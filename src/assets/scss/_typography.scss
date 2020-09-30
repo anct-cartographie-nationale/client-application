@@ -45,28 +45,24 @@ h6,
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-large;
-  text-transform: uppercase;
 }
 @mixin cn-bold-32 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-xlarge;
-  text-transform: uppercase;
 }
 @mixin cn-bold-28 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-large;
-  text-transform: uppercase;
 }
-@mixin cn-bold-28 {
+@mixin cn-regular-28 {
   font-family: $text-font;
   font-style: normal;
-  font-weight: bold;
+  font-weight: normal;
   font-size: $font-size-large;
-  text-transform: uppercase;
 }
 @mixin cn-bold-20 {
   font-family: $text-font;

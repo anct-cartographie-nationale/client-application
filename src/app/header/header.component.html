@@ -1,12 +1,15 @@
-<div fxLayout="row" fxLayoutAlign="center" class="header">
-  <div>
-    <a routerLink="/home" tabindex="0">logo</a>
+<div fxLayout="row" fxLayout.lt-sm="column" class="header">
+  <div class="logo">
+    <div fxLayout="column">
+      <span><span class="yellow">╔╧╤</span> Médiation</span>
+      <span><span class="orange">╚╪╧╤</span> Numérique</span>
+    </div>
   </div>
-  <div class="right">
-    <a routerLink="/resources" routerLinkActive="active" tabindex="0">Ressources</a>
-    <a routerLink="/projects" routerLinkActive="active">Projets</a>
-    <a routerLink="/sturctures" routerLinkActive="active" tabindex="0">Médiateurs numériques</a>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <a routerLink="/resources" [routerLinkActive]="'active'">Ressources</a>
+    <a routerLink="/projects" [routerLinkActive]="'active'">Projets</a>
+    <a routerLink="/sturctures" [routerLinkActive]="'active'" i18n>Médiateurs numériques</a>
     <span class="ico-mglass orange-icon"></span>
-    <a routerLink="/login" routerLinkActive="active" tabindex="0">Se connecter</a>
+    <a routerLink="/login" [routerLinkActive]="'active'">Se connecter</a>
   </div>
 </div>

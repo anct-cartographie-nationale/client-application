@@ -1,22 +1,39 @@
 @import '../../assets/scss/icon';
+@import '../../assets/scss/typography';
+@import '../../assets/scss/color';
+@import '../../assets/scss/breakpoint';
 
 .header {
   height: 80px;
-  display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0px 4vw;
-  .right {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    display: flex;
+  a {
+    &.active:before,
+    &.active:after {
+      display: inline-block;
+      text-decoration: none;
+    }
+    &.active:before {
+      content: '╟';
+      margin-right: 10px;
+    }
+    &.active:after {
+      content: '╢';
+      margin-left: 10px;
+    }
   }
+}
 
-  a:before {
-    content: '╟';
+.logo {
+  @include cn-regular-28;
+  .yellow {
+    color: $yellow;
   }
-  a:after {
-    content: '╢';
+  .orange {
+    color: $orange;
+  }
+  @media #{$tablet} {
+    @include cn-regular-16;
   }
 }

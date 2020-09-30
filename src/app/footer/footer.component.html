@@ -1,16 +1,11 @@
 <div class="footer" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
   <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="10px">
-    <a
-      class="clickable text-align-center"
-      tabindex="0"
-      (keyup.enter)="openLegalNotice()"
-      (click)="openLegalNotice()"
-      i18n
+    <a class="clickable text-align-center" (keyup.enter)="openLegalNotice()" (click)="openLegalNotice()" i18n
       >Mentions légales</a
     >
-    <a class="clickable text-align-center" routerLink="/sitemap" tabindex="0" i18n>Plan du site</a>
+    <a class="clickable text-align-center" routerLink="/sitemap" i18n>Plan du site</a>
 
-    <a tabindex="0" class="clickable text-align-center" href="mailto:todo@grandlyon.com">Contact</a>
+    <a class="clickable text-align-center" href="mailto:todo@grandlyon.com">Contact</a>
   </div>
   <a
     class="metro-link"
