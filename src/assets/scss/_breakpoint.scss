@@ -1,0 +1,13 @@
+$width-small-phone: 320px;
+$width-phone: 576px;
+$width-large-phone: 768px;
+$width-tablet: 992px;
+$width-desktop: 1200px;
+$width-large-desktop: 1201px;
+
+$small-phone: 'only screen and (max-width : #{$width-small-phone})';
+$phone: 'only screen and (max-width : #{$width-phone})';
+$large-phone: 'only screen and (max-width : #{$width-large-phone})';
+$tablet: 'only screen and (max-width : #{$width-tablet})';
+$desktop: 'only screen and (max-width : #{$width-desktop})';
+$large-desktop: 'only screen and (min-width : #{$width-large-desktop})';

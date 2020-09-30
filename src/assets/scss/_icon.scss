@@ -1,0 +1,39 @@
+@import './color';
+
+.ico-mglass {
+  position: relative;
+  display: inline-block;
+  background: $white;
+  border-radius: 30px;
+  height: 12px;
+  width: 12px;
+  border: 2px solid $grey;
+
+  &:after {
+    content: '';
+    height: 2px;
+    width: 8px;
+    background: $grey;
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+  }
+}
+
+.orange-icon {
+  border: 2px solid $orange;
+  &:after {
+    background: $orange;
+  }
+}
+
+.purple-icon {
+  border: 2px solid $purple;
+  &:after {
+    background: $purple;
+  }
+}

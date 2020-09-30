@@ -1,0 +1,25 @@
+<div class="footer" fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center">
+  <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="10px">
+    <a
+      class="clickable text-align-center"
+      tabindex="0"
+      (keyup.enter)="openLegalNotice()"
+      (click)="openLegalNotice()"
+      i18n
+      >Mentions légales</a
+    >
+    <a class="clickable text-align-center" routerLink="/sitemap" tabindex="0" i18n>Plan du site</a>
+
+    <a tabindex="0" class="clickable text-align-center" href="mailto:todo@grandlyon.com">Contact</a>
+  </div>
+  <a
+    class="metro-link"
+    href="https://www.grandlyon.com"
+    title="Accéder au site de la Métropole de Lyon (nouvelle fenêtre)"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img class="logo-grand-lyon" src="/assets/logos/ic_metro.svg" alt />
+    <p class="metro-title" i18n>Un site de la Métropole de Lyon</p>
+  </a>
+</div>

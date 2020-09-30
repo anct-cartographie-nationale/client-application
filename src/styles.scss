@@ -1,1 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import 'assets/scss/typography';
+@import 'assets/scss/color';
+@import 'assets/scss/breakpoint';
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: $default-link-color;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: pointer;
+  &:focus {
+    text-decoration: underline;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Containers
+.content-container {
+  margin: 0;
+  padding: 60px 0 30px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  &.medium-pt {
+    padding: 25px 0 30px 0;
+  }
+  &.small-pt {
+    padding: 10px 0 30px 0;
+  }
+  &.no-pt {
+    padding: 0 0 30px 0;
+  }
+  @media #{$phone} {
+    padding-top: 30px;
+  }
+}
+.section-container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  @media #{$tablet} {
+    width: 95%;
+    max-width: unset;
+  }
+  &.no-max-width {
+    max-width: unset;
+    margin-bottom: 1rem;
+  }
+}

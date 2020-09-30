@@ -1,0 +1,47 @@
+@import '../../assets/scss/color';
+@import '../../assets/scss/breakpoint';
+@import '../../assets/scss/typography';
+
+.footer {
+  height: 56px;
+  background-color: black;
+  display: flex;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0px 4vw;
+  a {
+    color: $white;
+    margin: 0 10px 0 12px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  img {
+    height: 37px;
+    width: 22px;
+  }
+  @media #{$large-phone} {
+    height: unset;
+    font-size: 0.75em;
+    div {
+      margin: 20px 0;
+      text-align: center;
+    }
+  }
+  @media #{$desktop} {
+    font-size: 1em;
+  }
+  @media #{$tablet} {
+    font-size: 0.875em;
+  }
+}
+
+.metro-title {
+  margin-left: 1vw;
+  @include arial-regular-16;
+}
+
+.metro-link {
+  display: flex;
+  align-items: center;
+}
