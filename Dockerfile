@@ -1,5 +1,5 @@
 # Stage 0, based on Node.js, to build and compile Angular
-FROM node:12.16-slim as builder
+FROM node:12.16-slim as build
 
 WORKDIR /app
 
