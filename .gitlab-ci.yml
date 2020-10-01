@@ -32,6 +32,8 @@ build_dev:
 
 code_analysis:
   image: skilldlabs/sonar-scanner:3.4.0
+  services:
+    - docker:18.09-dind
   stage: sonar-analysis
   tags:
     - test
