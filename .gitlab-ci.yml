@@ -12,8 +12,6 @@ build:
   services:
     - docker:18.09-dind
   stage: build
-  tags:
-    - build-push-to-registry
   only:
     - master
   script:
@@ -26,8 +24,6 @@ build_dev:
   services:
     - docker:18.09-dind
   stage: build
-  tags:
-    - build-push-to-registry
   only:
     - dev
   script:
@@ -40,8 +36,6 @@ code_analysis:
   services:
     - docker:18.09-dind
   stage: sonar-analysis
-  tags:
-    - test
   only:
     - dev
   script:
