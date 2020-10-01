@@ -1,13 +1,10 @@
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=pamn_client)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=security_rating)](https://sonarcloud.io/dashboard?id=pamn_client)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=pamn_client)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=alert_status)](https://sonarcloud.io/dashboard?id=pamn_client)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=bugs)](https://sonarcloud.io/dashboard?id=pamn_client)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=pamn_client)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=code_smells)](https://sonarcloud.io/dashboard?id=pamn_client)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=sqale_index)](https://sonarcloud.io/dashboard?id=pamn_client)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=ncloc)](https://sonarcloud.io/dashboard?id=pamn_client)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=pamn_client&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=pamn_client)
+[![Quality Gate Status](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=alert_status)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Bugs](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=bugs)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Lines of Code](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=ncloc)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Maintainability Rating](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=sqale_rating)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Quality Gate Status](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=alert_status)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Security Rating](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=security_rating)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Vulnerabilities](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=vulnerabilities)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
 
 
 
