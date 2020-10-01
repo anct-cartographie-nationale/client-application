@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web-app:
+    restart: unless-stopped
+    build: .
+    image: registry.forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client:${TAG}
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 8080

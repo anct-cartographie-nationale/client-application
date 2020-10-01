@@ -22,7 +22,7 @@ COPY ./src ./src
 ARG conf
 
 # Building the Angular app /dist i18n
-RUN npm run build-i18n:${conf}
+RUN npm run build
 
 # Stage 1, based on Nginx, to have only the compiled app
 FROM nginx

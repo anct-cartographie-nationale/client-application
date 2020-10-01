@@ -2,32 +2,39 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="fr" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="aed4ed763cafbc78772e873593d26f6c172c49d3" datatype="html">
+        <source>Qui sommes-nous ?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/header/header.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="144eae2386b91c6e439a7da2b792f36033beb198" datatype="html">
         <source>Ressources</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/header/header.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6fa10153ecfdc8fe2a11a7eaeb4ba93ac2d8e038" datatype="html">
         <source>Projets</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/header/header.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="269fee92b64c6de499c6a432b676e83573b91659" datatype="html">
         <source>Médiateurs numériques</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/header/header.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7a5b80bdfff39603e595a2a61d5032115874e412" datatype="html">
         <source>Se connecter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/header/header.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9915a302120305a1048e661fa028815cc83db69d" datatype="html">
