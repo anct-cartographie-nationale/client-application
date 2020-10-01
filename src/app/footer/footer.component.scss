@@ -1,9 +1,10 @@
 @import '../../assets/scss/color';
 @import '../../assets/scss/breakpoint';
 @import '../../assets/scss/typography';
+@import '../../assets/scss/layout';
 
 .footer {
-  height: 56px;
+  height: $footer-height;
   background-color: black;
   display: flex;
   align-items: center !important;

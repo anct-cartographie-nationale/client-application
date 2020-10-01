@@ -1,0 +1,62 @@
+@import './color';
+
+.ico-mglass {
+  position: relative;
+  display: inline-block;
+  background: transparent;
+  border-radius: 30px;
+  height: 12px;
+  width: 12px;
+  border: 2px solid $grey;
+
+  &:after {
+    content: '';
+    height: 2px;
+    width: 8px;
+    background: $grey;
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+  }
+
+  &.orange {
+    border: 2px solid $orange;
+    &:after {
+      background: $orange;
+    }
+  }
+
+  &.purple {
+    border: 2px solid $purple;
+    &:after {
+      background: $purple;
+    }
+  }
+}
+
+.ico-pin {
+  width: 20px;
+  height: 20px;
+  border-radius: 50% 50% 50% 0;
+  background: transparent;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -4px 0 0 0;
+  &.after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin: 8px 0 0 8px;
+    background: transparent;
+    border-radius: 50%;
+  }
+
+  &.orange {
+    background: $orange;
+  }
+}

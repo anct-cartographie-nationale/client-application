@@ -1,37 +1,39 @@
-@import '../../assets/scss/icon';
+@import '../../assets/scss/icons';
 @import '../../assets/scss/typography';
+@import '../../assets/scss/layout';
 @import '../../assets/scss/color';
 @import '../../assets/scss/breakpoint';
+@import '../../assets/scss/shapes';
 
 .header {
-  height: 80px;
+  height: $header-height;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 4vw;
+  padding: 0px 0 0 4vw;
+  text-align: center;
   a {
-    &.active:before,
-    &.active:after {
-      display: inline-block;
-      text-decoration: none;
+    &.active {
+      @include highlight;
     }
-    &.active:before {
-      content: '╟';
-      margin-right: 10px;
-    }
-    &.active:after {
-      content: '╢';
-      margin-left: 10px;
-    }
+  }
+  .right-header {
+    height: 100%;
+  }
+  .grey-background {
+    height: 100%;
+    padding: 0 3vw;
+    background-color: $grey-2;
   }
 }
 
 .logo {
   @include cn-regular-28;
-  .yellow {
-    color: $yellow;
+  text-align: initial;
+  .primary {
+    color: $primary-color;
   }
-  .orange {
-    color: $orange;
+  .secondary {
+    color: $secondary-color;
   }
   @media #{$tablet} {
     @include cn-regular-16;

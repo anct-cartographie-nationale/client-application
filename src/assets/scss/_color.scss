@@ -1,12 +1,20 @@
-$purple: #594d59;
 $black: #000000;
+$white: #ffff;
+/*  GREYS  */
 $grey: #b4bbbf;
 $grey-1: #333333;
+$grey-2: #eeeeee;
+/* YELLOW */
 $yellow: #f2cb04;
 $yellow-light: #fff8d6;
+/* ORANGES */
 $orange: #f27405;
 $orange-light: #f29f05;
 $orange-3: #fff4ea;
-$white: #ffff;
-
+/* OTHERS */
+$blue: #b3f8f8;
+$purple: #594d59;
+/* APP COLORS */
+$primary-color: $yellow;
+$secondary-color: $orange;
 $default-link-color: $grey-1;
