@@ -3,16 +3,30 @@ stages:
   - build
 
 build:
+  image: docker:18.09
+  services:
+    - docker:18.09-dind
   stage: build
   tags:
     - build-push-to-registry
   only:
     - master
-    - integration
   script:
-    - docker-compose build
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker-compose push
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" --build-arg conf=prod .
+    - docker push
+
+build_dev:
+  image: docker:18.09
+  services:
+    - docker:18.09-dind
+  stage: build
+  only:
+    - dev
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
+    - docker push
 
 code_analysis:
   stage: sonar-analysis
