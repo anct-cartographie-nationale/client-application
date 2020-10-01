@@ -13,6 +13,7 @@ RUN npm install --silent
 # Copy the project
 COPY angular.json .
 COPY tsconfig.json .
+COPY tsconfig.app.json .
 COPY nginx.conf .
 COPY /src ./src
 
