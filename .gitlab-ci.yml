@@ -1,0 +1,29 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  tags:
+    - build-push-to-registry
+  only:
+    - master
+    - integration
+  script:
+
+code_analysis:
+  stage: sonar-analysis
+  tags:
+    - test
+  only:
+    - dev
+  script:
+    - >
+      sonar-scanner
+      -Dsonar.projectName=${SONAR_PROJECT_KEY}
+      -Dsonar.projectVersion=1.0
+      -Dsonar.sourceEncoding=UTF-8
+      -Dsonar.projectBaseDir=.
+      -Dsonar.host.url=${SONAR_URL}
+      -Dsonar.projectKey=${SONAR_PROJECT_KEY}
+      -Dsonar.login=${SONAR_TOKEN}
