@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,7 +14,7 @@ import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent, StructureListComponent],
   imports: [BrowserModule, AppRoutingModule, FlexLayoutModule],
-  providers: [CustomBreakPointsProvider],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr' }, CustomBreakPointsProvider],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

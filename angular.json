@@ -14,8 +14,9 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
+        "sourceLocale": "fr",
         "locales": {
-          "fr": "src/locale/messages.fr.xlf"
+          "en": "src/locale/messages.en.xlf"
         }
       },
       "architect": {
@@ -64,6 +65,9 @@
             },
             "fr": {
               "localize": ["fr"]
+            },
+            "en": {
+              "localize": ["en"]
             }
           }
         },
@@ -78,6 +82,9 @@
             },
             "fr": {
               "browserTarget": "pamn:build:fr"
+            },
+            "en": {
+              "browserTarget": "pamn:build:en"
             }
           }
         },
