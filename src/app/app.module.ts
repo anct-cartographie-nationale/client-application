@@ -10,10 +10,11 @@ import { CustomBreakPointsProvider } from './config/custom-breakpoint';
 import { StructureListComponent } from './structure-list/structure-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent, StructureListComponent],
-  imports: [BrowserModule, AppRoutingModule, FlexLayoutModule],
+  imports: [BrowserModule, AppRoutingModule, FlexLayoutModule, SharedModule],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }, CustomBreakPointsProvider],
   bootstrap: [AppComponent],
 })
