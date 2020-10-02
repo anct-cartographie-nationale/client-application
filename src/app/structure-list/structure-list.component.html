@@ -1,1 +1,31 @@
-<p>structure-list works!</p>
+<div class="content-container no-pt">
+  <div
+    class="section-container no-max-width orange-background"
+    fxLayout="row"
+    fxLayout.lt-sm="column"
+    fxLayoutAlign="center baseline"
+    fxLayoutAlign.lt-sm="center center"
+    fxLayoutGap="20px"
+  >
+    <p>Vous faites partie d’une structure de médiation ?</p>
+    <a [href]="regisrationFormLink" target="_blank">Inscrivez-vous</a>
+  </div>
+  <div class="section-container card">
+    <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="space-between center">
+      <div class="input-container" fxLayout="row" fxLayoutGap="16px">
+        <span class="ico-mglass purple"></span>
+        <input class="input-field" type="text" placeholder="Rechercher une adresse, une association..." name="search" />
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <span class="clickable ico-pin orange"></span>
+        <a>Me localiser</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-container no-pt">
+  <div class="section-container">
+    <p>structure-list works!</p>
+  </div>
+</div>

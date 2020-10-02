@@ -5,9 +5,11 @@
   display: inline-block;
   background: transparent;
   border-radius: 30px;
+  border: 2px solid $grey;
   height: 12px;
   width: 12px;
-  border: 2px solid $grey;
+  min-width: 12px;
+  max-width: 12px;
 
   &:after {
     content: '';
@@ -41,6 +43,8 @@
 .ico-pin {
   width: 20px;
   height: 20px;
+  max-width: 20px;
+  max-height: 20px;
   border-radius: 50% 50% 50% 0;
   background: transparent;
   transform: rotate(-45deg);

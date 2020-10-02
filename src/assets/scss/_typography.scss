@@ -94,6 +94,12 @@ h6,
   font-weight: normal;
   font-size: $font-size-medium-mobile;
 }
+@mixin cn-bold-18 {
+  font-family: $title-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-medium-mobile;
+}
 @mixin cn-bold-16 {
   font-family: $text-font;
   font-style: normal;
