@@ -11,10 +11,11 @@ import { StructureListComponent } from './structure-list/structure-list.componen
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
+import { StructureModule } from './structure/structure.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent, StructureListComponent],
-  imports: [BrowserModule, AppRoutingModule, FlexLayoutModule, SharedModule],
+  imports: [BrowserModule, AppRoutingModule, FlexLayoutModule, SharedModule, StructureModule],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }, CustomBreakPointsProvider],
   bootstrap: [AppComponent],
 })
