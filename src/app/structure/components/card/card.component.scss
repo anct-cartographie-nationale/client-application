@@ -1,0 +1,22 @@
+.nbStructuresLabel {
+  color: #828282;
+  padding: 10px;
+  font-size: 14px;
+}
+.structure {
+  padding: 12px 0 12px 0;
+  border-bottom: 1px dashed #bdbdbd;
+  .typeStructure {
+    color: #828282;
+  }
+  .headerStructure {
+    .nomStructure {
+      font-weight: bold;
+      color: #594d59;
+      font-size: 22px;
+    }
+  }
+  &:last-child {
+    border-bottom: none;
+  }
+}
