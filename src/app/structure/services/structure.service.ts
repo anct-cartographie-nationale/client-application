@@ -37,7 +37,6 @@ export class StructureService {
       });
     }
     structure.ouvreLe = this.recupererProchaineOuverture(structure, jourSemaine, jourSemaine, now);
-
     return structure;
   }
 
@@ -58,6 +57,8 @@ export class StructureService {
         return structure.horaires.samedi;
       case 7:
         return structure.horaires.dimanche;
+      default:
+        return null;
     }
   }
   //Vérifie si l'heure actuelle est dans l'interval des horaires de la structure
@@ -110,7 +111,20 @@ export class StructureService {
         return this.recupererProchaineOuverture(s, 1, baseJour, baseHeure);
       }
     }
-    return 'Aucun horaire disponible';
+    var lastChancehoraire = this.recupererHoraire(s, j + 1);
+    var lastJour: any;
+    if (lastChancehoraire.open) {
+      lastChancehoraire.time.every((periode) => {
+        if (periode.openning && periode.openning < baseHeure) {
+          lastJour = { jour: this.numberToDay(j + 1), horaire: this.numberToHour(periode.openning) };
+          return false;
+        }
+        lastJour = 'Aucun horaire disponible';
+      });
+    } else {
+      lastJour = 'Aucun horaire disponible';
+    }
+    return lastJour;
   }
 
   numberToDay(n: number) {
@@ -129,6 +143,8 @@ export class StructureService {
         return 'samedi';
       case 7:
         return 'dimanche';
+      default:
+        return null;
     }
   }
 

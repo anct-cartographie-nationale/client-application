@@ -40,5 +40,5 @@ export class horaireStructure {
 }
 export class Jour {
   open: boolean;
-  time: [{ openning: number; closing: number }];
+  time: { openning: number; closing: number }[];
 }
