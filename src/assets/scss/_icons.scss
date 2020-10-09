@@ -64,3 +64,17 @@
     background: $orange;
   }
 }
+.ico-dot-available {
+  height: 12px;
+  width: 12px;
+  background-color: #41c29c;
+  border-radius: 50%;
+  display: inline-block;
+}
+.ico-dot-unavailable {
+  height: 12px;
+  width: 12px;
+  background-color: #b7b7b7;
+  border-radius: 50%;
+  display: inline-block;
+}

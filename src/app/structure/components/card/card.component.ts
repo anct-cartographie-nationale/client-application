@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Structure } from '../../models/structure.model';
+import { StructureService } from '../../services/structure.service';
 
 @Component({
   selector: 'app-card',
@@ -7,14 +8,14 @@ import { Structure } from '../../models/structure.model';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  structure: Structure[] = [];
-  servicesProposes: any = [
-    { val: 'CAF', text: 'Droits à la CAF' },
-    { val: 'Pôle Emploi', text: 'Droits à Pôle Emploi' },
-    { val: 'Impôts', text: 'Droits aux Impots' },
-    { val: 'CPAM', text: 'Droits à la CPAM (AMELI)' },
-  ];
-  constructor() {}
+  structures: Structure[] = [];
+  constructor(private _structureService: StructureService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._structureService.recupererStructures().subscribe((structures: Structure[]) => {
+      structures.forEach((s: Structure) => {
+        this.structures.push(this._structureService.majOuvertureStructure(s));
+      });
+    });
+  }
 }

@@ -1,17 +1,25 @@
-<span class="divider"></span>
-<span class="nbStructuresLabel">140 structures</span>
+<span class="nbStructuresLabel">{{ structures.length }} structures</span>
+<div class="structure" fxLayout="column" *ngFor="let structure of structures">
+  <span class="nomStructure">{{ structure.nom }}</span>
 
-<div class="structure">
-  <span class="typeStructure">Bibliothèque</span>
   <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center">
-    <span class="nomStructure">Nom de la structure</span>
-    <div class="distanceStructure">
-      <span>|-----| 63 m</span>
-    </div>
+    <span class="typeStructure">{{ structure.type_de_structure }}</span>
+    <span class="distanceStructure">|-| 63 m</span>
   </div>
   <br />
   <div class="statusStructure" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
-    <span class="dot"></span>
-    <span>Ouvert actuellement</span>
+    <div *ngIf="structure.estOuvert; else closed">
+      <span class="ico-dot-available"></span>
+      <span> Ouvert actuellement</span>
+    </div>
+    <ng-template #closed>
+      <span class="ico-dot-unavailable"></span>
+      <span *ngIf="structure.ouvreLe.jour; else noTime">
+        Fermé - Ouvre {{ structure.ouvreLe.jour }} à {{ structure.ouvreLe.horaire }}</span
+      >
+    </ng-template>
   </div>
 </div>
+<ng-template #noTime>
+  <span> Fermé - Aucun horaire disponible</span>
+</ng-template>
