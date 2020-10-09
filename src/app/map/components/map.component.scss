@@ -1,3 +1,31 @@
+@import '../../../assets/scss/color';
+
 #map {
   height: 600px;
+}
+
+::ng-deep .fa-map-marker {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  border-right: 5px solid transparent;
+  border-bottom: 12px solid red;
+  border-left: 7px solid transparent;
+}
+
+::ng-deep .leaflet-control-locate-circle {
+  &.leaflet-interactive {
+    stroke: $white !important;
+    fill: $black !important;
+    stroke-width: 2px !important;
+  }
+}
+
+::ng-deep .leaflet-marker-icon {
+  &.leaflet-interactive {
+    circle {
+      fill: $primary-color !important;
+      stroke-width: unset !important;
+    }
+  }
 }

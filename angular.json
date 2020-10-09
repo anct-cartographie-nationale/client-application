@@ -39,7 +39,11 @@
                 "output": "assets/"
               }
             ],
-            "styles": ["src/styles.scss", "./node_modules/leaflet/dist/leaflet.css"],
+            "styles": [
+              "src/styles.scss",
+              "./node_modules/leaflet/dist/leaflet.css",
+              "./node_modules/leaflet.locatecontrol/dist/L.Control.Locate.css"
+            ],
             "scripts": []
           },
           "configurations": {
