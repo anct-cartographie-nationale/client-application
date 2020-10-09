@@ -23,6 +23,9 @@
     height: 100%;
     padding: 0 3vw;
     background-color: $grey-2;
+    a {
+      text-decoration: underline;
+    }
   }
 }
 

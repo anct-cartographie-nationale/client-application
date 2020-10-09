@@ -1,3 +1,8 @@
+image: docker:git
+
+services:
+  - docker:dind
+
 stages:
   - sonar-analysis
   - build
@@ -8,8 +13,6 @@ build:
   services:
     - docker:18.09-dind
   stage: build
-  tags:
-    - build-push-to-registry
   only:
     - master
   script:
@@ -41,9 +44,10 @@ deploy_dev:
     - docker-compose up -d web-app
 
 code_analysis:
+  image: skilldlabs/sonar-scanner:3.4.0
+  services:
+    - docker:18.09-dind
   stage: sonar-analysis
-  tags:
-    - test
   only:
     - dev
   script:

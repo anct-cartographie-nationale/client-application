@@ -1,8 +1,29 @@
 {
+  "eslint.enable": true,
+  "javascript.format.enable": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "editor.formatOnSave": true,
   "i18n-ally.includeSubfolders": true,
   "i18n-ally.displayLanguage": "fr",
   "i18n-ally.localesPaths": "client/src/assets/i18n",
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.enabledFrameworks": "ngx-translate"
+  "i18n-ally.enabledFrameworks": "ngx-translate",
+  "typescript.preferences.importModuleSpecifier": "relative"
 }
