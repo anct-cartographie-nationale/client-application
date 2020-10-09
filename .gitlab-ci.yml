@@ -1,6 +1,7 @@
 stages:
   - sonar-analysis
   - build
+  - deploy
 
 build:
   image: docker:18.09
@@ -27,6 +28,17 @@ build_dev:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
     - docker push "$CI_REGISTRY_IMAGE:dev"
+    
+deploy_dev:
+  stage: deploy
+  tags:
+    - deploy
+  only:
+    - dev
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker-compose pull web-app
+    - docker-compose up -d web-app
 
 code_analysis:
   stage: sonar-analysis
