@@ -1,0 +1,172 @@
+@import '../../../../assets/scss/icons';
+@import '../../../../assets/scss/color';
+.header {
+  .title {
+    font-family: Times New Roman;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 103%;
+    padding: 16px 0 16px 0;
+
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+  }
+}
+.content {
+  margin: 10px 0 0px 0;
+  .icon {
+    border: 1px solid $grey;
+    padding: 4px 6px 8px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input {
+    width: 100%;
+    background-color: $grey-4;
+    border: none;
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 17px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    text-overflow: ellipsis;
+    color: $grey-1;
+    outline: none;
+  }
+  .searchSection {
+    button {
+      border: none;
+      cursor: pointer;
+      background-color: $purple;
+      font-family: Trebuchet MS;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 13px;
+      line-height: 100%;
+      align-items: center;
+      text-align: center;
+      color: $white;
+      padding: 0 10px 0 10px;
+      outline: none;
+    }
+  }
+  .btnSection {
+    padding: 16px 0 16px 0;
+    button {
+      border: 1px solid $grey;
+      border-radius: 33px;
+      background-color: $white;
+      padding: 2px 6px 2px 13px;
+      align-items: center;
+      display: flex;
+      cursor: pointer;
+
+      .btnText {
+        justify-content: center;
+        font-family: Trebuchet MS;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+      }
+      &:focus {
+        border: 1px solid $orange-light;
+        color: $orange-light;
+        outline: none;
+        .arrow {
+          background-color: transparent;
+          border-bottom: 1px solid $orange-light;
+          border-right: 1px solid $orange-light;
+          transform: translateY(25%) rotate(-135deg);
+          margin: 0 5px 0 10px;
+          height: 7px;
+          width: 7px;
+        }
+      }
+    }
+    .arrow {
+      background-color: transparent;
+      border-bottom: 1px solid $grey;
+      border-right: 1px solid $grey;
+      transform: translateY(-25%) rotate(45deg);
+      margin: 0 5px 0 10px;
+      height: 7px;
+      width: 7px;
+    }
+  }
+}
+.footer {
+  margin: 0px 0 16px 0;
+  a {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 18px;
+    /* or 120% */
+
+    display: flex;
+    align-items: center;
+    text-decoration-line: underline;
+  }
+  .checkbox {
+    position: relative;
+    padding-left: 27px;
+    label {
+      font-family: Trebuchet MS;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 21px;
+    }
+    input {
+      position: absolute;
+      opacity: 0;
+      height: 0;
+      width: 0;
+      &:checked ~ .customCheck {
+        background-color: $orange-light;
+        border-color: transparent;
+      }
+      &:checked ~ .customCheck:after {
+        display: block;
+      }
+    }
+    .customCheck {
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      background-color: $white;
+      border: 1px solid $grey;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      &:hover {
+        background-color: $grey-4;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        display: none;
+      }
+      &:after {
+        left: 6.5px;
+        top: 3px;
+        width: 4px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+      }
+    }
+  }
+}

@@ -64,6 +64,26 @@
     background: $orange;
   }
 }
+.ico-pin-search {
+  width: 18px;
+  height: 18px;
+  border-radius: 50% 50% 50% 0;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  &:before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    width: 7px;
+    height: 7px;
+    border-radius: 4px;
+    background-color: white;
+  }
+  &.grey {
+    background-color: #828282;
+  }
+}
 .ico-dot-available {
   height: 12px;
   width: 12px;
