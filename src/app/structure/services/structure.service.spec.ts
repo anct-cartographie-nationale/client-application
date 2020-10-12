@@ -133,7 +133,7 @@ describe('StructureService', () => {
   });
 
   it('Recuperer Prochaine Ouverture pour la semaine prochaine sur le même jour : should return an object ({Jour/Horaire})', () => {
-    //Init structure
+    //Init structure avec deux horaires le mardi
     const s: Structure = new Structure();
     var horaire = [
       { openning: 805, closing: 1200 },
@@ -156,7 +156,7 @@ describe('StructureService', () => {
   });
 
   it('Recuperer Prochaine Ouverture : should return an error string', () => {
-    //Init structure
+    //Init structure avec aucun horaire
     const s: Structure = new Structure();
     s.horaires = new horaireStructure();
     s.horaires.lundi = new Jour();
@@ -170,5 +170,52 @@ describe('StructureService', () => {
     //Init sur jeudi à 12h06
     const result = _structureService.recupererProchaineOuverture(s, 4, 2, 1206);
     expect(result).toEqual('Aucun horaire disponible');
+  });
+
+  it('Mise à jour ouverture de la structure : should return true', () => {
+    var horaire = [
+      { openning: 805, closing: 1200 },
+      { openning: 1400, closing: 1600 },
+    ];
+    //Init structure avec aucun horaire
+    const s: Structure = new Structure();
+    s.horaires = new horaireStructure();
+    s.horaires.lundi = new Jour();
+    s.horaires.mardi = new Jour();
+    s.horaires.mercredi = new Jour();
+    s.horaires.jeudi = new Jour();
+    s.horaires.vendredi = new Jour();
+    s.horaires.samedi = new Jour();
+    s.horaires.dimanche = new Jour();
+
+    s.horaires.jeudi.open = true;
+    s.horaires.jeudi.time = horaire;
+
+    //Init date sur un jeudi à 9h05
+    var dt = new DateTime.local(2020, 10, 8, 9, 5);
+    const result = _structureService.majOuvertureStructure(s, dt);
+    expect(result.estOuvert).toEqual(true);
+  });
+
+  it('Mise à jour ouverture de la structure : should return false', () => {
+    var horaire = [{ openning: 1400, closing: 1600 }];
+    //Init structure avec aucun horaire
+    const s: Structure = new Structure();
+    s.horaires = new horaireStructure();
+    s.horaires.lundi = new Jour();
+    s.horaires.mardi = new Jour();
+    s.horaires.mercredi = new Jour();
+    s.horaires.jeudi = new Jour();
+    s.horaires.vendredi = new Jour();
+    s.horaires.samedi = new Jour();
+    s.horaires.dimanche = new Jour();
+
+    s.horaires.jeudi.open = true;
+    s.horaires.jeudi.time = horaire;
+
+    //Init date sur un jeudi à 9h05
+    var dt = new DateTime.local(2020, 10, 8, 9, 5);
+    const result = _structureService.majOuvertureStructure(s, dt);
+    expect(result.estOuvert).toEqual(false);
   });
 });

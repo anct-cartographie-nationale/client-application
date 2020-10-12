@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Jour, Structure } from '../models/structure.model';
-const { DateTime } = require('luxon');
 
 @Injectable({
   providedIn: 'root',
@@ -13,17 +12,16 @@ export class StructureService {
     return this.http.get('/api/Structures');
   }
 
-  majOuvertureStructure(structure: Structure) {
+  majOuvertureStructure(structure: Structure, dateActuelle: any) {
     //Récupère le jour de la semaine.
-    var dt = DateTime.local();
-    var jourSemaine: number = dt.weekday;
+    var jourSemaine: number = dateActuelle.weekday;
 
     //Vérifie si les minutes commencent par zéro pour éviter la suppression.
     var now: number;
-    if (dt.minute.toString().length != 1) {
-      now = parseInt('' + dt.hour + dt.minute, 10);
+    if (dateActuelle.minute.toString().length != 1) {
+      now = parseInt('' + dateActuelle.hour + dateActuelle.minute, 10);
     } else {
-      now = parseInt('' + dt.hour + 0 + dt.minute, 10);
+      now = parseInt('' + dateActuelle.hour + 0 + dateActuelle.minute, 10);
     }
 
     //Récupérer les horaires d'une structure en fonction de son jour pour indiquer si elle est ouverte.
@@ -104,10 +102,15 @@ export class StructureService {
           return jourOuverture;
         }
       } else {
-        //Si le jour est égal à Dimanche, on le positionne sur Lundi.
+        //Si le jour n'est pas égal à Dimanche, on l'incrémente de 1.
         if (j != 7) {
           return this.recupererProchaineOuverture(s, j + 1, baseJour, baseHeure);
         }
+        //Si le jour est égal à Lundi, on le positionne sur 0 pour activer la condition d'arrêt.
+        if (baseJour == 1) {
+          return this.recupererProchaineOuverture(s, 0, baseJour, baseHeure);
+        }
+        //Si le jour est égal à Dimanche, on le positionne sur Lundi.
         return this.recupererProchaineOuverture(s, 1, baseJour, baseHeure);
       }
     }
