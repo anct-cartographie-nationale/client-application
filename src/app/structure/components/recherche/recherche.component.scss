@@ -58,6 +58,8 @@
   .btnSection {
     padding: 16px 0 16px 0;
     button {
+      outline: none;
+
       border: 1px solid $grey;
       border-radius: 33px;
       background-color: $white;
@@ -65,7 +67,6 @@
       align-items: center;
       display: flex;
       cursor: pointer;
-
       .btnText {
         justify-content: center;
         font-family: Trebuchet MS;
@@ -76,19 +77,18 @@
         display: flex;
         align-items: center;
       }
-      &:focus {
-        border: 1px solid $orange-light;
-        color: $orange-light;
-        outline: none;
-        .arrow {
-          background-color: transparent;
-          border-bottom: 1px solid $orange-light;
-          border-right: 1px solid $orange-light;
-          transform: translateY(25%) rotate(-135deg);
-          margin: 0 5px 0 10px;
-          height: 7px;
-          width: 7px;
-        }
+    }
+    .selected {
+      border: 1px solid $orange-light;
+      color: $orange-light;
+      .arrow {
+        background-color: transparent;
+        border-bottom: 1px solid $orange-light;
+        border-right: 1px solid $orange-light;
+        transform: translateY(25%) rotate(-135deg);
+        margin: 0 5px 0 10px;
+        height: 7px;
+        width: 7px;
       }
     }
     .arrow {
@@ -169,4 +169,15 @@
       }
     }
   }
+}
+.modal {
+  height: 500px;
+  width: 1100px;
+  background: $white;
+  border: 1px solid $purple;
+  box-sizing: border-box;
+  border-radius: 8px;
+  z-index: 1;
+  position: fixed;
+  margin-top: 80px;
 }

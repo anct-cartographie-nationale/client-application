@@ -11,19 +11,20 @@
   </div>
 
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
-    <button type="button">
+    <button type="button" [className]="btnServicesChecked ? 'selected' : ''" (click)="openModal(this.modalType[0])">
       <span class="btnText">Services</span>
       <div class="arrow"></div>
     </button>
-    <button type="button">
+    <button type="button" [className]="btnHomeChecked ? 'selected' : ''" (click)="openModal(this.modalType[1])">
       <span class="btnText">Accueil</span>
       <div class="arrow"></div>
     </button>
-    <button type="button">
+    <button type="button" [className]="btnMoreFilterchecked ? 'selected' : ''" (click)="openModal(this.modalType[2])">
       <span class="btnText">Plus de filtres</span>
       <div class="arrow"></div>
     </button>
   </div>
+  <div *ngIf="modalOpened" class="modal"></div>
 </div>
 <div class="footer" fxLayout="row" fxLayoutAlign="space-between center">
   <div class="checkbox">
