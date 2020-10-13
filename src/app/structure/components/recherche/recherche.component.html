@@ -11,46 +11,50 @@
   </div>
 
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
-    <button type="button" [className]="btnServicesChecked ? 'selected' : ''" (click)="openModal(this.modalType[0])">
+    <button
+      type="button"
+      [className]="modalOpened == modalType[0] ? 'selected' : ''"
+      (click)="openModal(this.modalType[0])"
+    >
       <span class="btnText">Services</span>
       <div class="arrow"></div>
     </button>
-    <button type="button" [className]="btnHomeChecked ? 'selected' : ''" (click)="openModal(this.modalType[1])">
+    <button
+      type="button"
+      [className]="modalOpened == modalType[1] ? 'selected' : ''"
+      (click)="openModal(this.modalType[1])"
+    >
       <span class="btnText">Accueil</span>
       <div class="arrow"></div>
     </button>
-    <button type="button" [className]="btnMoreFilterchecked ? 'selected' : ''" (click)="openModal(this.modalType[2])">
+    <button
+      type="button"
+      [className]="modalOpened == modalType[2] ? 'selected' : ''"
+      (click)="openModal(this.modalType[2])"
+    >
       <span class="btnText">Plus de filtres</span>
       <div class="arrow"></div>
     </button>
   </div>
-  <form
-    [formGroup]="form"
-    (ngSubmit)="applyFilter()"
-    novalidate
-    *ngIf="modalOpened"
-    class="modal"
-    fxLayout="column"
-    fxLayoutAlign="space-between"
-  >
+  <div *ngIf="modalOpened" fxLayout="column" fxLayoutAlign="space-between" [ngClass]="['modal', 'modal' + modalOpened]">
     <div class="contentModal" fxLayout="row wrap">
       <!--<div class="blockFiltre" *ngFor="let s of services">-->
-      <div class="blockFiltre" *ngFor="let s of services">
+      <div class="blockFiltre" *ngFor="let m of modules">
         <div class="blockLigne">
-          <h4>{{ s.titre }}</h4>
+          <h4>{{ m.titre }}</h4>
           <div
             fxLayout="row"
             class="ligneFiltre"
             fxLayoutAlign="space-between center"
-            *ngFor="let categ of s.categories"
+            *ngFor="let categ of m.categories"
           >
             <div class="checkbox">
               <label>
                 <input
                   type="checkbox"
-                  [checked]="isChecked(categ)"
+                  [checked]="this.checkedTab.indexOf(categ) > -1"
                   [value]="categ"
-                  (change)="onCheckboxChange($event, true)"
+                  (change)="onCheckboxChange($event, false)"
                 />
                 <span class="customCheck"></span>
               </label>
@@ -62,10 +66,10 @@
       </div>
     </div>
     <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
-      <a (click)="onCheckboxChange($event, false)">Effacer</a>
-      <button type="submit" value="Submit">Appliquer</button>
+      <a (click)="onCheckboxChange($event, true)">Effacer</a>
+      <button type="button" (click)="applyFilter(modalOpened)">Appliquer</button>
     </div>
-  </form>
+  </div>
 </div>
 <div class="footer" fxLayout="row" fxLayoutAlign="space-between center">
   <div class="checkbox">

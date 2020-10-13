@@ -1,4 +1,4 @@
-export class Service {
+export class Module {
   titre: string;
   categories: string[];
   size: number;
