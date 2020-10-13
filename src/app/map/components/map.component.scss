@@ -1,7 +1,9 @@
 @import '../../../assets/scss/color';
+@import '../../../assets/scss/layout';
 
 #map {
-  height: 600px;
+  height: calc(100vh - #{$header-height} - #{$footer-height});
+  width: 100%;
 }
 
 ::ng-deep .fa-map-marker {

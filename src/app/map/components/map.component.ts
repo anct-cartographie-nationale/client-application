@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { latLng, MapOptions, tileLayer, Map, Marker, icon, CRS, TileLayer, LatLngBounds } from 'leaflet';
+import { Component, Input, OnInit } from '@angular/core';
+import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds } from 'leaflet';
+import { MapService } from '../services/map.service';
 
-declare const L: any; // Leaflet
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
+  @Input() public toogleToolTipIds: Array<number> = [];
   public map: Map;
   public mapOptions: MapOptions;
-  public layersControl = {};
+  // Init locate options
   public locateOptions = {
     flyTo: false,
     keepCurrentZoomLevel: true,
@@ -21,22 +22,29 @@ export class MapComponent implements OnInit {
     clickBehavior: { inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'setView' },
   };
 
-  constructor() {}
+  constructor(private mapService: MapService) {}
 
   ngOnInit(): void {
     this.initializeMapOptions();
   }
 
+  /**
+   * Add marker when map is ready to be showned
+   * @param map
+   */
   public onMapReady(map: Map): void {
     this.map = map;
-    this.addSampleMarker();
+    this.addMarker();
+    this.toggleToolTip(this.toogleToolTipIds);
   }
 
-  public onNewLocation(e: Location): void {
-    console.log(e);
-  }
-
+  /**
+   * Init map options :
+   * - Metropole bounds based on a WMS service hosted by data.grandlyon.com
+   * - Map Layer based on open street maps
+   */
   private initializeMapOptions(): void {
+    // Init WMS service with param from data.grandlyon.com
     const metroMaps = new TileLayer.WMS('https://download.data.grandlyon.com/wms/grandlyon', {
       crs: CRS.EPSG4326,
       transparent: true,
@@ -55,64 +63,32 @@ export class MapComponent implements OnInit {
       width: 256,
       height: 256,
     };
-
-    const ignMaps = new TileLayer.WMS('https://data.grandlyon.com/api/query/map/ign', {
-      crs: CRS.EPSG4326,
-      transparent: true,
-      format: 'image/png',
-      attribution: 'Map data © OpenStreetMap contributors',
-      version: '1.1.1',
-    });
-    ignMaps.wmsParams = {
-      format: 'image/png',
-      styles: 'normal',
-      transparent: true,
-      version: '1.1.1',
-      layers: 'ORTHOIMAGERY.ORTHOPHOTOS.BDORTHO',
-      service: 'WMS',
-      request: 'GetMap',
-      width: 512,
-      height: 512,
-    };
-
     const carteLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: 'Map data © OpenStreetMap contributors',
     });
-
-    this.layersControl = {
-      baseLayers: {
-        Carte: carteLayer,
-        Satellite: ignMaps,
-      },
-      overlays: {
-        'Contours métropole': metroMaps,
-      },
-    };
+    // Center is set on townhall
+    // Zoom is blocked on 11 to prevent people to zoom out from metropole
     this.mapOptions = {
       center: latLng(45.764043, 4.835659),
-      zoom: 12,
+      zoom: 11,
+      minZoom: 11,
       layers: [carteLayer, metroMaps],
     };
   }
 
-  private addSampleMarker(): void {
-    const marker = new Marker([45.764043, 4.835659]).setIcon(
-      icon({
-        iconSize: [35, 41],
-        iconAnchor: [13, 41],
-        iconUrl: '../../../assets/img/ic_marker.png',
-      })
-    );
-    marker.addTo(this.map);
-    const marker2 = new Marker([45.764043, 4.935659]).setIcon(
-      icon({
-        iconSize: [35, 41],
-        iconAnchor: [13, 41],
-        iconUrl: '../../../assets/img/ic_marker.png',
-      })
-    );
-    marker2.addTo(this.map);
-    marker.bindTooltip('<p>Hello <br/>World !</p>');
+  /**
+   * Toogle all tooltips given in parameters
+   */
+  public toggleToolTip(ids: Array<number>): void {
+    ids.forEach((id) => {
+      this.mapService.toogleToolTip(id);
+    });
+  }
+
+  private addMarker(): void {
+    //TODO: Replace with real data
+    this.map = this.mapService.addMarker(this.map, 45.764043, 4.835659, 1);
+    this.map = this.mapService.addMarker(this.map, 45.764043, 4.935659, 2);
   }
 }

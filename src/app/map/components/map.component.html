@@ -1,12 +1,2 @@
-<div
-  id="map"
-  leaflet
-  [leafletOptions]="mapOptions"
-  [leafletLayersControl]="layersControl"
-  (leafletMapReady)="onMapReady($event)"
-></div>
-<leaflet-locate-control
-  [map]="map"
-  [options]="locateOptions"
-  (location$)="onNewLocation($event)"
-></leaflet-locate-control>
+<div id="map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
+<leaflet-locate-control [map]="map" [options]="locateOptions"></leaflet-locate-control>

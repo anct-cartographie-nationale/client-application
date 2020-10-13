@@ -3,8 +3,6 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
     "types": ["node"]
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
