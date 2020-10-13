@@ -1,11 +1,3 @@
-<div class="checkbox">
-  <label>
-    <input type="checkbox" />
-    <span class="customCheck"></span>
-  </label>
-  <div class="test">text ici</div>
-</div>
-
 <div class="header">
   <span class="title">Acteurs de la médiation</span>
 </div>
@@ -32,7 +24,15 @@
       <div class="arrow"></div>
     </button>
   </div>
-  <div *ngIf="modalOpened" class="modal" fxLayout="column" fxLayoutAlign="space-between">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="applyFilter()"
+    novalidate
+    *ngIf="modalOpened"
+    class="modal"
+    fxLayout="column"
+    fxLayoutAlign="space-between"
+  >
     <div class="contentModal" fxLayout="row wrap">
       <!--<div class="blockFiltre" *ngFor="let s of services">-->
       <div class="blockFiltre" *ngFor="let s of services">
@@ -46,7 +46,12 @@
           >
             <div class="checkbox">
               <label>
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  [checked]="isChecked(categ)"
+                  [value]="categ"
+                  (change)="onCheckboxChange($event, true)"
+                />
                 <span class="customCheck"></span>
               </label>
               <div class="label">{{ categ }}</div>
@@ -57,10 +62,10 @@
       </div>
     </div>
     <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
-      <a href="">Effacer</a>
-      <button type="button" (click)="applyFilter()">Appliquer</button>
+      <a (click)="onCheckboxChange($event, false)">Effacer</a>
+      <button type="submit" value="Submit">Appliquer</button>
     </div>
-  </div>
+  </form>
 </div>
 <div class="footer" fxLayout="row" fxLayoutAlign="space-between center">
   <div class="checkbox">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Service } from '../../models/recherche.model';
+import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-recherche',
@@ -7,7 +8,12 @@ import { Service } from '../../models/recherche.model';
   styleUrls: ['./recherche.component.scss'],
 })
 export class RechercheComponent implements OnInit {
-  constructor() {}
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      checkArray: this.fb.array([]),
+    });
+  }
+  form: FormGroup;
   modalOpened: string;
   modalType: string[] = ['services', 'accueil', 'plusFiltres'];
   btnServicesChecked: boolean;
@@ -17,19 +23,19 @@ export class RechercheComponent implements OnInit {
   services: Service[];
 
   ngOnInit(): void {
-    this.modalOpened = 'services';
+    this.modalOpened = null;
     this.btnServicesChecked = false;
     this.services = [];
+    //Block en attendant
     this.mockService('Accompagnement aux démarches en ligne', 'CAF', 7);
-    this.mockService('Insertion sociale et professionnelle', 'Diffuser son CV en ligne', 5);
+    this.mockService('Insertion sociale et professionnelle', ' Diffuser son CV en ligne', 5);
     this.mockService('Accès aux droits', 'Déclarer ses revenus en ligne et découvertes des services proposés', 8);
     this.mockService('Aide à la parentalité/éducation', 'Découvrir l’univers des jeux vidéos', 4);
     this.mockService('Compétences de base', 'Faire un diagnostic des compétences', 8);
     this.mockService('Culture et sécurité numérique', 'Traitement de texte : découverte', 4);
-    console.log(this.services);
-    this.calcSizeCol(this.services);
+    //Fin block en attendant
   }
-
+  //Fonction en attendant
   mockService(titre: string, categ: string, nbCateg: number) {
     var service1 = new Service();
     service1.titre = titre;
@@ -39,6 +45,7 @@ export class RechercheComponent implements OnInit {
     }
     this.services.push(service1);
   }
+  //Fin fonction en attendant
   openModal(option: string) {
     this.modalOpened = null;
     switch (option) {
@@ -64,22 +71,36 @@ export class RechercheComponent implements OnInit {
   }
   applyFilter() {
     this.openModal(this.modalOpened);
+    console.log(this.form.value);
   }
 
-  calcSizeCol(services: Service[]) {
-    for (var i = 0; i < services.length; i++) {
-      if (services[i + 1]) {
-        var nb1, nb2: number;
-        nb1 = services[i].categories.length;
-        nb2 = services[i + 1].categories.length;
-        if (nb1 + nb2 <= 13) {
-          services[i].size = parseFloat((nb1 / 13).toPrecision(2)) * 100;
-          services[i + 1].size = parseFloat((1 - services[i].size / 100).toPrecision(2)) * 100;
+  onCheckboxChange(e, reset: boolean) {
+    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+    if (reset) {
+      if (e.target.checked) {
+        checkArray.push(new FormControl(e.target.value));
+      } else {
+        let i: number = 0;
+        checkArray.controls.forEach((item: FormControl) => {
+          if (item.value == e.target.value) {
+            checkArray.removeAt(i);
+            return;
+          }
           i++;
-        } else {
-          services[i].size = 100;
-        }
+        });
       }
+    } else {
+      checkArray.clear();
     }
+  }
+  isChecked(module: string) {
+    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+    var bool: boolean = false;
+    checkArray.controls.forEach((item: FormControl) => {
+      if (item.value == module) {
+        bool = true;
+      }
+    });
+    return bool;
   }
 }
