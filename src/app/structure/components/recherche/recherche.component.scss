@@ -189,19 +189,12 @@
 }
 .checkbox {
   position: relative;
-  padding-left: 27px;
-  label {
-    font-family: Trebuchet MS;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 21px;
-  }
+  display: grid;
+  align-items: center;
+  grid-template-columns: min-content auto;
   input {
-    position: absolute;
     opacity: 0;
-    height: 0;
-    width: 0;
+    display: none;
     &:checked ~ .customCheck {
       background-color: $orange-light;
       border-color: transparent;
@@ -210,13 +203,24 @@
       display: block;
     }
   }
+  .label {
+    padding-left: 15px;
+
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 21px;
+  }
   .customCheck {
-    position: absolute;
-    height: 18px;
+    display: inline-grid;
     width: 18px;
+    height: 18px;
     background-color: $white;
     border: 1px solid $grey;
     cursor: pointer;
+    position: relative;
+
     top: 0;
     left: 0;
     &:hover {
@@ -228,7 +232,7 @@
       display: none;
     }
     &:after {
-      left: 6.5px;
+      left: 7px;
       top: 3px;
       width: 4px;
       height: 8px;
