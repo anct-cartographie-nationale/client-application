@@ -1,5 +1,6 @@
 @import '../../../../assets/scss/icons';
 @import '../../../../assets/scss/color';
+
 .header {
   .title {
     font-family: Times New Roman;
@@ -51,7 +52,7 @@
       align-items: center;
       text-align: center;
       color: $white;
-      padding: 0 10px 0 10px;
+      padding: 3px 16px 3px 16px;
       outline: none;
     }
   }
@@ -116,68 +117,126 @@
     align-items: center;
     text-decoration-line: underline;
   }
-  .checkbox {
-    position: relative;
-    padding-left: 27px;
-    label {
-      font-family: Trebuchet MS;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 15px;
-      line-height: 21px;
-    }
-    input {
-      position: absolute;
-      opacity: 0;
-      height: 0;
-      width: 0;
-      &:checked ~ .customCheck {
-        background-color: $orange-light;
-        border-color: transparent;
-      }
-      &:checked ~ .customCheck:after {
-        display: block;
-      }
-    }
-    .customCheck {
-      position: absolute;
-      height: 18px;
-      width: 18px;
-      background-color: $white;
-      border: 1px solid $grey;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      &:hover {
-        background-color: $grey-4;
-      }
-      &:after {
-        content: '';
-        position: absolute;
-        display: none;
-      }
-      &:after {
-        left: 6.5px;
-        top: 3px;
-        width: 4px;
-        height: 8px;
-        border: solid white;
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-      }
-    }
-  }
 }
 .modal {
-  height: 500px;
-  width: 1100px;
+  height: 654px;
+  max-width: 1100px;
   background: $white;
   border: 1px solid $purple;
   box-sizing: border-box;
   border-radius: 8px;
   z-index: 1;
-  position: fixed;
+  position: absolute;
   margin-top: 80px;
+  .contentModal {
+    writing-mode: vertical-lr;
+    padding: 20px 5px 10px 5px;
+    overflow-y: hidden;
+    max-width: 1100px;
+    .blockFiltre {
+      writing-mode: horizontal-tb;
+      max-width: 320px;
+      padding: 0 10px 10px 10px;
+    }
+    .ligneFiltre {
+      margin: 5px 0 5px 0;
+    }
+    h4 {
+      font-family: Trebuchet MS;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 13px;
+      line-height: 17px;
+      display: flex;
+      align-items: center;
+      margin: 0;
+    }
+    .nbResult {
+      font-family: Trebuchet MS;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 15px;
+    }
+    label {
+      font-family: Trebuchet MS;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+    }
+  }
+  .footer {
+    height: 32px;
+    padding-right: 24px;
+    button {
+      height: 100%;
+      border: none;
+      cursor: pointer;
+      background-color: $purple;
+      font-family: Trebuchet MS;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 13px;
+      line-height: 100%;
+      align-items: center;
+      text-align: center;
+      color: $white;
+      padding: 3px 16px 3px 16px;
+      outline: none;
+    }
+  }
+}
+.checkbox {
+  position: relative;
+  padding-left: 27px;
+  label {
+    font-family: Trebuchet MS;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 21px;
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+    &:checked ~ .customCheck {
+      background-color: $orange-light;
+      border-color: transparent;
+    }
+    &:checked ~ .customCheck:after {
+      display: block;
+    }
+  }
+  .customCheck {
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    background-color: $white;
+    border: 1px solid $grey;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    &:hover {
+      background-color: $grey-4;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      display: none;
+    }
+    &:after {
+      left: 6.5px;
+      top: 3px;
+      width: 4px;
+      height: 8px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+    }
+  }
 }

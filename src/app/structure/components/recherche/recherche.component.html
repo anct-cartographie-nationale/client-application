@@ -24,7 +24,35 @@
       <div class="arrow"></div>
     </button>
   </div>
-  <div *ngIf="modalOpened" class="modal"></div>
+  <div *ngIf="modalOpened" class="modal" fxLayout="column" fxLayoutAlign="space-between">
+    <div class="contentModal" fxLayout="row wrap">
+      <!--<div class="blockFiltre" *ngFor="let s of services">-->
+      <div class="blockFiltre" *ngFor="let s of services">
+        <div class="blockLigne">
+          <h4>{{ s.titre }}</h4>
+          <div
+            fxLayout="row"
+            class="ligneFiltre"
+            fxLayoutAlign="space-between center"
+            *ngFor="let categ of s.categories"
+          >
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" />
+                <span class="customCheck"></span>
+                {{ categ }}
+              </label>
+            </div>
+            <span class="nbResult">34</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
+      <a href="">Effacer</a>
+      <button type="button" (click)="applyFilter()">Appliquer</button>
+    </div>
+  </div>
 </div>
 <div class="footer" fxLayout="row" fxLayoutAlign="space-between center">
   <div class="checkbox">
