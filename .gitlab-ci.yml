@@ -4,8 +4,8 @@ services:
   - docker:dind
 
 stages:
-  - sonar-analysis
-  - build
+#   - sonar-analysis
+#   - build
   - deploy
 
 build:
@@ -39,7 +39,7 @@ deploy_dev:
   only:
     - dev
   script:
-    - ls
+    - cd /home/mps/ram
     - pwd
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker-compose pull web-app
