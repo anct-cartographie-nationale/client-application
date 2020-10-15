@@ -7,15 +7,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CustomBreakPointsProvider } from './config/custom-breakpoint';
-import { StructureListComponent } from './structure-list/structure-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
-import { StructureModule } from './structure/structure.module';
+import { StructureListModule } from './structure-list/structure-list.module';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent, StructureListComponent],
-  imports: [BrowserModule, AppRoutingModule, FlexLayoutModule, SharedModule, StructureModule],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent],
+  imports: [BrowserModule, AppRoutingModule, FlexLayoutModule, SharedModule, StructureListModule],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }, CustomBreakPointsProvider],
   bootstrap: [AppComponent],
 })

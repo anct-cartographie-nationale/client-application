@@ -1,3 +1,13 @@
+[![Quality Gate Status](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=alert_status)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Bugs](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=bugs)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Lines of Code](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=ncloc)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Maintainability Rating](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=sqale_rating)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Quality Gate Status](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=alert_status)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Security Rating](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=security_rating)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+[![Vulnerabilities](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=vulnerabilities)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+
+
+
 # Pamn
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
