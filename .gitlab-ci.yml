@@ -4,8 +4,8 @@ services:
   - docker:dind
 
 stages:
-#   - sonar-analysis
-#   - build
+  - sonar-analysis
+  - build
   - deploy
 
 build:
@@ -26,7 +26,7 @@ build_dev:
     - docker:18.09-dind
   stage: build
   only:
-    - dev
+    - master
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
@@ -51,7 +51,7 @@ code_analysis:
     - docker:18.09-dind
   stage: sonar-analysis
   only:
-    - dev
+    - master
   script:
     - >
       sonar-scanner
