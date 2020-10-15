@@ -1,1 +1,78 @@
-<p>recherche works!</p>
+<div class="header">
+  <span class="title">Acteurs de la médiation</span>
+</div>
+<div class="content" fxLayout="column">
+  <div class="searchSection" fxLayout="row" fxLayoutGap="1.5vw">
+    <div class="icon">
+      <div class="ico-pin-search grey"></div>
+    </div>
+    <input type="text" placeholder="Rechercher une adresse, une association..." />
+    <button type="button">Rechercher</button>
+  </div>
+
+  <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
+    <button
+      type="button"
+      [className]="modalOpened == modalType[0] ? 'selected' : ''"
+      (click)="openModal(this.modalType[0])"
+    >
+      <span class="btnText">Services</span>
+      <div class="arrow"></div>
+    </button>
+    <button
+      type="button"
+      [className]="modalOpened == modalType[1] ? 'selected' : ''"
+      (click)="openModal(this.modalType[1])"
+    >
+      <span class="btnText">Accueil</span>
+      <div class="arrow"></div>
+    </button>
+    <button
+      type="button"
+      [className]="modalOpened == modalType[2] ? 'selected' : ''"
+      (click)="openModal(this.modalType[2])"
+    >
+      <span class="btnText">Plus de filtres</span>
+      <div class="arrow"></div>
+    </button>
+  </div>
+  <div *ngIf="modalOpened" fxLayout="column" fxLayoutAlign="space-between" [ngClass]="['modal', 'modal' + modalOpened]">
+    <div class="contentModal" fxLayout="row wrap">
+      <!--<div class="blockFiltre" *ngFor="let s of services">-->
+      <div class="blockFiltre" *ngFor="let c of categories">
+        <div class="blockLigne">
+          <h4>{{ c.titre }}</h4>
+          <div fxLayout="row" class="ligneFiltre" fxLayoutAlign="space-between center" *ngFor="let module of c.modules">
+            <div class="checkbox">
+              <label>
+                <input
+                  type="checkbox"
+                  [checked]="this.checkedTab.indexOf(module) > -1"
+                  [value]="module"
+                  (change)="onCheckboxChange($event, false)"
+                />
+                <span class="customCheck"></span>
+              </label>
+              <div class="label">{{ module }}</div>
+            </div>
+            <span class="nbResult">34</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
+      <a (click)="onCheckboxChange($event, true)">Effacer</a>
+      <button type="button" (click)="applyFilter(modalOpened)">Appliquer</button>
+    </div>
+  </div>
+</div>
+<div class="footer" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" />
+      <span class="customCheck"></span>
+    </label>
+    <div class="label">Pass numérique</div>
+  </div>
+  <a href="">Ajouter une structure</a>
+</div>
