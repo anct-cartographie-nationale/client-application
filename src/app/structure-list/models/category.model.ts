@@ -1,5 +1,5 @@
 export class Category {
-  titre: string;
+  title: string;
   modules: string[];
   size: number;
 }

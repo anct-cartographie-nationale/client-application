@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from '../../models/category.model';
 
 @Component({
-  selector: 'app-recherche',
-  templateUrl: './recherche.component.html',
-  styleUrls: ['./recherche.component.scss'],
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss'],
 })
-export class RechercheComponent implements OnInit {
+export class SearchComponent implements OnInit {
   constructor() {}
   //Variables btn filtres
   modalType: string[] = ['services', 'accueil', 'plusFiltres'];
@@ -107,7 +107,7 @@ export class RechercheComponent implements OnInit {
    */
   mockService(module: Category[], titre: string, categ: string, nbCateg: number) {
     var m = new Category();
-    m.titre = titre;
+    m.title = titre;
     m.modules = [];
     for (var i = 0; i < nbCateg; i++) {
       m.modules.push(categ + i);
