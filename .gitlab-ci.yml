@@ -39,10 +39,9 @@ deploy_dev:
   only:
     - dev
   script:
-    - cd ram 
+    - ls 
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker-compose pull web-app
-    - docker-compose stop web-app
     - docker-compose up -d web-app
 
 code_analysis:
