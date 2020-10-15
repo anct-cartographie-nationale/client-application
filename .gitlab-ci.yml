@@ -26,7 +26,7 @@ build_dev:
     - docker:18.09-dind
   stage: build
   only:
-    - master
+    - dev
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
@@ -40,7 +40,6 @@ deploy_dev:
     - dev
   script:
     - cd /home/mps/ram
-    - pwd
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker-compose pull web-app
     - docker-compose up -d web-app
@@ -51,7 +50,7 @@ code_analysis:
     - docker:18.09-dind
   stage: sonar-analysis
   only:
-    - master
+    - dev
   script:
     - >
       sonar-scanner
