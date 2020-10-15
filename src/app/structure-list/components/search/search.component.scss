@@ -1,15 +1,11 @@
 @import '../../../../assets/scss/icons';
 @import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
 
 .header {
   .title {
-    font-family: Times New Roman;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 103%;
+    @include cn-bold-20;
     padding: 16px 0 16px 0;
-
     display: flex;
     align-items: center;
     text-transform: uppercase;
@@ -27,11 +23,7 @@
     width: 100%;
     background-color: $grey-4;
     border: none;
-    font-family: Trebuchet MS;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 17px;
+    @include cn-regular-14;
     display: flex;
     align-items: center;
     padding-left: 10px;
@@ -44,11 +36,7 @@
       border: none;
       cursor: pointer;
       background-color: $purple;
-      font-family: Trebuchet MS;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 13px;
-      line-height: 100%;
+      @include cn-bold-14;
       align-items: center;
       text-align: center;
       color: $white;
@@ -60,7 +48,6 @@
     padding: 16px 0 16px 0;
     button {
       outline: none;
-
       border: 1px solid $grey;
       border-radius: 33px;
       background-color: $white;
@@ -70,11 +57,7 @@
       cursor: pointer;
       .btnText {
         justify-content: center;
-        font-family: Trebuchet MS;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 13px;
-        line-height: 19px;
+        @include cn-regular-14;
         display: flex;
         align-items: center;
       }
@@ -106,13 +89,7 @@
 .footer {
   margin: 0px 0 16px 0;
   a {
-    font-family: Trebuchet MS;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 13px;
-    line-height: 18px;
-    /* or 120% */
-
+    @include cn-bold-14;
     display: flex;
     align-items: center;
     text-decoration-line: underline;
@@ -139,7 +116,7 @@
     writing-mode: vertical-lr;
     overflow-y: hidden;
     max-width: 1100px;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid $grey;
     margin-bottom: 10px;
     .blockFiltre {
       writing-mode: horizontal-tb;
@@ -150,28 +127,16 @@
       margin: 5px 0 5px 0;
     }
     h4 {
-      font-family: Trebuchet MS;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 13px;
-      line-height: 17px;
+      @include cn-bold-14;
       display: flex;
       align-items: center;
       margin-top: 0;
     }
     .nbResult {
-      font-family: Trebuchet MS;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 13px;
-      line-height: 15px;
+      @include cn-regular-14;
     }
     label {
-      font-family: Trebuchet MS;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 16px;
+      @include cn-regular-14;
     }
   }
   .footer {
@@ -181,10 +146,7 @@
       border: none;
       cursor: pointer;
       background-color: $purple;
-      font-family: Trebuchet MS;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 13px;
+      @include cn-bold-14;
       line-height: 100%;
       align-items: center;
       text-align: center;
@@ -216,11 +178,7 @@
   }
   .label {
     padding-left: 8px;
-    font-family: Trebuchet MS;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 17px;
+    @include cn-regular-14;
     padding: 0 16px 0 16px;
   }
   .customCheck {
@@ -247,7 +205,7 @@
       top: 3px;
       width: 4px;
       height: 8px;
-      border: solid white;
+      border: solid $white;
       border-width: 0 2px 2px 0;
       transform: rotate(45deg);
       -webkit-transform: rotate(45deg);
