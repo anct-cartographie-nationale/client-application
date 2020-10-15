@@ -8,102 +8,74 @@ import { Category } from '../../models/category.model';
 })
 export class SearchComponent implements OnInit {
   constructor() {}
-  //Variables btn filtres
-  modalType: string[] = ['services', 'accueil', 'plusFiltres'];
 
-  //Variable gestion liste modal
-  servicesCategories: Category[];
-  modaliteCategories: Category[];
+  // button variable
+  modalType: string[] = ['services', 'modalite', 'plusFiltres'];
+
+  // Modal variable
   categories: Category[];
-  filtresCategories: Category[];
-  modalOpened: string;
+  modalTypeOpened: string;
 
-  //Variable gestion Checkbox
-  checkedTab: string[];
-  filterCheck: string[];
+  // Checkbox variable
+  checkedModules: string[];
+  checkedModulesFilter: string[];
 
   ngOnInit(): void {
-    //Sert à afficher la modal et indiquer le type de filtre choisit
-    this.modalOpened = null;
-
-    //Sert à stocker les différentes catégories
-    this.servicesCategories = [];
-    this.modaliteCategories = [];
+    // Store the different categories
     this.categories = [];
-    this.filtresCategories = [];
 
-    //Sert à gérer la checkbox multiple
-    this.checkedTab = new Array();
-    this.filterCheck = new Array();
+    // Manage checkbox
+    this.checkedModules = new Array();
+    this.checkedModulesFilter = new Array();
   }
 
-  //Ouvrir la modal et afficher la liste en fonction du btn de filtre appuyé
+  // Open the modal and display the list according to the right filter button
   openModal(option: string) {
     this.categories = [];
-    switch (option) {
-      case this.modalType[0]:
-        //Vérifie si le btn n'est pas actif
-        if (this.modalOpened != this.modalType[0]) {
-          this.modalOpened = this.modalType[0];
-          this.fakeDataServices();
-        } else {
-          this.modalOpened = null;
-        }
-        break;
-      case this.modalType[1]:
-        //Vérifie si le btn n'est pas actif
-        if (this.modalOpened != this.modalType[1]) {
-          this.modalOpened = this.modalType[1];
-          this.fakeDataModalite();
-        } else {
-          this.modalOpened = null;
-        }
-        break;
-      case this.modalType[2]:
-        //Vérifie si le btn n'est pas actif
-        if (this.modalOpened != this.modalType[2]) {
-          this.modalOpened = this.modalType[2];
-          this.fakeDataFiltres();
-        } else {
-          this.modalOpened = null;
-        }
-        break;
-    }
-    //Initialisation de la liste temporaire
-    this.checkedTab = this.filterCheck.slice();
-  }
-
-  //Envoie d'un tableau contenant tous les filtres
-  applyFilter() {
-    this.filterCheck = this.checkedTab.slice();
-    this.openModal(this.modalOpened);
-    console.log(this.filterCheck);
-  }
-
-  //Gestion de l'evenement checkbox(Cocher/Décocher)
-  onCheckboxChange(e, reset: boolean) {
-    //Condition btn effacer filtre d'une liste
-    if (!reset) {
-      if (e.target.checked) {
-        this.checkedTab.push(e.target.value);
-      } else {
-        //Vérifie si la case décochée est présente dans la liste temporaire et la supprime
-        if (this.checkedTab.indexOf(e.target.value) > -1) {
-          this.checkedTab.splice(this.checkedTab.indexOf(e.target.value), 1);
-        }
-      }
+    if (this.modalTypeOpened !== option) {
+      this.modalTypeOpened = option;
+      this.fakeData(option);
     } else {
-      //Efface uniquement les éléments de la liste en cours
-      this.categories.forEach((m) => {
-        m.modules.forEach((categ) => {
-          if (this.checkedTab.indexOf(categ) > -1) this.checkedTab.splice(this.checkedTab.indexOf(categ), 1);
-        });
-      });
+      this.modalTypeOpened = null;
     }
+
+    // Init checked list modules
+    this.checkedModules = this.checkedModulesFilter.slice();
+  }
+
+  // Sends an array containing all filters
+  applyFilter() {
+    this.checkedModulesFilter = this.checkedModules.slice();
+    this.openModal(this.modalTypeOpened);
+
+    // Simulation send filter
+    console.log(this.checkedModulesFilter);
+  }
+
+  // Management of the checkbox event (Check / Uncheck)
+  onCheckboxChange(event) {
+    if (event.target.checked) {
+      this.checkedModules.push(event.target.value);
+    } else {
+      // Check if the unchecked module is present in the list and remove it
+      if (this.checkedModules.indexOf(event.target.value) > -1) {
+        this.checkedModules.splice(this.checkedModules.indexOf(event.target.value), 1);
+      }
+    }
+  }
+
+  // Clear only filters in the current modal
+  clearFilters() {
+    this.categories.forEach((categ) => {
+      categ.modules.forEach((module) => {
+        if (this.checkedModules.indexOf(module) > -1)
+          this.checkedModules.splice(this.checkedModules.indexOf(module), 1);
+      });
+    });
   }
 
   /**
-   * En attendant les apis
+   * En attendant l'api
    */
   mockService(module: Category[], titre: string, categ: string, nbCateg: number) {
     var m = new Category();
@@ -114,27 +86,27 @@ export class SearchComponent implements OnInit {
     }
     module.push(m);
   }
-  fakeDataServices() {
-    this.mockService(this.categories, 'Accompagnement aux démarches en ligne', 'CAF', 7);
-    this.mockService(this.categories, 'Insertion sociale et professionnelle', ' Diffuser son CV en ligne', 5);
-    this.mockService(
-      this.categories,
-      'Accès aux droits',
-      'Déclarer ses revenus en ligne et découvertes des services proposés',
-      8
-    );
-    this.mockService(this.categories, 'Aide à la parentalité/éducation', 'Découvrir l’univers des jeux vidéos', 4);
-    this.mockService(this.categories, 'Compétences de base', 'Faire un diagnostic des compétences', 8);
-    this.mockService(this.categories, 'Culture et sécurité numérique', 'Traitement de texte : découverte', 4);
-  }
-  fakeDataModalite() {
-    this.mockService(this.categories, "Modalité d'accueil", 'Matériel mis à dispostion', 6);
-  }
-  fakeDataFiltres() {
-    this.mockService(this.categories, 'Équipements', 'Accès à des revues ou livres infoirmatiques numériques', 8);
-    this.mockService(this.categories, "Type d'acteurs", 'Lieux de médiation (Pimms, assos...)', 5);
-    this.mockService(this.categories, 'Publics', 'Langues étrangères autres qu’anglais', 12);
-    this.mockService(this.categories, 'Labelisation', 'Prescripteur du Pass Numérique', 6);
-    this.mockService(this.categories, 'Type de structure', 'Espace de co-working', 6);
+  fakeData(option: string) {
+    if (option === this.modalType[0]) {
+      this.mockService(this.categories, 'Accompagnement aux démarches en ligne', 'CAF', 7);
+      this.mockService(this.categories, 'Insertion sociale et professionnelle', ' Diffuser son CV en ligne', 5);
+      this.mockService(
+        this.categories,
+        'Accès aux droits',
+        'Déclarer ses revenus en ligne et découvertes des services proposés',
+        8
+      );
+      this.mockService(this.categories, 'Aide à la parentalité/éducation', 'Découvrir l’univers des jeux vidéos', 4);
+      this.mockService(this.categories, 'Compétences de base', 'Faire un diagnostic des compétences', 8);
+      this.mockService(this.categories, 'Culture et sécurité numérique', 'Traitement de texte : découverte', 4);
+    } else if (option === this.modalType[1]) {
+      this.mockService(this.categories, "Modalité d'accueil", 'Matériel mis à dispostion', 6);
+    } else if (option === this.modalType[2]) {
+      this.mockService(this.categories, 'Équipements', 'Accès à des revues ou livres infoirmatiques numériques', 8);
+      this.mockService(this.categories, "Type d'acteurs", 'Lieux de médiation (Pimms, assos...)', 5);
+      this.mockService(this.categories, 'Publics', 'Langues étrangères autres qu’anglais', 12);
+      this.mockService(this.categories, 'Labelisation', 'Prescripteur du Pass Numérique', 6);
+      this.mockService(this.categories, 'Type de structure', 'Espace de co-working', 6);
+    }
   }
 }

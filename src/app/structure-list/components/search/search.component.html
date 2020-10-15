@@ -13,7 +13,7 @@
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
     <button
       type="button"
-      [className]="modalOpened == modalType[0] ? 'selected' : ''"
+      [className]="modalTypeOpened == modalType[0] ? 'selected' : ''"
       (click)="openModal(this.modalType[0])"
     >
       <span class="btnText">Services</span>
@@ -21,7 +21,7 @@
     </button>
     <button
       type="button"
-      [className]="modalOpened == modalType[1] ? 'selected' : ''"
+      [className]="modalTypeOpened == modalType[1] ? 'selected' : ''"
       (click)="openModal(this.modalType[1])"
     >
       <span class="btnText">Accueil</span>
@@ -29,14 +29,19 @@
     </button>
     <button
       type="button"
-      [className]="modalOpened == modalType[2] ? 'selected' : ''"
+      [className]="modalTypeOpened == modalType[2] ? 'selected' : ''"
       (click)="openModal(this.modalType[2])"
     >
       <span class="btnText">Plus de filtres</span>
       <div class="arrow"></div>
     </button>
   </div>
-  <div *ngIf="modalOpened" fxLayout="column" fxLayoutAlign="space-between" [ngClass]="['modal', 'modal' + modalOpened]">
+  <div
+    *ngIf="modalTypeOpened"
+    fxLayout="column"
+    fxLayoutAlign="space-between"
+    [ngClass]="['modal', 'modal' + modalTypeOpened]"
+  >
     <div class="contentModal" fxLayout="row wrap">
       <!--<div class="blockFiltre" *ngFor="let s of services">-->
       <div class="blockFiltre" *ngFor="let c of categories">
@@ -47,7 +52,7 @@
               <label>
                 <input
                   type="checkbox"
-                  [checked]="this.checkedTab.indexOf(module) > -1"
+                  [checked]="this.checkedModules.indexOf(module) > -1"
                   [value]="module"
                   (change)="onCheckboxChange($event, false)"
                 />
@@ -61,8 +66,8 @@
       </div>
     </div>
     <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
-      <a (click)="onCheckboxChange($event, true)">Effacer</a>
-      <button type="button" (click)="applyFilter(modalOpened)">Appliquer</button>
+      <a (click)="clearFilters()">Effacer</a>
+      <button type="button" (click)="applyFilter(modalTypeOpened)">Appliquer</button>
     </div>
   </div>
 </div>
