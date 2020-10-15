@@ -14,20 +14,20 @@ RUN npm install --silent
 COPY angular.json .
 COPY tsconfig.json .
 COPY tsconfig.app.json .
-COPY nginx.conf .
+COPY /nginx/nginx.conf .
 COPY /src ./src
 
 ARG conf
 
 # Building the Angular app /dist i18n
-RUN npm run build:${conf}
+RUN npm run build:dev
 
 # Stage 1, based on Nginx, to have only the compiled app
 FROM nginx:1.16.0-alpine
 
 # copy artifact build from the 'build environment'
-COPY --from=build /app/dist /var/www/htdocs
-COPY --from=build /app/nginx.conf /etc/nginx/nginx.conf
+
+COPY --from=build /app/dist/fr /usr/share/nginx/html
 
 RUN touch /var/run/nginx.pid
 

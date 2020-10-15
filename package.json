@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "release": "standard-version",
-    "translate": "ng xi18n --output-path src/locale --out-file messages.en.xlf"
+    "translate": "ng xi18n --output-path src/locale --out-file messages.en.xlf",
+    "api": "json-server api/db.json --routes api/routes.json --no-cors=true"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,8 @@
     "@runette/ngx-leaflet-locate": "^1.0.3",
     "leaflet": "^1.7.1",
     "leaflet.locatecontrol": "^0.72.0",
+    "json-server": "^0.16.2",
+    "luxon": "^1.25.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
