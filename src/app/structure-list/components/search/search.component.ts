@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Open the modal and display the list according to the right filter button
-  private openModal(option: string): void {
+  public openModal(option: string): void {
     this.categories = [];
     if (this.modalTypeOpened !== option) {
       this.modalTypeOpened = option;
@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Sends an array containing all filters
-  private applyFilter(): void {
+  public applyFilter(): void {
     this.checkedModulesFilter = this.checkedModules.slice();
     this.openModal(this.modalTypeOpened);
 
@@ -55,7 +55,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Management of the checkbox event (Check / Uncheck)
-  private onCheckboxChange(event): void {
+  public onCheckboxChange(event): void {
     if (event.target.checked) {
       this.checkedModules.push(event.target.value);
     } else {
@@ -76,7 +76,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  private submitSearch(searchTerm: string): void {
+  public submitSearch(searchTerm: string): void {
     this.searchEvent.emit(searchTerm);
   }
 
@@ -95,6 +95,8 @@ export class SearchComponent implements OnInit {
   private fakeData(option: string): void {
     if (option === this.modalType[0]) {
       this.mockService(this.categories, 'Accompagnement aux démarches en ligne', 'CAF', 7);
+    } else if (option === this.modalType[1]) {
+      this.mockService(this.categories, 'Compétences de base', 'Faire un diagnostic des compétences', 8);
       this.mockService(this.categories, 'Insertion sociale et professionnelle', ' Diffuser son CV en ligne', 5);
       this.mockService(
         this.categories,
@@ -103,12 +105,11 @@ export class SearchComponent implements OnInit {
         8
       );
       this.mockService(this.categories, 'Aide à la parentalité/éducation', 'Découvrir l’univers des jeux vidéos', 4);
-      this.mockService(this.categories, 'Compétences de base', 'Faire un diagnostic des compétences', 8);
       this.mockService(this.categories, 'Culture et sécurité numérique', 'Traitement de texte : découverte', 4);
-    } else if (option === this.modalType[1]) {
-      this.mockService(this.categories, "Modalité d'accueil", 'Matériel mis à dispostion', 6);
     } else if (option === this.modalType[2]) {
       this.mockService(this.categories, 'Équipements', 'Accès à des revues ou livres infoirmatiques numériques', 8);
+      this.mockService(this.categories, "Modalité d'accueil", 'Matériel mis à dispostion', 6);
+
       this.mockService(this.categories, "Type d'acteurs", 'Lieux de médiation (Pimms, assos...)', 5);
       this.mockService(this.categories, 'Publics', 'Langues étrangères autres qu’anglais', 12);
       this.mockService(this.categories, 'Labelisation', 'Prescripteur du Pass Numérique', 6);

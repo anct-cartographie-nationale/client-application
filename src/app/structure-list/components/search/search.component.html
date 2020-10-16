@@ -16,7 +16,7 @@
       [className]="modalTypeOpened == modalType[0] ? 'selected' : ''"
       (click)="openModal(this.modalType[0])"
     >
-      <span class="btnText">Services</span>
+      <span class="btnText">Accompagnement</span>
       <div class="arrow"></div>
     </button>
     <button
@@ -24,7 +24,7 @@
       [className]="modalTypeOpened == modalType[1] ? 'selected' : ''"
       (click)="openModal(this.modalType[1])"
     >
-      <span class="btnText">Accueil</span>
+      <span class="btnText">Formations</span>
       <div class="arrow"></div>
     </button>
     <button
@@ -42,27 +42,30 @@
     fxLayoutAlign="space-between"
     [ngClass]="['modal', 'modal' + modalTypeOpened]"
   >
-    <div class="contentModal" fxLayout="row wrap">
+    <div class="contentModal" fxLayout="row wrap" fxLayoutAlign="flex-start">
       <!--<div class="blockFiltre" *ngFor="let s of services">-->
       <div class="blockFiltre" *ngFor="let c of categories">
-        <div class="blockLigne">
-          <h4>{{ c.title }}</h4>
+        <h4>{{ c.title }}</h4>
+
+        <ul class="blockLigne">
           <div fxLayout="row" class="ligneFiltre" fxLayoutAlign="space-between center" *ngFor="let module of c.modules">
-            <div class="checkbox">
-              <label>
-                <input
-                  type="checkbox"
-                  [checked]="this.checkedModules.indexOf(module) > -1"
-                  [value]="module"
-                  (change)="onCheckboxChange($event, false)"
-                />
-                <span class="customCheck"></span>
-              </label>
-              <div class="label">{{ module }}</div>
-            </div>
+            <li class="checkbox">
+              <div class="testBox">
+                <label>
+                  <input
+                    type="checkbox"
+                    [checked]="this.checkedModules.indexOf(module) > -1"
+                    [value]="module"
+                    (change)="onCheckboxChange($event, false)"
+                  />
+                  <span class="customCheck"></span>
+                </label>
+                <div class="label">{{ module }}</div>
+              </div>
+            </li>
             <span class="nbResult">34</span>
           </div>
-        </div>
+        </ul>
       </div>
     </div>
     <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
