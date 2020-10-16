@@ -6,6 +6,6 @@ services:
     build: .
     image: registry.forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client:${TAG}
     volumes:
-      - ./nginx/dev.conf:/etc/nginx/conf.d/default.conf
+      - ./dev.conf:/etc/nginx/conf.d/default.conf
     ports:
-      - 8080:8080
+      - 8030:8080

@@ -39,6 +39,7 @@ deploy_dev:
   only:
     - dev
   script:
+    - cd /home/mps/ram
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker-compose pull web-app
     - docker-compose up -d web-app
