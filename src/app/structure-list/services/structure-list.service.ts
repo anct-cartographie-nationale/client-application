@@ -11,6 +11,7 @@ import { Time } from '../models/time.model';
 import { Weekday } from '../enum/weekday.enum';
 import { Week } from '../models/week.model';
 import { WeekDay } from '@angular/common';
+import { Filter } from '../models/filter.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,23 @@ import { WeekDay } from '@angular/common';
 export class StructureService {
   constructor(private http: HttpClient) {}
 
-  public getStructures(): Observable<Structure[]> {
-    return this.http.get('/api/Structures').pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+  public getStructures(filters: Filter[]): Observable<Structure[]> {
+    return this.http
+      .get('/api/Structures?' + this.constructApi(filters))
+      .pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+  }
+
+  private constructApi(filters: Filter[]): string {
+    let api: string = '';
+    if (filters) {
+      filters.forEach((filter) => {
+        if (api) {
+          api = api + '&';
+        }
+        api = api + filter.name + '_like=' + filter.value;
+      });
+    }
+    return api;
   }
 
   /**

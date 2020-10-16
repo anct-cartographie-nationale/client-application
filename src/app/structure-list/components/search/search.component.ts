@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Category } from '../../models/category.model';
 
 @Component({
@@ -9,6 +9,8 @@ import { Category } from '../../models/category.model';
 export class SearchComponent implements OnInit {
   constructor() {}
 
+  @Output() searchEvent = new EventEmitter();
+  searchTerm: string = '';
   // button variable
   modalType: string[] = ['services', 'modalite', 'plusFiltres'];
 
@@ -30,7 +32,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Open the modal and display the list according to the right filter button
-  openModal(option: string) {
+  private openModal(option: string): void {
     this.categories = [];
     if (this.modalTypeOpened !== option) {
       this.modalTypeOpened = option;
@@ -44,7 +46,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Sends an array containing all filters
-  applyFilter() {
+  private applyFilter(): void {
     this.checkedModulesFilter = this.checkedModules.slice();
     this.openModal(this.modalTypeOpened);
 
@@ -53,7 +55,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Management of the checkbox event (Check / Uncheck)
-  onCheckboxChange(event) {
+  private onCheckboxChange(event): void {
     if (event.target.checked) {
       this.checkedModules.push(event.target.value);
     } else {
@@ -65,7 +67,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Clear only filters in the current modal
-  clearFilters() {
+  private clearFilters(): void {
     this.categories.forEach((categ) => {
       categ.modules.forEach((module) => {
         if (this.checkedModules.indexOf(module) > -1)
@@ -74,10 +76,14 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  private submitSearch(searchTerm: string): void {
+    this.searchEvent.emit(searchTerm);
+  }
+
   /**
    * En attendant l'api
    */
-  mockService(module: Category[], titre: string, categ: string, nbCateg: number) {
+  private mockService(module: Category[], titre: string, categ: string, nbCateg: number): void {
     var m = new Category();
     m.title = titre;
     m.modules = [];
@@ -86,7 +92,7 @@ export class SearchComponent implements OnInit {
     }
     module.push(m);
   }
-  fakeData(option: string) {
+  private fakeData(option: string): void {
     if (option === this.modalType[0]) {
       this.mockService(this.categories, 'Accompagnement aux démarches en ligne', 'CAF', 7);
       this.mockService(this.categories, 'Insertion sociale et professionnelle', ' Diffuser son CV en ligne', 5);

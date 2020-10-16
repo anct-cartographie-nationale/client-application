@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StructureListComponent implements OnInit {
   constructor() {}
-
+  currentFilter: string;
   ngOnInit(): void {}
+
+  fetchResults(filter: string) {
+    this.currentFilter = filter;
+  }
 }

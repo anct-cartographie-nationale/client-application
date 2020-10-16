@@ -6,8 +6,8 @@
     <div class="icon">
       <div class="ico-pin-search grey"></div>
     </div>
-    <input type="text" placeholder="Rechercher une adresse, une association..." />
-    <button type="button">Rechercher</button>
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher une adresse, une association..." />
+    <button type="button" (click)="submitSearch(searchTerm)">Rechercher</button>
   </div>
 
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
