@@ -7,12 +7,29 @@
 }
 
 ::ng-deep .fa-map-marker {
-  display: inline-block;
-  height: 0;
-  width: 0;
-  border-right: 5px solid transparent;
-  border-bottom: 12px solid red;
-  border-left: 7px solid transparent;
+  color: $black;
+  position: absolute;
+  margin-left: 4px;
+  margin-top: 2px;
+  width: 12px;
+  height: 12px;
+  border: solid 1px currentColor;
+  border-radius: 7px 7px 7px 0;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  margin-left: -6px;
+  margin-top: 6px;
+}
+
+::ng-deep .fa-map-marker:before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 4px;
+  height: 4px;
+  border: solid 1px currentColor;
+  border-radius: 3px;
 }
 
 ::ng-deep .leaflet-control-locate-circle {

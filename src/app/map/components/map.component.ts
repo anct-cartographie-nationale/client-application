@@ -14,7 +14,7 @@ export class MapComponent implements OnInit {
   // Init locate options
   public locateOptions = {
     flyTo: false,
-    keepCurrentZoomLevel: true,
+    keepCurrentZoomLevel: false,
     locateOptions: {
       enableHighAccuracy: true,
     },
@@ -30,12 +30,11 @@ export class MapComponent implements OnInit {
 
   /**
    * Add marker when map is ready to be showned
-   * @param map
+   * @param map map
    */
   public onMapReady(map: Map): void {
     this.map = map;
     this.addMarker();
-    this.toggleToolTip(this.toogleToolTipIds);
   }
 
   /**
@@ -64,15 +63,15 @@ export class MapComponent implements OnInit {
       height: 256,
     };
     const carteLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
+      maxZoom: 20,
       attribution: 'Map data © OpenStreetMap contributors',
     });
     // Center is set on townhall
     // Zoom is blocked on 11 to prevent people to zoom out from metropole
     this.mapOptions = {
       center: latLng(45.764043, 4.835659),
-      zoom: 11,
-      minZoom: 11,
+      zoom: 10,
+      minZoom: 10,
       layers: [carteLayer, metroMaps],
     };
   }
@@ -88,7 +87,8 @@ export class MapComponent implements OnInit {
 
   private addMarker(): void {
     //TODO: Replace with real data
-    this.map = this.mapService.addMarker(this.map, 45.764043, 4.835659, 1);
-    this.map = this.mapService.addMarker(this.map, 45.764043, 4.935659, 2);
+    this.mapService.createMarker(45.764043, 4.835659, 1, '<p>Hello <br/>World !</p>').addTo(this.map);
+    this.mapService.createMarker(45.764043, 4.935659, 2, '<p>Hello <br/>World 2!</p>').addTo(this.map);
+    this.mapService.createMarker(45.664043, 4.835659, 3).addTo(this.map);
   }
 }
