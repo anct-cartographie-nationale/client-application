@@ -1,5 +1,6 @@
+import { Module } from './module.model';
+
 export class Category {
-  title: string;
-  modules: string[];
-  size: number;
+  name: string;
+  modules: Module[];
 }

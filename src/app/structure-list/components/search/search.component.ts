@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Category } from '../../models/category.model';
+import { Filter } from '../../models/filter.model';
+import { Module } from '../../models/module.model';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-search',
@@ -7,11 +10,14 @@ import { Category } from '../../models/category.model';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  constructor() {}
+  constructor(private searchService: SearchService) {}
 
   @Output() searchEvent = new EventEmitter();
+
+  // Search input variable
   searchTerm: string = '';
-  // button variable
+
+  // Button variable
   modalType: string[] = ['services', 'modalite', 'plusFiltres'];
 
   // Modal variable
@@ -19,16 +25,21 @@ export class SearchComponent implements OnInit {
   modalTypeOpened: string;
 
   // Checkbox variable
-  checkedModules: string[];
-  checkedModulesFilter: string[];
+  checkedModules: Module[];
+  checkedModulesFilter: Module[];
 
   ngOnInit(): void {
-    // Store the different categories
+    // Will store the different categories
     this.categories = [];
 
     // Manage checkbox
     this.checkedModules = new Array();
     this.checkedModulesFilter = new Array();
+  }
+
+  // Delete when getting back-end
+  private mockApiNumber(nb: number): string {
+    return ('00' + nb).slice(-3);
   }
 
   // Open the modal and display the list according to the right filter button
@@ -50,62 +61,81 @@ export class SearchComponent implements OnInit {
     this.checkedModulesFilter = this.checkedModules.slice();
     this.openModal(this.modalTypeOpened);
 
-    // Simulation send filter
-    console.log(this.checkedModulesFilter);
+    // Send search input filter
+    let filters: Filter[] = [];
+    if (this.searchTerm) {
+      filters.push(new Filter('nom', this.searchTerm, false));
+    }
+
+    // Send checked box filter
+    this.checkedModulesFilter.forEach((cm) => {
+      filters.push(new Filter(this.fromStringToIdExcel(cm.text), this.mockApiNumber(cm.id), false));
+    });
+    this.searchEvent.emit(filters);
   }
 
   // Management of the checkbox event (Check / Uncheck)
-  public onCheckboxChange(event): void {
+  public onCheckboxChange(event, categ: string): void {
+    const checkValue: number = parseInt(event.target.value);
     if (event.target.checked) {
-      this.checkedModules.push(event.target.value);
+      this.checkedModules.push(new Module(checkValue, categ));
     } else {
       // Check if the unchecked module is present in the list and remove it
-      if (this.checkedModules.indexOf(event.target.value) > -1) {
-        this.checkedModules.splice(this.checkedModules.indexOf(event.target.value), 1);
+      if (this.getIndex(checkValue, categ) > -1) {
+        this.checkedModules.splice(this.getIndex(checkValue, categ), 1);
       }
     }
   }
 
+  // Return index of a specific module in array modules
+  public getIndex(id: number, categ: string): number {
+    return this.checkedModules.findIndex((m: Module) => m.id === id && m.text === categ);
+  }
+
   // Clear only filters in the current modal
-  private clearFilters(): void {
-    this.categories.forEach((categ) => {
-      categ.modules.forEach((module) => {
-        if (this.checkedModules.indexOf(module) > -1)
-          this.checkedModules.splice(this.checkedModules.indexOf(module), 1);
+  public clearFilters(): void {
+    this.categories.forEach((categ: Category) => {
+      categ.modules.forEach((module: Module) => {
+        if (this.getIndex(module.id, categ.name) > -1)
+          this.checkedModules.splice(this.getIndex(module.id, categ.name), 1);
       });
     });
   }
 
-  public submitSearch(searchTerm: string): void {
-    this.searchEvent.emit(searchTerm);
+  // Format title of category to id of excel category
+  private fromStringToIdExcel(categ: string): string {
+    let splitStr = categ.toLowerCase().split(' ');
+    for (let i = 1; i < splitStr.length; i++) {
+      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr
+      .join('')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f'’°()]/g, '')
+      .replace(/[\s-]/g, ' ')
+      .replace('?', '');
   }
-
-  /**
-   * En attendant l'api
-   */
-  private mockService(module: Category[], titre: string, categ: string, nbCateg: number): void {
-    var m = new Category();
-    m.title = titre;
+  // Fake service api
+  private mockService(module: Category[], titre: string, categ: any, nbCateg: number): void {
+    let m = new Category();
+    m.name = titre;
     m.modules = [];
-    for (var i = 0; i < nbCateg; i++) {
-      m.modules.push(categ + i);
+    for (let i = 0; i < nbCateg; i++) {
+      m.modules.push(new Module(categ.id, categ.name + i));
     }
     module.push(m);
   }
+
+  // Fake data
   private fakeData(option: string): void {
     if (option === this.modalType[0]) {
-      this.mockService(this.categories, 'Accompagnement aux démarches en ligne', 'CAF', 7);
+      this.mockService(this.categories, 'Accompagnement des démarches', { name: 'CAF', id: '' }, 7);
     } else if (option === this.modalType[1]) {
-      this.mockService(this.categories, 'Compétences de base', 'Faire un diagnostic des compétences', 8);
-      this.mockService(this.categories, 'Insertion sociale et professionnelle', ' Diffuser son CV en ligne', 5);
-      this.mockService(
-        this.categories,
-        'Accès aux droits',
-        'Déclarer ses revenus en ligne et découvertes des services proposés',
-        8
-      );
-      this.mockService(this.categories, 'Aide à la parentalité/éducation', 'Découvrir l’univers des jeux vidéos', 4);
-      this.mockService(this.categories, 'Culture et sécurité numérique', 'Traitement de texte : découverte', 4);
+      this.searchService.getCategories().subscribe((d) => {
+        d.forEach((element) => {
+          this.categories.push(element);
+        });
+      });
     } else if (option === this.modalType[2]) {
       this.mockService(this.categories, 'Équipements', 'Accès à des revues ou livres infoirmatiques numériques', 8);
       this.mockService(this.categories, "Modalité d'accueil", 'Matériel mis à dispostion', 6);

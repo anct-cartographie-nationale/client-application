@@ -9,7 +9,6 @@ import { OpeningDay } from '../models/openingDay.model';
 import { Structure } from '../models/structure.model';
 import { Time } from '../models/time.model';
 import { Weekday } from '../enum/weekday.enum';
-import { Week } from '../models/week.model';
 import { WeekDay } from '@angular/common';
 import { Filter } from '../models/filter.model';
 
@@ -32,7 +31,11 @@ export class StructureService {
         if (api) {
           api = api + '&';
         }
-        api = api + filter.name + '_like=' + filter.value;
+        if (filter.isStrict) {
+          api = api + filter.name + '=' + filter.value;
+        } else {
+          api = api + filter.name + '_like=' + filter.value;
+        }
       });
     }
     return api;

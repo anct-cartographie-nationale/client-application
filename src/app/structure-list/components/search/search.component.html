@@ -7,34 +7,36 @@
       <div class="ico-pin-search grey"></div>
     </div>
     <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher une adresse, une association..." />
-    <button type="button" (click)="submitSearch(searchTerm)">Rechercher</button>
+    <button type="button" (click)="applyFilter()">Rechercher</button>
   </div>
 
-  <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
-    <button
-      type="button"
-      [className]="modalTypeOpened == modalType[0] ? 'selected' : ''"
-      (click)="openModal(this.modalType[0])"
-    >
-      <span class="btnText">Accompagnement</span>
-      <div class="arrow"></div>
-    </button>
-    <button
-      type="button"
-      [className]="modalTypeOpened == modalType[1] ? 'selected' : ''"
-      (click)="openModal(this.modalType[1])"
-    >
-      <span class="btnText">Formations</span>
-      <div class="arrow"></div>
-    </button>
-    <button
-      type="button"
-      [className]="modalTypeOpened == modalType[2] ? 'selected' : ''"
-      (click)="openModal(this.modalType[2])"
-    >
-      <span class="btnText">Plus de filtres</span>
-      <div class="arrow"></div>
-    </button>
+  <div class="btnSection">
+    <div class="phoneSection" fxLayout="row" fxLayoutAlign="center center">
+      <button
+        type="button"
+        [className]="modalTypeOpened === modalType[0] ? 'selected' : ''"
+        (click)="openModal(this.modalType[0])"
+      >
+        <span class="btnText">Accompagnement</span>
+        <div class="arrow"></div>
+      </button>
+      <button
+        type="button"
+        [className]="modalTypeOpened === modalType[1] ? 'selected' : ''"
+        (click)="openModal(this.modalType[1])"
+      >
+        <span class="btnText">Formations</span>
+        <div class="arrow"></div>
+      </button>
+      <button
+        type="button"
+        [className]="modalTypeOpened === modalType[2] ? 'selected' : ''"
+        (click)="openModal(this.modalType[2])"
+      >
+        <span class="btnText">Plus de filtres</span>
+        <div class="arrow"></div>
+      </button>
+    </div>
   </div>
   <div
     *ngIf="modalTypeOpened"
@@ -42,25 +44,25 @@
     fxLayoutAlign="space-between"
     [ngClass]="['modal', 'modal' + modalTypeOpened]"
   >
-    <div class="contentModal" fxLayout="row wrap" fxLayoutAlign="flex-start">
+    <div class="contentModal" fxLayout="row wrap" fxLayoutAlign="flex-start" *ngIf="categories.length > 0">
       <!--<div class="blockFiltre" *ngFor="let s of services">-->
       <div class="blockFiltre" *ngFor="let c of categories">
-        <h4>{{ c.title }}</h4>
+        <h4>{{ c.name }}</h4>
 
         <ul class="blockLigne">
           <div fxLayout="row" class="ligneFiltre" fxLayoutAlign="space-between center" *ngFor="let module of c.modules">
             <li class="checkbox">
-              <div class="testBox">
+              <div class="checkboxItem">
                 <label>
                   <input
                     type="checkbox"
-                    [checked]="this.checkedModules.indexOf(module) > -1"
-                    [value]="module"
-                    (change)="onCheckboxChange($event, false)"
+                    [checked]="getIndex(module.id, c.name) > -1"
+                    [value]="module.id"
+                    (change)="onCheckboxChange($event, c.name)"
                   />
                   <span class="customCheck"></span>
                 </label>
-                <div class="label">{{ module }}</div>
+                <div class="label">{{ module.text }}</div>
               </div>
             </li>
             <span class="nbResult">34</span>
@@ -76,11 +78,13 @@
 </div>
 <div class="footer" fxLayout="row" fxLayoutAlign="space-between center">
   <div class="checkbox">
-    <label>
-      <input type="checkbox" />
-      <span class="customCheck"></span>
-    </label>
-    <div class="label">Pass numérique</div>
+    <div class="checkboxItem">
+      <label>
+        <input type="checkbox" />
+        <span class="customCheck"></span>
+      </label>
+      <div class="label">Pass numérique</div>
+    </div>
   </div>
   <a href="">Ajouter une structure</a>
 </div>

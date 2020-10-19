@@ -1,6 +1,7 @@
 @import '../../../../assets/scss/icons';
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/breakpoint';
 
 .header {
   .title {
@@ -46,6 +47,9 @@
   }
   .btnSection {
     padding: 16px 0 16px 0;
+    .phoneSection {
+      display: none;
+    }
     button {
       outline: none;
       border: 1px solid $grey;
@@ -130,7 +134,7 @@
       -moz-column-gap: 46px;
       -webkit-column-count: 2;
       -webkit-column-gap: 46px;
-      column-count: 1;
+      column-count: 2;
       column-gap: 46px;
       column-rule: dashed 1px $grey;
     }
@@ -175,18 +179,13 @@
   }
 }
 .checkbox {
-  .testBox {
+  .checkboxItem {
     position: relative;
     display: inline-grid;
     align-items: center;
     grid-template-columns: min-content auto;
     min-height: 25px;
   }
-  /*position: relative;
-  display: grid;
-  align-items: center;
-  grid-template-columns: min-content auto;
-  min-height: 25px;*/
   list-style-type: none;
   input {
     opacity: 0;
@@ -239,3 +238,11 @@
     }
   }
 }
+/*@media #{$phone} {
+  .allSection {
+    display: none !important;
+  }
+  .phoneSection {
+    display: flex;
+  }
+}*/

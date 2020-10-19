@@ -11,7 +11,7 @@ const { DateTime } = require('luxon');
 })
 export class CardComponent implements OnInit {
   structures: Structure[] = [];
-  @Input() filter: string;
+  @Input() filter: Filter[];
   constructor(private structureService: StructureService) {}
 
   ngOnInit(): void {
@@ -19,8 +19,10 @@ export class CardComponent implements OnInit {
   }
   ngOnChanges(): void {
     let filters: Filter[] = [];
-    filters.push(new Filter('nom', this.filter));
-    this.getStructures(filters);
+    if (this.filter) {
+      filters = this.filter;
+      this.getStructures(filters);
+    }
   }
 
   public getStructures(filters): void {

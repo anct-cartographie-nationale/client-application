@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Filter } from './models/filter.model';
 
 @Component({
   selector: 'app-structure-list',
@@ -7,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StructureListComponent implements OnInit {
   constructor() {}
-  currentFilter: string;
+  currentFilter: Filter[];
   ngOnInit(): void {}
 
-  fetchResults(filter: string) {
+  fetchResults(filter: Filter[]) {
     this.currentFilter = filter;
   }
 }
