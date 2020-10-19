@@ -1,7 +1,6 @@
 @import '../../../../assets/scss/icons';
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
-@import '../../../../assets/scss/breakpoint';
 
 .header {
   .title {
@@ -238,11 +237,3 @@
     }
   }
 }
-/*@media #{$phone} {
-  .allSection {
-    display: none !important;
-  }
-  .phoneSection {
-    display: flex;
-  }
-}*/

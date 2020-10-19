@@ -5,7 +5,7 @@ import { Module } from '../../models/module.model';
 import { SearchService } from '../../services/search.service';
 
 @Component({
-  selector: 'app-search',
+  selector: 'app-structure-list-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })

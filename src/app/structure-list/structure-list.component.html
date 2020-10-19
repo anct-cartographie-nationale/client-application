@@ -1,5 +1,5 @@
 <div class="container">
-  <app-search (searchEvent)="fetchResults($event)"></app-search>
+  <app-structure-list-search (searchEvent)="fetchResults($event)"></app-structure-list-search>
   <div class="divider"></div>
-  <app-card [filter]="currentFilter"></app-card>
+  <app-structure-list-card [filter]="currentFilter"></app-structure-list-card>
 </div>

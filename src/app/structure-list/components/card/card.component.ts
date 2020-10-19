@@ -5,7 +5,7 @@ import { StructureService } from '../../services/structure-list.service';
 const { DateTime } = require('luxon');
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-structure-list-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
