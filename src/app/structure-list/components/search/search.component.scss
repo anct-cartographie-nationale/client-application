@@ -1,6 +1,7 @@
 @import '../../../../assets/scss/icons';
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/breakpoint';
 
 .header {
   .title {
@@ -89,16 +90,24 @@
   }
 }
 .modalformations {
+  @media #{$desktop} {
+    margin-left: 0;
+  }
+
   margin-left: 206px;
 }
 .modalplusFiltres {
+  @media #{$desktop} {
+    margin-left: 0;
+  }
   margin-left: 412px;
 }
 .modal {
   -moz-box-shadow: -5px 5px 10px 0px $grey;
   box-shadow: -5px 5px 10px 0px $grey;
   max-height: 648px;
-  width: 754px;
+  max-width: 754px;
+  width: 94%;
   background: $white;
   border: 1px solid $grey;
   box-sizing: border-box;
@@ -137,6 +146,11 @@
       column-count: 2;
       column-gap: 46px;
       column-rule: dashed 1px $grey;
+      @media #{$large-phone} {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+      }
     }
     .ligneFiltre {
       padding: 5px 0 5px 0;
