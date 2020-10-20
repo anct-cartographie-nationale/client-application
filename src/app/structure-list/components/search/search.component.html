@@ -11,8 +11,8 @@
   </div>
 
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
-    <div
-      class="button"
+    <button
+      type="button"
       [ngClass]="{ selected: modalTypeOpened === modalType[0] }"
       (click)="openModal(this.modalType[0])"
       fxLayout="row"
@@ -20,9 +20,9 @@
     >
       <span class="btnText">Accompagnement</span>
       <div class="arrow"></div>
-    </div>
-    <div
-      class="button"
+    </button>
+    <button
+      type="button"
       [ngClass]="{ selected: modalTypeOpened === modalType[1] }"
       (click)="openModal(this.modalType[1])"
       fxLayout="row"
@@ -30,9 +30,9 @@
     >
       <span class="btnText">Formations</span>
       <div class="arrow"></div>
-    </div>
-    <div
-      class="button"
+    </button>
+    <button
+      type="button"
       [ngClass]="{ selected: modalTypeOpened === modalType[2] }"
       (click)="openModal(this.modalType[2])"
       fxLayout="row"
@@ -40,7 +40,7 @@
     >
       <span class="btnText">Plus de filtres</span>
       <div class="arrow"></div>
-    </div>
+    </button>
   </div>
   <div
     *ngIf="modalTypeOpened"
