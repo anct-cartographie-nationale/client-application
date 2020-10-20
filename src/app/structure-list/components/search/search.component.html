@@ -65,8 +65,8 @@
                     (change)="onCheckboxChange($event, c.name)"
                   />
                   <span class="customCheck"></span>
+                  <div class="label">{{ module.text }}</div>
                 </label>
-                <div class="label">{{ module.text }}</div>
               </div>
             </li>
             <span class="nbResult">{{ module.count ? module.count : '0' }}</span>
@@ -86,8 +86,8 @@
       <label>
         <input type="checkbox" />
         <span class="customCheck"></span>
+        <div class="label">Pass numérique</div>
       </label>
-      <div class="label">Pass numérique</div>
     </div>
   </div>
   <a href="">Ajouter une structure</a>

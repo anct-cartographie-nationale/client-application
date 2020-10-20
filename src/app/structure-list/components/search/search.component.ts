@@ -89,6 +89,9 @@ export class SearchComponent implements OnInit {
 
   // Return index of a specific module in array modules
   public getIndex(id: number, categ: string): number {
+    console.log(this.checkedModules);
+    console.log(id);
+    console.log(categ);
     return this.checkedModules.findIndex((m: Module) => m.id === id && m.text === categ);
   }
 
@@ -122,7 +125,7 @@ export class SearchComponent implements OnInit {
     m.name = titre;
     m.modules = [];
     for (let i = 0; i < nbCateg; i++) {
-      m.modules.push(new Module(categ.id, categ.name + i));
+      m.modules.push(new Module(categ.id + i, categ.name + i));
     }
     module.push(m);
   }
@@ -130,7 +133,7 @@ export class SearchComponent implements OnInit {
   // Fake data
   private fakeData(option: string): void {
     if (option === this.modalType[0]) {
-      this.mockService(this.categories, 'Accompagnement des démarches', { name: 'CAF', id: '' }, 7);
+      this.mockService(this.categories, 'Accompagnement des démarches', { name: 'CAF', id: 5 }, 7);
     } else if (option === this.modalType[1]) {
       this.searchService.getCategories().subscribe((categories: Category[]) => {
         this.searchService
@@ -143,13 +146,18 @@ export class SearchComponent implements OnInit {
           });
       });
     } else if (option === this.modalType[2]) {
-      this.mockService(this.categories, 'Équipements', 'Accès à des revues ou livres infoirmatiques numériques', 8);
-      this.mockService(this.categories, "Modalité d'accueil", 'Matériel mis à dispostion', 6);
+      this.mockService(
+        this.categories,
+        'Équipements',
+        { name: 'Accès à des revues ou livres infoirmatiques numériques', id: 1 },
+        8
+      );
+      this.mockService(this.categories, "Modalité d'accueil", { name: 'Matériel mis à dispostion', id: 2 }, 6);
 
-      this.mockService(this.categories, "Type d'acteurs", 'Lieux de médiation (Pimms, assos...)', 5);
-      this.mockService(this.categories, 'Publics', 'Langues étrangères autres qu’anglais', 12);
-      this.mockService(this.categories, 'Labelisation', 'Prescripteur du Pass Numérique', 6);
-      this.mockService(this.categories, 'Type de structure', 'Espace de co-working', 6);
+      this.mockService(this.categories, "Type d'acteurs", { name: 'Lieux de médiation (Pimms, assos...)', id: 3 }, 5);
+      this.mockService(this.categories, 'Publics', { name: 'Langues étrangères autres qu’anglais', id: 4 }, 12);
+      this.mockService(this.categories, 'Labelisation', { name: 'Prescripteur du Pass Numérique', id: 5 }, 6);
+      this.mockService(this.categories, 'Type de structure', { name: 'Espace de co-working', id: 6 }, 6);
     }
   }
 }
