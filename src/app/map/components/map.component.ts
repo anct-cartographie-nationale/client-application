@@ -1,5 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds } from 'leaflet';
+import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+import { Structure } from '../../models/structure.model';
+import { GeoJson } from '../models/geojson.model';
+import { GeojsonService } from '../services/geojson.service';
 import { MapService } from '../services/map.service';
 
 @Component({
@@ -7,7 +12,8 @@ import { MapService } from '../services/map.service';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnChanges {
+  @Input() public structures: Structure[] = [];
   @Input() public toogleToolTipIds: Array<number> = [];
   public map: Map;
   public mapOptions: MapOptions;
@@ -22,10 +28,56 @@ export class MapComponent implements OnInit {
     clickBehavior: { inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'setView' },
   };
 
-  constructor(private mapService: MapService) {}
-
-  ngOnInit(): void {
+  constructor(private mapService: MapService, private geoJsonService: GeojsonService) {
     this.initializeMapOptions();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.structures) {
+      this.getStructurePosition();
+    }
+  }
+
+  /**
+   * Get structures positions and add marker corresponding to those positons on the map
+   */
+  private getStructurePosition(): void {
+    this.structures.forEach((element: Structure) => {
+      this.getCoord(element.voie).subscribe((coord: GeoJson) => {
+        this.mapService
+          .createMarker(coord.geometry.getLon(), coord.geometry.getLat(), 1, this.buildToolTip(element))
+          .addTo(this.map);
+      });
+    });
+  }
+
+  /**
+   * Create tooltip for display
+   * @param structure Structure
+   */
+  private buildToolTip(structure: Structure): string {
+    const cssAvailabilityClass = structure.isOpen ? 'available' : 'unavailable';
+    return (
+      '<h1>' +
+      structure.nomDeVotreStructure +
+      '</h1>' +
+      '<p>' +
+      structure.typeDeStructure +
+      '</p><div>' +
+      '<span class="ico-dot-' +
+      cssAvailabilityClass +
+      '"></span><span>' +
+      structure.openDisplay() +
+      '</span></div>'
+    );
+  }
+
+  /**
+   * Get coord with a street reference
+   * @param idVoie Street reference
+   */
+  public getCoord(idVoie: number): Observable<GeoJson> {
+    return this.geoJsonService.getAddress(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
   }
 
   /**
@@ -34,7 +86,6 @@ export class MapComponent implements OnInit {
    */
   public onMapReady(map: Map): void {
     this.map = map;
-    this.addMarker();
   }
 
   /**
@@ -83,12 +134,5 @@ export class MapComponent implements OnInit {
     ids.forEach((id) => {
       this.mapService.toogleToolTip(id);
     });
-  }
-
-  private addMarker(): void {
-    //TODO: Replace with real data
-    this.mapService.createMarker(45.764043, 4.835659, 1, '<p>Hello <br/>World !</p>').addTo(this.map);
-    this.mapService.createMarker(45.764043, 4.935659, 2, '<p>Hello <br/>World 2!</p>').addTo(this.map);
-    this.mapService.createMarker(45.664043, 4.835659, 3).addTo(this.map);
   }
 }

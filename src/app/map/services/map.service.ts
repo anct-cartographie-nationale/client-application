@@ -21,6 +21,9 @@ export class MapService {
       marker.bindTooltip(tooltip);
     }
     this.markersList[id] = marker;
+    console.log('marker lat', lat);
+    console.log('marker lon', lon);
+    console.log('marker', marker);
     return marker;
   }
 

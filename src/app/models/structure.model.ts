@@ -1,6 +1,7 @@
+import { TranslateService } from '@ngx-translate/core';
+import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Day } from './day.model';
 import { OpeningDay } from './openingDay.model';
-import { Weekday } from '../enum/weekday.enum';
 import { Week } from './week.model';
 
 export class Structure {
@@ -13,7 +14,7 @@ export class Structure {
   public typeDeStructure: string;
   public description: string;
   public n: string;
-  public voie: string;
+  public voie: number;
   public telephone: string;
   public courriel: string;
   public siteWeb: string;
@@ -32,7 +33,7 @@ export class Structure {
   public isOpen: boolean;
   public openedOn: OpeningDay;
 
-  constructor(obj?: any) {
+  constructor(obj?: any, private translateService: TranslateService) {
     Object.assign(this, obj, {
       hours: obj && obj.hours ? new Week(obj.hours) : null,
     });
@@ -56,6 +57,16 @@ export class Structure {
         return this.hours.sunday;
       default:
         return null;
+    }
+  }
+
+  public openDisplay(): string {
+    if (this.isOpen) {
+      return 'Ouvert actuellement ';
+    } else if (this.openedOn.day) {
+      return 'Fermé - Ouvre ' + this.openedOn.day + ' à ' + this.openedOn.schedule;
+    } else {
+      return 'Fermé - Aucun horaire disponible ';
     }
   }
 }

@@ -1,5 +1,7 @@
 @import '../../../assets/scss/color';
 @import '../../../assets/scss/layout';
+@import '../../../assets/scss/icons';
+@import '../../../assets/scss/typography';
 
 #map {
   height: calc(100vh - #{$header-height} - #{$footer-height});
@@ -46,5 +48,38 @@
       fill: $primary-color !important;
       stroke-width: unset !important;
     }
+  }
+}
+
+::ng-deep .leaflet-tooltip {
+  padding: 8px 10px 8px 10px;
+  h1 {
+    color: $purple;
+    @include cn-bold-20;
+    margin: 0;
+  }
+  p {
+    color: $grey-3;
+    @include cn-regular-16;
+    margin: 0 0 13px 0;
+  }
+  div {
+    align-items: center;
+    display: flex;
+  }
+  // Find somthing better than redeclare class. Mixins ?
+  .ico-dot-available {
+    height: 12px;
+    width: 12px;
+    background-color: $green;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  .ico-dot-unavailable {
+    height: 12px;
+    width: 12px;
+    background-color: $grey;
+    border-radius: 50%;
+    margin-right: 8px;
   }
 }

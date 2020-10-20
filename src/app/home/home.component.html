@@ -1,4 +1,4 @@
 <div fxLayout="row">
-  <app-structure-list class="left-pane" fxFlex="30%"></app-structure-list>
-  <app-map fxFlex="70%" [toogleToolTipIds]="[1, 2]"></app-map>
+  <app-structure-list [structureList]="structures" class="left-pane" fxFlex="30%"></app-structure-list>
+  <app-map fxFlex="70%" [structures]="structures"></app-map>
 </div>

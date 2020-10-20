@@ -2,15 +2,9 @@
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
 
-.nbStructuresLabel {
-  color: $grey;
-  @include cn-regular-16;
-  display: flex;
-  align-items: center;
-}
 .structure {
   padding: 12px 0 12px 0;
-  border-bottom: 1px dashed $grey;
+  border-bottom: 1px dashed $grey !important;
   .typeStructure {
     color: $grey;
     @include cn-regular-16;
