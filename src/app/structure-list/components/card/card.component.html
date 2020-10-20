@@ -1,25 +1,27 @@
 <span class="nbStructuresLabel">{{ structures.length }} structures</span>
-<div class="structure" fxLayout="column" *ngFor="let structure of structures">
-  <span class="nomStructure">{{ structure.nom }}</span>
+<div class="listStructure">
+  <div class="structure" fxLayout="column" *ngFor="let structure of structures">
+    <span class="nomStructure">{{ structure.nom }}</span>
 
-  <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center">
-    <span class="typeStructure">{{ structure.typeDeStructure }}</span>
-    <span class="distanceStructure">├─┤ 63 m</span>
-  </div>
-  <br />
-  <div class="statusStructure" fxLayout="row" fxLayoutAlign="start center">
-    <div *ngIf="structure.isOpen; else closed">
-      <span class="ico-dot-available"></span>
-      <span>Ouvert actuellement</span>
+    <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="typeStructure">{{ structure.typeDeStructure }}</span>
+      <span class="distanceStructure">├─┤ 63 m</span>
     </div>
-    <ng-template #closed>
-      <span class="ico-dot-unavailable"></span>
-      <span *ngIf="structure.openedOn.day; else noTime">
-        Fermé - Ouvre {{ structure.openedOn.day }} à {{ structure.openedOn.schedule }}</span
-      >
-    </ng-template>
-    <ng-template #noTime>
-      <span> Fermé - Aucun horaire disponible</span>
-    </ng-template>
+    <br />
+    <div class="statusStructure" fxLayout="row" fxLayoutAlign="start center">
+      <div *ngIf="structure.isOpen; else closed">
+        <span class="ico-dot-available"></span>
+        <span>Ouvert actuellement</span>
+      </div>
+      <ng-template #closed>
+        <span class="ico-dot-unavailable"></span>
+        <span *ngIf="structure.openedOn.day; else noTime">
+          Fermé - Ouvre {{ structure.openedOn.day }} à {{ structure.openedOn.schedule }}</span
+        >
+      </ng-template>
+      <ng-template #noTime>
+        <span> Fermé - Aucun horaire disponible</span>
+      </ng-template>
+    </div>
   </div>
 </div>

@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
   searchTerm: string = '';
 
   // Button variable
-  modalType: string[] = ['services', 'modalite', 'plusFiltres'];
+  modalType: string[] = ['accompagnement', 'formations', 'plusFiltres'];
 
   // Modal variable
   categories: Category[];
@@ -77,8 +77,6 @@ export class SearchComponent implements OnInit {
   // Management of the checkbox event (Check / Uncheck)
   public onCheckboxChange(event, categ: string): void {
     const checkValue: number = parseInt(event.target.value);
-    console.log(checkValue);
-
     if (event.target.checked) {
       this.checkedModules.push(new Module(checkValue, categ));
     } else {
@@ -117,6 +115,7 @@ export class SearchComponent implements OnInit {
       .replace(/[\s-]/g, ' ')
       .replace('?', '');
   }
+
   // Fake service api
   private mockService(module: Category[], titre: string, categ: any, nbCateg: number): void {
     let m = new Category();

@@ -21,7 +21,7 @@
   }
   input {
     width: 100%;
-    background-color: $grey-4;
+    background-color: $grey-5;
     border: none;
     @include cn-regular-14;
     display: flex;
@@ -45,11 +45,10 @@
     }
   }
   .btnSection {
-    padding: 16px 0 16px 0;
-    .phoneSection {
-      display: none;
-    }
-    button {
+    padding: 16px 0 8px 0;
+    .button {
+      height: 40px;
+      width: 190px;
       outline: none;
       border: 1px solid $grey;
       border-radius: 33px;
@@ -89,27 +88,29 @@
     }
   }
 }
-.modalaccueil {
-  margin-left: 100px;
+.modalformations {
+  margin-left: 206px;
 }
 .modalplusFiltres {
-  margin-left: 196px;
+  margin-left: 412px;
 }
 .modal {
-  max-height: 654px;
-  max-width: 754px;
+  -moz-box-shadow: -5px 5px 10px 0px $grey;
+  box-shadow: -5px 5px 10px 0px $grey;
+  max-height: 648px;
+  width: 754px;
   background: $white;
   border: 1px solid $grey;
   box-sizing: border-box;
   z-index: 1;
   position: absolute;
-  margin-top: 80px;
+  margin-top: 96px;
 
   ::-webkit-scrollbar {
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: $grey-4;
+    background: $grey-5;
   }
   ::-webkit-scrollbar-thumb {
     background: $grey;
@@ -159,7 +160,6 @@
       @include cn-bold-14;
       display: flex;
       align-items: center;
-      text-decoration-line: underline;
     }
     height: 32px;
     button {
@@ -203,7 +203,6 @@
   .label {
     padding-left: 8px;
     @include cn-regular-14;
-    padding: 0 16px 0 16px;
   }
   .customCheck {
     display: inline-grid;
@@ -217,7 +216,7 @@
     top: 0;
     left: 0;
     &:hover {
-      background-color: $grey-4;
+      background-color: $grey-5;
     }
     &:after {
       content: '';
@@ -235,5 +234,14 @@
       -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
     }
+  }
+}
+.footerSearchSection {
+  margin-bottom: 30px;
+  margin-right: 20px;
+
+  a {
+    @include cn-bold-14;
+    font-weight: bold;
   }
 }
