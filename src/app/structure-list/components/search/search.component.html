@@ -2,12 +2,19 @@
   <span class="title">Acteurs de la médiation</span>
 </div>
 <div class="content" fxLayout="column">
-  <div class="searchSection" fxLayout="row" fxLayoutGap="1.5vw">
-    <div class="icon">
-      <div class="ico-pin-search grey"></div>
-    </div>
-    <input type="text" [(ngModel)]="searchTerm" placeholder="Rechercher une adresse, une association..." />
-    <button type="button" (click)="applyFilter()">Rechercher</button>
+  <div class="searchSection">
+    <form
+      [formGroup]="searchForm"
+      fxLayout="row"
+      fxLayoutGap="1.5vw"
+      (ngSubmit)="applyFilter(searchForm.value.searchTerm)"
+    >
+      <div class="icon">
+        <div class="ico-pin-search grey"></div>
+      </div>
+      <input type="text" formControlName="searchTerm" placeholder="Rechercher une adresse, une association..." />
+      <button type="submit">Rechercher</button>
+    </form>
   </div>
 
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
@@ -76,7 +83,7 @@
     </div>
     <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
       <a (click)="clearFilters()">Effacer</a>
-      <button type="button" (click)="applyFilter(modalTypeOpened)">Appliquer</button>
+      <button type="button" (click)="applyFilter(searchForm.value.searchTerm)">Appliquer</button>
     </div>
   </div>
 </div>

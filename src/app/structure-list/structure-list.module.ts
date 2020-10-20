@@ -5,11 +5,11 @@ import { CardComponent } from './components/card/card.component';
 import { SearchComponent } from './components/search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [StructureListComponent, CardComponent, SearchComponent],
-  imports: [CommonModule, HttpClientModule, FlexLayoutModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FlexLayoutModule, FormsModule, ReactiveFormsModule],
   exports: [StructureListComponent],
 })
 export class StructureListModule {}

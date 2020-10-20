@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { stringToKeyValue } from '@angular/flex-layout/extended/typings/style/style-transforms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Category } from '../../models/category.model';
 import { Filter } from '../../models/filter.model';
 import { Module } from '../../models/module.model';
@@ -10,12 +12,16 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  constructor(private searchService: SearchService) {}
+  constructor(private searchService: SearchService, private fb: FormBuilder) {
+    this.searchForm = this.fb.group({
+      searchTerm: '',
+    });
+  }
 
   @Output() searchEvent = new EventEmitter();
 
-  // Search input variable
-  searchTerm: string = '';
+  // Form search input
+  searchForm: FormGroup;
 
   // Button variable
   modalType: string[] = ['accompagnement', 'formations', 'plusFiltres'];
@@ -57,14 +63,13 @@ export class SearchComponent implements OnInit {
   }
 
   // Sends an array containing all filters
-  public applyFilter(): void {
+  public applyFilter(term: string): void {
     this.checkedModulesFilter = this.checkedModules.slice();
     this.openModal(this.modalTypeOpened);
-
     // Send search input filter
     let filters: Filter[] = [];
-    if (this.searchTerm) {
-      filters.push(new Filter('nom', this.searchTerm, false));
+    if (term) {
+      filters.push(new Filter('nom', term, false));
     }
 
     // Send checked box filter
@@ -89,9 +94,6 @@ export class SearchComponent implements OnInit {
 
   // Return index of a specific module in array modules
   public getIndex(id: number, categ: string): number {
-    console.log(this.checkedModules);
-    console.log(id);
-    console.log(categ);
     return this.checkedModules.findIndex((m: Module) => m.id === id && m.text === categ);
   }
 
