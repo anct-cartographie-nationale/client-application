@@ -32,9 +32,17 @@ export class StructureService {
           api = api + '&';
         }
         if (filter.isStrict) {
-          api = api + filter.name + '=' + filter.value;
+          if (api.includes(filter.name)) {
+            api = api + '=' + filter.value;
+          } else {
+            api = api + filter.name + '=' + filter.value;
+          }
         } else {
-          api = api + filter.name + '_like=' + filter.value;
+          if (api.includes(filter.name)) {
+            api = api + filter.value;
+          } else {
+            api = api + filter.name + '_like=' + filter.value;
+          }
         }
       });
     }

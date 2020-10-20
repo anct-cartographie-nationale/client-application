@@ -77,6 +77,8 @@ export class SearchComponent implements OnInit {
   // Management of the checkbox event (Check / Uncheck)
   public onCheckboxChange(event, categ: string): void {
     const checkValue: number = parseInt(event.target.value);
+    console.log(checkValue);
+
     if (event.target.checked) {
       this.checkedModules.push(new Module(checkValue, categ));
     } else {
@@ -131,10 +133,15 @@ export class SearchComponent implements OnInit {
     if (option === this.modalType[0]) {
       this.mockService(this.categories, 'Accompagnement des démarches', { name: 'CAF', id: '' }, 7);
     } else if (option === this.modalType[1]) {
-      this.searchService.getCategories().subscribe((d) => {
-        d.forEach((element) => {
-          this.categories.push(element);
-        });
+      this.searchService.getCategories().subscribe((categories: Category[]) => {
+        this.searchService
+          .getFakeCounterModule()
+          .subscribe((res: { structureCountTab: { id: number; count: number }[] }) => {
+            categories.forEach((category) => {
+              category = this.searchService.setCountModules(category, res.structureCountTab);
+              this.categories.push(category);
+            });
+          });
       });
     } else if (option === this.modalType[2]) {
       this.mockService(this.categories, 'Équipements', 'Accès à des revues ou livres infoirmatiques numériques', 8);
