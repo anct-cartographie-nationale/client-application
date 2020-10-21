@@ -1,4 +1,3 @@
-import { TranslateService } from '@ngx-translate/core';
 import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Day } from './day.model';
 import { OpeningDay } from './openingDay.model';
@@ -33,7 +32,7 @@ export class Structure {
   public isOpen: boolean;
   public openedOn: OpeningDay;
 
-  constructor(obj?: any, private translateService: TranslateService) {
+  constructor(obj?: any) {
     Object.assign(this, obj, {
       hours: obj && obj.hours ? new Week(obj.hours) : null,
     });
