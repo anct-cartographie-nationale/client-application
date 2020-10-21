@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Address } from '../models/address.model';
 
 import { GeojsonService } from './geojson.service';
@@ -27,7 +26,6 @@ describe('GeojsonService', () => {
     await new Promise((resolve) => {
       service.getAddress(26061).subscribe(
         (val) => {
-          console.log(val);
           expect(val.zipcode).toEqual('69800');
           expect(val.text).toEqual('13ème Rue Cité Berliet');
           resolve();
