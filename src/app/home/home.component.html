@@ -1,5 +1,4 @@
-<div class="content-container">
-  <div class="section-container">
-    <app-structure-list></app-structure-list>
-  </div>
+<div fxLayout="row">
+  <app-structure-list [structureList]="structures" class="left-pane"></app-structure-list>
+  <app-map [structures]="structures" fxFlex="100"></app-map>
 </div>

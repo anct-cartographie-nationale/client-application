@@ -1,2 +1,3 @@
 <app-recherche></app-recherche>
-<app-card></app-card>
+<span class="nbStructuresLabel">{{ structureList.length }} structures</span>
+<app-card *ngFor="let structure of structureList" [structure]="structure"></app-card>

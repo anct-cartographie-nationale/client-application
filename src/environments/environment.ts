@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   registrationForm: 'https://services.formulaireextranet.grandlyon.com/saisie-fiche-structure',
+  addressApi: 'https://passerelle.formulaireextranet.grandlyon.com/base-adresse/base-adresse-nationale/streets',
+  geojsonApi: 'https://download.data.grandlyon.com/geocoding/photon/api',
   VERSION: require('../../package.json').version,
 };
 

@@ -1,16 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { WeekDay } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-const { DateTime } = require('luxon');
 
+import { Structure } from '../models/structure.model';
 import { Day } from '../models/day.model';
 import { OpeningDay } from '../models/openingDay.model';
-import { Structure } from '../models/structure.model';
+import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Time } from '../models/time.model';
-import { Weekday } from '../enum/weekday.enum';
-import { Week } from '../models/week.model';
-import { WeekDay } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',

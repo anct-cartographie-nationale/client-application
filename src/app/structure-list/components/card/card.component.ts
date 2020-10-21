@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Structure } from '../../models/structure.model';
-import { StructureService } from '../../services/structure-list.service';
-const { DateTime } = require('luxon');
+import { Component, Input, OnInit } from '@angular/core';
+import { Structure } from '../../../models/structure.model';
 
 @Component({
   selector: 'app-card',
@@ -9,14 +7,8 @@ const { DateTime } = require('luxon');
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  structures: Structure[] = [];
-  constructor(private structureService: StructureService) {}
+  @Input() public structure: Structure;
+  constructor() {}
 
-  ngOnInit(): void {
-    this.structureService.getStructures().subscribe((structures) => {
-      structures.forEach((s: Structure) => {
-        this.structures.push(this.structureService.updateOpeningStructure(s, DateTime.local()));
-      });
-    });
-  }
+  ngOnInit(): void {}
 }
