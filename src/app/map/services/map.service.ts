@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { divIcon } from 'leaflet';
 import { icon, Marker, Map } from 'leaflet';
 
 @Injectable({
@@ -9,13 +10,13 @@ export class MapService {
   constructor() {}
 
   public createMarker(lat: number, lon: number, id: number, tooltip?: string): Marker {
-    const marker = new Marker([lat, lon]).setIcon(
-      icon({
-        iconSize: [35, 41],
-        iconAnchor: [13, 41],
-        iconUrl: '../../../assets/img/ic_marker.png',
-      })
-    );
+    const icone = divIcon({
+      className: null,
+      html: "<div class='ico-marker-pin'></div>",
+      iconSize: [35, 41],
+      iconAnchor: [13, 41],
+    });
+    const marker = new Marker([lat, lon], { icon: icone });
 
     if (tooltip) {
       marker.bindTooltip(tooltip);
