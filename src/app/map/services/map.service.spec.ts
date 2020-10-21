@@ -23,8 +23,6 @@ describe('MapService', () => {
   });
   it('should add marker to map with icon ic_marker.png', () => {
     const marker = service.createMarker(45.764043, 4.835659, 1);
-
-    expect(marker.getIcon().options.iconUrl).toEqual('../../../assets/img/ic_marker.png');
     expect(marker.getIcon().options.iconSize).toEqual([35, 41]);
     expect(marker.getIcon().options.iconAnchor).toEqual([13, 41]);
   });
