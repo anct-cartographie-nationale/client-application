@@ -121,6 +121,7 @@ export class MapComponent implements OnChanges {
     // Zoom is blocked on 11 to prevent people to zoom out from metropole
     this.mapOptions = {
       center: latLng(45.764043, 4.835659),
+      maxZoom: 19,
       zoom: 10,
       minZoom: 10,
       layers: [carteLayer, metroMaps],
