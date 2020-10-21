@@ -1,5 +1,17 @@
 {
   "/api": {
     "target": "http://localhost:3000"
+  },
+  "/base-adresse/base-adresse-nationale/streets": {
+    "target": "https://passerelle.formulaireextranet.grandlyon.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
+  },
+  "/geocoding/photon/api": {
+    "target": "https://download.data.grandlyon.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
   }
 }

@@ -58,6 +58,10 @@
           <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="monday" datatype="html">
+        <source>monday</source>
+        <target>lundi</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

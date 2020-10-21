@@ -1,3 +1,8 @@
-<div class="content-container">
-  <app-structure-list></app-structure-list>
+<div fxLayout="row">
+  <app-structure-list
+    (searchEvent)="fetchResults($event)"
+    [structureList]="structures"
+    class="left-pane"
+  ></app-structure-list>
+  <app-map [structures]="structures" fxFlex="100"></app-map>
 </div>

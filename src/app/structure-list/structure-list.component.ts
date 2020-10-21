@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Filter } from './models/filter.model';
+import { Structure } from '../models/structure.model';
 
 @Component({
   selector: 'app-structure-list',
@@ -7,11 +8,13 @@ import { Filter } from './models/filter.model';
   styleUrls: ['./structure-list.component.scss'],
 })
 export class StructureListComponent implements OnInit {
+  @Input() public structureList: Structure[];
+  @Output() searchEvent = new EventEmitter();
+
   constructor() {}
-  currentFilter: Filter[];
   ngOnInit(): void {}
 
-  fetchResults(filter: Filter[]) {
-    this.currentFilter = filter;
+  fetchResults(filters: Filter[]) {
+    this.searchEvent.emit(filters);
   }
 }
