@@ -1,4 +1,9 @@
-<app-structure-list-search (searchEvent)="fetchResults($event)"></app-structure-list-search>
-<div class="divider"></div>
-<span class="nbStructuresLabel">{{ structureList.length }} structures</span>
-<app-card *ngFor="let structure of structureList" [structure]="structure"></app-card>
+<div class="topBlock">
+  <app-structure-list-search (searchEvent)="fetchResults($event)"></app-structure-list-search>
+  <div class="divider"></div>
+  <span class="nbStructuresLabel">{{ structureList.length }} structures</span>
+</div>
+
+<div class="listCard">
+  <app-card *ngFor="let structure of structureList" [structure]="structure"></app-card>
+</div>

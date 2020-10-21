@@ -1,8 +1,9 @@
-<div fxLayout="row">
+<div fxLayout="row" style="height: 100%">
   <app-structure-list
     (searchEvent)="fetchResults($event)"
     [structureList]="structures"
     class="left-pane"
+    fxLayout="column"
   ></app-structure-list>
   <app-map [structures]="structures" fxFlex="100"></app-map>
 </div>
