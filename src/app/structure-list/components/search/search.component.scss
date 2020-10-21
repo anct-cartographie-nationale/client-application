@@ -110,11 +110,14 @@
   border-left: 6.5px solid transparent;
   border-bottom: 6.5px solid transparent;
   border-radius: 11px;
+  z-index: 401 !important;
+
   //repeating-linear-gradient(37deg, transparent 0, transparent 1px, $grey 2px, $grey 2px) 12;
   //border-image: repeating-linear-gradient(-45deg, transparent 0, transparent 4px, $grey 4px, $grey 5px) 8;
 
   background: linear-gradient($white, $white) padding-box,
     repeating-linear-gradient(-45deg, transparent 0, transparent 4px, $grey 4px, $grey 5px) border-box;
+  //repeating-linear-gradient(-51deg, transparent 0, transparent 1px, $grey 1px, $grey 2px) border-box;
   box-sizing: border-box;
   z-index: 1;
   position: absolute;
@@ -139,7 +142,6 @@
     border-bottom: 1px solid $grey;
     margin-bottom: 10px;
     max-height: 500px;
-
     .blockFiltre {
       width: 100%;
       padding: 32px 40px 10px 40px;

@@ -69,7 +69,7 @@ export class SearchComponent implements OnInit {
     // Send search input filter
     let filters: Filter[] = [];
     if (term) {
-      filters.push(new Filter('nom', term, false));
+      filters.push(new Filter('nomDeVotreStructure', term, false));
     }
 
     // Send checked box filter
