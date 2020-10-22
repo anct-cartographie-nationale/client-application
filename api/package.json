@@ -7,5 +7,5 @@
   "private": true,
   "dependencies": {
     "json-server": "^0.16.2",
-  },
+  }
 }
