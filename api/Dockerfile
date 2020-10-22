@@ -4,8 +4,8 @@ FROM node:12.16
 WORKDIR /app
 
 # Copy the package.json file first in order to cache the modules
-COPY ./package.json .
-COPY ./package-lock.json .
+COPY ../package.json .
+COPY ../package-lock.json .
 
 # Install npm dependencies
 RUN npm install --silent
