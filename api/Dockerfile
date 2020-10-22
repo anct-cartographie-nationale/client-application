@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . .
 
 # Install npm dependencies
-RUN npm install --silent
+RUN npm install
 
 # run json-server
 RUN npm run api
