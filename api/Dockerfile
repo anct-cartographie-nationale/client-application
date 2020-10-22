@@ -1,17 +1,15 @@
 # Stage 0, based on Node.js
-FROM node:12.16
+FROM node:12.16-slim
 
 WORKDIR /app
 
 # Copy the package.json file first in order to cache the modules
-COPY ./package.json .
+COPY . .
 
 # Install npm dependencies
 RUN npm install --silent
 
-# Copy Json Server Api
-COPY /api ./api
-
+# run json-server
 RUN npm run api
 
 # expose port 3000
