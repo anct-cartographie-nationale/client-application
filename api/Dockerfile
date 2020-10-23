@@ -12,4 +12,4 @@ RUN npm install
 # expose port 3000
 EXPOSE 3000
 
-CMD ['npm run api']
+CMD ["npm", "run", "api"]
