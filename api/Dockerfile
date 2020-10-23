@@ -15,4 +15,4 @@ RUN npm run api
 # expose port 3000
 EXPOSE 3000
 
-CMD npm run api
+CMD ['sh', 'npm run api']
