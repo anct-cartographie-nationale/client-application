@@ -6,6 +6,9 @@ WORKDIR /app
 # Copy the package.json file first in order to cache the modules
 COPY . .
 
+RUN mkdir api
+RUN cp routes.json ./api
+
 # Install npm dependencies
 RUN npm install
 
