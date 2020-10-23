@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Structure } from '../../models/structure.model';
 import { GeoJson } from '../models/geojson.model';
-import { GeojsonService } from '../services/geojson.service';
+import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
 
 @Component({
@@ -21,11 +21,9 @@ export class MapComponent implements OnChanges {
   public locateOptions = {
     flyTo: false,
     keepCurrentZoomLevel: false,
-    locateOptions: {
-      enableHighAccuracy: true,
-    },
     icon: 'fa-map-marker',
     clickBehavior: { inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'setView' },
+    circlePadding: [5, 5],
   };
 
   constructor(private mapService: MapService, private geoJsonService: GeojsonService) {
@@ -77,7 +75,7 @@ export class MapComponent implements OnChanges {
    * @param idVoie Street reference
    */
   public getCoord(idVoie: number): Observable<GeoJson> {
-    return this.geoJsonService.getAddress(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
+    return this.geoJsonService.getAddressByIdVoie(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
   }
 
   /**
