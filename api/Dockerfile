@@ -9,9 +9,6 @@ COPY . .
 # Install npm dependencies
 RUN npm install
 
-# run json-server
-RUN npm run api
-
 # expose port 3000
 EXPOSE 3000
 
