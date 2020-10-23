@@ -13,6 +13,6 @@ RUN cp routes.json ./api
 RUN npm install
 
 # expose port 3000
-EXPOSE 3000
+EXPOSE 80 3000
 
 CMD ["npm", "run", "api"]
