@@ -3,7 +3,7 @@
 
   <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center">
     <span class="typeStructure">{{ structure.typeDeStructure }}</span>
-    <span *ngIf="geolocation" class="distanceStructure">├─┤ {{ distance }}</span>
+    <span *ngIf="structure.distance" class="distanceStructure">├─┤ {{ this.formatDistance() }}</span>
   </div>
   <br />
   <div class="statusStructure" fxLayout="row" fxLayoutAlign="start center">

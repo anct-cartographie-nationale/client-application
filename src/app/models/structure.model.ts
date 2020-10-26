@@ -31,6 +31,7 @@ export class Structure {
   public hours: Week;
   public isOpen: boolean;
   public openedOn: OpeningDay;
+  public distance?: string;
 
   constructor(obj?: any) {
     Object.assign(this, obj, {

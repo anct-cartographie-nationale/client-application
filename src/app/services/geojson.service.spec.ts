@@ -31,7 +31,6 @@ describe('GeojsonService', () => {
           resolve();
         },
         (err) => {
-          console.log(err);
           resolve();
         }
       );
@@ -47,7 +46,6 @@ describe('GeojsonService', () => {
           resolve();
         },
         (err) => {
-          console.log(err);
           resolve();
         }
       );
