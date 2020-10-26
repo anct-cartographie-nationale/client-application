@@ -5,7 +5,7 @@
   display: inline-block;
   background: transparent;
   border-radius: 30px;
-  border: 2px solid $grey;
+  border: 2px solid $purple;
   height: 12px;
   width: 12px;
   min-width: 12px;
@@ -15,7 +15,7 @@
     content: '';
     height: 2px;
     width: 8px;
-    background: $grey;
+    background: $purple;
     position: absolute;
     top: 14px;
     left: 10px;
@@ -23,20 +23,6 @@
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     -o-transform: rotate(45deg);
-  }
-
-  &.orange {
-    border: 2px solid $orange;
-    &:after {
-      background: $orange;
-    }
-  }
-
-  &.purple {
-    border: 2px solid $purple;
-    &:after {
-      background: $purple;
-    }
   }
 }
 
@@ -99,4 +85,22 @@
   background: #fff;
   position: absolute;
   border-radius: 50%;
+}
+
+.ico-profile {
+  .head {
+    width: 12px;
+    height: 12px;
+    border-radius: 25px;
+    border: 2px solid $purple;
+  }
+  .body {
+    width: 28px;
+    height: 10px;
+    border-radius: 20px 20px 0px 0px;
+    border-top: 2px solid $purple;
+    border-right: 2px solid $purple;
+    border-left: 2px solid $purple;
+    border-left: 2px solid $purple;
+  }
 }

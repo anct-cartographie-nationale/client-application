@@ -4,9 +4,10 @@ $white: #ffff;
 /*  GREYS  */
 $grey: #b4bbbf;
 $grey-1: #333333;
-$grey-2: #eeeeee;
+$grey-2: #4f4f4f;
 $grey-3: #c3c3c3;
-$grey-4: #f2ecf2;
+$grey-4: #bdbdbd;
+$grey-6: #f2f2f2;
 /* YELLOW */
 $yellow: #f2cb04;
 $yellow-light: #fff8d6;
@@ -18,8 +19,11 @@ $orange-3: #fff4ea;
 $green: #41c29c;
 /* OTHERS */
 $blue: #b3f8f8;
+$blue-dark: #2f5480;
 $purple: #594d59;
+$red-metro: #d50000;
 /* APP COLORS */
 $primary-color: $yellow;
 $secondary-color: $orange;
-$default-link-color: $grey-1;
+$default-link-color: $grey-2;
+$button-secondary: $blue-dark;

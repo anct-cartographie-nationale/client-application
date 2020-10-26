@@ -9,12 +9,17 @@
   display: flex;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: 0px 4vw;
+  padding: 0px 22px;
   a {
     color: $white;
-    margin: 0 10px 0 12px;
+    margin: 0px 0px 0px 10px;
     &:hover {
       text-decoration: underline;
+    }
+    &:not(:last-child)::after {
+      content: '•';
+      margin: 0px 0px 0px 10px;
+      display: inline-block;
     }
   }
   img {
