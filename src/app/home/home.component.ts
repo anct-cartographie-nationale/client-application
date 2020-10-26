@@ -67,6 +67,7 @@ export class HomeComponent implements OnInit {
    * @param idVoie Street reference
    */
   public getCoord(idVoie: number): Observable<GeoJson> {
+    console.log('in');
     return this.geoJsonService.getAddressByIdVoie(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
   }
 
