@@ -18,35 +18,34 @@ export class StructureService {
   constructor(private http: HttpClient) {}
 
   public getStructures(filters: Filter[]): Observable<Structure[]> {
-    console.log(this.constructApi(filters));
     return this.http
-      .get('/api/Structures?' + this.constructApi(filters))
+      .get('/api/Structures?' + this.constructSearchRequest(filters))
       .pipe(map((data: any[]) => data.map((item) => new Structure(item))));
   }
 
-  private constructApi(filters: Filter[]): string {
-    let api: string = '';
+  private constructSearchRequest(filters: Filter[]): string {
+    let requestParam = '';
     if (filters) {
       filters.forEach((filter) => {
-        if (api) {
-          api = api + '&';
+        if (requestParam) {
+          requestParam = requestParam + '&';
         }
         if (filter.isStrict) {
-          if (api.includes(filter.name)) {
-            api = api + '=' + filter.value;
+          if (requestParam.includes(filter.name)) {
+            requestParam = requestParam + '=' + filter.value;
           } else {
-            api = api + filter.name + '=' + filter.value;
+            requestParam = requestParam + filter.name + '=' + filter.value;
           }
         } else {
-          if (api.includes(filter.name)) {
-            api = api + filter.value;
+          if (requestParam.includes(filter.name)) {
+            requestParam = requestParam + filter.value;
           } else {
-            api = api + filter.name + '_like=' + filter.value;
+            requestParam = requestParam + filter.name + '_like=' + filter.value;
           }
         }
       });
     }
-    return api;
+    return requestParam;
   }
 
   /**

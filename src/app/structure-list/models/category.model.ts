@@ -5,6 +5,8 @@ export class Category {
   modules: Module[];
 
   constructor(obj?: any) {
-    Object.assign(this, obj);
+    Object.assign(this, obj, {
+      modules: obj && obj.modules ? obj.modules.map((module) => new Module(module.id, module.text)) : null,
+    });
   }
 }

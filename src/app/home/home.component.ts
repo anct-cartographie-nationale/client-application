@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  fetchResults(filters: Filter[]) {
+  public fetchResults(filters: Filter[]): void {
     this.structureService.getStructures(filters).subscribe((structures) => {
       this.structures = structures.map((structure) =>
         this.structureService.updateOpeningStructure(structure, DateTime.local())
