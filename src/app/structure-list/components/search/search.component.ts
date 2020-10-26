@@ -67,7 +67,7 @@ export class SearchComponent implements OnInit {
     this.checkedModulesFilter = this.checkedModules.slice();
     this.openModal(this.modalTypeOpened);
     // Send search input filter
-    let filters: Filter[] = [];
+    const filters: Filter[] = [];
     if (term) {
       filters.push(new Filter('nomDeVotreStructure', term, false));
     }
@@ -81,7 +81,7 @@ export class SearchComponent implements OnInit {
 
   // Management of the checkbox event (Check / Uncheck)
   public onCheckboxChange(event, categ: string): void {
-    const checkValue: number = parseInt(event.target.value);
+    const checkValue: number = parseInt(event.target.value, 10);
     if (event.target.checked) {
       this.checkedModules.push(new Module(checkValue, categ));
     } else {
@@ -101,8 +101,9 @@ export class SearchComponent implements OnInit {
   public clearFilters(): void {
     this.categories.forEach((categ: Category) => {
       categ.modules.forEach((module: Module) => {
-        if (this.getIndex(module.id, categ.name) > -1)
+        if (this.getIndex(module.id, categ.name) > -1) {
           this.checkedModules.splice(this.getIndex(module.id, categ.name), 1);
+        }
       });
     });
   }
@@ -155,7 +156,6 @@ export class SearchComponent implements OnInit {
         8
       );
       this.mockService(this.categories, "Modalité d'accueil", { name: 'Matériel mis à dispostion', id: 2 }, 6);
-
       this.mockService(this.categories, "Type d'acteurs", { name: 'Lieux de médiation (Pimms, assos...)', id: 3 }, 5);
       this.mockService(this.categories, 'Publics', { name: 'Langues étrangères autres qu’anglais', id: 4 }, 12);
       this.mockService(this.categories, 'Labelisation', { name: 'Prescripteur du Pass Numérique', id: 5 }, 6);
