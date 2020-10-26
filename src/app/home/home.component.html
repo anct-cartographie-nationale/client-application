@@ -1,4 +1,4 @@
 <div fxLayout="row">
-  <app-structure-list [structureList]="structures" class="left-pane"></app-structure-list>
+  <app-structure-list [structureList]="structures" [location]="currentLocation" class="left-pane"></app-structure-list>
   <app-map [structures]="structures" fxFlex="100"></app-map>
 </div>

@@ -163,7 +163,6 @@ describe('StructureListComponent', () => {
       })
     );
     structureList.length = 4;
-    console.log(structureList.length);
     component.structureList = structureList;
     fixture.detectChanges(); // calls NgOnit
   });
