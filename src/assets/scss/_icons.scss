@@ -60,7 +60,14 @@
 .ico-dot-unavailable {
   height: 12px;
   width: 12px;
-  background-color: $grey;
+  background-color: $red;
+  border-radius: 50%;
+  display: inline-block;
+}
+.ico-dot-unknown {
+  height: 12px;
+  width: 12px;
+  background-color: $grey-4;
   border-radius: 50%;
   display: inline-block;
 }
@@ -87,6 +94,25 @@
   border-radius: 50%;
 }
 
+.ico-marker-pin-sm {
+  width: 14px;
+  height: 14px;
+  border-radius: 50% 50% 50% 0;
+  background: $grey-3;
+  transform: rotate(-45deg);
+  margin: 0px 4px;
+}
+
+.ico-marker-pin-sm::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin: 4px 0 0 4px;
+  background: $app-background;
+  position: absolute;
+  border-radius: 50%;
+}
+
 .ico-profile {
   .head {
     width: 12px;
@@ -101,5 +127,24 @@
     border-top: 2px solid $purple;
     border-right: 2px solid $purple;
     border-left: 2px solid $purple;
+  }
+}
+
+.ico-close {
+  .mdiv {
+    height: 10px;
+    width: 2px;
+    margin-left: 5px;
+    background-color: $grey-3;
+    transform: rotate(45deg);
+    z-index: 1;
+  }
+
+  .md {
+    height: 10px;
+    width: 2px;
+    background-color: $grey-3;
+    transform: rotate(90deg);
+    z-index: 2;
   }
 }

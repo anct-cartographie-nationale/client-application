@@ -69,4 +69,26 @@ export class Structure {
       return 'Fermé - Aucun horaire disponible ';
     }
   }
+
+  /**
+   * Return a range, according to the distance, between [1,3] to get a distance reference.
+   * - [0,500m] => 1
+   * - [500m,1km] => 2
+   * - [1km, [ => 3
+   */
+  public getDistanceRange(): number {
+    if (!this.distance) {
+      return 3;
+    } else {
+      // If it's in km
+      if (this.distance.length > 3) {
+        return 3;
+      } else if (parseInt(this.distance, 10) < 500) {
+        // If it's between 0 and 500 m
+        return 1;
+      } else {
+        return 2;
+      }
+    }
+  }
 }
