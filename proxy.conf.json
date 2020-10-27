@@ -13,5 +13,11 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "info"
+  },
+  "/reverse": {
+    "target": "https://api-adresse.data.gouv.fr",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
   }
 }

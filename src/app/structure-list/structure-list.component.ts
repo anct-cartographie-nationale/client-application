@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Filter } from './models/filter.model';
 import { Structure } from '../models/structure.model';
-
+import { GeoJson } from '../map/models/geojson.model';
 @Component({
   selector: 'app-structure-list',
   templateUrl: './structure-list.component.html',
@@ -10,11 +10,12 @@ import { Structure } from '../models/structure.model';
 export class StructureListComponent implements OnInit {
   @Input() public structureList: Structure[];
   @Output() searchEvent = new EventEmitter();
+  @Input() public location: GeoJson;
 
   constructor() {}
   ngOnInit(): void {}
 
-  fetchResults(filters: Filter[]) {
+  public fetchResults(filters: Filter[]): void {
     this.searchEvent.emit(filters);
   }
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Structure } from '../../models/structure.model';
 import { GeoJson } from '../models/geojson.model';
-import { GeojsonService } from '../services/geojson.service';
+import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
 
 @Component({
@@ -21,11 +21,9 @@ export class MapComponent implements OnChanges {
   public locateOptions = {
     flyTo: false,
     keepCurrentZoomLevel: false,
-    locateOptions: {
-      enableHighAccuracy: true,
-    },
     icon: 'fa-map-marker',
     clickBehavior: { inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'setView' },
+    circlePadding: [5, 5],
   };
 
   constructor(private mapService: MapService, private geoJsonService: GeojsonService) {
@@ -77,7 +75,7 @@ export class MapComponent implements OnChanges {
    * @param idVoie Street reference
    */
   public getCoord(idVoie: number): Observable<GeoJson> {
-    return this.geoJsonService.getAddress(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
+    return this.geoJsonService.getAddressByIdVoie(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
   }
 
   /**
@@ -113,10 +111,25 @@ export class MapComponent implements OnChanges {
       width: 256,
       height: 256,
     };
-    const carteLayer = tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 20,
+    // Init WMS service with param from data.grandlyon.com
+    const carteLayer = new TileLayer.WMS('https://openstreetmap.data.grandlyon.com/wms', {
+      crs: CRS.EPSG3857,
+      transparent: true,
+      format: 'image/png',
       attribution: 'Map data © OpenStreetMap contributors',
+      version: '1.3.0',
+      maxZoom: 20,
     });
+    carteLayer.wmsParams = {
+      format: 'image/png',
+      transparent: true,
+      version: '1.3.0',
+      layers: 'osm_grandlyon',
+      service: 'WMS',
+      request: 'GetMap',
+      width: 256,
+      height: 256,
+    };
     // Center is set on townhall
     // Zoom is blocked on 11 to prevent people to zoom out from metropole
     this.mapOptions = {

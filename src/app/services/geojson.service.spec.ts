@@ -24,14 +24,13 @@ describe('GeojsonService', () => {
 
   it('should get address for id 26061 ', async () => {
     await new Promise((resolve) => {
-      service.getAddress(26061).subscribe(
+      service.getAddressByIdVoie(26061).subscribe(
         (val) => {
           expect(val.zipcode).toEqual('69800');
           expect(val.text).toEqual('13ème Rue Cité Berliet');
           resolve();
         },
         (err) => {
-          console.log(err);
           resolve();
         }
       );
@@ -47,7 +46,6 @@ describe('GeojsonService', () => {
           resolve();
         },
         (err) => {
-          console.log(err);
           resolve();
         }
       );

@@ -2,17 +2,23 @@
 @import '../../../assets/scss/layout';
 @import '../../../assets/scss/icons';
 @import '../../../assets/scss/typography';
+@import '../../../assets/scss/shapes';
+
+.map-wrapper {
+  border-radius: 6px;
+  @include background-hash;
+}
 
 #map {
-  height: calc(100vh - #{$header-height} - #{$footer-height});
+  height: calc(100vh - #{$header-height} - #{$footer-height} - 50px);
   width: 100%;
+  border: 10px solid white;
+  border-radius: 6px;
 }
 
 ::ng-deep .fa-map-marker {
   color: $black;
   position: absolute;
-  margin-left: 4px;
-  margin-top: 2px;
   width: 12px;
   height: 12px;
   border: solid 1px currentColor;
