@@ -28,7 +28,7 @@ FROM nginx
 # copy artifact build from the 'build environment'
 RUN apt-get update
 
-COPY --from=build /app/dist/fr /usr/share/nginx/html
+COPY --from=build /app/dist/fr /usr/share/nginx/html/fr
 
 RUN touch /var/run/nginx.pid
 RUN ls -l /usr/share/nginx/html
