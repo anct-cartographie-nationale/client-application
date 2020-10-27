@@ -2,6 +2,7 @@
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/breakpoint';
+@import '../../../../assets/scss/shapes';
 
 .header {
   .title {
@@ -106,23 +107,16 @@
   max-height: 648px;
   max-width: 754px;
   width: 94%;
-  background: $white;
   border-left: 6.5px solid transparent;
   border-bottom: 6.5px solid transparent;
   border-radius: 11px;
   z-index: 401 !important;
-
-  //repeating-linear-gradient(37deg, transparent 0, transparent 1px, $grey 2px, $grey 2px) 12;
-  //border-image: repeating-linear-gradient(-45deg, transparent 0, transparent 4px, $grey 4px, $grey 5px) 8;
-
-  background: linear-gradient($white, $white) padding-box,
-    repeating-linear-gradient(-45deg, transparent 0, transparent 4px, $grey 4px, $grey 5px) border-box;
-  //repeating-linear-gradient(-51deg, transparent 0, transparent 1px, $grey 1px, $grey 2px) border-box;
-  box-sizing: border-box;
-  z-index: 1;
+  margin: 8px 8px 0 0;
   position: absolute;
   margin-top: 96px;
-
+  border: 1px solid $grey-5;
+  border-radius: 6px;
+  @include background-hash;
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -132,9 +126,6 @@
   ::-webkit-scrollbar-thumb {
     background: $grey;
     border-radius: 6px;
-  }
-  .borderTricks {
-    border: 1px solid #e0e0e0;
   }
   .contentModal {
     overflow-y: auto;

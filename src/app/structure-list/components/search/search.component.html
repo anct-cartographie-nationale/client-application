@@ -55,9 +55,8 @@
     fxLayoutAlign="space-between"
     [ngClass]="['modal', 'modal' + modalTypeOpened]"
   >
-    <div class="borderTricks">
+    <div class="body-wrap">
       <div class="contentModal" fxLayout="row wrap" fxLayoutAlign="flex-start" *ngIf="categories.length > 0">
-        <!--<div class="blockFiltre" *ngFor="let s of services">-->
         <div class="blockFiltre" *ngFor="let c of categories">
           <h4>{{ c.name }}</h4>
 
