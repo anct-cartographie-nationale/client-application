@@ -47,7 +47,10 @@
       <span>{{ structure.openDisplay() }}</span>
     </div>
     <ng-template #closed>
-      <span class="ico-dot-unavailable"></span>
+      <span *ngIf="structure.openedOn.day; else unkown" class="ico-dot-unavailable"></span>
+    </ng-template>
+    <ng-template #unkown>
+      <span class="ico-dot-unknown"></span>
     </ng-template>
   </div>
 </div>

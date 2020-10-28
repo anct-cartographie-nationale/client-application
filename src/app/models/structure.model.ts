@@ -66,24 +66,24 @@ export class Structure {
     } else if (this.openedOn.day) {
       return 'Fermé - Ouvre ' + this.openedOn.day + ' à ' + this.openedOn.schedule;
     } else {
-      return 'Fermé - Aucun horaire disponible ';
+      return 'Aucun horaire disponible ';
     }
   }
 
   /**
    * Return a range, according to the distance, between [1,3] to get a distance reference.
-   * - [0,500m] => 1
-   * - [500m,1km] => 2
-   * - [1km, [ => 3
+   * - [0,5km] => 1
+   * - [5km,10km] => 2
+   * - [10km, [ => 3
    */
   public getDistanceRange(): number {
     if (!this.distance) {
       return 3;
     } else {
       // If it's in km
-      if (this.distance.length > 3) {
+      if (parseInt(this.distance, 10) > 10000) {
         return 3;
-      } else if (parseInt(this.distance, 10) < 500) {
+      } else if (parseInt(this.distance, 10) < 5000) {
         // If it's between 0 and 500 m
         return 1;
       } else {
