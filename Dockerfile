@@ -28,6 +28,7 @@ FROM nginx:1.16.0-alpine
 # copy artifact build from the 'build environment'
 
 COPY --from=build /app/dist/fr /usr/share/nginx/html
+COPY --from=build /app/dist/fr /usr/share/nginx/html/fr
 
 RUN touch /var/run/nginx.pid
 
