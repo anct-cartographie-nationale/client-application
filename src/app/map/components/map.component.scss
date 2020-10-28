@@ -11,7 +11,6 @@
 
 #map {
   height: calc(100vh - #{$header-height} - #{$footer-height} - 50px);
-  width: 100%;
   border: 10px solid white;
   border-radius: 6px;
 }
