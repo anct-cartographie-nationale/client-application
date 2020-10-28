@@ -29,6 +29,7 @@ FROM nginx
 RUN apt-get update
 
 COPY --from=build /app/dist/fr /usr/share/nginx/html
+COPY --from=build /app/dist/fr /usr/share/nginx/html/fr
 
 RUN touch /var/run/nginx.pid
 RUN ls -l /usr/share/nginx/html
