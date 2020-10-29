@@ -33,6 +33,10 @@ a {
   cursor: pointer;
 }
 
+.bold {
+  font-weight: bold !important;
+}
+
 // Containers
 .content-container {
   margin: 0;
@@ -67,4 +71,9 @@ a {
     margin-bottom: 1rem;
     width: unset;
   }
+}
+
+// Layout
+.w-100 {
+  width: 100%;
 }

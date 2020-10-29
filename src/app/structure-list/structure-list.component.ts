@@ -9,7 +9,18 @@ import { GeoJson } from '../map/models/geojson.model';
 export class StructureListComponent implements OnInit {
   @Input() public structureList: Structure[];
   @Input() public location: GeoJson;
+  public showStructureDetails = false;
+  public structure: Structure[];
   constructor() {}
 
   ngOnInit(): void {}
+
+  public showDetails(event): void {
+    this.showStructureDetails = true;
+    this.structure = event;
+  }
+
+  public closeDetails(): void {
+    this.showStructureDetails = false;
+  }
 }

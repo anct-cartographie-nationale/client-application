@@ -5,6 +5,7 @@
 .structure {
   padding: 12px 0 12px 0;
   border-bottom: 1px dashed $grey !important;
+  cursor: pointer;
   .typeStructure {
     color: $grey;
     @include cn-regular-16;
@@ -21,12 +22,5 @@
   }
   &:last-child {
     border-bottom: none;
-  }
-}
-.statusStructure {
-  span {
-    @include cn-regular-14;
-    margin-right: 8px;
-    display: inline-block;
   }
 }

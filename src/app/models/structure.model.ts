@@ -27,7 +27,11 @@ export class Structure {
   public accessibilitePersonnesAMobiliteReduitePmr: boolean;
   public jaccompagneLesUsagersDansLeursDemarchesEnLigne: boolean;
   public accompagnementDesDemarches: string[];
+  public modalitesDacces: string[];
+  public labelsEtQualifications: string[];
   public wifi: boolean;
+  public ordinateurs: boolean;
+  public nombre: number;
   public hours: Week;
   public isOpen: boolean;
   public openedOn: OpeningDay;

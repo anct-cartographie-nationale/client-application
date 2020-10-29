@@ -1,0 +1,19 @@
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/color';
+
+img {
+  margin-bottom: 16px;
+}
+
+p {
+  @include cn-bold-18;
+  margin: 0;
+}
+
+div {
+  border: 1px solid $grey-4;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  padding: 16px 25px;
+}

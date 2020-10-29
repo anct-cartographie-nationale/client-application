@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Structure } from '../../../models/structure.model';
 import { GeojsonService } from '../../../services/geojson.service';
 import { GeoJson } from '../../../map/models/geojson.model';
@@ -12,6 +12,7 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class CardComponent implements OnInit {
   @Input() public structure: Structure;
+  @Output() public showDetails: EventEmitter<Structure> = new EventEmitter<Structure>();
 
   constructor(private geoJsonService: GeojsonService) {}
   ngOnInit(): void {}
@@ -33,5 +34,9 @@ export class CardComponent implements OnInit {
    */
   public getCoord(idVoie: number): Observable<GeoJson> {
     return this.geoJsonService.getAddressByIdVoie(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
+  }
+
+  public cardClicked(): void {
+    this.showDetails.emit(this.structure);
   }
 }

@@ -15,6 +15,8 @@ import { MapModule } from './map/map.module';
 import { RechercheComponent } from './structure-list/components/recherche/recherche.component';
 import { StructureListComponent } from './structure-list/structure-list.component';
 import { CardComponent } from './structure-list/components/card/card.component';
+import { StructureDetailsComponent } from './structure-list/components/structure-details/structure-details.component';
+import { StructureOpeningStatusComponent } from './structure-list/components/structure-opening-status/structure-opening-status.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { CardComponent } from './structure-list/components/card/card.component';
     StructureListComponent,
     CardComponent,
     RechercheComponent,
+    StructureDetailsComponent,
+    StructureOpeningStatusComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FlexLayoutModule, SharedModule, MapModule],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' }, CustomBreakPointsProvider],
