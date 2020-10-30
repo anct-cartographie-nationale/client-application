@@ -1,3 +1,15 @@
 <app-recherche></app-recherche>
 <span class="nbStructuresLabel">{{ structureList.length }} structures</span>
-<app-card *ngFor="let structure of structureList" [structure]="structure"></app-card>
+<div (mouseout)="mouseOut()">
+  <app-card
+    *ngFor="let structure of structureList"
+    [structure]="structure"
+    (showDetails)="showDetails($event)"
+    (hover)="handleCardHover($event)"
+  ></app-card>
+</div>
+<app-structure-details
+  *ngIf="showStructureDetails"
+  [structure]="structure"
+  (closeDetails)="closeDetails()"
+></app-structure-details>

@@ -15,6 +15,8 @@ import { GeojsonService } from '../services/geojson.service';
 })
 export class HomeComponent implements OnInit {
   public structures: Structure[] = [];
+  public displayMarkerId: number;
+  public selectedMarkerId: number;
   public geolocation = false;
   public currentLocation: GeoJson;
   constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
@@ -85,5 +87,13 @@ export class HomeComponent implements OnInit {
       (location) => (this.currentLocation = location),
       (err) => console.error(err)
     );
+  }
+
+  public setMapMarkerId(event: Array<number>): void {
+    this.displayMarkerId = event[0];
+  }
+
+  public setSelectedMarkerId(id: number): void {
+    this.selectedMarkerId = id;
   }
 }
