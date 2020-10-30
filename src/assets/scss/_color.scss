@@ -4,22 +4,20 @@ $white: #ffff;
 /*  GREYS  */
 $grey: #b4bbbf;
 $grey-1: #333333;
-$grey-2: #eeeeee;
-$grey-3: #c3c3c3;
-$grey-4: #f2ecf2;
-/* YELLOW */
-$yellow: #f2cb04;
-$yellow-light: #fff8d6;
-/* ORANGES */
-$orange: #f27405;
-$orange-light: #f29f05;
-$orange-3: #fff4ea;
-/* GREEN */
+$grey-2: #4f4f4f;
+$grey-3: #828282;
+$grey-4: #bdbdbd;
+$grey-6: #f2f2f2;
+/* Status colors */
 $green: #41c29c;
+$red: #f98181;
 /* OTHERS */
-$blue: #b3f8f8;
-$purple: #594d59;
+$blue: #348899;
+$grey-1: #594d59;
+$red-metro: #d50000;
 /* APP COLORS */
-$primary-color: $yellow;
-$secondary-color: $orange;
-$default-link-color: $grey-1;
+$primary-color: $red-metro;
+$secondary-color: $blue;
+$default-link-color: $grey-2;
+$button-secondary: $blue;
+$app-background: $grey-6;

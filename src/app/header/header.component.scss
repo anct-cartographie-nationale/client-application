@@ -9,36 +9,27 @@
   height: $header-height;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 0 0 4vw;
   text-align: center;
+  border-bottom: solid 1px $grey-4;
+  background-color: $white;
+  padding: 0 20px;
   a {
+    font-style: italic;
+    color: $primary-color;
     &.active {
-      @include highlight;
+      font-weight: bold;
+      color: $grey-1;
     }
   }
   .right-header {
     height: 100%;
   }
-  .grey-background {
-    height: 100%;
-    padding: 0 3vw;
-    background-color: $grey-2;
-    a {
-      text-decoration: underline;
-    }
-  }
 }
 
 .logo {
-  @include cn-regular-28;
+  @include cn-regular-14;
   text-align: initial;
-  .primary {
-    color: $primary-color;
-  }
-  .secondary {
-    color: $secondary-color;
-  }
-  @media #{$tablet} {
-    @include cn-regular-16;
+  p {
+    margin: 0;
   }
 }

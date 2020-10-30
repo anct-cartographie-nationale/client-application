@@ -15,6 +15,7 @@ build:
   stage: build
   only:
     - master
+    - recette
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" --build-arg conf=prod .
@@ -31,7 +32,19 @@ build_dev:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
     - docker push "$CI_REGISTRY_IMAGE:dev"
-    
+
+build_json_server:
+  image: docker:18.09
+  services:
+    - docker:18.09-dind
+  stage: build
+  only:
+    - dev
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:json_server"  ./api/
+    - docker push "$CI_REGISTRY_IMAGE:json_server"
+
 deploy_dev:
   stage: deploy
   tags:
@@ -43,6 +56,18 @@ deploy_dev:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker-compose pull web-app
     - docker-compose up -d web-app
+
+deploy_rec:
+  stage: deploy
+  tags:
+    - deploy
+  only:
+    - recette
+  script:
+    - cd /home/mps/ram
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker-compose pull web-app-rec
+    - docker-compose up -d web-app-rec
 
 code_analysis:
   image: skilldlabs/sonar-scanner:3.4.0

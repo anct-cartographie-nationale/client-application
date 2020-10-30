@@ -1,9 +1,9 @@
+import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Day } from './day.model';
 import { OpeningDay } from './openingDay.model';
-import { Weekday } from '../enum/weekday.enum';
 import { Week } from './week.model';
-
 export class Structure {
+  public id: number;
   public numero: string;
   public dateDeCreation: string;
   public derniereModification: string;
@@ -13,7 +13,7 @@ export class Structure {
   public typeDeStructure: string;
   public description: string;
   public n: string;
-  public voie: string;
+  public voie: number;
   public telephone: string;
   public courriel: string;
   public siteWeb: string;
@@ -27,10 +27,15 @@ export class Structure {
   public accessibilitePersonnesAMobiliteReduitePmr: boolean;
   public jaccompagneLesUsagersDansLeursDemarchesEnLigne: boolean;
   public accompagnementDesDemarches: string[];
+  public modalitesDacces: string[];
+  public labelsEtQualifications: string[];
   public wifi: boolean;
+  public ordinateurs: boolean;
+  public nombre: number;
   public hours: Week;
   public isOpen: boolean;
   public openedOn: OpeningDay;
+  public distance?: string;
 
   constructor(obj?: any) {
     Object.assign(this, obj, {
@@ -56,6 +61,38 @@ export class Structure {
         return this.hours.sunday;
       default:
         return null;
+    }
+  }
+
+  public openDisplay(): string {
+    if (this.isOpen) {
+      return 'Ouvert actuellement';
+    } else if (this.openedOn.day) {
+      return 'Fermé - Ouvre ' + this.hours.getDayTranslation(this.openedOn.day) + ' à ' + this.openedOn.schedule;
+    } else {
+      return 'Aucun horaire disponible';
+    }
+  }
+
+  /**
+   * Return a range, according to the distance, between [1,3] to get a distance reference.
+   * - [0,5km] => 1
+   * - [5km,10km] => 2
+   * - [10km, [ => 3
+   */
+  public getDistanceRange(): number {
+    if (!this.distance) {
+      return 3;
+    } else {
+      // If it's in km
+      if (parseInt(this.distance, 10) > 10000) {
+        return 3;
+      } else if (parseInt(this.distance, 10) < 5000) {
+        // If it's between 0 and 500 m
+        return 1;
+      } else {
+        return 2;
+      }
     }
   }
 }

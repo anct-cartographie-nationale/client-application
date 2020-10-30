@@ -1,0 +1,80 @@
+@import '../../../assets/scss/color';
+@import '../../../assets/scss/layout';
+@import '../../../assets/scss/icons';
+@import '../../../assets/scss/typography';
+
+#map {
+  height: calc(100vh - #{$header-height} - #{$footer-height} - 120px);
+  // height: 100%;
+  width: 100%;
+  border: 10px solid white;
+}
+
+::ng-deep .fa-map-marker {
+  color: $black;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: solid 1px currentColor;
+  border-radius: 7px 7px 7px 0;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  margin-left: -6px;
+  margin-top: 6px;
+}
+
+::ng-deep .fa-map-marker:before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 4px;
+  height: 4px;
+  border: solid 1px currentColor;
+  border-radius: 3px;
+}
+
+::ng-deep .leaflet-control-locate-circle {
+  &.leaflet-interactive {
+    stroke: $white !important;
+    fill: $black !important;
+    stroke-width: 2px !important;
+  }
+}
+
+::ng-deep .leaflet-marker-icon {
+  &.leaflet-interactive {
+    circle {
+      fill: $primary-color !important;
+      stroke-width: unset !important;
+    }
+  }
+}
+
+::ng-deep .leaflet-tooltip {
+  padding: 8px 10px 8px 10px;
+  border-radius: 6px;
+  h1 {
+    color: $grey-1;
+    @include cn-bold-20;
+    margin: 0;
+  }
+  p {
+    color: $grey-3;
+    @include cn-regular-16;
+    margin: 0 0 13px 0;
+  }
+  div {
+    align-items: center;
+    display: flex;
+  }
+}
+
+::ng-deep .leaflet-left {
+  right: 0;
+  left: unset;
+  .leaflet-control {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+}

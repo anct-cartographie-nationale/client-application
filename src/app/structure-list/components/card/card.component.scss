@@ -2,36 +2,25 @@
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
 
-.nbStructuresLabel {
-  color: $grey;
-  @include cn-regular-16;
-  display: flex;
-  align-items: center;
-}
 .structure {
   padding: 12px 0 12px 0;
-  border-bottom: 1px dashed $grey;
+  border-bottom: 1px dashed $grey !important;
+  cursor: pointer;
   .typeStructure {
     color: $grey;
     @include cn-regular-16;
   }
   .nomStructure {
     padding-top: 13px;
-    color: $purple;
+    color: $grey-1;
     @include cn-bold-20;
     padding-bottom: 5px;
   }
   .distanceStructure {
     @include cn-regular-16;
-    color: $purple;
+    color: $grey-1;
   }
   &:last-child {
     border-bottom: none;
-  }
-}
-.statusStructure {
-  span {
-    @include cn-regular-14;
-    margin-right: 8px;
   }
 }

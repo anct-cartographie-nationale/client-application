@@ -1,25 +1,45 @@
-<span class="nbStructuresLabel">{{ structures.length }} structures</span>
-<div class="structure" fxLayout="column" *ngFor="let structure of structures">
-  <span class="nomStructure">{{ structure.nom }}</span>
+<div class="structure" fxLayout="column" (click)="cardClicked()" (mouseover)="cardHover()">
+  <span class="nomStructure">{{ structure.nomDeVotreStructure }}</span>
 
   <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center">
     <span class="typeStructure">{{ structure.typeDeStructure }}</span>
-    <span class="distanceStructure">├─┤ 63 m</span>
+    <div
+      *ngIf="structure.distance"
+      class="distanceStructure"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      fxLayoutGap="20px"
+    >
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div class="ico-marker-pin-sm"></div>
+        <svg
+          *ngFor="let i of [].constructor(structure.getDistanceRange())"
+          width="35"
+          height="7"
+          viewBox="0 0 35 7"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.5 3.61905C3.73256 5.04762 3.73256 6 10.8023 6C18.2442 6 18.9884 1 24.5698 1C30.1512 1 31.2674 1.95238 33.5 3.38095"
+            stroke="#828282"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-dasharray="1 4"
+          />
+        </svg>
+        <div class="ico-close">
+          <div class="mdiv">
+            <div class="md"></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        {{ this.formatDistance() }}
+      </div>
+    </div>
   </div>
   <br />
-  <div class="statusStructure" fxLayout="row" fxLayoutAlign="start center">
-    <div *ngIf="structure.isOpen; else closed">
-      <span class="ico-dot-available"></span>
-      <span>Ouvert actuellement</span>
-    </div>
-    <ng-template #closed>
-      <span class="ico-dot-unavailable"></span>
-      <span *ngIf="structure.openedOn.day; else noTime">
-        Fermé - Ouvre {{ structure.openedOn.day }} à {{ structure.openedOn.schedule }}</span
-      >
-    </ng-template>
-    <ng-template #noTime>
-      <span> Fermé - Aucun horaire disponible</span>
-    </ng-template>
-  </div>
+  <app-structure-opening-status [structure]="structure"></app-structure-opening-status>
 </div>

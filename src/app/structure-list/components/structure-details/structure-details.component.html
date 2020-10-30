@@ -1,0 +1,151 @@
+<div class="structrue-details-container">
+  <!-- Header info -->
+  <div fxLayout="row" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
+    <em class="ic-arrow-left clickable" (click)="close()"></em>
+    <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
+      <div fxLayout="column" fxLayoutAlign="center">
+        <h2 class="bold">{{ structure.nomDeVotreStructure }}</h2>
+        <h3>{{ structure.typeDeStructure }}</h3>
+      </div>
+      <app-structure-opening-status [structure]="structure"></app-structure-opening-status>
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="60%">
+          <div *ngIf="structure.voie" fxLayout="row" fxLayoutAlign="none center">
+            <em class="ico-marker-pin-sm absolute"></em>
+            <p>{{ structure.voie }}</p>
+          </div>
+          <div *ngIf="structure.siteWeb" fxLayout="row" fxLayoutAlign="none center">
+            <em class="ic-globe-alt"></em>
+            <a target="_blank" rel="noopener noreferrer" [href]="structure.siteWeb">{{ structure.siteWeb }}</a>
+          </div>
+          <div *ngIf="structure.telephone" fxLayout="row" fxLayoutAlign="none center">
+            <em class="ic-phone"></em>
+            <p>{{ structure.telephone }}</p>
+          </div>
+        </div>
+        <div fxLayout="column" fxFlex="40%">
+          <div *ngIf="structure.courriel" fxLayout="row" fxLayoutAlign="none center">
+            <em class="ic-mail"></em>
+            <a [href]="'mailto:' + structure.courriel">{{ structure.courriel }}</a>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="none center">
+            <em class="ic-mail"></em>
+            <p>TODO: PASS</p>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="none center">
+            <em class="ic-mail"></em>
+            <p>TODO: FABLAB</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Démarches -->
+  <div
+    *ngIf="structure.accompagnementDesDemarches.length > 0"
+    fxLayout="column"
+    class="structrue-details-block"
+    fxLayoutAlign="baseline baseline"
+    fxLayoutGap="20px"
+  >
+    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
+      <em class="ic-mouse"></em>
+      <h2>Démarches</h2>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="24px">
+      <div *ngFor="let accompagnement of structure.accompagnementDesDemarches">
+        <app-logo-card [name]="accompagnement"></app-logo-card>
+      </div>
+    </div>
+  </div>
+  <!-- Services -->
+  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
+      <em class="ic-mouse"></em>
+      <h2>Services</h2>
+    </div>
+    <div fxLayout="row" class="w-100">
+      <div fxFlex="50%">
+        <h3 class="subtitle">Compétences de base</h3>
+      </div>
+      <div fxFlex="50%">
+        <h3 class="subtitle">Accès au droits</h3>
+      </div>
+    </div>
+  </div>
+  <!-- Accueil -->
+  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
+      <em class="ic-mouse"></em>
+      <h2>Accueil</h2>
+    </div>
+    <!-- Openning Hours -->
+    <div fxLayout="row" class="w-100">
+      <div fxFlex="70%">
+        <h3 class="subtitle">Horaires d’ouverture au public :</h3>
+        <div fxLayout="column">
+          <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
+            <div *ngIf="day.value.open">
+              <h4>{{ day.key | day }}</h4>
+              <div class="openning-time" fxLayout="row" fxLayoutAlign="none center">
+                <div *ngFor="let timeRange of day.value.time; let isFirst = first">
+                  <p *ngIf="isFirst">de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}</p>
+                  <p *ngIf="!isFirst && timeRange.openning">
+                    et de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modalitesDacces -->
+      <div fxFlex="30%">
+        <h3 class="subtitle">Accès</h3>
+        <div *ngFor="let acces of structure.modalitesDacces">
+          <em
+            [ngClass]="{
+              'ic-user': acces === accessModality.free,
+              'ic-calendar-today': acces === accessModality.meeting,
+              'ic-camera': acces === accessModality.numeric
+            }"
+          ></em>
+          <p>{{ acces }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Equipements -->
+  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline">
+    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
+      <em class="ic-toolbox"></em>
+      <h2>Équipements</h2>
+    </div>
+    <div *ngIf="structure.wifi" fxLayout="row" fxLayoutAlign="none center">
+      <em class="ic-wifi"></em>
+      <p>Wifi en accès libre</p>
+    </div>
+    <div *ngIf="structure.ordinateurs" fxLayout="row" fxLayoutAlign="none center">
+      <em class="ic-screen"></em>
+      <p>Ordinateurs à disposition : {{ structure.nombre }}</p>
+    </div>
+  </div>
+  <!-- Labels -->
+  <div
+    *ngIf="structure.labelsEtQualifications"
+    fxLayout="column"
+    class="structrue-details-block"
+    fxLayoutAlign="baseline baseline"
+    fxLayoutGap="20px"
+  >
+    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
+      <em class="ic-toolbox"></em>
+      <h2>Labelisation</h2>
+    </div>
+    <div fxLayout="row wrap" fxLayoutGap="24px">
+      <div *ngFor="let labels of structure.labelsEtQualifications">
+        <app-logo-card [name]="labels"></app-logo-card>
+      </div>
+    </div>
+  </div>
+</div>
