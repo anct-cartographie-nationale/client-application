@@ -12,7 +12,7 @@
         <div fxLayout="column" fxFlex="60%">
           <div *ngIf="structure.voie" fxLayout="row" fxLayoutAlign="none center">
             <em class="ico-marker-pin-sm absolute"></em>
-            <p>{{ structure.voie }}</p>
+            <p>{{ structure.n }} {{ structure.address }}</p>
           </div>
           <div *ngIf="structure.siteWeb" fxLayout="row" fxLayoutAlign="none center">
             <em class="ic-globe-alt"></em>
