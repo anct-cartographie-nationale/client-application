@@ -132,24 +132,10 @@ export class MapComponent implements OnChanges {
       height: 256,
     };
     // Init WMS service with param from data.grandlyon.com
-    const carteLayer = new TileLayer.WMS('https://openstreetmap.data.grandlyon.com/wms', {
-      crs: CRS.EPSG3857,
-      transparent: true,
-      format: 'image/png',
-      attribution: 'Map data © OpenStreetMap contributors',
-      version: '1.3.0',
-      maxZoom: 20,
+    const carteLayer = tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
+      maxZoom: 19,
     });
-    carteLayer.wmsParams = {
-      format: 'image/png',
-      transparent: true,
-      version: '1.3.0',
-      layers: 'osm_grandlyon',
-      service: 'WMS',
-      request: 'GetMap',
-      width: 256,
-      height: 256,
-    };
     // Center is set on townhall
     // Zoom is blocked on 11 to prevent people to zoom out from metropole
     this.mapOptions = {
@@ -170,10 +156,11 @@ export class MapComponent implements OnChanges {
     });
   }
 
-  private centerLeafletMapOnMarker(markerId: number) {
+  private centerLeafletMapOnMarker(markerId: number): void {
     const marker = this.mapService.getMarker(markerId);
     const latLngs = [marker.getLatLng()];
     const markerBounds = latLngBounds(latLngs);
-    this.map.fitBounds(markerBounds);
+    // paddingTopLeft is used for centering marker because of structure details pane
+    this.map.fitBounds(markerBounds, { paddingTopLeft: [300, 0] });
   }
 }

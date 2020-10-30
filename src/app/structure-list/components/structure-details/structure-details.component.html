@@ -131,14 +131,20 @@
     </div>
   </div>
   <!-- Labels -->
-  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
+  <div
+    *ngIf="structure.labelsEtQualifications"
+    fxLayout="column"
+    class="structrue-details-block"
+    fxLayoutAlign="baseline baseline"
+    fxLayoutGap="20px"
+  >
     <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
       <em class="ic-toolbox"></em>
       <h2>Labelisation</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="24px">
-      <div *ngFor="let accompagnement of structure.labelsEtQualifications">
-        <app-logo-card [name]="accompagnement"></app-logo-card>
+      <div *ngFor="let labels of structure.labelsEtQualifications">
+        <app-logo-card [name]="labels"></app-logo-card>
       </div>
     </div>
   </div>

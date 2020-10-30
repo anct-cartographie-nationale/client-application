@@ -94,7 +94,6 @@ export class HomeComponent implements OnInit {
   }
 
   public setSelectedMarkerId(id: number): void {
-    console.log('setSelectedMarker', id);
     this.selectedMarkerId = id;
   }
 }

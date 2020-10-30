@@ -19,7 +19,10 @@ export class MapService {
     const marker = new Marker([lat, lon], { icon: markerIcon });
 
     if (tooltip) {
-      marker.bindTooltip(tooltip);
+      marker.bindTooltip(tooltip, {
+        opacity: 1,
+        direction: 'top',
+      });
     }
     MapService.markersList[id] = marker;
     return marker;
@@ -50,13 +53,15 @@ export class MapService {
    * @param html html to display
    */
   public setSelectedMarker(id: number): void {
-    const markerIcon = divIcon({
-      className: null,
-      html: "<div class='ico-marker-pin selected'></div>",
-      iconSize: [35, 41],
-      iconAnchor: [13, 41],
-    });
-    this.getMarker(id).setIcon(markerIcon);
+    if (id) {
+      const markerIcon = divIcon({
+        className: null,
+        html: "<div class='ico-marker-pin selected'></div>",
+        iconSize: [35, 41],
+        iconAnchor: [13, 41],
+      });
+      this.getMarker(id).setIcon(markerIcon);
+    }
   }
 
   /**
@@ -65,13 +70,15 @@ export class MapService {
    * @param html html to display
    */
   public setDefaultMarker(id: number): void {
-    const markerIcon = divIcon({
-      className: null,
-      html: "<div class='ico-marker-pin'></div>",
-      iconSize: [35, 41],
-      iconAnchor: [13, 41],
-    });
-    this.getMarker(id).setIcon(markerIcon);
+    if (id) {
+      const markerIcon = divIcon({
+        className: null,
+        html: "<div class='ico-marker-pin'></div>",
+        iconSize: [35, 41],
+        iconAnchor: [13, 41],
+      });
+      this.getMarker(id).setIcon(markerIcon);
+    }
   }
 
   /**
