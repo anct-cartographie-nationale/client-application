@@ -10,13 +10,13 @@ export class MapService {
   constructor() {}
 
   public createMarker(lat: number, lon: number, id: number, tooltip?: string): Marker {
-    const icone = divIcon({
+    const markerIcon = divIcon({
       className: null,
       html: "<div class='ico-marker-pin'></div>",
       iconSize: [35, 41],
       iconAnchor: [13, 41],
     });
-    const marker = new Marker([lat, lon], { icon: icone });
+    const marker = new Marker([lat, lon], { icon: markerIcon });
 
     if (tooltip) {
       marker.bindTooltip(tooltip);
@@ -42,6 +42,36 @@ export class MapService {
    */
   public setToolTip(id: number, html: string): void {
     this.getMarker(id).bindTooltip(html);
+  }
+
+  /**
+   * Set a marker as selected by changing icon color
+   * @param id markerId
+   * @param html html to display
+   */
+  public setSelectedMarker(id: number): void {
+    const markerIcon = divIcon({
+      className: null,
+      html: "<div class='ico-marker-pin selected'></div>",
+      iconSize: [35, 41],
+      iconAnchor: [13, 41],
+    });
+    this.getMarker(id).setIcon(markerIcon);
+  }
+
+  /**
+   * Set a marker as selected by changing icon color
+   * @param id markerId
+   * @param html html to display
+   */
+  public setDefaultMarker(id: number): void {
+    const markerIcon = divIcon({
+      className: null,
+      html: "<div class='ico-marker-pin'></div>",
+      iconSize: [35, 41],
+      iconAnchor: [13, 41],
+    });
+    this.getMarker(id).setIcon(markerIcon);
   }
 
   /**

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds } from 'leaflet';
+import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds } from 'leaflet';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Structure } from '../../models/structure.model';
@@ -16,6 +16,7 @@ import { LeafletControlLayersChanges } from '@asymmetrik/ngx-leaflet';
 export class MapComponent implements OnChanges {
   @Input() public structures: Structure[] = [];
   @Input() public toogleToolTipId: number;
+  @Input() public selectedMarkerId: number;
   public map: Map;
   public mapOptions: MapOptions;
   // Init locate options
@@ -35,16 +36,21 @@ export class MapComponent implements OnChanges {
     if (changes.structures) {
       this.getStructurePosition();
     }
+    // Handle map marker tooltip
     if (changes.toogleToolTipId && changes.toogleToolTipId.currentValue !== changes.toogleToolTipId.previousValue) {
       if (changes.toogleToolTipId.previousValue !== undefined) {
         this.mapService.toogleToolTip(changes.toogleToolTipId.previousValue);
       }
       this.mapService.toogleToolTip(changes.toogleToolTipId.currentValue);
-      // if (changes.toogleToolTipId.currentValue === undefined) {
-      //   this.mapService.toogleToolTip(changes.toogleToolTipId.previousValue);
-      // } else {
-      //   this.mapService.toogleToolTip(changes.toogleToolTipId.currentValue);
-      // }
+    }
+    // Handle map marker selection
+    if (changes.selectedMarkerId) {
+      if (changes.selectedMarkerId.currentValue === undefined) {
+        this.mapService.setDefaultMarker(changes.selectedMarkerId.previousValue);
+      } else {
+        this.mapService.setSelectedMarker(changes.selectedMarkerId.currentValue);
+        this.centerLeafletMapOnMarker(changes.selectedMarkerId.currentValue);
+      }
     }
   }
 
@@ -160,5 +166,12 @@ export class MapComponent implements OnChanges {
     ids.forEach((id) => {
       this.mapService.toogleToolTip(id);
     });
+  }
+
+  private centerLeafletMapOnMarker(markerId: number) {
+    const marker = this.mapService.getMarker(markerId);
+    const latLngs = [marker.getLatLng()];
+    const markerBounds = latLngBounds(latLngs);
+    this.map.fitBounds(markerBounds);
   }
 }

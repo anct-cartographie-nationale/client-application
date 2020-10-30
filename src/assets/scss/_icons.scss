@@ -82,6 +82,9 @@
   left: 50%;
   top: 50%;
   margin: -15px 0 0 -15px;
+  &.selected {
+    background: $red-metro;
+  }
 }
 
 .ico-marker-pin::after {
