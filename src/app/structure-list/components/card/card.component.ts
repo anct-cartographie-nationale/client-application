@@ -41,7 +41,7 @@ export class CardComponent implements OnInit {
     this.showDetails.emit(this.structure);
   }
 
-  public cardHover(hoverOut: boolean): void {
+  public cardHover(): void {
     this.hover.emit(this.structure);
   }
 }

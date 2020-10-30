@@ -69,3 +69,12 @@
     display: flex;
   }
 }
+
+::ng-deep .leaflet-left {
+  right: 0;
+  left: unset;
+  .leaflet-control {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+}

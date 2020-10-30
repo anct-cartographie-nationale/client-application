@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds } from 'leaflet';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds, Control } from 'leaflet';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Structure } from '../../models/structure.model';
@@ -7,6 +7,7 @@ import { GeoJson } from '../models/geojson.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
 import { LeafletControlLayersChanges } from '@asymmetrik/ngx-leaflet';
+import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
 
 @Component({
   selector: 'app-map',
@@ -17,6 +18,7 @@ export class MapComponent implements OnChanges {
   @Input() public structures: Structure[] = [];
   @Input() public toogleToolTipId: number;
   @Input() public selectedMarkerId: number;
+  @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
   public map: Map;
   public mapOptions: MapOptions;
   // Init locate options
