@@ -2,8 +2,8 @@ import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Day } from './day.model';
 import { OpeningDay } from './openingDay.model';
 import { Week } from './week.model';
-
 export class Structure {
+  public id: number;
   public numero: string;
   public dateDeCreation: string;
   public derniereModification: string;
@@ -66,11 +66,11 @@ export class Structure {
 
   public openDisplay(): string {
     if (this.isOpen) {
-      return 'Ouvert actuellement ';
+      return 'Ouvert actuellement';
     } else if (this.openedOn.day) {
-      return 'Fermé - Ouvre ' + this.openedOn.day + ' à ' + this.openedOn.schedule;
+      return 'Fermé - Ouvre ' + this.hours.getDayTranslation(this.openedOn.day) + ' à ' + this.openedOn.schedule;
     } else {
-      return 'Aucun horaire disponible ';
+      return 'Aucun horaire disponible';
     }
   }
 

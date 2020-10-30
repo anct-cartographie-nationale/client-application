@@ -6,7 +6,7 @@ import { icon, Marker, Map } from 'leaflet';
   providedIn: 'root',
 })
 export class MapService {
-  private markersList = {};
+  private static markersList = {};
   constructor() {}
 
   public createMarker(lat: number, lon: number, id: number, tooltip?: string): Marker {
@@ -21,7 +21,7 @@ export class MapService {
     if (tooltip) {
       marker.bindTooltip(tooltip);
     }
-    this.markersList[id] = marker;
+    MapService.markersList[id] = marker;
     return marker;
   }
 
@@ -30,7 +30,9 @@ export class MapService {
    * @param id marker id
    */
   public toogleToolTip(id: number): void {
-    this.getMarker(id).toggleTooltip();
+    if (id) {
+      this.getMarker(id).toggleTooltip();
+    }
   }
 
   /**
@@ -46,6 +48,6 @@ export class MapService {
    * Get marker by id
    */
   public getMarker(id: number): Marker {
-    return this.markersList[id] ? this.markersList[id] : null;
+    return MapService.markersList[id] ? MapService.markersList[id] : null;
   }
 }

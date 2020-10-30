@@ -1,4 +1,5 @@
 <div class="structrue-details-container">
+  <!-- Header info -->
   <div fxLayout="row" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
     <em class="ic-arrow-left clickable" (click)="close()"></em>
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
@@ -39,7 +40,7 @@
       </div>
     </div>
   </div>
-
+  <!-- Démarches -->
   <div
     *ngIf="structure.accompagnementDesDemarches.length > 0"
     fxLayout="column"
@@ -57,6 +58,7 @@
       </div>
     </div>
   </div>
+  <!-- Services -->
   <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
     <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
       <em class="ic-mouse"></em>
@@ -71,18 +73,20 @@
       </div>
     </div>
   </div>
+  <!-- Accueil -->
   <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
     <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
       <em class="ic-mouse"></em>
       <h2>Accueil</h2>
     </div>
+    <!-- Openning Hours -->
     <div fxLayout="row" class="w-100">
       <div fxFlex="70%">
         <h3 class="subtitle">Horaires d’ouverture au public :</h3>
         <div fxLayout="column">
           <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
             <div *ngIf="day.value.open">
-              <h4>{{ day.key }}</h4>
+              <h4>{{ day.key | day }}</h4>
               <div class="openning-time" fxLayout="row" fxLayoutAlign="none center">
                 <div *ngFor="let timeRange of day.value.time; let isFirst = first">
                   <p *ngIf="isFirst">de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}</p>
@@ -95,6 +99,7 @@
           </div>
         </div>
       </div>
+      <!-- modalitesDacces -->
       <div fxFlex="30%">
         <h3 class="subtitle">Accès</h3>
         <div *ngFor="let acces of structure.modalitesDacces">
@@ -107,10 +112,10 @@
           ></em>
           <p>{{ acces }}</p>
         </div>
-        <!-- modalitesDacces -->
       </div>
     </div>
   </div>
+  <!-- Equipements -->
   <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline">
     <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
       <em class="ic-toolbox"></em>
@@ -125,6 +130,7 @@
       <p>Ordinateurs à disposition : {{ structure.nombre }}</p>
     </div>
   </div>
+  <!-- Labels -->
   <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
     <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
       <em class="ic-toolbox"></em>

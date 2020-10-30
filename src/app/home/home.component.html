@@ -1,4 +1,9 @@
 <div fxLayout="row" class="content-container">
-  <app-structure-list [structureList]="structures" [location]="currentLocation" class="left-pane"></app-structure-list>
-  <app-map [structures]="structures" class="right-pane"></app-map>
+  <app-structure-list
+    [structureList]="structures"
+    [location]="currentLocation"
+    (displayMapMarkerId)="setMapMarkerId($event)"
+    class="left-pane"
+  ></app-structure-list>
+  <app-map [structures]="structures" [toogleToolTipId]="displayMarkerId" class="right-pane"></app-map>
 </div>

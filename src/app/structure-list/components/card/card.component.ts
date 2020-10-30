@@ -13,6 +13,7 @@ import { mergeMap } from 'rxjs/operators';
 export class CardComponent implements OnInit {
   @Input() public structure: Structure;
   @Output() public showDetails: EventEmitter<Structure> = new EventEmitter<Structure>();
+  @Output() public hover: EventEmitter<Structure> = new EventEmitter<Structure>();
 
   constructor(private geoJsonService: GeojsonService) {}
   ngOnInit(): void {}
@@ -38,5 +39,9 @@ export class CardComponent implements OnInit {
 
   public cardClicked(): void {
     this.showDetails.emit(this.structure);
+  }
+
+  public cardHover(hoverOut: boolean): void {
+    this.hover.emit(this.structure);
   }
 }

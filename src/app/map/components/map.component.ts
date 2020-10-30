@@ -6,6 +6,7 @@ import { Structure } from '../../models/structure.model';
 import { GeoJson } from '../models/geojson.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
+import { LeafletControlLayersChanges } from '@asymmetrik/ngx-leaflet';
 
 @Component({
   selector: 'app-map',
@@ -14,7 +15,7 @@ import { MapService } from '../services/map.service';
 })
 export class MapComponent implements OnChanges {
   @Input() public structures: Structure[] = [];
-  @Input() public toogleToolTipIds: Array<number> = [];
+  @Input() public toogleToolTipId: number;
   public map: Map;
   public mapOptions: MapOptions;
   // Init locate options
@@ -34,6 +35,17 @@ export class MapComponent implements OnChanges {
     if (changes.structures) {
       this.getStructurePosition();
     }
+    if (changes.toogleToolTipId && changes.toogleToolTipId.currentValue !== changes.toogleToolTipId.previousValue) {
+      if (changes.toogleToolTipId.previousValue !== undefined) {
+        this.mapService.toogleToolTip(changes.toogleToolTipId.previousValue);
+      }
+      this.mapService.toogleToolTip(changes.toogleToolTipId.currentValue);
+      // if (changes.toogleToolTipId.currentValue === undefined) {
+      //   this.mapService.toogleToolTip(changes.toogleToolTipId.previousValue);
+      // } else {
+      //   this.mapService.toogleToolTip(changes.toogleToolTipId.currentValue);
+      // }
+    }
   }
 
   /**
@@ -43,7 +55,7 @@ export class MapComponent implements OnChanges {
     this.structures.forEach((element: Structure) => {
       this.getCoord(element.voie).subscribe((coord: GeoJson) => {
         this.mapService
-          .createMarker(coord.geometry.getLon(), coord.geometry.getLat(), 1, this.buildToolTip(element))
+          .createMarker(coord.geometry.getLon(), coord.geometry.getLat(), element.id, this.buildToolTip(element))
           .addTo(this.map);
       });
     });
