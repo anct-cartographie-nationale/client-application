@@ -5,7 +5,7 @@
   display: inline-block;
   background: transparent;
   border-radius: 30px;
-  border: 2px solid $purple;
+  border: 2px solid $grey-1;
   height: 12px;
   width: 12px;
   min-width: 12px;
@@ -15,7 +15,7 @@
     content: '';
     height: 2px;
     width: 8px;
-    background: $purple;
+    background: $grey-1;
     position: absolute;
     top: 14px;
     left: 10px;
@@ -45,10 +45,6 @@
     background: transparent;
     border-radius: 50%;
   }
-
-  &.orange {
-    background: $orange;
-  }
 }
 .ico-dot-available {
   height: 12px;
@@ -76,14 +72,14 @@
   width: 30px;
   height: 30px;
   border-radius: 50% 50% 50% 0;
-  background: $purple;
+  background: $secondary-color;
   position: absolute;
   transform: rotate(-45deg);
   left: 50%;
   top: 50%;
   margin: -15px 0 0 -15px;
   &.selected {
-    background: $red-metro;
+    background: $primary-color;
   }
 }
 
@@ -125,15 +121,15 @@
     width: 12px;
     height: 12px;
     border-radius: 25px;
-    border: 2px solid $purple;
+    border: 2px solid $grey-1;
   }
   .body {
     width: 28px;
     height: 10px;
     border-radius: 20px 20px 0px 0px;
-    border-top: 2px solid $purple;
-    border-right: 2px solid $purple;
-    border-left: 2px solid $purple;
+    border-top: 2px solid $grey-1;
+    border-right: 2px solid $grey-1;
+    border-left: 2px solid $grey-1;
   }
 }
 

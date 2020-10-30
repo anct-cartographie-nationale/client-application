@@ -8,24 +8,16 @@ $grey-2: #4f4f4f;
 $grey-3: #828282;
 $grey-4: #bdbdbd;
 $grey-6: #f2f2f2;
-/* YELLOW */
-$yellow: #f2cb04;
-$yellow-light: #fff8d6;
-/* ORANGES */
-$orange: #f27405;
-$orange-light: #f29f05;
-$orange-3: #fff4ea;
-/* GREEN */
+/* Status colors */
 $green: #41c29c;
+$red: #f98181;
 /* OTHERS */
-$blue: #b3f8f8;
-$blue-dark: #2f5480;
-$purple: #594d59;
-$red: #eb5757;
+$blue: #348899;
+$grey-1: #594d59;
 $red-metro: #d50000;
 /* APP COLORS */
-$primary-color: $yellow;
-$secondary-color: $orange;
+$primary-color: $red-metro;
+$secondary-color: $blue;
 $default-link-color: $grey-2;
-$button-secondary: $blue-dark;
+$button-secondary: $blue;
 $app-background: $grey-6;
