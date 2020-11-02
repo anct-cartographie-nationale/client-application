@@ -11,7 +11,6 @@ server.use(middlewares);
 
 // Add custom routes before JSON Server router
 server.get('/structures/count', (req, res) => {
-  console.log('ok');
   let structureCountTab = [];
   // Compétences de base
   structureCountTab.push({ id: 260, count: 3 });
@@ -62,9 +61,7 @@ server.get('/structures/count', (req, res) => {
   structureCountTab.push({ id: 164, count: 1 });
   structureCountTab.push({ id: 163, count: 1 });
   structureCountTab.push({ id: 162, count: 2 });
-  return res.status(200).jsonp({
-    structureCountTab,
-  });
+  return res.status(200).jsonp(structureCountTab);
 });
 
 // Use default router

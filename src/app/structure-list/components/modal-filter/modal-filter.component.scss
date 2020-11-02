@@ -5,14 +5,14 @@
 @import '../../../../assets/scss/shapes';
 @import '../../../../assets/scss/buttons';
 
-.modalformations {
+.modaltraining {
   @media #{$desktop} {
     margin-left: 0;
   }
 
   margin-left: 196px;
 }
-.modalplusFiltres {
+.modalmoreFilters {
   @media #{$desktop} {
     margin-left: 0;
   }

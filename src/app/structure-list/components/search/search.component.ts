@@ -1,8 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
 import { Filter } from '../../models/filter.model';
 import { Module } from '../../models/module.model';
+import { StructureCounter } from '../../models/structureCounter.model';
 import { SearchService } from '../../services/search.service';
 
 @Component({
@@ -20,24 +23,26 @@ export class SearchComponent implements OnInit {
   @Output() searchEvent = new EventEmitter();
 
   // Form search input
-  searchForm: FormGroup;
-
-  // Button variable
-  modalType: string[] = ['accompagnement', 'formations', 'plusFiltres'];
-
+  private searchForm: FormGroup;
   // Modal variable
-  categories: Category[];
-  modalTypeOpened: string;
-
+  private categories: Category[];
+  private modalTypeOpened: string;
   // Checkbox variable
-  checkedModulesFilter: Module[];
+  private checkedModulesFilter: Module[];
 
   ngOnInit(): void {
     // Will store the different categories
     this.categories = [];
 
     this.checkedModulesFilter = new Array();
+    console.log(TypeModal[0]);
   }
+
+  // Accessor to template angular.
+  public get TypeModal(): typeof TypeModal {
+    return TypeModal;
+  }
+
   // Clear input search
   public clearInput(): void {
     this.searchForm.reset();
@@ -110,22 +115,22 @@ export class SearchComponent implements OnInit {
     module.push(category);
   }
 
-  // Fake data
+  // Get the correct list of checkbox/modules depending on the type of modal.
   private fakeData(option: string): void {
-    if (option === this.modalType[0]) {
+    if (option === TypeModal[0]) {
       this.mockService(this.categories, 'Accompagnement des démarches', { name: 'CAF', id: 5 }, 7);
-    } else if (option === this.modalType[1]) {
-      this.searchService.getCategoriesFormations().subscribe((categories: Category[]) => {
-        this.searchService
-          .getFakeCounterModule()
-          .subscribe((res: { structureCountTab: { id: number; count: number }[] }) => {
-            categories.forEach((category) => {
-              category = this.searchService.setCountModules(category, res.structureCountTab);
-              this.categories.push(category);
-            });
+    } else if (option === TypeModal[1]) {
+      forkJoin([this.searchService.getCategoriesFormations(), this.searchService.getFakeCounterModule()]).subscribe(
+        (res) => {
+          const categories: Category[] = res[0];
+          const structureCounter: StructureCounter[] = res[1];
+          categories.forEach((category) => {
+            category = this.searchService.setCountModules(category, structureCounter);
+            this.categories.push(category);
           });
-      });
-    } else if (option === this.modalType[2]) {
+        }
+      );
+    } else if (option === TypeModal[2]) {
       this.mockService(
         this.categories,
         'Équipements',

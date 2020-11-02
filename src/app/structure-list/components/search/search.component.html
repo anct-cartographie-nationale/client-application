@@ -14,7 +14,7 @@
         <div class="icon close" (click)="clearInput()">
           <div class="ico-close grey"></div>
         </div>
-        <div class="separator"></div>
+        <span class="separator"></span>
         <div class="icon pin">
           <div class="ico-pin-search blue"></div>
         </div>
@@ -28,8 +28,8 @@
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
     <button
       type="button"
-      [ngClass]="{ selected: modalTypeOpened === modalType[0] }"
-      (click)="openModal(this.modalType[0])"
+      [ngClass]="{ selected: modalTypeOpened === TypeModal[0] }"
+      (click)="openModal(TypeModal[0])"
       fxLayout="row"
       fxLayoutAlign="space-between center"
     >
@@ -38,8 +38,8 @@
     </button>
     <button
       type="button"
-      [ngClass]="{ selected: modalTypeOpened === modalType[1] }"
-      (click)="openModal(this.modalType[1])"
+      [ngClass]="{ selected: modalTypeOpened === TypeModal[1] }"
+      (click)="openModal(TypeModal[1])"
       fxLayout="row"
       fxLayoutAlign="space-between center"
     >
@@ -48,8 +48,8 @@
     </button>
     <button
       type="button"
-      [ngClass]="{ selected: modalTypeOpened === modalType[2] }"
-      (click)="openModal(this.modalType[2])"
+      [ngClass]="{ selected: modalTypeOpened === TypeModal[2] }"
+      (click)="openModal(TypeModal[2])"
       fxLayout="row"
       fxLayoutAlign="space-between center"
     >
