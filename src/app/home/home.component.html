@@ -3,8 +3,14 @@
     (searchEvent)="getStructures($event)"
     [structureList]="structures"
     [location]="currentLocation"
+    (displayMapMarkerId)="setMapMarkerId($event)"
+    (selectedMarkerId)="setSelectedMarkerId($event)"
     class="left-pane"
-    fxLayout="column"
   ></app-structure-list>
-  <app-map [structures]="structures" class="right-pane"></app-map>
+  <app-map
+    [structures]="structures"
+    [toogleToolTipId]="displayMarkerId"
+    [selectedMarkerId]="selectedMarkerId"
+    class="right-pane"
+  ></app-map>
 </div>

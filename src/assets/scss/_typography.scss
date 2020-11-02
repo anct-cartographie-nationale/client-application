@@ -1,10 +1,11 @@
 $text-font: 'Trebuchet MS', 'Helvetica', sans-serif;
 $footer-text-font: 'Arial', 'Helvetica', sans-serif;
-$title-font: 'Courier New', 'Helvetica', sans-serif;
+$title-font: 'Trebuchet MS', 'Helvetica', sans-serif;
 
 $font-size-xsmall: 0.875em; // 14px
 $font-size-small: 1em; // 16px
 $font-size-medium: 1.25em; // 20px
+$font-size-xmedium: 1.5em; // 24px
 $font-size-large: 1.75em; // 28px
 $font-size-xlarge: 2em; // 32px
 $font-size-medium-mobile: 1em;
@@ -63,6 +64,18 @@ h6,
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-large;
+}
+@mixin cn-regular-24 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-xmedium;
+}
+@mixin cn-bold-24 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-xmedium;
 }
 @mixin cn-bold-20 {
   font-family: $text-font;

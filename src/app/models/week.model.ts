@@ -1,5 +1,4 @@
 import { Day } from './day.model';
-import { Time } from './time.model';
 
 export class Week {
   monday: Day;
@@ -20,5 +19,26 @@ export class Week {
       saturday: obj && obj.saturday ? new Day(obj.saturday) : null,
       sunday: obj && obj.sunday ? new Day(obj.sunday) : null,
     });
+  }
+
+  public getDayTranslation(day: string): string {
+    switch (day) {
+      case 'monday':
+        return 'lundi';
+      case 'tuesday':
+        return 'mardi';
+      case 'thursday':
+        return 'jeudi';
+      case 'wednesday':
+        return 'mercredi';
+      case 'friday':
+        return 'vendredi';
+      case 'saturday':
+        return 'samedi';
+      case 'sunday':
+        return 'dimanche';
+      default:
+        return null;
+    }
   }
 }

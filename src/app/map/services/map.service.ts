@@ -6,22 +6,25 @@ import { icon, Marker, Map } from 'leaflet';
   providedIn: 'root',
 })
 export class MapService {
-  private markersList = {};
+  private static markersList = {};
   constructor() {}
 
   public createMarker(lat: number, lon: number, id: number, tooltip?: string): Marker {
-    const icone = divIcon({
+    const markerIcon = divIcon({
       className: null,
       html: "<div class='ico-marker-pin'></div>",
       iconSize: [35, 41],
       iconAnchor: [13, 41],
     });
-    const marker = new Marker([lat, lon], { icon: icone });
+    const marker = new Marker([lat, lon], { icon: markerIcon });
 
     if (tooltip) {
-      marker.bindTooltip(tooltip);
+      marker.bindTooltip(tooltip, {
+        opacity: 1,
+        direction: 'top',
+      });
     }
-    this.markersList[id] = marker;
+    MapService.markersList[id] = marker;
     return marker;
   }
 
@@ -30,7 +33,9 @@ export class MapService {
    * @param id marker id
    */
   public toogleToolTip(id: number): void {
-    this.getMarker(id).toggleTooltip();
+    if (id) {
+      this.getMarker(id).toggleTooltip();
+    }
   }
 
   /**
@@ -43,9 +48,43 @@ export class MapService {
   }
 
   /**
+   * Set a marker as selected by changing icon color
+   * @param id markerId
+   * @param html html to display
+   */
+  public setSelectedMarker(id: number): void {
+    if (id) {
+      const markerIcon = divIcon({
+        className: null,
+        html: "<div class='ico-marker-pin selected'></div>",
+        iconSize: [35, 41],
+        iconAnchor: [13, 41],
+      });
+      this.getMarker(id).setIcon(markerIcon);
+    }
+  }
+
+  /**
+   * Set a marker as selected by changing icon color
+   * @param id markerId
+   * @param html html to display
+   */
+  public setDefaultMarker(id: number): void {
+    if (id) {
+      const markerIcon = divIcon({
+        className: null,
+        html: "<div class='ico-marker-pin'></div>",
+        iconSize: [35, 41],
+        iconAnchor: [13, 41],
+      });
+      this.getMarker(id).setIcon(markerIcon);
+    }
+  }
+
+  /**
    * Get marker by id
    */
   public getMarker(id: number): Marker {
-    return this.markersList[id] ? this.markersList[id] : null;
+    return MapService.markersList[id] ? MapService.markersList[id] : null;
   }
 }

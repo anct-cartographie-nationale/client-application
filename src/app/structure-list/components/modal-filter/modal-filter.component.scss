@@ -27,7 +27,7 @@
   border-radius: 11px;
   z-index: 401 !important;
   position: absolute;
-  border: 1px solid $grey-5;
+  border: 1px solid $grey-6;
   border-radius: 6px;
   margin-top: 3.5px;
   @include background-hash;
@@ -35,7 +35,7 @@
     width: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: $grey-5;
+    background: $grey-6;
   }
   ::-webkit-scrollbar-thumb {
     background: $grey;

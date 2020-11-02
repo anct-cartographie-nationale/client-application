@@ -15,8 +15,10 @@
   padding: 0 20px;
   a {
     font-style: italic;
+    color: $primary-color;
     &.active {
       font-weight: bold;
+      color: $grey-1;
     }
   }
   .right-header {

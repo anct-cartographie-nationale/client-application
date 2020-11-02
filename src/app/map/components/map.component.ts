@@ -1,11 +1,13 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds } from 'leaflet';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds, Control } from 'leaflet';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Structure } from '../../models/structure.model';
 import { GeoJson } from '../models/geojson.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
+import { LeafletControlLayersChanges } from '@asymmetrik/ngx-leaflet';
+import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
 
 @Component({
   selector: 'app-map',
@@ -14,7 +16,9 @@ import { MapService } from '../services/map.service';
 })
 export class MapComponent implements OnChanges {
   @Input() public structures: Structure[] = [];
-  @Input() public toogleToolTipIds: Array<number> = [];
+  @Input() public toogleToolTipId: number;
+  @Input() public selectedMarkerId: number;
+  @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
   public map: Map;
   public mapOptions: MapOptions;
   // Init locate options
@@ -34,6 +38,22 @@ export class MapComponent implements OnChanges {
     if (changes.structures) {
       this.getStructurePosition();
     }
+    // Handle map marker tooltip
+    if (changes.toogleToolTipId && changes.toogleToolTipId.currentValue !== changes.toogleToolTipId.previousValue) {
+      if (changes.toogleToolTipId.previousValue !== undefined) {
+        this.mapService.toogleToolTip(changes.toogleToolTipId.previousValue);
+      }
+      this.mapService.toogleToolTip(changes.toogleToolTipId.currentValue);
+    }
+    // Handle map marker selection
+    if (changes.selectedMarkerId) {
+      if (changes.selectedMarkerId.currentValue === undefined) {
+        this.mapService.setDefaultMarker(changes.selectedMarkerId.previousValue);
+      } else {
+        this.mapService.setSelectedMarker(changes.selectedMarkerId.currentValue);
+        this.centerLeafletMapOnMarker(changes.selectedMarkerId.currentValue);
+      }
+    }
   }
 
   /**
@@ -43,7 +63,7 @@ export class MapComponent implements OnChanges {
     this.structures.forEach((element: Structure) => {
       this.getCoord(element.voie).subscribe((coord: GeoJson) => {
         this.mapService
-          .createMarker(coord.geometry.getLon(), coord.geometry.getLat(), 1, this.buildToolTip(element))
+          .createMarker(coord.geometry.getLon(), coord.geometry.getLat(), element.id, this.buildToolTip(element))
           .addTo(this.map);
       });
     });
@@ -54,7 +74,15 @@ export class MapComponent implements OnChanges {
    * @param structure Structure
    */
   private buildToolTip(structure: Structure): string {
-    const cssAvailabilityClass = structure.isOpen ? 'available' : 'unavailable';
+    let cssAvailabilityClass = structure.isOpen ? 'available' : null;
+    if (cssAvailabilityClass === null) {
+      if (structure.openedOn.day) {
+        cssAvailabilityClass = 'unavailable';
+      } else {
+        cssAvailabilityClass = 'unknown';
+      }
+    }
+
     return (
       '<h1>' +
       structure.nomDeVotreStructure +
@@ -112,24 +140,10 @@ export class MapComponent implements OnChanges {
       height: 256,
     };
     // Init WMS service with param from data.grandlyon.com
-    const carteLayer = new TileLayer.WMS('https://openstreetmap.data.grandlyon.com/wms', {
-      crs: CRS.EPSG3857,
-      transparent: true,
-      format: 'image/png',
-      attribution: 'Map data © OpenStreetMap contributors',
-      version: '1.3.0',
-      maxZoom: 20,
+    const carteLayer = tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
+      maxZoom: 19,
     });
-    carteLayer.wmsParams = {
-      format: 'image/png',
-      transparent: true,
-      version: '1.3.0',
-      layers: 'osm_grandlyon',
-      service: 'WMS',
-      request: 'GetMap',
-      width: 256,
-      height: 256,
-    };
     // Center is set on townhall
     // Zoom is blocked on 11 to prevent people to zoom out from metropole
     this.mapOptions = {
@@ -148,5 +162,13 @@ export class MapComponent implements OnChanges {
     ids.forEach((id) => {
       this.mapService.toogleToolTip(id);
     });
+  }
+
+  private centerLeafletMapOnMarker(markerId: number): void {
+    const marker = this.mapService.getMarker(markerId);
+    const latLngs = [marker.getLatLng()];
+    const markerBounds = latLngBounds(latLngs);
+    // paddingTopLeft is used for centering marker because of structure details pane
+    this.map.fitBounds(markerBounds, { paddingTopLeft: [300, 0] });
   }
 }

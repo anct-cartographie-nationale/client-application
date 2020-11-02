@@ -23,14 +23,16 @@ ARG conf
 RUN npm run build:dev
 
 # Stage 1, based on Nginx, to have only the compiled app
-FROM nginx:1.16.0-alpine
+FROM nginx
 
 # copy artifact build from the 'build environment'
+RUN apt-get update
 
 COPY --from=build /app/dist/fr /usr/share/nginx/html
 COPY --from=build /app/dist/fr /usr/share/nginx/html/fr
 
 RUN touch /var/run/nginx.pid
+RUN ls -l /usr/share/nginx/html
 
 # expose port 8080
 EXPOSE 8080

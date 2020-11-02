@@ -1,0 +1,12 @@
+<div class="statusStructure" fxLayout="row" fxLayoutAlign="start center">
+  <div>
+    <span *ngIf="structure.isOpen; else closed" class="ico-dot-available"></span>
+    <span>{{ structure.openDisplay() }}</span>
+  </div>
+  <ng-template #closed>
+    <span *ngIf="structure.openedOn.day; else unkown" class="ico-dot-unavailable"></span>
+  </ng-template>
+  <ng-template #unkown>
+    <span class="ico-dot-unknown"></span>
+  </ng-template>
+</div>

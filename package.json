@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration=fr --proxy-config proxy.conf.json",
-    "build:prod": "ng build --configuration=production,fr --output-path=dist",
-    "build:dev": "ng build --configuration=fr --output-path=dist",
+    "build:prod": "ng build --prod --configuration=production,fr --output-path=dist",
+    "build:dev": "ng build --prod --configuration=fr --output-path=dist",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

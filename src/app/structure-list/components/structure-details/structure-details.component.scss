@@ -1,0 +1,61 @@
+@import '../../../../assets/scss/icons';
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/z-index';
+@import '../../../../assets/scss/layout';
+
+.structrue-details-container {
+  background-color: $white;
+  z-index: $structure-details-z-index;
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 980px;
+  width: 100%;
+  height: calc(100vh - #{$header-height} - #{$footer-height});
+  padding: 18px 24px;
+  overflow: auto;
+}
+
+.structrue-details-block {
+  border-bottom: 1px dashed $grey-2;
+  padding-bottom: 24px;
+  .subtitle {
+    text-transform: uppercase;
+    @include cn-bold-16;
+  }
+}
+.structrue-details-block:last-child {
+  border-bottom: none;
+}
+
+.openning-time {
+  p {
+    margin-left: 0;
+    margin-right: 5px;
+  }
+}
+
+h2 {
+  margin-bottom: 5px;
+  @include cn-regular-24;
+}
+h3 {
+  margin: 0;
+  @include cn-regular-16;
+  color: $grey-3;
+}
+h4 {
+  margin-left: 0;
+  margin-bottom: 0;
+  @include cn-regular-14;
+  color: $grey-2;
+  text-transform: uppercase;
+}
+p,
+a {
+  @include cn-regular-16;
+  margin-left: 30px;
+  margin-top: 9px;
+  margin-bottom: 9px;
+}

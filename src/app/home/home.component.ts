@@ -17,6 +17,8 @@ import { GeojsonService } from '../services/geojson.service';
 })
 export class HomeComponent implements OnInit {
   public structures: Structure[] = [];
+  public displayMarkerId: number;
+  public selectedMarkerId: number;
   public geolocation = false;
   public currentLocation: GeoJson;
   constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit {
   private getStructurePosition(structure: Structure): Promise<Structure> {
     return new Promise((resolve, reject) => {
       this.getCoord(structure.voie).subscribe((coord: GeoJson) => {
+        structure.address = coord.properties.name + ' - ' + coord.properties.postcode + ' ' + coord.properties.city;
         structure.distance = this.geoJsonService.getDistance(
           coord.geometry.getLon(),
           coord.geometry.getLat(),
@@ -88,5 +91,13 @@ export class HomeComponent implements OnInit {
       },
       (err) => console.error(err)
     );
+  }
+
+  public setMapMarkerId(event: Array<number>): void {
+    this.displayMarkerId = event[0];
+  }
+
+  public setSelectedMarkerId(id: number): void {
+    this.selectedMarkerId = id;
   }
 }
