@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit {
   // Form search input
   private searchForm: FormGroup;
   // Modal variable
-  private categories: Category[];
+  public categories: Category[];
   private modalTypeOpened: string;
   // Checkbox variable
   private checkedModulesFilter: Module[];
@@ -35,7 +35,6 @@ export class SearchComponent implements OnInit {
     this.categories = [];
 
     this.checkedModulesFilter = new Array();
-    console.log(TypeModal[0]);
   }
 
   // Accessor to template angular.

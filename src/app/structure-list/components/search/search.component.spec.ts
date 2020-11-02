@@ -5,7 +5,7 @@ import { Filter } from '../../models/filter.model';
 import { Module } from '../../models/module.model';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SearchComponent } from './search.component';
-import { SearchService } from '../../services/search.service';
+import { TypeModal } from '../../enum/typeModal.enum';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -42,7 +42,7 @@ describe('SearchComponent', () => {
     for (let i = 0; i < 7; i++) {
       categories[0].modules.push(new Module(5 + i, 'CAF' + i));
     }
-    component.openModal('accompagnement');
+    component.openModal(TypeModal[0]);
     expect(component.categories).toEqual(categories);
   });
 });

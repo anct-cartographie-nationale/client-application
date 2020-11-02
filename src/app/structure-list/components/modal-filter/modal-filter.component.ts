@@ -17,7 +17,7 @@ export class ModalFilterComponent implements OnInit {
   }
   @Input() public modalType: string;
   @Input() public categories: Category[];
-  @Input() public modules: Module[];
+  @Input() public modules: Module[] = [];
   @Output() searchEvent = new EventEmitter();
   // Checkbox variable
   checkedModules: Module[];
@@ -29,12 +29,12 @@ export class ModalFilterComponent implements OnInit {
   }
 
   // Return index of a specific module in array modules
-  public getIndex(id: number, categ: string): number {
+  private getIndex(id: number, categ: string): number {
     return this.checkedModules.findIndex((m: Module) => m.id === id && m.text === categ);
   }
 
   // Management of the checkbox event (Check / Uncheck)
-  public onCheckboxChange(event, categ: string): void {
+  private onCheckboxChange(event, categ: string): void {
     const checkValue: number = parseInt(event.target.value, 10);
     if (event.target.checked) {
       this.checkedModules.push(new Module(checkValue, categ));
@@ -47,7 +47,7 @@ export class ModalFilterComponent implements OnInit {
   }
 
   // Clear only filters in the current modal
-  public clearFilters(): void {
+  private clearFilters(): void {
     this.categories.forEach((categ: Category) => {
       categ.modules.forEach((module: Module) => {
         if (this.getIndex(module.id, categ.name) > -1) {
