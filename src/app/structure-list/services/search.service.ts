@@ -17,7 +17,7 @@ export class SearchService {
       .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
   public getFakeCounterModule(): Observable<any> {
-    return this.http.get('http://localhost:3000/structures/count');
+    return this.http.get('/api/structures/count');
   }
   public setCountModules(category: Category, structureCountTab: { id: number; count: number }[]): Category {
     category.modules.forEach((m: Module) => {

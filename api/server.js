@@ -1,13 +1,17 @@
 const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults();
+const routes = {
+  '/api/*': '/$1',
+};
+const middlewares = [jsonServer.defaults(), jsonServer.rewriter(routes)];
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares);
 
 // Add custom routes before JSON Server router
 server.get('/structures/count', (req, res) => {
+  console.log('ok');
   let structureCountTab = [];
   // Compétences de base
   structureCountTab.push({ id: 260, count: 3 });
