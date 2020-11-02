@@ -11,8 +11,10 @@ import { Module } from '../models/module.model';
 export class SearchService {
   constructor(private http: HttpClient) {}
 
-  public getCategories(): Observable<Category[]> {
-    return this.http.get('/api/Categories').pipe(map((data: any[]) => data.map((item) => new Category(item))));
+  public getCategoriesFormations(): Observable<Category[]> {
+    return this.http
+      .get('/api/CategoriesFormations')
+      .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
   public getFakeCounterModule(): Observable<any> {
     return this.http.get('http://localhost:3000/structures/count');

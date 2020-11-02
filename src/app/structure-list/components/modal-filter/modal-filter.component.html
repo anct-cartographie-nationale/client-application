@@ -1,0 +1,33 @@
+<div *ngIf="modalType" fxLayout="column" fxLayoutAlign="space-between" [ngClass]="['modal', 'modal' + modalType]">
+  <div class="body-wrap">
+    <div class="contentModal" fxLayout="row wrap" fxLayoutAlign="flex-start" *ngIf="categories.length > 0">
+      <div class="blockFiltre" *ngFor="let c of categories">
+        <h4>{{ c.name }}</h4>
+
+        <ul class="blockLigne">
+          <div fxLayout="row" class="ligneFiltre" fxLayoutAlign="space-between center" *ngFor="let module of c.modules">
+            <li class="checkbox">
+              <div class="checkboxItem">
+                <label>
+                  <input
+                    type="checkbox"
+                    [checked]="getIndex(module.id, c.name) > -1"
+                    [value]="module.id"
+                    (change)="onCheckboxChange($event, c.name)"
+                  />
+                  <span class="customCheck"></span>
+                  <div class="label">{{ module.text }}</div>
+                </label>
+              </div>
+            </li>
+            <span class="nbResult">{{ module.count ? module.count : '0' }}</span>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
+      <a (click)="clearFilters()">Effacer</a>
+      <button type="button" (click)="emitFilter(searchForm.value.searchTerm)">Appliquer</button>
+    </div>
+  </div>
+</div>

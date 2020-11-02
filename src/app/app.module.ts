@@ -16,6 +16,7 @@ import { StructureListComponent } from './structure-list/structure-list.componen
 import { CardComponent } from './structure-list/components/card/card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './structure-list/components/search/search.component';
+import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SearchComponent } from './structure-list/components/search/search.compo
     StructureListComponent,
     CardComponent,
     SearchComponent,
+    ModalFilterComponent,
   ],
   imports: [
     BrowserModule,

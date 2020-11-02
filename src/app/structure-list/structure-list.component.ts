@@ -16,6 +16,7 @@ export class StructureListComponent implements OnInit {
   ngOnInit(): void {}
 
   public fetchResults(filters: Filter[]): void {
+    console.log(filters);
     this.searchEvent.emit(filters);
   }
 }
