@@ -3,6 +3,7 @@
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/breakpoint';
 @import '../../../../assets/scss/shapes';
+@import '../../../../assets/scss/buttons';
 
 .modalformations {
   @media #{$desktop} {
@@ -88,31 +89,16 @@
       display: flex;
       align-items: center;
       text-decoration: underline;
+      color: $secondary-color;
     }
     height: 32px;
     button {
-      height: 100%;
-      border: none;
-      cursor: pointer;
-      background-color: $purple;
+      @include btn-search-filter;
       @include cn-bold-14;
-      line-height: 100%;
-      align-items: center;
-      text-align: center;
-      color: $white;
-      padding: 3px 16px 3px 16px;
-      outline: none;
     }
   }
 }
 .checkbox {
-  .checkboxItem {
-    /*position: relative;
-    display: inline-grid;
-    align-items: center;
-    grid-template-columns: min-content auto;
-    min-height: 25px;*/
-  }
   list-style-type: none;
   input {
     opacity: 0;

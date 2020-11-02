@@ -96,13 +96,13 @@ export class SearchComponent implements OnInit {
 
   // Fake service api
   private mockService(module: Category[], titre: string, categ: any, nbCateg: number): void {
-    let m = new Category();
-    m.name = titre;
-    m.modules = [];
+    const category = new Category();
+    category.name = titre;
+    category.modules = [];
     for (let i = 0; i < nbCateg; i++) {
-      m.modules.push(new Module(categ.id + i, categ.name + i));
+      category.modules.push(new Module(categ.id + i, categ.name + i));
     }
-    module.push(m);
+    module.push(category);
   }
 
   // Fake data

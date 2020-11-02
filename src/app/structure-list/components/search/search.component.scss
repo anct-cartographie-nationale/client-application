@@ -3,6 +3,7 @@
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/breakpoint';
 @import '../../../../assets/scss/shapes';
+@import '../../../../assets/scss/buttons';
 
 .header {
   .title {
@@ -34,45 +35,32 @@
     outline: none;
   }
   .searchSection {
-    button {
-      border: none;
-      cursor: pointer;
-      background-color: $purple;
-      @include cn-bold-14;
-      align-items: center;
-      text-align: center;
-      color: $white;
-      padding: 3px 16px 3px 16px;
-      outline: none;
+    .searchButton {
+      border: 1px solid $grey-6;
+      border-radius: 6px;
+      @include background-hash;
+      padding: 0 0 4px 5px;
+      button {
+        @include btn-search;
+        @include cn-bold-14;
+      }
     }
   }
   .btnSection {
     padding: 16px 0 8px 0;
     button {
-      height: 40px;
-      width: 190px;
-      outline: none;
-      border: 1px solid $grey;
-      border-radius: 33px;
-      background-color: $white;
-      padding: 2px 6px 2px 13px;
-      align-items: center;
-      display: flex;
-      cursor: pointer;
+      @include btn-filter;
       .btnText {
-        justify-content: center;
         @include cn-regular-14;
-        display: flex;
-        align-items: center;
       }
     }
     .selected {
-      border: 1px solid $orange-light;
-      color: $orange-light;
+      border: 1px solid $primary-color;
+      color: $primary-color;
       .arrow {
         background-color: transparent;
-        border-bottom: 1px solid $orange-light;
-        border-right: 1px solid $orange-light;
+        border-bottom: 1px solid $primary-color;
+        border-right: 1px solid $primary-color;
         transform: translateY(25%) rotate(-135deg);
         margin: 0 5px 0 10px;
         height: 7px;
@@ -81,8 +69,8 @@
     }
     .arrow {
       background-color: transparent;
-      border-bottom: 1px solid $grey;
-      border-right: 1px solid $grey;
+      border-bottom: 1px solid $grey-2;
+      border-right: 1px solid $grey-2;
       transform: translateY(-25%) rotate(45deg);
       margin: 0 5px 0 10px;
       height: 7px;
@@ -90,117 +78,8 @@
     }
   }
 }
-.modalformations {
-  @media #{$desktop} {
-    margin-left: 0;
-  }
 
-  margin-left: 206px;
-}
-.modalplusFiltres {
-  @media #{$desktop} {
-    margin-left: 0;
-  }
-  margin-left: 412px;
-}
-.modal {
-  max-height: 648px;
-  max-width: 754px;
-  width: 94%;
-  border-left: 6.5px solid transparent;
-  border-bottom: 6.5px solid transparent;
-  border-radius: 11px;
-  z-index: 401 !important;
-  margin: 8px 8px 0 0;
-  position: absolute;
-  margin-top: 96px;
-  border: 1px solid $grey-5;
-  border-radius: 6px;
-  @include background-hash;
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: $grey-5;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: $grey;
-    border-radius: 6px;
-  }
-  .contentModal {
-    overflow-y: auto;
-    max-width: 1100px;
-    border-bottom: 1px solid $grey;
-    margin-bottom: 10px;
-    max-height: 500px;
-    .blockFiltre {
-      width: 100%;
-      padding: 32px 40px 10px 40px;
-      min-width: 450px;
-    }
-    .blockLigne {
-      padding-left: 0;
-      -moz-column-count: 2;
-      -moz-column-gap: 46px;
-      -webkit-column-count: 2;
-      -webkit-column-gap: 46px;
-      column-count: 2;
-      column-gap: 46px;
-      column-rule: dashed 1px $grey;
-      @media #{$large-phone} {
-        -moz-column-count: 1;
-        -webkit-column-count: 1;
-        column-count: 1;
-      }
-    }
-    .ligneFiltre {
-      padding: 5px 0 5px 0;
-    }
-    h4 {
-      @include cn-bold-14;
-      display: flex;
-      align-items: center;
-      margin-top: 0;
-    }
-    .nbResult {
-      @include cn-regular-14;
-    }
-    label {
-      @include cn-regular-14;
-    }
-  }
-  .footer {
-    margin: 0px 20px 16px 0;
-    a {
-      @include cn-bold-14;
-      display: flex;
-      align-items: center;
-      text-decoration: underline;
-    }
-    height: 32px;
-    button {
-      height: 100%;
-      border: none;
-      cursor: pointer;
-      background-color: $purple;
-      @include cn-bold-14;
-      line-height: 100%;
-      align-items: center;
-      text-align: center;
-      color: $white;
-      padding: 3px 16px 3px 16px;
-      outline: none;
-    }
-  }
-}
 .checkbox {
-  .checkboxItem {
-    /*position: relative;
-    display: inline-grid;
-    align-items: center;
-    grid-template-columns: min-content auto;
-    min-height: 25px;*/
-  }
   list-style-type: none;
   input {
     opacity: 0;
@@ -242,8 +121,6 @@
       content: '';
       position: absolute;
       display: none;
-    }
-    &:after {
       left: 7px;
       top: 3px;
       width: 4px;
