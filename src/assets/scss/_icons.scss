@@ -66,8 +66,8 @@
     border-radius: 4px;
     background-color: white;
   }
-  &.grey {
-    background-color: #828282;
+  &.blue {
+    background-color: $secondary-color;
   }
 }
 .ico-dot-available {
@@ -122,4 +122,24 @@
     border-right: 2px solid $purple;
     border-left: 2px solid $purple;
   }
+}
+
+.ico-close {
+  width: 15px;
+  height: 13px;
+  text-align: center;
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+.ico-close:before,
+.ico-close:after {
+  position: absolute;
+  content: '';
+  height: 14px;
+  width: 2px;
+  background-color: $grey-6;
 }

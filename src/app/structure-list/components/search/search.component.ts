@@ -38,6 +38,11 @@ export class SearchComponent implements OnInit {
 
     this.checkedModulesFilter = new Array();
   }
+  // Clear input search
+  public clearInput(): void {
+    this.searchForm.reset();
+    this.applyFilter(null);
+  }
 
   // Sends an array containing all filters
   public applyFilter(term: string): void {

@@ -10,13 +10,13 @@
     margin-left: 0;
   }
 
-  margin-left: 206px;
+  margin-left: 196px;
 }
 .modalplusFiltres {
   @media #{$desktop} {
     margin-left: 0;
   }
-  margin-left: 412px;
+  margin-left: 396px;
 }
 .modal {
   max-height: 648px;
@@ -29,6 +29,7 @@
   position: absolute;
   border: 1px solid $grey-5;
   border-radius: 6px;
+  margin-top: 3.5px;
   @include background-hash;
   ::-webkit-scrollbar {
     width: 10px;

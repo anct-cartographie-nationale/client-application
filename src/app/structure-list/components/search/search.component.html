@@ -9,10 +9,16 @@
       fxLayoutGap="1.5vw"
       (ngSubmit)="applyFilter(searchForm.value.searchTerm)"
     >
-      <div class="icon">
-        <div class="ico-pin-search grey"></div>
+      <div class="inputSection" fxLayout="row" fxLayoutAlign="space-between center">
+        <input type="text" formControlName="searchTerm" placeholder="Rechercher une adresse, une association..." />
+        <div class="icon close" (click)="clearInput()">
+          <div class="ico-close grey"></div>
+        </div>
+        <div class="separator"></div>
+        <div class="icon pin">
+          <div class="ico-pin-search blue"></div>
+        </div>
       </div>
-      <input type="text" formControlName="searchTerm" placeholder="Rechercher une adresse, une association..." />
       <div class="searchButton">
         <button type="submit">Rechercher</button>
       </div>

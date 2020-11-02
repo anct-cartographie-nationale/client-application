@@ -4,6 +4,7 @@
 @import '../../../../assets/scss/breakpoint';
 @import '../../../../assets/scss/shapes';
 @import '../../../../assets/scss/buttons';
+@import '../../../../assets/scss/inputs';
 
 .header {
   .title {
@@ -17,24 +18,31 @@
 .content {
   margin: 10px 0 0px 0;
   .icon {
-    border: 1px solid $grey;
-    padding: 4px 6px 8px 6px;
+    padding: 0 6px 0 6px;
     border-radius: 4px;
     cursor: pointer;
+    &.pin {
+      margin-bottom: 4px;
+    }
   }
   input {
-    width: 100%;
-    background-color: $grey-5;
-    border: none;
     @include cn-regular-14;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    text-overflow: ellipsis;
-    color: $grey-1;
-    outline: none;
+    @include input-search;
   }
   .searchSection {
+    .separator {
+      height: 100%;
+      width: 2px;
+      background-color: $grey-6;
+      margin: 0 5px 0 5px;
+    }
+    .inputSection {
+      padding: 6px 3px 6px 6px;
+      min-width: 463px;
+      border: 1px solid $grey-6;
+      background-color: $white;
+      height: 40px;
+    }
     .searchButton {
       border: 1px solid $grey-6;
       border-radius: 6px;
@@ -47,7 +55,7 @@
     }
   }
   .btnSection {
-    padding: 16px 0 8px 0;
+    padding: 16px 0 0px 0;
     button {
       @include btn-filter;
       .btnText {
@@ -134,8 +142,7 @@
   }
 }
 .footerSearchSection {
-  margin-bottom: 30px;
-  margin-right: 20px;
+  margin: 17px 0px 17px 0px;
 
   a {
     @include cn-bold-14;
