@@ -3,8 +3,10 @@ import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 const { DateTime } = require('luxon');
 import * as _ from 'lodash';
+
 import { Structure } from '../models/structure.model';
 import { StructureService } from '../services/structure-list.service';
+import { Filter } from '../structure-list/models/filter.model';
 import { GeoJson } from '../map/models/geojson.model';
 import { GeojsonService } from '../services/geojson.service';
 
@@ -25,11 +27,11 @@ export class HomeComponent implements OnInit {
     if (navigator.geolocation) {
       this.getLocation();
     }
-    this.getStructures();
+    this.getStructures(null);
   }
 
-  public getStructures(): void {
-    this.structureService.getStructures().subscribe((structures) => {
+  public getStructures(filters: Filter[]): void {
+    this.structureService.getStructures(filters).subscribe((structures) => {
       Promise.all(
         structures.map((structure) => {
           if (this.geolocation) {
@@ -70,7 +72,6 @@ export class HomeComponent implements OnInit {
    * @param idVoie Street reference
    */
   public getCoord(idVoie: number): Observable<GeoJson> {
-    console.log('in');
     return this.geoJsonService.getAddressByIdVoie(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
   }
 
@@ -85,7 +86,9 @@ export class HomeComponent implements OnInit {
 
   private getAddress(longitude: number, latitude: number): void {
     this.geoJsonService.getAddressByCoord(longitude, latitude).subscribe(
-      (location) => (this.currentLocation = location),
+      (location) => {
+        this.currentLocation = location;
+      },
       (err) => console.error(err)
     );
   }

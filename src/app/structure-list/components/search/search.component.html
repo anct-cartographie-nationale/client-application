@@ -1,0 +1,80 @@
+<div class="header">
+  <span class="title">Acteurs de la médiation</span>
+</div>
+<div class="content" fxLayout="column">
+  <div class="searchSection">
+    <form
+      [formGroup]="searchForm"
+      fxLayout="row"
+      fxLayoutGap="1.5vw"
+      (ngSubmit)="applyFilter(searchForm.value.searchTerm)"
+    >
+      <div class="inputSection" fxLayout="row" fxLayoutAlign="space-between center">
+        <input type="text" formControlName="searchTerm" placeholder="Rechercher une adresse, une association..." />
+        <div class="icon close" (click)="clearInput()">
+          <div class="ico-close grey"></div>
+        </div>
+        <span class="separator"></span>
+        <div class="icon pin">
+          <div class="ico-pin-search blue"></div>
+        </div>
+      </div>
+      <div class="searchButton">
+        <button type="submit">Rechercher</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
+    <button
+      type="button"
+      [ngClass]="{ selected: modalTypeOpened === TypeModal[0] }"
+      (click)="openModal(TypeModal[0])"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <span class="btnText">Accompagnement</span>
+      <div class="arrow"></div>
+    </button>
+    <button
+      type="button"
+      [ngClass]="{ selected: modalTypeOpened === TypeModal[1] }"
+      (click)="openModal(TypeModal[1])"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <span class="btnText">Formations</span>
+      <div class="arrow"></div>
+    </button>
+    <button
+      type="button"
+      [ngClass]="{ selected: modalTypeOpened === TypeModal[2] }"
+      (click)="openModal(TypeModal[2])"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+    >
+      <span class="btnText">Plus de filtres</span>
+      <div class="arrow"></div>
+    </button>
+  </div>
+  <div *ngIf="modalTypeOpened">
+    <app-modal-filter
+      [modalType]="modalTypeOpened"
+      [categories]="categories"
+      [modules]="checkedModulesFilter"
+      (searchEvent)="fetchResults($event)"
+    ></app-modal-filter>
+  </div>
+</div>
+<div class="footerSearchSection" fxLayout="row" fxLayoutAlign="space-between center">
+  <div class="checkbox">
+    <div class="checkboxItem">
+      <label>
+        <input type="checkbox" />
+        <span class="customCheck"></span>
+        <div class="label">Pass numérique</div>
+      </label>
+    </div>
+  </div>
+  <a href="">Ajouter une structure</a>
+</div>

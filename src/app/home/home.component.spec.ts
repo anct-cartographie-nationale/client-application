@@ -36,7 +36,6 @@ describe('HomeComponent', () => {
     await new Promise((resolve) => {
       component.getCoord(21356).subscribe(
         (val) => {
-          console.log(val);
           expect(val.geometry.getLat()).toEqual(69800);
           expect(val.geometry.getLon).toEqual(69800);
           resolve();

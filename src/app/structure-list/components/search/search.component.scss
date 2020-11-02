@@ -1,0 +1,99 @@
+@import '../../../../assets/scss/icons';
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/breakpoint';
+@import '../../../../assets/scss/shapes';
+@import '../../../../assets/scss/buttons';
+@import '../../../../assets/scss/inputs';
+
+.header {
+  .title {
+    @include cn-bold-20;
+    padding: 16px 0 16px 0;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+  }
+}
+.content {
+  margin: 10px 0 0px 0;
+  .icon {
+    padding: 0 6px 0 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    &.pin {
+      margin-bottom: 4px;
+    }
+  }
+  input {
+    @include cn-regular-14;
+    @include input-search;
+  }
+  .searchSection {
+    .separator {
+      height: 100%;
+      width: 2px;
+      background-color: $grey-6;
+      margin: 0 5px 0 5px;
+    }
+    .inputSection {
+      padding: 6px 3px 6px 6px;
+      min-width: 463px;
+      border: 1px solid $grey-6;
+      background-color: $white;
+      height: 40px;
+    }
+    .searchButton {
+      border: 1px solid $grey-6;
+      border-radius: 6px;
+      @include background-hash;
+      padding: 0 0 4px 5px;
+      button {
+        border-radius: 6px;
+        @include btn-search;
+        @include cn-bold-14;
+      }
+    }
+  }
+  .btnSection {
+    padding: 16px 0 0px 0;
+    button {
+      @include btn-filter;
+      .btnText {
+        @include cn-regular-14;
+      }
+    }
+    .selected {
+      border: 1px solid $primary-color;
+      color: $primary-color;
+      .arrow {
+        background-color: transparent;
+        border-bottom: 1px solid $primary-color;
+        border-right: 1px solid $primary-color;
+        transform: translateY(25%) rotate(-135deg);
+        margin: 0 5px 0 10px;
+        height: 7px;
+        width: 7px;
+      }
+    }
+    .arrow {
+      background-color: transparent;
+      border-bottom: 1px solid $grey-2;
+      border-right: 1px solid $grey-2;
+      transform: translateY(-25%) rotate(45deg);
+      margin: 0 5px 0 10px;
+      height: 7px;
+      width: 7px;
+    }
+  }
+}
+
+.footerSearchSection {
+  margin: 17px 0px 17px 0px;
+
+  a {
+    @include cn-bold-14;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+}

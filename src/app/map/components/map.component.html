@@ -1,2 +1,4 @@
-<div id="map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
-<leaflet-locate-control [map]="map" [options]="locateOptions"></leaflet-locate-control>
+<div class="map-wrapper">
+  <div id="map" class="body-wrap" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
+  <leaflet-locate-control [map]="map" [options]="locateOptions"></leaflet-locate-control>
+</div>
