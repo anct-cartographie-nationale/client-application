@@ -49,6 +49,7 @@
       @include background-hash;
       padding: 0 0 4px 5px;
       button {
+        border-radius: 6px;
         @include btn-search;
         @include cn-bold-14;
       }
@@ -87,59 +88,6 @@
   }
 }
 
-.checkbox {
-  list-style-type: none;
-  input {
-    opacity: 0;
-    display: none;
-    &:checked ~ .customCheck {
-      background-color: $orange-light;
-      border-color: transparent;
-    }
-    &:checked ~ .customCheck:after {
-      display: block;
-    }
-  }
-  label {
-    align-items: center;
-    grid-template-columns: min-content auto;
-    display: inline-grid;
-    cursor: pointer;
-  }
-  .label {
-    padding-left: 8px;
-    @include cn-regular-14;
-  }
-  .customCheck {
-    display: inline-grid;
-    width: 18px;
-    height: 18px;
-    background-color: $white;
-    border: 1px solid $grey;
-    cursor: pointer;
-    position: relative;
-
-    top: 0;
-    left: 0;
-    &:hover {
-      background-color: $grey-5;
-    }
-    &:after {
-      content: '';
-      position: absolute;
-      display: none;
-      left: 7px;
-      top: 3px;
-      width: 4px;
-      height: 8px;
-      border: solid $white;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-    }
-  }
-}
 .footerSearchSection {
   margin: 17px 0px 17px 0px;
 

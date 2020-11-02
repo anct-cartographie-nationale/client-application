@@ -51,7 +51,7 @@ export class SearchComponent implements OnInit {
   // Sends an array containing all filters
   public applyFilter(term: string): void {
     // Add search input filter
-    let filters: Filter[] = [];
+    const filters: Filter[] = [];
     if (term) {
       filters.push(new Filter('nomDeVotreStructure', term, false));
     }
@@ -69,7 +69,7 @@ export class SearchComponent implements OnInit {
   }
 
   public fetchResults(checkedModules: Module[]): void {
-    let inputTerm = this.searchForm.get('searchTerm').value;
+    const inputTerm = this.searchForm.get('searchTerm').value;
 
     // Store checked modules
     this.checkedModulesFilter = checkedModules;
@@ -91,7 +91,7 @@ export class SearchComponent implements OnInit {
   }
 
   private fromStringToIdExcel(categ: string): string {
-    let splitStr = categ.toLowerCase().split(' ');
+    const splitStr = categ.toLowerCase().split(' ');
     for (let i = 1; i < splitStr.length; i++) {
       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
@@ -105,9 +105,7 @@ export class SearchComponent implements OnInit {
 
   // Fake service api
   private mockService(module: Category[], titre: string, categ: any, nbCateg: number): void {
-    const category = new Category();
-    category.name = titre;
-    category.modules = [];
+    const category = new Category({ name: titre, modules: [] });
     for (let i = 0; i < nbCateg; i++) {
       category.modules.push(new Module(categ.id + i, categ.name + i));
     }
