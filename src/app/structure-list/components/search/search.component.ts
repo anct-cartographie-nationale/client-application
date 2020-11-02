@@ -23,12 +23,12 @@ export class SearchComponent implements OnInit {
   @Output() searchEvent = new EventEmitter();
 
   // Form search input
-  private searchForm: FormGroup;
+  public searchForm: FormGroup;
   // Modal variable
   public categories: Category[];
-  private modalTypeOpened: string;
+  public modalTypeOpened: string;
   // Checkbox variable
-  private checkedModulesFilter: Module[];
+  public checkedModulesFilter: Module[];
 
   ngOnInit(): void {
     // Will store the different categories
