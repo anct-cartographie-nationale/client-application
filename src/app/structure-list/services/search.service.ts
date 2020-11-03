@@ -12,9 +12,19 @@ import { StructureCounter } from '../models/structureCounter.model';
 export class SearchService {
   constructor(private http: HttpClient) {}
 
-  public getCategoriesFormations(): Observable<Category[]> {
+  public getCategoriesTraining(): Observable<Category[]> {
     return this.http
       .get('/api/CategoriesFormations')
+      .pipe(map((data: any[]) => data.map((item) => new Category(item))));
+  }
+  public getCategoriesAccompaniment(): Observable<Category[]> {
+    return this.http
+      .get('/api/CategoriesAccompagnement')
+      .pipe(map((data: any[]) => data.map((item) => new Category(item))));
+  }
+  public getCategoriesMoreFilters(): Observable<Category[]> {
+    return this.http
+      .get('/api/CategoriesPlusDeFiltres')
       .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
 
@@ -26,6 +36,8 @@ export class SearchService {
   public setCountModules(category: Category, structureCountTab: StructureCounter[]): Category {
     category.modules.forEach((m: Module) => {
       for (let i = 0; i < structureCountTab.length; i++) {
+        // Force type
+        m.id = m.id.toString();
         if (structureCountTab[i].id === m.id) {
           m.count = structureCountTab[i].count;
         }

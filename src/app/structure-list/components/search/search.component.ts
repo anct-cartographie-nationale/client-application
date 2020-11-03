@@ -30,6 +30,10 @@ export class SearchComponent implements OnInit {
   // Checkbox variable
   public checkedModulesFilter: Module[];
 
+  public numberTrainingChecked: number = 0;
+  public numberAccompanimentChecked: number = 0;
+  public numberMoreFiltersChecked: number = 0;
+
   ngOnInit(): void {
     // Will store the different categories
     this.categories = [];
@@ -64,13 +68,39 @@ export class SearchComponent implements OnInit {
   }
 
   // Delete when getting back-end
-  private mockApiNumber(nb: number): string {
+  private mockApiNumber(nb: string): string {
     return ('00' + nb).slice(-3);
   }
 
   public fetchResults(checkedModules: Module[]): void {
     const inputTerm = this.searchForm.get('searchTerm').value;
 
+    // Check if some modules is checked in filters
+    if (this.checkedModulesFilter !== checkedModules) {
+      // First btn filter
+      if (this.modalTypeOpened === TypeModal[0]) {
+        // Check if some modules is checked on first filter and store number of modules checked
+        checkedModules.length && this.numberTrainingChecked + this.numberMoreFiltersChecked != checkedModules.length
+          ? (this.numberAccompanimentChecked =
+              checkedModules.length - (this.numberTrainingChecked + this.numberMoreFiltersChecked))
+          : (this.numberAccompanimentChecked = 0);
+      } // Second btn filter
+      else if (this.modalTypeOpened === TypeModal[1]) {
+        // Check if some modules is checked on first filter and store number of modules checked
+        checkedModules.length &&
+        this.numberAccompanimentChecked + this.numberMoreFiltersChecked != checkedModules.length
+          ? (this.numberTrainingChecked =
+              checkedModules.length - (this.numberAccompanimentChecked + this.numberMoreFiltersChecked))
+          : (this.numberTrainingChecked = 0);
+      } // Third btn filter
+      else if (this.modalTypeOpened === TypeModal[2]) {
+        // Check if some modules is checked on first filter and store number of modules checked
+        checkedModules.length && this.numberAccompanimentChecked + this.numberTrainingChecked != checkedModules.length
+          ? (this.numberMoreFiltersChecked =
+              checkedModules.length - (this.numberAccompanimentChecked + this.numberTrainingChecked))
+          : (this.numberMoreFiltersChecked = 0);
+      }
+    }
     // Store checked modules
     this.checkedModulesFilter = checkedModules;
 
@@ -81,8 +111,6 @@ export class SearchComponent implements OnInit {
 
   // Open the modal and display the list according to the right filter button
   public openModal(option: string): void {
-    console.log(this.modalTypeOpened);
-    console.log(option);
     this.categories = [];
     if (this.modalTypeOpened !== option) {
       this.modalTypeOpened = option;
@@ -90,9 +118,6 @@ export class SearchComponent implements OnInit {
     } else {
       this.modalTypeOpened = null;
     }
-  }
-  test() {
-    console.log('test');
   }
   public closeModal(): void {
     this.modalTypeOpened = null;
@@ -111,21 +136,21 @@ export class SearchComponent implements OnInit {
       .replace('?', '');
   }
 
-  // Fake service api
-  private mockService(module: Category[], titre: string, categ: any, nbCateg: number): void {
-    const category = new Category({ name: titre, modules: [] });
-    for (let i = 0; i < nbCateg; i++) {
-      category.modules.push(new Module(categ.id + i, categ.name + i));
-    }
-    module.push(category);
-  }
-
   // Get the correct list of checkbox/modules depending on the type of modal.
   private fakeData(option: string): void {
     if (option === TypeModal[0]) {
-      this.mockService(this.categories, 'Accompagnement des démarches', { name: 'CAF', id: 5 }, 7);
+      forkJoin([this.searchService.getCategoriesAccompaniment(), this.searchService.getFakeCounterModule()]).subscribe(
+        (res) => {
+          const categories: Category[] = res[0];
+          const structureCounter: StructureCounter[] = res[1];
+          categories.forEach((category) => {
+            category = this.searchService.setCountModules(category, structureCounter);
+            this.categories.push(category);
+          });
+        }
+      );
     } else if (option === TypeModal[1]) {
-      forkJoin([this.searchService.getCategoriesFormations(), this.searchService.getFakeCounterModule()]).subscribe(
+      forkJoin([this.searchService.getCategoriesTraining(), this.searchService.getFakeCounterModule()]).subscribe(
         (res) => {
           const categories: Category[] = res[0];
           const structureCounter: StructureCounter[] = res[1];
@@ -136,17 +161,16 @@ export class SearchComponent implements OnInit {
         }
       );
     } else if (option === TypeModal[2]) {
-      this.mockService(
-        this.categories,
-        'Équipements',
-        { name: 'Accès à des revues ou livres infoirmatiques numériques', id: 1 },
-        8
+      forkJoin([this.searchService.getCategoriesMoreFilters(), this.searchService.getFakeCounterModule()]).subscribe(
+        (res) => {
+          const categories: Category[] = res[0];
+          const structureCounter: StructureCounter[] = res[1];
+          categories.forEach((category) => {
+            category = this.searchService.setCountModules(category, structureCounter);
+            this.categories.push(category);
+          });
+        }
       );
-      this.mockService(this.categories, "Modalité d'accueil", { name: 'Matériel mis à dispostion', id: 2 }, 6);
-      this.mockService(this.categories, "Type d'acteurs", { name: 'Lieux de médiation (Pimms, assos...)', id: 3 }, 5);
-      this.mockService(this.categories, 'Publics', { name: 'Langues étrangères autres qu’anglais', id: 4 }, 12);
-      this.mockService(this.categories, 'Labelisation', { name: 'Prescripteur du Pass Numérique', id: 5 }, 6);
-      this.mockService(this.categories, 'Type de structure', { name: 'Espace de co-working', id: 6 }, 6);
     }
   }
 }

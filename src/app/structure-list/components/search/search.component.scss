@@ -63,9 +63,12 @@
         @include cn-regular-14;
       }
     }
+    .containCheckedFilters {
+      border-color: $secondary-color;
+    }
     .selected {
-      border: 1px solid $primary-color;
-      color: $primary-color;
+      border-color: $primary-color;
+      color: inherit;
       .arrow {
         background-color: transparent;
         border-bottom: 1px solid $primary-color;

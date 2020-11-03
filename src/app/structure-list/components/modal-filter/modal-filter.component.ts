@@ -29,13 +29,13 @@ export class ModalFilterComponent implements OnInit {
   }
 
   // Return index of a specific module in array modules
-  public getIndex(id: number, categ: string): number {
+  public getIndex(id: string, categ: string): number {
     return this.checkedModules.findIndex((m: Module) => m.id === id && m.text === categ);
   }
 
   // Management of the checkbox event (Check / Uncheck)
   public onCheckboxChange(event, categ: string): void {
-    const checkValue: number = parseInt(event.target.value, 10);
+    const checkValue: string = event.target.value;
     if (event.target.checked) {
       this.checkedModules.push(new Module(checkValue, categ));
     } else {
@@ -55,7 +55,7 @@ export class ModalFilterComponent implements OnInit {
         }
       });
     });
-    this.emitModules([]);
+    this.emitModules(this.checkedModules);
   }
 
   // Sends an array containing all modules
