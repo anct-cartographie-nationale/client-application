@@ -26,7 +26,8 @@ export class SearchComponent implements OnInit {
   public searchForm: FormGroup;
   // Modal variable
   public categories: Category[];
-  public modalTypeOpened: string;
+  public modalTypeOpened: string; // todo: utiliser enum
+  public isOpenModal = false;
   // Checkbox variable
   public checkedModulesFilter: Module[];
 
@@ -113,8 +114,13 @@ export class SearchComponent implements OnInit {
   public openModal(option: string): void {
     this.categories = [];
     if (this.modalTypeOpened !== option) {
-      this.modalTypeOpened = option;
-      this.fakeData(option);
+      if (!this.isOpenModal) {
+        this.modalTypeOpened = option;
+        this.fakeData(option);
+        this.isOpenModal = true;
+      } else {
+        this.isOpenModal = false;
+      }
     } else {
       this.modalTypeOpened = null;
     }
