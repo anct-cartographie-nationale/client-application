@@ -52,7 +52,7 @@
       type="button"
       [disabled]="modalTypeOpened === TypeModal[2]"
       [ngClass]="{ selected: modalTypeOpened === TypeModal[2] }"
-      (click)="modalTypeOpened === TypeModal[2] ? test() : openModal(TypeModal[2])"
+      (click)="openModal(TypeModal[2])"
       fxLayout="row"
       fxLayoutAlign="space-between center"
     >
