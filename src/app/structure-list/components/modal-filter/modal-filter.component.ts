@@ -18,6 +18,7 @@ export class ModalFilterComponent implements OnInit {
   @Input() public categories: Category[];
   @Input() public modules: Module[] = [];
   @Output() searchEvent = new EventEmitter();
+  @Output() closeEvent = new EventEmitter();
   // Checkbox variable
   checkedModules: Module[];
   // Form search input
@@ -61,5 +62,9 @@ export class ModalFilterComponent implements OnInit {
   // Sends an array containing all modules
   public emitModules(m: Module[]): void {
     this.searchEvent.emit(m);
+  }
+
+  public closeModal(): void {
+    this.closeEvent.emit();
   }
 }

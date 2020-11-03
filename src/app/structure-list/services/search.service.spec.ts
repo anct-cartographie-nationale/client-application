@@ -21,13 +21,13 @@ describe('SearchService', () => {
 
   it('should return category with number of modules inside', () => {
     const structureCount: StructureCounter[] = [
-      { id: 176, count: 2 },
-      { id: 172, count: 1 },
-      { id: 173, count: 1 },
+      { id: '176', count: 2 },
+      { id: '172', count: 1 },
+      { id: '173', count: 1 },
     ];
-    const m1: Module = { id: 176, text: 'strm1', count: 0 };
-    const m2: Module = { id: 173, text: 'strm2', count: 0 };
-    const m3: Module = { id: 172, text: 'strm3', count: 0 };
+    const m1: Module = { id: '176', text: 'strm1', count: 0 };
+    const m2: Module = { id: '173', text: 'strm2', count: 0 };
+    const m3: Module = { id: '172', text: 'strm3', count: 0 };
     const category: Category = { name: 'strCateg', modules: [m1, m2, m3] };
     const result = service.setCountModules(category, structureCount);
     expect(result.modules[0].count).toBe(2);

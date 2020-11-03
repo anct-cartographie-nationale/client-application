@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 import { Day } from '../models/day.model';
 import { Structure } from '../models/structure.model';
+import { Time } from '../models/time.model';
 import { Week } from '../models/week.model';
 import { StructureService } from './structure-list.service';
 const { DateTime } = require('luxon');
@@ -28,12 +29,11 @@ describe('StructureService', () => {
     s.hours.friday = new Day(false);
     s.hours.saturday = new Day(false);
     s.hours.sunday = new Day(false);
-
     s.hours.thursday.open = true;
-    s.hours.thursday.time = [
-      { openning: 805, closing: 1200 },
-      { openning: 1400, closing: 1600 },
-    ];
+    s.hours.thursday.time = new Array(
+      new Time({ openning: 805, closing: 1200 }),
+      new Time({ openning: 1400, closing: 1600 })
+    );
 
     // Init date sur un jeudi à 9h05
     const dt = new DateTime.local(2020, 10, 8, 9, 5);
@@ -54,8 +54,7 @@ describe('StructureService', () => {
     s.hours.sunday = new Day();
 
     s.hours.thursday.open = true;
-    s.hours.thursday.time = [{ openning: 1400, closing: 1600 }];
-
+    s.hours.thursday.time = new Array(new Time({ openning: 1400, closing: 1600 }));
     // Init date sur un jeudi à 9h05
     const dt = new DateTime.local(2020, 10, 8, 9, 5);
     const result = structureService.updateOpeningStructure(s, dt);

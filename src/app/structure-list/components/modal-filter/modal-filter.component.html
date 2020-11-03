@@ -1,6 +1,6 @@
 <div
   *ngIf="modalType"
-  (clickOutside)="emitModules(modules)"
+  (clickOutside)="closeModal()"
   fxLayout="column"
   fxLayoutAlign="space-between"
   [ngClass]="['modal', 'modal' + modalType]"
