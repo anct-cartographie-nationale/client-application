@@ -75,12 +75,14 @@ export class SearchComponent implements OnInit {
     this.checkedModulesFilter = checkedModules;
 
     // Close modal after receive filters from her.
-    this.openModal(this.modalTypeOpened);
+    this.closeModal();
     inputTerm ? this.applyFilter(inputTerm) : this.applyFilter(null);
   }
 
   // Open the modal and display the list according to the right filter button
   public openModal(option: string): void {
+    console.log(this.modalTypeOpened);
+    console.log(option);
     this.categories = [];
     if (this.modalTypeOpened !== option) {
       this.modalTypeOpened = option;
@@ -88,6 +90,12 @@ export class SearchComponent implements OnInit {
     } else {
       this.modalTypeOpened = null;
     }
+  }
+  test() {
+    console.log('test');
+  }
+  public closeModal(): void {
+    this.modalTypeOpened = null;
   }
 
   private fromStringToIdExcel(categ: string): string {

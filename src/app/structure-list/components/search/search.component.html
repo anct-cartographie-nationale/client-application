@@ -28,6 +28,7 @@
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
     <button
       type="button"
+      [disabled]="modalTypeOpened === TypeModal[0]"
       [ngClass]="{ selected: modalTypeOpened === TypeModal[0] }"
       (click)="openModal(TypeModal[0])"
       fxLayout="row"
@@ -38,6 +39,7 @@
     </button>
     <button
       type="button"
+      [disabled]="modalTypeOpened === TypeModal[1]"
       [ngClass]="{ selected: modalTypeOpened === TypeModal[1] }"
       (click)="openModal(TypeModal[1])"
       fxLayout="row"
@@ -48,8 +50,9 @@
     </button>
     <button
       type="button"
+      [disabled]="modalTypeOpened === TypeModal[2]"
       [ngClass]="{ selected: modalTypeOpened === TypeModal[2] }"
-      (click)="openModal(TypeModal[2])"
+      (click)="modalTypeOpened === TypeModal[2] ? test() : openModal(TypeModal[2])"
       fxLayout="row"
       fxLayoutAlign="space-between center"
     >

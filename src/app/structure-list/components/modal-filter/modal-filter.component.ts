@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Category } from '../../models/category.model';
-import { Filter } from '../../models/filter.model';
 import { Module } from '../../models/module.model';
 
 @Component({
@@ -25,6 +24,7 @@ export class ModalFilterComponent implements OnInit {
   searchForm: FormGroup;
   ngOnInit(): void {
     // Manage checkbox
+    console.log('init');
     this.checkedModules = this.modules.slice();
   }
 
@@ -55,10 +55,11 @@ export class ModalFilterComponent implements OnInit {
         }
       });
     });
+    this.emitModules([]);
   }
 
   // Sends an array containing all modules
-  public emitModules(): void {
-    this.searchEvent.emit(this.checkedModules);
+  public emitModules(m: Module[]): void {
+    this.searchEvent.emit(m);
   }
 }
