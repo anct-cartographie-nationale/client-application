@@ -172,7 +172,7 @@
   }
 }
 
-.ico-close {
+.ico-close-search {
   width: 15px;
   height: 13px;
   text-align: center;
@@ -183,13 +183,13 @@
     transform: rotate(-45deg);
   }
 }
-.ico-close:before,
-.ico-close:after {
+.ico-close-search:before,
+.ico-close-search:after {
   position: absolute;
   content: '';
   height: 14px;
   width: 2px;
-  background-color: $grey-6;
+  background-color: $grey-4;
 }
 
 .ic-arrow-left {
