@@ -1,8 +1,8 @@
 {
   "name": "pamn-mock-api",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
-    "api": "json-server api/db.json --routes api/routes.json --no-cors=true"
+    "start": "node server.js"
   },
   "private": true,
   "dependencies": {
