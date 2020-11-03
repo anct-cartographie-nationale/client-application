@@ -28,8 +28,11 @@
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
     <button
       type="button"
-      [ngClass]="{ selected: modalTypeOpened === TypeModal[0], containCheckedFilters: numberAccompanimentChecked }"
-      (click)="openModal(TypeModal[0])"
+      [ngClass]="{
+        selected: modalTypeOpened === TypeModal.accompaniment,
+        containCheckedFilters: numberAccompanimentChecked
+      }"
+      (click)="openModal(TypeModal.accompaniment)"
       fxLayout="row"
       fxLayoutAlign="space-between center"
     >
@@ -38,8 +41,8 @@
     </button>
     <button
       type="button"
-      [ngClass]="{ selected: modalTypeOpened === TypeModal[1], containCheckedFilters: numberTrainingChecked }"
-      (click)="openModal(TypeModal[1])"
+      [ngClass]="{ selected: modalTypeOpened === TypeModal.training, containCheckedFilters: numberTrainingChecked }"
+      (click)="openModal(TypeModal.training)"
       fxLayout="row"
       fxLayoutAlign="space-between center"
     >
@@ -48,8 +51,11 @@
     </button>
     <button
       type="button"
-      [ngClass]="{ selected: modalTypeOpened === TypeModal[2], containCheckedFilters: numberMoreFiltersChecked }"
-      (click)="openModal(TypeModal[2])"
+      [ngClass]="{
+        selected: modalTypeOpened === TypeModal.moreFilters,
+        containCheckedFilters: numberMoreFiltersChecked
+      }"
+      (click)="openModal(TypeModal.moreFilters)"
       fxLayout="row"
       fxLayoutAlign="space-between center"
     >
@@ -57,7 +63,7 @@
       <div class="arrow"></div>
     </button>
   </div>
-  <div *ngIf="modalTypeOpened">
+  <div *ngIf="modalTypeOpened != null">
     <app-modal-filter
       [modalType]="modalTypeOpened"
       [categories]="categories"

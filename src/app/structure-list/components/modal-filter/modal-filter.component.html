@@ -1,9 +1,8 @@
 <div
-  *ngIf="modalType"
   (clickOutside)="closeModal()"
   fxLayout="column"
   fxLayoutAlign="space-between"
-  [ngClass]="['modal', 'modal' + modalType]"
+  [ngClass]="['modal', 'modal' + getModalType()]"
 >
   <div class="body-wrap">
     <div class="contentModal" fxLayout="row wrap" fxLayoutAlign="flex-start" *ngIf="categories.length > 0">

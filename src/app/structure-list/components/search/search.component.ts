@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Type } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { TypeModal } from '../../enum/typeModal.enum';
@@ -26,14 +26,14 @@ export class SearchComponent implements OnInit {
   public searchForm: FormGroup;
   // Modal variable
   public categories: Category[];
-  public modalTypeOpened: string; // todo: utiliser enum
+  public modalTypeOpened: TypeModal; // todo: utiliser enum
   public isOpenModal = false;
   // Checkbox variable
   public checkedModulesFilter: Module[];
 
-  public numberTrainingChecked: number = 0;
-  public numberAccompanimentChecked: number = 0;
-  public numberMoreFiltersChecked: number = 0;
+  public numberTrainingChecked = 0;
+  public numberAccompanimentChecked = 0;
+  public numberMoreFiltersChecked = 0;
 
   ngOnInit(): void {
     // Will store the different categories
@@ -78,28 +78,28 @@ export class SearchComponent implements OnInit {
 
     // Check if some modules is checked in filters
     if (this.checkedModulesFilter !== checkedModules) {
-      // First btn filter
-      if (this.modalTypeOpened === TypeModal[0]) {
-        // Check if some modules is checked on first filter and store number of modules checked
-        checkedModules.length && this.numberTrainingChecked + this.numberMoreFiltersChecked != checkedModules.length
-          ? (this.numberAccompanimentChecked =
-              checkedModules.length - (this.numberTrainingChecked + this.numberMoreFiltersChecked))
-          : (this.numberAccompanimentChecked = 0);
-      } // Second btn filter
-      else if (this.modalTypeOpened === TypeModal[1]) {
-        // Check if some modules is checked on first filter and store number of modules checked
-        checkedModules.length &&
-        this.numberAccompanimentChecked + this.numberMoreFiltersChecked != checkedModules.length
-          ? (this.numberTrainingChecked =
-              checkedModules.length - (this.numberAccompanimentChecked + this.numberMoreFiltersChecked))
-          : (this.numberTrainingChecked = 0);
-      } // Third btn filter
-      else if (this.modalTypeOpened === TypeModal[2]) {
-        // Check if some modules is checked on first filter and store number of modules checked
-        checkedModules.length && this.numberAccompanimentChecked + this.numberTrainingChecked != checkedModules.length
-          ? (this.numberMoreFiltersChecked =
-              checkedModules.length - (this.numberAccompanimentChecked + this.numberTrainingChecked))
-          : (this.numberMoreFiltersChecked = 0);
+      // First btn
+      switch (this.modalTypeOpened) {
+        case TypeModal.accompaniment:
+          this.numberAccompanimentChecked = this.countCheckFiltersOnModules(
+            checkedModules,
+            this.numberTrainingChecked + this.numberMoreFiltersChecked
+          );
+          break;
+        case TypeModal.training:
+          this.numberTrainingChecked = this.countCheckFiltersOnModules(
+            checkedModules,
+            this.numberAccompanimentChecked + this.numberMoreFiltersChecked
+          );
+          break;
+        case TypeModal.moreFilters:
+          this.numberMoreFiltersChecked = this.countCheckFiltersOnModules(
+            checkedModules,
+            this.numberAccompanimentChecked + this.numberTrainingChecked
+          );
+          break;
+        default:
+          throw new Error('Modal type not handle');
       }
     }
     // Store checked modules
@@ -110,13 +110,21 @@ export class SearchComponent implements OnInit {
     inputTerm ? this.applyFilter(inputTerm) : this.applyFilter(null);
   }
 
+  // Check if some modules is checked on first filter and store number of modules checked
+  public countCheckFiltersOnModules(checkedModules: Module[], value: number): number {
+    if (checkedModules.length && value !== checkedModules.length) {
+      return checkedModules.length - value;
+    } else {
+      return 0;
+    }
+  }
   // Open the modal and display the list according to the right filter button
-  public openModal(option: string): void {
+  public openModal(modalType: TypeModal): void {
     this.categories = [];
-    if (this.modalTypeOpened !== option) {
+    if (this.modalTypeOpened !== modalType) {
       if (!this.isOpenModal) {
-        this.modalTypeOpened = option;
-        this.fakeData(option);
+        this.modalTypeOpened = modalType;
+        this.fakeData(modalType);
         this.isOpenModal = true;
       } else {
         this.isOpenModal = false;
@@ -143,8 +151,8 @@ export class SearchComponent implements OnInit {
   }
 
   // Get the correct list of checkbox/modules depending on the type of modal.
-  private fakeData(option: string): void {
-    if (option === TypeModal[0]) {
+  private fakeData(option: TypeModal): void {
+    if (option === TypeModal.accompaniment) {
       forkJoin([this.searchService.getCategoriesAccompaniment(), this.searchService.getFakeCounterModule()]).subscribe(
         (res) => {
           const categories: Category[] = res[0];
@@ -155,7 +163,7 @@ export class SearchComponent implements OnInit {
           });
         }
       );
-    } else if (option === TypeModal[1]) {
+    } else if (option === TypeModal.training) {
       forkJoin([this.searchService.getCategoriesTraining(), this.searchService.getFakeCounterModule()]).subscribe(
         (res) => {
           const categories: Category[] = res[0];
@@ -166,7 +174,7 @@ export class SearchComponent implements OnInit {
           });
         }
       );
-    } else if (option === TypeModal[2]) {
+    } else if (option === TypeModal.moreFilters) {
       forkJoin([this.searchService.getCategoriesMoreFilters(), this.searchService.getFakeCounterModule()]).subscribe(
         (res) => {
           const categories: Category[] = res[0];

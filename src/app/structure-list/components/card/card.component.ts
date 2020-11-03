@@ -22,8 +22,8 @@ export class CardComponent implements OnInit {
    * Display distance in m or km according to value
    */
   public formatDistance(): string {
-    if (this.structure.distance.length > 3) {
-      return (parseInt(this.structure.distance, 10) / 1000).toFixed(1).toString() + ' km';
+    if (this.structure.distance > 1000) {
+      return (this.structure.distance / 1000).toFixed(1).toString() + ' km';
     } else {
       return this.structure.distance + ' m';
     }
