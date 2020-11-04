@@ -27,7 +27,6 @@ export class SearchComponent implements OnInit {
   // Modal variable
   public categories: Category[];
   public modalTypeOpened: TypeModal; // todo: utiliser enum
-  public isOpenModal = false;
   // Checkbox variable
   public checkedModulesFilter: Module[];
 
@@ -75,7 +74,6 @@ export class SearchComponent implements OnInit {
 
   public fetchResults(checkedModules: Module[]): void {
     const inputTerm = this.searchForm.get('searchTerm').value;
-    console.log(checkedModules);
     // Check if some modules is checked in filters
     if (this.checkedModulesFilter !== checkedModules) {
       // First btn
@@ -121,7 +119,7 @@ export class SearchComponent implements OnInit {
   // Open the modal and display the list according to the right filter button
   public openModal(modalType: TypeModal): void {
     this.categories = [];
-    // if modal already closed, reset type
+    // if modal already opened, reset type
     if (this.modalTypeOpened === modalType) {
       this.modalTypeOpened = undefined;
     } else if (this.modalTypeOpened !== modalType) {
@@ -131,7 +129,6 @@ export class SearchComponent implements OnInit {
   }
 
   public closeModal(): void {
-    //this.openModal(this.modalTypeOpened);
     this.modalTypeOpened = undefined;
   }
 
