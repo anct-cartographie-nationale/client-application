@@ -1,6 +1,9 @@
-<app-recherche></app-recherche>
-<span class="nbStructuresLabel">{{ structureList.length }} structures</span>
-<div (mouseout)="mouseOut()">
+<div class="topBlock">
+  <app-structure-list-search (searchEvent)="fetchResults($event)"></app-structure-list-search>
+  <span class="nbStructuresLabel">{{ structureList.length }} structures</span>
+</div>
+
+<div class="listCard" (mouseout)="mouseOut()">
   <app-card
     *ngFor="let structure of structureList"
     [structure]="structure"
@@ -8,6 +11,7 @@
     (hover)="handleCardHover($event)"
   ></app-card>
 </div>
+
 <app-structure-details
   *ngIf="showStructureDetails"
   [structure]="structure"

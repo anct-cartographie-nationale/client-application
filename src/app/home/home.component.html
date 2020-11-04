@@ -1,5 +1,6 @@
 <div fxLayout="row" class="content-container">
   <app-structure-list
+    (searchEvent)="getStructures($event)"
     [structureList]="structures"
     [location]="currentLocation"
     (displayMapMarkerId)="setMapMarkerId($event)"

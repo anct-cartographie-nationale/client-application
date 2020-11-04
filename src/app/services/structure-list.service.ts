@@ -9,6 +9,7 @@ import { Day } from '../models/day.model';
 import { OpeningDay } from '../models/openingDay.model';
 import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Time } from '../models/time.model';
+import { Filter } from '../structure-list/models/filter.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +17,35 @@ import { Time } from '../models/time.model';
 export class StructureService {
   constructor(private http: HttpClient) {}
 
-  public getStructures(): Observable<Structure[]> {
-    return this.http.get('/api/Structures').pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+  public getStructures(filters: Filter[]): Observable<Structure[]> {
+    return this.http
+      .get('/api/Structures?' + this.constructSearchRequest(filters))
+      .pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+  }
+
+  private constructSearchRequest(filters: Filter[]): string {
+    let requestParam = '';
+    if (filters) {
+      filters.forEach((filter) => {
+        if (requestParam) {
+          requestParam = requestParam + '&';
+        }
+        if (filter.isStrict) {
+          if (requestParam.includes(filter.name)) {
+            requestParam = requestParam + '=' + filter.value;
+          } else {
+            requestParam = requestParam + filter.name + '=' + filter.value;
+          }
+        } else {
+          if (requestParam.includes(filter.name)) {
+            requestParam = requestParam + filter.value;
+          } else {
+            requestParam = requestParam + filter.name + '_like=' + filter.value;
+          }
+        }
+      });
+    }
+    return requestParam;
   }
 
   /**
