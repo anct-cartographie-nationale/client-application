@@ -133,6 +133,7 @@ export class SearchComponent implements OnInit {
 
   public closeModal(): void {
     this.isOpenModal = false;
+    this.modalTypeOpened = undefined;
   }
 
   private fromStringToIdExcel(categ: string): string {
