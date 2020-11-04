@@ -122,17 +122,16 @@ export class SearchComponent implements OnInit {
   public openModal(modalType: TypeModal): void {
     this.categories = [];
     // if modal already closed, reset type
-    if (this.modalTypeOpened === modalType && !this.isOpenModal) {
+    if (this.modalTypeOpened === modalType) {
       this.modalTypeOpened = undefined;
-    } else if (!this.isOpenModal && this.modalTypeOpened !== modalType) {
+    } else if (this.modalTypeOpened !== modalType) {
       this.modalTypeOpened = modalType;
       this.fakeData(modalType);
-      this.isOpenModal = true;
     }
   }
 
   public closeModal(): void {
-    this.isOpenModal = false;
+    //this.openModal(this.modalTypeOpened);
     this.modalTypeOpened = undefined;
   }
 
