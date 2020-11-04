@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   public searchForm: FormGroup;
   // Modal variable
   public categories: Category[];
-  public modalTypeOpened: TypeModal; // todo: utiliser enum
+  public modalTypeOpened: TypeModal;
   // Checkbox variable
   public checkedModulesFilter: Module[];
 
