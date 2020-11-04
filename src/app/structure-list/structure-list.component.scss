@@ -1,5 +1,5 @@
-@import '../../assets/scss/icons';
 @import '../../assets/scss/color';
+@import '../../assets/scss/icons';
 @import '../../assets/scss/typography';
 
 .nbStructuresLabel {
@@ -7,4 +7,11 @@
   @include cn-regular-16;
   display: flex;
   align-items: center;
+}
+.listCard {
+  overflow-y: auto;
+  padding: 0 25px;
+}
+.topBlock {
+  padding: 0 25px;
 }

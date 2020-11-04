@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { inject, TestBed } from '@angular/core/testing';
 import { Day } from '../models/day.model';
 import { Structure } from '../models/structure.model';
@@ -7,15 +7,15 @@ import { StructureService } from './structure-list.service';
 const { DateTime } = require('luxon');
 
 describe('StructureService', () => {
+  let structureService: StructureService;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientTestingModule],
+      providers: [StructureService],
     });
+    structureService = TestBed.inject(StructureService);
   });
-  let structureService: StructureService;
-  beforeEach(inject([StructureService], (s: StructureService) => {
-    structureService = s;
-  }));
 
   it('Mise à jour ouverture de la structure : should return true', () => {
     // Init structure avec aucun horaire

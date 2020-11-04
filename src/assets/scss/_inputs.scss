@@ -1,0 +1,9 @@
+@mixin input-search {
+  width: 100%;
+  border: none;
+  padding-left: 10px;
+  text-overflow: ellipsis;
+  color: $grey-1;
+  outline: none;
+  font-style: italic;
+}

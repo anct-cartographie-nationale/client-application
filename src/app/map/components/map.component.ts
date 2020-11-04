@@ -74,7 +74,15 @@ export class MapComponent implements OnChanges {
    * @param structure Structure
    */
   private buildToolTip(structure: Structure): string {
-    const cssAvailabilityClass = structure.isOpen ? 'available' : 'unavailable';
+    let cssAvailabilityClass = structure.isOpen ? 'available' : null;
+    if (cssAvailabilityClass === null) {
+      if (structure.openedOn.day) {
+        cssAvailabilityClass = 'unavailable';
+      } else {
+        cssAvailabilityClass = 'unknown';
+      }
+    }
+
     return (
       '<h1>' +
       structure.nomDeVotreStructure +

@@ -1,0 +1,101 @@
+@import '../../../../assets/scss/icons';
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/breakpoint';
+@import '../../../../assets/scss/shapes';
+@import '../../../../assets/scss/buttons';
+
+.modaltraining {
+  @media #{$desktop} {
+    margin-left: 0;
+  }
+
+  margin-left: 196px;
+}
+.modalmoreFilters {
+  @media #{$desktop} {
+    margin-left: 0;
+  }
+  margin-left: 396px;
+}
+.modal {
+  max-height: 648px;
+  max-width: 754px;
+  width: 94%;
+  border-left: 6.5px solid transparent;
+  border-bottom: 6.5px solid transparent;
+  border-radius: 11px;
+  z-index: 401 !important;
+  position: absolute;
+  border: 1px solid $grey-6;
+  border-radius: 6px;
+  margin-top: 3.5px;
+  @include background-hash;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: $grey-6;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $grey;
+    border-radius: 6px;
+  }
+  .contentModal {
+    overflow-y: auto;
+    max-width: 1100px;
+    border-bottom: 1px solid $grey;
+    margin-bottom: 10px;
+    max-height: 500px;
+    .blockFiltre {
+      width: 100%;
+      padding: 32px 40px 10px 40px;
+      min-width: 450px;
+    }
+    .blockLigne {
+      padding-left: 0;
+      -moz-column-count: 2;
+      -moz-column-gap: 46px;
+      -webkit-column-count: 2;
+      -webkit-column-gap: 46px;
+      column-count: 2;
+      column-gap: 46px;
+      column-rule: dashed 1px $grey;
+      @media #{$large-phone} {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+      }
+    }
+    .ligneFiltre {
+      padding: 5px 0 5px 0;
+    }
+    h4 {
+      @include cn-bold-14;
+      display: flex;
+      align-items: center;
+      margin-top: 0;
+    }
+    .nbResult {
+      @include cn-regular-14;
+    }
+    label {
+      @include cn-regular-14;
+    }
+  }
+  .footer {
+    margin: 0px 20px 16px 0;
+    a {
+      @include cn-bold-14;
+      display: flex;
+      align-items: center;
+      text-decoration: underline;
+      color: $secondary-color;
+    }
+    height: 32px;
+    button {
+      @include btn-search-filter;
+      @include cn-bold-14;
+    }
+  }
+}

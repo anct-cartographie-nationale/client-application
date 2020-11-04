@@ -1,9 +1,12 @@
 .left-pane {
-  padding: 0 25px;
-  width: 590px;
-  min-width: 590px;
+  width: 640px;
+  min-width: 640px;
 }
 .right-pane {
-  width: 100%;
+  width: 80%;
+  height: 80%;
   padding: 0 40px 40px 40px;
+}
+.content-container {
+  height: 100%;
 }

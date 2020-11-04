@@ -46,6 +46,26 @@
     border-radius: 50%;
   }
 }
+.ico-pin-search {
+  width: 18px;
+  height: 18px;
+  border-radius: 50% 50% 50% 0;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  &:before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    width: 7px;
+    height: 7px;
+    border-radius: 4px;
+    background-color: white;
+  }
+  &.blue {
+    background-color: $secondary-color;
+  }
+}
 .ico-dot-available {
   height: 12px;
   width: 12px;
@@ -150,6 +170,26 @@
     transform: rotate(90deg);
     z-index: 2;
   }
+}
+
+.ico-close {
+  width: 15px;
+  height: 13px;
+  text-align: center;
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+.ico-close:before,
+.ico-close:after {
+  position: absolute;
+  content: '';
+  height: 14px;
+  width: 2px;
+  background-color: $grey-6;
 }
 
 .ic-arrow-left {
