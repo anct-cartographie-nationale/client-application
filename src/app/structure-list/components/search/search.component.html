@@ -63,7 +63,7 @@
       <div class="arrow"></div>
     </button>
   </div>
-  <div *ngIf="modalTypeOpened != null">
+  <div *ngIf="isOpenModal">
     <app-modal-filter
       [modalType]="modalTypeOpened"
       [categories]="categories"

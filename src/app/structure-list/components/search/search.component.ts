@@ -121,20 +121,18 @@ export class SearchComponent implements OnInit {
   // Open the modal and display the list according to the right filter button
   public openModal(modalType: TypeModal): void {
     this.categories = [];
-    if (this.modalTypeOpened !== modalType) {
-      if (!this.isOpenModal) {
-        this.modalTypeOpened = modalType;
-        this.fakeData(modalType);
-        this.isOpenModal = true;
-      } else {
-        this.isOpenModal = false;
-      }
-    } else {
-      this.modalTypeOpened = null;
+    // if modal already closed, reset type
+    if (this.modalTypeOpened === modalType && !this.isOpenModal) {
+      this.modalTypeOpened = undefined;
+    } else if (!this.isOpenModal && this.modalTypeOpened !== modalType) {
+      this.modalTypeOpened = modalType;
+      this.fakeData(modalType);
+      this.isOpenModal = true;
     }
   }
+
   public closeModal(): void {
-    this.modalTypeOpened = null;
+    this.isOpenModal = false;
   }
 
   private fromStringToIdExcel(categ: string): string {
