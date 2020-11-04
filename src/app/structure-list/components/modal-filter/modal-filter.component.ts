@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
-import { Filter } from '../../models/filter.model';
 import { Module } from '../../models/module.model';
 
 @Component({
@@ -15,10 +15,11 @@ export class ModalFilterComponent implements OnInit {
       searchTerm: '',
     });
   }
-  @Input() public modalType: string;
+  @Input() public modalType: TypeModal;
   @Input() public categories: Category[];
   @Input() public modules: Module[] = [];
   @Output() searchEvent = new EventEmitter();
+  @Output() closeEvent = new EventEmitter();
   // Checkbox variable
   checkedModules: Module[];
   // Form search input
@@ -29,13 +30,13 @@ export class ModalFilterComponent implements OnInit {
   }
 
   // Return index of a specific module in array modules
-  public getIndex(id: number, categ: string): number {
+  public getIndex(id: string, categ: string): number {
     return this.checkedModules.findIndex((m: Module) => m.id === id && m.text === categ);
   }
 
   // Management of the checkbox event (Check / Uncheck)
-  public onCheckboxChange(event, categ: string): void {
-    const checkValue: number = parseInt(event.target.value, 10);
+  public onCheckboxChange(event, categ: string, isSpecial: boolean): void {
+    const checkValue: string = isSpecial ? 'True' : event.target.value;
     if (event.target.checked) {
       this.checkedModules.push(new Module(checkValue, categ));
     } else {
@@ -45,20 +46,39 @@ export class ModalFilterComponent implements OnInit {
       }
     }
   }
-
   // Clear only filters in the current modal
   public clearFilters(): void {
     this.categories.forEach((categ: Category) => {
       categ.modules.forEach((module: Module) => {
-        if (this.getIndex(module.id, categ.name) > -1) {
-          this.checkedModules.splice(this.getIndex(module.id, categ.name), 1);
+        const index = this.getIndex(module.id, categ.name);
+        const indexSpecial = this.getIndex('True', module.id);
+        if (index > -1) {
+          this.checkedModules.splice(index, 1);
+        } else if (indexSpecial > -1) {
+          this.checkedModules.splice(indexSpecial, 1);
         }
       });
     });
+    this.emitModules(this.checkedModules);
   }
 
   // Sends an array containing all modules
-  public emitModules(): void {
-    this.searchEvent.emit(this.checkedModules);
+  public emitModules(m: Module[]): void {
+    this.searchEvent.emit(m);
+  }
+
+  public getModalType(): string {
+    switch (this.modalType) {
+      case TypeModal.training:
+        return 'training';
+      case TypeModal.moreFilters:
+        return 'moreFilters';
+      default:
+        return '';
+    }
+  }
+
+  public closeModal(): void {
+    this.closeEvent.emit();
   }
 }

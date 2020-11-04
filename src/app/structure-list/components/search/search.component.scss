@@ -33,18 +33,18 @@
     .separator {
       height: 100%;
       width: 2px;
-      background-color: $grey-6;
+      background-color: $grey-4;
       margin: 0 5px 0 5px;
     }
     .inputSection {
       padding: 6px 3px 6px 6px;
       min-width: 463px;
-      border: 1px solid $grey-6;
+      border: 1px solid $grey-4;
       background-color: $white;
       height: 40px;
     }
     .searchButton {
-      border: 1px solid $grey-6;
+      border: 1px solid $grey-4;
       border-radius: 6px;
       @include background-hash;
       padding: 0 0 4px 5px;
@@ -63,9 +63,12 @@
         @include cn-regular-14;
       }
     }
+    .containCheckedFilters {
+      border-color: $secondary-color;
+    }
     .selected {
-      border: 1px solid $primary-color;
-      color: $primary-color;
+      border-color: $primary-color;
+      color: inherit;
       .arrow {
         background-color: transparent;
         border-bottom: 1px solid $primary-color;

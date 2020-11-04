@@ -35,7 +35,7 @@ export class Structure {
   public hours: Week;
   public isOpen: boolean;
   public openedOn: OpeningDay;
-  public distance?: string;
+  public distance?: number;
   public address?: string;
 
   constructor(obj?: any) {
@@ -86,9 +86,9 @@ export class Structure {
       return 3;
     } else {
       // If it's in km
-      if (parseInt(this.distance, 10) > 10000) {
+      if (this.distance > 10000) {
         return 3;
-      } else if (parseInt(this.distance, 10) < 5000) {
+      } else if (this.distance < 5000) {
         // If it's between 0 and 500 m
         return 1;
       } else {

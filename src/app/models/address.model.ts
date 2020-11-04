@@ -11,6 +11,6 @@ export class Address {
   }
 
   public queryString(): string {
-    return this.text + ' ' + this.citycode;
+    return this.text + ' ' + this.zipcode;
   }
 }

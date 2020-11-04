@@ -1,5 +1,5 @@
 export enum TypeModal {
-  accompaniment,
+  accompaniment = 1,
   training,
   moreFilters,
 }
