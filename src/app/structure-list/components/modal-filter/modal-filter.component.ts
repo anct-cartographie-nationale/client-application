@@ -35,8 +35,8 @@ export class ModalFilterComponent implements OnInit {
   }
 
   // Management of the checkbox event (Check / Uncheck)
-  public onCheckboxChange(event, categ: string): void {
-    const checkValue: string = event.target.value;
+  public onCheckboxChange(event, categ: string, isSpecial: boolean): void {
+    const checkValue: string = isSpecial ? 'True' : event.target.value;
     if (event.target.checked) {
       this.checkedModules.push(new Module(checkValue, categ));
     } else {
@@ -46,13 +46,16 @@ export class ModalFilterComponent implements OnInit {
       }
     }
   }
-
   // Clear only filters in the current modal
   public clearFilters(): void {
     this.categories.forEach((categ: Category) => {
       categ.modules.forEach((module: Module) => {
-        if (this.getIndex(module.id, categ.name) > -1) {
-          this.checkedModules.splice(this.getIndex(module.id, categ.name), 1);
+        const index = this.getIndex(module.id, categ.name);
+        const indexSpecial = this.getIndex('True', module.id);
+        if (index > -1) {
+          this.checkedModules.splice(index, 1);
+        } else if (indexSpecial > -1) {
+          this.checkedModules.splice(indexSpecial, 1);
         }
       });
     });

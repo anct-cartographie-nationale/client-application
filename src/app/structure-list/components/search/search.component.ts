@@ -75,7 +75,7 @@ export class SearchComponent implements OnInit {
 
   public fetchResults(checkedModules: Module[]): void {
     const inputTerm = this.searchForm.get('searchTerm').value;
-
+    console.log(checkedModules);
     // Check if some modules is checked in filters
     if (this.checkedModulesFilter !== checkedModules) {
       // First btn
