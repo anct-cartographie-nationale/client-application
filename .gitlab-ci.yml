@@ -56,6 +56,7 @@ deploy_dev:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker-compose pull web-app
     - docker-compose up -d web-app
+    - docker system prune -a -f
 
 deploy_rec:
   stage: deploy
@@ -68,6 +69,7 @@ deploy_rec:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker-compose pull web-app-rec
     - docker-compose up -d web-app-rec
+    - docker system prune -a -f
 
 code_analysis:
   image: skilldlabs/sonar-scanner:3.4.0
