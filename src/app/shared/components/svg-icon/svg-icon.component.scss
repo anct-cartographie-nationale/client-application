@@ -1,0 +1,10 @@
+.icon {
+  color: inherit;
+  display: inline-block;
+}
+
+svg {
+  // Scale the SVG to cover the whole app-icon container.
+  height: 100%;
+  width: 100%;
+}

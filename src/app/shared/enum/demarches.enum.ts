@@ -1,9 +1,11 @@
 export enum Demarches {
-  pole_emploi = 'Pôle Emploi',
+  caf = 'Accompagnant CAF',
+  carsat = 'CARSAT',
   cpam = 'CPAM',
+  epn = 'Espace public numérique (EPN)',
   impots = 'Impôts',
   logements = 'Logement',
-  carsat = 'CARSAT',
+  gd_lyon = 'Grand lyon',
+  pole_emploi = 'Pôle Emploi',
   other = 'Autres',
-  caf = 'Accompagnant CAF',
 }

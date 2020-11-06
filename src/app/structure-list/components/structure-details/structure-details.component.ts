@@ -13,7 +13,9 @@ export class StructureDetailsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.structure);
+  }
 
   public close(): void {
     this.closeDetails.emit(true);

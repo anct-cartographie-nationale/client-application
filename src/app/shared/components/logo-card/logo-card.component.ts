@@ -20,18 +20,22 @@ export class LogoCardComponent implements OnInit {
   public getLogoKey(demarche: string): string {
     // return Demarches[demerche];
     switch (demarche) {
-      case Demarches.pole_emploi:
-        return 'pole_emploi';
       case Demarches.caf:
         return 'caf';
       case Demarches.carsat:
         return 'carsat';
       case Demarches.cpam:
         return 'cpam';
+      case Demarches.epn:
+        return 'epn';
       case Demarches.impots:
         return 'impots';
       case Demarches.logements:
-        return 'logements';
+        return 'logement';
+      case Demarches.gd_lyon:
+        return 'lyon';
+      case Demarches.pole_emploi:
+        return 'pole';
       case Demarches.other:
         return 'other';
       default:
@@ -40,13 +44,14 @@ export class LogoCardComponent implements OnInit {
   }
 
   private getLabelKey(demarche: string): string {
+    console.log('other !');
     switch (demarche) {
       case Labels.aidants_connect:
-        return 'aidants_connect';
+        return 'aidants';
       case Labels.maison_france_service:
-        return 'maison_france_service';
+        return 'franceservices';
       case Labels.pass_numerique:
-        return 'pass_numerique';
+        return 'pass';
       default:
         return 'null';
     }
