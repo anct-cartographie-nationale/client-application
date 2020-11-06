@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Structure } from '../../../models/structure.model';
+import { Module } from '../../models/module.model';
+import { Category } from '../../models/category.model';
 import { AccessModality } from '../../enum/access-modality.enum';
+import { SearchService } from '../../services/search.service';
+import * as _ from 'lodash';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -11,9 +15,25 @@ export class StructureDetailsComponent implements OnInit {
   @Output() public closeDetails: EventEmitter<boolean> = new EventEmitter<boolean>();
   public accessModality = AccessModality;
 
-  constructor() {}
+  public baseSkillssReferentiel: Category;
+  public accessRightsReferentiel: Category;
+  public baseSkills: Module[];
+  public accessRights: Module[];
 
-  ngOnInit(): void {}
+  constructor(private searchService: SearchService) {}
+
+  ngOnInit(): void {
+    this.searchService.getCategoriesTraining().subscribe((referentiels) => {
+      referentiels.forEach((referentiel) => {
+        if (referentiel.isBaseSkills()) {
+          this.baseSkillssReferentiel = referentiel;
+        } else if (referentiel.isRigthtsAccess()) {
+          this.accessRightsReferentiel = referentiel;
+        }
+      });
+      this.setServiceCategories();
+    });
+  }
 
   public close(): void {
     this.closeDetails.emit(true);
@@ -28,9 +48,23 @@ export class StructureDetailsComponent implements OnInit {
       case AccessModality.numeric:
         return 'tel';
       default:
-        throw new Error(`${accessModality} is not handled by getAccessIcon`);
+        return null;
     }
   }
 
+  public setServiceCategories(): void {
+    this.baseSkills = this.toNumbers(this.structure.lesCompetencesDeBase).map((skill) =>
+      _.find(this.baseSkillssReferentiel.modules, { id: skill })
+    );
+    this.accessRights = this.toNumbers(this.structure.accesAuxDroits).map((rights) =>
+      _.find(this.accessRightsReferentiel.modules, { id: rights })
+    );
+
+    console.log(this.baseSkills);
+    console.log(this.accessRights);
+  }
+
   public keepOriginalOrder = (a, b) => a.key;
+
+  public toNumbers = (arr) => arr.map(Number);
 }

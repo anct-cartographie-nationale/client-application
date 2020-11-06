@@ -35,6 +35,8 @@ export class Structure {
   public hours: Week;
   public isOpen: boolean;
   public openedOn: OpeningDay;
+  public lesCompetencesDeBase: string[];
+  public accesAuxDroits: string[];
   public distance?: number;
   public address?: string;
 

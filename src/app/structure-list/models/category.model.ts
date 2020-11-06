@@ -9,4 +9,12 @@ export class Category {
       modules: obj && obj.modules ? obj.modules.map((module) => new Module(module.id, module.text)) : null,
     });
   }
+
+  public isBaseSkills(): boolean {
+    return this.name === 'Les compétences de base';
+  }
+
+  public isRigthtsAccess(): boolean {
+    return this.name === 'Accès aux droits';
+  }
 }

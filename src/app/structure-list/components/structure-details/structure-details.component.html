@@ -65,11 +65,13 @@
       <h2>Services</h2>
     </div>
     <div fxLayout="row" class="w-100">
-      <div fxFlex="50%">
+      <div fxFlex="50%" *ngIf="baseSkills && baseSkills[0] !== undefined">
         <h3 class="subtitle">Compétences de base</h3>
+        <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>
       </div>
-      <div fxFlex="50%">
+      <div fxFlex="50%" *ngIf="accessRights && accessRights[0] !== undefined">
         <h3 class="subtitle">Accès au droits</h3>
+        <p *ngFor="let rights of accessRights">{{ rights.text }}</p>
       </div>
     </div>
   </div>
