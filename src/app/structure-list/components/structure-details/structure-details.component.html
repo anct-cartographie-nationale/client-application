@@ -10,30 +10,30 @@
       <app-structure-opening-status [structure]="structure"></app-structure-opening-status>
       <div fxLayout="row">
         <div fxLayout="column" fxFlex="60%">
-          <div *ngIf="structure.voie" fxLayout="row" fxLayoutAlign="none center">
-            <em class="ico-marker-pin-sm absolute"></em>
+          <div *ngIf="structure.voie" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'adress'"></app-svg-icon>
             <p>{{ structure.n }} {{ structure.address }}</p>
           </div>
-          <div *ngIf="structure.siteWeb" fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-globe-alt"></em>
+          <div *ngIf="structure.siteWeb" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'web'"></app-svg-icon>
             <a target="_blank" rel="noopener noreferrer" [href]="structure.siteWeb">{{ structure.siteWeb }}</a>
           </div>
-          <div *ngIf="structure.telephone" fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-phone"></em>
+          <div *ngIf="structure.telephone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'tel'"></app-svg-icon>
             <p>{{ structure.telephone }}</p>
           </div>
         </div>
         <div fxLayout="column" fxFlex="40%">
-          <div *ngIf="structure.courriel" fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-mail"></em>
+          <div *ngIf="structure.courriel" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
             <a [href]="'mailto:' + structure.courriel">{{ structure.courriel }}</a>
           </div>
-          <div fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-mail"></em>
+          <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'pass'"></app-svg-icon>
             <p>TODO: PASS</p>
           </div>
-          <div fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-mail"></em>
+          <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'structure'"></app-svg-icon>
             <p>TODO: FABLAB</p>
           </div>
         </div>
@@ -42,14 +42,14 @@
   </div>
   <!-- Démarches -->
   <div
-    *ngIf="structure.accompagnementDesDemarches.length > 0"
+    *ngIf="structure.accompagnementDesDemarches[0] !== ''"
     fxLayout="column"
     class="structrue-details-block"
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
-      <em class="ic-mouse"></em>
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+      <app-svg-icon [type]="'ico'" [icon]="'demarches'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Démarches</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="24px">
@@ -60,8 +60,8 @@
   </div>
   <!-- Services -->
   <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
-      <em class="ic-mouse"></em>
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+      <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Services</h2>
     </div>
     <div fxLayout="row" class="w-100">
@@ -75,8 +75,8 @@
   </div>
   <!-- Accueil -->
   <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
-      <em class="ic-mouse"></em>
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+      <app-svg-icon [type]="'ico'" [icon]="'accueil'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Accueil</h2>
     </div>
     <!-- Openning Hours -->
@@ -87,7 +87,7 @@
           <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
             <div *ngIf="day.value.open">
               <h4>{{ day.key | day }}</h4>
-              <div class="openning-time" fxLayout="row" fxLayoutAlign="none center">
+              <div class="openning-time" fxLayout="row" fxLayoutAlign="none flex-end">
                 <div *ngFor="let timeRange of day.value.time; let isFirst = first">
                   <p *ngIf="isFirst">de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}</p>
                   <p *ngIf="!isFirst && timeRange.openning">
@@ -102,43 +102,47 @@
       <!-- modalitesDacces -->
       <div fxFlex="30%">
         <h3 class="subtitle">Accès</h3>
-        <div *ngFor="let acces of structure.modalitesDacces">
-          <em
-            [ngClass]="{
-              'ic-user': acces === accessModality.free,
-              'ic-calendar-today': acces === accessModality.meeting,
-              'ic-camera': acces === accessModality.numeric
-            }"
-          ></em>
+        <div
+          *ngFor="let acces of structure.modalitesDacces"
+          fxLayout="row"
+          fxLayoutAlign="none flex-end"
+          fxLayoutGap="20px"
+        >
+          <app-svg-icon [type]="'ico'" [icon]="getAccessIcon(acces)"></app-svg-icon>
           <p>{{ acces }}</p>
         </div>
       </div>
     </div>
   </div>
   <!-- Equipements -->
-  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline">
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
-      <em class="ic-toolbox"></em>
+  <div
+    *ngIf="structure.hasEquipments()"
+    fxLayout="column"
+    class="structrue-details-block"
+    fxLayoutAlign="baseline baseline"
+  >
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+      <app-svg-icon [type]="'ico'" [icon]="'equipement'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Équipements</h2>
     </div>
-    <div *ngIf="structure.wifi" fxLayout="row" fxLayoutAlign="none center">
-      <em class="ic-wifi"></em>
+    <div *ngIf="structure.wifi" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+      <app-svg-icon [type]="'ico'" [icon]="'wifi'"></app-svg-icon>
       <p>Wifi en accès libre</p>
     </div>
-    <div *ngIf="structure.ordinateurs" fxLayout="row" fxLayoutAlign="none center">
-      <em class="ic-screen"></em>
+    <div *ngIf="structure.ordinateurs" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+      <app-svg-icon [type]="'ico'" [icon]="'computer'"></app-svg-icon>
       <p>Ordinateurs à disposition : {{ structure.nombre }}</p>
     </div>
   </div>
   <!-- Labels -->
   <div
-    *ngIf="structure.labelsEtQualifications"
+    *ngIf="structure.labelsEtQualifications[0] !== ''"
     fxLayout="column"
     class="structrue-details-block"
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
       <em class="ic-toolbox"></em>
       <h2>Labelisation</h2>
     </div>

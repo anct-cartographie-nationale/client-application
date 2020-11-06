@@ -1,6 +1,11 @@
 .icon {
-  color: inherit;
   display: inline-block;
+  height: 24px;
+  width: 24px;
+  &.icon-32 {
+    height: 32px;
+    width: 32px;
+  }
 }
 
 svg {

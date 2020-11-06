@@ -18,7 +18,6 @@ export class LogoCardComponent implements OnInit {
   ngOnInit(): void {}
 
   public getLogoKey(demarche: string): string {
-    // return Demarches[demerche];
     switch (demarche) {
       case Demarches.caf:
         return 'caf';
@@ -44,7 +43,6 @@ export class LogoCardComponent implements OnInit {
   }
 
   private getLabelKey(demarche: string): string {
-    console.log('other !');
     switch (demarche) {
       case Labels.aidants_connect:
         return 'aidants';
@@ -53,7 +51,7 @@ export class LogoCardComponent implements OnInit {
       case Labels.pass_numerique:
         return 'pass';
       default:
-        return 'null';
+        throw new Error(`${demarche} is not handled by getLabelKey and getLogoKey`);
     }
   }
 }
