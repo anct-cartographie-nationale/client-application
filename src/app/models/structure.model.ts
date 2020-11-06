@@ -76,6 +76,16 @@ export class Structure {
   }
 
   /**
+   * Check if a structure has equipments
+   */
+  public hasEquipments(): boolean {
+    if (this.wifi || this.ordinateurs) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Return a range, according to the distance, between [1,3] to get a distance reference.
    * - [0,5km] => 1
    * - [5km,10km] => 2

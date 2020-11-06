@@ -1,0 +1,15 @@
+.icon {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  &.icon-32 {
+    height: 32px;
+    width: 32px;
+  }
+}
+
+svg {
+  // Scale the SVG to cover the whole app-icon container.
+  height: 100%;
+  width: 100%;
+}

@@ -12,7 +12,7 @@ export class MapService {
   public createMarker(lat: number, lon: number, id: number, tooltip?: string): Marker {
     const markerIcon = divIcon({
       className: null,
-      html: "<div class='ico-marker-pin'></div>",
+      html: '<svg width="40" height="46"><use xlink:href="assets/img/sprite.svg#map-marker"></use></svg>',
       iconSize: [35, 41],
       iconAnchor: [13, 41],
     });

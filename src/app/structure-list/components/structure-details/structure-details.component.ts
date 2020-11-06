@@ -19,5 +19,18 @@ export class StructureDetailsComponent implements OnInit {
     this.closeDetails.emit(true);
   }
 
+  public getAccessIcon(accessModality: AccessModality): string {
+    switch (accessModality) {
+      case AccessModality.free:
+        return 'group';
+      case AccessModality.meeting:
+        return 'calendar';
+      case AccessModality.numeric:
+        return 'tel';
+      default:
+        throw new Error(`${accessModality} is not handled by getAccessIcon`);
+    }
+  }
+
   public keepOriginalOrder = (a, b) => a.key;
 }

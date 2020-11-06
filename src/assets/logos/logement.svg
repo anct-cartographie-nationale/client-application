@@ -1,0 +1,23 @@
+<svg id="logement" width="120" height="56" viewBox="0 0 120 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="18" y="47" width="85" height="2" rx="1" fill="#333333"/>
+<rect x="24" y="35.9999" width="17" height="11" fill="#4F4F4F"/>
+<path d="M31.9157 27.4206C32.2647 27.1694 32.7353 27.1694 33.0843 27.4206L42.484 34.1884C43.2719 34.7557 42.8706 35.9999 41.8996 35.9999H23.1003C22.1294 35.9999 21.7281 34.7557 22.516 34.1884L31.9157 27.4206Z" fill="#4F4F4F"/>
+<rect x="27" y="37.9999" width="4" height="3" fill="white"/>
+<rect x="34" y="37.9999" width="4" height="3" fill="white"/>
+<rect x="66" y="36" width="31" height="11" fill="#828282"/>
+<rect x="65" y="34" width="33" height="3" rx="1.5" fill="#828282"/>
+<rect x="68.9016" y="38" width="4" height="3" fill="white"/>
+<rect x="75.9016" y="38" width="4" height="3" fill="white"/>
+<rect x="83" y="38" width="4" height="3" fill="white"/>
+<rect x="90" y="38" width="4" height="3" fill="white"/>
+<rect x="45" y="9" width="17" height="38" fill="#333333"/>
+<rect x="48" y="14" width="4" height="3" fill="white"/>
+<rect x="48" y="22" width="4" height="3" fill="white"/>
+<rect x="48" y="30" width="4" height="3" fill="white"/>
+<rect x="48" y="38" width="4" height="3" fill="white"/>
+<rect x="55" y="14" width="4" height="3" fill="white"/>
+<rect x="55" y="22" width="4" height="3" fill="white"/>
+<rect x="55" y="30" width="4" height="3" fill="white"/>
+<rect x="55" y="38" width="4" height="3" fill="white"/>
+<rect x="43" y="7" width="21" height="3" rx="1.5" fill="#333333"/>
+</svg>
