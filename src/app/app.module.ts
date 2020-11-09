@@ -20,6 +20,8 @@ import { StructureDetailsComponent } from './structure-list/components/structure
 import { StructureOpeningStatusComponent } from './structure-list/components/structure-opening-status/structure-opening-status.component';
 import { ModalOutsideDirective } from './structure-list/services/modalOutside.directive';
 import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ModalFilterComponent } from './structure-list/components/modal-filter/m
     StructureDetailsComponent,
     StructureOpeningStatusComponent,
     ModalOutsideDirective,
+    LegalNoticeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
