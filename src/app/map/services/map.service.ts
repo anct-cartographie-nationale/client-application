@@ -56,7 +56,7 @@ export class MapService {
     if (id) {
       const markerIcon = divIcon({
         className: null,
-        html: '<svg width="56" height="65"><use xlink:href="assets/ico/sprite.svg#map-marker-locate"></use></svg>',
+        html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker-locate"></use></svg>',
         iconSize: [35, 41],
         iconAnchor: [13, 41],
       });
@@ -73,7 +73,7 @@ export class MapService {
     if (id) {
       const markerIcon = divIcon({
         className: null,
-        html: "<div class='ico-marker-pin'></div>",
+        html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
         iconSize: [35, 41],
         iconAnchor: [13, 41],
       });
