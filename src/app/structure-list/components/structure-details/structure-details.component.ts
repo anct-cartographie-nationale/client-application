@@ -59,9 +59,6 @@ export class StructureDetailsComponent implements OnInit {
     this.accessRights = this.toNumbers(this.structure.accesAuxDroits).map((rights) =>
       _.find(this.accessRightsReferentiel.modules, { id: rights })
     );
-
-    console.log(this.baseSkills);
-    console.log(this.accessRights);
   }
 
   public keepOriginalOrder = (a, b) => a.key;
