@@ -94,8 +94,9 @@ a {
     cursor: pointer;
   }
   .label {
-    padding-left: 8px;
-    @include cn-regular-14;
+    padding: 0 16px;
+    @include btn-pass;
+    width: 232px;
   }
   .customCheck {
     display: inline-grid;

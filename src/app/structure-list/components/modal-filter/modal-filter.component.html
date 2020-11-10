@@ -1,11 +1,11 @@
-<div fxLayout="column" fxLayoutAlign="space-between" [ngClass]="['modal', 'modal' + getModalType()]">
+<div *ngIf="modalType" fxLayout="column" fxLayoutAlign="space-between" [ngClass]="['modal', 'modal' + getModalType()]">
   <div class="body-wrap">
     <div class="contentModal" fxLayout="row wrap" fxLayoutAlign="flex-start" *ngIf="categories.length > 0">
       <div class="blockFiltre" *ngFor="let c of categories">
         <h4>{{ c.name }}</h4>
 
         <ul class="blockLigne">
-          <div fxLayout="row" class="ligneFiltre" fxLayoutAlign="space-between center" *ngFor="let module of c.modules">
+          <div fxLayout="row" class="ligneFiltre" fxLayoutAlign="center" *ngFor="let module of c.modules">
             <li class="checkbox">
               <div class="checkboxItem">
                 <label>
@@ -13,8 +13,8 @@
                     type="checkbox"
                     [checked]="
                       c.name !== 'Équipements et services proposés'
-                        ? getIndex(module.id, c.name) > -1
-                        : getIndex('True', module.id) > -1
+                        ? searchService.getIndex(checkedModules, module.id, c.name) > -1
+                        : searchService.getIndex(checkedModules, 'True', module.id) > -1
                     "
                     [value]="module.id"
                     (change)="
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
-      <a (click)="clearFilters()">Effacer</a>
+      <a tabindex="0" (click)="clearFilters()">Effacer</a>
       <button type="button" (click)="emitModules(checkedModules)">Appliquer</button>
     </div>
   </div>

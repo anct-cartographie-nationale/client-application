@@ -1,7 +1,7 @@
 <div class="topBlock">
   <app-structure-list-search (searchEvent)="fetchResults($event)"></app-structure-list-search>
-  <span class="nbStructuresLabel">{{ structureList.length }} structures</span>
 </div>
+<div class="nbStructuresLabel">{{ structureList.length }} structure{{ structureList.length > 1 ? 's' : '' }}</div>
 
 <div class="listCard" (mouseout)="mouseOut()">
   <app-card

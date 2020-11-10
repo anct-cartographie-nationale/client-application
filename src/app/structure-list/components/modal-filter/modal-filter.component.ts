@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
 import { Module } from '../../models/module.model';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-modal-filter',
@@ -10,7 +11,7 @@ import { Module } from '../../models/module.model';
   styleUrls: ['./modal-filter.component.scss'],
 })
 export class ModalFilterComponent implements OnInit {
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public searchService: SearchService) {
     this.searchForm = this.fb.group({
       searchTerm: '',
     });
@@ -21,17 +22,12 @@ export class ModalFilterComponent implements OnInit {
   @Output() searchEvent = new EventEmitter();
   @Output() closeEvent = new EventEmitter();
   // Checkbox variable
-  checkedModules: Module[];
+  public checkedModules: Module[] = [];
   // Form search input
-  searchForm: FormGroup;
+  private searchForm: FormGroup;
   ngOnInit(): void {
     // Manage checkbox
     this.checkedModules = this.modules.slice();
-  }
-
-  // Return index of a specific module in array modules
-  public getIndex(id: string, categ: string): number {
-    return this.checkedModules.findIndex((m: Module) => m.id === id && m.text === categ);
   }
 
   // Management of the checkbox event (Check / Uncheck)
@@ -41,8 +37,8 @@ export class ModalFilterComponent implements OnInit {
       this.checkedModules.push(new Module(checkValue, categ));
     } else {
       // Check if the unchecked module is present in the list and remove it
-      if (this.getIndex(checkValue, categ) > -1) {
-        this.checkedModules.splice(this.getIndex(checkValue, categ), 1);
+      if (this.searchService.getIndex(this.checkedModules, checkValue, categ) > -1) {
+        this.checkedModules.splice(this.searchService.getIndex(this.checkedModules, checkValue, categ), 1);
       }
     }
   }
@@ -50,8 +46,8 @@ export class ModalFilterComponent implements OnInit {
   public clearFilters(): void {
     this.categories.forEach((categ: Category) => {
       categ.modules.forEach((module: Module) => {
-        const index = this.getIndex(module.id, categ.name);
-        const indexSpecial = this.getIndex('True', module.id);
+        const index = this.searchService.getIndex(this.checkedModules, module.id, categ.name);
+        const indexSpecial = this.searchService.getIndex(this.checkedModules, 'True', module.id);
         if (index > -1) {
           this.checkedModules.splice(index, 1);
         } else if (indexSpecial > -1) {

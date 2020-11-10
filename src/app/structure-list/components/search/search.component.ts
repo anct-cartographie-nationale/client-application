@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output, Type } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
+import { GeoJson } from '../../../map/models/geojson.model';
+import { GeojsonService } from '../../../services/geojson.service';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
 import { Filter } from '../../models/filter.model';
@@ -14,7 +16,7 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  constructor(private searchService: SearchService, private fb: FormBuilder) {
+  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
     this.searchForm = this.fb.group({
       searchTerm: '',
     });
@@ -57,11 +59,11 @@ export class SearchComponent implements OnInit {
     // Add search input filter
     const filters: Filter[] = [];
     if (term) {
-      filters.push(new Filter('nomDeVotreStructure', term, false));
+      filters.push(new Filter('nomDeVotreStructure', term));
     }
     // Add checked box filter
     this.checkedModulesFilter.forEach((cm) => {
-      filters.push(new Filter(this.fromStringToIdExcel(cm.text), this.mockApiNumber(cm.id), false));
+      filters.push(new Filter(this.fromStringToIdExcel(cm.text), this.mockApiNumber(cm.id)));
     });
     // Send filters
     this.searchEvent.emit(filters);
@@ -69,7 +71,7 @@ export class SearchComponent implements OnInit {
 
   // Delete when getting back-end
   private mockApiNumber(nb: string): string {
-    return ('00' + nb).slice(-3);
+    return nb.length < 3 ? ('00' + nb).slice(-3) : nb;
   }
 
   public fetchResults(checkedModules: Module[]): void {
@@ -105,10 +107,10 @@ export class SearchComponent implements OnInit {
 
     // Close modal after receive filters from her.
     this.closeModal();
-    inputTerm ? this.applyFilter(inputTerm) : this.applyFilter(null);
+    this.applyFilter(inputTerm);
   }
 
-  // Check if some modules is checked on first filter and store number of modules checked
+  // Check if some modules is checked on filter and store number of modules checked
   public countCheckFiltersOnModules(checkedModules: Module[], value: number): number {
     if (checkedModules.length && value !== checkedModules.length) {
       return checkedModules.length - value;
@@ -121,7 +123,7 @@ export class SearchComponent implements OnInit {
     this.categories = [];
     // if modal already opened, reset type
     if (this.modalTypeOpened === modalType) {
-      this.modalTypeOpened = undefined;
+      this.closeModal();
     } else if (this.modalTypeOpened !== modalType) {
       this.modalTypeOpened = modalType;
       this.fakeData(modalType);
@@ -143,6 +145,38 @@ export class SearchComponent implements OnInit {
       .replace(/[\u0300-\u036f'’°()]/g, '')
       .replace(/[\s-]/g, ' ')
       .replace('?', '');
+  }
+  // Get adress and put it in input
+  public locateMe(): void {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const longitude = position.coords.longitude;
+      const latitude = position.coords.latitude;
+      this.geoJsonService.getAddressByCoord(longitude, latitude).subscribe((geoPosition: GeoJson) => {
+        const adress = geoPosition.properties.name;
+        this.searchForm.setValue({ searchTerm: adress });
+        this.applyFilter(adress);
+      });
+    });
+  }
+  // Management of the checkbox event (Check / Uncheck)
+  public numericPassCheck(event, categ): void {
+    const checkValue: string = event.target.value;
+    const inputTerm = this.searchForm.get('searchTerm').value;
+    if (event.target.checked) {
+      this.checkedModulesFilter.push(new Module(checkValue, categ));
+      this.numberMoreFiltersChecked++;
+    } else {
+      // Check if the unchecked module is present in the list and remove it
+      const index = this.checkedModulesFilter.findIndex((m: Module) => m.id === checkValue && m.text === categ);
+      if (index > -1) {
+        this.checkedModulesFilter.splice(index, 1);
+        this.numberMoreFiltersChecked = this.countCheckFiltersOnModules(
+          this.checkedModulesFilter,
+          this.numberAccompanimentChecked + this.numberTrainingChecked
+        );
+      }
+    }
+    this.applyFilter(inputTerm);
   }
 
   // Get the correct list of checkbox/modules depending on the type of modal.

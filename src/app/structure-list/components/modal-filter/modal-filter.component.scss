@@ -29,7 +29,7 @@
   margin-top: 3.5px;
   @include background-hash;
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 16px;
   }
   ::-webkit-scrollbar-track {
     background: $grey-6;
@@ -42,14 +42,18 @@
     overflow-y: auto;
     max-width: 1100px;
     border-bottom: 1px solid $grey;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     max-height: 438px;
     .blockFiltre {
       width: 100%;
-      padding: 32px 40px 0px 40px;
+      margin: 0 32px;
+      padding: 40px 0;
       min-width: 450px;
+      border-bottom: 1px dashed $grey-4;
+
       &:last-child {
         padding-bottom: 32px;
+        border-bottom: none;
       }
     }
     .blockLigne {
@@ -60,7 +64,6 @@
       -webkit-column-gap: 46px;
       column-count: 2;
       column-gap: 46px;
-      column-rule: dashed 1px $grey;
       margin: 0px;
       @media #{$large-phone} {
         -moz-column-count: 1;
@@ -69,10 +72,13 @@
       }
     }
     .ligneFiltre {
-      padding: 5px 0 5px 0;
+      padding: 0 5px;
     }
     h4 {
       @include cn-bold-14;
+      line-height: 17px;
+      text-transform: uppercase;
+      color: $grey-3;
       display: flex;
       align-items: center;
       margin-top: 0;
@@ -80,6 +86,8 @@
     }
     .nbResult {
       @include cn-regular-14;
+      line-height: 16px;
+      color: $grey-3;
     }
     label {
       @include cn-regular-14;
@@ -88,16 +96,37 @@
   .footer {
     margin: 0px 20px 16px 0;
     a {
-      @include cn-bold-14;
-      display: flex;
-      align-items: center;
-      text-decoration: underline;
-      color: $secondary-color;
+      @include btn-search-addStructure;
+      border: 1px solid transparent;
+      padding: 8px 8px 6px 8px;
+
+      &:hover {
+        color: $blue-hover;
+      }
+      &:focus {
+        color: $secondary-color;
+        border-color: $secondary-color;
+        border-radius: 4px;
+      }
+      &:active {
+        border: none;
+        color: $blue-active;
+      }
     }
     height: 32px;
     button {
       @include btn-search-filter;
-      @include cn-bold-14;
+      &:hover {
+        background-color: $blue-hover;
+      }
+      &:focus {
+        background-color: $white;
+        border-color: $secondary-color;
+        color: $secondary-color;
+      }
+      &:active {
+        background-color: $blue-active;
+      }
     }
   }
 }
