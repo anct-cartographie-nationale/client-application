@@ -32,6 +32,9 @@ export class HomeComponent implements OnInit {
 
   public getStructures(filters: Filter[]): void {
     this.structureService.getStructures(filters).subscribe((structures) => {
+      console.log(filters);
+      filters ? (structures = this.applyFilters(structures, filters)) : structures;
+
       Promise.all(
         structures.map((structure) => {
           if (this.geolocation) {
@@ -46,6 +49,28 @@ export class HomeComponent implements OnInit {
         this.structures = _.sortBy(structureList, ['distance']);
       });
     });
+  }
+
+  /**
+   *  Delete when we have back-end
+   *  Fix a bug with Json-server request
+   */
+  private applyFilters(structures, filters): Structure[] {
+    let structuresFiltered = [];
+    structures.forEach((s: Structure) => {
+      let count = 0;
+      filters.forEach((filter: Filter) => {
+        let properties: string[] = [];
+        properties = s[filter.name];
+        if (properties && properties.includes(filter.value)) {
+          count++;
+        }
+      });
+      if (count === filters.length) {
+        structuresFiltered.push(s);
+      }
+    });
+    return structuresFiltered;
   }
 
   /**

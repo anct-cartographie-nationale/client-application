@@ -17,19 +17,47 @@
 }
 .content {
   margin: 10px 0 0px 0;
-  .icon {
-    padding: 0 6px 0 6px;
-    border-radius: 4px;
-    cursor: pointer;
-    &.pin {
-      margin-bottom: 4px;
-    }
-  }
+
   input {
     @include cn-regular-14;
     @include input-search;
   }
   .searchSection {
+    .icon {
+      background-color: transparent;
+      border: 1px solid transparent;
+      outline: none;
+      cursor: pointer;
+      &.pin {
+        padding: 4px 6px 8px 6px;
+        &:hover {
+          .ico-pin-search {
+            background-color: $blue-hover;
+          }
+        }
+        &:focus {
+          border-color: $secondary-color;
+          .ico-pin-search {
+            background-color: $secondary-color;
+          }
+        }
+        &:active {
+          border-color: transparent;
+          .ico-pin-search {
+            background-color: $blue-active;
+          }
+        }
+      }
+      &.close {
+        padding: 4px 7px 10px 5px;
+        &:focus {
+          border-color: $secondary-color;
+        }
+        &:active {
+          border-color: transparent;
+        }
+      }
+    }
     .separator {
       height: 100%;
       width: 2px;
@@ -38,20 +66,33 @@
     }
     .inputSection {
       padding: 6px 3px 6px 6px;
-      min-width: 463px;
+      width: 100%;
       border: 1px solid $grey-4;
       background-color: $white;
       height: 40px;
     }
-    .searchButton {
-      border: 1px solid $grey-4;
-      border-radius: 6px;
+    .btnSearch {
       @include background-hash;
+      border: 1px solid $grey-4;
+      border-radius: 4px;
       padding: 0 0 4px 5px;
-      button {
-        border-radius: 6px;
+      outline: none;
+      &:hover {
+        border-color: $grey-6;
+        .searchButton {
+          color: $grey-3;
+        }
+      }
+      &:focus {
+        border-color: $blue-hover;
+      }
+      &:active {
+        background: none;
+        border-color: $grey-6;
+      }
+      .searchButton {
+        border-radius: 4px;
         @include btn-search;
-        @include cn-bold-14;
       }
     }
   }
@@ -59,15 +100,15 @@
     padding: 16px 0 0px 0;
     button {
       @include btn-filter;
-      .btnText {
-        @include cn-regular-14;
+      &:focus {
+        border-color: $secondary-color;
       }
     }
     .containCheckedFilters {
       border-color: $secondary-color;
     }
     .selected {
-      border-color: $primary-color;
+      border-color: $primary-color !important;
       color: inherit;
       .arrow {
         background-color: transparent;
@@ -92,11 +133,24 @@
 }
 
 .footerSearchSection {
-  margin: 17px 0px 17px 0px;
-
+  margin: 8px 0px 8px 0px;
+  height: 40px;
   a {
-    @include cn-bold-14;
-    font-weight: bold;
-    text-decoration: underline;
+    @include btn-search-addStructure;
+    border: 1px solid transparent;
+    padding: 8px 8px 6px 8px;
+
+    &:hover {
+      color: $blue-hover;
+    }
+    &:focus {
+      color: $secondary-color;
+      border-color: $secondary-color;
+      border-radius: 4px;
+    }
+    &:active {
+      border: none;
+      color: $blue-active;
+    }
   }
 }

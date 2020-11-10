@@ -45,4 +45,8 @@ export class SearchService {
     });
     return category;
   }
+
+  public getIndex(array: Module[], id: string, categ: string): number {
+    return array.findIndex((m: Module) => m.id === id && m.text === categ);
+  }
 }

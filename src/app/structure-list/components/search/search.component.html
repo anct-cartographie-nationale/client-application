@@ -7,21 +7,20 @@
       [formGroup]="searchForm"
       fxLayout="row"
       fxLayoutGap="1.5vw"
+      fxLayoutAlign=" center"
       (ngSubmit)="applyFilter(searchForm.value.searchTerm)"
     >
       <div class="inputSection" fxLayout="row" fxLayoutAlign="space-between center">
         <input type="text" formControlName="searchTerm" placeholder="Rechercher une adresse, une association..." />
-        <div class="icon close" (click)="clearInput()">
-          <div class="ico-close-search"></div>
-        </div>
+        <button type="button" (click)="clearInput()" class="icon close"><div class="ico-close-search"></div></button>
+
         <span class="separator"></span>
-        <div class="icon pin">
-          <div class="ico-pin-search blue"></div>
-        </div>
+        <button class="icon pin" type="button" (click)="locateMe()"><div class="ico-pin-search"></div></button>
       </div>
-      <div class="searchButton">
-        <button type="submit">Rechercher</button>
-      </div>
+
+      <button class="btnSearch" type="submit">
+        <div class="searchButton">Rechercher</div>
+      </button>
     </form>
   </div>
   <div (clickOutside)="closeModal()">
@@ -81,7 +80,12 @@
   <div class="checkbox">
     <div class="checkboxItem">
       <label>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          value="Pass numérique"
+          [checked]="searchService.getIndex(checkedModulesFilter, 'Pass numérique', 'Labels et qualifications') > -1"
+          (change)="numericPassCheck($event, 'Labels et qualifications')"
+        />
         <span class="customCheck"></span>
         <div class="label">Pass numérique</div>
       </label>
