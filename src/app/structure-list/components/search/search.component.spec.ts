@@ -33,7 +33,7 @@ describe('SearchComponent', () => {
 
   // applyFilter function
   it('should emit filters', () => {
-    const filter: Filter[] = [new Filter('nomDeVotreStructure', 'valInput', false)];
+    const filter: Filter[] = [new Filter('nomDeVotreStructure', 'valInput')];
     spyOn(component.searchEvent, 'emit');
     component.applyFilter('valInput');
     expect(component.searchEvent.emit).toHaveBeenCalled();

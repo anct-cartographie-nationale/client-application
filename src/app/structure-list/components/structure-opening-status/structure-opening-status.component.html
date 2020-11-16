@@ -1,4 +1,4 @@
-<div class="statusStructure" fxLayout="row" fxLayoutAlign="start center">
+<div class="statusStructure" fxLayout="row" fxLayoutAlign="start center" *ngIf="structure">
   <div>
     <span *ngIf="structure.isOpen; else closed" class="ico-dot-available"></span>
     <span>{{ structure.openDisplay() }}</span>

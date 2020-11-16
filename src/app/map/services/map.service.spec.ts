@@ -42,6 +42,6 @@ describe('MapService', () => {
     expect(service.getMarker(2)).toEqual(null);
   });
   it('should not get marker, empty', () => {
-    expect(service.getMarker(1)).toEqual(null);
+    expect(service.getMarker(2)).toEqual(null);
   });
 });
