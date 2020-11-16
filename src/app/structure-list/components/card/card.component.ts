@@ -38,6 +38,7 @@ export class CardComponent implements OnInit {
   }
 
   public cardClicked(): void {
+    console.log(this.structure);
     this.showDetails.emit(this.structure);
   }
 
