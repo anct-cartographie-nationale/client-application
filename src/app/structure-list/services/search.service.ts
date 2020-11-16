@@ -36,8 +36,6 @@ export class SearchService {
   public setCountModules(category: Category, structureCountTab: StructureCounter[]): Category {
     category.modules.forEach((m: Module) => {
       for (let i = 0; i < structureCountTab.length; i++) {
-        // Force type
-        m.id = m.id.toString();
         if (structureCountTab[i].id === m.id) {
           m.count = structureCountTab[i].count;
         }
