@@ -28,6 +28,16 @@ export class MapService {
     return marker;
   }
 
+  public createMDMMarker(lat: number, lon: number): Marker {
+    const markerIcon = divIcon({
+      className: null,
+      html: '<svg width="64" height="81"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
+      iconSize: [35, 41],
+      iconAnchor: [13, 41],
+    });
+    return new Marker([lat, lon], { icon: markerIcon });
+  }
+
   /**
    * Toogle a tooltip
    * @param id marker id

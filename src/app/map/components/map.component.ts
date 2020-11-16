@@ -139,6 +139,8 @@ export class MapComponent implements OnChanges {
       width: 256,
       height: 256,
     };
+    // Init mdm
+    this.initMDMLayer();
     // Init WMS service with param from data.grandlyon.com
     const carteLayer = tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -153,6 +155,15 @@ export class MapComponent implements OnChanges {
       minZoom: 10,
       layers: [carteLayer, metroMaps],
     };
+  }
+
+  private initMDMLayer(): void {
+    this.geoJsonService.getMDMGeoJson().subscribe((res) => {
+      console.log('test', res);
+      res.forEach((mdm) => {
+        this.mapService.createMDMMarker(mdm.geometry.getLon(), mdm.geometry.getLat()).addTo(this.map);
+      });
+    });
   }
 
   /**
