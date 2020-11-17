@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { divIcon, Map } from 'leaflet';
+import { DivIcon, divIcon, Map } from 'leaflet';
 import { Marker } from 'leaflet';
 
 @Injectable({
@@ -7,17 +7,35 @@ import { Marker } from 'leaflet';
 })
 export class MapService {
   private static markersList = {};
+  public markerIconHover = divIcon({
+    className: null,
+    html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker-locate"></use></svg>',
+    iconSize: [35, 41],
+    iconAnchor: [13, 41],
+  });
+  public markerIcon = divIcon({
+    className: null,
+    html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
+    iconSize: [35, 41],
+    iconAnchor: [13, 41],
+  });
+  public markerIconMdm = divIcon({
+    className: null,
+    html: '<svg width="19" height="24"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
+    iconSize: [19, 24],
+    iconAnchor: [19, 24],
+  });
+  public markerIconMdmHover = divIcon({
+    className: null,
+    html: '<svg width="19" height="24"><use xlink:href="assets/ico/sprite.svg#mdm-hover"></use></svg>',
+    iconSize: [19, 24],
+    iconAnchor: [19, 24],
+  });
   constructor() {}
 
   public createMarker(lat: number, lon: number, id: number, tooltip?: string): Marker {
-    const markerIcon = divIcon({
-      className: null,
-      html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
-      iconSize: [35, 41],
-      iconAnchor: [13, 41],
-    });
-    const marker = new Marker([lat, lon], { icon: markerIcon });
-    marker.on('mouseover', (evt) => {
+    const marker = new Marker([lat, lon], { icon: this.markerIcon });
+    marker.on('mouseclick', (evt) => {
       evt.target.openPopup();
     });
 
@@ -25,17 +43,26 @@ export class MapService {
       marker.bindPopup(tooltip);
     }
     MapService.markersList[id] = marker;
-    return marker;
+    return this.bindMousEventOnMarker(marker, this.markerIcon, this.markerIconHover);
   }
 
   public createMDMMarker(lat: number, lon: number): Marker {
-    const markerIcon = divIcon({
-      className: null,
-      html: '<svg width="19" height="24"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
-      iconSize: [19, 24],
-      iconAnchor: [19, 24],
+    const marker = new Marker([lat, lon], { icon: this.markerIconMdm, attribution: 'mdm' });
+
+    return this.bindMousEventOnMarker(marker, this.markerIconMdm, this.markerIconMdmHover);
+  }
+
+  private bindMousEventOnMarker(marker: Marker, regularIcon: DivIcon, hoverIcon: DivIcon): Marker {
+    marker.on('mouseover', (e) => {
+      if (marker.getIcon() === regularIcon) {
+        marker.setIcon(hoverIcon);
+      }
     });
-    return new Marker([lat, lon], { icon: markerIcon, attribution: 'mdm' });
+
+    marker.on('mouseout', (e) => {
+      marker.setIcon(regularIcon);
+    });
+    return marker;
   }
 
   /**
@@ -64,13 +91,7 @@ export class MapService {
    */
   public setSelectedMarker(id: number): void {
     if (id) {
-      const markerIcon = divIcon({
-        className: null,
-        html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker-locate"></use></svg>',
-        iconSize: [35, 41],
-        iconAnchor: [13, 41],
-      });
-      this.getMarker(id).setIcon(markerIcon);
+      this.getMarker(id).setIcon(this.markerIconHover);
     }
   }
 
