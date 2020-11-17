@@ -29,6 +29,7 @@
 .logo {
   @include cn-regular-14;
   text-align: initial;
+  outline: none;
   p {
     margin: 0;
   }
