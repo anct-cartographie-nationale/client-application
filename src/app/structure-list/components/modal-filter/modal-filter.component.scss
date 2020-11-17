@@ -28,6 +28,7 @@
   border-radius: 6px;
   margin-top: 3.5px;
   @include background-hash;
+  border: 1px solid $grey-4;
   ::-webkit-scrollbar {
     width: 16px;
   }

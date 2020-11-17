@@ -7,11 +7,11 @@
 .map-wrapper {
   border-radius: 6px;
   @include background-hash;
+  border: 1px solid $grey-4;
 }
 
 #map {
   height: calc(100vh - #{$header-height} - #{$footer-height} - 120px);
-  width: 100%;
   border: 10px solid $white;
   border-radius: 6px;
 }
