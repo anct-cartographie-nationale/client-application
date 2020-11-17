@@ -3,6 +3,7 @@
 @import '../../../assets/scss/icons';
 @import '../../../assets/scss/typography';
 @import '../../../assets/scss/shapes';
+@import '../../../assets/scss/buttons';
 
 .map-wrapper {
   border-radius: 6px;
@@ -11,9 +12,13 @@
 }
 
 #map {
-  height: calc(100vh - #{$header-height} - #{$footer-height} - 120px);
+  height: calc(100vh - #{$header-height} - #{$footer-height} - 87px);
   border: 10px solid $white;
   border-radius: 6px;
+}
+
+::ng-deep .leaflet-popup-close-button {
+  display: none;
 }
 
 ::ng-deep .fa-map-marker {
@@ -55,9 +60,11 @@
       stroke-width: unset !important;
     }
   }
+  margin-top: 0 !important;
+  margin-left: -21px !important;
 }
 
-::ng-deep .leaflet-tooltip {
+::ng-deep .leaflet-popup {
   padding: 8px 10px 8px 10px;
   border-radius: 6px;
   h1 {
@@ -70,9 +77,18 @@
     @include cn-regular-16;
     margin: 0 0 13px 0;
   }
-  div {
-    align-items: center;
-    display: flex;
+  .pop-up {
+    text-align: center;
+    padding-top: 20px;
+
+    button {
+      @include btn-search-filter;
+      @include cn-bold-14;
+      width: 149px;
+    }
+  }
+  span {
+    display: inline-block;
   }
 }
 

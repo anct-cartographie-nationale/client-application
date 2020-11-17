@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { divIcon } from 'leaflet';
-import { icon, Marker, Map } from 'leaflet';
+import { divIcon, Map } from 'leaflet';
+import { Marker } from 'leaflet';
 
 @Injectable({
   providedIn: 'root',
@@ -17,12 +17,12 @@ export class MapService {
       iconAnchor: [13, 41],
     });
     const marker = new Marker([lat, lon], { icon: markerIcon });
+    marker.on('mouseover', (evt) => {
+      evt.target.openPopup();
+    });
 
     if (tooltip) {
-      marker.bindTooltip(tooltip, {
-        opacity: 1,
-        direction: 'top',
-      });
+      marker.bindPopup(tooltip);
     }
     MapService.markersList[id] = marker;
     return marker;
@@ -44,7 +44,7 @@ export class MapService {
    */
   public toogleToolTip(id: number): void {
     if (id) {
-      this.getMarker(id).toggleTooltip();
+      this.getMarker(id).togglePopup();
     }
   }
 
@@ -96,5 +96,15 @@ export class MapService {
    */
   public getMarker(id: number): Marker {
     return MapService.markersList[id] ? MapService.markersList[id] : null;
+  }
+
+  public cleanMap(map: Map): Map {
+    MapService.markersList = {};
+    if (map) {
+      map.eachLayer((layer) => {
+        if (layer instanceof Marker) map.removeLayer(layer);
+      });
+    }
+    return map;
   }
 }

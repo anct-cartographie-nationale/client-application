@@ -34,8 +34,8 @@
       </div>
     </div>
     <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
-      <a tabindex="0" (click)="clearFilters()">Effacer</a>
-      <button type="button" (click)="emitModules(checkedModules)">Appliquer</button>
+      <a (click)="clearFilters()" tabindex="0">Effacer</a>
+      <app-button [style]="'button'" [link]="" [text]="'Appliquer'" (click)="emitModules(checkedModules)"></app-button>
     </div>
   </div>
 </div>

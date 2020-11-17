@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Filter } from './models/filter.model';
 import { Structure } from '../models/structure.model';
 import { GeoJson } from '../map/models/geojson.model';
@@ -7,19 +7,24 @@ import { GeoJson } from '../map/models/geojson.model';
   templateUrl: './structure-list.component.html',
   styleUrls: ['./structure-list.component.scss'],
 })
-export class StructureListComponent implements OnInit {
+export class StructureListComponent implements OnChanges {
   @Input() public structureList: Structure[];
   @Output() searchEvent = new EventEmitter();
   @Input() public location: GeoJson;
+  @Input() public selectedStructure: Structure = new Structure();
   @Output() public displayMapMarkerId: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
   @Output() public hoverOut: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
   @Output() public selectedMarkerId: EventEmitter<number> = new EventEmitter<number>();
+  @Output() loadMoreStructures = new EventEmitter();
   public showStructureDetails = false;
   public structure: Structure;
 
   constructor() {}
-  ngOnInit(): void {}
-
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.selectedStructure && this.selectedStructure) {
+      this.showDetails(this.selectedStructure);
+    }
+  }
   public fetchResults(filters: Filter[]): void {
     this.searchEvent.emit(filters);
   }
@@ -40,5 +45,14 @@ export class StructureListComponent implements OnInit {
 
   public mouseOut(): void {
     this.displayMapMarkerId.emit([undefined]);
+  }
+
+  public onScrollDown(event): void {
+    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 100) {
+      console.log('loading...');
+    }
+    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 50) {
+      this.loadMoreStructures.emit();
+    }
   }
 }

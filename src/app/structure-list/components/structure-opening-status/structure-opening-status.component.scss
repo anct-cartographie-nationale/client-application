@@ -8,3 +8,15 @@
     display: inline-block;
   }
 }
+.details {
+  span {
+    margin-right: 12px;
+    padding: 1px;
+    margin-left: 5px;
+    @include cn-regular-16;
+  }
+  .text {
+    margin-top: 9px;
+    margin-bottom: 9px;
+  }
+}

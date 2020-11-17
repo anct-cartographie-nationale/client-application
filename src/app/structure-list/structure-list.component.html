@@ -1,9 +1,11 @@
 <div class="topBlock">
   <app-structure-list-search (searchEvent)="fetchResults($event)"></app-structure-list-search>
 </div>
-<div class="nbStructuresLabel">{{ structureList.length }} structure{{ structureList.length > 1 ? 's' : '' }}</div>
+<div class="nbStructuresLabel">
+  {{ structureList ? structureList.length : '0' }} structure{{ structureList && structureList.length > 1 ? 's' : '' }}
+</div>
 
-<div class="listCard" (mouseout)="mouseOut()">
+<div (scroll)="onScrollDown($event)" class="listCard" (mouseout)="mouseOut()">
   <app-card
     *ngFor="let structure of structureList"
     [structure]="structure"
