@@ -100,3 +100,9 @@
     margin-right: 10px;
   }
 }
+
+@media print {
+  .map-wrapper {
+    display: none;
+  }
+}
