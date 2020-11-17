@@ -45,6 +45,8 @@ export class StructureDetailsComponent implements OnInit {
         return 'group';
       case AccessModality.meeting:
         return 'calendar';
+      case AccessModality.meetingOnly:
+        return 'calendar';
       case AccessModality.numeric:
         return 'tel';
       default:

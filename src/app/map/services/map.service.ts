@@ -31,7 +31,7 @@ export class MapService {
   public createMDMMarker(lat: number, lon: number): Marker {
     const markerIcon = divIcon({
       className: null,
-      html: '<svg width="64" height="81"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
+      html: '<svg width="19" height="24"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
       iconSize: [35, 41],
       iconAnchor: [13, 41],
     });
