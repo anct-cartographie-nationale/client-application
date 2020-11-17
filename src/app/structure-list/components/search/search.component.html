@@ -12,56 +12,55 @@
     >
       <div class="inputSection" fxLayout="row" fxLayoutAlign="space-between center">
         <input type="text" formControlName="searchTerm" placeholder="Rechercher une adresse, une association..." />
-        <button type="button" (click)="clearInput()" class="icon close"><div class="ico-close-search"></div></button>
-
+        <button (click)="clearInput()" class="icon close" type="button"><div class="ico-close-search"></div></button>
         <span class="separator"></span>
-        <button class="icon pin" type="button" (click)="locateMe()"><div class="ico-pin-search"></div></button>
+        <button (click)="locateMe()" class="icon pin" type="button"><div class="ico-pin-search"></div></button>
       </div>
-
-      <button class="btnSearch" type="submit">
-        <div class="searchButton">Rechercher</div>
-      </button>
+      <app-button [style]="'buttonWithHash'" [text]="'Rechercher'" [type]="'submit'"></app-button>
     </form>
   </div>
   <div (clickOutside)="closeModal()">
     <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
       <button
+        class="btn-filter"
         type="button"
+        fxLayout="row"
         [ngClass]="{
           selected: modalTypeOpened === TypeModal.accompaniment,
           containCheckedFilters: numberAccompanimentChecked
         }"
-        (click)="openModal(TypeModal.accompaniment)"
-        fxLayout="row"
         fxLayoutAlign="space-between center"
+        (click)="openModal(TypeModal.accompaniment)"
       >
-        <span class="btnText">Accompagnement</span>
+        <span>Accompagnement</span>
         <div class="arrow"></div>
       </button>
       <button
+        class="btn-filter"
         type="button"
+        fxLayout="row"
         [ngClass]="{
           selected: modalTypeOpened === TypeModal.training,
           containCheckedFilters: numberTrainingChecked
         }"
-        (click)="openModal(TypeModal.training)"
-        fxLayout="row"
         fxLayoutAlign="space-between center"
+        (click)="openModal(TypeModal.training)"
       >
-        <span class="btnText">Formations</span>
+        <span>Formations</span>
         <div class="arrow"></div>
       </button>
       <button
+        class="btn-filter"
         type="button"
+        fxLayout="row"
         [ngClass]="{
           selected: modalTypeOpened === TypeModal.moreFilters,
           containCheckedFilters: numberMoreFiltersChecked
         }"
-        (click)="openModal(TypeModal.moreFilters)"
-        fxLayout="row"
         fxLayoutAlign="space-between center"
+        (click)="openModal(TypeModal.moreFilters)"
       >
-        <span class="btnText">Plus de filtres</span>
+        <span>Plus de filtres</span>
         <div class="arrow"></div>
       </button>
     </div>
@@ -91,7 +90,10 @@
       </label>
     </div>
   </div>
-  <a href="https://services.formulaireextranet.grandlyon.com/saisie-fiche-structure/" target="_blank"
-    >Ajouter une structure</a
-  >
+  <a (click)="openConfirmationModal()" tabindex="0">Ajouter une structure</a>
 </div>
+<app-modal
+  [openned]="isConfirmationModalOpen"
+  [content]="confirmationModalContent"
+  (closed)="closeConfirmationModal()"
+></app-modal>

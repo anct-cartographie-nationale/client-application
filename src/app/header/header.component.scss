@@ -15,10 +15,18 @@
   padding: 0 20px;
   a {
     font-style: italic;
-    color: $primary-color;
+    color: $grey-2;
     &.active {
       font-weight: bold;
       color: $grey-1;
+      &:before {
+        color: $primary-color;
+        content: '// ';
+      }
+      &:after {
+        color: $primary-color;
+        content: ' //';
+      }
     }
   }
   .right-header {

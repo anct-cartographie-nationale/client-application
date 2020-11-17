@@ -1,13 +1,22 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds, Control } from 'leaflet';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds, Marker } from 'leaflet';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Structure } from '../../models/structure.model';
 import { GeoJson } from '../models/geojson.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
-import { LeafletControlLayersChanges } from '@asymmetrik/ngx-leaflet';
 import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-map',
@@ -19,6 +28,9 @@ export class MapComponent implements OnChanges {
   @Input() public toogleToolTipId: number;
   @Input() public selectedMarkerId: number;
   @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
+  @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+  private currentStructure: Structure;
+
   public map: Map;
   public mapOptions: MapOptions;
   // Init locate options
@@ -30,13 +42,21 @@ export class MapComponent implements OnChanges {
     circlePadding: [5, 5],
   };
 
+  // Add listener on the popup button to show details of structure
+  @HostListener('document:click', ['$event'])
+  public clickout(event): void {
+    if (event.target.classList.contains('btnShowDetails')) {
+      this.selectedStructure.emit(this.currentStructure);
+    }
+  }
+
   constructor(private mapService: MapService, private geoJsonService: GeojsonService) {
     this.initializeMapOptions();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.structures) {
-      this.getStructurePosition();
+      this.handleStructurePosition(changes.structures.previousValue);
     }
     // Handle map marker tooltip
     if (changes.toogleToolTipId && changes.toogleToolTipId.currentValue !== changes.toogleToolTipId.previousValue) {
@@ -59,12 +79,31 @@ export class MapComponent implements OnChanges {
   /**
    * Get structures positions and add marker corresponding to those positons on the map
    */
-  private getStructurePosition(): void {
-    this.structures.forEach((element: Structure) => {
+  private handleStructurePosition(previousStructuresValue: Structure[]): void {
+    // If there is more structure than before, append them
+    if (
+      previousStructuresValue &&
+      previousStructuresValue.length > 0 &&
+      previousStructuresValue.length < this.structures.length
+    ) {
+      const newStructures = _.differenceWith(this.structures, previousStructuresValue, _.isEqual);
+      this.getStructuresPositions(newStructures);
+    } else if (this.structures) {
+      this.map = this.mapService.cleanMap(this.map);
+      this.getStructuresPositions(this.structures);
+    }
+  }
+
+  private getStructuresPositions(structureListe: Structure[]): void {
+    structureListe.forEach((element: Structure) => {
       this.getCoord(element.voie).subscribe((coord: GeoJson) => {
         this.mapService
           .createMarker(coord.geometry.getLon(), coord.geometry.getLat(), element.id, this.buildToolTip(element))
-          .addTo(this.map);
+          .addTo(this.map)
+          // store structure before user click on button
+          .on('popupopen', () => {
+            this.currentStructure = element;
+          });
       });
     });
   }
@@ -82,7 +121,6 @@ export class MapComponent implements OnChanges {
         cssAvailabilityClass = 'unknown';
       }
     }
-
     return (
       '<h1>' +
       structure.nomDeVotreStructure +
@@ -94,7 +132,7 @@ export class MapComponent implements OnChanges {
       cssAvailabilityClass +
       '"></span><span>' +
       structure.openDisplay() +
-      '</span></div>'
+      '</span></div><div class="pop-up"><button type="button" class="btnShowDetails">Voir</button></div>'
     );
   }
 

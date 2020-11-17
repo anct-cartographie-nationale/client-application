@@ -1,10 +1,7 @@
-@import '../../../../assets/scss/icons';
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
-@import '../../../../assets/scss/breakpoint';
-@import '../../../../assets/scss/shapes';
-@import '../../../../assets/scss/buttons';
 @import '../../../../assets/scss/inputs';
+@import '../../../../assets/scss/hyperlink';
 
 .header {
   .title {
@@ -23,41 +20,6 @@
     @include input-search;
   }
   .searchSection {
-    .icon {
-      background-color: transparent;
-      border: 1px solid transparent;
-      outline: none;
-      cursor: pointer;
-      &.pin {
-        padding: 4px 6px 8px 6px;
-        &:hover {
-          .ico-pin-search {
-            background-color: $blue-hover;
-          }
-        }
-        &:focus {
-          border-color: $secondary-color;
-          .ico-pin-search {
-            background-color: $secondary-color;
-          }
-        }
-        &:active {
-          border-color: transparent;
-          .ico-pin-search {
-            background-color: $blue-active;
-          }
-        }
-      }
-      &.close {
-        padding: 4px 7px 10px 5px;
-        &:focus {
-          border-color: $secondary-color;
-        }
-        &:active {
-          border-color: transparent;
-        }
-      }
-    }
     .separator {
       height: 100%;
       width: 2px;
@@ -71,41 +33,31 @@
       background-color: $white;
       height: 40px;
     }
-    .btnSearch {
-      @include background-hash;
-      border: 1px solid $grey-4;
-      border-radius: 4px;
-      padding: 0 0 4px 5px;
-      outline: none;
-      &:hover {
-        border-color: $grey-6;
-        .searchButton {
-          color: $grey-3;
-        }
-      }
-      &:focus {
-        border-color: $blue-hover;
-      }
-      &:active {
-        background: none;
-        border-color: $grey-6;
-      }
-      .searchButton {
-        border-radius: 4px;
-        @include btn-search;
-      }
-    }
   }
   .btnSection {
     padding: 16px 0 0px 0;
     button {
-      @include btn-filter;
-      &:focus {
-        border-color: $secondary-color;
+      background: $white;
+      height: 40px;
+      width: 190px;
+      border: 1px solid $grey-4;
+      padding: 3px 16px 3px 16px;
+      outline: none;
+      border-radius: 4px;
+      cursor: pointer;
+      @include btn-normal;
+      .arrow {
+        background-color: transparent;
+        border-bottom: 1px solid $grey-2;
+        border-right: 1px solid $grey-2;
+        transform: translateY(-25%) rotate(45deg);
+        margin: 0 5px 0 10px;
+        height: 7px;
+        width: 7px;
       }
-    }
-    .containCheckedFilters {
-      border-color: $secondary-color;
+      &:focus {
+        border-color: $blue-hover;
+      }
     }
     .selected {
       border-color: $primary-color !important;
@@ -120,14 +72,8 @@
         width: 7px;
       }
     }
-    .arrow {
-      background-color: transparent;
-      border-bottom: 1px solid $grey-2;
-      border-right: 1px solid $grey-2;
-      transform: translateY(-25%) rotate(45deg);
-      margin: 0 5px 0 10px;
-      height: 7px;
-      width: 7px;
+    .containCheckedFilters {
+      border-color: $secondary-color;
     }
   }
 }
@@ -135,22 +81,42 @@
 .footerSearchSection {
   margin: 8px 0px 8px 0px;
   height: 40px;
-  a {
-    @include btn-search-addStructure;
-    border: 1px solid transparent;
-    padding: 8px 8px 6px 8px;
+}
 
+.icon {
+  background-color: transparent;
+  border: 1px solid transparent;
+  outline: none;
+  cursor: pointer;
+  &.pin {
+    padding: 4px 6px 8px 6px;
     &:hover {
-      color: $blue-hover;
+      .ico-pin-search {
+        background-color: $blue-hover;
+      }
     }
     &:focus {
-      color: $secondary-color;
       border-color: $secondary-color;
-      border-radius: 4px;
+      .ico-pin-search {
+        background-color: $secondary-color;
+      }
     }
     &:active {
-      border: none;
-      color: $blue-active;
+      border-color: transparent;
+      .ico-pin-search {
+        background-color: $blue-active;
+      }
     }
   }
+  &.close {
+    &:focus {
+      border-color: $secondary-color;
+    }
+    &:active {
+      border-color: transparent;
+    }
+  }
+}
+a {
+  @include hyperlink;
 }
