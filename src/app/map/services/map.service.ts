@@ -32,10 +32,10 @@ export class MapService {
     const markerIcon = divIcon({
       className: null,
       html: '<svg width="19" height="24"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
-      iconSize: [35, 41],
-      iconAnchor: [13, 41],
+      iconSize: [19, 24],
+      iconAnchor: [19, 24],
     });
-    return new Marker([lat, lon], { icon: markerIcon });
+    return new Marker([lat, lon], { icon: markerIcon, attribution: 'mdm' });
   }
 
   /**
@@ -102,7 +102,9 @@ export class MapService {
     MapService.markersList = {};
     if (map) {
       map.eachLayer((layer) => {
-        if (layer instanceof Marker) map.removeLayer(layer);
+        if (layer instanceof Marker && layer.options.attribution !== 'mdm') {
+          map.removeLayer(layer);
+        }
       });
     }
     return map;

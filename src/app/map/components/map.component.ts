@@ -8,7 +8,19 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds, Marker } from 'leaflet';
+import {
+  latLng,
+  MapOptions,
+  tileLayer,
+  Map,
+  CRS,
+  TileLayer,
+  LatLngBounds,
+  latLngBounds,
+  Marker,
+  layerGroup,
+  polyline,
+} from 'leaflet';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Structure } from '../../models/structure.model';
@@ -86,8 +98,7 @@ export class MapComponent implements OnChanges {
       previousStructuresValue.length > 0 &&
       previousStructuresValue.length < this.structures.length
     ) {
-      const newStructures = _.differenceWith(this.structures, previousStructuresValue, _.isEqual);
-      this.getStructuresPositions(newStructures);
+      this.getStructuresPositions(_.differenceWith(this.structures, previousStructuresValue, _.isEqual));
     } else if (this.structures) {
       this.map = this.mapService.cleanMap(this.map);
       this.getStructuresPositions(this.structures);
@@ -180,6 +191,7 @@ export class MapComponent implements OnChanges {
     // Init mdm
     this.initMDMLayer();
     // Init WMS service with param from data.grandlyon.com
+    layerGroup();
     const carteLayer = tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
       maxZoom: 19,
