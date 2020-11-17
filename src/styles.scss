@@ -132,3 +132,15 @@ a {
 .w-100 {
   width: 100%;
 }
+
+@media print {
+  body,
+  html,
+  .forPrint {
+    height: auto;
+  }
+
+  .content-container {
+    display: none !important;
+  }
+}

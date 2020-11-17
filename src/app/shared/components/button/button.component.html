@@ -1,5 +1,5 @@
 <ng-container *ngIf="style === 'buttonWithHash'">
-  <button class="btnSearch" type="{{ type }}">
+  <button class="btnSearch" type="{{ type }}" (click)="doAction()">
     <div *ngIf="!iconBtn" class="searchButton">{{ text }}</div>
     <div
       *ngIf="iconBtn"

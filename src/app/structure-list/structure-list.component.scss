@@ -19,3 +19,13 @@
 .topBlock {
   padding: 0 25px;
 }
+
+@media print {
+  .listCard {
+    display: none;
+  }
+
+  .hide-on-print {
+    display: none !important;
+  }
+}

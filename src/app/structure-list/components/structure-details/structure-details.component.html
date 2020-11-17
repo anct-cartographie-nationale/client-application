@@ -1,7 +1,7 @@
 <div class="structrue-details-container">
   <!-- Header info -->
   <div fxLayout="row" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
-    <em class="ic-arrow-left clickable" (click)="close()"></em>
+    <em class="ic-arrow-left clickable hide-on-print" (click)="close()"></em>
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
       <div fxLayout="row" fxLayoutAlign="space-between">
         <div fxLayout="column center">
@@ -9,14 +9,21 @@
           <h3>{{ structure.typeDeStructure }}</h3>
         </div>
         <div fxLayout="column" fxLayoutAlign="end">
-          <app-button [type]="'button'" [style]="'buttonWithHash'" [text]="'Imprimer'" [iconBtn]="'print'"></app-button>
+          <app-button
+            class="hide-on-print"
+            [type]="'button'"
+            [style]="'buttonWithHash'"
+            [text]="'Imprimer'"
+            [iconBtn]="'print'"
+            (action)="print()"
+          ></app-button>
         </div>
       </div>
-
       <div fxLayout="row">
         <div fxLayout="column" fxFlex="60%">
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-structure-opening-status
+              class="hide-on-print"
               [structure]="structure"
               [isCalledByDetails]="true"
             ></app-structure-opening-status>

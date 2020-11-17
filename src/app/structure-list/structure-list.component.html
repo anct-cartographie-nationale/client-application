@@ -1,7 +1,7 @@
-<div class="topBlock">
+<div class="topBlock hide-on-print">
   <app-structure-list-search (searchEvent)="fetchResults($event)"></app-structure-list-search>
 </div>
-<div class="nbStructuresLabel">
+<div class="nbStructuresLabel hide-on-print">
   {{ structureList ? structureList.length : '0' }} structure{{ structureList && structureList.length > 1 ? 's' : '' }}
 </div>
 
