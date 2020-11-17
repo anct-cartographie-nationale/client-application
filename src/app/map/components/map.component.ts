@@ -159,7 +159,6 @@ export class MapComponent implements OnChanges {
 
   private initMDMLayer(): void {
     this.geoJsonService.getMDMGeoJson().subscribe((res) => {
-      console.log('test', res);
       res.forEach((mdm) => {
         this.mapService.createMDMMarker(mdm.geometry.getLon(), mdm.geometry.getLat()).addTo(this.map);
       });
