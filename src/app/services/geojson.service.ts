@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Address } from '../models/address.model';
 import { GeoJson } from '../map/models/geojson.model';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,27 @@ export class GeojsonService {
     return this.http
       .get('/reverse/' + '?lon=' + longitude + '&lat=' + latitude)
       .pipe(map((data: { features: any[] }) => new GeoJson(data.features[0])));
+  }
+
+  /**
+   * Parse object to geojosn
+   * @param data string data
+   */
+  private parseToGeoJson(data: string): GeoJson {
+    return new GeoJson(data);
+  }
+
+  /**
+   * Retrive an address by geolocation
+   * @param idVoie Number
+   */
+  public getMDMGeoJson(): Observable<GeoJson[]> {
+    return this.http
+      .get(
+        '/wfs/grandlyon' +
+          '?SERVICE=WFS&VERSION=2.0.0&request=GetFeature&typename=ter_territoire.maison_de_la_metropole&outputFormat=application/json; subtype=geojson&SRSNAME=EPSG:4171&startIndex=0'
+      )
+      .pipe(map((data: { features: any[] }) => _.map(data.features, this.parseToGeoJson)));
   }
 
   /**

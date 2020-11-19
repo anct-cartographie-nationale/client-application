@@ -1,15 +1,33 @@
 <div class="structrue-details-container" *ngIf="structure">
   <!-- Header info -->
   <div fxLayout="row" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
-    <em class="ic-arrow-left clickable" (click)="close()"></em>
+    <em class="ic-arrow-left clickable hide-on-print" (click)="close()"></em>
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
-      <div fxLayout="column" fxLayoutAlign="center">
-        <h2 class="bold">{{ structure.nomDeVotreStructure }}</h2>
-        <h3>{{ structure.typeDeStructure }}</h3>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <div fxLayout="column center">
+          <h2 class="bold">{{ structure.nomDeVotreStructure }}</h2>
+          <h3>{{ structure.typeDeStructure }}</h3>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="end">
+          <app-button
+            class="hide-on-print"
+            [type]="'button'"
+            [style]="'buttonWithHash'"
+            [text]="'Imprimer'"
+            [iconBtn]="'print'"
+            (action)="print()"
+          ></app-button>
+        </div>
       </div>
-      <app-structure-opening-status [structure]="structure"></app-structure-opening-status>
       <div fxLayout="row">
         <div fxLayout="column" fxFlex="60%">
+          <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-structure-opening-status
+              class="hide-on-print"
+              [structure]="structure"
+              [isCalledByDetails]="true"
+            ></app-structure-opening-status>
+          </div>
           <div *ngIf="structure.voie" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'adress'"></app-svg-icon>
             <p>{{ structure.n }} {{ structure.address }}</p>
@@ -27,6 +45,10 @@
           <div *ngIf="structure.courriel" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
             <a [href]="'mailto:' + structure.courriel">{{ structure.courriel }}</a>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'calendar'"></app-svg-icon>
+            <p>Mise-à-jour le {{ structure.derniereModification | date: 'shortDate' }}</p>
           </div>
         </div>
       </div>

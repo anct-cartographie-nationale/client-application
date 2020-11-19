@@ -1,0 +1,19 @@
+<ng-container *ngIf="style === 'buttonWithHash'">
+  <button class="btnSearch" type="{{ type }}" (click)="doAction()">
+    <div *ngIf="!iconBtn" class="searchButton">{{ text }}</div>
+    <div
+      *ngIf="iconBtn"
+      fxLayout="row center"
+      class="searchButton withIcon"
+      fxLayoutAlign="space-between center"
+      fxLayoutGap="13px"
+    >
+      <app-svg-icon style="height: 100%" [type]="'ico'" [iconClass]="'icon-32'" [icon]="iconBtn"></app-svg-icon>
+      {{ text }}
+    </div>
+  </button>
+</ng-container>
+
+<ng-container *ngIf="style === 'button'">
+  <button class="btn-search-filter" type="{{ type }}">{{ text }}</button>
+</ng-container>

@@ -13,10 +13,19 @@
   margin: 0 16px;
 }
 .listCard {
-  overflow-y: scroll;
   overflow-y: overlay;
   padding: 0 25px;
 }
 .topBlock {
   padding: 0 25px;
+}
+
+@media print {
+  .listCard {
+    display: none;
+  }
+
+  .hide-on-print {
+    display: none !important;
+  }
 }

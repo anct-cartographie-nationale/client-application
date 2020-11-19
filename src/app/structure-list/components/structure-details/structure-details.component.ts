@@ -5,6 +5,8 @@ import { Category } from '../../models/category.model';
 import { AccessModality } from '../../enum/access-modality.enum';
 import { SearchService } from '../../services/search.service';
 import * as _ from 'lodash';
+import { ActivatedRoute } from '@angular/router';
+import { PrintService } from '../../../shared/service/print.service';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -19,8 +21,16 @@ export class StructureDetailsComponent implements OnInit {
   public accessRightsReferentiel: Category;
   public baseSkills: Module[];
   public accessRights: Module[];
+  public printMode = false;
 
-  constructor(private searchService: SearchService) {}
+  constructor(route: ActivatedRoute, private printService: PrintService, private searchService: SearchService) {
+    route.url.subscribe((url) => {
+      if (url[0].path === 'structure') {
+        this.structure = this.printService.structure;
+        this.printMode = true;
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.searchService.getCategoriesTraining().subscribe((referentiels) => {
@@ -32,6 +42,9 @@ export class StructureDetailsComponent implements OnInit {
         }
       });
       this.setServiceCategories();
+      if (this.printMode) {
+        this.printService.onDataReady();
+      }
     });
   }
 
@@ -39,11 +52,17 @@ export class StructureDetailsComponent implements OnInit {
     this.closeDetails.emit(true);
   }
 
+  public print(): void {
+    this.printService.printDocument('structure', this.structure);
+  }
+
   public getAccessIcon(accessModality: AccessModality): string {
     switch (accessModality) {
       case AccessModality.free:
         return 'group';
       case AccessModality.meeting:
+        return 'calendar';
+      case AccessModality.meetingOnly:
         return 'calendar';
       case AccessModality.numeric:
         return 'tel';

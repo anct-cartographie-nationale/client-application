@@ -171,9 +171,10 @@
 }
 
 .ico-close-search {
-  width: 15px;
-  height: 7px;
-  text-align: center;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
   &:before {
     transform: rotate(45deg);
   }
@@ -185,7 +186,7 @@
 .ico-close-search:after {
   position: absolute;
   content: '';
-  height: 14px;
+  height: 16px;
   width: 2px;
   background-color: $grey-4;
 }

@@ -58,3 +58,22 @@ a {
   margin-top: 9px;
   margin-bottom: 9px;
 }
+
+@media print {
+  .structrue-details-container {
+    background-color: unset;
+    z-index: unset;
+    position: unset;
+    top: unset;
+    left: unset;
+    max-width: unset;
+    width: unset;
+    height: unset;
+    padding: unset;
+    overflow: hidden;
+  }
+
+  .hide-on-print {
+    display: none !important;
+  }
+}

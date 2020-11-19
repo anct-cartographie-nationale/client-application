@@ -3,7 +3,7 @@
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/breakpoint';
 @import '../../../../assets/scss/shapes';
-@import '../../../../assets/scss/buttons';
+@import '../../../../assets/scss/hyperlink';
 
 .modaltraining {
   @media #{$desktop} {
@@ -22,12 +22,12 @@
   max-height: 648px;
   max-width: 754px;
   width: 94%;
-  border-radius: 11px;
   z-index: 1001 !important;
   position: absolute;
   border-radius: 6px;
   margin-top: 3.5px;
   @include background-hash;
+  border: 1px solid $grey-4;
   ::-webkit-scrollbar {
     width: 16px;
   }
@@ -95,38 +95,9 @@
   }
   .footer {
     margin: 0px 20px 16px 0;
-    a {
-      @include btn-search-addStructure;
-      border: 1px solid transparent;
-      padding: 8px 8px 6px 8px;
-
-      &:hover {
-        color: $blue-hover;
-      }
-      &:focus {
-        color: $secondary-color;
-        border-color: $secondary-color;
-        border-radius: 4px;
-      }
-      &:active {
-        border: none;
-        color: $blue-active;
-      }
-    }
     height: 32px;
-    button {
-      @include btn-search-filter;
-      &:hover {
-        background-color: $blue-hover;
-      }
-      &:focus {
-        background-color: $white;
-        border-color: $secondary-color;
-        color: $secondary-color;
-      }
-      &:active {
-        background-color: $blue-active;
-      }
-    }
   }
+}
+a {
+  @include hyperlink;
 }
