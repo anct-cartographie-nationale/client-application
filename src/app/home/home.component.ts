@@ -30,8 +30,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (navigator.geolocation) {
       this.getLocation();
+    } else {
+      this.getStructures(null);
     }
-    this.getStructures(null);
   }
 
   public getStructures(filters: Filter[]): void {
@@ -125,6 +126,7 @@ export class HomeComponent implements OnInit {
       const longitude = position.coords.longitude;
       const latitude = position.coords.latitude;
       this.getAddress(longitude, latitude);
+      this.getStructures(null);
     });
   }
 
