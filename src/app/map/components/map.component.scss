@@ -64,9 +64,21 @@
   margin-left: -21px !important;
 }
 
+::ng-deep .leaflet-left {
+  right: 0;
+  left: unset;
+  .leaflet-control {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+}
+/*** POP-UP ***/
+
 ::ng-deep .leaflet-popup {
-  padding: 8px 10px 8px 10px;
   border-radius: 6px;
+  @include background-hash;
+  padding: 0 0 4px 4px;
+  bottom: -15px !important;
   h1 {
     color: $grey-1;
     @include cn-bold-20;
@@ -84,21 +96,19 @@
     button {
       @include btn-search-filter;
       @include cn-bold-14;
-      width: 149px;
     }
   }
   span {
     display: inline-block;
   }
 }
-
-::ng-deep .leaflet-left {
-  right: 0;
-  left: unset;
-  .leaflet-control {
-    margin-left: 0;
-    margin-right: 10px;
-  }
+::ng-deep .leaflet-popup-content-wrapper {
+  box-shadow: unset;
+  border-radius: 6px;
+  border: 1px solid $grey-4;
+}
+::ng-deep .leaflet-popup-tip-container {
+  display: none;
 }
 
 @media print {

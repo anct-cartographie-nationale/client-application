@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DivIcon, divIcon, Map } from 'leaflet';
 import { Marker } from 'leaflet';
+import { MarkerType } from '../components/markerType.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -33,8 +34,11 @@ export class MapService {
   });
   constructor() {}
 
-  public createMarker(lat: number, lon: number, id: number, tooltip?: string): Marker {
-    const marker = new Marker([lat, lon], { icon: this.markerIcon });
+  public createMarker(lat: number, lon: number, markerType: MarkerType, id?: number, tooltip?: string): Marker {
+    const marker = new Marker([lat, lon], {
+      icon: this.getMarkerIcon(markerType),
+      attribution: this.getLayerAttributton(markerType),
+    });
     marker.on('mouseclick', (evt) => {
       evt.target.openPopup();
     });
@@ -44,14 +48,35 @@ export class MapService {
         autoPan: false,
       });
     }
-    MapService.markersList[id] = marker;
-    return this.bindMouseEventOnMarker(marker, this.markerIcon, this.markerIconHover);
+
+    if (id) {
+      MapService.markersList[id] = marker;
+    }
+    return this.bindMouseEventOnMarker(marker, this.getMarkerIcon(markerType), this.getMarkerIconHover(markerType));
   }
 
-  public createMDMMarker(lat: number, lon: number): Marker {
-    const marker = new Marker([lat, lon], { icon: this.markerIconMdm, attribution: 'mdm' });
+  private getLayerAttributton(markerType: MarkerType): string {
+    if (markerType === MarkerType.mdm) {
+      return 'mdm';
+    } else {
+      return 'structure';
+    }
+  }
 
-    return this.bindMouseEventOnMarker(marker, this.markerIconMdm, this.markerIconMdmHover);
+  private getMarkerIcon(markerType: MarkerType): DivIcon {
+    if (markerType === MarkerType.mdm) {
+      return this.markerIconMdm;
+    } else {
+      return this.markerIcon;
+    }
+  }
+
+  private getMarkerIconHover(markerType: MarkerType): DivIcon {
+    if (markerType === MarkerType.mdm) {
+      return this.markerIconMdmHover;
+    } else {
+      return this.markerIconHover;
+    }
   }
 
   private bindMouseEventOnMarker(marker: Marker, regularIcon: DivIcon, hoverIcon: DivIcon): Marker {
