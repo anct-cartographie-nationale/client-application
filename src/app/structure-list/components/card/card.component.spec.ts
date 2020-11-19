@@ -8,7 +8,7 @@ import { OpeningDay } from '../../../models/openingDay.model';
 describe('CardComponent', () => {
   let component: CardComponent;
   let fixture: ComponentFixture<CardComponent>;
-
+  let structure: Structure;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule],
@@ -19,7 +19,7 @@ describe('CardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CardComponent);
     component = fixture.debugElement.componentInstance;
-    const structure = new Structure({
+    structure = new Structure({
       id: 1,
       numero: '26-63',
       dateDeCreation: '2020-10-08T15:17:00.000Z',
@@ -168,5 +168,29 @@ describe('CardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should transform a distance into km', () => {
+    component.structure.distance = 4320;
+    const distance = component.formatDistance();
+    expect(distance).toEqual('4.3 km');
+  });
+  it('should transform a distance into m', () => {
+    component.structure.distance = 400;
+    const distance = component.formatDistance();
+    expect(distance).toEqual('400 m');
+  });
+
+  it('should emit structure to show details', () => {
+    spyOn(component.showDetails, 'emit');
+    component.cardClicked();
+    expect(component.showDetails.emit).toHaveBeenCalled();
+    expect(component.showDetails.emit).toHaveBeenCalledWith(structure);
+  });
+  it('should emit structure on cardHover', () => {
+    spyOn(component.hover, 'emit');
+    component.cardHover();
+    expect(component.hover.emit).toHaveBeenCalled();
+    expect(component.hover.emit).toHaveBeenCalledWith(structure);
   });
 });

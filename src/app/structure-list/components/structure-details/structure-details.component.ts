@@ -72,15 +72,13 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   public setServiceCategories(): void {
-    this.baseSkills = this.toNumbers(this.structure.lesCompetencesDeBase).map((skill) =>
+    this.baseSkills = this.structure.lesCompetencesDeBase.map((skill) =>
       _.find(this.baseSkillssReferentiel.modules, { id: skill })
     );
-    this.accessRights = this.toNumbers(this.structure.accesAuxDroits).map((rights) =>
+    this.accessRights = this.structure.accesAuxDroits.map((rights) =>
       _.find(this.accessRightsReferentiel.modules, { id: rights })
     );
   }
 
   public keepOriginalOrder = (a, b) => a.key;
-
-  public toNumbers = (arr) => arr.map(Number);
 }

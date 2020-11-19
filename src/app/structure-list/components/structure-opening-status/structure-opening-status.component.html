@@ -1,4 +1,10 @@
-<div class="statusStructure" [class]="isCalledByDetails ? 'details' : ''" fxLayout="row" fxLayoutAlign="start center">
+<div
+  class="statusStructure"
+  *ngIf="structure"
+  [class]="isCalledByDetails ? 'details' : ''"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+>
   <div>
     <span *ngIf="structure.isOpen; else closed" class="ico-dot-available"></span>
     <span class="text">{{ structure.openDisplay() }}</span>

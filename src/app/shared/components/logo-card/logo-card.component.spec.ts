@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Demarches } from '../../enum/demarches.enum';
 
 import { LogoCardComponent } from './logo-card.component';
 
@@ -8,9 +9,8 @@ describe('LogoCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LogoCardComponent ]
-    })
-    .compileComponents();
+      declarations: [LogoCardComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +21,16 @@ describe('LogoCardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should return logo name with a string input', () => {
+    const logoCaf = component.getLogoKey(Demarches.caf);
+    const logoCarsat = component.getLogoKey(Demarches.carsat);
+    const logoCpam = component.getLogoKey(Demarches.cpam);
+    const logoOther = component.getLogoKey(Demarches.other);
+    expect(logoCaf).toEqual('caf');
+    expect(logoCarsat).toEqual('carsat');
+    expect(logoCpam).toEqual('cpam');
+    expect(logoOther).toEqual('other');
   });
 });
