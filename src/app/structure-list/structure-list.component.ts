@@ -49,7 +49,6 @@ export class StructureListComponent implements OnChanges {
 
   public onScrollDown(event): void {
     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 100) {
-      console.log('loading...');
     }
     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 50) {
       this.loadMoreStructures.emit();
