@@ -40,19 +40,21 @@ export class MapService {
     });
 
     if (tooltip) {
-      marker.bindPopup(tooltip);
+      marker.bindPopup(tooltip, {
+        autoPan: false,
+      });
     }
     MapService.markersList[id] = marker;
-    return this.bindMousEventOnMarker(marker, this.markerIcon, this.markerIconHover);
+    return this.bindMouseEventOnMarker(marker, this.markerIcon, this.markerIconHover);
   }
 
   public createMDMMarker(lat: number, lon: number): Marker {
     const marker = new Marker([lat, lon], { icon: this.markerIconMdm, attribution: 'mdm' });
 
-    return this.bindMousEventOnMarker(marker, this.markerIconMdm, this.markerIconMdmHover);
+    return this.bindMouseEventOnMarker(marker, this.markerIconMdm, this.markerIconMdmHover);
   }
 
-  private bindMousEventOnMarker(marker: Marker, regularIcon: DivIcon, hoverIcon: DivIcon): Marker {
+  private bindMouseEventOnMarker(marker: Marker, regularIcon: DivIcon, hoverIcon: DivIcon): Marker {
     marker.on('mouseover', (e) => {
       if (marker.getIcon() === regularIcon) {
         marker.setIcon(hoverIcon);
