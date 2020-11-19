@@ -13,16 +13,6 @@ export class GeojsonService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Retrive an address with a street national reference
-   * @param idVoie Number
-   */
-  public getAddressByIdVoie(idVoie: number): Observable<Address> {
-    return this.http
-      .get('/base-adresse/base-adresse-nationale/streets' + '?id=' + idVoie)
-      .pipe(map((data: { data: any[]; err: number }) => new Address(data.data[0])));
-  }
-
-  /**
    * Retrive an address by geolocation
    * @param idVoie Number
    */
@@ -57,9 +47,9 @@ export class GeojsonService {
    * Get GeoLocation with an address
    * @param address Address
    */
-  public getCoord(address: Address): Observable<GeoJson> {
+  public getCoord(address: string, zipcode: string): Observable<GeoJson> {
     return this.http
-      .get('/geocoding/photon/api' + '?q=' + address.queryString())
+      .get('/geocoding/photon/api' + '?q=' + address + ' ' + zipcode)
       .pipe(map((data: { features: any[]; type: string }) => new GeoJson(data.features[0])));
   }
 

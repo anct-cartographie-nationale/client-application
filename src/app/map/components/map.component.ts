@@ -107,7 +107,7 @@ export class MapComponent implements OnChanges {
 
   private getStructuresPositions(structureListe: Structure[]): void {
     structureListe.forEach((element: Structure) => {
-      this.getCoord(element.voie).subscribe((coord: GeoJson) => {
+      this.getCoord(element.voie, element.commune).subscribe((coord: GeoJson) => {
         this.mapService
           .createMarker(coord.geometry.getLon(), coord.geometry.getLat(), element.id, this.buildToolTip(element))
           .addTo(this.map)
@@ -151,8 +151,8 @@ export class MapComponent implements OnChanges {
    * Get coord with a street reference
    * @param idVoie Street reference
    */
-  public getCoord(idVoie: number): Observable<GeoJson> {
-    return this.geoJsonService.getAddressByIdVoie(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
+  public getCoord(voie: string, zipcode: string): Observable<GeoJson> {
+    return this.geoJsonService.getCoord(voie, zipcode);
   }
 
   /**

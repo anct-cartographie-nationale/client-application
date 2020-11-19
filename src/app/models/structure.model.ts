@@ -13,7 +13,8 @@ export class Structure {
   public typeDeStructure: string;
   public description: string;
   public n: string;
-  public voie: number;
+  public voie: string;
+  public commune: string;
   public telephone: string;
   public courriel: string;
   public siteWeb: string;
