@@ -47,9 +47,9 @@ export class GeojsonService {
    * Get GeoLocation with an address
    * @param address Address
    */
-  public getCoord(address: string, zipcode: string): Observable<GeoJson> {
+  public getCoord(numero: string, address: string, zipcode: string): Observable<GeoJson> {
     return this.http
-      .get('/geocoding/photon/api' + '?q=' + address + ' ' + zipcode)
+      .get('/geocoding/photon/api' + '?q=' + numero + ' ' + address + ' ' + zipcode)
       .pipe(map((data: { features: any[]; type: string }) => new GeoJson(data.features[0])));
   }
 

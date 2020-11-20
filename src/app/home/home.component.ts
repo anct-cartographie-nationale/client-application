@@ -95,7 +95,7 @@ export class HomeComponent implements OnInit {
    */
   private getStructurePosition(structure: Structure): Promise<Structure> {
     return new Promise((resolve, reject) => {
-      this.getCoord(structure.voie, structure.commune).subscribe((coord: GeoJson) => {
+      this.getCoord(structure.n, structure.voie, structure.commune).subscribe((coord: GeoJson) => {
         structure.address = coord.properties.name + ' - ' + coord.properties.postcode + ' ' + coord.properties.city;
         structure.distance = parseInt(
           this.geoJsonService.getDistance(
@@ -116,8 +116,8 @@ export class HomeComponent implements OnInit {
    * Get coord with a street reference
    * @param idVoie Street reference
    */
-  public getCoord(voie: string, zipcode: string): Observable<GeoJson> {
-    return this.geoJsonService.getCoord(voie, zipcode);
+  public getCoord(numero: string, voie: string, zipcode: string): Observable<GeoJson> {
+    return this.geoJsonService.getCoord(numero, voie, zipcode);
   }
 
   public getLocation(): void {
