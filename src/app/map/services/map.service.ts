@@ -10,26 +10,28 @@ export class MapService {
   public markerIconHover = divIcon({
     className: null,
     html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker-locate"></use></svg>',
-    iconSize: [35, 41],
-    iconAnchor: [13, 41],
+    iconSize: [40, 46],
+    iconAnchor: [20, 46],
+    popupAnchor: [0, -46],
   });
   public markerIcon = divIcon({
     className: null,
     html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
-    iconSize: [35, 41],
-    iconAnchor: [13, 41],
+    iconSize: [40, 46],
+    iconAnchor: [20, 46],
+    popupAnchor: [0, -46],
   });
   public markerIconMdm = divIcon({
     className: null,
     html: '<svg width="19" height="24"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
     iconSize: [19, 24],
-    iconAnchor: [19, 24],
+    iconAnchor: [9, 0],
   });
   public markerIconMdmHover = divIcon({
     className: null,
     html: '<svg width="19" height="24"><use xlink:href="assets/ico/sprite.svg#mdm-hover"></use></svg>',
     iconSize: [19, 24],
-    iconAnchor: [19, 24],
+    iconAnchor: [9, 0],
   });
   constructor() {}
 
