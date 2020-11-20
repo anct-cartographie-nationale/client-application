@@ -18,7 +18,7 @@ export class StructureService {
   constructor(private http: HttpClient) {}
 
   public getStructures(filters: Filter[]): Observable<Structure[]> {
-    return this.http.get('/api/Structures').pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+    return this.http.get('/api/structures').pipe(map((data: any[]) => data.map((item) => new Structure(item))));
   }
 
   /**
