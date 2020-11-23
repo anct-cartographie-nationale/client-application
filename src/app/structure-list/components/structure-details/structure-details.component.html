@@ -66,10 +66,17 @@
       <app-svg-icon [type]="'ico'" [icon]="'demarches'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Démarches</h2>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="24px">
-      <div *ngFor="let accompagnement of structure.accompagnementDesDemarches">
-        <app-logo-card [name]="accompagnement"></app-logo-card>
+    <div fxLayout="column">
+      <div fxLayout="row wrap" fxLayoutGap="24px">
+        <div *ngFor="let accompagnement of structure.accompagnementDesDemarches">
+          <app-logo-card [name]="accompagnement"></app-logo-card>
+        </div>
       </div>
+      <p *ngIf="isOtherSection">
+        Tout ce qui est en lien avec la création d'entreprise ex : consultation de sites de références (BPI, Je créé
+        dans ma région, ...), inscription à des newsletters, aide pour trouver des sites (CMA, CCI, Urssaf,...),
+        recherches d'infos sur moteur de recherche...
+      </p>
     </div>
   </div>
   <!-- Services -->

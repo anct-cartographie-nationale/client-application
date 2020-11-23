@@ -22,6 +22,7 @@ export class StructureDetailsComponent implements OnInit {
   public baseSkills: Module[];
   public accessRights: Module[];
   public printMode = false;
+  public isOtherSection = false;
 
   constructor(route: ActivatedRoute, private printService: PrintService, private searchService: SearchService) {
     route.url.subscribe((url) => {
@@ -46,6 +47,11 @@ export class StructureDetailsComponent implements OnInit {
         this.printService.onDataReady();
       }
     });
+    const index = this.structure.accompagnementDesDemarches.indexOf('Autres');
+    if (index > -1) {
+      this.structure.accompagnementDesDemarches.splice(index, 1);
+      this.isOtherSection = true;
+    }
   }
 
   public close(): void {
