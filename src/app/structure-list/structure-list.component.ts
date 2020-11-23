@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChange
 import { Filter } from './models/filter.model';
 import { Structure } from '../models/structure.model';
 import { GeoJson } from '../map/models/geojson.model';
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-structure-list',
   templateUrl: './structure-list.component.html',
@@ -15,14 +17,28 @@ export class StructureListComponent implements OnChanges {
   @Output() public displayMapMarkerId: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
   @Output() public hoverOut: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
   @Output() public selectedMarkerId: EventEmitter<number> = new EventEmitter<number>();
-  @Output() loadMoreStructures = new EventEmitter();
   public showStructureDetails = false;
   public structure: Structure;
+  public structuresListChunked: Structure[];
+  private pageStructures = 0;
+  private arrayChunked: Structure[][] = [];
+  private chunck = 10;
 
   constructor() {}
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.selectedStructure && this.selectedStructure) {
       this.showDetails(this.selectedStructure);
+    }
+    if (changes.structureList) {
+      this.arrayChunked = [];
+      this.pageStructures = 0;
+      if (this.pageStructures == 0) {
+        for (let i = 0; i < this.structureList.length; i += this.chunck) {
+          this.arrayChunked.push(this.structureList.slice(i, i + this.chunck));
+        }
+      }
+      this.structuresListChunked = this.arrayChunked[0];
     }
   }
   public fetchResults(filters: Filter[]): void {
@@ -51,7 +67,14 @@ export class StructureListComponent implements OnChanges {
     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 100) {
     }
     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 50) {
-      this.loadMoreStructures.emit();
+      this.loadMoreStructures();
+    }
+  }
+  private loadMoreStructures(): void {
+    if (this.pageStructures < this.arrayChunked.length - 1) {
+      this.pageStructures++;
+      const newStructures = _.map(this.arrayChunked[this.pageStructures]);
+      this.structuresListChunked = [...this.structuresListChunked, ...newStructures];
     }
   }
 }

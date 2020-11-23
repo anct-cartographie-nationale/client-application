@@ -21,9 +21,6 @@ export class HomeComponent implements OnInit {
   public selectedMarkerId: number;
   public geolocation = false;
   public currentLocation: GeoJson;
-  public pageStructures = 0;
-  public structuresChunked: Structure[][] = [];
-  private chunck = 10;
   public currentStructure: Structure;
   constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
 
@@ -36,10 +33,6 @@ export class HomeComponent implements OnInit {
   }
 
   public getStructures(filters: Filter[]): void {
-    if (filters) {
-      this.pageStructures = 0;
-      this.structuresChunked = [];
-    }
     this.structureService.getStructures(filters).subscribe((structures) => {
       filters ? (structures = this.applyFilters(structures, filters)) : structures;
       if (structures) {
@@ -55,12 +48,7 @@ export class HomeComponent implements OnInit {
           })
         ).then((structureList) => {
           structureList = _.sortBy(structureList, ['distance']);
-          if (this.pageStructures == 0) {
-            for (let i = 0; i < structureList.length; i += this.chunck) {
-              this.structuresChunked.push(structureList.slice(i, i + this.chunck));
-            }
-          }
-          this.structures = this.structuresChunked[0];
+          this.structures = structureList;
         });
       } else {
         this.structures = null;
@@ -145,14 +133,6 @@ export class HomeComponent implements OnInit {
 
   public setSelectedMarkerId(id: number): void {
     this.selectedMarkerId = id;
-  }
-
-  public loadMoreStructures(): void {
-    if (this.pageStructures < this.structuresChunked.length - 1) {
-      this.pageStructures++;
-      const newStructures = _.map(this.structuresChunked[this.pageStructures]);
-      this.structures = [...this.structures, ...newStructures];
-    }
   }
 
   public showDetailStructure(structure: Structure): void {

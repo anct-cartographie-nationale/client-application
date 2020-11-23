@@ -7,7 +7,7 @@
 
 <div (scroll)="onScrollDown($event)" class="listCard" (mouseout)="mouseOut()">
   <app-card
-    *ngFor="let structure of structureList"
+    *ngFor="let structure of structuresListChunked"
     [structure]="structure"
     (showDetails)="showDetails($event)"
     (hover)="handleCardHover($event)"
