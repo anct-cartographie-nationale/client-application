@@ -135,7 +135,9 @@ export class HomeComponent implements OnInit {
       (location) => {
         this.currentLocation = location;
       },
-      (err) => error(err)
+      (err) => {
+        throw new Error(err);
+      }
     );
   }
 
