@@ -48,7 +48,7 @@
           </div>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'calendar'"></app-svg-icon>
-            <p>Mise-à-jour le {{ structure.derniereModification | date: 'shortDate' }}</p>
+            <p>Mise-à-jour le {{ structure.derniereModification | date: 'mediumDate' }}</p>
           </div>
         </div>
       </div>
@@ -73,17 +73,23 @@
     </div>
   </div>
   <!-- Services -->
-  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
+  <div
+    *ngIf="isBaseSkills() || isAccessRights()"
+    fxLayout="column"
+    class="structrue-details-block"
+    fxLayoutAlign="baseline baseline"
+    fxLayoutGap="20px"
+  >
     <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
       <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Services</h2>
     </div>
     <div fxLayout="row" class="w-100">
-      <div fxFlex="50%" *ngIf="baseSkills && baseSkills[0] !== undefined">
+      <div fxFlex="50%" *ngIf="isBaseSkills()">
         <h3 class="subtitle">Compétences de base</h3>
         <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>
       </div>
-      <div fxFlex="50%" *ngIf="accessRights && accessRights[0] !== undefined">
+      <div fxFlex="50%" *ngIf="isAccessRights()">
         <h3 class="subtitle">Accès au droits</h3>
         <p *ngFor="let rights of accessRights">{{ rights.text }}</p>
       </div>

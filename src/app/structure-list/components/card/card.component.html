@@ -1,14 +1,11 @@
 <div class="structure" fxLayout="column" (click)="cardClicked()" (mouseover)="cardHover()">
-  <span class="nomStructure">{{ structure.nomDeVotreStructure }}</span>
-
-  <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center">
-    <span class="typeStructure">{{ structure.typeDeStructure }}</span>
-
+  <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+    <span class="nomStructure">{{ structure.nomDeVotreStructure }}</span>
     <div
       *ngIf="structure.distance"
       class="distanceStructure"
       fxLayout="row"
-      fxLayoutAlign="center center"
+      fxLayoutAlign="end center"
       fxLayoutGap="20px"
     >
       <div fxLayout="row" fxLayoutAlign="center center">
@@ -19,6 +16,7 @@
       </div>
     </div>
   </div>
+  <span class="typeStructure">{{ structure.typeDeStructure }}</span>
   <br />
   <app-structure-opening-status [structure]="structure"></app-structure-opening-status>
 </div>
