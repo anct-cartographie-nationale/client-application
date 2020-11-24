@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { WeekDay } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as _ from 'lodash';
 
 import { Structure } from '../models/structure.model';
 import { Day } from '../models/day.model';
@@ -18,7 +19,26 @@ export class StructureService {
   constructor(private http: HttpClient) {}
 
   public getStructures(filters: Filter[]): Observable<Structure[]> {
-    return this.http.get('/api/structures').pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+    if (filters && filters.length > 0) {
+      let requestUrl = '/api/structures/search';
+      const queryString = _.find(filters, { name: 'query' });
+      if (queryString) {
+        _.remove(filters, { name: 'query' });
+        requestUrl += `?query=${queryString.value}`;
+      }
+      const formatedFilters = this.formatFilters(filters);
+      return this.http
+        .post(requestUrl, { filters: formatedFilters })
+        .pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+    } else {
+      return this.http.get('/api/structures').pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+    }
+  }
+
+  private formatFilters(filters: Filter[]): object {
+    return filters.map((filter) => {
+      return { [filter.name]: filter.value };
+    });
   }
 
   /**

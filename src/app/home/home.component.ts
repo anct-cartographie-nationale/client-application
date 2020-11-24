@@ -41,7 +41,6 @@ export class HomeComponent implements OnInit {
       this.structuresChunked = [];
     }
     this.structureService.getStructures(filters).subscribe((structures) => {
-      filters ? (structures = this.applyFilters(structures, filters)) : structures;
       if (structures) {
         Promise.all(
           structures.map((structure) => {
@@ -55,7 +54,7 @@ export class HomeComponent implements OnInit {
           })
         ).then((structureList) => {
           structureList = _.sortBy(structureList, ['distance']);
-          if (this.pageStructures == 0) {
+          if (this.pageStructures === 0) {
             for (let i = 0; i < structureList.length; i += this.chunck) {
               this.structuresChunked.push(structureList.slice(i, i + this.chunck));
             }
@@ -66,28 +65,6 @@ export class HomeComponent implements OnInit {
         this.structures = null;
       }
     });
-  }
-
-  /**
-   *  Delete when we have back-end
-   *  Fix a bug with Json-server request
-   */
-  private applyFilters(structures, filters): Structure[] {
-    let structuresFiltered = [];
-    structures.forEach((s: Structure) => {
-      let count = 0;
-      filters.forEach((filter: Filter) => {
-        let properties: string[] = [];
-        properties = s[filter.name];
-        if (properties && properties.includes(filter.value)) {
-          count++;
-        }
-      });
-      if (count === filters.length) {
-        structuresFiltered.push(s);
-      }
-    });
-    return structuresFiltered;
   }
 
   /**
