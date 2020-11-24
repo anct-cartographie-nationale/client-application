@@ -29,6 +29,8 @@ import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
 import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
 import * as _ from 'lodash';
+import { GeoJsonProperties } from '../models/geoJsonProperties.model';
+import { MarkerType } from './markerType.enum';
 
 @Component({
   selector: 'app-map',
@@ -109,7 +111,13 @@ export class MapComponent implements OnChanges {
     structureListe.forEach((element: Structure) => {
       this.getCoord(element.n, element.voie, element.commune).subscribe((coord: GeoJson) => {
         this.mapService
-          .createMarker(coord.geometry.getLon(), coord.geometry.getLat(), element.id, this.buildToolTip(element))
+          .createMarker(
+            coord.geometry.getLon(),
+            coord.geometry.getLat(),
+            MarkerType.structure,
+            element.id,
+            this.buildToolTip(element)
+          )
           .addTo(this.map)
           // store structure before user click on button
           .on('popupopen', () => {
@@ -145,6 +153,10 @@ export class MapComponent implements OnChanges {
       structure.openDisplay() +
       '</span></div><div class="pop-up"><button type="button" class="btnShowDetails">Voir</button></div>'
     );
+  }
+
+  private buildMdmPopUp(mdmProperties: GeoJsonProperties): string {
+    return `<h1>${mdmProperties.nom}</h1><p>${mdmProperties.adresse}</p>`;
   }
 
   /**
@@ -210,7 +222,15 @@ export class MapComponent implements OnChanges {
   private initMDMLayer(): void {
     this.geoJsonService.getMDMGeoJson().subscribe((res) => {
       res.forEach((mdm) => {
-        this.mapService.createMDMMarker(mdm.geometry.getLon(), mdm.geometry.getLat()).addTo(this.map);
+        this.mapService
+          .createMarker(
+            mdm.geometry.getLon(),
+            mdm.geometry.getLat(),
+            MarkerType.mdm,
+            null,
+            this.buildMdmPopUp(mdm.properties)
+          )
+          .addTo(this.map);
       });
     });
   }
