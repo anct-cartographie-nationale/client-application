@@ -13,13 +13,14 @@
   max-width: 980px;
   width: 100%;
   height: calc(100vh - #{$header-height} - #{$footer-height});
-  padding: 18px 24px;
+  padding: 10px 24px;
   overflow: auto;
 }
 
 .structrue-details-block {
   border-bottom: 1px dashed $grey-2;
   padding-bottom: 24px;
+  padding-right: 68px;
   .subtitle {
     text-transform: uppercase;
     @include cn-bold-16;
@@ -37,6 +38,7 @@
 }
 
 h2 {
+  margin-top: 0;
   margin-bottom: 5px;
   @include cn-regular-24;
 }
