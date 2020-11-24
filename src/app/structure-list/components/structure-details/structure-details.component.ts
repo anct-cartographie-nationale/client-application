@@ -81,4 +81,11 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   public keepOriginalOrder = (a, b) => a.key;
+
+  public isBaseSkills(): boolean {
+    return this.baseSkills && this.baseSkills[0] !== undefined;
+  }
+  public isAccessRights(): boolean {
+    return this.accessRights && this.accessRights[0] !== undefined;
+  }
 }

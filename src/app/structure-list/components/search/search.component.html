@@ -6,7 +6,7 @@
     <form
       [formGroup]="searchForm"
       fxLayout="row"
-      fxLayoutGap="1.5vw"
+      fxLayoutGap="16px"
       fxLayoutAlign=" center"
       (ngSubmit)="applyFilter(searchForm.value.searchTerm)"
     >
@@ -20,7 +20,7 @@
     </form>
   </div>
   <div (clickOutside)="closeModal()">
-    <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
       <button
         class="btn-filter"
         type="button"

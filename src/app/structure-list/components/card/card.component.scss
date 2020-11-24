@@ -31,10 +31,12 @@
     color: $grey-1;
     @include cn-bold-20;
     padding-bottom: 5px;
+    width: 100%;
   }
   .distanceStructure {
     @include cn-regular-16;
     color: $grey-1;
+    width: 50%;
   }
   &:last-child {
     border-bottom: none;
