@@ -38,13 +38,9 @@ export class HomeComponent implements OnInit {
       if (structures) {
         Promise.all(
           structures.map((structure) => {
-            if (this.geolocation) {
-              return this.getStructurePosition(structure).then((val) => {
-                return this.structureService.updateOpeningStructure(val, DateTime.local());
-              });
-            } else {
-              return this.structureService.updateOpeningStructure(structure, DateTime.local());
-            }
+            return this.getStructurePosition(structure).then((val) => {
+              return this.structureService.updateOpeningStructure(val, DateTime.local());
+            });
           })
         ).then((structureList) => {
           structureList = _.sortBy(structureList, ['distance']);
@@ -85,16 +81,19 @@ export class HomeComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.getCoord(structure.n, structure.voie, structure.commune).subscribe((coord: GeoJson) => {
         structure.address = structure.voie + ' - ' + coord.properties.postcode + ' ' + coord.properties.city;
-        structure.distance = parseInt(
-          this.geoJsonService.getDistance(
-            coord.geometry.getLon(),
-            coord.geometry.getLat(),
-            this.currentLocation.geometry.getLon(),
-            this.currentLocation.geometry.getLat(),
-            'M'
-          ),
-          10
-        );
+        // If location available, process structure distance
+        if (this.currentLocation) {
+          structure.distance = parseInt(
+            this.geoJsonService.getDistance(
+              coord.geometry.getLon(),
+              coord.geometry.getLat(),
+              this.currentLocation.geometry.getLon(),
+              this.currentLocation.geometry.getLat(),
+              'M'
+            ),
+            10
+          );
+        }
         resolve(structure);
       });
     });
@@ -109,13 +108,20 @@ export class HomeComponent implements OnInit {
   }
 
   public getLocation(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.geolocation = true;
-      const longitude = position.coords.longitude;
-      const latitude = position.coords.latitude;
-      this.getAddress(longitude, latitude);
-      this.getStructures(null);
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.geolocation = true;
+        const longitude = position.coords.longitude;
+        const latitude = position.coords.latitude;
+        this.getAddress(longitude, latitude);
+        this.getStructures(null);
+      },
+      (err) => {
+        if (err.PERMISSION_DENIED) {
+          this.getStructures(null);
+        }
+      }
+    );
   }
 
   private getAddress(longitude: number, latitude: number): void {
