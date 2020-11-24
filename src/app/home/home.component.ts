@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
   private getStructurePosition(structure: Structure): Promise<Structure> {
     return new Promise((resolve, reject) => {
       this.getCoord(structure.n, structure.voie, structure.commune).subscribe((coord: GeoJson) => {
-        structure.address = coord.properties.name + ' - ' + coord.properties.postcode + ' ' + coord.properties.city;
+        structure.address = structure.voie + ' - ' + coord.properties.postcode + ' ' + coord.properties.city;
         structure.distance = parseInt(
           this.geoJsonService.getDistance(
             coord.geometry.getLon(),
@@ -135,7 +135,7 @@ export class HomeComponent implements OnInit {
       (location) => {
         this.currentLocation = location;
       },
-      (err) => console.error(err)
+      (err) => error(err)
     );
   }
 

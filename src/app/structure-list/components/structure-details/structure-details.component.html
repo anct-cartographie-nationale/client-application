@@ -3,7 +3,7 @@
   <div fxLayout="row" fxLayoutAlign="end center">
     <div (click)="close()" class="ico-close-details"></div>
   </div>
-  <div fxLayout="row" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
+  <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
       <div fxLayout="row" fxLayoutAlign="space-between start">
         <div fxLayout="column">
@@ -60,7 +60,7 @@
   <div
     *ngIf="structure.accompagnementDesDemarches[0] !== ''"
     fxLayout="column"
-    class="structrue-details-block"
+    class="structure-details-block"
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
@@ -85,7 +85,7 @@
   <div
     *ngIf="isBaseSkills() || isAccessRights()"
     fxLayout="column"
-    class="structrue-details-block"
+    class="structure-details-block"
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
@@ -105,7 +105,7 @@
     </div>
   </div>
   <!-- Accueil -->
-  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
+  <div fxLayout="column" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
     <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
       <app-svg-icon [type]="'ico'" [icon]="'accueil'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Accueil</h2>
@@ -149,7 +149,7 @@
   <div
     *ngIf="structure.hasEquipments()"
     fxLayout="column"
-    class="structrue-details-block"
+    class="structure-details-block"
     fxLayoutAlign="baseline baseline"
   >
     <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
@@ -169,7 +169,7 @@
   <div
     *ngIf="structure.labelsEtQualifications[0] !== ''"
     fxLayout="column"
-    class="structrue-details-block"
+    class="structure-details-block"
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
