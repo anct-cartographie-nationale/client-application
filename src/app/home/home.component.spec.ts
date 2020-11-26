@@ -31,20 +31,6 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('getCoord(): should get coord', async () => {
-    await new Promise((resolve) => {
-      component.getCoord('Rue de la Mairie ', 'Feyzin').subscribe(
-        (val) => {
-          expect(val.geometry.getLat()).toEqual(4.8591584);
-          expect(val.geometry.getLon()).toEqual(45.6727968);
-          resolve();
-        },
-        (err) => {
-          resolve();
-        }
-      );
-    });
   });
 
   it('getAddress(): should getAddress', () => {

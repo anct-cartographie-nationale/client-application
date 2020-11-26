@@ -38,12 +38,9 @@ export class HomeComponent implements OnInit {
         Promise.all(
           structures.map((structure) => {
             if (this.geolocation) {
-              return this.getStructurePosition(structure).then((val) => {
-                return this.structureService.updateOpeningStructure(val, DateTime.local());
-              });
-            } else {
-              return this.structureService.updateOpeningStructure(structure, DateTime.local());
+              structure = this.getStructurePosition(structure);
             }
+            return this.structureService.updateOpeningStructure(structure, DateTime.local());
           })
         ).then((structureList) => {
           structureList = _.sortBy(structureList, ['distance']);
@@ -58,31 +55,18 @@ export class HomeComponent implements OnInit {
   /**
    * Get structures positions and add marker corresponding to those positons on the map
    */
-  private getStructurePosition(structure: Structure): Promise<Structure> {
-    return new Promise((resolve, reject) => {
-      this.getCoord(structure.n, structure.voie, structure.commune).subscribe((coord: GeoJson) => {
-        structure.address = structure.voie + ' - ' + coord.properties.postcode + ' ' + coord.properties.city;
-        structure.distance = parseInt(
-          this.geoJsonService.getDistance(
-            coord.geometry.getLon(),
-            coord.geometry.getLat(),
-            this.currentLocation.geometry.getLon(),
-            this.currentLocation.geometry.getLat(),
-            'M'
-          ),
-          10
-        );
-        resolve(structure);
-      });
-    });
-  }
-
-  /**
-   * Get coord with a street reference
-   * @param idVoie Street reference
-   */
-  public getCoord(numero: string, voie: string, zipcode: string): Observable<GeoJson> {
-    return this.geoJsonService.getCoord(numero, voie, zipcode);
+  private getStructurePosition(structure: Structure): Structure {
+    structure.distance = parseInt(
+      this.geoJsonService.getDistance(
+        structure.getLon(),
+        structure.getLat(),
+        this.currentLocation.geometry.getLon(),
+        this.currentLocation.geometry.getLat(),
+        'M'
+      ),
+      10
+    );
+    return structure;
   }
 
   public getLocation(): void {
