@@ -16,11 +16,16 @@
         <span class="separator"></span>
         <button (click)="locateMe()" class="icon pin" type="button"><div class="ico-pin-search"></div></button>
       </div>
-      <app-button [style]="'buttonWithHash'" [text]="'Rechercher'" [type]="'submit'"></app-button>
+      <app-button
+        class="isntPhoneContent"
+        [style]="'buttonWithHash'"
+        [text]="'Rechercher'"
+        [type]="'submit'"
+      ></app-button>
     </form>
   </div>
   <div (clickOutside)="closeModal()">
-    <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+    <div class="btnSection isntPhoneContent" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
       <button
         class="btn-filter"
         type="button"
@@ -75,7 +80,18 @@
     </div>
   </div>
 </div>
-<div class="footerSearchSection" fxLayout="row" fxLayoutAlign="space-between center">
+<div class="phoneSection">
+  <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
+    <app-button
+      [style]="'buttonPhone'"
+      [extraClass]="numberAccompanimentChecked ? 'containCheckedFilters' : ''"
+      [text]="'Filtres'"
+      (action)="openModal(TypeModal.accompaniment)"
+    ></app-button>
+    <a (click)="openConfirmationModal()" tabindex="0">Ajouter une structure</a>
+  </div>
+</div>
+<div class="footerSearchSection isntPhoneContent" fxLayout="row" fxLayoutAlign="space-between center">
   <div class="checkbox">
     <div class="checkboxItem">
       <label>

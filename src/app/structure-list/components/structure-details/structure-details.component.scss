@@ -3,6 +3,7 @@
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/z-index';
 @import '../../../../assets/scss/layout';
+@import '../../../../assets/scss/breakpoint';
 
 .structrue-details-container {
   border-right: solid 1px $grey-4;
@@ -16,7 +17,15 @@
   height: calc(100vh - #{$header-height} - #{$footer-height});
   padding: 10px 24px;
   overflow: auto;
-  .btnPrint {
+  @media #{$tablet} {
+    position: fixed;
+    padding: 0;
+    height: 100vh;
+    .printButton {
+      display: none !important;
+    }
+  }
+  .printButton {
     margin-right: 75px;
   }
 }

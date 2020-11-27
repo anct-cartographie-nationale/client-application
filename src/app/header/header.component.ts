@@ -6,7 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  public showMenu = false;
 
+  constructor() {}
   ngOnInit(): void {}
+
+  public openMenu(): void {
+    this.showMenu = true;
+  }
+  public closeMenu(): void {
+    this.showMenu = false;
+  }
 }

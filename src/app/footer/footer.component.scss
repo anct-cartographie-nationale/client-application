@@ -26,8 +26,9 @@
     height: 37px;
     width: 22px;
   }
+
   @media #{$large-phone} {
-    height: unset;
+    display: none !important;
     font-size: 0.75em;
     div {
       margin: 20px 0;

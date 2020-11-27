@@ -52,6 +52,13 @@ button {
     }
   }
 }
+.btn-switch-phone {
+  background: $black;
+  height: 40px;
+  color: $white;
+  padding: 4px 37px 4px 37px;
+  border-radius: 20px;
+}
 .btn-search-filter {
   background: $secondary-color;
   height: 40px;
@@ -70,5 +77,16 @@ button {
   }
   &:active {
     background-color: $blue-active;
+  }
+}
+.btn-filter-phone {
+  background: $white;
+  height: 40px;
+  color: $grey-1;
+  padding: 4px 37px 4px 37px;
+  border-color: $grey-4;
+  @include btn-normal;
+  &.containCheckedFilters {
+    border-color: $secondary-color;
   }
 }

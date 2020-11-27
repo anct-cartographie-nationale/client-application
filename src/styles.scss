@@ -76,6 +76,7 @@ a {
 
 .checkbox {
   list-style-type: none;
+  width: 100%;
   input {
     opacity: 0;
     display: none;
@@ -95,7 +96,6 @@ a {
   .label {
     padding: 0 16px;
     @include btn-pass;
-    width: 232px;
   }
   .customCheck {
     display: inline-grid;

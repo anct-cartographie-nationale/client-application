@@ -17,3 +17,23 @@
 <ng-container *ngIf="style === 'button'">
   <button class="btn-search-filter" type="{{ type }}">{{ text }}</button>
 </ng-container>
+
+<ng-container *ngIf="style === 'buttonPhone'">
+  <button class="btn-filter-phone" [ngClass]="extraClass" type="{{ type }}" (click)="doAction()">{{ text }}</button>
+</ng-container>
+
+<ng-container *ngIf="style === 'roundedButton'">
+  <button class="btn-switch-phone" type="{{ type }}" (click)="doAction()">
+    <div *ngIf="!iconBtn" class="searchButton">{{ text }}</div>
+    <div
+      *ngIf="iconBtn"
+      fxLayout="row center"
+      class="searchButton withIcon"
+      fxLayoutAlign="space-between center"
+      fxLayoutGap="13px"
+    >
+      <app-svg-icon [type]="'ico'" [iconClass]="'icon-32'" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+      {{ text }}
+    </div>
+  </button>
+</ng-container>

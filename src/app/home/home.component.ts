@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   public geolocation = false;
   public currentLocation: GeoJson;
   public currentStructure: Structure;
+  public isMapPhone = false;
   constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
 
   ngOnInit(): void {
@@ -145,5 +146,9 @@ export class HomeComponent implements OnInit {
 
   public showDetailStructure(structure: Structure): void {
     this.currentStructure = new Structure(structure);
+  }
+
+  public switchMapList(): void {
+    this.isMapPhone = !this.isMapPhone;
   }
 }

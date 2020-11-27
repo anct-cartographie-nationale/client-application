@@ -21,6 +21,7 @@ import { StructureOpeningStatusComponent } from './structure-list/components/str
 import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { AboutComponent } from './about/about.component';
+import { MenuPhoneComponent } from './menu-phone/menu-phone.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AboutComponent } from './about/about.component';
     StructureOpeningStatusComponent,
     LegalNoticeComponent,
     AboutComponent,
+    MenuPhoneComponent,
   ],
   imports: [
     BrowserModule,
