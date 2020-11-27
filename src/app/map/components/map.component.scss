@@ -112,6 +112,9 @@
   border-radius: 6px;
   border: 1px solid $grey-4;
 }
+::ng-deep .leaflet-popup-content {
+  width: 240px;
+}
 ::ng-deep .leaflet-popup-tip-container {
   display: none;
 }
