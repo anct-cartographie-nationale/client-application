@@ -81,8 +81,10 @@ export class MapComponent implements OnChanges {
     }
     // Handle map marker selection
     if (changes.selectedMarkerId) {
+      this.map.closePopup();
       if (changes.selectedMarkerId.currentValue === undefined) {
         this.mapService.setDefaultMarker(changes.selectedMarkerId.previousValue);
+        this.map.setView(this.mapOptions.center, this.mapOptions.zoom);
       } else {
         this.mapService.setSelectedMarker(changes.selectedMarkerId.currentValue);
         this.centerLeafletMapOnMarker(changes.selectedMarkerId.currentValue);
