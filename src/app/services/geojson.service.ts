@@ -43,6 +43,16 @@ export class GeojsonService {
       .pipe(map((data: { features: any[] }) => _.map(data.features, this.parseToGeoJson)));
   }
 
+  /**
+   * Get GeoLocation with an address
+   * @param address Address
+   */
+  public getCoord(numero: string, address: string, zipcode: string): Observable<GeoJson> {
+    return this.http
+      .get('/geocoding/photon/api' + '?q=' + numero + ' ' + address + ' ' + zipcode)
+      .pipe(map((data: { features: any[]; type: string }) => new GeoJson(data.features[0])));
+  }
+
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   // :::                                                                         :::
   // :::  This routine calculates the distance between two points (given the     :::

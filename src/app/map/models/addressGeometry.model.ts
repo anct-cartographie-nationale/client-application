@@ -7,10 +7,10 @@ export class AddressGeometry {
   }
 
   public getLat(): number {
-    return this.coordinates[0];
+    return this.coordinates[1];
   }
 
   public getLon(): number {
-    return this.coordinates[1];
+    return this.coordinates[0];
   }
 }

@@ -112,10 +112,10 @@ export class Structure {
   }
 
   public getLat(): number {
-    return this.coord[0];
+    return this.coord[1];
   }
 
   public getLon(): number {
-    return this.coord[1];
+    return this.coord[0];
   }
 }

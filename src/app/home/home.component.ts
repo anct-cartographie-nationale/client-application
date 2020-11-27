@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
   public geolocation = false;
   public currentLocation: GeoJson;
   public currentStructure: Structure;
+  public userLatitude: number;
+  public userLongitude: number;
   constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
 
   ngOnInit(): void {
@@ -33,37 +35,84 @@ export class HomeComponent implements OnInit {
   }
 
   public getStructures(filters: Filter[]): void {
-    this.structureService.getStructures(filters).subscribe((structures) => {
-      if (structures) {
-        Promise.all(
-          structures.map((structure) => {
-            if (this.geolocation) {
-              structure = this.getStructurePosition(structure);
-            }
-            return this.structureService.updateOpeningStructure(structure, DateTime.local());
-          })
-        ).then((structureList) => {
-          structureList = _.sortBy(structureList, ['distance']);
-          this.structures = structureList;
+    const queryString = _.find(filters, { name: 'query' });
+    if (queryString) {
+      if (this.isLocationRequest(queryString.value)) {
+        this.getCoordByAddress(queryString.value).then((res) => {
+          this.currentLocation = res;
+          this.updateStructuresdistance(
+            this.structures,
+            this.currentLocation.geometry.getLon(),
+            this.currentLocation.geometry.getLat()
+          );
         });
       } else {
-        this.structures = null;
+        this.structureService.getStructures(filters).subscribe((structures) => {
+          if (structures) {
+            this.updateStructuresdistance(structures, this.userLongitude, this.userLatitude);
+          } else {
+            this.structures = null;
+          }
+        });
       }
+    } else {
+      this.structureService.getStructures(filters).subscribe((structures) => {
+        if (structures) {
+          this.updateStructuresdistance(structures, this.userLongitude, this.userLatitude);
+        } else {
+          this.structures = null;
+        }
+      });
+    }
+  }
+
+  private updateStructuresdistance(structures: Structure[], lon: number, lat: number): void {
+    Promise.all(
+      structures.map((structure) => {
+        if (this.geolocation) {
+          structure = this.getStructurePosition(structure, lon, lat);
+        }
+        return this.structureService.updateOpeningStructure(structure, DateTime.local());
+      })
+    ).then((structureList) => {
+      structureList = _.sortBy(structureList, ['distance']);
+      this.structures = structureList;
     });
   }
 
   /**
-   * Get structures positions and add marker corresponding to those positons on the map
+   * Retrive GeoJson for a given address
+   * @param address string
    */
-  private getStructurePosition(structure: Structure): Structure {
+  private getCoordByAddress(address: string): Promise<GeoJson> {
+    return new Promise((resolve) => {
+      this.geoJsonService.getCoord(address, '', '69000').subscribe((res) => {
+        resolve(res);
+      });
+    });
+  }
+
+  /**
+   * Check with a regex that an address is request
+   * @param value string
+   */
+  private isLocationRequest(value: string): boolean {
+    const regex = /^\d+\s[A-z]+\s[A-z]+/g;
+    if (value.match(regex)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Get structures positions and add marker corresponding to those positons on the map
+   * @param structure Structure
+   * @param lon number
+   * @param lat number
+   */
+  private getStructurePosition(structure: Structure, lon: number, lat: number): Structure {
     structure.distance = parseInt(
-      this.geoJsonService.getDistance(
-        structure.getLon(),
-        structure.getLat(),
-        this.currentLocation.geometry.getLon(),
-        this.currentLocation.geometry.getLat(),
-        'M'
-      ),
+      this.geoJsonService.getDistance(structure.getLat(), structure.getLon(), lat, lon, 'M'),
       10
     );
     return structure;
@@ -72,13 +121,18 @@ export class HomeComponent implements OnInit {
   public getLocation(): void {
     navigator.geolocation.getCurrentPosition((position) => {
       this.geolocation = true;
-      const longitude = position.coords.longitude;
-      const latitude = position.coords.latitude;
-      this.getAddress(longitude, latitude);
+      this.userLongitude = position.coords.longitude;
+      this.userLatitude = position.coords.latitude;
+      this.getAddress(position.coords.longitude, position.coords.latitude);
       this.getStructures(null);
     });
   }
 
+  /**
+   * Get an address by coord
+   * @param longitude number
+   * @param latitude number
+   */
   private getAddress(longitude: number, latitude: number): void {
     this.geoJsonService.getAddressByCoord(longitude, latitude).subscribe(
       (location) => {

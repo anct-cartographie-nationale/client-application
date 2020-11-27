@@ -111,8 +111,8 @@ export class MapComponent implements OnChanges {
     structureListe.forEach((structure: Structure) => {
       this.mapService
         .createMarker(
-          structure.getLon(),
           structure.getLat(),
+          structure.getLon(),
           MarkerType.structure,
           structure.id,
           this.buildToolTip(structure)

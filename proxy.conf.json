@@ -25,5 +25,11 @@
     "secure": false,
     "changeOrigin": true,
     "logLevel": "info"
+  },
+  "/geocoding/photon/api": {
+    "target": "https://download.data.grandlyon.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
   }
 }
