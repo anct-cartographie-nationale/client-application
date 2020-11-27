@@ -17,6 +17,15 @@ export class LogoCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  // Get the custom or default name from a demarche.
+  public getName(demarche: string): string {
+    switch (demarche) {
+      case Demarches.caf:
+        return 'Caf';
+      default:
+        return demarche;
+    }
+  }
   public getLogoKey(demarche: string): string {
     switch (demarche) {
       case Demarches.caf:
