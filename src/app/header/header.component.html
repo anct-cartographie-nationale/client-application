@@ -1,12 +1,12 @@
 <div fxLayout="row" class="header hide-on-print">
   <div class="logo clickable" routerLink="/home">
-    <div fxLayout="row">
-      <!-- <img class="logo-grand-lyon" src="/assets/logos/ram_logo.svg" alt /> -->
-      <div fxLayout="column" fxLayoutAlign="center">
-        <p>Réseau des Acteurs de la Médiation Numérique</p>
-        <p>de la Métropole de Lyon</p>
-      </div>
+    <img class="logo-grand-lyon" src="/assets/logos/ram_logo.svg" alt />
+    <div class="logo-text" fxLayout="column" fxLayoutAlign="center">
+      <p>Réseau des Acteurs de la Médiation Numérique de la Métropole de Lyon</p>
     </div>
+  </div>
+  <div class="containerIconMenu" (click)="openMenu()">
+    <span class="ico-menu"></span>
   </div>
   <div fxLayout="row" class="right-header" fxLayoutAlign="center center" fxLayoutGap="3vw">
     <a routerLink="/home" [routerLinkActive]="'active'" i18n>Acteurs de la médiation numérique</a>
@@ -21,3 +21,4 @@
     ></a> -->
   </div>
 </div>
+<app-menu-phone *ngIf="showMenu" (closeEvent)="closeMenu($event)"></app-menu-phone>

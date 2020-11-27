@@ -7,13 +7,23 @@
     (selectedMarkerId)="setSelectedMarkerId($event)"
     [selectedStructure]="currentStructure"
     class="left-pane"
+    [ngClass]="{ mapPhone: isMapPhone == true }"
     fxLayout="column"
   ></app-structure-list>
+  <div class="btnSwitch">
+    <app-button
+      [style]="'roundedButton'"
+      [text]="isMapPhone ? 'Liste' : 'Carte'"
+      [iconBtn]="isMapPhone ? 'liste' : 'map-marker'"
+      (action)="switchMapList()"
+    ></app-button>
+  </div>
   <app-map
     [structures]="structures"
     [toogleToolTipId]="displayMarkerId"
     [selectedMarkerId]="selectedMarkerId"
     (selectedStructure)="showDetailStructure($event)"
     class="right-pane"
+    [ngClass]="{ mapPhone: isMapPhone == true }"
   ></app-map>
 </div>

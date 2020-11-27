@@ -17,7 +17,8 @@ export class MapService {
   });
   public markerIcon = divIcon({
     className: null,
-    html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
+    html:
+      '<svg width="40" height="46" fill="#348899" stroke="#fff" stroke-width="2"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
     iconSize: [40, 46],
     iconAnchor: [20, 46],
     popupAnchor: [0, -46],
@@ -133,7 +134,8 @@ export class MapService {
     if (id) {
       const markerIcon = divIcon({
         className: null,
-        html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
+        html:
+          '<svg width="40" height="46" fill="#348899" stroke="#fff" stroke-width="2"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
         iconSize: [35, 41],
         iconAnchor: [13, 41],
       });

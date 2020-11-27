@@ -1,6 +1,7 @@
 @import '../../../../assets/scss/icons';
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/breakpoint';
 
 .indicatorDistance {
   width: 34px;
@@ -40,5 +41,11 @@
   }
   &:last-child {
     border-bottom: none;
+  }
+}
+
+@media #{$large-phone} {
+  .isntPhoneContent {
+    display: none !important;
   }
 }

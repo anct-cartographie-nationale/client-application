@@ -584,10 +584,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0.8;
   cursor: pointer;
-  &:active {
-    opacity: 0.8;
-  }
 
   &:before,
   &:after {
@@ -604,5 +602,25 @@
   }
   &:after {
     transform: rotate(-45deg);
+  }
+}
+.ico-menu,
+.ico-menu:before,
+.ico-menu:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 2px;
+  width: 23px;
+  background: $black;
+  position: absolute;
+  display: block;
+  content: '';
+}
+.ico-menu {
+  &:before {
+    top: -6px;
+  }
+  &:after {
+    bottom: -6px;
   }
 }

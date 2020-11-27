@@ -4,6 +4,7 @@
 @import '../../../../assets/scss/breakpoint';
 @import '../../../../assets/scss/shapes';
 @import '../../../../assets/scss/hyperlink';
+@import '../../../../assets/scss/z-index';
 
 .modaltraining {
   @media #{$desktop} {
@@ -22,10 +23,20 @@
   max-height: 648px;
   max-width: 754px;
   width: 94%;
-  z-index: 1001 !important;
+  z-index: $modal-filter-structure-z-index !important;
   position: absolute;
   border-radius: 6px;
   margin-top: 3.5px;
+  @media #{$large-phone} {
+    max-height: auto;
+    max-width: auto;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: none;
+    padding: 0;
+  }
   @include background-hash;
   border: 1px solid $grey-4;
   ::-webkit-scrollbar {
@@ -38,12 +49,29 @@
     background: $grey;
     border-radius: 6px;
   }
+  .body-wrap {
+    @media #{$large-phone} {
+      height: 100vh;
+    }
+    .titleFilter {
+      display: none !important;
+      margin: 27px 25px 0px 25px;
+      @include cn-bold-28;
+      @media #{$large-phone} {
+        display: flex !important;
+      }
+    }
+  }
   .contentModal {
     overflow-y: auto;
     max-width: 1100px;
     border-bottom: 1px solid $grey;
     margin-bottom: 16px;
     max-height: 438px;
+    @media #{$large-phone} {
+      max-height: none;
+      height: 100%;
+    }
     .blockFiltre {
       width: 100%;
       margin: 0 32px;
@@ -54,6 +82,11 @@
       &:last-child {
         padding-bottom: 32px;
         border-bottom: none;
+      }
+      @media #{$large-phone} {
+        margin: 0 18px;
+        padding: 25px 0;
+        min-width: 0;
       }
     }
     .blockLigne {

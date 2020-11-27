@@ -10,7 +10,7 @@
           <h2 class="bold">{{ structure.nomDeVotreStructure }}</h2>
           <h3>{{ structure.typeDeStructure }}</h3>
         </div>
-        <div class="btnPrint" fxLayout="column" fxLayoutAlign="end">
+        <div class="printButton" fxLayout="column" fxLayoutAlign="end">
           <app-button
             class="hide-on-print"
             [type]="'button'"
@@ -21,7 +21,7 @@
           ></app-button>
         </div>
       </div>
-      <div fxLayout="row">
+      <div fxLayout="row" fxLayout.lt-sm="column">
         <div fxLayout="column" fxFlex="50%">
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-structure-opening-status
@@ -98,7 +98,7 @@
       <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Services</h2>
     </div>
-    <div fxLayout="row" class="w-100">
+    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
       <div fxFlex="50%" *ngIf="isBaseSkills()">
         <h3 class="subtitle">Compétences de base</h3>
         <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>
@@ -116,7 +116,7 @@
       <h2>Accueil</h2>
     </div>
     <!-- Openning Hours -->
-    <div fxLayout="row" class="w-100">
+    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
       <div fxFlex="50%">
         <h3 class="subtitle">Horaires d’ouverture au public :</h3>
         <div fxLayout="column">
