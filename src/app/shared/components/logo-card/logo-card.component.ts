@@ -59,6 +59,8 @@ export class LogoCardComponent implements OnInit {
         return 'franceservices';
       case Labels.pass_numerique:
         return 'pass';
+      case Labels.territoire:
+        return 'territoire';
       default:
         throw new Error(`${demarche} is not handled by getLabelKey and getLogoKey`);
     }
