@@ -5,6 +5,7 @@
 @import '../../../../assets/scss/layout';
 
 .structrue-details-container {
+  border-right: solid 1px $grey-4;
   background-color: $white;
   z-index: $structure-details-z-index;
   position: absolute;
@@ -15,10 +16,13 @@
   height: calc(100vh - #{$header-height} - #{$footer-height});
   padding: 10px 24px;
   overflow: auto;
+  .btnPrint {
+    margin-right: 75px;
+  }
 }
 
 .structrue-details-container > .structure-details-block {
-  padding: 0px 68px 24px 0;
+  padding: 0px 0px 24px 0;
   border-bottom: 1px dashed $grey-2;
   .subtitle {
     text-transform: uppercase;
@@ -27,7 +31,7 @@
 }
 
 .structrue-details-container > .structure-details-block ~ .structure-details-block {
-  padding: 24px 68px 24px 0;
+  padding: 24px 0;
 }
 
 .structure-details-block:last-child {

@@ -10,7 +10,7 @@
           <h2 class="bold">{{ structure.nomDeVotreStructure }}</h2>
           <h3>{{ structure.typeDeStructure }}</h3>
         </div>
-        <div fxLayout="column" fxLayoutAlign="end">
+        <div class="btnPrint" fxLayout="column" fxLayoutAlign="end">
           <app-button
             class="hide-on-print"
             [type]="'button'"
@@ -22,7 +22,7 @@
         </div>
       </div>
       <div fxLayout="row">
-        <div fxLayout="column" fxFlex="60%">
+        <div fxLayout="column" fxFlex="50%">
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-structure-opening-status
               class="hide-on-print"
@@ -36,21 +36,26 @@
           </div>
           <div *ngIf="structure.siteWeb" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'web'"></app-svg-icon>
-            <a target="_blank" rel="noopener noreferrer" [href]="structure.siteWeb">{{ structure.siteWeb }}</a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              [href]="structure.siteWeb.includes('http') ? structure.siteWeb : 'http://' + structure.siteWeb"
+              >{{ structure.siteWeb | url }}</a
+            >
           </div>
           <div *ngIf="structure.telephone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'tel'"></app-svg-icon>
-            <p>{{ structure.telephone }}</p>
+            <p>{{ structure.telephone | phone }}</p>
           </div>
         </div>
-        <div fxLayout="column" fxFlex="40%">
+        <div fxLayout="column" fxFlex="50%">
           <div *ngIf="structure.courriel" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
             <a [href]="'mailto:' + structure.courriel">{{ structure.courriel }}</a>
           </div>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'calendar'"></app-svg-icon>
-            <p>Mise-à-jour le {{ structure.derniereModification | date: 'mediumDate' }}</p>
+            <p>Mise à jour le {{ structure.derniereModification | date: 'mediumDate' }}</p>
           </div>
         </div>
       </div>
@@ -112,7 +117,7 @@
     </div>
     <!-- Openning Hours -->
     <div fxLayout="row" class="w-100">
-      <div fxFlex="70%">
+      <div fxFlex="50%">
         <h3 class="subtitle">Horaires d’ouverture au public :</h3>
         <div fxLayout="column">
           <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
@@ -131,7 +136,7 @@
         </div>
       </div>
       <!-- modalitesDacces -->
-      <div fxFlex="30%">
+      <div fxFlex="50%">
         <h3 class="subtitle">Accès</h3>
         <div
           *ngFor="let acces of structure.modalitesDacces"
