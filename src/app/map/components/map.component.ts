@@ -215,7 +215,7 @@ export class MapComponent implements OnChanges {
     this.mapOptions = {
       center: latLng(45.764043, 4.835659),
       maxZoom: 19,
-      zoom: 10,
+      zoom: 12,
       minZoom: 10,
       layers: [carteLayer, metroMaps],
     };
