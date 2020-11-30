@@ -4,22 +4,13 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Address } from '../models/address.model';
 import { GeoJson } from '../map/models/geojson.model';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GeojsonService {
   constructor(private http: HttpClient) {}
-
-  /**
-   * Retrive an address with a street national reference
-   * @param idVoie Number
-   */
-  public getAddressByIdVoie(idVoie: number): Observable<Address> {
-    return this.http
-      .get('/base-adresse/base-adresse-nationale/streets' + '?id=' + idVoie)
-      .pipe(map((data: { data: any[]; err: number }) => new Address(data.data[0])));
-  }
 
   /**
    * Retrive an address by geolocation
@@ -32,12 +23,33 @@ export class GeojsonService {
   }
 
   /**
+   * Parse object to geojosn
+   * @param data string data
+   */
+  private parseToGeoJson(data: string): GeoJson {
+    return new GeoJson(data);
+  }
+
+  /**
+   * Retrive an address by geolocation
+   * @param idVoie Number
+   */
+  public getMDMGeoJson(): Observable<GeoJson[]> {
+    return this.http
+      .get(
+        '/wfs/grandlyon' +
+          '?SERVICE=WFS&VERSION=2.0.0&request=GetFeature&typename=ter_territoire.maison_de_la_metropole&outputFormat=application/json; subtype=geojson&SRSNAME=EPSG:4171&startIndex=0'
+      )
+      .pipe(map((data: { features: any[] }) => _.map(data.features, this.parseToGeoJson)));
+  }
+
+  /**
    * Get GeoLocation with an address
    * @param address Address
    */
-  public getCoord(address: Address): Observable<GeoJson> {
+  public getCoord(numero: string, address: string, zipcode: string): Observable<GeoJson> {
     return this.http
-      .get('/geocoding/photon/api' + '?q=' + address.queryString())
+      .get('/geocoding/photon/api' + '?q=' + numero + ' ' + address + ' ' + zipcode)
       .pipe(map((data: { features: any[]; type: string }) => new GeoJson(data.features[0])));
   }
 

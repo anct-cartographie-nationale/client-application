@@ -1,12 +1,49 @@
+@import '../../assets/scss/breakpoint';
+@import '../../assets/scss/layout';
+@import '../../assets/scss/z-index';
+
 .left-pane {
   width: 640px;
   min-width: 640px;
+  @media #{$tablet} {
+    width: 100%;
+    min-width: unset;
+    &.mapPhone {
+      display: none !important;
+    }
+  }
 }
 .right-pane {
   width: 80%;
-  height: 80%;
-  padding: 0 40px 40px 40px;
+  padding: 0 40px;
+  @media #{$tablet} {
+    display: none;
+    &.mapPhone {
+      display: block;
+    }
+    width: 100%;
+    padding: 0;
+  }
 }
 .content-container {
   height: 100%;
+  @media #{$tablet} {
+    padding: 0;
+  }
+}
+.btnSwitch {
+  position: fixed;
+  left: 50%;
+  bottom: $footer-height;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  display: none;
+  @media #{$tablet} {
+    display: block;
+    opacity: 0.8;
+    z-index: $btn-phone-switch-map-list-z-index;
+  }
+  @media #{$large-phone} {
+    bottom: 20px;
+  }
 }

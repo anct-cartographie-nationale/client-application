@@ -35,6 +35,25 @@ h6,
   font-family: $title-font;
 }
 
+@mixin btn-bold {
+  @include cn-bold-16;
+  line-height: 18px;
+}
+
+@mixin btn-bold-sousligne {
+  @include btn-bold;
+  text-decoration: underline;
+}
+@mixin btn-normal {
+  @include cn-regular-16;
+  line-height: 19px;
+}
+
+@mixin btn-pass {
+  @include cn-regular-18;
+  line-height: 21px;
+}
+
 @mixin arial-regular-16 {
   font-family: $footer-text-font;
   font-style: normal;

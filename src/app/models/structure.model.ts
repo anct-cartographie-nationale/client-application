@@ -13,7 +13,8 @@ export class Structure {
   public typeDeStructure: string;
   public description: string;
   public n: string;
-  public voie: number;
+  public voie: string;
+  public commune: string;
   public telephone: string;
   public courriel: string;
   public siteWeb: string;
@@ -35,7 +36,9 @@ export class Structure {
   public hours: Week;
   public isOpen: boolean;
   public openedOn: OpeningDay;
-  public distance?: string;
+  public lesCompetencesDeBase: string[];
+  public accesAuxDroits: string[];
+  public distance?: number;
   public address?: string;
 
   constructor(obj?: any) {
@@ -76,6 +79,16 @@ export class Structure {
   }
 
   /**
+   * Check if a structure has equipments
+   */
+  public hasEquipments(): boolean {
+    if (this.wifi || this.ordinateurs) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * Return a range, according to the distance, between [1,3] to get a distance reference.
    * - [0,5km] => 1
    * - [5km,10km] => 2
@@ -86,9 +99,9 @@ export class Structure {
       return 3;
     } else {
       // If it's in km
-      if (parseInt(this.distance, 10) > 10000) {
+      if (this.distance > 10000) {
         return 3;
-      } else if (parseInt(this.distance, 10) < 5000) {
+      } else if (this.distance < 5000) {
         // If it's between 0 and 500 m
         return 1;
       } else {

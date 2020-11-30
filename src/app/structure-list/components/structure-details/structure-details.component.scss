@@ -3,8 +3,10 @@
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/z-index';
 @import '../../../../assets/scss/layout';
+@import '../../../../assets/scss/breakpoint';
 
 .structrue-details-container {
+  border-right: solid 1px $grey-4;
   background-color: $white;
   z-index: $structure-details-z-index;
   position: absolute;
@@ -13,19 +15,35 @@
   max-width: 980px;
   width: 100%;
   height: calc(100vh - #{$header-height} - #{$footer-height});
-  padding: 18px 24px;
+  padding: 10px 24px;
   overflow: auto;
+  @media #{$tablet} {
+    position: fixed;
+    padding: 0;
+    height: 100vh;
+    .printButton {
+      display: none !important;
+    }
+  }
+  .printButton {
+    margin-right: 75px;
+  }
 }
 
-.structrue-details-block {
+.structrue-details-container > .structure-details-block {
+  padding: 0px 0px 24px 0;
   border-bottom: 1px dashed $grey-2;
-  padding-bottom: 24px;
   .subtitle {
     text-transform: uppercase;
     @include cn-bold-16;
   }
 }
-.structrue-details-block:last-child {
+
+.structrue-details-container > .structure-details-block ~ .structure-details-block {
+  padding: 24px 0;
+}
+
+.structure-details-block:last-child {
   border-bottom: none;
 }
 
@@ -37,6 +55,7 @@
 }
 
 h2 {
+  margin-top: 0;
   margin-bottom: 5px;
   @include cn-regular-24;
 }
@@ -55,7 +74,25 @@ h4 {
 p,
 a {
   @include cn-regular-16;
-  margin-left: 30px;
   margin-top: 9px;
   margin-bottom: 9px;
+}
+
+@media print {
+  .structrue-details-container {
+    background-color: unset;
+    z-index: unset;
+    position: unset;
+    top: unset;
+    left: unset;
+    max-width: unset;
+    width: unset;
+    height: unset;
+    padding: unset;
+    overflow: hidden;
+  }
+
+  .hide-on-print {
+    display: none !important;
+  }
 }

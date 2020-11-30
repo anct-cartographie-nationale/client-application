@@ -1,40 +1,61 @@
-<div class="structrue-details-container">
+<div class="structrue-details-container" *ngIf="structure">
   <!-- Header info -->
-  <div fxLayout="row" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
-    <em class="ic-arrow-left clickable" (click)="close()"></em>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <div (click)="close()" class="ico-close-details"></div>
+  </div>
+  <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
-      <div fxLayout="column" fxLayoutAlign="center">
-        <h2 class="bold">{{ structure.nomDeVotreStructure }}</h2>
-        <h3>{{ structure.typeDeStructure }}</h3>
+      <div fxLayout="row" fxLayoutAlign="space-between start">
+        <div fxLayout="column">
+          <h2 class="bold">{{ structure.nomDeVotreStructure }}</h2>
+          <h3>{{ structure.typeDeStructure }}</h3>
+        </div>
+        <div class="printButton" fxLayout="column" fxLayoutAlign="end">
+          <app-button
+            class="hide-on-print"
+            [type]="'button'"
+            [style]="'buttonWithHash'"
+            [text]="'Imprimer'"
+            [iconBtn]="'print'"
+            (action)="print()"
+          ></app-button>
+        </div>
       </div>
-      <app-structure-opening-status [structure]="structure"></app-structure-opening-status>
-      <div fxLayout="row">
-        <div fxLayout="column" fxFlex="60%">
-          <div *ngIf="structure.voie" fxLayout="row" fxLayoutAlign="none center">
-            <em class="ico-marker-pin-sm absolute"></em>
+      <div fxLayout="row" fxLayout.lt-sm="column">
+        <div fxLayout="column" fxFlex="50%">
+          <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-structure-opening-status
+              class="hide-on-print"
+              [structure]="structure"
+              [isCalledByDetails]="true"
+            ></app-structure-opening-status>
+          </div>
+          <div *ngIf="structure.voie" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'adress'"></app-svg-icon>
             <p>{{ structure.n }} {{ structure.address }}</p>
           </div>
-          <div *ngIf="structure.siteWeb" fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-globe-alt"></em>
-            <a target="_blank" rel="noopener noreferrer" [href]="structure.siteWeb">{{ structure.siteWeb }}</a>
+          <div *ngIf="structure.siteWeb" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'web'"></app-svg-icon>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              [href]="structure.siteWeb.includes('http') ? structure.siteWeb : 'http://' + structure.siteWeb"
+              >{{ structure.siteWeb | url }}</a
+            >
           </div>
-          <div *ngIf="structure.telephone" fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-phone"></em>
-            <p>{{ structure.telephone }}</p>
+          <div *ngIf="structure.telephone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'tel'"></app-svg-icon>
+            <p>{{ structure.telephone | phone }}</p>
           </div>
         </div>
-        <div fxLayout="column" fxFlex="40%">
-          <div *ngIf="structure.courriel" fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-mail"></em>
+        <div fxLayout="column" fxFlex="50%">
+          <div *ngIf="structure.courriel" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
             <a [href]="'mailto:' + structure.courriel">{{ structure.courriel }}</a>
           </div>
-          <div fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-mail"></em>
-            <p>TODO: PASS</p>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="none center">
-            <em class="ic-mail"></em>
-            <p>TODO: FABLAB</p>
+          <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'calendar'"></app-svg-icon>
+            <p>Mise à jour le {{ structure.derniereModification | date: 'mediumDate' }}</p>
           </div>
         </div>
       </div>
@@ -42,52 +63,67 @@
   </div>
   <!-- Démarches -->
   <div
-    *ngIf="structure.accompagnementDesDemarches.length > 0"
+    *ngIf="structure.accompagnementDesDemarches[0] !== ''"
     fxLayout="column"
-    class="structrue-details-block"
+    class="structure-details-block"
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
-      <em class="ic-mouse"></em>
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+      <app-svg-icon [type]="'ico'" [icon]="'demarches'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Démarches</h2>
     </div>
-    <div fxLayout="row wrap" fxLayoutGap="24px">
-      <div *ngFor="let accompagnement of structure.accompagnementDesDemarches">
-        <app-logo-card [name]="accompagnement"></app-logo-card>
+    <div fxLayout="column">
+      <div fxLayout="row wrap" fxLayoutGap="24px">
+        <div *ngFor="let accompagnement of structure.accompagnementDesDemarches">
+          <app-logo-card [name]="accompagnement"></app-logo-card>
+        </div>
       </div>
+      <p *ngIf="isOtherSection">
+        Tout ce qui est en lien avec la création d'entreprise ex : consultation de sites de références (BPI, Je créé
+        dans ma région, ...), inscription à des newsletters, aide pour trouver des sites (CMA, CCI, Urssaf,...),
+        recherches d'infos sur moteur de recherche...
+      </p>
     </div>
   </div>
   <!-- Services -->
-  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
-      <em class="ic-mouse"></em>
+  <div
+    *ngIf="isBaseSkills() || isAccessRights()"
+    fxLayout="column"
+    class="structure-details-block"
+    fxLayoutAlign="baseline baseline"
+    fxLayoutGap="20px"
+  >
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+      <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Services</h2>
     </div>
-    <div fxLayout="row" class="w-100">
-      <div fxFlex="50%">
+    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
+      <div fxFlex="50%" *ngIf="isBaseSkills()">
         <h3 class="subtitle">Compétences de base</h3>
+        <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>
       </div>
-      <div fxFlex="50%">
+      <div fxFlex="50%" *ngIf="isAccessRights()">
         <h3 class="subtitle">Accès au droits</h3>
+        <p *ngFor="let rights of accessRights">{{ rights.text }}</p>
       </div>
     </div>
   </div>
   <!-- Accueil -->
-  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
-      <em class="ic-mouse"></em>
+  <div fxLayout="column" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+      <app-svg-icon [type]="'ico'" [icon]="'accueil'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Accueil</h2>
     </div>
     <!-- Openning Hours -->
-    <div fxLayout="row" class="w-100">
-      <div fxFlex="70%">
+    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
+      <div fxFlex="50%">
         <h3 class="subtitle">Horaires d’ouverture au public :</h3>
         <div fxLayout="column">
           <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
             <div *ngIf="day.value.open">
               <h4>{{ day.key | day }}</h4>
-              <div class="openning-time" fxLayout="row" fxLayoutAlign="none center">
+              <div class="openning-time" fxLayout="row" fxLayoutAlign="none flex-end">
                 <div *ngFor="let timeRange of day.value.time; let isFirst = first">
                   <p *ngIf="isFirst">de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}</p>
                   <p *ngIf="!isFirst && timeRange.openning">
@@ -100,45 +136,49 @@
         </div>
       </div>
       <!-- modalitesDacces -->
-      <div fxFlex="30%">
+      <div fxFlex="50%">
         <h3 class="subtitle">Accès</h3>
-        <div *ngFor="let acces of structure.modalitesDacces">
-          <em
-            [ngClass]="{
-              'ic-user': acces === accessModality.free,
-              'ic-calendar-today': acces === accessModality.meeting,
-              'ic-camera': acces === accessModality.numeric
-            }"
-          ></em>
+        <div
+          *ngFor="let acces of structure.modalitesDacces"
+          fxLayout="row"
+          fxLayoutAlign="none flex-end"
+          fxLayoutGap="20px"
+        >
+          <app-svg-icon [type]="'ico'" [icon]="getAccessIcon(acces)"></app-svg-icon>
           <p>{{ acces }}</p>
         </div>
       </div>
     </div>
   </div>
   <!-- Equipements -->
-  <div fxLayout="column" class="structrue-details-block" fxLayoutAlign="baseline baseline">
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
-      <em class="ic-toolbox"></em>
+  <div
+    *ngIf="structure.hasEquipments()"
+    fxLayout="column"
+    class="structure-details-block"
+    fxLayoutAlign="baseline baseline"
+  >
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+      <app-svg-icon [type]="'ico'" [icon]="'equipement'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Équipements</h2>
     </div>
-    <div *ngIf="structure.wifi" fxLayout="row" fxLayoutAlign="none center">
-      <em class="ic-wifi"></em>
+    <div *ngIf="structure.wifi" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+      <app-svg-icon [type]="'ico'" [icon]="'wifi'"></app-svg-icon>
       <p>Wifi en accès libre</p>
     </div>
-    <div *ngIf="structure.ordinateurs" fxLayout="row" fxLayoutAlign="none center">
-      <em class="ic-screen"></em>
+    <div *ngIf="structure.ordinateurs" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+      <app-svg-icon [type]="'ico'" [icon]="'computer'"></app-svg-icon>
       <p>Ordinateurs à disposition : {{ structure.nombre }}</p>
     </div>
   </div>
   <!-- Labels -->
   <div
-    *ngIf="structure.labelsEtQualifications"
+    *ngIf="structure.labelsEtQualifications[0] !== ''"
     fxLayout="column"
-    class="structrue-details-block"
+    class="structure-details-block"
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
-    <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
       <em class="ic-toolbox"></em>
       <h2>Labelisation</h2>
     </div>

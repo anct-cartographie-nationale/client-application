@@ -3,7 +3,8 @@
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/breakpoint';
 @import '../../../../assets/scss/shapes';
-@import '../../../../assets/scss/buttons';
+@import '../../../../assets/scss/hyperlink';
+@import '../../../../assets/scss/z-index';
 
 .modaltraining {
   @media #{$desktop} {
@@ -22,17 +23,24 @@
   max-height: 648px;
   max-width: 754px;
   width: 94%;
-  border-left: 6.5px solid transparent;
-  border-bottom: 6.5px solid transparent;
-  border-radius: 11px;
-  z-index: 401 !important;
+  z-index: $modal-filter-structure-z-index !important;
   position: absolute;
-  border: 1px solid $grey-6;
   border-radius: 6px;
   margin-top: 3.5px;
+  @media #{$large-phone} {
+    max-height: auto;
+    max-width: auto;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: none;
+    padding: 0;
+  }
   @include background-hash;
+  border: 1px solid $grey-4;
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 16px;
   }
   ::-webkit-scrollbar-track {
     background: $grey-6;
@@ -41,16 +49,45 @@
     background: $grey;
     border-radius: 6px;
   }
+  .body-wrap {
+    @media #{$large-phone} {
+      height: 100vh;
+    }
+    .titleFilter {
+      display: none !important;
+      margin: 27px 25px 0px 25px;
+      @include cn-bold-28;
+      @media #{$large-phone} {
+        display: flex !important;
+      }
+    }
+  }
   .contentModal {
     overflow-y: auto;
     max-width: 1100px;
     border-bottom: 1px solid $grey;
-    margin-bottom: 10px;
-    max-height: 500px;
+    margin-bottom: 16px;
+    max-height: 438px;
+    @media #{$large-phone} {
+      max-height: none;
+      height: 100%;
+    }
     .blockFiltre {
       width: 100%;
-      padding: 32px 40px 10px 40px;
+      margin: 0 32px;
+      padding: 40px 0;
       min-width: 450px;
+      border-bottom: 1px dashed $grey-4;
+
+      &:last-child {
+        padding-bottom: 32px;
+        border-bottom: none;
+      }
+      @media #{$large-phone} {
+        margin: 0 18px;
+        padding: 25px 0;
+        min-width: 0;
+      }
     }
     .blockLigne {
       padding-left: 0;
@@ -60,7 +97,7 @@
       -webkit-column-gap: 46px;
       column-count: 2;
       column-gap: 46px;
-      column-rule: dashed 1px $grey;
+      margin: 0px;
       @media #{$large-phone} {
         -moz-column-count: 1;
         -webkit-column-count: 1;
@@ -68,16 +105,22 @@
       }
     }
     .ligneFiltre {
-      padding: 5px 0 5px 0;
+      padding: 5px;
     }
     h4 {
       @include cn-bold-14;
+      line-height: 17px;
+      text-transform: uppercase;
+      color: $grey-3;
       display: flex;
       align-items: center;
       margin-top: 0;
+      margin-bottom: 9px;
     }
     .nbResult {
       @include cn-regular-14;
+      line-height: 16px;
+      color: $grey-3;
     }
     label {
       @include cn-regular-14;
@@ -85,17 +128,9 @@
   }
   .footer {
     margin: 0px 20px 16px 0;
-    a {
-      @include cn-bold-14;
-      display: flex;
-      align-items: center;
-      text-decoration: underline;
-      color: $secondary-color;
-    }
     height: 32px;
-    button {
-      @include btn-search-filter;
-      @include cn-bold-14;
-    }
   }
+}
+a {
+  @include hyperlink;
 }

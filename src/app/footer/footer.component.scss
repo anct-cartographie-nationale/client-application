@@ -26,8 +26,9 @@
     height: 37px;
     width: 22px;
   }
+
   @media #{$large-phone} {
-    height: unset;
+    display: none !important;
     font-size: 0.75em;
     div {
       margin: 20px 0;
@@ -43,11 +44,23 @@
 }
 
 .metro-title {
-  margin-left: 1vw;
+  margin-left: 6px;
   @include arial-regular-16;
 }
 
 .metro-link {
   display: flex;
   align-items: center;
+}
+
+@media screen {
+  div {
+    flex-direction: row !important;
+  }
+}
+
+@media print {
+  div {
+    display: none !important;
+  }
 }

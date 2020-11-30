@@ -1,31 +1,44 @@
 @import './color';
 @import './shapes';
+@import './typography';
 
 @mixin btn-filter {
   background: $white;
   height: 40px;
   width: 190px;
-  border: 1px solid $grey-6;
+  border: 1px solid $grey-4;
   padding: 3px 16px 3px 16px;
   outline: none;
   border-radius: 4px;
   cursor: pointer;
+  @include btn-normal;
 }
 @mixin btn-search {
   background: $white;
-  height: 34px;
+  height: 31px;
   border: none;
   color: $primary-color;
   padding: 3px 16px 3px 16px;
   outline: none;
   cursor: pointer;
+  display: table-cell;
+  vertical-align: middle;
+  @include btn-bold;
 }
 @mixin btn-search-filter {
   background: $secondary-color;
   height: 40px;
-  border: none;
   color: $white;
-  padding: 3px 16px 3px 16px;
+  padding: 4px 37px 4px 37px;
+  border-radius: 4px;
   outline: none;
+  border: 1px solid transparent;
   cursor: pointer;
+  @include cn-bold-16;
+  line-break: 18px;
+}
+@mixin btn-search-addStructure {
+  @include btn-bold-sousligne;
+  color: $secondary-color;
+  outline: none;
 }

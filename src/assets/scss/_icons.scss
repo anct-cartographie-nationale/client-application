@@ -52,6 +52,7 @@
   border-radius: 50% 50% 50% 0;
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
+  background-color: $grey-3;
   &:before {
     content: '';
     position: absolute;
@@ -61,9 +62,6 @@
     height: 7px;
     border-radius: 4px;
     background-color: white;
-  }
-  &.blue {
-    background-color: $secondary-color;
   }
 }
 .ico-dot-available {
@@ -172,10 +170,11 @@
   }
 }
 
-.ico-close {
-  width: 15px;
-  height: 13px;
-  text-align: center;
+.ico-close-search {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
   &:before {
     transform: rotate(45deg);
   }
@@ -183,13 +182,13 @@
     transform: rotate(-45deg);
   }
 }
-.ico-close:before,
-.ico-close:after {
+.ico-close-search:before,
+.ico-close-search:after {
   position: absolute;
   content: '';
-  height: 14px;
+  height: 16px;
   width: 2px;
-  background-color: $grey-6;
+  background-color: $grey-4;
 }
 
 .ic-arrow-left {
@@ -231,7 +230,6 @@
   background-color: transparent;
   border-width: 0.07em;
   border-radius: 0.05em;
-  background-color: transparent;
   margin: 0 0.16em;
 }
 .ic-print:before {
@@ -576,4 +574,53 @@
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   top: 9px;
+}
+
+.ico-close-details {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  background-color: $black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  cursor: pointer;
+
+  &:before,
+  &:after {
+    content: '';
+    width: 23px;
+    height: 2px;
+    background-color: $white;
+    position: absolute;
+    border-radius: 1px;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+.ico-menu,
+.ico-menu:before,
+.ico-menu:after {
+  cursor: pointer;
+  border-radius: 1px;
+  height: 2px;
+  width: 23px;
+  background: $black;
+  position: absolute;
+  display: block;
+  content: '';
+}
+.ico-menu {
+  &:before {
+    top: -6px;
+  }
+  &:after {
+    bottom: -6px;
+  }
 }

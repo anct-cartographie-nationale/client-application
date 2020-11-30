@@ -22,27 +22,12 @@ describe('GeojsonService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get address for id 26061 ', async () => {
+  it('should get coord with query string Rue de la Mairie Feyzin ', async () => {
     await new Promise((resolve) => {
-      service.getAddressByIdVoie(26061).subscribe(
+      service.getCoord('Rue de la Mairie', 'Feyzin').subscribe(
         (val) => {
-          expect(val.zipcode).toEqual('69800');
-          expect(val.text).toEqual('13ème Rue Cité Berliet');
-          resolve();
-        },
-        (err) => {
-          resolve();
-        }
-      );
-    });
-  });
-
-  it('should get coord with query string avenue foch 69006 ', async () => {
-    await new Promise((resolve) => {
-      service.getCoord(new Address({ text: 'avenue foch', citycode: '69006' })).subscribe(
-        (val) => {
-          expect(val.geometry.getLat()).toEqual(4.8429024);
-          expect(val.geometry.getLon()).toEqual(45.7733884);
+          expect(val.geometry.getLat()).toEqual(4.8591584);
+          expect(val.geometry.getLon()).toEqual(45.6727968);
           resolve();
         },
         (err) => {

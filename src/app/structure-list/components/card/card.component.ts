@@ -1,10 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Structure } from '../../../models/structure.model';
 import { GeojsonService } from '../../../services/geojson.service';
-import { GeoJson } from '../../../map/models/geojson.model';
-import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
-
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -22,19 +18,11 @@ export class CardComponent implements OnInit {
    * Display distance in m or km according to value
    */
   public formatDistance(): string {
-    if (this.structure.distance.length > 3) {
-      return (parseInt(this.structure.distance, 10) / 1000).toFixed(1).toString() + ' km';
+    if (this.structure.distance > 1000) {
+      return (this.structure.distance / 1000).toFixed(1).toString() + ' km';
     } else {
       return this.structure.distance + ' m';
     }
-  }
-
-  /**
-   * Get coord with a street reference
-   * @param idVoie Street reference
-   */
-  public getCoord(idVoie: number): Observable<GeoJson> {
-    return this.geoJsonService.getAddressByIdVoie(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
   }
 
   public cardClicked(): void {

@@ -1,10 +1,8 @@
-@import '../../../../assets/scss/icons';
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
-@import '../../../../assets/scss/breakpoint';
-@import '../../../../assets/scss/shapes';
-@import '../../../../assets/scss/buttons';
 @import '../../../../assets/scss/inputs';
+@import '../../../../assets/scss/hyperlink';
+@import '../../../../assets/scss/breakpoint';
 
 .header {
   .title {
@@ -17,14 +15,7 @@
 }
 .content {
   margin: 10px 0 0px 0;
-  .icon {
-    padding: 0 6px 0 6px;
-    border-radius: 4px;
-    cursor: pointer;
-    &.pin {
-      margin-bottom: 4px;
-    }
-  }
+
   input {
     @include cn-regular-14;
     @include input-search;
@@ -33,49 +24,30 @@
     .separator {
       height: 100%;
       width: 2px;
-      background-color: $grey-6;
+      background-color: $grey-4;
       margin: 0 5px 0 5px;
     }
     .inputSection {
       padding: 6px 3px 6px 6px;
-      min-width: 463px;
-      border: 1px solid $grey-6;
+      width: 100%;
+      border: 1px solid $grey-4;
       background-color: $white;
       height: 40px;
     }
-    .searchButton {
-      border: 1px solid $grey-6;
-      border-radius: 6px;
-      @include background-hash;
-      padding: 0 0 4px 5px;
-      button {
-        border-radius: 6px;
-        @include btn-search;
-        @include cn-bold-14;
-      }
-    }
   }
-  .btnSection {
-    padding: 16px 0 0px 0;
-    button {
-      @include btn-filter;
-      .btnText {
-        @include cn-regular-14;
-      }
-    }
-    .selected {
-      border: 1px solid $primary-color;
-      color: $primary-color;
-      .arrow {
-        background-color: transparent;
-        border-bottom: 1px solid $primary-color;
-        border-right: 1px solid $primary-color;
-        transform: translateY(25%) rotate(-135deg);
-        margin: 0 5px 0 10px;
-        height: 7px;
-        width: 7px;
-      }
-    }
+}
+.btnSection {
+  padding: 16px 0 0px 0;
+  button {
+    background: $white;
+    height: 40px;
+    width: 100%;
+    border: 1px solid $grey-4;
+    padding: 3px 16px 3px 16px;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    @include btn-normal;
     .arrow {
       background-color: transparent;
       border-bottom: 1px solid $grey-2;
@@ -85,15 +57,84 @@
       height: 7px;
       width: 7px;
     }
+    &:focus {
+      border-color: $blue-hover;
+    }
+  }
+  .selected {
+    border-color: $primary-color !important;
+    color: inherit;
+    .arrow {
+      background-color: transparent;
+      border-bottom: 1px solid $primary-color;
+      border-right: 1px solid $primary-color;
+      transform: translateY(25%) rotate(-135deg);
+      margin: 0 5px 0 10px;
+      height: 7px;
+      width: 7px;
+    }
+  }
+  .containCheckedFilters {
+    border-color: $secondary-color;
   }
 }
 
 .footerSearchSection {
-  margin: 17px 0px 17px 0px;
+  margin: 8px 0px 8px 0px;
+  height: 40px;
+}
 
-  a {
-    @include cn-bold-14;
-    font-weight: bold;
-    text-decoration: underline;
+.icon {
+  background-color: transparent;
+  border: 1px solid transparent;
+  outline: none;
+  cursor: pointer;
+  &.pin {
+    padding: 4px 6px 8px 6px;
+    &:hover {
+      .ico-pin-search {
+        background-color: $blue-hover;
+      }
+    }
+    &:focus {
+      border-color: $secondary-color;
+      .ico-pin-search {
+        background-color: $secondary-color;
+      }
+    }
+    &:active {
+      border-color: transparent;
+      .ico-pin-search {
+        background-color: $blue-active;
+      }
+    }
+  }
+  &.close {
+    &:focus {
+      border-color: $secondary-color;
+    }
+    &:active {
+      border-color: transparent;
+    }
+  }
+}
+a {
+  @include hyperlink;
+  width: 100%;
+  text-align: right;
+}
+.phoneSection {
+  margin: 9px 0px 18px 0px;
+  display: none;
+  .btnSection {
+    padding: 0;
+  }
+}
+@media #{$large-phone} {
+  .isntPhoneContent {
+    display: none !important;
+  }
+  .phoneSection {
+    display: block;
   }
 }

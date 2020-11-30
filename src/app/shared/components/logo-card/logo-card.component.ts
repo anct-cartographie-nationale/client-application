@@ -17,21 +17,33 @@ export class LogoCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public getLogoKey(demarche: string): string {
-    // return Demarches[demerche];
+  // Get the custom or default name from a demarche.
+  public getName(demarche: string): string {
     switch (demarche) {
-      case Demarches.pole_emploi:
-        return 'pole_emploi';
+      case Demarches.caf:
+        return 'Caf';
+      default:
+        return demarche;
+    }
+  }
+  public getLogoKey(demarche: string): string {
+    switch (demarche) {
       case Demarches.caf:
         return 'caf';
       case Demarches.carsat:
         return 'carsat';
       case Demarches.cpam:
         return 'cpam';
+      case Demarches.epn:
+        return 'epn';
       case Demarches.impots:
         return 'impots';
       case Demarches.logements:
-        return 'logements';
+        return 'logement';
+      case Demarches.gd_lyon:
+        return 'lyon';
+      case Demarches.pole_emploi:
+        return 'pole';
       case Demarches.other:
         return 'other';
       default:
@@ -42,13 +54,15 @@ export class LogoCardComponent implements OnInit {
   private getLabelKey(demarche: string): string {
     switch (demarche) {
       case Labels.aidants_connect:
-        return 'aidants_connect';
+        return 'aidants';
       case Labels.maison_france_service:
-        return 'maison_france_service';
+        return 'franceservices';
       case Labels.pass_numerique:
-        return 'pass_numerique';
+        return 'pass';
+      case Labels.territoire:
+        return 'territoire';
       default:
-        return 'null';
+        throw new Error(`${demarche} is not handled by getLabelKey and getLogoKey`);
     }
   }
 }

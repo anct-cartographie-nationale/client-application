@@ -21,31 +21,58 @@ export class HomeComponent implements OnInit {
   public selectedMarkerId: number;
   public geolocation = false;
   public currentLocation: GeoJson;
+  public currentStructure: Structure;
+  public isMapPhone = false;
   constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
 
   ngOnInit(): void {
     if (navigator.geolocation) {
       this.getLocation();
+    } else {
+      this.getStructures(null);
     }
-    this.getStructures(null);
   }
 
   public getStructures(filters: Filter[]): void {
     this.structureService.getStructures(filters).subscribe((structures) => {
-      Promise.all(
-        structures.map((structure) => {
-          if (this.geolocation) {
+      filters ? (structures = this.applyFilters(structures, filters)) : structures;
+      if (structures) {
+        Promise.all(
+          structures.map((structure) => {
             return this.getStructurePosition(structure).then((val) => {
               return this.structureService.updateOpeningStructure(val, DateTime.local());
             });
-          } else {
-            return this.structureService.updateOpeningStructure(structure, DateTime.local());
-          }
-        })
-      ).then((structureList) => {
-        this.structures = _.sortBy(structureList, ['distance']);
-      });
+          })
+        ).then((structureList) => {
+          structureList = _.sortBy(structureList, ['distance']);
+          this.structures = structureList;
+        });
+      } else {
+        this.structures = null;
+      }
     });
+  }
+
+  /**
+   *  Delete when we have back-end
+   *  Fix a bug with Json-server request
+   */
+  private applyFilters(structures, filters): Structure[] {
+    let structuresFiltered = [];
+    structures.forEach((s: Structure) => {
+      let count = 0;
+      filters.forEach((filter: Filter) => {
+        let properties: string[] = [];
+        properties = s[filter.name];
+        if (properties && properties.includes(filter.value)) {
+          count++;
+        }
+      });
+      if (count === filters.length) {
+        structuresFiltered.push(s);
+      }
+    });
+    return structuresFiltered;
   }
 
   /**
@@ -53,15 +80,21 @@ export class HomeComponent implements OnInit {
    */
   private getStructurePosition(structure: Structure): Promise<Structure> {
     return new Promise((resolve, reject) => {
-      this.getCoord(structure.voie).subscribe((coord: GeoJson) => {
-        structure.address = coord.properties.name + ' - ' + coord.properties.postcode + ' ' + coord.properties.city;
-        structure.distance = this.geoJsonService.getDistance(
-          coord.geometry.getLon(),
-          coord.geometry.getLat(),
-          this.currentLocation.geometry.getLon(),
-          this.currentLocation.geometry.getLat(),
-          'M'
-        );
+      this.getCoord(structure.n, structure.voie, structure.commune).subscribe((coord: GeoJson) => {
+        structure.address = structure.voie + ' - ' + coord.properties.postcode + ' ' + coord.properties.city;
+        // If location available, process structure distance
+        if (this.currentLocation) {
+          structure.distance = parseInt(
+            this.geoJsonService.getDistance(
+              coord.geometry.getLon(),
+              coord.geometry.getLat(),
+              this.currentLocation.geometry.getLon(),
+              this.currentLocation.geometry.getLat(),
+              'M'
+            ),
+            10
+          );
+        }
         resolve(structure);
       });
     });
@@ -71,17 +104,25 @@ export class HomeComponent implements OnInit {
    * Get coord with a street reference
    * @param idVoie Street reference
    */
-  public getCoord(idVoie: number): Observable<GeoJson> {
-    return this.geoJsonService.getAddressByIdVoie(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
+  public getCoord(numero: string, voie: string, zipcode: string): Observable<GeoJson> {
+    return this.geoJsonService.getCoord(numero, voie, zipcode);
   }
 
   public getLocation(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.geolocation = true;
-      const longitude = position.coords.longitude;
-      const latitude = position.coords.latitude;
-      this.getAddress(longitude, latitude);
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.geolocation = true;
+        const longitude = position.coords.longitude;
+        const latitude = position.coords.latitude;
+        this.getAddress(longitude, latitude);
+        this.getStructures(null);
+      },
+      (err) => {
+        if (err.PERMISSION_DENIED) {
+          this.getStructures(null);
+        }
+      }
+    );
   }
 
   private getAddress(longitude: number, latitude: number): void {
@@ -89,7 +130,9 @@ export class HomeComponent implements OnInit {
       (location) => {
         this.currentLocation = location;
       },
-      (err) => console.error(err)
+      (err) => {
+        throw new Error(err);
+      }
     );
   }
 
@@ -99,5 +142,13 @@ export class HomeComponent implements OnInit {
 
   public setSelectedMarkerId(id: number): void {
     this.selectedMarkerId = id;
+  }
+
+  public showDetailStructure(structure: Structure): void {
+    this.currentStructure = new Structure(structure);
+  }
+
+  public switchMapList(): void {
+    this.isMapPhone = !this.isMapPhone;
   }
 }

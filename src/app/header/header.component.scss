@@ -15,13 +15,24 @@
   padding: 0 20px;
   a {
     font-style: italic;
-    color: $primary-color;
+    color: $grey-2;
     &.active {
       font-weight: bold;
       color: $grey-1;
+      &:before {
+        color: $primary-color;
+        content: '// ';
+      }
+      &:after {
+        color: $primary-color;
+        content: ' //';
+      }
     }
   }
   .right-header {
+    @media #{$tablet} {
+      display: none !important;
+    }
     height: 100%;
   }
 }
@@ -29,7 +40,32 @@
 .logo {
   @include cn-regular-14;
   text-align: initial;
+  outline: none;
   p {
     margin: 0;
+  }
+  @media #{$tablet} {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media print {
+  div {
+    display: none !important;
+  }
+}
+
+.containerIconMenu {
+  display: none;
+  padding-right: 20px;
+  @media #{$tablet} {
+    display: block;
+  }
+}
+
+@media #{$tablet} {
+  .logo-text {
+    display: none !important;
   }
 }

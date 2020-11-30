@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +6,15 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {}
+  public showMenu = false;
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      console.log(params);
-    });
+  constructor() {}
+  ngOnInit(): void {}
+
+  public openMenu(): void {
+    this.showMenu = true;
+  }
+  public closeMenu(): void {
+    this.showMenu = false;
   }
 }

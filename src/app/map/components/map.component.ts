@@ -1,13 +1,36 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds, Control } from 'leaflet';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import {
+  latLng,
+  MapOptions,
+  tileLayer,
+  Map,
+  CRS,
+  TileLayer,
+  LatLngBounds,
+  latLngBounds,
+  Marker,
+  layerGroup,
+  polyline,
+} from 'leaflet';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { Structure } from '../../models/structure.model';
 import { GeoJson } from '../models/geojson.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
-import { LeafletControlLayersChanges } from '@asymmetrik/ngx-leaflet';
 import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
+import * as _ from 'lodash';
+import { GeoJsonProperties } from '../models/geoJsonProperties.model';
+import { MarkerType } from './markerType.enum';
 
 @Component({
   selector: 'app-map',
@@ -19,6 +42,9 @@ export class MapComponent implements OnChanges {
   @Input() public toogleToolTipId: number;
   @Input() public selectedMarkerId: number;
   @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
+  @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+  private currentStructure: Structure;
+
   public map: Map;
   public mapOptions: MapOptions;
   // Init locate options
@@ -30,13 +56,21 @@ export class MapComponent implements OnChanges {
     circlePadding: [5, 5],
   };
 
+  // Add listener on the popup button to show details of structure
+  @HostListener('document:click', ['$event'])
+  public clickout(event): void {
+    if (event.target.classList.contains('btnShowDetails')) {
+      this.selectedStructure.emit(this.currentStructure);
+    }
+  }
+
   constructor(private mapService: MapService, private geoJsonService: GeojsonService) {
     this.initializeMapOptions();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.structures) {
-      this.getStructurePosition();
+      this.handleStructurePosition(changes.structures.previousValue);
     }
     // Handle map marker tooltip
     if (changes.toogleToolTipId && changes.toogleToolTipId.currentValue !== changes.toogleToolTipId.previousValue) {
@@ -47,8 +81,10 @@ export class MapComponent implements OnChanges {
     }
     // Handle map marker selection
     if (changes.selectedMarkerId) {
+      this.map.closePopup();
       if (changes.selectedMarkerId.currentValue === undefined) {
         this.mapService.setDefaultMarker(changes.selectedMarkerId.previousValue);
+        this.map.setView(this.mapOptions.center, this.mapOptions.zoom);
       } else {
         this.mapService.setSelectedMarker(changes.selectedMarkerId.currentValue);
         this.centerLeafletMapOnMarker(changes.selectedMarkerId.currentValue);
@@ -59,12 +95,36 @@ export class MapComponent implements OnChanges {
   /**
    * Get structures positions and add marker corresponding to those positons on the map
    */
-  private getStructurePosition(): void {
-    this.structures.forEach((element: Structure) => {
-      this.getCoord(element.voie).subscribe((coord: GeoJson) => {
+  private handleStructurePosition(previousStructuresValue: Structure[]): void {
+    // If there is more structure than before, append them
+    if (
+      previousStructuresValue &&
+      previousStructuresValue.length > 0 &&
+      previousStructuresValue.length < this.structures.length
+    ) {
+      this.getStructuresPositions(_.differenceWith(this.structures, previousStructuresValue, _.isEqual));
+    } else if (this.structures) {
+      this.map = this.mapService.cleanMap(this.map);
+      this.getStructuresPositions(this.structures);
+    }
+  }
+
+  private getStructuresPositions(structureListe: Structure[]): void {
+    structureListe.forEach((element: Structure) => {
+      this.getCoord(element.n, element.voie, element.commune).subscribe((coord: GeoJson) => {
         this.mapService
-          .createMarker(coord.geometry.getLon(), coord.geometry.getLat(), element.id, this.buildToolTip(element))
-          .addTo(this.map);
+          .createMarker(
+            coord.geometry.getLon(),
+            coord.geometry.getLat(),
+            MarkerType.structure,
+            element.id,
+            this.buildToolTip(element)
+          )
+          .addTo(this.map)
+          // store structure before user click on button
+          .on('popupopen', () => {
+            this.currentStructure = element;
+          });
       });
     });
   }
@@ -82,7 +142,6 @@ export class MapComponent implements OnChanges {
         cssAvailabilityClass = 'unknown';
       }
     }
-
     return (
       '<h1>' +
       structure.nomDeVotreStructure +
@@ -94,16 +153,20 @@ export class MapComponent implements OnChanges {
       cssAvailabilityClass +
       '"></span><span>' +
       structure.openDisplay() +
-      '</span></div>'
+      '</span></div><div class="pop-up"><button type="button" class="btnShowDetails">Voir</button></div>'
     );
+  }
+
+  private buildMdmPopUp(mdmProperties: GeoJsonProperties): string {
+    return `<h1>${mdmProperties.nom}</h1><p>${mdmProperties.adresse}</p>`;
   }
 
   /**
    * Get coord with a street reference
    * @param idVoie Street reference
    */
-  public getCoord(idVoie: number): Observable<GeoJson> {
-    return this.geoJsonService.getAddressByIdVoie(idVoie).pipe(mergeMap((res) => this.geoJsonService.getCoord(res)));
+  public getCoord(numero: string, voie: string, zipcode: string): Observable<GeoJson> {
+    return this.geoJsonService.getCoord(numero, voie, zipcode);
   }
 
   /**
@@ -139,7 +202,10 @@ export class MapComponent implements OnChanges {
       width: 256,
       height: 256,
     };
+    // Init mdm
+    this.initMDMLayer();
     // Init WMS service with param from data.grandlyon.com
+    layerGroup();
     const carteLayer = tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
       maxZoom: 19,
@@ -153,6 +219,22 @@ export class MapComponent implements OnChanges {
       minZoom: 10,
       layers: [carteLayer, metroMaps],
     };
+  }
+
+  private initMDMLayer(): void {
+    this.geoJsonService.getMDMGeoJson().subscribe((res) => {
+      res.forEach((mdm) => {
+        this.mapService
+          .createMarker(
+            mdm.geometry.getLon(),
+            mdm.geometry.getLat(),
+            MarkerType.mdm,
+            null,
+            this.buildMdmPopUp(mdm.properties)
+          )
+          .addTo(this.map);
+      });
+    });
   }
 
   /**

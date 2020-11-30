@@ -1,19 +1,31 @@
-<div *ngIf="modalType" fxLayout="column" fxLayoutAlign="space-between" [ngClass]="['modal', 'modal' + modalType]">
-  <div class="body-wrap">
+<div *ngIf="modalType" fxLayout="column" fxLayoutAlign="space-between" [ngClass]="['modal', 'modal' + getModalType()]">
+  <div class="body-wrap" fxLayout="column" fxLayoutAlign="space-between">
+    <div class="titleFilter" fxLayout="row" fxLayoutAlign="space-between">
+      <span>Filtres</span>
+      <div (click)="closeModal()" class="ico-close-details"></div>
+    </div>
     <div class="contentModal" fxLayout="row wrap" fxLayoutAlign="flex-start" *ngIf="categories.length > 0">
       <div class="blockFiltre" *ngFor="let c of categories">
         <h4>{{ c.name }}</h4>
 
         <ul class="blockLigne">
-          <div fxLayout="row" class="ligneFiltre" fxLayoutAlign="space-between center" *ngFor="let module of c.modules">
+          <div fxLayout="row" class="ligneFiltre" *ngFor="let module of c.modules">
             <li class="checkbox">
               <div class="checkboxItem">
                 <label>
                   <input
                     type="checkbox"
-                    [checked]="getIndex(module.id, c.name) > -1"
+                    [checked]="
+                      c.name !== 'Équipements et services proposés'
+                        ? searchService.getIndex(checkedModules, module.id, c.name) > -1
+                        : searchService.getIndex(checkedModules, 'True', module.id) > -1
+                    "
                     [value]="module.id"
-                    (change)="onCheckboxChange($event, c.name)"
+                    (change)="
+                      c.name !== 'Équipements et services proposés'
+                        ? onCheckboxChange($event, c.name, false)
+                        : onCheckboxChange($event, module.id, true)
+                    "
                   />
                   <span class="customCheck"></span>
                   <div class="label">{{ module.text }}</div>
@@ -26,8 +38,8 @@
       </div>
     </div>
     <div class="footer" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="3vw">
-      <a (click)="clearFilters()">Effacer</a>
-      <button type="button" (click)="emitModules()">Appliquer</button>
+      <a (click)="clearFilters()" tabindex="0">Effacer</a>
+      <app-button [style]="'button'" [text]="'Appliquer'" (click)="emitModules(checkedModules)"></app-button>
     </div>
   </div>
 </div>

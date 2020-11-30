@@ -3,17 +3,29 @@
 @import '../../../assets/scss/icons';
 @import '../../../assets/scss/typography';
 @import '../../../assets/scss/shapes';
+@import '../../../assets/scss/buttons';
+@import '../../../assets/scss/breakpoint';
 
 .map-wrapper {
   border-radius: 6px;
   @include background-hash;
+  border: 1px solid $grey-4;
 }
 
 #map {
-  height: calc(100vh - #{$header-height} - #{$footer-height} - 120px);
-  width: 100%;
+  height: calc(100vh - #{$header-height} - #{$footer-height} - 87px);
   border: 10px solid $white;
   border-radius: 6px;
+  @media #{$tablet} {
+    height: calc(100vh - #{$header-height} - #{$footer-height} - 24px);
+  }
+  @media #{$large-phone} {
+    height: calc(100vh - #{$header-height} - 28px);
+  }
+}
+
+::ng-deep .leaflet-popup-close-button {
+  display: none;
 }
 
 ::ng-deep .fa-map-marker {
@@ -57,9 +69,21 @@
   }
 }
 
-::ng-deep .leaflet-tooltip {
-  padding: 8px 10px 8px 10px;
+::ng-deep .leaflet-left {
+  right: 0;
+  left: unset;
+  .leaflet-control {
+    margin-left: 0;
+    margin-right: 10px;
+  }
+}
+/*** POP-UP ***/
+
+::ng-deep .leaflet-popup {
   border-radius: 6px;
+  @include background-hash;
+  padding: 0 0 4px 4px;
+  bottom: -15px !important;
   h1 {
     color: $grey-1;
     @include cn-bold-20;
@@ -70,17 +94,33 @@
     @include cn-regular-16;
     margin: 0 0 13px 0;
   }
-  div {
-    align-items: center;
-    display: flex;
+  .pop-up {
+    text-align: center;
+    padding-top: 20px;
+
+    button {
+      @include btn-search-filter;
+      @include cn-bold-14;
+    }
+  }
+  span {
+    display: inline-block;
   }
 }
+::ng-deep .leaflet-popup-content-wrapper {
+  box-shadow: unset;
+  border-radius: 6px;
+  border: 1px solid $grey-4;
+}
+::ng-deep .leaflet-popup-content {
+  width: 240px;
+}
+::ng-deep .leaflet-popup-tip-container {
+  display: none;
+}
 
-::ng-deep .leaflet-left {
-  right: 0;
-  left: unset;
-  .leaflet-control {
-    margin-left: 0;
-    margin-right: 10px;
+@media print {
+  .map-wrapper {
+    display: none;
   }
 }

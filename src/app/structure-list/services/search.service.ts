@@ -12,9 +12,19 @@ import { StructureCounter } from '../models/structureCounter.model';
 export class SearchService {
   constructor(private http: HttpClient) {}
 
-  public getCategoriesFormations(): Observable<Category[]> {
+  public getCategoriesTraining(): Observable<Category[]> {
     return this.http
       .get('/api/CategoriesFormations')
+      .pipe(map((data: any[]) => data.map((item) => new Category(item))));
+  }
+  public getCategoriesAccompaniment(): Observable<Category[]> {
+    return this.http
+      .get('/api/CategoriesAccompagnement')
+      .pipe(map((data: any[]) => data.map((item) => new Category(item))));
+  }
+  public getCategoriesMoreFilters(): Observable<Category[]> {
+    return this.http
+      .get('/api/CategoriesPlusDeFiltres')
       .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
 
@@ -32,5 +42,9 @@ export class SearchService {
       }
     });
     return category;
+  }
+
+  public getIndex(array: Module[], id: string, categ: string): number {
+    return array.findIndex((m: Module) => m.id === id && m.text === categ);
   }
 }

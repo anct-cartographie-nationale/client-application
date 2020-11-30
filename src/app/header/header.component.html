@@ -1,23 +1,24 @@
-<div fxLayout="row" fxLayout.lt-sm="column" class="header">
-  <div class="logo clickable">
-    <div fxLayout="row">
-      <img class="logo-grand-lyon" src="/assets/logos/ram_logo.svg" alt />
-      <div fxLayout="column" fxLayoutAlign="center">
-        <p>Réseau des Acteurs de la Médiation</p>
-        <p>de la Métropole de Lyon</p>
-      </div>
+<div fxLayout="row" class="header hide-on-print">
+  <div class="logo clickable" routerLink="/home">
+    <img class="logo-grand-lyon" src="/assets/logos/ram_logo.svg" alt />
+    <div class="logo-text" fxLayout="column" fxLayoutAlign="center">
+      <p>Réseau des Acteurs de la Médiation Numérique de la Métropole de Lyon</p>
     </div>
   </div>
+  <div class="containerIconMenu" (click)="openMenu()">
+    <span class="ico-menu"></span>
+  </div>
   <div fxLayout="row" class="right-header" fxLayoutAlign="center center" fxLayoutGap="3vw">
-    <a routerLink="/home" [routerLinkActive]="'active'" i18n>Acteurs de la médiation</a>
-    <a routerLink="/resources" [routerLinkActive]="'active'" i18n>Ressources</a>
-    <a routerLink="/projects" [routerLinkActive]="'active'" i18n>Projets</a>
+    <a routerLink="/home" [routerLinkActive]="'active'" i18n>Acteurs de la médiation numérique</a>
+    <!-- <a routerLink="/resources" [routerLinkActive]="'active'" i18n>Ressources</a>
+    <a routerLink="/projects" [routerLinkActive]="'active'" i18n>Projets</a> -->
     <a routerLink="/about" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
-    <a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a>
+    <!--<a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a>
     <a routerLink="/home" [routerLinkActive]="'active'" i18n
       ><span class="ico-profile" fxLayout="column" fxLayoutAlign="center center">
         <span class="head"></span>
         <span class="body"></span> </span
-    ></a>
+    ></a> -->
   </div>
 </div>
+<app-menu-phone *ngIf="showMenu" (closeEvent)="closeMenu($event)"></app-menu-phone>

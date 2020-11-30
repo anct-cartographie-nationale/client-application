@@ -18,34 +18,7 @@ export class StructureService {
   constructor(private http: HttpClient) {}
 
   public getStructures(filters: Filter[]): Observable<Structure[]> {
-    return this.http
-      .get('/api/Structures?' + this.constructSearchRequest(filters))
-      .pipe(map((data: any[]) => data.map((item) => new Structure(item))));
-  }
-
-  private constructSearchRequest(filters: Filter[]): string {
-    let requestParam = '';
-    if (filters) {
-      filters.forEach((filter) => {
-        if (requestParam) {
-          requestParam = requestParam + '&';
-        }
-        if (filter.isStrict) {
-          if (requestParam.includes(filter.name)) {
-            requestParam = requestParam + '=' + filter.value;
-          } else {
-            requestParam = requestParam + filter.name + '=' + filter.value;
-          }
-        } else {
-          if (requestParam.includes(filter.name)) {
-            requestParam = requestParam + filter.value;
-          } else {
-            requestParam = requestParam + filter.name + '_like=' + filter.value;
-          }
-        }
-      });
-    }
-    return requestParam;
+    return this.http.get('/api/structures').pipe(map((data: any[]) => data.map((item) => new Structure(item))));
   }
 
   /**

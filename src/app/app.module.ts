@@ -16,9 +16,12 @@ import { StructureListComponent } from './structure-list/structure-list.componen
 import { CardComponent } from './structure-list/components/card/card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './structure-list/components/search/search.component';
-import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
 import { StructureDetailsComponent } from './structure-list/components/structure-details/structure-details.component';
 import { StructureOpeningStatusComponent } from './structure-list/components/structure-opening-status/structure-opening-status.component';
+import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
+import { AboutComponent } from './about/about.component';
+import { MenuPhoneComponent } from './menu-phone/menu-phone.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { StructureOpeningStatusComponent } from './structure-list/components/str
     ModalFilterComponent,
     StructureDetailsComponent,
     StructureOpeningStatusComponent,
+    LegalNoticeComponent,
+    AboutComponent,
+    MenuPhoneComponent,
   ],
   imports: [
     BrowserModule,

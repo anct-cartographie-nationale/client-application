@@ -1,5 +1,5 @@
 export class StructureCounter {
-  id: number;
+  id: string;
   count: number;
 
   constructor(obj?: any) {

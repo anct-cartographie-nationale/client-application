@@ -8,6 +8,7 @@ import { Structure } from '../../../models/structure.model';
 })
 export class StructureOpeningStatusComponent implements OnInit {
   @Input() public structure: Structure;
+  @Input() public isCalledByDetails: boolean;
 
   constructor() {}
 

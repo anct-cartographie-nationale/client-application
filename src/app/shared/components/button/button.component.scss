@@ -1,0 +1,92 @@
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/shapes';
+
+@mixin btn-bold {
+  @include cn-bold-16;
+  line-height: 18px;
+}
+@mixin btn-bold-underline {
+  @include btn-bold;
+  text-decoration: underline;
+}
+@mixin btn-regular {
+  @include cn-regular-16;
+  line-height: 19px;
+}
+
+button {
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid;
+}
+.btnSearch {
+  @include background-hash;
+  border-color: $grey-4;
+  padding: 0 0 4px 5px;
+  &:hover {
+    border-color: $grey-6;
+    .searchButton {
+      color: $grey-3 !important;
+    }
+  }
+  &:focus {
+    border-color: $blue-hover;
+  }
+  &:active {
+    background: none;
+    border-color: $grey-6;
+  }
+  .searchButton {
+    background: $white;
+    height: 31px;
+    color: $secondary-color;
+    padding: 3px 16px 3px 16px;
+    display: table-cell;
+    vertical-align: middle;
+    @include btn-bold;
+    &.withIcon {
+      color: $black;
+      height: 36px;
+    }
+  }
+}
+.btn-switch-phone {
+  background: $black;
+  height: 40px;
+  color: $white;
+  padding: 4px 37px 4px 37px;
+  border-radius: 20px;
+}
+.btn-search-filter {
+  background: $secondary-color;
+  height: 40px;
+  color: $white;
+  padding: 4px 37px 4px 37px;
+  border-color: transparent;
+  @include btn-bold;
+  line-break: 18px;
+  &:hover {
+    background-color: $blue-hover;
+  }
+  &:focus {
+    background-color: $white;
+    border-color: $secondary-color;
+    color: $secondary-color;
+  }
+  &:active {
+    background-color: $blue-active;
+  }
+}
+.btn-filter-phone {
+  background: $white;
+  height: 40px;
+  color: $grey-1;
+  padding: 4px 37px 4px 37px;
+  border-color: $grey-4;
+  @include btn-normal;
+  &.containCheckedFilters {
+    border-color: $secondary-color;
+  }
+}
