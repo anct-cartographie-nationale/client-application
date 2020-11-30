@@ -33,6 +33,18 @@ build_dev:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
     - docker push "$CI_REGISTRY_IMAGE:dev"
 
+build_mobile:
+  image: docker:18.09
+  services:
+    - docker:18.09-dind
+  stage: build
+  only:
+    - dev
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:mobile" --build-arg conf=dev .
+    - docker push "$CI_REGISTRY_IMAGE:mobile"
+
 build_json_server:
   image: docker:18.09
   services:
@@ -51,6 +63,19 @@ deploy_dev:
     - deploy
   only:
     - dev
+  script:
+    - cd /home/mps/ram
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker-compose pull web-app
+    - docker-compose up -d web-app
+    - docker system prune -a -f
+
+deploy_mobile:
+  stage: deploy
+  tags:
+    - deploy
+  only:
+    - mobile
   script:
     - cd /home/mps/ram
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
