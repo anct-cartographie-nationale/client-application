@@ -30,6 +30,9 @@
     }
   }
   .right-header {
+    @media #{$tablet} {
+      display: none !important;
+    }
     height: 100%;
   }
 }
@@ -41,10 +44,28 @@
   p {
     margin: 0;
   }
+  @media #{$tablet} {
+    text-align: center;
+    width: 100%;
+  }
 }
 
 @media print {
   div {
+    display: none !important;
+  }
+}
+
+.containerIconMenu {
+  display: none;
+  padding-right: 20px;
+  @media #{$tablet} {
+    display: block;
+  }
+}
+
+@media #{$tablet} {
+  .logo-text {
     display: none !important;
   }
 }

@@ -17,6 +17,15 @@ export class LogoCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  // Get the custom or default name from a demarche.
+  public getName(demarche: string): string {
+    switch (demarche) {
+      case Demarches.caf:
+        return 'Caf';
+      default:
+        return demarche;
+    }
+  }
   public getLogoKey(demarche: string): string {
     switch (demarche) {
       case Demarches.caf:
@@ -50,6 +59,8 @@ export class LogoCardComponent implements OnInit {
         return 'franceservices';
       case Labels.pass_numerique:
         return 'pass';
+      case Labels.territoire:
+        return 'territoire';
       default:
         throw new Error(`${demarche} is not handled by getLabelKey and getLogoKey`);
     }

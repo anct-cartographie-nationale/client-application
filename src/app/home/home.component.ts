@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   public currentStructure: Structure;
   public userLatitude: number;
   public userLongitude: number;
+  public isMapPhone = false;
   constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
 
   ngOnInit(): void {
@@ -119,13 +120,20 @@ export class HomeComponent implements OnInit {
   }
 
   public getLocation(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.geolocation = true;
-      this.userLongitude = position.coords.longitude;
-      this.userLatitude = position.coords.latitude;
-      this.getAddress(position.coords.longitude, position.coords.latitude);
-      this.getStructures(null);
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.geolocation = true;
+        this.userLongitude = position.coords.longitude;
+        this.userLatitude = position.coords.latitude;
+        this.getAddress(position.coords.longitude, position.coords.latitude);
+        this.getStructures(null);
+      },
+      (err) => {
+        if (err.PERMISSION_DENIED) {
+          this.getStructures(null);
+        }
+      }
+    );
   }
 
   /**
@@ -154,5 +162,9 @@ export class HomeComponent implements OnInit {
 
   public showDetailStructure(structure: Structure): void {
     this.currentStructure = new Structure(structure);
+  }
+
+  public switchMapList(): void {
+    this.isMapPhone = !this.isMapPhone;
   }
 }
