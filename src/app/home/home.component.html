@@ -23,6 +23,7 @@
     [toogleToolTipId]="displayMarkerId"
     [selectedMarkerId]="selectedMarkerId"
     (selectedStructure)="showDetailStructure($event)"
+    [isMapPhone]="isMapPhone"
     class="right-pane"
     [ngClass]="{ mapPhone: isMapPhone == true }"
   ></app-map>
