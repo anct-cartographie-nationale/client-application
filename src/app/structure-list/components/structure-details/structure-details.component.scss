@@ -18,9 +18,9 @@
   padding: 10px 24px;
   overflow: auto;
   @media #{$tablet} {
+    width: calc(100% - 2 * 24px);
     position: fixed;
-    padding: 0;
-    height: 100vh;
+    height: 100%;
     .printButton {
       display: none !important;
     }
@@ -90,6 +90,7 @@ a {
     height: unset;
     padding: unset;
     overflow: hidden;
+    border-right: 0;
   }
 
   .hide-on-print {
