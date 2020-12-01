@@ -41,6 +41,7 @@ export class MapComponent implements OnChanges {
   @Input() public structures: Structure[] = [];
   @Input() public toogleToolTipId: number;
   @Input() public selectedMarkerId: number;
+  @Input() public isMapPhone: boolean;
   @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
   @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
   private currentStructure: Structure;
@@ -69,6 +70,13 @@ export class MapComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.isMapPhone) {
+      if (this.isMapPhone) {
+        setTimeout(() => {
+          this.map.invalidateSize();
+        }, 0);
+      }
+    }
     if (changes.structures) {
       this.handleStructurePosition(changes.structures.previousValue);
     }
@@ -80,7 +88,7 @@ export class MapComponent implements OnChanges {
       this.mapService.toogleToolTip(changes.toogleToolTipId.currentValue);
     }
     // Handle map marker selection
-    if (changes.selectedMarkerId) {
+    if (changes.selectedMarkerId && this.map) {
       this.map.closePopup();
       if (changes.selectedMarkerId.currentValue === undefined) {
         this.mapService.setDefaultMarker(changes.selectedMarkerId.previousValue);
@@ -215,7 +223,7 @@ export class MapComponent implements OnChanges {
     this.mapOptions = {
       center: latLng(45.764043, 4.835659),
       maxZoom: 19,
-      zoom: 10,
+      zoom: 12,
       minZoom: 10,
       layers: [carteLayer, metroMaps],
     };

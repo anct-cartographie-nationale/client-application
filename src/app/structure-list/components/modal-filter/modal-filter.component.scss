@@ -20,14 +20,14 @@
   margin-left: 396px;
 }
 .modal {
-  max-height: 648px;
   max-width: 754px;
   width: 94%;
   z-index: $modal-filter-structure-z-index !important;
-  position: absolute;
+  position: fixed;
   border-radius: 6px;
   margin-top: 3.5px;
   @media #{$large-phone} {
+    height: 100%;
     max-height: auto;
     max-width: auto;
     width: 100%;
@@ -52,6 +52,7 @@
   .body-wrap {
     @media #{$large-phone} {
       height: 100vh;
+      height: -webkit-fill-available;
     }
     .titleFilter {
       display: none !important;
@@ -67,7 +68,7 @@
     max-width: 1100px;
     border-bottom: 1px solid $grey;
     margin-bottom: 16px;
-    max-height: 438px;
+    max-height: 40vh;
     @media #{$large-phone} {
       max-height: none;
       height: 100%;
