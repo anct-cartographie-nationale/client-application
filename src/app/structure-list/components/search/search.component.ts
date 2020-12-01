@@ -64,7 +64,7 @@ export class SearchComponent implements OnInit {
     // Add search input filter
     const filters: Filter[] = [];
     if (term) {
-      filters.push(new Filter('nomDeVotreStructure', term));
+      filters.push(new Filter('query', term));
     }
     // Add checked box filter
     this.checkedModulesFilter.forEach((cm) => {

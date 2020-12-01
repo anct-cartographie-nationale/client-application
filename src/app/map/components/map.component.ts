@@ -118,22 +118,20 @@ export class MapComponent implements OnChanges {
   }
 
   private getStructuresPositions(structureListe: Structure[]): void {
-    structureListe.forEach((element: Structure) => {
-      this.getCoord(element.n, element.voie, element.commune).subscribe((coord: GeoJson) => {
-        this.mapService
-          .createMarker(
-            coord.geometry.getLon(),
-            coord.geometry.getLat(),
-            MarkerType.structure,
-            element.id,
-            this.buildToolTip(element)
-          )
-          .addTo(this.map)
-          // store structure before user click on button
-          .on('popupopen', () => {
-            this.currentStructure = element;
-          });
-      });
+    structureListe.forEach((structure: Structure) => {
+      this.mapService
+        .createMarker(
+          structure.getLat(),
+          structure.getLon(),
+          MarkerType.structure,
+          structure.id,
+          this.buildToolTip(structure)
+        )
+        .addTo(this.map)
+        // store structure before user click on button
+        .on('popupopen', () => {
+          this.currentStructure = structure;
+        });
     });
   }
 
@@ -167,14 +165,6 @@ export class MapComponent implements OnChanges {
 
   private buildMdmPopUp(mdmProperties: GeoJsonProperties): string {
     return `<h1>${mdmProperties.nom}</h1><p>${mdmProperties.adresse}</p>`;
-  }
-
-  /**
-   * Get coord with a street reference
-   * @param idVoie Street reference
-   */
-  public getCoord(numero: string, voie: string, zipcode: string): Observable<GeoJson> {
-    return this.geoJsonService.getCoord(numero, voie, zipcode);
   }
 
   /**

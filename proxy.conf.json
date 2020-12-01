@@ -14,12 +14,6 @@
     "changeOrigin": true,
     "logLevel": "info"
   },
-  "/geocoding/photon/api": {
-    "target": "https://download.data.grandlyon.com",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "info"
-  },
   "/wfs/grandlyon": {
     "target": "https://download.data.grandlyon.com",
     "secure": false,
@@ -28,6 +22,12 @@
   },
   "/reverse": {
     "target": "https://api-adresse.data.gouv.fr",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
+  },
+  "/geocoding/photon/api": {
+    "target": "https://download.data.grandlyon.com",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "info"

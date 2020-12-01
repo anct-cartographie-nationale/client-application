@@ -14,17 +14,17 @@ export class SearchService {
 
   public getCategoriesTraining(): Observable<Category[]> {
     return this.http
-      .get('/api/CategoriesFormations')
+      .get('/api/categories/categoriesFormations')
       .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
   public getCategoriesAccompaniment(): Observable<Category[]> {
     return this.http
-      .get('/api/CategoriesAccompagnement')
+      .get('/api/categories/categoriesAccompagnement')
       .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
   public getCategoriesMoreFilters(): Observable<Category[]> {
     return this.http
-      .get('/api/CategoriesPlusDeFiltres')
+      .get('/api/categories/categoriesOthers')
       .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
 

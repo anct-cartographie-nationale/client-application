@@ -40,6 +40,7 @@ export class Structure {
   public accesAuxDroits: string[];
   public distance?: number;
   public address?: string;
+  public coord?: number[];
 
   constructor(obj?: any) {
     Object.assign(this, obj, {
@@ -108,5 +109,13 @@ export class Structure {
         return 2;
       }
     }
+  }
+
+  public getLat(): number {
+    return this.coord[1];
+  }
+
+  public getLon(): number {
+    return this.coord[0];
   }
 }
