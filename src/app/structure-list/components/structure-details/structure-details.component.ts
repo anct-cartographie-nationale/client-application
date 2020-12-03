@@ -60,7 +60,7 @@ export class StructureDetailsComponent implements OnInit {
       case Equipment.wifi:
         return 'wifi';
       case Equipment.bornes:
-        return 'tel';
+        return 'borne';
       case Equipment.printer:
         return 'print';
       case Equipment.tablet:
