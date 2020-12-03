@@ -75,7 +75,7 @@ export class StructureDetailsComponent implements OnInit {
   public getEquipmentsLabel(equipment: Equipment): string {
     switch (equipment) {
       case Equipment.wifi:
-        return 'Wifi';
+        return 'Wifi en accès libre';
       case Equipment.bornes:
         return 'Bornes numériques';
       case Equipment.printer:
