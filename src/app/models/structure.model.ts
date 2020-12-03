@@ -30,14 +30,13 @@ export class Structure {
   public accompagnementDesDemarches: string[];
   public modalitesDacces: string[];
   public labelsEtQualifications: string[];
-  public wifi: boolean;
-  public ordinateurs: boolean;
-  public nombre: number;
+  public ordinateurs: number;
   public hours: Week;
   public isOpen: boolean;
   public openedOn: OpeningDay;
   public lesCompetencesDeBase: string[];
   public accesAuxDroits: string[];
+  public equipementsEtServicesProposes: string[];
   public distance?: number;
   public address?: string;
   public coord?: number[];
@@ -83,7 +82,7 @@ export class Structure {
    * Check if a structure has equipments
    */
   public hasEquipments(): boolean {
-    if (this.wifi || this.ordinateurs) {
+    if (this.equipementsEtServicesProposes) {
       return true;
     }
     return false;

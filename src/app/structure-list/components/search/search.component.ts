@@ -68,7 +68,7 @@ export class SearchComponent implements OnInit {
     }
     // Add checked box filter
     this.checkedModulesFilter.forEach((cm) => {
-      filters.push(new Filter(this.fromStringToIdExcel(cm.text), this.mockApiNumber(cm.id)));
+      filters.push(new Filter(this.fromStringToId(cm.text), this.mockApiNumber(cm.id)));
     });
     // Send filters
     this.searchEvent.emit(filters);
@@ -139,7 +139,7 @@ export class SearchComponent implements OnInit {
     this.modalTypeOpened = undefined;
   }
 
-  private fromStringToIdExcel(categ: string): string {
+  private fromStringToId(categ: string): string {
     const splitStr = categ.toLowerCase().split(' ');
     for (let i = 1; i < splitStr.length; i++) {
       splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
