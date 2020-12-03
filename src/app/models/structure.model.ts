@@ -82,7 +82,7 @@ export class Structure {
    * Check if a structure has equipments
    */
   public hasEquipments(): boolean {
-    if (this.equipementsEtServicesProposes) {
+    if (this.equipementsEtServicesProposes.length) {
       return true;
     }
     return false;
