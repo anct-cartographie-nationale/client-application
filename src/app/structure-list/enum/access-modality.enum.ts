@@ -1,6 +1,6 @@
 export enum AccessModality {
-  free = 'Accès libre',
-  numeric = 'Téléphone / Visio',
-  meetingOnly = 'Uniquement sur RDV',
+  free = 'accesLibre',
+  numeric = 'telephoneVisio',
+  meetingOnly = 'uniquementSurRdv',
   meeting = 'Sur RDV',
 }
