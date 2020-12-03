@@ -48,7 +48,7 @@ export class StructureDetailsComponent implements OnInit {
         this.printService.onDataReady();
       }
     });
-    const index = this.structure.accompagnementDesDemarches.indexOf('Autres');
+    const index = this.structure.accompagnementDesDemarches.indexOf('autres');
     if (index > -1) {
       this.structure.accompagnementDesDemarches.splice(index, 1);
       this.isOtherSection = true;
