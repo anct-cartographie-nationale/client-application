@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   public showMenu = false;
+  public isSignUpOpen = false;
 
   constructor() {}
   ngOnInit(): void {}
@@ -16,5 +17,8 @@ export class HeaderComponent implements OnInit {
   }
   public closeMenu(): void {
     this.showMenu = false;
+  }
+  public closeSignUpModal(): void {
+    this.isSignUpOpen = false;
   }
 }

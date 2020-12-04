@@ -13,12 +13,15 @@
     <!-- <a routerLink="/resources" [routerLinkActive]="'active'" i18n>Ressources</a>
     <a routerLink="/projects" [routerLinkActive]="'active'" i18n>Projets</a> -->
     <a routerLink="/about" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
-    <!--<a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a>
-    <a routerLink="/home" [routerLinkActive]="'active'" i18n
-      ><span class="ico-profile" fxLayout="column" fxLayoutAlign="center center">
+    <!-- <a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a> -->
+    <button (click)="isSignUpOpen = !isSignUpOpen">
+      <span class="ico-profile" fxLayout="column" fxLayoutAlign="center center">
         <span class="head"></span>
-        <span class="body"></span> </span
-    ></a> -->
+        <span class="body"></span>
+      </span>
+    </button>
   </div>
 </div>
 <app-menu-phone *ngIf="showMenu" (closeEvent)="closeMenu($event)"></app-menu-phone>
+<!-- <app-signup-modal [openned]="isSignUpOpen" (closed)="closeSignUpModal()"></app-signup-modal> -->
+<app-signin-modal [openned]="isSignUpOpen" (closed)="closeSignUpModal()"></app-signin-modal>
