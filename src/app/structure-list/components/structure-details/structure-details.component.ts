@@ -7,6 +7,7 @@ import { SearchService } from '../../services/search.service';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
+import { Equipment } from '../../enum/equipment.enum';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -47,10 +48,44 @@ export class StructureDetailsComponent implements OnInit {
         this.printService.onDataReady();
       }
     });
-    const index = this.structure.accompagnementDesDemarches.indexOf('Autres');
+    const index = this.structure.accompagnementDesDemarches.indexOf('autres');
     if (index > -1) {
       this.structure.accompagnementDesDemarches.splice(index, 1);
       this.isOtherSection = true;
+    }
+  }
+
+  public getEquipmentsIcon(equipment: Equipment): string {
+    switch (equipment) {
+      case Equipment.wifi:
+        return 'wifi';
+      case Equipment.bornes:
+        return 'borne';
+      case Equipment.printer:
+        return 'print';
+      case Equipment.tablet:
+        return 'tel';
+      case Equipment.computer:
+        return 'computer';
+      default:
+        return null;
+    }
+  }
+
+  public getEquipmentsLabel(equipment: Equipment): string {
+    switch (equipment) {
+      case Equipment.wifi:
+        return 'Wifi en accès libre';
+      case Equipment.bornes:
+        return 'Bornes numériques';
+      case Equipment.printer:
+        return 'Imprimantes';
+      case Equipment.tablet:
+        return 'Téléphone';
+      case Equipment.computer:
+        return 'Ordinateurs à disposition';
+      default:
+        return null;
     }
   }
 
@@ -72,6 +107,21 @@ export class StructureDetailsComponent implements OnInit {
         return 'calendar';
       case AccessModality.numeric:
         return 'tel';
+      default:
+        return null;
+    }
+  }
+
+  public getAccessLabel(accessModality: AccessModality): string {
+    switch (accessModality) {
+      case AccessModality.free:
+        return 'Accès libre';
+      case AccessModality.meeting:
+        return 'Sur rendez-vous';
+      case AccessModality.meetingOnly:
+        return 'Uniquement sur RDV';
+      case AccessModality.numeric:
+        return 'Téléphone / Visio';
       default:
         return null;
     }

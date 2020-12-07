@@ -145,7 +145,7 @@
           fxLayoutGap="20px"
         >
           <app-svg-icon [type]="'ico'" [icon]="getAccessIcon(acces)"></app-svg-icon>
-          <p>{{ acces }}</p>
+          <p>{{ getAccessLabel(acces) }}</p>
         </div>
       </div>
     </div>
@@ -161,13 +161,17 @@
       <app-svg-icon [type]="'ico'" [icon]="'equipement'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Équipements</h2>
     </div>
-    <div *ngIf="structure.wifi" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
-      <app-svg-icon [type]="'ico'" [icon]="'wifi'"></app-svg-icon>
-      <p>Wifi en accès libre</p>
-    </div>
-    <div *ngIf="structure.ordinateurs" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
-      <app-svg-icon [type]="'ico'" [icon]="'computer'"></app-svg-icon>
-      <p>Ordinateurs à disposition : {{ structure.nombre }}</p>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="none flex-end"
+      fxLayoutGap="13px"
+      *ngFor="let equipement of structure.equipementsEtServicesProposes"
+    >
+      <app-svg-icon [type]="'ico'" [icon]="getEquipmentsIcon(equipement)"></app-svg-icon>
+      <p>
+        {{ getEquipmentsLabel(equipement) }}
+        <span *ngIf="equipement == 'ordinateurs'; else otherEquipments"> : {{ structure.nbComputers }}</span>
+      </p>
     </div>
   </div>
   <!-- Labels -->

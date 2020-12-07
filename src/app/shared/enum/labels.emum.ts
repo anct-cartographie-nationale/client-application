@@ -1,6 +1,6 @@
 export enum Labels {
-  pass_numerique = 'Pass numérique',
-  maison_france_service = 'Maison France Service',
-  aidants_connect = 'Aidants Connect',
-  territoire = 'Fabrique de territoire',
+  pass_numerique = 'passNumerique',
+  maison_france_service = 'maisonFranceService',
+  aidants_connect = 'aidantsConnect',
+  territoire = 'fabriqueDeTerritoire',
 }
