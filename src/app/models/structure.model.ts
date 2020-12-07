@@ -30,7 +30,7 @@ export class Structure {
   public accompagnementDesDemarches: string[];
   public modalitesDacces: string[];
   public labelsEtQualifications: string[];
-  public ordinateurs: number;
+  public nbComputers: number;
   public hours: Week;
   public isOpen: boolean;
   public openedOn: OpeningDay;

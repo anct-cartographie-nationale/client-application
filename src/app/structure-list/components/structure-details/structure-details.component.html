@@ -170,7 +170,7 @@
       <app-svg-icon [type]="'ico'" [icon]="getEquipmentsIcon(equipement)"></app-svg-icon>
       <p>
         {{ getEquipmentsLabel(equipement) }}
-        <span *ngIf="equipement == 'ordinateurs'; else otherEquipments"> : {{ structure.ordinateurs }}</span>
+        <span *ngIf="equipement == 'ordinateurs'; else otherEquipments"> : {{ structure.nbComputers }}</span>
       </p>
     </div>
   </div>

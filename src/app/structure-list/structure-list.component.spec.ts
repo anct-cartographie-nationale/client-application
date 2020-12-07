@@ -53,7 +53,7 @@ describe('StructureListComponent', () => {
       aideALaParentalite: '',
       cultureEtSecuriteNumerique: 264,
       wifiEnAccesLibre: 'True',
-      ordinateurs: '',
+      nbComputers: '',
       nombre: '',
       tablettes: '',
       bornesNumeriques: '',
