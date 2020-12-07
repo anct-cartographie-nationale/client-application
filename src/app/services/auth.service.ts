@@ -32,4 +32,10 @@ export class AuthService {
   public register(user: User): Observable<any> {
     return this.http.post('api/users', user);
   }
+
+  public verifyUser(userId: string, token: string): Observable<any> {
+    return this.http.post(`api/users/verify/${userId}`, null, {
+      params: { token },
+    });
+  }
 }
