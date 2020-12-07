@@ -7,35 +7,38 @@
     <div class="card-body">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username">Identifiant</label>
           <input
             type="text"
             formControlName="username"
+            autocomplete="on"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
           />
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
+            <div *ngIf="f.username.errors.required">Identifiant requis</div>
           </div>
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">Mot de passe</label>
           <input
             type="password"
             formControlName="password"
+            autocomplete="on"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
           />
           <div *ngIf="submitted && f.password.errors">
-            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.required">Mot de passe requis</div>
           </div>
         </div>
+        <div *ngIf="authFailed">Identifiant ou mot de passe invalide</div>
         <div>
           <button [disabled]="loading">
             <span *ngIf="loading"></span>
             Login
           </button>
-          <a routerLink="../register" class="btn btn-link">Register</a>
+          <button (click)="sendSwitchToSignIn()">Inscription</button>
         </div>
       </form>
     </div>

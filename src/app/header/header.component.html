@@ -14,14 +14,15 @@
     <a routerLink="/projects" [routerLinkActive]="'active'" i18n>Projets</a> -->
     <a routerLink="/about" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
     <!-- <a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a> -->
-    <button (click)="isSignUpOpen = !isSignUpOpen">
+    <button *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
       <span class="ico-profile" fxLayout="column" fxLayoutAlign="center center">
         <span class="head"></span>
         <span class="body"></span>
       </span>
     </button>
+    <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
   </div>
 </div>
 <app-menu-phone *ngIf="showMenu" (closeEvent)="closeMenu($event)"></app-menu-phone>
-<!-- <app-signup-modal [openned]="isSignUpOpen" (closed)="closeSignUpModal()"></app-signup-modal> -->
-<app-signin-modal [openned]="isSignUpOpen" (closed)="closeSignUpModal()"></app-signin-modal>
+<app-signup-modal *ngIf="displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignUpModal($event)"></app-signup-modal>
+<app-signin-modal *ngIf="!displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignInModal()"></app-signin-modal>

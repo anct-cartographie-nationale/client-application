@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../../../services/auth.service';
 
@@ -12,17 +13,26 @@ export class SignUpModalComponent implements OnInit {
   public loginForm: FormGroup;
   public loading = false;
   public submitted = false;
+  public authFailed = false;
+  public returnUrl: string;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   @Input() public openned: boolean;
-  @Output() closed = new EventEmitter();
+  @Output() closed = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // getter for form fields
@@ -31,7 +41,11 @@ export class SignUpModalComponent implements OnInit {
   }
 
   public closeModal(): void {
-    this.closed.emit();
+    this.closed.emit(true);
+  }
+
+  public sendSwitchToSignIn(): void {
+    this.closed.emit(false);
   }
 
   public onSubmit(): void {
@@ -47,11 +61,13 @@ export class SignUpModalComponent implements OnInit {
       .login(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        (data) => {
-          //TODO: redirect to ?
+        () => {
+          this.router.navigate([this.returnUrl]);
+          this.closeModal();
         },
-        (error) => {
+        () => {
           this.loading = false;
+          this.authFailed = true;
         }
       );
   }

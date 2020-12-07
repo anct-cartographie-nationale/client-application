@@ -10,6 +10,7 @@
           <label for="email">Email</label>
           <input
             type="email"
+            autocomplete="on"
             formControlName="email"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
@@ -22,6 +23,7 @@
           <label for="password">Mot de passe</label>
           <input
             type="password"
+            autocomplete="on"
             formControlName="password"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
@@ -38,6 +40,7 @@
           <label for="confirmPassword">Confirmation du mot de passe</label>
           <input
             type="password"
+            autocomplete="on"
             formControlName="confirmPassword"
             class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
