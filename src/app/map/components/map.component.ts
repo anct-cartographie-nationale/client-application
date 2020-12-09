@@ -224,8 +224,8 @@ export class MapComponent implements OnChanges {
       res.forEach((mdm) => {
         this.mapService
           .createMarker(
-            mdm.geometry.getLon(),
             mdm.geometry.getLat(),
+            mdm.geometry.getLon(),
             MarkerType.mdm,
             null,
             this.buildMdmPopUp(mdm.properties)
