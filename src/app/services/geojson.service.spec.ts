@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { Address } from '../models/address.model';
 
 import { GeojsonService } from './geojson.service';
 import { HttpClientModule } from '@angular/common/http';

@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Address } from '../models/address.model';
 import { GeoJson } from '../map/models/geojson.model';
 import * as _ from 'lodash';
 

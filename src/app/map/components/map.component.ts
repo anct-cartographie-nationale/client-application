@@ -8,23 +8,8 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import {
-  latLng,
-  MapOptions,
-  tileLayer,
-  Map,
-  CRS,
-  TileLayer,
-  LatLngBounds,
-  latLngBounds,
-  Marker,
-  layerGroup,
-  polyline,
-} from 'leaflet';
-import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds, layerGroup } from 'leaflet';
 import { Structure } from '../../models/structure.model';
-import { GeoJson } from '../models/geojson.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
 import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';

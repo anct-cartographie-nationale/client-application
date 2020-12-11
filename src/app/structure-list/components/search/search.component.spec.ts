@@ -104,7 +104,7 @@ describe('SearchComponent', () => {
     const checkedModules: Module[] = [{ id: evt.target.value, text: categ, count: 0 }];
     component.checkedModulesFilter = checkedModules;
     component.numericPassCheck(evt, categ);
-    const expectArray: Module[] = [new Module(evt.target.value, categ)];
+    new Module(evt.target.value, categ);
     expect(component.checkedModulesFilter.length).toEqual(0);
     expect(component.numberMoreFiltersChecked).toEqual(0);
   });

@@ -19,11 +19,10 @@ export class LogoCardComponent implements OnInit {
 
   // Get the custom or default name from a demarche.
   public getName(demarche: string): string {
-    switch (demarche) {
-      case Demarches.caf:
-        return 'Caf';
-      default:
-        return demarche;
+    if (demarche === Demarches.caf) {
+      return 'Caf';
+    } else {
+      return demarche;
     }
   }
   public getLogoKey(demarche: string): string {

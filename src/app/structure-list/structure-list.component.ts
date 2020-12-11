@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Filter } from './models/filter.model';
 import { Structure } from '../models/structure.model';
 import { GeoJson } from '../map/models/geojson.model';
@@ -64,8 +64,6 @@ export class StructureListComponent implements OnChanges {
   }
 
   public onScrollDown(event): void {
-    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 100) {
-    }
     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 50) {
       this.loadMoreStructures();
     }

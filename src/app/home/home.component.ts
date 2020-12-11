@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
 const { DateTime } = require('luxon');
 import * as _ from 'lodash';
 
@@ -98,7 +96,7 @@ export class HomeComponent implements OnInit {
    * @param value string
    */
   private isLocationRequest(value: string): boolean {
-    const regex = /^\d+\s[A-z]+\s[A-z]+/g;
+    const regex = /^\d+\s[A-z]+\s[A-z]+/g; //NOSONAR
     if (value.match(regex)) {
       return true;
     }

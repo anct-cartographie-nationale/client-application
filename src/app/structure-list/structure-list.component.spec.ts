@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StyleUtils } from '@angular/flex-layout';
 import { OpeningDay } from '../models/openingDay.model';
 import { Structure } from '../models/structure.model';
 import { Filter } from './models/filter.model';
