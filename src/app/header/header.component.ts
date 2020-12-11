@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout(): void {
-    return this.authService.logout();
+    this.authService.logout();
   }
 
   public closeSignInModal(): void {

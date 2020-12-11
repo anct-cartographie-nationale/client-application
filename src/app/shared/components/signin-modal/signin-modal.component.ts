@@ -29,7 +29,7 @@ export class SignInModalComponent implements OnInit {
           '',
           [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/)],
         ],
-        confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: [''],
       },
       { validator: MustMatch('password', 'confirmPassword') }
     );
