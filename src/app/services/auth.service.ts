@@ -22,7 +22,10 @@ export class AuthService {
   }
 
   public get token(): string {
-    return this.userSubject.value.accessToken;
+    if (this.userSubject.value) {
+      return this.userSubject.value.accessToken;
+    }
+    return null;
   }
 
   public logout(): void {

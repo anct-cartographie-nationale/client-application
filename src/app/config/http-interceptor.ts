@@ -17,6 +17,10 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     // HttpHeader object immutable - copy values
     const headerSettings: { [name: string]: string | string[] } = {};
 
+    if (request.headers.get('skip')) {
+      return next.handle(request);
+    }
+
     for (const key of request.headers.keys()) {
       headerSettings[key] = request.headers.getAll(key);
     }

@@ -1,9 +1,61 @@
 <div fxLayout="column" class="content-container">
-  <div class="section-container" fxLayout="colum" fxLayoutAlign="center center">
+  <div class="section-container" fxLayout="column" fxLayoutAlign="center center">
     <h1>Profil</h1>
     <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
       <p>Id: {{ userProfile._id }}</p>
       <p>Email: {{ userProfile.email }}</p>
+      <button (click)="toogleChangePassword()">Changer de mot de passe</button>
+
+      <form *ngIf="changePassword" fxLayout="column" fxLayoutGap="10px" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="oldPassword">Ancien mot de passe</label>
+          <input
+            type="password"
+            autocomplete="on"
+            formControlName="oldPassword"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.oldPassword.errors }"
+          />
+          <div *ngIf="submitted && f.oldPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.oldPassword.errors.required">L'Ancien mot de passe est obligatoire</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input
+            type="password"
+            autocomplete="on"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+          />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Le mot de passe est obligatoire</div>
+            <div *ngIf="f.password.errors.pattern">
+              Le mot de passe doit avoir au minimun 8 caractères, une majuscule, une minuscule, un chiffre et un
+              caractère spécial.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirmation du mot de passe</label>
+          <input
+            type="password"
+            autocomplete="on"
+            formControlName="confirmPassword"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+          />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors.required">La confirmation du mot de passe est obligatoire</div>
+            <div *ngIf="f.confirmPassword.errors.mustMatch">Les mot de passe ne sont pas les mêmes</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" [disabled]="loading" class="btn btn-primary">Appliquer</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

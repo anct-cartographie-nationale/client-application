@@ -10,6 +10,14 @@ import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 @NgModule({
   imports: [CommonModule, RouterModule, FlexLayoutModule, ReactiveFormsModule],
   declarations: [...SharedPipes, ...SharedComponents, ...SharedDirectives, SvgIconComponent],
-  exports: [...SharedPipes, ...SharedComponents, ...SharedDirectives],
+  exports: [
+    ...SharedPipes,
+    ...SharedComponents,
+    ...SharedDirectives,
+    CommonModule,
+    RouterModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
+  ],
 })
 export class SharedModule {}

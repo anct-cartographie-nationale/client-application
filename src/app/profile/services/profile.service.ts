@@ -7,9 +7,15 @@ import { User } from '../../models/user.model';
   providedIn: 'root',
 })
 export class ProfileService {
+  private readonly baseUrl = 'api/users';
+
   constructor(private http: HttpClient) {}
 
   public getProfile(): Observable<User> {
-    return this.http.get<User>('api/users/profile');
+    return this.http.get<User>(`${this.baseUrl}/profile`);
+  }
+
+  public changePassword(newPassword: string, oldPassword: string): Observable<User> {
+    return this.http.post<any>(`${this.baseUrl}/change-password`, { newPassword, oldPassword });
   }
 }
