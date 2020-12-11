@@ -1,0 +1,9 @@
+<div fxLayout="column" class="content-container">
+  <div class="section-container" fxLayout="colum" fxLayoutAlign="center center">
+    <h1>Profil</h1>
+    <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+      <p>Id: {{ userProfile._id }}</p>
+      <p>Email: {{ userProfile.email }}</p>
+    </div>
+  </div>
+</div>

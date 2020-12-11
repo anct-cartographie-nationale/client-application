@@ -14,12 +14,15 @@
     <a routerLink="/projects" [routerLinkActive]="'active'" i18n>Projets</a> -->
     <a routerLink="/about" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
     <!-- <a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a> -->
-    <button *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
+    <a *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
       <span class="ico-profile" fxLayout="column" fxLayoutAlign="center center">
         <span class="head"></span>
         <span class="body"></span>
       </span>
-    </button>
+    </a>
+    <a *ngIf="isLoggedIn" routerLink="/profile" [routerLinkActive]="'active'" fxLayout="row" fxLayoutGap="1.5vh">
+      <app-svg-icon [type]="'ico'" [iconClass]="'icon-32'" [icon]="'user'" [iconColor]="'currentColor'"></app-svg-icon>
+    </a>
     <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
   </div>
 </div>
