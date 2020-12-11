@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { StructureDetailsComponent } from './structure-list/components/structure-details/structure-details.component';
 import { StructureListComponent } from './structure-list/structure-list.component';
+import { UserVerificationComponent } from './user-verification/user-verification.component';
 
 const routes: Routes = [
   { path: 'print', outlet: 'print', children: [{ path: 'structure', component: StructureDetailsComponent }] },
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'users/verify/:id',
+    component: UserVerificationComponent,
   },
   {
     path: '**',

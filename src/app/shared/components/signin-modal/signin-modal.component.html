@@ -1,0 +1,70 @@
+<div class="cModal" [ngClass]="openned ? 'oModal' : ''">
+  <div (clickOutside)="closeModal()" fxLayout="column" fxLayoutAlign="center center">
+    <div class="ico-close-wrapper">
+      <div (click)="closeModal()" class="ico-close-details"></div>
+    </div>
+    <h4>Inscription</h4>
+    <div *ngIf="!success">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            autocomplete="on"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+          />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input
+            type="password"
+            autocomplete="on"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+          />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Le mot de passe est obligatoire</div>
+            <div *ngIf="f.password.errors.pattern">
+              Le mot de passe doit avoir au minimun 8 caractères, une majuscule, une minuscule, un chiffre et un
+              caractère spécial.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirmation du mot de passe</label>
+          <input
+            type="password"
+            autocomplete="on"
+            formControlName="confirmPassword"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+          />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors.required">La confirmation du mot de passe est obligatoire</div>
+            <div *ngIf="f.confirmPassword.errors.mustMatch">Les mot de passe ne sont pas les mêmes</div>
+          </div>
+        </div>
+
+        <div *ngIf="userAlreadyExist">Cette addresse mail est déjà utilisée</div>
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Register
+          </button>
+          <a routerLink="../login" class="btn btn-link">Cancel</a>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="success">
+      <p>
+        Un mail de confirmation vous a été envoyé. Merci de valider votre addresse mail avant de pouvoir vous connecter.
+      </p>
+    </div>
+  </div>
+</div>

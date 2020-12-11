@@ -1,0 +1,13 @@
+<div fxLayout="column" class="content-container">
+  <h1 style="display: none">Vérification du mail utilisateur</h1>
+  <div class="section-container" fxLayout="colum" fxLayoutAlign="center center">
+    <p *ngIf="!verificationSuccess && !verificationIssue">Votre email est en cours de vérification ...</p>
+    <p *ngIf="verificationSuccess">
+      Vous avez correctement validé l'email associé a votre compte. Vous pouvez dès maintenant vous connecter au site.
+    </p>
+    <p *ngIf="verificationIssue">
+      Une erreur est survenue lors de la validation de votre email... Veuillez envoyer un mail au support.
+    </p>
+    <div></div>
+  </div>
+</div>

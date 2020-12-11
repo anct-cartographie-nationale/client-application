@@ -13,12 +13,16 @@
     <!-- <a routerLink="/resources" [routerLinkActive]="'active'" i18n>Ressources</a>
     <a routerLink="/projects" [routerLinkActive]="'active'" i18n>Projets</a> -->
     <a routerLink="/about" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
-    <!--<a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a>
-    <a routerLink="/home" [routerLinkActive]="'active'" i18n
-      ><span class="ico-profile" fxLayout="column" fxLayoutAlign="center center">
+    <!-- <a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a> -->
+    <button *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
+      <span class="ico-profile" fxLayout="column" fxLayoutAlign="center center">
         <span class="head"></span>
-        <span class="body"></span> </span
-    ></a> -->
+        <span class="body"></span>
+      </span>
+    </button>
+    <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
   </div>
 </div>
 <app-menu-phone *ngIf="showMenu" (closeEvent)="closeMenu($event)"></app-menu-phone>
+<app-signup-modal *ngIf="displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignUpModal($event)"></app-signup-modal>
+<app-signin-modal *ngIf="!displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignInModal()"></app-signin-modal>
