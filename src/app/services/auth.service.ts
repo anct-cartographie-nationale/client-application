@@ -37,7 +37,7 @@ export class AuthService {
     return false;
   }
 
-  public getExpiration(): DateTime {
+  private getExpiration(): DateTime {
     return DateTime.fromISO(this.userValue.expiresAt, { zone: 'Europe/Paris' });
   }
 
