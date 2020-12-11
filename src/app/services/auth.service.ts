@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   public get token(): string {
-    return this.userSubject.value.access_token;
+    return this.userSubject.value.accessToken;
   }
 
   public logout(): void {
@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   public getExpiration(): DateTime {
-    return DateTime.fromISO(this.userValue.expires_at, { zone: 'Europe/Paris' });
+    return DateTime.fromISO(this.userValue.expiresAt, { zone: 'Europe/Paris' });
   }
 
   public register(user: User): Observable<any> {
