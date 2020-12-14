@@ -1,7 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,7 +13,6 @@ import { SharedModule } from './shared/shared.module';
 import { MapModule } from './map/map.module';
 import { StructureListComponent } from './structure-list/structure-list.component';
 import { CardComponent } from './structure-list/components/card/card.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './structure-list/components/search/search.component';
 import { StructureDetailsComponent } from './structure-list/components/structure-details/structure-details.component';
 import { StructureOpeningStatusComponent } from './structure-list/components/structure-opening-status/structure-opening-status.component';
@@ -44,17 +42,7 @@ import { ProfileModule } from './profile/profile.module';
     MenuPhoneComponent,
     UserVerificationComponent,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FlexLayoutModule,
-    SharedModule,
-    MapModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ProfileModule,
-  ],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
