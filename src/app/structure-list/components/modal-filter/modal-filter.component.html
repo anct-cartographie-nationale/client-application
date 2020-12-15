@@ -15,9 +15,9 @@
                 <label>
                   <input
                     type="checkbox"
-                    [checked]="searchService.getIndex(checkedModules, module.id, c.name) > -1"
+                    [checked]="searchService.getIndex(checkedModules, module.id, c.id) > -1"
                     [value]="module.id"
-                    (change)="onCheckboxChange($event, c.name)"
+                    (change)="onCheckboxChange($event, c.id)"
                   />
                   <span class="customCheck"></span>
                   <div class="label">{{ module.text }}</div>

@@ -1,4 +1,4 @@
 <div fxLayout="column" fxLayoutAlign="center center" *ngIf="name">
-  <img [src]="'assets/logos/' + getLogoKey(name) + '.svg'" [alt]="'logo ' + name" />
+  <img [src]="'assets/logos/' + name + '.svg'" [alt]="'logo ' + name" />
   <p>{{ getName(name) }}</p>
 </div>

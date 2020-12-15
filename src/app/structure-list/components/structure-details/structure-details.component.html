@@ -1,3 +1,9 @@
+<app-structureForm
+  *ngIf="showForm"
+  [idStructure]="structure.id"
+  (closeEvent)="updateStructure($event)"
+  (clickOutside)="displayForm()"
+></app-structureForm>
 <div class="structrue-details-container" *ngIf="structure">
   <!-- Header info -->
   <div fxLayout="row" fxLayoutAlign="end center">
@@ -7,8 +13,8 @@
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
       <div fxLayout="row" fxLayoutAlign="space-between start">
         <div fxLayout="column">
-          <h2 class="bold">{{ structure.nomDeVotreStructure }}</h2>
-          <h3>{{ structure.typeDeStructure }}</h3>
+          <h2 class="bold">{{ structure.structureName }}</h2>
+          <h3>{{ getLabelTypeStructure(structure.structureType) }}</h3>
         </div>
         <div class="printButton" fxLayout="column" fxLayoutAlign="end">
           <app-button
@@ -30,32 +36,32 @@
               [isCalledByDetails]="true"
             ></app-structure-opening-status>
           </div>
-          <div *ngIf="structure.voie" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+          <div *ngIf="structure.adressWay" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'adress'"></app-svg-icon>
-            <p>{{ structure.n }} {{ structure.address }}</p>
+            <p>{{ structure.adressNumero }} {{ structure.address }}</p>
           </div>
-          <div *ngIf="structure.siteWeb" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+          <div *ngIf="structure.website" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'web'"></app-svg-icon>
             <a
               target="_blank"
               rel="noopener noreferrer"
-              [href]="structure.siteWeb.includes('http') ? structure.siteWeb : 'http://' + structure.siteWeb"
-              >{{ structure.siteWeb | url }}</a
+              [href]="structure.website.includes('http') ? structure.website : 'http://' + structure.website"
+              >{{ structure.website | url }}</a
             >
           </div>
-          <div *ngIf="structure.telephone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+          <div *ngIf="structure.contactPhone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'tel'"></app-svg-icon>
-            <p>{{ structure.telephone | phone }}</p>
+            <p>{{ structure.contactPhone | phone }}</p>
           </div>
         </div>
         <div fxLayout="column" fxFlex="50%">
-          <div *ngIf="structure.courriel" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+          <div *ngIf="structure.contactMail" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
-            <a [href]="'mailto:' + structure.courriel">{{ structure.courriel }}</a>
+            <a [href]="'mailto:' + structure.contactMail">{{ structure.contactMail }}</a>
           </div>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'calendar'"></app-svg-icon>
-            <p>Mise à jour le {{ structure.derniereModification | date: 'mediumDate' }}</p>
+            <p>Mise à jour le {{ structure.updatedAt | date: 'mediumDate' }}</p>
           </div>
         </div>
       </div>
@@ -63,7 +69,7 @@
   </div>
   <!-- Démarches -->
   <div
-    *ngIf="structure.accompagnementDesDemarches[0] !== ''"
+    *ngIf="structure.proceduresAccompaniment.length"
     fxLayout="column"
     class="structure-details-block"
     fxLayoutAlign="baseline baseline"
@@ -75,8 +81,8 @@
     </div>
     <div fxLayout="column">
       <div fxLayout="row wrap" fxLayoutGap="24px">
-        <div *ngFor="let accompagnement of structure.accompagnementDesDemarches">
-          <app-logo-card [name]="accompagnement"></app-logo-card>
+        <div *ngFor="let accompagnement of structure.proceduresAccompaniment">
+          <app-logo-card *ngIf="accompagnement != 'autres'" [name]="accompagnement"></app-logo-card>
         </div>
       </div>
       <p *ngIf="isOtherSection">
@@ -135,11 +141,11 @@
           </div>
         </div>
       </div>
-      <!-- modalitesDacces -->
+      <!-- accessModality -->
       <div fxFlex="50%">
         <h3 class="subtitle">Accès</h3>
         <div
-          *ngFor="let acces of structure.modalitesDacces"
+          *ngFor="let acces of structure.accessModality"
           fxLayout="row"
           fxLayoutAlign="none flex-end"
           fxLayoutGap="20px"
@@ -165,18 +171,21 @@
       fxLayout="row"
       fxLayoutAlign="none flex-end"
       fxLayoutGap="13px"
-      *ngFor="let equipement of structure.equipementsEtServicesProposes"
+      *ngFor="let equipement of structure.equipmentsAndServices"
     >
       <app-svg-icon [type]="'ico'" [icon]="getEquipmentsIcon(equipement)"></app-svg-icon>
       <p>
         {{ getEquipmentsLabel(equipement) }}
-        <span *ngIf="equipement == 'ordinateurs'; else otherEquipments"> : {{ structure.nbComputers }}</span>
+        <span *ngIf="equipement == 'ordinateurs'"> : {{ structure.nbComputers }}</span>
+        <span *ngIf="equipement == 'tablettes'"> : {{ structure.nbTablets }}</span>
+        <span *ngIf="equipement == 'bornesNumeriques'"> : {{ structure.nbNumericTerminal }}</span>
+        <span *ngIf="equipement == 'imprimantes'"> : {{ structure.nbPrinters }}</span>
       </p>
     </div>
   </div>
   <!-- Labels -->
   <div
-    *ngIf="structure.labelsEtQualifications[0] !== ''"
+    *ngIf="structure.labelsQualifications.length"
     fxLayout="column"
     class="structure-details-block"
     fxLayoutAlign="baseline baseline"
@@ -187,7 +196,7 @@
       <h2>Labelisation</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="24px">
-      <div *ngFor="let labels of structure.labelsEtQualifications">
+      <div *ngFor="let labels of structure.labelsQualifications">
         <app-logo-card [name]="labels"></app-logo-card>
       </div>
     </div>

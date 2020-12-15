@@ -22,7 +22,7 @@ describe('StructureDetailsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     let structure: Structure = new Structure();
-    structure.lesCompetencesDeBase = ['123', '234', '817'];
+    structure.baseSkills = ['123', '234', '817'];
     component.structure = structure;
   });
 
@@ -65,8 +65,8 @@ describe('StructureDetailsComponent', () => {
     accessRightsReferentiel.name = 'categ1';
     accessRightsReferentiel.modules = arrayModule;
     component.accessRightsReferentiel = accessRightsReferentiel;
-    component.structure.lesCompetencesDeBase = ['260', '261'];
-    component.structure.accesAuxDroits = ['145', '112'];
+    component.structure.baseSkills = ['260', '261'];
+    component.structure.accessRight = ['145', '112'];
     component.setServiceCategories();
     expect(component.baseSkills).toEqual([m1, m3]);
     expect(component.accessRights).toEqual([mo2, mo3]);
