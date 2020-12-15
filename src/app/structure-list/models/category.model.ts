@@ -2,6 +2,7 @@ import { Module } from './module.model';
 
 export class Category {
   name: string;
+  id: string;
   modules: Module[];
 
   constructor(obj?: any) {

@@ -4,6 +4,7 @@ import { ModalComponent } from './modal/modal.component';
 import { SignUpModalComponent } from './signup-modal/signup-modal.component';
 import { SignInModalComponent } from './signin-modal/signin-modal.component';
 import { SvgIconComponent } from './svg-icon/svg-icon.component';
+import { ValidatorFormComponent } from './validator-form/validator-form.component';
 
 // tslint:disable-next-line: max-line-length
 export {
@@ -11,6 +12,7 @@ export {
   SvgIconComponent,
   ModalComponent,
   ButtonComponent,
+  ValidatorFormComponent,
   SignUpModalComponent,
   SignInModalComponent,
 };
@@ -20,7 +22,8 @@ export const SharedComponents = [
   LogoCardComponent,
   SvgIconComponent,
   ModalComponent,
+  ButtonComponent,
+  ValidatorFormComponent,
   SignUpModalComponent,
   SignInModalComponent,
-  ButtonComponent,
 ];

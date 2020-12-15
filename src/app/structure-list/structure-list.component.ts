@@ -17,6 +17,8 @@ export class StructureListComponent implements OnChanges {
   @Output() public displayMapMarkerId: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
   @Output() public hoverOut: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
   @Output() public selectedMarkerId: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public updatedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+
   public showStructureDetails = false;
   public structure: Structure;
   public structuresListChunked: Structure[];
@@ -31,14 +33,7 @@ export class StructureListComponent implements OnChanges {
       this.showDetails(this.selectedStructure);
     }
     if (changes.structureList) {
-      this.arrayChunked = [];
-      this.pageStructures = 0;
-      if (this.pageStructures == 0) {
-        for (let i = 0; i < this.structureList.length; i += this.chunck) {
-          this.arrayChunked.push(this.structureList.slice(i, i + this.chunck));
-        }
-      }
-      this.structuresListChunked = this.arrayChunked[0];
+      this.structuresListChunked = this.chunckAnArray(this.structureList);
     }
   }
   public fetchResults(filters: Filter[]): void {
@@ -61,6 +56,19 @@ export class StructureListComponent implements OnChanges {
 
   public mouseOut(): void {
     this.displayMapMarkerId.emit([undefined]);
+  }
+
+  public emitUpdatedStructure(s: Structure): void {
+    this.updatedStructure.emit(s);
+  }
+
+  private chunckAnArray(structures: Structure[]): Structure[] {
+    this.arrayChunked = [];
+    this.pageStructures = 0;
+    for (let i = 0; i < structures.length; i += this.chunck) {
+      this.arrayChunked.push(structures.slice(i, i + this.chunck));
+    }
+    return this.arrayChunked[0];
   }
 
   public onScrollDown(event): void {

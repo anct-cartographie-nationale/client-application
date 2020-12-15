@@ -1,44 +1,55 @@
 import { Weekday } from '../structure-list/enum/weekday.enum';
+import { Address } from './address.model';
 import { Day } from './day.model';
 import { OpeningDay } from './openingDay.model';
 import { Week } from './week.model';
 export class Structure {
   public id: number;
   public numero: string;
-  public dateDeCreation: string;
-  public derniereModification: string;
-  public nomDeLusager: string;
-  public votreStructureEstElle: string;
-  public nomDeVotreStructure: string;
-  public typeDeStructure: string;
+  public createdAt: string;
+  public updatedAt: string;
+  public structureRepresentation: string;
+  public structureName: string;
+  public structureType: string[];
   public description: string;
-  public n: string;
-  public voie: string;
-  public commune: string;
-  public telephone: string;
-  public courriel: string;
-  public siteWeb: string;
+  public address: Address;
+  public contactPhone: string;
+  public contactMail: string;
+  public website: string;
   public facebook: string;
   public twitter: string;
   public instagram: string;
-  public civilite: string;
-  public nom: string;
-  public prenom: string;
+  public gender: string;
+  public contactName: string;
+  public contactSurname: string;
   public fonction: string;
-  public accessibilitePersonnesAMobiliteReduitePmr: boolean;
-  public jaccompagneLesUsagersDansLeursDemarchesEnLigne: boolean;
-  public accompagnementDesDemarches: string[];
-  public modalitesDacces: string[];
-  public labelsEtQualifications: string[];
+  public lockdownActivity: string;
+  public pmrAccess: boolean;
+  public publicsAccompaniment: string[];
+  public proceduresAccompaniment: string[];
+  public accessModality: string[];
+  public documentsMeeting: string;
+  public labelsQualifications: string[];
+  public publics: string[];
   public nbComputers: number;
+  public nbPrinters: number;
+  public nbTablets: number;
+  public nbNumericTerminal: number;
+  public exceptionalClosures: string;
+  public equipmentsAndServices: string[];
   public hours: Week;
+  public equipmentsDetails: string;
+  public equipmentsAccessType: string[];
+
   public isOpen: boolean;
   public openedOn: OpeningDay;
-  public lesCompetencesDeBase: string[];
-  public accesAuxDroits: string[];
-  public equipementsEtServicesProposes: string[];
+  public baseSkills: string[];
+  public accessRight: string[];
+  public parentingHelp: string[];
+  public socialAndProfessional: string[];
+  public digitalCultureSecurity: string[];
+
   public distance?: number;
-  public address?: string;
   public coord?: number[];
 
   constructor(obj?: any) {
@@ -82,7 +93,7 @@ export class Structure {
    * Check if a structure has equipments
    */
   public hasEquipments(): boolean {
-    if (this.equipementsEtServicesProposes.length) {
+    if (this.equipmentsAndServices.length) {
       return true;
     }
     return false;
