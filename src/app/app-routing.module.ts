@@ -5,6 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ResetEmailComponent } from './reset-email/reset-email.component';
 import { StructureDetailsComponent } from './structure-list/components/structure-details/structure-details.component';
 import { StructureListComponent } from './structure-list/structure-list.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: 'users/verify/:id',
     component: UserVerificationComponent,
+  },
+  {
+    path: 'change-email/:id',
+    component: ResetEmailComponent,
   },
   {
     path: 'profile',

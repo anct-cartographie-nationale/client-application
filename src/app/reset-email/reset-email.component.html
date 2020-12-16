@@ -1,0 +1,12 @@
+<div fxLayout="column" class="content-container">
+  <div class="section-container" fxLayout="colum" fxLayoutAlign="center center">
+    <p *ngIf="changeSuccess">
+      Vous avez correctement changé votre email associé a votre compte. Vous pouvez désormais vous reconnecter avec
+      votre nouvel email
+    </p>
+    <p *ngIf="!changeSuccess">
+      Une erreur est survenue lors de la validation du changement de votre email... Veuillez envoyer un mail au support.
+    </p>
+    <div></div>
+  </div>
+</div>

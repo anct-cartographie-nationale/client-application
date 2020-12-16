@@ -25,6 +25,7 @@ import { UserVerificationComponent } from './user-verification/user-verification
 import { AuthGuard } from './guards/auth.guard';
 import { CustomHttpInterceptor } from './config/http-interceptor';
 import { ProfileModule } from './profile/profile.module';
+import { ResetEmailComponent } from './reset-email/reset-email.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ProfileModule } from './profile/profile.module';
     MenuPhoneComponent,
     FormComponent,
     UserVerificationComponent,
+    ResetEmailComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule],
   providers: [

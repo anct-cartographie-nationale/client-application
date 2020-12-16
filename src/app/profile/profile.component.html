@@ -4,6 +4,25 @@
     <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
       <p>Id: {{ userProfile._id }}</p>
       <p>Email: {{ userProfile.email }}</p>
+      <button (click)="toogleChangeEmail()">Changer d'email</button>
+      <form
+        *ngIf="changeEmail"
+        fxLayout="column"
+        fxLayoutGap="10px"
+        [formGroup]="formEmail"
+        (ngSubmit)="onSubmitEmail()"
+      >
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" autocomplete="on" formControlName="email" class="form-control" />
+          <div *ngIf="submitted" class="invalid-feedback">
+            <app-validator-form [control]="formEmail.controls.email"></app-validator-form>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" [disabled]="loading" class="btn btn-primary">Appliquer</button>
+        </div>
+      </form>
       <button (click)="toogleChangePassword()">Changer de mot de passe</button>
 
       <form *ngIf="changePassword" fxLayout="column" fxLayoutGap="10px" [formGroup]="form" (ngSubmit)="onSubmit()">
