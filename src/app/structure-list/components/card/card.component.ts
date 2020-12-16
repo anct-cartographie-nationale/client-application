@@ -1,6 +1,8 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Structure } from '../../../models/structure.model';
 import { GeojsonService } from '../../../services/geojson.service';
+import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -29,6 +31,16 @@ export class CardComponent implements OnInit {
     this.showDetails.emit(this.structure);
   }
 
+  public getLabelTypeStructure(typeStructure: string[]): string {
+    let label = '';
+    typeStructure.forEach((type) => {
+      if (label) {
+        label += ', ';
+      }
+      label += typeStructureEnum[type];
+    });
+    return label;
+  }
   public cardHover(): void {
     this.hover.emit(this.structure);
   }

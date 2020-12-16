@@ -20,6 +20,7 @@ import { ModalFilterComponent } from './structure-list/components/modal-filter/m
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { AboutComponent } from './about/about.component';
 import { MenuPhoneComponent } from './menu-phone/menu-phone.component';
+import { FormComponent } from './form/form.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CustomHttpInterceptor } from './config/http-interceptor';
@@ -41,6 +42,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     LegalNoticeComponent,
     AboutComponent,
     MenuPhoneComponent,
+    FormComponent,
     UserVerificationComponent,
     ResetPasswordComponent,
   ],

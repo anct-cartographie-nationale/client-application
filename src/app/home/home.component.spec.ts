@@ -31,7 +31,6 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  });
 
   it('getAddress(): should getAddress', () => {
     spyOn(navigator.geolocation, 'getCurrentPosition').and.callFake(() => {

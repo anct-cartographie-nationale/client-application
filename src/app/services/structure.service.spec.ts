@@ -4,7 +4,7 @@ import { Day } from '../models/day.model';
 import { Structure } from '../models/structure.model';
 import { Time } from '../models/time.model';
 import { Week } from '../models/week.model';
-import { StructureService } from './structure-list.service';
+import { StructureService } from './structure.service';
 const { DateTime } = require('luxon');
 
 describe('StructureService', () => {

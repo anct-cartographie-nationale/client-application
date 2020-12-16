@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
 import { Equipment } from '../../enum/equipment.enum';
+import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -16,6 +17,7 @@ import { Equipment } from '../../enum/equipment.enum';
 export class StructureDetailsComponent implements OnInit {
   @Input() public structure: Structure;
   @Output() public closeDetails: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public updatedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
   public accessModality = AccessModality;
 
   public baseSkillssReferentiel: Category;
@@ -24,6 +26,7 @@ export class StructureDetailsComponent implements OnInit {
   public accessRights: Module[];
   public printMode = false;
   public isOtherSection = false;
+  public showForm = false;
 
   constructor(route: ActivatedRoute, private printService: PrintService, private searchService: SearchService) {
     route.url.subscribe((url) => {
@@ -48,11 +51,22 @@ export class StructureDetailsComponent implements OnInit {
         this.printService.onDataReady();
       }
     });
-    const index = this.structure.accompagnementDesDemarches.indexOf('autres');
+    const index = this.structure.proceduresAccompaniment.indexOf('autres');
     if (index > -1) {
-      this.structure.accompagnementDesDemarches.splice(index, 1);
+      this.structure.proceduresAccompaniment.splice(index, 1);
       this.isOtherSection = true;
     }
+  }
+
+  public getLabelTypeStructure(typeStructure: string[]): string {
+    let label = '';
+    typeStructure.forEach((type) => {
+      if (label) {
+        label += ', ';
+      }
+      label += typeStructureEnum[type];
+    });
+    return label;
   }
 
   public getEquipmentsIcon(equipment: Equipment): string {
@@ -97,6 +111,16 @@ export class StructureDetailsComponent implements OnInit {
     this.printService.printDocument('structure', this.structure);
   }
 
+  // Show/hide editForm structure
+  public displayForm(): void {
+    this.showForm = !this.showForm;
+  }
+
+  public updateStructure(s: Structure): void {
+    this.structure = new Structure({ ...this.structure, ...s });
+    this.displayForm();
+    this.updatedStructure.emit(this.structure);
+  }
   public getAccessIcon(accessModality: AccessModality): string {
     switch (accessModality) {
       case AccessModality.free:
@@ -128,10 +152,10 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   public setServiceCategories(): void {
-    this.baseSkills = this.structure.lesCompetencesDeBase.map((skill) =>
+    this.baseSkills = this.structure.baseSkills.map((skill) =>
       _.find(this.baseSkillssReferentiel.modules, { id: skill })
     );
-    this.accessRights = this.structure.accesAuxDroits.map((rights) =>
+    this.accessRights = this.structure.accessRight.map((rights) =>
       _.find(this.accessRightsReferentiel.modules, { id: rights })
     );
   }

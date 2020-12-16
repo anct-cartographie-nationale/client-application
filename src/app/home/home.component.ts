@@ -3,7 +3,7 @@ const { DateTime } = require('luxon');
 import * as _ from 'lodash';
 
 import { Structure } from '../models/structure.model';
-import { StructureService } from '../services/structure-list.service';
+import { StructureService } from '../services/structure.service';
 import { Filter } from '../structure-list/models/filter.model';
 import { GeoJson } from '../map/models/geojson.model';
 import { GeojsonService } from '../services/geojson.service';
@@ -63,6 +63,12 @@ export class HomeComponent implements OnInit {
         }
       });
     }
+  }
+
+  public updateStructures(s: Structure): void {
+    this.structures = this.structures.map((structure) => {
+      return structure.id === s.id ? s : structure;
+    });
   }
 
   private updateStructuresdistance(structures: Structure[], lon: number, lat: number): void {

@@ -68,15 +68,10 @@ export class SearchComponent implements OnInit {
     }
     // Add checked box filter
     this.checkedModulesFilter.forEach((cm) => {
-      filters.push(new Filter(this.fromStringToId(cm.text), this.mockApiNumber(cm.id)));
+      filters.push(new Filter(cm.text, cm.id));
     });
     // Send filters
     this.searchEvent.emit(filters);
-  }
-
-  // Delete when getting back-end
-  private mockApiNumber(nb: string): string {
-    return nb.length < 3 ? ('00' + nb).slice(-3) : nb;
   }
 
   public fetchResults(checkedModules: Module[]): void {
@@ -131,7 +126,7 @@ export class SearchComponent implements OnInit {
       this.closeModal();
     } else if (this.modalTypeOpened !== modalType) {
       this.modalTypeOpened = modalType;
-      this.fakeData(modalType);
+      this.getData(modalType);
     }
   }
 
@@ -139,18 +134,6 @@ export class SearchComponent implements OnInit {
     this.modalTypeOpened = undefined;
   }
 
-  private fromStringToId(categ: string): string {
-    const splitStr = categ.toLowerCase().split(' ');
-    for (let i = 1; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr
-      .join('')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f'’°()]/g, '')
-      .replace(/[\s-]/g, ' ')
-      .replace('?', '');
-  }
   // Get adress and put it in input
   public locateMe(): void {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -171,7 +154,7 @@ export class SearchComponent implements OnInit {
       this.checkedModulesFilter.push(new Module(checkValue, categ));
       this.numberMoreFiltersChecked++;
     } else {
-      // Check if the unchecked module is present in the list and remove it
+      // Check if the module is present in the list and remove it
       const index = this.checkedModulesFilter.findIndex((m: Module) => m.id === checkValue && m.text === categ);
       if (index > -1) {
         this.checkedModulesFilter.splice(index, 1);
@@ -185,7 +168,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Get the correct list of checkbox/modules depending on the type of modal.
-  private fakeData(option: TypeModal): void {
+  private getData(option: TypeModal): void {
     if (option === TypeModal.accompaniment) {
       forkJoin([this.searchService.getCategoriesAccompaniment(), this.searchService.getFakeCounterModule()]).subscribe(
         (res) => {

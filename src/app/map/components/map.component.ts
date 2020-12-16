@@ -16,6 +16,7 @@ import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
 import * as _ from 'lodash';
 import { GeoJsonProperties } from '../models/geoJsonProperties.model';
 import { MarkerType } from './markerType.enum';
+import { typeStructureEnum } from '../../shared/enum/typeStructure.enum';
 
 @Component({
   selector: 'app-map',
@@ -135,10 +136,10 @@ export class MapComponent implements OnChanges {
     }
     return (
       '<h1>' +
-      structure.nomDeVotreStructure +
+      structure.structureName +
       '</h1>' +
       '<p>' +
-      structure.typeDeStructure +
+      this.getLabelTypeStructure(structure.structureType) +
       '</p><div>' +
       '<span class="ico-dot-' +
       cssAvailabilityClass +
@@ -146,6 +147,17 @@ export class MapComponent implements OnChanges {
       structure.openDisplay() +
       '</span></div><div class="pop-up"><button type="button" class="btnShowDetails">Voir</button></div>'
     );
+  }
+
+  private getLabelTypeStructure(typeStructure: string[]): string {
+    let label = '';
+    typeStructure.forEach((type) => {
+      if (label) {
+        label += ', ';
+      }
+      label += typeStructureEnum[type];
+    });
+    return label;
   }
 
   private buildMdmPopUp(mdmProperties: GeoJsonProperties): string {

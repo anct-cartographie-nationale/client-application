@@ -18,4 +18,5 @@
   *ngIf="showStructureDetails"
   [structure]="structure"
   (closeDetails)="closeDetails()"
+  (updatedStructure)="emitUpdatedStructure($event)"
 ></app-structure-details>

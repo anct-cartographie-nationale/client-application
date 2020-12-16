@@ -18,6 +18,14 @@ import { Filter } from '../structure-list/models/filter.model';
 export class StructureService {
   constructor(private http: HttpClient) {}
 
+  public postStructure(id: number, structure: Structure): Observable<Structure> {
+    structure.updatedAt = new Date().toString();
+    return this.http.post('/api/structures/' + id, structure).pipe(map((item: Structure) => new Structure(item)));
+  }
+
+  public getStructure(id: number): Observable<Structure> {
+    return this.http.get('/api/structures/' + id).pipe(map((item: any) => new Structure(item)));
+  }
   public getStructures(filters: Filter[]): Observable<Structure[]> {
     if (filters && filters.length > 0) {
       let requestUrl = '/api/structures/search';

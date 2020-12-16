@@ -1,6 +1,6 @@
 <div class="structure" fxLayout="column" (click)="cardClicked()" (mouseover)="cardHover()">
   <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
-    <span class="nomStructure">{{ structure.nomDeVotreStructure }}</span>
+    <span class="nomStructure">{{ structure.structureName }}</span>
     <div
       *ngIf="structure.distance"
       class="distanceStructure"
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <span class="typeStructure">{{ structure.typeDeStructure }}</span>
+  <span class="typeStructure">{{ getLabelTypeStructure(structure.structureType) }}</span>
   <br />
   <app-structure-opening-status [structure]="structure"></app-structure-opening-status>
 </div>
