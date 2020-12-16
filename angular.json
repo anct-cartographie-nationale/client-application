@@ -14,9 +14,15 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale": "fr",
+        "sourceLocale": {
+          "code": "fr",
+          "baseHref": ""
+        },
         "locales": {
-          "en": "src/locale/messages.en.xlf"
+          "en": {
+            "baseHref": "/en/",
+            "translation": "src/locale/messages.en.xlf"
+          }
         }
       },
       "architect": {
@@ -54,6 +60,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "aot": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
