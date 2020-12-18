@@ -48,6 +48,11 @@ export class SignUpModalComponent implements OnInit {
     this.closed.emit(false);
   }
 
+  public swithToResetPassword(): void {
+    this.closed.emit(true);
+    this.router.navigate(['/reset-password']);
+  }
+
   public onSubmit(): void {
     this.submitted = true;
 

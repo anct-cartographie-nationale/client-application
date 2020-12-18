@@ -26,6 +26,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { CustomHttpInterceptor } from './config/http-interceptor';
 import { ProfileModule } from './profile/profile.module';
 import { ResetEmailComponent } from './reset-email/reset-email.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ResetEmailComponent } from './reset-email/reset-email.component';
     FormComponent,
     UserVerificationComponent,
     ResetEmailComponent,
+    ResetPasswordComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule],
   providers: [
