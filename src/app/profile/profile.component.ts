@@ -15,6 +15,8 @@ export class ProfileComponent implements OnInit {
   public submitted = false;
   public changePassword = false;
   public loading = false;
+  public changeEmail = false;
+  public formEmail: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {}
 
@@ -40,6 +42,9 @@ export class ProfileComponent implements OnInit {
       },
       { validator: MustMatch('password', 'confirmPassword') }
     );
+    this.formEmail = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]],
+    });
   }
 
   // getter for form fields
@@ -51,6 +56,26 @@ export class ProfileComponent implements OnInit {
     this.changePassword = !this.changePassword;
   }
 
+  public toogleChangeEmail(): void {
+    this.changeEmail = !this.changeEmail;
+  }
+
+  public onSubmitEmail(): void {
+    this.submitted = true;
+    if (this.formEmail.invalid) {
+      return;
+    }
+    this.loading = true;
+    this.profileService.changeEmail(this.formEmail.value.email, this.userProfile.email).subscribe(
+      () => {
+        this.toogleChangeEmail();
+        this.loading = false;
+      },
+      (err) => {
+        this.loading = false;
+      }
+    );
+  }
   public onSubmit(): void {
     this.submitted = true;
     // stop here if form is invalid
