@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://forge.grandlyon.com///compare/v1.1.0...v1.2.0) (2020-12-18)
+
+
+### Features
+
+* add password-reset handling ([c91cda1](https://forge.grandlyon.com///commit/c91cda15dc7c00220b910d122e2f65f40bb57e06))
+* structure form edit + data display refacto ([4aa542f](https://forge.grandlyon.com///commit/4aa542f730786a7374f1f4d83f520ef6d58e5baf))
+* update nginx conf for matomo ([69562bf](https://forge.grandlyon.com///commit/69562bfc77e67d64510a38de33bd17d8e360dee4))
+* **auth:** add basic signin - signup pop-up ([68a7de9](https://forge.grandlyon.com///commit/68a7de9d6a00e41f1948aefe83f8261c0d36bb8b))
+* **auth:** add email verification page ([ec52547](https://forge.grandlyon.com///commit/ec52547c4c3fbee5c79fe5de6530bf9d4db52a90))
+* **cicd:** update sonar analysis with TS + add Mr validation pipeline ([b57e3d4](https://forge.grandlyon.com///commit/b57e3d4550748cea6d217e1c7887ee47673df3b3))
+* **profile:** add change password ([3db0df0](https://forge.grandlyon.com///commit/3db0df04df7dd3988b04c1b0eb5cf87b1c0842fb))
+* **profile:** add profile module and component. ([dad29ce](https://forge.grandlyon.com///commit/dad29ce7743e53d4fcb03c5d86e15b420b63d3db))
+* add location search ([3407dfc](https://forge.grandlyon.com///commit/3407dfc81528f22b9bf7efcefdf44e4e2e79f736))
+* move structure location call to backend ([bfca4a1](https://forge.grandlyon.com///commit/bfca4a17f76aa36d9f19bcb3047bcc8afb1e691b))
+
+
+### Bug Fixes
+
+* **build:** fix translation build and nginx config ([62cd04b](https://forge.grandlyon.com///commit/62cd04b61de88bb855e0b467e92d3fa7cd67fa4c))
+* **build:** fix translation build and nginx config ([f5b5e31](https://forge.grandlyon.com///commit/f5b5e31950dc210476ac382ba454038fb80434e0))
+* camelcase var ([9bfaeb6](https://forge.grandlyon.com///commit/9bfaeb6aea2d15866009c4a8ea3bcce34ff578e3))
+* change endpoint for categories ([0415307](https://forge.grandlyon.com///commit/041530756690d0b17816900d0e8405947b82f7d9))
+* color ([7bb0a1a](https://forge.grandlyon.com///commit/7bb0a1a1f6bf7ce931d2ef3306d59c6f98f43fbe))
+* filters refacto for backend ([1a9e126](https://forge.grandlyon.com///commit/1a9e1263c3a2155b383602ccbfbe1eb6212f51b3))
+* module import ([6d9f220](https://forge.grandlyon.com///commit/6d9f220f659fcf074f77db3debac5c9870c0615b))
+* remove duplicated source in docker image ([59dd172](https://forge.grandlyon.com///commit/59dd172096ced0b2c26638bee4e353dfb4c892f7))
+* sonar issues. Unused imports, empty block ... ([b761be8](https://forge.grandlyon.com///commit/b761be8a61baba74b4e3d5ea9a5428ebea571a6f))
+* switch method from public to private ([337a90c](https://forge.grandlyon.com///commit/337a90ce3b84088f5ff244229f94e3836be92e8e))
+* unnecessary form validation and function return type ([fc87022](https://forge.grandlyon.com///commit/fc8702287f26c859d4c3bfb449a9f771b9445bda))
+* update nginx config ([f193866](https://forge.grandlyon.com///commit/f1938666d1e0e16beb00722118e21a26a8408280))
+* **auth:** add better signin signup logic ([a160631](https://forge.grandlyon.com///commit/a1606311613f4ad4f7cf43c73a99ee06bdda74e0))
+* **auth:** add regex for password check + add email already in use msg ([02f75f2](https://forge.grandlyon.com///commit/02f75f2fbfb312880c210694ff26f24b0eb0a1a8))
+* **map:** missing mdm marker ([971b486](https://forge.grandlyon.com///commit/971b486e06b632609ee262cbf54184084efc2d58))
+
 ## [1.1.0](https://forge.grandlyon.com///compare/v0.0.3...v1.1.0) (2020-12-01)
 
 
