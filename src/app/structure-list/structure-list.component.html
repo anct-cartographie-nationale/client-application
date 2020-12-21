@@ -5,7 +5,7 @@
   {{ structureList ? structureList.length : '0' }} structure{{ structureList && structureList.length > 1 ? 's' : '' }}
 </div>
 
-<div (scroll)="onScrollDown($event)" class="listCard" (mouseout)="mouseOut()">
+<div (scroll)="onScrollDown($event)" id="listCard" class="listCard" (mouseout)="mouseOut()">
   <app-card
     *ngFor="let structure of structuresListChunked"
     [structure]="structure"

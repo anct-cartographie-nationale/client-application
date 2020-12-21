@@ -34,6 +34,7 @@ export class StructureListComponent implements OnChanges {
     }
     if (changes.structureList) {
       this.structuresListChunked = this.chunckAnArray(this.structureList);
+      document.getElementById('listCard').scrollTo(0, 0);
     }
   }
   public fetchResults(filters: Filter[]): void {
