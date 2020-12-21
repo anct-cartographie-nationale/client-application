@@ -176,10 +176,12 @@
       <app-svg-icon [type]="'ico'" [icon]="getEquipmentsIcon(equipement)"></app-svg-icon>
       <p>
         {{ getEquipmentsLabel(equipement) }}
-        <span *ngIf="equipement == 'ordinateurs'"> : {{ structure.nbComputers }}</span>
-        <span *ngIf="equipement == 'tablettes'"> : {{ structure.nbTablets }}</span>
-        <span *ngIf="equipement == 'bornesNumeriques'"> : {{ structure.nbNumericTerminal }}</span>
-        <span *ngIf="equipement == 'imprimantes'"> : {{ structure.nbPrinters }}</span>
+        <span *ngIf="equipement == 'ordinateurs' && structure.nbComputers"> : {{ structure.nbComputers }}</span>
+        <span *ngIf="equipement == 'tablettes' && structure.nbTablets"> : {{ structure.nbTablets }}</span>
+        <span *ngIf="equipement == 'bornesNumeriques' && structure.nbNumericTerminal">
+          : {{ structure.nbNumericTerminal }}</span
+        >
+        <span *ngIf="equipement == 'imprimantes' && structure.nbPrinters"> : {{ structure.nbPrinters }}</span>
       </p>
     </div>
   </div>
