@@ -55,7 +55,7 @@
   </div>
   <p>VOUS JOINDRE</p>
   <p>Téléphone*</p>
-  <input type="text" formControlName="contactPhone" />
+  <input type="text" formControlName="contactPhone" (input)="modifyPhoneInput($event.target.value)" />
   <app-validator-form [control]="getStructureControl('contactPhone')"></app-validator-form>
   <p>Courriel*</p>
   <input type="email" formControlName="contactMail" />

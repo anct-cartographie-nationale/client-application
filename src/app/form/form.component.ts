@@ -87,7 +87,10 @@ export class FormComponent implements OnInit {
         street: new FormControl(structure.address.street, Validators.required),
         commune: new FormControl(structure.address.commune, Validators.required),
       }),
-      contactPhone: new FormControl(structure.contactPhone, [Validators.required, Validators.pattern('[0-9]{10}')]),
+      contactPhone: new FormControl(structure.contactPhone, [
+        Validators.required,
+        Validators.pattern('([0-9]{2} ){4}[0-9]{2}'),
+      ]),
       contactMail: new FormControl(structure.contactMail, [
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
@@ -147,6 +150,16 @@ export class FormComponent implements OnInit {
 
   public getAddressControl(nameControl: string): AbstractControl {
     return this.structureForm.get('address').get(nameControl);
+  }
+
+  public modifyPhoneInput(phoneNumber: string): void {
+    // Take length of phone number without spaces.
+    let phoneNoSpace = phoneNumber.replace(/\s/g, '');
+    // Check to refresh every 2 number.
+    if (phoneNoSpace.length % 2 == 0) {
+      // Add space every 2 number
+      this.structureForm.get('contactPhone').setValue(phoneNoSpace.replace(/(?!^)(?=(?:\d{2})+$)/g, ' '));
+    }
   }
 
   public getTime(day: string): FormArray {
