@@ -78,7 +78,7 @@ export class StructureDetailsComponent implements OnInit {
       case Equipment.printer:
         return 'print';
       case Equipment.tablet:
-        return 'tel';
+        return 'tablet';
       case Equipment.computer:
         return 'computer';
       default:
@@ -95,7 +95,7 @@ export class StructureDetailsComponent implements OnInit {
       case Equipment.printer:
         return 'Imprimantes';
       case Equipment.tablet:
-        return 'Téléphone';
+        return 'Tablettes';
       case Equipment.computer:
         return 'Ordinateurs à disposition';
       default:
