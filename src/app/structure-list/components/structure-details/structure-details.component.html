@@ -9,7 +9,7 @@
   <div fxLayout="row" fxLayoutAlign="end center">
     <div (click)="close()" class="ico-close-details"></div>
   </div>
-  <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
+  <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="8px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
       <div fxLayout="row" fxLayoutAlign="space-between start">
         <div fxLayout="column">
@@ -36,9 +36,9 @@
               [isCalledByDetails]="true"
             ></app-structure-opening-status>
           </div>
-          <div *ngIf="structure.adressWay" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+          <div *ngIf="structure.address" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'adress'"></app-svg-icon>
-            <p>{{ structure.adressNumero }} {{ structure.address }}</p>
+            <p>{{ structure.address.numero }} {{ structure.address.street }}, {{ structure.address.commune }}</p>
           </div>
           <div *ngIf="structure.website" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'web'"></app-svg-icon>
@@ -55,7 +55,7 @@
           </div>
         </div>
         <div fxLayout="column" fxFlex="50%">
-          <div *ngIf="structure.contactMail" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+          <div *ngIf="structure.contactMail" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
             <a [href]="'mailto:' + structure.contactMail">{{ structure.contactMail }}</a>
           </div>
@@ -75,7 +75,7 @@
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
-    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'demarches'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Démarches</h2>
     </div>
@@ -100,7 +100,7 @@
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
-    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Services</h2>
     </div>
@@ -117,7 +117,7 @@
   </div>
   <!-- Accueil -->
   <div fxLayout="column" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="20px">
-    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'accueil'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Accueil</h2>
     </div>
@@ -148,7 +148,7 @@
           *ngFor="let acces of structure.accessModality"
           fxLayout="row"
           fxLayoutAlign="none flex-end"
-          fxLayoutGap="20px"
+          fxLayoutGap="8px"
         >
           <app-svg-icon [type]="'ico'" [icon]="getAccessIcon(acces)"></app-svg-icon>
           <p>{{ getAccessLabel(acces) }}</p>
@@ -163,7 +163,7 @@
     class="structure-details-block"
     fxLayoutAlign="baseline baseline"
   >
-    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'equipement'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Équipements</h2>
     </div>
@@ -193,8 +193,8 @@
     fxLayoutAlign="baseline baseline"
     fxLayoutGap="20px"
   >
-    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="20px">
-      <em class="ic-toolbox"></em>
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
+      <app-svg-icon [type]="'ico'" [icon]="'label'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Labelisation</h2>
     </div>
     <div fxLayout="row wrap" fxLayoutGap="24px">
