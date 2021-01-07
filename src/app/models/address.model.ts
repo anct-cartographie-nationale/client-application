@@ -1,5 +1,5 @@
 export class Address {
-  numero: string;
-  street: string;
-  commune: string;
+  numero: string = null;
+  street: string = null;
+  commune: string = null;
 }

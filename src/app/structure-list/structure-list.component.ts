@@ -55,7 +55,7 @@ export class StructureListComponent implements OnChanges {
     this.displayMapMarkerId.emit([event.id]);
   }
 
-  public mouseOut(): void {
+  public mouseLeave(): void {
     this.displayMapMarkerId.emit([undefined]);
   }
 

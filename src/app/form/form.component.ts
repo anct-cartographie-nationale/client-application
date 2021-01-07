@@ -11,6 +11,7 @@ import { EquipmentAccess } from '../shared/enum/equipmentAccess.enum';
 import { WeekDayEnum } from '../shared/enum/weekDay.enum';
 import { typeStructureEnum } from '../shared/enum/typeStructure.enum';
 import { FonctionContactEnum } from '../shared/enum/fonctionContact.enum';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-structureForm',
@@ -18,7 +19,8 @@ import { FonctionContactEnum } from '../shared/enum/fonctionContact.enum';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  @Input() public idStructure: number;
+  @Input() public idStructure?: number;
+  @Input() public profile?: User;
   @Output() closeEvent = new EventEmitter<Structure>();
   public structureForm: FormGroup;
   public equipmentAccess = EquipmentAccess;
@@ -36,10 +38,14 @@ export class FormComponent implements OnInit {
   constructor(private structureService: StructureService, private searchService: SearchService) {}
 
   ngOnInit(): void {
-    this.structureService.getStructure(this.idStructure).subscribe((structure) => {
-      this.initForm(structure);
-      this.structureId = structure.id;
-    });
+    if (this.idStructure) {
+      this.structureService.getStructure(this.idStructure).subscribe((structure) => {
+        this.initForm(structure);
+        this.structureId = structure.id;
+      });
+    } else {
+      this.initForm(new Structure());
+    }
     this.searchService.getCategoriesAccompaniment().subscribe((categories: Category[]) => {
       this.proceduresAccompaniment = categories[0];
     });
@@ -77,10 +83,12 @@ export class FormComponent implements OnInit {
   private initForm(structure: Structure): void {
     // Init form
     this.structureForm = new FormGroup({
+      id: new FormControl(structure.id),
+      coord: new FormControl(structure.coord),
       structureType: this.loadArrayForCheckbox(structure.structureType, true),
       structureName: new FormControl(structure.structureName, Validators.required),
       structureRepresentation: new FormControl(structure.structureRepresentation, Validators.required),
-      description: new FormControl(structure.description),
+      description: new FormControl(structure.description, Validators.required),
       lockdownActivity: new FormControl(structure.lockdownActivity),
       address: new FormGroup({
         numero: new FormControl(structure.address.numero),
@@ -222,12 +230,21 @@ export class FormComponent implements OnInit {
   }
   public onSubmit(structureForm: FormGroup): void {
     if (structureForm.valid) {
-      this.structureService.postStructure(this.structureId, structureForm.value).subscribe(
-        (structure: Structure) => {
-          this.closeEvent.emit(structure);
-        },
-        (err) => {}
-      );
+      if (this.structureId) {
+        this.structureService.postStructure(this.structureId, structureForm.value).subscribe(
+          (structure: Structure) => {
+            this.closeEvent.emit(structure);
+          },
+          (err) => {}
+        );
+      } else {
+        this.structureService.createStructure(structureForm.value, this.profile).subscribe(
+          (structure: Structure) => {
+            this.closeEvent.emit(structure);
+          },
+          (err) => {}
+        );
+      }
     } else {
     }
   }

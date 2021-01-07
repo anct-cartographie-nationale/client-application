@@ -1,60 +1,61 @@
+import { WebElement } from 'protractor';
 import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Address } from './address.model';
 import { Day } from './day.model';
 import { OpeningDay } from './openingDay.model';
 import { Week } from './week.model';
 export class Structure {
-  public id: number;
-  public numero: string;
-  public createdAt: string;
-  public updatedAt: string;
-  public structureRepresentation: string;
-  public structureName: string;
-  public structureType: string[];
-  public description: string;
-  public address: Address;
-  public contactPhone: string;
-  public contactMail: string;
-  public website: string;
-  public facebook: string;
-  public twitter: string;
-  public instagram: string;
-  public gender: string;
-  public contactName: string;
-  public contactSurname: string;
-  public fonction: string;
-  public lockdownActivity: string;
-  public pmrAccess: boolean;
-  public publicsAccompaniment: string[];
-  public proceduresAccompaniment: string[];
-  public accessModality: string[];
-  public documentsMeeting: string;
-  public labelsQualifications: string[];
-  public publics: string[];
-  public nbComputers: number;
-  public nbPrinters: number;
-  public nbTablets: number;
-  public nbNumericTerminal: number;
-  public exceptionalClosures: string;
-  public equipmentsAndServices: string[];
+  public id: number = null;
+  public numero: string = null;
+  public createdAt: string = null;
+  public updatedAt: string = null;
+  public structureRepresentation: string = null;
+  public structureName: string = null;
+  public structureType: string[] = [];
+  public description: string = null;
+  public address: Address = new Address();
+  public contactPhone: string = null;
+  public contactMail: string = null;
+  public website: string = null;
+  public facebook: string = null;
+  public twitter: string = null;
+  public instagram: string = null;
+  public gender: string = null;
+  public contactName: string = null;
+  public contactSurname: string = null;
+  public fonction: string = null;
+  public lockdownActivity: string = null;
+  public pmrAccess: boolean = false;
+  public publicsAccompaniment: string[] = [];
+  public proceduresAccompaniment: string[] = [];
+  public accessModality: string[] = [];
+  public documentsMeeting: string = null;
+  public labelsQualifications: string[] = [];
+  public publics: string[] = [];
+  public nbComputers: number = null;
+  public nbPrinters: number = null;
+  public nbTablets: number = null;
+  public nbNumericTerminal: number = null;
+  public exceptionalClosures: string = null;
+  public equipmentsAndServices: string[] = [];
   public hours: Week;
-  public equipmentsDetails: string;
-  public equipmentsAccessType: string[];
+  public equipmentsDetails: string = null;
+  public equipmentsAccessType: string[] = [];
 
-  public isOpen: boolean;
-  public openedOn: OpeningDay;
-  public baseSkills: string[];
-  public accessRight: string[];
-  public parentingHelp: string[];
-  public socialAndProfessional: string[];
-  public digitalCultureSecurity: string[];
+  public isOpen: boolean = false;
+  public openedOn: OpeningDay = new OpeningDay();
+  public baseSkills: string[] = [];
+  public accessRight: string[] = [];
+  public parentingHelp: string[] = [];
+  public socialAndProfessional: string[] = [];
+  public digitalCultureSecurity: string[] = [];
 
   public distance?: number;
-  public coord?: number[];
+  public coord?: number[] = [];
 
   constructor(obj?: any) {
     Object.assign(this, obj, {
-      hours: obj && obj.hours ? new Week(obj.hours) : null,
+      hours: obj && obj.hours ? new Week(obj.hours) : new Week(),
     });
   }
 
