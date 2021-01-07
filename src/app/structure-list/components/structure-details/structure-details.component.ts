@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
 import { Equipment } from '../../enum/equipment.enum';
 import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
+import { TclService } from '../../../services/tcl.service';
+import { TclStopPoint } from '../../../models/tclStopPoint.model';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -24,11 +26,17 @@ export class StructureDetailsComponent implements OnInit {
   public accessRightsReferentiel: Category;
   public baseSkills: Module[];
   public accessRights: Module[];
+  public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
   public isOtherSection = false;
   public showForm = false;
 
-  constructor(route: ActivatedRoute, private printService: PrintService, private searchService: SearchService) {
+  constructor(
+    route: ActivatedRoute,
+    private printService: PrintService,
+    private searchService: SearchService,
+    private tclService: TclService
+  ) {
     route.url.subscribe((url) => {
       if (url[0].path === 'structure') {
         this.structure = this.printService.structure;
@@ -56,6 +64,8 @@ export class StructureDetailsComponent implements OnInit {
       this.structure.proceduresAccompaniment.splice(index, 1);
       this.isOtherSection = true;
     }
+    // GetTclStopPoints
+    this.getTclStopPoints();
   }
 
   public getLabelTypeStructure(typeStructure: string[]): string {
@@ -167,5 +177,11 @@ export class StructureDetailsComponent implements OnInit {
   }
   public isAccessRights(): boolean {
     return this.accessRights && this.accessRights[0] !== undefined;
+  }
+
+  public getTclStopPoints(): void {
+    this.tclService.getTclStopPointBycoord(this.structure.getLon(), this.structure.getLat()).subscribe((res) => {
+      this.tclStopPoints = res;
+    });
   }
 }
