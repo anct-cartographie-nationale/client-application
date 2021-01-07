@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
 import { Equipment } from '../../enum/equipment.enum';
 import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
+import { TclService } from '../../../services/tcl.service';
+import { TclStopPoint } from '../../../models/tclStopPoint.model';
 import { ProfileService } from '../../../profile/services/profile.service';
 import { User } from '../../../models/user.model';
 @Component({
@@ -26,6 +28,7 @@ export class StructureDetailsComponent implements OnInit {
   public accessRightsReferentiel: Category;
   public baseSkills: Module[];
   public accessRights: Module[];
+  public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
   public isOtherSection = false;
   public showForm = false;
@@ -34,6 +37,7 @@ export class StructureDetailsComponent implements OnInit {
   constructor(
     route: ActivatedRoute,
     private printService: PrintService,
+    private tclService: TclService,
     private profileService: ProfileService,
     private searchService: SearchService
   ) {
@@ -55,6 +59,8 @@ export class StructureDetailsComponent implements OnInit {
       this.structure.proceduresAccompaniment.splice(index, 1);
       this.isOtherSection = true;
     }
+    // GetTclStopPoints
+    this.getTclStopPoints();
   }
 
   private setReferentiels(): void {
@@ -182,5 +188,11 @@ export class StructureDetailsComponent implements OnInit {
   }
   public isAccessRights(): boolean {
     return this.accessRights && this.accessRights[0] !== undefined;
+  }
+
+  public getTclStopPoints(): void {
+    this.tclService.getTclStopPointBycoord(this.structure.getLon(), this.structure.getLat()).subscribe((res) => {
+      this.tclStopPoints = res;
+    });
   }
 }
