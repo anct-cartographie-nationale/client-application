@@ -69,9 +69,11 @@ export class MapComponent implements OnChanges {
     // Handle map marker tooltip
     if (changes.toogleToolTipId && changes.toogleToolTipId.currentValue !== changes.toogleToolTipId.previousValue) {
       if (changes.toogleToolTipId.previousValue !== undefined) {
-        this.mapService.toogleToolTip(changes.toogleToolTipId.previousValue);
+        this.mapService.setUnactiveMarker(changes.toogleToolTipId.previousValue);
       }
-      this.mapService.toogleToolTip(changes.toogleToolTipId.currentValue);
+      if (changes.toogleToolTipId.currentValue !== undefined) {
+        this.mapService.setActiveMarker(changes.toogleToolTipId.currentValue);
+      }
     }
     // Handle map marker selection
     if (changes.selectedMarkerId && this.map) {
@@ -229,15 +231,6 @@ export class MapComponent implements OnChanges {
           )
           .addTo(this.map);
       });
-    });
-  }
-
-  /**
-   * Toogle all tooltips given in parameters
-   */
-  public toggleToolTip(ids: Array<number>): void {
-    ids.forEach((id) => {
-      this.mapService.toogleToolTip(id);
     });
   }
 
