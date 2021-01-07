@@ -4,6 +4,7 @@
     <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
       <p>Id: {{ userProfile._id }}</p>
       <p>Email: {{ userProfile.email }}</p>
+      <button (click)="toogleAddStructure()">Ajouter une structure</button>
       <button (click)="toogleChangeEmail()">Changer d'email</button>
       <form
         *ngIf="changeEmail"
@@ -77,4 +78,10 @@
       </form>
     </div>
   </div>
+  <app-structureForm
+    *ngIf="addStructure"
+    [profile]="userProfile"
+    (closeEvent)="toogleAddStructure($event)"
+    (clickOutside)="toogleAddStructure()"
+  ></app-structureForm>
 </div>

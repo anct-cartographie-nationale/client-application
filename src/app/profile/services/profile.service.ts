@@ -2,17 +2,27 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
+import { AuthService } from '../../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
   private readonly baseUrl = 'api/users';
+  private currentProfile: User = null;
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  constructor(private http: HttpClient) {}
+  public async getProfile(): Promise<User> {
+    // Get profil by API only on first time
+    if (!this.currentProfile) {
+      const profile = await this.http.get<User>(`${this.baseUrl}/profile`).toPromise();
+      this.currentProfile = profile;
+    }
+    return this.currentProfile;
+  }
 
-  public getProfile(): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/profile`);
+  public isLinkedToStructure(idStructure: number): boolean {
+    return this.currentProfile.structuresLink.includes(idStructure);
   }
 
   public changePassword(newPassword: string, oldPassword: string): Observable<User> {

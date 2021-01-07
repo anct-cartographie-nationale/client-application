@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Structure } from '../models/structure.model';
 import { User } from '../models/user.model';
 import { MustMatch } from '../shared/validator/form';
 import { ProfileService } from './services/profile.service';
@@ -17,11 +18,12 @@ export class ProfileComponent implements OnInit {
   public loading = false;
   public changeEmail = false;
   public formEmail: FormGroup;
+  public addStructure = false;
 
   constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {}
 
   ngOnInit(): void {
-    this.profileService.getProfile().subscribe((profile) => {
+    this.profileService.getProfile().then((profile) => {
       this.userProfile = profile;
     });
     this.initForm();
@@ -54,6 +56,9 @@ export class ProfileComponent implements OnInit {
 
   public toogleChangePassword(): void {
     this.changePassword = !this.changePassword;
+  }
+  public toogleAddStructure(): void {
+    this.addStructure = !this.addStructure;
   }
 
   public toogleChangeEmail(): void {

@@ -5,4 +5,5 @@ export class User {
   emailVerified: boolean;
   role: number;
   validationToken: string;
+  structuresLink: number[];
 }
