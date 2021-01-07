@@ -14,7 +14,7 @@ export class ProfileService {
 
   public async getProfile(): Promise<User> {
     // Get profil by API only on first time
-    if (!this.currentProfile) {
+    if (!this.currentProfile && this.authService.isLoggedIn()) {
       const profile = await this.http.get<User>(`${this.baseUrl}/profile`).toPromise();
       this.currentProfile = profile;
     }
@@ -22,6 +22,12 @@ export class ProfileService {
   }
 
   public isLinkedToStructure(idStructure: number): boolean {
+    if (!this.authService.isLoggedIn()) {
+      this.currentProfile = null;
+    }
+    if (!this.currentProfile) {
+      return false;
+    }
     return this.currentProfile.structuresLink.includes(idStructure);
   }
 
