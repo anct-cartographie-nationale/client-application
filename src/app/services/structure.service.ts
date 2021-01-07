@@ -11,12 +11,18 @@ import { OpeningDay } from '../models/openingDay.model';
 import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Time } from '../models/time.model';
 import { Filter } from '../structure-list/models/filter.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StructureService {
   constructor(private http: HttpClient) {}
+
+  public createStructure(structure: Structure, profile: User): Observable<Structure> {
+    const idUser = profile.email;
+    return this.http.post('/api/structures', { structure, idUser }).pipe(map((item: Structure) => new Structure(item)));
+  }
 
   public postStructure(id: number, structure: Structure): Observable<Structure> {
     structure.updatedAt = new Date().toString();

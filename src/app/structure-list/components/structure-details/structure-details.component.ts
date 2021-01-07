@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
 import { Equipment } from '../../enum/equipment.enum';
 import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
+import { ProfileService } from '../../../profile/services/profile.service';
+import { User } from '../../../models/user.model';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -27,8 +29,14 @@ export class StructureDetailsComponent implements OnInit {
   public printMode = false;
   public isOtherSection = false;
   public showForm = false;
+  public currentProfile: User;
 
-  constructor(route: ActivatedRoute, private printService: PrintService, private searchService: SearchService) {
+  constructor(
+    route: ActivatedRoute,
+    private printService: PrintService,
+    private profileService: ProfileService,
+    private searchService: SearchService
+  ) {
     route.url.subscribe((url) => {
       if (url[0].path === 'structure') {
         this.structure = this.printService.structure;
@@ -38,6 +46,18 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.profileService.getProfile().then((p: User) => {
+      this.currentProfile = p;
+    });
+    this.setReferentiels();
+    const index = this.structure.proceduresAccompaniment.indexOf('autres');
+    if (index > -1) {
+      this.structure.proceduresAccompaniment.splice(index, 1);
+      this.isOtherSection = true;
+    }
+  }
+
+  private setReferentiels(): void {
     this.searchService.getCategoriesTraining().subscribe((referentiels) => {
       referentiels.forEach((referentiel) => {
         if (referentiel.isBaseSkills()) {
@@ -51,13 +71,7 @@ export class StructureDetailsComponent implements OnInit {
         this.printService.onDataReady();
       }
     });
-    const index = this.structure.proceduresAccompaniment.indexOf('autres');
-    if (index > -1) {
-      this.structure.proceduresAccompaniment.splice(index, 1);
-      this.isOtherSection = true;
-    }
   }
-
   public getLabelTypeStructure(typeStructure: string[]): string {
     let label = '';
     typeStructure.forEach((type) => {
@@ -118,8 +132,9 @@ export class StructureDetailsComponent implements OnInit {
 
   public updateStructure(s: Structure): void {
     this.structure = new Structure({ ...this.structure, ...s });
-    this.displayForm();
     this.updatedStructure.emit(this.structure);
+    this.setReferentiels();
+    this.displayForm();
   }
   public getAccessIcon(accessModality: AccessModality): string {
     switch (accessModality) {

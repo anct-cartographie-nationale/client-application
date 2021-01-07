@@ -11,13 +11,13 @@ export class Week {
 
   constructor(obj?: any) {
     Object.assign(this, obj, {
-      monday: obj && obj.monday ? new Day(obj.monday) : null,
-      tuesday: obj && obj.tuesday ? new Day(obj.tuesday) : null,
-      wednesday: obj && obj.wednesday ? new Day(obj.wednesday) : null,
-      thursday: obj && obj.thursday ? new Day(obj.thursday) : null,
-      friday: obj && obj.friday ? new Day(obj.friday) : null,
-      saturday: obj && obj.saturday ? new Day(obj.saturday) : null,
-      sunday: obj && obj.sunday ? new Day(obj.sunday) : null,
+      monday: obj && obj.monday ? new Day(obj.monday) : new Day(),
+      tuesday: obj && obj.tuesday ? new Day(obj.tuesday) : new Day(),
+      wednesday: obj && obj.wednesday ? new Day(obj.wednesday) : new Day(),
+      thursday: obj && obj.thursday ? new Day(obj.thursday) : new Day(),
+      friday: obj && obj.friday ? new Day(obj.friday) : new Day(),
+      saturday: obj && obj.saturday ? new Day(obj.saturday) : new Day(),
+      sunday: obj && obj.sunday ? new Day(obj.sunday) : new Day(),
     });
   }
 

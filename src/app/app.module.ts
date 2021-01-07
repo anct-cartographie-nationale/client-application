@@ -43,7 +43,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     LegalNoticeComponent,
     AboutComponent,
     MenuPhoneComponent,
-    FormComponent,
     UserVerificationComponent,
     ResetEmailComponent,
     ResetPasswordComponent,

@@ -7,6 +7,9 @@
 <div class="structrue-details-container" *ngIf="structure">
   <!-- Header info -->
   <div fxLayout="row" fxLayoutAlign="end center">
+    <button *ngIf="profileService.isLinkedToStructure(structure.id)" (click)="displayForm()">
+      Modifier la structure
+    </button>
     <div (click)="close()" class="ico-close-details"></div>
   </div>
   <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="8px">
