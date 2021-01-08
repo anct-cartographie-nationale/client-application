@@ -15,21 +15,26 @@ export class ValidationAttachmentComponent implements OnInit {
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
-    this.demandsAttachment = this.adminService.getPendingAttachmentsStructure();
+    this.adminService.getPendingAttachmentsStructure().subscribe((demands) => {
+      this.demandsAttachment = demands;
+    });
   }
 
+  // Todo : Appeler removeDemand(demand) dans le subscribe de acceptAttachmentStructure() quand l'api sera faite.
   public acceptDemand(demand: demandAttachment): void {
     console.log('accept');
-    this.removeDemand(demand);
     this.adminService.acceptAttachmentStructure(demand.userEmail, demand.structureId);
+    this.removeDemand(demand);
   }
 
+  // Todo : Appeler removeDemand(demand) dans le subscribe de acceptAttachmentStructure() quand l'api sera faite.
   public refuseDemand(demand: demandAttachment): void {
     console.log('refuse');
     this.adminService.refuseAttachmentStructure(demand.userEmail, demand.structureId);
     this.removeDemand(demand);
   }
 
+  // Remove the request that was accepted or refused
   private removeDemand(demand: demandAttachment): void {
     const index = this.demandsAttachment.findIndex((d: demandAttachment) => d === demand);
     if (index > -1) {

@@ -1,20 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { demandAttachment } from '../models/demandAttachment.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   // Return pendingAttachments of all profiles.
-  public getPendingAttachmentsStructure(): demandAttachment[] {
-    return [{ userEmail: 'jb@test.fr', structureId: 53 }];
+  public getPendingAttachmentsStructure(): Observable<demandAttachment[]> {
+    return this.http.get<any>('api/users/pendingAttachments');
   }
 
-  // Post
-  public acceptAttachmentStructure(mailUser, idStructure): void {}
+  // Todo : Api post qui retourne vrai si aucune erreur sinon httpException
+  public acceptAttachmentStructure(mailUser, idStructure) {}
 
-  // Post
-  public refuseAttachmentStructure(mailUser, idStructure): void {}
+  // Todo : Api post qui retourne vrai si aucune erreur sinon httpException
+  public refuseAttachmentStructure(mailUser, idStructure) {}
 }
