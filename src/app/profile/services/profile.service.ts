@@ -40,6 +40,13 @@ export class ProfileService {
     return this.http.post<any>(`${this.baseUrl}`, body);
   }
 
+  public isAdmin(): boolean {
+    if (this.currentProfile) {
+      return this.currentProfile.role == 1;
+    }
+    return false;
+  }
+
   public changePassword(newPassword: string, oldPassword: string): Observable<User> {
     return this.http.post<any>(`${this.baseUrl}/change-password`, { newPassword, oldPassword });
   }

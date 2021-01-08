@@ -27,6 +27,8 @@ import { CustomHttpInterceptor } from './config/http-interceptor';
 import { ProfileModule } from './profile/profile.module';
 import { ResetEmailComponent } from './reset-email/reset-email.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AdminModule } from './admin/admin.module';
+import { AdminGuard } from './guards/admin.guard';
 
 @NgModule({
   declarations: [
@@ -47,12 +49,13 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ResetEmailComponent,
     ResetPasswordComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule, AdminModule],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
     CustomBreakPointsProvider,
     AuthGuard,
+    AdminGuard,
   ],
   bootstrap: [AppComponent],
 })
