@@ -10,7 +10,7 @@
           <strong>{{ structureId }}</strong>
         </span>
       </p>
-      <button routerLink="/admin">Accèder au panel d'administration</button>
+      <button *ngIf="profileService.isAdmin()" routerLink="/admin">Accèder au panel d'administration</button>
       <button (click)="toogleAddStructure()">Ajouter une structure</button>
       <button (click)="toogleChangeEmail()">Changer d'email</button>
       <form
