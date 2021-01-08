@@ -21,13 +21,12 @@ export class ValidationAttachmentComponent implements OnInit {
   public acceptDemand(demand: demandAttachment): void {
     console.log('accept');
     this.removeDemand(demand);
-
-    this.adminService.acceptAttachmentStructure(demand.user.email, demand.structure.id);
+    this.adminService.acceptAttachmentStructure(demand.userEmail, demand.structureId);
   }
 
   public refuseDemand(demand: demandAttachment): void {
     console.log('refuse');
-    this.adminService.refuseAttachmentStructure(demand.user.email, demand.structure.id);
+    this.adminService.refuseAttachmentStructure(demand.userEmail, demand.structureId);
     this.removeDemand(demand);
   }
 

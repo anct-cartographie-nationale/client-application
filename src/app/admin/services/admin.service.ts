@@ -9,9 +9,12 @@ export class AdminService {
 
   // Return pendingAttachments of all profiles.
   public getPendingAttachmentsStructure(): demandAttachment[] {
-    return [new demandAttachment()];
+    return [{ userEmail: 'jb@test.fr', structureId: 53 }];
   }
 
+  // Post
   public acceptAttachmentStructure(mailUser, idStructure): void {}
+
+  // Post
   public refuseAttachmentStructure(mailUser, idStructure): void {}
 }
