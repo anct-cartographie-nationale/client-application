@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { userInfo } from 'os';
+import { Structure } from '../../../models/structure.model';
+import { User } from '../../../models/user.model';
+import { demandAttachment } from '../../models/demandAttachment.model';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-admin-validation-attachment',
@@ -6,7 +11,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./validation-attachment.component.scss'],
 })
 export class ValidationAttachmentComponent implements OnInit {
-  constructor() {}
+  demandsAttachment: demandAttachment[];
+  constructor(private adminService: AdminService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.demandsAttachment = this.adminService.getPendingAttachmentsStructure();
+  }
+
+  public acceptDemand(demand: demandAttachment): void {
+    console.log('accept');
+    this.removeDemand(demand);
+
+    this.adminService.acceptAttachmentStructure(demand.user.email, demand.structure.id);
+  }
+
+  public refuseDemand(demand: demandAttachment): void {
+    console.log('refuse');
+    this.adminService.refuseAttachmentStructure(demand.user.email, demand.structure.id);
+    this.removeDemand(demand);
+  }
+
+  private removeDemand(demand: demandAttachment): void {
+    const index = this.demandsAttachment.findIndex((d: demandAttachment) => d === demand);
+    if (index > -1) {
+      this.demandsAttachment.splice(index, 1);
+    }
+  }
 }

@@ -1,1 +1,21 @@
-<div fxLayout="row" fxLayoutAlign="center center"><p>validation-attachment works!</p></div>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <table>
+    <thead>
+      <th>Utilisateur</th>
+      <th>Structure</th>
+      <th>Options</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let demand of demandsAttachment">
+        <td>{{ demand.user.email }}</td>
+        <td>{{ demande.structure.structureName }}</td>
+        <td>
+          <button (click)="acceptDemand(demand)">Valider</button><button (click)="refuseDemand(demand)">Refuser</button>
+        </td>
+      </tr>
+      <tr *ngIf="!demandsAttachment.length">
+        <td colspan="3">Aucune demande en attente</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
