@@ -11,6 +11,7 @@ import { EquipmentAccess } from '../shared/enum/equipmentAccess.enum';
 import { WeekDayEnum } from '../shared/enum/weekDay.enum';
 import { typeStructureEnum } from '../shared/enum/typeStructure.enum';
 import { FonctionContactEnum } from '../shared/enum/fonctionContact.enum';
+import { ProfileService } from '../profile/services/profile.service';
 import { User } from '../models/user.model';
 
 @Component({
@@ -20,9 +21,13 @@ import { User } from '../models/user.model';
 })
 export class FormComponent implements OnInit {
   @Input() public idStructure?: number;
+  @Input() public isEditMode: boolean;
   @Input() public profile?: User;
   @Output() closeEvent = new EventEmitter<Structure>();
   public structureForm: FormGroup;
+
+  public userAlreadyExist = false;
+
   public equipmentAccess = EquipmentAccess;
   public weekDay = WeekDayEnum;
   public typeStructure = typeStructureEnum;
@@ -35,7 +40,11 @@ export class FormComponent implements OnInit {
   public equipmentsAndServices: Category;
   public proceduresAccompaniment: Category;
   public structureId: number;
-  constructor(private structureService: StructureService, private searchService: SearchService) {}
+  constructor(
+    private structureService: StructureService,
+    private searchService: SearchService,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
     if (this.idStructure) {
@@ -75,6 +84,7 @@ export class FormComponent implements OnInit {
         }
       });
     });
+
     this.searchService.getCategoriesTraining().subscribe((t) => {
       this.categoryTraining = t;
     });
@@ -143,6 +153,13 @@ export class FormComponent implements OnInit {
       equipmentsDetails: new FormControl(structure.equipmentsDetails),
       equipmentsAccessType: this.loadArrayForCheckbox(structure.equipmentsAccessType, false),
     });
+
+    // Disable form when it's to claim.
+    if (!this.isEditMode && this.idStructure) {
+      Object.keys(this.structureForm.controls).forEach((controlName) => {
+        this.structureForm.controls[controlName].disable();
+      });
+    }
   }
 
   private loadArrayForCheckbox(array: string[], isRequired: boolean): FormArray {
@@ -151,7 +168,6 @@ export class FormComponent implements OnInit {
       isRequired ? Validators.required : Validators.nullValidator
     );
   }
-
   public getStructureControl(nameControl: string): AbstractControl {
     return this.structureForm.get(nameControl);
   }
@@ -186,8 +202,8 @@ export class FormComponent implements OnInit {
   }
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning, Validators.required),
-      closing: new FormControl(time.closing, Validators.required),
+      openning: new FormControl(time.openning),
+      closing: new FormControl(time.closing),
     });
   }
 
@@ -228,24 +244,34 @@ export class FormComponent implements OnInit {
     }
     return false;
   }
+  public onSubmitClaim(accountForm: FormGroup): void {
+    if (!this.structureForm.invalid && accountForm.valid) {
+      this.profileService.createUserandLinkStructure(this.structureId, accountForm.value).subscribe((user) => {
+        this.closeEvent.emit(this.structureForm.value);
+      });
+    }
+  }
+
+  public onSubmitClaimWithAccount(): void {
+    this.structureService
+      .claimStructureWithAccount(this.structureId, this.profile.email)
+      .subscribe((structuresLinked) => {
+        this.profile.structuresLink = structuresLinked;
+        this.profileService.setProfile(this.profile);
+        this.closeEvent.emit(this.structureForm.value);
+      });
+  }
   public onSubmit(structureForm: FormGroup): void {
     if (structureForm.valid) {
       if (this.structureId) {
-        this.structureService.postStructure(this.structureId, structureForm.value).subscribe(
-          (structure: Structure) => {
-            this.closeEvent.emit(structure);
-          },
-          (err) => {}
-        );
+        this.structureService.editStructure(this.structureId, structureForm.value).subscribe((structure: Structure) => {
+          this.closeEvent.emit(structure);
+        });
       } else {
-        this.structureService.createStructure(structureForm.value, this.profile).subscribe(
-          (structure: Structure) => {
-            this.closeEvent.emit(structure);
-          },
-          (err) => {}
-        );
+        this.structureService.createStructure(structureForm.value, this.profile).subscribe((structure: Structure) => {
+          this.closeEvent.emit(structure);
+        });
       }
-    } else {
     }
   }
 }

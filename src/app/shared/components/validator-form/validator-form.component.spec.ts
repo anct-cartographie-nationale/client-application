@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValidatorFormComponent } from './validator-form.component';
 
-describe('button', () => {
+describe('validatorForm', () => {
   let component: ValidatorFormComponent;
   let fixture: ComponentFixture<ValidatorFormComponent>;
 

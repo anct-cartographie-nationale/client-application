@@ -4,6 +4,12 @@
     <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
       <p>Id: {{ userProfile._id }}</p>
       <p>Email: {{ userProfile.email }}</p>
+      <p>
+        Mes structures :
+        <span *ngFor="let structureId of userProfile.structuresLink">
+          <b>{{ structureId }}</b>
+        </span>
+      </p>
       <button (click)="toogleAddStructure()">Ajouter une structure</button>
       <button (click)="toogleChangeEmail()">Changer d'email</button>
       <form

@@ -33,12 +33,12 @@ export class CardComponent implements OnInit {
 
   public getLabelTypeStructure(typeStructure: string[]): string {
     let label = '';
-    typeStructure.forEach((type) => {
+    for (let i = 0; i < typeStructure.length; i++) {
       if (label) {
         label += ', ';
       }
-      label += typeStructureEnum[type];
-    });
+      label += typeStructureEnum[typeStructure[i]];
+    }
     return label;
   }
   public cardHover(): void {

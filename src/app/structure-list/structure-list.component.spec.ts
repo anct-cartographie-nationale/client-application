@@ -202,7 +202,7 @@ describe('StructureListComponent', () => {
 
   it('should emit undefined id structure to remove map marker', () => {
     spyOn(component.displayMapMarkerId, 'emit');
-    component.mouseOut();
+    component.mouseLeave();
     expect(component.displayMapMarkerId.emit).toHaveBeenCalled();
     expect(component.displayMapMarkerId.emit).toHaveBeenCalledWith([undefined]);
   });

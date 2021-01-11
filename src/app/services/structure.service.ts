@@ -17,24 +17,33 @@ import { User } from '../models/user.model';
   providedIn: 'root',
 })
 export class StructureService {
+  private readonly baseUrl = 'api/structures';
   constructor(private http: HttpClient) {}
 
   public createStructure(structure: Structure, profile: User): Observable<Structure> {
     const idUser = profile.email;
-    return this.http.post('/api/structures', { structure, idUser }).pipe(map((item: Structure) => new Structure(item)));
+    return this.http.post(`${this.baseUrl}`, { structure, idUser }).pipe(map((item: Structure) => new Structure(item)));
   }
 
-  public postStructure(id: number, structure: Structure): Observable<Structure> {
+  public editStructure(id: number, structure: Structure): Observable<Structure> {
     structure.updatedAt = new Date().toString();
-    return this.http.post('/api/structures/' + id, structure).pipe(map((item: Structure) => new Structure(item)));
+    return this.http.put(`${this.baseUrl}/${id}`, structure).pipe(map((item: Structure) => new Structure(item)));
+  }
+
+  public isClaimed(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}/isClaimed`);
+  }
+
+  public claimStructureWithAccount(id: number, email: string): Observable<number[]> {
+    return this.http.post<any>(`${this.baseUrl}/${id}/claim`, { email });
   }
 
   public getStructure(id: number): Observable<Structure> {
-    return this.http.get('/api/structures/' + id).pipe(map((item: any) => new Structure(item)));
+    return this.http.get(`${this.baseUrl}/${id}`).pipe(map((item: any) => new Structure(item)));
   }
   public getStructures(filters: Filter[]): Observable<Structure[]> {
     if (filters && filters.length > 0) {
-      let requestUrl = '/api/structures/search';
+      let requestUrl = `${this.baseUrl}/search`;
       const queryString = _.find(filters, { name: 'query' });
       if (queryString) {
         _.remove(filters, { name: 'query' });
@@ -45,7 +54,7 @@ export class StructureService {
         .post(requestUrl, { filters: formatedFilters })
         .pipe(map((data: any[]) => data.map((item) => new Structure(item))));
     } else {
-      return this.http.get('/api/structures').pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+      return this.http.get(`${this.baseUrl}`).pipe(map((data: any[]) => data.map((item) => new Structure(item))));
     }
   }
 
