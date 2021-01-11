@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
-import { AuthService } from '../../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,25 +9,35 @@ import { AuthService } from '../../services/auth.service';
 export class ProfileService {
   private readonly baseUrl = 'api/users';
   private currentProfile: User = null;
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   public async getProfile(): Promise<User> {
     // Get profil by API only on first time
-    if (!this.currentProfile && this.authService.isLoggedIn()) {
+    if (!this.currentProfile) {
       const profile = await this.http.get<User>(`${this.baseUrl}/profile`).toPromise();
       this.currentProfile = profile;
     }
     return this.currentProfile;
   }
 
+  public setProfile(profile: User): void {
+    this.currentProfile = profile;
+  }
+
   public isLinkedToStructure(idStructure: number): boolean {
-    if (!this.authService.isLoggedIn()) {
-      this.currentProfile = null;
-    }
     if (!this.currentProfile) {
       return false;
     }
     return this.currentProfile.structuresLink.includes(idStructure);
+  }
+
+  public removeProfile(): void {
+    this.currentProfile = null;
+  }
+
+  public createUserandLinkStructure(id: number, body: User): Observable<User> {
+    body.structuresLink = [id];
+    return this.http.post<any>(`${this.baseUrl}`, body);
   }
 
   public changePassword(newPassword: string, oldPassword: string): Observable<User> {

@@ -9,10 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
 import { Equipment } from '../../enum/equipment.enum';
 import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
+import { StructureService } from '../../../services/structure.service';
 import { TclService } from '../../../services/tcl.service';
 import { TclStopPoint } from '../../../models/tclStopPoint.model';
 import { ProfileService } from '../../../profile/services/profile.service';
 import { User } from '../../../models/user.model';
+import { AuthService } from '../../../services/auth.service';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -32,14 +34,19 @@ export class StructureDetailsComponent implements OnInit {
   public printMode = false;
   public isOtherSection = false;
   public showForm = false;
+  public isClaimed: boolean = null;
+  public isLoading: boolean = false;
+  public isEditMode: boolean = false;
   public currentProfile: User;
 
   constructor(
     route: ActivatedRoute,
     private printService: PrintService,
+    private searchService: SearchService,
+    private structureService: StructureService,
     private tclService: TclService,
     private profileService: ProfileService,
-    private searchService: SearchService
+    private authService: AuthService
   ) {
     route.url.subscribe((url) => {
       if (url[0].path === 'structure') {
@@ -50,31 +57,34 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getProfile().then((p: User) => {
-      this.currentProfile = p;
-    });
-    this.setReferentiels();
-    const index = this.structure.proceduresAccompaniment.indexOf('autres');
-    if (index > -1) {
-      this.structure.proceduresAccompaniment.splice(index, 1);
-      this.isOtherSection = true;
+    this.isLoading = true;
+    if (this.authService.isLoggedIn()) {
+      this.profileService.getProfile().then((p: User) => {
+        this.currentProfile = p;
+      });
     }
     // GetTclStopPoints
     this.getTclStopPoints();
-  }
-
-  private setReferentiels(): void {
-    this.searchService.getCategoriesTraining().subscribe((referentiels) => {
-      referentiels.forEach((referentiel) => {
-        if (referentiel.isBaseSkills()) {
-          this.baseSkillssReferentiel = referentiel;
-        } else if (referentiel.isRigthtsAccess()) {
-          this.accessRightsReferentiel = referentiel;
+    this.structureService.isClaimed(this.structure.id).subscribe((boolean) => {
+      this.isClaimed = boolean;
+      this.searchService.getCategoriesTraining().subscribe((referentiels) => {
+        referentiels.forEach((referentiel) => {
+          if (referentiel.isBaseSkills()) {
+            this.baseSkillssReferentiel = referentiel;
+          } else if (referentiel.isRigthtsAccess()) {
+            this.accessRightsReferentiel = referentiel;
+          }
+        });
+        this.setServiceCategories();
+        if (this.printMode) {
+          this.printService.onDataReady();
         }
+        this.isLoading = false;
       });
-      this.setServiceCategories();
-      if (this.printMode) {
-        this.printService.onDataReady();
+      const index = this.structure.proceduresAccompaniment.indexOf('autres');
+      if (index > -1) {
+        this.structure.proceduresAccompaniment.splice(index, 1);
+        this.isOtherSection = true;
       }
     });
   }
@@ -131,7 +141,16 @@ export class StructureDetailsComponent implements OnInit {
     this.printService.printDocument('structure', this.structure);
   }
 
-  // Show/hide editForm structure
+  public editStructure(): void {
+    this.isEditMode = true;
+    this.displayForm();
+  }
+
+  public claimStructure(): void {
+    this.isEditMode = false;
+    this.displayForm();
+  }
+  // Show/hide form structure
   public displayForm(): void {
     this.showForm = !this.showForm;
   }
@@ -139,8 +158,8 @@ export class StructureDetailsComponent implements OnInit {
   public updateStructure(s: Structure): void {
     this.structure = new Structure({ ...this.structure, ...s });
     this.updatedStructure.emit(this.structure);
-    this.setReferentiels();
     this.displayForm();
+    this.ngOnInit();
   }
   public getAccessIcon(accessModality: AccessModality): string {
     switch (accessModality) {

@@ -1,4 +1,5 @@
-<div *ngIf="control.invalid" class="alert">
+<div *ngIf="control && control.invalid" class="alert">
   <div *ngIf="control.errors.required">Champ obligatoire</div>
-  <div *ngIf="control.errors.pattern">Champ mal renseigné</div>
+  <div *ngIf="control.errors.pattern">{{ errorPattern }}</div>
+  <div *ngIf="control.errors.mustMatch">{{ errorMustMatch }}</div>
 </div>
