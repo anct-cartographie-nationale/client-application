@@ -17,27 +17,15 @@ export class ClaimStructureComponent implements OnInit {
     });
   }
 
-  // Todo : Appeler removeDemand(demand) dans le subscribe de acceptAttachmentStructure() quand l'api sera faite.
   public acceptDemand(demand: DemandAttachment): void {
-    console.log('accept');
     this.adminService.acceptStructureClaim(demand.userEmail, demand.structureId).subscribe((data) => {
       this.demandsAttachment = data;
     });
   }
 
-  // Todo : Appeler removeDemand(demand) dans le subscribe de acceptAttachmentStructure() quand l'api sera faite.
   public refuseDemand(demand: DemandAttachment): void {
-    console.log('refuse');
     this.adminService.refuseStructureClaim(demand.userEmail, demand.structureId).subscribe((data) => {
       this.demandsAttachment = data;
     });
   }
-
-  // Remove the request that was accepted or refused
-  // private removeDemand(demand: DemandAttachment): void {
-  //   const index = this.demandsAttachment.findIndex((d: DemandAttachment) => d === demand);
-  //   if (index > -1) {
-  //     this.demandsAttachment.splice(index, 1);
-  //   }
-  // }
 }
