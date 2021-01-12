@@ -20,6 +20,7 @@
         <span class="body"></span>
       </span>
     </a>
+    <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'">Administration</a>
     <a *ngIf="isLoggedIn" routerLink="/profile" [routerLinkActive]="'active'" fxLayout="row" fxLayoutGap="1.5vh">
       <app-svg-icon [type]="'ico'" [iconClass]="'icon-32'" [icon]="'user'" [iconColor]="'currentColor'"></app-svg-icon>
     </a>

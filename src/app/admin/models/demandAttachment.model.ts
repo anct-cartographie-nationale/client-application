@@ -1,4 +1,4 @@
-export class demandAttachment {
+export class DemandAttachment {
   userEmail: string;
   structureId: number;
 }

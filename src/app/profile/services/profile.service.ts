@@ -9,7 +9,9 @@ import { User } from '../../models/user.model';
 export class ProfileService {
   private readonly baseUrl = 'api/users';
   private currentProfile: User = null;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getProfile();
+  }
 
   public async getProfile(): Promise<User> {
     // Get profil by API only on first time
