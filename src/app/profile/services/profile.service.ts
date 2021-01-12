@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
+import decode from 'jwt-decode';
+import { UserRole } from '../../shared/enum/userRole.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -43,8 +45,14 @@ export class ProfileService {
   }
 
   public isAdmin(): boolean {
-    if (this.currentProfile) {
-      return this.currentProfile.role == 1;
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      const token = user.accessToken;
+      // decode the token to get its payload
+      const tokenPayload: User = decode(token);
+      if (tokenPayload.role == UserRole.admin) {
+        return true;
+      }
     }
     return false;
   }
