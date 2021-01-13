@@ -12,7 +12,7 @@ describe('CreateAccountFormComponent', () => {
       email: new FormControl('test@test.fr', Validators.required),
       password: new FormControl('Testaze123!', [
         Validators.required,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
       ]),
       confirmPassword: new FormControl('Testaze123!'),
     },

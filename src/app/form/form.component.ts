@@ -182,7 +182,7 @@ export class FormComponent implements OnInit {
     // Check to refresh every 2 number.
     if (phoneNoSpace.length % 2 == 0) {
       // Add space every 2 number
-      this.structureForm.get('contactPhone').setValue(phoneNoSpace.replace(/(?!^)(?=(?:\d{2})+$)/g, ' '));
+      this.structureForm.get('contactPhone').setValue(phoneNoSpace.replace(/(?!^)(?=(?:\d{2})+$)/g, ' ')); //NOSONAR
     }
   }
 
