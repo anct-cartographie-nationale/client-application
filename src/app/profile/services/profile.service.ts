@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
+import decode from 'jwt-decode';
+import { UserRole } from '../../shared/enum/userRole.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,9 @@ import { User } from '../../models/user.model';
 export class ProfileService {
   private readonly baseUrl = 'api/users';
   private currentProfile: User = null;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getProfile();
+  }
 
   public async getProfile(): Promise<User> {
     // Get profil by API only on first time
@@ -38,6 +42,19 @@ export class ProfileService {
   public createUserandLinkStructure(id: number, body: User): Observable<User> {
     body.structuresLink = [id];
     return this.http.post<any>(`${this.baseUrl}`, body);
+  }
+
+  public isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      const token = user.accessToken;
+      // decode the token to get its payload
+      const tokenPayload: User = decode(token);
+      if (tokenPayload.role == UserRole.admin) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public changePassword(newPassword: string, oldPassword: string): Observable<User> {

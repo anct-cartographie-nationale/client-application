@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileService } from '../profile/services/profile.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class HeaderComponent implements OnInit {
   public isPopUpOpen = false;
   public displaySignUp = true;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private profileService: ProfileService) {}
   ngOnInit(): void {}
 
   public openMenu(): void {
@@ -40,5 +41,9 @@ export class HeaderComponent implements OnInit {
     } else {
       this.isPopUpOpen = false;
     }
+  }
+
+  public get isAdmin(): boolean {
+    return this.profileService.isAdmin();
   }
 }

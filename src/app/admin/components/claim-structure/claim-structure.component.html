@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <table *ngIf="demandsAttachment">
+    <thead>
+      <th>Utilisateur</th>
+      <th>Structure</th>
+      <th>Options</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let demand of demandsAttachment">
+        <td>{{ demand.userEmail }}</td>
+        <td>{{ demand.structureId }}</td>
+        <td>
+          <button (click)="acceptDemand(demand)">Valider</button><button (click)="refuseDemand(demand)">Refuser</button>
+        </td>
+      </tr>
+      <tr *ngIf="!demandsAttachment.length">
+        <td colspan="3">Aucune demande en attente</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

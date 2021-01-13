@@ -4,10 +4,16 @@
     <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
       <p>Id: {{ userProfile._id }}</p>
       <p>Email: {{ userProfile.email }}</p>
-      <p>
+      <p fxLayout="column" *ngIf="userProfile.structuresLink.length > 0">
         Mes structures :
         <span *ngFor="let structureId of userProfile.structuresLink">
-          <b>{{ structureId }}</b>
+          <strong>{{ structureId }}</strong>
+        </span>
+      </p>
+      <p fxLayout="column" *ngIf="userProfile.pendingStructuresLink.length > 0">
+        Mes structures en attente de validation:
+        <span *ngFor="let structureId of userProfile.pendingStructuresLink">
+          <strong>{{ structureId }}</strong>
         </span>
       </p>
       <button (click)="toogleAddStructure()">Ajouter une structure</button>
