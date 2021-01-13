@@ -1,9 +1,9 @@
 <div fxLayout="row" fxLayoutAlign="center center">
-  <table *ngIf="demandsAttachment">
+  <table *ngIf="demandsAttachment" summary="demands attachment results">
     <thead>
-      <th>Utilisateur</th>
-      <th>Structure</th>
-      <th>Options</th>
+      <th scope="col">Utilisateur</th>
+      <th scope="col">Structure</th>
+      <th scope="col">Options</th>
     </thead>
     <tbody>
       <tr *ngFor="let demand of demandsAttachment">
