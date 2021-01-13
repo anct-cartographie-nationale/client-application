@@ -40,7 +40,7 @@ export class ProfileService {
   }
 
   public createUserandLinkStructure(id: number, body: User): Observable<User> {
-    body.structuresLink = [id];
+    body.pendingStructuresLink = [id];
     return this.http.post<any>(`${this.baseUrl}`, body);
   }
 

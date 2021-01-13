@@ -6,4 +6,5 @@ export class User {
   role: number;
   validationToken: string;
   structuresLink: number[];
+  pendingStructuresLink: number[];
 }

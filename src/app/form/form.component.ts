@@ -256,7 +256,7 @@ export class FormComponent implements OnInit {
     this.structureService
       .claimStructureWithAccount(this.structureId, this.profile.email)
       .subscribe((structuresLinked) => {
-        this.profile.structuresLink = structuresLinked;
+        this.profile.pendingStructuresLink = structuresLinked;
         this.profileService.setProfile(this.profile);
         this.closeEvent.emit(this.structureForm.value);
       });
