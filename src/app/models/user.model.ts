@@ -6,5 +6,9 @@ export class User {
   role: number;
   validationToken: string;
   structuresLink: number[];
-  pendingStructuresLink: number[];
+  pendingStructuresLink: number[] = [];
+
+  constructor(obj?: any) {
+    Object.assign(this, obj);
+  }
 }

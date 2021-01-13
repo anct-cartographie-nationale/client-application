@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -35,7 +36,7 @@ export class SignInModalComponent implements OnInit {
 
     this.loading = true;
     this.authService
-      .register(form.value)
+      .register(new User(form.value))
       .pipe(first())
       .subscribe(
         () => {
