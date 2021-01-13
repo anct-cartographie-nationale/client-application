@@ -67,7 +67,7 @@
         <div fxLayout="column" fxFlex="50%">
           <div *ngIf="structure.contactMail" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
-            <a [href]="'mailto:' + structure.contactMail">{{ structure.contactMail }}</a>
+            <p>{{ structure.contactMail }}</p>
           </div>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'calendar'"></app-svg-icon>
@@ -133,8 +133,8 @@
     </div>
     <!-- Openning Hours -->
     <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
-      <div fxFlex="50%">
-        <h3 class="subtitle">Horaires d’ouverture au public :</h3>
+      <div *ngIf="structure.hours.hasData()" fxFlex="50%">
+        <h3 class="subtitle">Horaires d’ouverture au public</h3>
         <div fxLayout="column">
           <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
             <div *ngIf="day.value.open">

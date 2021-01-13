@@ -41,4 +41,20 @@ export class Week {
         return null;
     }
   }
+
+  public hasData() {
+    console.log('has data');
+    if (
+      this.monday.time.length === 0 &&
+      this.tuesday.time.length === 0 &&
+      this.wednesday.time.length === 0 &&
+      this.thursday.time.length === 0 &&
+      this.friday.time.length === 0 &&
+      this.saturday.time.length === 0 &&
+      this.sunday.time.length === 0
+    ) {
+      return false;
+    }
+    return true;
+  }
 }
