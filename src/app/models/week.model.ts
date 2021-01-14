@@ -43,7 +43,6 @@ export class Week {
   }
 
   public hasData() {
-    console.log('has data');
     if (
       this.monday.time.length === 0 &&
       this.tuesday.time.length === 0 &&
