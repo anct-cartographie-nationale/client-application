@@ -17,6 +17,9 @@ export class CreateAccountFormComponent implements OnInit {
     this.accountForm = new FormGroup(
       {
         email: new FormControl('', Validators.required),
+        name: new FormControl('', Validators.required),
+        surname: new FormControl('', Validators.required),
+        phone: new FormControl('', [Validators.required, Validators.pattern('([0-9]{2} ){4}[0-9]{2}')]), //NOSONAR
         password: new FormControl('', [
           Validators.required,
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
@@ -36,5 +39,15 @@ export class CreateAccountFormComponent implements OnInit {
 
   public getAccountControl(nameControl: string): AbstractControl {
     return this.accountForm.get(nameControl);
+  }
+
+  public modifyPhoneInput(phoneNumber: string): void {
+    // Take length of phone number without spaces.
+    let phoneNoSpace = phoneNumber.replace(/\s/g, '');
+    // Check to refresh every 2 number.
+    if (phoneNoSpace.length % 2 == 0) {
+      // Add space every 2 number
+      this.accountForm.get('phone').setValue(phoneNoSpace.replace(/(?!^)(?=(?:\d{2})+$)/g, ' ')); //NOSONAR
+    }
   }
 }
