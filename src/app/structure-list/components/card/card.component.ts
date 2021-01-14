@@ -31,16 +31,6 @@ export class CardComponent implements OnInit {
     this.showDetails.emit(this.structure);
   }
 
-  public getLabelTypeStructure(typeStructure: string[]): string {
-    let label = '';
-    for (let i = 0; i < typeStructure.length; i++) {
-      if (label) {
-        label += ', ';
-      }
-      label += typeStructureEnum[typeStructure[i]];
-    }
-    return label;
-  }
   public cardHover(): void {
     this.hover.emit(this.structure);
   }

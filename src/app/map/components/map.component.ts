@@ -141,7 +141,7 @@ export class MapComponent implements OnChanges {
       structure.structureName +
       '</h1>' +
       '<p>' +
-      this.getLabelTypeStructure(structure.structureType) +
+      structure.getLabelTypeStructure() +
       '</p><div>' +
       '<span class="ico-dot-' +
       cssAvailabilityClass +
@@ -149,17 +149,6 @@ export class MapComponent implements OnChanges {
       structure.openDisplay() +
       '</span></div><div class="pop-up"><button type="button" class="btnShowDetails">Voir</button></div>'
     );
-  }
-
-  private getLabelTypeStructure(typeStructure: string[]): string {
-    let label = '';
-    typeStructure.forEach((type) => {
-      if (label) {
-        label += ', ';
-      }
-      label += typeStructureEnum[type];
-    });
-    return label;
   }
 
   private buildMdmPopUp(mdmProperties: GeoJsonProperties): string {

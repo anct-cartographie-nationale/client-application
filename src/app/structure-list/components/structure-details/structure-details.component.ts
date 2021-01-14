@@ -88,16 +88,6 @@ export class StructureDetailsComponent implements OnInit {
       }
     });
   }
-  public getLabelTypeStructure(typeStructure: string[]): string {
-    let label = '';
-    typeStructure.forEach((type) => {
-      if (label) {
-        label += ', ';
-      }
-      label += typeStructureEnum[type];
-    });
-    return label;
-  }
 
   public getEquipmentsIcon(equipment: Equipment): string {
     switch (equipment) {
