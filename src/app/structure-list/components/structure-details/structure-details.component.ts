@@ -65,7 +65,7 @@ export class StructureDetailsComponent implements OnInit {
     }
     // GetTclStopPoints
     this.getTclStopPoints();
-    this.structureService.isClaimed(this.structure.id).subscribe((boolean) => {
+    this.structureService.isClaimed(this.structure._id).subscribe((boolean) => {
       this.isClaimed = boolean;
       this.searchService.getCategoriesTraining().subscribe((referentiels) => {
         referentiels.forEach((referentiel) => {

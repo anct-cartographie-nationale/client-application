@@ -25,20 +25,21 @@ export class StructureService {
     return this.http.post(`${this.baseUrl}`, { structure, idUser }).pipe(map((item: Structure) => new Structure(item)));
   }
 
-  public editStructure(id: number, structure: Structure): Observable<Structure> {
+  public editStructure(id: string, structure: Structure): Observable<Structure> {
     structure.updatedAt = new Date().toString();
+    delete structure._id; // id should not be provided for update
     return this.http.put(`${this.baseUrl}/${id}`, structure).pipe(map((item: Structure) => new Structure(item)));
   }
 
-  public isClaimed(id: number): Observable<any> {
+  public isClaimed(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}/isClaimed`);
   }
 
-  public claimStructureWithAccount(id: number, email: string): Observable<number[]> {
+  public claimStructureWithAccount(id: string, email: string): Observable<string[]> {
     return this.http.post<any>(`${this.baseUrl}/${id}/claim`, { email });
   }
 
-  public getStructure(id: number): Observable<Structure> {
+  public getStructure(id: string): Observable<Structure> {
     return this.http.get(`${this.baseUrl}/${id}`).pipe(map((item: any) => new Structure(item)));
   }
   public getStructures(filters: Filter[]): Observable<Structure[]> {

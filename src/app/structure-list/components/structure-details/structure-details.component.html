@@ -1,6 +1,6 @@
 <app-structureForm
   *ngIf="showForm"
-  [idStructure]="structure.id"
+  [idStructure]="structure._id"
   [isEditMode]="isEditMode"
   [profile]="currentProfile"
   (closeEvent)="updateStructure($event)"
@@ -12,7 +12,7 @@
     <button (click)="claimStructure()">Revendiquer</button>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center">
-    <button *ngIf="profileService.isLinkedToStructure(structure.id)" (click)="editStructure()">
+    <button *ngIf="profileService.isLinkedToStructure(structure._id)" (click)="editStructure()">
       Modifier ma structure
     </button>
   </div>

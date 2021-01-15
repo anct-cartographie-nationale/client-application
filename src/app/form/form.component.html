@@ -38,8 +38,9 @@
         </label>
       </div>
     </div>
-    <p>Description</p>
+    <p>Description*</p>
     <textarea rows="4" style="width: 100%" maxlength="500" formControlName="description"></textarea>
+    <app-validator-form [control]="getStructureControl('description')"></app-validator-form>
     <p>
       Afin de rendre visible l'offre de formation numérique proposée lors de ce nouveau confinement, merci d'indiquer
       ici, les activités que vous avez pu maintenir

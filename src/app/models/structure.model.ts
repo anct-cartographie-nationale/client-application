@@ -1,4 +1,3 @@
-import { WebElement } from 'protractor';
 import { typeStructureEnum } from '../shared/enum/typeStructure.enum';
 import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Address } from './address.model';
@@ -6,7 +5,7 @@ import { Day } from './day.model';
 import { OpeningDay } from './openingDay.model';
 import { Week } from './week.model';
 export class Structure {
-  public id: number = null;
+  public _id: string = null;
   public numero: string = null;
   public createdAt: string = null;
   public updatedAt: string = null;

@@ -16,7 +16,6 @@ import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
 import * as _ from 'lodash';
 import { GeoJsonProperties } from '../models/geoJsonProperties.model';
 import { MarkerType } from './markerType.enum';
-import { typeStructureEnum } from '../../shared/enum/typeStructure.enum';
 
 @Component({
   selector: 'app-map',
@@ -25,8 +24,8 @@ import { typeStructureEnum } from '../../shared/enum/typeStructure.enum';
 })
 export class MapComponent implements OnChanges {
   @Input() public structures: Structure[] = [];
-  @Input() public toogleToolTipId: number;
-  @Input() public selectedMarkerId: number;
+  @Input() public toogleToolTipId: string;
+  @Input() public selectedMarkerId: string;
   @Input() public isMapPhone: boolean;
   @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
   @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
@@ -112,7 +111,7 @@ export class MapComponent implements OnChanges {
           structure.getLat(),
           structure.getLon(),
           MarkerType.structure,
-          structure.id,
+          structure._id,
           this.buildToolTip(structure)
         )
         .addTo(this.map)
@@ -223,7 +222,7 @@ export class MapComponent implements OnChanges {
     });
   }
 
-  private centerLeafletMapOnMarker(markerId: number): void {
+  private centerLeafletMapOnMarker(markerId: string): void {
     const marker = this.mapService.getMarker(markerId);
     const latLngs = [marker.getLatLng()];
     const markerBounds = latLngBounds(latLngs);

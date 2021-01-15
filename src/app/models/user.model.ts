@@ -5,8 +5,8 @@ export class User {
   emailVerified: boolean;
   role: number;
   validationToken: string;
-  structuresLink: number[];
-  pendingStructuresLink: number[] = [];
+  structuresLink: string[];
+  pendingStructuresLink: string[] = [];
 
   constructor(obj?: any) {
     Object.assign(this, obj);

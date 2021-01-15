@@ -20,7 +20,7 @@ import { User } from '../models/user.model';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  @Input() public idStructure?: number;
+  @Input() public idStructure?: string;
   @Input() public isEditMode: boolean;
   @Input() public profile?: User;
   @Output() closeEvent = new EventEmitter<Structure>();
@@ -39,7 +39,7 @@ export class FormComponent implements OnInit {
   public publicsAccompaniment: Category;
   public equipmentsAndServices: Category;
   public proceduresAccompaniment: Category;
-  public structureId: number;
+  public structureId: string;
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
@@ -50,7 +50,7 @@ export class FormComponent implements OnInit {
     if (this.idStructure) {
       this.structureService.getStructure(this.idStructure).subscribe((structure) => {
         this.initForm(structure);
-        this.structureId = structure.id;
+        this.structureId = structure._id;
       });
     } else {
       this.initForm(new Structure());
@@ -93,7 +93,7 @@ export class FormComponent implements OnInit {
   private initForm(structure: Structure): void {
     // Init form
     this.structureForm = new FormGroup({
-      id: new FormControl(structure.id),
+      _id: new FormControl(structure._id),
       coord: new FormControl(structure.coord),
       structureType: this.loadArrayForCheckbox(structure.structureType, true),
       structureName: new FormControl(structure.structureName, Validators.required),
