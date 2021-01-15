@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://forge.grandlyon.com///compare/v1.2.0...v1.3.0) (2021-01-15)
+
+
+### Features
+
+* add admin validation for structure claim ([a04a36c](https://forge.grandlyon.com///commit/a04a36c067cd30efd01780217d93b53dff02fe24))
+* add tcl display handling ([2ca8938](https://forge.grandlyon.com///commit/2ca8938cbf9bf3131e66e14f0336eb347e4e8aa4))
+* claim structure ([216124e](https://forge.grandlyon.com///commit/216124eb0204c55c61f363fc3b7ec78410e2050a))
+* create structure ([841d5c3](https://forge.grandlyon.com///commit/841d5c34a60babeae2da59023e3fbb77c298e9a9))
+
+
+### Bug Fixes
+
+* admin role verification handling + npm package fix ([dbd803f](https://forge.grandlyon.com///commit/dbd803f2b295fc1cd3e8433be4c26ffd53163be2))
+* clean code ([c4095e6](https://forge.grandlyon.com///commit/c4095e6cf7f8e1ac60de7f4b15ec5fa443504e15))
+* openning hours handling when there is no hours ([40e3fef](https://forge.grandlyon.com///commit/40e3fefa2c3150eefdd2e8b1f2d0aa0d5b208353))
+* remove console log ([72874c9](https://forge.grandlyon.com///commit/72874c9d26eb93ae553753f57a7635fd9e844a41))
+* structure display modification + fix missing address ([afe4d06](https://forge.grandlyon.com///commit/afe4d06cc11f0b144ca6bead3c525be82b480ee0))
+* update ram logo ([7f13e37](https://forge.grandlyon.com///commit/7f13e3704df7dada49c412ebe7a0071cbc17099b))
+
 ## [1.2.0](https://forge.grandlyon.com///compare/v1.1.0...v1.2.0) (2020-12-18)
 
 
