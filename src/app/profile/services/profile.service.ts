@@ -28,7 +28,7 @@ export class ProfileService {
     this.currentProfile = profile;
   }
 
-  public isLinkedToStructure(idStructure: number): boolean {
+  public isLinkedToStructure(idStructure: string): boolean {
     if (!this.currentProfile) {
       return false;
     }
@@ -39,7 +39,7 @@ export class ProfileService {
     this.currentProfile = null;
   }
 
-  public createUserandLinkStructure(id: number, body: User): Observable<User> {
+  public createUserandLinkStructure(id: string, body: User): Observable<User> {
     body.pendingStructuresLink = [id];
     return this.http.post<any>(`${this.baseUrl}`, body);
   }

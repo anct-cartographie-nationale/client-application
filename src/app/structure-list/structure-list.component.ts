@@ -14,9 +14,8 @@ export class StructureListComponent implements OnChanges {
   @Output() searchEvent = new EventEmitter();
   @Input() public location: GeoJson;
   @Input() public selectedStructure: Structure = new Structure();
-  @Output() public displayMapMarkerId: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
-  @Output() public hoverOut: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
-  @Output() public selectedMarkerId: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public displayMapMarkerId: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public selectedMarkerId: EventEmitter<string> = new EventEmitter<string>();
   @Output() public updatedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
 
   public showStructureDetails = false;
@@ -43,7 +42,7 @@ export class StructureListComponent implements OnChanges {
   public showDetails(event: Structure): void {
     this.showStructureDetails = true;
     this.structure = event;
-    this.selectedMarkerId.emit(this.structure.id);
+    this.selectedMarkerId.emit(this.structure._id);
   }
 
   public closeDetails(): void {
@@ -51,12 +50,12 @@ export class StructureListComponent implements OnChanges {
     this.showStructureDetails = false;
   }
 
-  public handleCardHover(event: Structure): void {
-    this.displayMapMarkerId.emit([event.id]);
+  public handleCardHover(structure: Structure): void {
+    this.displayMapMarkerId.emit(structure._id);
   }
 
   public mouseLeave(): void {
-    this.displayMapMarkerId.emit([undefined]);
+    this.displayMapMarkerId.emit(undefined);
   }
 
   public emitUpdatedStructure(s: Structure): void {
