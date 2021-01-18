@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
 import decode from 'jwt-decode';
 import { UserRole } from '../../shared/enum/userRole.enum';
+import { AuthService } from '../../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { UserRole } from '../../shared/enum/userRole.enum';
 export class ProfileService {
   private readonly baseUrl = 'api/users';
   private currentProfile: User = null;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
     this.getProfile();
   }
 
@@ -45,14 +46,15 @@ export class ProfileService {
   }
 
   public isAdmin(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
+    if (this.authService.isLoggedIn()) {
+      const user = this.authService.userValue;
       const token = user.accessToken;
       // decode the token to get its payload
       const tokenPayload: User = decode(token);
       if (tokenPayload.role == UserRole.admin) {
         return true;
       }
+      return false;
     }
     return false;
   }
