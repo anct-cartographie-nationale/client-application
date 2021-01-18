@@ -12,8 +12,11 @@
     <button (click)="claimStructure()">Revendiquer</button>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center">
-    <button *ngIf="profileService.isLinkedToStructure(structure._id)" (click)="editStructure()">
-      Modifier ma structure
+    <button
+      *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
+      (click)="editStructure()"
+    >
+      Modifier la structure
     </button>
   </div>
   <div fxLayout="row" fxLayoutAlign="end center">
