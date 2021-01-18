@@ -7,6 +7,7 @@ import { AddressService } from '../../service/address.service';
   styleUrls: ['./address-autocomplete.component.scss'],
 })
 export class AddressAutocompleteComponent {
+  public readonly AUTOCOMPLETE_NBR = 5;
   public data = [];
   @ViewChild('searchAddress', { static: true }) searchAddress: ElementRef;
   @Output() selectedAddress: EventEmitter<string> = new EventEmitter<string>();
@@ -15,7 +16,7 @@ export class AddressAutocompleteComponent {
 
   public onSearchChange(searchString: string) {
     this.addressService.searchAddress(searchString).subscribe((data) => {
-      this.data = data.hits.hits;
+      this.data = data.hits.hits.slice(0, this.AUTOCOMPLETE_NBR);
     });
   }
 
