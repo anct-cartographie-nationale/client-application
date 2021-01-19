@@ -35,8 +35,8 @@ export class StructureService {
     return this.http.get(`${this.baseUrl}/${id}/isClaimed`);
   }
 
-  public claimStructureWithAccount(id: string, email: string): Observable<string[]> {
-    return this.http.post<any>(`${this.baseUrl}/${id}/claim`, { email });
+  public claimStructureWithAccount(id: string, user: User): Observable<string[]> {
+    return this.http.post<any>(`${this.baseUrl}/${id}/claim`, user);
   }
 
   public getStructure(id: string): Observable<Structure> {
