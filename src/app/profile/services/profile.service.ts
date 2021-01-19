@@ -11,9 +11,7 @@ import { UserRole } from '../../shared/enum/userRole.enum';
 export class ProfileService {
   private readonly baseUrl = 'api/users';
   private currentProfile: User = null;
-  constructor(private http: HttpClient) {
-    this.getProfile();
-  }
+  constructor(private http: HttpClient) {}
 
   public async getProfile(): Promise<User> {
     // Get profil by API only on first time
