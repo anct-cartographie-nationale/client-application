@@ -1,9 +1,17 @@
+@import '../../assets/scss/layout';
+@import '../../assets/scss/breakpoint';
 .form {
   position: fixed;
   background: white;
-  width: 50vw;
-  height: 100vh;
-  top: 0;
+  width: 100vw;
+  height: calc(100vh - #{$header-height} - #{$footer-height});
+  top: #{$header-height};
   z-index: 9999;
   overflow: auto;
+}
+
+@media #{$large-phone} {
+  .form {
+    height: calc(100vh - #{$header-height});
+  }
 }

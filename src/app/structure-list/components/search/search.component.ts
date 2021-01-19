@@ -24,6 +24,9 @@ export class SearchComponent implements OnInit {
 
   @Output() searchEvent = new EventEmitter();
 
+  // Show/hide form createStructure
+  public addStructureFormModal = false;
+
   // Form search input
   public searchForm: FormGroup;
   // Modal variable
@@ -35,12 +38,6 @@ export class SearchComponent implements OnInit {
   public numberTrainingChecked = 0;
   public numberAccompanimentChecked = 0;
   public numberMoreFiltersChecked = 0;
-
-  // Modal confirmation variable
-  public isConfirmationModalOpen = false;
-  public confirmationModalContent =
-    'Afin d’ajouter votre structure,vous allez être redirigé vers le formulaire Grand Lyon à remplir.';
-
   ngOnInit(): void {
     // Will store the different categories
     this.categories = [];
@@ -204,10 +201,8 @@ export class SearchComponent implements OnInit {
       );
     }
   }
-  public openConfirmationModal(): void {
-    this.isConfirmationModalOpen = true;
-  }
-  public closeConfirmationModal(): void {
-    this.isConfirmationModalOpen = false;
+
+  public toogleAddStructure(): void {
+    this.addStructureFormModal = !this.addStructureFormModal;
   }
 }

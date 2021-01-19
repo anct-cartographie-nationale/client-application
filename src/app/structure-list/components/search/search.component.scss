@@ -4,6 +4,9 @@
 @import '../../../../assets/scss/hyperlink';
 @import '../../../../assets/scss/breakpoint';
 
+.block {
+  padding: 0 25px;
+}
 .header {
   .title {
     @include cn-bold-20;
