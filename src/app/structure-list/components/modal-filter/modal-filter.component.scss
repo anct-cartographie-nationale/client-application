@@ -22,7 +22,7 @@
 .modal {
   max-width: 754px;
   width: 94%;
-  z-index: $modal-filter-structure-z-index !important;
+  z-index: $modal-z-index !important;
   position: fixed;
   border-radius: 6px;
   margin-top: 3.5px;
