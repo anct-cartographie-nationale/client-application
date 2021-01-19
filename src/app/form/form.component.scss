@@ -10,21 +10,17 @@
   top: #{$header-height};
   z-index: 9999;
   overflow: auto;
-}
-
-@media #{$tablet} {
-  .form {
+  @media #{$tablet} {
     height: calc(100vh);
     top: 0;
   }
-  .header {
-    display: block !important;
-  }
-  .footer {
+}
+
+.footer {
+  @media #{$tablet} {
     display: flex !important;
   }
 }
-
 .header {
   height: #{$header-height-phone};
   line-height: #{$header-height-phone};
@@ -36,6 +32,9 @@
   background-color: $grey-1;
   color: $white;
   padding: 0 20px;
+  @media #{$tablet} {
+    display: block !important;
+  }
   h3 {
     margin: 0;
   }
@@ -48,10 +47,17 @@
   }
   .page {
     display: block;
-    height: calc(100vh - #{$header-height-phone} - #{$footer-height-phone});
-    overflow-y: scroll;
+    height: calc(100vh - #{$header-height} - #{$footer-height} - #{$footer-height-phone});
+
+    overflow-y: auto;
+    @media #{$tablet} {
+      height: calc(100vh - #{$header-height-phone} - #{$footer-height-phone});
+    }
     &.home {
-      height: calc(100vh - #{$header-height-phone} - 1px);
+      height: calc(100vh - #{$header-height} - #{$footer-height});
+      @media #{$tablet} {
+        height: calc(100vh - #{$header-height-phone} - 1px);
+      }
     }
   }
   .titleDesc {
@@ -66,6 +72,7 @@
   background: $secondary-color;
   border-radius: 4px;
   outline: none;
+  cursor: pointer;
   border: 0;
   color: $white;
   height: 40px;
