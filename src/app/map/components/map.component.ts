@@ -8,7 +8,18 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { latLng, MapOptions, tileLayer, Map, CRS, TileLayer, LatLngBounds, latLngBounds, layerGroup } from 'leaflet';
+import {
+  latLng,
+  MapOptions,
+  geoJSON,
+  tileLayer,
+  Map,
+  CRS,
+  TileLayer,
+  LatLngBounds,
+  latLngBounds,
+  layerGroup,
+} from 'leaflet';
 import { Structure } from '../../models/structure.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
@@ -16,6 +27,9 @@ import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
 import * as _ from 'lodash';
 import { GeoJsonProperties } from '../models/geoJsonProperties.model';
 import { MarkerType } from './markerType.enum';
+import { typeStructureEnum } from '../../shared/enum/typeStructure.enum';
+import metropole from '../../../assets/geojson/metropole.json';
+import brignais from '../../../assets/geojson/brignais.json';
 
 @Component({
   selector: 'app-map',
@@ -168,25 +182,6 @@ export class MapComponent implements OnChanges {
    * - Map Layer based on open street maps
    */
   private initializeMapOptions(): void {
-    // Init WMS service with param from data.grandlyon.com
-    const metroMaps = new TileLayer.WMS('https://download.data.grandlyon.com/wms/grandlyon', {
-      crs: CRS.EPSG4326,
-      transparent: true,
-      format: 'image/png',
-      attribution: 'Map data © OpenStreetMap contributors',
-      version: '1.3.0',
-      bounds: new LatLngBounds([45.437, 4.568], [46.03, 5.18]),
-    });
-    metroMaps.wmsParams = {
-      format: 'image/png',
-      transparent: true,
-      version: '1.3.0',
-      layers: 'adr_voie_lieu.adrmetropole',
-      service: 'WMS',
-      request: 'GetMap',
-      width: 256,
-      height: 256,
-    };
     // Init mdm
     this.initMDMLayer();
     // Init WMS service with param from data.grandlyon.com
@@ -202,7 +197,7 @@ export class MapComponent implements OnChanges {
       maxZoom: 19,
       zoom: 12,
       minZoom: 10,
-      layers: [carteLayer, metroMaps],
+      layers: [carteLayer],
     };
   }
 
@@ -219,6 +214,8 @@ export class MapComponent implements OnChanges {
           )
           .addTo(this.map);
       });
+      this.initBrignaisLayer();
+      this.initMetropoleLayer();
     });
   }
 
@@ -228,5 +225,29 @@ export class MapComponent implements OnChanges {
     const markerBounds = latLngBounds(latLngs);
     // paddingTopLeft is used for centering marker because of structure details pane
     this.map.fitBounds(markerBounds, { paddingTopLeft: [300, 0] });
+  }
+
+  private initBrignaisLayer(): void {
+    this.map.addLayer(
+      geoJSON(
+        {
+          type: brignais.features[0].geometry.type,
+          coordinates: brignais.features[0].geometry.coordinates,
+        } as any,
+        { style: () => ({ color: '#d50000', fillOpacity: 0 }) }
+      )
+    );
+  }
+
+  private initMetropoleLayer(): void {
+    this.map.addLayer(
+      geoJSON(
+        {
+          type: metropole.features[0].geometry.type,
+          coordinates: metropole.features[0].geometry.coordinates,
+        } as any,
+        { style: () => ({ color: '#d50000', fillOpacity: 0 }) }
+      )
+    );
   }
 }
