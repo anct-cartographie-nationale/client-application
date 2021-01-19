@@ -1,0 +1,17 @@
+<div class="search-bar">
+  <div>
+    <input
+      id="search-address"
+      type="text"
+      placeholder="ex: 20 rue du lac, Lyon"
+      (input)="onSearchChange($event.target.value)"
+      class="form-input"
+      #searchAddress
+    />
+  </div>
+  <div class="autocomplete-items">
+    <p *ngFor="let hit of data" (click)="selectedResult(hit)" class="autocomplete-item">
+      {{ parseHitToAddress(hit) }}
+    </p>
+  </div>
+</div>

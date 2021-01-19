@@ -1,3 +1,6 @@
+@import './color';
+@import './shapes';
+
 @mixin input-search {
   width: 100%;
   border: none;
@@ -6,4 +9,17 @@
   color: $grey-1;
   outline: none;
   font-style: italic;
+}
+
+.form-input {
+  min-width: 290px;
+  background: $grey-6;
+  border: 1px solid $grey-4;
+  box-sizing: border-box;
+  border-radius: $input-radius;
+  height: 40px;
+}
+.form-input:focus {
+  border: 1px solid $blue;
+  outline: none !important;
 }
