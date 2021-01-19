@@ -31,8 +31,8 @@ export class StructureService {
     return this.http.put(`${this.baseUrl}/${id}`, structure).pipe(map((item: Structure) => new Structure(item)));
   }
 
-  public isClaimed(id: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}/isClaimed`);
+  public isClaimed(id: string, profile: User): Observable<boolean> {
+    return this.http.post<boolean>(`${this.baseUrl}/${id}/isClaimed`, profile);
   }
 
   public claimStructureWithAccount(id: string, email: string): Observable<string[]> {
