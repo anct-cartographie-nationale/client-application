@@ -1,0 +1,176 @@
+<p>
+  Horaires d'ouverture :<br />
+
+  <span class="sub-text" #test>
+    Entrez les horaires généraux d'ouverture. Les horaires propres à chaque services proposés seront à remplir plus
+    loin.
+  </span>
+</p>
+
+<div class="days">
+  <p>la ?</p>
+  <div *ngFor="let day of structure.hours" (click)="activateDay(day)" class="day" [ngClass]="{ active: day.active }">
+    <div
+      class="header-container sub-text"
+      [ngClass]="modifiedFields && modifiedFields.hours && modifiedFields.hours[day.name] ? 'modified' : ''"
+    >
+      <div class="header">
+        <div>
+          {{ day.name | titlecase }}
+        </div>
+
+        <div>
+          <img
+            *ngIf="copiedDayName === day.name"
+            (click)="cancelCopy()"
+            src="../../../../../assets/img/black/cross.svg"
+            matTooltip="Annuler la copie"
+            matTooltipClass="tooltip"
+          />
+          <img
+            *ngIf="copiedDayName !== day.name && copiedDayName.length > 0"
+            (click)="paste(day)"
+            src="../../../../../assets/img/black/paste.svg"
+            matTooltip="Coller les heures copiées"
+            matTooltipClass="tooltip"
+          />
+          <img
+            *ngIf="!copiedDayName"
+            (click)="copy(day)"
+            src="../../../../../assets/img/black/copy.svg"
+            matTooltip="Copier les heures"
+            matTooltipClass="tooltip"
+          />
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            id="{{ day.name }}"
+            class="toggle-checkbox hidden"
+            (click)="toggleOpenDay(day, $event.target.checked)"
+            [checked]="day.open"
+          />
+          <label for="{{ day.name }}" class="toggle-label"></label>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!day.open"></div>
+
+    <div *ngIf="day.open">
+      <div class="active" *ngIf="day.active">
+        <div class="hour" *ngFor="let hour of day.hours; let i = index">
+          <div>De</div>
+
+          <div class="input-container">
+            <input type="time" [(ngModel)]="hour.start" (change)="checkHoursValid()" />
+          </div>
+
+          <div>à</div>
+
+          <div class="input-container">
+            <input type="time" [(ngModel)]="hour.end" (change)="checkHoursValid()" />
+          </div>
+
+          <div class="input-container">
+            <select [(ngModel)]="hour.type">
+              <option value="withoutAppointment">Présentiel (Sans rendez-vous)</option>
+              <option value="appointment">Présentiel (Avec rendez-vous)</option>
+              <option value="phone">Téléphonique</option>
+            </select>
+          </div>
+
+          <img
+            src="../../../../../assets/img/black/add-full.svg"
+            *ngIf="day.hours.length === 1"
+            (click)="addHours(day)"
+            class="add"
+          />
+          <img
+            src="../../../../../assets/img/black/cross.svg"
+            *ngIf="day.hours.length > 1"
+            (click)="removeHours(day, i)"
+          />
+
+          <div>
+            <div *ngIf="hour.error === 'incomplete'" class="warning-message">!</div>
+            <div *ngIf="hour.error === 'wrong'" class="error-message">?</div>
+          </div>
+        </div>
+
+        <img
+          src="../../../../../assets/img/black/add-full.svg"
+          *ngIf="day.hours.length > 1 && day.hours.length < 5"
+          (click)="addHours(day)"
+          class="add"
+        />
+      </div>
+
+      <div class="inactive hour" *ngIf="!day.active">
+        <div>De</div>
+
+        <div>
+          <input type="time" [(ngModel)]="day.hours[0].start" (change)="checkHoursValid()" />
+        </div>
+
+        <div>à</div>
+
+        <div>
+          <input type="time" [(ngModel)]="day.hours[0].end" (change)="checkHoursValid()" />
+        </div>
+
+        <div class="input-container">
+          <select [(ngModel)]="day.hours[0].type">
+            <option value="withoutAppointment">Présentiel (Sans rendez-vous)</option>
+            <option value="appointment">Présentiel (Avec rendez-vous)</option>
+            <option value="phone">Téléphonique</option>
+          </select>
+        </div>
+
+        <img
+          src="../../../../../assets/img/black/add-full.svg"
+          *ngIf="day.hours.length === 1"
+          (click)="addHours(day)"
+          class="add"
+        />
+        <div *ngIf="day.hours.length > 1">...</div>
+
+        <div>
+          <div
+            *ngIf="
+              day.hours[0].error === 'incomplete' ||
+                (day.hours[1] && day.hours[1].error === 'incomplete') ||
+                (day.hours[2] && day.hours[2].error === 'incomplete') ||
+                (day.hours[3] && day.hours[3].error === 'incomplete') ||
+                (day.hours[4] && day.hours[4].error === 'incomplete');
+              else wrong
+            "
+            class="warning-message"
+          >
+            !
+          </div>
+          <ng-template #wrong>
+            <div
+              *ngIf="
+                day.hours[0].error === 'wrong' ||
+                (day.hours[1] && day.hours[1].error === 'wrong') ||
+                (day.hours[2] && day.hours[2].error === 'wrong') ||
+                (day.hours[23] && day.hours[3].error === 'wrong') ||
+                (day.hours[4] && day.hours[4].error === 'wrong')
+              "
+              class="error-message"
+            >
+              ?
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="legend">
+  ! : Horaire incomplet<br />
+  ? : Horaire incohérent
+</p>

@@ -7,6 +7,7 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
 import { ValidatorFormComponent } from './validator-form/validator-form.component';
 import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { AddressAutocompleteComponent } from './address-autocomplete/address-autocomplete.component';
+import { HourPickerComponent } from './hour-picker/hour-picker.component';
 
 // tslint:disable-next-line: max-line-length
 export {
@@ -19,6 +20,7 @@ export {
   SignInModalComponent,
   CreateAccountFormComponent,
   AddressAutocompleteComponent,
+  HourPickerComponent,
 };
 
 // tslint:disable-next-line:variable-name
@@ -32,4 +34,5 @@ export const SharedComponents = [
   SignInModalComponent,
   CreateAccountFormComponent,
   AddressAutocompleteComponent,
+  HourPickerComponent,
 ];

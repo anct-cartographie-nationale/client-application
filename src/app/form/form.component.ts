@@ -13,6 +13,7 @@ import { typeStructureEnum } from '../shared/enum/typeStructure.enum';
 import { FonctionContactEnum } from '../shared/enum/fonctionContact.enum';
 import { ProfileService } from '../profile/services/profile.service';
 import { User } from '../models/user.model';
+import { Week } from '../models/week.model';
 
 @Component({
   selector: 'app-structureForm',
@@ -25,6 +26,7 @@ export class FormComponent implements OnInit {
   @Input() public profile?: User;
   @Output() closeEvent = new EventEmitter<Structure>();
   public structureForm: FormGroup;
+  public tmp = new Week();
 
   public userAlreadyExist = false;
 
