@@ -1,5 +1,5 @@
 <div class="header">
-  <span class="title">Acteurs de la médiation</span>
+  <span class="title">Acteurs de la médiation numérique</span>
 </div>
 <div class="content" fxLayout="column">
   <div class="searchSection">
@@ -11,7 +11,7 @@
       (ngSubmit)="applyFilter(searchForm.value.searchTerm)"
     >
       <div class="inputSection" fxLayout="row" fxLayoutAlign="space-between center">
-        <input type="text" formControlName="searchTerm" placeholder="Rechercher une adresse, une association..." />
+        <input type="text" formControlName="searchTerm" placeholder="Rechercher une commune, une association..." />
         <button (click)="clearInput()" class="icon close" type="button"><div class="ico-close-search"></div></button>
         <span class="separator"></span>
         <button (click)="locateMe()" class="icon pin" type="button"><div class="ico-pin-search"></div></button>
@@ -37,7 +37,7 @@
         fxLayoutAlign="space-between center"
         (click)="openModal(TypeModal.accompaniment)"
       >
-        <span>Accompagnement</span>
+        <span>Démarches en ligne</span>
         <div class="arrow"></div>
       </button>
       <button
@@ -51,7 +51,7 @@
         fxLayoutAlign="space-between center"
         (click)="openModal(TypeModal.training)"
       >
-        <span>Formations</span>
+        <span>Ateliers</span>
         <div class="arrow"></div>
       </button>
       <button
@@ -65,7 +65,7 @@
         fxLayoutAlign="space-between center"
         (click)="openModal(TypeModal.moreFilters)"
       >
-        <span>Plus de filtres</span>
+        <span>Plus de critères</span>
         <div class="arrow"></div>
       </button>
     </div>

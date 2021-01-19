@@ -2,6 +2,7 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Structure } from '../../../models/structure.model';
 import { GeojsonService } from '../../../services/geojson.service';
 import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
+import { Equipment } from '../../enum/equipment.enum';
 
 @Component({
   selector: 'app-card',
