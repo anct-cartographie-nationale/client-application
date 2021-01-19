@@ -65,7 +65,7 @@ export class StructureDetailsComponent implements OnInit {
     }
     // GetTclStopPoints
     this.getTclStopPoints();
-    this.structureService.isClaimed(this.structure.id).subscribe((boolean) => {
+    this.structureService.isClaimed(this.structure._id).subscribe((boolean) => {
       this.isClaimed = boolean;
       this.searchService.getCategoriesTraining().subscribe((referentiels) => {
         referentiels.forEach((referentiel) => {
@@ -87,16 +87,6 @@ export class StructureDetailsComponent implements OnInit {
         this.isOtherSection = true;
       }
     });
-  }
-  public getLabelTypeStructure(typeStructure: string[]): string {
-    let label = '';
-    typeStructure.forEach((type) => {
-      if (label) {
-        label += ', ';
-      }
-      label += typeStructureEnum[type];
-    });
-    return label;
   }
 
   public getEquipmentsIcon(equipment: Equipment): string {
