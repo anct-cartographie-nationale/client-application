@@ -1,5 +1,7 @@
 @import '../../assets/scss/layout';
 @import '../../assets/scss/breakpoint';
+@import '../../assets/scss/color';
+@import '../../assets/scss/typography';
 .form {
   position: fixed;
   background: white;
@@ -10,8 +12,67 @@
   overflow: auto;
 }
 
-@media #{$large-phone} {
+@media #{$tablet} {
   .form {
-    height: calc(100vh - #{$header-height});
+    height: calc(100vh);
+    top: 0;
+  }
+  .header {
+    display: block !important;
+  }
+  .footer {
+    display: flex !important;
+  }
+}
+
+.header {
+  height: #{$header-height-phone};
+  line-height: #{$header-height-phone};
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  border-bottom: solid 1px $grey-4;
+  background-color: $grey-1;
+  color: $white;
+  padding: 0 20px;
+  h3 {
+    margin: 0;
+  }
+}
+.content {
+  padding: 0 16px;
+  h2 {
+    @include cn-bold-28;
+    color: $secondary-color;
+  }
+  .page {
+    display: block;
+    height: calc(100vh - #{$header-height-phone} - #{$footer-height-phone});
+    overflow-y: scroll;
+    &.home {
+      height: calc(100vh - #{$header-height-phone} - 1px);
+    }
+  }
+  .titleDesc {
+    @include cn-bold-20;
+  }
+  p {
+    @include cn-regular-18;
+  }
+}
+
+.btn {
+  background: $secondary-color;
+  border-radius: 4px;
+  outline: none;
+  border: 0;
+  color: $white;
+  height: 40px;
+  width: 192px;
+
+  &.start {
+    @include btn-bold;
+    margin-bottom: 26px;
   }
 }

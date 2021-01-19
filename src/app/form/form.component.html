@@ -1,4 +1,4 @@
-<div class="form">
+<div *ngIf="false" class="form">
   <form [formGroup]="structureForm" *ngIf="structureForm" (ngSubmit)="onSubmit(structureForm)">
     <p>Votre structure est-elle ?*</p>
     <input type="radio" formControlName="structureRepresentation" value="principal" /> Un établissement principal (siège
@@ -269,4 +269,25 @@
     *ngIf="!isEditMode && structureId && !profile"
     (submitForm)="onSubmitClaim($event)"
   ></app-create-account-form>
+</div>
+<div class="form" fxLayout="column">
+  <div class="header">
+    <h3>Création de compte</h3>
+  </div>
+  <div class="content">
+    <div *ngIf="currentPage == 0" class="home page" fxLayout="column" fxLayoutAlign="space-between center">
+      <h2>Ajouter votre structure</h2>
+      <img src="../../assets/form/schedule.svg" alt="logo schedule" />
+      <div>
+        <p class="titleDesc">Cela va prendre une quinzaine de minutes</p>
+        <p>Une fois réalisé cela vous permettra d'être référencé sur la platefome</p>
+      </div>
+      <button class="btn start" (click)="nextPage()">C'est Parti</button>
+    </div>
+    <div *ngIf="currentPage == 1" class="informations page"></div>
+  </div>
+  <div *ngIf="currentPage != 0" class="footer" fxLayout="row" fxLayoutAlign="space-around center">
+    <button class="btn start" (click)="previousPage()">Précédent</button>
+    <button class="btn start" (click)="nextPage()">Suivant</button>
+  </div>
 </div>

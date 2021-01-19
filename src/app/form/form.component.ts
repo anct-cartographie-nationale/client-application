@@ -40,6 +40,10 @@ export class FormComponent implements OnInit {
   public equipmentsAndServices: Category;
   public proceduresAccompaniment: Category;
   public structureId: string;
+
+  //New var form
+  public currentPage = 0;
+
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
@@ -271,5 +275,12 @@ export class FormComponent implements OnInit {
         });
       }
     }
+  }
+
+  public nextPage(): void {
+    this.currentPage++;
+  }
+  public previousPage(): void {
+    this.currentPage--;
   }
 }
