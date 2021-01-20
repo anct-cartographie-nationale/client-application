@@ -173,3 +173,20 @@
     min-width: 26px;
   }
 }
+.form-group {
+  margin-bottom: 26px;
+}
+input {
+  margin-top: 4px;
+  background: $grey-6;
+  padding: 8px;
+  height: 40px;
+  border: 1px solid $grey-4;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 296px;
+  @include cn-regular-14;
+  &.phone {
+    width: 205px;
+  }
+}

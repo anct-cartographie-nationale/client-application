@@ -304,7 +304,12 @@ export class FormComponent implements OnInit {
   public setValidationsForm(): void {
     this.pagesValidation[0] = { valid: true };
     this.pagesValidation[1] = { valid: true };
-    this.pagesValidation[2] = { valid: this.accountForm.get('surname').valid && this.accountForm.get('phone').valid };
+    this.pagesValidation[2] = {
+      valid:
+        this.accountForm.get('surname').valid &&
+        this.accountForm.get('name').valid &&
+        this.accountForm.get('phone').valid,
+    };
     this.updatePageValid();
   }
 
