@@ -43,6 +43,8 @@ export class FormComponent implements OnInit {
 
   //New var form
   public currentPage = 0;
+  public progressStatus = 0;
+  public nbPagesForm = 13;
 
   constructor(
     private structureService: StructureService,
@@ -279,8 +281,10 @@ export class FormComponent implements OnInit {
 
   public nextPage(): void {
     this.currentPage++;
+    this.progressStatus += 100 / this.nbPagesForm;
   }
   public previousPage(): void {
     this.currentPage--;
+    this.progressStatus -= 100 / this.nbPagesForm;
   }
 }

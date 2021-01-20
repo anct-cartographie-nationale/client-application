@@ -2,6 +2,7 @@
 @import '../../assets/scss/breakpoint';
 @import '../../assets/scss/color';
 @import '../../assets/scss/typography';
+
 .form {
   position: fixed;
   background: white;
@@ -13,6 +14,9 @@
   @media #{$tablet} {
     height: calc(100vh);
     top: 0;
+  }
+  h3 {
+    margin: 0;
   }
 }
 
@@ -41,12 +45,13 @@
   @media #{$tablet} {
     display: block !important;
   }
-  h3 {
-    margin: 0;
-  }
 }
 .content {
   padding: 0 16px;
+  display: block;
+  overflow-y: auto;
+  height: 100vh;
+
   h2 {
     @include cn-bold-28;
     color: $secondary-color;
@@ -55,38 +60,26 @@
     @include cn-bold-24;
   }
   .page {
-    display: block;
-    height: calc(100vh - #{$header-height} - #{$footer-height} - #{$footer-height-phone});
-
-    overflow-y: auto;
-    @media #{$tablet} {
-      height: calc(100vh - #{$header-height-phone} - #{$footer-height-phone});
-    }
     &.home {
-      height: calc(100vh - #{$header-height} - #{$footer-height});
-      @media #{$tablet} {
-        // -1px because of border-bottom of Header
-        height: calc(100vh - #{$header-height-phone} - 1px);
-      }
+      height: 100%;
       .btnStart {
         text-align: center;
       }
     }
     &.informations {
       ul {
-        list-style: none;
-        padding: 0;
-        span {
-          padding-top: 2px; // Align text with bullet list
-          position: absolute;
-        }
-        li::before {
-          content: '\2022';
+        padding-left: 24px;
+        li::marker {
           color: $secondary-color;
-          font-weight: bold;
-          display: inline-block;
-          width: 1em;
           font-size: 26px;
+        }
+        li > * {
+          vertical-align: text-bottom;
+        }
+        li {
+          @include cn-regular-18;
+          line-height: 24px;
+          margin: 10px 0;
         }
       }
     }
@@ -96,10 +89,6 @@
   }
   p {
     @include cn-regular-18;
-  }
-  li {
-    @include cn-regular-18;
-    line-height: 36px;
   }
 }
 
@@ -154,5 +143,25 @@
       left: -2px;
       border-left-color: $secondary-color;
     }
+  }
+}
+.progressBar {
+  height: 50px;
+  progress {
+    width: 100%;
+    height: 6px;
+    border-radius: 7px;
+    &::-webkit-progress-bar {
+      background-color: $white;
+    }
+    &::-webkit-progress-value {
+      background-color: $secondary-color;
+      border-radius: 12px;
+    }
+  }
+  label {
+    @include cn-bold-14;
+    color: $secondary-color;
+    min-width: 26px;
   }
 }

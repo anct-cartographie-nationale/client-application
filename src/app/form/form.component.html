@@ -275,6 +275,16 @@
     <h3>Création de compte</h3>
   </div>
   <div class="content">
+    <div
+      class="progressBar"
+      *ngIf="currentPage != 0"
+      fxLayout="row"
+      fxLayoutAlign="space-between center"
+      fxLayoutGap="20px"
+    >
+      <label for="progressForm">{{ progressStatus | number: '1.0-0' }}% </label>
+      <progress id="progressForm" max="100" [value]="progressStatus"></progress>
+    </div>
     <div *ngIf="currentPage == 0" class="home page" fxLayout="column" fxLayoutAlign="space-between">
       <h2>Ajouter votre structure</h2>
       <img src="../../assets/form/schedule.svg" alt="logo schedule" />
@@ -301,7 +311,12 @@
     </div>
     <div *ngIf="currentPage == 2" class="page"></div>
   </div>
-  <div *ngIf="currentPage != 0" class="footer" fxLayout="row" fxLayoutAlign="space-around center">
+  <div
+    *ngIf="currentPage != 0 && currentPage != nbPagesForm"
+    class="footer"
+    fxLayout="row"
+    fxLayoutAlign="space-around center"
+  >
     <button class="btn previous" (click)="previousPage()"><span class="chevron left"></span>Précédent</button>
     <button class="btn next" (click)="nextPage()">Suivant<span class="chevron right"></span></button>
   </div>
