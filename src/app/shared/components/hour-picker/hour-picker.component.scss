@@ -1,36 +1,79 @@
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
+
+h1 {
+  @include cn-bold-22;
+}
+
 .days {
   display: grid;
   row-gap: 15px;
 
   .day {
     display: grid;
-    grid-template-columns: 175px 1fr;
+    grid-template-columns: 130px 1fr;
     column-gap: 20px;
 
     .header-container {
       .header {
         display: grid;
-        grid-template-columns: 1fr auto auto;
+        grid-template-columns: 35px auto;
         column-gap: 20px;
         align-items: center;
         height: 40px;
       }
     }
 
+    .row-container {
+      display: grid;
+      grid-template-columns: auto 1fr;
+    }
     .active {
       display: grid;
-      row-gap: 10px;
+      grid-template-columns: 1fr 250px 40px;
+    }
+    .add {
+      display: grid;
+      grid-template-columns: 96px 40px;
+      column-gap: 10px;
+      // grid-template-columns: 80px 100px;
+      align-items: center;
     }
 
     .hour {
       height: 40px;
       display: grid;
-      grid-template-columns: auto 100px auto 100px 1fr 30px 20px;
+      // grid-template-columns: auto 70px auto 70px 30px 80px 1fr;
+      grid-template-columns: auto 70px auto 70px 30px 30px;
       column-gap: 10px;
       align-items: center;
       justify-items: center;
     }
   }
+}
+
+.grey-rounded-border {
+  border: 1px solid $grey-4;
+  box-sizing: border-box;
+  border-radius: 22px;
+  @include cn-regular-14;
+  color: $grey-2;
+  display: flex;
+  justify-content: center;
+}
+
+.grid-center {
+  display: grid;
+  align-items: center;
+}
+
+input {
+  background: $grey-6;
+  border: 1px solid $grey-4;
+  box-sizing: border-box;
+  border-radius: 4px;
+  height: 40px;
+  @include cn-regular-14;
 }
 
 p {
@@ -60,10 +103,4 @@ img {
   font-size: 1em;
   display: grid;
   align-items: center;
-}
-
-.legend {
-  font-weight: normal;
-  font-style: italic;
-  text-align: right;
 }

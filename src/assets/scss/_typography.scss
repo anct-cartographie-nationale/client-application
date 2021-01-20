@@ -4,7 +4,8 @@ $title-font: 'Trebuchet MS', 'Helvetica', sans-serif;
 
 $font-size-xsmall: 0.875em; // 14px
 $font-size-small: 1em; // 16px
-$font-size-medium: 1.25em; // 20px
+$font-size-smedium: 1.25em; // 20px
+$font-size-medium: 1.375em; // 22px
 $font-size-xmedium: 1.5em; // 24px
 $font-size-large: 1.75em; // 28px
 $font-size-xlarge: 2em; // 32px
@@ -96,29 +97,35 @@ h6,
   font-weight: bold;
   font-size: $font-size-xmedium;
 }
-@mixin cn-bold-20 {
+@mixin cn-bold-22 {
   font-family: $text-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-medium;
 }
+@mixin cn-bold-20 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-smedium;
+}
 @mixin cn-regular-20 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
-  font-size: $font-size-medium;
+  font-size: $font-size-smedium;
 }
 @mixin cn-bold-20 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
-  font-size: $font-size-medium;
+  font-size: $font-size-smedium;
 }
 @mixin cn-regular-20 {
   font-family: $title-font;
   font-style: normal;
   font-weight: normal;
-  font-size: $font-size-medium;
+  font-size: $font-size-smedium;
 }
 @mixin cn-regular-18 {
   font-family: $title-font;

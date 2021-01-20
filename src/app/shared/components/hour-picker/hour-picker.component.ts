@@ -11,7 +11,6 @@ import { Week } from '../../../models/week.model';
   styleUrls: ['./hour-picker.component.scss'],
 })
 export class HourPickerComponent implements OnChanges, OnDestroy {
-  @ViewChild('test', { static: true }) test;
   @Input() modifiedFields: any;
   // @Input() structure: any;
 
@@ -23,43 +22,43 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
     hours: [
       {
         name: 'Lundi',
-        hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+        hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
         active: false,
       },
       {
         name: 'Mardi',
-        hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+        hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
         active: false,
       },
       {
         name: 'Mercredi',
-        hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+        hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
         active: false,
       },
       {
         name: 'Jeudi',
-        hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+        hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
         active: false,
       },
       {
         name: 'Vendredi',
-        hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+        hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
         active: false,
       },
       {
         name: 'Samedi',
-        hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+        hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
         active: false,
       },
       {
         name: 'Dimanche',
-        hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+        hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
         active: false,
       },
@@ -68,43 +67,43 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   public structureHoursDefault: any[] = [
     {
       name: 'Lundi',
-      hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+      hours: [{ start: '', end: '', error: 'incomplete' }],
       open: false,
       active: false,
     },
     {
       name: 'Mardi',
-      hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+      hours: [{ start: '', end: '', error: 'incomplete' }],
       open: false,
       active: false,
     },
     {
       name: 'Mercredi',
-      hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+      hours: [{ start: '', end: '', error: 'incomplete' }],
       open: false,
       active: false,
     },
     {
       name: 'Jeudi',
-      hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+      hours: [{ start: '', end: '', error: 'incomplete' }],
       open: false,
       active: false,
     },
     {
       name: 'Vendredi',
-      hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+      hours: [{ start: '', end: '', error: 'incomplete' }],
       open: false,
       active: false,
     },
     {
       name: 'Samedi',
-      hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+      hours: [{ start: '', end: '', error: 'incomplete' }],
       open: false,
       active: false,
     },
     {
       name: 'Dimanche',
-      hours: [{ start: '', end: '', type: 'withoutAppointment', error: 'incomplete' }],
+      hours: [{ start: '', end: '', error: 'incomplete' }],
       open: false,
       active: false,
     },
@@ -121,7 +120,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   /**
    * Intégrer les horaires dans les horaires par défaut du composant
    */
-  formatHoursForEdition() {
+  public formatHoursForEdition(): void {
     console.log('formatHoursForEdition');
     if (this.structure.hours) {
       for (const dayDefault of this.structureHoursDefault) {
@@ -143,7 +142,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
    * Formater les horaires pour l'enregistrement en base :
    * supprimer les données inutiles
    */
-  formatHoursForSave(): any {
+  public formatHoursForSave(): void {
     console.log('formatHoursForSave');
     if (!this.structure.hours) {
       return;
@@ -160,16 +159,19 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
     }
   }
 
-  activateDay(day: any): void {
+  public activateDay(day: any): void {
     console.log('activateDay');
-    this.structure.hours.forEach((dayHours) => {
-      dayHours.active = false;
-    });
+    // this.structure.hours.forEach((dayHours) => {
+    //   dayHours.active = false;
+    // });
     day.active = true;
   }
 
-  toggleOpenDay(day: any, value: any): void {
+  public toggleOpenDay(day: any, value: any): void {
     day.open = value;
+    if (!value) {
+      day.hours = [{ start: '', end: '', error: 'incomplete' }];
+    }
 
     this.checkHoursValid();
   }
@@ -177,7 +179,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   /**
    * Ajouter une ligne d'horaires à un jour
    */
-  addHours(day: any): void {
+  public addHours(day: any): void {
     if (day.hours.length >= 5) {
       return;
     }
@@ -195,7 +197,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   /**
    * Supprimer la dernière ligne d'horaires d'un jour
    */
-  removeHours(day: any, index: number): void {
+  public removeHours(day: any, index: number): void {
     if (index > -1) {
       day.hours.splice(index, 1);
     }
@@ -204,7 +206,8 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   /**
    * Copier les horaires d'un jour pour les coller par dessus les horaires d'un autre jour
    */
-  copy(day): void {
+  public copy(day): void {
+    console.log('copy', day);
     this.copiedDayName = day.name;
     this.copiedDay = day;
   }
@@ -212,7 +215,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   /**
    * Remplacer les horaires d'un jour par les horaires copiés précédemment
    */
-  paste(day): void {
+  public paste(day): void {
     day.hours = JSON.parse(JSON.stringify(this.copiedDay.hours));
     day.open = this.copiedDay.open;
   }
@@ -220,7 +223,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   /**
    * Annuler la copie des horaires
    */
-  cancelCopy(): void {
+  public cancelCopy(): void {
     this.copiedDayName = '';
     this.copiedDay = null;
   }
@@ -228,7 +231,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   /**
    * Vérifier que le format des horaires est correct
    */
-  checkHoursValid() {
+  public checkHoursValid(): void {
     let error = false;
 
     console.log('checkHoursValid');

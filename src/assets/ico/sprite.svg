@@ -14,6 +14,36 @@
 <path fill-rule="evenodd" clip-rule="evenodd" d="M7 4C5.89543 4 5 4.89543 5 6V23C5 24.1046 5.89543 25 7 25L7 26.5C7 27.3284 7.67157 28 8.5 28C9.32843 28 10 27.3284 10 26.5V25H21V26.5C21 27.3284 21.6716 28 22.5 28C23.3284 28 24 27.3284 24 26.5V25C25.1046 25 26 24.1046 26 23V6C26 4.89543 25.1046 4 24 4H7ZM24 9H7V18H24V9ZM12 22H19L18.125 23H12.875L12 22ZM10 6C9.44772 6 9 6.44772 9 7C9 7.55228 9.44772 8 10 8H21C21.5523 8 22 7.55228 22 7C22 6.44772 21.5523 6 21 6H10ZM10.6668 21.8754C10.4609 21.1805 9.89524 20.6514 9.18821 20.4923L7 20V23H11L10.6668 21.8754ZM21.8118 20.4923C21.1048 20.6514 20.5391 21.1805 20.3332 21.8754L20 23H24V20L21.8118 20.4923Z" fill="black"/>
 </symbol>
 
+<symbol id="paste" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 16L5 16V4H14L14 16Z" stroke="#333333" stroke-width="2"/>
+<path d="M19 21C19.5523 21 20 20.5523 20 20V7C20 6.44772 19.5523 6 19 6H16V17C16 17.5523 15.5523 18 15 18H9V20C9 20.5523 9.44772 21 10 21H19Z" fill="#32383D"/>
+</symbol>
+
+
+<symbol id="copy" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4 4C4 3.44771 4.44772 3 5 3H14C14.5523 3 15 3.44772 15 4V6H9C8.44772 6 8 6.44772 8 7V18H5C4.44772 18 4 17.5523 4 17V4ZM10 7C9.44772 7 9 7.44772 9 8V20C9 20.5523 9.44771 21 10 21H19C19.5523 21 20 20.5523 20 20V8C20 7.44772 19.5523 7 19 7H10Z" fill="#32383D"/>
+</symbol>
+
+<symbol id="cancel" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.9498 5.36385C17.3403 4.97332 17.9734 4.97332 18.364 5.36385C18.7545 5.75437 18.7545 6.38753 18.364 6.77806L7.05026 18.0918C6.65973 18.4823 6.02657 18.4823 5.63605 18.0918C5.24552 17.7012 5.24552 17.0681 5.63605 16.6776L16.9498 5.36385Z" fill="black"/>
+<path d="M18.364 16.6777C18.7545 17.0682 18.7545 17.7013 18.364 18.0919C17.9734 18.4824 17.3403 18.4824 16.9498 18.0919L5.63605 6.77816C5.24552 6.38764 5.24552 5.75447 5.63605 5.36395C6.02657 4.97343 6.65974 4.97343 7.05026 5.36395L18.364 16.6777Z" fill="black"/>
+</symbol>
+
+<symbol id="nok" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="16" cy="16" r="13" fill="#ED3939"/>
+<path d="M12.5 20L20 12.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20 20L12.5 12.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+
+<symbol id="ok" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="16" cy="16" r="13" fill="#47C562"/>
+<path d="M11 16.8182L14.8889 20L21 13" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+
+<symbol id="add" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 5C11.4477 5 11 5.44772 11 6V11H6C5.44772 11 5 11.4477 5 12C5 12.5523 5.44772 13 6 13H11V18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18V13H18C18.5523 13 19 12.5523 19 12C19 11.4477 18.5523 11 18 11H13V6C13 5.44772 12.5523 5 12 5Z" fill="#333333"/>
+</symbol>
+
 
 <symbol id="liste" viewBox="0 0 32 32"  xmlns="http://www.w3.org/2000/svg">
 <rect x="10" y="9" width="16" height="2" rx="1" />

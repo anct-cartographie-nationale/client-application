@@ -1,67 +1,56 @@
-<p>
-  Horaires d'ouverture :<br />
-
-  <span class="sub-text" #test>
-    Entrez les horaires généraux d'ouverture. Les horaires propres à chaque services proposés seront à remplir plus
-    loin.
-  </span>
-</p>
+<h1>Quels sont les horaires d'ouverture ?<br /></h1>
 
 <div class="days">
-  <p>la ?</p>
   <div *ngFor="let day of structure.hours" (click)="activateDay(day)" class="day" [ngClass]="{ active: day.active }">
     <div
       class="header-container sub-text"
       [ngClass]="modifiedFields && modifiedFields.hours && modifiedFields.hours[day.name] ? 'modified' : ''"
     >
       <div class="header">
-        <div>
-          {{ day.name | titlecase }}
-        </div>
-
-        <div>
-          <img
-            *ngIf="copiedDayName === day.name"
-            (click)="cancelCopy()"
-            src="../../../../../assets/img/black/cross.svg"
-            matTooltip="Annuler la copie"
-            matTooltipClass="tooltip"
-          />
-          <img
-            *ngIf="copiedDayName !== day.name && copiedDayName.length > 0"
-            (click)="paste(day)"
-            src="../../../../../assets/img/black/paste.svg"
-            matTooltip="Coller les heures copiées"
-            matTooltipClass="tooltip"
-          />
-          <img
-            *ngIf="!copiedDayName"
-            (click)="copy(day)"
-            src="../../../../../assets/img/black/copy.svg"
-            matTooltip="Copier les heures"
-            matTooltipClass="tooltip"
-          />
-        </div>
-
-        <div>
-          <input
+        <div class="grid-center">
+          <!-- <input
             type="checkbox"
             id="{{ day.name }}"
             class="toggle-checkbox hidden"
             (click)="toggleOpenDay(day, $event.target.checked)"
             [checked]="day.open"
-          />
+          /> -->
+          <label class="switch">
+            <input
+              type="checkbox"
+              id="{{ day.name }}"
+              (click)="toggleOpenDay(day, $event.target.checked)"
+              [checked]="day.open"
+            />
+            <span class="slider"></span>
+          </label>
           <label for="{{ day.name }}" class="toggle-label"></label>
+        </div>
+
+        <div>
+          {{ day.name | titlecase }}
         </div>
       </div>
     </div>
 
-    <div *ngIf="!day.open"></div>
+    <div *ngIf="!day.open">
+      <div class="active">
+        <div class="grid-center">
+          <app-copy-paste
+            [day]="day"
+            [copiedDayName]="copiedDayName"
+            (copyEvent)="copy($event)"
+            (pasteEvent)="paste($event)"
+            (cancelEvent)="cancelCopy()"
+          ></app-copy-paste>
+        </div>
+      </div>
+    </div>
 
-    <div *ngIf="day.open">
+    <div *ngIf="day.open" class="row-container">
       <div class="active" *ngIf="day.active">
         <div class="hour" *ngFor="let hour of day.hours; let i = index">
-          <div>De</div>
+          <div>de</div>
 
           <div class="input-container">
             <input type="time" [(ngModel)]="hour.start" (change)="checkHoursValid()" />
@@ -73,38 +62,58 @@
             <input type="time" [(ngModel)]="hour.end" (change)="checkHoursValid()" />
           </div>
 
-          <div class="input-container">
-            <select [(ngModel)]="hour.type">
-              <option value="withoutAppointment">Présentiel (Sans rendez-vous)</option>
-              <option value="appointment">Présentiel (Avec rendez-vous)</option>
-              <option value="phone">Téléphonique</option>
-            </select>
-          </div>
-
-          <img
-            src="../../../../../assets/img/black/add-full.svg"
-            *ngIf="day.hours.length === 1"
-            (click)="addHours(day)"
-            class="add"
-          />
-          <img
-            src="../../../../../assets/img/black/cross.svg"
-            *ngIf="day.hours.length > 1"
-            (click)="removeHours(day, i)"
-          />
-
           <div>
-            <div *ngIf="hour.error === 'incomplete'" class="warning-message">!</div>
-            <div *ngIf="hour.error === 'wrong'" class="error-message">?</div>
+            <div *ngIf="hour.error === 'wrong' || hour.error === 'incomplete'" class="error-message">
+              <app-svg-icon [type]="'ico'" [icon]="'nok'"></app-svg-icon>
+            </div>
+            <div *ngIf="hour.error === null" class="error-message">
+              <app-svg-icon [type]="'ico'" [icon]="'ok'"></app-svg-icon>
+            </div>
+          </div>
+        </div>
+        <div class="add" *ngIf="day.hours.length === 1">
+          <div
+            (click)="addHours(day)"
+            fxLayout="row"
+            fxLayoutAlign="center center"
+            fxLayoutGap="3px"
+            class="grey-rounded-border"
+          >
+            <app-svg-icon
+              [type]="'ico'"
+              [icon]="'add'"
+              [iconColor]="'currentColor'"
+              (click)="cancelCopy()"
+            ></app-svg-icon
+            >Ajouter
+          </div>
+          <div class="grid-center">
+            <app-copy-paste
+              [day]="day"
+              [copiedDayName]="copiedDayName"
+              (copyEvent)="copy($event)"
+              (pasteEvent)="paste($event)"
+              (cancelEvent)="cancelCopy()"
+            ></app-copy-paste>
           </div>
         </div>
 
-        <img
+        <div *ngIf="day.hours.length === 2" class="grid-center">
+          <app-copy-paste
+            [day]="day"
+            [copiedDayName]="copiedDayName"
+            (copyEvent)="copy($event)"
+            (pasteEvent)="paste($event)"
+            (cancelEvent)="cancelCopy()"
+          ></app-copy-paste>
+        </div>
+
+        <!-- <img
           src="../../../../../assets/img/black/add-full.svg"
           *ngIf="day.hours.length > 1 && day.hours.length < 5"
           (click)="addHours(day)"
           class="add"
-        />
+        /> -->
       </div>
 
       <div class="inactive hour" *ngIf="!day.active">
@@ -120,20 +129,14 @@
           <input type="time" [(ngModel)]="day.hours[0].end" (change)="checkHoursValid()" />
         </div>
 
-        <div class="input-container">
-          <select [(ngModel)]="day.hours[0].type">
-            <option value="withoutAppointment">Présentiel (Sans rendez-vous)</option>
-            <option value="appointment">Présentiel (Avec rendez-vous)</option>
-            <option value="phone">Téléphonique</option>
-          </select>
-        </div>
+        <div *ngIf="day.hours.length > 1 && day.hours.length < 2" (click)="addHours(day)">+ Ajouter 3</div>
 
-        <img
+        <!-- <img
           src="../../../../../assets/img/black/add-full.svg"
           *ngIf="day.hours.length === 1"
           (click)="addHours(day)"
           class="add"
-        />
+        /> -->
         <div *ngIf="day.hours.length > 1">...</div>
 
         <div>
@@ -148,7 +151,7 @@
             "
             class="warning-message"
           >
-            !
+            <app-svg-icon [type]="'ico'" [icon]="'nok'"></app-svg-icon>
           </div>
           <ng-template #wrong>
             <div
@@ -161,7 +164,7 @@
               "
               class="error-message"
             >
-              ?
+              <app-svg-icon [type]="'ico'" [icon]="'nok'"></app-svg-icon>
             </div>
           </ng-template>
         </div>
@@ -169,8 +172,3 @@
     </div>
   </div>
 </div>
-
-<p class="legend">
-  ! : Horaire incomplet<br />
-  ? : Horaire incohérent
-</p>
