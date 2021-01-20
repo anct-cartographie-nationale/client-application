@@ -308,8 +308,44 @@
           <li><span>la liste des ateliers que vous dispensez (optionnel)</span></li>
         </ul>
       </div>
+      <div>
+        <ul>
+          <li><span>les coordonnées de votre structure</span></li>
+
+          <li><span>les horaires d’ouverture</span></li>
+
+          <li><span>la liste des ateliers que vous dispensez (optionnel)</span></li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li><span>les coordonnées de votre structure</span></li>
+
+          <li><span>les horaires d’ouverture</span></li>
+
+          <li><span>la liste des ateliers que vous dispensez (optionnel)</span></li>
+        </ul>
+      </div>
     </div>
-    <div *ngIf="currentPage == 2" class="page"></div>
+    <form [formGroup]="accountForm" *ngIf="accountForm">
+      <div *ngIf="currentPage == 2" class="page">
+        <h3>Qui êtes-vous ?</h3>
+        <p>Ces informations ne seront pas visibles sur la plateforme</p>
+        <div class="form-group">
+          <label for="surname">Nom</label>
+          <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Téléphone</label>
+          <input
+            type="text"
+            formControlName="phone"
+            class="form-control"
+            (input)="modifyPhoneInput(accountForm, 'phone', $event.target.value)"
+          />
+        </div>
+      </div>
+    </form>
   </div>
   <div
     *ngIf="currentPage != 0 && currentPage != nbPagesForm"
@@ -318,6 +354,8 @@
     fxLayoutAlign="space-around center"
   >
     <button class="btn previous" (click)="previousPage()"><span class="chevron left"></span>Précédent</button>
-    <button class="btn next" (click)="nextPage()">Suivant<span class="chevron right"></span></button>
+    <button class="btn next" (click)="nextPage()" [disabled]="!isPageValid" [ngClass]="{ invalid: !isPageValid }">
+      Suivant<span class="chevron right"></span>
+    </button>
   </div>
 </div>

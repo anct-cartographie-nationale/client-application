@@ -55,11 +55,13 @@
   h2 {
     @include cn-bold-28;
     color: $secondary-color;
+    margin-bottom: 0;
   }
   h3 {
-    @include cn-bold-24;
+    @include cn-bold-22;
   }
   .page {
+    color: $grey-1;
     &.home {
       height: 100%;
       .btnStart {
@@ -86,8 +88,10 @@
   }
   .titleDesc {
     @include cn-bold-20;
+    margin-bottom: 20px;
   }
   p {
+    margin-top: 10;
     @include cn-regular-18;
   }
 }
@@ -102,6 +106,10 @@
   height: 40px;
   width: 192px;
   @include btn-bold;
+
+  &.invalid {
+    opacity: 0.4;
+  }
 
   &.start {
     margin-bottom: 26px;

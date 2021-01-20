@@ -9,6 +9,7 @@ $font-size-xmedium: 1.5em; // 24px
 $font-size-large: 1.75em; // 28px
 $font-size-xlarge: 2em; // 32px
 $font-size-medium-mobile: 1em;
+$font-size-xmedium-mobile: 1.375em; // 22px
 
 html,
 body,
@@ -95,6 +96,18 @@ h6,
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-xmedium;
+}
+@mixin cn-bold-22 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-xmedium-mobile;
+}
+@mixin cn-regular-22 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-xmedium-mobile;
 }
 @mixin cn-bold-20 {
   font-family: $text-font;

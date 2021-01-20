@@ -13,6 +13,7 @@ import { typeStructureEnum } from '../shared/enum/typeStructure.enum';
 import { FonctionContactEnum } from '../shared/enum/fonctionContact.enum';
 import { ProfileService } from '../profile/services/profile.service';
 import { User } from '../models/user.model';
+import { MustMatch } from '../shared/validator/form';
 
 @Component({
   selector: 'app-structureForm',
@@ -45,6 +46,9 @@ export class FormComponent implements OnInit {
   public currentPage = 0;
   public progressStatus = 0;
   public nbPagesForm = 13;
+  public accountForm: FormGroup;
+  public isPageValid: boolean;
+  public pagesValidation = [];
 
   constructor(
     private structureService: StructureService,
@@ -97,6 +101,22 @@ export class FormComponent implements OnInit {
   }
 
   private initForm(structure: Structure): void {
+    // Init account Form
+    this.accountForm = new FormGroup(
+      {
+        email: new FormControl('', Validators.required),
+        name: new FormControl('', Validators.required),
+        surname: new FormControl('', Validators.required),
+        phone: new FormControl('', [Validators.required, Validators.pattern('([0-9]{2} ){4}[0-9]{2}')]), //NOSONAR
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
+        ]),
+        confirmPassword: new FormControl(''),
+      },
+      [MustMatch('password', 'confirmPassword')]
+    );
+
     // Init form
     this.structureForm = new FormGroup({
       _id: new FormControl(structure._id),
@@ -166,6 +186,7 @@ export class FormComponent implements OnInit {
         this.structureForm.controls[controlName].disable();
       });
     }
+    this.setValidationsForm();
   }
 
   private loadArrayForCheckbox(array: string[], isRequired: boolean): FormArray {
@@ -182,14 +203,15 @@ export class FormComponent implements OnInit {
     return this.structureForm.get('address').get(nameControl);
   }
 
-  public modifyPhoneInput(phoneNumber: string): void {
+  public modifyPhoneInput(form: FormGroup, controlName: string, phoneNumber: string): void {
     // Take length of phone number without spaces.
     let phoneNoSpace = phoneNumber.replace(/\s/g, '');
     // Check to refresh every 2 number.
     if (phoneNoSpace.length % 2 == 0) {
       // Add space every 2 number
-      this.structureForm.get('contactPhone').setValue(phoneNoSpace.replace(/(?!^)(?=(?:\d{2})+$)/g, ' ')); //NOSONAR
+      form.get(controlName).setValue(phoneNoSpace.replace(/(?!^)(?=(?:\d{2})+$)/g, ' ')); //NOSONAR
     }
+    this.setValidationsForm();
   }
 
   public getTime(day: string): FormArray {
@@ -279,12 +301,24 @@ export class FormComponent implements OnInit {
     }
   }
 
+  public setValidationsForm(): void {
+    this.pagesValidation[0] = { valid: true };
+    this.pagesValidation[1] = { valid: true };
+    this.pagesValidation[2] = { valid: this.accountForm.get('surname').valid && this.accountForm.get('phone').valid };
+    this.updatePageValid();
+  }
+
+  private updatePageValid(): void {
+    this.isPageValid = this.pagesValidation[this.currentPage].valid;
+  }
   public nextPage(): void {
     this.currentPage++;
     this.progressStatus += 100 / this.nbPagesForm;
+    this.updatePageValid();
   }
   public previousPage(): void {
     this.currentPage--;
     this.progressStatus -= 100 / this.nbPagesForm;
+    this.updatePageValid();
   }
 }
