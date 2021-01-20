@@ -144,7 +144,7 @@
     </div>
     <div formGroupName="hours">
       <p>Heures</p>
-      <app-hour-picker></app-hour-picker>
+      <app-hour-picker [structureInput]="getStructureControl('hours')" [isEditMode]="!isEditMode"></app-hour-picker>
       <!-- <div *ngFor="let day of weekDay | keyvalue">
         <div [formGroupName]="day.key">
           <p>Ouvert le {{ day.value }} ? :</p>

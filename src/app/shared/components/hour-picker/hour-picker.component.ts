@@ -1,9 +1,9 @@
-import { Component, Input, Output, EventEmitter, OnDestroy, ViewChild, OnChanges, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { Component, Input, Output, EventEmitter, OnDestroy, OnChanges } from '@angular/core';
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
-import { Structure } from '../../../models/structure.model';
+import { Day } from '../../../models/day.model';
 import { Time } from '../../../models/time.model';
-import { Week } from '../../../models/week.model';
+import { WeekDayEnum } from '../../enum/weekDay.enum';
 
 @Component({
   selector: 'app-hour-picker',
@@ -12,14 +12,33 @@ import { Week } from '../../../models/week.model';
 })
 export class HourPickerComponent implements OnChanges, OnDestroy {
   @Input() modifiedFields: any;
-  // @Input() structure: any;
+  @Input() structureInput: FormGroup;
+  @Input() isEditMode: boolean;
 
   @Output() updateHoursError = new EventEmitter<{ badHoursFormat: boolean }>();
+  @Output() updateForm = new EventEmitter<FormGroup>();
 
   private copiedDay: any;
   public copiedDayName = '';
   public structure = {
-    hours: [
+    hours: this.initHoursDefault(),
+  };
+  public structureHoursDefault: any[] = this.initHoursDefault();
+
+  ngOnChanges(): void {
+    this.formatHoursForEdition();
+  }
+
+  ngOnDestroy(): void {
+    this.formatHoursForSave();
+  }
+
+  public getStructureControl(nameControl: string): AbstractControl {
+    return this.structureInput.get(nameControl);
+  }
+
+  private initHoursDefault(): any {
+    return [
       {
         name: 'Lundi',
         hours: [{ start: '', end: '', error: 'incomplete' }],
@@ -62,80 +81,98 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
         open: false,
         active: false,
       },
-    ],
-  };
-  public structureHoursDefault: any[] = [
-    {
-      name: 'Lundi',
-      hours: [{ start: '', end: '', error: 'incomplete' }],
-      open: false,
-      active: false,
-    },
-    {
-      name: 'Mardi',
-      hours: [{ start: '', end: '', error: 'incomplete' }],
-      open: false,
-      active: false,
-    },
-    {
-      name: 'Mercredi',
-      hours: [{ start: '', end: '', error: 'incomplete' }],
-      open: false,
-      active: false,
-    },
-    {
-      name: 'Jeudi',
-      hours: [{ start: '', end: '', error: 'incomplete' }],
-      open: false,
-      active: false,
-    },
-    {
-      name: 'Vendredi',
-      hours: [{ start: '', end: '', error: 'incomplete' }],
-      open: false,
-      active: false,
-    },
-    {
-      name: 'Samedi',
-      hours: [{ start: '', end: '', error: 'incomplete' }],
-      open: false,
-      active: false,
-    },
-    {
-      name: 'Dimanche',
-      hours: [{ start: '', end: '', error: 'incomplete' }],
-      open: false,
-      active: false,
-    },
-  ];
-
-  ngOnChanges(): void {
-    this.formatHoursForEdition();
+    ];
   }
 
-  ngOnDestroy(): void {
-    this.formatHoursForSave();
+  /**
+   * Convert data from form to component structure
+   */
+  private parseFormToHours(day: Day, key: string): void {
+    this.structureHoursDefault.forEach((element) => {
+      if (element.name.toLowerCase() === key) {
+        element.open = day.open;
+        element.active = day.open;
+        element.hours = day.time
+          .map((hour: Time) => {
+            if (hour.openning) {
+              return {
+                start: this.formatNumericalHours(hour.openning),
+                end: this.formatNumericalHours(hour.closing),
+                error: null,
+              };
+            }
+          })
+          .filter((item) => item);
+      }
+    });
+    this.structure.hours = this.structureHoursDefault;
+  }
+
+  private parseToDay(data: {
+    name: string;
+    hours: { start: string; end: string }[];
+    open: boolean;
+    active: boolean;
+  }): Day {
+    return new Day({
+      open: data.open,
+      time: data.hours.map(
+        (hour) =>
+          new Time({
+            openning: this.formatStringHours(hour.start),
+            closing: this.formatStringHours(hour.end),
+          })
+      ),
+    });
+  }
+
+  private parseHoursToForm(): FormGroup {
+    return new FormGroup({
+      monday: this.createDay(this.parseToDay(this.structure.hours[0])),
+      tuesday: this.createDay(this.parseToDay(this.structure.hours[1])),
+      wednesday: this.createDay(this.parseToDay(this.structure.hours[2])),
+      thursday: this.createDay(this.parseToDay(this.structure.hours[3])),
+      friday: this.createDay(this.parseToDay(this.structure.hours[4])),
+      saturday: this.createDay(this.parseToDay(this.structure.hours[5])),
+      sunday: this.createDay(this.parseToDay(this.structure.hours[6])),
+    });
+  }
+
+  /**
+   * convert 1300 to '13:00'
+   */
+  private formatNumericalHours(hour: number): string {
+    const numberStr = hour.toString();
+    if (numberStr.length === 3) {
+      return `0${numberStr[0]}:${numberStr[1]}${numberStr[2]}`;
+    } else {
+      const splitStr = numberStr.match(/.{1,2}/g);
+      return `${splitStr[0]}:${splitStr[1]}`;
+    }
+  }
+
+  /**
+   * convert '13:00' to 1300
+   */
+  private formatStringHours(hour: string): number {
+    const numberStr = hour.split(':')[0] + hour.split(':')[1];
+    return parseInt(numberStr);
   }
 
   /**
    * Intégrer les horaires dans les horaires par défaut du composant
    */
   public formatHoursForEdition(): void {
-    console.log('formatHoursForEdition');
-    if (this.structure.hours) {
-      for (const dayDefault of this.structureHoursDefault) {
-        const foundDay = this.structure.hours.filter((day) => day.name === dayDefault.name);
-
-        // if (foundDay.length && !foundDay[0].error) {
-        if (foundDay.length) {
-          foundDay[0].open = true;
-        } else if (!foundDay.length) {
-          this.structure.hours.push(dayDefault);
-        }
-      }
-    } else {
-      this.structure.hours = this.structureHoursDefault;
+    if (this.structureInput) {
+      this.parseFormToHours(this.getStructureControl('monday').value, WeekDayEnum.monday);
+      this.parseFormToHours(this.getStructureControl('tuesday').value, WeekDayEnum.tuesday);
+      this.parseFormToHours(this.getStructureControl('wednesday').value, WeekDayEnum.wednesday);
+      this.parseFormToHours(this.getStructureControl('thursday').value, WeekDayEnum.thursday);
+      this.parseFormToHours(this.getStructureControl('friday').value, WeekDayEnum.friday);
+      this.parseFormToHours(this.getStructureControl('saturday').value, WeekDayEnum.saturday);
+      this.parseFormToHours(this.getStructureControl('sunday').value, WeekDayEnum.sunday);
     }
+    // this.structure.hours = this.structureHoursDefault;
   }
 
   /**
@@ -143,7 +180,6 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
    * supprimer les données inutiles
    */
   public formatHoursForSave(): void {
-    console.log('formatHoursForSave');
     if (!this.structure.hours) {
       return;
     }
@@ -160,10 +196,6 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   }
 
   public activateDay(day: any): void {
-    console.log('activateDay');
-    // this.structure.hours.forEach((dayHours) => {
-    //   dayHours.active = false;
-    // });
     day.active = true;
   }
 
@@ -187,7 +219,6 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
     day.hours.push({
       start: '',
       end: '',
-      type: 'withoutAppointment',
       error: 'incomplete',
     });
 
@@ -207,7 +238,6 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
    * Copier les horaires d'un jour pour les coller par dessus les horaires d'un autre jour
    */
   public copy(day): void {
-    console.log('copy', day);
     this.copiedDayName = day.name;
     this.copiedDay = day;
   }
@@ -233,10 +263,12 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
    */
   public checkHoursValid(): void {
     let error = false;
-
-    console.log('checkHoursValid');
     for (const day of this.structure.hours) {
       if (day.open) {
+        // Init if no data
+        if (day.hours.length === 0) {
+          this.addHours(day);
+        }
         for (const hour of day.hours) {
           if (hour.start === '' || hour.end === '') {
             hour.error = 'incomplete';
@@ -257,6 +289,23 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
       this.updateHoursError.emit({ badHoursFormat: true });
     } else {
       this.updateHoursError.emit(null);
+      // Emit new form value
+      this.parseHoursToForm();
+      this.updateForm.emit(this.parseHoursToForm());
     }
+  }
+
+  private createDay(day: Day): FormGroup {
+    return new FormGroup({
+      open: new FormControl(day.open, Validators.required),
+      time: new FormArray(day.time.map((oneTime) => this.createTime(oneTime))) as FormArray,
+    });
+  }
+
+  private createTime(time: Time): FormGroup {
+    return new FormGroup({
+      openning: new FormControl(time.openning),
+      closing: new FormControl(time.closing),
+    });
   }
 }

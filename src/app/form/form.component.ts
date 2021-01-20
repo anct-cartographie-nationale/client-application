@@ -22,11 +22,10 @@ import { Week } from '../models/week.model';
 })
 export class FormComponent implements OnInit {
   @Input() public idStructure?: string;
-  @Input() public isEditMode: boolean;
+  @Input() public isEditMode: boolean = true;
   @Input() public profile?: User;
   @Output() closeEvent = new EventEmitter<Structure>();
   public structureForm: FormGroup;
-  public tmp = new Week();
 
   public userAlreadyExist = false;
 

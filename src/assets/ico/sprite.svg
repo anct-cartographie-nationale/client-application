@@ -30,9 +30,9 @@
 </symbol>
 
 <symbol id="nok" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="16" cy="16" r="13" fill="#ED3939"/>
-<path d="M12.5 20L20 12.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M20 20L12.5 12.5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="16" cy="16" r="13" fill="#DA6C2E"/>
+<path d="M16.25 17.5L16.25 9.00001" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16.25 23.6065L16.25 22.9999" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
 
 <symbol id="ok" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

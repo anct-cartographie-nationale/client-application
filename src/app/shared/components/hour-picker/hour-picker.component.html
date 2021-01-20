@@ -21,6 +21,7 @@
               id="{{ day.name }}"
               (click)="toggleOpenDay(day, $event.target.checked)"
               [checked]="day.open"
+              [disabled]="isEditMode"
             />
             <span class="slider"></span>
           </label>
@@ -33,7 +34,7 @@
       </div>
     </div>
 
-    <div *ngIf="!day.open">
+    <!-- <div *ngIf="!day.open">
       <div class="active">
         <div class="grid-center">
           <app-copy-paste
@@ -45,7 +46,7 @@
           ></app-copy-paste>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div *ngIf="day.open" class="row-container">
       <div class="active" *ngIf="day.active">
@@ -53,13 +54,13 @@
           <div>de</div>
 
           <div class="input-container">
-            <input type="time" [(ngModel)]="hour.start" (change)="checkHoursValid()" />
+            <input type="time" [(ngModel)]="hour.start" (change)="checkHoursValid()" [disabled]="isEditMode" />
           </div>
 
           <div>à</div>
 
           <div class="input-container">
-            <input type="time" [(ngModel)]="hour.end" (change)="checkHoursValid()" />
+            <input type="time" [(ngModel)]="hour.end" (change)="checkHoursValid()" [disabled]="isEditMode" />
           </div>
 
           <div>
@@ -71,7 +72,7 @@
             </div>
           </div>
         </div>
-        <div class="add" *ngIf="day.hours.length === 1">
+        <div class="add" *ngIf="day.hours.length === 1 && !isEditMode">
           <div
             (click)="addHours(day)"
             fxLayout="row"
@@ -79,15 +80,9 @@
             fxLayoutGap="3px"
             class="grey-rounded-border"
           >
-            <app-svg-icon
-              [type]="'ico'"
-              [icon]="'add'"
-              [iconColor]="'currentColor'"
-              (click)="cancelCopy()"
-            ></app-svg-icon
-            >Ajouter
+            <app-svg-icon [type]="'ico'" [icon]="'add'" [iconColor]="'currentColor'"></app-svg-icon>Ajouter
           </div>
-          <div class="grid-center">
+          <!-- <div class="grid-center">
             <app-copy-paste
               [day]="day"
               [copiedDayName]="copiedDayName"
@@ -95,10 +90,10 @@
               (pasteEvent)="paste($event)"
               (cancelEvent)="cancelCopy()"
             ></app-copy-paste>
-          </div>
+          </div> -->
         </div>
 
-        <div *ngIf="day.hours.length === 2" class="grid-center">
+        <!-- <div *ngIf="day.hours.length === 2" class="grid-center">
           <app-copy-paste
             [day]="day"
             [copiedDayName]="copiedDayName"
@@ -106,17 +101,10 @@
             (pasteEvent)="paste($event)"
             (cancelEvent)="cancelCopy()"
           ></app-copy-paste>
-        </div>
-
-        <!-- <img
-          src="../../../../../assets/img/black/add-full.svg"
-          *ngIf="day.hours.length > 1 && day.hours.length < 5"
-          (click)="addHours(day)"
-          class="add"
-        /> -->
+        </div> -->
       </div>
 
-      <div class="inactive hour" *ngIf="!day.active">
+      <!-- <div class="inactive hour" *ngIf="!day.active">
         <div>De</div>
 
         <div>
@@ -128,16 +116,6 @@
         <div>
           <input type="time" [(ngModel)]="day.hours[0].end" (change)="checkHoursValid()" />
         </div>
-
-        <div *ngIf="day.hours.length > 1 && day.hours.length < 2" (click)="addHours(day)">+ Ajouter 3</div>
-
-        <!-- <img
-          src="../../../../../assets/img/black/add-full.svg"
-          *ngIf="day.hours.length === 1"
-          (click)="addHours(day)"
-          class="add"
-        /> -->
-        <div *ngIf="day.hours.length > 1">...</div>
 
         <div>
           <div
@@ -168,7 +146,7 @@
             </div>
           </ng-template>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
