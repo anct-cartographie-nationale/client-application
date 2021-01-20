@@ -275,19 +275,34 @@
     <h3>Création de compte</h3>
   </div>
   <div class="content">
-    <div *ngIf="currentPage == 0" class="home page" fxLayout="column" fxLayoutAlign="space-between center">
+    <div *ngIf="currentPage == 0" class="home page" fxLayout="column" fxLayoutAlign="space-between">
       <h2>Ajouter votre structure</h2>
       <img src="../../assets/form/schedule.svg" alt="logo schedule" />
       <div>
         <p class="titleDesc">Cela va prendre une quinzaine de minutes</p>
         <p>Une fois réalisé cela vous permettra d'être référencé sur la platefome</p>
       </div>
-      <button class="btn start" (click)="nextPage()">C'est Parti</button>
+      <div class="btnStart">
+        <button class="btn start" (click)="nextPage()">C'est Parti</button>
+      </div>
     </div>
-    <div *ngIf="currentPage == 1" class="informations page"></div>
+    <div *ngIf="currentPage == 1" class="informations page" fxLayout="column" fxLayoutGap="28px">
+      <h3>De quelles informations faut-il vous munir ?</h3>
+      <img src="../../assets/form/factures.svg" alt="logo factures" />
+      <div>
+        <ul>
+          <li><span>les coordonnées de votre structure</span></li>
+
+          <li><span>les horaires d’ouverture</span></li>
+
+          <li><span>la liste des ateliers que vous dispensez (optionnel)</span></li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="currentPage == 2" class="page"></div>
   </div>
   <div *ngIf="currentPage != 0" class="footer" fxLayout="row" fxLayoutAlign="space-around center">
-    <button class="btn start" (click)="previousPage()">Précédent</button>
-    <button class="btn start" (click)="nextPage()">Suivant</button>
+    <button class="btn previous" (click)="previousPage()"><span class="chevron left"></span>Précédent</button>
+    <button class="btn next" (click)="nextPage()">Suivant<span class="chevron right"></span></button>
   </div>
 </div>
