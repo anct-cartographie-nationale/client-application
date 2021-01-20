@@ -340,6 +340,58 @@
           </div>
         </div>
       </div>
+      <div *ngIf="currentPage == 3" class="page">
+        <h3>Quels identifiants utiliserez-vous pour vous connecter ?</h3>
+        <div class="form-group" fxLayout="column">
+          <label for="email">Courriel personnel</label>
+          <div fxLayout="row" fxLayoutGap="13px">
+            <input type="text" (input)="setValidationsForm()" formControlName="email" class="form-control" />
+            <img *ngIf="accountForm.get('email').valid" src="../../assets/form/checked.svg" alt="logo checked" />
+          </div>
+        </div>
+        <div class="form-group" fxLayout="column">
+          <label for="password">Création de mot de passe</label>
+          <div fxLayout="row" fxLayoutGap="13px">
+            <input
+              [type]="isShowPassword ? 'text' : 'password'"
+              formControlName="password"
+              class="form-control password"
+              (input)="setValidationsForm()"
+              autocomplete="on"
+            />
+            <img
+              (click)="showPassword()"
+              class="eyePassword"
+              src="../../assets/form/eyePassword.svg"
+              alt="logo eyePassword"
+            />
+            <img *ngIf="accountForm.get('password').valid" src="../../assets/form/checked.svg" alt="logo checked" />
+          </div>
+        </div>
+        <div class="form-group" fxLayout="column">
+          <label for="confirmPassword">Vérification du mot de passe</label>
+          <div fxLayout="row" fxLayoutGap="13px">
+            <input
+              [type]="isShowConfirmPassword ? 'text' : 'password'"
+              formControlName="confirmPassword"
+              class="form-control password"
+              (input)="setValidationsForm()"
+              autocomplete="on"
+            />
+            <img
+              (click)="showConfirmPassword()"
+              class="eyePassword"
+              src="../../assets/form/eyePassword.svg"
+              alt="logo eyePassword"
+            />
+            <img
+              *ngIf="accountForm.get('password').valid && accountForm.get('confirmPassword').valid"
+              src="../../assets/form/checked.svg"
+              alt="logo checked"
+            />
+          </div>
+        </div>
+      </div>
     </form>
   </div>
   <div

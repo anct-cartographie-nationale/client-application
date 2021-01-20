@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Structure } from '../models/structure.model';
 import { Time } from '../models/time.model';
@@ -49,6 +49,8 @@ export class FormComponent implements OnInit {
   public accountForm: FormGroup;
   public isPageValid: boolean;
   public pagesValidation = [];
+  public isShowConfirmPassword = false;
+  public isShowPassword = false;
 
   constructor(
     private structureService: StructureService,
@@ -104,7 +106,7 @@ export class FormComponent implements OnInit {
     // Init account Form
     this.accountForm = new FormGroup(
       {
-        email: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]),
         name: new FormControl('', Validators.required),
         surname: new FormControl('', Validators.required),
         phone: new FormControl('', [Validators.required, Validators.pattern('([0-9]{2} ){4}[0-9]{2}')]), //NOSONAR
@@ -310,6 +312,12 @@ export class FormComponent implements OnInit {
         this.accountForm.get('name').valid &&
         this.accountForm.get('phone').valid,
     };
+    this.pagesValidation[3] = {
+      valid:
+        this.accountForm.get('email').valid &&
+        this.accountForm.get('password').valid &&
+        this.accountForm.get('confirmPassword').valid,
+    };
     this.updatePageValid();
   }
 
@@ -325,5 +333,11 @@ export class FormComponent implements OnInit {
     this.currentPage--;
     this.progressStatus -= 100 / this.nbPagesForm;
     this.updatePageValid();
+  }
+  public showPassword(): void {
+    this.isShowPassword = !this.isShowPassword;
+  }
+  public showConfirmPassword(): void {
+    this.isShowConfirmPassword = !this.isShowConfirmPassword;
   }
 }

@@ -189,4 +189,16 @@ input {
   &.phone {
     width: 205px;
   }
+  &.password {
+    width: 256px;
+  }
+}
+img {
+  &.eyePassword {
+    padding: 0 2.5px; // Align to email input
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }
