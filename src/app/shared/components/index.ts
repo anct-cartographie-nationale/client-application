@@ -7,7 +7,7 @@ import { SvgIconComponent } from './svg-icon/svg-icon.component';
 import { ValidatorFormComponent } from './validator-form/validator-form.component';
 import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { AddressAutocompleteComponent } from './address-autocomplete/address-autocomplete.component';
-
+import { StructureTypePickerComponent } from './structure-type-picker/structure-type-picker.component';
 // tslint:disable-next-line: max-line-length
 export {
   LogoCardComponent,
@@ -19,6 +19,7 @@ export {
   SignInModalComponent,
   CreateAccountFormComponent,
   AddressAutocompleteComponent,
+  StructureTypePickerComponent,
 };
 
 // tslint:disable-next-line:variable-name
@@ -32,4 +33,5 @@ export const SharedComponents = [
   SignInModalComponent,
   CreateAccountFormComponent,
   AddressAutocompleteComponent,
+  StructureTypePickerComponent,
 ];
