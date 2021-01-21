@@ -39,6 +39,8 @@ a {
   &.primary {
     @include hyperlink;
     width: 100%;
+  }
+  &.right {
     text-align: right;
   }
 }

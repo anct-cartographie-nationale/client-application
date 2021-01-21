@@ -8,19 +8,6 @@
 ></app-structureForm>
 <div class="structrue-details-container" *ngIf="structure && !isLoading">
   <!-- Header info -->
-  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!isClaimed">
-    <a (click)="claimStructure()" class="primary" tabindex="0">Revendiquer</a>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <a
-      *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
-      (click)="editStructure()"
-      class="primary"
-      tabindex="0"
-    >
-      Modifier la structure
-    </a>
-  </div>
   <div fxLayout="row" fxLayoutAlign="end center">
     <div (click)="close()" class="ico-close-details"></div>
   </div>
@@ -94,6 +81,23 @@
             <p>Mise à jour le {{ structure.updatedAt | date: 'mediumDate' }}</p>
           </div>
         </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <a *ngIf="!isClaimed" (click)="claimStructure()" class="primary" tabindex="0">Revendiquer cette structure</a>
+        <a
+          *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
+          (click)="editStructure()"
+          class="primary"
+          tabindex="0"
+        >
+          Modifier cette structure
+        </a>
+      </div>
+      <div>
+        {{ structure.description }}
+      </div>
+      <div class="info">
+        {{ structure.lockdownActivity }}
       </div>
     </div>
   </div>

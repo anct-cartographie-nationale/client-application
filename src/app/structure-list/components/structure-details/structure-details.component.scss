@@ -5,6 +5,10 @@
 @import '../../../../assets/scss/layout';
 @import '../../../../assets/scss/breakpoint';
 
+a {
+  padding: unset;
+}
+
 .structrue-details-container {
   border-right: solid 1px $grey-4;
   background-color: $white;
