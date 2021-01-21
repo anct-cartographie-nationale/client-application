@@ -165,4 +165,21 @@ export class Structure {
         return null;
     }
   }
+
+  public getEquipmentsTitle(equipment: Equipment): string {
+    switch (equipment) {
+      case Equipment.wifi:
+        return 'Wifi';
+      case Equipment.bornes:
+        return 'Bornes';
+      case Equipment.printer:
+        return 'Imprimantes';
+      case Equipment.tablet:
+        return 'Tablettes';
+      case Equipment.computer:
+        return 'Ordinateurs';
+      default:
+        return null;
+    }
+  }
 }

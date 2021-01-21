@@ -94,7 +94,7 @@
       </div>
     </div>
   </div>
-  <!-- Démarches -->
+  <!-- Démarches en ligne -->
   <div
     *ngIf="structure.proceduresAccompaniment.length"
     fxLayout="column"
@@ -104,7 +104,7 @@
   >
     <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'demarches'" [iconClass]="'icon-32'"></app-svg-icon>
-      <h2>Démarches</h2>
+      <h2>Démarches en ligne</h2>
     </div>
     <div fxLayout="column">
       <div fxLayout="row wrap" fxLayoutGap="24px">
@@ -206,11 +206,6 @@
       fxLayoutGap="13px"
       *ngFor="let equipement of structure.equipmentsAndServices"
     >
-      <app-svg-icon
-        [type]="'ico'"
-        [icon]="structure.getEquipmentsIcon(equipement)"
-        [iconColor]="'currentColor'"
-      ></app-svg-icon>
       <p>
         {{ getEquipmentsLabel(equipement) }}
         <span *ngIf="equipement == 'ordinateurs' && structure.nbComputers"> : {{ structure.nbComputers }}</span>

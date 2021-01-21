@@ -12,6 +12,7 @@
     (showDetails)="showDetails($event)"
     (hover)="handleCardHover($event)"
   ></app-card>
+  <p *ngIf="structureList && structureList.length <= 0">Il n'y a aucune réponse correspondant à votre recherche</p>
 </div>
 
 <app-structure-details
