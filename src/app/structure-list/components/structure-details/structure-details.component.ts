@@ -37,7 +37,7 @@ export class StructureDetailsComponent implements OnInit {
   public isClaimed: boolean = null;
   public isLoading: boolean = false;
   public isEditMode: boolean = false;
-  public currentProfile: User;
+  public currentProfile: User = null;
 
   constructor(
     route: ActivatedRoute,
@@ -56,37 +56,33 @@ export class StructureDetailsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.isLoading = true;
     if (this.authService.isLoggedIn()) {
-      this.profileService.getProfile().then((p: User) => {
-        this.currentProfile = p;
-      });
+      this.currentProfile = await this.profileService.getProfile();
     }
+    this.isClaimed = await this.structureService.isClaimed(this.structure._id, this.currentProfile).toPromise();
     // GetTclStopPoints
     this.getTclStopPoints();
-    this.structureService.isClaimed(this.structure._id).subscribe((boolean) => {
-      this.isClaimed = boolean;
-      this.searchService.getCategoriesTraining().subscribe((referentiels) => {
-        referentiels.forEach((referentiel) => {
-          if (referentiel.isBaseSkills()) {
-            this.baseSkillssReferentiel = referentiel;
-          } else if (referentiel.isRigthtsAccess()) {
-            this.accessRightsReferentiel = referentiel;
-          }
-        });
-        this.setServiceCategories();
-        if (this.printMode) {
-          this.printService.onDataReady();
+    this.searchService.getCategoriesTraining().subscribe((referentiels) => {
+      referentiels.forEach((referentiel) => {
+        if (referentiel.isBaseSkills()) {
+          this.baseSkillssReferentiel = referentiel;
+        } else if (referentiel.isRigthtsAccess()) {
+          this.accessRightsReferentiel = referentiel;
         }
-        this.isLoading = false;
       });
-      const index = this.structure.proceduresAccompaniment.indexOf('autres');
-      if (index > -1) {
-        this.structure.proceduresAccompaniment.splice(index, 1);
-        this.isOtherSection = true;
+      this.setServiceCategories();
+      if (this.printMode) {
+        this.printService.onDataReady();
       }
+      this.isLoading = false;
     });
+    const index = this.structure.proceduresAccompaniment.indexOf('autres');
+    if (index > -1) {
+      this.structure.proceduresAccompaniment.splice(index, 1);
+      this.isOtherSection = true;
+    }
   }
 
   public getEquipmentsLabel(equipment: Equipment): string {
