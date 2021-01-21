@@ -9,6 +9,7 @@ export class SvgIconComponent {
   @Input() icon: string;
   @Input() iconClass: string;
   @Input() type: string;
-  @Input() iconColor: string;
+  @Input() iconColor: string = 'none';
+  @Input() title: string = null;
   constructor() {}
 }

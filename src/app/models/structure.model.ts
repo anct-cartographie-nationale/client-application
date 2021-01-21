@@ -1,3 +1,4 @@
+import { Equipment } from '../structure-list/enum/equipment.enum';
 import { typeStructureEnum } from '../shared/enum/typeStructure.enum';
 import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Address } from './address.model';
@@ -112,6 +113,13 @@ export class Structure {
   }
 
   /**
+   * Check if a structure has pass Numeric label
+   */
+  public hasPassNumeric(): boolean {
+    return this.labelsQualifications.includes('passNumerique');
+  }
+
+  /**
    * Return a range, according to the distance, between [1,3] to get a distance reference.
    * - [0,5km] => 1
    * - [5km,10km] => 2
@@ -139,5 +147,39 @@ export class Structure {
 
   public getLon(): number {
     return this.coord[0];
+  }
+
+  public getEquipmentsIcon(equipment: Equipment): string {
+    switch (equipment) {
+      case Equipment.wifi:
+        return 'wifi';
+      case Equipment.bornes:
+        return 'borne';
+      case Equipment.printer:
+        return 'print';
+      case Equipment.tablet:
+        return 'tablet';
+      case Equipment.computer:
+        return 'computer';
+      default:
+        return null;
+    }
+  }
+
+  public getEquipmentsTitle(equipment: Equipment): string {
+    switch (equipment) {
+      case Equipment.wifi:
+        return 'Wifi';
+      case Equipment.bornes:
+        return 'Bornes';
+      case Equipment.printer:
+        return 'Imprimantes';
+      case Equipment.tablet:
+        return 'Tablettes';
+      case Equipment.computer:
+        return 'Ordinateurs';
+      default:
+        return null;
+    }
   }
 }

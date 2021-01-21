@@ -253,13 +253,11 @@ export class FormComponent implements OnInit {
   }
 
   public onSubmitClaimWithAccount(): void {
-    this.structureService
-      .claimStructureWithAccount(this.structureId, this.profile.email)
-      .subscribe((structuresLinked) => {
-        this.profile.pendingStructuresLink = structuresLinked;
-        this.profileService.setProfile(this.profile);
-        this.closeEvent.emit(this.structureForm.value);
-      });
+    this.structureService.claimStructureWithAccount(this.structureId, this.profile).subscribe((structuresLinked) => {
+      this.profile.pendingStructuresLink = structuresLinked;
+      this.profileService.setProfile(this.profile);
+      this.closeEvent.emit(this.structureForm.value);
+    });
   }
   public onSubmit(structureForm: FormGroup): void {
     if (structureForm.valid) {

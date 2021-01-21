@@ -12,8 +12,11 @@
     <button (click)="claimStructure()">Revendiquer</button>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center">
-    <button *ngIf="profileService.isLinkedToStructure(structure._id)" (click)="editStructure()">
-      Modifier ma structure
+    <button
+      *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
+      (click)="editStructure()"
+    >
+      Modifier la structure
     </button>
   </div>
   <div fxLayout="row" fxLayoutAlign="end center">
@@ -21,10 +24,20 @@
   </div>
   <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="8px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
-      <div fxLayout="row" fxLayoutAlign="space-between start">
-        <div fxLayout="column">
-          <h2 class="bold">{{ structure.structureName }}</h2>
+      <div fxLayout="column" fxLayoutAlign="space-between start">
+        <h2 class="bold">{{ structure.structureName }}</h2>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="typeInformationHeader" fxLayout="column">
           <h3>{{ structure.getLabelTypeStructure() }}</h3>
+          <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="7px" *ngIf="structure.hasEquipments()">
+            <app-svg-icon
+              *ngFor="let equipement of structure.equipmentsAndServices"
+              [type]="'ico'"
+              [iconColor]="'currentColor'"
+              [icon]="structure.getEquipmentsIcon(equipement)"
+            ></app-svg-icon>
+          </div>
         </div>
         <div class="printButton" fxLayout="column" fxLayoutAlign="end">
           <app-button
@@ -69,6 +82,10 @@
             <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
             <p>{{ structure.contactMail }}</p>
           </div>
+          <div *ngIf="structure.hasPassNumeric()" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'pass'"></app-svg-icon>
+            <p>agréé Pass Numérique</p>
+          </div>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'calendar'"></app-svg-icon>
             <p>Mise à jour le {{ structure.updatedAt | date: 'mediumDate' }}</p>
@@ -77,7 +94,7 @@
       </div>
     </div>
   </div>
-  <!-- Démarches -->
+  <!-- Démarches en ligne -->
   <div
     *ngIf="structure.proceduresAccompaniment.length"
     fxLayout="column"
@@ -87,7 +104,7 @@
   >
     <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'demarches'" [iconClass]="'icon-32'"></app-svg-icon>
-      <h2>Démarches</h2>
+      <h2>Démarches en ligne</h2>
     </div>
     <div fxLayout="column">
       <div fxLayout="row wrap" fxLayoutGap="24px">
@@ -112,7 +129,7 @@
   >
     <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
-      <h2>Services</h2>
+      <h2>Ateliers</h2>
     </div>
     <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
       <div fxFlex="50%" *ngIf="isBaseSkills()">
@@ -120,7 +137,7 @@
         <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>
       </div>
       <div fxFlex="50%" *ngIf="isAccessRights()">
-        <h3 class="subtitle">Accès au droits</h3>
+        <h3 class="subtitle">Accès aux droits</h3>
         <p *ngFor="let rights of accessRights">{{ rights.text }}</p>
       </div>
     </div>
@@ -189,7 +206,6 @@
       fxLayoutGap="13px"
       *ngFor="let equipement of structure.equipmentsAndServices"
     >
-      <app-svg-icon [type]="'ico'" [icon]="getEquipmentsIcon(equipement)"></app-svg-icon>
       <p>
         {{ getEquipmentsLabel(equipement) }}
         <span *ngIf="equipement == 'ordinateurs' && structure.nbComputers"> : {{ structure.nbComputers }}</span>

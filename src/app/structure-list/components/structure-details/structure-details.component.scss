@@ -53,7 +53,9 @@
     margin-right: 5px;
   }
 }
-
+.typeInformationHeader {
+  color: $grey-3;
+}
 h2 {
   margin-top: 0;
   margin-bottom: 5px;
@@ -62,7 +64,6 @@ h2 {
 h3 {
   margin: 0;
   @include cn-regular-16;
-  color: $grey-3;
 }
 h4 {
   margin-left: 0;

@@ -85,23 +85,6 @@ export class StructureDetailsComponent implements OnInit {
     }
   }
 
-  public getEquipmentsIcon(equipment: Equipment): string {
-    switch (equipment) {
-      case Equipment.wifi:
-        return 'wifi';
-      case Equipment.bornes:
-        return 'borne';
-      case Equipment.printer:
-        return 'print';
-      case Equipment.tablet:
-        return 'tablet';
-      case Equipment.computer:
-        return 'computer';
-      default:
-        return null;
-    }
-  }
-
   public getEquipmentsLabel(equipment: Equipment): string {
     switch (equipment) {
       case Equipment.wifi:

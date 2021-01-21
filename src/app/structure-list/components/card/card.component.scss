@@ -3,22 +3,6 @@
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/breakpoint';
 
-.indicatorDistance {
-  width: 34px;
-  height: 1px;
-  background: $grey-3;
-  border-radius: 1px;
-  &:before {
-    height: 7px;
-    width: 33px;
-    content: '';
-    margin-top: -3px;
-    display: block;
-    border-radius: 1px;
-    border-left: 1px solid $grey-3;
-    border-right: 1px solid $grey-3;
-  }
-}
 .structure {
   padding: 12px 0 12px 0;
   border-bottom: 1px dashed $grey !important;
@@ -41,11 +25,5 @@
   }
   &:last-child {
     border-bottom: none;
-  }
-}
-
-@media #{$large-phone} {
-  .isntPhoneContent {
-    display: none !important;
   }
 }
