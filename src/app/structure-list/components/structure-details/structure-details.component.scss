@@ -74,7 +74,7 @@ h4 {
   text-transform: uppercase;
 }
 p,
-a {
+.custom-link {
   @include cn-regular-16;
   margin-top: 9px;
   margin-bottom: 9px;

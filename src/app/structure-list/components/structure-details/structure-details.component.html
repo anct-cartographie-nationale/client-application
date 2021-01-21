@@ -9,15 +9,17 @@
 <div class="structrue-details-container" *ngIf="structure && !isLoading">
   <!-- Header info -->
   <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!isClaimed">
-    <button (click)="claimStructure()">Revendiquer</button>
+    <a (click)="claimStructure()" class="primary" tabindex="0">Revendiquer</a>
   </div>
   <div fxLayout="row" fxLayoutAlign="center center">
-    <button
+    <a
       *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
       (click)="editStructure()"
+      class="primary"
+      tabindex="0"
     >
       Modifier la structure
-    </button>
+    </a>
   </div>
   <div fxLayout="row" fxLayoutAlign="end center">
     <div (click)="close()" class="ico-close-details"></div>
@@ -67,6 +69,7 @@
             <app-svg-icon [type]="'ico'" [icon]="'web'"></app-svg-icon>
             <a
               target="_blank"
+              class="custom-link"
               rel="noopener noreferrer"
               [href]="structure.website.includes('http') ? structure.website : 'http://' + structure.website"
               >{{ structure.website | url }}</a
@@ -90,59 +93,6 @@
             <app-svg-icon [type]="'ico'" [icon]="'calendar'"></app-svg-icon>
             <p>Mise à jour le {{ structure.updatedAt | date: 'mediumDate' }}</p>
           </div>
-        </div>
-      </div>
-      <div>
-        {{ structure.description }}
-      </div>
-      <div class="info">
-        {{ structure.lockdownActivity }}
-      </div>
-    </div>
-  </div>
-  <!-- Accueil -->
-  <div
-    *ngIf="structure.accessModality.length > 0 || structure.hours.hasData()"
-    fxLayout="column"
-    class="structure-details-block"
-    fxLayoutAlign="baseline baseline"
-    fxLayoutGap="20px"
-  >
-    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
-      <app-svg-icon [type]="'ico'" [icon]="'accueil'" [iconClass]="'icon-32'"></app-svg-icon>
-      <h2>Accueil</h2>
-    </div>
-    <!-- Openning Hours -->
-    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
-      <div *ngIf="structure.hours.hasData()" fxFlex="50%">
-        <h3 class="subtitle">Horaires d’ouverture au public</h3>
-        <div fxLayout="column">
-          <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
-            <div *ngIf="day.value.open">
-              <h4>{{ day.key | day }}</h4>
-              <div class="openning-time" fxLayout="row" fxLayoutAlign="none flex-end">
-                <div *ngFor="let timeRange of day.value.time; let isFirst = first">
-                  <p *ngIf="isFirst">de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}</p>
-                  <p *ngIf="!isFirst && timeRange.openning">
-                    et de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- accessModality -->
-      <div *ngIf="structure.accessModality.length > 0" fxFlex="50%">
-        <h3 class="subtitle">Accès</h3>
-        <div
-          *ngFor="let acces of structure.accessModality"
-          fxLayout="row"
-          fxLayoutAlign="none flex-end"
-          fxLayoutGap="8px"
-        >
-          <app-svg-icon [type]="'ico'" [icon]="getAccessIcon(acces)"></app-svg-icon>
-          <p>{{ getAccessLabel(acces) }}</p>
         </div>
       </div>
     </div>
@@ -195,7 +145,53 @@
       </div>
     </div>
   </div>
-
+  <!-- Accueil -->
+  <div
+    *ngIf="structure.accessModality.length > 0 || structure.hours.hasData()"
+    fxLayout="column"
+    class="structure-details-block"
+    fxLayoutAlign="baseline baseline"
+    fxLayoutGap="20px"
+  >
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
+      <app-svg-icon [type]="'ico'" [icon]="'accueil'" [iconClass]="'icon-32'"></app-svg-icon>
+      <h2>Accueil</h2>
+    </div>
+    <!-- Openning Hours -->
+    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
+      <div *ngIf="structure.hours.hasData()" fxFlex="50%">
+        <h3 class="subtitle">Horaires d’ouverture au public</h3>
+        <div fxLayout="column">
+          <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
+            <div *ngIf="day.value.open">
+              <h4>{{ day.key | day }}</h4>
+              <div class="openning-time" fxLayout="row" fxLayoutAlign="none flex-end">
+                <div *ngFor="let timeRange of day.value.time; let isFirst = first">
+                  <p *ngIf="isFirst">de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}</p>
+                  <p *ngIf="!isFirst && timeRange.openning">
+                    et de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- accessModality -->
+      <div *ngIf="structure.accessModality.length > 0" fxFlex="50%">
+        <h3 class="subtitle">Accès</h3>
+        <div
+          *ngFor="let acces of structure.accessModality"
+          fxLayout="row"
+          fxLayoutAlign="none flex-end"
+          fxLayoutGap="8px"
+        >
+          <app-svg-icon [type]="'ico'" [icon]="getAccessIcon(acces)"></app-svg-icon>
+          <p>{{ getAccessLabel(acces) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Equipements -->
   <div
     *ngIf="structure.hasEquipments()"

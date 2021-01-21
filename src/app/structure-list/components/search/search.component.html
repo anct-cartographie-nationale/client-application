@@ -88,7 +88,7 @@
       [text]="'Filtres'"
       (action)="openModal(TypeModal.accompaniment)"
     ></app-button>
-    <a (click)="openConfirmationModal()" tabindex="0">Ajouter une structure</a>
+    <a (click)="openConfirmationModal()" class="primary" tabindex="0">Ajouter une structure</a>
   </div>
 </div>
 <div class="footerSearchSection isntPhoneContent" fxLayout="row" fxLayoutAlign="space-between center">
@@ -106,7 +106,7 @@
       </label>
     </div>
   </div>
-  <a (click)="openConfirmationModal()" tabindex="0">Ajouter une structure</a>
+  <a (click)="openConfirmationModal()" class="primary" tabindex="0">Ajouter une structure</a>
 </div>
 <app-modal
   [openned]="isConfirmationModalOpen"
