@@ -3,6 +3,8 @@
 @import '../../assets/scss/color';
 @import '../../assets/scss/typography';
 
+$progressBar-height: 50px;
+
 .form {
   position: fixed;
   background: white;
@@ -58,10 +60,18 @@
     margin-bottom: 0;
   }
   h3 {
-    margin-bottom: 16px;
+    margin: 0;
     @include cn-bold-22;
   }
   .page {
+    @media #{$tablet} {
+      height: calc(
+        100vh - #{$header-height-phone} - #{$progressBar-height} - #{$footer-height-phone} - 1px
+      ); // -1px because of header border
+    }
+    height: calc(
+      100vh - #{$header-height} - #{$progressBar-height} - #{$footer-height} - #{$footer-height-phone}
+    ); // -1px because of header border
     color: $grey-1;
     &.home {
       height: 100%;
@@ -86,13 +96,20 @@
         }
       }
     }
+    .title {
+      margin-bottom: 26px;
+    }
+    .type-picker {
+      height: 100%;
+    }
   }
   .titleDesc {
     @include cn-bold-20;
     margin-bottom: 20px;
   }
   p {
-    margin-top: 10;
+    margin-top: 10px;
+    margin-bottom: 0;
     @include cn-regular-18;
   }
 }
@@ -155,7 +172,7 @@
   }
 }
 .progressBar {
-  height: 50px;
+  height: #{$progressBar-height};
   progress {
     width: 100%;
     height: 6px;

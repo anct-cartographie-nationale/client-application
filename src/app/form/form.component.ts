@@ -124,7 +124,7 @@ export class FormComponent implements OnInit {
     this.structureForm = new FormGroup({
       _id: new FormControl(structure._id),
       coord: new FormControl(structure.coord),
-      structureType: this.loadArrayForCheckbox(structure.structureType, true),
+      structureType: new FormControl(structure.structureType, Validators.required),
       structureName: new FormControl(structure.structureName, Validators.required),
       structureRepresentation: new FormControl(structure.structureRepresentation, Validators.required),
       description: new FormControl(structure.description, Validators.required),
@@ -322,6 +322,7 @@ export class FormComponent implements OnInit {
     this.pagesValidation[4] = {
       valid: this.structureForm.get('structureName').valid && this.structureForm.get('address').valid,
     };
+    this.pagesValidation[5] = { valid: this.structureForm.get('structureType').valid };
     this.updatePageValid();
   }
 
@@ -353,6 +354,10 @@ export class FormComponent implements OnInit {
     } else {
       this.structureForm.get('address').reset();
     }
+    this.setValidationsForm();
+  }
+  public setTypeStructure(type?: string): void {
+    this.structureForm.get('structureType').setValue(type);
     this.setValidationsForm();
   }
 }
