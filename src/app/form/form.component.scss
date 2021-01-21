@@ -58,6 +58,7 @@
     margin-bottom: 0;
   }
   h3 {
+    margin-bottom: 16px;
     @include cn-bold-22;
   }
   .page {
@@ -178,19 +179,14 @@
 }
 input {
   margin-top: 4px;
-  background: $grey-6;
-  padding: 8px;
-  height: 40px;
-  border: 1px solid $grey-4;
-  box-sizing: border-box;
-  border-radius: 4px;
-  width: 296px;
-  @include cn-regular-14;
   &.phone {
     width: 205px;
   }
   &.password {
     width: 256px;
+  }
+  &.structureName {
+    width: 250px;
   }
 }
 img {

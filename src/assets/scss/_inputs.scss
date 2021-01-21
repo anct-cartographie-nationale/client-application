@@ -1,5 +1,6 @@
 @import './color';
 @import './shapes';
+@import './typography';
 
 @mixin input-search {
   width: 100%;
@@ -12,12 +13,14 @@
 }
 
 .form-input {
-  min-width: 290px;
+  width: 296px;
   background: $grey-6;
   border: 1px solid $grey-4;
   box-sizing: border-box;
   border-radius: $input-radius;
   height: 40px;
+  padding: 8px;
+  @include cn-regular-14;
 }
 .form-input:focus {
   border: 1px solid $blue;

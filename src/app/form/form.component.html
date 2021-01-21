@@ -316,14 +316,14 @@
         <div class="form-group" fxLayout="column">
           <label for="surname">Nom</label>
           <div fxLayout="row" fxLayoutGap="13px">
-            <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-control" />
+            <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-input" />
             <img *ngIf="accountForm.get('surname').valid" src="../../assets/form/checked.svg" alt="logo checked" />
           </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="name">Prénom</label>
           <div fxLayout="row" fxLayoutGap="13px">
-            <input type="text" (input)="setValidationsForm()" formControlName="name" class="form-control" />
+            <input type="text" (input)="setValidationsForm()" formControlName="name" class="form-input" />
             <img *ngIf="accountForm.get('name').valid" src="../../assets/form/checked.svg" alt="logo checked" />
           </div>
         </div>
@@ -333,7 +333,7 @@
             <input
               type="text"
               formControlName="phone"
-              class="form-control phone"
+              class="form-input phone"
               (input)="modifyPhoneInput(accountForm, 'phone', $event.target.value)"
             />
             <img *ngIf="accountForm.get('phone').valid" src="../../assets/form/checked.svg" alt="logo checked" />
@@ -345,7 +345,7 @@
         <div class="form-group" fxLayout="column">
           <label for="email">Courriel personnel</label>
           <div fxLayout="row" fxLayoutGap="13px">
-            <input type="text" (input)="setValidationsForm()" formControlName="email" class="form-control" />
+            <input type="text" (input)="setValidationsForm()" formControlName="email" class="form-input" />
             <img *ngIf="accountForm.get('email').valid" src="../../assets/form/checked.svg" alt="logo checked" />
           </div>
         </div>
@@ -355,7 +355,7 @@
             <input
               [type]="isShowPassword ? 'text' : 'password'"
               formControlName="password"
-              class="form-control password"
+              class="form-input password"
               (input)="setValidationsForm()"
               autocomplete="on"
             />
@@ -374,7 +374,7 @@
             <input
               [type]="isShowConfirmPassword ? 'text' : 'password'"
               formControlName="confirmPassword"
-              class="form-control password"
+              class="form-input password"
               (input)="setValidationsForm()"
               autocomplete="on"
             />
@@ -389,6 +389,39 @@
               src="../../assets/form/checked.svg"
               alt="logo checked"
             />
+          </div>
+        </div>
+      </div>
+    </form>
+    <form [formGroup]="structureForm" *ngIf="structureForm">
+      <div *ngIf="currentPage == 4" class="page">
+        <h3>Quelle structure voulez-vous réferencer ?</h3>
+        <div class="form-group" fxLayout="column">
+          <label for="structureName">Nom de la structure</label>
+          <div fxLayout="row" fxLayoutGap="13px">
+            <input
+              type="text"
+              (input)="setValidationsForm()"
+              formControlName="structureName"
+              class="form-input structureName"
+            />
+            <img
+              *ngIf="structureForm.get('structureName').valid"
+              src="../../assets/form/checked.svg"
+              alt="logo checked"
+            />
+          </div>
+        </div>
+        <div class="form-group" fxLayout="column">
+          <label for="address">Adresse de la structure</label>
+
+          <div fxLayout="row" fxLayoutGap="13px">
+            <app-address-autocomplete
+              [address]="structureForm.get('address').valid ? structureForm.get('address').value : null"
+              (inputAddress)="setAddressStructure()"
+              (selectedAddress)="setAddressStructure($event)"
+            ></app-address-autocomplete>
+            <img *ngIf="structureForm.get('address').valid" src="../../assets/form/checked.svg" alt="logo checked" />
           </div>
         </div>
       </div>

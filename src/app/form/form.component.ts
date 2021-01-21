@@ -14,6 +14,7 @@ import { FonctionContactEnum } from '../shared/enum/fonctionContact.enum';
 import { ProfileService } from '../profile/services/profile.service';
 import { User } from '../models/user.model';
 import { MustMatch } from '../shared/validator/form';
+import { Address } from '../models/address.model';
 
 @Component({
   selector: 'app-structureForm',
@@ -318,6 +319,9 @@ export class FormComponent implements OnInit {
         this.accountForm.get('password').valid &&
         this.accountForm.get('confirmPassword').valid,
     };
+    this.pagesValidation[4] = {
+      valid: this.structureForm.get('structureName').valid && this.structureForm.get('address').valid,
+    };
     this.updatePageValid();
   }
 
@@ -339,5 +343,16 @@ export class FormComponent implements OnInit {
   }
   public showConfirmPassword(): void {
     this.isShowConfirmPassword = !this.isShowConfirmPassword;
+  }
+
+  public setAddressStructure(address?: Address): void {
+    if (address) {
+      this.getAddressControl('numero').setValue(address.numero);
+      this.getAddressControl('street').setValue(address.street);
+      this.getAddressControl('commune').setValue(address.commune);
+    } else {
+      this.structureForm.get('address').reset();
+    }
+    this.setValidationsForm();
   }
 }
