@@ -92,53 +92,11 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- Démarches en ligne -->
-  <div
-    *ngIf="structure.proceduresAccompaniment.length"
-    fxLayout="column"
-    class="structure-details-block"
-    fxLayoutAlign="baseline baseline"
-    fxLayoutGap="20px"
-  >
-    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
-      <app-svg-icon [type]="'ico'" [icon]="'demarches'" [iconClass]="'icon-32'"></app-svg-icon>
-      <h2>Démarches en ligne</h2>
-    </div>
-    <div fxLayout="column">
-      <div fxLayout="row wrap" fxLayoutGap="24px">
-        <div *ngFor="let accompagnement of structure.proceduresAccompaniment">
-          <app-logo-card *ngIf="accompagnement != 'autres'" [name]="accompagnement"></app-logo-card>
-        </div>
+      <div>
+        {{ structure.description }}
       </div>
-      <p *ngIf="isOtherSection">
-        Tout ce qui est en lien avec la création d'entreprise ex : consultation de sites de références (BPI, Je créé
-        dans ma région, ...), inscription à des newsletters, aide pour trouver des sites (CMA, CCI, Urssaf,...),
-        recherches d'infos sur moteur de recherche...
-      </p>
-    </div>
-  </div>
-  <!-- Services -->
-  <div
-    *ngIf="isBaseSkills() || isAccessRights()"
-    fxLayout="column"
-    class="structure-details-block"
-    fxLayoutAlign="baseline baseline"
-    fxLayoutGap="20px"
-  >
-    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
-      <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
-      <h2>Ateliers</h2>
-    </div>
-    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
-      <div fxFlex="50%" *ngIf="isBaseSkills()">
-        <h3 class="subtitle">Compétences de base</h3>
-        <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>
-      </div>
-      <div fxFlex="50%" *ngIf="isAccessRights()">
-        <h3 class="subtitle">Accès aux droits</h3>
-        <p *ngFor="let rights of accessRights">{{ rights.text }}</p>
+      <div class="info">
+        {{ structure.lockdownActivity }}
       </div>
     </div>
   </div>
@@ -189,6 +147,55 @@
       </div>
     </div>
   </div>
+  <!-- Démarches en ligne -->
+  <div
+    *ngIf="structure.proceduresAccompaniment.length"
+    fxLayout="column"
+    class="structure-details-block"
+    fxLayoutAlign="baseline baseline"
+    fxLayoutGap="20px"
+  >
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
+      <app-svg-icon [type]="'ico'" [icon]="'demarches'" [iconClass]="'icon-32'"></app-svg-icon>
+      <h2>Démarches en ligne</h2>
+    </div>
+    <div fxLayout="column">
+      <div fxLayout="row wrap" fxLayoutGap="24px">
+        <div *ngFor="let accompagnement of structure.proceduresAccompaniment">
+          <app-logo-card *ngIf="accompagnement != 'autres'" [name]="accompagnement"></app-logo-card>
+        </div>
+      </div>
+      <p *ngIf="isOtherSection">
+        Tout ce qui est en lien avec la création d'entreprise ex : consultation de sites de références (BPI, Je créé
+        dans ma région, ...), inscription à des newsletters, aide pour trouver des sites (CMA, CCI, Urssaf,...),
+        recherches d'infos sur moteur de recherche...
+      </p>
+    </div>
+  </div>
+  <!-- Services -->
+  <div
+    *ngIf="isBaseSkills() || isAccessRights()"
+    fxLayout="column"
+    class="structure-details-block"
+    fxLayoutAlign="baseline baseline"
+    fxLayoutGap="20px"
+  >
+    <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
+      <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
+      <h2>Ateliers</h2>
+    </div>
+    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
+      <div fxFlex="50%" *ngIf="isBaseSkills()">
+        <h3 class="subtitle">Compétences de base</h3>
+        <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>
+      </div>
+      <div fxFlex="50%" *ngIf="isAccessRights()">
+        <h3 class="subtitle">Accès aux droits</h3>
+        <p *ngFor="let rights of accessRights">{{ rights.text }}</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Equipements -->
   <div
     *ngIf="structure.hasEquipments()"
