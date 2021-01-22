@@ -6,10 +6,11 @@
       placeholder="ex: 20 rue du lac, Lyon"
       (input)="onSearchChange($event.target.value)"
       class="form-input"
+      autocomplete="off"
       #searchAddress
     />
   </div>
-  <div class="autocomplete-items">
+  <div class="autocomplete-items" *ngIf="!isAlreadySearch">
     <p *ngFor="let hit of data" (click)="selectedResult(hit)" class="autocomplete-item">
       {{ parseHitToAddress(hit) }}
     </p>
