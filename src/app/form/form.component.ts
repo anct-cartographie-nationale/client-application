@@ -257,18 +257,20 @@ export class FormComponent implements OnInit {
     }
   }
 
-  public onCheckChange(event, formControlName: string): void {
+  public onCheckChange(event: boolean, formControlName: string, value: string): void {
     const formArray: FormArray = this.structureForm.get(formControlName) as FormArray;
-    if (event.target.checked) {
+    if (event) {
       // Add a new control in the arrayForm
-      formArray.push(new FormControl(event.target.value));
+      formArray.push(new FormControl(value));
     } else {
       // Remove uncheck control in the arrayForm
-      const index = formArray.controls.findIndex((element) => element.value == event.target.value);
+      const index = formArray.controls.findIndex((element) => element.value == value);
       formArray.removeAt(index);
     }
+    this.setValidationsForm();
   }
 
+  // Check if a FormControl value is in FormArray
   public isInArray(term: string, formControlName): boolean {
     if (this.structureForm.controls[formControlName].value) {
       return this.structureForm.controls[formControlName].value.includes(term);
@@ -320,9 +322,10 @@ export class FormComponent implements OnInit {
         this.accountForm.get('confirmPassword').valid,
     };
     this.pagesValidation[4] = {
-      valid: this.structureForm.get('structureName').valid && this.structureForm.get('address').valid,
+      valid: this.getStructureControl('structureName').valid && this.getStructureControl('address').valid,
     };
-    this.pagesValidation[5] = { valid: this.structureForm.get('structureType').valid };
+    this.pagesValidation[5] = { valid: this.getStructureControl('structureType').valid };
+    this.pagesValidation[6] = { valid: this.getStructureControl('accessModality').valid };
     this.updatePageValid();
   }
 
@@ -357,7 +360,7 @@ export class FormComponent implements OnInit {
     this.setValidationsForm();
   }
   public setTypeStructure(type?: string): void {
-    this.structureForm.get('structureType').setValue(type);
+    this.getStructureControl('structureType').setValue(type);
     this.setValidationsForm();
   }
 }

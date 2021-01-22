@@ -319,14 +319,14 @@
           <label for="surname">Nom</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-input" />
-            <img *ngIf="accountForm.get('surname').valid" src="../../assets/form/checked.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('surname').valid" src="../../assets/form/validate.svg" alt="logo checked" />
           </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="name">Prénom</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="name" class="form-input" />
-            <img *ngIf="accountForm.get('name').valid" src="../../assets/form/checked.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('name').valid" src="../../assets/form/validate.svg" alt="logo checked" />
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -338,7 +338,7 @@
               class="form-input phone"
               (input)="modifyPhoneInput(accountForm, 'phone', $event.target.value)"
             />
-            <img *ngIf="accountForm.get('phone').valid" src="../../assets/form/checked.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('phone').valid" src="../../assets/form/validate.svg" alt="logo checked" />
           </div>
         </div>
       </div>
@@ -350,7 +350,7 @@
           <label for="email">Courriel personnel</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="email" class="form-input" />
-            <img *ngIf="accountForm.get('email').valid" src="../../assets/form/checked.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('email').valid" src="../../assets/form/validate.svg" alt="logo checked" />
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -369,7 +369,7 @@
               src="../../assets/form/eyePassword.svg"
               alt="logo eyePassword"
             />
-            <img *ngIf="accountForm.get('password').valid" src="../../assets/form/checked.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('password').valid" src="../../assets/form/validate.svg" alt="logo checked" />
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -390,7 +390,7 @@
             />
             <img
               *ngIf="accountForm.get('password').valid && accountForm.get('confirmPassword').valid"
-              src="../../assets/form/checked.svg"
+              src="../../assets/form/validate.svg"
               alt="logo checked"
             />
           </div>
@@ -412,8 +412,8 @@
               class="form-input structureName"
             />
             <img
-              *ngIf="structureForm.get('structureName').valid"
-              src="../../assets/form/checked.svg"
+              *ngIf="getStructureControl('structureName').valid"
+              src="../../assets/form/validate.svg"
               alt="logo checked"
             />
           </div>
@@ -423,11 +423,11 @@
 
           <div fxLayout="row" fxLayoutGap="13px">
             <app-address-autocomplete
-              [address]="structureForm.get('address').valid ? structureForm.get('address').value : null"
+              [address]="getStructureControl('address').valid ? getStructureControl('address').value : null"
               (inputAddress)="setAddressStructure()"
               (selectedAddress)="setAddressStructure($event)"
             ></app-address-autocomplete>
-            <img *ngIf="structureForm.get('address').valid" src="../../assets/form/checked.svg" alt="logo checked" />
+            <img *ngIf="getStructureControl('address').valid" src="../../assets/form/validate.svg" alt="logo checked" />
           </div>
         </div>
       </div>
@@ -438,9 +438,27 @@
         </div>
         <div class="type-picker">
           <app-structure-type-picker
-            [pickedChoice]="structureForm.get('structureType').valid ? structureForm.get('structureType').value : null"
+            [pickedChoice]="
+              getStructureControl('structureType').valid ? getStructureControl('structureType').value : null
+            "
             (selectedType)="setTypeStructure($event)"
           ></app-structure-type-picker>
+        </div>
+      </div>
+      <div *ngIf="currentPage == 6" class="page">
+        <div class="title">
+          <h3>Quels sont les modalités d'accueil ?</h3>
+          <p>Plusieurs choix possibles</p>
+        </div>
+        <div *ngIf="accessModality">
+          <app-checkbox-form
+            *ngFor="let module of accessModality.modules"
+            [isChecked]="isInArray(module.id, accessModality.id)"
+            [text]="module.text"
+            [iconSvg]="module.id"
+            (checkEvent)="onCheckChange($event, accessModality.id, module.id)"
+          >
+          </app-checkbox-form>
         </div>
       </div>
     </form>
