@@ -144,7 +144,8 @@
     </div>
     <div formGroupName="hours">
       <p>Heures</p>
-      <div *ngFor="let day of weekDay | keyvalue">
+      <app-hour-picker [structureInput]="getStructureControl('hours')" [isEditMode]="!isEditMode"></app-hour-picker>
+      <!-- <div *ngFor="let day of weekDay | keyvalue">
         <div [formGroupName]="day.key">
           <p>Ouvert le {{ day.value }} ? :</p>
           <input type="radio" formControlName="open" (click)="addTime(day.key)" [value]="true" />Oui <br />
@@ -167,7 +168,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <p>Fermetures exceptionnelles</p>
     <input type="text" formControlName="exceptionalClosures" />

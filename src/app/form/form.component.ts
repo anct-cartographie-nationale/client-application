@@ -23,7 +23,7 @@ import { Address } from '../models/address.model';
 })
 export class FormComponent implements OnInit {
   @Input() public idStructure?: string;
-  @Input() public isEditMode: boolean;
+  @Input() public isEditMode: boolean = true;
   @Input() public profile?: User;
   @Output() closeEvent = new EventEmitter<Structure>();
   public structureForm: FormGroup;
