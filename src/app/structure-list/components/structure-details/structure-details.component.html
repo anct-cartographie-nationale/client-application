@@ -39,7 +39,7 @@
           ></app-button>
         </div>
       </div>
-      <div fxLayout="row" fxLayout.lt-sm="column">
+      <div fxLayout="row" class="mobile-column">
         <div fxLayout="column" fxFlex="50%">
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-structure-opening-status
@@ -114,7 +114,7 @@
       <h2>Accueil</h2>
     </div>
     <!-- Openning Hours -->
-    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
+    <div fxLayout="row" class="w-100 mobile-column">
       <div *ngIf="structure.hours.hasData()" fxFlex="50%">
         <h3 class="subtitle">Horaires d’ouverture au public</h3>
         <div fxLayout="column">
@@ -193,7 +193,7 @@
       <h2>Ateliers</h2>
     </div>
     <span class="bold-info">L'accès à ces ateliers peut être payant</span>
-    <div fxLayout="row" class="w-100" fxLayout.lt-sm="column">
+    <div fxLayout="row" class="w-100 mobile-column">
       <div fxFlex="50%" *ngIf="isBaseSkills()">
         <h3 class="subtitle">Compétences de base</h3>
         <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>

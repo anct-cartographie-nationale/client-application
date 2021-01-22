@@ -53,11 +53,11 @@
   align-items: center;
 }
 
-@media screen {
-  div {
-    flex-direction: row !important;
-  }
-}
+// @media screen {
+//   div {
+//     flex-direction: row !important;
+//   }
+// }
 
 @media print {
   div {

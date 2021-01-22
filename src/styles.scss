@@ -149,6 +149,14 @@ a {
   width: 100%;
 }
 
+.mobile-column {
+  @media #{$large-phone} {
+    flex-direction: column;
+  }
+}
+
+// PRINT
+
 @media print {
   body,
   html,
