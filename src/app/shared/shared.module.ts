@@ -10,7 +10,13 @@ import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 import { AddressAutocompleteComponent } from './components/address-autocomplete/address-autocomplete.component';
 @NgModule({
   imports: [CommonModule, RouterModule, FlexLayoutModule, ReactiveFormsModule],
-  declarations: [...SharedPipes, ...SharedComponents, ...SharedDirectives, SvgIconComponent, AddressAutocompleteComponent],
+  declarations: [
+    ...SharedPipes,
+    ...SharedComponents,
+    ...SharedDirectives,
+    SvgIconComponent,
+    AddressAutocompleteComponent,
+  ],
   exports: [
     ...SharedPipes,
     ...SharedComponents,

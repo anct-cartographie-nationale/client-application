@@ -8,6 +8,7 @@ import { ValidatorFormComponent } from './validator-form/validator-form.componen
 import { CreateAccountFormComponent } from './create-account-form/create-account-form.component';
 import { AddressAutocompleteComponent } from './address-autocomplete/address-autocomplete.component';
 import { StructureTypePickerComponent } from './structure-type-picker/structure-type-picker.component';
+import { CheckboxFormComponent } from './checkbox-form/checkbox-form.component';
 // tslint:disable-next-line: max-line-length
 export {
   LogoCardComponent,
@@ -20,6 +21,7 @@ export {
   CreateAccountFormComponent,
   AddressAutocompleteComponent,
   StructureTypePickerComponent,
+  CheckboxFormComponent,
 };
 
 // tslint:disable-next-line:variable-name
@@ -34,4 +36,5 @@ export const SharedComponents = [
   CreateAccountFormComponent,
   AddressAutocompleteComponent,
   StructureTypePickerComponent,
+  CheckboxFormComponent,
 ];
