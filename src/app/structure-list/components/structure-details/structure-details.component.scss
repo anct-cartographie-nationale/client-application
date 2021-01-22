@@ -40,6 +40,8 @@ a {
   .subtitle {
     text-transform: uppercase;
     @include cn-bold-16;
+    margin-bottom: 10px;
+    color: $grey-3;
   }
 }
 
@@ -53,8 +55,7 @@ a {
 
 .openning-time {
   p {
-    margin-left: 0;
-    margin-right: 5px;
+    margin: 0 5px 12px 0;
   }
 }
 .typeInformationHeader {
@@ -82,6 +83,17 @@ p,
   @include cn-regular-16;
   margin-top: 9px;
   margin-bottom: 9px;
+  &.no-margin {
+    margin-top: unset;
+    margin-bottom: unset;
+  }
+  &.no-margin-bottom {
+    margin-bottom: unset;
+  }
+}
+
+.bold-info {
+  @include cn-bold-16;
 }
 
 @media print {
