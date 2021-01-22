@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { GeoJson } from '../../../map/models/geojson.model';
@@ -15,14 +15,16 @@ import { SearchService } from '../../services/search.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnChanges {
+  @Output() searchEvent = new EventEmitter();
+  @Output() locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() locate = false;
+
   constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
     this.searchForm = this.fb.group({
       searchTerm: '',
     });
   }
-
-  @Output() searchEvent = new EventEmitter();
 
   // Form search input
   public searchForm: FormGroup;
@@ -48,6 +50,12 @@ export class SearchComponent implements OnInit {
     this.checkedModulesFilter = new Array();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.locate && changes.locate.currentValue) {
+      this.locateMe();
+    }
+  }
+
   // Accessor to template angular.
   public get TypeModal(): typeof TypeModal {
     return TypeModal;
@@ -57,6 +65,9 @@ export class SearchComponent implements OnInit {
   public clearInput(): void {
     this.searchForm.reset();
     this.applyFilter(null);
+    if (this.locate) {
+      this.locatationReset.emit(true);
+    }
   }
 
   // Sends an array containing all filters

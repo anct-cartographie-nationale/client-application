@@ -43,6 +43,7 @@ export class MapComponent implements OnChanges {
   @Input() public isMapPhone: boolean;
   @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
   @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+  @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
   private currentStructure: Structure;
 
   public map: Map;
@@ -249,5 +250,9 @@ export class MapComponent implements OnChanges {
         { style: () => ({ color: '#d50000', fillOpacity: 0 }) }
       )
     );
+  }
+
+  public sendLocationEvent(event: any): void {
+    this.locatationTrigger.emit(true);
   }
 }
