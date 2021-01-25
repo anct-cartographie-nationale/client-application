@@ -46,7 +46,7 @@
       height: 40px;
       display: grid;
       // grid-template-columns: auto 70px auto 70px 30px 80px 1fr;
-      grid-template-columns: auto 70px auto 70px 30px 30px;
+      grid-template-columns: auto 52px auto 61px 30px 30px;
       column-gap: 10px;
       align-items: center;
       justify-items: center;
@@ -76,6 +76,8 @@ input {
   border-radius: 4px;
   height: 40px;
   @include cn-regular-14;
+  min-width: 56px;
+  text-align: center;
 }
 
 p {
@@ -105,4 +107,9 @@ img {
   font-size: 1em;
   display: grid;
   align-items: center;
+}
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  background: none;
+  display: none;
 }
