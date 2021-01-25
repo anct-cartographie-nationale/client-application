@@ -1,5 +1,3 @@
-<h1>Quels sont les horaires d'ouverture ?<br /></h1>
-
 <div class="days">
   <div *ngFor="let day of structure.hours" (click)="activateDay(day)" class="day" [ngClass]="{ active: day.active }">
     <div

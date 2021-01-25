@@ -2,10 +2,6 @@
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/breakpoint';
 
-h1 {
-  @include cn-bold-22;
-}
-
 .days {
   display: grid;
   row-gap: 15px;

@@ -142,34 +142,6 @@
       </div>
       <app-validator-form [control]="getStructureControl('publics')"></app-validator-form>
     </div>
-    <div formGroupName="hours">
-      <p>Heures</p>
-      <app-hour-picker [structureInput]="getStructureControl('hours')" [isEditMode]="!isEditMode"></app-hour-picker>
-      <!-- <div *ngFor="let day of weekDay | keyvalue">
-        <div [formGroupName]="day.key">
-          <p>Ouvert le {{ day.value }} ? :</p>
-          <input type="radio" formControlName="open" (click)="addTime(day.key)" [value]="true" />Oui <br />
-          <input type="radio" formControlName="open" (click)="removeTime(day.key)" [value]="false" />Non
-          <div formArrayName="time" *ngIf="isOpen(day.key)">
-            <div *ngFor="let time of getTime(day.key).controls; index as i">
-              <div [formGroupName]="i">
-                <input type="number" formControlName="openning" />
-                <input type="number" formControlName="closing" />
-              </div>
-              <div *ngIf="i < 1">
-                <input
-                  type="checkbox"
-                  [value]="false"
-                  (change)="onCheckPlageHoursChange($event, day.key, time)"
-                  [checked]="getTime(day.key).controls.length == 2"
-                  [disabled]="getStructureControl('hours').disabled"
-                />Ajouter une plage
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    </div>
     <p>Fermetures exceptionnelles</p>
     <input type="text" formControlName="exceptionalClosures" />
     <div *ngIf="publicsAccompaniment">
@@ -461,6 +433,17 @@
           >
           </app-checkbox-form>
         </div>
+      </div>
+      <div *ngIf="currentPage == 7" class="page">
+        <div class="title">
+          <h3>Quels sont les horaires d'ouverture ?</h3>
+        </div>
+        <app-hour-picker
+          *ngIf="hoursForm"
+          (updateForm)="updateHours($event)"
+          [structureInput]="hoursForm"
+          [isEditMode]="!isEditMode"
+        ></app-hour-picker>
       </div>
     </form>
   </div>

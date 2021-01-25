@@ -15,6 +15,7 @@ import { ProfileService } from '../profile/services/profile.service';
 import { User } from '../models/user.model';
 import { MustMatch } from '../shared/validator/form';
 import { Address } from '../models/address.model';
+import { Week } from '../models/week.model';
 
 @Component({
   selector: 'app-structureForm',
@@ -44,7 +45,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 0;
+  public currentPage = 7;
   public progressStatus = 0;
   public nbPagesForm = 13;
   public accountForm: FormGroup;
@@ -52,6 +53,7 @@ export class FormComponent implements OnInit {
   public pagesValidation = [];
   public isShowConfirmPassword = false;
   public isShowPassword = false;
+  public hoursForm: FormGroup;
 
   constructor(
     private structureService: StructureService,
@@ -152,15 +154,6 @@ export class FormComponent implements OnInit {
       fonction: new FormControl(structure.fonction),
       pmrAccess: new FormControl(structure.pmrAccess),
       documentsMeeting: new FormControl(structure.documentsMeeting),
-      hours: new FormGroup({
-        monday: this.createDay(structure.hours.monday),
-        tuesday: this.createDay(structure.hours.tuesday),
-        wednesday: this.createDay(structure.hours.wednesday),
-        thursday: this.createDay(structure.hours.thursday),
-        friday: this.createDay(structure.hours.friday),
-        saturday: this.createDay(structure.hours.saturday),
-        sunday: this.createDay(structure.hours.sunday),
-      }),
       exceptionalClosures: new FormControl(structure.exceptionalClosures),
       labelsQualifications: this.loadArrayForCheckbox(structure.labelsQualifications, false),
       accessModality: this.loadArrayForCheckbox(structure.accessModality, true),
@@ -181,6 +174,16 @@ export class FormComponent implements OnInit {
       ),
       equipmentsDetails: new FormControl(structure.equipmentsDetails),
       equipmentsAccessType: this.loadArrayForCheckbox(structure.equipmentsAccessType, false),
+    });
+
+    this.hoursForm = new FormGroup({
+      monday: this.createDay(structure.hours.monday),
+      tuesday: this.createDay(structure.hours.tuesday),
+      wednesday: this.createDay(structure.hours.wednesday),
+      thursday: this.createDay(structure.hours.thursday),
+      friday: this.createDay(structure.hours.friday),
+      saturday: this.createDay(structure.hours.saturday),
+      sunday: this.createDay(structure.hours.sunday),
     });
 
     // Disable form when it's to claim.
@@ -217,14 +220,6 @@ export class FormComponent implements OnInit {
     this.setValidationsForm();
   }
 
-  public getTime(day: string): FormArray {
-    return this.structureForm.get('hours').get(day).get('time') as FormArray;
-  }
-
-  public isOpen(day: string): boolean {
-    return this.structureForm.get('hours').get(day).get('open').value;
-  }
-
   private createDay(day: Day): FormGroup {
     return new FormGroup({
       open: new FormControl(day.open, Validators.required),
@@ -236,25 +231,6 @@ export class FormComponent implements OnInit {
       openning: new FormControl(time.openning),
       closing: new FormControl(time.closing),
     });
-  }
-
-  public addTime(day: string): void {
-    if (!this.structureForm.get('hours').get(day).value.open) {
-      this.getTime(day).push(this.createTime(new Time()));
-    }
-  }
-
-  public removeTime(day: string, time: Time): void {
-    const index = this.getTime(day).controls.findIndex((element) => element.value == time);
-    this.getTime(day).removeAt(index);
-  }
-
-  public onCheckPlageHoursChange(event, day, time: Time): void {
-    if (event.target.checked) {
-      this.getTime(day).push(this.createTime(new Time()));
-    } else {
-      this.removeTime(day, time);
-    }
   }
 
   public onCheckChange(event: boolean, formControlName: string, value: string): void {
@@ -326,6 +302,7 @@ export class FormComponent implements OnInit {
     };
     this.pagesValidation[5] = { valid: this.getStructureControl('structureType').valid };
     this.pagesValidation[6] = { valid: this.getStructureControl('accessModality').valid };
+    this.pagesValidation[7] = { valid: true };
     this.updatePageValid();
   }
 
@@ -362,5 +339,8 @@ export class FormComponent implements OnInit {
   public setTypeStructure(type?: string): void {
     this.getStructureControl('structureType').setValue(type);
     this.setValidationsForm();
+  }
+  public updateHours(form: FormGroup) {
+    this.hoursForm = form;
   }
 }
