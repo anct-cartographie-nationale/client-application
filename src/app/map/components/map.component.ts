@@ -8,11 +8,10 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { latLng, MapOptions, geoJSON, tileLayer, Map, latLngBounds, layerGroup } from 'leaflet';
+import { latLng, MapOptions, geoJSON, tileLayer, Map, latLngBounds, layerGroup, Control } from 'leaflet';
 import { Structure } from '../../models/structure.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
-import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
 import * as _ from 'lodash';
 import { GeoJsonProperties } from '../models/geoJsonProperties.model';
 import { MarkerType } from './markerType.enum';
@@ -20,6 +19,7 @@ import { typeStructureEnum } from '../../shared/enum/typeStructure.enum';
 import metropole from '../../../assets/geojson/metropole.json';
 import brignais from '../../../assets/geojson/brignais.json';
 import L from 'leaflet';
+import 'leaflet.locatecontrol';
 
 @Component({
   selector: 'app-map',
@@ -32,7 +32,6 @@ export class MapComponent implements OnChanges {
   @Input() public selectedMarkerId: string;
   @Input() public isMapPhone: boolean;
   @Input() public locate = false;
-  @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
   @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
   @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
   private lc;
@@ -182,6 +181,7 @@ export class MapComponent implements OnChanges {
     this.map = map;
     // Handle location
     this.lc = L.control.locate(this.locateOptions).addTo(this.map);
+    // .locate(this.locateOptions).addTo(this.map);
     this.map.on('locationfound', () => {
       this.locatationTrigger.emit(true);
     });
