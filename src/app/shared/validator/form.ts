@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 
 // custom validator to check that two fields match
 export function MustMatch(controlName: string, matchingControlName: string): any {
@@ -11,6 +11,17 @@ export function MustMatch(controlName: string, matchingControlName: string): any
       matchingControl.setErrors({ mustMatch: true });
     } else {
       matchingControl.setErrors(null);
+    }
+  };
+}
+
+export function CheckHours(openning: number) {
+  return (control: AbstractControl) => {
+    const regex = new RegExp('^[0-9]*$');
+    if (regex.test(control.value) && openning < control.value) {
+      return null;
+    } else {
+      return { forbiddenName: { value: control.value } };
     }
   };
 }

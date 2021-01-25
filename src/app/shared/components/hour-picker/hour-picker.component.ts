@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import { Day } from '../../../models/day.model';
 import { Time } from '../../../models/time.model';
 import { WeekDayEnum } from '../../enum/weekDay.enum';
+import { CheckHours } from '../../validator/form';
 
 @Component({
   selector: 'app-hour-picker',
@@ -15,7 +16,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   @Input() structureInput: FormGroup;
   @Input() isEditMode: boolean;
 
-  @Output() updateHoursError = new EventEmitter<{ badHoursFormat: boolean }>();
+  @Output() updateFormError = new EventEmitter<boolean>();
   @Output() updateForm = new EventEmitter<FormGroup>();
 
   private copiedDay: any;
@@ -94,17 +95,32 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
         element.active = day.open;
         element.hours = day.time
           .map((hour: Time) => {
-            if (hour.openning) {
+            if (hour.openning && hour.closing) {
               return {
                 start: this.formatNumericalHours(hour.openning),
                 end: this.formatNumericalHours(hour.closing),
                 error: null,
               };
+            } else {
+              if (hour.openning) {
+                return {
+                  start: this.formatNumericalHours(hour.openning),
+                  end: '',
+                  error: 'incomplete',
+                };
+              } else {
+                return {
+                  start: '',
+                  end: this.formatNumericalHours(hour.closing),
+                  error: 'incomplete',
+                };
+              }
             }
           })
           .filter((item) => item);
       }
     });
+    this.checkHoursValid();
     this.structure.hours = this.structureHoursDefault;
   }
 
@@ -202,10 +218,9 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   public toggleOpenDay(day: any, value: any): void {
     day.open = value;
     if (!value) {
-      day.hours = [{ start: '', end: '', error: 'incomplete' }];
+      day.hours = [];
     }
-
-    this.checkHoursValid();
+    this.submitForm();
   }
 
   /**
@@ -221,8 +236,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
       end: '',
       error: 'incomplete',
     });
-
-    this.checkHoursValid();
+    this.submitForm();
   }
 
   /**
@@ -282,17 +296,13 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
         }
       }
     }
-
     // Émettre l'erreur à ajouter au formulaire pour autoriser
     // ou empêcher de passer à l'étape suivante
-    if (error) {
-      this.updateHoursError.emit({ badHoursFormat: true });
-    } else {
-      this.updateHoursError.emit(null);
-      // Emit new form value
-      this.parseHoursToForm();
-      this.updateForm.emit(this.parseHoursToForm());
-    }
+  }
+
+  public submitForm() {
+    this.checkHoursValid();
+    this.updateForm.emit(this.parseHoursToForm());
   }
 
   private createDay(day: Day): FormGroup {
@@ -304,8 +314,8 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
 
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning),
-      closing: new FormControl(time.closing),
+      openning: new FormControl(time.openning, Validators.required),
+      closing: new FormControl(time.closing, [Validators.required, CheckHours(time.openning)]),
     });
   }
 }

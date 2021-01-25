@@ -228,8 +228,8 @@ export class FormComponent implements OnInit {
   }
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning),
-      closing: new FormControl(time.closing),
+      openning: new FormControl(time.openning, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')),
+      closing: new FormControl(time.closing, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')),
     });
   }
 
@@ -302,7 +302,8 @@ export class FormComponent implements OnInit {
     };
     this.pagesValidation[5] = { valid: this.getStructureControl('structureType').valid };
     this.pagesValidation[6] = { valid: this.getStructureControl('accessModality').valid };
-    this.pagesValidation[7] = { valid: true };
+    this.pagesValidation[7] = { valid: this.hoursForm.valid };
+
     this.updatePageValid();
   }
 
@@ -342,5 +343,6 @@ export class FormComponent implements OnInit {
   }
   public updateHours(form: FormGroup) {
     this.hoursForm = form;
+    this.setValidationsForm();
   }
 }

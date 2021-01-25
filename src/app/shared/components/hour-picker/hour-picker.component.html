@@ -52,13 +52,13 @@
           <div>de</div>
 
           <div class="input-container">
-            <input type="time" [(ngModel)]="hour.start" (change)="checkHoursValid()" [disabled]="isEditMode" />
+            <input type="time" [(ngModel)]="hour.start" (change)="submitForm()" [disabled]="isEditMode" />
           </div>
 
           <div>à</div>
 
           <div class="input-container">
-            <input type="time" [(ngModel)]="hour.end" (change)="checkHoursValid()" [disabled]="isEditMode" />
+            <input type="time" [(ngModel)]="hour.end" (change)="submitForm()" [disabled]="isEditMode" />
           </div>
 
           <div>
