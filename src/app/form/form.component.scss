@@ -111,6 +111,26 @@ $progressBar-height: 50px;
     margin-top: 10px;
     margin-bottom: 0;
     @include cn-regular-18;
+
+    &.notRequired {
+      font-style: italic;
+      color: $secondary-color;
+    }
+  }
+  .textareaBlock {
+    max-width: 90%;
+
+    textarea {
+      padding: 13px 8px;
+      background: $grey-6;
+      border: 1px solid $grey-4;
+      border-radius: 4px;
+      resize: none;
+      @include cn-regular-16;
+    }
+    p {
+      text-align: right;
+    }
   }
 }
 

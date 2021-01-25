@@ -445,6 +445,23 @@
           [isEditMode]="!isEditMode"
         ></app-hour-picker>
       </div>
+      <div *ngIf="currentPage == 8" class="page">
+        <div class="title">
+          <h3>Avez-vous des précisions à apporter sur les horaires ?</h3>
+          <p class="notRequired">facultatif</p>
+        </div>
+        <div class="textareaBlock" fxLayout="column">
+          <textarea
+            rows="8"
+            placeholder="Exemple : nous ne sommes ouvert que le 1er mercredi du mois."
+            maxlength="500"
+            formControlName="description"
+          ></textarea>
+          <p>
+            {{ getStructureControl('description').value ? getStructureControl('description').value.length : 0 }}/500
+          </p>
+        </div>
+      </div>
     </form>
   </div>
   <div
