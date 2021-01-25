@@ -19,6 +19,7 @@ export class StructureListComponent implements OnChanges {
   @Output() public selectedMarkerId: EventEmitter<string> = new EventEmitter<string>();
   @Output() public updatedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
   @Output() public locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public showStructureDetails = false;
   public structure: Structure;
@@ -88,5 +89,9 @@ export class StructureListComponent implements OnChanges {
 
   public sendLocatationReset(): void {
     this.locatationReset.emit(true);
+  }
+
+  public sendlocatationTrigger(): void {
+    this.locatationTrigger.emit(true);
   }
 }

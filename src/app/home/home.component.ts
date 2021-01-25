@@ -173,8 +173,13 @@ export class HomeComponent implements OnInit {
     this.isMapPhone = !this.isMapPhone;
   }
 
-  public locatationTrigger(): void {
-    this.locate = true;
+  public locatationTrigger(event: any): void {
+    if (event && event !== this.locate) {
+      this.locate = !this.locate;
+    }
+    if (!event) {
+      this.locate = true;
+    }
   }
 
   public locatationReset(): void {

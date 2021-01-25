@@ -1,7 +1,8 @@
 <div class="topBlock hide-on-print">
   <app-structure-list-search
     (searchEvent)="fetchResults($event)"
-    (locatationReset)="sendLocatationReset($event)"
+    (locatationReset)="sendLocatationReset()"
+    (locatationTrigger)="sendlocatationTrigger()"
     [locate]="locate"
   ></app-structure-list-search>
 </div>

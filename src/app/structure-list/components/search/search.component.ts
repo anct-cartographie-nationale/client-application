@@ -18,6 +18,7 @@ import { SearchService } from '../../services/search.service';
 export class SearchComponent implements OnInit, OnChanges {
   @Output() searchEvent = new EventEmitter();
   @Output() locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() locate = false;
 
   constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
@@ -51,7 +52,7 @@ export class SearchComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.locate && changes.locate.currentValue) {
+    if (changes.locate && changes.locate.currentValue && !changes.locate.previousValue) {
       this.locateMe();
     }
   }
@@ -155,6 +156,7 @@ export class SearchComponent implements OnInit, OnChanges {
         this.searchForm.setValue({ searchTerm: adress });
         this.applyFilter(adress);
       });
+      this.locatationTrigger.emit(true);
     });
   }
   // Management of the checkbox event (Check / Uncheck)

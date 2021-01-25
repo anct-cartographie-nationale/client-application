@@ -1,8 +1,8 @@
 <div class="map-wrapper">
   <div id="map" class="body-wrap" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
-  <leaflet-locate-control
+  <!-- <leaflet-locate-control
     [map]="map"
     [options]="locateOptions"
     (location$)="sendLocationEvent($event)"
-  ></leaflet-locate-control>
+  ></leaflet-locate-control> -->
 </div>
