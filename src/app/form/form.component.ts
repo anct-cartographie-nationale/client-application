@@ -45,7 +45,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 8;
+  public currentPage = 9;
   public progressStatus = 0;
   public nbPagesForm = 13;
   public accountForm: FormGroup;
@@ -152,7 +152,7 @@ export class FormComponent implements OnInit {
       contactName: new FormControl(structure.contactName),
       contactSurname: new FormControl(structure.contactSurname),
       fonction: new FormControl(structure.fonction),
-      pmrAccess: new FormControl(structure.pmrAccess),
+      pmrAccess: new FormControl(structure.pmrAccess, Validators.required),
       documentsMeeting: new FormControl(structure.documentsMeeting),
       exceptionalClosures: new FormControl(structure.exceptionalClosures),
       labelsQualifications: this.loadArrayForCheckbox(structure.labelsQualifications, false),
@@ -304,7 +304,7 @@ export class FormComponent implements OnInit {
     this.pagesValidation[6] = { valid: this.getStructureControl('accessModality').valid };
     this.pagesValidation[7] = { valid: this.hoursForm.valid };
     this.pagesValidation[8] = { valid: this.getStructureControl('description').valid };
-
+    this.pagesValidation[9] = { valid: this.getStructureControl('pmrAccess').valid };
     this.updatePageValid();
   }
 
@@ -342,8 +342,12 @@ export class FormComponent implements OnInit {
     this.getStructureControl('structureType').setValue(type);
     this.setValidationsForm();
   }
-  public updateHours(form: FormGroup) {
+  public updateHours(form: FormGroup): void {
     this.hoursForm = form;
+    this.setValidationsForm();
+  }
+  public onPmrAccessChange(bool: boolean): void {
+    this.getStructureControl('pmrAccess').setValue(bool);
     this.setValidationsForm();
   }
 }
