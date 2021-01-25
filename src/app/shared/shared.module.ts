@@ -9,7 +9,6 @@ import { SharedDirectives } from './directives';
 import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 import { AddressAutocompleteComponent } from './components/address-autocomplete/address-autocomplete.component';
 import { HourPickerComponent } from './components/hour-picker/hour-picker.component';
-import { CopyPasteComponent } from './components/hour-picker/copy-paste/copy-paste.component';
 @NgModule({
   imports: [CommonModule, FormsModule, RouterModule, FlexLayoutModule, ReactiveFormsModule],
   declarations: [
@@ -19,7 +18,6 @@ import { CopyPasteComponent } from './components/hour-picker/copy-paste/copy-pas
     SvgIconComponent,
     AddressAutocompleteComponent,
     HourPickerComponent,
-    CopyPasteComponent,
   ],
   exports: [
     ...SharedPipes,
