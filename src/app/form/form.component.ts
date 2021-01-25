@@ -45,7 +45,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 9;
+  public currentPage = 10;
   public progressStatus = 0;
   public nbPagesForm = 13;
   public accountForm: FormGroup;
@@ -54,6 +54,9 @@ export class FormComponent implements OnInit {
   public isShowConfirmPassword = false;
   public isShowPassword = false;
   public hoursForm: FormGroup;
+  //collapse var
+  public showWebsite: boolean;
+  public showSocialNetwork: boolean;
 
   constructor(
     private structureService: StructureService,
@@ -144,7 +147,10 @@ export class FormComponent implements OnInit {
         Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
       ]),
-      website: new FormControl(structure.website),
+      website: new FormControl(structure.website, [
+        Validators.required,
+        Validators.pattern('(www[.])[a-z0-9.-]*[.][a-z]{2,3}'),
+      ]),
       facebook: new FormControl(structure.facebook),
       twitter: new FormControl(structure.twitter),
       instagram: new FormControl(structure.instagram),
@@ -305,6 +311,15 @@ export class FormComponent implements OnInit {
     this.pagesValidation[7] = { valid: this.hoursForm.valid };
     this.pagesValidation[8] = { valid: this.getStructureControl('description').valid };
     this.pagesValidation[9] = { valid: this.getStructureControl('pmrAccess').valid };
+    this.pagesValidation[10] = {
+      valid:
+        this.getStructureControl('contactMail').valid &&
+        (this.getStructureControl('website').valid || !this.showWebsite) &&
+        ((this.getStructureControl('facebook').valid &&
+          this.getStructureControl('twitter').valid &&
+          this.getStructureControl('instagram').valid) ||
+          !this.showSocialNetwork),
+    };
     this.updatePageValid();
   }
 
@@ -348,6 +363,22 @@ export class FormComponent implements OnInit {
   }
   public onPmrAccessChange(bool: boolean): void {
     this.getStructureControl('pmrAccess').setValue(bool);
+    this.setValidationsForm();
+  }
+  public toggleWebSite(): void {
+    this.showWebsite = !this.showWebsite;
+    if (!this.showWebsite) {
+      this.getStructureControl('website').reset();
+    }
+    this.setValidationsForm();
+  }
+  public toggleSocialNetwork(): void {
+    this.showSocialNetwork = !this.showSocialNetwork;
+    if (!this.showSocialNetwork) {
+      this.getStructureControl('facebook').reset();
+      this.getStructureControl('twitter').reset();
+      this.getStructureControl('instagram').reset();
+    }
     this.setValidationsForm();
   }
 }

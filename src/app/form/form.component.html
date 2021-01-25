@@ -472,6 +472,94 @@
         >
         </app-radio-form>
       </div>
+      <div *ngIf="currentPage == 10" class="page">
+        <div class="title">
+          <h3>Comment vous trouver sur internet ?</h3>
+        </div>
+        <div class="form-group" fxLayout="column">
+          <label for="structureName">Courriel de la structure</label>
+          <div fxLayout="row" fxLayoutGap="13px">
+            <input type="text" (input)="setValidationsForm()" formControlName="contactMail" class="form-input" />
+            <img
+              *ngIf="getStructureControl('contactMail').valid"
+              src="../../assets/form/validate.svg"
+              alt="logo checked"
+            />
+          </div>
+        </div>
+        <div class="collapse" [ngClass]="{ notCollapsed: !showWebsite }">
+          <div fxLayout="column">
+            <div class="collapseHeader" fxLayout="row" fxLayoutAlign=" center" (click)="toggleWebSite()">
+              <div class="titleCollapse">J’ajoute un site web</div>
+              <div class="logo">
+                <svg class="plus" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#add'"></use>
+                </svg>
+              </div>
+            </div>
+            <div *ngIf="showWebsite" class="inputSection">
+              <div class="form-group" fxLayout="column">
+                <label for="website">Adresse du site web</label>
+                <div fxLayout="row" fxLayoutGap="27px">
+                  <input type="text" (input)="setValidationsForm()" formControlName="website" class="form-input" />
+                  <img
+                    *ngIf="getStructureControl('website').valid"
+                    src="../../assets/form/validate.svg"
+                    alt="logo checked"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="collapse" [ngClass]="{ notCollapsed: !showSocialNetwork }">
+          <div fxLayout="column">
+            <div class="collapseHeader" fxLayout="row" fxLayoutAlign=" center" (click)="toggleSocialNetwork()">
+              <div class="titleCollapse">J’ajoute les réseaux sociaux</div>
+              <div class="logo">
+                <svg class="plus" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#add'"></use>
+                </svg>
+              </div>
+            </div>
+            <div *ngIf="showSocialNetwork" class="inputSection">
+              <div class="form-group">
+                <div fxLayout="row" fxLayoutGap="27px">
+                  <input
+                    type="text"
+                    (input)="setValidationsForm()"
+                    placeholder="Compte Facebook"
+                    formControlName="facebook"
+                    class="form-input"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <div fxLayout="row" fxLayoutGap="27px">
+                  <input
+                    type="text"
+                    (input)="setValidationsForm()"
+                    placeholder="Compte Twitter"
+                    formControlName="twitter"
+                    class="form-input"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <div fxLayout="row" fxLayoutGap="27px">
+                  <input
+                    type="text"
+                    (input)="setValidationsForm()"
+                    placeholder="Compte Instagram"
+                    formControlName="instagram"
+                    class="form-input"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
   <div
