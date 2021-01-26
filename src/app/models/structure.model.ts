@@ -21,6 +21,7 @@ export class Structure {
   public facebook: string = null;
   public twitter: string = null;
   public instagram: string = null;
+  public linkedin: string = null;
   public gender: string = null;
   public contactName: string = null;
   public contactSurname: string = null;

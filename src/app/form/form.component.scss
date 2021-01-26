@@ -251,15 +251,73 @@ img {
     margin: 0;
     color: $grey-2;
     @include cn-regular-14;
+    &.facebook {
+      &:focus-within {
+        svg {
+          &.facebook {
+            border-color: $secondary-color;
+            fill: $secondary-color;
+          }
+        }
+      }
+    }
+    &.instagram {
+      &:focus-within {
+        svg {
+          &.instagram {
+            border-color: $secondary-color;
+            fill: $secondary-color;
+          }
+        }
+      }
+    }
+    &.twitter {
+      &:focus-within {
+        svg {
+          &.twitter {
+            border-color: $secondary-color;
+            fill: $secondary-color;
+          }
+        }
+      }
+    }
+    &.linkedin {
+      &:focus-within {
+        svg {
+          &.linkedin {
+            border-color: $secondary-color;
+            fill: $secondary-color;
+          }
+        }
+      }
+    }
   }
   .inputSection {
     input {
-      width: 269px;
+      width: 217px;
       margin-top: 8px;
+      &.withIcon {
+        border-radius: 0 4px 4px 0;
+        border-left: 0;
+      }
     }
     padding: 0px 15px 19px 12px;
     img {
+      margin-top: 8px;
+      padding-left: 41px;
       margin-right: -54px;
+    }
+    svg {
+      margin-top: 8px;
+      width: 22px;
+      height: 38px;
+      fill: $grey-3;
+      margin-right: 0;
+      border: 1px solid $grey-4;
+      border-radius: 4px 0 0 4px;
+      border-right: 0;
+      padding-left: 16px;
+      background: $grey-6;
     }
   }
   .titleCollapse {

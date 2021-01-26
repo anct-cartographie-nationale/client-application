@@ -485,6 +485,12 @@
               src="../../assets/form/validate.svg"
               alt="logo checked"
             />
+
+            <img
+              *ngIf="getStructureControl('contactMail').invalid"
+              src="../../assets/form/notvalidate.svg"
+              alt="logo checked"
+            />
           </div>
         </div>
         <div class="collapse" [ngClass]="{ notCollapsed: !showWebsite }">
@@ -501,10 +507,21 @@
               <div class="form-group" fxLayout="column">
                 <label for="website">Adresse du site web</label>
                 <div fxLayout="row" fxLayoutGap="27px">
-                  <input type="text" (input)="setValidationsForm()" formControlName="website" class="form-input" />
+                  <input
+                    type="text"
+                    placeholder="www.resonum.com"
+                    (input)="setValidationsForm()"
+                    formControlName="website"
+                    class="form-input"
+                  />
                   <img
                     *ngIf="getStructureControl('website').valid"
                     src="../../assets/form/validate.svg"
+                    alt="logo checked"
+                  />
+                  <img
+                    *ngIf="getStructureControl('website').invalid"
+                    src="../../assets/form/notvalidate.svg"
                     alt="logo checked"
                   />
                 </div>
@@ -523,36 +540,115 @@
               </div>
             </div>
             <div *ngIf="showSocialNetwork" class="inputSection">
-              <div class="form-group">
-                <div fxLayout="row" fxLayoutGap="27px">
+              <div class="form-group facebook">
+                <div fxLayout="row">
+                  <svg class="facebook" aria-hidden="true">
+                    <use [attr.xlink:href]="'assets/form/sprite.svg#facebook'"></use>
+                  </svg>
                   <input
                     type="text"
                     (input)="setValidationsForm()"
-                    placeholder="Compte Facebook"
+                    placeholder="facebook.com/resonum"
                     formControlName="facebook"
-                    class="form-input"
+                    class="form-input withIcon"
+                  />
+                  <img
+                    *ngIf="
+                      getStructureControl('facebook').valid &&
+                      getStructureControl('facebook').value != null &&
+                      getStructureControl('facebook').value != ''
+                    "
+                    src="../../assets/form/validate.svg"
+                    alt="logo checked"
+                  />
+                  <img
+                    *ngIf="getStructureControl('facebook').invalid"
+                    src="../../assets/form/notvalidate.svg"
+                    alt="logo checked"
                   />
                 </div>
               </div>
-              <div class="form-group">
-                <div fxLayout="row" fxLayoutGap="27px">
+              <div class="form-group twitter">
+                <div fxLayout="row">
+                  <svg class="twitter" aria-hidden="true">
+                    <use [attr.xlink:href]="'assets/form/sprite.svg#twitter'"></use>
+                  </svg>
                   <input
                     type="text"
                     (input)="setValidationsForm()"
-                    placeholder="Compte Twitter"
+                    placeholder="twitter.com/resonum"
                     formControlName="twitter"
-                    class="form-input"
+                    class="form-input withIcon"
+                  />
+                  <img
+                    *ngIf="
+                      getStructureControl('twitter').valid &&
+                      getStructureControl('twitter').value != null &&
+                      getStructureControl('twitter').value != ''
+                    "
+                    src="../../assets/form/validate.svg"
+                    alt="logo checked"
+                  />
+                  <img
+                    *ngIf="getStructureControl('twitter').invalid"
+                    src="../../assets/form/notvalidate.svg"
+                    alt="logo checked"
                   />
                 </div>
               </div>
-              <div class="form-group">
-                <div fxLayout="row" fxLayoutGap="27px">
+              <div class="form-group instagram">
+                <div fxLayout="row">
+                  <svg class="instagram" aria-hidden="true">
+                    <use [attr.xlink:href]="'assets/form/sprite.svg#instagram'"></use>
+                  </svg>
                   <input
                     type="text"
                     (input)="setValidationsForm()"
-                    placeholder="Compte Instagram"
                     formControlName="instagram"
-                    class="form-input"
+                    placeholder="instagram.com/resonum"
+                    class="form-input withIcon"
+                  />
+                  <img
+                    *ngIf="
+                      getStructureControl('instagram').valid &&
+                      getStructureControl('instagram').value != null &&
+                      getStructureControl('instagram').value != ''
+                    "
+                    src="../../assets/form/validate.svg"
+                    alt="logo checked"
+                  />
+                  <img
+                    *ngIf="getStructureControl('instagram').invalid"
+                    src="../../assets/form/notvalidate.svg"
+                    alt="logo checked"
+                  />
+                </div>
+              </div>
+              <div class="form-group linkedin">
+                <div fxLayout="row">
+                  <svg class="linkedin" aria-hidden="true">
+                    <use [attr.xlink:href]="'assets/form/sprite.svg#linkedin'"></use>
+                  </svg>
+                  <input
+                    type="text"
+                    (input)="setValidationsForm()"
+                    formControlName="linkedin"
+                    placeholder="linkedin.com/in/resonum"
+                    class="form-input withIcon"
+                  />
+                  <img
+                    *ngIf="
+                      getStructureControl('linkedin').valid &&
+                      getStructureControl('linkedin').value != null &&
+                      getStructureControl('linkedin').value != ''
+                    "
+                    src="../../assets/form/validate.svg"
+                    alt="logo checked"
+                  />
+                  <img
+                    *ngIf="getStructureControl('linkedin').invalid"
+                    src="../../assets/form/notvalidate.svg"
+                    alt="logo checked"
                   />
                 </div>
               </div>
