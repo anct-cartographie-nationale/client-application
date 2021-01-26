@@ -35,19 +35,20 @@ export class FormComponent implements OnInit {
   public weekDay = WeekDayEnum;
   public typeStructure = typeStructureEnum;
   public fonctions = FonctionContactEnum;
-  public categoryTraining: Category[];
   public labelsQualifications: Category;
   public publics: Category;
   public accessModality: Category;
   public publicsAccompaniment: Category;
   public equipmentsAndServices: Category;
   public proceduresAccompaniment: Category;
+  public trainingCategories: { category: Category; openned: boolean }[] = [];
+
   public structureId: string;
 
   //New var form
-  public currentPage = 12;
+  public currentPage = 13;
   public progressStatus = 0;
-  public nbPagesForm = 13;
+  public nbPagesForm = 20;
   public accountForm: FormGroup;
   public isPageValid: boolean;
   public pagesValidation = [];
@@ -59,6 +60,7 @@ export class FormComponent implements OnInit {
   public showSocialNetwork: boolean;
   public showPublicsAccompaniment: boolean;
   public showProceduresAccompaniment: boolean;
+
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
@@ -104,8 +106,10 @@ export class FormComponent implements OnInit {
       });
     });
 
-    this.searchService.getCategoriesTraining().subscribe((t) => {
-      this.categoryTraining = t;
+    this.searchService.getCategoriesTraining().subscribe((categories: Category[]) => {
+      categories.forEach((categ) => {
+        this.trainingCategories.push({ category: categ, openned: false });
+      });
     });
   }
 
@@ -323,7 +327,19 @@ export class FormComponent implements OnInit {
           !this.showSocialNetwork),
     };
     this.pagesValidation[11] = { valid: this.getStructureControl('publics').valid };
-    this.pagesValidation[12] = { valid: this.getStructureControl('publicsAccompaniment').valid };
+    this.pagesValidation[12] = {
+      valid:
+        this.getStructureControl('publicsAccompaniment').valid &&
+        this.getStructureControl('proceduresAccompaniment').valid,
+    };
+    this.pagesValidation[13] = {
+      valid:
+        this.getStructureControl('accessRight').valid &&
+        this.getStructureControl('socialAndProfessional').valid &&
+        this.getStructureControl('baseSkills').valid &&
+        this.getStructureControl('parentingHelp').valid &&
+        this.getStructureControl('digitalCultureSecurity').valid,
+    };
     this.updatePageValid();
   }
 
@@ -401,5 +417,12 @@ export class FormComponent implements OnInit {
       this.getStructureControl('proceduresAccompaniment').reset();
     }
     this.setValidationsForm();
+  }
+  public toggleTrainingCategories(categ: { category: Category; openned: boolean }): void {
+    this.trainingCategories.forEach((c: { category: Category; openned: boolean }) => {
+      if (categ === c) {
+        c.openned = !c.openned;
+      }
+    });
   }
 }

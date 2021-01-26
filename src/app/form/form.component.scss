@@ -347,9 +347,8 @@ img {
     border-radius: 20px;
     margin: 4px;
     max-width: 100%;
-    white-space: nowrap;
     height: 40px;
-    padding: 0 28px;
+    padding: 0 13px;
     @include cn-bold-14;
     outline: none;
     border: none;
@@ -359,9 +358,18 @@ img {
     }
   }
   svg {
-    width: 13px;
+    width: 20px;
     height: 10px;
-    margin-left: -17px;
+    margin-right: 4px;
     stroke: $grey-6;
   }
+}
+.textBtn {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  width: 100%;
+  margin-right: 12px;
 }

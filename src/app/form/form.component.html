@@ -667,10 +667,14 @@
             (click)="updateChoice(choice.id, 'publics')"
             [ngClass]="{ selectedChoice: isInArray(choice.id, 'publics') }"
           >
-            <svg class="validate" aria-hidden="true">
-              <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-            </svg>
-            {{ choice.text }}
+            <div fxLayout="row" fxLayoutAlign=" center">
+              <svg class="validate" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+              </svg>
+              <div class="textBtn">
+                {{ choice.text }}
+              </div>
+            </div>
           </button>
         </div>
       </div>
@@ -701,10 +705,14 @@
                 (click)="updateChoice(choice.id, 'proceduresAccompaniment')"
                 [ngClass]="{ selectedChoice: isInArray(choice.id, 'proceduresAccompaniment') }"
               >
-                <svg class="validate" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-                </svg>
-                {{ choice.text }}
+                <div fxLayout="row" fxLayoutAlign=" center">
+                  <svg class="validate" aria-hidden="true">
+                    <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                  </svg>
+                  <div class="textBtn">
+                    {{ choice.text }}
+                  </div>
+                </div>
               </button>
             </div>
           </div>
@@ -731,10 +739,54 @@
                 (click)="updateChoice(choice.id, 'publicsAccompaniment')"
                 [ngClass]="{ selectedChoice: isInArray(choice.id, 'publicsAccompaniment') }"
               >
-                <svg class="validate" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                <div fxLayout="row" fxLayoutAlign=" center">
+                  <svg class="validate" aria-hidden="true">
+                    <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                  </svg>
+                  <div class="textBtn">
+                    {{ choice.text }}
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="currentPage == 13" class="page">
+        <div class="title">
+          <h3>Quel(s) atelier(s) au numérique proposez-vous ?</h3>
+          <p class="notRequired">facultatif</p>
+        </div>
+        <div class="collapse" *ngFor="let categ of trainingCategories" [ngClass]="{ notCollapsed: !categ.openned }">
+          <div fxLayout="column">
+            <div
+              class="collapseHeader"
+              fxLayout="row"
+              fxLayoutGap="20px"
+              fxLayoutAlign=" center"
+              (click)="toggleTrainingCategories(categ)"
+            >
+              <div class="titleCollapse">{{ categ.category.name }}</div>
+              <div class="logo">
+                <svg class="plus" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#add'"></use>
                 </svg>
-                {{ choice.text }}
+              </div>
+            </div>
+            <div *ngIf="categ.openned" class="tags">
+              <button
+                *ngFor="let choice of categ.category.modules"
+                (click)="updateChoice(choice.id, categ.category.id)"
+                [ngClass]="{ selectedChoice: isInArray(choice.id, categ.category.id) }"
+              >
+                <div fxLayout="row" fxLayoutAlign=" center">
+                  <svg class="validate" aria-hidden="true">
+                    <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                  </svg>
+                  <div class="textBtn">
+                    {{ choice.text }}
+                  </div>
+                </div>
               </button>
             </div>
           </div>
