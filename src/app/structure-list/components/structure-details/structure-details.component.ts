@@ -8,7 +8,6 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
 import { Equipment } from '../../enum/equipment.enum';
-import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
 import { StructureService } from '../../../services/structure.service';
 import { TclService } from '../../../services/tcl.service';
 import { TclStopPoint } from '../../../models/tclStopPoint.model';
@@ -125,7 +124,6 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   public deleteStructure(shouldDelete: boolean): void {
-    console.log('DELETE', shouldDelete);
     this.toggleDeleteModal();
     if (shouldDelete) {
       this.structureService.delete(this.structure._id).subscribe((res) => {
