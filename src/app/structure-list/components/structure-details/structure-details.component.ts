@@ -5,7 +5,7 @@ import { Category } from '../../models/category.model';
 import { AccessModality } from '../../enum/access-modality.enum';
 import { SearchService } from '../../services/search.service';
 import * as _ from 'lodash';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
 import { Equipment } from '../../enum/equipment.enum';
 import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
@@ -41,13 +41,14 @@ export class StructureDetailsComponent implements OnInit {
   public currentProfile: User = null;
 
   constructor(
-    route: ActivatedRoute,
     private printService: PrintService,
     private searchService: SearchService,
     private structureService: StructureService,
     private tclService: TclService,
     private profileService: ProfileService,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     route.url.subscribe((url) => {
       if (url[0].path === 'structure') {
@@ -103,8 +104,8 @@ export class StructureDetailsComponent implements OnInit {
     }
   }
 
-  public close(): void {
-    this.closeDetails.emit(true);
+  public close(refreshRequired: boolean): void {
+    this.closeDetails.emit(refreshRequired);
   }
 
   public print(): void {
@@ -114,6 +115,18 @@ export class StructureDetailsComponent implements OnInit {
   public editStructure(): void {
     this.isEditMode = true;
     this.displayForm();
+  }
+
+  public deleteStructure(): void {
+    this.structureService.delete(this.structure._id).subscribe((res) => {
+      this.reload();
+    });
+  }
+
+  private reload(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['./'], { relativeTo: this.route });
   }
 
   public claimStructure(): void {

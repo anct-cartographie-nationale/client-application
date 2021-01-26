@@ -40,8 +40,13 @@ export class StructureService {
   }
 
   public getStructure(id: string): Observable<Structure> {
-    return this.http.get(`${this.baseUrl}/${id}`).pipe(map((item: any) => new Structure(item)));
+    return this.http.get<Structure>(`${this.baseUrl}/${id}`);
   }
+
+  public delete(id: string): Observable<Structure> {
+    return this.http.delete<Structure>(`${this.baseUrl}/${id}`);
+  }
+
   public getStructures(filters: Filter[]): Observable<Structure[]> {
     if (filters && filters.length > 0) {
       let requestUrl = `${this.baseUrl}/search`;
