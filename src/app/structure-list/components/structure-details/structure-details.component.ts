@@ -15,6 +15,7 @@ import { TclStopPoint } from '../../../models/tclStopPoint.model';
 import { ProfileService } from '../../../profile/services/profile.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth.service';
+import { PublicCategorie } from '../../enum/public.enum';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -130,20 +131,6 @@ export class StructureDetailsComponent implements OnInit {
     this.displayForm();
     this.ngOnInit();
   }
-  public getAccessIcon(accessModality: AccessModality): string {
-    switch (accessModality) {
-      case AccessModality.free:
-        return 'group';
-      case AccessModality.meeting:
-        return 'calendar';
-      case AccessModality.meetingOnly:
-        return 'calendar';
-      case AccessModality.numeric:
-        return 'tel';
-      default:
-        return null;
-    }
-  }
 
   public getAccessLabel(accessModality: AccessModality): string {
     switch (accessModality) {
@@ -155,6 +142,21 @@ export class StructureDetailsComponent implements OnInit {
         return 'Uniquement sur RDV';
       case AccessModality.numeric:
         return 'Téléphone / Visio';
+      default:
+        return null;
+    }
+  }
+
+  public getPublicLabel(tagetPublic: PublicCategorie): string {
+    switch (tagetPublic) {
+      case PublicCategorie.young:
+        return 'Jeunes (16 - 25 ans)';
+      case PublicCategorie.adult:
+        return 'Adultes (25 - 65 ans)';
+      case PublicCategorie.elderly:
+        return 'Séniors (+ de 65 ans)';
+      case PublicCategorie.all:
+        return 'Tout public';
       default:
         return null;
     }

@@ -5,6 +5,7 @@
 @import 'assets/scss/breakpoint';
 @import 'assets/scss/icons';
 @import 'assets/scss/inputs';
+@import 'assets/scss/hyperlink';
 @import '../node_modules/leaflet.locatecontrol/dist/L.Control.Locate.css';
 
 html {
@@ -34,6 +35,13 @@ a {
   }
   &:hover {
     text-decoration: underline;
+  }
+  &.primary {
+    @include hyperlink;
+    width: 100%;
+  }
+  &.right {
+    text-align: right;
   }
 }
 
@@ -140,6 +148,14 @@ a {
 .w-100 {
   width: 100%;
 }
+
+.mobile-column {
+  @media #{$large-phone} {
+    flex-direction: column;
+  }
+}
+
+// PRINT
 
 @media print {
   body,
