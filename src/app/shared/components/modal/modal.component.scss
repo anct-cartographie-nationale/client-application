@@ -36,3 +36,6 @@
   }
   padding: 28px;
 }
+button {
+  @include btn-search-filter;
+}

@@ -109,6 +109,8 @@
   <a (click)="openConfirmationModal()" class="primary right" tabindex="0">Ajouter une structure</a>
 </div>
 <app-modal
+  *ngIf="isConfirmationModalOpen"
+  [modalType]="modalType.information"
   [openned]="isConfirmationModalOpen"
   [content]="confirmationModalContent"
   (closed)="closeConfirmationModal()"

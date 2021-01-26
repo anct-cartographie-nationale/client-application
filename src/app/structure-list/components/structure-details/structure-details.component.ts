@@ -16,6 +16,7 @@ import { ProfileService } from '../../../profile/services/profile.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth.service';
 import { PublicCategorie } from '../../enum/public.enum';
+import { AppModalType } from '../../../shared/components/modal/modal-type.enum';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -39,6 +40,8 @@ export class StructureDetailsComponent implements OnInit {
   public isLoading: boolean = false;
   public isEditMode: boolean = false;
   public currentProfile: User = null;
+  public deleteModalOpenned = false;
+  public modalType = AppModalType;
 
   constructor(
     private printService: PrintService,
@@ -117,10 +120,18 @@ export class StructureDetailsComponent implements OnInit {
     this.displayForm();
   }
 
-  public deleteStructure(): void {
-    this.structureService.delete(this.structure._id).subscribe((res) => {
-      this.reload();
-    });
+  public toggleDeleteModal(): void {
+    this.deleteModalOpenned = !this.deleteModalOpenned;
+  }
+
+  public deleteStructure(shouldDelete: boolean): void {
+    console.log('DELETE', shouldDelete);
+    this.toggleDeleteModal();
+    if (shouldDelete) {
+      this.structureService.delete(this.structure._id).subscribe((res) => {
+        this.reload();
+      });
+    }
   }
 
   private reload(): void {

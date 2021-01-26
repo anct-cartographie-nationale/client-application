@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { GeoJson } from '../../../map/models/geojson.model';
 import { GeojsonService } from '../../../services/geojson.service';
+import { AppModalType } from '../../../shared/components/modal/modal-type.enum';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
 import { Filter } from '../../models/filter.model';
@@ -23,6 +24,7 @@ export class SearchComponent implements OnInit {
   }
 
   @Output() searchEvent = new EventEmitter();
+  public modalType = AppModalType;
 
   // Form search input
   public searchForm: FormGroup;

@@ -92,7 +92,7 @@
         >
           Modifier cette structure
         </a>
-        <a *ngIf="profileService.isAdmin()" (click)="deleteStructure()" class="primary" tabindex="0">
+        <a *ngIf="profileService.isAdmin()" (click)="toggleDeleteModal()" class="primary" tabindex="0">
           Supprimer cette structure
         </a>
       </div>
@@ -278,3 +278,10 @@
     </div>
   </div>
 </div>
+<app-modal
+  *ngIf="deleteModalOpenned"
+  [modalType]="modalType.confirmation"
+  [openned]="deleteModalOpenned"
+  [content]="'Voulez-vous vraiment supprimer cette structure ?'"
+  (closed)="deleteStructure($event)"
+></app-modal>
