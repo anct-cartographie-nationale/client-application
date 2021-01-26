@@ -14,9 +14,12 @@ export class StructureListComponent implements OnChanges {
   @Output() searchEvent = new EventEmitter();
   @Input() public location: GeoJson;
   @Input() public selectedStructure: Structure = new Structure();
+  @Input() public locate = false;
   @Output() public displayMapMarkerId: EventEmitter<string> = new EventEmitter<string>();
   @Output() public selectedMarkerId: EventEmitter<string> = new EventEmitter<string>();
   @Output() public updatedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+  @Output() public locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public showStructureDetails = false;
   public structure: Structure;
@@ -82,5 +85,13 @@ export class StructureListComponent implements OnChanges {
       const newStructures = _.map(this.arrayChunked[this.pageStructures]);
       this.structuresListChunked = [...this.structuresListChunked, ...newStructures];
     }
+  }
+
+  public sendLocatationReset(): void {
+    this.locatationReset.emit(true);
+  }
+
+  public sendlocatationTrigger(): void {
+    this.locatationTrigger.emit(true);
   }
 }

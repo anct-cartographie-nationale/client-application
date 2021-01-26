@@ -8,28 +8,18 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import {
-  latLng,
-  MapOptions,
-  geoJSON,
-  tileLayer,
-  Map,
-  CRS,
-  TileLayer,
-  LatLngBounds,
-  latLngBounds,
-  layerGroup,
-} from 'leaflet';
+import { latLng, MapOptions, geoJSON, tileLayer, Map, latLngBounds, layerGroup, Control } from 'leaflet';
 import { Structure } from '../../models/structure.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
-import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
 import * as _ from 'lodash';
 import { GeoJsonProperties } from '../models/geoJsonProperties.model';
 import { MarkerType } from './markerType.enum';
 import { typeStructureEnum } from '../../shared/enum/typeStructure.enum';
 import metropole from '../../../assets/geojson/metropole.json';
 import brignais from '../../../assets/geojson/brignais.json';
+import L from 'leaflet';
+import 'leaflet.locatecontrol';
 
 @Component({
   selector: 'app-map',
@@ -41,8 +31,10 @@ export class MapComponent implements OnChanges {
   @Input() public toogleToolTipId: string;
   @Input() public selectedMarkerId: string;
   @Input() public isMapPhone: boolean;
-  @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
+  @Input() public locate = false;
   @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+  @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private lc;
   private currentStructure: Structure;
 
   public map: Map;
@@ -74,6 +66,14 @@ export class MapComponent implements OnChanges {
         setTimeout(() => {
           this.map.invalidateSize();
         }, 0);
+      }
+    }
+    // Handle map locate from search bar
+    if (changes.locate && !changes.locate.isFirstChange()) {
+      if (changes.locate.currentValue) {
+        this.lc.start();
+      } else {
+        this.lc.stop();
       }
     }
     if (changes.structures) {
@@ -134,6 +134,11 @@ export class MapComponent implements OnChanges {
           this.currentStructure = structure;
         });
     });
+    // Reset location if active to prevent graphical issue
+    if (this.locate) {
+      this.lc.stop();
+      this.lc.start();
+    }
   }
 
   /**
@@ -174,6 +179,12 @@ export class MapComponent implements OnChanges {
    */
   public onMapReady(map: Map): void {
     this.map = map;
+    // Handle location
+    this.lc = L.control.locate(this.locateOptions).addTo(this.map);
+    // .locate(this.locateOptions).addTo(this.map);
+    this.map.on('locationfound', () => {
+      this.locatationTrigger.emit(true);
+    });
   }
 
   /**
