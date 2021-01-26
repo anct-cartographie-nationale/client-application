@@ -656,6 +656,24 @@
           </div>
         </div>
       </div>
+      <div *ngIf="currentPage == 11" class="page">
+        <div class="title">
+          <h3>Quel public peut venir vous consulter ?</h3>
+          <p>Plusieurs choix possibles</p>
+        </div>
+        <div class="tags" *ngIf="publics">
+          <button
+            *ngFor="let choice of publics.modules"
+            (click)="updateChoicePublics(choice.id)"
+            [ngClass]="{ selectedChoice: isInArray(choice.id, 'publics') }"
+          >
+            <svg class="validate" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+            </svg>
+            {{ choice.text }}
+          </button>
+        </div>
+      </div>
     </form>
   </div>
   <div

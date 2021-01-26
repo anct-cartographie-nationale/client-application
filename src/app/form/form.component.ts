@@ -45,7 +45,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 10;
+  public currentPage = 11;
   public progressStatus = 0;
   public nbPagesForm = 13;
   public accountForm: FormGroup;
@@ -321,6 +321,7 @@ export class FormComponent implements OnInit {
           this.getStructureControl('instagram').valid) ||
           !this.showSocialNetwork),
     };
+    this.pagesValidation[11] = { valid: this.getStructureControl('publics').valid };
     this.updatePageValid();
   }
 
@@ -381,5 +382,8 @@ export class FormComponent implements OnInit {
       this.getStructureControl('instagram').reset();
     }
     this.setValidationsForm();
+  }
+  public updateChoicePublics(choice): void {
+    this.onCheckChange(!this.isInArray(choice, 'publics'), 'publics', choice);
   }
 }

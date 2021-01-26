@@ -340,3 +340,28 @@ img {
     }
   }
 }
+
+.tags {
+  button {
+    background: $grey-6;
+    border-radius: 20px;
+    margin: 4px;
+    max-width: 100%;
+    white-space: nowrap;
+    height: 40px;
+    padding: 0 28px;
+    @include cn-bold-14;
+    outline: none;
+    border: none;
+    &.selectedChoice {
+      background: $green-1 !important;
+      color: $white;
+    }
+  }
+  svg {
+    width: 13px;
+    height: 10px;
+    margin-left: -17px;
+    stroke: $grey-6;
+  }
+}
