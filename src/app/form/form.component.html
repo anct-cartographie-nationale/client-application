@@ -664,7 +664,7 @@
         <div class="tags" *ngIf="publics">
           <button
             *ngFor="let choice of publics.modules"
-            (click)="updateChoicePublics(choice.id)"
+            (click)="updateChoice(choice.id, 'publics')"
             [ngClass]="{ selectedChoice: isInArray(choice.id, 'publics') }"
           >
             <svg class="validate" aria-hidden="true">
@@ -672,6 +672,72 @@
             </svg>
             {{ choice.text }}
           </button>
+        </div>
+      </div>
+      <div *ngIf="currentPage == 12" class="page">
+        <div class="title">
+          <h3>Quel(s) accompagnement(s) proposez-vous ?</h3>
+          <p class="notRequired">facultatif</p>
+        </div>
+        <div class="collapse" [ngClass]="{ notCollapsed: !showProceduresAccompaniment }">
+          <div fxLayout="column">
+            <div
+              class="collapseHeader"
+              fxLayout="row"
+              fxLayoutGap="20px"
+              fxLayoutAlign=" center"
+              (click)="toggleProceduresAccompaniment()"
+            >
+              <div class="titleCollapse">Publics spécifiques (handicap...) ?</div>
+              <div class="logo">
+                <svg class="plus" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#add'"></use>
+                </svg>
+              </div>
+            </div>
+            <div *ngIf="showProceduresAccompaniment && publics" class="tags">
+              <button
+                *ngFor="let choice of proceduresAccompaniment.modules"
+                (click)="updateChoice(choice.id, 'proceduresAccompaniment')"
+                [ngClass]="{ selectedChoice: isInArray(choice.id, 'proceduresAccompaniment') }"
+              >
+                <svg class="validate" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                </svg>
+                {{ choice.text }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="collapse" [ngClass]="{ notCollapsed: !showPublicsAccompaniment }">
+          <div fxLayout="column">
+            <div
+              class="collapseHeader"
+              fxLayout="row"
+              fxLayoutGap="20px"
+              fxLayoutAlign=" center"
+              (click)="togglePublicsAccompaniment()"
+            >
+              <div class="titleCollapse">Publics spécifiques (handicap...) ?</div>
+              <div class="logo">
+                <svg class="plus" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#add'"></use>
+                </svg>
+              </div>
+            </div>
+            <div *ngIf="showPublicsAccompaniment && publics" class="tags">
+              <button
+                *ngFor="let choice of publicsAccompaniment.modules"
+                (click)="updateChoice(choice.id, 'publicsAccompaniment')"
+                [ngClass]="{ selectedChoice: isInArray(choice.id, 'publicsAccompaniment') }"
+              >
+                <svg class="validate" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                </svg>
+                {{ choice.text }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </form>

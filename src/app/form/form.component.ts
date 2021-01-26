@@ -45,7 +45,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 11;
+  public currentPage = 12;
   public progressStatus = 0;
   public nbPagesForm = 13;
   public accountForm: FormGroup;
@@ -57,7 +57,8 @@ export class FormComponent implements OnInit {
   //collapse var
   public showWebsite: boolean;
   public showSocialNetwork: boolean;
-
+  public showPublicsAccompaniment: boolean;
+  public showProceduresAccompaniment: boolean;
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
@@ -322,6 +323,7 @@ export class FormComponent implements OnInit {
           !this.showSocialNetwork),
     };
     this.pagesValidation[11] = { valid: this.getStructureControl('publics').valid };
+    this.pagesValidation[12] = { valid: this.getStructureControl('publicsAccompaniment').valid };
     this.updatePageValid();
   }
 
@@ -383,7 +385,21 @@ export class FormComponent implements OnInit {
     }
     this.setValidationsForm();
   }
-  public updateChoicePublics(choice): void {
-    this.onCheckChange(!this.isInArray(choice, 'publics'), 'publics', choice);
+  public updateChoice(choice: string, controlName: string): void {
+    this.onCheckChange(!this.isInArray(choice, controlName), controlName, choice);
+  }
+  public togglePublicsAccompaniment(): void {
+    this.showPublicsAccompaniment = !this.showPublicsAccompaniment;
+    if (!this.showPublicsAccompaniment) {
+      this.getStructureControl('publicsAccompaniment').reset();
+    }
+    this.setValidationsForm();
+  }
+  public toggleProceduresAccompaniment(): void {
+    this.showProceduresAccompaniment = !this.showProceduresAccompaniment;
+    if (!this.showProceduresAccompaniment) {
+      this.getStructureControl('proceduresAccompaniment').reset();
+    }
+    this.setValidationsForm();
   }
 }
