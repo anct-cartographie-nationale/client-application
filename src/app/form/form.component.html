@@ -812,6 +812,122 @@
         >
         </app-radio-form>
       </div>
+      <div *ngIf="currentPage == 16" class="page">
+        <div class="title">
+          <h3>Quel matériel mettez-vous à disposition ?</h3>
+          <p class="notRequired">facultatif</p>
+        </div>
+        <ng-container *ngFor="let equipment of equipmentsAndServices">
+          <div
+            class="collapse"
+            [ngClass]="{ notCollapsed: !equipment.openned }"
+            *ngIf="['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes'].includes(equipment.module.id)"
+          >
+            <div fxLayout="column">
+              <div
+                class="collapseHeader"
+                fxLayout="row"
+                fxLayoutAlign=" center"
+                (click)="toggleEquipmentsServices(equipment)"
+              >
+                <div class="titleCollapse">{{ equipment.module.text }}</div>
+                <div class="logo">
+                  <svg class="plus" aria-hidden="true">
+                    <use [attr.xlink:href]="'assets/form/sprite.svg#add'"></use>
+                  </svg>
+                </div>
+              </div>
+              <div *ngIf="equipment.openned" class="inputSection">
+                <div class="form-group" fxLayout="column">
+                  <label for="equipment">Nombre</label>
+                  <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="27px">
+                    <ng-container *ngIf="equipment.module.id == 'ordinateurs'">
+                      <input
+                        type="number"
+                        (input)="setValidationsForm()"
+                        formControlName="nbComputers"
+                        class="form-input nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbComputers').valid"
+                        src="../../assets/form/validate.svg"
+                        alt="logo checked"
+                        class="nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbComputers').invalid"
+                        src="../../assets/form/notvalidate.svg"
+                        alt="logo checked"
+                        class="nbEquipment"
+                      />
+                    </ng-container>
+                    <ng-container *ngIf="equipment.module.id == 'tablettes'">
+                      <input
+                        type="number"
+                        (input)="setValidationsForm()"
+                        formControlName="nbTablets"
+                        class="form-input nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbTablets').valid"
+                        src="../../assets/form/validate.svg"
+                        alt="logo checked"
+                        class="nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbTablets').invalid"
+                        src="../../assets/form/notvalidate.svg"
+                        alt="logo checked"
+                        class="nbEquipment"
+                      />
+                    </ng-container>
+                    <ng-container *ngIf="equipment.module.id == 'imprimantes'">
+                      <input
+                        type="number"
+                        (input)="setValidationsForm()"
+                        formControlName="nbPrinters"
+                        class="form-input nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbPrinters').valid"
+                        src="../../assets/form/validate.svg"
+                        alt="logo checked"
+                        class="nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbPrinters').invalid"
+                        src="../../assets/form/notvalidate.svg"
+                        alt="logo checked"
+                        class="nbEquipment"
+                      />
+                    </ng-container>
+                    <ng-container *ngIf="equipment.module.id == 'bornesNumeriques'">
+                      <input
+                        type="number"
+                        (input)="setValidationsForm()"
+                        formControlName="nbNumericTerminal"
+                        class="form-input nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbNumericTerminal').valid"
+                        src="../../assets/form/validate.svg"
+                        alt="logo checked"
+                        class="nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbNumericTerminal').invalid"
+                        src="../../assets/form/notvalidate.svg"
+                        alt="logo checked"
+                        class="nbEquipment"
+                      />
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
     </form>
   </div>
   <div

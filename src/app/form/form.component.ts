@@ -16,6 +16,8 @@ import { User } from '../models/user.model';
 import { MustMatch } from '../shared/validator/form';
 import { Address } from '../models/address.model';
 import { Week } from '../models/week.model';
+import { Module } from '../structure-list/models/module.model';
+import { Equipment } from '../structure-list/enum/equipment.enum';
 
 @Component({
   selector: 'app-structureForm',
@@ -39,7 +41,7 @@ export class FormComponent implements OnInit {
   public publics: Category;
   public accessModality: Category;
   public publicsAccompaniment: Category;
-  public equipmentsAndServices: Category;
+  public equipmentsAndServices: { module: Module; openned: boolean }[] = [];
   public proceduresAccompaniment: Category;
   public trainingCategories: { category: Category; openned: boolean }[] = [];
 
@@ -87,7 +89,9 @@ export class FormComponent implements OnInit {
             break;
           }
           case CategoryEnum.equipmentsAndServices: {
-            this.equipmentsAndServices = categ;
+            categ.modules.forEach((c) => {
+              this.equipmentsAndServices.push({ module: c, openned: false });
+            });
             break;
           }
           case CategoryEnum.labelsQualifications: {
@@ -178,11 +182,21 @@ export class FormComponent implements OnInit {
       parentingHelp: this.loadArrayForCheckbox(structure.parentingHelp, false),
       socialAndProfessional: this.loadArrayForCheckbox(structure.socialAndProfessional, false),
       digitalCultureSecurity: this.loadArrayForCheckbox(structure.digitalCultureSecurity, false),
-      nbComputers: new FormControl(structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 0),
-      nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 0),
-      nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 0),
+      nbComputers: new FormControl(
+        structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 0,
+        [Validators.required, Validators.pattern('[0-9]{1,}')]
+      ),
+      nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 0, [
+        Validators.required,
+        Validators.pattern('[0-9]{1,}'),
+      ]),
+      nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 0, [
+        Validators.required,
+        Validators.pattern('[0-9]{1,}'),
+      ]),
       nbNumericTerminal: new FormControl(
-        structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 0
+        structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 0,
+        [Validators.required, Validators.pattern('[0-9]{1,}')]
       ),
       equipmentsDetails: new FormControl(structure.equipmentsDetails),
       equipmentsAccessType: this.loadArrayForCheckbox(structure.equipmentsAccessType, false),
@@ -344,6 +358,14 @@ export class FormComponent implements OnInit {
     };
     this.pagesValidation[14] = { valid: this.getStructureControl('freeWorkShop').valid };
     this.pagesValidation[15] = { valid: this.getStructureControl('freeWifi').valid };
+    this.pagesValidation[16] = {
+      valid:
+        this.getStructureControl('equipmentsAndServices').valid &&
+        this.getStructureControl('nbComputers').valid &&
+        this.getStructureControl('nbPrinters').valid &&
+        this.getStructureControl('nbTablets').valid &&
+        this.getStructureControl('nbNumericTerminal').valid,
+    };
     this.updatePageValid();
   }
 
@@ -438,5 +460,34 @@ export class FormComponent implements OnInit {
   public onfreeWifiChange(bool: boolean): void {
     this.getStructureControl('freeWifi').setValue(bool);
     this.setValidationsForm();
+  }
+
+  public toggleEquipmentsServices(equipment: { module: Module; openned: boolean }): void {
+    this.equipmentsAndServices.forEach((e: { module: Module; openned: boolean }) => {
+      if (equipment === e) {
+        e.openned = !e.openned;
+        if (!equipment.openned) {
+          switch (e.module.id) {
+            case Equipment.computer: {
+              this.getStructureControl('nbComputers').setValue(0);
+              break;
+            }
+            case Equipment.printer: {
+              this.getStructureControl('nbPrinters').setValue(0);
+              break;
+            }
+            case Equipment.tablet: {
+              this.getStructureControl('nbTablets').setValue(0);
+              break;
+            }
+            case Equipment.bornes: {
+              this.getStructureControl('nbNumericTerminal').setValue(0);
+              break;
+            }
+          }
+          this.setValidationsForm();
+        }
+      }
+    });
   }
 }
