@@ -43,6 +43,7 @@ export class Structure {
   public hours: Week;
   public equipmentsDetails: string = null;
   public equipmentsAccessType: string[] = [];
+  public freeWorkShop: boolean = false;
 
   public isOpen: boolean = false;
   public openedOn: OpeningDay = new OpeningDay();

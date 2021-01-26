@@ -186,6 +186,7 @@ export class FormComponent implements OnInit {
       ),
       equipmentsDetails: new FormControl(structure.equipmentsDetails),
       equipmentsAccessType: this.loadArrayForCheckbox(structure.equipmentsAccessType, false),
+      freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
     });
 
     this.hoursForm = new FormGroup({
@@ -340,6 +341,7 @@ export class FormComponent implements OnInit {
         this.getStructureControl('parentingHelp').valid &&
         this.getStructureControl('digitalCultureSecurity').valid,
     };
+    this.pagesValidation[14] = { valid: this.getStructureControl('freeWorkShop').valid };
     this.updatePageValid();
   }
 
@@ -424,5 +426,10 @@ export class FormComponent implements OnInit {
         c.openned = !c.openned;
       }
     });
+  }
+
+  public freeWorkShop(bool: boolean): void {
+    this.getStructureControl('freeWorkShop').setValue(bool);
+    this.setValidationsForm();
   }
 }

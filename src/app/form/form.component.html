@@ -792,6 +792,16 @@
           </div>
         </div>
       </div>
+      <div *ngIf="currentPage == 14" class="page">
+        <div class="title">
+          <h3>Est-ce accessible pour les personnes à mobilité réduite ?</h3>
+        </div>
+        <app-radio-form
+          [selectedOption]="getStructureControl('pmrAccess').value"
+          (selectedEvent)="onPmrAccessChange($event)"
+        >
+        </app-radio-form>
+      </div>
     </form>
   </div>
   <div
