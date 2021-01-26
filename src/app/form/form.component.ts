@@ -46,7 +46,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 13;
+  public currentPage = 14;
   public progressStatus = 0;
   public nbPagesForm = 20;
   public accountForm: FormGroup;
@@ -187,6 +187,7 @@ export class FormComponent implements OnInit {
       equipmentsDetails: new FormControl(structure.equipmentsDetails),
       equipmentsAccessType: this.loadArrayForCheckbox(structure.equipmentsAccessType, false),
       freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
+      freeWifi: new FormControl(structure.freeWifi, Validators.required),
     });
 
     this.hoursForm = new FormGroup({
@@ -342,6 +343,7 @@ export class FormComponent implements OnInit {
         this.getStructureControl('digitalCultureSecurity').valid,
     };
     this.pagesValidation[14] = { valid: this.getStructureControl('freeWorkShop').valid };
+    this.pagesValidation[15] = { valid: this.getStructureControl('freeWifi').valid };
     this.updatePageValid();
   }
 
@@ -428,8 +430,13 @@ export class FormComponent implements OnInit {
     });
   }
 
-  public freeWorkShop(bool: boolean): void {
+  public onfreeWorkShopChange(bool: boolean): void {
     this.getStructureControl('freeWorkShop').setValue(bool);
+    this.setValidationsForm();
+  }
+
+  public onfreeWifiChange(bool: boolean): void {
+    this.getStructureControl('freeWifi').setValue(bool);
     this.setValidationsForm();
   }
 }

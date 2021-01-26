@@ -794,11 +794,21 @@
       </div>
       <div *ngIf="currentPage == 14" class="page">
         <div class="title">
-          <h3>Est-ce accessible pour les personnes à mobilité réduite ?</h3>
+          <h3>Ces ateliers sont-ils gratuits ?</h3>
         </div>
         <app-radio-form
-          [selectedOption]="getStructureControl('pmrAccess').value"
-          (selectedEvent)="onPmrAccessChange($event)"
+          [selectedOption]="getStructureControl('freeWorkShop').value"
+          (selectedEvent)="onfreeWorkShopChange($event)"
+        >
+        </app-radio-form>
+      </div>
+      <div *ngIf="currentPage == 15" class="page">
+        <div class="title">
+          <h3>Proposez-vous le wifi en accès libre ?</h3>
+        </div>
+        <app-radio-form
+          [selectedOption]="getStructureControl('freeWifi').value"
+          (selectedEvent)="onfreeWifiChange($event)"
         >
         </app-radio-form>
       </div>
