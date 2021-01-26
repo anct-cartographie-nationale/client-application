@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   public userLatitude: number;
   public userLongitude: number;
   public isMapPhone = false;
+  public locate = false; // Use to sync location between search and map
   constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
 
   ngOnInit(): void {
@@ -170,5 +171,18 @@ export class HomeComponent implements OnInit {
 
   public switchMapList(): void {
     this.isMapPhone = !this.isMapPhone;
+  }
+
+  public locatationTrigger(event: any): void {
+    if (event && event !== this.locate) {
+      this.locate = !this.locate;
+    }
+    if (!event) {
+      this.locate = true;
+    }
+  }
+
+  public locatationReset(): void {
+    this.locate = false;
   }
 }
