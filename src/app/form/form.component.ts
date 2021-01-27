@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 14;
+  public currentPage = 17;
   public progressStatus = 0;
   public nbPagesForm = 20;
   public accountForm: FormGroup;
@@ -275,7 +275,7 @@ export class FormComponent implements OnInit {
   }
 
   // Check if a FormControl value is in FormArray
-  public isInArray(term: string, formControlName): boolean {
+  public isInArray(term: string, formControlName: string): boolean {
     if (this.structureForm.controls[formControlName].value) {
       return this.structureForm.controls[formControlName].value.includes(term);
     }
@@ -366,6 +366,7 @@ export class FormComponent implements OnInit {
         this.getStructureControl('nbTablets').valid &&
         this.getStructureControl('nbNumericTerminal').valid,
     };
+    this.pagesValidation[17] = { valid: this.getStructureControl('labelsQualifications').valid };
     this.updatePageValid();
   }
 

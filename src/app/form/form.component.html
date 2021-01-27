@@ -928,6 +928,16 @@
           </div>
         </ng-container>
       </div>
+      <div *ngIf="currentPage == 17" class="page">
+        <div class="title">
+          <h3>Acceptez-vous le Pass numérique APTIC ?</h3>
+        </div>
+        <app-radio-form
+          [selectedOption]="isInArray('passNumerique', 'labelsQualifications')"
+          (selectedEvent)="updateChoice('passNumerique', 'labelsQualifications')"
+        >
+        </app-radio-form>
+      </div>
     </form>
   </div>
   <div
