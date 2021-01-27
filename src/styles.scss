@@ -6,6 +6,7 @@
 @import 'assets/scss/icons';
 @import 'assets/scss/inputs';
 @import 'assets/scss/hyperlink';
+@import 'assets/scss/layout';
 @import '../node_modules/leaflet.locatecontrol/dist/L.Control.Locate.css';
 
 html {
@@ -67,6 +68,9 @@ a {
   }
   &.no-pt {
     padding: 0 0 30px 0;
+  }
+  &.full-screen {
+    height: calc(100vh - #{$header-height} - #{$footer-height});
   }
   @media #{$phone} {
     padding-top: 30px;
