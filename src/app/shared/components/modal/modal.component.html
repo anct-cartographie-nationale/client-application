@@ -1,7 +1,7 @@
 <div class="cModal" [ngClass]="openned ? 'oModal' : ''">
   <div (clickOutside)="closeModal(false)">
     <p>{{ content }}</p>
-    <div *ngIf="modalType && modalType === modalTypeEnum.information" class="footer">
+    <div *ngIf="modalType && modalType === modalTypeEnum.outsideLink" class="footer">
       <a
         (click)="closeModal(false)"
         href="https://services.formulaireextranet.grandlyon.com/saisie-fiche-structure/"
@@ -10,6 +10,15 @@
         rel="noreferrer noopener"
         >Continuer vers le formulaire</a
       >
+    </div>
+    <div
+      *ngIf="this.modalType && this.modalType === modalTypeEnum.information"
+      fxLayout="row"
+      fxLayoutAlign="center"
+      fxLayoutGap="20px"
+      class="footer"
+    >
+      <button (click)="closeModal(false)">Ok</button>
     </div>
     <div
       *ngIf="this.modalType && this.modalType === modalTypeEnum.confirmation"

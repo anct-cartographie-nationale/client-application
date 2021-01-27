@@ -40,6 +40,7 @@ export class StructureDetailsComponent implements OnInit {
   public isEditMode: boolean = false;
   public currentProfile: User = null;
   public deleteModalOpenned = false;
+  public claimModalOpenned = false;
   public modalType = AppModalType;
 
   constructor(
@@ -123,6 +124,10 @@ export class StructureDetailsComponent implements OnInit {
     this.deleteModalOpenned = !this.deleteModalOpenned;
   }
 
+  public toggleClaimModal(): void {
+    this.claimModalOpenned = !this.claimModalOpenned;
+  }
+
   public deleteStructure(shouldDelete: boolean): void {
     this.toggleDeleteModal();
     if (shouldDelete) {
@@ -138,9 +143,12 @@ export class StructureDetailsComponent implements OnInit {
     this.router.navigate(['./'], { relativeTo: this.route });
   }
 
-  public claimStructure(): void {
-    this.isEditMode = false;
-    this.displayForm();
+  public claimStructure(shouldClaim: boolean): void {
+    this.toggleClaimModal();
+    if (shouldClaim) {
+      this.isEditMode = false;
+      this.displayForm();
+    }
   }
   // Show/hide form structure
   public displayForm(): void {

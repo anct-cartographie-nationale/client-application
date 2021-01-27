@@ -1,4 +1,5 @@
 export enum AppModalType {
-  information = 1,
-  confirmation = 2,
+  outsideLink = 1,
+  information,
+  confirmation,
 }

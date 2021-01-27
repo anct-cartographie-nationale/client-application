@@ -83,7 +83,7 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center" class="hide-on-print">
-        <a *ngIf="!isClaimed" (click)="claimStructure()" class="primary" tabindex="0">Revendiquer cette structure</a>
+        <a *ngIf="!isClaimed" (click)="toggleClaimModal()" class="primary" tabindex="0">Revendiquer cette structure</a>
         <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
           (click)="editStructure()"
@@ -282,6 +282,15 @@
   *ngIf="deleteModalOpenned"
   [modalType]="modalType.confirmation"
   [openned]="deleteModalOpenned"
-  [content]="'Voulez-vous vraiment supprimer cette structure ?'"
+  [content]="'Voulez-vous vraiment supprimer cette structure&nbsp;?'"
   (closed)="deleteStructure($event)"
+></app-modal>
+<app-modal
+  *ngIf="claimModalOpenned"
+  [modalType]="modalType.confirmation"
+  [openned]="claimModalOpenned"
+  [content]="
+    'Voulez-vous vraiment revendiquer cette structure&nbsp;? Une demande sera envoyée a l\'administrateur pour validation'
+  "
+  (closed)="claimStructure($event)"
 ></app-modal>

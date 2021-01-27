@@ -6,8 +6,10 @@
     [locate]="locate"
   ></app-structure-list-search>
 </div>
-<div class="nbStructuresLabel hide-on-print">
-  {{ structureList ? structureList.length : '0' }} structure{{ structureList && structureList.length > 1 ? 's' : '' }}
+<div class="nbStructuresLabel hide-on-print" [ngPlural]="structureList.length">
+  <ng-template ngPluralCase="0">0 structure trouvée</ng-template>
+  <ng-template ngPluralCase="1">1 structure trouvée</ng-template>
+  <ng-template ngPluralCase="other">{{ structureList.length }} structures trouvées</ng-template>
 </div>
 
 <div (scroll)="onScrollDown($event)" id="listCard" class="listCard" (mouseleave)="mouseLeave()">
