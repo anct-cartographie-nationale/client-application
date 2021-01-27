@@ -10,7 +10,7 @@
       <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
     </svg>
   </div>
-  <svg aria-hidden="true">
+  <svg aria-hidden="true" [ngClass]="iconType">
     <use [attr.xlink:href]="'assets/form/sprite.svg#' + iconSvg"></use>
   </svg>
   <p>{{ text }}</p>

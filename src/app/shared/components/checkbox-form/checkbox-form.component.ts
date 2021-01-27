@@ -9,6 +9,7 @@ export class CheckboxFormComponent implements OnInit {
   @Input() public isChecked: boolean;
   @Input() public text: string;
   @Input() public iconSvg: string;
+  @Input() public iconType: string;
   @Output() checkEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor() {}
 

@@ -368,6 +368,7 @@ export class FormComponent implements OnInit {
     };
     this.pagesValidation[17] = { valid: this.getStructureControl('labelsQualifications').valid };
     this.pagesValidation[18] = { valid: this.getStructureControl('labelsQualifications').valid };
+    this.pagesValidation[19] = { valid: this.getStructureControl('equipmentsAndServices').valid };
     this.updatePageValid();
   }
 

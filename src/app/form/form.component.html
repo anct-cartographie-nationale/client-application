@@ -949,9 +949,34 @@
             [isChecked]="isInArray(module.id, labelsQualifications.id)"
             [text]="module.text"
             [iconSvg]="module.id"
+            [iconType]="'labels'"
             (checkEvent)="onCheckChange($event, labelsQualifications.id, module.id)"
           >
           </app-checkbox-form>
+        </div>
+      </div>
+      <div *ngIf="currentPage == 19" class="page">
+        <div class="title">
+          <h3>Quels autres services proposez-vous ?</h3>
+          <p class="notRequired">facultatif</p>
+        </div>
+        <div *ngIf="labelsQualifications">
+          <ng-container *ngFor="let equipment of equipmentsAndServices">
+            <app-checkbox-form
+              *ngIf="
+                [
+                  'Prêt / don de matériels',
+                  'Reconditionnements de matériel',
+                  'Accès à des revues ou livres informatiques et numériques'
+                ].includes(equipment.module.id)
+              "
+              [isChecked]="isInArray(equipment.module.id, 'equipmentsAndServices')"
+              [text]="equipment.module.text"
+              [iconSvg]="equipment.module.id"
+              (checkEvent)="onCheckChange($event, 'equipmentsAndServices', equipment.module.id)"
+            >
+            </app-checkbox-form>
+          </ng-container>
         </div>
       </div>
     </form>
