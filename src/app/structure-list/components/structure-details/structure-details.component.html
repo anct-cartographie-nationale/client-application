@@ -82,7 +82,7 @@
           </div>
         </div>
       </div>
-      <div fxLayout="row" fxLayoutAlign="center center">
+      <div fxLayout="row" fxLayoutAlign="center center" class="hide-on-print">
         <a *ngIf="!isClaimed" (click)="claimStructure()" class="primary" tabindex="0">Revendiquer cette structure</a>
         <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
