@@ -9,7 +9,7 @@
 <div class="structrue-details-container" *ngIf="structure && !isLoading">
   <!-- Header info -->
   <div fxLayout="row" fxLayoutAlign="end center">
-    <div (click)="close()" class="ico-close-details"></div>
+    <div (click)="close(false)" class="ico-close-details"></div>
   </div>
   <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="8px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
@@ -91,6 +91,9 @@
           tabindex="0"
         >
           Modifier cette structure
+        </a>
+        <a *ngIf="profileService.isAdmin()" (click)="toggleDeleteModal()" class="primary" tabindex="0">
+          Supprimer cette structure
         </a>
       </div>
       <div>
@@ -275,3 +278,10 @@
     </div>
   </div>
 </div>
+<app-modal
+  *ngIf="deleteModalOpenned"
+  [modalType]="modalType.confirmation"
+  [openned]="deleteModalOpenned"
+  [content]="'Voulez-vous vraiment supprimer cette structure ?'"
+  (closed)="deleteStructure($event)"
+></app-modal>

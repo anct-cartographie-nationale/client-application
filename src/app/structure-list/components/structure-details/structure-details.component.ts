@@ -5,10 +5,9 @@ import { Category } from '../../models/category.model';
 import { AccessModality } from '../../enum/access-modality.enum';
 import { SearchService } from '../../services/search.service';
 import * as _ from 'lodash';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
 import { Equipment } from '../../enum/equipment.enum';
-import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
 import { StructureService } from '../../../services/structure.service';
 import { TclService } from '../../../services/tcl.service';
 import { TclStopPoint } from '../../../models/tclStopPoint.model';
@@ -16,6 +15,7 @@ import { ProfileService } from '../../../profile/services/profile.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth.service';
 import { PublicCategorie } from '../../enum/public.enum';
+import { AppModalType } from '../../../shared/components/modal/modal-type.enum';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -39,15 +39,18 @@ export class StructureDetailsComponent implements OnInit {
   public isLoading: boolean = false;
   public isEditMode: boolean = false;
   public currentProfile: User = null;
+  public deleteModalOpenned = false;
+  public modalType = AppModalType;
 
   constructor(
-    route: ActivatedRoute,
     private printService: PrintService,
     private searchService: SearchService,
     private structureService: StructureService,
     private tclService: TclService,
     private profileService: ProfileService,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     route.url.subscribe((url) => {
       if (url[0].path === 'structure') {
@@ -103,8 +106,8 @@ export class StructureDetailsComponent implements OnInit {
     }
   }
 
-  public close(): void {
-    this.closeDetails.emit(true);
+  public close(refreshRequired: boolean): void {
+    this.closeDetails.emit(refreshRequired);
   }
 
   public print(): void {
@@ -114,6 +117,25 @@ export class StructureDetailsComponent implements OnInit {
   public editStructure(): void {
     this.isEditMode = true;
     this.displayForm();
+  }
+
+  public toggleDeleteModal(): void {
+    this.deleteModalOpenned = !this.deleteModalOpenned;
+  }
+
+  public deleteStructure(shouldDelete: boolean): void {
+    this.toggleDeleteModal();
+    if (shouldDelete) {
+      this.structureService.delete(this.structure._id).subscribe((res) => {
+        this.reload();
+      });
+    }
+  }
+
+  private reload(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['./'], { relativeTo: this.route });
   }
 
   public claimStructure(): void {

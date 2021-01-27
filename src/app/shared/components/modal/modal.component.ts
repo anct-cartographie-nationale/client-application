@@ -1,19 +1,21 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AppModalType } from './modal-type.enum';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
   constructor() {}
 
   @Input() public openned: boolean;
   @Input() public content: string;
-  @Output() closed = new EventEmitter();
-  ngOnInit(): void {}
+  @Input() public modalType: AppModalType;
+  @Output() closed = new EventEmitter<boolean>();
+  public modalTypeEnum = AppModalType;
 
-  public closeModal(): void {
-    this.closed.emit();
+  public closeModal(value: boolean): void {
+    this.closed.emit(value);
   }
 }
