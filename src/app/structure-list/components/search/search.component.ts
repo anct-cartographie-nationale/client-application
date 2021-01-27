@@ -21,16 +21,7 @@ export class SearchComponent implements OnInit, OnChanges {
   @Output() locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() locate = false;
-
-  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
-    this.searchForm = this.fb.group({
-      searchTerm: '',
-    });
-  }
-
-  @Output() searchEvent = new EventEmitter();
   public modalType = AppModalType;
-
   // Form search input
   public searchForm: FormGroup;
   // Modal variable
@@ -48,10 +39,14 @@ export class SearchComponent implements OnInit, OnChanges {
   public confirmationModalContent =
     'Afin d’ajouter votre structure,vous allez être redirigé vers le formulaire Grand Lyon à remplir.';
 
+  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
+    this.searchForm = this.fb.group({
+      searchTerm: '',
+    });
+  }
   ngOnInit(): void {
     // Will store the different categories
     this.categories = [];
-
     this.checkedModulesFilter = new Array();
   }
 
