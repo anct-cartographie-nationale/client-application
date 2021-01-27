@@ -455,10 +455,14 @@
             rows="8"
             placeholder="Exemple : nous ne sommes ouvert que le 1er mercredi du mois."
             maxlength="500"
-            formControlName="description"
+            formControlName="exceptionalClosures"
           ></textarea>
           <p>
-            {{ getStructureControl('description').value ? getStructureControl('description').value.length : 0 }}/500
+            {{
+              getStructureControl('exceptionalClosures').value
+                ? getStructureControl('exceptionalClosures').value.length
+                : 0
+            }}/500
           </p>
         </div>
       </div>
@@ -977,6 +981,23 @@
             >
             </app-checkbox-form>
           </ng-container>
+        </div>
+      </div>
+      <div *ngIf="currentPage == 20" class="page">
+        <div class="title">
+          <h3>Pouvez vous présentez votre structure ?</h3>
+          <p class="notRequired">facultatif</p>
+        </div>
+        <div class="textareaBlock" fxLayout="column">
+          <textarea
+            rows="8"
+            placeholder="Exemple : nous sommes une équipe de 7  bénévoles qui orientont les personnes pour qui le numérique est une langue étrangère"
+            maxlength="500"
+            formControlName="description"
+          ></textarea>
+          <p>
+            {{ getStructureControl('description').value ? getStructureControl('description').value.length : 0 }}/500
+          </p>
         </div>
       </div>
     </form>

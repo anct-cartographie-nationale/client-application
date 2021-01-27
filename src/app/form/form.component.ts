@@ -48,9 +48,9 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 17;
+  public currentPage = 0;
   public progressStatus = 0;
-  public nbPagesForm = 20;
+  public nbPagesForm = 21;
   public accountForm: FormGroup;
   public isPageValid: boolean;
   public pagesValidation = [];
@@ -331,7 +331,7 @@ export class FormComponent implements OnInit {
     this.pagesValidation[5] = { valid: this.getStructureControl('structureType').valid };
     this.pagesValidation[6] = { valid: this.getStructureControl('accessModality').valid };
     this.pagesValidation[7] = { valid: this.hoursForm.valid };
-    this.pagesValidation[8] = { valid: this.getStructureControl('description').valid };
+    this.pagesValidation[8] = { valid: this.getStructureControl('exceptionalClosures').valid };
     this.pagesValidation[9] = { valid: this.getStructureControl('pmrAccess').valid };
     this.pagesValidation[10] = {
       valid:
@@ -369,6 +369,7 @@ export class FormComponent implements OnInit {
     this.pagesValidation[17] = { valid: this.getStructureControl('labelsQualifications').valid };
     this.pagesValidation[18] = { valid: this.getStructureControl('labelsQualifications').valid };
     this.pagesValidation[19] = { valid: this.getStructureControl('equipmentsAndServices').valid };
+    this.pagesValidation[20] = { valid: this.getStructureControl('description').valid };
     this.updatePageValid();
   }
 
