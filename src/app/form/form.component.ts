@@ -367,6 +367,7 @@ export class FormComponent implements OnInit {
         this.getStructureControl('nbNumericTerminal').valid,
     };
     this.pagesValidation[17] = { valid: this.getStructureControl('labelsQualifications').valid };
+    this.pagesValidation[18] = { valid: this.getStructureControl('labelsQualifications').valid };
     this.updatePageValid();
   }
 

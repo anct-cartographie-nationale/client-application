@@ -938,6 +938,22 @@
         >
         </app-radio-form>
       </div>
+      <div *ngIf="currentPage == 18" class="page">
+        <div class="title">
+          <h3>Quelle(s) labelisation proposez-vous ?</h3>
+          <p class="notRequired">facultatif</p>
+        </div>
+        <div *ngIf="labelsQualifications">
+          <app-checkbox-form
+            *ngFor="let module of labelsQualifications.modules"
+            [isChecked]="isInArray(module.id, labelsQualifications.id)"
+            [text]="module.text"
+            [iconSvg]="module.id"
+            (checkEvent)="onCheckChange($event, labelsQualifications.id, module.id)"
+          >
+          </app-checkbox-form>
+        </div>
+      </div>
     </form>
   </div>
   <div
