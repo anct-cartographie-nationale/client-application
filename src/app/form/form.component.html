@@ -299,14 +299,24 @@
           <label for="surname">Nom</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-input" />
-            <img *ngIf="accountForm.get('surname').valid" src="../../assets/form/validate.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('surname').valid" src="../../assets/form/validate.svg" alt="logo valid" />
+            <img
+              *ngIf="accountForm.get('surname').invalid && accountForm.get('surname').value"
+              src="../../assets/form/notvalidate.svg"
+              alt="logo invalid"
+            />
           </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="name">Prénom</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="name" class="form-input" />
-            <img *ngIf="accountForm.get('name').valid" src="../../assets/form/validate.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('name').valid" src="../../assets/form/validate.svg" alt="logo valid" />
+            <img
+              *ngIf="accountForm.get('name').invalid && accountForm.get('name').value"
+              src="../../assets/form/notvalidate.svg"
+              alt="logo invalid"
+            />
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -318,7 +328,12 @@
               class="form-input phone"
               (input)="modifyPhoneInput(accountForm, 'phone', $event.target.value)"
             />
-            <img *ngIf="accountForm.get('phone').valid" src="../../assets/form/validate.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('phone').valid" src="../../assets/form/validate.svg" alt="logo valid" />
+            <img
+              *ngIf="accountForm.get('phone').invalid && accountForm.get('phone').value"
+              src="../../assets/form/notvalidate.svg"
+              alt="logo invalid"
+            />
           </div>
         </div>
       </div>
@@ -330,11 +345,20 @@
           <label for="email">Courriel personnel</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="email" class="form-input" />
-            <img *ngIf="accountForm.get('email').valid" src="../../assets/form/validate.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('email').valid" src="../../assets/form/validate.svg" alt="logo valid" />
+            <img
+              *ngIf="accountForm.get('email').invalid && accountForm.get('email').value"
+              src="../../assets/form/notvalidate.svg"
+              alt="logo invalid"
+            />
           </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="password">Création de mot de passe</label>
+          <p class="password" *ngIf="accountForm.get('password').invalid && accountForm.get('password').value">
+            Le mot de passe doit contenir au minimum : 8 caractères dont un caractère spécial, un caractère en majuscule
+            et un chiffre.
+          </p>
           <div fxLayout="row" fxLayoutGap="13px">
             <input
               [type]="isShowPassword ? 'text' : 'password'"
@@ -349,7 +373,12 @@
               src="../../assets/form/eyePassword.svg"
               alt="logo eyePassword"
             />
-            <img *ngIf="accountForm.get('password').valid" src="../../assets/form/validate.svg" alt="logo checked" />
+            <img *ngIf="accountForm.get('password').valid" src="../../assets/form/validate.svg" alt="logo valid" />
+            <img
+              *ngIf="accountForm.get('password').invalid && accountForm.get('password').value"
+              src="../../assets/form/notvalidate.svg"
+              alt="logo invalid"
+            />
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -369,9 +398,14 @@
               alt="logo eyePassword"
             />
             <img
-              *ngIf="accountForm.get('password').valid && accountForm.get('confirmPassword').valid"
+              *ngIf="accountForm.get('confirmPassword').valid && accountForm.get('confirmPassword').value"
               src="../../assets/form/validate.svg"
-              alt="logo checked"
+              alt="logo valid"
+            />
+            <img
+              *ngIf="accountForm.get('confirmPassword').invalid && accountForm.get('confirmPassword').value"
+              src="../../assets/form/notvalidate.svg"
+              alt="logo invalid"
             />
           </div>
         </div>
@@ -394,7 +428,7 @@
             <img
               *ngIf="getStructureControl('structureName').valid"
               src="../../assets/form/validate.svg"
-              alt="logo checked"
+              alt="logo valid"
             />
           </div>
         </div>
@@ -407,7 +441,7 @@
               (inputAddress)="setAddressStructure()"
               (selectedAddress)="setAddressStructure($event)"
             ></app-address-autocomplete>
-            <img *ngIf="getStructureControl('address').valid" src="../../assets/form/validate.svg" alt="logo checked" />
+            <img *ngIf="getStructureControl('address').valid" src="../../assets/form/validate.svg" alt="logo valid" />
           </div>
         </div>
       </div>
@@ -496,13 +530,13 @@
             <img
               *ngIf="getStructureControl('contactMail').valid"
               src="../../assets/form/validate.svg"
-              alt="logo checked"
+              alt="logo valid"
             />
 
             <img
-              *ngIf="getStructureControl('contactMail').invalid"
+              *ngIf="getStructureControl('contactMail').invalid && getStructureControl('contactMail').value"
               src="../../assets/form/notvalidate.svg"
-              alt="logo checked"
+              alt="logo invalid"
             />
           </div>
         </div>
@@ -533,12 +567,12 @@
                   <img
                     *ngIf="getStructureControl('website').valid && getStructureControl('website').value"
                     src="../../assets/form/validate.svg"
-                    alt="logo checked"
+                    alt="logo valid"
                   />
                   <img
                     *ngIf="getStructureControl('website').invalid"
                     src="../../assets/form/notvalidate.svg"
-                    alt="logo checked"
+                    alt="logo invalid"
                   />
                 </div>
               </div>
@@ -560,7 +594,7 @@
             </div>
             <div *ngIf="showSocialNetwork" class="inputSection">
               <div class="form-group facebook">
-                <div fxLayout="row">
+                <div fxLayout="row" fxLayoutGap="27px">
                   <svg class="facebook" aria-hidden="true">
                     <use [attr.xlink:href]="'assets/form/sprite.svg#facebook'"></use>
                   </svg>
@@ -578,17 +612,17 @@
                       getStructureControl('facebook').value != ''
                     "
                     src="../../assets/form/validate.svg"
-                    alt="logo checked"
+                    alt="logo valid"
                   />
                   <img
                     *ngIf="getStructureControl('facebook').invalid"
                     src="../../assets/form/notvalidate.svg"
-                    alt="logo checked"
+                    alt="logo invalid"
                   />
                 </div>
               </div>
               <div class="form-group twitter">
-                <div fxLayout="row">
+                <div fxLayout="row" fxLayoutGap="27px">
                   <svg class="twitter" aria-hidden="true">
                     <use [attr.xlink:href]="'assets/form/sprite.svg#twitter'"></use>
                   </svg>
@@ -606,17 +640,17 @@
                       getStructureControl('twitter').value != ''
                     "
                     src="../../assets/form/validate.svg"
-                    alt="logo checked"
+                    alt="logo valid"
                   />
                   <img
                     *ngIf="getStructureControl('twitter').invalid"
                     src="../../assets/form/notvalidate.svg"
-                    alt="logo checked"
+                    alt="logo invalid"
                   />
                 </div>
               </div>
               <div class="form-group instagram">
-                <div fxLayout="row">
+                <div fxLayout="row" fxLayoutGap="27px">
                   <svg class="instagram" aria-hidden="true">
                     <use [attr.xlink:href]="'assets/form/sprite.svg#instagram'"></use>
                   </svg>
@@ -634,17 +668,17 @@
                       getStructureControl('instagram').value != ''
                     "
                     src="../../assets/form/validate.svg"
-                    alt="logo checked"
+                    alt="logo valid"
                   />
                   <img
                     *ngIf="getStructureControl('instagram').invalid"
                     src="../../assets/form/notvalidate.svg"
-                    alt="logo checked"
+                    alt="logo invalid"
                   />
                 </div>
               </div>
               <div class="form-group linkedin">
-                <div fxLayout="row">
+                <div fxLayout="row" fxLayoutGap="27px">
                   <svg class="linkedin" aria-hidden="true">
                     <use [attr.xlink:href]="'assets/form/sprite.svg#linkedin'"></use>
                   </svg>
@@ -662,12 +696,12 @@
                       getStructureControl('linkedin').value != ''
                     "
                     src="../../assets/form/validate.svg"
-                    alt="logo checked"
+                    alt="logo valid"
                   />
                   <img
                     *ngIf="getStructureControl('linkedin').invalid"
                     src="../../assets/form/notvalidate.svg"
-                    alt="logo checked"
+                    alt="logo invalid"
                   />
                 </div>
               </div>
@@ -882,13 +916,13 @@
                       <img
                         *ngIf="getStructureControl('nbComputers').valid"
                         src="../../assets/form/validate.svg"
-                        alt="logo checked"
+                        alt="logo valid"
                         class="nbEquipment"
                       />
                       <img
                         *ngIf="getStructureControl('nbComputers').invalid"
                         src="../../assets/form/notvalidate.svg"
-                        alt="logo checked"
+                        alt="logo valid"
                         class="nbEquipment"
                       />
                     </ng-container>
@@ -902,13 +936,13 @@
                       <img
                         *ngIf="getStructureControl('nbTablets').valid"
                         src="../../assets/form/validate.svg"
-                        alt="logo checked"
+                        alt="logo valid"
                         class="nbEquipment"
                       />
                       <img
                         *ngIf="getStructureControl('nbTablets').invalid"
                         src="../../assets/form/notvalidate.svg"
-                        alt="logo checked"
+                        alt="logo invalid"
                         class="nbEquipment"
                       />
                     </ng-container>
@@ -922,13 +956,13 @@
                       <img
                         *ngIf="getStructureControl('nbPrinters').valid"
                         src="../../assets/form/validate.svg"
-                        alt="logo checked"
+                        alt="logo valid"
                         class="nbEquipment"
                       />
                       <img
                         *ngIf="getStructureControl('nbPrinters').invalid"
                         src="../../assets/form/notvalidate.svg"
-                        alt="logo checked"
+                        alt="logo invalid"
                         class="nbEquipment"
                       />
                     </ng-container>
@@ -942,13 +976,13 @@
                       <img
                         *ngIf="getStructureControl('nbNumericTerminal').valid"
                         src="../../assets/form/validate.svg"
-                        alt="logo checked"
+                        alt="logo valid"
                         class="nbEquipment"
                       />
                       <img
                         *ngIf="getStructureControl('nbNumericTerminal').invalid"
                         src="../../assets/form/notvalidate.svg"
-                        alt="logo checked"
+                        alt="logo invalid"
                         class="nbEquipment"
                       />
                     </ng-container>

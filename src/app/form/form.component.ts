@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 7;
+  public currentPage = 16;
   public progressStatus = 0;
   public nbPagesForm = 20;
   public accountForm: FormGroup;
@@ -123,8 +123,8 @@ export class FormComponent implements OnInit {
     this.accountForm = new FormGroup(
       {
         email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]),
-        name: new FormControl('', Validators.required),
-        surname: new FormControl('', Validators.required),
+        name: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]),
+        surname: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]),
         phone: new FormControl('', [Validators.required, Validators.pattern('([0-9]{2} ){4}[0-9]{2}')]), //NOSONAR
         password: new FormControl('', [
           Validators.required,
