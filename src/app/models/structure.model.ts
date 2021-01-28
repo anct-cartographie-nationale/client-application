@@ -45,6 +45,7 @@ export class Structure {
   public equipmentsAccessType: string[] = [];
   public freeWorkShop: boolean = null;
   public freeWifi: boolean = null;
+  public otherDescription: string = null;
 
   public isOpen: boolean = false;
   public openedOn: OpeningDay = new OpeningDay();

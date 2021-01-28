@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 16;
+  public currentPage = 12;
   public progressStatus = 0;
   public nbPagesForm = 20;
   public accountForm: FormGroup;
@@ -164,6 +164,7 @@ export class FormComponent implements OnInit {
       accessModality: this.loadArrayForCheckbox(structure.accessModality, true),
       publicsAccompaniment: this.loadArrayForCheckbox(structure.publicsAccompaniment, false),
       proceduresAccompaniment: this.loadArrayForCheckbox(structure.proceduresAccompaniment, false),
+      otherDescription: new FormControl(structure.otherDescription),
       equipmentsAndServices: this.loadArrayForCheckbox(structure.equipmentsAndServices, false),
       publics: this.loadArrayForCheckbox(structure.publics, true),
       baseSkills: this.loadArrayForCheckbox(structure.baseSkills, false),
@@ -339,6 +340,9 @@ export class FormComponent implements OnInit {
         this.getStructureControl('proceduresAccompaniment').valid,
     };
     this.pagesValidation[13] = {
+      valid: this.getStructureControl('otherDescription').value,
+    };
+    this.pagesValidation[14] = {
       valid:
         this.getStructureControl('accessRight').valid &&
         this.getStructureControl('socialAndProfessional').valid &&
@@ -346,9 +350,9 @@ export class FormComponent implements OnInit {
         this.getStructureControl('parentingHelp').valid &&
         this.getStructureControl('digitalCultureSecurity').valid,
     };
-    this.pagesValidation[14] = { valid: this.getStructureControl('freeWorkShop').valid };
-    this.pagesValidation[15] = { valid: this.getStructureControl('freeWifi').valid };
-    this.pagesValidation[16] = {
+    this.pagesValidation[15] = { valid: this.getStructureControl('freeWorkShop').valid };
+    this.pagesValidation[16] = { valid: this.getStructureControl('freeWifi').valid };
+    this.pagesValidation[17] = {
       valid:
         this.getStructureControl('equipmentsAndServices').valid &&
         this.getStructureControl('nbComputers').valid &&
@@ -356,11 +360,10 @@ export class FormComponent implements OnInit {
         this.getStructureControl('nbTablets').valid &&
         this.getStructureControl('nbNumericTerminal').valid,
     };
-    this.pagesValidation[17] = { valid: this.getStructureControl('labelsQualifications').valid };
-    this.pagesValidation[17] = { valid: this.getStructureControl('labelsQualifications').valid };
-    this.pagesValidation[18] = { valid: this.getStructureControl('equipmentsAndServices').valid };
-    this.pagesValidation[19] = { valid: this.getStructureControl('description').valid };
-    this.pagesValidation[20] = { valid: this.userAcceptSavedDate };
+    this.pagesValidation[18] = { valid: this.getStructureControl('labelsQualifications').valid };
+    this.pagesValidation[19] = { valid: this.getStructureControl('equipmentsAndServices').valid };
+    this.pagesValidation[20] = { valid: this.getStructureControl('description').valid };
+    this.pagesValidation[21] = { valid: this.userAcceptSavedDate };
     this.updatePageValid();
   }
 
@@ -368,11 +371,21 @@ export class FormComponent implements OnInit {
     this.isPageValid = this.pagesValidation[this.currentPage].valid;
   }
   public nextPage(): void {
+    // Check if "other" isn't check to hide "other description" page
+    if (this.currentPage == 12 && !this.isInArray('autres', 'proceduresAccompaniment')) {
+      this.currentPage++; // page 13 skip and go to page 14
+      this.progressStatus += 100 / this.nbPagesForm;
+    }
     this.currentPage++;
     this.progressStatus += 100 / this.nbPagesForm;
     this.updatePageValid();
   }
   public previousPage(): void {
+    // Check if "other" isn't check to hide "other description" page
+    if (this.currentPage == 14 && !this.isInArray('autres', 'proceduresAccompaniment')) {
+      this.currentPage--; // page 13 skip and go to page 12
+      this.progressStatus -= 100 / this.nbPagesForm;
+    }
     this.currentPage--;
     this.progressStatus -= 100 / this.nbPagesForm;
     this.updatePageValid();

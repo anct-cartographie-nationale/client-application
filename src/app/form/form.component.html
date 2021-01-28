@@ -813,6 +813,25 @@
       </div>
       <div *ngIf="currentPage == 13" class="page">
         <div class="title">
+          <h3>Quelles sont les autres démarches ?</h3>
+        </div>
+        <div class="textareaBlock" fxLayout="column">
+          <textarea
+            rows="8"
+            placeholder="Exemple : tout ce qui est en lien avec la création d'entreprise..."
+            maxlength="500"
+            formControlName="otherDescription"
+            (input)="setValidationsForm()"
+          ></textarea>
+          <p>
+            {{
+              getStructureControl('otherDescription').value ? getStructureControl('otherDescription').value.length : 0
+            }}/500
+          </p>
+        </div>
+      </div>
+      <div *ngIf="currentPage == 14" class="page">
+        <div class="title">
           <h3>Quel(s) atelier(s) au numérique proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
         </div>
@@ -854,7 +873,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 14" class="page">
+      <div *ngIf="currentPage == 15" class="page">
         <div class="title">
           <h3>Ces ateliers sont-ils gratuits ?</h3>
         </div>
@@ -864,7 +883,7 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 15" class="page">
+      <div *ngIf="currentPage == 16" class="page">
         <div class="title">
           <h3>Proposez-vous le wifi en accès libre ?</h3>
         </div>
@@ -874,7 +893,7 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 16" class="page">
+      <div *ngIf="currentPage == 17" class="page">
         <div class="title">
           <h3>Quel matériel mettez-vous à disposition ?</h3>
           <p class="notRequired">facultatif</p>
@@ -993,7 +1012,7 @@
           </div>
         </ng-container>
       </div>
-      <div *ngIf="currentPage == 17" class="page">
+      <div *ngIf="currentPage == 18" class="page">
         <div class="title">
           <h3>Quelle(s) labelisation proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -1010,7 +1029,7 @@
           </app-checkbox-form>
         </div>
       </div>
-      <div *ngIf="currentPage == 18" class="page">
+      <div *ngIf="currentPage == 19" class="page">
         <div class="title">
           <h3>Quels autres services proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -1034,7 +1053,7 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="currentPage == 19" class="page">
+      <div *ngIf="currentPage == 20" class="page">
         <div class="title">
           <h3>Pouvez vous présentez votre structure ?</h3>
           <p class="notRequired">facultatif</p>
@@ -1051,7 +1070,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 20" class="page">
+      <div *ngIf="currentPage == 2" class="page">
         <div class="title">
           <h3>Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon* ?</h3>
         </div>
