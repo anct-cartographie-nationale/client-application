@@ -220,7 +220,7 @@
         <input
           type="checkbox"
           [value]="equipment.key"
-          (change)="onCheckChange($event, 'equipmentsAccessType',equipment.key)"
+          (change)="onCheckChange($event, 'equipmentsAccessType', equipment.key)"
           [checked]="isInArray(equipment.key, 'equipmentsAccessType')"
           [disabled]="getStructureControl('equipmentsAccessType').disabled"
         />
@@ -444,6 +444,7 @@
       <div *ngIf="currentPage == 7" class="page">
         <div class="title">
           <h3>Quels sont les horaires d'ouverture ?</h3>
+          <p class="notRequired">facultatif</p>
         </div>
         <app-hour-picker
           *ngIf="hoursForm"
