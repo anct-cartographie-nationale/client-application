@@ -50,7 +50,7 @@ export class FormComponent implements OnInit {
   //New var form
   public currentPage = 7;
   public progressStatus = 0;
-  public nbPagesForm = 21;
+  public nbPagesForm = 20;
   public accountForm: FormGroup;
   public isPageValid: boolean;
   public pagesValidation = [];
@@ -151,10 +151,7 @@ export class FormComponent implements OnInit {
         Validators.required,
         Validators.pattern('[a-z0-9-]{1,}[@][a-z0-9-]{1,}[.][a-z]{2,3}'),
       ]),
-      website: new FormControl(structure.website, [
-        Validators.required,
-        Validators.pattern('(www[.])[a-z0-9.-]*[.][a-z]{2,3}'),
-      ]),
+      website: new FormControl(structure.website, [Validators.pattern('(www[.])[a-z0-9.-]*[.][a-z]{2,3}')]),
       facebook: new FormControl(structure.facebook, Validators.pattern('(facebook.com/[a-z0-9A-Z.-]{1,})')),
       twitter: new FormControl(structure.twitter, Validators.pattern('(twitter.com/[a-z0-9A-Z.-]{1,})')),
       instagram: new FormControl(structure.instagram, Validators.pattern('(instagram.com/[a-z0-9A-Z.-]{1,})')),
@@ -360,10 +357,10 @@ export class FormComponent implements OnInit {
         this.getStructureControl('nbNumericTerminal').valid,
     };
     this.pagesValidation[17] = { valid: this.getStructureControl('labelsQualifications').valid };
-    this.pagesValidation[18] = { valid: this.getStructureControl('labelsQualifications').valid };
-    this.pagesValidation[19] = { valid: this.getStructureControl('equipmentsAndServices').valid };
-    this.pagesValidation[20] = { valid: this.getStructureControl('description').valid };
-    this.pagesValidation[21] = { valid: this.userAcceptSavedDate };
+    this.pagesValidation[17] = { valid: this.getStructureControl('labelsQualifications').valid };
+    this.pagesValidation[18] = { valid: this.getStructureControl('equipmentsAndServices').valid };
+    this.pagesValidation[19] = { valid: this.getStructureControl('description').valid };
+    this.pagesValidation[20] = { valid: this.userAcceptSavedDate };
     this.updatePageValid();
   }
 

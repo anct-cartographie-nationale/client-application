@@ -528,7 +528,7 @@
                     class="form-input"
                   />
                   <img
-                    *ngIf="getStructureControl('website').valid"
+                    *ngIf="getStructureControl('website').valid && getStructureControl('website').value"
                     src="../../assets/form/validate.svg"
                     alt="logo checked"
                   />
@@ -943,16 +943,6 @@
       </div>
       <div *ngIf="currentPage == 17" class="page">
         <div class="title">
-          <h3>Acceptez-vous le Pass numérique APTIC ?</h3>
-        </div>
-        <app-radio-form
-          [selectedOption]="isInArray('passNumerique', 'labelsQualifications')"
-          (selectedEvent)="updateChoice('passNumerique', 'labelsQualifications')"
-        >
-        </app-radio-form>
-      </div>
-      <div *ngIf="currentPage == 18" class="page">
-        <div class="title">
           <h3>Quelle(s) labelisation proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
         </div>
@@ -968,7 +958,7 @@
           </app-checkbox-form>
         </div>
       </div>
-      <div *ngIf="currentPage == 19" class="page">
+      <div *ngIf="currentPage == 18" class="page">
         <div class="title">
           <h3>Quels autres services proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -992,7 +982,7 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="currentPage == 20" class="page">
+      <div *ngIf="currentPage == 19" class="page">
         <div class="title">
           <h3>Pouvez vous présentez votre structure ?</h3>
           <p class="notRequired">facultatif</p>
@@ -1009,7 +999,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 21" class="page">
+      <div *ngIf="currentPage == 20" class="page">
         <div class="title">
           <h3>Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon* ?</h3>
         </div>
