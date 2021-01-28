@@ -244,7 +244,13 @@
   ></app-create-account-form>
 </div>
 <div class="form" fxLayout="column">
+  <app-menu-phone (closeEvent)="closeMenu($event)"></app-menu-phone>
   <div class="header">
+    <div class="container-icoMenu">
+      <div class="block-iconMenu" (click)="toggleMenu()">
+        <span class="ico-menu"></span>
+      </div>
+    </div>
     <h3>Création de compte</h3>
   </div>
   <div class="content">

@@ -49,6 +49,28 @@ $progressBar-height: 50px;
   @media #{$tablet} {
     display: block !important;
   }
+  .container-icoMenu {
+    width: 100%;
+    position: absolute;
+    height: 50px;
+    .block-iconMenu {
+      right: 44px;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+    }
+    .ico-menu {
+      right: 13px;
+      top: 24px;
+      background: $white;
+      &::after {
+        background: $white;
+      }
+      &::before {
+        background: $white;
+      }
+    }
+  }
 }
 .content {
   padding: 0 16px;

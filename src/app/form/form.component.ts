@@ -30,7 +30,6 @@ export class FormComponent implements OnInit {
   @Input() public profile?: User;
   @Output() closeEvent = new EventEmitter<Structure>();
   public structureForm: FormGroup;
-
   public userAlreadyExist = false;
 
   public equipmentAccess = EquipmentAccess;
@@ -58,6 +57,9 @@ export class FormComponent implements OnInit {
   public isShowPassword = false;
   public hoursForm: FormGroup;
   public userAcceptSavedDate = false;
+
+  public showMenu = false;
+
   //collapse var
   public showWebsite: boolean;
   public showSocialNetwork: boolean;
@@ -527,5 +529,12 @@ export class FormComponent implements OnInit {
         this.closeEvent.emit(this.structureForm.value);
       });
     }*/
+  }
+  public toggleMenu(): void {
+    this.showMenu = !this.showMenu;
+    console.log(this.showMenu);
+  }
+  public closeMenu(e): void {
+    console.log(e);
   }
 }
