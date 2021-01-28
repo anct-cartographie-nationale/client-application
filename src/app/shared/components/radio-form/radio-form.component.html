@@ -1,6 +1,6 @@
 <button
   (click)="clicked(true)"
-  [ngClass]="{ selected: selectedOption }"
+  [ngClass]="{ selected: selectedOption && selectedOption != null }"
   fxLayout="row"
   fxLayoutAlign=" center"
   fxLayoutGap="17px"
@@ -14,7 +14,7 @@
 </button>
 <button
   (click)="clicked(false)"
-  [ngClass]="{ selected: !selectedOption }"
+  [ngClass]="{ selected: !selectedOption && selectedOption != null }"
   fxLayout="row"
   fxLayoutAlign=" center"
   fxLayoutGap="17px"

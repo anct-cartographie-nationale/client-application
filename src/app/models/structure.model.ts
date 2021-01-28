@@ -27,7 +27,7 @@ export class Structure {
   public contactSurname: string = null;
   public fonction: string = null;
   public lockdownActivity: string = null;
-  public pmrAccess: boolean = false;
+  public pmrAccess: boolean = null;
   public publicsAccompaniment: string[] = [];
   public proceduresAccompaniment: string[] = [];
   public accessModality: string[] = [];
@@ -43,8 +43,8 @@ export class Structure {
   public hours: Week;
   public equipmentsDetails: string = null;
   public equipmentsAccessType: string[] = [];
-  public freeWorkShop: boolean = false;
-  public freeWifi: boolean = false;
+  public freeWorkShop: boolean = null;
+  public freeWifi: boolean = null;
 
   public isOpen: boolean = false;
   public openedOn: OpeningDay = new OpeningDay();
