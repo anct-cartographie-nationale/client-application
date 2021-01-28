@@ -254,9 +254,26 @@ img {
   border-radius: 4px;
   cursor: pointer;
   margin-bottom: 13px;
+
+  .logo {
+    .hide {
+      display: block;
+    }
+    .show {
+      display: none;
+    }
+  }
   &.notCollapsed {
     margin-bottom: 8px;
     background: $grey-6;
+    .logo {
+      .hide {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
+    }
   }
   .form-group {
     margin: 0;
