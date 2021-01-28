@@ -201,7 +201,7 @@ $progressBar-height: 50px;
     height: 6px;
     border-radius: 7px;
     &::-webkit-progress-bar {
-      background-color: $white;
+      background-color: $grey-6;
     }
     &::-webkit-progress-value {
       background-color: $secondary-color;
