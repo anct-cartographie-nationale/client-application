@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 0;
+  public currentPage = 7;
   public progressStatus = 0;
   public nbPagesForm = 21;
   public accountForm: FormGroup;
@@ -57,6 +57,7 @@ export class FormComponent implements OnInit {
   public isShowConfirmPassword = false;
   public isShowPassword = false;
   public hoursForm: FormGroup;
+  public userAcceptSavedDate = false;
   //collapse var
   public showWebsite: boolean;
   public showSocialNetwork: boolean;
@@ -140,18 +141,12 @@ export class FormComponent implements OnInit {
       coord: new FormControl(structure.coord),
       structureType: new FormControl(structure.structureType, Validators.required),
       structureName: new FormControl(structure.structureName, Validators.required),
-      structureRepresentation: new FormControl(structure.structureRepresentation, Validators.required),
       description: new FormControl(structure.description),
-      lockdownActivity: new FormControl(structure.lockdownActivity),
       address: new FormGroup({
         numero: new FormControl(structure.address.numero),
         street: new FormControl(structure.address.street, Validators.required),
         commune: new FormControl(structure.address.commune, Validators.required),
       }),
-      contactPhone: new FormControl(structure.contactPhone, [
-        Validators.required,
-        Validators.pattern('([0-9]{2} ){4}[0-9]{2}'),
-      ]),
       contactMail: new FormControl(structure.contactMail, [
         Validators.required,
         Validators.pattern('[a-z0-9-]{1,}[@][a-z0-9-]{1,}[.][a-z]{2,3}'),
@@ -164,10 +159,7 @@ export class FormComponent implements OnInit {
       twitter: new FormControl(structure.twitter, Validators.pattern('(twitter.com/[a-z0-9A-Z.-]{1,})')),
       instagram: new FormControl(structure.instagram, Validators.pattern('(instagram.com/[a-z0-9A-Z.-]{1,})')),
       linkedin: new FormControl(structure.linkedin, Validators.pattern('(linkedin.com/in/[a-z0-9A-Z.-]{1,})')),
-      gender: new FormControl(structure.gender),
-      contactName: new FormControl(structure.contactName),
-      contactSurname: new FormControl(structure.contactSurname),
-      fonction: new FormControl(structure.fonction),
+      hours: new FormGroup({}),
       pmrAccess: new FormControl(structure.pmrAccess, Validators.required),
       documentsMeeting: new FormControl(structure.documentsMeeting),
       exceptionalClosures: new FormControl(structure.exceptionalClosures),
@@ -263,6 +255,7 @@ export class FormComponent implements OnInit {
 
   public onCheckChange(event: boolean, formControlName: string, value: string): void {
     const formArray: FormArray = this.structureForm.get(formControlName) as FormArray;
+
     if (event) {
       // Add a new control in the arrayForm
       formArray.push(new FormControl(value));
@@ -370,6 +363,7 @@ export class FormComponent implements OnInit {
     this.pagesValidation[18] = { valid: this.getStructureControl('labelsQualifications').valid };
     this.pagesValidation[19] = { valid: this.getStructureControl('equipmentsAndServices').valid };
     this.pagesValidation[20] = { valid: this.getStructureControl('description').valid };
+    this.pagesValidation[21] = { valid: this.userAcceptSavedDate };
     this.updatePageValid();
   }
 
@@ -409,6 +403,10 @@ export class FormComponent implements OnInit {
   }
   public updateHours(form: FormGroup): void {
     this.hoursForm = form;
+    this.setValidationsForm();
+  }
+  public setHoursError(): void {
+    this.hoursForm.setErrors({ formError: true });
     this.setValidationsForm();
   }
   public onPmrAccessChange(bool: boolean): void {
@@ -467,6 +465,7 @@ export class FormComponent implements OnInit {
   }
 
   public toggleEquipmentsServices(equipment: { module: Module; openned: boolean }): void {
+    this.onCheckChange(!equipment.openned, 'equipmentsAndServices', equipment.module.id);
     this.equipmentsAndServices.forEach((e: { module: Module; openned: boolean }) => {
       if (equipment === e) {
         e.openned = !e.openned;
@@ -493,5 +492,30 @@ export class FormComponent implements OnInit {
         }
       }
     });
+  }
+  public acceptDataBeSaved(isAccepted: boolean): void {
+    this.userAcceptSavedDate = isAccepted;
+    this.setValidationsForm();
+  }
+
+  public validateForm(): void {
+    //this.structureForm.get('hours').setValue(this.hoursForm);
+    if (this.structureForm.valid && this.accountForm.valid && this.hoursForm.valid) {
+      let structure: Structure = this.structureForm.value;
+      structure.hours = this.hoursForm.value;
+      this.structureService.createStructure(structure, this.accountForm.value).subscribe((structure: Structure) => {
+        this.closeEvent.emit(structure);
+      });
+    } else {
+      console.log(this.structureForm);
+      console.log(this.accountForm);
+      console.log(this.hoursForm);
+      console.log('invalid');
+    }
+    /*if (!this.structureForm.invalid && accountForm.valid) {
+      this.profileService.createUserandLinkStructure(this.structureId, accountForm.value).subscribe((user) => {
+        this.closeEvent.emit(this.structureForm.value);
+      });
+    }*/
   }
 }

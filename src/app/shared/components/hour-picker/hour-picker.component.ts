@@ -16,8 +16,10 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   @Input() structureInput: FormGroup;
   @Input() isEditMode: boolean;
 
-  @Output() updateFormError = new EventEmitter<boolean>();
+  @Output() updateFormError = new EventEmitter<any>();
   @Output() updateForm = new EventEmitter<FormGroup>();
+
+  public error = false;
 
   private copiedDay: any;
   public copiedDayName = '';
@@ -275,7 +277,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   /**
    * Vérifier que le format des horaires est correct
    */
-  public checkHoursValid(): void {
+  public checkHoursValid(): boolean {
     let error = false;
     for (const day of this.structure.hours) {
       if (day.open) {
@@ -298,11 +300,16 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
     }
     // Émettre l'erreur à ajouter au formulaire pour autoriser
     // ou empêcher de passer à l'étape suivante
+
+    return !error;
   }
 
   public submitForm() {
-    this.checkHoursValid();
-    this.updateForm.emit(this.parseHoursToForm());
+    if (this.checkHoursValid()) {
+      this.updateForm.emit(this.parseHoursToForm());
+    } else {
+      this.updateFormError.emit();
+    }
   }
 
   private createDay(day: Day): FormGroup {

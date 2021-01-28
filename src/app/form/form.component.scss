@@ -26,8 +26,10 @@ $progressBar-height: 50px;
   border-top: 1px solid $grey-4;
   padding: 17px;
   .btn {
-    border-radius: 22px;
     width: 149px;
+    &.validate {
+      background-color: $green-1;
+    }
   }
   @media #{$tablet} {
     display: flex !important;
@@ -193,6 +195,7 @@ $progressBar-height: 50px;
 }
 .progressBar {
   height: #{$progressBar-height};
+
   progress {
     width: 100%;
     height: 6px;
@@ -204,11 +207,19 @@ $progressBar-height: 50px;
       background-color: $secondary-color;
       border-radius: 12px;
     }
+    &.validate {
+      &::-webkit-progress-value {
+        background-color: $green-1;
+      }
+    }
   }
   label {
     @include cn-bold-14;
     color: $secondary-color;
     min-width: 26px;
+    &.validate {
+      color: $green-1;
+    }
   }
 }
 .form-group {
