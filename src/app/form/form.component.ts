@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 20;
+  public currentPage = 7;
   public progressStatus = 0;
   public nbPagesForm = 23;
   public accountForm: FormGroup;

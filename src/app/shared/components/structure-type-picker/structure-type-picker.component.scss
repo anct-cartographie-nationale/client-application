@@ -23,6 +23,7 @@ button {
     white-space: nowrap;
     height: 40px;
     padding: 0 28px;
+    cursor: pointer;
     @include cn-bold-14;
   }
 }
@@ -35,6 +36,10 @@ button {
   .btnText {
     color: $secondary-color;
   }
+  .containerBtn {
+    background: none !important;
+    border-color: $secondary-color;
+  }
 }
 .boutonSection {
   text-align: center;
@@ -46,14 +51,11 @@ button {
     @include cn-bold-14;
     margin-bottom: 12px;
   }
+
   button {
     background: none;
     max-width: 114px;
     &:focus {
-      .containerBtn {
-        background: none;
-        border-color: $secondary-color;
-      }
     }
   }
   .containerBtn {

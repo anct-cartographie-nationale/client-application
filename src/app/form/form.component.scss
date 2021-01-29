@@ -14,7 +14,6 @@ $progressBar-height: 50px;
   height: calc(100vh - #{$header-height} - #{$footer-height});
   top: #{$header-height};
   z-index: $structure-details-z-index;
-  overflow: auto;
   @media #{$tablet} {
     height: calc(100vh);
     top: 0;
@@ -25,8 +24,10 @@ $progressBar-height: 50px;
 }
 
 .footer {
-  border-top: 1px solid $grey-4;
   padding: 17px;
+  width: 100%;
+  max-width: 960px;
+  margin: 20px auto;
   .btn {
     width: 149px;
     &.validate {
@@ -34,7 +35,8 @@ $progressBar-height: 50px;
     }
   }
   @media #{$tablet} {
-    display: flex !important;
+    margin: 0 auto;
+    border-top: 1px solid $grey-4;
   }
 }
 .header {
@@ -78,7 +80,7 @@ $progressBar-height: 50px;
   padding: 0 16px;
   display: block;
   overflow-y: auto;
-  height: 100vh;
+  height: auto;
 
   h2 {
     @include cn-bold-28;
@@ -90,18 +92,22 @@ $progressBar-height: 50px;
     @include cn-bold-22;
   }
   .page {
+    max-width: 960px;
+    margin: auto;
     @media #{$tablet} {
       height: calc(
         100vh - #{$header-height-phone} - #{$progressBar-height} - #{$footer-height-phone} - 1px
       ); // -1px because of header border
     }
-    height: calc(
+    height: auto;
+    /*height: calc(
       100vh - #{$header-height} - #{$progressBar-height} - #{$footer-height} - #{$footer-height-phone}
-    ); // -1px because of header border
+    ); // -1px because of header border*/
     color: $grey-1;
     &.home {
       height: 100%;
       .btnStart {
+        margin-top: 90px;
         text-align: center;
       }
     }
@@ -146,10 +152,16 @@ $progressBar-height: 50px;
       font-style: italic;
       color: $secondary-color;
     }
+    &.informationEndForm {
+      margin-top: 18px;
+      color: $grey-2;
+      @include cn-regular-14;
+    }
   }
   .textareaBlock {
-    max-width: 90%;
-
+    @media #{$tablet} {
+      max-width: 90%;
+    }
     textarea {
       padding: 13px 8px;
       background: $grey-6;
@@ -223,7 +235,8 @@ $progressBar-height: 50px;
 }
 .progressBar {
   height: #{$progressBar-height};
-
+  max-width: 960px;
+  margin: auto;
   progress {
     width: 100%;
     height: 6px;
@@ -269,6 +282,7 @@ input {
   }
 }
 img {
+  max-height: 340px;
   &.eyePassword {
     padding: 0 2.5px; // Align to email input
     cursor: pointer;
@@ -280,12 +294,15 @@ img {
 
 // collapse
 .collapse {
-  width: 296px;
   border: 1px solid $grey-4;
   border-radius: 4px;
-  cursor: pointer;
   margin-bottom: 13px;
-
+  &.equipments {
+    width: 296px;
+  }
+  @media #{$tablet} {
+    width: 296px;
+  }
   .logo {
     .hide {
       display: block;
@@ -393,6 +410,7 @@ img {
   .collapseHeader {
     height: 65px;
     padding: 0 15px 0 12px;
+    cursor: pointer;
   }
   .logo {
     height: 24px;
@@ -417,6 +435,7 @@ img {
     @include cn-bold-14;
     outline: none;
     border: none;
+    cursor: pointer;
     &.selectedChoice {
       background: $green-1 !important;
       color: $white;
@@ -483,4 +502,7 @@ img {
     margin-top: 50vh;
     transform: translateY(-50%);
   }
+}
+.asterisk {
+  color: $secondary-color;
 }
