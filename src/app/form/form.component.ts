@@ -48,9 +48,9 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 12;
+  public currentPage = 0;
   public progressStatus = 0;
-  public nbPagesForm = 20;
+  public nbPagesForm = 22;
   public accountForm: FormGroup;
   public isPageValid: boolean;
   public pagesValidation = [];
@@ -126,9 +126,9 @@ export class FormComponent implements OnInit {
     // Init account Form
     this.accountForm = new FormGroup(
       {
-        email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]),
-        name: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]),
-        surname: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]),
+        email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]), //NOSONAR
+        name: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]), //NOSONAR
+        surname: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]), //NOSONAR
         phone: new FormControl('', [Validators.required, Validators.pattern('([0-9]{2} ){4}[0-9]{2}')]), //NOSONAR
         password: new FormControl('', [
           Validators.required,
@@ -155,11 +155,15 @@ export class FormComponent implements OnInit {
         Validators.required,
         Validators.pattern('[a-z0-9-]{1,}[@][a-z0-9-]{1,}[.][a-z]{2,3}'),
       ]),
-      website: new FormControl(structure.website, [Validators.pattern('(www[.])[a-z0-9.-]*[.][a-z]{2,3}')]),
-      facebook: new FormControl(structure.facebook, Validators.pattern('(facebook.com/[a-z0-9A-Z.-]{1,})')),
-      twitter: new FormControl(structure.twitter, Validators.pattern('(twitter.com/[a-z0-9A-Z.-]{1,})')),
-      instagram: new FormControl(structure.instagram, Validators.pattern('(instagram.com/[a-z0-9A-Z.-]{1,})')),
-      linkedin: new FormControl(structure.linkedin, Validators.pattern('(linkedin.com/in/[a-z0-9A-Z.-]{1,})')),
+      contactPhone: new FormControl(structure.contactPhone, [
+        Validators.required,
+        Validators.pattern('([0-9]{2} ){4}[0-9]{2}'),
+      ]), //NOSONAR
+      website: new FormControl(structure.website, [Validators.pattern('(www[.])[a-z0-9.-]*[.][a-z]{2,3}')]), //NOSONAR
+      facebook: new FormControl(structure.facebook, Validators.pattern('(facebook.com/[a-z0-9A-Z.-]{1,})')), //NOSONAR
+      twitter: new FormControl(structure.twitter, Validators.pattern('(twitter.com/[a-z0-9A-Z.-]{1,})')), //NOSONAR
+      instagram: new FormControl(structure.instagram, Validators.pattern('(instagram.com/[a-z0-9A-Z.-]{1,})')), //NOSONAR
+      linkedin: new FormControl(structure.linkedin, Validators.pattern('(linkedin.com/in/[a-z0-9A-Z.-]{1,})')), //NOSONAR
       hours: new FormGroup({}),
       pmrAccess: new FormControl(structure.pmrAccess, Validators.required),
       documentsMeeting: new FormControl(structure.documentsMeeting),
@@ -178,19 +182,19 @@ export class FormComponent implements OnInit {
       digitalCultureSecurity: this.loadArrayForCheckbox(structure.digitalCultureSecurity, false),
       nbComputers: new FormControl(
         structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 0,
-        [Validators.required, Validators.pattern('[0-9]{1,}')]
+        [Validators.required, Validators.pattern('[0-9]{1,}')] //NOSONAR
       ),
       nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 0, [
         Validators.required,
-        Validators.pattern('[0-9]{1,}'),
+        Validators.pattern('[0-9]{1,}'), //NOSONAR
       ]),
       nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 0, [
         Validators.required,
-        Validators.pattern('[0-9]{1,}'),
+        Validators.pattern('[0-9]{1,}'), //NOSONAR
       ]),
       nbNumericTerminal: new FormControl(
         structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 0,
-        [Validators.required, Validators.pattern('[0-9]{1,}')]
+        [Validators.required, Validators.pattern('[0-9]{1,}')] //NOSONAR
       ),
       equipmentsDetails: new FormControl(structure.equipmentsDetails),
       equipmentsAccessType: this.loadArrayForCheckbox(structure.equipmentsAccessType, false),
@@ -323,12 +327,13 @@ export class FormComponent implements OnInit {
     this.pagesValidation[4] = {
       valid: this.getStructureControl('structureName').valid && this.getStructureControl('address').valid,
     };
-    this.pagesValidation[5] = { valid: this.getStructureControl('structureType').valid };
-    this.pagesValidation[6] = { valid: this.getStructureControl('accessModality').valid };
-    this.pagesValidation[7] = { valid: this.hoursForm.valid };
-    this.pagesValidation[8] = { valid: this.getStructureControl('exceptionalClosures').valid };
-    this.pagesValidation[9] = { valid: this.getStructureControl('pmrAccess').valid };
-    this.pagesValidation[10] = {
+    this.pagesValidation[5] = { valid: this.getStructureControl('contactPhone').valid };
+    this.pagesValidation[6] = { valid: this.getStructureControl('structureType').valid };
+    this.pagesValidation[7] = { valid: this.getStructureControl('accessModality').valid };
+    this.pagesValidation[8] = { valid: this.hoursForm.valid };
+    this.pagesValidation[9] = { valid: this.getStructureControl('exceptionalClosures').valid };
+    this.pagesValidation[10] = { valid: this.getStructureControl('pmrAccess').valid };
+    this.pagesValidation[11] = {
       valid:
         this.getStructureControl('contactMail').valid &&
         (this.getStructureControl('website').valid || !this.showWebsite) &&
@@ -337,16 +342,16 @@ export class FormComponent implements OnInit {
           this.getStructureControl('instagram').valid) ||
           !this.showSocialNetwork),
     };
-    this.pagesValidation[11] = { valid: this.getStructureControl('publics').valid };
-    this.pagesValidation[12] = {
+    this.pagesValidation[12] = { valid: this.getStructureControl('publics').valid };
+    this.pagesValidation[13] = {
       valid:
         this.getStructureControl('publicsAccompaniment').valid &&
         this.getStructureControl('proceduresAccompaniment').valid,
     };
-    this.pagesValidation[13] = {
+    this.pagesValidation[14] = {
       valid: this.getStructureControl('otherDescription').value,
     };
-    this.pagesValidation[14] = {
+    this.pagesValidation[15] = {
       valid:
         this.getStructureControl('accessRight').valid &&
         this.getStructureControl('socialAndProfessional').valid &&
@@ -354,9 +359,9 @@ export class FormComponent implements OnInit {
         this.getStructureControl('parentingHelp').valid &&
         this.getStructureControl('digitalCultureSecurity').valid,
     };
-    this.pagesValidation[15] = { valid: this.getStructureControl('freeWorkShop').valid };
-    this.pagesValidation[16] = { valid: this.getStructureControl('freeWifi').valid };
-    this.pagesValidation[17] = {
+    this.pagesValidation[16] = { valid: this.getStructureControl('freeWorkShop').valid };
+    this.pagesValidation[17] = { valid: this.getStructureControl('freeWifi').valid };
+    this.pagesValidation[18] = {
       valid:
         this.getStructureControl('equipmentsAndServices').valid &&
         this.getStructureControl('nbComputers').valid &&
@@ -364,10 +369,10 @@ export class FormComponent implements OnInit {
         this.getStructureControl('nbTablets').valid &&
         this.getStructureControl('nbNumericTerminal').valid,
     };
-    this.pagesValidation[18] = { valid: this.getStructureControl('labelsQualifications').valid };
-    this.pagesValidation[19] = { valid: this.getStructureControl('equipmentsAndServices').valid };
-    this.pagesValidation[20] = { valid: this.getStructureControl('description').valid };
-    this.pagesValidation[21] = { valid: this.userAcceptSavedDate };
+    this.pagesValidation[19] = { valid: this.getStructureControl('labelsQualifications').valid };
+    this.pagesValidation[20] = { valid: this.getStructureControl('equipmentsAndServices').valid };
+    this.pagesValidation[21] = { valid: this.getStructureControl('description').valid };
+    this.pagesValidation[22] = { valid: this.userAcceptSavedDate };
     this.updatePageValid();
   }
 
@@ -376,8 +381,8 @@ export class FormComponent implements OnInit {
   }
   public nextPage(): void {
     // Check if "other" isn't check to hide "other description" page
-    if (this.currentPage == 12 && !this.isInArray('autres', 'proceduresAccompaniment')) {
-      this.currentPage++; // page 13 skip and go to page 14
+    if (this.currentPage == 13 && !this.isInArray('autres', 'proceduresAccompaniment')) {
+      this.currentPage++; // page 14 skip and go to page 15
       this.progressStatus += 100 / this.nbPagesForm;
     }
     this.currentPage++;
@@ -386,8 +391,8 @@ export class FormComponent implements OnInit {
   }
   public previousPage(): void {
     // Check if "other" isn't check to hide "other description" page
-    if (this.currentPage == 14 && !this.isInArray('autres', 'proceduresAccompaniment')) {
-      this.currentPage--; // page 13 skip and go to page 12
+    if (this.currentPage == 15 && !this.isInArray('autres', 'proceduresAccompaniment')) {
+      this.currentPage--; // page 14 skip and go to page 13
       this.progressStatus -= 100 / this.nbPagesForm;
     }
     this.currentPage--;

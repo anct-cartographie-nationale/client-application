@@ -250,7 +250,7 @@
         <h3>ATTENTION</h3>
         <p>Il vous faudra de nouveau remplir le formulaire si vous quittez</p>
         <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
-          <button class="btn leave" (click)="leaveForm(showModalExit)" >Quitter</button>
+          <button class="btn leave" (click)="leaveForm(showModalExit)">Quitter</button>
           <button class="btn" (click)="leaveForm(null)">Annuler</button>
         </div>
       </div>
@@ -463,7 +463,33 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 5" class="page" fxLayout="column">
+      <div *ngIf="currentPage == 5" class="page">
+        <div class="title">
+          <h3>Quel numéro appelé pour joindre votre structure ?</h3>
+        </div>
+        <div class="form-group" fxLayout="column">
+          <label for="contactPhone">Téléphone de la structure</label>
+          <div fxLayout="row" fxLayoutGap="13px">
+            <input
+              type="text"
+              formControlName="contactPhone"
+              class="form-input"
+              (input)="modifyPhoneInput(structureForm, 'contactPhone', $event.target.value)"
+            />
+            <img
+              *ngIf="getStructureControl('contactPhone').valid"
+              src="../../assets/form/validate.svg"
+              alt="logo valid"
+            />
+            <img
+              *ngIf="getStructureControl('contactPhone').invalid && getStructureControl('contactPhone').value"
+              src="../../assets/form/notvalidate.svg"
+              alt="logo invalid"
+            />
+          </div>
+        </div>
+      </div>
+      <div *ngIf="currentPage == 6" class="page" fxLayout="column">
         <div class="title">
           <h3>Quel type de structure ?</h3>
           <p>1 seul choix possible</p>
@@ -477,7 +503,7 @@
           ></app-structure-type-picker>
         </div>
       </div>
-      <div *ngIf="currentPage == 6" class="page">
+      <div *ngIf="currentPage == 7" class="page">
         <div class="title">
           <h3>Quels sont les modalités d'accueil ?</h3>
           <p>Plusieurs choix possibles</p>
@@ -493,7 +519,7 @@
           </app-checkbox-form>
         </div>
       </div>
-      <div *ngIf="currentPage == 7" class="page">
+      <div *ngIf="currentPage == 8" class="page">
         <div class="title">
           <h3>Quels sont les horaires d'ouverture ?</h3>
           <p class="notRequired">facultatif</p>
@@ -506,7 +532,7 @@
           [isEditMode]="!isEditMode"
         ></app-hour-picker>
       </div>
-      <div *ngIf="currentPage == 8" class="page">
+      <div *ngIf="currentPage == 9" class="page">
         <div class="title">
           <h3>Avez-vous des précisions à apporter sur les horaires ?</h3>
           <p class="notRequired">facultatif</p>
@@ -527,7 +553,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 9" class="page">
+      <div *ngIf="currentPage == 10" class="page">
         <div class="title">
           <h3>Est-ce accessible pour les personnes à mobilité réduite ?</h3>
         </div>
@@ -537,7 +563,7 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 10" class="page">
+      <div *ngIf="currentPage == 11" class="page">
         <div class="title">
           <h3>Comment vous trouver sur internet ?</h3>
         </div>
@@ -727,7 +753,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 11" class="page">
+      <div *ngIf="currentPage == 12" class="page">
         <div class="title">
           <h3>Quel public peut venir vous consulter ?</h3>
           <p>Plusieurs choix possibles</p>
@@ -749,7 +775,7 @@
           </button>
         </div>
       </div>
-      <div *ngIf="currentPage == 12" class="page">
+      <div *ngIf="currentPage == 13" class="page">
         <div class="title">
           <h3>Quel(s) accompagnement(s) proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -829,7 +855,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 13" class="page">
+      <div *ngIf="currentPage == 14" class="page">
         <div class="title">
           <h3>Quelles sont les autres démarches ?</h3>
         </div>
@@ -848,7 +874,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 14" class="page">
+      <div *ngIf="currentPage == 15" class="page">
         <div class="title">
           <h3>Quel(s) atelier(s) au numérique proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -891,7 +917,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 15" class="page">
+      <div *ngIf="currentPage == 16" class="page">
         <div class="title">
           <h3>Ces ateliers sont-ils gratuits ?</h3>
         </div>
@@ -901,7 +927,7 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 16" class="page">
+      <div *ngIf="currentPage == 17" class="page">
         <div class="title">
           <h3>Proposez-vous le wifi en accès libre ?</h3>
         </div>
@@ -911,7 +937,7 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 17" class="page">
+      <div *ngIf="currentPage == 18" class="page">
         <div class="title">
           <h3>Quel matériel mettez-vous à disposition ?</h3>
           <p class="notRequired">facultatif</p>
@@ -1030,7 +1056,7 @@
           </div>
         </ng-container>
       </div>
-      <div *ngIf="currentPage == 18" class="page">
+      <div *ngIf="currentPage == 19" class="page">
         <div class="title">
           <h3>Quelle(s) labelisation proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -1047,7 +1073,7 @@
           </app-checkbox-form>
         </div>
       </div>
-      <div *ngIf="currentPage == 19" class="page">
+      <div *ngIf="currentPage == 20" class="page">
         <div class="title">
           <h3>Quels autres services proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -1071,7 +1097,7 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="currentPage == 20" class="page">
+      <div *ngIf="currentPage == 21" class="page">
         <div class="title">
           <h3>Pouvez vous présentez votre structure ?</h3>
           <p class="notRequired">facultatif</p>
@@ -1088,7 +1114,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 2" class="page">
+      <div *ngIf="currentPage == 22" class="page">
         <div class="title">
           <h3>Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon* ?</h3>
         </div>
