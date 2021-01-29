@@ -146,7 +146,7 @@ export class FormComponent implements OnInit {
       structureType: new FormControl(structure.structureType, Validators.required),
       structureName: new FormControl(structure.structureName, Validators.required),
       description: new FormControl(structure.description),
-      lockdownActivity : new FormControl(structure.description),
+      lockdownActivity: new FormControl(structure.description),
       address: new FormGroup({
         numero: new FormControl(structure.address.numero),
         street: new FormControl(structure.address.street, Validators.required),
@@ -182,20 +182,20 @@ export class FormComponent implements OnInit {
       socialAndProfessional: this.loadArrayForCheckbox(structure.socialAndProfessional, false),
       digitalCultureSecurity: this.loadArrayForCheckbox(structure.digitalCultureSecurity, false),
       nbComputers: new FormControl(
-        structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 0,
-        [Validators.required, Validators.pattern('[0-9]{1,}')] //NOSONAR
+        structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 1,
+        [Validators.required, Validators.pattern('[1-9]{1}[0-9]*')] //NOSONAR
       ),
-      nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 0, [
+      nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 1, [
         Validators.required,
-        Validators.pattern('[0-9]{1,}'), //NOSONAR
+        Validators.pattern('[1-9]{1}[0-9]*'), //NOSONAR
       ]),
-      nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 0, [
+      nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 1, [
         Validators.required,
-        Validators.pattern('[0-9]{1,}'), //NOSONAR
+        Validators.pattern('[1-9]{1}[0-9]*'), //NOSONAR
       ]),
       nbNumericTerminal: new FormControl(
-        structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 0,
-        [Validators.required, Validators.pattern('[0-9]{1,}')] //NOSONAR
+        structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 1,
+        [Validators.required, Validators.pattern('[1-9]{1}[0-9]*')] //NOSONAR
       ),
       equipmentsDetails: new FormControl(structure.equipmentsDetails),
       equipmentsAccessType: this.loadArrayForCheckbox(structure.equipmentsAccessType, false),
@@ -493,19 +493,19 @@ export class FormComponent implements OnInit {
         if (!equipment.openned) {
           switch (e.module.id) {
             case Equipment.computer: {
-              this.getStructureControl('nbComputers').setValue(0);
+              this.getStructureControl('nbComputers').setValue(1);
               break;
             }
             case Equipment.printer: {
-              this.getStructureControl('nbPrinters').setValue(0);
+              this.getStructureControl('nbPrinters').setValue(1);
               break;
             }
             case Equipment.tablet: {
-              this.getStructureControl('nbTablets').setValue(0);
+              this.getStructureControl('nbTablets').setValue(1);
               break;
             }
             case Equipment.bornes: {
-              this.getStructureControl('nbNumericTerminal').setValue(0);
+              this.getStructureControl('nbNumericTerminal').setValue(1);
               break;
             }
           }
