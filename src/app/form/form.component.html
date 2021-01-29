@@ -1116,6 +1116,25 @@
       </div>
       <div *ngIf="currentPage == 22" class="page">
         <div class="title">
+          <h3>Y a-t-il des informations spécifique à la période COVID ?</h3>
+          <p class="notRequired">facultatif</p>
+        </div>
+        <div class="textareaBlock" fxLayout="column">
+          <textarea
+            rows="8"
+            placeholder="Exemple : nous ne sommes joignables que par visio"
+            maxlength="500"
+            formControlName="lockdownActivity"
+          ></textarea>
+          <p>
+            {{
+              getStructureControl('lockdownActivity').value ? getStructureControl('lockdownActivity').value.length : 0
+            }}/500
+          </p>
+        </div>
+      </div>
+      <div *ngIf="currentPage == 23" class="page">
+        <div class="title">
           <h3>Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon* ?</h3>
         </div>
         <app-checkbox-form
