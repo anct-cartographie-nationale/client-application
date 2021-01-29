@@ -48,6 +48,7 @@ import { AdminGuard } from './guards/admin.guard';
     UserVerificationComponent,
     ResetEmailComponent,
     ResetPasswordComponent,
+    FormComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule, AdminModule],
   providers: [

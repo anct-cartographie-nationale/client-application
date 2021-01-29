@@ -2,6 +2,8 @@
 @import '../../assets/scss/breakpoint';
 @import '../../assets/scss/color';
 @import '../../assets/scss/typography';
+@import '../../assets/scss/shapes';
+@import '../../assets/scss/z-index';
 
 $progressBar-height: 50px;
 
@@ -11,7 +13,7 @@ $progressBar-height: 50px;
   width: 100vw;
   height: calc(100vh - #{$header-height} - #{$footer-height});
   top: #{$header-height};
-  z-index: 9999;
+  z-index: $structure-details-z-index;
   overflow: auto;
   @media #{$tablet} {
     height: calc(100vh);
@@ -435,4 +437,50 @@ img {
   -webkit-box-orient: vertical;
   width: 100%;
   margin-right: 12px;
+}
+
+.modalExitContainer {
+  width: 100%;
+  height: 100%;
+  z-index: $modal-confirmation-z-index;
+  position: absolute;
+  content: '';
+  top: 0;
+  background: rgba(0, 0, 0, 0.65);
+  .modal {
+    .contentModal {
+      width: 100%;
+      background: rgba(255, 255, 255, 1);
+      padding: 35px 20px 18px 20px;
+      h3 {
+        @include cn-bold-18;
+        color: $orange-warning;
+      }
+      p {
+        @include cn-bold-16;
+        color: $grey-1;
+        text-align: center;
+      }
+      .footerModal {
+        width: 100%;
+        margin-top: 14px;
+        @include cn-bold-16;
+        .btn {
+          width: 149px;
+          &.leave {
+            background: none;
+            color: $grey-1;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    width: 350px;
+    margin: auto;
+    border-radius: 6px;
+    @include background-hash;
+    border: 1px solid $grey-4;
+    margin-top: 50vh;
+    transform: translateY(-50%);
+  }
 }

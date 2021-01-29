@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProfileService } from '../profile/services/profile.service';
 import { AuthService } from '../services/auth.service';
 
@@ -12,13 +13,14 @@ export class HeaderComponent implements OnInit {
   public isPopUpOpen = false;
   public displaySignUp = true;
 
-  constructor(private authService: AuthService, private profileService: ProfileService) {}
+  constructor(private authService: AuthService, private profileService: ProfileService, private router: Router) {}
   ngOnInit(): void {}
 
   public openMenu(): void {
     this.showMenu = true;
   }
-  public closeMenu(): void {
+  public closeMenu(route: string): void {
+    this.router.navigateByUrl(route);
     this.showMenu = false;
   }
 

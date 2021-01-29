@@ -18,6 +18,7 @@ import { Address } from '../models/address.model';
 import { Week } from '../models/week.model';
 import { Module } from '../structure-list/models/module.model';
 import { Equipment } from '../structure-list/enum/equipment.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-structureForm',
@@ -59,7 +60,7 @@ export class FormComponent implements OnInit {
   public userAcceptSavedDate = false;
 
   public showMenu = false;
-
+  public showModalExit: string = null;
   //collapse var
   public showWebsite: boolean;
   public showSocialNetwork: boolean;
@@ -69,7 +70,8 @@ export class FormComponent implements OnInit {
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -534,7 +536,20 @@ export class FormComponent implements OnInit {
     this.showMenu = !this.showMenu;
     console.log(this.showMenu);
   }
-  public closeMenu(e): void {
-    console.log(e);
+
+  public leaveForm(route: string): void {
+    if (route) {
+      this.router.navigateByUrl(route);
+    } else {
+      this.showModalExit = null;
+    }
+  }
+
+  public closeMenu(route: string): void {
+    if (route) {
+      this.showModalExit = route;
+    } else {
+      this.showMenu = false;
+    }
   }
 }

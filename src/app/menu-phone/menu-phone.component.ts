@@ -10,11 +10,11 @@ import { AuthService } from '../services/auth.service';
 export class MenuPhoneComponent implements OnInit {
   constructor(private authService: AuthService, private profileService: ProfileService) {}
 
-  @Output() closeEvent = new EventEmitter();
+  @Output() closeEvent = new EventEmitter<string>();
   ngOnInit(): void {}
 
-  closeMenu(): void {
-    this.closeEvent.emit();
+  closeMenu(route: string): void {
+    this.closeEvent.emit(route);
   }
 
   public get isLoggedIn(): boolean {
