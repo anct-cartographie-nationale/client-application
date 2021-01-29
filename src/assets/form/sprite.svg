@@ -17,7 +17,7 @@
 <path d="M2.00002 5.81818L5.8889 9L12 2" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
 
-<symbol id="typeStructure_private" viewBox="0 0 20 45" xmlns="http://www.w3.org/2000/svg">
+<symbol id="typeStructure_privateLucratif" viewBox="0 0 20 45" xmlns="http://www.w3.org/2000/svg">
 <path d="M3.56201 15.4203L16.562 10V43H3.56201V15.4203Z" stroke="none"/>
 <rect x="0.562012" y="44" width="19" height="1" stroke="none"/>
 <path d="M7.06201 0L7.56201 15H6.56201L7.06201 0Z" stroke="none"/>
@@ -71,7 +71,7 @@
 <rect x="10.562" y="39" width="4" height="1" fill="white" stroke="none"/>
 </symbol>
 
-<symbol id="typeStructure_privateLucratif" viewBox="0 0 20 25" xmlns="http://www.w3.org/2000/svg">
+<symbol id="typeStructure_private" viewBox="0 0 20 25" xmlns="http://www.w3.org/2000/svg">
 <path d="M3.12402 8H16.124V23H3.12402V8Z" stroke="none"/>
 <path d="M9.79077 10.5L9.79077 1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M9.79077 1.44444C9.79077 1.44444 9.40188 1 8.6241 1C7.84633 1 7.45744 1.44444 7.45744 1.44444V4.11111C7.45744 4.11111 7.84633 3.66667 8.6241 3.66667C9.40188 3.66667 9.79077 4.11111 9.79077 4.11111V1.44444Z" stroke="none"/>
