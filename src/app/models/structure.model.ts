@@ -10,9 +10,8 @@ export class Structure {
   public numero: string = null;
   public createdAt: string = null;
   public updatedAt: string = null;
-  public structureRepresentation: string = null;
   public structureName: string = null;
-  public structureType: string[] = [];
+  public structureType: string = null;
   public description: string = null;
   public address: Address = new Address();
   public contactPhone: string = null;
@@ -22,16 +21,12 @@ export class Structure {
   public twitter: string = null;
   public instagram: string = null;
   public linkedin: string = null;
-  public gender: string = null;
-  public contactName: string = null;
-  public contactSurname: string = null;
-  public fonction: string = null;
   public lockdownActivity: string = null;
   public pmrAccess: boolean = null;
   public publicsAccompaniment: string[] = [];
   public proceduresAccompaniment: string[] = [];
   public accessModality: string[] = [];
-  public documentsMeeting: string = null;
+  public documentsMeeting: string = null; // A voir
   public labelsQualifications: string[] = [];
   public publics: string[] = [];
   public nbComputers: number = null;
@@ -41,8 +36,6 @@ export class Structure {
   public exceptionalClosures: string = null;
   public equipmentsAndServices: string[] = [];
   public hours: Week;
-  public equipmentsDetails: string = null;
-  public equipmentsAccessType: string[] = [];
   public freeWorkShop: boolean = null;
   public freeWifi: boolean = null;
   public otherDescription: string = null;
@@ -93,17 +86,6 @@ export class Structure {
     } else {
       return 'Aucun horaire disponible';
     }
-  }
-
-  public getLabelTypeStructure(): string {
-    let label = '';
-    this.structureType.forEach((type) => {
-      if (label) {
-        label += ', ';
-      }
-      label += typeStructureEnum[type];
-    });
-    return label;
   }
 
   /**

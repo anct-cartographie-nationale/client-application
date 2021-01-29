@@ -29,7 +29,7 @@
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <div class="typeInformationHeader" fxLayout="column">
-          <h3>{{ structure.getLabelTypeStructure() }}</h3>
+          <h3>{{ structure.structureType }}</h3>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="7px" *ngIf="structure.hasEquipments()">
             <app-svg-icon
               *ngFor="let equipement of structure.equipmentsAndServices"

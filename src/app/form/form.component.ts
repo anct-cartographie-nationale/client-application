@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Structure } from '../models/structure.model';
 import { Time } from '../models/time.model';
@@ -7,19 +7,15 @@ import { StructureService } from '../services/structure.service';
 import { SearchService } from '../structure-list/services/search.service';
 import { Category } from '../structure-list/models/category.model';
 import { CategoryEnum } from '../shared/enum/category.enum';
-import { EquipmentAccess } from '../shared/enum/equipmentAccess.enum';
-import { WeekDayEnum } from '../shared/enum/weekDay.enum';
-import { typeStructureEnum } from '../shared/enum/typeStructure.enum';
-import { FonctionContactEnum } from '../shared/enum/fonctionContact.enum';
 import { ProfileService } from '../profile/services/profile.service';
 import { User } from '../models/user.model';
 import { MustMatch } from '../shared/validator/form';
 import { Address } from '../models/address.model';
-import { Week } from '../models/week.model';
 import { Module } from '../structure-list/models/module.model';
 import { Equipment } from '../structure-list/enum/equipment.enum';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../services/auth.service';
+import { first } from 'rxjs/operators';
 @Component({
   selector: 'app-structureForm',
   templateUrl: './form.component.html',
@@ -31,12 +27,7 @@ export class FormComponent implements OnInit {
   @Input() public profile?: User;
   @Output() closeEvent = new EventEmitter<Structure>();
   public structureForm: FormGroup;
-  public userAlreadyExist = false;
 
-  public equipmentAccess = EquipmentAccess;
-  public weekDay = WeekDayEnum;
-  public typeStructure = typeStructureEnum;
-  public fonctions = FonctionContactEnum;
   public labelsQualifications: Category;
   public publics: Category;
   public accessModality: Category;
@@ -48,7 +39,7 @@ export class FormComponent implements OnInit {
   public structureId: string;
 
   //New var form
-  public currentPage = 7;
+  public currentPage = 0;
   public progressStatus = 0;
   public nbPagesForm = 23;
   public accountForm: FormGroup;
@@ -71,10 +62,12 @@ export class FormComponent implements OnInit {
     private structureService: StructureService,
     private searchService: SearchService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    console.log(this.idStructure);
     if (this.idStructure) {
       this.structureService.getStructure(this.idStructure).subscribe((structure) => {
         this.initForm(structure);
@@ -123,6 +116,7 @@ export class FormComponent implements OnInit {
   }
 
   private initForm(structure: Structure): void {
+    console.log(structure);
     // Init account Form
     this.accountForm = new FormGroup(
       {
@@ -197,8 +191,6 @@ export class FormComponent implements OnInit {
         structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 1,
         [Validators.required, Validators.pattern('[1-9]{1}[0-9]*')] //NOSONAR
       ),
-      equipmentsDetails: new FormControl(structure.equipmentsDetails),
-      equipmentsAccessType: this.loadArrayForCheckbox(structure.equipmentsAccessType, false),
       freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
       freeWifi: new FormControl(structure.freeWifi, Validators.required),
     });
@@ -524,9 +516,28 @@ export class FormComponent implements OnInit {
     if (this.structureForm.valid && this.accountForm.valid && this.hoursForm.valid) {
       let structure: Structure = this.structureForm.value;
       structure.hours = this.hoursForm.value;
-      this.structureService.createStructure(structure, this.accountForm.value).subscribe((structure: Structure) => {
-        this.closeEvent.emit(structure);
-      });
+      const user = new User(this.accountForm.value);
+      this.authService
+        .register(user)
+        .pipe(first())
+        .subscribe(
+          () => {
+            this.structureService.createStructure(structure, user).subscribe(
+              (structure: Structure) => {
+                this.closeEvent.emit(structure);
+              },
+              (err) => {
+                this.closeEvent.emit(null);
+              }
+            );
+          },
+          (error) => {
+            if (error.error.statusCode === 400) {
+              console.log('Compte déjà créé');
+              this.closeEvent.emit(null);
+            }
+          }
+        );
     } else {
       console.log(this.structureForm);
       console.log(this.accountForm);
