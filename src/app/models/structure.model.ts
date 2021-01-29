@@ -26,7 +26,6 @@ export class Structure {
   public publicsAccompaniment: string[] = [];
   public proceduresAccompaniment: string[] = [];
   public accessModality: string[] = [];
-  public documentsMeeting: string = null; // A voir
   public labelsQualifications: string[] = [];
   public publics: string[] = [];
   public nbComputers: number = null;

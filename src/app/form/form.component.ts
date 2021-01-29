@@ -161,7 +161,6 @@ export class FormComponent implements OnInit {
       linkedin: new FormControl(structure.linkedin, Validators.pattern('(linkedin.com/in/[a-z0-9A-Z.-]{1,})')), //NOSONAR
       hours: new FormGroup({}),
       pmrAccess: new FormControl(structure.pmrAccess, Validators.required),
-      documentsMeeting: new FormControl(structure.documentsMeeting),
       exceptionalClosures: new FormControl(structure.exceptionalClosures),
       labelsQualifications: this.loadArrayForCheckbox(structure.labelsQualifications, false),
       accessModality: this.loadArrayForCheckbox(structure.accessModality, true),
