@@ -89,7 +89,7 @@
         [text]="'Filtres'"
         (action)="openModal(TypeModal.accompaniment)"
       ></app-button>
-      <a (click)="toogleAddStructure()" tabindex="0">Ajouter une structure</a>
+      <a routerLink="/create-structure" tabindex="0">Ajouter une structure</a>
     </div>
   </div>
   <div class="footerSearchSection isntPhoneContent" fxLayout="row" fxLayoutAlign="space-between center">
@@ -107,12 +107,6 @@
         </label>
       </div>
     </div>
-    <a (click)="toogleAddStructure()" tabindex="0">Ajouter une structure</a>
+    <a routerLink="/create-structure" tabindex="0">Ajouter une structure</a>
   </div>
 </div>
-
-<app-structureForm
-  *ngIf="addStructureFormModal"
-  (closeEvent)="toogleAddStructure($event)"
-  (clickOutside)="toogleAddStructure()"
-></app-structureForm>

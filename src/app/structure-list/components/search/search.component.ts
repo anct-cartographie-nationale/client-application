@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { GeoJson } from '../../../map/models/geojson.model';
+import { Structure } from '../../../models/structure.model';
 import { GeojsonService } from '../../../services/geojson.service';
 import { AppModalType } from '../../../shared/components/modal/modal-type.enum';
 import { TypeModal } from '../../enum/typeModal.enum';
@@ -219,9 +221,5 @@ export class SearchComponent implements OnInit, OnChanges {
         }
       );
     }
-  }
-
-  public toogleAddStructure(): void {
-    this.addStructureFormModal = !this.addStructureFormModal;
   }
 }
