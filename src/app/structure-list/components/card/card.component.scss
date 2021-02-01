@@ -11,12 +11,13 @@
     color: $grey-3;
     @include cn-regular-16;
   }
-  .nomStructure {
+  .structure-name {
     padding-top: 13px;
     color: $grey-1;
     @include cn-bold-20;
     padding-bottom: 5px;
     width: 100%;
+    text-transform: capitalize;
   }
   .distanceStructure {
     @include cn-regular-16;
