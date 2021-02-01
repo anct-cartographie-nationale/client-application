@@ -33,6 +33,9 @@ $progressBar-height: 50px;
     &.validate {
       background-color: $green-1;
     }
+    &.unique {
+      width: 240px;
+    }
   }
   @media #{$tablet} {
     margin: 0 auto;
@@ -505,4 +508,27 @@ img {
 }
 .asterisk {
   color: $secondary-color;
+}
+
+.structureInfoBlock {
+  background: $green-1;
+  color: $white;
+  padding: 16px;
+  border-radius: 6px;
+  @include cn-bold-18;
+  .structureInfoContent {
+    width: 100%;
+  }
+  span {
+    font-style: italic;
+    @include cn-regular-14;
+  }
+  .validateSvg {
+    stroke: $white;
+    text-align: right;
+    svg {
+      height: 14px;
+      width: 14px;
+    }
+  }
 }

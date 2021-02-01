@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
   //New var form
   public currentPage = 0;
   public progressStatus = 0;
-  public nbPagesForm = 23;
+  public nbPagesForm = 24;
   public accountForm: FormGroup;
   public isPageValid: boolean;
   public pagesValidation = [];
@@ -51,6 +51,7 @@ export class FormComponent implements OnInit {
 
   public showMenu = false;
   public showModalExit: string = null;
+  public emailConfirmed = false;
   //collapse var
   public showWebsite: boolean;
   public showSocialNetwork: boolean;
@@ -119,7 +120,7 @@ export class FormComponent implements OnInit {
     // Init account Form
     this.accountForm = new FormGroup(
       {
-        email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')]), //NOSONAR
+        email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9.-]+@[a-z0-9.-]+[.][a-z]{2,3}')]), //NOSONAR
         name: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]), //NOSONAR
         surname: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]), //NOSONAR
         phone: new FormControl('', [Validators.required, Validators.pattern('([0-9]{2} ){4}[0-9]{2}')]), //NOSONAR
@@ -147,7 +148,7 @@ export class FormComponent implements OnInit {
       }),
       contactMail: new FormControl(structure.contactMail, [
         Validators.required,
-        Validators.pattern('[a-z0-9-]{1,}[@][a-z0-9-]{1,}[.][a-z]{2,3}'),
+        Validators.pattern('[a-z0-9.-]+@[a-z0-9.-]+[.][a-z]{2,3}'),
       ]),
       contactPhone: new FormControl(structure.contactPhone, [
         Validators.required,
@@ -349,9 +350,15 @@ export class FormComponent implements OnInit {
       this.currentPage++; // page 14 skip and go to page 15
       this.progressStatus += 100 / this.nbPagesForm;
     }
-    this.currentPage++;
-    this.progressStatus += 100 / this.nbPagesForm;
-    this.updatePageValid();
+
+    // Check if going to the last page to submit form and send email verification.
+    if (this.currentPage == this.nbPagesForm - 1) {
+      this.validateForm();
+    } else {
+      this.currentPage++;
+      this.progressStatus += 100 / this.nbPagesForm;
+      this.updatePageValid();
+    }
   }
   public previousPage(): void {
     // Check if "other" isn't check to hide "other description" page
@@ -494,10 +501,10 @@ export class FormComponent implements OnInit {
           () => {
             this.structureService.createStructure(structure, user).subscribe(
               (structure: Structure) => {
-                this.router.navigateByUrl('/home');
+                this.currentPage++;
               },
               (err) => {
-                this.router.navigateByUrl('/home');
+                console.log('err création structure');
               }
             );
           },
@@ -505,7 +512,6 @@ export class FormComponent implements OnInit {
             if (error.error.statusCode === 400) {
               console.log('Email déjà utilisé');
             }
-            this.router.navigateByUrl('/home');
           }
         );
     } else {
@@ -534,5 +540,9 @@ export class FormComponent implements OnInit {
     } else {
       this.showMenu = false;
     }
+  }
+  // TODO : Email verification link
+  public confirmEmail(): void {
+    this.emailConfirmed = true;
   }
 }

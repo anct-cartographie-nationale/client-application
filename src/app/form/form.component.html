@@ -918,27 +918,46 @@
           le site des services et démarches en ligne dans la Métropole de Lyon
         </p>
       </div>
+      <div *ngIf="currentPage == nbPagesForm && !emailConfirmed" class="page" fxLayout="column" fxLayoutGap="69px">
+        <svg aria-hidden="true">
+          <use [attr.xlink:href]="'assets/form/sprite.svg#emailVerification'"></use>
+        </svg>
+        <h3>Un courriel vous a été envoyé afin de finaliser votre inscription</h3>
+      </div>
+      <div *ngIf="emailConfirmed" class="page">
+        <div class="title">
+          <h3>
+            Bravo !<br />
+            Votre structure a bien été référencée.
+          </h3>
+        </div>
+
+        <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
+          <div class="structureInfoContent" fxLayout="column">
+            {{ getStructureControl('structureName').value }}
+            <span>{{ getStructureControl('structureType').value }}</span>
+          </div>
+          <div class="validateSvg">
+            <svg class="validate" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
   <div *ngIf="currentPage != 0" class="footer" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <button class="btn previous" (click)="previousPage()"><span class="chevron left"></span>Précédent</button>
-    <button
-      *ngIf="currentPage != nbPagesForm"
-      class="btn next"
-      (click)="nextPage()"
-      [disabled]="!isPageValid"
-      [ngClass]="{ invalid: !isPageValid }"
-    >
-      Suivant<span class="chevron right"></span>
+    <div *ngIf="currentPage != nbPagesForm">
+      <button class="btn previous" (click)="previousPage()"><span class="chevron left"></span>Précédent</button>
+      <button class="btn next" (click)="nextPage()" [disabled]="!isPageValid" [ngClass]="{ invalid: !isPageValid }">
+        Suivant<span class="chevron right"></span>
+      </button>
+    </div>
+    <button *ngIf="currentPage == nbPagesForm && !emailConfirmed" class="btn validate unique" (click)="confirmEmail()">
+      Ok
     </button>
-    <button
-      *ngIf="currentPage == nbPagesForm"
-      class="btn validate"
-      (click)="validateForm()"
-      [disabled]="!isPageValid"
-      [ngClass]="{ invalid: !isPageValid }"
-    >
-      Terminer
+    <button *ngIf="emailConfirmed" class="btn unique" routerLink="/home" [routerLinkActive]="'active'">
+      Voir ma structure
     </button>
   </div>
 </div>
