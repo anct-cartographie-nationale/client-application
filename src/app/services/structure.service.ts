@@ -31,8 +31,8 @@ export class StructureService {
     return this.http.put(`${this.baseUrl}/${id}`, structure).pipe(map((item: Structure) => new Structure(item)));
   }
 
-  public isClaimed(id: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}/isClaimed`);
+  public isClaimed(id: string, profile: User): Observable<boolean> {
+    return this.http.post<boolean>(`${this.baseUrl}/${id}/isClaimed`, profile);
   }
 
   public claimStructureWithAccount(id: string, user: User): Observable<string[]> {
@@ -40,8 +40,13 @@ export class StructureService {
   }
 
   public getStructure(id: string): Observable<Structure> {
-    return this.http.get(`${this.baseUrl}/${id}`).pipe(map((item: any) => new Structure(item)));
+    return this.http.get<Structure>(`${this.baseUrl}/${id}`);
   }
+
+  public delete(id: string): Observable<Structure> {
+    return this.http.delete<Structure>(`${this.baseUrl}/${id}`);
+  }
+
   public getStructures(filters: Filter[]): Observable<Structure[]> {
     if (filters && filters.length > 0) {
       let requestUrl = `${this.baseUrl}/search`;

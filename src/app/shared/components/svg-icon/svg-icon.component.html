@@ -1,3 +1,4 @@
 <svg aria-hidden="true" class="icon" [ngClass]="iconClass" [attr.fill]="iconColor" [attr.stroke]="iconColor">
+  <title *ngIf="title">{{ title }}</title>
   <use [attr.xlink:href]="'assets/' + type + '/sprite.svg#' + icon"></use>
 </svg>

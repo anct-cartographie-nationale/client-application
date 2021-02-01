@@ -12,9 +12,7 @@ import { AuthService } from '../../services/auth.service';
 export class ProfileService {
   private readonly baseUrl = 'api/users';
   private currentProfile: User = null;
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.getProfile();
-  }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   public async getProfile(): Promise<User> {
     // Get profil by API only on first time

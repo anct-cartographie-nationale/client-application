@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { DateTime } from 'luxon';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,7 +13,7 @@ export class AuthService {
   private userSubject: BehaviorSubject<UserAuth>;
   public user: Observable<UserAuth>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.userSubject = new BehaviorSubject<UserAuth>(JSON.parse(localStorage.getItem('user')));
     this.user = this.userSubject.asObservable();
   }
@@ -31,6 +32,7 @@ export class AuthService {
   public logout(): void {
     localStorage.removeItem('user');
     this.userSubject.next(null);
+    window.location.replace('/home');
   }
 
   public isLoggedIn(): boolean {

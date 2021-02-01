@@ -1,8 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { GeoJson } from '../../../map/models/geojson.model';
 import { GeojsonService } from '../../../services/geojson.service';
+import { AppModalType } from '../../../shared/components/modal/modal-type.enum';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
 import { Filter } from '../../models/filter.model';
@@ -15,18 +16,16 @@ import { SearchService } from '../../services/search.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
-  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
-    this.searchForm = this.fb.group({
-      searchTerm: '',
-    });
-  }
-
+export class SearchComponent implements OnInit, OnChanges {
   @Output() searchEvent = new EventEmitter();
 
   // Show/hide form createStructure
   public addStructureFormModal = false;
 
+  @Output() locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() locate = false;
+  public modalType = AppModalType;
   // Form search input
   public searchForm: FormGroup;
   // Modal variable
@@ -38,11 +37,27 @@ export class SearchComponent implements OnInit {
   public numberTrainingChecked = 0;
   public numberAccompanimentChecked = 0;
   public numberMoreFiltersChecked = 0;
+
+  // Modal confirmation variable
+  public isConfirmationModalOpen = false;
+  public confirmationModalContent =
+    'Afin d’ajouter votre structure,vous allez être redirigé vers le formulaire Grand Lyon à remplir.';
+
+  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
+    this.searchForm = this.fb.group({
+      searchTerm: '',
+    });
+  }
   ngOnInit(): void {
     // Will store the different categories
     this.categories = [];
-
     this.checkedModulesFilter = new Array();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.locate && changes.locate.currentValue && !changes.locate.previousValue) {
+      this.locateMe();
+    }
   }
 
   // Accessor to template angular.
@@ -54,6 +69,9 @@ export class SearchComponent implements OnInit {
   public clearInput(): void {
     this.searchForm.reset();
     this.applyFilter(null);
+    if (this.locate) {
+      this.locatationReset.emit(true);
+    }
   }
 
   // Sends an array containing all filters
@@ -141,6 +159,7 @@ export class SearchComponent implements OnInit {
         this.searchForm.setValue({ searchTerm: adress });
         this.applyFilter(adress);
       });
+      this.locatationTrigger.emit(true);
     });
   }
   // Management of the checkbox event (Check / Uncheck)

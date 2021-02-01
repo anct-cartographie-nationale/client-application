@@ -8,9 +8,6 @@
       fxLayoutAlign="end center"
       fxLayoutGap="20px"
     >
-      <div class="isntPhoneContent" fxLayout="row" fxLayoutAlign="center center">
-        <span class="indicatorDistance" *ngFor="let i of [].constructor(structure.getDistanceRange())"></span>
-      </div>
       <div>
         {{ this.formatDistance() }}
       </div>
@@ -23,6 +20,7 @@
       [type]="'ico'"
       [iconColor]="'grey'"
       [icon]="structure.getEquipmentsIcon(equipement)"
+      [title]="structure.getEquipmentsTitle(equipement)"
     ></app-svg-icon>
   </div>
 
