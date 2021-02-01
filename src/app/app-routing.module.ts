@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { PanelComponent } from './admin/components/panel/panel.component';
+import { FormComponent } from './form/form.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
@@ -64,6 +65,10 @@ const routes: Routes = [
     path: 'admin',
     canActivate: [AdminGuard],
     component: PanelComponent,
+  },
+  {
+    path: 'create-structure',
+    component: FormComponent,
   },
   {
     path: '**',

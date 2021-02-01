@@ -25,7 +25,6 @@ export class FormComponent implements OnInit {
   @Input() public idStructure?: string;
   @Input() public isEditMode: boolean = true;
   @Input() public profile?: User;
-  @Output() closeEvent = new EventEmitter<Structure>();
   public structureForm: FormGroup;
 
   public labelsQualifications: Category;
@@ -272,34 +271,6 @@ export class FormComponent implements OnInit {
     }
     return false;
   }
-  public onSubmitClaim(accountForm: FormGroup): void {
-    if (!this.structureForm.invalid && accountForm.valid) {
-      this.profileService.createUserandLinkStructure(this.structureId, accountForm.value).subscribe((user) => {
-        this.closeEvent.emit(this.structureForm.value);
-      });
-    }
-  }
-
-  public onSubmitClaimWithAccount(): void {
-    this.structureService.claimStructureWithAccount(this.structureId, this.profile).subscribe((structuresLinked) => {
-      this.profile.pendingStructuresLink = structuresLinked;
-      this.profileService.setProfile(this.profile);
-      this.closeEvent.emit(this.structureForm.value);
-    });
-  }
-  public onSubmit(structureForm: FormGroup): void {
-    if (structureForm.valid) {
-      if (this.structureId) {
-        this.structureService.editStructure(this.structureId, structureForm.value).subscribe((structure: Structure) => {
-          this.closeEvent.emit(structure);
-        });
-      } else {
-        this.structureService.createStructure(structureForm.value, this.profile).subscribe((structure: Structure) => {
-          this.closeEvent.emit(structure);
-        });
-      }
-    }
-  }
 
   public setValidationsForm(): void {
     this.pagesValidation[0] = { valid: true };
@@ -523,18 +494,18 @@ export class FormComponent implements OnInit {
           () => {
             this.structureService.createStructure(structure, user).subscribe(
               (structure: Structure) => {
-                this.closeEvent.emit(structure);
+                this.router.navigateByUrl('/home');
               },
               (err) => {
-                this.closeEvent.emit(null);
+                this.router.navigateByUrl('/home');
               }
             );
           },
           (error) => {
             if (error.error.statusCode === 400) {
-              console.log('Compte déjà créé');
-              this.closeEvent.emit(null);
+              console.log('Email déjà utilisé');
             }
+            this.router.navigateByUrl('/home');
           }
         );
     } else {
@@ -543,11 +514,6 @@ export class FormComponent implements OnInit {
       console.log(this.hoursForm);
       console.log('invalid');
     }
-    /*if (!this.structureForm.invalid && accountForm.valid) {
-      this.profileService.createUserandLinkStructure(this.structureId, accountForm.value).subscribe((user) => {
-        this.closeEvent.emit(this.structureForm.value);
-      });
-    }*/
   }
   public toggleMenu(): void {
     this.showMenu = !this.showMenu;

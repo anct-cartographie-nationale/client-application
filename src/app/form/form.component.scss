@@ -8,13 +8,13 @@
 $progressBar-height: 50px;
 
 .form {
-  position: fixed;
   background: white;
   width: 100vw;
   height: calc(100vh - #{$header-height} - #{$footer-height});
   top: #{$header-height};
   z-index: $structure-details-z-index;
   @media #{$tablet} {
+    position: fixed; //Hide default header app.
     height: calc(100vh);
     top: 0;
   }
