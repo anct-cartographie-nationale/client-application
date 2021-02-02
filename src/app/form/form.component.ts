@@ -517,6 +517,7 @@ export class FormComponent implements OnInit {
       let user: User;
       if (this.profile) {
         user = this.profile;
+        structure.accountVerified = true;
         this.createStructure(structure, user);
       } else {
         if (this.accountForm.valid) {

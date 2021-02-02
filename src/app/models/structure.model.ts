@@ -51,6 +51,8 @@ export class Structure {
   public distance?: number;
   public coord?: number[] = [];
 
+  public accountVerified: boolean = false;
+
   constructor(obj?: any) {
     Object.assign(this, obj, {
       hours: obj && obj.hours ? new Week(obj.hours) : new Week(),

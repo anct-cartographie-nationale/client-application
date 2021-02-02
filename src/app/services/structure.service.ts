@@ -20,6 +20,12 @@ export class StructureService {
   private readonly baseUrl = 'api/structures';
   constructor(private http: HttpClient) {}
 
+  public updateStructureAfterOwnerVerify(id: string, structure: Structure): Observable<Structure> {
+    delete structure._id; // id should not be provided for update
+    return this.http
+      .put(`${this.baseUrl}/updateAfterOwnerVerify/${id}`, structure)
+      .pipe(map((item: Structure) => new Structure(item)));
+  }
   public createStructure(structure: Structure, profile: User): Observable<Structure> {
     const idUser = profile.email;
     return this.http.post(`${this.baseUrl}`, { structure, idUser }).pipe(map((item: Structure) => new Structure(item)));

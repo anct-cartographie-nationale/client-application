@@ -1,13 +1,29 @@
 <div fxLayout="column" class="content-container full-screen">
-  <h1 style="display: none">Vérification du mail utilisateur</h1>
-  <div class="section-container" fxLayout="colum" fxLayoutAlign="center center">
-    <p *ngIf="!verificationSuccess && !verificationIssue">Votre email est en cours de vérification ...</p>
-    <p *ngIf="verificationSuccess">
-      Vous avez correctement validé l'email associé a votre compte. Vous pouvez dès maintenant vous connecter au site.
-    </p>
-    <p *ngIf="verificationIssue">
-      Une erreur est survenue lors de la validation de votre email... Veuillez envoyer un mail au support.
-    </p>
-    <div></div>
+  <p *ngIf="!verificationSuccess && !verificationIssue">Votre email est en cours de vérification ...</p>
+  <div *ngIf="verificationSuccess">
+    <div class="title">
+      <h3>
+        Bravo !<br />
+        Votre compte et votre structure ont bien été référencés.
+      </h3>
+    </div>
+
+    <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
+      <div class="structureInfoContent" fxLayout="column">
+        {{ structure.structureName }}
+        <span>{{ structure.structureType }}</span>
+      </div>
+      <div class="validateSvg">
+        <svg class="validate" aria-hidden="true">
+          <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+        </svg>
+      </div>
+    </div>
+    <div class="btnSection">
+      <button class="btn" routerLink="/home" [routerLinkActive]="'active'">Voir ma structure</button>
+    </div>
   </div>
+  <p *ngIf="verificationIssue">
+    Une erreur est survenue lors de la validation de votre email... Veuillez envoyer un mail au support.
+  </p>
 </div>
