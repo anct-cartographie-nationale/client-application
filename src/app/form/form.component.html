@@ -938,6 +938,27 @@
           le site des services et démarches en ligne dans la Métropole de Lyon
         </p>
       </div>
+      <div *ngIf="currentPage == 24" class="page">
+        <div class="title">
+          <h3>Voulez-vous inviter d’autres personnes dans cette structure ?</h3>
+          <p class="notRequired">facultatif</p>
+        </div>
+        <div class="collapse" [ngClass]="{ notCollapsed: true }">
+          <div fxLayout="column">
+            <div class="collapseHeader" fxLayout="row" fxLayoutAlign=" center">
+              <div class="titleCollapse">J’ajoute d'autres personnes dans cette structure</div>
+              <div class="logo">
+                <svg class="show" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
+                </svg>
+                <svg class="hide" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div *ngIf="currentPage == nbPagesForm && !profile" class="page" fxLayout="column" fxLayoutGap="69px">
         <svg aria-hidden="true">
           <use [attr.xlink:href]="'assets/form/sprite.svg#emailVerification'"></use>

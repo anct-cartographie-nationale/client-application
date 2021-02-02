@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
   //New var form
   public currentPage = 0;
   public progressStatus = 0;
-  public nbPagesForm = 24;
+  public nbPagesForm = 25;
   public accountForm: FormGroup;
   public isPageValid: boolean;
   public pagesValidation = [];
@@ -198,6 +198,7 @@ export class FormComponent implements OnInit {
       freeWifi: new FormControl(structure.freeWifi, Validators.required),
     });
 
+    // Init hours form
     this.hoursForm = new FormGroup({
       monday: this.createDay(structure.hours.monday),
       tuesday: this.createDay(structure.hours.tuesday),
@@ -343,6 +344,7 @@ export class FormComponent implements OnInit {
     this.pagesValidation[21] = { valid: this.getStructureControl('description').valid };
     this.pagesValidation[22] = { valid: this.getStructureControl('lockdownActivity').valid };
     this.pagesValidation[23] = { valid: this.userAcceptSavedDate };
+    this.pagesValidation[24] = { valid: true };
     this.updatePageValid();
   }
 
