@@ -62,7 +62,7 @@
         </ul>
       </div>
     </div>
-    <form [formGroup]="accountForm" *ngIf="accountForm">
+    <form [formGroup]="accountForm" *ngIf="accountForm && !profile">
       <div *ngIf="currentPage == 2" class="page">
         <div class="title">
           <h3>Qui êtes-vous ?</h3>
@@ -938,13 +938,13 @@
           le site des services et démarches en ligne dans la Métropole de Lyon
         </p>
       </div>
-      <div *ngIf="currentPage == nbPagesForm && !emailConfirmed" class="page" fxLayout="column" fxLayoutGap="69px">
+      <div *ngIf="currentPage == nbPagesForm && !profile" class="page" fxLayout="column" fxLayoutGap="69px">
         <svg aria-hidden="true">
           <use [attr.xlink:href]="'assets/form/sprite.svg#emailVerification'"></use>
         </svg>
         <h3>Un courriel vous a été envoyé afin de finaliser votre inscription</h3>
       </div>
-      <div *ngIf="emailConfirmed" class="page">
+      <div *ngIf="currentPage == nbPagesForm && profile" class="page">
         <div class="title">
           <h3>
             Bravo !<br />
@@ -973,10 +973,20 @@
         Suivant<span class="chevron right"></span>
       </button>
     </div>
-    <button *ngIf="currentPage == nbPagesForm && !emailConfirmed" class="btn validate unique" (click)="confirmEmail()">
+    <button
+      *ngIf="currentPage == nbPagesForm && !profile"
+      class="btn validate unique"
+      routerLink="/home"
+      [routerLinkActive]="'active'"
+    >
       Ok
     </button>
-    <button *ngIf="emailConfirmed" class="btn unique" routerLink="/home" [routerLinkActive]="'active'">
+    <button
+      *ngIf="currentPage == nbPagesForm && profile"
+      class="btn unique"
+      routerLink="/home"
+      [routerLinkActive]="'active'"
+    >
       Voir ma structure
     </button>
   </div>

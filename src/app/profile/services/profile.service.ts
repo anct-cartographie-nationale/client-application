@@ -16,7 +16,7 @@ export class ProfileService {
 
   public async getProfile(): Promise<User> {
     // Get profil by API only on first time
-    if (!this.currentProfile) {
+    if (this.authService.isLoggedIn()) {
       const profile = await this.http.get<User>(`${this.baseUrl}/profile`).toPromise();
       this.currentProfile = profile;
     }

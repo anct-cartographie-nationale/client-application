@@ -24,7 +24,7 @@ import { first } from 'rxjs/operators';
 export class FormComponent implements OnInit {
   @Input() public idStructure?: string;
   @Input() public isEditMode: boolean = true;
-  @Input() public profile?: User;
+  public profile: User;
   public structureForm: FormGroup;
 
   public labelsQualifications: Category;
@@ -51,7 +51,6 @@ export class FormComponent implements OnInit {
 
   public showMenu = false;
   public showModalExit: string = null;
-  public emailConfirmed = false;
   //collapse var
   public showWebsite: boolean;
   public showSocialNetwork: boolean;
@@ -67,7 +66,9 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.idStructure);
+    this.profileService.getProfile().then((user: User) => {
+      this.profile = user;
+    });
     if (this.idStructure) {
       this.structureService.getStructure(this.idStructure).subscribe((structure) => {
         this.initForm(structure);
@@ -116,7 +117,6 @@ export class FormComponent implements OnInit {
   }
 
   private initForm(structure: Structure): void {
-    console.log(structure);
     // Init account Form
     this.accountForm = new FormGroup(
       {
@@ -350,6 +350,11 @@ export class FormComponent implements OnInit {
     this.isPageValid = this.pagesValidation[this.currentPage].valid;
   }
   public nextPage(): void {
+    // Check if user already connected to skip accountForm pages.
+    if (this.currentPage == 1 && this.profile) {
+      this.currentPage += 2; // Skip 2 pages from AccountForm
+      this.progressStatus += 2 * (100 / this.nbPagesForm);
+    }
     // Check if "other" isn't check to hide "other description" page
     if (this.currentPage == 13 && !this.isInArray('autres', 'proceduresAccompaniment')) {
       this.currentPage++; // page 14 skip and go to page 15
@@ -366,6 +371,12 @@ export class FormComponent implements OnInit {
     }
   }
   public previousPage(): void {
+    // Check if user already connected to skip accountForm pages.
+    if (this.currentPage == 4 && this.profile) {
+      this.currentPage -= 2; // Skip 2 pages from AccountForm
+      this.progressStatus -= 2 * (100 / this.nbPagesForm);
+    }
+
     // Check if "other" isn't check to hide "other description" page
     if (this.currentPage == 15 && !this.isInArray('autres', 'proceduresAccompaniment')) {
       this.currentPage--; // page 14 skip and go to page 13
@@ -498,41 +509,34 @@ export class FormComponent implements OnInit {
   }
 
   public validateForm(): void {
-    //this.structureForm.get('hours').setValue(this.hoursForm);
-    if (this.structureForm.valid && this.accountForm.valid && this.hoursForm.valid) {
+    if (this.structureForm.valid && this.hoursForm.valid) {
       let structure: Structure = this.structureForm.value;
       structure.hours = this.hoursForm.value;
-      const user = new User(this.accountForm.value);
-      this.authService
-        .register(user)
-        .pipe(first())
-        .subscribe(
-          () => {
-            this.structureService.createStructure(structure, user).subscribe(
-              (structure: Structure) => {
-                this.currentPage++;
-              },
-              (err) => {
-                console.log('err création structure');
-              }
-            );
-          },
-          (error) => {
-            if (error.error.statusCode === 400) {
-              console.log('Email déjà utilisé');
-            }
-          }
-        );
-    } else {
-      console.log(this.structureForm);
-      console.log(this.accountForm);
-      console.log(this.hoursForm);
-      console.log('invalid');
+      let user: User;
+      if (this.profile) {
+        user = this.profile;
+        this.createStructure(structure, user);
+      } else {
+        if (this.accountForm.valid) {
+          user = new User(this.accountForm.value);
+          this.authService
+            .register(user)
+            .pipe(first())
+            .subscribe(() => {
+              this.createStructure(structure, user);
+            });
+        }
+      }
     }
+  }
+
+  private createStructure(structure: Structure, user: User): void {
+    this.structureService.createStructure(structure, user).subscribe(() => {
+      this.currentPage++;
+    });
   }
   public toggleMenu(): void {
     this.showMenu = !this.showMenu;
-    console.log(this.showMenu);
   }
 
   public leaveForm(route: string): void {
@@ -549,9 +553,5 @@ export class FormComponent implements OnInit {
     } else {
       this.showMenu = false;
     }
-  }
-  // TODO : Email verification link
-  public confirmEmail(): void {
-    this.emailConfirmed = true;
   }
 }
