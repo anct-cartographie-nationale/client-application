@@ -701,7 +701,9 @@
           <div
             class="collapse equipments"
             [ngClass]="{ notCollapsed: !equipment.openned }"
-            *ngIf="['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes'].includes(equipment.module.id)"
+            *ngIf="
+              ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners'].includes(equipment.module.id)
+            "
           >
             <div fxLayout="column">
               <div
@@ -801,6 +803,26 @@
                         *ngIf="getStructureControl('nbNumericTerminal').invalid"
                         src="../../assets/form/notvalidate.svg"
                         alt="logo invalid"
+                        class="nbEquipment"
+                      />
+                    </ng-container>
+                    <ng-container *ngIf="equipment.module.id == 'scanners'">
+                      <input
+                        type="number"
+                        (input)="setValidationsForm()"
+                        formControlName="nbScanners"
+                        class="form-input nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbScanners').valid"
+                        src="../../assets/form/validate.svg"
+                        alt="logo valid"
+                        class="nbEquipment"
+                      />
+                      <img
+                        *ngIf="getStructureControl('nbScanners').invalid"
+                        src="../../assets/form/notvalidate.svg"
+                        alt="logo valid"
                         class="nbEquipment"
                       />
                     </ng-container>

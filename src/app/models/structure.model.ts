@@ -32,6 +32,7 @@ export class Structure {
   public nbPrinters: number = null;
   public nbTablets: number = null;
   public nbNumericTerminal: number = null;
+  public nbScanners: number = null;
   public exceptionalClosures: string = null;
   public equipmentsAndServices: string[] = [];
   public hours: Week;
@@ -146,6 +147,8 @@ export class Structure {
         return 'tablet';
       case Equipment.computer:
         return 'computer';
+      case Equipment.scanner:
+        return 'scan';
       default:
         return null;
     }

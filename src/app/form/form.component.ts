@@ -190,6 +190,10 @@ export class FormComponent implements OnInit {
         structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 1,
         [Validators.required, Validators.pattern('[1-9]{1}[0-9]*')] //NOSONAR
       ),
+      nbScanners: new FormControl(
+        structure.equipmentsAndServices.includes('scanners') ? structure.nbScanners : 1,
+        [Validators.required, Validators.pattern('[1-9]{1}[0-9]*')] //NOSONAR
+      ),
       freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
       freeWifi: new FormControl(structure.freeWifi, Validators.required),
     });
@@ -331,7 +335,8 @@ export class FormComponent implements OnInit {
         this.getStructureControl('nbComputers').valid &&
         this.getStructureControl('nbPrinters').valid &&
         this.getStructureControl('nbTablets').valid &&
-        this.getStructureControl('nbNumericTerminal').valid,
+        this.getStructureControl('nbNumericTerminal').valid &&
+        this.getStructureControl('nbScanners').valid,
     };
     this.pagesValidation[19] = { valid: this.getStructureControl('labelsQualifications').valid };
     this.pagesValidation[20] = { valid: this.getStructureControl('equipmentsAndServices').valid };
@@ -475,6 +480,10 @@ export class FormComponent implements OnInit {
             }
             case Equipment.bornes: {
               this.getStructureControl('nbNumericTerminal').setValue(1);
+              break;
+            }
+            case Equipment.scanner: {
+              this.getStructureControl('nbScanners').setValue(1);
               break;
             }
           }

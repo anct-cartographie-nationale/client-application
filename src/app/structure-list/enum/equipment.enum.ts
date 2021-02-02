@@ -4,4 +4,5 @@ export enum Equipment {
   printer = 'imprimantes',
   tablet = 'tablettes',
   computer = 'ordinateurs',
+  scanner = 'scanners',
 }

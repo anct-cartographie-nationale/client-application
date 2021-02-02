@@ -102,6 +102,8 @@ export class StructureDetailsComponent implements OnInit {
         return 'Tablettes';
       case Equipment.computer:
         return 'Ordinateurs à disposition';
+      case Equipment.scanner:
+        return 'Scanners';
       default:
         return null;
     }
