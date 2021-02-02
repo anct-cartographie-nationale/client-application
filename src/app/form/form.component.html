@@ -859,11 +859,9 @@
           <ng-container *ngFor="let equipment of equipmentsAndServices">
             <app-checkbox-form
               *ngIf="
-                [
-                  'Prêt / don de matériels',
-                  'Reconditionnements de matériel',
-                  'Accès à des revues ou livres informatiques et numériques'
-                ].includes(equipment.module.id)
+                ['donDeMateriels', 'reconditionnementsDeMateriel', 'accesLivresInformatiques'].includes(
+                  equipment.module.id
+                )
               "
               [isChecked]="isInArray(equipment.module.id, 'equipmentsAndServices')"
               [text]="equipment.module.text"
