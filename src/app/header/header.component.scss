@@ -4,6 +4,7 @@
 @import '../../assets/scss/color';
 @import '../../assets/scss/breakpoint';
 @import '../../assets/scss/shapes';
+@import '../../assets/scss/buttons';
 
 .header {
   height: $header-height;
@@ -14,19 +15,12 @@
   background-color: $white;
   padding: 0 20px;
   a {
-    font-style: italic;
     color: $grey-2;
     &.active {
       font-weight: bold;
       color: $grey-1;
-      &:before {
-        color: $primary-color;
-        content: '// ';
-      }
-      &:after {
-        color: $primary-color;
-        content: ' //';
-      }
+      border-bottom: 2px solid $red-default;
+      text-decoration: none;
     }
   }
   .right-header {
@@ -47,6 +41,14 @@
   @media #{$tablet} {
     text-align: center;
     width: 100%;
+  }
+}
+
+button {
+  @include btn-grey;
+  &.red {
+    @include btn-red;
+    border: none;
   }
 }
 

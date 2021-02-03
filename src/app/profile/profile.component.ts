@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Structure } from '../models/structure.model';
 import { User } from '../models/user.model';
+import { AuthService } from '../services/auth.service';
 import { MustMatch } from '../shared/validator/form';
 import { ProfileService } from './services/profile.service';
 
@@ -20,7 +20,11 @@ export class ProfileComponent implements OnInit {
   public formEmail: FormGroup;
   public addStructure = false;
 
-  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {}
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
     this.profileService.getProfile().then((profile) => {
@@ -97,5 +101,9 @@ export class ProfileComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  public logout(): void {
+    this.authService.logout();
   }
 }

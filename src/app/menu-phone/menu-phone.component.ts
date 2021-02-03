@@ -24,4 +24,8 @@ export class MenuPhoneComponent implements OnInit {
   public get isAdmin(): boolean {
     return this.profileService.isAdmin();
   }
+
+  public get displayName(): string {
+    return this.authService.getUsernameDisplay();
+  }
 }

@@ -2,16 +2,14 @@
   <div class="outside" (click)="closeMenu()"></div>
   <div class="contentMenu" fxLayout="column" fxLayoutAlign="space-between">
     <div>
-      <div class="titleFilter" fxLayout="row" fxLayoutAlign="space-between">
+      <div class="titleFilter" fxLayout="row" fxLayoutAlign="space-between center">
         <span>Menu</span>
         <div (click)="closeMenu()" class="ico-close-details"></div>
       </div>
-      <div fxLayout="column" class="right-header" fxLayoutGap="3vw">
+      <div fxLayout="column" class="right-header" fxLayoutAlign="none baseline" fxLayoutGap="5vw">
         <a routerLink="/home" [routerLinkActive]="'active'" (click)="closeMenu()" i18n>Les acteurs</a>
-        <!-- <a routerLink="/resources" [routerLinkActive]="'active'" i18n>Ressources</a>
-        <a routerLink="/projects" [routerLinkActive]="'active'" i18n>Projets</a> -->
-        <a routerLink="/about" [routerLinkActive]="'active'" (click)="closeMenu()" i18n>Qui sommes-nous ?</a>
-
+        <!-- <a routerLink="/resources" [routerLinkActive]="'active'" i18n>Ressources</a> -->
+        <!-- <a routerLink="/projects" [routerLinkActive]="'active'" i18n>Projets</a> -->
         <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'">Administration</a>
         <!--<a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a>
         <a routerLink="/home" [routerLinkActive]="'active'" i18n
@@ -19,15 +17,16 @@
             <span class="head"></span>
             <span class="body"></span> </span
         ></a> -->
-        <a *ngIf="isLoggedIn" routerLink="/profile" [routerLinkActive]="'active'" fxLayout="row" fxLayoutGap="1.5vh">
-          <app-svg-icon
-            [type]="'ico'"
-            [iconClass]="'icon-32'"
-            [icon]="'user'"
-            [iconColor]="'currentColor'"
-          ></app-svg-icon>
-        </a>
-        <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+        <button
+          *ngIf="isLoggedIn"
+          class="red"
+          routerLink="/profile"
+          [routerLinkActive]="'active'"
+          (click)="closeMenu()"
+        >
+          {{ displayName }}
+        </button>
+        <button *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen; closeMenu()">Se connecter</button>
       </div>
     </div>
     <!--<div class="footer" fxLayout="row" fxLayoutGap="1.5vh">

@@ -1,8 +1,8 @@
 <div fxLayout="row" class="header hide-on-print">
   <div class="logo clickable" routerLink="/home">
-    <img class="logo-grand-lyon" src="/assets/logos/ram_logo.svg" alt />
+    <img class="logo-grand-lyon" src="/assets/logos/resin.svg" alt />
     <div class="logo-text" fxLayout="column" fxLayoutAlign="center">
-      <p>Réseau des Acteurs de la Médiation Numérique de la Métropole de Lyon</p>
+      <p>Réseau des acteurs de l'inclusion numérique de la métropole de Lyon</p>
     </div>
   </div>
   <div class="containerIconMenu" (click)="openMenu()">
@@ -10,21 +10,16 @@
   </div>
   <div fxLayout="row" class="right-header" fxLayoutAlign="center center" fxLayoutGap="3vw">
     <a routerLink="/home" [routerLinkActive]="'active'" i18n>Les acteurs</a>
-    <!-- <a routerLink="/resources" [routerLinkActive]="'active'" i18n>Ressources</a>
-    <a routerLink="/projects" [routerLinkActive]="'active'" i18n>Projets</a> -->
-    <a routerLink="/about" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
-    <!-- <a routerLink="/login" [routerLinkActive]="'active'" i18n><span class="clickable ico-mglass purple"></span></a> -->
-    <a *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
-      <span class="ico-profile" fxLayout="column" fxLayoutAlign="center center">
-        <span class="head"></span>
-        <span class="body"></span>
-      </span>
-    </a>
+    <!-- <a routerLink="/news" [routerLinkActive]="'active'" i18n>Actualités</a> -->
+    <!-- <a routerLink="/resources" [routerLinkActive]="'active'" i18n>Ressources</a> -->
     <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'">Administration</a>
-    <a *ngIf="isLoggedIn" routerLink="/profile" [routerLinkActive]="'active'" fxLayout="row" fxLayoutGap="1.5vh">
+    <!-- <a *ngIf="isLoggedIn" routerLink="/profile" [routerLinkActive]="'active'" fxLayout="row" fxLayoutGap="1.5vh">
       <app-svg-icon [type]="'ico'" [iconClass]="'icon-32'" [icon]="'user'" [iconColor]="'currentColor'"></app-svg-icon>
-    </a>
-    <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+    </a> -->
+    <button *ngIf="isLoggedIn" class="red" routerLink="/profile" [routerLinkActive]="'active'">
+      {{ displayName }}
+    </button>
+    <button *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">Se connecter</button>
   </div>
 </div>
 <app-menu-phone *ngIf="showMenu" (closeEvent)="closeMenu($event)"></app-menu-phone>

@@ -2,6 +2,7 @@
 @import '../../assets/scss/z-index';
 @import '../../assets/scss/typography';
 @import '../../assets/scss/breakpoint';
+@import '../../assets/scss/buttons';
 
 @keyframes slideMenu {
   from {
@@ -43,7 +44,10 @@
 }
 .titleFilter {
   margin-bottom: 35px;
-  @include cn-bold-28;
+  @include cn-regular-28;
+  span {
+    color: $grey-2;
+  }
 }
 .footer {
   a {
@@ -53,22 +57,21 @@
     margin: auto 0 auto 0;
   }
 }
+
 a {
-  @include cn-bold-18;
-  font-style: italic;
   color: $grey-2;
-  height: 70px;
-  margin: 0;
   &.active {
     font-weight: bold;
     color: $grey-1;
-    &:before {
-      color: $primary-color;
-      content: '// ';
-    }
-    &:after {
-      color: $primary-color;
-      content: ' //';
-    }
+    border-bottom: 2px solid $red-default;
+    text-decoration: none;
+  }
+}
+
+button {
+  @include btn-grey;
+  &.red {
+    @include btn-red;
+    border: none;
   }
 }
