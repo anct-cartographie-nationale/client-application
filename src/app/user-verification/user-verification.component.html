@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="btnSection">
-      <button class="btn" routerLink="/home" [routerLinkActive]="'active'">Voir ma structure</button>
+      <button class="btn" routerLink="/home" [state]="{ data: structure }">Voir ma structure</button>
     </div>
   </div>
   <p *ngIf="verificationIssue">

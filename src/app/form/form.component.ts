@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Structure } from '../models/structure.model';
 import { Time } from '../models/time.model';
@@ -27,6 +27,8 @@ export class FormComponent implements OnInit {
   public profile: User;
   public structureForm: FormGroup;
 
+  public createdStructure: Structure;
+
   public labelsQualifications: Category;
   public publics: Category;
   public accessModality: Category;
@@ -50,7 +52,6 @@ export class FormComponent implements OnInit {
   public userAcceptSavedDate = false;
 
   public showMenu = false;
-  public showModalExit: string = null;
   //collapse var
   public showWebsite: boolean;
   public showSocialNetwork: boolean;
@@ -534,27 +535,31 @@ export class FormComponent implements OnInit {
   }
 
   private createStructure(structure: Structure, user: User): void {
-    this.structureService.createStructure(structure, user).subscribe(() => {
+    this.structureService.createStructure(structure, user).subscribe((structure) => {
       this.currentPage++;
+      this.createdStructure = structure;
     });
   }
   public toggleMenu(): void {
     this.showMenu = !this.showMenu;
   }
 
-  public leaveForm(route: string): void {
-    if (route) {
-      this.router.navigateByUrl(route);
-    } else {
-      this.showModalExit = null;
-    }
+  public closeMenu(): void {
+    this.showMenu = false;
   }
 
-  public closeMenu(route: string): void {
-    if (route) {
-      this.showModalExit = route;
-    } else {
-      this.showMenu = false;
-    }
+  public canExit(): Promise<boolean> {
+    return new Promise((resolve) => this.showModal(resolve));
+  }
+  public showConfirmationModal = false;
+  private resolve: Function;
+
+  private showModal(resolve: Function): void {
+    this.showConfirmationModal = true;
+    this.resolve = resolve;
+  }
+  public hasRedirectionAccepted(hasAccept: boolean): void {
+    this.resolve(hasAccept);
+    this.showConfirmationModal = false;
   }
 }

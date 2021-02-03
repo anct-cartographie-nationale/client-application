@@ -12,6 +12,7 @@ import { CheckboxFormComponent } from './checkbox-form/checkbox-form.component';
 import { HourPickerComponent } from './hour-picker/hour-picker.component';
 import { CopyPasteComponent } from './hour-picker/copy-paste/copy-paste.component';
 import { RadioFormComponent } from './radio-form/radio-form.component';
+import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmation.component';
 
 // tslint:disable-next-line: max-line-length
 export {
@@ -29,6 +30,7 @@ export {
   HourPickerComponent,
   CopyPasteComponent,
   RadioFormComponent,
+  ModalConfirmationComponent,
 };
 
 // tslint:disable-next-line:variable-name
@@ -47,4 +49,5 @@ export const SharedComponents = [
   HourPickerComponent,
   CopyPasteComponent,
   RadioFormComponent,
+  ModalConfirmationComponent,
 ];

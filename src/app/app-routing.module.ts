@@ -5,6 +5,7 @@ import { PanelComponent } from './admin/components/panel/panel.component';
 import { FormComponent } from './form/form.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { DeactivateGuard } from './guards/deactivate.guard';
 import { HomeComponent } from './home/home.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -69,6 +70,7 @@ const routes: Routes = [
   {
     path: 'create-structure',
     component: FormComponent,
+    canDeactivate: [DeactivateGuard],
   },
   {
     path: '**',

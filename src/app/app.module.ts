@@ -29,6 +29,7 @@ import { ResetEmailComponent } from './reset-email/reset-email.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminModule } from './admin/admin.module';
 import { AdminGuard } from './guards/admin.guard';
+import { DeactivateGuard } from './guards/deactivate.guard';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { AdminGuard } from './guards/admin.guard';
     CustomBreakPointsProvider,
     AuthGuard,
     AdminGuard,
+    DeactivateGuard,
   ],
   bootstrap: [AppComponent],
 })

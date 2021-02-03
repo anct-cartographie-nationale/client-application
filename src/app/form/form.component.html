@@ -1,15 +1,6 @@
 <div class="form" fxLayout="column">
-  <div *ngIf="showModalExit" class="modalExitContainer">
-    <div class="modal">
-      <div class="contentModal" fxLayout="column" fxLayoutAlign="space-around center">
-        <h3>ATTENTION</h3>
-        <p>Il vous faudra de nouveau remplir le formulaire si vous quittez</p>
-        <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
-          <button class="btn leave" (click)="leaveForm(showModalExit)">Quitter</button>
-          <button class="btn" (click)="leaveForm(null)">Annuler</button>
-        </div>
-      </div>
-    </div>
+  <div *ngIf="showConfirmationModal">
+    <app-modal-confirmation (closeModalEvent)="hasRedirectionAccepted($event)"></app-modal-confirmation>
   </div>
   <app-menu-phone *ngIf="showMenu" (closeEvent)="closeMenu($event)"></app-menu-phone>
   <div class="header">
@@ -1006,7 +997,7 @@
       *ngIf="currentPage == nbPagesForm && profile"
       class="btn unique"
       routerLink="/home"
-      [routerLinkActive]="'active'"
+      [state]="{ data: createdStructure }"
     >
       Voir ma structure
     </button>

@@ -7,6 +7,7 @@ import { StructureService } from '../services/structure.service';
 import { Filter } from '../structure-list/models/filter.model';
 import { GeoJson } from '../map/models/geojson.model';
 import { GeojsonService } from '../services/geojson.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +32,9 @@ export class HomeComponent implements OnInit {
       this.getLocation();
     } else {
       this.getStructures(null);
+    }
+    if (history.state.data) {
+      this.currentStructure = new Structure(history.state.data);
     }
   }
 
