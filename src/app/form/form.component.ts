@@ -549,7 +549,12 @@ export class FormComponent implements OnInit {
   }
 
   public canExit(): Promise<boolean> {
-    return new Promise((resolve) => this.showModal(resolve));
+    // Avoid confirmation when user submit form and leave.
+    if (this.currentPage == this.nbPagesForm) {
+      return new Promise((resolve) => resolve(true));
+    } else {
+      return new Promise((resolve) => this.showModal(resolve));
+    }
   }
   public showConfirmationModal = false;
   private resolve: Function;
