@@ -4,7 +4,7 @@
     <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
       <p>Id: {{ userProfile._id }}</p>
       <p>Email: {{ userProfile.email }}</p>
-      <button (click)="logout()">Logout</button>
+      <button (click)="logout()">Se déconnecter</button>
       <p fxLayout="column" *ngIf="userProfile.structuresLink.length > 0">
         Mes structures :
         <span *ngFor="let structureId of userProfile.structuresLink">
