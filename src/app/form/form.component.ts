@@ -25,44 +25,47 @@ export class FormComponent implements OnInit {
   @Input() public idStructure?: string;
   @Input() public isEditMode: boolean = true;
   public profile: User;
-  public structureForm: FormGroup;
-
   public createdStructure: Structure;
 
+  // Form var
+  public structureForm: FormGroup;
+  public accountForm: FormGroup;
+  public hoursForm: FormGroup;
   public labelsQualifications: Category;
   public publics: Category;
   public accessModality: Category;
   public publicsAccompaniment: Category;
-  public equipmentsAndServices: { module: Module; openned: boolean }[] = [];
   public proceduresAccompaniment: Category;
+  public equipmentsAndServices: { module: Module; openned: boolean }[] = [];
   public trainingCategories: { category: Category; openned: boolean }[] = [];
 
-  public structureId: string;
-
-  //New var form
+  // Page and progress var
   public currentPage = 0;
   public progressStatus = 0;
   public nbPagesForm = 25;
-  public accountForm: FormGroup;
   public isPageValid: boolean;
   public pagesValidation = [];
-  public isShowConfirmPassword = false;
-  public isShowPassword = false;
-  public hoursForm: FormGroup;
-  public userAcceptSavedDate = false;
 
-  public showMenu = false;
-  //collapse var
+  // Collapse var
   public showWebsite: boolean;
   public showSocialNetwork: boolean;
   public showPublicsAccompaniment: boolean;
   public showProceduresAccompaniment: boolean;
 
+  // ModalExit var
+  public showConfirmationModal = false;
+  private resolve: Function;
+
+  // Condition form
+  public isShowConfirmPassword = false;
+  public isShowPassword = false;
+  public userAcceptSavedDate = false;
+  public showMenu = false;
+
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
     private profileService: ProfileService,
-    private router: Router,
     private authService: AuthService
   ) {}
 
@@ -70,14 +73,20 @@ export class FormComponent implements OnInit {
     this.profileService.getProfile().then((user: User) => {
       this.profile = user;
     });
+
+    // Check if it's a new structure or edit structure
     if (this.idStructure) {
       this.structureService.getStructure(this.idStructure).subscribe((structure) => {
         this.initForm(structure);
-        this.structureId = structure._id;
+        this.idStructure = structure._id;
       });
     } else {
       this.initForm(new Structure());
     }
+    this.setCategories();
+  }
+
+  private setCategories(): void {
     this.searchService.getCategoriesAccompaniment().subscribe((categories: Category[]) => {
       this.proceduresAccompaniment = categories[0];
     });
@@ -109,7 +118,6 @@ export class FormComponent implements OnInit {
         }
       });
     });
-
     this.searchService.getCategoriesTraining().subscribe((categories: Category[]) => {
       categories.forEach((categ) => {
         this.trainingCategories.push({ category: categ, openned: false });
@@ -149,12 +157,12 @@ export class FormComponent implements OnInit {
       }),
       contactMail: new FormControl(structure.contactMail, [
         Validators.required,
-        Validators.pattern('[a-z0-9.-]+@[a-z0-9.-]+[.][a-z]{2,3}'),
+        Validators.pattern('[a-z0-9.-]+@[a-z0-9.-]+[.][a-z]{2,3}'), //NOSONAR
       ]),
       contactPhone: new FormControl(structure.contactPhone, [
         Validators.required,
-        Validators.pattern('([0-9]{2} ){4}[0-9]{2}'),
-      ]), //NOSONAR
+        Validators.pattern('([0-9]{2} ){4}[0-9]{2}'), //NOSONAR
+      ]),
       website: new FormControl(structure.website, [Validators.pattern('(www[.])[a-z0-9.-]*[.][a-z]{2,3}')]), //NOSONAR
       facebook: new FormControl(structure.facebook, Validators.pattern('(facebook.com/[a-z0-9A-Z.-]{1,})')), //NOSONAR
       twitter: new FormControl(structure.twitter, Validators.pattern('(twitter.com/[a-z0-9A-Z.-]{1,})')), //NOSONAR
@@ -556,8 +564,6 @@ export class FormComponent implements OnInit {
       return new Promise((resolve) => this.showModal(resolve));
     }
   }
-  public showConfirmationModal = false;
-  private resolve: Function;
 
   private showModal(resolve: Function): void {
     this.showConfirmationModal = true;
