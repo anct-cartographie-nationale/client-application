@@ -63,7 +63,7 @@ export class StructureDetailsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.isLoading = true;
-    if (this.authService.isLoggedIn()) {
+    if (this.userIsLoggedIn()) {
       this.currentProfile = await this.profileService.getProfile();
     }
     this.isClaimed = await this.structureService.isClaimed(this.structure._id, this.currentProfile).toPromise();
@@ -88,6 +88,10 @@ export class StructureDetailsComponent implements OnInit {
       this.structure.proceduresAccompaniment.splice(index, 1);
       this.isOtherSection = true;
     }
+  }
+
+  public userIsLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   public getEquipmentsLabel(equipment: Equipment): string {
@@ -148,8 +152,11 @@ export class StructureDetailsComponent implements OnInit {
   public claimStructure(shouldClaim: boolean): void {
     this.toggleClaimModal();
     if (shouldClaim) {
-      this.isEditMode = false;
-      this.displayForm();
+      this.profileService.getProfile().then((user: User) => {
+        this.structureService.claimStructureWithAccount(this.structure._id, user).subscribe(() => {
+          this.isClaimed = true;
+        });
+      });
     }
   }
   // Show/hide form structure
