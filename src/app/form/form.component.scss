@@ -6,7 +6,9 @@
 @import '../../assets/scss/z-index';
 
 $progressBar-height: 50px;
-
+h3 {
+  margin: 0;
+}
 .form {
   background: white;
   width: 100vw;
@@ -57,6 +59,7 @@ $progressBar-height: 50px;
     width: 100%;
     position: absolute;
     height: 50px;
+
     .block-iconMenu {
       right: 44px;
       width: 50px;
@@ -88,7 +91,6 @@ $progressBar-height: 50px;
     margin-bottom: 0;
   }
   h3 {
-    margin: 0;
     @include cn-bold-22;
   }
   .page {
@@ -294,9 +296,6 @@ img {
   border: 1px solid $grey-4;
   border-radius: 4px;
   margin-bottom: 13px;
-  &.equipments {
-    width: 296px;
-  }
   @media #{$tablet} {
     width: 296px;
   }
@@ -372,9 +371,6 @@ img {
       &.withIcon {
         border-radius: 0 4px 4px 0;
         border-left: 0;
-      }
-      &.nbEquipment {
-        width: 55px;
       }
     }
     padding: 0px 15px 19px 12px;

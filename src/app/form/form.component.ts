@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
   public trainingCategories: { category: Category; openned: boolean }[] = [];
 
   // Page and progress var
-  public currentPage = 0;
+  public currentPage = 17;
   public progressStatus = 0;
   public nbPagesForm = 25;
   public isPageValid: boolean;
