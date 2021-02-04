@@ -316,5 +316,12 @@
 </defs>
 </symbol>
 
+<symbol id="chevronRight" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 6L16 12.5L8 19" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+
+<symbol id="chevronLeft" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 6L8 12.5L16 19" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
 
 </svg>

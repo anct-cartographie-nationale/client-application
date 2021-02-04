@@ -305,7 +305,7 @@
         </div>
         <app-radio-form
           [selectedOption]="getStructureControl('pmrAccess').value"
-          (selectedEvent)="onRadioBtnChange('pmrAccess',$event)"
+          (selectedEvent)="onRadioBtnChange('pmrAccess', $event)"
         >
         </app-radio-form>
       </div>
@@ -669,7 +669,7 @@
         </div>
         <app-radio-form
           [selectedOption]="getStructureControl('freeWorkShop').value"
-          (selectedEvent)="onRadioBtnChange('freeWorkShop',$event)"
+          (selectedEvent)="onRadioBtnChange('freeWorkShop', $event)"
         >
         </app-radio-form>
       </div>
@@ -679,7 +679,7 @@
         </div>
         <app-radio-form
           [selectedOption]="getStructureControl('freeWifi').value"
-          (selectedEvent)="onRadioBtnChange('freeWifi',$event)"
+          (selectedEvent)="onRadioBtnChange('freeWifi', $event)"
         >
         </app-radio-form>
       </div>
@@ -977,13 +977,39 @@
         </div>
       </div>
     </form>
-  </div>
-  <div *ngIf="currentPage != 0" class="footer" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <div *ngIf="currentPage != nbPagesForm">
-      <button class="btn previous" (click)="previousPage()"><span class="chevron left"></span>Précédent</button>
-      <button class="btn next" (click)="nextPage()" [disabled]="!isPageValid" [ngClass]="{ invalid: !isPageValid }">
-        Suivant<span class="chevron right"></span>
+    <div *ngIf="currentPage != 0" class="footer desktop">
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm">
+        <app-footer-form
+          (previousPage)="previousPage()"
+          (nextPage)="nextPage()"
+          [isValid]="isPageValid"
+        ></app-footer-form>
+      </div>
+      <button
+        *ngIf="currentPage == nbPagesForm && !profile"
+        class="btn validate unique"
+        routerLink="/home"
+        [routerLinkActive]="'active'"
+      >
+        Ok
       </button>
+      <button
+        *ngIf="currentPage == nbPagesForm && profile"
+        class="btn unique"
+        routerLink="/home"
+        [state]="{ data: createdStructure }"
+      >
+        Voir ma structure
+      </button>
+    </div>
+  </div>
+  <div *ngIf="currentPage != 0" class="footer phone">
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm">
+      <app-footer-form
+        (previousPage)="previousPage()"
+        (nextPage)="nextPage()"
+        [isValid]="isPageValid"
+      ></app-footer-form>
     </div>
     <button
       *ngIf="currentPage == nbPagesForm && !profile"

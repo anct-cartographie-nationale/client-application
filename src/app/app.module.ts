@@ -30,6 +30,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AdminModule } from './admin/admin.module';
 import { AdminGuard } from './guards/admin.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
+import { FooterFormComponent } from './footer-form/footer-form.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { DeactivateGuard } from './guards/deactivate.guard';
     ResetEmailComponent,
     ResetPasswordComponent,
     FormComponent,
+    FooterFormComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule, AdminModule],
   providers: [
