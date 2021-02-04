@@ -1,11 +1,15 @@
 <div class="container" fxLayout="column">
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px">
-    <div class="boutonSection" [ngClass]="{ selectedType: type.name == pickedType }" *ngFor="let type of type_data">
+    <div
+      class="boutonSection"
+      [ngClass]="{ selectedType: type.name == pickedType }"
+      *ngFor="let type of structureTypes"
+    >
       <button (click)="pickType(type.name)">
         <div class="containerBtn">
           <div class="btn">
             <svg aria-hidden="true">
-              <use [attr.xlink:href]="'assets/form/sprite.svg#' + type.logo"></use>
+              <use [attr.xlink:href]="'assets/form/sprite.svg#' + getStructureTypeIcon(type.name)"></use>
             </svg>
           </div>
         </div>

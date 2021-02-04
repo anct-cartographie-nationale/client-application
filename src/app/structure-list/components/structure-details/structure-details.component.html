@@ -86,14 +86,15 @@
         <a *ngIf="!isClaimed && userIsLoggedIn()" (click)="toggleClaimModal()" class="primary" tabindex="0"
           >Revendiquer cette structure</a
         >
-        <a
+        <!-- temporary remove edit -->
+        <!-- <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
           (click)="editStructure()"
           class="primary"
           tabindex="0"
         >
           Modifier cette structure
-        </a>
+        </a> -->
         <a *ngIf="profileService.isAdmin()" (click)="toggleDeleteModal()" class="primary" tabindex="0">
           Supprimer cette structure
         </a>
