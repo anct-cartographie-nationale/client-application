@@ -2,6 +2,7 @@ $text-font: 'Trebuchet MS', 'Helvetica', sans-serif;
 $footer-text-font: 'Arial', 'Helvetica', sans-serif;
 $title-font: 'Trebuchet MS', 'Helvetica', sans-serif;
 
+$font-size-xxsmall: 0.75em; // 12px
 $font-size-xsmall: 0.875em; // 14px
 $font-size-small: 1em; // 16px
 $font-size-medium: 1.25em; // 20px
@@ -155,6 +156,12 @@ h6,
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-xsmall;
+}
+@mixin cn-regular-12 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-xxsmall;
 }
 
 @mixin text-ellipsis {

@@ -26,10 +26,6 @@ export class HeaderComponent implements OnInit {
     return this.authService.isLoggedIn();
   }
 
-  public logout(): void {
-    this.authService.logout();
-  }
-
   public closeSignInModal(): void {
     this.isPopUpOpen = false;
     this.displaySignUp = true;
@@ -45,5 +41,9 @@ export class HeaderComponent implements OnInit {
 
   public get isAdmin(): boolean {
     return this.profileService.isAdmin();
+  }
+
+  public get displayName(): string {
+    return this.authService.getUsernameDisplay();
   }
 }

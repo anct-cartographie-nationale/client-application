@@ -21,12 +21,6 @@
     @include input-search;
   }
   .searchSection {
-    .separator {
-      height: 100%;
-      width: 2px;
-      background-color: $grey-4;
-      margin: 0 5px 0 5px;
-    }
     .inputSection {
       padding: 6px 3px 6px 6px;
       width: 100%;

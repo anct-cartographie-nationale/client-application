@@ -4,6 +4,8 @@
 @import '../../assets/scss/color';
 @import '../../assets/scss/breakpoint';
 @import '../../assets/scss/shapes';
+@import '../../assets/scss/buttons';
+@import '../../assets/scss/z-index';
 
 .header {
   height: $header-height;
@@ -13,22 +15,6 @@
   border-bottom: solid 1px $grey-4;
   background-color: $white;
   padding: 0 20px;
-  a {
-    font-style: italic;
-    color: $grey-2;
-    &.active {
-      font-weight: bold;
-      color: $grey-1;
-      &:before {
-        color: $primary-color;
-        content: '// ';
-      }
-      &:after {
-        color: $primary-color;
-        content: ' //';
-      }
-    }
-  }
   .right-header {
     @media #{$tablet} {
       display: none !important;
@@ -50,6 +36,24 @@
   }
 }
 
+button {
+  @include btn-grey;
+  &.red {
+    @include btn-red;
+    border: none;
+  }
+}
+
+a {
+  color: $grey-2;
+  &.active {
+    font-weight: bold;
+    color: $grey-1;
+    border-bottom: 2px solid $red-default;
+    text-decoration: none;
+  }
+}
+
 @media print {
   div {
     display: none !important;
@@ -67,5 +71,59 @@
 @media #{$tablet} {
   .logo-text {
     display: none !important;
+  }
+}
+
+@keyframes slideMenu {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes background-fade {
+  0% {
+    background: none;
+  }
+  100% {
+    background: none;
+  }
+}
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: $menu-phone-z-index;
+  animation: slideMenu 0.5s;
+  .menu-content {
+    background-color: $white;
+    height: 100vh;
+    width: 350px;
+    padding: 27px 25px;
+  }
+  .outside {
+    width: calc(100% - 350px);
+    height: 100vh;
+    opacity: 0.65;
+    animation: background-fade 0.1s;
+    background-color: $black;
+  }
+}
+.title {
+  margin-bottom: 35px;
+  @include cn-regular-28;
+  span {
+    color: $grey-2;
+  }
+}
+.footer {
+  a {
+    height: unset;
+    display: table-cell;
+    vertical-align: middle;
+    margin: auto 0 auto 0;
   }
 }
