@@ -16,6 +16,7 @@ import { Equipment } from '../structure-list/enum/equipment.enum';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
+import { Regex } from '../shared/enum/regex.enum';
 @Component({
   selector: 'app-structureForm',
   templateUrl: './form.component.html',
@@ -129,10 +130,10 @@ export class FormComponent implements OnInit {
     // Init account Form
     this.accountForm = new FormGroup(
       {
-        email: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9.-]+@[a-z0-9.-]+[.][a-z]{2,3}')]), //NOSONAR
-        name: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]), //NOSONAR
-        surname: new FormControl('', [Validators.required, Validators.pattern('[A-Za-zÀ-ÖØ-öø-ÿ-]{1,}')]), //NOSONAR
-        phone: new FormControl('', [Validators.required, Validators.pattern('([0-9]{2} ){4}[0-9]{2}')]), //NOSONAR
+        email: new FormControl('', [Validators.required, Validators.pattern(Regex.email)]), //NOSONAR
+        name: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]), //NOSONAR
+        surname: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]), //NOSONAR
+        phone: new FormControl('', [Validators.required, Validators.pattern(Regex.phone)]), //NOSONAR
         password: new FormControl('', [
           Validators.required,
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
@@ -157,17 +158,17 @@ export class FormComponent implements OnInit {
       }),
       contactMail: new FormControl(structure.contactMail, [
         Validators.required,
-        Validators.pattern('[a-z0-9.-]+@[a-z0-9.-]+[.][a-z]{2,3}'), //NOSONAR
+        Validators.pattern(Regex.email), //NOSONAR
       ]),
       contactPhone: new FormControl(structure.contactPhone, [
         Validators.required,
-        Validators.pattern('([0-9]{2} ){4}[0-9]{2}'), //NOSONAR
+        Validators.pattern(Regex.phone), //NOSONAR
       ]),
-      website: new FormControl(structure.website, [Validators.pattern('(www[.])[a-z0-9.-]*[.][a-z]{2,3}')]), //NOSONAR
-      facebook: new FormControl(structure.facebook, Validators.pattern('(facebook.com/[a-z0-9A-Z.-]{1,})')), //NOSONAR
-      twitter: new FormControl(structure.twitter, Validators.pattern('(twitter.com/[a-z0-9A-Z.-]{1,})')), //NOSONAR
-      instagram: new FormControl(structure.instagram, Validators.pattern('(instagram.com/[a-z0-9A-Z.-]{1,})')), //NOSONAR
-      linkedin: new FormControl(structure.linkedin, Validators.pattern('(linkedin.com/in/[a-z0-9A-Z.-]{1,})')), //NOSONAR
+      website: new FormControl(structure.website, Validators.pattern(Regex.website)), //NOSONAR
+      facebook: new FormControl(structure.facebook, Validators.pattern(Regex.facebook)), //NOSONAR
+      twitter: new FormControl(structure.twitter, Validators.pattern(Regex.twitter)), //NOSONAR
+      instagram: new FormControl(structure.instagram, Validators.pattern(Regex.instagram)), //NOSONAR
+      linkedin: new FormControl(structure.linkedin, Validators.pattern(Regex.linkedIn)), //NOSONAR
       hours: new FormGroup({}),
       pmrAccess: new FormControl(structure.pmrAccess, Validators.required),
       exceptionalClosures: new FormControl(structure.exceptionalClosures),
@@ -185,23 +186,23 @@ export class FormComponent implements OnInit {
       digitalCultureSecurity: this.loadArrayForCheckbox(structure.digitalCultureSecurity, false),
       nbComputers: new FormControl(
         structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 1,
-        [Validators.required, Validators.pattern('[1-9]{1}[0-9]*')] //NOSONAR
+        [Validators.required, Validators.pattern(Regex.noNullNumber)] //NOSONAR
       ),
       nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 1, [
         Validators.required,
-        Validators.pattern('[1-9]{1}[0-9]*'), //NOSONAR
+        Validators.pattern(Regex.noNullNumber), //NOSONAR
       ]),
       nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 1, [
         Validators.required,
-        Validators.pattern('[1-9]{1}[0-9]*'), //NOSONAR
+        Validators.pattern(Regex.noNullNumber), //NOSONAR
       ]),
       nbNumericTerminal: new FormControl(
         structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 1,
-        [Validators.required, Validators.pattern('[1-9]{1}[0-9]*')] //NOSONAR
+        [Validators.required, Validators.pattern(Regex.noNullNumber)] //NOSONAR
       ),
       nbScanners: new FormControl(
         structure.equipmentsAndServices.includes('scanners') ? structure.nbScanners : 1,
-        [Validators.required, Validators.pattern('[1-9]{1}[0-9]*')] //NOSONAR
+        [Validators.required, Validators.pattern(Regex.noNullNumber)] //NOSONAR
       ),
       freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
       freeWifi: new FormControl(structure.freeWifi, Validators.required),
@@ -253,8 +254,8 @@ export class FormComponent implements OnInit {
   }
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')),
-      closing: new FormControl(time.closing, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')),
+      openning: new FormControl(time.openning, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')), //NOSONAR
+      closing: new FormControl(time.closing, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')), //NOSONAR
     });
   }
 
