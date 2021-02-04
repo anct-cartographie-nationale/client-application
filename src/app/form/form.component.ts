@@ -527,6 +527,7 @@ export class FormComponent implements OnInit {
   private createStructure(structure: Structure, user: User): void {
     this.structureService.createStructure(structure, user).subscribe((structure) => {
       this.currentPage++;
+      this.progressStatus += 100 / this.nbPagesForm;
       this.createdStructure = structure;
     });
   }
