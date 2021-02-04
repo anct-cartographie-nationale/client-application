@@ -18,9 +18,6 @@ $progressBar-height: 50px;
     height: calc(100vh);
     top: 0;
   }
-  h3 {
-    margin: 0;
-  }
 }
 
 .footer {
@@ -103,9 +100,6 @@ $progressBar-height: 50px;
       ); // -1px because of header border
     }
     height: auto;
-    /*height: calc(
-      100vh - #{$header-height} - #{$progressBar-height} - #{$footer-height} - #{$footer-height-phone}
-    ); // -1px because of header border*/
     color: $grey-1;
     &.home {
       height: 100%;
