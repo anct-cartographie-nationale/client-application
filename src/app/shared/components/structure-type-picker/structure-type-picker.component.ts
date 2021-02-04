@@ -1,4 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { StructureType } from '../../../models/structure-type.model';
+import { StructureTypeService } from '../../../services/structure-type.service';
+
+export enum structureTypes {
+  public = 'Publique',
+  private = 'Privée à but non lucratif',
+  privateLucratif = 'Privée à but lucratif',
+}
 
 @Component({
   selector: 'app-structure-type-picker',
@@ -7,70 +15,56 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class StructureTypePickerComponent implements OnInit {
   public pickedType: string;
+  public structureTypes: StructureType[];
   @Input() public pickedChoice?: string;
   @Output() selectedType: EventEmitter<string> = new EventEmitter<string>();
 
-  public type_data = [
-    {
-      name: 'Publique',
-      logo: 'typeStructure_public',
-      choices: [
-        'Mairie',
-        'CAF',
-        'CCAS',
-        'Maison de la métropole',
-        'CARSAT',
-        'Médiathèque/Bibliothèque',
-        'Pôle Emploi',
-        'Préfecture',
-        'BIJ/PIJ',
-      ],
-    },
-    {
-      name: 'Privée à but non lucratif',
-      logo: 'typeStructure_private',
-      choices: [
-        'Association',
-        'Centre socio-culturel',
-        'MJC / Cyberbase',
-        'PIMMS',
-        'Structure information jeunesse (SIJ)',
-        'Missions locales ',
-      ],
-    },
-    {
-      name: 'Privée à but lucratif',
-      logo: 'typeStructure_privateLucratif',
-      choices: ['Structure de formation', "Structure d'insertion"],
-    },
-  ];
-  constructor() {}
+  constructor(private structureTypeService: StructureTypeService) {}
 
   ngOnInit() {
     if (this.pickedChoice) {
       this.pickedType = this.getType(this.pickedChoice);
     }
+    this.structureTypeService.getStructureTypes().subscribe((types) => {
+      this.structureTypes = types;
+    });
   }
 
-  getType(nameChoice: string): string {
-    return this.type_data.filter((type) => {
-      if (type.choices.includes(nameChoice)) {
+  public getType(nameChoice: string): string {
+    return this.structureTypes.filter((type) => {
+      if (type.values.includes(nameChoice)) {
         return type.name;
       }
     })[0].name;
   }
-  getChoices(nameType: string): string[] {
-    return this.type_data.filter((type) => {
+
+  public getChoices(nameType: string): string[] {
+    return this.structureTypes.filter((type) => {
       if (type.name == nameType) {
-        return type.choices;
+        return type.values;
       }
-    })[0].choices;
+    })[0].values;
   }
-  pickType(type: string): void {
+
+  public pickType(type: string): void {
     this.pickedType = type;
   }
-  pickChoice(choice: string): void {
+
+  public pickChoice(choice: string): void {
     this.pickedChoice = choice;
     this.selectedType.emit(choice);
+  }
+
+  public getStructureTypeIcon(type: string): string {
+    switch (type) {
+      case structureTypes.public:
+        return 'typeStructure_public';
+      case structureTypes.private:
+        return 'typeStructure_private';
+      case structureTypes.privateLucratif:
+        return 'typeStructure_privateLucratif';
+      default:
+        throw new Error('Structure type not handle');
+    }
   }
 }
