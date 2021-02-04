@@ -40,9 +40,9 @@ export class FormComponent implements OnInit {
   public trainingCategories: { category: Category; openned: boolean }[] = [];
 
   // Page and progress var
-  public currentPage = 17;
+  public currentPage = 0;
   public progressStatus = 0;
-  public nbPagesForm = 25;
+  public nbPagesForm = 24;
   public isPageValid: boolean;
   public pagesValidation = [];
 
@@ -345,7 +345,7 @@ export class FormComponent implements OnInit {
     this.pagesValidation[21] = { valid: this.getStructureControl('description').valid };
     this.pagesValidation[22] = { valid: this.getStructureControl('lockdownActivity').valid };
     this.pagesValidation[23] = { valid: this.userAcceptSavedDate };
-    this.pagesValidation[24] = { valid: true };
+    //this.pagesValidation[24] = { valid: true };
     this.updatePageValid();
   }
 
