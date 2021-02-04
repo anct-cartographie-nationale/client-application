@@ -217,13 +217,6 @@ export class FormComponent implements OnInit {
       saturday: this.createDay(structure.hours.saturday),
       sunday: this.createDay(structure.hours.sunday),
     });
-
-    // Disable form when it's to claim.
-    if (!this.isEditMode && this.idStructure) {
-      Object.keys(this.structureForm.controls).forEach((controlName) => {
-        this.structureForm.controls[controlName].disable();
-      });
-    }
     this.setValidationsForm();
   }
 
@@ -267,7 +260,6 @@ export class FormComponent implements OnInit {
 
   public onCheckChange(event: boolean, formControlName: string, value: string): void {
     const formArray: FormArray = this.structureForm.get(formControlName) as FormArray;
-
     if (event) {
       // Add a new control in the arrayForm
       formArray.push(new FormControl(value));
@@ -426,8 +418,8 @@ export class FormComponent implements OnInit {
     this.hoursForm.setErrors({ formError: true });
     this.setValidationsForm();
   }
-  public onPmrAccessChange(bool: boolean): void {
-    this.getStructureControl('pmrAccess').setValue(bool);
+  public onRadioBtnChange(controlName: string, bool: boolean): void {
+    this.getStructureControl(controlName).setValue(bool);
     this.setValidationsForm();
   }
   public toggleWebSite(): void {
@@ -469,16 +461,6 @@ export class FormComponent implements OnInit {
         c.openned = !c.openned;
       }
     });
-  }
-
-  public onfreeWorkShopChange(bool: boolean): void {
-    this.getStructureControl('freeWorkShop').setValue(bool);
-    this.setValidationsForm();
-  }
-
-  public onfreeWifiChange(bool: boolean): void {
-    this.getStructureControl('freeWifi').setValue(bool);
-    this.setValidationsForm();
   }
 
   public toggleEquipmentsServices(equipment: { module: Module; openned: boolean }): void {

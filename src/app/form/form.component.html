@@ -305,7 +305,7 @@
         </div>
         <app-radio-form
           [selectedOption]="getStructureControl('pmrAccess').value"
-          (selectedEvent)="onPmrAccessChange($event)"
+          (selectedEvent)="onRadioBtnChange('pmrAccess',$event)"
         >
         </app-radio-form>
       </div>
@@ -669,7 +669,7 @@
         </div>
         <app-radio-form
           [selectedOption]="getStructureControl('freeWorkShop').value"
-          (selectedEvent)="onfreeWorkShopChange($event)"
+          (selectedEvent)="onRadioBtnChange('freeWorkShop',$event)"
         >
         </app-radio-form>
       </div>
@@ -679,7 +679,7 @@
         </div>
         <app-radio-form
           [selectedOption]="getStructureControl('freeWifi').value"
-          (selectedEvent)="onfreeWifiChange($event)"
+          (selectedEvent)="onRadioBtnChange('freeWifi',$event)"
         >
         </app-radio-form>
       </div>
