@@ -16,15 +16,15 @@ export class CopyPasteComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public copy() {
+  public copy(): void {
     this.copyEvent.emit(this.day);
   }
 
-  public paste() {
+  public paste(): void {
     this.pasteEvent.emit(this.day);
   }
 
-  public cancel() {
+  public cancel(): void {
     this.cancelEvent.emit();
   }
 }

@@ -10,7 +10,7 @@ import { AddressService } from '../../service/address.service';
 export class AddressAutocompleteComponent implements OnInit {
   public readonly AUTOCOMPLETE_NBR = 5;
   public data = [];
-  public isAlreadySearch = false;
+  public isAlreadySearching = false;
   @ViewChild('searchAddress', { static: true }) searchAddress: ElementRef;
   @Output() selectedAddress: EventEmitter<Address> = new EventEmitter<Address>();
   @Output() inputAddress: EventEmitter<any> = new EventEmitter<any>();
@@ -25,11 +25,11 @@ export class AddressAutocompleteComponent implements OnInit {
     }
   }
   public onSearchChange(searchString: string) {
-    if (!this.isAlreadySearch) {
-      this.isAlreadySearch = true;
+    if (!this.isAlreadySearching) {
+      this.isAlreadySearching = true;
       this.addressService.searchAddress(searchString).subscribe((data) => {
         this.data = data.hits.hits.slice(0, this.AUTOCOMPLETE_NBR);
-        this.isAlreadySearch = false;
+        this.isAlreadySearching = false;
       });
     }
     this.inputAddress.emit();

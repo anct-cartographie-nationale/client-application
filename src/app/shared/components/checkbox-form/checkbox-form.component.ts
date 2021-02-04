@@ -15,7 +15,7 @@ export class CheckboxFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  clicked() {
+  public clicked(): void {
     this.isChecked = !this.isChecked;
     this.checkEvent.emit(this.isChecked);
   }
