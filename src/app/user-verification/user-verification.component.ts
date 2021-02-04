@@ -39,7 +39,7 @@ export class UserVerificationComponent implements OnInit {
           (structure) => {
             structure.accountVerified = true;
             this.structure = structure;
-            this.structureService.updateStructureAfterOwnerVerify(structure._id, structure).subscribe(
+            this.structureService.updateStructureAfterOwnerVerify(structure._id, user).subscribe(
               () => {
                 this.verificationSuccess = true;
               },
