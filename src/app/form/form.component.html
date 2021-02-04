@@ -119,7 +119,10 @@
         </div>
         <div class="form-group" fxLayout="column">
           <label for="password">Création de mot de passe</label>
-          <p class="password" *ngIf="accountForm.get('password').invalid && accountForm.get('password').value">
+          <p
+            class="password"
+            [ngClass]="{ invalid: accountForm.get('password').invalid && accountForm.get('password').value }"
+          >
             Le mot de passe doit contenir au minimum : 8 caractères dont un caractère spécial, un caractère en majuscule
             et un chiffre.
           </p>
