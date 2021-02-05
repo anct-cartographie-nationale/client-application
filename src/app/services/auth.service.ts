@@ -42,6 +42,10 @@ export class AuthService {
     return false;
   }
 
+  public getUsernameDisplay(): string {
+    return `${this.userValue.name}`;
+  }
+
   private getExpiration(): DateTime {
     return DateTime.fromISO(this.userValue.expiresAt, { zone: 'Europe/Paris' });
   }

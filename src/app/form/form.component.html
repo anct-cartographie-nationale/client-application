@@ -4,15 +4,6 @@
     [content]="'Il vous faudra de nouveau remplir le formulaire si vous quittez'"
     (closed)="hasRedirectionAccepted($event)"
   ></app-modal-confirmation>
-  <app-menu-phone *ngIf="showMenu" (closeEvent)="closeMenu($event)"></app-menu-phone>
-  <div class="header">
-    <div class="container-icoMenu">
-      <div class="block-iconMenu" (click)="toggleMenu()">
-        <span class="ico-menu"></span>
-      </div>
-    </div>
-    <h3>Création de compte</h3>
-  </div>
   <div class="content">
     <div
       class="progressBar"

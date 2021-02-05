@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://forge.grandlyon.com///compare/v1.3.0...v1.4.0) (2021-02-01)
+
+
+### Features
+
+* add address search with auto-complete ([b5c264b](https://forge.grandlyon.com///commit/b5c264b807e92800550ac8a5bebaa649be80771f))
+* add geojson for metropole and brignais ([b329468](https://forge.grandlyon.com///commit/b329468f4c2f07f6ab60789db940b6587be2a854))
+* add modal for structure claim + use of ngPlural on search ([316d2a7](https://forge.grandlyon.com///commit/316d2a7428571661015bdaf025cc7992cf56cd58))
+* update app-modal for handling confirmation buttons ([aae176e](https://forge.grandlyon.com///commit/aae176e28103b98aee31db3a716364088a1a24de))
+* **structure:** add admin delete ([553c303](https://forge.grandlyon.com///commit/553c303b93ed8bb7019eef8cf7b66fbebcb2e3dd))
+* sync locate from search bar to map ([a99e9b4](https://forge.grandlyon.com///commit/a99e9b4356022e1c9a385cf2533eee68a2d08636))
+* **structure-details:** add description and lockdown activity ([3bdb11b](https://forge.grandlyon.com///commit/3bdb11bb3375c8592e4170c3e4cea98778e7bfbf))
+* **structure-details:** update structure card ([fa0c752](https://forge.grandlyon.com///commit/fa0c75244846f83c0608e898763620fd72ec8f0f))
+* update metropole gejson ([056b85c](https://forge.grandlyon.com///commit/056b85c3c5ba45ca6add5e625ad0d8e26d55e31b))
+* **style:** add form-input style ([b1dba86](https://forge.grandlyon.com///commit/b1dba86db8287cb7926e5f6373269d1ff5537ac2))
+
+
+### Bug Fixes
+
+* add capitalize on structure card name ([26f403d](https://forge.grandlyon.com///commit/26f403df260406b4de89fec017ad33613b66bc73))
+* **print:** hide buttons ([62b4ad4](https://forge.grandlyon.com///commit/62b4ad4471b0efc9860d64f9a2b094727d584307))
+* layout issue on small components ([b83233e](https://forge.grandlyon.com///commit/b83233eb7c81c1ce21c627f62cce7c15ddbd709a))
+* remove duplicated event emitter ([1808865](https://forge.grandlyon.com///commit/180886584651e3b2e259c9212b607ddf02f37ac1))
+* remove test component from home ([729e20f](https://forge.grandlyon.com///commit/729e20f81813400c0ae24c518c3985d88b373fe9))
+* small design fixes on search and structure details ([88c61df](https://forge.grandlyon.com///commit/88c61dfb63de5b8e86077e793c349a216adac855))
+* update map locate logic ([ed2e397](https://forge.grandlyon.com///commit/ed2e397be7d1a2e8a7e52d28590b8d85a8bd4107))
+* update unused map package ([5852223](https://forge.grandlyon.com///commit/5852223529ef7df61ec54e95ae8b47970aaace77))
+* **design:** structure-details display ([d2c9fd7](https://forge.grandlyon.com///commit/d2c9fd7d63f48303b249ae7b9711800da010516d))
+* **print:** firefox issue for printing + fxLayout issue for chrome after printing ([fc64a2a](https://forge.grandlyon.com///commit/fc64a2a84a4c2d7db1dde0baefc970990c426137))
+* **style:** add global link style ([5671fd8](https://forge.grandlyon.com///commit/5671fd8ce56b16383e4d18d71fc321ff1c3e51f1))
+
 ## [1.3.0](https://forge.grandlyon.com///compare/v1.2.0...v1.3.0) (2021-01-15)
 
 

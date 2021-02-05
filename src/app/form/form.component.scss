@@ -16,9 +16,8 @@ h3 {
   top: #{$header-height};
   z-index: $structure-details-z-index;
   @media #{$tablet} {
+    height: calc(100vh - #{$header-height});
     position: fixed; //Hide default header app.
-    height: 100vh;
-    top: 0;
   }
 }
 
