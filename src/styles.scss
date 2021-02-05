@@ -195,6 +195,8 @@ button {
   top: 0;
   background-color: $modal-background;
   .modal {
+    max-height: 90%;
+    overflow: auto;
     .contentModal {
       width: 100%;
       background: $white;

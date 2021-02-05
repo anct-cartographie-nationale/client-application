@@ -84,7 +84,7 @@ export class SignUpModalComponent implements OnInit {
       );
   }
 
-  toggleShowPassword(): void {
+  public toggleShowPassword(): void {
     this.isShowPassword = !this.isShowPassword;
   }
 }

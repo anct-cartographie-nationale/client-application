@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Regex } from '../../enum/regex.enum';
 import { MustMatch } from '../../validator/form';
 
 @Component({
@@ -11,14 +12,16 @@ export class CreateAccountFormComponent implements OnInit {
   constructor() {}
   public accountForm: FormGroup;
   public submitted: boolean = false;
+  public isShowConfirmPassword = false;
+  public isShowPassword = false;
   @Output() public submitForm = new EventEmitter<FormGroup>();
 
   ngOnInit(): void {
     this.accountForm = new FormGroup(
       {
-        email: new FormControl('', Validators.required),
-        name: new FormControl('', Validators.required),
-        surname: new FormControl('', Validators.required),
+        email: new FormControl('', [Validators.required, Validators.pattern(Regex.email)]),
+        name: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]),
+        surname: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]),
         phone: new FormControl('', [Validators.required, Validators.pattern('([0-9]{2} ){4}[0-9]{2}')]), //NOSONAR
         password: new FormControl('', [
           Validators.required,
@@ -28,6 +31,11 @@ export class CreateAccountFormComponent implements OnInit {
       },
       [MustMatch('password', 'confirmPassword')]
     );
+  }
+
+  // getter for form fields
+  get f(): { [key: string]: AbstractControl } {
+    return this.accountForm.controls;
   }
 
   public onSubmit(accountForm: FormGroup) {
@@ -49,5 +57,11 @@ export class CreateAccountFormComponent implements OnInit {
       // Add space every 2 number
       this.accountForm.get('phone').setValue(phoneNoSpace.replace(/(?!^)(?=(?:\d{2})+$)/g, ' ')); //NOSONAR
     }
+  }
+  public toggleShowConfirmPassword(): void {
+    this.isShowConfirmPassword = !this.isShowConfirmPassword;
+  }
+  public toggleShowPassword(): void {
+    this.isShowPassword = !this.isShowPassword;
   }
 }
