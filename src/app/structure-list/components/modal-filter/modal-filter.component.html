@@ -15,17 +15,9 @@
                 <label>
                   <input
                     type="checkbox"
-                    [checked]="
-                      c.name !== 'Équipements et services proposés'
-                        ? searchService.getIndex(checkedModules, module.id, c.name) > -1
-                        : searchService.getIndex(checkedModules, 'True', module.id) > -1
-                    "
+                    [checked]="searchService.getIndex(checkedModules, module.id, c.id) > -1"
                     [value]="module.id"
-                    (change)="
-                      c.name !== 'Équipements et services proposés'
-                        ? onCheckboxChange($event, c.name, false)
-                        : onCheckboxChange($event, module.id, true)
-                    "
+                    (change)="onCheckboxChange($event, c.id)"
                   />
                   <span class="customCheck"></span>
                   <div class="label">{{ module.text }}</div>

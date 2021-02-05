@@ -56,6 +56,7 @@ build_json_server:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY_IMAGE:json_server"  ./api/
     - docker push "$CI_REGISTRY_IMAGE:json_server"
+  when: manual
 
 deploy_dev:
   stage: deploy
@@ -103,6 +104,9 @@ code_analysis:
   stage: sonar-analysis
   only:
     - dev
+  before_script:
+    - export NODE_PATH=$NODE_PATH:`npm root -g`
+    - npm install -g typescript
   script:
     - >
       sonar-scanner
@@ -113,3 +117,14 @@ code_analysis:
       -Dsonar.host.url=${SONAR_URL}
       -Dsonar.projectKey=${SONAR_PROJECT_KEY}
       -Dsonar.login=${SONAR_TOKEN}
+
+mr:
+  image: docker:18.09
+  services:
+    - docker:18.09-dind
+  stage: build
+  only:
+    - merge_requests
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .

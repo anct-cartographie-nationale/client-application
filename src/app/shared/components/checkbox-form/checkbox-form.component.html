@@ -1,0 +1,17 @@
+<button
+  (click)="clicked()"
+  [ngClass]="{ selected: isChecked }"
+  fxLayout="row"
+  fxLayoutAlign=" center"
+  fxLayoutGap="17px"
+>
+  <div class="checkmark">
+    <svg class="validate" aria-hidden="true">
+      <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+    </svg>
+  </div>
+  <svg *ngIf="iconSvg" aria-hidden="true" [ngClass]="iconType">
+    <use [attr.xlink:href]="'assets/form/sprite.svg#' + iconSvg"></use>
+  </svg>
+  <p>{{ text }}</p>
+</button>

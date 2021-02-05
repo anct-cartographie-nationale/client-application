@@ -1,0 +1,59 @@
+@import '../../assets/scss/color';
+@import '../../assets/scss/typography';
+@import '../../assets/scss/breakpoint';
+
+.content-container {
+  max-width: 960px;
+  padding: 18px;
+  margin: auto;
+}
+.structureInfoBlock {
+  background: $green-1;
+  color: $white;
+  padding: 16px;
+  border-radius: 6px;
+  @include cn-bold-18;
+  .structureInfoContent {
+    width: 100%;
+  }
+  span {
+    font-style: italic;
+    @include cn-regular-14;
+  }
+  .validateSvg {
+    stroke: $white;
+    text-align: right;
+    svg {
+      height: 14px;
+      width: 14px;
+    }
+  }
+}
+.btn {
+  background: $secondary-color;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  color: $white;
+  height: 40px;
+  width: 192px;
+  @include btn-bold;
+}
+.btnSection {
+  @media #{$large-phone} {
+    position: fixed;
+    border-top: 1px solid $grey-4;
+  }
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 17px 0px;
+}
+
+.tmp-form-link {
+  a {
+    color: $white !important;
+  }
+}

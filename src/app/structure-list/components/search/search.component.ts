@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, Type } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { GeoJson } from '../../../map/models/geojson.model';
@@ -15,15 +15,15 @@ import { SearchService } from '../../services/search.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
-  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
-    this.searchForm = this.fb.group({
-      searchTerm: '',
-    });
-  }
-
+export class SearchComponent implements OnInit, OnChanges {
   @Output() searchEvent = new EventEmitter();
 
+  // Show/hide form createStructure
+  public addStructureFormModal = false;
+
+  @Output() locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() locate = false;
   // Form search input
   public searchForm: FormGroup;
   // Modal variable
@@ -41,11 +41,21 @@ export class SearchComponent implements OnInit {
   public confirmationModalContent =
     'Afin d’ajouter votre structure,vous allez être redirigé vers le formulaire Grand Lyon à remplir.';
 
+  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
+    this.searchForm = this.fb.group({
+      searchTerm: '',
+    });
+  }
   ngOnInit(): void {
     // Will store the different categories
     this.categories = [];
-
     this.checkedModulesFilter = new Array();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.locate && changes.locate.currentValue && !changes.locate.previousValue) {
+      this.locateMe();
+    }
   }
 
   // Accessor to template angular.
@@ -57,6 +67,9 @@ export class SearchComponent implements OnInit {
   public clearInput(): void {
     this.searchForm.reset();
     this.applyFilter(null);
+    if (this.locate) {
+      this.locatationReset.emit(true);
+    }
   }
 
   // Sends an array containing all filters
@@ -64,19 +77,14 @@ export class SearchComponent implements OnInit {
     // Add search input filter
     const filters: Filter[] = [];
     if (term) {
-      filters.push(new Filter('nomDeVotreStructure', term));
+      filters.push(new Filter('query', term));
     }
     // Add checked box filter
     this.checkedModulesFilter.forEach((cm) => {
-      filters.push(new Filter(this.fromStringToIdExcel(cm.text), this.mockApiNumber(cm.id)));
+      filters.push(new Filter(cm.text, cm.id));
     });
     // Send filters
     this.searchEvent.emit(filters);
-  }
-
-  // Delete when getting back-end
-  private mockApiNumber(nb: string): string {
-    return nb.length < 3 ? ('00' + nb).slice(-3) : nb;
   }
 
   public fetchResults(checkedModules: Module[]): void {
@@ -131,7 +139,7 @@ export class SearchComponent implements OnInit {
       this.closeModal();
     } else if (this.modalTypeOpened !== modalType) {
       this.modalTypeOpened = modalType;
-      this.fakeData(modalType);
+      this.getData(modalType);
     }
   }
 
@@ -139,18 +147,6 @@ export class SearchComponent implements OnInit {
     this.modalTypeOpened = undefined;
   }
 
-  private fromStringToIdExcel(categ: string): string {
-    const splitStr = categ.toLowerCase().split(' ');
-    for (let i = 1; i < splitStr.length; i++) {
-      splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    return splitStr
-      .join('')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f'’°()]/g, '')
-      .replace(/[\s-]/g, ' ')
-      .replace('?', '');
-  }
   // Get adress and put it in input
   public locateMe(): void {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -161,6 +157,7 @@ export class SearchComponent implements OnInit {
         this.searchForm.setValue({ searchTerm: adress });
         this.applyFilter(adress);
       });
+      this.locatationTrigger.emit(true);
     });
   }
   // Management of the checkbox event (Check / Uncheck)
@@ -171,7 +168,7 @@ export class SearchComponent implements OnInit {
       this.checkedModulesFilter.push(new Module(checkValue, categ));
       this.numberMoreFiltersChecked++;
     } else {
-      // Check if the unchecked module is present in the list and remove it
+      // Check if the module is present in the list and remove it
       const index = this.checkedModulesFilter.findIndex((m: Module) => m.id === checkValue && m.text === categ);
       if (index > -1) {
         this.checkedModulesFilter.splice(index, 1);
@@ -185,7 +182,7 @@ export class SearchComponent implements OnInit {
   }
 
   // Get the correct list of checkbox/modules depending on the type of modal.
-  private fakeData(option: TypeModal): void {
+  private getData(option: TypeModal): void {
     if (option === TypeModal.accompaniment) {
       forkJoin([this.searchService.getCategoriesAccompaniment(), this.searchService.getFakeCounterModule()]).subscribe(
         (res) => {
@@ -220,11 +217,5 @@ export class SearchComponent implements OnInit {
         }
       );
     }
-  }
-  public openConfirmationModal(): void {
-    this.isConfirmationModalOpen = true;
-  }
-  public closeConfirmationModal(): void {
-    this.isConfirmationModalOpen = false;
   }
 }

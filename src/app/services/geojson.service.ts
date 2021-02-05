@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Address } from '../models/address.model';
 import { GeoJson } from '../map/models/geojson.model';
 import * as _ from 'lodash';
 
@@ -18,7 +17,7 @@ export class GeojsonService {
    */
   public getAddressByCoord(longitude: number, latitude: number): Observable<any> {
     return this.http
-      .get('/reverse/' + '?lon=' + longitude + '&lat=' + latitude)
+      .get('/reverse/' + '?lon=' + longitude + '&lat=' + latitude, { headers: { skip: 'true' } })
       .pipe(map((data: { features: any[] }) => new GeoJson(data.features[0])));
   }
 
@@ -38,7 +37,8 @@ export class GeojsonService {
     return this.http
       .get(
         '/wfs/grandlyon' +
-          '?SERVICE=WFS&VERSION=2.0.0&request=GetFeature&typename=ter_territoire.maison_de_la_metropole&outputFormat=application/json; subtype=geojson&SRSNAME=EPSG:4171&startIndex=0'
+          '?SERVICE=WFS&VERSION=2.0.0&request=GetFeature&typename=ter_territoire.maison_de_la_metropole&outputFormat=application/json; subtype=geojson&SRSNAME=EPSG:4171&startIndex=0',
+        { headers: { skip: 'true' } }
       )
       .pipe(map((data: { features: any[] }) => _.map(data.features, this.parseToGeoJson)));
   }
@@ -49,7 +49,7 @@ export class GeojsonService {
    */
   public getCoord(numero: string, address: string, zipcode: string): Observable<GeoJson> {
     return this.http
-      .get('/geocoding/photon/api' + '?q=' + numero + ' ' + address + ' ' + zipcode)
+      .get('/geocoding/photon/api' + '?q=' + numero + ' ' + address + ' ' + zipcode, { headers: { skip: 'true' } })
       .pipe(map((data: { features: any[]; type: string }) => new GeoJson(data.features[0])));
   }
 

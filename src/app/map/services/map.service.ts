@@ -8,9 +8,17 @@ import { MarkerType } from '../components/markerType.enum';
 })
 export class MapService {
   private static markersList = {};
+  private isMarkerActive = false;
   public markerIconHover = divIcon({
     className: null,
     html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker-locate"></use></svg>',
+    iconSize: [40, 46],
+    iconAnchor: [20, 46],
+    popupAnchor: [0, -46],
+  });
+  public markerIconActive = divIcon({
+    className: null,
+    html: '<svg width="40" height="46" fill="#d50000"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
     iconSize: [40, 46],
     iconAnchor: [20, 46],
     popupAnchor: [0, -46],
@@ -37,7 +45,7 @@ export class MapService {
   });
   constructor() {}
 
-  public createMarker(lat: number, lon: number, markerType: MarkerType, id?: number, tooltip?: string): Marker {
+  public createMarker(lat: number, lon: number, markerType: MarkerType, id?: string, tooltip?: string): Marker {
     const marker = new Marker([lat, lon], {
       icon: this.getMarkerIcon(markerType),
       attribution: this.getLayerAttributton(markerType),
@@ -96,13 +104,18 @@ export class MapService {
   }
 
   /**
-   * Toogle a tooltip
    * @param id marker id
    */
-  public toogleToolTip(id: number): void {
-    if (id) {
-      this.getMarker(id).togglePopup();
+  public setActiveMarker(id: string): void {
+    this.getMarker(id).setIcon(this.getMarkerIconHover(MarkerType.structure));
+  }
+
+  public setUnactiveMarker(id: string): void {
+    // To skip mouseleave when user emit click on structure list
+    if (!this.isMarkerActive) {
+      this.getMarker(id).setIcon(this.getMarkerIcon(MarkerType.structure));
     }
+    this.isMarkerActive = false;
   }
 
   /**
@@ -110,7 +123,7 @@ export class MapService {
    * @param id markerId
    * @param html html to display
    */
-  public setToolTip(id: number, html: string): void {
+  public setToolTip(id: string, html: string): void {
     this.getMarker(id).bindTooltip(html);
   }
 
@@ -119,9 +132,10 @@ export class MapService {
    * @param id markerId
    * @param html html to display
    */
-  public setSelectedMarker(id: number): void {
+  public setSelectedMarker(id: string): void {
     if (id) {
-      this.getMarker(id).setIcon(this.markerIconHover);
+      this.getMarker(id).setIcon(this.markerIconActive);
+      this.isMarkerActive = true;
     }
   }
 
@@ -130,7 +144,7 @@ export class MapService {
    * @param id markerId
    * @param html html to display
    */
-  public setDefaultMarker(id: number): void {
+  public setDefaultMarker(id: string): void {
     if (id) {
       const markerIcon = divIcon({
         className: null,
@@ -146,7 +160,7 @@ export class MapService {
   /**
    * Get marker by id
    */
-  public getMarker(id: number): Marker {
+  public getMarker(id: string): Marker {
     return MapService.markersList[id] ? MapService.markersList[id] : null;
   }
 

@@ -4,6 +4,10 @@
 @import 'assets/scss/color';
 @import 'assets/scss/breakpoint';
 @import 'assets/scss/icons';
+@import 'assets/scss/inputs';
+@import 'assets/scss/hyperlink';
+@import 'assets/scss/layout';
+@import 'assets/scss/buttons';
 @import '../node_modules/leaflet.locatecontrol/dist/L.Control.Locate.css';
 
 html {
@@ -33,6 +37,14 @@ a {
   }
   &:hover {
     text-decoration: underline;
+    outline-color: $blue-hover;
+  }
+  &.primary {
+    @include hyperlink;
+    width: 100%;
+  }
+  &.right {
+    text-align: right;
   }
 }
 
@@ -59,6 +71,9 @@ a {
   &.no-pt {
     padding: 0 0 30px 0;
   }
+  &.full-screen {
+    min-height: calc(100vh - #{$header-height} - #{$footer-height});
+  }
   @media #{$phone} {
     padding-top: 30px;
   }
@@ -76,6 +91,13 @@ a {
     max-width: unset;
     margin-bottom: 1rem;
     width: unset;
+  }
+}
+
+/** Buttons **/
+button {
+  &:focus {
+    outline-color: $blue-hover;
   }
 }
 
@@ -101,7 +123,8 @@ a {
     cursor: pointer;
   }
   .label {
-    padding: 0 16px;
+    padding-left: 16px;
+    padding-right: 10px;
     @include btn-pass;
   }
   .customCheck {
@@ -134,10 +157,19 @@ a {
     }
   }
 }
+
 // Layout
 .w-100 {
   width: 100%;
 }
+
+.mobile-column {
+  @media #{$large-phone} {
+    flex-direction: column;
+  }
+}
+
+// PRINT
 
 @media print {
   body,

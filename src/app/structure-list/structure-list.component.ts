@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Filter } from './models/filter.model';
 import { Structure } from '../models/structure.model';
 import { GeoJson } from '../map/models/geojson.model';
@@ -14,9 +14,13 @@ export class StructureListComponent implements OnChanges {
   @Output() searchEvent = new EventEmitter();
   @Input() public location: GeoJson;
   @Input() public selectedStructure: Structure = new Structure();
-  @Output() public displayMapMarkerId: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
-  @Output() public hoverOut: EventEmitter<Array<number>> = new EventEmitter<Array<number>>();
-  @Output() public selectedMarkerId: EventEmitter<number> = new EventEmitter<number>();
+  @Input() public locate = false;
+  @Output() public displayMapMarkerId: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public selectedMarkerId: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public updatedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+  @Output() public locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   public showStructureDetails = false;
   public structure: Structure;
   public structuresListChunked: Structure[];
@@ -31,14 +35,8 @@ export class StructureListComponent implements OnChanges {
       this.showDetails(this.selectedStructure);
     }
     if (changes.structureList) {
-      this.arrayChunked = [];
-      this.pageStructures = 0;
-      if (this.pageStructures == 0) {
-        for (let i = 0; i < this.structureList.length; i += this.chunck) {
-          this.arrayChunked.push(this.structureList.slice(i, i + this.chunck));
-        }
-      }
-      this.structuresListChunked = this.arrayChunked[0];
+      this.structuresListChunked = this.chunckAnArray(this.structureList);
+      document.getElementById('listCard').scrollTo(0, 0);
     }
   }
   public fetchResults(filters: Filter[]): void {
@@ -47,7 +45,7 @@ export class StructureListComponent implements OnChanges {
   public showDetails(event: Structure): void {
     this.showStructureDetails = true;
     this.structure = event;
-    this.selectedMarkerId.emit(this.structure.id);
+    this.selectedMarkerId.emit(this.structure._id);
   }
 
   public closeDetails(): void {
@@ -55,17 +53,28 @@ export class StructureListComponent implements OnChanges {
     this.showStructureDetails = false;
   }
 
-  public handleCardHover(event: Structure): void {
-    this.displayMapMarkerId.emit([event.id]);
+  public handleCardHover(structure: Structure): void {
+    this.displayMapMarkerId.emit(structure._id);
   }
 
-  public mouseOut(): void {
-    this.displayMapMarkerId.emit([undefined]);
+  public mouseLeave(): void {
+    this.displayMapMarkerId.emit(undefined);
+  }
+
+  public emitUpdatedStructure(s: Structure): void {
+    this.updatedStructure.emit(s);
+  }
+
+  private chunckAnArray(structures: Structure[]): Structure[] {
+    this.arrayChunked = [];
+    this.pageStructures = 0;
+    for (let i = 0; i < structures.length; i += this.chunck) {
+      this.arrayChunked.push(structures.slice(i, i + this.chunck));
+    }
+    return this.arrayChunked[0];
   }
 
   public onScrollDown(event): void {
-    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 100) {
-    }
     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 50) {
       this.loadMoreStructures();
     }
@@ -76,5 +85,13 @@ export class StructureListComponent implements OnChanges {
       const newStructures = _.map(this.arrayChunked[this.pageStructures]);
       this.structuresListChunked = [...this.structuresListChunked, ...newStructures];
     }
+  }
+
+  public sendLocatationReset(): void {
+    this.locatationReset.emit(true);
+  }
+
+  public sendlocatationTrigger(): void {
+    this.locatationTrigger.emit(true);
   }
 }

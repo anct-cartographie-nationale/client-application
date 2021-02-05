@@ -1,0 +1,22 @@
+@import '../../../../assets/scss/color';
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+}
+.autocomplete-items {
+  border: 0.0625rem solid #d4d4d4;
+  border-top: none;
+  border-bottom: none;
+  z-index: 99;
+  background-color: #fff;
+  cursor: pointer;
+}
+.autocomplete-item {
+  margin: 0;
+  padding: 1em 0;
+}
+.autocomplete-item:hover {
+  background-color: #dee6ee;
+  cursor: pointer;
+}

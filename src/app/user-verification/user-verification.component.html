@@ -1,0 +1,65 @@
+<div fxLayout="column" class="content-container full-screen">
+  <p *ngIf="!verificationSuccess && !verificationIssue">Votre email est en cours de vérification ...</p>
+  <div *ngIf="verificationSuccess">
+    <div class="title">
+      <h3 *ngIf="structure">
+        Bravo !<br />
+        Votre compte et votre structure ont bien été référencés.
+      </h3>
+      <h3 *ngIf="!structure">
+        Bravo !<br />
+        Votre compte a bien été créé.
+      </h3>
+    </div>
+
+    <div *ngIf="structure" class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
+      <div class="structureInfoContent" fxLayout="column">
+        {{ structure.structureName }}
+        <span>{{ structure.structureType }}</span>
+      </div>
+      <div class="validateSvg">
+        <svg class="validate" aria-hidden="true">
+          <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+        </svg>
+      </div>
+    </div>
+    <div class="btnSection" fxLayout="row" fxLayoutAlign="space-around center">
+      <button *ngIf="structure" class="btn" routerLink="/home" [state]="{ data: structure }">Voir ma structure</button>
+      <button class="btn tmp-form-link" routerLink="/home">
+        <a
+          class="typeform-share button"
+          href="https://form.typeform.com/to/vfbLqfKe?typeform-medium=embed-snippet"
+          data-mode="popup"
+          data-size="100"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Donnez nous votre avis !
+        </a>
+      </button>
+    </div>
+  </div>
+  <p *ngIf="verificationIssue">
+    Une erreur est survenue lors de la validation de votre email... Veuillez envoyer un mail au support.
+  </p>
+  <script>
+    (function () {
+      var qs,
+        js,
+        q,
+        s,
+        d = document,
+        gi = d.getElementById,
+        ce = d.createElement,
+        gt = d.getElementsByTagName,
+        id = 'typef_orm_share',
+        b = 'https://embed.typeform.com/';
+      if (!gi.call(d, id)) {
+        js = ce.call(d, 'script');
+        js.id = id;
+        js.src = b + 'embed.js';
+        q = gt.call(d, 'script')[0];
+        q.parentNode.insertBefore(js, q);
+      }
+    })();
+  </script>
+</div>

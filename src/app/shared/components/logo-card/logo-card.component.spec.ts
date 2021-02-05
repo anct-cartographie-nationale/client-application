@@ -24,13 +24,11 @@ describe('LogoCardComponent', () => {
   });
 
   it('should return logo name with a string input', () => {
-    const logoCaf = component.getLogoKey(Demarches.caf);
-    const logoCarsat = component.getLogoKey(Demarches.carsat);
-    const logoCpam = component.getLogoKey(Demarches.cpam);
-    const logoOther = component.getLogoKey(Demarches.other);
-    expect(logoCaf).toEqual('caf');
-    expect(logoCarsat).toEqual('carsat');
-    expect(logoCpam).toEqual('cpam');
-    expect(logoOther).toEqual('other');
+    const logoCaf = component.getName('accompagnantCaf');
+    const logoCarsat = component.getName('carsat');
+    const logoCpam = component.getName('cpam');
+    expect(logoCaf).toEqual(Demarches.accompagnantCaf);
+    expect(logoCarsat).toEqual(Demarches.carsat);
+    expect(logoCpam).toEqual(Demarches.cpam);
   });
 });

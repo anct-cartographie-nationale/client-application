@@ -1,0 +1,472 @@
+[
+  {
+    "_id": { "$oid": "5fbb933b80a5c257dc0161f5" },
+    "modules": [
+      {
+        "id": 260,
+        "display_id": "260",
+        "display_name": "Modules APTIC - n°260",
+        "digest": "Maitrise de l’environnement d’un ordinateur (clavier, souris)",
+        "text": "Maitrise de l’environnement d’un ordinateur (clavier, souris)",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/260/",
+        "receipt_time": "2020-09-01T15:16:53",
+        "last_update_time": "2020-09-28T11:34:49"
+      },
+      {
+        "id": 259,
+        "display_id": "259",
+        "display_name": "Modules APTIC - n°259",
+        "digest": "Composantes et facettes de l’identité numérique",
+        "text": "Composantes et facettes de l’identité numérique",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/259/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:35:39"
+      },
+      {
+        "id": 261,
+        "display_id": "261",
+        "display_name": "Modules APTIC - n°261",
+        "digest": "Internet : fonctionnement et outils de navigation web",
+        "text": "Internet : fonctionnement et outils de navigation web",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/261/",
+        "receipt_time": "2020-09-28T11:49:27",
+        "last_update_time": "2020-09-28T11:49:27"
+      },
+      {
+        "id": 249,
+        "display_id": "249",
+        "display_name": "Modules APTIC - n°249",
+        "digest": "Internet : fonctionnement des emails",
+        "text": "Internet : fonctionnement des emails",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/249/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:34:34"
+      },
+      {
+        "id": 222,
+        "display_id": "222",
+        "display_name": "Modules APTIC - n°222",
+        "digest": "Le smartphone : principes de fonctionnement",
+        "text": "Le smartphone : principes de fonctionnement",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/222/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:36:31"
+      },
+      {
+        "id": 212,
+        "display_id": "212",
+        "display_name": "Modules APTIC - n°212",
+        "digest": "Internet : envoyer, recevoir, gérer ses emails",
+        "text": "Internet : envoyer, recevoir, gérer ses emails",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/212/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:37:10"
+      },
+      {
+        "id": 186,
+        "display_id": "186",
+        "display_name": "Modules APTIC - n°186",
+        "digest": "Smartphones et Tablettes sous Androïd",
+        "text": "Smartphones et Tablettes sous Androïd",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/186/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:37:58"
+      },
+      {
+        "id": 183,
+        "display_id": "183",
+        "display_name": "Modules APTIC - n°183",
+        "digest": "Smartphone : Les principaux gestes pour l'écran tactile",
+        "text": "Smartphone : Les principaux gestes pour l'écran tactile",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/183/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:38:33"
+      }
+    ],
+    "name": "Les compétences de base",
+    "id": "baseSkills",
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5fbb934180a5c257dc0161f6" },
+    "modules": [
+      {
+        "id": 176,
+        "display_id": "176",
+        "display_name": "Modules APTIC - n°176",
+        "digest": "Pôle Emploi : faire ses déclarations en ligne",
+        "text": "Pôle Emploi : faire ses déclarations en ligne",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/176/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:40:18"
+      },
+      {
+        "id": 175,
+        "display_id": "175",
+        "display_name": "Modules APTIC - n°175",
+        "digest": "Déclarer ses revenus en ligne et découvertes des services proposés",
+        "text": "Déclarer ses revenus en ligne et découvertes des services proposés",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/175/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:41:14"
+      },
+      {
+        "id": 174,
+        "display_id": "174",
+        "display_name": "Modules APTIC - n°174",
+        "digest": "Accéder à ses droits sociaux et les gérer en ligne (RSA…)",
+        "text": "Accéder à ses droits sociaux et les gérer en ligne (RSA…)",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/174/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:41:49"
+      },
+      {
+        "id": 173,
+        "display_id": "173",
+        "display_name": "Modules APTIC - n°173",
+        "digest": "Ouvrir et gérer son dossier de retraite (CNAF/CARSAT) en ligne",
+        "text": "Ouvrir et gérer son dossier de retraite (CNAF/CARSAT) en ligne",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/173/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:42:26"
+      },
+      {
+        "id": 172,
+        "display_id": "172",
+        "display_name": "Modules APTIC - n°172",
+        "digest": "Gérer son abonnement et ses factures d'électricité/gaz en ligne",
+        "text": "Gérer son abonnement et ses factures d'électricité/gaz en ligne",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/172/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:43:02"
+      },
+      {
+        "id": 171,
+        "display_id": "171",
+        "display_name": "Modules APTIC - n°171",
+        "digest": "Gérer ses droits d'assuré social en ligne/sur internet",
+        "text": "Gérer ses droits d'assuré social en ligne/sur internet",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/171/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:43:38"
+      },
+      {
+        "id": 167,
+        "display_id": "167",
+        "display_name": "Modules APTIC - n°167",
+        "digest": "Plateforme Ameli.fr : la sécurité sociale en ligne",
+        "text": "Plateforme Ameli.fr : la sécurité sociale en ligne",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/167/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:46:37"
+      },
+      {
+        "id": 165,
+        "display_id": "165",
+        "display_name": "Modules APTIC - n°165",
+        "digest": "Plateforme France Connect",
+        "text": "Plateforme France Connect",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/165/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T11:47:07"
+      }
+    ],
+    "name": "Accès aux droits",
+    "id": "accessRight",
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5fbb934780a5c257dc0161f7" },
+    "modules": [
+      {
+        "id": 254,
+        "display_id": "254",
+        "display_name": "Modules APTIC - n°254",
+        "digest": "Utiliser les réseaux sociaux pour sa recherche d'emploi",
+        "text": "Utiliser les réseaux sociaux pour sa recherche d'emploi",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/254/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:00:45"
+      },
+      {
+        "id": 240,
+        "display_id": "240",
+        "display_name": "Modules APTIC - n°240",
+        "digest": "Panorama des plateformes de recherche d’emploi",
+        "text": "Panorama des plateformes de recherche d’emploi",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/240/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:00:16"
+      },
+      {
+        "id": 194,
+        "display_id": "194",
+        "display_name": "Modules APTIC - n°194",
+        "digest": "Traitement de texte : découverte",
+        "text": "Traitement de texte : découverte",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/194/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:01:59"
+      },
+      {
+        "id": 193,
+        "display_id": "193",
+        "display_name": "Modules APTIC - n°193",
+        "digest": "Traitement de texte : utilisation de base",
+        "text": "Traitement de texte : utilisation de base",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/193/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:03:40"
+      },
+      {
+        "id": 192,
+        "display_id": "192",
+        "display_name": "Modules APTIC - n°192",
+        "digest": "Traitement de texte : utilisation avancée",
+        "text": "Traitement de texte : utilisation avancée",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/192/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:01:15"
+      },
+      {
+        "id": 191,
+        "display_id": "191",
+        "display_name": "Modules APTIC - n°191",
+        "digest": "Tableur : découverte",
+        "text": "Tableur : découverte",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/191/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T16:59:55"
+      },
+      {
+        "id": 262,
+        "display_id": "262",
+        "display_name": "Modules APTIC - n°262",
+        "digest": "Réalisation CV",
+        "text": "Réalisation CV",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/262/",
+        "receipt_time": "2020-09-28T12:16:43",
+        "last_update_time": "2020-09-28T12:16:43"
+      },
+      {
+        "id": 263,
+        "display_id": "263",
+        "display_name": "Modules APTIC - n°263",
+        "digest": "Diffuser son CV en ligne",
+        "text": "Diffuser son CV en ligne",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/263/",
+        "receipt_time": "2020-09-28T12:18:40",
+        "last_update_time": "2020-09-28T12:18:40"
+      },
+      {
+        "id": 3,
+        "display_id": "3",
+        "display_name": "Modules APTIC - n°3",
+        "digest": "Organiser sa recherche d'emploi",
+        "text": "Organiser sa recherche d'emploi",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/3/",
+        "receipt_time": "2020-09-01T15:13:48",
+        "last_update_time": "2020-10-08T17:01:53"
+      }
+    ],
+    "name": "Insertion sociale et professionnelle",
+    "id": "socialAndProfessional",
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5fbb934c80a5c257dc0161f8" },
+    "modules": [
+      {
+        "id": 257,
+        "display_id": "257",
+        "display_name": "Modules APTIC - n\u00b0257",
+        "digest": "\u00catre parent \u00e0 l'\u00e8re num\u00e9rique: conna\u00eetre les usages, jouer son r\u00f4le de parent - 03",
+        "text": "\u00catre parent \u00e0 l'\u00e8re num\u00e9rique: conna\u00eetre les usages, jouer son r\u00f4le de parent - 03",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/257/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:04:33"
+      },
+      {
+        "id": 238,
+        "display_id": "238",
+        "display_name": "Modules APTIC - n\u00b0238",
+        "digest": "D\u00e9couvrir l\u2019univers des jeux vid\u00e9o - 22",
+        "text": "D\u00e9couvrir l\u2019univers des jeux vid\u00e9o - 22",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/238/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T12:27:06"
+      },
+      {
+        "id": 178,
+        "display_id": "178",
+        "display_name": "Modules APTIC - n\u00b0178",
+        "digest": "Suivre la scolarit\u00e9 de son enfant - 82",
+        "text": "Suivre la scolarit\u00e9 de son enfant - 82",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/178/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T12:27:28"
+      },
+      {
+        "id": 166,
+        "display_id": "166",
+        "display_name": "Modules APTIC - n\u00b0166",
+        "digest": "D\u00e9couvrir les services en ligne de l'enfance de votre commune - 94",
+        "text": "D\u00e9couvrir les services en ligne de l'enfance de votre commune - 94",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/166/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T12:27:49"
+      }
+    ],
+    "name": "Aide à la parentalité",
+    "id": "parentingHelp",
+    "__v": 0
+  },
+  {
+    "_id": { "$oid": "5fbb935080a5c257dc0161f9" },
+    "modules": [
+      {
+        "id": 264,
+        "display_id": "264",
+        "display_name": "Modules APTIC - n\u00b0264",
+        "digest": "Les conduites \u00e0 risques et les bons usages du num\u00e9rique - 02",
+        "text": "Les conduites \u00e0 risques et les bons usages du num\u00e9rique - 02",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/264/",
+        "receipt_time": "2020-09-28T12:20:29",
+        "last_update_time": "2020-10-08T17:07:13"
+      },
+      {
+        "id": 255,
+        "display_id": "255",
+        "display_name": "Modules APTIC - n\u00b0255",
+        "digest": "D\u00e9couvrir les r\u00e9seaux sociaux : d\u00e9finition, fonctionnement - 05",
+        "text": "D\u00e9couvrir les r\u00e9seaux sociaux : d\u00e9finition, fonctionnement - 05",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/255/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:07:08"
+      },
+      {
+        "id": 265,
+        "display_id": "265",
+        "display_name": "Modules APTIC - n\u00b0265",
+        "digest": "Fablab : charte, valeurs et panorama des outils num\u00e9riques - 09",
+        "text": "Fablab : charte, valeurs et panorama des outils num\u00e9riques - 09",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/265/",
+        "receipt_time": "2020-09-28T12:24:48",
+        "last_update_time": "2020-10-08T17:06:35"
+      },
+      {
+        "id": 232,
+        "display_id": "232",
+        "display_name": "Modules APTIC - n\u00b0232",
+        "digest": "Les paiements en ligne - 28",
+        "text": "Les paiements en ligne - 28",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/232/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:15:56"
+      },
+      {
+        "id": 225,
+        "display_id": "225",
+        "display_name": "Modules APTIC - n\u00b0225",
+        "digest": "Internet : comprendre les principes de fonctionnement - 35",
+        "text": "Internet : comprendre les principes de fonctionnement - 35",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/225/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T12:21:13"
+      },
+      {
+        "id": 221,
+        "display_id": "221",
+        "display_name": "Modules APTIC - n\u00b0221",
+        "digest": "Techniques de v\u00e9rification de l\u2019information - 39",
+        "text": "Techniques de v\u00e9rification de l\u2019information - 39",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/221/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:12:07"
+      },
+      {
+        "id": 218,
+        "display_id": "218",
+        "display_name": "Modules APTIC - n\u00b0218",
+        "digest": "Cr\u00e9er et param\u00e9trer un compte Google - 42",
+        "text": "Cr\u00e9er et param\u00e9trer un compte Google - 42",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/218/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T12:21:50"
+      },
+      {
+        "id": 209,
+        "display_id": "209",
+        "display_name": "Modules APTIC - n\u00b0209",
+        "digest": "G\u00e9rer ses donn\u00e9es : sauvegarde en ligne (dans le cloud) - 51",
+        "text": "G\u00e9rer ses donn\u00e9es : sauvegarde en ligne (dans le cloud) - 51",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/209/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T12:22:21"
+      },
+      {
+        "id": 208,
+        "display_id": "208",
+        "display_name": "Modules APTIC - n\u00b0208",
+        "digest": "G\u00e9rer ses donn\u00e9es : sauvegardes locales (disques durs externes, cl\u00e9 USB) - 52",
+        "text": "G\u00e9rer ses donn\u00e9es : sauvegardes locales (disques durs externes, cl\u00e9 USB) - 52",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/208/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T12:23:10"
+      },
+      {
+        "id": 206,
+        "display_id": "206",
+        "display_name": "Modules APTIC - n\u00b0206",
+        "digest": "Classer, g\u00e9rer et partager ses photos - 54",
+        "text": "Classer, g\u00e9rer et partager ses photos - 54",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/206/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:12:28"
+      },
+      {
+        "id": 195,
+        "display_id": "195",
+        "display_name": "Modules APTIC - n\u00b0195",
+        "digest": "Skype et autres outils de visioconf\u00e9rence - 65",
+        "text": "Skype et autres outils de visioconf\u00e9rence - 65",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/195/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-09-28T12:25:44"
+      },
+      {
+        "id": 164,
+        "display_id": "164",
+        "display_name": "Modules APTIC - n\u00b0164",
+        "digest": "Connaitre et g\u00e9rer son identit\u00e9 num\u00e9rique - 96",
+        "text": "Connaitre et g\u00e9rer son identit\u00e9 num\u00e9rique - 96",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/164/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:13:35"
+      },
+      {
+        "id": 163,
+        "display_id": "163",
+        "display_name": "Modules APTIC - n\u00b0163",
+        "digest": "Nettoyer son identit\u00e9 num\u00e9rique - 97",
+        "text": "Nettoyer son identit\u00e9 num\u00e9rique - 97",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/163/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:13:57"
+      },
+      {
+        "id": 162,
+        "display_id": "162",
+        "display_name": "Modules APTIC - n\u00b0162",
+        "digest": "Effacer ses traces sur le web, prot\u00e9ger ses donn\u00e9es personnelles - 98",
+        "text": "Effacer ses traces sur le web, prot\u00e9ger ses donn\u00e9es personnelles - 98",
+        "url": "https://services.formulaireextranet.grandlyon.com/backoffice/data/modules-aptic/162/",
+        "receipt_time": "2020-09-01T15:16:52",
+        "last_update_time": "2020-10-08T17:13:04"
+      }
+    ],
+    "name": "Culture et sécurité numérique",
+    "id": "digitalCultureSecurity",
+    "__v": 0
+  }
+]

@@ -1,0 +1,44 @@
+<form [formGroup]="accountForm" *ngIf="accountForm" (ngSubmit)="onSubmit(accountForm)">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" autocomplete="on" formControlName="email" class="form-control" />
+    <app-validator-form *ngIf="submitted" [control]="getAccountControl('email')"></app-validator-form>
+  </div>
+  <div class="form-group">
+    <label for="surname">Nom</label>
+    <input type="text" formControlName="surname" class="form-control" />
+    <app-validator-form *ngIf="submitted" [control]="getAccountControl('surname')"></app-validator-form>
+  </div>
+  <div class="form-group">
+    <label for="name">Prénom</label>
+    <input type="text" formControlName="name" class="form-control" />
+    <app-validator-form *ngIf="submitted" [control]="getAccountControl('name')"></app-validator-form>
+  </div>
+  <div class="form-group">
+    <label for="phone">Téléphone</label>
+    <input type="text" formControlName="phone" class="form-control" (input)="modifyPhoneInput($event.target.value)" />
+    <app-validator-form *ngIf="submitted" [control]="getAccountControl('phone')"></app-validator-form>
+  </div>
+  <div class="form-group">
+    <label for="password">Mot de passe</label>
+    <input type="password" autocomplete="on" formControlName="password" class="form-control" />
+    <app-validator-form
+      *ngIf="submitted"
+      [nameControl]="'password'"
+      [control]="getAccountControl('password')"
+    ></app-validator-form>
+  </div>
+  <div class="form-group">
+    <label for="confirmPassword">Confirmation du mot de passe</label>
+    <input type="password" autocomplete="on" formControlName="confirmPassword" class="form-control" />
+    <app-validator-form
+      *ngIf="submitted"
+      [nameControl]="'password'"
+      [control]="getAccountControl('confirmPassword')"
+    ></app-validator-form>
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary" type="submit">Valider</button>
+  </div>
+</form>

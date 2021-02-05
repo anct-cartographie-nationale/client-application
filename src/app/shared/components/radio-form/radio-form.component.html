@@ -1,0 +1,28 @@
+<button
+  (click)="clicked(true)"
+  [ngClass]="{ selected: selectedOption && selectedOption != null }"
+  fxLayout="row"
+  fxLayoutAlign=" center"
+  fxLayoutGap="17px"
+>
+  <div class="checkmark">
+    <svg class="validate" aria-hidden="true">
+      <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+    </svg>
+  </div>
+  <p>Oui</p>
+</button>
+<button
+  (click)="clicked(false)"
+  [ngClass]="{ selected: !selectedOption && selectedOption != null }"
+  fxLayout="row"
+  fxLayoutAlign=" center"
+  fxLayoutGap="17px"
+>
+  <div class="checkmark">
+    <svg class="validate" aria-hidden="true">
+      <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+    </svg>
+  </div>
+  <p>Non</p>
+</button>
