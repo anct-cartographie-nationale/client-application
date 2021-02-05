@@ -21,7 +21,7 @@ h3 {
 }
 
 .form-group {
-  margin-bottom: 26px;
+  margin-top: 26px;
   label {
     margin-bottom: 4px;
     @include cn-regular-14;
@@ -32,6 +32,7 @@ h3 {
     margin-right: 39px;
   }
   &.password {
+    margin-bottom: 39px;
     p {
       @include cn-regular-14;
       color: $grey-3;

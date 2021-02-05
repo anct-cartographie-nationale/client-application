@@ -46,8 +46,8 @@
                 alt="logo invalid"
               />
             </div>
+            <div class="invalid" *ngIf="authFailed">Identifiant ou mot de passe invalide</div>
           </div>
-          <div class="invalid" *ngIf="authFailed">Identifiant ou mot de passe invalide</div>
           <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
             <button class="btn confirm" (click)="swithToResetPassword()">Mot de passe oublié</button>
             <button
