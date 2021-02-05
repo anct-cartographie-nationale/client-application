@@ -35,23 +35,27 @@ export class UserVerificationComponent implements OnInit {
   private sendVerification(): void {
     this.authService.verifyUser(this.userId, this.token).subscribe(
       (user: User) => {
-        this.structureService.getStructure(user.structuresLink[0]).subscribe(
-          (structure) => {
-            structure.accountVerified = true;
-            this.structure = structure;
-            this.structureService.updateStructureAfterOwnerVerify(structure._id, user).subscribe(
-              () => {
-                this.verificationSuccess = true;
-              },
-              () => {
-                this.verificationIssue = true;
-              }
-            );
-          },
-          () => {
-            this.verificationIssue = true;
-          }
-        );
+        if (user.structuresLink[0]) {
+          this.structureService.getStructure(user.structuresLink[0]).subscribe(
+            (structure) => {
+              structure.accountVerified = true;
+              this.structure = structure;
+              this.structureService.updateStructureAfterOwnerVerify(structure._id, user).subscribe(
+                () => {
+                  this.verificationSuccess = true;
+                },
+                () => {
+                  this.verificationIssue = true;
+                }
+              );
+            },
+            () => {
+              this.verificationIssue = true;
+            }
+          );
+        } else {
+          this.verificationSuccess = true;
+        }
       },
       () => {
         this.verificationIssue = true;

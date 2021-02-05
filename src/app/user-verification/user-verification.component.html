@@ -2,13 +2,17 @@
   <p *ngIf="!verificationSuccess && !verificationIssue">Votre email est en cours de vérification ...</p>
   <div *ngIf="verificationSuccess">
     <div class="title">
-      <h3>
+      <h3 *ngIf="structure">
         Bravo !<br />
         Votre compte et votre structure ont bien été référencés.
       </h3>
+      <h3 *ngIf="!structure">
+        Bravo !<br />
+        Votre compte a bien été créé.
+      </h3>
     </div>
 
-    <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
+    <div *ngIf="structure" class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
       <div class="structureInfoContent" fxLayout="column">
         {{ structure.structureName }}
         <span>{{ structure.structureType }}</span>
@@ -20,7 +24,7 @@
       </div>
     </div>
     <div class="btnSection" fxLayout="row" fxLayoutAlign="space-around center">
-      <button class="btn" routerLink="/home" [state]="{ data: structure }">Voir ma structure</button>
+      <button *ngIf="structure" class="btn" routerLink="/home" [state]="{ data: structure }">Voir ma structure</button>
       <button class="btn tmp-form-link" routerLink="/home">
         <a
           class="typeform-share button"
