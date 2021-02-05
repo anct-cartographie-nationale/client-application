@@ -15,7 +15,7 @@
     <div *ngIf="structure" class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
       <div class="structureInfoContent" fxLayout="column">
         {{ structure.structureName }}
-        <span>{{ structure.structureType }}</span>
+        <span>{{ structure.getLabelTypeStructure() }}</span>
       </div>
       <div class="validateSvg">
         <svg class="validate" aria-hidden="true">
