@@ -159,7 +159,7 @@ export class MapComponent implements OnChanges {
       structure.structureName +
       '</h1>' +
       '<p>' +
-      structure.structureType +
+      structure.getLabelTypeStructure() +
       '</p><div>' +
       '<span class="ico-dot-' +
       cssAvailabilityClass +
