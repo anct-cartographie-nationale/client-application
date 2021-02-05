@@ -11,9 +11,7 @@ export class FooterFormComponent implements OnInit {
   @Output() previousPage = new EventEmitter<any>();
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.isValid);
-  }
+  ngOnInit(): void {}
 
   public goToNextPage(): void {
     this.nextPage.emit();

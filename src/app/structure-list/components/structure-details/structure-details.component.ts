@@ -15,7 +15,6 @@ import { ProfileService } from '../../../profile/services/profile.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth.service';
 import { PublicCategorie } from '../../enum/public.enum';
-import { AppModalType } from '../../../shared/components/modal/modal-type.enum';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -41,7 +40,6 @@ export class StructureDetailsComponent implements OnInit {
   public currentProfile: User = null;
   public deleteModalOpenned = false;
   public claimModalOpenned = false;
-  public modalType = AppModalType;
 
   constructor(
     private printService: PrintService,

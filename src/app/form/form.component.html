@@ -1,7 +1,9 @@
 <div class="form" fxLayout="column">
-  <div *ngIf="showConfirmationModal">
-    <app-modal-confirmation (closeModalEvent)="hasRedirectionAccepted($event)"></app-modal-confirmation>
-  </div>
+  <app-modal-confirmation
+    [openned]="showConfirmationModal"
+    [content]="'Il vous faudra de nouveau remplir le formulaire si vous quittez'"
+    (closed)="hasRedirectionAccepted($event)"
+  ></app-modal-confirmation>
   <app-menu-phone *ngIf="showMenu" (closeEvent)="closeMenu($event)"></app-menu-phone>
   <div class="header">
     <div class="container-icoMenu">

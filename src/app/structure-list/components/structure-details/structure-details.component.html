@@ -282,19 +282,16 @@
     </div>
   </div>
 </div>
-<app-modal
-  *ngIf="deleteModalOpenned"
-  [modalType]="modalType.confirmation"
+<app-modal-confirmation
   [openned]="deleteModalOpenned"
   [content]="'Voulez-vous vraiment supprimer cette structure&nbsp;?'"
   (closed)="deleteStructure($event)"
-></app-modal>
-<app-modal
-  *ngIf="claimModalOpenned"
-  [modalType]="modalType.confirmation"
+></app-modal-confirmation>
+
+<app-modal-confirmation
   [openned]="claimModalOpenned"
   [content]="
     'Voulez-vous vraiment revendiquer cette structure&nbsp;? Une demande sera envoyée a l\'administrateur pour validation'
   "
   (closed)="claimStructure($event)"
-></app-modal>
+></app-modal-confirmation>

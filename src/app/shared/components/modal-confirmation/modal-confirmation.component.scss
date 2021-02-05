@@ -10,11 +10,11 @@
   position: absolute;
   content: '';
   top: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background-color: $modal-background;
   .modal {
     .contentModal {
       width: 100%;
-      background: rgba(255, 255, 255, 1);
+      background: $white;
       padding: 35px 20px 18px 20px;
       h3 {
         @include cn-bold-18;

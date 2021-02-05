@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -8,15 +8,12 @@ import { Subject } from 'rxjs';
 })
 export class ModalConfirmationComponent implements OnInit {
   constructor() {}
-
-  @Output() closeModalEvent = new EventEmitter<boolean>();
+  @Input() public openned: boolean;
+  @Input() public content: string;
+  @Output() closed = new EventEmitter<boolean>();
   ngOnInit(): void {}
 
-  onDismiss() {
-    this.closeModalEvent.emit(false);
-  }
-
-  onConfirm() {
-    this.closeModalEvent.emit(true);
+  public closeModal(value: boolean): void {
+    this.closed.emit(value);
   }
 }

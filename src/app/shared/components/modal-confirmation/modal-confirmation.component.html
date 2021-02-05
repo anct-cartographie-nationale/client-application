@@ -1,11 +1,11 @@
-<div class="modalExitContainer">
+<div *ngIf="openned" class="modalExitContainer">
   <div class="modal">
     <div class="contentModal" fxLayout="column" fxLayoutAlign="space-around center">
       <h3>ATTENTION</h3>
-      <p>Il vous faudra de nouveau remplir le formulaire si vous quittez</p>
+      <p>{{ content }}</p>
       <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
-        <button class="btn leave" (click)="onConfirm()">Quitter</button>
-        <button class="btn" (click)="onDismiss()">Annuler</button>
+        <button class="btn leave" (click)="closeModal(true)">Confirmer</button>
+        <button class="btn" (click)="closeModal(false)">Annuler</button>
       </div>
     </div>
   </div>
