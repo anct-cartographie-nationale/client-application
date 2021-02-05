@@ -1,47 +1,69 @@
-<div class="cModal" [ngClass]="openned ? 'oModal' : ''">
-  <div (clickOutside)="closeModal()" fxLayout="column" fxLayoutAlign="center center">
-    <div class="ico-close-wrapper">
-      <div (click)="closeModal()" class="ico-close-details"></div>
-    </div>
-    <h4 class="card-header">Connexion</h4>
-    <div class="card-body">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="username">Email</label>
-          <input
-            type="text"
-            formControlName="username"
-            autocomplete="on"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
-          />
-          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Identifiant requis</div>
+<div *ngIf="openned" class="modalBackground">
+  <div class="modal">
+    <div (clickOutside)="closeModal(false)" class="contentModal" fxLayout="column" fxLayoutAlign="space-around start">
+      <div class="ico-close" fxLayout="row" fxLayoutAlign="end center">
+        <div class="ico-close-wrapper">
+          <div (click)="closeModal()" class="ico-close-details"></div>
+        </div>
+      </div>
+
+      <div class="form">
+        <h3>Se connecter</h3>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="form-group" fxLayout="column">
+            <label for="email">Courriel personnel</label>
+            <div fxLayout="row" fxLayoutGap="13px">
+              <input type="text" autocomplete="on" formControlName="email" class="form-input" />
+              <img
+                *ngIf="f.email.invalid && f.email.value"
+                src="../../assets/form/notvalidate.svg"
+                alt="logo invalid"
+              />
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <input
-            type="password"
-            formControlName="password"
-            autocomplete="on"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-          />
-          <div *ngIf="submitted && f.password.errors">
-            <div *ngIf="f.password.errors.required">Mot de passe requis</div>
+          <div class="form-group password" fxLayout="column">
+            <label for="password">Mot de passe</label>
+            <p [ngClass]="{ invalid: f.password.invalid && f.password.value }">
+              Le mot de passe doit contenir au minimum : 8 caractères dont un caractère spécial, un caractère en
+              majuscule et un chiffre.
+            </p>
+            <div fxLayout="row" fxLayoutGap="13px">
+              <input
+                [type]="isShowPassword ? 'text' : 'password'"
+                autocomplete="on"
+                formControlName="password"
+                class="form-input"
+              />
+              <img
+                (click)="toggleShowPassword()"
+                class="eyePassword"
+                src="../../assets/form/eyePassword.svg"
+                alt="logo eyePassword"
+              />
+              <img
+                *ngIf="f.password.invalid && f.password.value"
+                src="../../assets/form/notvalidate.svg"
+                alt="logo invalid"
+              />
+            </div>
           </div>
-        </div>
-        <div *ngIf="authFailed">Identifiant ou mot de passe invalide</div>
-        <div>
-          <button [disabled]="loading">
-            <span *ngIf="loading"></span>
-            Login
-          </button>
-          <button (click)="sendSwitchToSignIn()">Inscription</button>
-        </div>
-        <a (click)="swithToResetPassword()">Mot de passe oublié</a>
-      </form>
+          <div class="invalid" *ngIf="authFailed">Identifiant ou mot de passe invalide</div>
+          <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
+            <button class="btn confirm" (click)="swithToResetPassword()">Mot de passe oublié</button>
+            <button
+              type="submit"
+              class="btn"
+              [disabled]="loginForm.invalid || loading"
+              [ngClass]="{ invalid: loginForm.invalid || loading }"
+            >
+              Connexion
+            </button>
+          </div>
+          <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
+            <button class="btn register" (click)="sendSwitchToSignIn()">Je n’ai pas encore de compte</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
