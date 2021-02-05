@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { GeoJson } from '../../../map/models/geojson.model';
 import { GeojsonService } from '../../../services/geojson.service';
-import { AppModalType } from '../../../shared/components/modal/modal-type.enum';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
 import { Filter } from '../../models/filter.model';
@@ -18,10 +17,13 @@ import { SearchService } from '../../services/search.service';
 })
 export class SearchComponent implements OnInit, OnChanges {
   @Output() searchEvent = new EventEmitter();
+
+  // Show/hide form createStructure
+  public addStructureFormModal = false;
+
   @Output() locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input() locate = false;
-  public modalType = AppModalType;
   // Form search input
   public searchForm: FormGroup;
   // Modal variable
@@ -215,11 +217,5 @@ export class SearchComponent implements OnInit, OnChanges {
         }
       );
     }
-  }
-  public openConfirmationModal(): void {
-    this.isConfirmationModalOpen = true;
-  }
-  public closeConfirmationModal(): void {
-    this.isConfirmationModalOpen = false;
   }
 }

@@ -1,0 +1,39 @@
+@import '../../assets/scss/color';
+@import '../../assets/scss/typography';
+
+.btn {
+  background: $secondary-color;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  color: $white;
+  height: 40px;
+  width: 149px;
+  @include btn-bold;
+  &.previous {
+    background-color: initial;
+    color: $grey-2;
+  }
+  &.next {
+    .rowBtn {
+      margin-left: 24px;
+    }
+  }
+  &.invalid {
+    opacity: 0.4;
+  }
+}
+
+.chevronLeft {
+  height: 24px;
+  width: 24px;
+  stroke: $black;
+  margin-right: 10px;
+}
+.chevronRight {
+  height: 24px;
+  width: 24px;
+  stroke: $white;
+  margin-left: 10px;
+}

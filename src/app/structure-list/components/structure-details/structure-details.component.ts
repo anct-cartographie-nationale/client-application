@@ -15,7 +15,6 @@ import { ProfileService } from '../../../profile/services/profile.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth.service';
 import { PublicCategorie } from '../../enum/public.enum';
-import { AppModalType } from '../../../shared/components/modal/modal-type.enum';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -41,7 +40,6 @@ export class StructureDetailsComponent implements OnInit {
   public currentProfile: User = null;
   public deleteModalOpenned = false;
   public claimModalOpenned = false;
-  public modalType = AppModalType;
 
   constructor(
     private printService: PrintService,
@@ -63,7 +61,7 @@ export class StructureDetailsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.isLoading = true;
-    if (this.authService.isLoggedIn()) {
+    if (this.userIsLoggedIn()) {
       this.currentProfile = await this.profileService.getProfile();
     }
     this.isClaimed = await this.structureService.isClaimed(this.structure._id, this.currentProfile).toPromise();
@@ -90,6 +88,10 @@ export class StructureDetailsComponent implements OnInit {
     }
   }
 
+  public userIsLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
   public getEquipmentsLabel(equipment: Equipment): string {
     switch (equipment) {
       case Equipment.wifi:
@@ -102,6 +104,8 @@ export class StructureDetailsComponent implements OnInit {
         return 'Tablettes';
       case Equipment.computer:
         return 'Ordinateurs à disposition';
+      case Equipment.scanner:
+        return 'Scanners';
       default:
         return null;
     }
@@ -146,8 +150,11 @@ export class StructureDetailsComponent implements OnInit {
   public claimStructure(shouldClaim: boolean): void {
     this.toggleClaimModal();
     if (shouldClaim) {
-      this.isEditMode = false;
-      this.displayForm();
+      this.profileService.getProfile().then((user: User) => {
+        this.structureService.claimStructureWithAccount(this.structure._id, user).subscribe(() => {
+          this.isClaimed = true;
+        });
+      });
     }
   }
   // Show/hide form structure

@@ -1,115 +1,110 @@
-<div class="header">
-  <span class="title">Acteurs de la médiation numérique</span>
-</div>
-<div class="content" fxLayout="column">
-  <div class="searchSection">
-    <form
-      [formGroup]="searchForm"
-      fxLayout="row"
-      fxLayoutGap="16px"
-      fxLayoutAlign=" center"
-      (ngSubmit)="applyFilter(searchForm.value.searchTerm)"
-    >
-      <div class="inputSection" fxLayout="row" fxLayoutAlign="space-between center">
-        <input type="text" formControlName="searchTerm" placeholder="Rechercher une commune, une association..." />
-        <button (click)="clearInput()" class="icon close" type="button"><div class="ico-close-search"></div></button>
+<div class="block">
+  <div class="header">
+    <span class="title">Acteurs de la médiation numérique</span>
+  </div>
+  <div class="content" fxLayout="column">
+    <div class="searchSection">
+      <form
+        [formGroup]="searchForm"
+        fxLayout="row"
+        fxLayoutGap="16px"
+        fxLayoutAlign=" center"
+        (ngSubmit)="applyFilter(searchForm.value.searchTerm)"
+      >
+        <div class="inputSection" fxLayout="row" fxLayoutAlign="space-between center">
+          <input type="text" formControlName="searchTerm" placeholder="Rechercher une commune, une association..." />
+          <button (click)="clearInput()" class="icon close" type="button"><div class="ico-close-search"></div></button>
+        </div>
+        <app-button
+          class="isntPhoneContent"
+          [style]="'buttonWithHash'"
+          [text]="'Rechercher'"
+          [type]="'submit'"
+        ></app-button>
+      </form>
+    </div>
+    <div (clickOutside)="closeModal()">
+      <div class="btnSection isntPhoneContent" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+        <button
+          class="btn-filter"
+          type="button"
+          fxLayout="row"
+          [ngClass]="{
+            selected: modalTypeOpened === TypeModal.accompaniment,
+            containCheckedFilters: numberAccompanimentChecked
+          }"
+          fxLayoutAlign="space-between center"
+          (click)="openModal(TypeModal.accompaniment)"
+        >
+          <span>Démarches en ligne</span>
+          <div class="arrow"></div>
+        </button>
+        <button
+          class="btn-filter"
+          type="button"
+          fxLayout="row"
+          [ngClass]="{
+            selected: modalTypeOpened === TypeModal.training,
+            containCheckedFilters: numberTrainingChecked
+          }"
+          fxLayoutAlign="space-between center"
+          (click)="openModal(TypeModal.training)"
+        >
+          <span>Ateliers</span>
+          <div class="arrow"></div>
+        </button>
+        <button
+          class="btn-filter"
+          type="button"
+          fxLayout="row"
+          [ngClass]="{
+            selected: modalTypeOpened === TypeModal.moreFilters,
+            containCheckedFilters: numberMoreFiltersChecked
+          }"
+          fxLayoutAlign="space-between center"
+          (click)="openModal(TypeModal.moreFilters)"
+        >
+          <span>Plus de critères</span>
+          <div class="arrow"></div>
+        </button>
       </div>
+      <div *ngIf="modalTypeOpened">
+        <app-modal-filter
+          [modalType]="modalTypeOpened"
+          [categories]="categories"
+          [modules]="checkedModulesFilter"
+          (searchEvent)="fetchResults($event)"
+          (closeEvent)="closeModal()"
+        ></app-modal-filter>
+      </div>
+    </div>
+  </div>
+  <div class="phoneSection">
+    <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
       <app-button
-        class="isntPhoneContent"
-        [style]="'buttonWithHash'"
-        [text]="'Rechercher'"
-        [type]="'submit'"
+        [style]="'buttonPhone'"
+        [extraClass]="numberAccompanimentChecked ? 'containCheckedFilters' : ''"
+        [text]="'Filtres'"
+        (action)="openModal(TypeModal.accompaniment)"
       ></app-button>
-    </form>
-  </div>
-  <div (clickOutside)="closeModal()">
-    <div class="btnSection isntPhoneContent" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
-      <button
-        class="btn-filter"
-        type="button"
-        fxLayout="row"
-        [ngClass]="{
-          selected: modalTypeOpened === TypeModal.accompaniment,
-          containCheckedFilters: numberAccompanimentChecked
-        }"
-        fxLayoutAlign="space-between center"
-        (click)="openModal(TypeModal.accompaniment)"
-      >
-        <span>Démarches en ligne</span>
-        <div class="arrow"></div>
-      </button>
-      <button
-        class="btn-filter"
-        type="button"
-        fxLayout="row"
-        [ngClass]="{
-          selected: modalTypeOpened === TypeModal.training,
-          containCheckedFilters: numberTrainingChecked
-        }"
-        fxLayoutAlign="space-between center"
-        (click)="openModal(TypeModal.training)"
-      >
-        <span>Ateliers</span>
-        <div class="arrow"></div>
-      </button>
-      <button
-        class="btn-filter"
-        type="button"
-        fxLayout="row"
-        [ngClass]="{
-          selected: modalTypeOpened === TypeModal.moreFilters,
-          containCheckedFilters: numberMoreFiltersChecked
-        }"
-        fxLayoutAlign="space-between center"
-        (click)="openModal(TypeModal.moreFilters)"
-      >
-        <span>Plus de critères</span>
-        <div class="arrow"></div>
-      </button>
-    </div>
-    <div *ngIf="modalTypeOpened">
-      <app-modal-filter
-        [modalType]="modalTypeOpened"
-        [categories]="categories"
-        [modules]="checkedModulesFilter"
-        (searchEvent)="fetchResults($event)"
-        (closeEvent)="closeModal()"
-      ></app-modal-filter>
+      <a routerLink="/create-structure" tabindex="0">Ajouter une structure</a>
     </div>
   </div>
-</div>
-<div class="phoneSection">
-  <div class="btnSection" fxLayout="row" fxLayoutAlign="space-between center">
-    <app-button
-      [style]="'buttonPhone'"
-      [extraClass]="numberAccompanimentChecked ? 'containCheckedFilters' : ''"
-      [text]="'Filtres'"
-      (action)="openModal(TypeModal.accompaniment)"
-    ></app-button>
-    <a (click)="openConfirmationModal()" class="primary right" tabindex="0">Ajouter une structure</a>
-  </div>
-</div>
-<div class="footerSearchSection isntPhoneContent" fxLayout="row" fxLayoutAlign="space-between center">
-  <div class="checkbox">
-    <div class="checkboxItem">
-      <label>
-        <input
-          type="checkbox"
-          value="passNumerique"
-          [checked]="searchService.getIndex(checkedModulesFilter, 'passNumerique', 'labelsQualifications') > -1"
-          (change)="numericPassCheck($event, 'labelsQualifications')"
-        />
-        <span class="customCheck"></span>
-        <div class="label">Pass numérique</div>
-      </label>
+  <div class="footerSearchSection isntPhoneContent" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="checkbox">
+      <div class="checkboxItem">
+        <label>
+          <input
+            type="checkbox"
+            value="passNumerique"
+            [checked]="searchService.getIndex(checkedModulesFilter, 'passNumerique', 'labelsQualifications') > -1"
+            (change)="numericPassCheck($event, 'labelsQualifications')"
+          />
+          <span class="customCheck"></span>
+          <div class="label">Pass numérique</div>
+        </label>
+      </div>
     </div>
+    <a routerLink="/create-structure" tabindex="0">Ajouter une structure</a>
   </div>
-  <a (click)="openConfirmationModal()" class="primary right" tabindex="0">Ajouter une structure</a>
 </div>
-<app-modal
-  *ngIf="isConfirmationModalOpen"
-  [modalType]="modalType.outsideLink"
-  [openned]="isConfirmationModalOpen"
-  [content]="confirmationModalContent"
-  (closed)="closeConfirmationModal()"
-></app-modal>

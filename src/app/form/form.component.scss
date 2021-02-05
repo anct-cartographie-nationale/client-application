@@ -1,9 +1,451 @@
+@import '../../assets/scss/layout';
+@import '../../assets/scss/breakpoint';
+@import '../../assets/scss/color';
+@import '../../assets/scss/typography';
+@import '../../assets/scss/shapes';
+@import '../../assets/scss/z-index';
+
+$progressBar-height: 50px;
+h3 {
+  margin: 0;
+}
 .form {
-  position: fixed;
   background: white;
-  width: 50vw;
-  height: 100vh;
-  top: 0;
-  z-index: 9999;
-  overflow: auto;
+  width: 100vw;
+  height: calc(100vh - #{$header-height} - #{$footer-height});
+  top: #{$header-height};
+  z-index: $structure-details-z-index;
+  @media #{$tablet} {
+    height: calc(100vh - #{$header-height});
+    position: fixed; //Hide default header app.
+  }
+}
+
+.footer {
+  padding: 17px 0;
+  width: 100%;
+  max-width: 960px;
+  margin: 20px auto;
+  text-align: center;
+  .btn {
+    width: 149px;
+    &.validate {
+      background-color: $green-1;
+    }
+    &.unique {
+      width: 240px;
+    }
+  }
+  &.desktop {
+    @media #{$tablet} {
+      display: none;
+    }
+  }
+
+  &.phone {
+    display: none;
+    @media #{$tablet} {
+      margin: 0 auto;
+      border-top: 1px solid $grey-4;
+      display: block;
+    }
+  }
+}
+.header {
+  height: #{$header-height-phone};
+  line-height: #{$header-height-phone};
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  border-bottom: solid 1px $grey-4;
+  background-color: $grey-1;
+  color: $white;
+  padding: 0 20px;
+  @media #{$tablet} {
+    display: block !important;
+  }
+  .container-icoMenu {
+    width: 100%;
+    position: absolute;
+    height: 50px;
+
+    .block-iconMenu {
+      right: 44px;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+    }
+    .ico-menu {
+      right: 13px;
+      top: 24px;
+      background: $white;
+      &::after {
+        background: $white;
+      }
+      &::before {
+        background: $white;
+      }
+    }
+  }
+}
+.content {
+  padding: 0 16px;
+  display: block;
+  overflow-y: auto;
+  height: auto;
+  h2 {
+    @include cn-bold-28;
+    color: $secondary-color;
+    margin-bottom: 0;
+  }
+  h3 {
+    @include cn-bold-22;
+  }
+  .page {
+    max-width: 960px;
+    margin: auto;
+    @media #{$tablet} {
+      height: calc(
+        100vh - #{$header-height-phone} - #{$progressBar-height} - #{$footer-height-phone} - 1px
+      ); // -1px because of header border
+    }
+    height: auto;
+    color: $grey-1;
+    &.home {
+      height: 100%;
+      .btnStart {
+        margin-top: 90px;
+        text-align: center;
+      }
+    }
+    &.informations {
+      ul {
+        padding-left: 24px;
+        li::marker {
+          color: $secondary-color;
+          font-size: 26px;
+        }
+        li > * {
+          vertical-align: text-bottom;
+        }
+        li {
+          @include cn-regular-18;
+          line-height: 24px;
+          margin: 10px 0;
+        }
+      }
+    }
+    .title {
+      margin-bottom: 26px;
+    }
+    .type-picker {
+      height: 100%;
+    }
+  }
+  .titleDesc {
+    @include cn-bold-20;
+    margin-bottom: 20px;
+  }
+  p {
+    margin-top: 10px;
+    margin-bottom: 0;
+    @include cn-regular-18;
+    &.password {
+      @include cn-regular-14;
+      color: $grey-3;
+
+      margin-top: 4px;
+      width: 256px;
+      &.invalid {
+        color: $orange-warning;
+      }
+    }
+    &.notRequired {
+      font-style: italic;
+      color: $secondary-color;
+    }
+    &.informationEndForm {
+      margin-top: 18px;
+      color: $grey-2;
+      @include cn-regular-14;
+    }
+  }
+  .textareaBlock {
+    @media #{$tablet} {
+      max-width: 90%;
+    }
+    textarea {
+      padding: 13px 8px;
+      background: $grey-6;
+      border: 1px solid $grey-4;
+      border-radius: 1px;
+      resize: none;
+      @include cn-regular-16;
+    }
+    p {
+      text-align: right;
+    }
+  }
+}
+
+.btn {
+  background: $secondary-color;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  color: $white;
+  height: 40px;
+  width: 192px;
+  @include btn-bold;
+
+  &.start {
+    margin-bottom: 26px;
+  }
+}
+.progressBar {
+  height: #{$progressBar-height};
+  max-width: 960px;
+  margin: auto;
+  progress {
+    width: 100%;
+    height: 6px;
+    border-radius: 7px;
+    &::-webkit-progress-bar {
+      background-color: $grey-6;
+    }
+    &::-webkit-progress-value {
+      background-color: $secondary-color;
+      border-radius: 12px;
+    }
+    &.validate {
+      &::-webkit-progress-value {
+        background-color: $green-1;
+      }
+    }
+  }
+  label {
+    @include cn-bold-14;
+    color: $secondary-color;
+    min-width: 26px;
+    &.validate {
+      color: $green-1;
+    }
+  }
+}
+.form-group {
+  margin-bottom: 26px;
+  label {
+    color: $grey-2;
+  }
+}
+input {
+  margin-top: 4px;
+  &.phone {
+    width: 205px;
+  }
+  &.password {
+    width: 256px;
+  }
+  &.structureName {
+    width: 250px;
+  }
+}
+img {
+  max-height: 340px;
+  &.eyePassword {
+    padding: 0 2.5px; // Align to email input
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// collapse
+.collapse {
+  border: 1px solid $grey-4;
+  border-radius: 4px;
+  margin-bottom: 13px;
+  @media #{$tablet} {
+    width: 296px;
+  }
+  .logo {
+    .hide {
+      display: block;
+    }
+    .show {
+      display: none;
+    }
+  }
+  &.notCollapsed {
+    margin-bottom: 8px;
+    background: $grey-6;
+    .logo {
+      .hide {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
+    }
+  }
+  .form-group {
+    margin: 0;
+    color: $grey-2;
+    @include cn-regular-14;
+    &.facebook {
+      &:focus-within {
+        svg {
+          &.facebook {
+            border-color: $secondary-color;
+            fill: $secondary-color;
+          }
+        }
+      }
+    }
+    &.instagram {
+      &:focus-within {
+        svg {
+          &.instagram {
+            border-color: $secondary-color;
+            fill: $secondary-color;
+          }
+        }
+      }
+    }
+    &.twitter {
+      &:focus-within {
+        svg {
+          &.twitter {
+            border-color: $secondary-color;
+            fill: $secondary-color;
+          }
+        }
+      }
+    }
+    &.linkedin {
+      &:focus-within {
+        svg {
+          &.linkedin {
+            border-color: $secondary-color;
+            fill: $secondary-color;
+          }
+        }
+      }
+    }
+  }
+  .inputSection {
+    input {
+      width: 100%;
+      margin-top: 8px;
+      &.withIcon {
+        border-radius: 0 4px 4px 0;
+        border-left: 0;
+      }
+    }
+    padding: 0px 15px 19px 12px;
+    img {
+      margin-top: 8px;
+      //padding-left: 41px;
+      margin-right: -54px;
+      &.nbEquipment {
+        padding-left: 214px;
+      }
+    }
+    svg {
+      margin-top: 8px;
+      width: 22px;
+      height: 38px;
+      fill: $grey-3;
+      margin-right: 0 !important;
+      border: 1px solid $grey-4;
+      border-radius: 4px 0 0 4px;
+      border-right: 0;
+      padding-left: 16px;
+      background: $grey-6;
+    }
+  }
+  .titleCollapse {
+    width: 100%;
+    @include cn-bold-16;
+    color: $grey-2;
+  }
+  .collapseHeader {
+    height: 65px;
+    padding: 0 15px 0 12px;
+    cursor: pointer;
+  }
+  .logo {
+    height: 24px;
+    width: 24px;
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: $grey-1;
+    }
+  }
+}
+
+.tags {
+  padding: 8px;
+  button {
+    background: $grey-6;
+    border-radius: 20px;
+    margin: 4px;
+    max-width: 100%;
+    height: 40px;
+    padding: 0 13px;
+    @include cn-bold-14;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &.selectedChoice {
+      background: $green-1 !important;
+      color: $white;
+    }
+  }
+  svg {
+    width: 20px;
+    height: 10px;
+    margin-right: 4px;
+    stroke: $grey-6;
+  }
+}
+.textBtn {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  width: 100%;
+  margin-right: 12px;
+}
+
+.asterisk {
+  color: $secondary-color;
+}
+
+.structureInfoBlock {
+  background: $green-1;
+  color: $white;
+  padding: 16px;
+  border-radius: 6px;
+  @include cn-bold-18;
+  .structureInfoContent {
+    width: 100%;
+  }
+  span {
+    font-style: italic;
+    @include cn-regular-14;
+  }
+  .validateSvg {
+    stroke: $white;
+    text-align: right;
+    svg {
+      height: 14px;
+      width: 14px;
+    }
+  }
 }

@@ -18,7 +18,7 @@
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <div class="typeInformationHeader" fxLayout="column">
-          <h3>{{ structure.getLabelTypeStructure() }}</h3>
+          <h3>{{ structure.structureType }}</h3>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="7px" *ngIf="structure.hasEquipments()">
             <app-svg-icon
               *ngFor="let equipement of structure.equipmentsAndServices"
@@ -83,15 +83,18 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center" class="hide-on-print">
-        <a *ngIf="!isClaimed" (click)="toggleClaimModal()" class="primary" tabindex="0">Revendiquer cette structure</a>
-        <a
+        <a *ngIf="!isClaimed && userIsLoggedIn()" (click)="toggleClaimModal()" class="primary" tabindex="0"
+          >Revendiquer cette structure</a
+        >
+        <!-- temporary remove edit -->
+        <!-- <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
           (click)="editStructure()"
           class="primary"
           tabindex="0"
         >
           Modifier cette structure
-        </a>
+        </a> -->
         <a *ngIf="profileService.isAdmin()" (click)="toggleDeleteModal()" class="primary" tabindex="0">
           Supprimer cette structure
         </a>
@@ -227,6 +230,7 @@
           : {{ structure.nbNumericTerminal }}</span
         >
         <span *ngIf="equipement == 'imprimantes' && structure.nbPrinters"> : {{ structure.nbPrinters }}</span>
+        <span *ngIf="equipement == 'scanners' && structure.nbScanners"> : {{ structure.nbScanners }}</span>
       </p>
     </div>
   </div>
@@ -278,19 +282,16 @@
     </div>
   </div>
 </div>
-<app-modal
-  *ngIf="deleteModalOpenned"
-  [modalType]="modalType.confirmation"
+<app-modal-confirmation
   [openned]="deleteModalOpenned"
   [content]="'Voulez-vous vraiment supprimer cette structure&nbsp;?'"
   (closed)="deleteStructure($event)"
-></app-modal>
-<app-modal
-  *ngIf="claimModalOpenned"
-  [modalType]="modalType.confirmation"
+></app-modal-confirmation>
+
+<app-modal-confirmation
   [openned]="claimModalOpenned"
   [content]="
     'Voulez-vous vraiment revendiquer cette structure&nbsp;? Une demande sera envoyée a l\'administrateur pour validation'
   "
   (closed)="claimStructure($event)"
-></app-modal>
+></app-modal-confirmation>

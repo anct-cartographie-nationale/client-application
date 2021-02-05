@@ -10,9 +10,8 @@ export class Structure {
   public numero: string = null;
   public createdAt: string = null;
   public updatedAt: string = null;
-  public structureRepresentation: string = null;
   public structureName: string = null;
-  public structureType: string[] = [];
+  public structureType: string = null;
   public description: string = null;
   public address: Address = new Address();
   public contactPhone: string = null;
@@ -21,27 +20,25 @@ export class Structure {
   public facebook: string = null;
   public twitter: string = null;
   public instagram: string = null;
-  public gender: string = null;
-  public contactName: string = null;
-  public contactSurname: string = null;
-  public fonction: string = null;
+  public linkedin: string = null;
   public lockdownActivity: string = null;
-  public pmrAccess: boolean = false;
+  public pmrAccess: boolean = null;
   public publicsAccompaniment: string[] = [];
   public proceduresAccompaniment: string[] = [];
   public accessModality: string[] = [];
-  public documentsMeeting: string = null;
   public labelsQualifications: string[] = [];
   public publics: string[] = [];
   public nbComputers: number = null;
   public nbPrinters: number = null;
   public nbTablets: number = null;
   public nbNumericTerminal: number = null;
+  public nbScanners: number = null;
   public exceptionalClosures: string = null;
   public equipmentsAndServices: string[] = [];
   public hours: Week;
-  public equipmentsDetails: string = null;
-  public equipmentsAccessType: string[] = [];
+  public freeWorkShop: boolean = null;
+  public freeWifi: boolean = null;
+  public otherDescription: string = null;
 
   public isOpen: boolean = false;
   public openedOn: OpeningDay = new OpeningDay();
@@ -53,6 +50,8 @@ export class Structure {
 
   public distance?: number;
   public coord?: number[] = [];
+
+  public accountVerified: boolean = false;
 
   constructor(obj?: any) {
     Object.assign(this, obj, {
@@ -89,17 +88,6 @@ export class Structure {
     } else {
       return 'Aucun horaire disponible';
     }
-  }
-
-  public getLabelTypeStructure(): string {
-    let label = '';
-    this.structureType.forEach((type) => {
-      if (label) {
-        label += ', ';
-      }
-      label += typeStructureEnum[type];
-    });
-    return label;
   }
 
   /**
@@ -161,6 +149,8 @@ export class Structure {
         return 'tablet';
       case Equipment.computer:
         return 'computer';
+      case Equipment.scanner:
+        return 'scan';
       default:
         return null;
     }

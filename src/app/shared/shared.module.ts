@@ -8,9 +8,17 @@ import { SharedPipes } from './pipes';
 import { SharedDirectives } from './directives';
 import { SvgIconComponent } from './components/svg-icon/svg-icon.component';
 import { AddressAutocompleteComponent } from './components/address-autocomplete/address-autocomplete.component';
+import { HourPickerComponent } from './components/hour-picker/hour-picker.component';
 @NgModule({
-  imports: [CommonModule, RouterModule, FlexLayoutModule, ReactiveFormsModule],
-  declarations: [...SharedPipes, ...SharedComponents, ...SharedDirectives, SvgIconComponent, AddressAutocompleteComponent],
+  imports: [CommonModule, FormsModule, RouterModule, FlexLayoutModule, ReactiveFormsModule],
+  declarations: [
+    ...SharedPipes,
+    ...SharedComponents,
+    ...SharedDirectives,
+    SvgIconComponent,
+    AddressAutocompleteComponent,
+    HourPickerComponent,
+  ],
   exports: [
     ...SharedPipes,
     ...SharedComponents,

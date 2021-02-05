@@ -127,3 +127,17 @@ a {
     margin: auto 0 auto 0;
   }
 }
+
+.desktop-show {
+  display: block;
+  @media #{$tablet} {
+    display: none;
+  }
+}
+
+.mobile-show {
+  display: none;
+  @media #{$tablet} {
+    display: block;
+  }
+}
