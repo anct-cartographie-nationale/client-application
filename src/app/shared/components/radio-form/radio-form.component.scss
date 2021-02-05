@@ -1,0 +1,51 @@
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
+
+svg {
+  width: 40px;
+  height: 100%;
+  fill: $secondary-color;
+  stroke: $secondary-color;
+  &.validate {
+    width: 13px;
+    height: 100%;
+    stroke: $green-1;
+    display: none;
+  }
+}
+
+button {
+  width: 296px;
+  background: $grey-6;
+  border-radius: 4px;
+  padding: 0 16px;
+  height: 65px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin: 8px 0;
+  &.selected {
+    background: $green-1;
+    .validate {
+      display: initial;
+    }
+    p {
+      color: $white;
+    }
+    .checkmark {
+      width: 20px;
+      height: 20px;
+      border: none;
+    }
+  }
+  p {
+    @include cn-bold-16;
+  }
+  .checkmark {
+    width: 18px;
+    height: 18px;
+    background: $white;
+    border: 1px solid $grey-3;
+    border-radius: 10px;
+  }
+}

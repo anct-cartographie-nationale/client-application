@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ProfileService } from './profile/services/profile.service';
+import { AuthService } from './services/auth.service';
 import { PrintService } from './shared/service/print.service';
 
 @Component({
@@ -9,5 +11,13 @@ import { PrintService } from './shared/service/print.service';
 export class AppComponent {
   title = 'pamn';
 
-  constructor(public printService: PrintService) {}
+  constructor(
+    public printService: PrintService,
+    private authService: AuthService,
+    private profilService: ProfileService
+  ) {
+    if (this.authService.isLoggedIn()) {
+      this.profilService.getProfile();
+    }
+  }
 }

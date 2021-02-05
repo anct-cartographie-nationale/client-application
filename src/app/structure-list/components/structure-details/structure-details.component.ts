@@ -5,8 +5,16 @@ import { Category } from '../../models/category.model';
 import { AccessModality } from '../../enum/access-modality.enum';
 import { SearchService } from '../../services/search.service';
 import * as _ from 'lodash';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
+import { Equipment } from '../../enum/equipment.enum';
+import { StructureService } from '../../../services/structure.service';
+import { TclService } from '../../../services/tcl.service';
+import { TclStopPoint } from '../../../models/tclStopPoint.model';
+import { ProfileService } from '../../../profile/services/profile.service';
+import { User } from '../../../models/user.model';
+import { AuthService } from '../../../services/auth.service';
+import { PublicCategorie } from '../../enum/public.enum';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -15,16 +23,34 @@ import { PrintService } from '../../../shared/service/print.service';
 export class StructureDetailsComponent implements OnInit {
   @Input() public structure: Structure;
   @Output() public closeDetails: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public updatedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
   public accessModality = AccessModality;
 
   public baseSkillssReferentiel: Category;
   public accessRightsReferentiel: Category;
   public baseSkills: Module[];
   public accessRights: Module[];
+  public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
   public isOtherSection = false;
+  public showForm = false;
+  public isClaimed: boolean = null;
+  public isLoading: boolean = false;
+  public isEditMode: boolean = false;
+  public currentProfile: User = null;
+  public deleteModalOpenned = false;
+  public claimModalOpenned = false;
 
-  constructor(route: ActivatedRoute, private printService: PrintService, private searchService: SearchService) {
+  constructor(
+    private printService: PrintService,
+    private searchService: SearchService,
+    private structureService: StructureService,
+    private tclService: TclService,
+    private profileService: ProfileService,
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     route.url.subscribe((url) => {
       if (url[0].path === 'structure') {
         this.structure = this.printService.structure;
@@ -33,7 +59,14 @@ export class StructureDetailsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.isLoading = true;
+    if (this.userIsLoggedIn()) {
+      this.currentProfile = await this.profileService.getProfile();
+    }
+    this.isClaimed = await this.structureService.isClaimed(this.structure._id, this.currentProfile).toPromise();
+    // GetTclStopPoints
+    this.getTclStopPoints();
     this.searchService.getCategoriesTraining().subscribe((referentiels) => {
       referentiels.forEach((referentiel) => {
         if (referentiel.isBaseSkills()) {
@@ -46,42 +79,131 @@ export class StructureDetailsComponent implements OnInit {
       if (this.printMode) {
         this.printService.onDataReady();
       }
+      this.isLoading = false;
     });
-    const index = this.structure.accompagnementDesDemarches.indexOf('Autres');
+    const index = this.structure.proceduresAccompaniment.indexOf('autres');
     if (index > -1) {
-      this.structure.accompagnementDesDemarches.splice(index, 1);
+      this.structure.proceduresAccompaniment.splice(index, 1);
       this.isOtherSection = true;
     }
   }
 
-  public close(): void {
-    this.closeDetails.emit(true);
+  public userIsLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  public getEquipmentsLabel(equipment: Equipment): string {
+    switch (equipment) {
+      case Equipment.wifi:
+        return 'Wifi en accès libre';
+      case Equipment.bornes:
+        return 'Bornes numériques';
+      case Equipment.printer:
+        return 'Imprimantes';
+      case Equipment.tablet:
+        return 'Tablettes';
+      case Equipment.computer:
+        return 'Ordinateurs à disposition';
+      case Equipment.scanner:
+        return 'Scanners';
+      default:
+        return null;
+    }
+  }
+
+  public close(refreshRequired: boolean): void {
+    this.closeDetails.emit(refreshRequired);
   }
 
   public print(): void {
     this.printService.printDocument('structure', this.structure);
   }
 
-  public getAccessIcon(accessModality: AccessModality): string {
+  public editStructure(): void {
+    this.isEditMode = true;
+    this.displayForm();
+  }
+
+  public toggleDeleteModal(): void {
+    this.deleteModalOpenned = !this.deleteModalOpenned;
+  }
+
+  public toggleClaimModal(): void {
+    this.claimModalOpenned = !this.claimModalOpenned;
+  }
+
+  public deleteStructure(shouldDelete: boolean): void {
+    this.toggleDeleteModal();
+    if (shouldDelete) {
+      this.structureService.delete(this.structure._id).subscribe((res) => {
+        this.reload();
+      });
+    }
+  }
+
+  private reload(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['./'], { relativeTo: this.route });
+  }
+
+  public claimStructure(shouldClaim: boolean): void {
+    this.toggleClaimModal();
+    if (shouldClaim) {
+      this.profileService.getProfile().then((user: User) => {
+        this.structureService.claimStructureWithAccount(this.structure._id, user).subscribe(() => {
+          this.isClaimed = true;
+        });
+      });
+    }
+  }
+  // Show/hide form structure
+  public displayForm(): void {
+    this.showForm = !this.showForm;
+  }
+
+  public updateStructure(s: Structure): void {
+    this.structure = new Structure({ ...this.structure, ...s });
+    this.updatedStructure.emit(this.structure);
+    this.displayForm();
+    this.ngOnInit();
+  }
+
+  public getAccessLabel(accessModality: AccessModality): string {
     switch (accessModality) {
       case AccessModality.free:
-        return 'group';
+        return 'Accès libre';
       case AccessModality.meeting:
-        return 'calendar';
+        return 'Sur rendez-vous';
       case AccessModality.meetingOnly:
-        return 'calendar';
+        return 'Uniquement sur RDV';
       case AccessModality.numeric:
-        return 'tel';
+        return 'Téléphone / Visio';
+      default:
+        return null;
+    }
+  }
+
+  public getPublicLabel(tagetPublic: PublicCategorie): string {
+    switch (tagetPublic) {
+      case PublicCategorie.young:
+        return 'Jeunes (16 - 25 ans)';
+      case PublicCategorie.adult:
+        return 'Adultes (25 - 65 ans)';
+      case PublicCategorie.elderly:
+        return 'Séniors (+ de 65 ans)';
+      case PublicCategorie.all:
+        return 'Tout public';
       default:
         return null;
     }
   }
 
   public setServiceCategories(): void {
-    this.baseSkills = this.structure.lesCompetencesDeBase.map((skill) =>
+    this.baseSkills = this.structure.baseSkills.map((skill) =>
       _.find(this.baseSkillssReferentiel.modules, { id: skill })
     );
-    this.accessRights = this.structure.accesAuxDroits.map((rights) =>
+    this.accessRights = this.structure.accessRight.map((rights) =>
       _.find(this.accessRightsReferentiel.modules, { id: rights })
     );
   }
@@ -93,5 +215,11 @@ export class StructureDetailsComponent implements OnInit {
   }
   public isAccessRights(): boolean {
     return this.accessRights && this.accessRights[0] !== undefined;
+  }
+
+  public getTclStopPoints(): void {
+    this.tclService.getTclStopPointBycoord(this.structure.getLon(), this.structure.getLat()).subscribe((res) => {
+      this.tclStopPoints = res;
+    });
   }
 }

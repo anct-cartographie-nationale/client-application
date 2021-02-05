@@ -8,29 +8,18 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import {
-  latLng,
-  MapOptions,
-  tileLayer,
-  Map,
-  CRS,
-  TileLayer,
-  LatLngBounds,
-  latLngBounds,
-  Marker,
-  layerGroup,
-  polyline,
-} from 'leaflet';
-import { Observable } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { latLng, MapOptions, geoJSON, tileLayer, Map, latLngBounds, layerGroup, Control } from 'leaflet';
 import { Structure } from '../../models/structure.model';
-import { GeoJson } from '../models/geojson.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
-import { NgxLeafletLocateComponent } from '@runette/ngx-leaflet-locate';
 import * as _ from 'lodash';
 import { GeoJsonProperties } from '../models/geoJsonProperties.model';
 import { MarkerType } from './markerType.enum';
+import { typeStructureEnum } from '../../shared/enum/typeStructure.enum';
+import metropole from '../../../assets/geojson/metropole.json';
+import brignais from '../../../assets/geojson/brignais.json';
+import L from 'leaflet';
+import 'leaflet.locatecontrol';
 
 @Component({
   selector: 'app-map',
@@ -39,11 +28,13 @@ import { MarkerType } from './markerType.enum';
 })
 export class MapComponent implements OnChanges {
   @Input() public structures: Structure[] = [];
-  @Input() public toogleToolTipId: number;
-  @Input() public selectedMarkerId: number;
+  @Input() public toogleToolTipId: string;
+  @Input() public selectedMarkerId: string;
   @Input() public isMapPhone: boolean;
-  @ViewChild(NgxLeafletLocateComponent, { static: false }) locateComponent: NgxLeafletLocateComponent;
+  @Input() public locate = false;
   @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+  @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
+  private lc;
   private currentStructure: Structure;
 
   public map: Map;
@@ -77,15 +68,25 @@ export class MapComponent implements OnChanges {
         }, 0);
       }
     }
+    // Handle map locate from search bar
+    if (changes.locate && !changes.locate.isFirstChange()) {
+      if (changes.locate.currentValue) {
+        this.lc.start();
+      } else {
+        this.lc.stop();
+      }
+    }
     if (changes.structures) {
       this.handleStructurePosition(changes.structures.previousValue);
     }
     // Handle map marker tooltip
     if (changes.toogleToolTipId && changes.toogleToolTipId.currentValue !== changes.toogleToolTipId.previousValue) {
       if (changes.toogleToolTipId.previousValue !== undefined) {
-        this.mapService.toogleToolTip(changes.toogleToolTipId.previousValue);
+        this.mapService.setUnactiveMarker(changes.toogleToolTipId.previousValue);
       }
-      this.mapService.toogleToolTip(changes.toogleToolTipId.currentValue);
+      if (changes.toogleToolTipId.currentValue !== undefined) {
+        this.mapService.setActiveMarker(changes.toogleToolTipId.currentValue);
+      }
     }
     // Handle map marker selection
     if (changes.selectedMarkerId && this.map) {
@@ -118,23 +119,26 @@ export class MapComponent implements OnChanges {
   }
 
   private getStructuresPositions(structureListe: Structure[]): void {
-    structureListe.forEach((element: Structure) => {
-      this.getCoord(element.n, element.voie, element.commune).subscribe((coord: GeoJson) => {
-        this.mapService
-          .createMarker(
-            coord.geometry.getLon(),
-            coord.geometry.getLat(),
-            MarkerType.structure,
-            element.id,
-            this.buildToolTip(element)
-          )
-          .addTo(this.map)
-          // store structure before user click on button
-          .on('popupopen', () => {
-            this.currentStructure = element;
-          });
-      });
+    structureListe.forEach((structure: Structure) => {
+      this.mapService
+        .createMarker(
+          structure.getLat(),
+          structure.getLon(),
+          MarkerType.structure,
+          structure._id,
+          this.buildToolTip(structure)
+        )
+        .addTo(this.map)
+        // store structure before user click on button
+        .on('popupopen', () => {
+          this.currentStructure = structure;
+        });
     });
+    // Reset location if active to prevent graphical issue
+    if (this.locate) {
+      this.lc.stop();
+      this.lc.start();
+    }
   }
 
   /**
@@ -152,10 +156,10 @@ export class MapComponent implements OnChanges {
     }
     return (
       '<h1>' +
-      structure.nomDeVotreStructure +
+      structure.structureName +
       '</h1>' +
       '<p>' +
-      structure.typeDeStructure +
+      structure.structureType +
       '</p><div>' +
       '<span class="ico-dot-' +
       cssAvailabilityClass +
@@ -170,19 +174,17 @@ export class MapComponent implements OnChanges {
   }
 
   /**
-   * Get coord with a street reference
-   * @param idVoie Street reference
-   */
-  public getCoord(numero: string, voie: string, zipcode: string): Observable<GeoJson> {
-    return this.geoJsonService.getCoord(numero, voie, zipcode);
-  }
-
-  /**
    * Add marker when map is ready to be showned
    * @param map map
    */
   public onMapReady(map: Map): void {
     this.map = map;
+    // Handle location
+    this.lc = L.control.locate(this.locateOptions).addTo(this.map);
+    // .locate(this.locateOptions).addTo(this.map);
+    this.map.on('locationfound', () => {
+      this.locatationTrigger.emit(true);
+    });
   }
 
   /**
@@ -191,25 +193,6 @@ export class MapComponent implements OnChanges {
    * - Map Layer based on open street maps
    */
   private initializeMapOptions(): void {
-    // Init WMS service with param from data.grandlyon.com
-    const metroMaps = new TileLayer.WMS('https://download.data.grandlyon.com/wms/grandlyon', {
-      crs: CRS.EPSG4326,
-      transparent: true,
-      format: 'image/png',
-      attribution: 'Map data © OpenStreetMap contributors',
-      version: '1.3.0',
-      bounds: new LatLngBounds([45.437, 4.568], [46.03, 5.18]),
-    });
-    metroMaps.wmsParams = {
-      format: 'image/png',
-      transparent: true,
-      version: '1.3.0',
-      layers: 'adr_voie_lieu.adrmetropole',
-      service: 'WMS',
-      request: 'GetMap',
-      width: 256,
-      height: 256,
-    };
     // Init mdm
     this.initMDMLayer();
     // Init WMS service with param from data.grandlyon.com
@@ -225,7 +208,7 @@ export class MapComponent implements OnChanges {
       maxZoom: 19,
       zoom: 12,
       minZoom: 10,
-      layers: [carteLayer, metroMaps],
+      layers: [carteLayer],
     };
   }
 
@@ -234,31 +217,48 @@ export class MapComponent implements OnChanges {
       res.forEach((mdm) => {
         this.mapService
           .createMarker(
-            mdm.geometry.getLon(),
             mdm.geometry.getLat(),
+            mdm.geometry.getLon(),
             MarkerType.mdm,
             null,
             this.buildMdmPopUp(mdm.properties)
           )
           .addTo(this.map);
       });
+      this.initBrignaisLayer();
+      this.initMetropoleLayer();
     });
   }
 
-  /**
-   * Toogle all tooltips given in parameters
-   */
-  public toggleToolTip(ids: Array<number>): void {
-    ids.forEach((id) => {
-      this.mapService.toogleToolTip(id);
-    });
-  }
-
-  private centerLeafletMapOnMarker(markerId: number): void {
+  private centerLeafletMapOnMarker(markerId: string): void {
     const marker = this.mapService.getMarker(markerId);
     const latLngs = [marker.getLatLng()];
     const markerBounds = latLngBounds(latLngs);
     // paddingTopLeft is used for centering marker because of structure details pane
     this.map.fitBounds(markerBounds, { paddingTopLeft: [300, 0] });
+  }
+
+  private initBrignaisLayer(): void {
+    this.map.addLayer(
+      geoJSON(
+        {
+          type: brignais.features[0].geometry.type,
+          coordinates: brignais.features[0].geometry.coordinates,
+        } as any,
+        { style: () => ({ color: '#d50000', fillOpacity: 0 }) }
+      )
+    );
+  }
+
+  private initMetropoleLayer(): void {
+    this.map.addLayer(
+      geoJSON(
+        {
+          type: metropole.features[0].geometry.type,
+          coordinates: metropole.features[0].geometry.coordinates,
+        } as any,
+        { style: () => ({ color: '#d50000', fillOpacity: 0 }) }
+      )
+    );
   }
 }

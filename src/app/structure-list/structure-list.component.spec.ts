@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { StyleUtils } from '@angular/flex-layout';
 import { OpeningDay } from '../models/openingDay.model';
 import { Structure } from '../models/structure.model';
 import { Filter } from './models/filter.model';
@@ -22,38 +21,36 @@ describe('StructureListComponent', () => {
     structure = new Structure({
       id: 1,
       numero: '26-63',
-      dateDeCreation: '2020-10-08T15:17:00.000Z',
-      derniereModification: '2020-10-08T15:17:00.000Z',
+      updatedAt: '2020-10-08T15:17:00.000Z',
       nomDeLusager: 'Erwan Le luron',
-      votreStructureEstElle: 'Un établissement principal (siège social)',
-      nomDeVotreStructure: 'Régie de Quartier Armstrong',
-      typeDeStructure: 'Tiers-lieu & coworking, FabLab',
+      structureRepresentation: 'Un établissement principal (siège social)',
+      structureName: 'Régie de Quartier Armstrong',
+      structureType: 'Tiers-lieu & coworking, FabLab',
       description: "Association loi 1901 dont l'objet est l'insertion par l'économie social et solidaire",
       n: 2,
-      voie: 21356,
-      telephone: '04 72 21 03 07',
-      courriel: 'sguillet@rqa.fr',
-      siteWeb: '',
+      adressWay: 21356,
+      contactPhone: '04 72 21 03 07',
+      contactMail: 'sguillet@rqa.fr',
+      website: '',
       facebook: '',
       twitter: '@rqainfo69',
       instagram: '',
-      civilite: 'Madame',
-      nom: 'GUILLET',
-      prenom: 'Séverine',
+      gender: 'Madame',
+      contactName: 'GUILLET',
+      contactSurname: 'Séverine',
       fonction: 'Autres',
-      accessibilitePersonnesAMobiliteReduitePmr: '',
+      pmrAccess: '',
       choixMultiples: 'Tout public',
-      fermeturesExceptionnelles: '',
-      jaccompagneLesUsagersDansLeursDemarchesEnLigne: 'True',
-      accompagnementDesDemarches: 'Accompagnant CAF',
+      exceptionalClosures: '',
+      proceduresAccompaniment: 'Accompagnant CAF',
       autresAccompagnements: '',
-      lesCompetencesDeBase: 260,
-      accesAuxDroits: 176,
-      insertionSocialeEtProfessionnelle: 254,
-      aideALaParentalite: '',
-      cultureEtSecuriteNumerique: 264,
+      baseSkills: 260,
+      accessRight: 176,
+      socialAndProfessional: 254,
+      parentingHelp: '',
+      digitalCultureSecurity: 264,
       wifiEnAccesLibre: 'True',
-      ordinateurs: '',
+      nbComputers: '',
       nombre: '',
       tablettes: '',
       bornesNumeriques: '',
@@ -205,7 +202,7 @@ describe('StructureListComponent', () => {
 
   it('should emit undefined id structure to remove map marker', () => {
     spyOn(component.displayMapMarkerId, 'emit');
-    component.mouseOut();
+    component.mouseLeave();
     expect(component.displayMapMarkerId.emit).toHaveBeenCalled();
     expect(component.displayMapMarkerId.emit).toHaveBeenCalledWith([undefined]);
   });

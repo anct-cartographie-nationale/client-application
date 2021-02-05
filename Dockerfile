@@ -20,7 +20,7 @@ COPY /src ./src
 ARG conf
 
 # Building the Angular app /dist i18n
-RUN npm run build:dev
+RUN npm run build:prod
 
 # Stage 1, based on Nginx, to have only the compiled app
 FROM nginx
@@ -29,7 +29,6 @@ FROM nginx
 RUN apt-get update
 
 COPY --from=build /app/dist/fr /usr/share/nginx/html
-COPY --from=build /app/dist/fr /usr/share/nginx/html/fr
 
 RUN touch /var/run/nginx.pid
 RUN ls -l /usr/share/nginx/html

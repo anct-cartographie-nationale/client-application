@@ -27,29 +27,38 @@
 ::ng-deep .leaflet-popup-close-button {
   display: none;
 }
-
+::ng-deep .leaflet-bar-part-single {
+  &:hover {
+    .fa-map-marker {
+      background-color: $blue-hover;
+    }
+  }
+  &:active {
+    .fa-map-marker {
+      background-color: $blue-active;
+    }
+  }
+}
 ::ng-deep .fa-map-marker {
-  color: $black;
   position: absolute;
-  width: 12px;
-  height: 12px;
-  border: solid 1px currentColor;
-  border-radius: 7px 7px 7px 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50% 50% 50% 0;
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
-  margin-left: -6px;
-  margin-top: 6px;
-}
-
-::ng-deep .fa-map-marker:before {
-  content: '';
-  position: absolute;
-  left: 3px;
-  top: 3px;
-  width: 4px;
-  height: 4px;
-  border: solid 1px currentColor;
-  border-radius: 3px;
+  background-color: $grey-3;
+  margin-left: -8px;
+  margin-top: 4px;
+  &:before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    width: 7px;
+    height: 7px;
+    border-radius: 4px;
+    background-color: $white;
+  }
 }
 
 ::ng-deep .leaflet-control-locate-circle {
@@ -82,6 +91,7 @@
 ::ng-deep .leaflet-popup {
   border-radius: 6px;
   @include background-hash;
+  border: 1px solid $grey-4;
   padding: 0 0 4px 4px;
   bottom: -15px !important;
   h1 {
@@ -110,7 +120,6 @@
 ::ng-deep .leaflet-popup-content-wrapper {
   box-shadow: unset;
   border-radius: 6px;
-  border: 1px solid $grey-4;
 }
 ::ng-deep .leaflet-popup-content {
   width: 240px;

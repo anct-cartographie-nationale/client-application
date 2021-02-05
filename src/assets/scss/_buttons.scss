@@ -18,7 +18,7 @@
   height: 31px;
   border: none;
   color: $primary-color;
-  padding: 3px 16px 3px 16px;
+  padding: 3px 16px;
   outline: none;
   cursor: pointer;
   display: table-cell;
@@ -29,7 +29,7 @@
   background: $secondary-color;
   height: 40px;
   color: $white;
-  padding: 4px 37px 4px 37px;
+  padding: 4px 37px;
   border-radius: 4px;
   outline: none;
   border: 1px solid transparent;
@@ -41,4 +41,24 @@
   @include btn-bold-sousligne;
   color: $secondary-color;
   outline: none;
+}
+@mixin btn-grey {
+  border: 1px solid $grey-4;
+  box-sizing: border-box;
+  border-radius: 6px;
+  background: $white;
+  color: $grey-2;
+  cursor: pointer;
+  @include cn-regular-12;
+  line-height: 18px;
+  padding: 8px 15px;
+}
+@mixin btn-red {
+  border-radius: 6px;
+  background: $red-default;
+  color: $white;
+  cursor: pointer;
+  @include cn-regular-12;
+  line-height: 18px;
+  padding: 8px 15px;
 }

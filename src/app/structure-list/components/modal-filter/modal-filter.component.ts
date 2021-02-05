@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
 import { Module } from '../../models/module.model';
@@ -11,11 +10,7 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./modal-filter.component.scss'],
 })
 export class ModalFilterComponent implements OnInit {
-  constructor(private fb: FormBuilder, public searchService: SearchService) {
-    this.searchForm = this.fb.group({
-      searchTerm: '',
-    });
-  }
+  constructor(public searchService: SearchService) {}
   @Input() public modalType: TypeModal;
   @Input() public categories: Category[];
   @Input() public modules: Module[] = [];
@@ -23,20 +18,18 @@ export class ModalFilterComponent implements OnInit {
   @Output() closeEvent = new EventEmitter();
   // Checkbox variable
   public checkedModules: Module[] = [];
-  // Form search input
-  private searchForm: FormGroup;
   ngOnInit(): void {
     // Manage checkbox
     this.checkedModules = this.modules.slice();
   }
 
   // Management of the checkbox event (Check / Uncheck)
-  public onCheckboxChange(event, categ: string, isSpecial: boolean): void {
-    const checkValue: string = isSpecial ? 'True' : event.target.value;
+  public onCheckboxChange(event, categ: string): void {
+    const checkValue: string = event.target.value;
     if (event.target.checked) {
       this.checkedModules.push(new Module(checkValue, categ));
     } else {
-      // Check if the unchecked module is present in the list and remove it
+      // Check if the module is present in the list and remove it
       if (this.searchService.getIndex(this.checkedModules, checkValue, categ) > -1) {
         this.checkedModules.splice(this.searchService.getIndex(this.checkedModules, checkValue, categ), 1);
       }
@@ -46,12 +39,9 @@ export class ModalFilterComponent implements OnInit {
   public clearFilters(): void {
     this.categories.forEach((categ: Category) => {
       categ.modules.forEach((module: Module) => {
-        const index = this.searchService.getIndex(this.checkedModules, module.id, categ.name);
-        const indexSpecial = this.searchService.getIndex(this.checkedModules, 'True', module.id);
+        const index = this.searchService.getIndex(this.checkedModules, module.id, categ.id);
         if (index > -1) {
           this.checkedModules.splice(index, 1);
-        } else if (indexSpecial > -1) {
-          this.checkedModules.splice(indexSpecial, 1);
         }
       });
     });

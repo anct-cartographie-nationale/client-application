@@ -50,7 +50,7 @@ describe('ModalFilterComponent', () => {
     ];
     component.checkedModules = modules;
     const evt = { target: { checked: true, value: '175' } };
-    component.onCheckboxChange(evt, 'training', false);
+    component.onCheckboxChange(evt, 'training');
     expect(component.checkedModules.length).toEqual(4);
   });
   it('should remove a module to checkedModule array', () => {
@@ -61,7 +61,7 @@ describe('ModalFilterComponent', () => {
     ];
     component.checkedModules = modules;
     const evt = { target: { checked: false, value: '173' } };
-    component.onCheckboxChange(evt, 'training', false);
+    component.onCheckboxChange(evt, 'training');
     expect(component.checkedModules.length).toEqual(2);
   });
 
@@ -76,7 +76,7 @@ describe('ModalFilterComponent', () => {
       { id: '167', text: 'training', count: 0 },
     ];
     component.checkedModules = modules;
-    const category: Category = new Category({ name: 'morefilters', modules: [modules[0], modules[1], modules[2]] });
+    const category: Category = new Category({ id: 'morefilters', modules: [modules[0], modules[1], modules[2]] });
     component.categories = [category];
     component.clearFilters();
     expect(component.checkedModules.length).toEqual(3);

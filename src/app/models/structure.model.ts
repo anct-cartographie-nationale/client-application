@@ -1,49 +1,61 @@
+import { Equipment } from '../structure-list/enum/equipment.enum';
+import { typeStructureEnum } from '../shared/enum/typeStructure.enum';
 import { Weekday } from '../structure-list/enum/weekday.enum';
+import { Address } from './address.model';
 import { Day } from './day.model';
 import { OpeningDay } from './openingDay.model';
 import { Week } from './week.model';
 export class Structure {
-  public id: number;
-  public numero: string;
-  public dateDeCreation: string;
-  public derniereModification: string;
-  public nomDeLusager: string;
-  public votreStructureEstElle: string;
-  public nomDeVotreStructure: string;
-  public typeDeStructure: string;
-  public description: string;
-  public n: string;
-  public voie: string;
-  public commune: string;
-  public telephone: string;
-  public courriel: string;
-  public siteWeb: string;
-  public facebook: string;
-  public twitter: string;
-  public instagram: string;
-  public civilite: string;
-  public nom: string;
-  public prenom: string;
-  public fonction: string;
-  public accessibilitePersonnesAMobiliteReduitePmr: boolean;
-  public jaccompagneLesUsagersDansLeursDemarchesEnLigne: boolean;
-  public accompagnementDesDemarches: string[];
-  public modalitesDacces: string[];
-  public labelsEtQualifications: string[];
-  public wifi: boolean;
-  public ordinateurs: boolean;
-  public nombre: number;
+  public _id: string = null;
+  public numero: string = null;
+  public createdAt: string = null;
+  public updatedAt: string = null;
+  public structureName: string = null;
+  public structureType: string = null;
+  public description: string = null;
+  public address: Address = new Address();
+  public contactPhone: string = null;
+  public contactMail: string = null;
+  public website: string = null;
+  public facebook: string = null;
+  public twitter: string = null;
+  public instagram: string = null;
+  public linkedin: string = null;
+  public lockdownActivity: string = null;
+  public pmrAccess: boolean = null;
+  public publicsAccompaniment: string[] = [];
+  public proceduresAccompaniment: string[] = [];
+  public accessModality: string[] = [];
+  public labelsQualifications: string[] = [];
+  public publics: string[] = [];
+  public nbComputers: number = null;
+  public nbPrinters: number = null;
+  public nbTablets: number = null;
+  public nbNumericTerminal: number = null;
+  public nbScanners: number = null;
+  public exceptionalClosures: string = null;
+  public equipmentsAndServices: string[] = [];
   public hours: Week;
-  public isOpen: boolean;
-  public openedOn: OpeningDay;
-  public lesCompetencesDeBase: string[];
-  public accesAuxDroits: string[];
+  public freeWorkShop: boolean = null;
+  public freeWifi: boolean = null;
+  public otherDescription: string = null;
+
+  public isOpen: boolean = false;
+  public openedOn: OpeningDay = new OpeningDay();
+  public baseSkills: string[] = [];
+  public accessRight: string[] = [];
+  public parentingHelp: string[] = [];
+  public socialAndProfessional: string[] = [];
+  public digitalCultureSecurity: string[] = [];
+
   public distance?: number;
-  public address?: string;
+  public coord?: number[] = [];
+
+  public accountVerified: boolean = false;
 
   constructor(obj?: any) {
     Object.assign(this, obj, {
-      hours: obj && obj.hours ? new Week(obj.hours) : null,
+      hours: obj && obj.hours ? new Week(obj.hours) : new Week(),
     });
   }
 
@@ -82,10 +94,17 @@ export class Structure {
    * Check if a structure has equipments
    */
   public hasEquipments(): boolean {
-    if (this.wifi || this.ordinateurs) {
+    if (this.equipmentsAndServices.length) {
       return true;
     }
     return false;
+  }
+
+  /**
+   * Check if a structure has pass Numeric label
+   */
+  public hasPassNumeric(): boolean {
+    return this.labelsQualifications.includes('passNumerique');
   }
 
   /**
@@ -107,6 +126,50 @@ export class Structure {
       } else {
         return 2;
       }
+    }
+  }
+
+  public getLat(): number {
+    return this.coord[1];
+  }
+
+  public getLon(): number {
+    return this.coord[0];
+  }
+
+  public getEquipmentsIcon(equipment: Equipment): string {
+    switch (equipment) {
+      case Equipment.wifi:
+        return 'wifi';
+      case Equipment.bornes:
+        return 'borne';
+      case Equipment.printer:
+        return 'print';
+      case Equipment.tablet:
+        return 'tablet';
+      case Equipment.computer:
+        return 'computer';
+      case Equipment.scanner:
+        return 'scan';
+      default:
+        return null;
+    }
+  }
+
+  public getEquipmentsTitle(equipment: Equipment): string {
+    switch (equipment) {
+      case Equipment.wifi:
+        return 'Wifi';
+      case Equipment.bornes:
+        return 'Bornes';
+      case Equipment.printer:
+        return 'Imprimantes';
+      case Equipment.tablet:
+        return 'Tablettes';
+      case Equipment.computer:
+        return 'Ordinateurs';
+      default:
+        return null;
     }
   }
 }

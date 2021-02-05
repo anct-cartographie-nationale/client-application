@@ -1,5 +1,10 @@
-$structure-details-z-index: 1002;
-$modal-add-structure-z-index: 1002;
-$modal-filter-structure-z-index: 1002;
-$modal-menu-phone-z-index: 1002;
-$btn-phone-switch-map-list-z-index: 1001;
+// Phone view
+$btn-phone-switch-map-list-z-index: 1002;
+$menu-phone-z-index: 1003;
+
+// Structure details
+$structure-details-z-index: 1001;
+
+// Modals (filters/confirmationPopup/authen/...)
+$modal-z-index: 1002;
+$modal-confirmation-z-index: 1004;
