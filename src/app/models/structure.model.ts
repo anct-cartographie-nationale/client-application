@@ -174,6 +174,6 @@ export class Structure {
   }
 
   public getLabelTypeStructure(): string {
-    return typeStructureEnum[this.structureType];
+    return typeStructureEnum[this.structureType] ? typeStructureEnum[this.structureType] : '';
   }
 }
