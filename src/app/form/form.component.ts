@@ -30,6 +30,7 @@ export class FormComponent implements OnInit {
   public structureForm: FormGroup;
   public accountForm: FormGroup;
   public hoursForm: FormGroup;
+  public editForm: FormGroup;
   public labelsQualifications: Category;
   public publics: Category;
   public accessModality: Category;
@@ -66,7 +67,8 @@ export class FormComponent implements OnInit {
     private structureService: StructureService,
     private searchService: SearchService,
     private profileService: ProfileService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -138,7 +140,27 @@ export class FormComponent implements OnInit {
     );
 
     // Init form
-    this.structureForm = new FormGroup({
+    this.structureForm = this.createStructureForm(structure);
+    this.editForm = this.createStructureForm(structure);
+
+    // Init hours form
+    this.hoursForm = new FormGroup({
+      monday: this.createDay(structure.hours.monday),
+      tuesday: this.createDay(structure.hours.tuesday),
+      wednesday: this.createDay(structure.hours.wednesday),
+      thursday: this.createDay(structure.hours.thursday),
+      friday: this.createDay(structure.hours.friday),
+      saturday: this.createDay(structure.hours.saturday),
+      sunday: this.createDay(structure.hours.sunday),
+    });
+    if (this.isEditMode) {
+      this.showCollapse(structure);
+    }
+
+    this.setValidationsForm();
+  }
+  private createStructureForm(structure): FormGroup {
+    const form = new FormGroup({
       _id: new FormControl(structure._id),
       coord: new FormControl(structure.coord),
       structureType: new FormControl(structure.structureType, Validators.required),
@@ -201,22 +223,7 @@ export class FormComponent implements OnInit {
       freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
       freeWifi: new FormControl(structure.freeWifi, Validators.required),
     });
-
-    // Init hours form
-    this.hoursForm = new FormGroup({
-      monday: this.createDay(structure.hours.monday),
-      tuesday: this.createDay(structure.hours.tuesday),
-      wednesday: this.createDay(structure.hours.wednesday),
-      thursday: this.createDay(structure.hours.thursday),
-      friday: this.createDay(structure.hours.friday),
-      saturday: this.createDay(structure.hours.saturday),
-      sunday: this.createDay(structure.hours.sunday),
-    });
-    if (this.isEditMode) {
-      this.showCollapse(structure);
-    }
-
-    this.setValidationsForm();
+    return form;
   }
   private showCollapse(s: Structure): void {
     if (s.website) {
@@ -232,6 +239,7 @@ export class FormComponent implements OnInit {
       this.showProceduresAccompaniment = true;
     }
     this.trainingCategories.forEach((categ: { category: Category; openned: boolean }) => {
+      categ.openned = false;
       switch (categ.category.id) {
         case 'accessRight':
           if (s.accessRight.length) {
@@ -261,6 +269,7 @@ export class FormComponent implements OnInit {
       }
     });
     this.equipmentsAndServices.forEach((equipment: { module: Module; openned: boolean }) => {
+      equipment.openned = false;
       switch (equipment.module.id) {
         case 'ordinateurs':
           if (s.equipmentsAndServices.includes('ordinateurs')) {
@@ -602,7 +611,9 @@ export class FormComponent implements OnInit {
       structure.hours = this.hoursForm.value;
       let user: User;
       if (this.isEditMode) {
-        console.log('ok');
+        this.structureService.editStructure(structure).subscribe((s: Structure) => {
+          this.router.navigateByUrl('home', { state: { data: s } });
+        });
       } else {
         if (this.profile) {
           user = this.profile;
@@ -658,7 +669,14 @@ export class FormComponent implements OnInit {
 
   // Function for editMode only
 
-  public goToSpecificPage(numPage: number): void {
+  public goToSpecificPage(numPage: number, isSave: boolean): void {
+    if (isSave) {
+      this.editForm = this.createStructureForm(new Structure(this.structureForm.value));
+    } else {
+      const structure = new Structure(this.editForm.value);
+      this.structureForm = this.createStructureForm(structure);
+      this.showCollapse(structure);
+    }
     this.currentPage = numPage;
   }
 }
