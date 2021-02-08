@@ -203,4 +203,9 @@ export class StructureDetailsComponent implements OnInit {
       this.tclStopPoints = res;
     });
   }
+  public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
+    return equipmentsAndServices.filter((eqpt) =>
+      ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners'].includes(eqpt)
+    );
+  }
 }

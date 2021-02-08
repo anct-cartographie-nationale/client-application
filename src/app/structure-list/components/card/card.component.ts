@@ -35,4 +35,9 @@ export class CardComponent implements OnInit {
   public cardHover(): void {
     this.hover.emit(this.structure);
   }
+  public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
+    return equipmentsAndServices.filter((eqpt) =>
+      ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners'].includes(eqpt)
+    );
+  }
 }
