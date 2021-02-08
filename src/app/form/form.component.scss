@@ -5,9 +5,17 @@
 @import '../../assets/scss/shapes';
 @import '../../assets/scss/z-index';
 
-$progressBar-height: 50px;
 h3 {
   margin: 0;
+}
+form {
+  @media #{$tablet} {
+    &.editMode {
+      .page {
+        height: calc(100vh - #{$header-height-phone} - #{$footer-height-phone} - 1px); // -1px because of header border
+      }
+    }
+  }
 }
 .form {
   background: white;
@@ -447,5 +455,14 @@ img {
       height: 14px;
       width: 14px;
     }
+  }
+}
+.footerEditMode {
+  width: 100%;
+  position: fixed;
+  bottom: 56px;
+  margin: 20px 0;
+  @media #{$tablet} {
+    bottom: 0;
   }
 }

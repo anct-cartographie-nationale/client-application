@@ -7,7 +7,7 @@
   <div class="content">
     <div
       class="progressBar"
-      *ngIf="currentPage != 0"
+      *ngIf="currentPage != 0 && !isEditMode"
       fxLayout="row"
       fxLayoutAlign="space-between center"
       fxLayoutGap="20px"
@@ -22,7 +22,7 @@
         [value]="progressStatus"
       ></progress>
     </div>
-    <div *ngIf="currentPage == 0" class="home page" fxLayout="column" fxLayoutAlign="space-between">
+    <div *ngIf="currentPage == 0 && !isEditMode" class="home page" fxLayout="column" fxLayoutAlign="space-between">
       <h2>Ajouter votre structure</h2>
       <img src="../../assets/form/schedule.svg" alt="logo schedule" />
       <div>
@@ -31,6 +31,16 @@
       </div>
       <div class="btnStart">
         <button class="btn start" (click)="nextPage()">C'est Parti</button>
+      </div>
+    </div>
+    <div *ngIf="currentPage == 0 && isEditMode" class="home page" fxLayout="column" fxLayoutAlign="space-between">
+      <h2>Modification de la structure</h2>
+      <div>
+        <div class="summary" *ngFor="let page of pagesValidation; let index = index">
+          <div class="itemSummary" *ngIf="page.name" (click)="goToSpecificPage(index)">
+            {{ page.name }}
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="currentPage == 1" class="informations page" fxLayout="column" fxLayoutGap="28px">
@@ -171,7 +181,7 @@
         </div>
       </div>
     </form>
-    <form [formGroup]="structureForm" *ngIf="structureForm">
+    <form [formGroup]="structureForm" *ngIf="structureForm" [ngClass]="{ editMode: isEditMode }">
       <div *ngIf="currentPage == 4" class="page">
         <div class="title">
           <h3>Quelle structure voulez-vous réferencer ?</h3>
@@ -974,12 +984,15 @@
       </div>
     </form>
     <div *ngIf="currentPage != 0" class="footer desktop">
-      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm">
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm && !isEditMode">
         <app-footer-form
           (previousPage)="previousPage()"
           (nextPage)="nextPage()"
           [isValid]="isPageValid"
         ></app-footer-form>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isEditMode">
+        <button class="btn" (click)="goToSpecificPage(0)">Validé</button>
       </div>
       <button
         *ngIf="currentPage == nbPagesForm && !profile"
@@ -998,14 +1011,22 @@
         Voir ma structure
       </button>
     </div>
+    <div *ngIf="isEditMode" class="footerEditMode">
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isEditMode && currentPage == 0">
+        <button class="btn unique" (click)="validateForm()">Terminé</button>
+      </div>
+    </div>
   </div>
   <div *ngIf="currentPage != 0" class="footer phone">
-    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm">
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm && !isEditMode">
       <app-footer-form
         (previousPage)="previousPage()"
         (nextPage)="nextPage()"
         [isValid]="isPageValid"
       ></app-footer-form>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isEditMode">
+      <button class="btn unique" (click)="goToSpecificPage(0)">Validé</button>
     </div>
     <button
       *ngIf="currentPage == nbPagesForm && !profile"

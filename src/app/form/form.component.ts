@@ -367,13 +367,20 @@ export class FormComponent implements OnInit {
     };
     this.pagesValidation[4] = {
       valid: this.getStructureControl('structureName').valid && this.getStructureControl('address').valid,
+      name: 'Nom et adresse',
     };
-    this.pagesValidation[5] = { valid: this.getStructureControl('contactPhone').valid };
-    this.pagesValidation[6] = { valid: this.getStructureControl('structureType').valid };
-    this.pagesValidation[7] = { valid: this.getStructureControl('accessModality').valid };
-    this.pagesValidation[8] = { valid: this.hoursForm.valid };
-    this.pagesValidation[9] = { valid: this.getStructureControl('exceptionalClosures').valid };
-    this.pagesValidation[10] = { valid: this.getStructureControl('pmrAccess').valid };
+    this.pagesValidation[5] = { valid: this.getStructureControl('contactPhone').valid, name: 'Téléphone' };
+    this.pagesValidation[6] = { valid: this.getStructureControl('structureType').valid, name: 'Type de structure' };
+    this.pagesValidation[7] = { valid: this.getStructureControl('accessModality').valid, name: "Modalités d'accueil " };
+    this.pagesValidation[8] = { valid: this.hoursForm.valid, name: "Horaires d'ouverture" };
+    this.pagesValidation[9] = {
+      valid: this.getStructureControl('exceptionalClosures').valid,
+      name: 'Précisions sur les horaires',
+    };
+    this.pagesValidation[10] = {
+      valid: this.getStructureControl('pmrAccess').valid,
+      name: 'Accessibilité pour les personnes à mobilité réduite',
+    };
     this.pagesValidation[11] = {
       valid:
         this.getStructureControl('contactMail').valid &&
@@ -382,15 +389,18 @@ export class FormComponent implements OnInit {
           this.getStructureControl('twitter').valid &&
           this.getStructureControl('instagram').valid) ||
           !this.showSocialNetwork),
+      name: 'Présence sur internet',
     };
-    this.pagesValidation[12] = { valid: this.getStructureControl('publics').valid };
+    this.pagesValidation[12] = { valid: this.getStructureControl('publics').valid, name: 'Public admis' };
     this.pagesValidation[13] = {
       valid:
         this.getStructureControl('publicsAccompaniment').valid &&
         this.getStructureControl('proceduresAccompaniment').valid,
+      name: 'Accompagnements proposés',
     };
     this.pagesValidation[14] = {
       valid: this.getStructureControl('otherDescription').value,
+      name: 'Autres démarches proposés',
     };
     this.pagesValidation[15] = {
       valid:
@@ -399,9 +409,10 @@ export class FormComponent implements OnInit {
         this.getStructureControl('baseSkills').valid &&
         this.getStructureControl('parentingHelp').valid &&
         this.getStructureControl('digitalCultureSecurity').valid,
+      name: 'Ateliers au numérique proposés',
     };
-    this.pagesValidation[16] = { valid: this.getStructureControl('freeWorkShop').valid };
-    this.pagesValidation[17] = { valid: this.getStructureControl('freeWifi').valid };
+    this.pagesValidation[16] = { valid: this.getStructureControl('freeWorkShop').valid, name: 'Gratuité des ateliers' };
+    this.pagesValidation[17] = { valid: this.getStructureControl('freeWifi').valid, name: 'Gratuité du wifi' };
     this.pagesValidation[18] = {
       valid:
         this.getStructureControl('equipmentsAndServices').valid &&
@@ -410,11 +421,24 @@ export class FormComponent implements OnInit {
         this.getStructureControl('nbTablets').valid &&
         this.getStructureControl('nbNumericTerminal').valid &&
         this.getStructureControl('nbScanners').valid,
+      name: 'Matériels mis à disposition',
     };
-    this.pagesValidation[19] = { valid: this.getStructureControl('labelsQualifications').valid };
-    this.pagesValidation[20] = { valid: this.getStructureControl('equipmentsAndServices').valid };
-    this.pagesValidation[21] = { valid: this.getStructureControl('description').valid };
-    this.pagesValidation[22] = { valid: this.getStructureControl('lockdownActivity').valid };
+    this.pagesValidation[19] = {
+      valid: this.getStructureControl('labelsQualifications').valid,
+      name: 'Labélisations proposées',
+    };
+    this.pagesValidation[20] = {
+      valid: this.getStructureControl('equipmentsAndServices').valid,
+      name: 'Autres services proposés',
+    };
+    this.pagesValidation[21] = {
+      valid: this.getStructureControl('description').valid,
+      name: 'Présentation de la structure',
+    };
+    this.pagesValidation[22] = {
+      valid: this.getStructureControl('lockdownActivity').valid,
+      name: 'Informations spécifiques à la période COVID',
+    };
     this.pagesValidation[23] = { valid: this.userAcceptSavedDate };
     //this.pagesValidation[24] = { valid: true };
     this.updatePageValid();
@@ -577,19 +601,23 @@ export class FormComponent implements OnInit {
       let structure: Structure = this.structureForm.value;
       structure.hours = this.hoursForm.value;
       let user: User;
-      if (this.profile) {
-        user = this.profile;
-        structure.accountVerified = true;
-        this.createStructure(structure, user);
+      if (this.isEditMode) {
+        console.log('ok');
       } else {
-        if (this.accountForm.valid) {
-          user = new User(this.accountForm.value);
-          this.authService
-            .register(user)
-            .pipe(first())
-            .subscribe(() => {
-              this.createStructure(structure, user);
-            });
+        if (this.profile) {
+          user = this.profile;
+          structure.accountVerified = true;
+          this.createStructure(structure, user);
+        } else {
+          if (this.accountForm.valid) {
+            user = new User(this.accountForm.value);
+            this.authService
+              .register(user)
+              .pipe(first())
+              .subscribe(() => {
+                this.createStructure(structure, user);
+              });
+          }
         }
       }
     }
@@ -626,5 +654,11 @@ export class FormComponent implements OnInit {
   public hasRedirectionAccepted(hasAccept: boolean): void {
     this.resolve(hasAccept);
     this.showConfirmationModal = false;
+  }
+
+  // Function for editMode only
+
+  public goToSpecificPage(numPage: number): void {
+    this.currentPage = numPage;
   }
 }
