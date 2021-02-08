@@ -13,7 +13,7 @@ import { MustMatch } from '../shared/validator/form';
 import { Address } from '../models/address.model';
 import { Module } from '../structure-list/models/module.model';
 import { Equipment } from '../structure-list/enum/equipment.enum';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { Regex } from '../shared/enum/regex.enum';
@@ -23,8 +23,6 @@ import { Regex } from '../shared/enum/regex.enum';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  @Input() public idStructure?: string;
-  @Input() public isEditMode: boolean = true;
   public profile: User;
   public createdStructure: Structure;
 
@@ -62,6 +60,7 @@ export class FormComponent implements OnInit {
   public isShowPassword = false;
   public userAcceptSavedDate = false;
   public showMenu = false;
+  public isEditMode = false;
 
   constructor(
     private structureService: StructureService,
@@ -70,59 +69,54 @@ export class FormComponent implements OnInit {
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.profileService.getProfile().then((user: User) => {
       this.profile = user;
     });
-
+    await this.setCategories();
     // Check if it's a new structure or edit structure
-    if (this.idStructure) {
-      this.structureService.getStructure(this.idStructure).subscribe((structure) => {
-        this.initForm(structure);
-        this.idStructure = structure._id;
-      });
+    if (history.state.data) {
+      this.isEditMode = true;
+      this.initForm(new Structure(history.state.data));
     } else {
       this.initForm(new Structure());
     }
-    this.setCategories();
   }
 
-  private setCategories(): void {
+  async setCategories(): Promise<void> {
     this.searchService.getCategoriesAccompaniment().subscribe((categories: Category[]) => {
       this.proceduresAccompaniment = categories[0];
     });
-    this.searchService.getCategoriesMoreFilters().subscribe((categories: Category[]) => {
-      categories.forEach((categ) => {
-        switch (categ.id) {
-          case CategoryEnum.accessModality: {
-            this.accessModality = categ;
-            break;
-          }
-          case CategoryEnum.equipmentsAndServices: {
-            categ.modules.forEach((c) => {
-              this.equipmentsAndServices.push({ module: c, openned: false });
-            });
-            break;
-          }
-          case CategoryEnum.labelsQualifications: {
-            this.labelsQualifications = categ;
-            break;
-          }
-          case CategoryEnum.publics: {
-            this.publics = categ;
-            break;
-          }
-          case CategoryEnum.publicsAccompaniment: {
-            this.publicsAccompaniment = categ;
-            break;
-          }
+    const equipmentsCategs = await this.searchService.getCategoriesMoreFilters().toPromise();
+    equipmentsCategs.forEach((categ) => {
+      switch (categ.id) {
+        case CategoryEnum.accessModality: {
+          this.accessModality = categ;
+          break;
         }
-      });
+        case CategoryEnum.equipmentsAndServices: {
+          categ.modules.forEach((c) => {
+            this.equipmentsAndServices.push({ module: c, openned: false });
+          });
+          break;
+        }
+        case CategoryEnum.labelsQualifications: {
+          this.labelsQualifications = categ;
+          break;
+        }
+        case CategoryEnum.publics: {
+          this.publics = categ;
+          break;
+        }
+        case CategoryEnum.publicsAccompaniment: {
+          this.publicsAccompaniment = categ;
+          break;
+        }
+      }
     });
-    this.searchService.getCategoriesTraining().subscribe((categories: Category[]) => {
-      categories.forEach((categ) => {
-        this.trainingCategories.push({ category: categ, openned: false });
-      });
+    let categs = await this.searchService.getCategoriesTraining().toPromise();
+    categs.forEach((categ) => {
+      this.trainingCategories.push({ category: categ, openned: false });
     });
   }
 
@@ -218,7 +212,83 @@ export class FormComponent implements OnInit {
       saturday: this.createDay(structure.hours.saturday),
       sunday: this.createDay(structure.hours.sunday),
     });
+    if (this.isEditMode) {
+      this.showCollapse(structure);
+    }
+
     this.setValidationsForm();
+  }
+  private showCollapse(s: Structure): void {
+    if (s.website) {
+      this.showWebsite = true;
+    }
+    if (s.facebook || s.twitter || s.instagram || s.linkedin) {
+      this.showSocialNetwork = true;
+    }
+    if (s.publicsAccompaniment.length) {
+      this.showPublicsAccompaniment = true;
+    }
+    if (s.proceduresAccompaniment.length) {
+      this.showProceduresAccompaniment = true;
+    }
+    this.trainingCategories.forEach((categ: { category: Category; openned: boolean }) => {
+      switch (categ.category.id) {
+        case 'accessRight':
+          if (s.accessRight.length) {
+            categ.openned = true;
+          }
+          break;
+        case 'socialAndProfessional':
+          if (s.socialAndProfessional.length) {
+            categ.openned = true;
+          }
+          break;
+        case 'baseSkills':
+          if (s.baseSkills.length) {
+            categ.openned = true;
+          }
+          break;
+        case 'parentingHelp':
+          if (s.parentingHelp.length) {
+            categ.openned = true;
+          }
+          break;
+        case 'digitalCultureSecurity':
+          if (s.digitalCultureSecurity.length) {
+            categ.openned = true;
+          }
+          break;
+      }
+    });
+    this.equipmentsAndServices.forEach((equipment: { module: Module; openned: boolean }) => {
+      switch (equipment.module.id) {
+        case 'ordinateurs':
+          if (s.equipmentsAndServices.includes('ordinateurs')) {
+            equipment.openned = true;
+          }
+          break;
+        case 'tablettes':
+          if (s.equipmentsAndServices.includes('tablettes')) {
+            equipment.openned = true;
+          }
+          break;
+        case 'bornesNumeriques':
+          if (s.equipmentsAndServices.includes('bornesNumeriques')) {
+            equipment.openned = true;
+          }
+          break;
+        case 'imprimantes':
+          if (s.equipmentsAndServices.includes('imprimantes')) {
+            equipment.openned = true;
+          }
+          break;
+        case 'scanners':
+          if (s.equipmentsAndServices.includes('scanners')) {
+            equipment.openned = true;
+          }
+          break;
+      }
+    });
   }
 
   private loadArrayForCheckbox(array: string[], isRequired: boolean): FormArray {
@@ -254,8 +324,8 @@ export class FormComponent implements OnInit {
   }
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')), //NOSONAR
-      closing: new FormControl(time.closing, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')), //NOSONAR
+      openning: new FormControl(time.openning), //NOSONAR
+      closing: new FormControl(time.closing), //NOSONAR
     });
   }
 

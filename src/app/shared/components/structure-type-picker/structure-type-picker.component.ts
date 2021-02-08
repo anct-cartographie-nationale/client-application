@@ -22,11 +22,11 @@ export class StructureTypePickerComponent implements OnInit {
   constructor(private structureTypeService: StructureTypeService) {}
 
   ngOnInit() {
-    if (this.pickedChoice) {
-      this.pickedType = this.getType(this.pickedChoice);
-    }
     this.structureTypeService.getStructureTypes().subscribe((types) => {
       this.structureTypes = types;
+      if (this.pickedChoice) {
+        this.pickedType = this.getType(this.pickedChoice);
+      }
     });
   }
 

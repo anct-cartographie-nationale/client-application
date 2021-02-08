@@ -1,11 +1,3 @@
-<app-structureForm
-  *ngIf="showForm"
-  [idStructure]="structure._id"
-  [isEditMode]="isEditMode"
-  [profile]="currentProfile"
-  (closeEvent)="updateStructure($event)"
-  (clickOutside)="displayForm()"
-></app-structureForm>
 <div class="structrue-details-container" *ngIf="structure && !isLoading">
   <!-- Header info -->
   <div fxLayout="row" fxLayoutAlign="end center">
@@ -87,14 +79,15 @@
           >Revendiquer cette structure</a
         >
         <!-- temporary remove edit -->
-        <!-- <a
+        <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
-          (click)="editStructure()"
+          routerLink="/create-structure"
+          [state]="{ data: structure }"
           class="primary"
           tabindex="0"
         >
           Modifier cette structure
-        </a> -->
+        </a>
         <a *ngIf="profileService.isAdmin()" (click)="toggleDeleteModal()" class="primary" tabindex="0">
           Supprimer cette structure
         </a>
