@@ -651,7 +651,7 @@ export class FormComponent implements OnInit {
 
   public canExit(): Promise<boolean> {
     // Avoid confirmation when user submit form and leave.
-    if (this.currentPage == this.nbPagesForm) {
+    if (this.currentPage == this.nbPagesForm || this.isEditMode) {
       return new Promise((resolve) => resolve(true));
     } else {
       return new Promise((resolve) => this.showModal(resolve));
