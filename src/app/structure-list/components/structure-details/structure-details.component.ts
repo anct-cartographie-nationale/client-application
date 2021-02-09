@@ -175,6 +175,8 @@ export class StructureDetailsComponent implements OnInit {
         return 'Séniors (+ de 65 ans)';
       case PublicCategorie.all:
         return 'Tout public';
+      case PublicCategorie.under16Years:
+        return 'Moins de 16 ans';
       default:
         return null;
     }
