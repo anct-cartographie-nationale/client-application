@@ -612,7 +612,7 @@ export class FormComponent implements OnInit {
       let user: User;
       if (this.isEditMode) {
         this.structureService.editStructure(structure).subscribe((s: Structure) => {
-          this.router.navigateByUrl('home', { state: { data: s } });
+          this.editForm = this.createStructureForm(s);
         });
       } else {
         if (this.profile) {
@@ -671,12 +671,16 @@ export class FormComponent implements OnInit {
 
   public goToSpecificPage(numPage: number, isSave: boolean): void {
     if (isSave) {
-      this.editForm = this.createStructureForm(new Structure(this.structureForm.value));
+      this.validateForm();
     } else {
       const structure = new Structure(this.editForm.value);
       this.structureForm = this.createStructureForm(structure);
       this.showCollapse(structure);
     }
     this.currentPage = numPage;
+  }
+
+  public closeEditMode(): void {
+    this.router.navigateByUrl('home', { state: { data: this.editForm.value } });
   }
 }
