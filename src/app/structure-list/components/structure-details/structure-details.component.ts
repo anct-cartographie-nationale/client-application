@@ -32,7 +32,6 @@ export class StructureDetailsComponent implements OnInit {
   public accessRights: Module[];
   public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
-  public isOtherSection = false;
   public showForm = false;
   public isClaimed: boolean = null;
   public isLoading: boolean = false;
@@ -84,7 +83,6 @@ export class StructureDetailsComponent implements OnInit {
     const index = this.structure.proceduresAccompaniment.indexOf('autres');
     if (index > -1) {
       this.structure.proceduresAccompaniment.splice(index, 1);
-      this.isOtherSection = true;
     }
   }
 

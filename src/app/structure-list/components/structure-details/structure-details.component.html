@@ -62,6 +62,45 @@
               >{{ structure.website | url }}</a
             >
           </div>
+          <div *ngIf="structure.hasSocialNetwork()" fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'network'"></app-svg-icon>
+            <a
+              *ngIf="structure.facebook"
+              target="_blank"
+              class="custom-link"
+              rel="noopener noreferrer"
+              [href]="'http://' + structure.facebook"
+            >
+              <app-svg-icon [type]="'ico'" [icon]="'facebook'" [title]="Facebook"></app-svg-icon
+            ></a>
+            <a
+              *ngIf="structure.twitter"
+              target="_blank"
+              class="custom-link"
+              rel="noopener noreferrer"
+              [href]="'http://' + structure.twitter"
+            >
+              <app-svg-icon [type]="'ico'" [icon]="'twitter'" [title]="Twitter"></app-svg-icon
+            ></a>
+            <a
+              *ngIf="structure.instagram"
+              target="_blank"
+              class="custom-link"
+              rel="noopener noreferrer"
+              [href]="'http://' + structure.instagram"
+            >
+              <app-svg-icon [type]="'ico'" [icon]="'instagram'" [title]="Instagram"></app-svg-icon
+            ></a>
+            <a
+              *ngIf="structure.linkedin"
+              target="_blank"
+              class="custom-link"
+              rel="noopener noreferrer"
+              [href]="'http://' + structure.linkedin"
+            >
+              <app-svg-icon [type]="'ico'" [icon]="'linkedin'" [title]="Linkedin"></app-svg-icon
+            ></a>
+          </div>
           <div *ngIf="structure.contactPhone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'tel'"></app-svg-icon>
             <p>{{ structure.contactPhone | phone }}</p>
@@ -163,7 +202,7 @@
   </div>
   <!-- Démarches en ligne -->
   <div
-    *ngIf="structure.proceduresAccompaniment.length"
+    *ngIf="structure.proceduresAccompaniment.length || structure.otherDescription"
     fxLayout="column"
     class="structure-details-block"
     fxLayoutAlign="baseline baseline"
@@ -179,10 +218,8 @@
           <app-logo-card *ngIf="accompagnement != 'autres'" [name]="accompagnement"></app-logo-card>
         </div>
       </div>
-      <p *ngIf="isOtherSection">
-        Tout ce qui est en lien avec la création d'entreprise ex : consultation de sites de références (BPI, Je créé
-        dans ma région, ...), inscription à des newsletters, aide pour trouver des sites (CMA, CCI, Urssaf,...),
-        recherches d'infos sur moteur de recherche...
+      <p *ngIf="structure.otherDescription">
+        {{ structure.otherDescription }}
       </p>
     </div>
   </div>

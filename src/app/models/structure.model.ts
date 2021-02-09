@@ -176,4 +176,8 @@ export class Structure {
   public getLabelTypeStructure(): string {
     return typeStructureEnum[this.structureType] ? typeStructureEnum[this.structureType] : '';
   }
+
+  public hasSocialNetwork(): boolean {
+    return this.facebook !== null || this.instagram !== null || this.twitter !== null || this.linkedin !== null;
+  }
 }
