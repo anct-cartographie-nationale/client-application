@@ -26,18 +26,6 @@ h3 {
   max-width: 960px;
   margin: 20px auto;
   text-align: center;
-  .btn {
-    width: 149px;
-    &.validate {
-      background-color: $green-1;
-    }
-    &.unique {
-      width: 240px;
-    }
-    &.invalid {
-      opacity: 0.4;
-    }
-  }
   &.desktop {
     @media #{$tablet} {
       display: none;
@@ -208,17 +196,7 @@ h3 {
   }
 }
 
-.btn {
-  background: $secondary-color;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  color: $white;
-  height: 40px;
-  width: 192px;
-  @include btn-bold;
-
+.btn-primary {
   &.previous {
     background-color: initial;
     color: $grey-2;

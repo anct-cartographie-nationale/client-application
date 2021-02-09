@@ -29,21 +29,10 @@
         width: 100%;
         margin-top: 14px;
         @include cn-bold-16;
-        .btn {
-          background: $secondary-color;
-          border-radius: 4px;
-          outline: none;
-          cursor: pointer;
-          border: 0;
-          color: $white;
-          height: 40px;
-          @include btn-bold;
-          width: 149px;
-          &.leave {
-            background: none;
-            color: $grey-1;
-            text-decoration: underline;
-          }
+        .leave {
+          background: none;
+          color: $grey-1;
+          text-decoration: underline;
         }
       }
     }
