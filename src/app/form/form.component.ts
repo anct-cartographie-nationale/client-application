@@ -166,7 +166,7 @@ export class FormComponent implements OnInit {
       structureType: new FormControl(structure.structureType, Validators.required),
       structureName: new FormControl(structure.structureName, Validators.required),
       description: new FormControl(structure.description),
-      lockdownActivity: new FormControl(structure.description),
+      lockdownActivity: new FormControl(structure.lockdownActivity),
       address: new FormGroup({
         numero: new FormControl(structure.address.numero),
         street: new FormControl(structure.address.street, Validators.required),
