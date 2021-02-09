@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { ProfileService } from '../profile/services/profile.service';
 import { AuthService } from '../services/auth.service';
 
@@ -17,8 +17,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthService, private profileService: ProfileService, private router: Router) {
     this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        // Show loading indicator.curr
+      if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;
       }
     });
