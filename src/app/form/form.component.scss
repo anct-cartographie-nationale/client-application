@@ -82,7 +82,7 @@ h3 {
 .content {
   .editHome {
     height: calc(
-      100vh - #{$header-height} - #{$footer-height} - 81px - 1px
+      100vh - #{$header-height} - #{$footer-height} - 81px - 1px - 55px
     ) !important; // -1px because of header border
   }
   @media #{$tablet} {
@@ -93,7 +93,7 @@ h3 {
         ); // -1px because of header border
       }
       .editHome {
-        height: calc(100vh - #{$header-height-phone} - 87px - 1px) !important; // -1px because of header border
+        height: calc(100vh - #{$header-height-phone} - 87px - 1px - 55px) !important; // -1px because of header border
       }
     }
   }
@@ -493,5 +493,14 @@ img {
   }
   &.last {
     border: 0;
+  }
+}
+.headerEditMode {
+  max-width: 960px;
+  margin: auto;
+  h2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
