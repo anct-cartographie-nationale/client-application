@@ -284,7 +284,6 @@ img {
   border: 1px solid $grey-4;
   border-radius: 4px;
   margin-bottom: 13px;
-  //margin-right: 40px;
   @media #{$tablet} {
     width: 296px;
   }
@@ -490,7 +489,7 @@ img {
   @include cn-bold-20;
   cursor: pointer;
   &:hover {
-    background: #0000000d;
+    background: $grey-6;
   }
   &.last {
     border: 0;
