@@ -557,4 +557,15 @@ export class FormComponent implements OnInit {
     this.resolve(hasAccept);
     this.showConfirmationModal = false;
   }
+
+  public verifyUserExist(inputEmail): void {
+    if (this.accountForm.get('email').valid) {
+      this.profileService.isEmailAlreadyUsed(inputEmail).subscribe((isExist) => {
+        if (isExist) {
+          this.accountForm.get('email').setErrors({ alreadyExist: true });
+          this.setValidationsForm();
+        }
+      });
+    }
+  }
 }
