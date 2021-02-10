@@ -1,40 +1,21 @@
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/color';
-@import '../../../../assets/scss/buttons';
-@import '../../../../assets/scss/z-index';
-@import '../../../../assets/scss/hyperlink';
-.cModal {
-  position: fixed;
-  z-index: $modal-z-index;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: $modal-background;
-  display: none;
+
+.ico-close {
+  width: 100%;
 }
-.cModal > div {
-  max-width: 450px;
-  position: relative;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: $white;
+h3 {
+  @include cn-bold-24;
+  color: $black;
+  margin-top: 0;
+}
+.form {
+  max-width: 391px;
+  margin: auto;
+  width: 100%;
+}
+.emailAlreadyUse {
+  color: $orange-warning;
   text-align: center;
-  border-radius: 4px;
-  @include cn-bold-16;
-  p {
-    padding: 30px 48px 0 40px;
-  }
-}
-.oModal {
-  display: block;
-}
-.ico-close-wrapper {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-}
-.ico-close-details {
-  opacity: 1;
+  margin-bottom: 10px;
 }

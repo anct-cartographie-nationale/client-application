@@ -3,38 +3,76 @@
 @import '../../../../assets/scss/buttons';
 @import '../../../../assets/scss/z-index';
 @import '../../../../assets/scss/hyperlink';
-.cModal {
-  position: fixed;
-  z-index: $modal-z-index;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: $modal-background;
-  display: none;
+
+.ico-close {
+  width: 100%;
 }
-.cModal > div {
-  max-width: 450px;
-  position: relative;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: $white;
-  text-align: center;
-  border-radius: 4px;
-  @include cn-bold-16;
-  p {
-    padding: 30px 48px 0 40px;
+.invalid {
+  color: $orange-warning;
+}
+h3 {
+  @include cn-bold-24;
+  color: $black;
+  margin-top: 0;
+}
+.form {
+  max-width: 391px;
+  margin: auto;
+}
+
+.form-group {
+  margin-top: 26px;
+  .notValidate {
+    min-width: 26px;
+    width: 26px;
+    height: 40px;
+  }
+  label {
+    margin-bottom: 4px;
+    @include cn-regular-14;
+    color: $grey-2;
+  }
+  input {
+    width: 100%;
+    margin-right: 39px;
+  }
+  &.password {
+    margin-bottom: 39px;
+    p {
+      @include cn-regular-14;
+      color: $grey-3;
+      margin-top: 0;
+      margin-bottom: 4px;
+      padding-right: 39px;
+      &.invalid {
+        color: $orange-warning;
+      }
+    }
+    .eyePassword {
+      cursor: pointer;
+      margin-right: 39px;
+      width: 24px;
+      height: 40px;
+      stroke: $grey-3;
+      fill: $grey-3;
+    }
   }
 }
-.oModal {
-  display: block;
-}
-.ico-close-wrapper {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-}
-.ico-close-details {
-  opacity: 1;
+.footerModal {
+  padding-right: 39px;
+  button {
+    width: 100% !important;
+    &.invalid {
+      opacity: 0.4;
+    }
+    &.confirm {
+      font-size: 14px;
+    }
+    &.register {
+      background: $white;
+      border: 1px solid $grey-4;
+      color: $secondary-color;
+      height: 38px;
+    }
+  }
 }
