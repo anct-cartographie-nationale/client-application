@@ -64,42 +64,44 @@
           </div>
           <div *ngIf="structure.hasSocialNetwork()" fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'network'"></app-svg-icon>
-            <a
-              *ngIf="structure.facebook"
-              target="_blank"
-              class="custom-link"
-              rel="noopener noreferrer"
-              [href]="'http://' + structure.facebook"
-            >
-              <app-svg-icon [type]="'ico'" [icon]="'facebook'" [title]="Facebook"></app-svg-icon
-            ></a>
-            <a
-              *ngIf="structure.twitter"
-              target="_blank"
-              class="custom-link"
-              rel="noopener noreferrer"
-              [href]="'http://' + structure.twitter"
-            >
-              <app-svg-icon [type]="'ico'" [icon]="'twitter'" [title]="Twitter"></app-svg-icon
-            ></a>
-            <a
-              *ngIf="structure.instagram"
-              target="_blank"
-              class="custom-link"
-              rel="noopener noreferrer"
-              [href]="'http://' + structure.instagram"
-            >
-              <app-svg-icon [type]="'ico'" [icon]="'instagram'" [title]="Instagram"></app-svg-icon
-            ></a>
-            <a
-              *ngIf="structure.linkedin"
-              target="_blank"
-              class="custom-link"
-              rel="noopener noreferrer"
-              [href]="'http://' + structure.linkedin"
-            >
-              <app-svg-icon [type]="'ico'" [icon]="'linkedin'" [title]="Linkedin"></app-svg-icon
-            ></a>
+            <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="8px">
+              <a
+                *ngIf="structure.facebook"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.facebook"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'facebook'" [title]="Facebook"></app-svg-icon
+              ></a>
+              <a
+                *ngIf="structure.twitter"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.twitter"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'twitter'" [title]="Twitter"></app-svg-icon
+              ></a>
+              <a
+                *ngIf="structure.instagram"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.instagram"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'instagram'" [title]="Instagram"></app-svg-icon
+              ></a>
+              <a
+                *ngIf="structure.linkedin"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.linkedin"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'linkedin'" [title]="Linkedin"></app-svg-icon
+              ></a>
+            </div>
           </div>
           <div *ngIf="structure.contactPhone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'tel'"></app-svg-icon>
