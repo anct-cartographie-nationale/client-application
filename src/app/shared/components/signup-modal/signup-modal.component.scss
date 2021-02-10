@@ -23,7 +23,8 @@ h3 {
 .form-group {
   margin-top: 26px;
   .notValidate {
-    width: 32px;
+    min-width: 26px;
+    width: 26px;
     height: 40px;
   }
   label {
