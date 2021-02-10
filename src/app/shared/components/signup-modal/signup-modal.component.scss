@@ -22,6 +22,10 @@ h3 {
 
 .form-group {
   margin-top: 26px;
+  .notValidate {
+    width: 32px;
+    height: 40px;
+  }
   label {
     margin-bottom: 4px;
     @include cn-regular-14;
@@ -46,6 +50,10 @@ h3 {
     .eyePassword {
       cursor: pointer;
       margin-right: 39px;
+      width: 24px;
+      height: 40px;
+      stroke: $grey-3;
+      fill: $grey-3;
     }
   }
 }

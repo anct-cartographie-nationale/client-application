@@ -48,7 +48,6 @@ export class SignUpModalComponent implements OnInit {
   }
 
   public closeModal(): void {
-    console.log('ok');
     this.closed.emit(true);
   }
 
