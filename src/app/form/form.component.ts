@@ -62,6 +62,7 @@ export class FormComponent implements OnInit {
   public userAcceptSavedDate = false;
   public showMenu = false;
   public isEditMode = false;
+  public isLoading = false;
 
   constructor(
     private structureService: StructureService,
@@ -72,11 +73,13 @@ export class FormComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.isLoading = true;
     this.profileService.getProfile().then((user: User) => {
       this.profile = user;
     });
     await this.setCategories();
     // Check if it's a new structure or edit structure
+    this.isLoading = false;
     if (history.state.data) {
       this.isEditMode = true;
       this.initForm(new Structure(history.state.data));
