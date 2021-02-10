@@ -615,6 +615,7 @@ export class FormComponent implements OnInit {
       let user: User;
       if (this.isEditMode) {
         this.structureService.editStructure(structure).subscribe((s: Structure) => {
+          this.createdStructure = s;
           this.editForm = this.createStructureForm(s);
         });
       } else {
@@ -684,6 +685,6 @@ export class FormComponent implements OnInit {
   }
 
   public closeEditMode(): void {
-    this.router.navigateByUrl('home', { state: { data: this.editForm.value } });
+    this.router.navigateByUrl('home', { state: { data: this.createdStructure } });
   }
 }
