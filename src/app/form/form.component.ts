@@ -17,6 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { Regex } from '../shared/enum/regex.enum';
+const { DateTime } = require('luxon');
 @Component({
   selector: 'app-structureForm',
   templateUrl: './form.component.html',
@@ -615,7 +616,7 @@ export class FormComponent implements OnInit {
       let user: User;
       if (this.isEditMode) {
         this.structureService.editStructure(structure).subscribe((s: Structure) => {
-          this.createdStructure = s;
+          this.createdStructure = this.structureService.updateOpeningStructure(s, DateTime.local());
           this.editForm = this.createStructureForm(s);
         });
       } else {
