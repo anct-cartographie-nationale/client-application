@@ -516,7 +516,7 @@ export class FormComponent implements OnInit {
   }
 
   /**
-   * Pgae algo for claim structure case
+   * Page algo for claim structure case
    */
   public nextPageClaim(): void {
     if (this.currentPage == this.nbPagesForm - 1) {
@@ -542,9 +542,25 @@ export class FormComponent implements OnInit {
       this.currentPage = this.nbPagesForm;
     }
 
-    if (this.currentPage !== this.nbPagesForm - 1) {
-      this.progressStatus += 25;
+    this.progressStatus += 25;
+  }
+
+  /**
+   * Page algo for claim structure case
+   */
+  public previousPageClaim(): void {
+    if (this.currentPage == PageTypeEnum.accountInfo) {
+      this.currentPage = PageTypeEnum.summary;
+      this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.accountCredentials) {
+      this.currentPage = PageTypeEnum.accountInfo;
+      this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.cgu) {
+      this.currentPage = PageTypeEnum.accountCredentials;
+      this.updatePageValid();
     }
+
+    this.progressStatus -= 25;
   }
 
   public nextPage(): void {
@@ -576,20 +592,24 @@ export class FormComponent implements OnInit {
     }
   }
   public previousPage(): void {
-    // Check if user already connected to skip accountForm pages.
-    if (this.currentPage == PageTypeEnum.structureNameAndAddress && this.profile) {
-      this.currentPage -= 2; // Skip 2 pages from AccountForm
-      this.progressStatus -= 2 * (100 / this.nbPagesForm);
-    }
+    if (this.isClaimMode) {
+      this.previousPageClaim();
+    } else {
+      // Check if user already connected to skip accountForm pages.
+      if (this.currentPage == PageTypeEnum.structureNameAndAddress && this.profile) {
+        this.currentPage -= 2; // Skip 2 pages from AccountForm
+        this.progressStatus -= 2 * (100 / this.nbPagesForm);
+      }
 
-    // Check if "other" isn't check to hide "other description" page
-    if (this.currentPage == PageTypeEnum.structureWorkshop && !this.isInArray('autres', 'proceduresAccompaniment')) {
-      this.currentPage--; // page 14 skip and go to page 13
+      // Check if "other" isn't check to hide "other description" page
+      if (this.currentPage == PageTypeEnum.structureWorkshop && !this.isInArray('autres', 'proceduresAccompaniment')) {
+        this.currentPage--; // page 14 skip and go to page 13
+        this.progressStatus -= 100 / this.nbPagesForm;
+      }
+      this.currentPage--;
       this.progressStatus -= 100 / this.nbPagesForm;
+      this.updatePageValid();
     }
-    this.currentPage--;
-    this.progressStatus -= 100 / this.nbPagesForm;
-    this.updatePageValid();
   }
   public showPassword(): void {
     this.isShowPassword = !this.isShowPassword;
