@@ -13,18 +13,17 @@ import { MustMatch } from '../shared/validator/form';
 import { Address } from '../models/address.model';
 import { Module } from '../structure-list/models/module.model';
 import { Equipment } from '../structure-list/enum/equipment.enum';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { Regex } from '../shared/enum/regex.enum';
+const { DateTime } = require('luxon');
 @Component({
   selector: 'app-structureForm',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  @Input() public idStructure?: string;
-  @Input() public isEditMode: boolean = true;
   public profile: User;
   public createdStructure: Structure;
 
@@ -32,6 +31,7 @@ export class FormComponent implements OnInit {
   public structureForm: FormGroup;
   public accountForm: FormGroup;
   public hoursForm: FormGroup;
+  public editForm: FormGroup;
   public labelsQualifications: Category;
   public publics: Category;
   public accessModality: Category;
@@ -62,67 +62,69 @@ export class FormComponent implements OnInit {
   public isShowPassword = false;
   public userAcceptSavedDate = false;
   public showMenu = false;
+  public isEditMode = false;
+  public isLoading = false;
+  public isWifiChoosen = false;
 
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
     private profileService: ProfileService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.isLoading = true;
     this.profileService.getProfile().then((user: User) => {
       this.profile = user;
     });
-
+    await this.setCategories();
     // Check if it's a new structure or edit structure
-    if (this.idStructure) {
-      this.structureService.getStructure(this.idStructure).subscribe((structure) => {
-        this.initForm(structure);
-        this.idStructure = structure._id;
-      });
+    this.isLoading = false;
+    if (history.state.data) {
+      this.isEditMode = true;
+      this.isWifiChoosen = true;
+      this.initForm(new Structure(history.state.data));
     } else {
       this.initForm(new Structure());
     }
-    this.setCategories();
   }
 
-  private setCategories(): void {
+  async setCategories(): Promise<void> {
     this.searchService.getCategoriesAccompaniment().subscribe((categories: Category[]) => {
       this.proceduresAccompaniment = categories[0];
     });
-    this.searchService.getCategoriesMoreFilters().subscribe((categories: Category[]) => {
-      categories.forEach((categ) => {
-        switch (categ.id) {
-          case CategoryEnum.accessModality: {
-            this.accessModality = categ;
-            break;
-          }
-          case CategoryEnum.equipmentsAndServices: {
-            categ.modules.forEach((c) => {
-              this.equipmentsAndServices.push({ module: c, openned: false });
-            });
-            break;
-          }
-          case CategoryEnum.labelsQualifications: {
-            this.labelsQualifications = categ;
-            break;
-          }
-          case CategoryEnum.publics: {
-            this.publics = categ;
-            break;
-          }
-          case CategoryEnum.publicsAccompaniment: {
-            this.publicsAccompaniment = categ;
-            break;
-          }
+    const equipmentsCategs = await this.searchService.getCategoriesMoreFilters().toPromise();
+    equipmentsCategs.forEach((categ) => {
+      switch (categ.id) {
+        case CategoryEnum.accessModality: {
+          this.accessModality = categ;
+          break;
         }
-      });
+        case CategoryEnum.equipmentsAndServices: {
+          categ.modules.forEach((c) => {
+            this.equipmentsAndServices.push({ module: c, openned: false });
+          });
+          break;
+        }
+        case CategoryEnum.labelsQualifications: {
+          this.labelsQualifications = categ;
+          break;
+        }
+        case CategoryEnum.publics: {
+          this.publics = categ;
+          break;
+        }
+        case CategoryEnum.publicsAccompaniment: {
+          this.publicsAccompaniment = categ;
+          break;
+        }
+      }
     });
-    this.searchService.getCategoriesTraining().subscribe((categories: Category[]) => {
-      categories.forEach((categ) => {
-        this.trainingCategories.push({ category: categ, openned: false });
-      });
+    let categs = await this.searchService.getCategoriesTraining().toPromise();
+    categs.forEach((categ) => {
+      this.trainingCategories.push({ category: categ, openned: false });
     });
   }
 
@@ -144,13 +146,33 @@ export class FormComponent implements OnInit {
     );
 
     // Init form
-    this.structureForm = new FormGroup({
+    this.structureForm = this.createStructureForm(structure);
+    this.editForm = this.createStructureForm(structure);
+
+    // Init hours form
+    this.hoursForm = new FormGroup({
+      monday: this.createDay(structure.hours.monday),
+      tuesday: this.createDay(structure.hours.tuesday),
+      wednesday: this.createDay(structure.hours.wednesday),
+      thursday: this.createDay(structure.hours.thursday),
+      friday: this.createDay(structure.hours.friday),
+      saturday: this.createDay(structure.hours.saturday),
+      sunday: this.createDay(structure.hours.sunday),
+    });
+    if (this.isEditMode) {
+      this.showCollapse(structure);
+    }
+
+    this.setValidationsForm();
+  }
+  private createStructureForm(structure): FormGroup {
+    const form = new FormGroup({
       _id: new FormControl(structure._id),
       coord: new FormControl(structure.coord),
       structureType: new FormControl(structure.structureType, Validators.required),
       structureName: new FormControl(structure.structureName, Validators.required),
       description: new FormControl(structure.description),
-      lockdownActivity: new FormControl(structure.description),
+      lockdownActivity: new FormControl(structure.lockdownActivity),
       address: new FormGroup({
         numero: new FormControl(structure.address.numero),
         street: new FormControl(structure.address.street, Validators.required),
@@ -205,20 +227,82 @@ export class FormComponent implements OnInit {
         [Validators.required, Validators.pattern(Regex.noNullNumber)] //NOSONAR
       ),
       freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
-      freeWifi: new FormControl(structure.freeWifi, Validators.required),
     });
-
-    // Init hours form
-    this.hoursForm = new FormGroup({
-      monday: this.createDay(structure.hours.monday),
-      tuesday: this.createDay(structure.hours.tuesday),
-      wednesday: this.createDay(structure.hours.wednesday),
-      thursday: this.createDay(structure.hours.thursday),
-      friday: this.createDay(structure.hours.friday),
-      saturday: this.createDay(structure.hours.saturday),
-      sunday: this.createDay(structure.hours.sunday),
+    return form;
+  }
+  private showCollapse(s: Structure): void {
+    if (s.website) {
+      this.showWebsite = true;
+    }
+    if (s.facebook || s.twitter || s.instagram || s.linkedin) {
+      this.showSocialNetwork = true;
+    }
+    if (s.publicsAccompaniment.length) {
+      this.showPublicsAccompaniment = true;
+    }
+    if (s.proceduresAccompaniment.length) {
+      this.showProceduresAccompaniment = true;
+    }
+    this.trainingCategories.forEach((categ: { category: Category; openned: boolean }) => {
+      categ.openned = false;
+      switch (categ.category.id) {
+        case 'accessRight':
+          if (s.accessRight.length) {
+            categ.openned = true;
+          }
+          break;
+        case 'socialAndProfessional':
+          if (s.socialAndProfessional.length) {
+            categ.openned = true;
+          }
+          break;
+        case 'baseSkills':
+          if (s.baseSkills.length) {
+            categ.openned = true;
+          }
+          break;
+        case 'parentingHelp':
+          if (s.parentingHelp.length) {
+            categ.openned = true;
+          }
+          break;
+        case 'digitalCultureSecurity':
+          if (s.digitalCultureSecurity.length) {
+            categ.openned = true;
+          }
+          break;
+      }
     });
-    this.setValidationsForm();
+    this.equipmentsAndServices.forEach((equipment: { module: Module; openned: boolean }) => {
+      equipment.openned = false;
+      switch (equipment.module.id) {
+        case 'ordinateurs':
+          if (s.equipmentsAndServices.includes('ordinateurs')) {
+            equipment.openned = true;
+          }
+          break;
+        case 'tablettes':
+          if (s.equipmentsAndServices.includes('tablettes')) {
+            equipment.openned = true;
+          }
+          break;
+        case 'bornesNumeriques':
+          if (s.equipmentsAndServices.includes('bornesNumeriques')) {
+            equipment.openned = true;
+          }
+          break;
+        case 'imprimantes':
+          if (s.equipmentsAndServices.includes('imprimantes')) {
+            equipment.openned = true;
+          }
+          break;
+        case 'scanners':
+          if (s.equipmentsAndServices.includes('scanners')) {
+            equipment.openned = true;
+          }
+          break;
+      }
+    });
   }
 
   private loadArrayForCheckbox(array: string[], isRequired: boolean): FormArray {
@@ -254,12 +338,15 @@ export class FormComponent implements OnInit {
   }
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')), //NOSONAR
-      closing: new FormControl(time.closing, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')), //NOSONAR
+      openning: new FormControl(time.openning), //NOSONAR
+      closing: new FormControl(time.closing), //NOSONAR
     });
   }
 
   public onCheckChange(event: boolean, formControlName: string, value: string): void {
+    if (value == 'wifiEnAccesLibre') {
+      this.isWifiChoosen = true;
+    }
     const formArray: FormArray = this.structureForm.get(formControlName) as FormArray;
     if (event) {
       // Add a new control in the arrayForm
@@ -297,13 +384,20 @@ export class FormComponent implements OnInit {
     };
     this.pagesValidation[4] = {
       valid: this.getStructureControl('structureName').valid && this.getStructureControl('address').valid,
+      name: 'Nom et adresse',
     };
-    this.pagesValidation[5] = { valid: this.getStructureControl('contactPhone').valid };
-    this.pagesValidation[6] = { valid: this.getStructureControl('structureType').valid };
-    this.pagesValidation[7] = { valid: this.getStructureControl('accessModality').valid };
-    this.pagesValidation[8] = { valid: this.hoursForm.valid };
-    this.pagesValidation[9] = { valid: this.getStructureControl('exceptionalClosures').valid };
-    this.pagesValidation[10] = { valid: this.getStructureControl('pmrAccess').valid };
+    this.pagesValidation[5] = { valid: this.getStructureControl('contactPhone').valid, name: 'Téléphone' };
+    this.pagesValidation[6] = { valid: this.getStructureControl('structureType').valid, name: 'Type de structure' };
+    this.pagesValidation[7] = { valid: this.getStructureControl('accessModality').valid, name: "Modalités d'accueil " };
+    this.pagesValidation[8] = { valid: this.hoursForm.valid, name: "Horaires d'ouverture" };
+    this.pagesValidation[9] = {
+      valid: this.getStructureControl('exceptionalClosures').valid,
+      name: 'Précisions sur les horaires',
+    };
+    this.pagesValidation[10] = {
+      valid: this.getStructureControl('pmrAccess').valid,
+      name: 'Accessibilité pour les personnes à mobilité réduite',
+    };
     this.pagesValidation[11] = {
       valid:
         this.getStructureControl('contactMail').valid &&
@@ -312,15 +406,18 @@ export class FormComponent implements OnInit {
           this.getStructureControl('twitter').valid &&
           this.getStructureControl('instagram').valid) ||
           !this.showSocialNetwork),
+      name: 'Présence sur internet',
     };
-    this.pagesValidation[12] = { valid: this.getStructureControl('publics').valid };
+    this.pagesValidation[12] = { valid: this.getStructureControl('publics').valid, name: 'Public admis' };
     this.pagesValidation[13] = {
       valid:
         this.getStructureControl('publicsAccompaniment').valid &&
         this.getStructureControl('proceduresAccompaniment').valid,
+      name: 'Accompagnements proposés',
     };
     this.pagesValidation[14] = {
       valid: this.getStructureControl('otherDescription').value,
+      name: 'Autres démarches proposés',
     };
     this.pagesValidation[15] = {
       valid:
@@ -329,9 +426,13 @@ export class FormComponent implements OnInit {
         this.getStructureControl('baseSkills').valid &&
         this.getStructureControl('parentingHelp').valid &&
         this.getStructureControl('digitalCultureSecurity').valid,
+      name: 'Ateliers au numérique proposés',
     };
-    this.pagesValidation[16] = { valid: this.getStructureControl('freeWorkShop').valid };
-    this.pagesValidation[17] = { valid: this.getStructureControl('freeWifi').valid };
+    this.pagesValidation[16] = { valid: this.getStructureControl('freeWorkShop').valid, name: 'Gratuité des ateliers' };
+    this.pagesValidation[17] = {
+      valid: this.getStructureControl('equipmentsAndServices').valid && this.isWifiChoosen,
+      name: 'Gratuité du wifi',
+    };
     this.pagesValidation[18] = {
       valid:
         this.getStructureControl('equipmentsAndServices').valid &&
@@ -340,11 +441,24 @@ export class FormComponent implements OnInit {
         this.getStructureControl('nbTablets').valid &&
         this.getStructureControl('nbNumericTerminal').valid &&
         this.getStructureControl('nbScanners').valid,
+      name: 'Matériels mis à disposition',
     };
-    this.pagesValidation[19] = { valid: this.getStructureControl('labelsQualifications').valid };
-    this.pagesValidation[20] = { valid: this.getStructureControl('equipmentsAndServices').valid };
-    this.pagesValidation[21] = { valid: this.getStructureControl('description').valid };
-    this.pagesValidation[22] = { valid: this.getStructureControl('lockdownActivity').valid };
+    this.pagesValidation[19] = {
+      valid: this.getStructureControl('labelsQualifications').valid,
+      name: 'Labélisations proposées',
+    };
+    this.pagesValidation[20] = {
+      valid: this.getStructureControl('equipmentsAndServices').valid,
+      name: 'Autres services proposés',
+    };
+    this.pagesValidation[21] = {
+      valid: this.getStructureControl('description').valid,
+      name: 'Présentation de la structure',
+    };
+    this.pagesValidation[22] = {
+      valid: this.getStructureControl('lockdownActivity').valid,
+      name: 'Informations spécifiques à la période COVID',
+    };
     this.pagesValidation[23] = { valid: this.userAcceptSavedDate };
     //this.pagesValidation[24] = { valid: true };
     this.updatePageValid();
@@ -507,19 +621,26 @@ export class FormComponent implements OnInit {
       let structure: Structure = this.structureForm.value;
       structure.hours = this.hoursForm.value;
       let user: User;
-      if (this.profile) {
-        user = this.profile;
-        structure.accountVerified = true;
-        this.createStructure(structure, user);
+      if (this.isEditMode) {
+        this.structureService.editStructure(structure).subscribe((s: Structure) => {
+          this.createdStructure = this.structureService.updateOpeningStructure(s, DateTime.local());
+          this.editForm = this.createStructureForm(s);
+        });
       } else {
-        if (this.accountForm.valid) {
-          user = new User(this.accountForm.value);
-          this.authService
-            .register(user)
-            .pipe(first())
-            .subscribe(() => {
-              this.createStructure(structure, user);
-            });
+        if (this.profile) {
+          user = this.profile;
+          structure.accountVerified = true;
+          this.createStructure(structure, user);
+        } else {
+          if (this.accountForm.valid) {
+            user = new User(this.accountForm.value);
+            this.authService
+              .register(user)
+              .pipe(first())
+              .subscribe(() => {
+                this.createStructure(structure, user);
+              });
+          }
         }
       }
     }
@@ -542,7 +663,7 @@ export class FormComponent implements OnInit {
 
   public canExit(): Promise<boolean> {
     // Avoid confirmation when user submit form and leave.
-    if (this.currentPage == this.nbPagesForm) {
+    if (this.currentPage == this.nbPagesForm || this.currentPage < 3 || this.isEditMode) {
       return new Promise((resolve) => resolve(true));
     } else {
       return new Promise((resolve) => this.showModal(resolve));
@@ -558,6 +679,24 @@ export class FormComponent implements OnInit {
     this.showConfirmationModal = false;
   }
 
+  // Function for editMode only
+
+  public goToSpecificPage(numPage: number, isSave: boolean): void {
+    if (isSave) {
+      this.validateForm();
+    } else {
+      const structure = new Structure(this.editForm.value);
+      this.structureForm = this.createStructureForm(structure);
+      this.showCollapse(structure);
+    }
+    this.currentPage = numPage;
+    this.updatePageValid();
+  }
+
+  public closeEditMode(): void {
+    this.router.navigateByUrl('home', { state: { data: this.createdStructure } });
+  }
+  
   public verifyUserExist(inputEmail): void {
     if (this.accountForm.get('email').valid) {
       this.profileService.isEmailAlreadyUsed(inputEmail).subscribe((isExist) => {

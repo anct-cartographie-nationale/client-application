@@ -23,7 +23,6 @@ import { PublicCategorie } from '../../enum/public.enum';
 export class StructureDetailsComponent implements OnInit {
   @Input() public structure: Structure;
   @Output() public closeDetails: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() public updatedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
   public accessModality = AccessModality;
 
   public baseSkillssReferentiel: Category;
@@ -32,10 +31,8 @@ export class StructureDetailsComponent implements OnInit {
   public accessRights: Module[];
   public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
-  public showForm = false;
   public isClaimed: boolean = null;
   public isLoading: boolean = false;
-  public isEditMode: boolean = false;
   public currentProfile: User = null;
   public deleteModalOpenned = false;
   public claimModalOpenned = false;
@@ -117,11 +114,6 @@ export class StructureDetailsComponent implements OnInit {
     this.printService.printDocument('structure', this.structure);
   }
 
-  public editStructure(): void {
-    this.isEditMode = true;
-    this.displayForm();
-  }
-
   public toggleDeleteModal(): void {
     this.deleteModalOpenned = !this.deleteModalOpenned;
   }
@@ -155,17 +147,6 @@ export class StructureDetailsComponent implements OnInit {
       });
     }
   }
-  // Show/hide form structure
-  public displayForm(): void {
-    this.showForm = !this.showForm;
-  }
-
-  public updateStructure(s: Structure): void {
-    this.structure = new Structure({ ...this.structure, ...s });
-    this.updatedStructure.emit(this.structure);
-    this.displayForm();
-    this.ngOnInit();
-  }
 
   public getAccessLabel(accessModality: AccessModality): string {
     switch (accessModality) {
@@ -192,6 +173,8 @@ export class StructureDetailsComponent implements OnInit {
         return 'Séniors (+ de 65 ans)';
       case PublicCategorie.all:
         return 'Tout public';
+      case PublicCategorie.under16Years:
+        return 'Moins de 16 ans';
       default:
         return null;
     }
@@ -219,5 +202,10 @@ export class StructureDetailsComponent implements OnInit {
     this.tclService.getTclStopPointBycoord(this.structure.getLon(), this.structure.getLat()).subscribe((res) => {
       this.tclStopPoints = res;
     });
+  }
+  public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
+    return equipmentsAndServices.filter((eqpt) =>
+      ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners', 'wifiEnAccesLibre'].includes(eqpt)
+    );
   }
 }

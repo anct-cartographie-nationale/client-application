@@ -37,7 +37,6 @@ export class Structure {
   public equipmentsAndServices: string[] = [];
   public hours: Week;
   public freeWorkShop: boolean = null;
-  public freeWifi: boolean = null;
   public otherDescription: string = null;
 
   public isOpen: boolean = false;
