@@ -46,7 +46,12 @@
         <button class="btn-primary start" (click)="nextPage()">C'est Parti</button>
       </div>
     </div>
-    <div *ngIf="currentPage == 0 && isEditMode" class="editHome page" fxLayout="column" fxLayoutAlign="space-between">
+    <div
+      *ngIf="currentPage == pageTypeEnum.summary && isEditMode"
+      class="editHome page"
+      fxLayout="column"
+      fxLayoutAlign="space-between"
+    >
       <div>
         <div class="summary" *ngFor="let page of pagesValidation; let index = index">
           <div
@@ -65,7 +70,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="currentPage == 1" class="informations page" fxLayout="column" fxLayoutGap="28px">
+    <div *ngIf="currentPage == pageTypeEnum.info" class="informations page" fxLayout="column" fxLayoutGap="28px">
       <h3>De quelles informations faut-il vous munir ?</h3>
       <img src="../../assets/form/factures.svg" alt="logo factures" />
       <div>
@@ -79,7 +84,7 @@
       </div>
     </div>
     <form [formGroup]="accountForm" *ngIf="accountForm && !profile">
-      <div *ngIf="currentPage == 2" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.accountInfo" class="page">
         <div class="title">
           <h3>Qui êtes-vous ?</h3>
           <p>Ces informations ne seront pas visibles sur la plateforme</p>
@@ -126,7 +131,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 3" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.accountCredentials" class="page">
         <div class="title">
           <h3>Quels identifiants utiliserez-vous pour vous connecter ?</h3>
         </div>
@@ -204,7 +209,7 @@
       </div>
     </form>
     <form [formGroup]="structureForm" *ngIf="structureForm">
-      <div *ngIf="currentPage == 4" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureNameAndAddress" class="page">
         <div class="title">
           <h3>Quelle structure voulez-vous réferencer ?</h3>
         </div>
@@ -237,7 +242,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 5" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structurePhone" class="page">
         <div class="title">
           <h3>Quel numéro appelé pour joindre votre structure ?</h3>
         </div>
@@ -263,7 +268,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 6" class="page" fxLayout="column">
+      <div *ngIf="currentPage == pageTypeEnum.structureType" class="page" fxLayout="column">
         <div class="title">
           <h3>Quel type de structure ?</h3>
           <p>1 seul choix possible</p>
@@ -277,7 +282,7 @@
           ></app-structure-type-picker>
         </div>
       </div>
-      <div *ngIf="currentPage == 7" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureAccessModality" class="page">
         <div class="title">
           <h3>Quelles sont les modalités d'accueil ?</h3>
           <p>Plusieurs choix possibles</p>
@@ -293,7 +298,7 @@
           </app-checkbox-form>
         </div>
       </div>
-      <div *ngIf="currentPage == 8" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureHours" class="page">
         <div class="title">
           <h3>Quels sont les horaires d'ouverture ?</h3>
           <p class="notRequired">facultatif</p>
@@ -306,7 +311,7 @@
           [isEditMode]="!isEditMode"
         ></app-hour-picker>
       </div>
-      <div *ngIf="currentPage == 9" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureHoursDetails" class="page">
         <div class="title">
           <h3>Avez-vous des précisions à apporter sur les horaires ?</h3>
           <p class="notRequired">facultatif</p>
@@ -327,7 +332,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 10" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structurePmr" class="page">
         <div class="title">
           <h3>Est-ce accessible pour les personnes à mobilité réduite ?</h3>
         </div>
@@ -337,7 +342,7 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 11" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureWebAndSocialNetwork" class="page">
         <div class="title">
           <h3>Comment vous trouver sur internet ?</h3>
         </div>
@@ -527,7 +532,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 12" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structurePublicTarget" class="page">
         <div class="title">
           <h3>Quel public peut venir vous consulter ?</h3>
           <p>Plusieurs choix possibles</p>
@@ -549,7 +554,7 @@
           </button>
         </div>
       </div>
-      <div *ngIf="currentPage == 13" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureAccompaniment" class="page">
         <div class="title">
           <h3>Quel(s) accompagnement(s) proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -629,7 +634,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 14" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureOtherAccompaniment" class="page">
         <div class="title">
           <h3>Quelles sont les autres démarches ?</h3>
         </div>
@@ -648,7 +653,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 15" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureWorkshop" class="page">
         <div class="title">
           <h3>Quel(s) atelier(s) au numérique proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -691,7 +696,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 16" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureWorkshopPrice" class="page">
         <div class="title">
           <h3>Ces ateliers sont-ils gratuits ?</h3>
         </div>
@@ -701,7 +706,7 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 17" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureWifi" class="page">
         <div class="title">
           <h3>Proposez-vous le wifi en accès libre ?</h3>
         </div>
@@ -711,7 +716,7 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 18" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureEquipments" class="page">
         <div class="title">
           <h3>Quel matériel mettez-vous à disposition ?</h3>
           <p class="notRequired">facultatif</p>
@@ -852,7 +857,7 @@
           </div>
         </ng-container>
       </div>
-      <div *ngIf="currentPage == 19" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureLabels" class="page">
         <div class="title">
           <h3>Quelle(s) labelisation proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -869,7 +874,7 @@
           </app-checkbox-form>
         </div>
       </div>
-      <div *ngIf="currentPage == 20" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureOtherServices" class="page">
         <div class="title">
           <h3>Quels autres services proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -891,7 +896,7 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="currentPage == 21" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureDescription" class="page">
         <div class="title">
           <h3>Pouvez vous présentez votre structure ?</h3>
           <p class="notRequired">facultatif</p>
@@ -908,7 +913,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 22" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureCovidInfo" class="page">
         <div class="title">
           <h3>Y a-t-il des informations spécifique à la période COVID ?</h3>
           <p class="notRequired">facultatif</p>
@@ -927,7 +932,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 23" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.cgu" class="page">
         <div class="title">
           <h3>
             Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon<span
