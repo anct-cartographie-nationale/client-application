@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StructureType } from '../../../models/structure-type.model';
 import { StructureTypeService } from '../../../services/structure-type.service';
+import { typeStructureEnum } from '../../enum/typeStructure.enum';
 
 export enum structureTypes {
   public = 'Publique',
@@ -66,5 +67,8 @@ export class StructureTypePickerComponent implements OnInit {
       default:
         throw new Error('Structure type not handle');
     }
+  }
+  public getStructureTypeName(type: string): string {
+    return typeStructureEnum[type];
   }
 }

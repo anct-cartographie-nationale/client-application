@@ -322,7 +322,6 @@
           (updateForm)="updateHours($event)"
           (updateFormError)="setHoursError()"
           [structureInput]="hoursForm"
-          [isEditMode]="!isEditMode"
         ></app-hour-picker>
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureHoursDetails" class="page">
@@ -725,7 +724,7 @@
           <h3>Proposez-vous le wifi en accès libre ?</h3>
         </div>
         <app-radio-form
-          [selectedOption]="isInArray('wifiEnAccesLibre', 'equipmentsAndServices')"
+          [selectedOption]="isEditMode ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices') : null"
           (selectedEvent)="onCheckChange($event, 'equipmentsAndServices', 'wifiEnAccesLibre')"
         >
         </app-radio-form>

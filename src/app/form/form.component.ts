@@ -68,6 +68,7 @@ export class FormComponent implements OnInit {
   public isEditMode = false;
   public isClaimMode = false;
   public isLoading = false;
+  public isWifiChoosen = false;
 
   constructor(
     private structureService: StructureService,
@@ -87,6 +88,7 @@ export class FormComponent implements OnInit {
     this.isLoading = false;
     if (history.state.data) {
       this.isEditMode = true;
+      this.isWifiChoosen = true;
       this.initForm(new Structure(history.state.data));
     } else if (history.state.newUser) {
       this.isClaimMode = true;
@@ -356,6 +358,9 @@ export class FormComponent implements OnInit {
   }
 
   public onCheckChange(event: boolean, formControlName: string, value: string): void {
+    if (value == 'wifiEnAccesLibre') {
+      this.isWifiChoosen = true;
+    }
     const formArray: FormArray = this.structureForm.get(formControlName) as FormArray;
     if (event) {
       // Add a new control in the arrayForm
@@ -471,7 +476,7 @@ export class FormComponent implements OnInit {
         name: 'Gratuité des ateliers',
       };
       this.pagesValidation[PageTypeEnum.structureWifi] = {
-        valid: this.getStructureControl('equipmentsAndServices').valid,
+        valid: this.getStructureControl('equipmentsAndServices').valid && this.isWifiChoosen,
         name: 'Gratuité du wifi',
       };
       this.pagesValidation[PageTypeEnum.structureEquipments] = {
@@ -745,7 +750,7 @@ export class FormComponent implements OnInit {
 
   public canExit(): Promise<boolean> {
     // Avoid confirmation when user submit form and leave.
-    if (this.currentPage == this.nbPagesForm || this.isEditMode) {
+    if (this.currentPage == this.nbPagesForm || this.currentPage < 3 || this.isEditMode) {
       return new Promise((resolve) => resolve(true));
     } else {
       return new Promise((resolve) => this.showModal(resolve));
@@ -772,6 +777,7 @@ export class FormComponent implements OnInit {
       this.showCollapse(structure);
     }
     this.currentPage = numPage;
+    this.updatePageValid();
   }
 
   public closeEditMode(): void {

@@ -31,10 +31,7 @@ export class StructureDetailsComponent implements OnInit {
   public accessRights: Module[];
   public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
-  public isOtherSection = false;
-  public showForm = false;
   public isClaimed: boolean = null;
-  Z;
   public isLoading: boolean = false;
   public currentProfile: User = null;
   public deleteModalOpenned = false;
