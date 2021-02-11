@@ -5,7 +5,6 @@
 @import '../../assets/scss/shapes';
 @import '../../assets/scss/z-index';
 
-$progressBar-height: 50px;
 h3 {
   margin: 0;
 }
@@ -27,15 +26,6 @@ h3 {
   max-width: 960px;
   margin: 20px auto;
   text-align: center;
-  .btn {
-    width: 149px;
-    &.validate {
-      background-color: $green-1;
-    }
-    &.unique {
-      width: 240px;
-    }
-  }
   &.desktop {
     @media #{$tablet} {
       display: none;
@@ -90,6 +80,23 @@ h3 {
   }
 }
 .content {
+  .editHome {
+    height: calc(
+      100vh - #{$header-height} - #{$footer-height} - 81px - 1px - 55px
+    ) !important; // -1px because of header border
+  }
+  @media #{$tablet} {
+    &.editMode {
+      .page {
+        height: calc(
+          100vh - #{$header-height-phone} - #{$footer-height-phone} - 87px - 1px
+        ); // -1px because of header border
+      }
+      .editHome {
+        height: calc(100vh - #{$header-height-phone} - 87px - 1px - 55px) !important; // -1px because of header border
+      }
+    }
+  }
   padding: 0 16px;
   display: block;
   overflow-y: auto;
@@ -189,20 +196,29 @@ h3 {
   }
 }
 
-.btn {
-  background: $secondary-color;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  color: $white;
-  height: 40px;
-  width: 192px;
-  @include btn-bold;
-
+.btn-primary {
+  &.previous {
+    background-color: initial;
+    color: $grey-2;
+    width: 120px;
+    border-radius: 6px;
+    border: 1px solid $grey-4;
+  }
   &.start {
     margin-bottom: 26px;
   }
+}
+.chevronRight {
+  height: 24px;
+  width: 24px;
+  stroke: $grey-2;
+  margin-left: 10px;
+}
+.chevronLeft {
+  height: 24px;
+  width: 24px;
+  stroke: $black;
+  margin-right: 10px;
 }
 .progressBar {
   height: #{$progressBar-height};
@@ -447,5 +463,44 @@ img {
       height: 14px;
       width: 14px;
     }
+  }
+}
+.footerEditMode {
+  width: 100%;
+  position: fixed;
+  bottom: 56px;
+  margin: 0;
+  background: $white;
+  left: 0;
+  border-top: 1px solid $grey-4;
+  padding: 20px 0;
+  @media #{$tablet} {
+    bottom: 0;
+    left: 0;
+  }
+}
+.returnBtnSection {
+  max-width: 960px;
+  margin: 24px auto;
+}
+.itemSummary {
+  height: 60px;
+  border-bottom: 1px solid $grey-4;
+  @include cn-bold-20;
+  cursor: pointer;
+  &:hover {
+    background: $grey-6;
+  }
+  &.last {
+    border: 0;
+  }
+}
+.headerEditMode {
+  max-width: 960px;
+  margin: auto;
+  h2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
