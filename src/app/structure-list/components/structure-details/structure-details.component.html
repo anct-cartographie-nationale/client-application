@@ -136,7 +136,7 @@
         >
           Modifier cette structure
         </a> -->
-        <a *ngIf="profileService.isAdmin()" (click)="toggleDeleteModal()" class="primary" tabindex="0">
+        <a *ngIf="canDelete()" (click)="toggleDeleteModal()" class="primary" tabindex="0">
           Supprimer cette structure
         </a>
       </div>

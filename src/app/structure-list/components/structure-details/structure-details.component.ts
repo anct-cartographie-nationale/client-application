@@ -220,4 +220,11 @@ export class StructureDetailsComponent implements OnInit {
       this.tclStopPoints = res;
     });
   }
+
+  public canDelete(): boolean {
+    if (this.profileService.isAdmin() || this.profileService.isLinkedToStructure(this.structure._id)) {
+      return true;
+    }
+    return false;
+  }
 }
