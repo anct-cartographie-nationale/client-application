@@ -207,7 +207,7 @@ export class StructureDetailsComponent implements OnInit {
   }
   public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
     return equipmentsAndServices.filter((eqpt) =>
-      ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners'].includes(eqpt)
+      ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners', 'wifiEnAccesLibre'].includes(eqpt)
     );
   }
 }

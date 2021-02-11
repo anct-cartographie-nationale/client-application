@@ -225,7 +225,6 @@ export class FormComponent implements OnInit {
         [Validators.required, Validators.pattern(Regex.noNullNumber)] //NOSONAR
       ),
       freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
-      freeWifi: new FormControl(structure.freeWifi, Validators.required),
     });
     return form;
   }
@@ -425,7 +424,10 @@ export class FormComponent implements OnInit {
       name: 'Ateliers au numérique proposés',
     };
     this.pagesValidation[16] = { valid: this.getStructureControl('freeWorkShop').valid, name: 'Gratuité des ateliers' };
-    this.pagesValidation[17] = { valid: this.getStructureControl('freeWifi').valid, name: 'Gratuité du wifi' };
+    this.pagesValidation[17] = {
+      valid: this.getStructureControl('equipmentsAndServices').valid,
+      name: 'Gratuité du wifi',
+    };
     this.pagesValidation[18] = {
       valid:
         this.getStructureControl('equipmentsAndServices').valid &&

@@ -706,8 +706,8 @@
           <h3>Proposez-vous le wifi en accès libre ?</h3>
         </div>
         <app-radio-form
-          [selectedOption]="getStructureControl('freeWifi').value"
-          (selectedEvent)="onRadioBtnChange('freeWifi', $event)"
+          [selectedOption]="isInArray('wifiEnAccesLibre', 'equipmentsAndServices')"
+          (selectedEvent)="onCheckChange($event, 'equipmentsAndServices', 'wifiEnAccesLibre')"
         >
         </app-radio-form>
       </div>
