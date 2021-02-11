@@ -1,11 +1,11 @@
-<div *ngIf="openned" class="modalExitContainer">
+<div *ngIf="openned" class="modalBackground">
   <div class="modal">
     <div class="contentModal" fxLayout="column" fxLayoutAlign="space-around center">
       <h3>ATTENTION</h3>
       <p>{{ content }}</p>
       <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
-        <button class="btn-primary small leave" (click)="closeModal(true)">Confirmer</button>
-        <button class="btn-primary small" (click)="closeModal(false)">Annuler</button>
+        <button class="btn confirm" (click)="closeModal(true)">Confirmer</button>
+        <button class="btn" (click)="closeModal(false)">Annuler</button>
       </div>
     </div>
   </div>

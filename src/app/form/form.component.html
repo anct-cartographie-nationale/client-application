@@ -142,8 +142,17 @@
         </div>
         <div class="form-group" fxLayout="column">
           <label for="email">Courriel personnel</label>
+          <p class="special invalid" *ngIf="this.accountForm.get('email').hasError('alreadyExist')">
+            L'email est déja utilisé.
+          </p>
           <div fxLayout="row" fxLayoutGap="13px">
-            <input type="text" (input)="setValidationsForm()" formControlName="email" class="form-input" />
+            <input
+              type="text"
+              (input)="setValidationsForm()"
+              (keyup)="verifyUserExist($event.target.value)"
+              formControlName="email"
+              class="form-input"
+            />
             <img *ngIf="accountForm.get('email').valid" src="../../assets/form/validate.svg" alt="logo valid" />
             <img
               *ngIf="accountForm.get('email').invalid && accountForm.get('email').value"
@@ -155,7 +164,7 @@
         <div class="form-group" fxLayout="column">
           <label for="password">Création de mot de passe</label>
           <p
-            class="password"
+            class="special"
             [ngClass]="{ invalid: accountForm.get('password').invalid && accountForm.get('password').value }"
           >
             Le mot de passe doit contenir au minimum : 8 caractères dont un caractère spécial, un caractère en majuscule

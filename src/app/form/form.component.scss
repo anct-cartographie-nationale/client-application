@@ -158,7 +158,7 @@ h3 {
     margin-top: 10px;
     margin-bottom: 0;
     @include cn-regular-18;
-    &.password {
+    &.special {
       @include cn-regular-14;
       color: $grey-3;
 

@@ -32,7 +32,9 @@ export class StructureDetailsComponent implements OnInit {
   public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
   public isOtherSection = false;
+  public showForm = false;
   public isClaimed: boolean = null;
+  Z;
   public isLoading: boolean = false;
   public currentProfile: User = null;
   public deleteModalOpenned = false;
@@ -81,7 +83,6 @@ export class StructureDetailsComponent implements OnInit {
     const index = this.structure.proceduresAccompaniment.indexOf('autres');
     if (index > -1) {
       this.structure.proceduresAccompaniment.splice(index, 1);
-      this.isOtherSection = true;
     }
   }
 

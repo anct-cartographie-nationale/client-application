@@ -777,4 +777,15 @@ export class FormComponent implements OnInit {
   public closeEditMode(): void {
     this.router.navigateByUrl('home', { state: { data: this.createdStructure } });
   }
+
+  public verifyUserExist(inputEmail): void {
+    if (this.accountForm.get('email').valid) {
+      this.profileService.isEmailAlreadyUsed(inputEmail).subscribe((isExist) => {
+        if (isExist) {
+          this.accountForm.get('email').setErrors({ alreadyExist: true });
+          this.setValidationsForm();
+        }
+      });
+    }
+  }
 }

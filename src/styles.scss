@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'assets/scss/typography';
+@import 'assets/scss/z-index';
 @import 'assets/scss/color';
 @import 'assets/scss/breakpoint';
 @import 'assets/scss/icons';
@@ -180,5 +181,58 @@ button {
 
   .content-container {
     display: none !important;
+  }
+}
+
+// Modal
+
+.modalBackground {
+  width: 100%;
+  height: 100%;
+  z-index: $modal-z-index;
+  position: absolute;
+  content: '';
+  top: 0;
+  background-color: $modal-background;
+  .modal {
+    max-height: 90%;
+    overflow: auto;
+    .contentModal {
+      width: 100%;
+      background: $white;
+      padding: 35px 20px 18px 20px;
+    }
+    .footerModal {
+      width: 100%;
+      margin-top: 14px;
+      @include cn-bold-16;
+      .btn {
+        background: $secondary-color;
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+        border: 0;
+        color: $white;
+        height: 40px;
+        @include btn-bold;
+        width: 149px;
+        &.confirm {
+          background: none;
+          color: $grey-1;
+          text-decoration: underline;
+        }
+      }
+    }
+    min-width: 350px;
+    width: 80%;
+    max-width: 560px;
+    margin: auto;
+    border-radius: 6px;
+    @include background-hash;
+    border: 1px solid $grey-4;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
