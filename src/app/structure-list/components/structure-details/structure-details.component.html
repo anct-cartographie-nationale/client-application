@@ -76,9 +76,7 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center" class="hide-on-print">
-        <a *ngIf="!isClaimed && userIsLoggedIn()" (click)="toggleClaimModal()" class="primary" tabindex="0"
-          >Revendiquer cette structure</a
-        >
+        <a *ngIf="!isClaimed" (click)="handleClaim()" class="primary" tabindex="0">Revendiquer cette structure</a>
         <!-- temporary remove edit -->
         <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
