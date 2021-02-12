@@ -14,7 +14,6 @@ import { CheckHours } from '../../validator/form';
 export class HourPickerComponent implements OnChanges, OnDestroy {
   @Input() modifiedFields: any;
   @Input() structureInput: FormGroup;
-  @Input() isEditMode: boolean;
 
   @Output() updateFormError = new EventEmitter<any>();
   @Output() updateForm = new EventEmitter<FormGroup>();

@@ -31,8 +31,9 @@ export class StructureService {
     return this.http.post(`${this.baseUrl}`, { structure, idUser }).pipe(map((item: Structure) => new Structure(item)));
   }
 
-  public editStructure(id: string, structure: Structure): Observable<Structure> {
+  public editStructure(structure: Structure): Observable<Structure> {
     structure.updatedAt = new Date().toString();
+    const id = structure._id;
     delete structure._id; // id should not be provided for update
     return this.http.put(`${this.baseUrl}/${id}`, structure).pipe(map((item: Structure) => new Structure(item)));
   }

@@ -4,10 +4,23 @@
     [content]="'Il vous faudra de nouveau remplir le formulaire si vous quittez'"
     (closed)="hasRedirectionAccepted($event)"
   ></app-modal-confirmation>
-  <div class="content">
+  <div class="content" *ngIf="!isLoading" [ngClass]="{ editMode: isEditMode }">
+    <div class="headerEditMode" *ngIf="isEditMode">
+      <h2>Modification de {{ editForm.get('structureName').value }}</h2>
+    </div>
+    <div class="returnBtnSection" *ngIf="isEditMode && currentPage != 0">
+      <button class="btn-primary previous" (click)="goToSpecificPage(0, false)">
+        <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
+          <svg class="chevronLeft" aria-hidden="true">
+            <use [attr.xlink:href]="'assets/form/sprite.svg#chevronLeft'"></use>
+          </svg>
+          Retour
+        </div>
+      </button>
+    </div>
     <div
       class="progressBar"
-      *ngIf="currentPage != 0"
+      *ngIf="currentPage != 0 && !isEditMode"
       fxLayout="row"
       fxLayoutAlign="space-between center"
       fxLayoutGap="20px"
@@ -22,7 +35,7 @@
         [value]="progressStatus"
       ></progress>
     </div>
-    <div *ngIf="currentPage == 0" class="home page" fxLayout="column" fxLayoutAlign="space-between">
+    <div *ngIf="currentPage == 0 && !isEditMode" class="home page" fxLayout="column" fxLayoutAlign="space-between">
       <h2>Ajouter votre structure</h2>
       <img src="../../assets/form/schedule.svg" alt="logo schedule" />
       <div>
@@ -30,7 +43,26 @@
         <p>Une fois réalisé cela vous permettra d'être référencé sur la platefome</p>
       </div>
       <div class="btnStart">
-        <button class="btn start" (click)="nextPage()">C'est Parti</button>
+        <button class="btn-primary start" (click)="nextPage()">C'est Parti</button>
+      </div>
+    </div>
+    <div *ngIf="currentPage == 0 && isEditMode" class="editHome page" fxLayout="column" fxLayoutAlign="space-between">
+      <div>
+        <div class="summary" *ngFor="let page of pagesValidation; let index = index">
+          <div
+            class="itemSummary"
+            [ngClass]="{ last: index == 22 }"
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
+            *ngIf="page.name"
+            (click)="goToSpecificPage(index, false)"
+          >
+            {{ page.name }}
+            <svg class="chevronRight" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="currentPage == 1" class="informations page" fxLayout="column" fxLayoutGap="28px">
@@ -256,7 +288,7 @@
       </div>
       <div *ngIf="currentPage == 7" class="page">
         <div class="title">
-          <h3>Quels sont les modalités d'accueil ?</h3>
+          <h3>Quelles sont les modalités d'accueil ?</h3>
           <p>Plusieurs choix possibles</p>
         </div>
         <div *ngIf="accessModality" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="flex-start">
@@ -280,7 +312,6 @@
           (updateForm)="updateHours($event)"
           (updateFormError)="setHoursError()"
           [structureInput]="hoursForm"
-          [isEditMode]="!isEditMode"
         ></app-hour-picker>
       </div>
       <div *ngIf="currentPage == 9" class="page">
@@ -683,8 +714,8 @@
           <h3>Proposez-vous le wifi en accès libre ?</h3>
         </div>
         <app-radio-form
-          [selectedOption]="getStructureControl('freeWifi').value"
-          (selectedEvent)="onRadioBtnChange('freeWifi', $event)"
+          [selectedOption]="isEditMode ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices') : null"
+          (selectedEvent)="onCheckChange($event, 'equipmentsAndServices', 'wifiEnAccesLibre')"
         >
         </app-radio-form>
       </div>
@@ -983,16 +1014,26 @@
       </div>
     </form>
     <div *ngIf="currentPage != 0" class="footer desktop">
-      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm">
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm && !isEditMode">
         <app-footer-form
           (previousPage)="previousPage()"
           (nextPage)="nextPage()"
           [isValid]="isPageValid"
         ></app-footer-form>
       </div>
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isEditMode">
+        <button
+          class="btn-primary"
+          [ngClass]="{ invalid: !isPageValid }"
+          [disabled]="!isPageValid"
+          (click)="goToSpecificPage(0, true)"
+        >
+          Valider
+        </button>
+      </div>
       <button
         *ngIf="currentPage == nbPagesForm && !profile"
-        class="btn validate unique"
+        class="btn-primary validate unique"
         routerLink="/home"
         [routerLinkActive]="'active'"
       >
@@ -1000,25 +1041,40 @@
       </button>
       <button
         *ngIf="currentPage == nbPagesForm && profile"
-        class="btn unique"
+        class="btn-primary unique"
         routerLink="/home"
         [state]="{ data: createdStructure }"
       >
         Voir ma structure
       </button>
     </div>
+    <div *ngIf="isEditMode && currentPage == 0" class="footerEditMode">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button class="btn-primary unique" (click)="closeEditMode()">Terminer</button>
+      </div>
+    </div>
   </div>
   <div *ngIf="currentPage != 0" class="footer phone">
-    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm">
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm && !isEditMode">
       <app-footer-form
         (previousPage)="previousPage()"
         (nextPage)="nextPage()"
         [isValid]="isPageValid"
       ></app-footer-form>
     </div>
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isEditMode">
+      <button
+        class="btn-primary"
+        [ngClass]="{ invalid: !isPageValid }"
+        [disabled]="!isPageValid"
+        (click)="goToSpecificPage(0, true)"
+      >
+        Valider
+      </button>
+    </div>
     <button
       *ngIf="currentPage == nbPagesForm && !profile"
-      class="btn validate unique"
+      class="btn-primary validate unique"
       routerLink="/home"
       [routerLinkActive]="'active'"
     >
@@ -1026,7 +1082,7 @@
     </button>
     <button
       *ngIf="currentPage == nbPagesForm && profile"
-      class="btn unique"
+      class="btn-primary unique"
       routerLink="/home"
       [state]="{ data: createdStructure }"
     >

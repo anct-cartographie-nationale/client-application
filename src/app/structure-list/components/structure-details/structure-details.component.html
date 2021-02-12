@@ -1,11 +1,3 @@
-<app-structureForm
-  *ngIf="showForm"
-  [idStructure]="structure._id"
-  [isEditMode]="isEditMode"
-  [profile]="currentProfile"
-  (closeEvent)="updateStructure($event)"
-  (clickOutside)="displayForm()"
-></app-structureForm>
 <div class="structrue-details-container" *ngIf="structure && !isLoading">
   <!-- Header info -->
   <div fxLayout="row" fxLayoutAlign="end center">
@@ -20,8 +12,9 @@
         <div class="typeInformationHeader" fxLayout="column">
           <h3>{{ structure.getLabelTypeStructure() }}</h3>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="7px" *ngIf="structure.hasEquipments()">
+            <div></div>
             <app-svg-icon
-              *ngFor="let equipement of structure.equipmentsAndServices"
+              *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)"
               [type]="'ico'"
               [iconColor]="'currentColor'"
               [icon]="structure.getEquipmentsIcon(equipement)"
@@ -128,9 +121,10 @@
           >Revendiquer cette structure</a
         >
         <!-- temporary remove edit -->
-        <!-- <a
+        <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
-          (click)="editStructure()"
+          routerLink="/create-structure"
+          [state]="{ data: structure }"
           class="primary"
           tabindex="0"
         >
@@ -261,7 +255,7 @@
       <h2>Équipements</h2>
     </div>
     <div fxLayout="column">
-      <p *ngFor="let equipement of structure.equipmentsAndServices" class="no-margin-bottom">
+      <p *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)" class="no-margin-bottom">
         {{ getEquipmentsLabel(equipement) }}
         <span *ngIf="equipement == 'ordinateurs' && structure.nbComputers"> : {{ structure.nbComputers }}</span>
         <span *ngIf="equipement == 'tablettes' && structure.nbTablets"> : {{ structure.nbTablets }}</span>
