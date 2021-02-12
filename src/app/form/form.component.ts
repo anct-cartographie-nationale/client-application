@@ -41,7 +41,7 @@ export class FormComponent implements OnInit {
   public equipmentsAndServices: { module: Module; openned: boolean }[] = [];
   public trainingCategories: { category: Category; openned: boolean }[] = [];
   public pageTypeEnum = PageTypeEnum;
-  public claimStructureId = null;
+  public claimStructure: Structure = null;
 
   // Page and progress var
   public currentPage = 0;
@@ -93,7 +93,7 @@ export class FormComponent implements OnInit {
     } else if (history.state.newUser) {
       this.isClaimMode = true;
       this.createAccountForm();
-      this.claimStructureId = history.state.newUser;
+      this.claimStructure = history.state.newUser;
       this.setValidationsForm();
     } else {
       this.initForm(new Structure());
@@ -523,7 +523,7 @@ export class FormComponent implements OnInit {
       const user = new User(this.accountForm.value);
       // Create user and claim structure
       this.authService.register(user).subscribe(() => {
-        this.structureService.claimStructureWithAccount(this.claimStructureId, user).subscribe(() => {
+        this.structureService.claimStructureWithAccount(this.claimStructure._id, user).subscribe(() => {
           this.progressStatus = 100;
         });
       });
@@ -813,5 +813,13 @@ export class FormComponent implements OnInit {
         }
       });
     }
+  }
+
+  public displayAddStructure(): boolean {
+    return this.currentPage == this.pageTypeEnum.summary && !this.isEditMode && !this.isClaimMode;
+  }
+
+  public displayClaimStructure(): boolean {
+    return this.currentPage == this.pageTypeEnum.summary && !this.isEditMode && this.isClaimMode;
   }
 }

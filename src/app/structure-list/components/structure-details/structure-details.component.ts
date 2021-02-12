@@ -126,7 +126,7 @@ export class StructureDetailsComponent implements OnInit {
     if (this.userIsLoggedIn()) {
       this.toggleClaimModal();
     } else {
-      this.router.navigate(['create-structure'], { state: { newUser: this.structure._id } });
+      this.router.navigate(['create-structure'], { state: { newUser: this.structure } });
     }
   }
 

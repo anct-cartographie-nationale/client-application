@@ -35,17 +35,29 @@
         [value]="progressStatus"
       ></progress>
     </div>
-    <div
-      *ngIf="currentPage == pageTypeEnum.summary && !isEditMode"
-      class="home page"
-      fxLayout="column"
-      fxLayoutAlign="space-between"
-    >
+    <div *ngIf="displayAddStructure()" class="home page" fxLayout="column" fxLayoutAlign="space-between">
       <h2>Ajouter votre structure</h2>
       <img src="../../assets/form/schedule.svg" alt="logo schedule" />
       <div>
         <p class="titleDesc">Cela va prendre une quinzaine de minutes</p>
         <p>Une fois réalisé cela vous permettra d'être référencé sur la platefome</p>
+      </div>
+      <div class="btnStart">
+        <button class="btn-primary start" (click)="nextPage()">C'est Parti</button>
+      </div>
+    </div>
+    <div
+      *ngIf="displayClaimStructure()"
+      class="home page"
+      fxLayout="column"
+      fxLayoutAlign="space-between center"
+      fxLayoutAlign.lt-sm="center"
+    >
+      <h2>
+        Revendiquer la structure <span>{{ claimStructure.structureName }}</span>
+      </h2>
+      <div>
+        <p>Une fois réalisé cela vous permettra de devenir propriétaire de cette structure</p>
       </div>
       <div class="btnStart">
         <button class="btn-primary start" (click)="nextPage()">C'est Parti</button>
