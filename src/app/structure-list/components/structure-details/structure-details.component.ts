@@ -203,6 +203,12 @@ export class StructureDetailsComponent implements OnInit {
       this.tclStopPoints = res;
     });
   }
+  public canDelete(): boolean {
+    if (this.profileService.isAdmin() || this.profileService.isLinkedToStructure(this.structure._id)) {
+      return true;
+    }
+    return false;
+  }
   public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
     return equipmentsAndServices.filter((eqpt) =>
       ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners', 'wifiEnAccesLibre'].includes(eqpt)
