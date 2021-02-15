@@ -86,6 +86,7 @@ h3 {
     ) !important; // -1px because of header border
   }
   @media #{$tablet} {
+    height: 100%;
     &.editMode {
       .page {
         height: calc(
@@ -103,8 +104,11 @@ h3 {
   height: auto;
   h2 {
     @include cn-bold-28;
-    color: $secondary-color;
+    color: $black;
     margin-bottom: 0;
+    span {
+      color: $secondary-color;
+    }
   }
   h3 {
     @include cn-bold-22;
@@ -163,7 +167,7 @@ h3 {
       color: $grey-3;
 
       margin-top: 4px;
-      width: 256px;
+      width: 280px;
       &.invalid {
         color: $orange-warning;
       }

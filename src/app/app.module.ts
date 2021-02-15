@@ -29,7 +29,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AdminModule } from './admin/admin.module';
 import { AdminGuard } from './guards/admin.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
-import { FooterFormComponent } from './footer-form/footer-form.component';
+import { FooterFormComponent } from './form/footer-form/footer-form.component';
 
 @NgModule({
   declarations: [

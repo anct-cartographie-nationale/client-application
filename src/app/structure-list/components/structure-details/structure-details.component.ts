@@ -122,6 +122,14 @@ export class StructureDetailsComponent implements OnInit {
     this.claimModalOpenned = !this.claimModalOpenned;
   }
 
+  public handleClaim(): void {
+    if (this.userIsLoggedIn()) {
+      this.toggleClaimModal();
+    } else {
+      this.router.navigate(['create-structure'], { state: { newUser: this.structure } });
+    }
+  }
+
   public deleteStructure(shouldDelete: boolean): void {
     this.toggleDeleteModal();
     if (shouldDelete) {

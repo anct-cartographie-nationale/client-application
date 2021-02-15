@@ -17,6 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { Regex } from '../shared/enum/regex.enum';
+import { PageTypeEnum } from './pageType.enum';
 const { DateTime } = require('luxon');
 @Component({
   selector: 'app-structureForm',
@@ -39,6 +40,8 @@ export class FormComponent implements OnInit {
   public proceduresAccompaniment: Category;
   public equipmentsAndServices: { module: Module; openned: boolean }[] = [];
   public trainingCategories: { category: Category; openned: boolean }[] = [];
+  public pageTypeEnum = PageTypeEnum;
+  public claimStructure: Structure = null;
 
   // Page and progress var
   public currentPage = 0;
@@ -63,6 +66,7 @@ export class FormComponent implements OnInit {
   public userAcceptSavedDate = false;
   public showMenu = false;
   public isEditMode = false;
+  public isClaimMode = false;
   public isLoading = false;
   public isWifiChoosen = false;
 
@@ -86,6 +90,11 @@ export class FormComponent implements OnInit {
       this.isEditMode = true;
       this.isWifiChoosen = true;
       this.initForm(new Structure(history.state.data));
+    } else if (history.state.newUser) {
+      this.isClaimMode = true;
+      this.createAccountForm();
+      this.claimStructure = history.state.newUser;
+      this.setValidationsForm();
     } else {
       this.initForm(new Structure());
     }
@@ -130,20 +139,7 @@ export class FormComponent implements OnInit {
 
   private initForm(structure: Structure): void {
     // Init account Form
-    this.accountForm = new FormGroup(
-      {
-        email: new FormControl('', [Validators.required, Validators.pattern(Regex.email)]), //NOSONAR
-        name: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]), //NOSONAR
-        surname: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]), //NOSONAR
-        phone: new FormControl('', [Validators.required, Validators.pattern(Regex.phone)]), //NOSONAR
-        password: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
-        ]),
-        confirmPassword: new FormControl(''),
-      },
-      [MustMatch('password', 'confirmPassword')]
-    );
+    this.createAccountForm();
 
     // Init form
     this.structureForm = this.createStructureForm(structure);
@@ -165,6 +161,24 @@ export class FormComponent implements OnInit {
 
     this.setValidationsForm();
   }
+
+  private createAccountForm(): void {
+    this.accountForm = new FormGroup(
+      {
+        email: new FormControl('', [Validators.required, Validators.pattern(Regex.email)]), //NOSONAR
+        name: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]), //NOSONAR
+        surname: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]), //NOSONAR
+        phone: new FormControl('', [Validators.required, Validators.pattern(Regex.phone)]), //NOSONAR
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
+        ]),
+        confirmPassword: new FormControl(''),
+      },
+      [MustMatch('password', 'confirmPassword')]
+    );
+  }
+
   private createStructureForm(structure): FormGroup {
     const form = new FormGroup({
       _id: new FormControl(structure._id),
@@ -338,8 +352,8 @@ export class FormComponent implements OnInit {
   }
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning), //NOSONAR
-      closing: new FormControl(time.closing), //NOSONAR
+      openning: new FormControl(time.openning),
+      closing: new FormControl(time.closing),
     });
   }
 
@@ -368,141 +382,234 @@ export class FormComponent implements OnInit {
   }
 
   public setValidationsForm(): void {
-    this.pagesValidation[0] = { valid: true };
-    this.pagesValidation[1] = { valid: true };
-    this.pagesValidation[2] = {
-      valid:
-        this.accountForm.get('surname').valid &&
-        this.accountForm.get('name').valid &&
-        this.accountForm.get('phone').valid,
-    };
-    this.pagesValidation[3] = {
-      valid:
-        this.accountForm.get('email').valid &&
-        this.accountForm.get('password').valid &&
-        this.accountForm.get('confirmPassword').valid,
-    };
-    this.pagesValidation[4] = {
-      valid: this.getStructureControl('structureName').valid && this.getStructureControl('address').valid,
-      name: 'Nom et adresse',
-    };
-    this.pagesValidation[5] = { valid: this.getStructureControl('contactPhone').valid, name: 'Téléphone' };
-    this.pagesValidation[6] = { valid: this.getStructureControl('structureType').valid, name: 'Type de structure' };
-    this.pagesValidation[7] = { valid: this.getStructureControl('accessModality').valid, name: "Modalités d'accueil " };
-    this.pagesValidation[8] = { valid: this.hoursForm.valid, name: "Horaires d'ouverture" };
-    this.pagesValidation[9] = {
-      valid: this.getStructureControl('exceptionalClosures').valid,
-      name: 'Précisions sur les horaires',
-    };
-    this.pagesValidation[10] = {
-      valid: this.getStructureControl('pmrAccess').valid,
-      name: 'Accessibilité pour les personnes à mobilité réduite',
-    };
-    this.pagesValidation[11] = {
-      valid:
-        this.getStructureControl('contactMail').valid &&
-        (this.getStructureControl('website').valid || !this.showWebsite) &&
-        ((this.getStructureControl('facebook').valid &&
-          this.getStructureControl('twitter').valid &&
-          this.getStructureControl('instagram').valid) ||
-          !this.showSocialNetwork),
-      name: 'Présence sur internet',
-    };
-    this.pagesValidation[12] = { valid: this.getStructureControl('publics').valid, name: 'Public admis' };
-    this.pagesValidation[13] = {
-      valid:
-        this.getStructureControl('publicsAccompaniment').valid &&
-        this.getStructureControl('proceduresAccompaniment').valid,
-      name: 'Accompagnements proposés',
-    };
-    this.pagesValidation[14] = {
-      valid: this.getStructureControl('otherDescription').value,
-      name: 'Autres démarches proposés',
-    };
-    this.pagesValidation[15] = {
-      valid:
-        this.getStructureControl('accessRight').valid &&
-        this.getStructureControl('socialAndProfessional').valid &&
-        this.getStructureControl('baseSkills').valid &&
-        this.getStructureControl('parentingHelp').valid &&
-        this.getStructureControl('digitalCultureSecurity').valid,
-      name: 'Ateliers au numérique proposés',
-    };
-    this.pagesValidation[16] = { valid: this.getStructureControl('freeWorkShop').valid, name: 'Gratuité des ateliers' };
-    this.pagesValidation[17] = {
-      valid: this.getStructureControl('equipmentsAndServices').valid && this.isWifiChoosen,
-      name: 'Gratuité du wifi',
-    };
-    this.pagesValidation[18] = {
-      valid:
-        this.getStructureControl('equipmentsAndServices').valid &&
-        this.getStructureControl('nbComputers').valid &&
-        this.getStructureControl('nbPrinters').valid &&
-        this.getStructureControl('nbTablets').valid &&
-        this.getStructureControl('nbNumericTerminal').valid &&
-        this.getStructureControl('nbScanners').valid,
-      name: 'Matériels mis à disposition',
-    };
-    this.pagesValidation[19] = {
-      valid: this.getStructureControl('labelsQualifications').valid,
-      name: 'Labélisations proposées',
-    };
-    this.pagesValidation[20] = {
-      valid: this.getStructureControl('equipmentsAndServices').valid,
-      name: 'Autres services proposés',
-    };
-    this.pagesValidation[21] = {
-      valid: this.getStructureControl('description').valid,
-      name: 'Présentation de la structure',
-    };
-    this.pagesValidation[22] = {
-      valid: this.getStructureControl('lockdownActivity').valid,
-      name: 'Informations spécifiques à la période COVID',
-    };
-    this.pagesValidation[23] = { valid: this.userAcceptSavedDate };
-    //this.pagesValidation[24] = { valid: true };
-    this.updatePageValid();
+    if (this.isClaimMode) {
+      this.pagesValidation[PageTypeEnum.summary] = { valid: true };
+      this.pagesValidation[PageTypeEnum.accountInfo] = {
+        valid:
+          this.accountForm.get('surname').valid &&
+          this.accountForm.get('name').valid &&
+          this.accountForm.get('phone').valid,
+      };
+      this.pagesValidation[PageTypeEnum.accountCredentials] = {
+        valid:
+          this.accountForm.get('email').valid &&
+          this.accountForm.get('password').valid &&
+          this.accountForm.get('confirmPassword').valid,
+      };
+      this.pagesValidation[PageTypeEnum.cgu] = { valid: this.userAcceptSavedDate };
+      this.updatePageValid();
+    } else {
+      this.pagesValidation[PageTypeEnum.summary] = { valid: true };
+      this.pagesValidation[PageTypeEnum.info] = { valid: true };
+      this.pagesValidation[PageTypeEnum.accountInfo] = {
+        valid:
+          this.accountForm.get('surname').valid &&
+          this.accountForm.get('name').valid &&
+          this.accountForm.get('phone').valid,
+      };
+      this.pagesValidation[PageTypeEnum.accountCredentials] = {
+        valid:
+          this.accountForm.get('email').valid &&
+          this.accountForm.get('password').valid &&
+          this.accountForm.get('confirmPassword').valid,
+      };
+      this.pagesValidation[PageTypeEnum.structureNameAndAddress] = {
+        valid: this.getStructureControl('structureName').valid && this.getStructureControl('address').valid,
+        name: 'Nom et adresse',
+      };
+      this.pagesValidation[PageTypeEnum.structurePhone] = {
+        valid: this.getStructureControl('contactPhone').valid,
+        name: 'Téléphone',
+      };
+      this.pagesValidation[PageTypeEnum.structureType] = {
+        valid: this.getStructureControl('structureType').valid,
+        name: 'Type de structure',
+      };
+      this.pagesValidation[PageTypeEnum.structureAccessModality] = {
+        valid: this.getStructureControl('accessModality').valid,
+        name: "Modalités d'accueil ",
+      };
+      this.pagesValidation[PageTypeEnum.structureHours] = { valid: this.hoursForm.valid, name: "Horaires d'ouverture" };
+      this.pagesValidation[PageTypeEnum.structureHoursDetails] = {
+        valid: this.getStructureControl('exceptionalClosures').valid,
+        name: 'Précisions sur les horaires',
+      };
+      this.pagesValidation[PageTypeEnum.structurePmr] = {
+        valid: this.getStructureControl('pmrAccess').valid,
+        name: 'Accessibilité pour les personnes à mobilité réduite',
+      };
+      this.pagesValidation[PageTypeEnum.structureWebAndSocialNetwork] = {
+        valid:
+          this.getStructureControl('contactMail').valid &&
+          (this.getStructureControl('website').valid || !this.showWebsite) &&
+          ((this.getStructureControl('facebook').valid &&
+            this.getStructureControl('twitter').valid &&
+            this.getStructureControl('instagram').valid) ||
+            !this.showSocialNetwork),
+        name: 'Présence sur internet',
+      };
+      this.pagesValidation[PageTypeEnum.structurePublicTarget] = {
+        valid: this.getStructureControl('publics').valid,
+        name: 'Public admis',
+      };
+      this.pagesValidation[PageTypeEnum.structureAccompaniment] = {
+        valid:
+          this.getStructureControl('publicsAccompaniment').valid &&
+          this.getStructureControl('proceduresAccompaniment').valid,
+        name: 'Accompagnements proposés',
+      };
+      this.pagesValidation[PageTypeEnum.structureOtherAccompaniment] = {
+        valid: this.getStructureControl('otherDescription').value,
+        name: 'Autres démarches proposés',
+      };
+      this.pagesValidation[PageTypeEnum.structureWorkshop] = {
+        valid:
+          this.getStructureControl('accessRight').valid &&
+          this.getStructureControl('socialAndProfessional').valid &&
+          this.getStructureControl('baseSkills').valid &&
+          this.getStructureControl('parentingHelp').valid &&
+          this.getStructureControl('digitalCultureSecurity').valid,
+        name: 'Ateliers au numérique proposés',
+      };
+      this.pagesValidation[PageTypeEnum.structureWorkshopPrice] = {
+        valid: this.getStructureControl('freeWorkShop').valid,
+        name: 'Gratuité des ateliers',
+      };
+      this.pagesValidation[PageTypeEnum.structureWifi] = {
+        valid: this.getStructureControl('equipmentsAndServices').valid && this.isWifiChoosen,
+        name: 'Gratuité du wifi',
+      };
+      this.pagesValidation[PageTypeEnum.structureEquipments] = {
+        valid:
+          this.getStructureControl('equipmentsAndServices').valid &&
+          this.getStructureControl('nbComputers').valid &&
+          this.getStructureControl('nbPrinters').valid &&
+          this.getStructureControl('nbTablets').valid &&
+          this.getStructureControl('nbNumericTerminal').valid &&
+          this.getStructureControl('nbScanners').valid,
+        name: 'Matériels mis à disposition',
+      };
+      this.pagesValidation[PageTypeEnum.structureLabels] = {
+        valid: this.getStructureControl('labelsQualifications').valid,
+        name: 'Labélisations proposées',
+      };
+      this.pagesValidation[PageTypeEnum.structureOtherServices] = {
+        valid: this.getStructureControl('equipmentsAndServices').valid,
+        name: 'Autres services proposés',
+      };
+      this.pagesValidation[PageTypeEnum.structureDescription] = {
+        valid: this.getStructureControl('description').valid,
+        name: 'Présentation de la structure',
+      };
+      this.pagesValidation[PageTypeEnum.structureCovidInfo] = {
+        valid: this.getStructureControl('lockdownActivity').valid,
+        name: 'Informations spécifiques à la période COVID',
+      };
+      this.pagesValidation[PageTypeEnum.cgu] = { valid: this.userAcceptSavedDate };
+      //this.pagesValidation[PageTypeEnum.addUserToStructure] = { valid: true };
+      this.updatePageValid();
+    }
   }
 
   private updatePageValid(): void {
     this.isPageValid = this.pagesValidation[this.currentPage].valid;
   }
-  public nextPage(): void {
-    // Check if user already connected to skip accountForm pages.
-    if (this.currentPage == 1 && this.profile) {
-      this.currentPage += 2; // Skip 2 pages from AccountForm
-      this.progressStatus += 2 * (100 / this.nbPagesForm);
-    }
-    // Check if "other" isn't check to hide "other description" page
-    if (this.currentPage == 13 && !this.isInArray('autres', 'proceduresAccompaniment')) {
-      this.currentPage++; // page 14 skip and go to page 15
-      this.progressStatus += 100 / this.nbPagesForm;
+
+  /**
+   * Page algo for claim structure case
+   */
+  public nextPageClaim(): void {
+    if (this.currentPage == this.nbPagesForm - 1) {
+      const user = new User(this.accountForm.value);
+      // Create user and claim structure
+      this.authService.register(user).subscribe(() => {
+        this.structureService.claimStructureWithAccount(this.claimStructure._id, user).subscribe(() => {
+          this.progressStatus = 100;
+        });
+      });
     }
 
-    // Check if going to the last page to submit form and send email verification.
-    if (this.currentPage == this.nbPagesForm - 1) {
-      this.validateForm();
-    } else {
-      this.currentPage++;
-      this.progressStatus += 100 / this.nbPagesForm;
+    if (this.currentPage == PageTypeEnum.summary) {
+      this.currentPage = PageTypeEnum.accountInfo;
       this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.accountInfo) {
+      this.currentPage = PageTypeEnum.accountCredentials;
+      this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.accountCredentials) {
+      this.currentPage = PageTypeEnum.cgu;
+      this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.cgu) {
+      this.currentPage = this.nbPagesForm;
+    }
+
+    this.progressStatus += 25;
+  }
+
+  /**
+   * Page algo for claim structure case
+   */
+  public previousPageClaim(): void {
+    if (this.currentPage == PageTypeEnum.accountInfo) {
+      this.currentPage = PageTypeEnum.summary;
+      this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.accountCredentials) {
+      this.currentPage = PageTypeEnum.accountInfo;
+      this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.cgu) {
+      this.currentPage = PageTypeEnum.accountCredentials;
+      this.updatePageValid();
+    }
+
+    this.progressStatus -= 25;
+  }
+
+  public nextPage(): void {
+    if (this.isClaimMode) {
+      this.nextPageClaim();
+    } else {
+      // Check if user already connected to skip accountForm pages.
+      if (this.currentPage == PageTypeEnum.info && this.profile) {
+        this.currentPage += 2; // Skip accountInfo pages from AccountForm
+        this.progressStatus += 2 * (100 / this.nbPagesForm);
+      }
+      // Check if "other" isn't check to hide "other description" page
+      if (
+        this.currentPage == PageTypeEnum.structureAccompaniment &&
+        !this.isInArray('autres', 'proceduresAccompaniment')
+      ) {
+        this.currentPage++; // page structureOtherAccompaniment skip and go to page structureWorkshop
+        this.progressStatus += 100 / this.nbPagesForm;
+      }
+
+      // Check if going to the last page to submit form and send email verification.
+      if (this.currentPage == this.nbPagesForm - 1) {
+        this.validateForm();
+      } else {
+        this.currentPage++;
+        this.progressStatus += 100 / this.nbPagesForm;
+        this.updatePageValid();
+      }
     }
   }
   public previousPage(): void {
-    // Check if user already connected to skip accountForm pages.
-    if (this.currentPage == 4 && this.profile) {
-      this.currentPage -= 2; // Skip 2 pages from AccountForm
-      this.progressStatus -= 2 * (100 / this.nbPagesForm);
-    }
+    if (this.isClaimMode) {
+      this.previousPageClaim();
+    } else {
+      // Check if user already connected to skip accountForm pages.
+      if (this.currentPage == PageTypeEnum.structureNameAndAddress && this.profile) {
+        this.currentPage -= 2; // Skip 2 pages from AccountForm
+        this.progressStatus -= 2 * (100 / this.nbPagesForm);
+      }
 
-    // Check if "other" isn't check to hide "other description" page
-    if (this.currentPage == 15 && !this.isInArray('autres', 'proceduresAccompaniment')) {
-      this.currentPage--; // page 14 skip and go to page 13
+      // Check if "other" isn't check to hide "other description" page
+      if (this.currentPage == PageTypeEnum.structureWorkshop && !this.isInArray('autres', 'proceduresAccompaniment')) {
+        this.currentPage--; // page 14 skip and go to page 13
+        this.progressStatus -= 100 / this.nbPagesForm;
+      }
+      this.currentPage--;
       this.progressStatus -= 100 / this.nbPagesForm;
+      this.updatePageValid();
     }
-    this.currentPage--;
-    this.progressStatus -= 100 / this.nbPagesForm;
-    this.updatePageValid();
   }
   public showPassword(): void {
     this.isShowPassword = !this.isShowPassword;
@@ -696,7 +803,7 @@ export class FormComponent implements OnInit {
   public closeEditMode(): void {
     this.router.navigateByUrl('home', { state: { data: this.createdStructure } });
   }
-  
+
   public verifyUserExist(inputEmail): void {
     if (this.accountForm.get('email').valid) {
       this.profileService.isEmailAlreadyUsed(inputEmail).subscribe((isExist) => {
@@ -706,5 +813,13 @@ export class FormComponent implements OnInit {
         }
       });
     }
+  }
+
+  public displayAddStructure(): boolean {
+    return this.currentPage == this.pageTypeEnum.summary && !this.isEditMode && !this.isClaimMode;
+  }
+
+  public displayClaimStructure(): boolean {
+    return this.currentPage == this.pageTypeEnum.summary && !this.isEditMode && this.isClaimMode;
   }
 }
