@@ -30,6 +30,7 @@ import { AdminModule } from './admin/admin.module';
 import { AdminGuard } from './guards/admin.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
 import { FooterFormComponent } from './form/footer-form/footer-form.component';
+import { TempUserResolver } from './resolvers/temp-user.resolver';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { FooterFormComponent } from './form/footer-form/footer-form.component';
     AuthGuard,
     AdminGuard,
     DeactivateGuard,
+    TempUserResolver,
   ],
   bootstrap: [AppComponent],
 })

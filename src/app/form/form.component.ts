@@ -18,6 +18,7 @@ import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { Regex } from '../shared/enum/regex.enum';
 import { PageTypeEnum } from './pageType.enum';
+import { TempUserService } from '../services/temp-user.service';
 const { DateTime } = require('luxon');
 @Component({
   selector: 'app-structureForm',
@@ -42,6 +43,7 @@ export class FormComponent implements OnInit {
   public trainingCategories: { category: Category; openned: boolean }[] = [];
   public pageTypeEnum = PageTypeEnum;
   public claimStructure: Structure = null;
+  public linkedStructureId: Array<string> = null;
 
   // Page and progress var
   public currentPage = 0;
@@ -67,6 +69,7 @@ export class FormComponent implements OnInit {
   public showMenu = false;
   public isEditMode = false;
   public isClaimMode = false;
+  public isAccountMode = false;
   public isLoading = false;
   public isWifiChoosen = false;
 
@@ -75,7 +78,9 @@ export class FormComponent implements OnInit {
     private searchService: SearchService,
     private profileService: ProfileService,
     private authService: AuthService,
-    private router: Router
+    private tempUserService: TempUserService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -98,6 +103,16 @@ export class FormComponent implements OnInit {
     } else {
       this.initForm(new Structure());
     }
+    // Handle account creation when pre-register
+    this.route.data.subscribe((data) => {
+      if (data.user) {
+        this.isAccountMode = true;
+        this.createAccountForm(data.user.email, data.user.name, data.user.surname);
+        this.linkedStructureId = data.user.pendingStructuresLink;
+        this.setValidationsForm();
+        this.currentPage = PageTypeEnum.accountInfo;
+      }
+    });
   }
 
   async setCategories(): Promise<void> {
@@ -162,13 +177,16 @@ export class FormComponent implements OnInit {
     this.setValidationsForm();
   }
 
-  private createAccountForm(): void {
+  private createAccountForm(email?: string, name?: string, surname?: string): void {
     this.accountForm = new FormGroup(
       {
-        email: new FormControl('', [Validators.required, Validators.pattern(Regex.email)]), //NOSONAR
-        name: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]), //NOSONAR
-        surname: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]), //NOSONAR
-        phone: new FormControl('', [Validators.required, Validators.pattern(Regex.phone)]), //NOSONAR
+        email: new FormControl(email ? email : '', [Validators.required, Validators.pattern(Regex.email)]),
+        name: new FormControl(name ? name : '', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]),
+        surname: new FormControl(surname ? surname : '', [
+          Validators.required,
+          Validators.pattern(Regex.textWithoutNumber),
+        ]),
+        phone: new FormControl('', [Validators.required, Validators.pattern(Regex.phone)]),
         password: new FormControl('', [
           Validators.required,
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
@@ -192,19 +210,13 @@ export class FormComponent implements OnInit {
         street: new FormControl(structure.address.street, Validators.required),
         commune: new FormControl(structure.address.commune, Validators.required),
       }),
-      contactMail: new FormControl(structure.contactMail, [
-        Validators.required,
-        Validators.pattern(Regex.email), //NOSONAR
-      ]),
-      contactPhone: new FormControl(structure.contactPhone, [
-        Validators.required,
-        Validators.pattern(Regex.phone), //NOSONAR
-      ]),
-      website: new FormControl(structure.website, Validators.pattern(Regex.website)), //NOSONAR
-      facebook: new FormControl(structure.facebook, Validators.pattern(Regex.facebook)), //NOSONAR
-      twitter: new FormControl(structure.twitter, Validators.pattern(Regex.twitter)), //NOSONAR
-      instagram: new FormControl(structure.instagram, Validators.pattern(Regex.instagram)), //NOSONAR
-      linkedin: new FormControl(structure.linkedin, Validators.pattern(Regex.linkedIn)), //NOSONAR
+      contactMail: new FormControl(structure.contactMail, [Validators.required, Validators.pattern(Regex.email)]),
+      contactPhone: new FormControl(structure.contactPhone, [Validators.required, Validators.pattern(Regex.phone)]),
+      website: new FormControl(structure.website, Validators.pattern(Regex.website)),
+      facebook: new FormControl(structure.facebook, Validators.pattern(Regex.facebook)),
+      twitter: new FormControl(structure.twitter, Validators.pattern(Regex.twitter)),
+      instagram: new FormControl(structure.instagram, Validators.pattern(Regex.instagram)),
+      linkedin: new FormControl(structure.linkedin, Validators.pattern(Regex.linkedIn)),
       hours: new FormGroup({}),
       pmrAccess: new FormControl(structure.pmrAccess, Validators.required),
       exceptionalClosures: new FormControl(structure.exceptionalClosures),
@@ -222,24 +234,24 @@ export class FormComponent implements OnInit {
       digitalCultureSecurity: this.loadArrayForCheckbox(structure.digitalCultureSecurity, false),
       nbComputers: new FormControl(
         structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 1,
-        [Validators.required, Validators.pattern(Regex.noNullNumber)] //NOSONAR
+        [Validators.required, Validators.pattern(Regex.noNullNumber)]
       ),
       nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 1, [
         Validators.required,
-        Validators.pattern(Regex.noNullNumber), //NOSONAR
+        Validators.pattern(Regex.noNullNumber),
       ]),
       nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 1, [
         Validators.required,
-        Validators.pattern(Regex.noNullNumber), //NOSONAR
+        Validators.pattern(Regex.noNullNumber),
       ]),
       nbNumericTerminal: new FormControl(
         structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 1,
-        [Validators.required, Validators.pattern(Regex.noNullNumber)] //NOSONAR
+        [Validators.required, Validators.pattern(Regex.noNullNumber)]
       ),
-      nbScanners: new FormControl(
-        structure.equipmentsAndServices.includes('scanners') ? structure.nbScanners : 1,
-        [Validators.required, Validators.pattern(Regex.noNullNumber)] //NOSONAR
-      ),
+      nbScanners: new FormControl(structure.equipmentsAndServices.includes('scanners') ? structure.nbScanners : 1, [
+        Validators.required,
+        Validators.pattern(Regex.noNullNumber),
+      ]),
       freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
     });
     return form;
@@ -384,6 +396,21 @@ export class FormComponent implements OnInit {
   public setValidationsForm(): void {
     if (this.isClaimMode) {
       this.pagesValidation[PageTypeEnum.summary] = { valid: true };
+      this.pagesValidation[PageTypeEnum.accountInfo] = {
+        valid:
+          this.accountForm.get('surname').valid &&
+          this.accountForm.get('name').valid &&
+          this.accountForm.get('phone').valid,
+      };
+      this.pagesValidation[PageTypeEnum.accountCredentials] = {
+        valid:
+          this.accountForm.get('email').valid &&
+          this.accountForm.get('password').valid &&
+          this.accountForm.get('confirmPassword').valid,
+      };
+      this.pagesValidation[PageTypeEnum.cgu] = { valid: this.userAcceptSavedDate };
+      this.updatePageValid();
+    } else if (this.isAccountMode) {
       this.pagesValidation[PageTypeEnum.accountInfo] = {
         valid:
           this.accountForm.get('surname').valid &&
@@ -544,6 +571,31 @@ export class FormComponent implements OnInit {
 
     this.progressStatus += 25;
   }
+  /**
+   * Page algo for create account case
+   */
+  public nextPageAccount(): void {
+    if (this.currentPage == this.nbPagesForm - 1) {
+      const user = new User(this.accountForm.value);
+      // Create user with structure
+      user.structuresLink = this.linkedStructureId;
+      this.authService.register(user).subscribe(() => {
+        this.progressStatus = 100;
+      });
+    }
+
+    if (this.currentPage == PageTypeEnum.accountInfo) {
+      this.currentPage = PageTypeEnum.accountCredentials;
+      this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.accountCredentials) {
+      this.currentPage = PageTypeEnum.cgu;
+      this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.cgu) {
+      this.currentPage = this.nbPagesForm;
+    }
+
+    this.progressStatus += 25;
+  }
 
   /**
    * Page algo for claim structure case
@@ -566,6 +618,8 @@ export class FormComponent implements OnInit {
   public nextPage(): void {
     if (this.isClaimMode) {
       this.nextPageClaim();
+    } else if (this.isAccountMode) {
+      this.nextPageAccount();
     } else {
       // Check if user already connected to skip accountForm pages.
       if (this.currentPage == PageTypeEnum.info && this.profile) {
