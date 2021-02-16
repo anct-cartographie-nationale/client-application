@@ -245,7 +245,7 @@ export class MapComponent implements OnChanges {
           type: brignais.features[0].geometry.type,
           coordinates: brignais.features[0].geometry.coordinates,
         } as any,
-        { style: () => ({ color: '#d50000', fillOpacity: 0 }) }
+        { style: () => ({ color: '#a00000', fillOpacity: 0, weight: 1 }) }
       )
     );
   }
@@ -257,7 +257,7 @@ export class MapComponent implements OnChanges {
           type: metropole.features[0].geometry.type,
           coordinates: metropole.features[0].geometry.coordinates,
         } as any,
-        { style: () => ({ color: '#d50000', fillOpacity: 0 }) }
+        { style: () => ({ color: '#a00000', fillOpacity: 0, weight: 1 }) }
       )
     );
   }
