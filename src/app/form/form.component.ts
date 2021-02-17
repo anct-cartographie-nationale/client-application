@@ -70,6 +70,7 @@ export class FormComponent implements OnInit {
   public isEditMode = false;
   public isClaimMode = false;
   public isAccountMode = false;
+  public isJoinMode = false;
   public isLoading = false;
   public isWifiChoosen = false;
 
@@ -97,6 +98,10 @@ export class FormComponent implements OnInit {
       this.initForm(new Structure(history.state.data));
     } else if (history.state.newUser) {
       this.isClaimMode = true;
+      // Handle join strucutre, the case is very similar to claim
+      if (history.state.isJoin) {
+        this.isJoinMode = true;
+      }
       this.createAccountForm();
       this.claimStructure = history.state.newUser;
       this.setValidationsForm();
@@ -550,9 +555,16 @@ export class FormComponent implements OnInit {
       const user = new User(this.accountForm.value);
       // Create user and claim structure
       this.authService.register(user).subscribe(() => {
-        this.structureService.claimStructureWithAccount(this.claimStructure._id, user).subscribe(() => {
-          this.progressStatus = 100;
-        });
+        // If joinMode, send join request, if not send claim request;
+        if (this.isJoinMode) {
+          this.structureService.joinStructure(this.claimStructure._id, user.email).subscribe(() => {
+            this.progressStatus = 100;
+          });
+        } else {
+          this.structureService.claimStructureWithAccount(this.claimStructure._id, user).subscribe(() => {
+            this.progressStatus = 100;
+          });
+        }
       });
     }
 
@@ -615,6 +627,21 @@ export class FormComponent implements OnInit {
     this.progressStatus -= 25;
   }
 
+  /**
+   * Page algo for claim structure case
+   */
+  public previousPageAccount(): void {
+    if (this.currentPage == PageTypeEnum.accountCredentials) {
+      this.currentPage = PageTypeEnum.accountInfo;
+      this.updatePageValid();
+    } else if (this.currentPage == PageTypeEnum.cgu) {
+      this.currentPage = PageTypeEnum.accountCredentials;
+      this.updatePageValid();
+    }
+
+    this.progressStatus -= 25;
+  }
+
   public nextPage(): void {
     if (this.isClaimMode) {
       this.nextPageClaim();
@@ -648,6 +675,8 @@ export class FormComponent implements OnInit {
   public previousPage(): void {
     if (this.isClaimMode) {
       this.previousPageClaim();
+    } else if (this.isAccountMode) {
+      this.previousPageAccount();
     } else {
       // Check if user already connected to skip accountForm pages.
       if (this.currentPage == PageTypeEnum.structureNameAndAddress && this.profile) {

@@ -36,6 +36,7 @@ export class StructureDetailsComponent implements OnInit {
   public currentProfile: User = null;
   public deleteModalOpenned = false;
   public claimModalOpenned = false;
+  public joinModalOpenned = false;
 
   constructor(
     private printService: PrintService,
@@ -122,11 +123,23 @@ export class StructureDetailsComponent implements OnInit {
     this.claimModalOpenned = !this.claimModalOpenned;
   }
 
+  public toggleJoinModal(): void {
+    this.joinModalOpenned = !this.joinModalOpenned;
+  }
+
   public handleClaim(): void {
     if (this.userIsLoggedIn()) {
       this.toggleClaimModal();
     } else {
       this.router.navigate(['create-structure'], { state: { newUser: this.structure } });
+    }
+  }
+
+  public handleJoin(): void {
+    if (this.userIsLoggedIn()) {
+      this.toggleJoinModal();
+    } else {
+      this.router.navigate(['create-structure'], { state: { newUser: this.structure, isJoin: true } });
     }
   }
 
@@ -152,6 +165,15 @@ export class StructureDetailsComponent implements OnInit {
         this.structureService.claimStructureWithAccount(this.structure._id, user).subscribe(() => {
           this.isClaimed = true;
         });
+      });
+    }
+  }
+
+  public joinStructure(shouldClaim: boolean): void {
+    this.toggleJoinModal();
+    if (shouldClaim) {
+      this.structureService.joinStructure(this.structure._id, this.authService.userValue.username).subscribe((res) => {
+        this.isClaimed = true;
       });
     }
   }
@@ -220,6 +242,12 @@ export class StructureDetailsComponent implements OnInit {
   public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
     return equipmentsAndServices.filter((eqpt) =>
       ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners', 'wifiEnAccesLibre'].includes(eqpt)
+    );
+  }
+
+  public displayJoin(): boolean {
+    return (
+      !(this.profileService.isLinkedToStructure(this.structure._id) || this.profileService.isAdmin()) && this.isClaimed
     );
   }
 }

@@ -50,6 +50,14 @@ export class StructureService {
     return this.http.get<Structure>(`${this.baseUrl}/${id}`);
   }
 
+  public validateStructureJoin(id: string, userId: string, state: boolean): Observable<Structure> {
+    return this.http.post<any>(`${this.baseUrl}/${id}/join/${userId}/${state}`, null);
+  }
+
+  public joinStructure(id: string, email: string): Observable<Structure> {
+    return this.http.post<any>(`${this.baseUrl}/${id}/join`, { email });
+  }
+
   public delete(id: string): Observable<Structure> {
     return this.http.delete<Structure>(`${this.baseUrl}/${id}`);
   }

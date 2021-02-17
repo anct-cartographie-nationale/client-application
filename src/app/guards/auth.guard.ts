@@ -10,10 +10,11 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): UrlTree | boolean {
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authService.isLoggedIn()) {
       return true;
     }
-    return this.router.parseUrl('/home');
+    this.router.navigate(['/home'], { queryParams: { returnUrl: state.url } });
+    return false;
   }
 }

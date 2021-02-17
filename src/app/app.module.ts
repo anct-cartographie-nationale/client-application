@@ -31,6 +31,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
 import { FooterFormComponent } from './form/footer-form/footer-form.component';
 import { TempUserResolver } from './resolvers/temp-user.resolver';
+import { StructureJoinComponent } from './structure-join/structure-join.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { TempUserResolver } from './resolvers/temp-user.resolver';
     ResetPasswordComponent,
     FormComponent,
     FooterFormComponent,
+    StructureJoinComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule, AdminModule],
   providers: [

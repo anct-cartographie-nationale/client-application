@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { ProfileService } from '../profile/services/profile.service';
 import { AuthService } from '../services/auth.service';
 
@@ -13,20 +13,39 @@ export class HeaderComponent implements OnInit {
   public isPopUpOpen = false;
   public displaySignUp = true;
   public currentRoute = '';
-  public formeRoute = '/create-structure';
+  public formRoute = '/create-structure';
+  public returnUrl = null;
 
-  constructor(private authService: AuthService, private profileService: ProfileService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private profileService: ProfileService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;
       }
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      if (params.verified || params.returnUrl) {
+        Promise.resolve().then(() => {
+          if (!this.isLoggedIn) {
+            this.isPopUpOpen = true;
+            this.displaySignUp = true;
+          }
+        });
+        this.returnUrl = params.returnUrl;
+      }
+    });
+  }
 
   public openMenu(): void {
     this.showMenu = true;
   }
+
   public closeMenu(route: string): void {
     this.router.navigateByUrl(route);
     this.showMenu = false;
@@ -47,6 +66,9 @@ export class HeaderComponent implements OnInit {
     } else {
       this.isPopUpOpen = false;
     }
+    if (this.returnUrl && this.isLoggedIn) {
+      this.router.navigateByUrl(this.returnUrl);
+    }
   }
 
   public get isAdmin(): boolean {
@@ -58,6 +80,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public displayLogo(): boolean {
-    return this.formeRoute !== this.currentRoute;
+    return this.formRoute !== this.currentRoute;
   }
 }

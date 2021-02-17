@@ -109,6 +109,9 @@ h3 {
     span {
       color: $secondary-color;
     }
+    &.no-wrap {
+      white-space: nowrap;
+    }
   }
   h3 {
     @include cn-bold-22;
