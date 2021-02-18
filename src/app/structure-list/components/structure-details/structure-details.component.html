@@ -118,6 +118,7 @@
       </div>
       <div fxLayout="row" fxLayoutAlign="center center" class="hide-on-print">
         <a *ngIf="!isClaimed" (click)="handleClaim()" class="primary" tabindex="0">Revendiquer cette structure</a>
+        <a *ngIf="displayJoin()" (click)="handleJoin()" class="primary" tabindex="0">Rejoindre cette structure</a>
         <!-- temporary remove edit -->
         <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
@@ -325,4 +326,12 @@
     'Voulez-vous vraiment revendiquer cette structure&nbsp;? Une demande sera envoyée a l\'administrateur pour validation'
   "
   (closed)="claimStructure($event)"
+></app-modal-confirmation>
+
+<app-modal-confirmation
+  [openned]="joinModalOpenned"
+  [content]="
+    'Voulez-vous vraiment rejoindre cette structure&nbsp;? Une demande sera envoyée aux membres pour validation'
+  "
+  (closed)="joinStructure($event)"
 ></app-modal-confirmation>

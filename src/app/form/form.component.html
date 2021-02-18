@@ -53,8 +53,8 @@
       fxLayoutAlign="space-between center"
       fxLayoutAlign.lt-sm="center"
     >
-      <h2>
-        Revendiquer la structure <span>{{ claimStructure.structureName }}</span>
+      <h2 class="no-wrap">
+        {{ isJoinMode ? 'Rejoindre' : 'Revendiquer' }} la structure <span>{{ claimStructure.structureName }}</span>
       </h2>
       <div>
         <p>Une fois réalisé cela vous permettra de devenir propriétaire de cette structure</p>
