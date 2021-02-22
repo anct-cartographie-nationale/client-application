@@ -22,7 +22,7 @@ button {
   border: 1px solid;
 }
 .btnSearch {
-  @include background-hash;
+  @include background-hash($grey-2);
   border-color: $grey-4;
   padding: 0 0 4px 5px;
   &:hover {
@@ -45,6 +45,7 @@ button {
     padding: 3px 16px 3px 16px;
     display: table-cell;
     vertical-align: middle;
+    border-radius: 4px;
     @include btn-bold;
     &.withIcon {
       color: $black;

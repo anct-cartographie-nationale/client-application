@@ -59,7 +59,7 @@ button {
     }
   }
   .containerBtn {
-    @include background-hash;
+    @include background-hash($grey-2);
     padding: 0 0 4px 5px;
     border-radius: 4px;
     cursor: pointer;

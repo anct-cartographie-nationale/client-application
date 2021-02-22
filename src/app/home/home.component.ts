@@ -7,7 +7,7 @@ import { StructureService } from '../services/structure.service';
 import { Filter } from '../structure-list/models/filter.model';
 import { GeoJson } from '../map/models/geojson.model';
 import { GeojsonService } from '../services/geojson.service';
-import { ActivatedRoute } from '@angular/router';
+import { CustomRegExp } from '../utils/CustomRegExp';
 
 @Component({
   selector: 'app-home',
@@ -107,8 +107,7 @@ export class HomeComponent implements OnInit {
    * @param value string
    */
   private isLocationRequest(value: string): boolean {
-    const regex = /^\d+\s[A-z]+\s[A-z]+/g; //NOSONAR
-    if (value.match(regex)) {
+    if (value.match(CustomRegExp.LOCATION)) {
       return true;
     }
     return false;

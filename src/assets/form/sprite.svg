@@ -336,4 +336,9 @@
 <path d="M13.25 20.6066L13.25 20" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 </symbol>
 
+<symbol id="validate" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="13" cy="13" r="13" fill="#47C562"/>
+<path d="M8 13.8182L11.8889 17L18 10" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</symbol>
+
 </svg>

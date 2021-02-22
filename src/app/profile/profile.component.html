@@ -1,100 +1,311 @@
-<div fxLayout="column" class="content-container full-screen">
-  <div class="section-container" fxLayout="column" fxLayoutAlign="center center">
-    <h1>Profil</h1>
+<div fxLayout="column" class="content-container full-screen" *ngIf="userProfile">
+  <div class="profileSection">
+    <div class="section-container" fxLayout="row">
+      <svg class="cameraProfile" aria-hidden="true">
+        <use [attr.xlink:href]="'assets/ico/sprite.svg#camera'"></use>
+      </svg>
+      <div class="profileInformation" fxLayoutGap="18px" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <p class="profileName">{{ userProfile.surname | titlecase }} {{ userProfile.name | titlecase }}</p>
+          <button class="btn-primary" (click)="logout()">Déconnexion</button>
+        </div>
+        <div class="profileEmail" fxLayout="column">
+          <span>Identifiant</span>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <p>{{ userProfile.email }}</p>
+            <nav aria-label="modalOption">
+              <ul>
+                <li>
+                  <button
+                    [ngClass]="{ active: isModalOptsProfile }"
+                    (click)="openModalOptsProfile()"
+                    class="btn-primary transparent"
+                  >
+                    <app-svg-icon [type]="'ico'" [iconColor]="inherit" [icon]="'moreOpts'"></app-svg-icon>
+                  </button>
+                  <ul *ngIf="isModalOptsProfile" class="dropdown">
+                    <app-modal-options
+                      [isModalProfileOpts]="true"
+                      [hasOwners]="false"
+                      (closed)="closeModalOpts($event)"
+                    ></app-modal-options>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="structureSection">
+    <div class="section-container" fxLayoutGap="18px" fxLayout="column">
+      <ng-container *ngIf="userProfile.structuresLink.length > 0 && structures">
+        <div class="structureCard" *ngFor="let s of structures; let i = index">
+          <div class="structureInfo" fxLayout="column" fxLayoutGap="14px">
+            <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+              <a class="structureName" routerLink="/home" [state]="{ data: s.structure }">{{
+                s.structure.structureName
+              }}</a>
+              <nav aria-label="modalOption">
+                <ul>
+                  <li>
+                    <button
+                      [ngClass]="{ active: modalOptsStructureIndex == i }"
+                      (click)="openModalOptsStructure(i, s)"
+                      class="btn-primary transparent"
+                    >
+                      <app-svg-icon [type]="'ico'" [iconColor]="inherit" [icon]="'moreOpts'"></app-svg-icon>
+                    </button>
+                    <ul *ngIf="modalOptsStructureIndex == i" class="dropdown">
+                      <app-modal-options
+                        [isModalProfileOpts]="false"
+                        [hasOwners]="currentStructureOwners.owners.length > 0"
+                        (closed)="closeModalOpts($event)"
+                      ></app-modal-options>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div fxLayout="column" fxLayoutGap="14px">
+              <p class="ownerName" *ngFor="let owner of s.owners">{{ owner.email }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="addSection" fxLayout="row" fxLayoutAlign="center center">
+        <app-button
+          class="hide-on-print"
+          [type]="'button'"
+          [style]="'buttonWithHash'"
+          [text]="'Ajouter une structure'"
+          [iconBtn]="'add'"
+          (action)="addStructure()"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+
+  <div>
     <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
-      <p>Id: {{ userProfile._id }}</p>
-      <p>Email: {{ userProfile.email }}</p>
-      <button (click)="logout()">Se déconnecter</button>
-      <p fxLayout="column" *ngIf="userProfile.structuresLink.length > 0">
-        Mes structures :
-        <span *ngFor="let structureId of userProfile.structuresLink">
-          <strong>{{ structureId }}</strong>
-        </span>
-      </p>
       <p fxLayout="column" *ngIf="userProfile.pendingStructuresLink.length > 0">
         Mes structures en attente de validation:
         <span *ngFor="let structureId of userProfile.pendingStructuresLink">
           <strong>{{ structureId }}</strong>
         </span>
       </p>
-      <button (click)="toogleAddStructure()">Ajouter une structure</button>
-      <button (click)="toogleChangeEmail()">Changer d'email</button>
-      <form
-        *ngIf="changeEmail"
-        fxLayout="column"
-        fxLayoutGap="10px"
-        [formGroup]="formEmail"
-        (ngSubmit)="onSubmitEmail()"
-      >
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" autocomplete="on" formControlName="email" class="form-control" />
-          <div *ngIf="submitted" class="invalid-feedback">
-            <app-validator-form [control]="formEmail.controls.email"></app-validator-form>
-          </div>
-        </div>
-        <div class="form-group">
-          <button type="submit" [disabled]="loading" class="btn btn-primary">Appliquer</button>
-        </div>
-      </form>
-      <button (click)="toogleChangePassword()">Changer de mot de passe</button>
-
-      <form *ngIf="changePassword" fxLayout="column" fxLayoutGap="10px" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="oldPassword">Ancien mot de passe</label>
-          <input
-            type="password"
-            autocomplete="on"
-            formControlName="oldPassword"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.oldPassword.errors }"
-          />
-          <div *ngIf="submitted && f.oldPassword.errors" class="invalid-feedback">
-            <div *ngIf="f.oldPassword.errors.required">L'Ancien mot de passe est obligatoire</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <input
-            type="password"
-            autocomplete="on"
-            formControlName="password"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-          />
-          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Le mot de passe est obligatoire</div>
-            <div *ngIf="f.password.errors.pattern">
-              Le mot de passe doit avoir au minimun 8 caractères, une majuscule, une minuscule, un chiffre et un
-              caractère spécial.
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="confirmPassword">Confirmation du mot de passe</label>
-          <input
-            type="password"
-            autocomplete="on"
-            formControlName="confirmPassword"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
-          />
-          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-            <div *ngIf="f.confirmPassword.errors.required">La confirmation du mot de passe est obligatoire</div>
-            <div *ngIf="f.confirmPassword.errors.mustMatch">Les mot de passe ne sont pas les mêmes</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <button type="submit" [disabled]="loading" class="btn btn-primary">Appliquer</button>
-        </div>
-      </form>
     </div>
   </div>
-  <app-structureForm
-    *ngIf="addStructure"
-    [profile]="userProfile"
-    (closeEvent)="toogleAddStructure($event)"
-    (clickOutside)="toogleAddStructure()"
-  ></app-structureForm>
 </div>
+<div *ngIf="editModal" class="modalBackground">
+  <div class="modal" (clickOutside)="closeModalOptsProfile()">
+    <form
+      *ngIf="editModal == typeModalProfile.password"
+      [formGroup]="formPassword"
+      class="contentModal"
+      fxLayout="column"
+      fxLayoutAlign="center start"
+      fxLayoutGap="20px"
+    >
+      <div fxLayout="row" class="headerModal" fxLayoutAlign="space-between center">
+        <h2>Changer de mot de passe</h2>
+        <div class="ico-close-details" (click)="closeModalOptsProfile()"></div>
+      </div>
+      <div class="form-group" fxLayout="column" fxLayoutGap="4px">
+        <label for="oldPassword">Ancien mot de passe</label>
+        <p *ngIf="passwordError" class="special invalid">Votre ancien mot de passe est incorrect.</p>
+        <div fxLayout="row" fxLayoutGap="13px">
+          <input
+            [type]="isShowOldPassword ? 'text' : 'password'"
+            formControlName="oldPassword"
+            class="form-input password"
+            autocomplete="on"
+          />
+          <app-svg-icon
+            (click)="showOldPassword()"
+            [type]="'form'"
+            [iconClass]="'grey'"
+            [icon]="'eyePassword'"
+          ></app-svg-icon>
+          <app-svg-icon *ngIf="passwordError" [type]="'form'" [icon]="'notValidate'"></app-svg-icon>
+        </div>
+      </div>
+      <div class="form-group" fxLayout="column">
+        <label for="password">Nouveau mot de passe</label>
+        <p class="special" [ngClass]="{ invalid: fpass.password.invalid && fpass.password.value }">
+          Le mot de passe doit contenir au minimum : 8 caractères dont un caractère spécial, un caractère en majuscule
+          et un chiffre.
+        </p>
+        <div fxLayout="row" fxLayoutGap="13px">
+          <input
+            [type]="isShowPassword ? 'text' : 'password'"
+            formControlName="password"
+            class="form-input password"
+            autocomplete="on"
+          />
+          <app-svg-icon
+            (click)="showPassword()"
+            [type]="'form'"
+            [iconClass]="'grey'"
+            [icon]="'eyePassword'"
+          ></app-svg-icon>
+          <app-svg-icon *ngIf="fpass.password.valid" [type]="'form'" [icon]="'validate'"></app-svg-icon>
+          <app-svg-icon
+            *ngIf="fpass.password.invalid && fpass.password.value"
+            [type]="'form'"
+            [icon]="'notValidate'"
+          ></app-svg-icon>
+        </div>
+      </div>
+      <div class="form-group" fxLayout="column">
+        <label for="confirmPassword">Confirmation du mot de passe</label>
+        <div fxLayout="row" fxLayoutGap="13px">
+          <input
+            [type]="isShowConfirmPassword ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            class="form-input password"
+            autocomplete="on"
+          />
+          <app-svg-icon
+            (click)="showConfirmPassword()"
+            [type]="'form'"
+            [iconClass]="'grey'"
+            [icon]="'eyePassword'"
+          ></app-svg-icon>
+          <app-svg-icon
+            *ngIf="fpass.confirmPassword.valid && fpass.password.value"
+            [type]="'form'"
+            [icon]="'validate'"
+          ></app-svg-icon>
+          <app-svg-icon
+            *ngIf="fpass.confirmPassword.invalid && fpass.confirmPassword.value"
+            [type]="'form'"
+            [icon]="'notValidate'"
+          ></app-svg-icon>
+        </div>
+      </div>
+      <div class="footerModal" fxLayout="row" fxLayoutAlign="center center">
+        <button
+          type="submit"
+          [ngClass]="{ invalid: formPassword.invalid }"
+          class="btn-primary small leave"
+          (click)="submitPassword()"
+        >
+          Valider
+        </button>
+      </div>
+    </form>
+    <form
+      *ngIf="editModal == typeModalProfile.email"
+      [formGroup]="formEmail"
+      class="contentModal"
+      fxLayout="column"
+      fxLayoutAlign="center start"
+    >
+      <div fxLayout="row" class="headerModal" fxLayoutAlign="space-between center">
+        <h2>Changer de courriel</h2>
+        <div class="ico-close-details" (click)="closeModalOptsProfile()"></div>
+      </div>
+      <div class="form-group" fxLayout="column">
+        <label for="email">Nouveau courriel</label>
+        <p class="special invalid" *ngIf="this.fmail.email.hasError('alreadyExist')">L'email est déja utilisé.</p>
+        <div fxLayout="row" fxLayoutGap="13px">
+          <input
+            type="text"
+            formControlName="email"
+            class="form-input"
+            autocomplete="on"
+            (keyup)="verifyEmailAlreadyUsed($event.target.value, this.fmail.email)"
+          />
+          <app-svg-icon *ngIf="fmail.email.valid" [type]="'form'" [icon]="'validate'"></app-svg-icon>
+          <app-svg-icon
+            *ngIf="fmail.email.invalid && fmail.email.value"
+            [type]="'form'"
+            [icon]="'notValidate'"
+          ></app-svg-icon>
+        </div>
+      </div>
+      <div class="footerModal" fxLayout="row" fxLayoutAlign="center center">
+        <button
+          type="submit"
+          [ngClass]="{ invalid: formEmail.invalid }"
+          class="btn-primary small leave"
+          (click)="submitEmail()"
+        >
+          Valider
+        </button>
+      </div>
+    </form>
+    <div
+      *ngIf="editModal == typeModalProfile.deleteAccount"
+      class="contentModal"
+      fxLayout="column"
+      fxLayoutAlign="center start"
+      fxLayoutGap="30px"
+    >
+      <div fxLayout="row" class="headerModal" fxLayoutAlign="space-between center">
+        <h2>Supprimer un compte</h2>
+        <div class="ico-close-details" (click)="closeModalOptsProfile()"></div>
+      </div>
+      <div fxLayout="column" fxLayoutGap="16px">
+        <div class="row removeOwner" *ngFor="let owner of currentStructureOwners.owners" fxLayoutGap="16px">
+          <button class="btn-primary small" (click)="removeOwner(owner.id)">X</button>
+          <span>
+            {{ owner.email }}
+          </span>
+        </div>
+      </div>
+      <div class="footerModal" fxLayout="row" fxLayoutAlign="center center">
+        <button type="button" class="btn-primary small leave" (click)="closeModalOptsProfile()">Terminer</button>
+      </div>
+    </div>
+    <form
+      *ngIf="editModal == typeModalProfile.addAccount"
+      [formGroup]="formAddAccount"
+      class="contentModal"
+      fxLayout="column"
+      fxLayoutAlign="center start"
+      fxLayoutGap="30px"
+    >
+      <div fxLayout="row" class="headerModal" fxLayoutAlign="space-between center">
+        <h2>Ajouter un compte</h2>
+        <div class="ico-close-details" (click)="closeModalOptsProfile()"></div>
+      </div>
+      <div class="form-group" fxLayout="column">
+        <label for="email">Courriel du compte à ajouter</label>
+        <p *ngIf="ownerAlreadyLinked" class="special invalid">L'email est déjà rattaché à la structure.</p>
+        <div fxLayout="row" fxLayoutGap="13px">
+          <input type="text" formControlName="email" class="form-input" autocomplete="on" />
+          <app-svg-icon *ngIf="fAddAccount.email.valid" [type]="'form'" [icon]="'validate'"></app-svg-icon>
+          <app-svg-icon
+            *ngIf="fAddAccount.email.invalid && fAddAccount.email.value"
+            [type]="'form'"
+            [icon]="'notValidate'"
+          ></app-svg-icon>
+        </div>
+      </div>
+      <div class="footerModal" fxLayout="row" fxLayoutAlign="center center">
+        <button
+          type="submit"
+          [ngClass]="{ invalid: formAddAccount.invalid }"
+          class="btn-primary small leave"
+          (click)="addOwner()"
+        >
+          Envoyer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<app-modal-confirmation
+  [openned]="deleteModalStructureOpenned"
+  [content]="'Voulez-vous vraiment supprimer cette structure ?'"
+  (closed)="deleteStructure($event)"
+></app-modal-confirmation>
+<app-modal-confirmation
+  [openned]="deleteModalAccountOpenned"
+  [content]="'Voulez-vous vraiment supprimer votre compte ?'"
+  (closed)="deleteAccount($event)"
+></app-modal-confirmation>

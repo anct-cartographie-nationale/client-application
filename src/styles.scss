@@ -228,7 +228,7 @@ button {
     max-width: 560px;
     margin: auto;
     border-radius: 6px;
-    @include background-hash;
+    @include background-hash($grey-2);
     border: 1px solid $grey-4;
     position: absolute;
     top: 50%;

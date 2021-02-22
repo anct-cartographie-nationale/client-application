@@ -1,0 +1,36 @@
+@import '../../../assets/scss/color';
+@import '../../../assets/scss/typography';
+@import '../../../assets/scss/shapes';
+@import '../../../assets/scss/z-index';
+
+.modalOptions {
+  width: 300px;
+  background-color: $white;
+  position: absolute;
+  z-index: $modal-z-index;
+  list-style-type: none;
+  @include background-hash($secondary-color);
+  border: 1px solid $secondary-color;
+  border-radius: 6px;
+  .modalContent {
+    background: $white;
+    border-radius: 6px;
+    padding: 25px 22px 18px 22px;
+    div {
+      cursor: pointer;
+      &.invalid {
+        opacity: 0.4;
+        cursor: default;
+      }
+    }
+    p {
+      @include cn-bold-16;
+      white-space: nowrap;
+      margin: 0;
+    }
+    .deleteItem {
+      color: $red-default;
+      fill: $red-default;
+    }
+  }
+}

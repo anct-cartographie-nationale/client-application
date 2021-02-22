@@ -164,6 +164,8 @@
               (keyup)="verifyUserExist($event.target.value)"
               formControlName="email"
               class="form-input"
+              [readonly]="isAccountMode"
+              [ngClass]="{ disabled: isAccountMode }"
             />
             <img *ngIf="accountForm.get('email').valid" src="../../assets/form/validate.svg" alt="logo valid" />
             <img
