@@ -1,0 +1,166 @@
+@import '../../assets/scss/color';
+@import '../../assets/scss/typography';
+@import '../../assets/scss/hyperlink';
+@import '../../assets/scss/shapes';
+@import '../../assets/scss/breakpoint';
+
+.content-container {
+  padding-top: 0;
+}
+.section-container {
+  width: 50%;
+  padding: 20px 0;
+  .profileInformation {
+    width: 100%;
+  }
+  .cameraProfile {
+    width: 128px;
+    margin-right: 16px;
+    height: 113px;
+  }
+  @media #{$tablet} {
+    .cameraProfile {
+      display: none;
+    }
+    width: 70%;
+  }
+  @media #{$large-phone} {
+    width: 90%;
+  }
+}
+.profileSection {
+  background: $white;
+  border-bottom: 1px solid $grey-4;
+  .profileName {
+    @include cn-bold-24;
+    margin: 0 !important;
+  }
+  .profileEmail {
+    span {
+      @include cn-regular-16;
+      color: $grey-2;
+    }
+    p {
+      margin: 0;
+      @include cn-regular-18;
+    }
+  }
+}
+button {
+  &.transparent {
+    background: none;
+    border: 1px solid $grey-4;
+    border-radius: 6px;
+  }
+}
+.structureSection {
+  margin-bottom: 108px;
+  .structureCard {
+    border: 1px solid $grey-4;
+    border-radius: 6px;
+    .structureInfo {
+      border-radius: 6px;
+      background: $white;
+      min-height: 100px;
+      padding: 33px 55px;
+      @media #{$large-phone} {
+        padding: 33px 25px;
+      }
+      a {
+        margin: 0;
+        &.structureName {
+          @include cn-bold-24;
+          color: $secondary-color;
+          text-decoration: underline;
+        }
+      }
+      .ownerName {
+        @include cn-regular-18;
+        color: $grey-2;
+      }
+    }
+    @include background-hash($grey-2);
+  }
+}
+.addSection {
+  button {
+    background: $red-default;
+    color: $white;
+  }
+}
+.contentModal {
+  padding: 35px 34px 18px 54px !important;
+  .headerModal {
+    width: 100%;
+  }
+  p {
+    &.special {
+      margin: 8px 0;
+      @include cn-regular-14;
+      color: $grey-3;
+      &.invalid {
+        color: $orange-warning;
+      }
+    }
+  }
+  .removeOwner {
+    button {
+      width: 40px;
+      background-color: $red-default;
+    }
+    span {
+      @include cn-bold-18;
+    }
+  }
+  button {
+    &.invalid {
+      opacity: 0.4;
+    }
+  }
+  .form-group {
+    width: 100%;
+    padding-right: 40px;
+    input {
+      width: 100%;
+    }
+  }
+  .ico-close-details {
+    min-width: 40px;
+  }
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+li {
+  fill: $secondary-color;
+  color: $black;
+  display: block;
+  float: left;
+  position: relative;
+  text-decoration: none;
+  button {
+    width: 40px;
+    fill: $secondary-color;
+    &.active {
+      background-color: $secondary-color;
+      fill: $white;
+      border-color: $secondary-color;
+    }
+    &:hover {
+      background-color: $secondary-color;
+      fill: $white;
+      border-color: $secondary-color;
+    }
+  }
+}
+
+ul li ul {
+  position: absolute;
+  display: block;
+  margin-left: -268px;
+  margin-top: 7px;
+}

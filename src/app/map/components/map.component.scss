@@ -8,7 +8,7 @@
 
 .map-wrapper {
   border-radius: 6px;
-  @include background-hash;
+  @include background-hash($grey-2);
   border: 1px solid $grey-4;
 }
 
@@ -90,7 +90,7 @@
 
 ::ng-deep .leaflet-popup {
   border-radius: 6px;
-  @include background-hash;
+  @include background-hash($grey-2);
   border: 1px solid $grey-4;
   padding: 0 0 4px 4px;
   bottom: -15px !important;

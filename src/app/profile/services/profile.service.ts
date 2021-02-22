@@ -15,7 +15,7 @@ export class ProfileService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   public async getProfile(): Promise<User> {
-    if (this.authService.isLoggedIn() && !this.currentProfile) {
+    if (this.authService.isLoggedIn()) {
       const profile = await this.http.get<User>(`${this.baseUrl}/profile`).toPromise();
       this.currentProfile = profile;
     }
@@ -24,6 +24,9 @@ export class ProfileService {
 
   public setProfile(profile: User): void {
     this.currentProfile = profile;
+  }
+  public deleteProfile(): Observable<User> {
+    return this.http.delete<User>(`${this.baseUrl}`);
   }
 
   public isLinkedToStructure(idStructure: string): boolean {

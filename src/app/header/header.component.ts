@@ -45,9 +45,7 @@ export class HeaderComponent implements OnInit {
   public openMenu(): void {
     this.showMenu = true;
   }
-
-  public closeMenu(route: string): void {
-    this.router.navigateByUrl(route);
+  public closeMenu(): void {
     this.showMenu = false;
   }
 

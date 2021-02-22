@@ -5,6 +5,11 @@
 @import '../../assets/scss/shapes';
 @import '../../assets/scss/z-index';
 
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 h3 {
   margin: 0;
 }

@@ -37,7 +37,7 @@
     border: none;
     padding: 0;
   }
-  @include background-hash;
+  @include background-hash($grey-2);
   border: 1px solid $grey-4;
   ::-webkit-scrollbar {
     width: 16px;

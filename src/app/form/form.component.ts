@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Structure } from '../models/structure.model';
 import { Time } from '../models/time.model';
@@ -16,9 +16,9 @@ import { Equipment } from '../structure-list/enum/equipment.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
-import { Regex } from '../shared/enum/regex.enum';
 import { PageTypeEnum } from './pageType.enum';
 import { TempUserService } from '../services/temp-user.service';
+import { CustomRegExp } from '../utils/CustomRegExp';
 const { DateTime } = require('luxon');
 @Component({
   selector: 'app-structureForm',
@@ -112,7 +112,7 @@ export class FormComponent implements OnInit {
     this.route.data.subscribe((data) => {
       if (data.user) {
         this.isAccountMode = true;
-        this.createAccountForm(data.user.email, data.user.name, data.user.surname);
+        this.createAccountForm(data.user.email);
         this.linkedStructureId = data.user.pendingStructuresLink;
         this.setValidationsForm();
         this.currentPage = PageTypeEnum.accountInfo;
@@ -182,19 +182,16 @@ export class FormComponent implements OnInit {
     this.setValidationsForm();
   }
 
-  private createAccountForm(email?: string, name?: string, surname?: string): void {
+  private createAccountForm(email?: string): void {
     this.accountForm = new FormGroup(
       {
-        email: new FormControl(email ? email : '', [Validators.required, Validators.pattern(Regex.email)]),
-        name: new FormControl(name ? name : '', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]),
-        surname: new FormControl(surname ? surname : '', [
-          Validators.required,
-          Validators.pattern(Regex.textWithoutNumber),
-        ]),
-        phone: new FormControl('', [Validators.required, Validators.pattern(Regex.phone)]),
+        email: new FormControl(email ? email : '', [Validators.required, Validators.pattern(CustomRegExp.EMAIL)]),
+        name: new FormControl('', [Validators.required, Validators.pattern(CustomRegExp.TEXT_WITHOUT_NUMBER)]),
+        surname: new FormControl('', [Validators.required, Validators.pattern(CustomRegExp.TEXT_WITHOUT_NUMBER)]),
+        phone: new FormControl('', [Validators.required, Validators.pattern(CustomRegExp.PHONE)]),
         password: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
+          Validators.pattern(CustomRegExp.PASSWORD), //NOSONAR
         ]),
         confirmPassword: new FormControl(''),
       },
@@ -215,13 +212,19 @@ export class FormComponent implements OnInit {
         street: new FormControl(structure.address.street, Validators.required),
         commune: new FormControl(structure.address.commune, Validators.required),
       }),
-      contactMail: new FormControl(structure.contactMail, [Validators.required, Validators.pattern(Regex.email)]),
-      contactPhone: new FormControl(structure.contactPhone, [Validators.required, Validators.pattern(Regex.phone)]),
-      website: new FormControl(structure.website, Validators.pattern(Regex.website)),
-      facebook: new FormControl(structure.facebook, Validators.pattern(Regex.facebook)),
-      twitter: new FormControl(structure.twitter, Validators.pattern(Regex.twitter)),
-      instagram: new FormControl(structure.instagram, Validators.pattern(Regex.instagram)),
-      linkedin: new FormControl(structure.linkedin, Validators.pattern(Regex.linkedIn)),
+      contactMail: new FormControl(structure.contactMail, [
+        Validators.required,
+        Validators.pattern(CustomRegExp.EMAIL),
+      ]),
+      contactPhone: new FormControl(structure.contactPhone, [
+        Validators.required,
+        Validators.pattern(CustomRegExp.PHONE),
+      ]),
+      website: new FormControl(structure.website, Validators.pattern(CustomRegExp.WEBSITE)),
+      facebook: new FormControl(structure.facebook, Validators.pattern(CustomRegExp.FACEBOOK)),
+      twitter: new FormControl(structure.twitter, Validators.pattern(CustomRegExp.TWITTER)),
+      instagram: new FormControl(structure.instagram, Validators.pattern(CustomRegExp.INSTAGRAM)),
+      linkedin: new FormControl(structure.linkedin, Validators.pattern(CustomRegExp.LINKEDIN)),
       hours: new FormGroup({}),
       pmrAccess: new FormControl(structure.pmrAccess, Validators.required),
       exceptionalClosures: new FormControl(structure.exceptionalClosures),
@@ -239,23 +242,23 @@ export class FormComponent implements OnInit {
       digitalCultureSecurity: this.loadArrayForCheckbox(structure.digitalCultureSecurity, false),
       nbComputers: new FormControl(
         structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 1,
-        [Validators.required, Validators.pattern(Regex.noNullNumber)]
+        [Validators.required, Validators.pattern(CustomRegExp.NO_NULL_NUMBER)]
       ),
       nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 1, [
         Validators.required,
-        Validators.pattern(Regex.noNullNumber),
+        Validators.pattern(CustomRegExp.NO_NULL_NUMBER),
       ]),
       nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 1, [
         Validators.required,
-        Validators.pattern(Regex.noNullNumber),
+        Validators.pattern(CustomRegExp.NO_NULL_NUMBER),
       ]),
       nbNumericTerminal: new FormControl(
         structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 1,
-        [Validators.required, Validators.pattern(Regex.noNullNumber)]
+        [Validators.required, Validators.pattern(CustomRegExp.NO_NULL_NUMBER)]
       ),
       nbScanners: new FormControl(structure.equipmentsAndServices.includes('scanners') ? structure.nbScanners : 1, [
         Validators.required,
-        Validators.pattern(Regex.noNullNumber),
+        Validators.pattern(CustomRegExp.NO_NULL_NUMBER),
       ]),
       freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
     });
