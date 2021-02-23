@@ -234,7 +234,7 @@ export class StructureDetailsComponent implements OnInit {
     });
   }
   public canDelete(): boolean {
-    if (this.profileService.isAdmin() || this.profileService.isLinkedToStructure(this.structure._id)) {
+    if (this.profileService.isAdmin()) {
       return true;
     }
     return false;
