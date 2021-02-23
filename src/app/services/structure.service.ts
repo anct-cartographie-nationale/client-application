@@ -13,7 +13,6 @@ import { Time } from '../models/time.model';
 import { Filter } from '../structure-list/models/filter.model';
 import { User } from '../models/user.model';
 import { StructureWithOwners } from '../models/structureWithOwners.model';
-import { Owner } from '../models/owner.model';
 import { TempUser } from '../models/temp-user.model';
 
 @Injectable({

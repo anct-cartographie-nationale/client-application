@@ -299,14 +299,6 @@ img {
   @media #{$tablet} {
     width: 296px;
   }
-  .logo {
-    .hide {
-      display: block;
-    }
-    .show {
-      display: none;
-    }
-  }
   &.notCollapsed {
     margin-bottom: 8px;
     background: $grey-6;
@@ -412,6 +404,12 @@ img {
       width: 100%;
       height: 100%;
       fill: $grey-1;
+    }
+    .hide {
+      display: block;
+    }
+    .show {
+      display: none;
     }
   }
 }

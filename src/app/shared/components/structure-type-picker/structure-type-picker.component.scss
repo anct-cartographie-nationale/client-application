@@ -55,8 +55,6 @@ button {
   button {
     background: none;
     max-width: 114px;
-    &:focus {
-    }
   }
   .containerBtn {
     @include background-hash($grey-2);

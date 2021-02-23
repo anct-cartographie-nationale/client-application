@@ -71,7 +71,7 @@ export class ProfileService {
     return this.http.post<any>(`${this.baseUrl}/change-email`, { newEmail, oldEmail });
   }
 
-  public isEmailAlreadyUsed(newMail: string): Observable<Boolean> {
-    return this.http.post<Boolean>(`${this.baseUrl}/verify-exist-user`, { newMail });
+  public isEmailAlreadyUsed(newMail: string): Observable<boolean> {
+    return this.http.post<boolean>(`${this.baseUrl}/verify-exist-user`, { newMail });
   }
 }

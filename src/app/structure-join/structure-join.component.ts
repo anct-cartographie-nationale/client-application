@@ -5,7 +5,6 @@ import { StructureService } from '../services/structure.service';
 @Component({
   selector: 'app-structure-join',
   templateUrl: './structure-join.component.html',
-  styleUrls: ['./structure-join.component.scss'],
 })
 export class StructureJoinComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private structureService: StructureService) {}

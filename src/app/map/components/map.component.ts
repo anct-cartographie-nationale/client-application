@@ -1,21 +1,11 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
-import { latLng, MapOptions, geoJSON, tileLayer, Map, latLngBounds, layerGroup, Control } from 'leaflet';
+import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { latLng, MapOptions, geoJSON, tileLayer, Map, latLngBounds, layerGroup } from 'leaflet';
 import { Structure } from '../../models/structure.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
 import * as _ from 'lodash';
 import { GeoJsonProperties } from '../models/geoJsonProperties.model';
 import { MarkerType } from './markerType.enum';
-import { typeStructureEnum } from '../../shared/enum/typeStructure.enum';
 import metropole from '../../../assets/geojson/metropole.json';
 import brignais from '../../../assets/geojson/brignais.json';
 import L from 'leaflet';

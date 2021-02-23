@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnDestroy, OnChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import * as _ from 'lodash';
 import { Day } from '../../../models/day.model';
 import { Time } from '../../../models/time.model';
 import { WeekDayEnum } from '../../enum/weekDay.enum';
