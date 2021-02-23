@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FunctionTypeModalOptions } from '../enum/functionTypeModalOptions.enum';
+import { FunctionTypeModalOptions } from '../../enum/functionTypeModalOptions.enum';
 
 @Component({
   selector: 'app-modal-options',

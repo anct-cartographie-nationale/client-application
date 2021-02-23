@@ -12,6 +12,8 @@ import { HourPickerComponent } from './hour-picker/hour-picker.component';
 import { CopyPasteComponent } from './hour-picker/copy-paste/copy-paste.component';
 import { RadioFormComponent } from './radio-form/radio-form.component';
 import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmation.component';
+import { StructureOptionsModalComponent } from './structure-options-modal/structure-options-modal.component';
+import { ModalOptionsComponent } from './modal-options/modal-options.component';
 
 // tslint:disable-next-line: max-line-length
 export {
@@ -29,6 +31,8 @@ export {
   CopyPasteComponent,
   RadioFormComponent,
   ModalConfirmationComponent,
+  StructureOptionsModalComponent,
+  ModalOptionsComponent,
 };
 
 // tslint:disable-next-line:variable-name
@@ -47,4 +51,6 @@ export const SharedComponents = [
   CopyPasteComponent,
   RadioFormComponent,
   ModalConfirmationComponent,
+  StructureOptionsModalComponent,
+  ModalOptionsComponent,
 ];
