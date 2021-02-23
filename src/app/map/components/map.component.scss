@@ -76,6 +76,14 @@
       stroke-width: unset !important;
     }
   }
+  &:hover {
+    svg {
+      fill: $red-info;
+      &.mdm {
+        fill: #bd9e6a;
+      }
+    }
+  }
 }
 
 ::ng-deep .leaflet-left {
@@ -97,12 +105,15 @@
   h1 {
     color: $grey-1;
     @include cn-bold-20;
+    font-size: 18px;
     margin: 0;
   }
   p {
     color: $grey-3;
     @include cn-regular-16;
+    font-size: 16px;
     margin: 0 0 13px 0;
+    font-style: italic;
   }
   .pop-up {
     text-align: center;
@@ -111,6 +122,7 @@
     button {
       @include btn-search-filter;
       @include cn-bold-14;
+      font-size: 16px;
     }
   }
   span {
@@ -127,7 +139,6 @@
 ::ng-deep .leaflet-popup-tip-container {
   display: none;
 }
-
 @media print {
   .map-wrapper {
     display: none;
