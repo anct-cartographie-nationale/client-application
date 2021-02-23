@@ -32,7 +32,7 @@
   background: $white;
   border-bottom: 1px solid $grey-4;
   .profileName {
-    @include cn-bold-24;
+    @include cn-bold-26;
     margin: 0 !important;
   }
   .profileEmail {
@@ -69,7 +69,7 @@ button {
       a {
         margin: 0;
         &.structureName {
-          @include cn-bold-24;
+          @include cn-bold-26;
           color: $secondary-color;
           text-decoration: underline;
         }
