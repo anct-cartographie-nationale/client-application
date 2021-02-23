@@ -12,6 +12,7 @@ export class ModalOptionsComponent implements OnInit {
   constructor() {}
   @Input() isModalProfileOpts = false;
   @Input() hasOwners = true;
+  @Input() public isEditFormView? = false;
   @Output() closed = new EventEmitter<number>();
   ngOnInit(): void {}
 

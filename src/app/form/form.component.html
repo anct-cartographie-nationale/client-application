@@ -5,8 +5,13 @@
     (closed)="hasRedirectionAccepted($event)"
   ></app-modal-confirmation>
   <div class="content" *ngIf="!isLoading" [ngClass]="{ editMode: isEditMode }">
-    <div class="headerEditMode" *ngIf="isEditMode">
+    <div class="headerEditMode" *ngIf="isEditMode" fxLayout="row" fxLayoutAlign="space-between center">
       <h2>Modification de {{ editForm.get('structureName').value }}</h2>
+      <app-structure-options-modal
+        [structure]="structureWithOwners"
+        [isEditFormView]="true"
+        (closed)="structureDeleted()"
+      ></app-structure-options-modal>
     </div>
     <div class="returnBtnSection" *ngIf="isEditMode && currentPage != 0">
       <button class="btn-primary previous" (click)="goToSpecificPage(0, false)">

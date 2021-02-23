@@ -21,6 +21,7 @@ export class StructureOptionsModalComponent implements OnInit {
   // Global var
   @Input() public structure?: StructureWithOwners;
   @Input() public userProfile?: User;
+  @Input() public isEditFormView? = false;
   @Output() closed = new EventEmitter();
   public active: boolean;
 

@@ -7,6 +7,7 @@
       <ul *ngIf="showModalOption" class="dropdown">
         <app-modal-options
           [isModalProfileOpts]="!structure"
+          [isEditFormView]="structure && isEditFormView"
           [hasOwners]="structure && structure.owners.length > 0"
           (closed)="closeModalOpts($event)"
         ></app-modal-options>

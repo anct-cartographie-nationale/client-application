@@ -18,6 +18,7 @@ import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { PageTypeEnum } from './pageType.enum';
 import { CustomRegExp } from '../utils/CustomRegExp';
+import { StructureWithOwners } from '../models/structureWithOwners.model';
 const { DateTime } = require('luxon');
 @Component({
   selector: 'app-structureForm',
@@ -71,6 +72,7 @@ export class FormComponent implements OnInit {
   public isJoinMode = false;
   public isLoading = false;
   public isWifiChoosen = false;
+  public structureWithOwners: StructureWithOwners;
 
   constructor(
     private structureService: StructureService,
@@ -92,7 +94,11 @@ export class FormComponent implements OnInit {
     if (history.state.data) {
       this.isEditMode = true;
       this.isWifiChoosen = true;
-      this.initForm(new Structure(history.state.data));
+      const editStructure = new Structure(history.state.data);
+      this.initForm(editStructure);
+      this.structureService.getStructureWithOwners(editStructure._id, this.profile).subscribe((s) => {
+        this.structureWithOwners = s;
+      });
     } else if (history.state.newUser) {
       this.isClaimMode = true;
       // Handle join strucutre, the case is very similar to claim
@@ -902,5 +908,9 @@ export class FormComponent implements OnInit {
 
   public displayClaimStructure(): boolean {
     return this.currentPage == this.pageTypeEnum.summary && !this.isEditMode && this.isClaimMode;
+  }
+
+  public structureDeleted(): void {
+    this.router.navigateByUrl('home');
   }
 }

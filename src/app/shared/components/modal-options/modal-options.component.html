@@ -28,7 +28,13 @@
       <app-svg-icon [type]="'ico'" [iconColor]="'inherit'" [icon]="'remove'"></app-svg-icon>
       <p>Supprimer un compte</p>
     </div>
-    <div (click)="closeModal(functionType.editStructure)" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="9px">
+    <div
+      *ngIf="!isEditFormView"
+      (click)="closeModal(functionType.editStructure)"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="9px"
+    >
       <app-svg-icon [type]="'ico'" [iconColor]="'inherit'" [icon]="'edit'"></app-svg-icon>
       <p>Modifier la structure</p>
     </div>
