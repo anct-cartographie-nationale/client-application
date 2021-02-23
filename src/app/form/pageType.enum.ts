@@ -23,5 +23,4 @@ export enum PageTypeEnum {
   structureDescription = 21,
   structureCovidInfo = 22,
   cgu = 23,
-  addUserToStructure = 24,
 }

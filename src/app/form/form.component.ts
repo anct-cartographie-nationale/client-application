@@ -17,7 +17,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { PageTypeEnum } from './pageType.enum';
-import { TempUserService } from '../services/temp-user.service';
 import { CustomRegExp } from '../utils/CustomRegExp';
 const { DateTime } = require('luxon');
 @Component({
@@ -28,7 +27,6 @@ const { DateTime } = require('luxon');
 export class FormComponent implements OnInit {
   public profile: User;
   public createdStructure: Structure;
-
   // Form var
   public structureForm: FormGroup;
   public accountForm: FormGroup;
@@ -79,7 +77,6 @@ export class FormComponent implements OnInit {
     private searchService: SearchService,
     private profileService: ProfileService,
     private authService: AuthService,
-    private tempUserService: TempUserService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -541,7 +538,6 @@ export class FormComponent implements OnInit {
         name: 'Informations spécifiques à la période COVID',
       };
       this.pagesValidation[PageTypeEnum.cgu] = { valid: this.userAcceptSavedDate };
-      //this.pagesValidation[PageTypeEnum.addUserToStructure] = { valid: true };
       this.updatePageValid();
     }
   }
@@ -664,7 +660,6 @@ export class FormComponent implements OnInit {
         this.currentPage++; // page structureOtherAccompaniment skip and go to page structureWorkshop
         this.progressStatus += 100 / this.nbPagesForm;
       }
-
       // Check if going to the last page to submit form and send email verification.
       if (this.currentPage == this.nbPagesForm - 1) {
         this.validateForm();
