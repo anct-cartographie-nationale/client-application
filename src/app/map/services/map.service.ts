@@ -9,16 +9,9 @@ import { MarkerType } from '../components/markerType.enum';
 export class MapService {
   private static markersList = {};
   private isMarkerActive = false;
-  public markerIconHover = divIcon({
-    className: null,
-    html: '<svg width="40" height="46"><use xlink:href="assets/ico/sprite.svg#map-marker-locate"></use></svg>',
-    iconSize: [40, 46],
-    iconAnchor: [20, 46],
-    popupAnchor: [0, -46],
-  });
   public markerIconActive = divIcon({
     className: null,
-    html: '<svg width="40" height="46" fill="#d50000"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
+    html: '<svg width="40" height="46" fill="#A00000"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
     iconSize: [40, 46],
     iconAnchor: [20, 46],
     popupAnchor: [0, -46],
@@ -33,13 +26,8 @@ export class MapService {
   });
   public markerIconMdm = divIcon({
     className: null,
-    html: '<svg width="19" height="24"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
-    iconSize: [19, 24],
-    iconAnchor: [9, 0],
-  });
-  public markerIconMdmHover = divIcon({
-    className: null,
-    html: '<svg width="19" height="24"><use xlink:href="assets/ico/sprite.svg#mdm-hover"></use></svg>',
+    html:
+      '<svg width="19" height="24" fill="#D4C4A9" class="mdm"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
     iconSize: [19, 24],
     iconAnchor: [9, 0],
   });
@@ -63,7 +51,7 @@ export class MapService {
     if (id) {
       MapService.markersList[id] = marker;
     }
-    return this.bindMouseEventOnMarker(marker, this.getMarkerIcon(markerType), this.getMarkerIconHover(markerType));
+    return marker;
   }
 
   private getLayerAttributton(markerType: MarkerType): string {
@@ -82,32 +70,11 @@ export class MapService {
     }
   }
 
-  private getMarkerIconHover(markerType: MarkerType): DivIcon {
-    if (markerType === MarkerType.mdm) {
-      return this.markerIconMdmHover;
-    } else {
-      return this.markerIconHover;
-    }
-  }
-
-  private bindMouseEventOnMarker(marker: Marker, regularIcon: DivIcon, hoverIcon: DivIcon): Marker {
-    marker.on('mouseover', (e) => {
-      if (marker.getIcon() === regularIcon) {
-        marker.setIcon(hoverIcon);
-      }
-    });
-
-    marker.on('mouseout', (e) => {
-      marker.setIcon(regularIcon);
-    });
-    return marker;
-  }
-
   /**
    * @param id marker id
    */
   public setActiveMarker(id: string): void {
-    this.getMarker(id).setIcon(this.getMarkerIconHover(MarkerType.structure));
+    this.getMarker(id).setIcon(this.markerIconActive);
   }
 
   public setUnactiveMarker(id: string): void {

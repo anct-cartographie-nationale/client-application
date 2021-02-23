@@ -26,7 +26,6 @@ body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
 }
-
 a {
   color: $default-link-color;
   text-decoration: none;
@@ -127,6 +126,9 @@ button {
     padding-left: 16px;
     padding-right: 10px;
     @include btn-pass;
+    &.pass {
+      @include cn-regular-18;
+    }
   }
   .customCheck {
     display: inline-grid;

@@ -5,12 +5,12 @@ $title-font: 'Trebuchet MS', 'Helvetica', sans-serif;
 $font-size-xxsmall: 0.75em; // 12px
 $font-size-xsmall: 0.875em; // 14px
 $font-size-small: 1em; // 16px
-$font-size-smedium: 1.25em; // 20px
-$font-size-medium: 1.375em; // 22px
-$font-size-xmedium: 1.5em; // 24px
-$font-size-large: 1.75em; // 28px
-$font-size-xlarge: 2em; // 32px
-$font-size-medium-mobile: 1.1em;
+
+$font-size-smedium: 1.125em; // 18px
+$font-size-medium: 1.25em; // 20px
+$font-size-xmedium: 1.375em; // 22px
+
+$font-size-large: 1.625em; // 26px
 
 html,
 body,
@@ -37,116 +37,73 @@ h6,
   font-family: $title-font;
 }
 
-@mixin btn-bold {
-  @include cn-bold-16;
-  line-height: 18px;
-}
-
-@mixin btn-bold-sousligne {
-  @include btn-bold;
-  text-decoration: underline;
-}
-@mixin btn-normal {
-  @include cn-regular-16;
-  line-height: 19px;
-}
-
-@mixin btn-pass {
-  @include cn-regular-18;
-  line-height: 21px;
-}
-
 @mixin arial-regular-16 {
   font-family: $footer-text-font;
   font-style: normal;
   font-size: $font-size-small;
 }
 
-@mixin cn-bold-36 {
-  font-family: $text-font;
-  font-style: normal;
-  font-weight: bold;
-  font-size: $font-size-large;
-}
-@mixin cn-bold-32 {
-  font-family: $title-font;
-  font-style: normal;
-  font-weight: bold;
-  font-size: $font-size-xlarge;
-}
-@mixin cn-bold-28 {
+@mixin cn-bold-26 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-large;
 }
-@mixin cn-regular-28 {
+@mixin cn-regular-26 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-large;
-}
-@mixin cn-regular-24 {
-  font-family: $text-font;
-  font-style: normal;
-  font-weight: normal;
-  font-size: $font-size-xmedium;
-}
-@mixin cn-bold-24 {
-  font-family: $text-font;
-  font-style: normal;
-  font-weight: bold;
-  font-size: $font-size-xmedium;
 }
 
 @mixin cn-regular-22 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
-  font-size: $font-size-medium;
+  font-size: $font-size-xmedium;
 }
 
 @mixin cn-bold-22 {
   font-family: $text-font;
   font-style: normal;
   font-weight: bold;
+  font-size: $font-size-xmedium;
+}
+@mixin cn-bold-20 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-medium;
+}
+@mixin cn-regular-20 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: normal;
   font-size: $font-size-medium;
 }
 @mixin cn-bold-20 {
-  font-family: $text-font;
-  font-style: normal;
-  font-weight: bold;
-  font-size: $font-size-smedium;
-}
-@mixin cn-regular-20 {
-  font-family: $text-font;
-  font-style: normal;
-  font-weight: normal;
-  font-size: $font-size-smedium;
-}
-@mixin cn-bold-20 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
-  font-size: $font-size-smedium;
+  font-size: $font-size-medium;
 }
 @mixin cn-regular-20 {
   font-family: $title-font;
   font-style: normal;
   font-weight: normal;
-  font-size: $font-size-smedium;
+  font-size: $font-size-medium;
 }
 @mixin cn-regular-18 {
   font-family: $title-font;
   font-style: normal;
   font-weight: normal;
-  font-size: $font-size-medium-mobile;
+  font-size: $font-size-smedium;
 }
 @mixin cn-bold-18 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
-  font-size: $font-size-medium-mobile;
+  font-size: $font-size-smedium;
 }
 @mixin cn-bold-16 {
   font-family: $text-font;
@@ -183,4 +140,23 @@ h6,
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+@mixin btn-bold {
+  @include cn-bold-16;
+  line-height: 18px;
+}
+
+@mixin btn-bold-underline {
+  @include btn-bold;
+  text-decoration: underline;
+}
+@mixin btn-normal {
+  @include cn-regular-16;
+  line-height: 19px;
+}
+
+@mixin btn-pass {
+  @include cn-regular-14;
+  line-height: 21px;
 }

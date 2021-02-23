@@ -47,6 +47,8 @@ button {
     vertical-align: middle;
     border-radius: 4px;
     @include btn-bold;
+    font-size: 16px;
+    border-radius: 4px;
     &.withIcon {
       color: $black;
       height: 36px;
