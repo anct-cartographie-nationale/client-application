@@ -1,3 +1,15 @@
+@import '../../assets/scss/color';
+@import '../../assets/scss/typography';
+
 .content-container {
   overflow: auto;
+}
+
+h2 {
+  @include cn-bold-16;
+  color: $red-default;
+}
+
+.about-container {
+  max-width: 760px;
 }
