@@ -108,7 +108,7 @@ h3 {
   overflow-y: auto;
   height: auto;
   h2 {
-    @include cn-bold-28;
+    @include cn-bold-26;
     color: $black;
     margin-bottom: 0;
     span {
@@ -119,7 +119,11 @@ h3 {
     }
   }
   h3 {
-    @include cn-bold-22;
+    @include cn-bold-26;
+
+    @media #{$tablet} {
+      @include cn-bold-22;
+    }
   }
   .page {
     max-width: 960px;

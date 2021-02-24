@@ -5,8 +5,13 @@
     (closed)="hasRedirectionAccepted($event)"
   ></app-modal-confirmation>
   <div class="content" *ngIf="!isLoading" [ngClass]="{ editMode: isEditMode }">
-    <div class="headerEditMode" *ngIf="isEditMode">
+    <div class="headerEditMode" *ngIf="isEditMode" fxLayout="row" fxLayoutAlign="space-between center">
       <h2>Modification de {{ editForm.get('structureName').value }}</h2>
+      <app-structure-options-modal
+        [structure]="structureWithOwners"
+        [isEditFormView]="true"
+        (closed)="structureDeleted()"
+      ></app-structure-options-modal>
     </div>
     <div class="returnBtnSection" *ngIf="isEditMode && currentPage != 0">
       <button class="btn-primary previous" (click)="goToSpecificPage(0, false)">
@@ -1031,27 +1036,6 @@
               getStructureControl('lockdownActivity').value ? getStructureControl('lockdownActivity').value.length : 0
             }}/500
           </p>
-        </div>
-      </div>
-      <div *ngIf="false" class="page">
-        <div class="title">
-          <h3>Voulez-vous inviter d’autres personnes dans cette structure ?</h3>
-          <p class="notRequired">facultatif</p>
-        </div>
-        <div class="collapse" [ngClass]="{ notCollapsed: true }">
-          <div fxLayout="column">
-            <div class="collapseHeader" fxLayout="row" fxLayoutAlign=" center">
-              <div class="titleCollapse">J’ajoute d'autres personnes dans cette structure</div>
-              <div class="logo">
-                <svg class="show" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
-                </svg>
-                <svg class="hide" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
-                </svg>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </form>

@@ -17,8 +17,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { PageTypeEnum } from './pageType.enum';
-import { TempUserService } from '../services/temp-user.service';
 import { CustomRegExp } from '../utils/CustomRegExp';
+import { StructureWithOwners } from '../models/structureWithOwners.model';
 const { DateTime } = require('luxon');
 @Component({
   selector: 'app-structureForm',
@@ -28,7 +28,6 @@ const { DateTime } = require('luxon');
 export class FormComponent implements OnInit {
   public profile: User;
   public createdStructure: Structure;
-
   // Form var
   public structureForm: FormGroup;
   public accountForm: FormGroup;
@@ -73,13 +72,13 @@ export class FormComponent implements OnInit {
   public isJoinMode = false;
   public isLoading = false;
   public isWifiChoosen = false;
+  public structureWithOwners: StructureWithOwners;
 
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
     private profileService: ProfileService,
     private authService: AuthService,
-    private tempUserService: TempUserService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -95,7 +94,11 @@ export class FormComponent implements OnInit {
     if (history.state.data) {
       this.isEditMode = true;
       this.isWifiChoosen = true;
-      this.initForm(new Structure(history.state.data));
+      const editStructure = new Structure(history.state.data);
+      this.initForm(editStructure);
+      this.structureService.getStructureWithOwners(editStructure._id, this.profile).subscribe((s) => {
+        this.structureWithOwners = s;
+      });
     } else if (history.state.newUser) {
       this.isClaimMode = true;
       // Handle join strucutre, the case is very similar to claim
@@ -541,7 +544,6 @@ export class FormComponent implements OnInit {
         name: 'Informations spécifiques à la période COVID',
       };
       this.pagesValidation[PageTypeEnum.cgu] = { valid: this.userAcceptSavedDate };
-      //this.pagesValidation[PageTypeEnum.addUserToStructure] = { valid: true };
       this.updatePageValid();
     }
   }
@@ -664,7 +666,6 @@ export class FormComponent implements OnInit {
         this.currentPage++; // page structureOtherAccompaniment skip and go to page structureWorkshop
         this.progressStatus += 100 / this.nbPagesForm;
       }
-
       // Check if going to the last page to submit form and send email verification.
       if (this.currentPage == this.nbPagesForm - 1) {
         this.validateForm();
@@ -907,5 +908,9 @@ export class FormComponent implements OnInit {
 
   public displayClaimStructure(): boolean {
     return this.currentPage == this.pageTypeEnum.summary && !this.isEditMode && this.isClaimMode;
+  }
+
+  public structureDeleted(): void {
+    this.router.navigateByUrl('home');
   }
 }
