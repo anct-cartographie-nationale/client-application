@@ -52,15 +52,4 @@
       </div>
     </div>
   </div>
-
-  <div>
-    <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
-      <p fxLayout="column" *ngIf="userProfile.pendingStructuresLink.length > 0">
-        Mes structures en attente de validation:
-        <span *ngFor="let structureId of userProfile.pendingStructuresLink">
-          <strong>{{ structureId }}</strong>
-        </span>
-      </p>
-    </div>
-  </div>
 </div>

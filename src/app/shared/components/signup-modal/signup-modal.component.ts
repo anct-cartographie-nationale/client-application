@@ -46,7 +46,8 @@ export class SignUpModalComponent implements OnInit {
   }
 
   public sendSwitchToSignIn(): void {
-    this.closed.emit(false);
+    this.closed.emit(true);
+    this.router.navigate(['/create-structure']);
   }
 
   public swithToResetPassword(): void {
