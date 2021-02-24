@@ -6,7 +6,7 @@
       </svg>
       <div class="profileInformation" fxLayoutGap="18px" fxLayout="column">
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <p class="profileName">{{ userProfile.surname | titlecase }} {{ userProfile.name | titlecase }}</p>
+          <p class="profileName">{{ userProfile.name | titlecase }} {{ userProfile.surname | titlecase }}</p>
           <button class="btn-primary" (click)="logout()">Déconnexion</button>
         </div>
         <div class="profileEmail" fxLayout="column">

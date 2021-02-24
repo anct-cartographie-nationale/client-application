@@ -48,7 +48,7 @@
         <p>Une fois réalisé cela vous permettra d'être référencé sur la platefome</p>
       </div>
       <div class="btnStart">
-        <button class="btn-primary start" (click)="nextPage()">C'est Parti</button>
+        <button class="btn-primary start" (click)="nextPage()">C'est parti</button>
       </div>
     </div>
     <div
@@ -65,7 +65,7 @@
         <p>Une fois réalisé cela vous permettra de devenir propriétaire de cette structure</p>
       </div>
       <div class="btnStart">
-        <button class="btn-primary start" (click)="nextPage()">C'est Parti</button>
+        <button class="btn-primary start" (click)="nextPage()">C'est parti</button>
       </div>
     </div>
     <div
@@ -994,7 +994,13 @@
         démarches en ligne dans la Métropole de Lyon
       </p>
     </div>
-    <div *ngIf="currentPage == nbPagesForm && !profile" class="page" fxLayout="column" fxLayoutGap="69px">
+    <div
+      *ngIf="currentPage == nbPagesForm && !profile"
+      class="page"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="69px"
+    >
       <svg aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#emailVerification'"></use>
       </svg>
@@ -1008,7 +1014,7 @@
         </h3>
       </div>
 
-      <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
+      <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign="center">
         <div class="structureInfoContent" fxLayout="column">
           {{ getStructureControl('structureName').value }}
           <span>{{ getStructureControl('structureType').value }}</span>
