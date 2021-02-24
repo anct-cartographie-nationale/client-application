@@ -9,6 +9,16 @@
   &.icon-75 {
     width: 4.688em;
   }
+  &.validation {
+    height: 100%;
+    width: 26px;
+  }
+  &.hover {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
   &.grey {
     fill: $grey-3;
     stroke: $grey-3;

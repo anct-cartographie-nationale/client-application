@@ -62,10 +62,10 @@
 
           <div>
             <div *ngIf="hour.error === 'wrong' || hour.error === 'incomplete'" class="error-message">
-              <app-svg-icon [type]="'ico'" [icon]="'nok'"></app-svg-icon>
+              <app-svg-icon [iconClass]="'icon-32'" [type]="'ico'" [icon]="'nok'"></app-svg-icon>
             </div>
             <div *ngIf="hour.error === null" class="error-message">
-              <app-svg-icon [type]="'ico'" [icon]="'ok'"></app-svg-icon>
+              <app-svg-icon [iconClass]="'icon-32'" [type]="'ico'" [icon]="'ok'"></app-svg-icon>
             </div>
           </div>
         </div>
