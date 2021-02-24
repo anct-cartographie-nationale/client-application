@@ -807,7 +807,13 @@
           <h3>Proposez-vous le wifi en accès libre ?</h3>
         </div>
         <app-radio-form
-          [selectedOption]="isEditMode ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices') : null"
+          [selectedOption]="
+            isEditMode
+              ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices')
+              : isWifiChoosen
+              ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices')
+              : null
+          "
           (selectedEvent)="onCheckChange($event, 'equipmentsAndServices', 'wifiEnAccesLibre')"
         >
         </app-radio-form>
