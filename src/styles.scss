@@ -195,6 +195,7 @@ button {
   position: absolute;
   content: '';
   top: 0;
+  left: 0;
   background-color: $modal-background;
   .modal {
     max-height: 90%;
