@@ -8,7 +8,7 @@
     <tbody>
       <tr *ngFor="let demand of demandsAttachment">
         <td>{{ demand.userEmail }}</td>
-        <td>{{ demand.structureId }}</td>
+        <td>{{ demand.structureName }}</td>
         <td>
           <button (click)="acceptDemand(demand)">Valider</button><button (click)="refuseDemand(demand)">Refuser</button>
         </td>
