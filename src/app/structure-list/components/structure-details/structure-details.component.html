@@ -102,7 +102,12 @@
           </div>
         </div>
         <div fxLayout="column" fxFlex="50%">
-          <div *ngIf="structure.contactMail" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
+          <div
+            *ngIf="structure.contactMail && structure.contactMail !== 'unknown@unknown.com'"
+            fxLayout="row"
+            fxLayoutAlign="none center"
+            fxLayoutGap="13px"
+          >
             <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
             <p>{{ structure.contactMail }}</p>
           </div>
@@ -118,6 +123,7 @@
       </div>
       <div fxLayout="row" fxLayoutAlign="center center" class="hide-on-print">
         <a *ngIf="!isClaimed" (click)="handleClaim()" class="primary" tabindex="0">Revendiquer cette structure</a>
+        <a *ngIf="displayJoin()" (click)="handleJoin()" class="primary" tabindex="0">Rejoindre cette structure</a>
         <!-- temporary remove edit -->
         <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
@@ -185,7 +191,7 @@
             >
               <p class="no-margin">{{ getAccessLabel(acces) }}</p>
             </div>
-            <p class="no-margin">Accessibles aux personnes à mobilité réduite</p>
+            <p *ngIf="structure.pmrAccess" class="no-margin">Accessibles aux personnes à mobilité réduite</p>
           </div>
           <div *ngFor="let public of structure.publics" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
             <p class="no-margin">{{ getPublicLabel(public) }}</p>
@@ -325,4 +331,12 @@
     'Voulez-vous vraiment revendiquer cette structure&nbsp;? Une demande sera envoyée a l\'administrateur pour validation'
   "
   (closed)="claimStructure($event)"
+></app-modal-confirmation>
+
+<app-modal-confirmation
+  [openned]="joinModalOpenned"
+  [content]="
+    'Voulez-vous vraiment rejoindre cette structure&nbsp;? Une demande sera envoyée aux membres pour validation'
+  "
+  (closed)="joinStructure($event)"
 ></app-modal-confirmation>

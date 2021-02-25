@@ -1,0 +1,83 @@
+@import '../../assets/scss/color';
+@import '../../assets/scss/typography';
+@import '../../assets/scss/hyperlink';
+@import '../../assets/scss/shapes';
+@import '../../assets/scss/breakpoint';
+
+.content-container {
+  padding-top: 0;
+}
+.section-container {
+  width: 50%;
+  padding: 20px 0;
+  .profileInformation {
+    width: 100%;
+  }
+  .cameraProfile {
+    width: 128px;
+    margin-right: 16px;
+    height: 113px;
+  }
+  @media #{$tablet} {
+    .cameraProfile {
+      display: none;
+    }
+    width: 70%;
+  }
+  @media #{$large-phone} {
+    width: 90%;
+  }
+}
+.profileSection {
+  background: $white;
+  border-bottom: 1px solid $grey-4;
+  .profileName {
+    @include cn-bold-26;
+    margin: 0 !important;
+  }
+  .profileEmail {
+    span {
+      @include cn-regular-16;
+      color: $grey-2;
+    }
+    p {
+      margin: 0;
+      @include cn-regular-18;
+    }
+  }
+}
+.structureSection {
+  margin-bottom: 108px;
+  .structureCard {
+    border: 1px solid $grey-4;
+    border-radius: 6px;
+    .structureInfo {
+      border-radius: 6px;
+      background: $white;
+      min-height: 100px;
+      padding: 33px 55px;
+      @media #{$large-phone} {
+        padding: 33px 25px;
+      }
+      a {
+        margin: 0;
+        &.structureName {
+          @include cn-bold-26;
+          color: $secondary-color;
+          text-decoration: underline;
+        }
+      }
+      .ownerName {
+        @include cn-regular-18;
+        color: $grey-2;
+      }
+    }
+    @include background-hash($grey-2);
+  }
+}
+.addSection {
+  button {
+    background: $red-default;
+    color: $white;
+  }
+}

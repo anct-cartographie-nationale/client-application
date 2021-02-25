@@ -5,6 +5,11 @@
 @import '../../assets/scss/shapes';
 @import '../../assets/scss/z-index';
 
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 h3 {
   margin: 0;
 }
@@ -103,15 +108,22 @@ h3 {
   overflow-y: auto;
   height: auto;
   h2 {
-    @include cn-bold-28;
+    @include cn-bold-26;
     color: $black;
     margin-bottom: 0;
     span {
       color: $secondary-color;
     }
+    &.no-wrap {
+      white-space: nowrap;
+    }
   }
   h3 {
-    @include cn-bold-22;
+    @include cn-bold-26;
+
+    @media #{$tablet} {
+      @include cn-bold-22;
+    }
   }
   .page {
     max-width: 960px;
@@ -291,14 +303,6 @@ img {
   @media #{$tablet} {
     width: 296px;
   }
-  .logo {
-    .hide {
-      display: block;
-    }
-    .show {
-      display: none;
-    }
-  }
   &.notCollapsed {
     margin-bottom: 8px;
     background: $grey-6;
@@ -404,6 +408,12 @@ img {
       width: 100%;
       height: 100%;
       fill: $grey-1;
+    }
+    .hide {
+      display: block;
+    }
+    .show {
+      display: none;
     }
   }
 }

@@ -10,6 +10,7 @@
   </div>
   <div fxLayout="row" class="right-header" fxLayoutAlign="center center" fxLayoutGap="3vw">
     <a routerLink="/home" [routerLinkActive]="'active'" i18n>Les acteurs</a>
+    <a routerLink="/about" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
     <!-- <a routerLink="/news" [routerLinkActive]="'active'" i18n>Actualités</a> -->
     <!-- <a routerLink="/resources" [routerLinkActive]="'active'" i18n>Ressources</a> -->
     <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'">Administration</a>
@@ -32,7 +33,7 @@
       </div>
       <div fxLayout="column" class="right-header" fxLayoutAlign="none baseline" fxLayoutGap="5vw">
         <a routerLink="/home" [routerLinkActive]="'active'" (click)="closeMenu()" i18n>Les acteurs</a>
-        <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'">Administration</a>
+        <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'" (click)="closeMenu()">Administration</a>
       </div>
     </div>
     <div>
@@ -45,7 +46,7 @@
 </div>
 
 <app-signup-modal *ngIf="displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignUpModal($event)"></app-signup-modal>
-<app-signin-modal *ngIf="!displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignInModal()"></app-signin-modal>
+<!-- <app-signin-modal *ngIf="!displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignInModal()"></app-signin-modal> -->
 
 <ng-template #customTitle>
   <img class="desktop-show logo-grand-lyon" src="/assets/logos/resin.svg" alt />

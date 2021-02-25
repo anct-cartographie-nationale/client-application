@@ -6,22 +6,26 @@
 .structure {
   padding: 12px 0 12px 0;
   border-bottom: 1px dashed $grey !important;
+  min-height: 110px;
   cursor: pointer;
+  @media #{$large-phone} {
+    height: unset;
+  }
   .typeStructure {
     color: $grey-3;
     @include cn-regular-16;
+    font-style: italic;
   }
   .structure-name {
-    padding-top: 13px;
     color: $grey-1;
-    @include cn-bold-20;
+    @include cn-bold-18;
     padding-bottom: 5px;
     width: 100%;
     text-transform: capitalize;
   }
   .distanceStructure {
     @include cn-regular-16;
-    color: $grey-1;
+    color: $grey-3;
     width: 50%;
   }
   &:last-child {

@@ -5,8 +5,13 @@
     (closed)="hasRedirectionAccepted($event)"
   ></app-modal-confirmation>
   <div class="content" *ngIf="!isLoading" [ngClass]="{ editMode: isEditMode }">
-    <div class="headerEditMode" *ngIf="isEditMode">
+    <div class="headerEditMode" *ngIf="isEditMode" fxLayout="row" fxLayoutAlign="space-between center">
       <h2>Modification de {{ editForm.get('structureName').value }}</h2>
+      <app-structure-options-modal
+        [structure]="structureWithOwners"
+        [isEditFormView]="true"
+        (closed)="structureDeleted()"
+      ></app-structure-options-modal>
     </div>
     <div class="returnBtnSection" *ngIf="isEditMode && currentPage != 0">
       <button class="btn-primary previous" (click)="goToSpecificPage(0, false)">
@@ -43,7 +48,7 @@
         <p>Une fois réalisé cela vous permettra d'être référencé sur la platefome</p>
       </div>
       <div class="btnStart">
-        <button class="btn-primary start" (click)="nextPage()">C'est Parti</button>
+        <button class="btn-primary start" (click)="nextPage()">C'est parti</button>
       </div>
     </div>
     <div
@@ -53,14 +58,14 @@
       fxLayoutAlign="space-between center"
       fxLayoutAlign.lt-sm="center"
     >
-      <h2>
-        Revendiquer la structure <span>{{ claimStructure.structureName }}</span>
+      <h2 class="no-wrap">
+        {{ isJoinMode ? 'Rejoindre' : 'Revendiquer' }} la structure <span>{{ claimStructure.structureName }}</span>
       </h2>
       <div>
         <p>Une fois réalisé cela vous permettra de devenir propriétaire de cette structure</p>
       </div>
       <div class="btnStart">
-        <button class="btn-primary start" (click)="nextPage()">C'est Parti</button>
+        <button class="btn-primary start" (click)="nextPage()">C'est parti</button>
       </div>
     </div>
     <div
@@ -164,6 +169,8 @@
               (keyup)="verifyUserExist($event.target.value)"
               formControlName="email"
               class="form-input"
+              [readonly]="isAccountMode"
+              [ngClass]="{ disabled: isAccountMode }"
             />
             <img *ngIf="accountForm.get('email').valid" src="../../assets/form/validate.svg" alt="logo valid" />
             <img
@@ -957,27 +964,6 @@
           </p>
         </div>
       </div>
-      <div *ngIf="false" class="page">
-        <div class="title">
-          <h3>Voulez-vous inviter d’autres personnes dans cette structure ?</h3>
-          <p class="notRequired">facultatif</p>
-        </div>
-        <div class="collapse" [ngClass]="{ notCollapsed: true }">
-          <div fxLayout="column">
-            <div class="collapseHeader" fxLayout="row" fxLayoutAlign=" center">
-              <div class="titleCollapse">J’ajoute d'autres personnes dans cette structure</div>
-              <div class="logo">
-                <svg class="show" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
-                </svg>
-                <svg class="hide" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </form>
     <div *ngIf="currentPage == pageTypeEnum.cgu" class="page">
       <div class="title">
@@ -1008,7 +994,13 @@
         démarches en ligne dans la Métropole de Lyon
       </p>
     </div>
-    <div *ngIf="currentPage == nbPagesForm && !profile" class="page" fxLayout="column" fxLayoutGap="69px">
+    <div
+      *ngIf="currentPage == nbPagesForm && !profile"
+      class="page"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="69px"
+    >
       <svg aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#emailVerification'"></use>
       </svg>
@@ -1022,7 +1014,7 @@
         </h3>
       </div>
 
-      <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
+      <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign="center">
         <div class="structureInfoContent" fxLayout="column">
           {{ getStructureControl('structureName').value }}
           <span>{{ getStructureControl('structureType').value }}</span>

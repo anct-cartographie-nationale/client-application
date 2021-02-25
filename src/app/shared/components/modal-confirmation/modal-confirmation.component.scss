@@ -39,7 +39,7 @@
     width: 350px;
     margin: auto;
     border-radius: 6px;
-    @include background-hash;
+    @include background-hash($grey-2);
     border: 1px solid $grey-4;
     margin-top: 50vh;
     transform: translateY(-50%);

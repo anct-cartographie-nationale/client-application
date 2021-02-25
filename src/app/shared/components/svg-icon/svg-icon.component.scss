@@ -1,3 +1,4 @@
+@import '../../../../assets/scss/color';
 .icon {
   display: inline-block;
   height: 2em;
@@ -7,6 +8,10 @@
   }
   &.icon-75 {
     width: 4.688em;
+  }
+  &.grey {
+    fill: $grey-3;
+    stroke: $grey-3;
   }
 }
 

@@ -38,7 +38,7 @@
   line-break: 18px;
 }
 @mixin btn-search-addStructure {
-  @include btn-bold-sousligne;
+  @include btn-bold-underline;
   color: $secondary-color;
   outline: none;
 }

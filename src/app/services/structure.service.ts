@@ -12,6 +12,8 @@ import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Time } from '../models/time.model';
 import { Filter } from '../structure-list/models/filter.model';
 import { User } from '../models/user.model';
+import { StructureWithOwners } from '../models/structureWithOwners.model';
+import { TempUser } from '../models/temp-user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -50,8 +52,23 @@ export class StructureService {
     return this.http.get<Structure>(`${this.baseUrl}/${id}`);
   }
 
+  public validateStructureJoin(id: string, userId: string, state: boolean): Observable<Structure> {
+    return this.http.post<any>(`${this.baseUrl}/${id}/join/${userId}/${state}`, null);
+  }
+
+  public joinStructure(id: string, email: string): Observable<Structure> {
+    return this.http.post<any>(`${this.baseUrl}/${id}/join`, { email });
+  }
+
   public delete(id: string): Observable<Structure> {
     return this.http.delete<Structure>(`${this.baseUrl}/${id}`);
+  }
+
+  public removeOwnerFromStructure(idOwner: string, idStructure: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/${idStructure}/owner/${idOwner}`);
+  }
+  public addOwnerToStructure(user: TempUser, idStructure: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/${idStructure}/addOwner`, user);
   }
 
   public getStructures(filters: Filter[]): Observable<Structure[]> {
@@ -172,5 +189,8 @@ export class StructureService {
       const tabNum = n.toString().match(/.{1,2}/g);
       return tabNum[0] + 'h' + tabNum[1];
     }
+  }
+  public getStructureWithOwners(structureId: string, profile: User): Observable<StructureWithOwners> {
+    return this.http.post<any>(`${this.baseUrl}/${structureId}/withOwners`, { emailUser: profile.email });
   }
 }

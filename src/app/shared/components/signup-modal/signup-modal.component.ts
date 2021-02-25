@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../../../services/auth.service';
-import { Regex } from '../../enum/regex.enum';
+import { CustomRegExp } from '../../../utils/CustomRegExp';
 
 @Component({
   selector: 'app-signup-modal',
@@ -29,14 +29,8 @@ export class SignUpModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern(Regex.email)]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
-        ],
-      ],
+      email: ['', [Validators.required, Validators.pattern(CustomRegExp.EMAIL)]],
+      password: ['', [Validators.required, Validators.pattern(CustomRegExp.PASSWORD)]],
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -52,7 +46,8 @@ export class SignUpModalComponent implements OnInit {
   }
 
   public sendSwitchToSignIn(): void {
-    this.closed.emit(false);
+    this.closed.emit(true);
+    this.router.navigate(['/create-structure']);
   }
 
   public swithToResetPassword(): void {

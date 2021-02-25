@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Regex } from '../../enum/regex.enum';
+import { CustomRegExp } from '../../../utils/CustomRegExp';
 import { MustMatch } from '../../validator/form';
 
 @Component({
@@ -19,14 +19,11 @@ export class CreateAccountFormComponent implements OnInit {
   ngOnInit(): void {
     this.accountForm = new FormGroup(
       {
-        email: new FormControl('', [Validators.required, Validators.pattern(Regex.email)]),
-        name: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]),
-        surname: new FormControl('', [Validators.required, Validators.pattern(Regex.textWithoutNumber)]),
-        phone: new FormControl('', [Validators.required, Validators.pattern('([0-9]{2} ){4}[0-9]{2}')]), //NOSONAR
-        password: new FormControl('', [
-          Validators.required,
-          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
-        ]),
+        email: new FormControl('', [Validators.required, Validators.pattern(CustomRegExp.EMAIL)]),
+        name: new FormControl('', [Validators.required, Validators.pattern(CustomRegExp.TEXT_WITHOUT_NUMBER)]),
+        surname: new FormControl('', [Validators.required, Validators.pattern(CustomRegExp.TEXT_WITHOUT_NUMBER)]),
+        phone: new FormControl('', [Validators.required, Validators.pattern(CustomRegExp.PHONE)]),
+        password: new FormControl('', [Validators.required, Validators.pattern(CustomRegExp.PASSWORD)]),
         confirmPassword: new FormControl(''),
       },
       [MustMatch('password', 'confirmPassword')]

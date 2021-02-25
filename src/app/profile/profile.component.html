@@ -1,100 +1,55 @@
-<div fxLayout="column" class="content-container full-screen">
-  <div class="section-container" fxLayout="column" fxLayoutAlign="center center">
-    <h1>Profil</h1>
-    <div *ngIf="userProfile" fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
-      <p>Id: {{ userProfile._id }}</p>
-      <p>Email: {{ userProfile.email }}</p>
-      <button (click)="logout()">Se déconnecter</button>
-      <p fxLayout="column" *ngIf="userProfile.structuresLink.length > 0">
-        Mes structures :
-        <span *ngFor="let structureId of userProfile.structuresLink">
-          <strong>{{ structureId }}</strong>
-        </span>
-      </p>
-      <p fxLayout="column" *ngIf="userProfile.pendingStructuresLink.length > 0">
-        Mes structures en attente de validation:
-        <span *ngFor="let structureId of userProfile.pendingStructuresLink">
-          <strong>{{ structureId }}</strong>
-        </span>
-      </p>
-      <button (click)="toogleAddStructure()">Ajouter une structure</button>
-      <button (click)="toogleChangeEmail()">Changer d'email</button>
-      <form
-        *ngIf="changeEmail"
-        fxLayout="column"
-        fxLayoutGap="10px"
-        [formGroup]="formEmail"
-        (ngSubmit)="onSubmitEmail()"
-      >
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" autocomplete="on" formControlName="email" class="form-control" />
-          <div *ngIf="submitted" class="invalid-feedback">
-            <app-validator-form [control]="formEmail.controls.email"></app-validator-form>
+<div fxLayout="column" class="content-container full-screen" *ngIf="userProfile">
+  <div class="profileSection">
+    <div class="section-container" fxLayout="row">
+      <svg class="cameraProfile" aria-hidden="true">
+        <use [attr.xlink:href]="'assets/ico/sprite.svg#camera'"></use>
+      </svg>
+      <div class="profileInformation" fxLayoutGap="18px" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <p class="profileName">{{ userProfile.name | titlecase }} {{ userProfile.surname | titlecase }}</p>
+          <button class="btn-primary" (click)="logout()">Déconnexion</button>
+        </div>
+        <div class="profileEmail" fxLayout="column">
+          <span>Identifiant</span>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <p>{{ userProfile.email }}</p>
+            <app-structure-options-modal
+              [userProfile]="userProfile"
+              (closed)="ngOnInit()"
+            ></app-structure-options-modal>
           </div>
         </div>
-        <div class="form-group">
-          <button type="submit" [disabled]="loading" class="btn btn-primary">Appliquer</button>
-        </div>
-      </form>
-      <button (click)="toogleChangePassword()">Changer de mot de passe</button>
-
-      <form *ngIf="changePassword" fxLayout="column" fxLayoutGap="10px" [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="oldPassword">Ancien mot de passe</label>
-          <input
-            type="password"
-            autocomplete="on"
-            formControlName="oldPassword"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.oldPassword.errors }"
-          />
-          <div *ngIf="submitted && f.oldPassword.errors" class="invalid-feedback">
-            <div *ngIf="f.oldPassword.errors.required">L'Ancien mot de passe est obligatoire</div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="password">Mot de passe</label>
-          <input
-            type="password"
-            autocomplete="on"
-            formControlName="password"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-          />
-          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Le mot de passe est obligatoire</div>
-            <div *ngIf="f.password.errors.pattern">
-              Le mot de passe doit avoir au minimun 8 caractères, une majuscule, une minuscule, un chiffre et un
-              caractère spécial.
+      </div>
+    </div>
+  </div>
+  <div class="structureSection">
+    <div class="section-container" fxLayoutGap="18px" fxLayout="column">
+      <ng-container *ngIf="userProfile.structuresLink.length > 0 && structures">
+        <div class="structureCard" *ngFor="let s of structures; let i = index">
+          <div class="structureInfo" fxLayout="column" fxLayoutGap="14px">
+            <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+              <a class="structureName" routerLink="/home" [state]="{ data: s.structure }">{{
+                s.structure.structureName
+              }}</a>
+              <app-structure-options-modal [structure]="s" (closed)="ngOnInit()"></app-structure-options-modal>
+            </div>
+            <div fxLayout="column" fxLayoutGap="14px">
+              <p class="ownerName" *ngFor="let owner of s.owners">{{ owner.email }}</p>
             </div>
           </div>
         </div>
-        <div class="form-group">
-          <label for="confirmPassword">Confirmation du mot de passe</label>
-          <input
-            type="password"
-            autocomplete="on"
-            formControlName="confirmPassword"
-            class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
-          />
-          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-            <div *ngIf="f.confirmPassword.errors.required">La confirmation du mot de passe est obligatoire</div>
-            <div *ngIf="f.confirmPassword.errors.mustMatch">Les mot de passe ne sont pas les mêmes</div>
-          </div>
-        </div>
+      </ng-container>
 
-        <div class="form-group">
-          <button type="submit" [disabled]="loading" class="btn btn-primary">Appliquer</button>
-        </div>
-      </form>
+      <div class="addSection" fxLayout="row" fxLayoutAlign="center center">
+        <app-button
+          class="hide-on-print"
+          [type]="'button'"
+          [style]="'buttonWithHash'"
+          [text]="'Ajouter une structure'"
+          [iconBtn]="'add'"
+          (action)="addStructure()"
+        ></app-button>
+      </div>
     </div>
   </div>
-  <app-structureForm
-    *ngIf="addStructure"
-    [profile]="userProfile"
-    (closeEvent)="toogleAddStructure($event)"
-    (clickOutside)="toogleAddStructure()"
-  ></app-structureForm>
 </div>

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../profile/services/profile.service';
 import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-reset-email',
   templateUrl: './reset-email.component.html',
-  styleUrls: ['./reset-email.component.scss'],
 })
 export class ResetEmailComponent implements OnInit {
   public token: string;
