@@ -130,6 +130,7 @@ a {
 
 .mobile-show {
   display: none;
+  @include cn-bold-16;
   @media #{$tablet} {
     display: block;
   }

@@ -6,7 +6,7 @@
   ></app-modal-confirmation>
   <div class="content" *ngIf="!isLoading" [ngClass]="{ editMode: isEditMode }">
     <div class="headerEditMode" *ngIf="isEditMode" fxLayout="row" fxLayoutAlign="space-between center">
-      <h2>Modification de {{ editForm.get('structureName').value }}</h2>
+      <h2 class="no-margin">Modification de {{ editForm.get('structureName').value }}</h2>
       <app-structure-options-modal
         [structure]="structureWithOwners"
         [isEditFormView]="true"
@@ -74,21 +74,19 @@
       fxLayout="column"
       fxLayoutAlign="space-between"
     >
-      <div>
-        <div class="summary" *ngFor="let page of pagesValidation; let index = index">
-          <div
-            class="itemSummary"
-            [ngClass]="{ last: index == 22 }"
-            fxLayout="row"
-            fxLayoutAlign="space-between center"
-            *ngIf="page.name"
-            (click)="goToSpecificPage(index, false)"
-          >
-            {{ page.name }}
-            <svg class="chevronRight" aria-hidden="true">
-              <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
-            </svg>
-          </div>
+      <div class="summary" *ngFor="let page of pagesValidation; let index = index">
+        <div
+          class="itemSummary"
+          [ngClass]="{ last: index == 22 }"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          *ngIf="page.name"
+          (click)="goToSpecificPage(index, false)"
+        >
+          {{ page.name }}
+          <svg class="chevronRight" aria-hidden="true">
+            <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
+          </svg>
         </div>
       </div>
     </div>
@@ -105,7 +103,11 @@
         </ul>
       </div>
     </div>
-    <form [formGroup]="accountForm" *ngIf="accountForm && !profile" (keyup.enter)="isPageValid && !isEditMode? nextPage() : null">
+    <form
+      [formGroup]="accountForm"
+      *ngIf="accountForm && !profile"
+      (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null"
+    >
       <div *ngIf="currentPage == pageTypeEnum.accountInfo" class="page">
         <div class="title">
           <h3>Qui êtes-vous ?</h3>
@@ -274,7 +276,11 @@
         </div>
       </div>
     </form>
-    <form [formGroup]="structureForm" *ngIf="structureForm" (keyup.enter)="isPageValid && !isEditMode? nextPage() : null">
+    <form
+      [formGroup]="structureForm"
+      *ngIf="structureForm"
+      (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null"
+    >
       <div *ngIf="currentPage == pageTypeEnum.structureNameAndAddress" class="page">
         <div class="title">
           <h3>Quelle structure voulez-vous réferencer ?</h3>
@@ -1016,7 +1022,7 @@
         <div class="textareaBlock" fxLayout="column">
           <textarea
             rows="8"
-            placeholder="Exemple : nous sommes une équipe de 7  bénévoles qui orientont les personnes pour qui le numérique est une langue étrangère"
+            placeholder="Exemple : nous sommes une équipe de 7 bénévoles qui orientons les personnes pour qui le numérique est une langue étrangère"
             maxlength="500"
             formControlName="description"
           ></textarea>

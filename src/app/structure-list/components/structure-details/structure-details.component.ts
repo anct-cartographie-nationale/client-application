@@ -161,11 +161,13 @@ export class StructureDetailsComponent implements OnInit {
   public claimStructure(shouldClaim: boolean): void {
     this.toggleClaimModal();
     if (shouldClaim) {
-      this.profileService.getProfile().then((user: User) => {
-        this.structureService.claimStructureWithAccount(this.structure._id, user).subscribe(() => {
-          this.isClaimed = true;
+      this.structureService
+        .claimStructureWithAccount(this.structure._id, this.authService.userValue.username)
+        .subscribe(() => {
+          this.profileService.getProfile().then((user: User) => {
+            this.isClaimed = true;
+          });
         });
-      });
     }
   }
 
@@ -173,7 +175,9 @@ export class StructureDetailsComponent implements OnInit {
     this.toggleJoinModal();
     if (shouldClaim) {
       this.structureService.joinStructure(this.structure._id, this.authService.userValue.username).subscribe((res) => {
-        this.isClaimed = true;
+        this.profileService.getProfile().then((user: User) => {
+          this.isClaimed = true;
+        });
       });
     }
   }
@@ -247,7 +251,9 @@ export class StructureDetailsComponent implements OnInit {
 
   public displayJoin(): boolean {
     return (
-      !(this.profileService.isLinkedToStructure(this.structure._id) || this.profileService.isAdmin()) && this.isClaimed
+      !(this.profileService.isLinkedToStructure(this.structure._id) || this.profileService.isAdmin()) &&
+      this.isClaimed &&
+      !this.profileService.isPendingLinkedToStructure(this.structure._id)
     );
   }
 }
