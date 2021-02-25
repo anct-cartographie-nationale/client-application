@@ -39,13 +39,13 @@
                 <use [attr.xlink:href]="'assets/form/sprite.svg#notValidate'"></use>
               </svg>
             </div>
-            <div class="invalid" *ngIf="authFailed">Identifiant ou mot de passe invalide</div>
+            <div class="incorrectId" *ngIf="authFailed">Identifiant ou mot de passe invalide</div>
           </div>
           <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
-            <button class="btn confirm" (click)="swithToResetPassword()">Mot de passe oublié</button>
+            <button type="button" class="btn confirm" (click)="swithToResetPassword()">Mot de passe oublié</button>
             <button
               type="submit"
-              class="btn"
+              class="btn-primary"
               [disabled]="loginForm.invalid || loading"
               [ngClass]="{ invalid: loginForm.invalid || loading }"
             >
