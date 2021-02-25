@@ -19,6 +19,7 @@ import { first } from 'rxjs/operators';
 import { PageTypeEnum } from './pageType.enum';
 import { CustomRegExp } from '../utils/CustomRegExp';
 import { StructureWithOwners } from '../models/structureWithOwners.model';
+import { RouterListenerService } from '../services/routerListener.service';
 const { DateTime } = require('luxon');
 @Component({
   selector: 'app-structureForm',
@@ -80,7 +81,8 @@ export class FormComponent implements OnInit {
     private profileService: ProfileService,
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private routerListener: RouterListenerService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -121,6 +123,16 @@ export class FormComponent implements OnInit {
         this.currentPage = PageTypeEnum.accountInfo;
       }
     });
+  }
+
+  public previousUrl(): void {
+    if (this.claimStructure) {
+      this.routerListener.goToPreviousUrl(this.claimStructure);
+    } else if (this.editForm) {
+      this.routerListener.goToPreviousUrl(this.editForm.value);
+    } else {
+      this.routerListener.goToPreviousUrl();
+    }
   }
 
   async setCategories(): Promise<void> {
@@ -166,7 +178,9 @@ export class FormComponent implements OnInit {
 
     // Init form
     this.structureForm = this.createStructureForm(structure);
-    this.editForm = this.createStructureForm(structure);
+    if (this.isEditMode) {
+      this.editForm = this.createStructureForm(structure);
+    }
 
     // Init hours form
     this.hoursForm = new FormGroup({

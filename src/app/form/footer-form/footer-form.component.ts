@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class FooterFormComponent implements OnInit {
   @Input() isValid: boolean;
+  @Input() btnName: string[];
   @Output() nextPage = new EventEmitter<any>();
   @Output() previousPage = new EventEmitter<any>();
   constructor() {}

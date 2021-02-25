@@ -4,7 +4,7 @@
       <svg class="chevronLeft" aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#chevronLeft'"></use>
       </svg>
-      Précédent
+      {{ btnName[0] }}
     </div>
   </button>
   <button
@@ -14,7 +14,8 @@
     [ngClass]="{ invalid: !isValid }"
   >
     <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
-      Suivant<svg class="chevronRight" aria-hidden="true">
+      {{ btnName[1]
+      }}<svg class="chevronRight" aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
       </svg>
     </div>
