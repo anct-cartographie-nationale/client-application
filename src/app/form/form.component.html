@@ -47,9 +47,13 @@
         <p class="titleDesc">Cela va prendre une quinzaine de minutes</p>
         <p>Une fois réalisé cela vous permettra d'être référencé sur la platefome</p>
       </div>
-      <div class="btnStart">
-        <button class="btn-primary start" (click)="nextPage()">C'est parti</button>
-      </div>
+      <app-footer-form
+        class="btnStart"
+        [btnName]="['Précédent', 'C\'est parti']"
+        (previousPage)="previousUrl()"
+        (nextPage)="nextPage()"
+        [isValid]="isPageValid"
+      ></app-footer-form>
     </div>
     <div
       *ngIf="displayClaimStructure()"
@@ -64,9 +68,13 @@
       <div>
         <p>Une fois réalisé cela vous permettra de devenir propriétaire de cette structure</p>
       </div>
-      <div class="btnStart">
-        <button class="btn-primary start" (click)="nextPage()">C'est parti</button>
-      </div>
+      <app-footer-form
+        class="btnStart"
+        [btnName]="['Précédent', 'C\'est parti']"
+        (previousPage)="previousUrl()"
+        (nextPage)="nextPage()"
+        [isValid]="isPageValid"
+      ></app-footer-form>
     </div>
     <div
       *ngIf="currentPage == pageTypeEnum.summary && isEditMode"
@@ -1115,6 +1123,7 @@
     <div *ngIf="currentPage != 0" class="footer desktop">
       <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm && !isEditMode">
         <app-footer-form
+          [btnName]="['Précédent', 'Suivant']"
           (previousPage)="previousPage()"
           (nextPage)="nextPage()"
           [isValid]="isPageValid"
@@ -1156,6 +1165,7 @@
   <div *ngIf="currentPage != 0" class="footer phone">
     <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm && !isEditMode">
       <app-footer-form
+        [btnName]="['Précédent', 'Suivant']"
         (previousPage)="previousPage()"
         (nextPage)="nextPage()"
         [isValid]="isPageValid"
