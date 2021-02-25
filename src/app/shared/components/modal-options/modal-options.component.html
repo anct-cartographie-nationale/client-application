@@ -1,0 +1,52 @@
+<div class="modalOptions" (clickOutside)="closeModal(0)">
+  <div *ngIf="isModalProfileOpts" class="modalContent" fxLayout="column" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="9px">
+      <app-svg-icon [type]="'ico'" [iconColor]="inherit" [icon]="'email'"></app-svg-icon>
+      <p (click)="closeModal(functionType.changeEmail)">Changer mon courriel</p>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="9px">
+      <app-svg-icon [type]="'ico'" [iconColor]="inherit" [icon]="'password'"></app-svg-icon>
+      <p (click)="closeModal(functionType.changePassword)">Changer mon mot de passe</p>
+    </div>
+    <div fxLayout="row" class="deleteItem" fxLayoutAlign="start center" fxLayoutGap="9px">
+      <app-svg-icon [type]="'ico'" [iconColor]="inherit" [icon]="'cancel'"></app-svg-icon>
+      <p (click)="closeModal(functionType.deleteAccount)">Supprimer mon compte</p>
+    </div>
+  </div>
+  <div *ngIf="!isModalProfileOpts" class="modalContent" fxLayout="column" fxLayoutGap="10px">
+    <div (click)="closeModal(functionType.addUser)" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="9px">
+      <app-svg-icon [type]="'ico'" [iconColor]="'inherit'" [icon]="'add'"></app-svg-icon>
+      <p>Ajouter un compte</p>
+    </div>
+    <div
+      (click)="hasOwners ? closeModal(functionType.removeUser) : null"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="9px"
+      [ngClass]="{ invalid: !hasOwners }"
+    >
+      <app-svg-icon [type]="'ico'" [iconColor]="'inherit'" [icon]="'remove'"></app-svg-icon>
+      <p>Supprimer un compte</p>
+    </div>
+    <div
+      *ngIf="!isEditFormView"
+      (click)="closeModal(functionType.editStructure)"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      fxLayoutGap="9px"
+    >
+      <app-svg-icon [type]="'ico'" [iconColor]="'inherit'" [icon]="'edit'"></app-svg-icon>
+      <p>Modifier la structure</p>
+    </div>
+    <div
+      (click)="closeModal(functionType.removeStructure)"
+      fxLayout="row"
+      class="deleteItem"
+      fxLayoutAlign="start center"
+      fxLayoutGap="9px"
+    >
+      <app-svg-icon [type]="'ico'" [iconColor]="'inherit'" [icon]="'cancel'"></app-svg-icon>
+      <p>Supprimer la structure</p>
+    </div>
+  </div>
+</div>

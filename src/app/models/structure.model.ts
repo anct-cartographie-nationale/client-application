@@ -37,7 +37,6 @@ export class Structure {
   public equipmentsAndServices: string[] = [];
   public hours: Week;
   public freeWorkShop: boolean = null;
-  public freeWifi: boolean = null;
   public otherDescription: string = null;
 
   public isOpen: boolean = false;
@@ -171,5 +170,13 @@ export class Structure {
       default:
         return null;
     }
+  }
+
+  public getLabelTypeStructure(): string {
+    return typeStructureEnum[this.structureType] ? typeStructureEnum[this.structureType] : '';
+  }
+
+  public hasSocialNetwork(): boolean {
+    return this.facebook !== null || this.instagram !== null || this.twitter !== null || this.linkedin !== null;
   }
 }

@@ -37,7 +37,7 @@
     border: none;
     padding: 0;
   }
-  @include background-hash;
+  @include background-hash($grey-2);
   border: 1px solid $grey-4;
   ::-webkit-scrollbar {
     width: 16px;
@@ -57,7 +57,7 @@
     .titleFilter {
       display: none !important;
       margin: 27px 25px 0px 25px;
-      @include cn-bold-28;
+      @include cn-bold-26;
       @media #{$large-phone} {
         display: flex !important;
       }
@@ -109,7 +109,7 @@
       padding: 5px 0;
     }
     h4 {
-      @include cn-bold-14;
+      @include cn-bold-16;
       line-height: 17px;
       text-transform: uppercase;
       color: $grey-3;

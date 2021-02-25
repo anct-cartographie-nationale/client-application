@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CustomRegExp } from '../../../utils/CustomRegExp';
 import { MustMatch } from '../../validator/form';
 
 import { CreateAccountFormComponent } from './create-account-form.component';
@@ -12,7 +13,7 @@ describe('CreateAccountFormComponent', () => {
       email: new FormControl('test@test.fr', Validators.required),
       password: new FormControl('Testaze123!', [
         Validators.required,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/), //NOSONAR
+        Validators.pattern(CustomRegExp.PASSWORD), //NOSONAR
       ]),
       confirmPassword: new FormControl('Testaze123!'),
     },

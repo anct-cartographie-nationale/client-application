@@ -1,15 +1,22 @@
 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
-  <button class="btn previous" (click)="goToPreviousPage()">
+  <button class="btn-primary small previous" (click)="goToPreviousPage()">
     <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
       <svg class="chevronLeft" aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#chevronLeft'"></use>
       </svg>
-      Précédent
+      {{ btnName[0] }}
     </div>
   </button>
-  <button class="btn next" (click)="goToNextPage()" [disabled]="!isValid" [ngClass]="{ invalid: !isValid }">
+  <button
+    class="btn-primary small next"
+    (click)="goToNextPage()"
+    [disabled]="!isValid"
+    type="submit"
+    [ngClass]="{ invalid: !isValid }"
+  >
     <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
-      Suivant<svg class="chevronRight" aria-hidden="true">
+      {{ btnName[1]
+      }}<svg class="chevronRight" aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
       </svg>
     </div>

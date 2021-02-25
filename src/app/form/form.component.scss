@@ -5,7 +5,11 @@
 @import '../../assets/scss/shapes';
 @import '../../assets/scss/z-index';
 
-$progressBar-height: 50px;
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 h3 {
   margin: 0;
 }
@@ -27,15 +31,6 @@ h3 {
   max-width: 960px;
   margin: 20px auto;
   text-align: center;
-  .btn {
-    width: 149px;
-    &.validate {
-      background-color: $green-1;
-    }
-    &.unique {
-      width: 240px;
-    }
-  }
   &.desktop {
     @media #{$tablet} {
       display: none;
@@ -90,17 +85,46 @@ h3 {
   }
 }
 .content {
+  .editHome {
+    height: calc(
+      100vh - #{$header-height} - #{$footer-height} - 81px - 1px - 55px - 48px
+    ) !important; // -1px because of header border
+  }
+  @media #{$tablet} {
+    height: 100%;
+    &.editMode {
+      .page {
+        height: calc(
+          100vh - #{$header-height-phone} - #{$footer-height-phone} - 87px - 1px
+        ); // -1px because of header border
+      }
+      .editHome {
+        height: unset !important; // -1px because of header border
+        margin-bottom: 80px;
+      }
+    }
+  }
   padding: 0 16px;
   display: block;
   overflow-y: auto;
   height: auto;
   h2 {
-    @include cn-bold-28;
-    color: $secondary-color;
+    @include cn-bold-26;
+    color: $black;
     margin-bottom: 0;
+    span {
+      color: $secondary-color;
+    }
+    &.no-wrap {
+      white-space: nowrap;
+    }
   }
   h3 {
-    @include cn-bold-22;
+    @include cn-bold-26;
+
+    @media #{$tablet} {
+      @include cn-bold-22;
+    }
   }
   .page {
     max-width: 960px;
@@ -116,6 +140,7 @@ h3 {
       height: 100%;
       .btnStart {
         margin-top: 90px;
+        margin-bottom: 10px;
         text-align: center;
       }
     }
@@ -151,12 +176,12 @@ h3 {
     margin-top: 10px;
     margin-bottom: 0;
     @include cn-regular-18;
-    &.password {
+    &.special {
       @include cn-regular-14;
       color: $grey-3;
 
       margin-top: 4px;
-      width: 256px;
+      width: 280px;
       &.invalid {
         color: $orange-warning;
       }
@@ -189,20 +214,29 @@ h3 {
   }
 }
 
-.btn {
-  background: $secondary-color;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  color: $white;
-  height: 40px;
-  width: 192px;
-  @include btn-bold;
-
+.btn-primary {
+  &.previous {
+    background-color: initial;
+    color: $grey-2;
+    width: 120px;
+    border-radius: 6px;
+    border: 1px solid $grey-4;
+  }
   &.start {
     margin-bottom: 26px;
   }
+}
+.chevronRight {
+  height: 24px;
+  width: 24px;
+  stroke: $grey-2;
+  margin-left: 10px;
+}
+.chevronLeft {
+  height: 24px;
+  width: 24px;
+  stroke: $black;
+  margin-right: 10px;
 }
 .progressBar {
   height: #{$progressBar-height};
@@ -239,6 +273,28 @@ h3 {
   label {
     color: $grey-2;
   }
+  &.facebook,
+  &.twitter,
+  &.instagram,
+  &.linkedin,
+  &.website,
+  &.equipments {
+    div {
+      height: 52px;
+      .validationIcon {
+        margin-right: -53px;
+      }
+    }
+  }
+  div {
+    height: 44px;
+  }
+  .addressRow {
+    height: auto;
+    .validateIcon {
+      height: 38px !important;
+    }
+  }
 }
 input {
   margin-top: 4px;
@@ -255,7 +311,6 @@ input {
 img {
   max-height: 340px;
   &.eyePassword {
-    padding: 0 2.5px; // Align to email input
     cursor: pointer;
     &:hover {
       opacity: 0.8;
@@ -270,14 +325,6 @@ img {
   margin-bottom: 13px;
   @media #{$tablet} {
     width: 296px;
-  }
-  .logo {
-    .hide {
-      display: block;
-    }
-    .show {
-      display: none;
-    }
   }
   &.notCollapsed {
     margin-bottom: 8px;
@@ -346,14 +393,6 @@ img {
       }
     }
     padding: 0px 15px 19px 12px;
-    img {
-      margin-top: 8px;
-      //padding-left: 41px;
-      margin-right: -54px;
-      &.nbEquipment {
-        padding-left: 214px;
-      }
-    }
     svg {
       margin-top: 8px;
       width: 22px;
@@ -384,6 +423,12 @@ img {
       width: 100%;
       height: 100%;
       fill: $grey-1;
+    }
+    .hide {
+      display: block;
+    }
+    .show {
+      display: none;
     }
   }
 }
@@ -447,5 +492,46 @@ img {
       height: 14px;
       width: 14px;
     }
+  }
+}
+.footerEditMode {
+  width: 100%;
+  position: fixed;
+  bottom: 56px;
+  margin: 0;
+  background: $white;
+  left: 0;
+  border-top: 1px solid $grey-4;
+  padding: 20px 0;
+  @media #{$tablet} {
+    bottom: 0;
+    left: 0;
+  }
+}
+.returnBtnSection {
+  max-width: 960px;
+  margin: 24px auto;
+}
+.itemSummary {
+  height: 60px;
+  border-bottom: 1px solid $grey-4;
+  @include cn-bold-20;
+  cursor: pointer;
+  &:hover {
+    background: $grey-6;
+  }
+  &.last {
+    border: 0;
+  }
+}
+.headerEditMode {
+  max-width: 960px;
+  margin: auto;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  h2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }

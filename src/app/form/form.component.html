@@ -4,10 +4,28 @@
     [content]="'Il vous faudra de nouveau remplir le formulaire si vous quittez'"
     (closed)="hasRedirectionAccepted($event)"
   ></app-modal-confirmation>
-  <div class="content">
+  <div class="content" *ngIf="!isLoading" [ngClass]="{ editMode: isEditMode }">
+    <div class="headerEditMode" *ngIf="isEditMode" fxLayout="row" fxLayoutAlign="space-between center">
+      <h2 class="no-margin">Modification de {{ editForm.get('structureName').value }}</h2>
+      <app-structure-options-modal
+        [structure]="structureWithOwners"
+        [isEditFormView]="true"
+        (closed)="structureDeleted()"
+      ></app-structure-options-modal>
+    </div>
+    <div class="returnBtnSection" *ngIf="isEditMode && currentPage != 0">
+      <button class="btn-primary previous" (click)="goToSpecificPage(0, false)">
+        <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
+          <svg class="chevronLeft" aria-hidden="true">
+            <use [attr.xlink:href]="'assets/form/sprite.svg#chevronLeft'"></use>
+          </svg>
+          Retour
+        </div>
+      </button>
+    </div>
     <div
       class="progressBar"
-      *ngIf="currentPage != 0"
+      *ngIf="currentPage != 0 && !isEditMode"
       fxLayout="row"
       fxLayoutAlign="space-between center"
       fxLayoutGap="20px"
@@ -22,18 +40,65 @@
         [value]="progressStatus"
       ></progress>
     </div>
-    <div *ngIf="currentPage == 0" class="home page" fxLayout="column" fxLayoutAlign="space-between">
+    <div *ngIf="displayAddStructure()" class="home page" fxLayout="column" fxLayoutAlign="space-between">
       <h2>Ajouter votre structure</h2>
       <img src="../../assets/form/schedule.svg" alt="logo schedule" />
       <div>
         <p class="titleDesc">Cela va prendre une quinzaine de minutes</p>
         <p>Une fois réalisé cela vous permettra d'être référencé sur la platefome</p>
       </div>
-      <div class="btnStart">
-        <button class="btn start" (click)="nextPage()">C'est Parti</button>
+      <app-footer-form
+        class="btnStart"
+        [btnName]="['Précédent', 'C\'est parti']"
+        (previousPage)="previousUrl()"
+        (nextPage)="nextPage()"
+        [isValid]="isPageValid"
+      ></app-footer-form>
+    </div>
+    <div
+      *ngIf="displayClaimStructure()"
+      class="home page"
+      fxLayout="column"
+      fxLayoutAlign="space-between center"
+      fxLayoutAlign.lt-sm="center"
+    >
+      <h2 class="no-wrap">
+        {{ isJoinMode ? 'Rejoindre' : 'Revendiquer' }} la structure <span>{{ claimStructure.structureName }}</span>
+      </h2>
+      <div>
+        <p>Une fois réalisé cela vous permettra de devenir propriétaire de cette structure</p>
+      </div>
+      <app-footer-form
+        class="btnStart"
+        [btnName]="['Précédent', 'C\'est parti']"
+        (previousPage)="previousUrl()"
+        (nextPage)="nextPage()"
+        [isValid]="isPageValid"
+      ></app-footer-form>
+    </div>
+    <div
+      *ngIf="currentPage == pageTypeEnum.summary && isEditMode"
+      class="editHome page"
+      fxLayout="column"
+      fxLayoutAlign="space-between"
+    >
+      <div class="summary" *ngFor="let page of pagesValidation; let index = index">
+        <div
+          class="itemSummary"
+          [ngClass]="{ last: index == 22 }"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+          *ngIf="page.name"
+          (click)="goToSpecificPage(index, false)"
+        >
+          {{ page.name }}
+          <svg class="chevronRight" aria-hidden="true">
+            <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
+          </svg>
+        </div>
       </div>
     </div>
-    <div *ngIf="currentPage == 1" class="informations page" fxLayout="column" fxLayoutGap="28px">
+    <div *ngIf="currentPage == pageTypeEnum.info" class="informations page" fxLayout="column" fxLayoutGap="28px">
       <h3>De quelles informations faut-il vous munir ?</h3>
       <img src="../../assets/form/factures.svg" alt="logo factures" />
       <div>
@@ -46,8 +111,12 @@
         </ul>
       </div>
     </div>
-    <form [formGroup]="accountForm" *ngIf="accountForm && !profile">
-      <div *ngIf="currentPage == 2" class="page">
+    <form
+      [formGroup]="accountForm"
+      *ngIf="accountForm && !profile"
+      (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null"
+    >
+      <div *ngIf="currentPage == pageTypeEnum.accountInfo" class="page">
         <div class="title">
           <h3>Qui êtes-vous ?</h3>
           <p>Ces informations ne seront pas visibles sur la plateforme</p>
@@ -56,24 +125,36 @@
           <label for="surname">Nom</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-input" />
-            <img *ngIf="accountForm.get('surname').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
+            <app-svg-icon
+              *ngIf="accountForm.get('surname').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('surname').invalid && accountForm.get('surname').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="name">Prénom</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="name" class="form-input" />
-            <img *ngIf="accountForm.get('name').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
+            <app-svg-icon
+              *ngIf="accountForm.get('name').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('name').invalid && accountForm.get('name').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -85,35 +166,58 @@
               class="form-input phone"
               (input)="modifyPhoneInput(accountForm, 'phone', $event.target.value)"
             />
-            <img *ngIf="accountForm.get('phone').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
+            <app-svg-icon
+              *ngIf="accountForm.get('phone').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('phone').invalid && accountForm.get('phone').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 3" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.accountCredentials" class="page">
         <div class="title">
           <h3>Quels identifiants utiliserez-vous pour vous connecter ?</h3>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="email">Courriel personnel</label>
+          <p class="special invalid" *ngIf="this.accountForm.get('email').hasError('alreadyExist')">
+            L'email est déja utilisé.
+          </p>
           <div fxLayout="row" fxLayoutGap="13px">
-            <input type="text" (input)="setValidationsForm()" formControlName="email" class="form-input" />
-            <img *ngIf="accountForm.get('email').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
-              *ngIf="accountForm.get('email').invalid && accountForm.get('email').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
+            <input
+              type="text"
+              (input)="setValidationsForm()"
+              (keyup)="verifyUserExist($event.target.value)"
+              formControlName="email"
+              class="form-input"
+              [readonly]="isAccountMode"
+              [ngClass]="{ disabled: isAccountMode }"
             />
+            <app-svg-icon
+              *ngIf="accountForm.get('email').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
+              *ngIf="accountForm.get('email').invalid && accountForm.get('email').value"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="password">Création de mot de passe</label>
           <p
-            class="password"
+            class="special"
             [ngClass]="{ invalid: accountForm.get('password').invalid && accountForm.get('password').value }"
           >
             Le mot de passe doit contenir au minimum : 8 caractères dont un caractère spécial, un caractère en majuscule
@@ -127,18 +231,25 @@
               (input)="setValidationsForm()"
               autocomplete="on"
             />
-            <img
+            <app-svg-icon
+              [iconClass]="'validation grey hover'"
+              [type]="'form'"
+              [icon]="'eyePassword'"
               (click)="showPassword()"
-              class="eyePassword"
-              src="../../assets/form/eyePassword.svg"
-              alt="logo eyePassword"
-            />
-            <img *ngIf="accountForm.get('password').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
+            ></app-svg-icon>
+
+            <app-svg-icon
+              *ngIf="accountForm.get('password').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('password').invalid && accountForm.get('password').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -151,28 +262,34 @@
               (input)="setValidationsForm()"
               autocomplete="on"
             />
-            <img
+            <app-svg-icon
+              [iconClass]="'validation grey hover'"
+              [type]="'form'"
+              [icon]="'eyePassword'"
               (click)="showConfirmPassword()"
-              class="eyePassword"
-              src="../../assets/form/eyePassword.svg"
-              alt="logo eyePassword"
-            />
-            <img
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('confirmPassword').valid && accountForm.get('confirmPassword').value"
-              src="../../assets/form/validate.svg"
-              alt="logo valid"
-            />
-            <img
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('confirmPassword').invalid && accountForm.get('confirmPassword').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
       </div>
     </form>
-    <form [formGroup]="structureForm" *ngIf="structureForm">
-      <div *ngIf="currentPage == 4" class="page">
+    <form
+      [formGroup]="structureForm"
+      *ngIf="structureForm"
+      (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null"
+    >
+      <div *ngIf="currentPage == pageTypeEnum.structureNameAndAddress" class="page">
         <div class="title">
           <h3>Quelle structure voulez-vous réferencer ?</h3>
         </div>
@@ -185,27 +302,34 @@
               formControlName="structureName"
               class="form-input structureName"
             />
-            <img
+            <app-svg-icon
               *ngIf="getStructureControl('structureName').valid"
-              src="../../assets/form/validate.svg"
-              alt="logo valid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="address">Adresse de la structure</label>
 
-          <div fxLayout="row" fxLayoutGap="13px">
+          <div class="addressRow" fxLayout="row" fxLayoutGap="13px">
             <app-address-autocomplete
               [address]="getStructureControl('address').valid ? getStructureControl('address').value : null"
               (inputAddress)="setAddressStructure()"
               (selectedAddress)="setAddressStructure($event)"
             ></app-address-autocomplete>
-            <img *ngIf="getStructureControl('address').valid" src="../../assets/form/validate.svg" alt="logo valid" />
+            <app-svg-icon
+              *ngIf="getStructureControl('address').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+              class="validateIcon"
+            ></app-svg-icon>
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 5" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structurePhone" class="page">
         <div class="title">
           <h3>Quel numéro appelé pour joindre votre structure ?</h3>
         </div>
@@ -218,20 +342,22 @@
               class="form-input"
               (input)="modifyPhoneInput(structureForm, 'contactPhone', $event.target.value)"
             />
-            <img
+            <app-svg-icon
               *ngIf="getStructureControl('contactPhone').valid"
-              src="../../assets/form/validate.svg"
-              alt="logo valid"
-            />
-            <img
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="getStructureControl('contactPhone').invalid && getStructureControl('contactPhone').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 6" class="page" fxLayout="column">
+      <div *ngIf="currentPage == pageTypeEnum.structureType" class="page" fxLayout="column">
         <div class="title">
           <h3>Quel type de structure ?</h3>
           <p>1 seul choix possible</p>
@@ -245,9 +371,9 @@
           ></app-structure-type-picker>
         </div>
       </div>
-      <div *ngIf="currentPage == 7" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureAccessModality" class="page">
         <div class="title">
-          <h3>Quels sont les modalités d'accueil ?</h3>
+          <h3>Quelles sont les modalités d'accueil ?</h3>
           <p>Plusieurs choix possibles</p>
         </div>
         <div *ngIf="accessModality" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="flex-start">
@@ -261,7 +387,7 @@
           </app-checkbox-form>
         </div>
       </div>
-      <div *ngIf="currentPage == 8" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureHours" class="page">
         <div class="title">
           <h3>Quels sont les horaires d'ouverture ?</h3>
           <p class="notRequired">facultatif</p>
@@ -271,10 +397,9 @@
           (updateForm)="updateHours($event)"
           (updateFormError)="setHoursError()"
           [structureInput]="hoursForm"
-          [isEditMode]="!isEditMode"
         ></app-hour-picker>
       </div>
-      <div *ngIf="currentPage == 9" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureHoursDetails" class="page">
         <div class="title">
           <h3>Avez-vous des précisions à apporter sur les horaires ?</h3>
           <p class="notRequired">facultatif</p>
@@ -295,7 +420,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 10" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structurePmr" class="page">
         <div class="title">
           <h3>Est-ce accessible pour les personnes à mobilité réduite ?</h3>
         </div>
@@ -305,7 +430,7 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 11" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureWebAndSocialNetwork" class="page">
         <div class="title">
           <h3>Comment vous trouver sur internet ?</h3>
         </div>
@@ -313,17 +438,18 @@
           <label for="structureName">Courriel de la structure</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="contactMail" class="form-input" />
-            <img
+            <app-svg-icon
               *ngIf="getStructureControl('contactMail').valid"
-              src="../../assets/form/validate.svg"
-              alt="logo valid"
-            />
-
-            <img
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="getStructureControl('contactMail').invalid && getStructureControl('contactMail').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="collapse" [ngClass]="{ notCollapsed: !showWebsite }">
@@ -340,7 +466,7 @@
               </div>
             </div>
             <div *ngIf="showWebsite" class="inputSection">
-              <div class="form-group" fxLayout="column">
+              <div class="form-group website" fxLayout="column">
                 <label for="website">Adresse du site web</label>
                 <div fxLayout="row" fxLayoutGap="27px">
                   <input
@@ -350,16 +476,20 @@
                     formControlName="website"
                     class="form-input"
                   />
-                  <img
+                  <app-svg-icon
                     *ngIf="getStructureControl('website').valid && getStructureControl('website').value"
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('website').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
             </div>
@@ -391,20 +521,24 @@
                     formControlName="facebook"
                     class="form-input withIcon"
                   />
-                  <img
+                  <app-svg-icon
                     *ngIf="
                       getStructureControl('facebook').valid &&
                       getStructureControl('facebook').value != null &&
                       getStructureControl('facebook').value != ''
                     "
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('facebook').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
               <div class="form-group twitter">
@@ -419,20 +553,24 @@
                     formControlName="twitter"
                     class="form-input withIcon"
                   />
-                  <img
+                  <app-svg-icon
                     *ngIf="
                       getStructureControl('twitter').valid &&
                       getStructureControl('twitter').value != null &&
                       getStructureControl('twitter').value != ''
                     "
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('twitter').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
               <div class="form-group instagram">
@@ -447,20 +585,25 @@
                     placeholder="instagram.com/resonum"
                     class="form-input withIcon"
                   />
-                  <img
+
+                  <app-svg-icon
                     *ngIf="
                       getStructureControl('instagram').valid &&
                       getStructureControl('instagram').value != null &&
                       getStructureControl('instagram').value != ''
                     "
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('instagram').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
               <div class="form-group linkedin">
@@ -475,27 +618,31 @@
                     placeholder="linkedin.com/in/resonum"
                     class="form-input withIcon"
                   />
-                  <img
+                  <app-svg-icon
                     *ngIf="
                       getStructureControl('linkedin').valid &&
                       getStructureControl('linkedin').value != null &&
                       getStructureControl('linkedin').value != ''
                     "
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('linkedin').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 12" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structurePublicTarget" class="page">
         <div class="title">
           <h3>Quel public peut venir vous consulter ?</h3>
           <p>Plusieurs choix possibles</p>
@@ -517,7 +664,7 @@
           </button>
         </div>
       </div>
-      <div *ngIf="currentPage == 13" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureAccompaniment" class="page">
         <div class="title">
           <h3>Quel(s) accompagnement(s) proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -597,7 +744,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 14" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureOtherAccompaniment" class="page">
         <div class="title">
           <h3>Quelles sont les autres démarches ?</h3>
         </div>
@@ -616,7 +763,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 15" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureWorkshop" class="page">
         <div class="title">
           <h3>Quel(s) atelier(s) au numérique proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -659,7 +806,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="currentPage == 16" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureWorkshopPrice" class="page">
         <div class="title">
           <h3>Ces ateliers sont-ils gratuits ?</h3>
         </div>
@@ -669,17 +816,23 @@
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 17" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureWifi" class="page">
         <div class="title">
           <h3>Proposez-vous le wifi en accès libre ?</h3>
         </div>
         <app-radio-form
-          [selectedOption]="getStructureControl('freeWifi').value"
-          (selectedEvent)="onRadioBtnChange('freeWifi', $event)"
+          [selectedOption]="
+            isEditMode
+              ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices')
+              : isWifiChoosen
+              ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices')
+              : null
+          "
+          (selectedEvent)="onCheckChange($event, 'equipmentsAndServices', 'wifiEnAccesLibre')"
         >
         </app-radio-form>
       </div>
-      <div *ngIf="currentPage == 18" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureEquipments" class="page">
         <div class="title">
           <h3>Quel matériel mettez-vous à disposition ?</h3>
           <p class="notRequired">facultatif</p>
@@ -710,7 +863,7 @@
                 </div>
               </div>
               <div *ngIf="equipment.openned" class="inputSection">
-                <div class="form-group" fxLayout="column">
+                <div class="form-group equipments" fxLayout="column">
                   <label for="equipment">Nombre</label>
                   <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="27px">
                     <ng-container *ngIf="equipment.module.id == 'ordinateurs'">
@@ -720,18 +873,20 @@
                         formControlName="nbComputers"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbComputers').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbComputers').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                     <ng-container *ngIf="equipment.module.id == 'tablettes'">
                       <input
@@ -740,18 +895,20 @@
                         formControlName="nbTablets"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbTablets').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbTablets').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo invalid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                     <ng-container *ngIf="equipment.module.id == 'imprimantes'">
                       <input
@@ -760,18 +917,20 @@
                         formControlName="nbPrinters"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbPrinters').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbPrinters').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo invalid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                     <ng-container *ngIf="equipment.module.id == 'bornesNumeriques'">
                       <input
@@ -780,18 +939,20 @@
                         formControlName="nbNumericTerminal"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbNumericTerminal').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbNumericTerminal').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo invalid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                     <ng-container *ngIf="equipment.module.id == 'scanners'">
                       <input
@@ -800,18 +961,20 @@
                         formControlName="nbScanners"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbScanners').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbScanners').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                   </div>
                 </div>
@@ -820,7 +983,7 @@
           </div>
         </ng-container>
       </div>
-      <div *ngIf="currentPage == 19" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureLabels" class="page">
         <div class="title">
           <h3>Quelle(s) labelisation proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -837,7 +1000,7 @@
           </app-checkbox-form>
         </div>
       </div>
-      <div *ngIf="currentPage == 20" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureOtherServices" class="page">
         <div class="title">
           <h3>Quels autres services proposez-vous ?</h3>
           <p class="notRequired">facultatif</p>
@@ -859,7 +1022,7 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="currentPage == 21" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureDescription" class="page">
         <div class="title">
           <h3>Pouvez vous présentez votre structure ?</h3>
           <p class="notRequired">facultatif</p>
@@ -867,7 +1030,7 @@
         <div class="textareaBlock" fxLayout="column">
           <textarea
             rows="8"
-            placeholder="Exemple : nous sommes une équipe de 7  bénévoles qui orientont les personnes pour qui le numérique est une langue étrangère"
+            placeholder="Exemple : nous sommes une équipe de 7 bénévoles qui orientons les personnes pour qui le numérique est une langue étrangère"
             maxlength="500"
             formControlName="description"
           ></textarea>
@@ -876,7 +1039,7 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 22" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.structureCovidInfo" class="page">
         <div class="title">
           <h3>Y a-t-il des informations spécifique à la période COVID ?</h3>
           <p class="notRequired">facultatif</p>
@@ -895,95 +1058,90 @@
           </p>
         </div>
       </div>
-      <div *ngIf="currentPage == 23" class="page">
-        <div class="title">
-          <h3>
-            Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon<span
-              class="asterisk"
-              >*</span
-            >
-            ?
-          </h3>
-        </div>
-        <app-checkbox-form
-          [isChecked]="userAcceptSavedDate"
-          [text]="'J\'accepte'"
-          (checkEvent)="acceptDataBeSaved($event)"
-        >
-        </app-checkbox-form>
-        <p class="informationEndForm">
-          <span class="asterisk">*</span> Les informations recueillies sont enregistrées dans un fichier par la
-          Métropole de Lyon en vue de l'animation du réseau des acteurs de la médiation numérique. Elles sont conservées
-          pendant 24 mois et sont destinées aux seuls intervenants habilités de la Métropole de Lyon. Vos données
-          personnelles sont traitées dans ce cadre aux fins de Ârecensement des actions de médiation numérique sur le
-          territoire de la métropole. Conformément à la loi 78-17 du 6 janvier 1978 modifiée relative à l'information,
-          aux fichiers et aux libertés, et au Règlement Général européen à la Protection des Données, vous avez la
-          possibilité d’exercer vos droits d’accès, de rectification, d’effacement, d’opposition, de limitation du
-          traitement et de révocation de votre consentement. Afin d'exercer vos droits, vous pouvez vous adresser : par
-          courrier postal à : Métropole de Lyon - Direction des Affaires Juridiques et de la Commande Publique - 20, rue
-          du Lac - BP 33569 - 69505 Lyon Cedex par courrier électronique en remplissant le formulaire dédié sur Toodego,
-          le site des services et démarches en ligne dans la Métropole de Lyon
-        </p>
-      </div>
-      <div *ngIf="false" class="page">
-        <div class="title">
-          <h3>Voulez-vous inviter d’autres personnes dans cette structure ?</h3>
-          <p class="notRequired">facultatif</p>
-        </div>
-        <div class="collapse" [ngClass]="{ notCollapsed: true }">
-          <div fxLayout="column">
-            <div class="collapseHeader" fxLayout="row" fxLayoutAlign=" center">
-              <div class="titleCollapse">J’ajoute d'autres personnes dans cette structure</div>
-              <div class="logo">
-                <svg class="show" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
-                </svg>
-                <svg class="hide" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="currentPage == nbPagesForm && !profile" class="page" fxLayout="column" fxLayoutGap="69px">
-        <svg aria-hidden="true">
-          <use [attr.xlink:href]="'assets/form/sprite.svg#emailVerification'"></use>
-        </svg>
-        <h3>Un courriel vous a été envoyé afin de finaliser votre inscription</h3>
-      </div>
-      <div *ngIf="currentPage == nbPagesForm && profile" class="page">
-        <div class="title">
-          <h3>
-            Bravo !<br />
-            Votre structure a bien été référencée.
-          </h3>
-        </div>
-
-        <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
-          <div class="structureInfoContent" fxLayout="column">
-            {{ getStructureControl('structureName').value }}
-            <span>{{ getStructureControl('structureType').value }}</span>
-          </div>
-          <div class="validateSvg">
-            <svg class="validate" aria-hidden="true">
-              <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-            </svg>
-          </div>
-        </div>
-      </div>
     </form>
+    <div *ngIf="currentPage == pageTypeEnum.cgu" class="page">
+      <div class="title">
+        <h3>
+          Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon<span class="asterisk"
+            >*</span
+          >
+          ?
+        </h3>
+      </div>
+      <app-checkbox-form
+        [isChecked]="userAcceptSavedDate"
+        [text]="'J\'accepte'"
+        (checkEvent)="acceptDataBeSaved($event)"
+      >
+      </app-checkbox-form>
+      <p class="informationEndForm">
+        <span class="asterisk">*</span> Les informations recueillies sont enregistrées dans un fichier par la Métropole
+        de Lyon en vue de l'animation du réseau des acteurs de la médiation numérique. Elles sont conservées pendant 24
+        mois et sont destinées aux seuls intervenants habilités de la Métropole de Lyon. Vos données personnelles sont
+        traitées dans ce cadre aux fins de Ârecensement des actions de médiation numérique sur le territoire de la
+        métropole. Conformément à la loi 78-17 du 6 janvier 1978 modifiée relative à l'information, aux fichiers et aux
+        libertés, et au Règlement Général européen à la Protection des Données, vous avez la possibilité d’exercer vos
+        droits d’accès, de rectification, d’effacement, d’opposition, de limitation du traitement et de révocation de
+        votre consentement. Afin d'exercer vos droits, vous pouvez vous adresser : par courrier postal à : Métropole de
+        Lyon - Direction des Affaires Juridiques et de la Commande Publique - 20, rue du Lac - BP 33569 - 69505 Lyon
+        Cedex par courrier électronique en remplissant le formulaire dédié sur Toodego, le site des services et
+        démarches en ligne dans la Métropole de Lyon
+      </p>
+    </div>
+    <div
+      *ngIf="currentPage == nbPagesForm && !profile"
+      class="page"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="69px"
+    >
+      <svg aria-hidden="true">
+        <use [attr.xlink:href]="'assets/form/sprite.svg#emailVerification'"></use>
+      </svg>
+      <h3>Un courriel vous a été envoyé afin de finaliser votre inscription</h3>
+    </div>
+    <div *ngIf="currentPage == nbPagesForm && profile" class="page">
+      <div class="title">
+        <h3>
+          Bravo !<br />
+          Votre structure a bien été référencée.
+        </h3>
+      </div>
+
+      <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign="center">
+        <div class="structureInfoContent" fxLayout="column">
+          {{ getStructureControl('structureName').value }}
+          <span>{{ getStructureControl('structureType').value }}</span>
+        </div>
+        <div class="validateSvg">
+          <svg class="validate" aria-hidden="true">
+            <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+          </svg>
+        </div>
+      </div>
+    </div>
     <div *ngIf="currentPage != 0" class="footer desktop">
-      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm">
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm && !isEditMode">
         <app-footer-form
+          [btnName]="['Précédent', 'Suivant']"
           (previousPage)="previousPage()"
           (nextPage)="nextPage()"
           [isValid]="isPageValid"
         ></app-footer-form>
       </div>
+      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isEditMode">
+        <button
+          class="btn-primary"
+          [ngClass]="{ invalid: !isPageValid }"
+          [disabled]="!isPageValid"
+          (click)="goToSpecificPage(0, true)"
+        >
+          Valider
+        </button>
+      </div>
       <button
         *ngIf="currentPage == nbPagesForm && !profile"
-        class="btn validate unique"
+        class="btn-primary validate unique"
         routerLink="/home"
         [routerLinkActive]="'active'"
       >
@@ -991,25 +1149,41 @@
       </button>
       <button
         *ngIf="currentPage == nbPagesForm && profile"
-        class="btn unique"
+        class="btn-primary unique"
         routerLink="/home"
         [state]="{ data: createdStructure }"
       >
         Voir ma structure
       </button>
     </div>
+    <div *ngIf="isEditMode && currentPage == 0" class="footerEditMode">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button class="btn-primary unique" (click)="closeEditMode()">Terminer</button>
+      </div>
+    </div>
   </div>
   <div *ngIf="currentPage != 0" class="footer phone">
-    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm">
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="currentPage != nbPagesForm && !isEditMode">
       <app-footer-form
+        [btnName]="['Précédent', 'Suivant']"
         (previousPage)="previousPage()"
         (nextPage)="nextPage()"
         [isValid]="isPageValid"
       ></app-footer-form>
     </div>
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="isEditMode">
+      <button
+        class="btn-primary"
+        [ngClass]="{ invalid: !isPageValid }"
+        [disabled]="!isPageValid"
+        (click)="goToSpecificPage(0, true)"
+      >
+        Valider
+      </button>
+    </div>
     <button
       *ngIf="currentPage == nbPagesForm && !profile"
-      class="btn validate unique"
+      class="btn-primary validate unique"
       routerLink="/home"
       [routerLinkActive]="'active'"
     >
@@ -1017,7 +1191,7 @@
     </button>
     <button
       *ngIf="currentPage == nbPagesForm && profile"
-      class="btn unique"
+      class="btn-primary unique"
       routerLink="/home"
       [state]="{ data: createdStructure }"
     >

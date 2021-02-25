@@ -30,8 +30,12 @@ RUN apt-get update
 
 COPY --from=build /app/dist/fr /usr/share/nginx/html
 
+# Add outdated browser page
+ADD ./nginx/outdated.html /usr/share/nginx/html
+
 RUN touch /var/run/nginx.pid
 RUN ls -l /usr/share/nginx/html
+
 
 # expose port 8080
 EXPOSE 8080

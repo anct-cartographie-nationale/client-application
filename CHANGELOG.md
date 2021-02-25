@@ -2,6 +2,77 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://forge.grandlyon.com///compare/v1.4.0...v1.5.0) (2021-02-25)
+
+
+### Features
+
+* add connect redirection + handle structure join ([f5abd5e](https://forge.grandlyon.com///commit/f5abd5e5fea66c8e6d04aee335be93da9976b3e7))
+* add favicon ([ff8adb8](https://forge.grandlyon.com///commit/ff8adb8c40679fbd539ce644c00eb2cec109f531))
+* add form widget for claim and register ([ce914c8](https://forge.grandlyon.com///commit/ce914c8e917610d4a5812dee6fdc4a607e4cf763))
+* add hour-picker first version from boussole project ([4333076](https://forge.grandlyon.com///commit/4333076c2212ceb08d73cc6d7205e0e3bc75b986))
+* add outdated browser handling ([ecff2a3](https://forge.grandlyon.com///commit/ecff2a37d20e6f85f0823bc96899975b5298d219))
+* add registration for claim when not connected ([0bbb3f0](https://forge.grandlyon.com///commit/0bbb3f0e1b55ff2461cdbf48d0380774aebaea4c))
+* handle sign-in with form ([7031971](https://forge.grandlyon.com///commit/7031971082fae414423abdecc701789f42a87fda))
+* **about:** add europe and region logo + update style ([34e3aeb](https://forge.grandlyon.com///commit/34e3aebd188f3984dcd5bfb0028bfd20793924da))
+* add logic to hout-picker + remove copy/paste feature ([c61a63e](https://forge.grandlyon.com///commit/c61a63e391636645af45b26c174dd57d86d17e80))
+* add registration form from email ([60fa0c8](https://forge.grandlyon.com///commit/60fa0c8e41df9c82e5d6957dd752e4c210c4c9c8))
+* add social network on structure details ([a057084](https://forge.grandlyon.com///commit/a05708495671d20610c102091f6c2893e8214bcb))
+* add user delete structure ([f85d2c4](https://forge.grandlyon.com///commit/f85d2c4e938941eef70ce6a36f12b8c507b2524b))
+* move structureType to back ([8d7aa8e](https://forge.grandlyon.com///commit/8d7aa8e28347610ba36b833e41ce9e5f55a04f0c))
+* update date-picker style ([36904c7](https://forge.grandlyon.com///commit/36904c785c075d64c68fffe669e3e9b33c9d119f))
+* update header/footer design ([0838655](https://forge.grandlyon.com///commit/083865546cf32c0f209abe3f3a48db5d6c7cdf94))
+* update nginx conf for ghost ([c390497](https://forge.grandlyon.com///commit/c390497d8127190ea6f56873c3fa28b86b53f39d))
+
+
+### Bug Fixes
+
+* add admin structureName + bug fix on sturcutredetails ([6f32ee8](https://forge.grandlyon.com///commit/6f32ee8659c17790b762cafd3c2f34263e2cf522))
+* add claim structure message ([41cfbb8](https://forge.grandlyon.com///commit/41cfbb801537b662fe08ed4133e803a15d914088))
+* add page type ([3c037a3](https://forge.grandlyon.com///commit/3c037a3f441d9569ba6f47ef9ff047bab6181630))
+* add previous page handling for claim ([ee7b65a](https://forge.grandlyon.com///commit/ee7b65a8a1f48c218796b145d2b4ed51db2690b9))
+* claim structure issue ([7b2218b](https://forge.grandlyon.com///commit/7b2218b6e0c61f5b7c66b5580691ac63d0de9410))
+* design profile ([8c829ba](https://forge.grandlyon.com///commit/8c829ba2b118414c6cb536b6033b6f1faf1a864c))
+* firefox issue on hour picker ([12b8fe0](https://forge.grandlyon.com///commit/12b8fe0ec470876f506bb64c69644cb1d1a628d7))
+* header issue on add structure navigation ([1e210a0](https://forge.grandlyon.com///commit/1e210a0b974199990ac3b5d48a34e0c6a8bb4419))
+* icon color + alignements ([83ea88f](https://forge.grandlyon.com///commit/83ea88f74f4f1c7d5dd84be9671df4e05ed3a89c))
+* map marker color + stroke-width ([6375907](https://forge.grandlyon.com///commit/637590750aa921e625bbe77c879ba194131b62c0))
+* move about page link + fix icon ([a9bb6d5](https://forge.grandlyon.com///commit/a9bb6d5da584d0b31fd9b75613353f99e2b3cce5))
+* move footer-form ([2f2e7ba](https://forge.grandlyon.com///commit/2f2e7baa422b788d590c5dafced0cb69a2c35f83))
+* regex issue on phone number and text without number ([e886673](https://forge.grandlyon.com///commit/e886673882248a5884f5ff57229463257b23b8ab))
+* remove locate button on search ([66ca00f](https://forge.grandlyon.com///commit/66ca00f332fffdda2115ee050bb834a1821105ea))
+* remove menu-phone component and fix bug ([cb2607f](https://forge.grandlyon.com///commit/cb2607f6a28ed51ad1d4cf985a0baf8b75329ebf))
+* remove structure delete for users from structure-details ([516446d](https://forge.grandlyon.com///commit/516446d600b197df71a8508ee8e722289e806fd3))
+* structure list card height ([35df2f9](https://forge.grandlyon.com///commit/35df2f9fb58879a4af33e000cf788707b5bb4efc))
+* structure type display ([4abc885](https://forge.grandlyon.com///commit/4abc885932771e89f53b497743ebb882cbe3c369))
+* structure type for map ([667bc2d](https://forge.grandlyon.com///commit/667bc2d54d58f3c3d1b016852bce616b54a06e87))
+* typo and color ([a5e2f93](https://forge.grandlyon.com///commit/a5e2f93bb8d8782074faf14936af7f3cb797a4ce))
+* unexisting css class ([a9241a7](https://forge.grandlyon.com///commit/a9241a7959687acbe9dad12ac5a31716e0e99977))
+* upadte import ([cc61eed](https://forge.grandlyon.com///commit/cc61eedb495879f173ac91f2ae1d716f60906de7))
+* update modale position ([8a18689](https://forge.grandlyon.com///commit/8a186897bc4c713cacd8fd11e17f89dbfd40ce51))
+* update typeform update ([d0d134d](https://forge.grandlyon.com///commit/d0d134d0753584d31919034449672e379a5e72f0))
+* various design bug ([9b8df1d](https://forge.grandlyon.com///commit/9b8df1d03eff87014d263dfa84e9eb2e82fcda55))
+* wording for form / profile and outdated page ([de23088](https://forge.grandlyon.com///commit/de230889cce920786d9d48f56084c23c012d4703))
+* **editForm:** fix logic validate/close form ([c68f9ba](https://forge.grandlyon.com///commit/c68f9baf3e433db7f34d06446d205e17d5ed48cd))
+* **form:** add menu icon ([e822be4](https://forge.grandlyon.com///commit/e822be4a83295d6a4558abd21c15053d6abc8f11))
+* **form:** add page (phoneContact structure) ([b8e91b8](https://forge.grandlyon.com///commit/b8e91b894d5200ef9e906750c3f04f4694b16b7c))
+* **form:** add page (pmrAccess) ([2c7a9fc](https://forge.grandlyon.com///commit/2c7a9fcb7409785a584effca7d4711853c139ed6))
+* **form:** add page(Description) ([4f458c7](https://forge.grandlyon.com///commit/4f458c7ad599ba33999bc7b939483d18da322405))
+* **form:** add page(description) + fix page(exceptionnalClosures) ([a398d07](https://forge.grandlyon.com///commit/a398d0712c2d9834260099f1c31d196b622e0692))
+* **form:** add page(Equipments) ([cd58628](https://forge.grandlyon.com///commit/cd586281c0f56591a8ccec9899b1e1b4653ca107))
+* **form:** add page(invited User) ([beda94d](https://forge.grandlyon.com///commit/beda94dc8e0e8b0829457855e52778020db12f26))
+* **form:** add page(isPassNumeric) ([0e82b75](https://forge.grandlyon.com///commit/0e82b75cce7bebc144d9a5f98f2575c112e93521))
+* **form:** add page(labelsQualifications) ([1a798c2](https://forge.grandlyon.com///commit/1a798c224953f6e1e1bae3f7133cd45b3b0e895e))
+* **form:** add scanner ([cda0a0d](https://forge.grandlyon.com///commit/cda0a0d39ff8a0e6c919c6ed30b72fe63666b853))
+* **form:** bug homePage blink on editForm ([dfa65ec](https://forge.grandlyon.com///commit/dfa65ec175cb18593408166212ae0140bf6546b8))
+* **form:** clean code ([5d0bd5b](https://forge.grandlyon.com///commit/5d0bd5b25a09ca950494da43823afd393a0f6197))
+* **form:** fix and clean code ([74daf90](https://forge.grandlyon.com///commit/74daf9003cc4c3acf9ff78cc8915aa07e0a308f4))
+* **form:** fix collaspse size + header titler phone ([6007a0d](https://forge.grandlyon.com///commit/6007a0dfc47b372be1d1372151889efd587feeeb))
+* **form:** fix css ([d5c1ea7](https://forge.grandlyon.com///commit/d5c1ea74acdd948559b396d30feb389e4a6054c5))
+* **form:** fix password hint ([05cf734](https://forge.grandlyon.com///commit/05cf7349d1622017fe209fc900fdbe01f9cbf9cf))
+* **form:** fix progress 100% on validate Mail ([2e15ee6](https://forge.grandlyon.com///commit/2e15ee6ccfd0653b391ae582a28d794cb11ef774))
+* **structures:** update strucutes list design ([1422095](https://forge.grandlyon.com///commit/14220950f13df2b5e0b7863d4796d61072ef45be))
+
 ## [1.4.0](https://forge.grandlyon.com///compare/v1.3.0...v1.4.0) (2021-02-01)
 
 

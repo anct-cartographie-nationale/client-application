@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Time } from '../models/time.model';
 import { SharedModule } from '../shared/shared.module';
 
 import { FormComponent } from './form.component';
@@ -56,27 +55,27 @@ describe('FormComponent', () => {
         }),
         tuesday: new FormGroup({
           open: new FormControl(true, Validators.required),
-          time: new FormArray([]) as FormArray,
+          time: new FormArray([]),
         }),
         wednesday: new FormGroup({
           open: new FormControl(true, Validators.required),
-          time: new FormArray([]) as FormArray,
+          time: new FormArray([]),
         }),
         thursday: new FormGroup({
           open: new FormControl(true, Validators.required),
-          time: new FormArray([]) as FormArray,
+          time: new FormArray([]),
         }),
         friday: new FormGroup({
           open: new FormControl(true, Validators.required),
-          time: new FormArray([]) as FormArray,
+          time: new FormArray([]),
         }),
         saturday: new FormGroup({
           open: new FormControl(false, Validators.required),
-          time: new FormArray([]) as FormArray,
+          time: new FormArray([]),
         }),
         sunday: new FormGroup({
           open: new FormControl(false, Validators.required),
-          time: new FormArray([]) as FormArray,
+          time: new FormArray([]),
         }),
       }),
       exceptionalClosures: new FormControl('structure.exceptionalClosures'),
@@ -114,7 +113,7 @@ describe('FormComponent', () => {
   it('should return the correct Time from a specific day', () => {
     const day = 'monday';
     const control = component.getTime(day);
-    const TimeForm = component.structureForm.get('hours').get(day).get('time') as FormArray;
+    const TimeForm = component.structureForm.get('hours').get(day).get('time');
     expect(control).toEqual(TimeForm);
   });
   it('should return true', () => {

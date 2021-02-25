@@ -6,7 +6,7 @@
 .modalExitContainer {
   width: 100%;
   height: 100%;
-  z-index: $modal-confirmation-z-index;
+  z-index: $modal-z-index;
   position: absolute;
   content: '';
   top: 0;
@@ -29,28 +29,17 @@
         width: 100%;
         margin-top: 14px;
         @include cn-bold-16;
-        .btn {
-          background: $secondary-color;
-          border-radius: 4px;
-          outline: none;
-          cursor: pointer;
-          border: 0;
-          color: $white;
-          height: 40px;
-          @include btn-bold;
-          width: 149px;
-          &.leave {
-            background: none;
-            color: $grey-1;
-            text-decoration: underline;
-          }
+        .leave {
+          background: none;
+          color: $grey-1;
+          text-decoration: underline;
         }
       }
     }
     width: 350px;
     margin: auto;
     border-radius: 6px;
-    @include background-hash;
+    @include background-hash($grey-2);
     border: 1px solid $grey-4;
     margin-top: 50vh;
     transform: translateY(-50%);

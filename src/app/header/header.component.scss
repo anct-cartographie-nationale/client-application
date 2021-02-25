@@ -52,6 +52,7 @@ a {
     border-bottom: 2px solid $red-default;
     text-decoration: none;
   }
+  @include cn-regular-14;
 }
 
 @media print {
@@ -114,17 +115,9 @@ a {
 }
 .title {
   margin-bottom: 35px;
-  @include cn-regular-28;
+  @include cn-regular-26;
   span {
     color: $grey-2;
-  }
-}
-.footer {
-  a {
-    height: unset;
-    display: table-cell;
-    vertical-align: middle;
-    margin: auto 0 auto 0;
   }
 }
 
@@ -137,6 +130,7 @@ a {
 
 .mobile-show {
   display: none;
+  @include cn-bold-16;
   @media #{$tablet} {
     display: block;
   }

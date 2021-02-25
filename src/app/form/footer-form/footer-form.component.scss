@@ -1,16 +1,7 @@
-@import '../../assets/scss/color';
-@import '../../assets/scss/typography';
+@import '../../../assets/scss/color';
+@import '../../../assets/scss/typography';
 
-.btn {
-  background: $secondary-color;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-  border: 0;
-  color: $white;
-  height: 40px;
-  width: 149px;
-  @include btn-bold;
+.btn-primary {
   &.previous {
     background-color: initial;
     color: $grey-2;
@@ -34,6 +25,6 @@
 .chevronRight {
   height: 24px;
   width: 24px;
-  stroke: $white;
+  stroke: inherit;
   margin-left: 10px;
 }

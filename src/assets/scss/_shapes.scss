@@ -33,17 +33,17 @@ $mat-tab-shadow: 0px 2px 7px rgba(0, 0, 0, 0.25);
   background-position-y: 12px;
 }
 
-@mixin background-hash {
+@mixin background-hash($color) {
   background: linear-gradient(
     -45deg,
-    $grey-2 2.5%,
+    $color 2.5%,
     $white 2.5%,
     $white 47.5%,
-    $grey-2 47.5%,
-    $grey-2 52.5%,
+    $color 47.5%,
+    $color 52.5%,
     $white 52.5%,
     $white 97.5%,
-    $grey-2 97.5%
+    $color 97.5%
   );
   background-size: 5px 5px;
   background-position: 25px 25px;

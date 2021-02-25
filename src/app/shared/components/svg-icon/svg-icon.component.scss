@@ -1,3 +1,4 @@
+@import '../../../../assets/scss/color';
 .icon {
   display: inline-block;
   height: 2em;
@@ -7,6 +8,24 @@
   }
   &.icon-75 {
     width: 4.688em;
+  }
+  &.validation {
+    height: 100%;
+    width: 26px;
+  }
+  &.hover {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &.grey {
+    fill: $grey-3;
+    stroke: $grey-3;
+  }
+  &.grey-1 {
+    fill: $grey-1;
+    stroke: $grey-1;
   }
 }
 
