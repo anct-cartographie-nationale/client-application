@@ -11,55 +11,34 @@
         Votre compte a bien été créé.
       </h3>
     </div>
-
-    <div *ngIf="structure" class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
-      <div class="structureInfoContent" fxLayout="column">
-        {{ structure.structureName }}
-        <span>{{ structure.getLabelTypeStructure() }}</span>
+    <div *ngIf="structure" class="structureCard">
+      <div class="structureInfo" fxLayout="column" fxLayoutGap="14px">
+        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+          <a class="structureName" routerLink="/home" [state]="{ data: structure }">{{ structure.structureName }}</a>
+        </div>
       </div>
-      <div class="validateSvg">
-        <svg class="validate" aria-hidden="true">
-          <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-        </svg>
-      </div>
-    </div>
-    <div class="btnSection" fxLayout="row" fxLayoutAlign="space-around center">
-      <button *ngIf="structure" class="btn" routerLink="/home" [state]="{ data: structure }">Voir ma structure</button>
-      <button class="btn tmp-form-link" routerLink="/home">
-        <a
-          class="typeform-share button"
-          href="https://form.typeform.com/to/vfbLqfKe?typeform-medium=embed-snippet"
-          data-mode="popup"
-          data-size="100"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Donnez nous votre avis !
-        </a>
-      </button>
     </div>
   </div>
   <p *ngIf="verificationIssue">
     Une erreur est survenue lors de la validation de votre email... Veuillez envoyer un mail au support.
   </p>
-  <script>
-    (function () {
-      var qs,
-        js,
-        q,
-        s,
-        d = document,
-        gi = d.getElementById,
-        ce = d.createElement,
-        gt = d.getElementsByTagName,
-        id = 'typef_orm_share',
-        b = 'https://embed.typeform.com/';
-      if (!gi.call(d, id)) {
-        js = ce.call(d, 'script');
-        js.id = id;
-        js.src = b + 'embed.js';
-        q = gt.call(d, 'script')[0];
-        q.parentNode.insertBefore(js, q);
-      }
-    })();
-  </script>
+  <!-- TypeForm -->
+  <div *ngIf="!verificationIssue">
+    <iframe
+      *ngIf="structure"
+      class="typeform-widget custom-form"
+      title="typeform"
+      src="https://form.typeform.com/to/m7DV3CdW?typeform-medium=embed-snippet"
+    ></iframe>
+    <div
+      *ngIf="!structure"
+      class="typeform-widget custom-form"
+      data-url="https://form.typeform.com/to/ASJH3B7Z?typeform-medium=embed-snippet"
+    ></div>
+  </div>
+  <div class="btnSection" fxLayout="row" fxLayoutAlign="space-around center">
+    <button *ngIf="structure && verificationSuccess" class="btn" routerLink="/home" [state]="{ data: structure }">
+      Voir ma structure
+    </button>
+  </div>
 </div>
