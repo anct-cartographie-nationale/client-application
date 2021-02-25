@@ -87,7 +87,7 @@ h3 {
 .content {
   .editHome {
     height: calc(
-      100vh - #{$header-height} - #{$footer-height} - 81px - 1px - 55px - 24px
+      100vh - #{$header-height} - #{$footer-height} - 81px - 1px - 55px - 48px
     ) !important; // -1px because of header border
   }
   @media #{$tablet} {
@@ -99,7 +99,8 @@ h3 {
         ); // -1px because of header border
       }
       .editHome {
-        height: calc(100vh - #{$header-height-phone} - 87px - 1px - 55px) !important; // -1px because of header border
+        height: unset !important; // -1px because of header border
+        margin-bottom: 80px;
       }
     }
   }
@@ -526,12 +527,10 @@ img {
   max-width: 960px;
   margin: auto;
   margin-top: 24px;
+  margin-bottom: 24px;
   h2 {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-  }
-  @media #{$tablet} {
-    margin-top: 0;
   }
 }

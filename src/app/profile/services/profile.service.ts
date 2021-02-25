@@ -36,6 +36,14 @@ export class ProfileService {
     return this.currentProfile.structuresLink.includes(idStructure);
   }
 
+  public isPendingLinkedToStructure(idStructure: string): boolean {
+    if (!this.currentProfile) {
+      return false;
+    }
+    console.log(this.currentProfile.pendingStructuresLink);
+    return this.currentProfile.pendingStructuresLink.includes(idStructure);
+  }
+
   public removeProfile(): void {
     this.currentProfile = null;
   }

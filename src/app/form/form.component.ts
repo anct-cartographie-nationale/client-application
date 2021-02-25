@@ -566,7 +566,7 @@ export class FormComponent implements OnInit {
             this.progressStatus = 100;
           });
         } else {
-          this.structureService.claimStructureWithAccount(this.claimStructure._id, user).subscribe(() => {
+          this.structureService.claimStructureWithAccount(this.claimStructure._id, user.email).subscribe(() => {
             this.progressStatus = 100;
           });
         }

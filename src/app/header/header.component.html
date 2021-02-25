@@ -33,6 +33,7 @@
       </div>
       <div fxLayout="column" class="right-header" fxLayoutAlign="none baseline" fxLayoutGap="5vw">
         <a routerLink="/home" [routerLinkActive]="'active'" (click)="closeMenu()" i18n>Les acteurs</a>
+        <a routerLink="/about" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
         <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'" (click)="closeMenu()">Administration</a>
       </div>
     </div>
