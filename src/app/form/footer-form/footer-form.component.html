@@ -11,6 +11,7 @@
     class="btn-primary small next"
     (click)="goToNextPage()"
     [disabled]="!isValid"
+    type="submit"
     [ngClass]="{ invalid: !isValid }"
   >
     <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">

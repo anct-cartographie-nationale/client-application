@@ -105,7 +105,7 @@
         </ul>
       </div>
     </div>
-    <form [formGroup]="accountForm" *ngIf="accountForm && !profile">
+    <form [formGroup]="accountForm" *ngIf="accountForm && !profile" (keyup.enter)="isPageValid && !isEditMode? nextPage() : null">
       <div *ngIf="currentPage == pageTypeEnum.accountInfo" class="page">
         <div class="title">
           <h3>Qui êtes-vous ?</h3>
@@ -241,7 +241,7 @@
         </div>
       </div>
     </form>
-    <form [formGroup]="structureForm" *ngIf="structureForm">
+    <form [formGroup]="structureForm" *ngIf="structureForm" (keyup.enter)="isPageValid && !isEditMode? nextPage() : null">
       <div *ngIf="currentPage == pageTypeEnum.structureNameAndAddress" class="page">
         <div class="title">
           <h3>Quelle structure voulez-vous réferencer ?</h3>
