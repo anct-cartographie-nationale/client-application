@@ -33,7 +33,7 @@
               }}</a>
               <app-structure-options-modal [structure]="s" (closed)="ngOnInit()"></app-structure-options-modal>
             </div>
-            <div fxLayout="column" fxLayoutGap="14px">
+            <div fxLayout="column" fxLayoutGap="14px" class="ownersBlock">
               <p class="ownerName" *ngFor="let owner of s.owners">{{ owner.email }}</p>
             </div>
           </div>

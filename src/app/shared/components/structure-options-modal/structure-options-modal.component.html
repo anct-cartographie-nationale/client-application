@@ -165,7 +165,7 @@
         <h2>Supprimer un compte</h2>
         <div class="ico-close-details" (click)="closeModalOptsProfile()"></div>
       </div>
-      <div fxLayout="column" fxLayoutGap="16px">
+      <div fxLayout="column" fxLayoutGap="16px" class="ownersBlock">
         <div class="row removeOwner" *ngFor="let owner of structure.owners" fxLayoutGap="16px">
           <button class="btn-primary small" (click)="removeOwner(owner.id)">X</button>
           <span>

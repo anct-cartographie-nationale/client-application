@@ -60,6 +60,9 @@ button {
     }
   }
   .removeOwner {
+    white-space: nowrap;
+    width: 84%;
+    text-overflow: ellipsis;
     button {
       width: 40px;
       background-color: $red-default;
@@ -82,5 +85,10 @@ button {
   }
   .ico-close-details {
     min-width: 40px;
+  }
+  .ownersBlock {
+    width: 100%;
+    max-height: 300px;
+    overflow: auto;
   }
 }

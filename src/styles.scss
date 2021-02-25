@@ -233,7 +233,7 @@ button {
     border-radius: 6px;
     @include background-hash($grey-2);
     border: 1px solid $grey-4;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
