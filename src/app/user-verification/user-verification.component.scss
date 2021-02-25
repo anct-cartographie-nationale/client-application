@@ -7,28 +7,7 @@
   padding: 18px;
   margin: auto;
 }
-.structureInfoBlock {
-  background: $green-1;
-  color: $white;
-  padding: 16px;
-  border-radius: 6px;
-  @include cn-bold-18;
-  .structureInfoContent {
-    width: 100%;
-  }
-  span {
-    font-style: italic;
-    @include cn-regular-14;
-  }
-  .validateSvg {
-    stroke: $white;
-    text-align: right;
-    svg {
-      height: 14px;
-      width: 14px;
-    }
-  }
-}
+
 .btn {
   background: $secondary-color;
   border-radius: 4px;
@@ -58,8 +37,18 @@
   }
 }
 
-.test {
+.custom-form {
   width: 100%;
-  height: 300px;
-  transform: scale(0.75);
+  height: 480px;
+  border: none;
+}
+
+// Override button style to be the same as typeform button
+button {
+  margin: 0px;
+  max-width: 100%;
+  font-size: 24px !important;
+  line-height: 32px !important;
+  min-height: 48px;
+  width: 245px !important;
 }

@@ -11,25 +11,31 @@
         Votre compte a bien été créé.
       </h3>
     </div>
-    <div *ngIf="structure" class="structureInfoBlock" fxLayout="row" fxLayoutAlign=" center">
-      <div class="structureInfoContent" fxLayout="column">
-        {{ structure.structureName }}
-        <span>{{ structure.getLabelTypeStructure() }}</span>
-      </div>
-      <div class="validateSvg">
-        <svg class="validate" aria-hidden="true">
-          <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-        </svg>
+    <div *ngIf="structure" class="structureCard">
+      <div class="structureInfo" fxLayout="column" fxLayoutGap="14px">
+        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+          <a class="structureName" routerLink="/home" [state]="{ data: structure }">{{ structure.structureName }}</a>
+        </div>
       </div>
     </div>
   </div>
   <p *ngIf="verificationIssue">
     Une erreur est survenue lors de la validation de votre email... Veuillez envoyer un mail au support.
   </p>
-  <div
-    class="typeform-widget test"
-    data-url="https://form.typeform.com/to/m7DV3CdW?typeform-medium=embed-snippet"
-  ></div>
+  <!-- TypeForm -->
+  <div *ngIf="!verificationIssue">
+    <iframe
+      *ngIf="structure"
+      class="typeform-widget custom-form"
+      title="typeform"
+      src="https://form.typeform.com/to/m7DV3CdW?typeform-medium=embed-snippet"
+    ></iframe>
+    <div
+      *ngIf="!structure"
+      class="typeform-widget custom-form"
+      data-url="https://form.typeform.com/to/ASJH3B7Z?typeform-medium=embed-snippet"
+    ></div>
+  </div>
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-around center">
     <button *ngIf="structure && verificationSuccess" class="btn" routerLink="/home" [state]="{ data: structure }">
       Voir ma structure

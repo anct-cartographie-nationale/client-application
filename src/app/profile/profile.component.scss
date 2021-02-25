@@ -48,33 +48,8 @@
 }
 .structureSection {
   margin-bottom: 108px;
-  .structureCard {
-    border: 1px solid $grey-4;
-    border-radius: 6px;
-    .structureInfo {
-      border-radius: 6px;
-      background: $white;
-      min-height: 100px;
-      padding: 33px 55px;
-      @media #{$large-phone} {
-        padding: 33px 25px;
-      }
-      a {
-        margin: 0;
-        &.structureName {
-          @include cn-bold-26;
-          color: $secondary-color;
-          text-decoration: underline;
-        }
-      }
-      .ownerName {
-        @include cn-regular-18;
-        color: $grey-2;
-      }
-    }
-    @include background-hash($grey-2);
-  }
 }
+
 .addSection {
   button {
     background: $red-default;
