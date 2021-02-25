@@ -71,7 +71,7 @@ export class FormComponent implements OnInit {
   public isAccountMode = false;
   public isJoinMode = false;
   public isLoading = false;
-  public isWifiChoosen = false;
+  public isWifiChoosen = null;
   public structureWithOwners: StructureWithOwners;
 
   constructor(

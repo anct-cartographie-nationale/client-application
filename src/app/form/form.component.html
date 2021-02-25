@@ -115,24 +115,36 @@
           <label for="surname">Nom</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-input" />
-            <img *ngIf="accountForm.get('surname').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
+            <app-svg-icon
+              *ngIf="accountForm.get('surname').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('surname').invalid && accountForm.get('surname').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="name">Prénom</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="name" class="form-input" />
-            <img *ngIf="accountForm.get('name').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
+            <app-svg-icon
+              *ngIf="accountForm.get('name').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('name').invalid && accountForm.get('name').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -144,12 +156,18 @@
               class="form-input phone"
               (input)="modifyPhoneInput(accountForm, 'phone', $event.target.value)"
             />
-            <img *ngIf="accountForm.get('phone').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
+            <app-svg-icon
+              *ngIf="accountForm.get('phone').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('phone').invalid && accountForm.get('phone').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
       </div>
@@ -172,12 +190,18 @@
               [readonly]="isAccountMode"
               [ngClass]="{ disabled: isAccountMode }"
             />
-            <img *ngIf="accountForm.get('email').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
+            <app-svg-icon
+              *ngIf="accountForm.get('email').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('email').invalid && accountForm.get('email').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -197,18 +221,25 @@
               (input)="setValidationsForm()"
               autocomplete="on"
             />
-            <img
+            <app-svg-icon
+              [iconClass]="'validation grey hover'"
+              [type]="'form'"
+              [icon]="'eyePassword'"
               (click)="showPassword()"
-              class="eyePassword"
-              src="../../assets/form/eyePassword.svg"
-              alt="logo eyePassword"
-            />
-            <img *ngIf="accountForm.get('password').valid" src="../../assets/form/validate.svg" alt="logo valid" />
-            <img
+            ></app-svg-icon>
+
+            <app-svg-icon
+              *ngIf="accountForm.get('password').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('password').invalid && accountForm.get('password').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
@@ -221,22 +252,24 @@
               (input)="setValidationsForm()"
               autocomplete="on"
             />
-            <img
+            <app-svg-icon
+              [iconClass]="'validation grey hover'"
+              [type]="'form'"
+              [icon]="'eyePassword'"
               (click)="showConfirmPassword()"
-              class="eyePassword"
-              src="../../assets/form/eyePassword.svg"
-              alt="logo eyePassword"
-            />
-            <img
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('confirmPassword').valid && accountForm.get('confirmPassword').value"
-              src="../../assets/form/validate.svg"
-              alt="logo valid"
-            />
-            <img
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="accountForm.get('confirmPassword').invalid && accountForm.get('confirmPassword').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
       </div>
@@ -255,23 +288,30 @@
               formControlName="structureName"
               class="form-input structureName"
             />
-            <img
+            <app-svg-icon
               *ngIf="getStructureControl('structureName').valid"
-              src="../../assets/form/validate.svg"
-              alt="logo valid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="address">Adresse de la structure</label>
 
-          <div fxLayout="row" fxLayoutGap="13px">
+          <div class="addressRow" fxLayout="row" fxLayoutGap="13px">
             <app-address-autocomplete
               [address]="getStructureControl('address').valid ? getStructureControl('address').value : null"
               (inputAddress)="setAddressStructure()"
               (selectedAddress)="setAddressStructure($event)"
             ></app-address-autocomplete>
-            <img *ngIf="getStructureControl('address').valid" src="../../assets/form/validate.svg" alt="logo valid" />
+            <app-svg-icon
+              *ngIf="getStructureControl('address').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+              class="validateIcon"
+            ></app-svg-icon>
           </div>
         </div>
       </div>
@@ -288,16 +328,18 @@
               class="form-input"
               (input)="modifyPhoneInput(structureForm, 'contactPhone', $event.target.value)"
             />
-            <img
+            <app-svg-icon
               *ngIf="getStructureControl('contactPhone').valid"
-              src="../../assets/form/validate.svg"
-              alt="logo valid"
-            />
-            <img
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="getStructureControl('contactPhone').invalid && getStructureControl('contactPhone').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
       </div>
@@ -382,17 +424,18 @@
           <label for="structureName">Courriel de la structure</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="contactMail" class="form-input" />
-            <img
+            <app-svg-icon
               *ngIf="getStructureControl('contactMail').valid"
-              src="../../assets/form/validate.svg"
-              alt="logo valid"
-            />
-
-            <img
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
               *ngIf="getStructureControl('contactMail').invalid && getStructureControl('contactMail').value"
-              src="../../assets/form/notvalidate.svg"
-              alt="logo invalid"
-            />
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
           </div>
         </div>
         <div class="collapse" [ngClass]="{ notCollapsed: !showWebsite }">
@@ -409,7 +452,7 @@
               </div>
             </div>
             <div *ngIf="showWebsite" class="inputSection">
-              <div class="form-group" fxLayout="column">
+              <div class="form-group website" fxLayout="column">
                 <label for="website">Adresse du site web</label>
                 <div fxLayout="row" fxLayoutGap="27px">
                   <input
@@ -419,16 +462,20 @@
                     formControlName="website"
                     class="form-input"
                   />
-                  <img
+                  <app-svg-icon
                     *ngIf="getStructureControl('website').valid && getStructureControl('website').value"
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('website').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
             </div>
@@ -460,20 +507,24 @@
                     formControlName="facebook"
                     class="form-input withIcon"
                   />
-                  <img
+                  <app-svg-icon
                     *ngIf="
                       getStructureControl('facebook').valid &&
                       getStructureControl('facebook').value != null &&
                       getStructureControl('facebook').value != ''
                     "
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('facebook').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
               <div class="form-group twitter">
@@ -488,20 +539,24 @@
                     formControlName="twitter"
                     class="form-input withIcon"
                   />
-                  <img
+                  <app-svg-icon
                     *ngIf="
                       getStructureControl('twitter').valid &&
                       getStructureControl('twitter').value != null &&
                       getStructureControl('twitter').value != ''
                     "
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('twitter').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
               <div class="form-group instagram">
@@ -516,20 +571,25 @@
                     placeholder="instagram.com/resonum"
                     class="form-input withIcon"
                   />
-                  <img
+
+                  <app-svg-icon
                     *ngIf="
                       getStructureControl('instagram').valid &&
                       getStructureControl('instagram').value != null &&
                       getStructureControl('instagram').value != ''
                     "
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('instagram').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
               <div class="form-group linkedin">
@@ -544,20 +604,24 @@
                     placeholder="linkedin.com/in/resonum"
                     class="form-input withIcon"
                   />
-                  <img
+                  <app-svg-icon
                     *ngIf="
                       getStructureControl('linkedin').valid &&
                       getStructureControl('linkedin').value != null &&
                       getStructureControl('linkedin').value != ''
                     "
-                    src="../../assets/form/validate.svg"
-                    alt="logo valid"
-                  />
-                  <img
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'validate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
+                  <app-svg-icon
                     *ngIf="getStructureControl('linkedin').invalid"
-                    src="../../assets/form/notvalidate.svg"
-                    alt="logo invalid"
-                  />
+                    [iconClass]="'validation'"
+                    [type]="'form'"
+                    [icon]="'notValidate'"
+                    class="validationIcon"
+                  ></app-svg-icon>
                 </div>
               </div>
             </div>
@@ -743,7 +807,13 @@
           <h3>Proposez-vous le wifi en accès libre ?</h3>
         </div>
         <app-radio-form
-          [selectedOption]="isEditMode ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices') : null"
+          [selectedOption]="
+            isEditMode
+              ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices')
+              : isWifiChoosen
+              ? isInArray('wifiEnAccesLibre', 'equipmentsAndServices')
+              : null
+          "
           (selectedEvent)="onCheckChange($event, 'equipmentsAndServices', 'wifiEnAccesLibre')"
         >
         </app-radio-form>
@@ -779,7 +849,7 @@
                 </div>
               </div>
               <div *ngIf="equipment.openned" class="inputSection">
-                <div class="form-group" fxLayout="column">
+                <div class="form-group equipments" fxLayout="column">
                   <label for="equipment">Nombre</label>
                   <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="27px">
                     <ng-container *ngIf="equipment.module.id == 'ordinateurs'">
@@ -789,18 +859,20 @@
                         formControlName="nbComputers"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbComputers').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbComputers').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                     <ng-container *ngIf="equipment.module.id == 'tablettes'">
                       <input
@@ -809,18 +881,20 @@
                         formControlName="nbTablets"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbTablets').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbTablets').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo invalid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                     <ng-container *ngIf="equipment.module.id == 'imprimantes'">
                       <input
@@ -829,18 +903,20 @@
                         formControlName="nbPrinters"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbPrinters').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbPrinters').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo invalid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                     <ng-container *ngIf="equipment.module.id == 'bornesNumeriques'">
                       <input
@@ -849,18 +925,20 @@
                         formControlName="nbNumericTerminal"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbNumericTerminal').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbNumericTerminal').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo invalid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                     <ng-container *ngIf="equipment.module.id == 'scanners'">
                       <input
@@ -869,18 +947,20 @@
                         formControlName="nbScanners"
                         class="form-input nbEquipment"
                       />
-                      <img
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbScanners').valid"
-                        src="../../assets/form/validate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
-                      <img
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'validate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
+                      <app-svg-icon
                         *ngIf="getStructureControl('nbScanners').invalid"
-                        src="../../assets/form/notvalidate.svg"
-                        alt="logo valid"
-                        class="nbEquipment"
-                      />
+                        [iconClass]="'validation'"
+                        [type]="'form'"
+                        [icon]="'notValidate'"
+                        class="validationIcon"
+                      ></app-svg-icon>
                     </ng-container>
                   </div>
                 </div>
