@@ -73,10 +73,17 @@
   height: 40px;
   width: 192px;
   @include btn-bold;
+  stroke: $white;
   &.small {
     width: 149px;
   }
   &.invalid {
     opacity: 0.4;
+  }
+  &:focus {
+    background: $white;
+    color: $secondary-color;
+    border: 1px solid $secondary-color;
+    stroke: $secondary-color;
   }
 }
