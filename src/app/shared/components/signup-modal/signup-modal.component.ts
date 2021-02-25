@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../../../services/auth.service';
+import { CustomRegExp } from '../../../utils/CustomRegExp';
 
 @Component({
   selector: 'app-signup-modal',
@@ -15,7 +16,7 @@ export class SignUpModalComponent implements OnInit {
   public submitted = false;
   public authFailed = false;
   public returnUrl: string;
-
+  public isShowPassword = false;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -28,8 +29,8 @@ export class SignUpModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.pattern(CustomRegExp.EMAIL)]],
+      password: ['', [Validators.required, Validators.pattern(CustomRegExp.PASSWORD)]],
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -45,7 +46,8 @@ export class SignUpModalComponent implements OnInit {
   }
 
   public sendSwitchToSignIn(): void {
-    this.closed.emit(false);
+    this.closed.emit(true);
+    this.router.navigate(['/create-structure']);
   }
 
   public swithToResetPassword(): void {
@@ -60,10 +62,9 @@ export class SignUpModalComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
     this.loading = true;
     this.authService
-      .login(this.f.username.value, this.f.password.value)
+      .login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         () => {
@@ -75,5 +76,9 @@ export class SignUpModalComponent implements OnInit {
           this.authFailed = true;
         }
       );
+  }
+
+  public toggleShowPassword(): void {
+    this.isShowPassword = !this.isShowPassword;
   }
 }

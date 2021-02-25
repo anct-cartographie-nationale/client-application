@@ -1,44 +1,90 @@
 <form [formGroup]="accountForm" *ngIf="accountForm" (ngSubmit)="onSubmit(accountForm)">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" autocomplete="on" formControlName="email" class="form-control" />
-    <app-validator-form *ngIf="submitted" [control]="getAccountControl('email')"></app-validator-form>
+  <div class="form-group" fxLayout="column">
+    <label for="email">Courriel personnel</label>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input type="text" autocomplete="on" formControlName="email" class="form-input" />
+      <img *ngIf="f.email.invalid && f.email.value" src="../../assets/form/notvalidate.svg" alt="logo invalid" />
+    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" fxLayout="column">
     <label for="surname">Nom</label>
-    <input type="text" formControlName="surname" class="form-control" />
-    <app-validator-form *ngIf="submitted" [control]="getAccountControl('surname')"></app-validator-form>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input type="text" autocomplete="on" formControlName="surname" class="form-input" />
+      <img *ngIf="f.surname.invalid && f.surname.value" src="../../assets/form/notvalidate.svg" alt="logo invalid" />
+    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" fxLayout="column">
     <label for="name">Prénom</label>
-    <input type="text" formControlName="name" class="form-control" />
-    <app-validator-form *ngIf="submitted" [control]="getAccountControl('name')"></app-validator-form>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input type="text" autocomplete="on" formControlName="name" class="form-input" />
+      <img *ngIf="f.name.invalid && f.name.value" src="../../assets/form/notvalidate.svg" alt="logo invalid" />
+    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" fxLayout="column">
     <label for="phone">Téléphone</label>
-    <input type="text" formControlName="phone" class="form-control" (input)="modifyPhoneInput($event.target.value)" />
-    <app-validator-form *ngIf="submitted" [control]="getAccountControl('phone')"></app-validator-form>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input
+        type="text"
+        autocomplete="on"
+        (input)="modifyPhoneInput($event.target.value)"
+        formControlName="phone"
+        class="form-input"
+      />
+      <img *ngIf="f.phone.invalid && f.phone.value" src="../../assets/form/notvalidate.svg" alt="logo invalid" />
+    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group password" fxLayout="column">
     <label for="password">Mot de passe</label>
-    <input type="password" autocomplete="on" formControlName="password" class="form-control" />
-    <app-validator-form
-      *ngIf="submitted"
-      [nameControl]="'password'"
-      [control]="getAccountControl('password')"
-    ></app-validator-form>
+    <p [ngClass]="{ invalid: f.password.invalid && f.password.value }">
+      Le mot de passe doit contenir au minimum : 8 caractères dont un caractère spécial, un caractère en majuscule et un
+      chiffre.
+    </p>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input
+        [type]="isShowPassword ? 'text' : 'password'"
+        autocomplete="on"
+        formControlName="password"
+        class="form-input"
+      />
+      <img
+        (click)="toggleShowPassword()"
+        class="eyePassword"
+        src="../../assets/form/eyePassword.svg"
+        alt="logo eyePassword"
+      />
+      <img *ngIf="f.password.invalid && f.password.value" src="../../assets/form/notvalidate.svg" alt="logo invalid" />
+    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group password" fxLayout="column">
     <label for="confirmPassword">Confirmation du mot de passe</label>
-    <input type="password" autocomplete="on" formControlName="confirmPassword" class="form-control" />
-    <app-validator-form
-      *ngIf="submitted"
-      [nameControl]="'password'"
-      [control]="getAccountControl('confirmPassword')"
-    ></app-validator-form>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input
+        [type]="isShowConfirmPassword ? 'text' : 'password'"
+        autocomplete="on"
+        formControlName="confirmPassword"
+        class="form-input"
+      />
+      <img
+        (click)="toggleShowConfirmPassword()"
+        class="eyePassword"
+        src="../../assets/form/eyePassword.svg"
+        alt="logo eyePassword"
+      />
+      <img
+        *ngIf="f.confirmPassword.invalid && f.confirmPassword.value"
+        src="../../assets/form/notvalidate.svg"
+        alt="logo invalid"
+      />
+    </div>
   </div>
-
-  <div class="form-group">
-    <button class="btn btn-primary" type="submit">Valider</button>
+  <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
+    <button
+      type="submit"
+      class="btn"
+      [disabled]="accountForm.invalid || loading"
+      [ngClass]="{ invalid: accountForm.invalid || loading }"
+    >
+      Valider
+    </button>
   </div>
 </form>

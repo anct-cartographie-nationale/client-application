@@ -6,16 +6,10 @@
       fxLayout="row center"
       class="searchButton withIcon"
       fxLayoutAlign="space-between center"
-      fxLayoutGap="13px"
+      fxLayoutGap="5px"
     >
-      <app-svg-icon
-        style="height: 100%"
-        [type]="'ico'"
-        [iconClass]="'icon-32'"
-        [icon]="iconBtn"
-        [iconColor]="'currentColor'"
-      ></app-svg-icon>
-      {{ text }}
+      <app-svg-icon [type]="'ico'" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+      <span>{{ text }}</span>
     </div>
   </button>
 </ng-container>

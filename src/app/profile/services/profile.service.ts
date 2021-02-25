@@ -15,7 +15,7 @@ export class ProfileService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   public async getProfile(): Promise<User> {
-    if (this.authService.isLoggedIn() && !this.currentProfile) {
+    if (this.authService.isLoggedIn()) {
       const profile = await this.http.get<User>(`${this.baseUrl}/profile`).toPromise();
       this.currentProfile = profile;
     }
@@ -25,12 +25,23 @@ export class ProfileService {
   public setProfile(profile: User): void {
     this.currentProfile = profile;
   }
+  public deleteProfile(): Observable<User> {
+    return this.http.delete<User>(`${this.baseUrl}`);
+  }
 
   public isLinkedToStructure(idStructure: string): boolean {
     if (!this.currentProfile) {
       return false;
     }
     return this.currentProfile.structuresLink.includes(idStructure);
+  }
+
+  public isPendingLinkedToStructure(idStructure: string): boolean {
+    if (!this.currentProfile) {
+      return false;
+    }
+    console.log(this.currentProfile.pendingStructuresLink);
+    return this.currentProfile.pendingStructuresLink.includes(idStructure);
   }
 
   public removeProfile(): void {
@@ -66,5 +77,9 @@ export class ProfileService {
   }
   public changeEmail(newEmail: string, oldEmail: string): Observable<User> {
     return this.http.post<any>(`${this.baseUrl}/change-email`, { newEmail, oldEmail });
+  }
+
+  public isEmailAlreadyUsed(newMail: string): Observable<boolean> {
+    return this.http.post<boolean>(`${this.baseUrl}/verify-exist-user`, { newMail });
   }
 }

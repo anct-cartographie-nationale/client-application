@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MustMatch } from '../shared/validator/form';
+import { CustomRegExp } from '../utils/CustomRegExp';
 
 @Component({
   selector: 'app-reset-password',
@@ -36,10 +37,7 @@ export class ResetPasswordComponent implements OnInit {
   private initPasswordForm(): void {
     this.resetFormChangePassword = this.formBuilder.group(
       {
-        password: [
-          '',
-          [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/)], //NOSONAR
-        ],
+        password: ['', [Validators.required, Validators.pattern(CustomRegExp.PASSWORD)]],
         confirmPassword: [''],
       },
       { validator: MustMatch('password', 'confirmPassword') }

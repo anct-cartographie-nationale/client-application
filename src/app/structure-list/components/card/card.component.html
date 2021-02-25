@@ -16,13 +16,11 @@
   <span class="typeStructure">{{ structure.getLabelTypeStructure() }}</span>
   <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="7px" *ngIf="structure.hasEquipments()">
     <app-svg-icon
-      *ngFor="let equipement of structure.equipmentsAndServices"
+      *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)"
       [type]="'ico'"
       [iconColor]="'grey'"
       [icon]="structure.getEquipmentsIcon(equipement)"
       [title]="structure.getEquipmentsTitle(equipement)"
     ></app-svg-icon>
   </div>
-
-  <br />
 </div>

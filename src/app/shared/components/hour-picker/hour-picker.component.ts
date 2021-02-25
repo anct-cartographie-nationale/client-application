@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnDestroy, OnChanges } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import * as _ from 'lodash';
 import { Day } from '../../../models/day.model';
 import { Time } from '../../../models/time.model';
 import { WeekDayEnum } from '../../enum/weekDay.enum';
@@ -14,7 +13,6 @@ import { CheckHours } from '../../validator/form';
 export class HourPickerComponent implements OnChanges, OnDestroy {
   @Input() modifiedFields: any;
   @Input() structureInput: FormGroup;
-  @Input() isEditMode: boolean;
 
   @Output() updateFormError = new EventEmitter<any>();
   @Output() updateForm = new EventEmitter<FormGroup>();

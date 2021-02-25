@@ -1,8 +1,6 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Structure } from '../../../models/structure.model';
 import { GeojsonService } from '../../../services/geojson.service';
-import { typeStructureEnum } from '../../../shared/enum/typeStructure.enum';
-import { Equipment } from '../../enum/equipment.enum';
 
 @Component({
   selector: 'app-card',
@@ -34,5 +32,10 @@ export class CardComponent implements OnInit {
 
   public cardHover(): void {
     this.hover.emit(this.structure);
+  }
+  public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
+    return equipmentsAndServices.filter((eqpt) =>
+      ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners', 'wifiEnAccesLibre'].includes(eqpt)
+    );
   }
 }

@@ -1,11 +1,3 @@
-<app-structureForm
-  *ngIf="showForm"
-  [idStructure]="structure._id"
-  [isEditMode]="isEditMode"
-  [profile]="currentProfile"
-  (closeEvent)="updateStructure($event)"
-  (clickOutside)="displayForm()"
-></app-structureForm>
 <div class="structrue-details-container" *ngIf="structure && !isLoading">
   <!-- Header info -->
   <div fxLayout="row" fxLayoutAlign="end center">
@@ -13,15 +5,16 @@
   </div>
   <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="8px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
-      <div fxLayout="column" fxLayoutAlign="space-between start">
+      <div fxLayout="column" class="no-margin" fxLayoutAlign="space-between start">
         <h2 class="bold">{{ structure.structureName }}</h2>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <div class="typeInformationHeader" fxLayout="column">
           <h3>{{ structure.getLabelTypeStructure() }}</h3>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="7px" *ngIf="structure.hasEquipments()">
+            <div></div>
             <app-svg-icon
-              *ngFor="let equipement of structure.equipmentsAndServices"
+              *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)"
               [type]="'ico'"
               [iconColor]="'currentColor'"
               [icon]="structure.getEquipmentsIcon(equipement)"
@@ -62,14 +55,60 @@
               >{{ structure.website | url }}</a
             >
           </div>
+          <div *ngIf="structure.hasSocialNetwork()" fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'network'"></app-svg-icon>
+            <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="8px">
+              <a
+                *ngIf="structure.facebook"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.facebook"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'facebook'" [title]="Facebook"></app-svg-icon
+              ></a>
+              <a
+                *ngIf="structure.twitter"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.twitter"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'twitter'" [title]="Twitter"></app-svg-icon
+              ></a>
+              <a
+                *ngIf="structure.instagram"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.instagram"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'instagram'" [title]="Instagram"></app-svg-icon
+              ></a>
+              <a
+                *ngIf="structure.linkedin"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.linkedin"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'linkedin'" [title]="Linkedin"></app-svg-icon
+              ></a>
+            </div>
+          </div>
           <div *ngIf="structure.contactPhone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'tel'"></app-svg-icon>
             <p>{{ structure.contactPhone | phone }}</p>
           </div>
         </div>
         <div fxLayout="column" fxFlex="50%">
-          <div *ngIf="structure.contactMail" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
-            <app-svg-icon [type]="'ico'" [icon]="'email'"></app-svg-icon>
+          <div
+            *ngIf="structure.contactMail && structure.contactMail !== 'unknown@unknown.com'"
+            fxLayout="row"
+            fxLayoutAlign="none center"
+            fxLayoutGap="13px"
+          >
+            <app-svg-icon [type]="'ico'" [iconClass]="'grey-1'" [icon]="'email'"></app-svg-icon>
             <p>{{ structure.contactMail }}</p>
           </div>
           <div *ngIf="structure.hasPassNumeric()" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
@@ -83,19 +122,19 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="center center" class="hide-on-print">
-        <a *ngIf="!isClaimed && userIsLoggedIn()" (click)="toggleClaimModal()" class="primary" tabindex="0"
-          >Revendiquer cette structure</a
-        >
+        <a *ngIf="!isClaimed" (click)="handleClaim()" class="primary" tabindex="0">Revendiquer cette structure</a>
+        <a *ngIf="displayJoin()" (click)="handleJoin()" class="primary" tabindex="0">Rejoindre cette structure</a>
         <!-- temporary remove edit -->
-        <!-- <a
+        <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
-          (click)="editStructure()"
+          routerLink="/create-structure"
+          [state]="{ data: structure }"
           class="primary"
           tabindex="0"
         >
           Modifier cette structure
-        </a> -->
-        <a *ngIf="profileService.isAdmin()" (click)="toggleDeleteModal()" class="primary" tabindex="0">
+        </a>
+        <a *ngIf="canDelete()" (click)="toggleDeleteModal()" class="primary" tabindex="0">
           Supprimer cette structure
         </a>
       </div>
@@ -152,7 +191,7 @@
             >
               <p class="no-margin">{{ getAccessLabel(acces) }}</p>
             </div>
-            <p class="no-margin">Accessibles aux personnes à mobilité réduite</p>
+            <p *ngIf="structure.pmrAccess" class="no-margin">Accessibles aux personnes à mobilité réduite</p>
           </div>
           <div *ngFor="let public of structure.publics" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
             <p class="no-margin">{{ getPublicLabel(public) }}</p>
@@ -163,7 +202,7 @@
   </div>
   <!-- Démarches en ligne -->
   <div
-    *ngIf="structure.proceduresAccompaniment.length"
+    *ngIf="structure.proceduresAccompaniment.length || structure.otherDescription"
     fxLayout="column"
     class="structure-details-block"
     fxLayoutAlign="baseline baseline"
@@ -179,10 +218,8 @@
           <app-logo-card *ngIf="accompagnement != 'autres'" [name]="accompagnement"></app-logo-card>
         </div>
       </div>
-      <p *ngIf="isOtherSection">
-        Tout ce qui est en lien avec la création d'entreprise ex : consultation de sites de références (BPI, Je créé
-        dans ma région, ...), inscription à des newsletters, aide pour trouver des sites (CMA, CCI, Urssaf,...),
-        recherches d'infos sur moteur de recherche...
+      <p *ngIf="structure.otherDescription">
+        {{ structure.otherDescription }}
       </p>
     </div>
   </div>
@@ -222,7 +259,7 @@
       <h2>Équipements</h2>
     </div>
     <div fxLayout="column">
-      <p *ngFor="let equipement of structure.equipmentsAndServices" class="no-margin-bottom">
+      <p *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)" class="no-margin-bottom">
         {{ getEquipmentsLabel(equipement) }}
         <span *ngIf="equipement == 'ordinateurs' && structure.nbComputers"> : {{ structure.nbComputers }}</span>
         <span *ngIf="equipement == 'tablettes' && structure.nbTablets"> : {{ structure.nbTablets }}</span>
@@ -294,4 +331,12 @@
     'Voulez-vous vraiment revendiquer cette structure&nbsp;? Une demande sera envoyée a l\'administrateur pour validation'
   "
   (closed)="claimStructure($event)"
+></app-modal-confirmation>
+
+<app-modal-confirmation
+  [openned]="joinModalOpenned"
+  [content]="
+    'Voulez-vous vraiment rejoindre cette structure&nbsp;? Une demande sera envoyée aux membres pour validation'
+  "
+  (closed)="joinStructure($event)"
 ></app-modal-confirmation>

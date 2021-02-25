@@ -5,7 +5,6 @@ import { AdminService } from '../../services/admin.service';
 @Component({
   selector: 'app-admin-claim-structure',
   templateUrl: './claim-structure.component.html',
-  styleUrls: ['./claim-structure.component.scss'],
 })
 export class ClaimStructureComponent implements OnInit {
   public demandsAttachment: DemandAttachment[];

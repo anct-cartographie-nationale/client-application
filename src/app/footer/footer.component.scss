@@ -13,6 +13,8 @@
   a {
     color: $white;
     margin: 0px 0px 0px 10px;
+    text-decoration: none;
+    @include cn-regular-12;
     &:hover {
       text-decoration: underline;
     }
@@ -34,12 +36,6 @@
       margin: 20px 0;
       text-align: center;
     }
-  }
-  @media #{$desktop} {
-    font-size: 1em;
-  }
-  @media #{$tablet} {
-    font-size: 0.875em;
   }
 }
 

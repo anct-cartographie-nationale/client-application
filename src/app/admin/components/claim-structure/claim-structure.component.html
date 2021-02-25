@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center center">
-  <table *ngIf="demandsAttachment" summary="demands attachment results">
+  <table *ngIf="demandsAttachment" aria-describedby="demands attachment results">
     <thead>
       <th scope="col">Utilisateur</th>
       <th scope="col">Structure</th>
@@ -8,7 +8,7 @@
     <tbody>
       <tr *ngFor="let demand of demandsAttachment">
         <td>{{ demand.userEmail }}</td>
-        <td>{{ demand.structureId }}</td>
+        <td>{{ demand.structureName }}</td>
         <td>
           <button (click)="acceptDemand(demand)">Valider</button><button (click)="refuseDemand(demand)">Refuser</button>
         </td>
