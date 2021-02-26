@@ -1,17 +1,29 @@
-<div class="section-container" fxLayout="row">
+<div class="section-container" fxLayout="row" fxLayoutGap="32px">
   <div fxLayout="column" class="list-container">
     <div fxLayout="column">
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-        <h2>A la une</h2>
-        <button>Publier votre actu</button>
+      <div fxLayout="row" class="row-border" fxLayoutAlign="space-between center">
+        <h2>à la une</h2>
+        <app-button
+          [type]="'button'"
+          [style]="'buttonWithHash'"
+          [text]="'Publier votre actu'"
+          (action)="publishNews()"
+        ></app-button>
       </div>
     </div>
 
     <div fxLayout="column">
-      <div fxLayout="row">
-        <h2>Autres actualités</h2>
+      <div fxLayout="row" class="row-border">
+        <h2>autres actualités</h2>
       </div>
     </div>
   </div>
-  <div fxLayout="column" fxLayoutAlign=" center" class="project-container">Appels ap rojets</div>
+  <div fxLayout="column" fxLayoutAlign=" center" class="project-container">
+    <div class="background-project-container">
+      <div class="project-content" fxLayout="column">
+        <app-svg-icon [iconClass]="'icon-80'" [iconColor]="'inherit'" [type]="'post'" [icon]="'project'"></app-svg-icon>
+        <h2>appels à projets</h2>
+      </div>
+    </div>
+  </div>
 </div>
