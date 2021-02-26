@@ -159,6 +159,9 @@ button {
       -ms-transform: rotate(45deg);
     }
   }
+  &.no-width {
+    width: unset;
+  }
 }
 
 // Layout
