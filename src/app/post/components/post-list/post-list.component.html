@@ -16,8 +16,13 @@
       <div fxLayout="row" class="row-border">
         <h2>autres actualités</h2>
       </div>
-      <div *ngFor="let new of news">
-        <app-post-card></app-post-card>
+      <div fxLayout="row" fxLayoutGap="33px">
+        <div fxLayout="column" class="columnPosts">
+          <app-post-card [post]="news" *ngFor="let news of leftColumnPosts"></app-post-card>
+        </div>
+        <div fxLayout="column" class="columnPosts">
+          <app-post-card [post]="news" *ngFor="let news of rightColumnPosts"></app-post-card>
+        </div>
       </div>
     </div>
   </div>

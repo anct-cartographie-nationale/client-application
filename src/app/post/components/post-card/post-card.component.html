@@ -1,1 +1,15 @@
-<p>post-card works!</p>
+<div fxLayout="column" *ngIf="post" class="post" fxLayoutGap="12px">
+  <div fxLayout="row"></div>
+  <div fxLayout="row" class="title">
+    {{ post.title }}
+  </div>
+  <div fxLayout="row" class="description">
+    {{ post.custom_excerpt }}
+  </div>
+  <div fxLayout="column" class="informations">
+    <div fxLayout="row">
+      {{ post.published_at | date: 'shortDate' }}
+    </div>
+    <div fxLayout="row">par auteurICI</div>
+  </div>
+</div>
