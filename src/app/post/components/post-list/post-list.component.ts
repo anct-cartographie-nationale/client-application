@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostListComponent implements OnInit {
   constructor() {}
-
+  news = ['', '', '', '', '', '', '', '', '', ''];
   ngOnInit(): void {}
 
   public publishNews(): void {}

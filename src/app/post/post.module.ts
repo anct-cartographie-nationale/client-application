@@ -6,9 +6,10 @@ import { PostHeaderComponent } from './components/post-header/post-header.compon
 import { PostListComponent } from './components/post-list/post-list.component';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { SharedModule } from '../shared/shared.module';
+import { PostCardComponent } from './components/post-card/post-card.component';
 
 @NgModule({
-  declarations: [PostComponent, PostHeaderComponent, PostListComponent, PostDetailsComponent],
+  declarations: [PostComponent, PostHeaderComponent, PostListComponent, PostDetailsComponent, PostCardComponent],
   imports: [CommonModule, PostRoutingModule, SharedModule],
 })
 export class PostModule {}

@@ -23,6 +23,7 @@
 }
 .project-container {
   width: 20%;
+  height: 100%;
   min-width: 306px;
   @include background-hash($secondary-color);
   border: 1px solid $secondary-color;
