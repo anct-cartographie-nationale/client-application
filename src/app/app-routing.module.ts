@@ -89,7 +89,7 @@ const routes: Routes = [
   },
   {
     path: 'posts',
-    loadChildren: () => import('./posts/posts.module').then((m) => m.PostsModule),
+    loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
   },
   {
     path: '**',
