@@ -4,6 +4,23 @@
 .post {
   padding: 24px 6px;
   border-bottom: 1px dashed $grey-3;
+  &.bigNew {
+    border: 0;
+    .imageContainer {
+      .image {
+        object-fit: cover;
+        height: 360px;
+        width: 100%;
+      }
+    }
+  }
+  .imageContainer {
+    .image {
+      object-fit: cover;
+      height: 88px;
+      width: 195px;
+    }
+  }
   .title {
     @include cn-bold-20;
     color: $grey-1;

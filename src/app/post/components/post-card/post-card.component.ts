@@ -8,6 +8,7 @@ import { Post } from '../../models/post.model';
 })
 export class PostCardComponent implements OnInit {
   @Input() post: Post;
+  @Input() class: string;
   constructor() {}
 
   ngOnInit(): void {}

@@ -1,5 +1,7 @@
-<div fxLayout="column" *ngIf="post" class="post" fxLayoutGap="12px">
-  <div fxLayout="row"></div>
+<div fxLayout="column" *ngIf="post" class="post" [ngClass]="class" fxLayoutGap="12px">
+  <div fxLayout="row" class="imageContainer" *ngIf="post.feature_image">
+    <img class="image" [src]="post.feature_image" />
+  </div>
   <div fxLayout="row" class="title">
     {{ post.title }}
   </div>
@@ -10,6 +12,6 @@
     <div fxLayout="row">
       {{ post.published_at | date: 'shortDate' }}
     </div>
-    <div fxLayout="row">par auteurICI</div>
+    <div fxLayout="row">par {{ post.primary_author.name }}</div>
   </div>
 </div>

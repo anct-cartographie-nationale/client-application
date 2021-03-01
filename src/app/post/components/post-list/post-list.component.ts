@@ -13,8 +13,11 @@ export class PostListComponent implements OnInit {
   news: PostWithMeta;
   leftColumnPosts: Post[] = [];
   rightColumnPosts: Post[] = [];
+  projectsNew: Post[] = [];
+  bigNews: Post;
   ngOnInit(): void {
-    this.postService.getAllPosts().subscribe((news) => {
+    this.postService.getPosts().subscribe((news) => {
+      console.log(news);
       news.posts.forEach((val, index) => {
         if (index % 2 == 0) {
           this.leftColumnPosts.push(val);
@@ -22,6 +25,10 @@ export class PostListComponent implements OnInit {
           this.rightColumnPosts.push(val);
         }
       });
+    });
+    this.postService.getPosts(['bignew']).subscribe((news) => {
+      this.bigNews = news.posts[0];
+      console.log(this.bigNews);
     });
   }
 

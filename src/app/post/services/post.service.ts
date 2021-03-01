@@ -11,7 +11,27 @@ export class PostService {
   private readonly baseUrl = 'api/posts';
   constructor(private http: HttpClient) {}
 
-  public getAllPosts(): Observable<PostWithMeta> {
-    return this.http.get<PostWithMeta>(`${this.baseUrl}`).pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
+  public getAllPostss(): Observable<PostWithMeta> {
+    return this.http
+      .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tag:-[getting-started,jeremie]`)
+      .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
+  }
+  public getPosts(tags?: string[]): Observable<PostWithMeta> {
+    if (!tags) {
+      return this.http
+        .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors`)
+        .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
+    }
+    let tagsString = '';
+    // Transform tab filters to string filters
+    tags.forEach((tag, index) => {
+      tagsString += tag;
+      if (index != tags.length - 1) {
+        tagsString += ',';
+      }
+    });
+    return this.http
+      .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tag:[${tagsString}]`)
+      .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
   }
 }
