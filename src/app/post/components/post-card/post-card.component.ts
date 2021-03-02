@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TagEnum } from '../../enum/tagEnum.enum';
 import { Post } from '../../models/post.model';
 
@@ -11,14 +12,9 @@ export class PostCardComponent implements OnInit {
   @Input() post: Post;
   @Input() class: string;
   test: string;
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    /*ùif (this.post) {
-      console.log(this.post);
-      this.test = this.post.html.replace(/<[^>]*>/g, '');
-    }*/
-  }
+  ngOnInit(): void {}
 
   getIconOfTag(tag: string): string {
     switch (tag) {
@@ -39,5 +35,8 @@ export class PostCardComponent implements OnInit {
       default:
         return null;
     }
+  }
+  public showDetails(post: Post): void {
+    this.router.navigateByUrl('posts/details/' + post.id);
   }
 }
