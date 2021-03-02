@@ -10,15 +10,15 @@ import { PostService } from '../../services/post.service';
 })
 export class PostListComponent implements OnInit {
   constructor(private postService: PostService) {}
-  news: PostWithMeta;
   leftColumnPosts: Post[] = [];
   rightColumnPosts: Post[] = [];
   projectsNew: Post[] = [];
   bigNews: Post;
+  projectsNews: Post[];
   ngOnInit(): void {
     this.postService.getPosts().subscribe((news) => {
-      console.log(news);
       news.posts.forEach((val, index) => {
+        val = this.addAuthorToPost(val);
         if (index % 2 == 0) {
           this.leftColumnPosts.push(val);
         } else {
@@ -26,11 +26,24 @@ export class PostListComponent implements OnInit {
         }
       });
     });
-    this.postService.getPosts(['bignew']).subscribe((news) => {
-      this.bigNews = news.posts[0];
-      console.log(this.bigNews);
+    this.postService.getPosts(['a-la-une']).subscribe((news) => {
+      this.bigNews = this.addAuthorToPost(news.posts[0]);
+    });
+    this.postService.getPosts(['appels']).subscribe((news) => {
+      let projectNews = news.posts;
+      projectNews.forEach((news) => {
+        news = this.addAuthorToPost(news);
+      });
+      this.projectsNew = projectNews;
     });
   }
 
   public publishNews(): void {}
+
+  //Transform excerpt post to have a custom author.
+  private addAuthorToPost(post: Post): Post {
+    post.author = post.excerpt;
+    post.excerpt = post.html.replace(/<[^>]*>/g, '');
+    return post;
+  }
 }

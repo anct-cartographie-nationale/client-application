@@ -11,15 +11,10 @@ export class PostService {
   private readonly baseUrl = 'api/posts';
   constructor(private http: HttpClient) {}
 
-  public getAllPostss(): Observable<PostWithMeta> {
-    return this.http
-      .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tag:-[getting-started,jeremie]`)
-      .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
-  }
   public getPosts(tags?: string[]): Observable<PostWithMeta> {
     if (!tags) {
       return this.http
-        .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors`)
+        .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tag:-[appels,a-la-une]`)
         .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
     }
     let tagsString = '';

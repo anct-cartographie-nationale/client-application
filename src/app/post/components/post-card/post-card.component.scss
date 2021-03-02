@@ -21,6 +21,13 @@
       width: 195px;
     }
   }
+  .tag {
+    @include cn-bold-16;
+    text-transform: uppercase;
+    color: $secondary-color;
+    fill: $secondary-color;
+    stroke: $secondary-color;
+  }
   .title {
     @include cn-bold-20;
     color: $grey-1;
@@ -38,5 +45,12 @@
     @include cn-regular-16;
     color: $grey-3;
     font-style: italic;
+  }
+}
+.project {
+  text-align: left;
+  .imageContainer,
+  .informations {
+    display: none !important;
   }
 }

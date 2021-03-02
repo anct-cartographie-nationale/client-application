@@ -32,6 +32,12 @@
       <div class="project-content" fxLayout="column">
         <app-svg-icon [iconClass]="'icon-80'" [iconColor]="'inherit'" [type]="'post'" [icon]="'project'"></app-svg-icon>
         <h2>appels à projets</h2>
+        <app-post-card
+          [post]="news"
+          [class]="'project'"
+          [ngClass]="{ 'last-child': last }"
+          *ngFor="let news of projectsNew; let last = last"
+        ></app-post-card>
       </div>
     </div>
   </div>

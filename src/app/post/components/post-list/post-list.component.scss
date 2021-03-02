@@ -13,8 +13,8 @@
     text-transform: uppercase;
   }
 }
-.test {
-  div {
+.last-child {
+  ::ng-deep .post {
     border: 0;
   }
 }
@@ -41,7 +41,7 @@
     background: $white;
     border-radius: 6px;
     .project-content {
-      padding: 18px 32px 62px 36px;
+      padding: 18px 32px 26px 36px;
       fill: $secondary-color;
       stroke: $secondary-color;
       text-align: center;
