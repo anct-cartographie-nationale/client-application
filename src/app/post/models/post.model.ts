@@ -9,4 +9,8 @@ export class Post {
   html: string;
   author: string;
   tags: Tag[];
+
+  constructor(obj?: any) {
+    Object.assign(this, obj);
+  }
 }

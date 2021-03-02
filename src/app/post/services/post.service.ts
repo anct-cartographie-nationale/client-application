@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Post } from '../models/post.model';
 import { PostWithMeta } from '../models/postWithMeta.model';
 
 @Injectable({
@@ -10,6 +11,12 @@ import { PostWithMeta } from '../models/postWithMeta.model';
 export class PostService {
   private readonly baseUrl = 'api/posts';
   constructor(private http: HttpClient) {}
+
+  public getPost(idPost: string): Observable<PostWithMeta> {
+    return this.http
+      .get<PostWithMeta>(`${this.baseUrl}/` + idPost)
+      .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
+  }
 
   public getPosts(tags?: string[]): Observable<PostWithMeta> {
     if (!tags) {

@@ -1,1 +1,5 @@
-<p>post-details works!</p>
+<div *ngIf="post">
+  <h2>{{ post.title }}</h2>
+</div>
+
+<button (click)="backToPosts()">Retour</button>

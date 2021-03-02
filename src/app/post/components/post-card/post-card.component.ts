@@ -37,6 +37,6 @@ export class PostCardComponent implements OnInit {
     }
   }
   public showDetails(post: Post): void {
-    this.router.navigateByUrl('posts/details/' + post.id);
+    this.router.navigateByUrl('posts/details/' + post.id, { state: { data: post } });
   }
 }

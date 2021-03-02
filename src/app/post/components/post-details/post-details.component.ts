@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Post } from '../../models/post.model';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-post-details',
@@ -7,10 +9,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./post-details.component.scss'],
 })
 export class PostDetailsComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute) {}
-  postId: string;
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private postService: PostService) {}
+  post: Post;
   ngOnInit(): void {
-    this.postId = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.postId);
+    if (history.state.data) {
+      this.post = new Post(history.state.data);
+    } else {
+      const postId = this.activatedRoute.snapshot.paramMap.get('id');
+      this.postService.getPost(postId).subscribe((post) => {
+        this.post = post.posts[0];
+        console.log(this.post);
+      });
+    }
+  }
+
+  public backToPosts(): void {
+    this.router.navigateByUrl('/posts');
   }
 }
