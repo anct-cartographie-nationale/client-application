@@ -13,12 +13,7 @@ export class PostCardComponent implements OnInit {
   test: string;
   constructor() {}
 
-  ngOnInit(): void {
-    /*ùif (this.post) {
-      console.log(this.post);
-      this.test = this.post.html.replace(/<[^>]*>/g, '');
-    }*/
-  }
+  ngOnInit(): void {}
 
   getIconOfTag(tag: string): string {
     switch (tag) {
