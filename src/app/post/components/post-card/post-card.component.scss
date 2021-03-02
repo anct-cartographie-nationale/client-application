@@ -1,8 +1,9 @@
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/breakpoint';
 
 .post {
-  padding: 24px 6px;
+  padding: 16px 0px;
   border-bottom: 1px dashed $grey-3;
   &.bigNew {
     border: 0;
@@ -11,6 +12,9 @@
         object-fit: cover;
         height: 360px;
         width: 100%;
+        @media #{$large-phone} {
+          height: 147px;
+        }
       }
     }
   }
@@ -19,6 +23,9 @@
       object-fit: cover;
       height: 88px;
       width: 195px;
+      @media #{$large-phone} {
+        height: 70px;
+      }
     }
   }
   .tag {
@@ -29,10 +36,16 @@
     stroke: $secondary-color;
   }
   .title {
+    @media #{$large-phone} {
+      @include cn-bold-18;
+    }
     @include cn-bold-20;
     color: $grey-1;
   }
   .description {
+    @media #{$large-phone} {
+      display: none !important;
+    }
     @include cn-regular-16;
     color: $black;
     overflow: hidden;

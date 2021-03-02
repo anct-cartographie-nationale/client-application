@@ -1,6 +1,7 @@
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/shapes';
+@import '../../../../assets/scss/breakpoint';
 
 .section-container {
   background: $grey-6;
@@ -19,16 +20,43 @@
   }
 }
 .list-container {
+  @media #{$tablet} {
+    width: 100%;
+  }
   width: 80%;
   h2 {
+    @media #{$large-phone} {
+      @include cn-bold-22;
+    }
     @include cn-bold-28;
     color: $grey-2;
   }
   .columnPosts {
+    @media #{$large-phone} {
+      display: none !important;
+    }
     width: 50%;
+  }
+  .columnPostsMobile {
+    display: none !important;
+    @media #{$large-phone} {
+      display: flex !important;
+    }
   }
 }
 .project-container {
+  &.desktop {
+    @media #{$tablet} {
+      display: none !important;
+    }
+  }
+  &.mobile {
+    display: none !important;
+    @media #{$tablet} {
+      display: flex !important;
+      width: 100%;
+    }
+  }
   width: 20%;
   height: 100%;
   min-width: 306px;
@@ -41,13 +69,23 @@
     background: $white;
     border-radius: 6px;
     .project-content {
+      @media #{$large-phone} {
+        padding: 10px 32px 0px 36px;
+      }
       padding: 18px 32px 26px 36px;
       fill: $secondary-color;
       stroke: $secondary-color;
+      &.mobile {
+        text-align: left;
+      }
       text-align: center;
       h2 {
+        @media #{$large-phone} {
+          @include cn-bold-22;
+        }
         @include cn-bold-26;
         color: $secondary-color;
+        margin-bottom: 0;
       }
     }
   }
