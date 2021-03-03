@@ -32,10 +32,7 @@ export class PostListComponent implements OnInit {
       this.bigNews = this.addAuthorToPost(news.posts[0]);
     });
     this.postService.getPosts([TagEnum.appels]).subscribe((news) => {
-      let projectNews = news.posts;
-      projectNews.forEach((news) => {
-        news = this.addAuthorToPost(news);
-      });
+      let projectNews = news.posts.map((news) => (news = this.addAuthorToPost(news)));
       this.projectsNew = projectNews;
     });
   }
