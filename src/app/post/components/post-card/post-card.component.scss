@@ -18,6 +18,13 @@
         }
       }
     }
+    .title {
+      @include cn-bold-30;
+    }
+    .description {
+      @include cn-regular-18;
+      color: $grey-1;
+    }
   }
   .imageContainer {
     .image {

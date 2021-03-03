@@ -1,11 +1,37 @@
-<div *ngIf="post" fxLayout="column">
-  <div fxLayout="row" (click)="backToPosts()">
-    <span>Retour à la liste d'acutalités</span>
+<div class="postContainer" *ngIf="post" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row">
+    <div class="backLink" fxLayout="row" fxLayoutAlign=" center" (click)="backToPosts()">
+      <svg class="chevronLeft" aria-hidden="true">
+        <use [attr.xlink:href]="'assets/form/sprite.svg#chevronLeft'"></use>
+      </svg>
+      <span>Retour à la liste d'acutalités</span>
+    </div>
   </div>
-  <app-post-card
-    [post]="news"
-    [class]="'project'"
-    [ngClass]="{ 'last-child': last }"
-    *ngFor="let news of projectsNew; let last = last"
-  ></app-post-card>
+  <div fxLayout="column">
+    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="post.tags[0].slug != 'appels'">
+      <app-svg-icon
+        [iconClass]="'icon-32'"
+        [iconColor]="'inherit'"
+        [type]="'post'"
+        [icon]="post.tags[0].slug"
+      ></app-svg-icon>
+      <span>{{ post.tags[0].name }}</span>
+    </div>
+    <div fxLayout="row" class="title">
+      {{ post.title }}
+    </div>
+  </div>
+
+  <div fxLayout="column" class="informations">
+    <div fxLayout="row">
+      {{ post.published_at | date: 'shortDate' }}
+    </div>
+    <div fxLayout="row">par {{ post.author }}</div>
+  </div>
+  <div fxLayout="row" class="imageContainer" *ngIf="post.feature_image">
+    <img class="image" [src]="post.feature_image" />
+  </div>
+  <div fxLayout="row" class="description">
+    <div [innerHtml]="post.safeHtml"></div>
+  </div>
 </div>

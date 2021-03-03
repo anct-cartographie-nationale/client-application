@@ -1,0 +1,63 @@
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/layout';
+
+$margin-post: 20px;
+
+.postContainer {
+  max-width: 832px;
+  margin: $margin-post auto;
+  height: calc(
+    100vh - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post} - #{$margin-post}* 2
+  );
+  .chevronLeft {
+    height: 24px;
+    width: 24px;
+    stroke: $black;
+    margin-right: 10px;
+  }
+  .backLink {
+    cursor: pointer;
+    color: $grey-2;
+    @include cn-bold-16;
+    &:hover {
+      opacity: 0.4;
+    }
+  }
+}
+.tag {
+  @include cn-bold-16;
+  text-transform: uppercase;
+  color: $secondary-color;
+  fill: $secondary-color;
+  stroke: $secondary-color;
+}
+.title {
+  @include cn-bold-30;
+  color: $grey-1;
+}
+.informations {
+  @include cn-regular-16;
+  color: $grey-3;
+  font-style: italic;
+}
+.imageContainer {
+  .image {
+    object-fit: cover;
+    height: 360px;
+    width: 100%;
+  }
+}
+.description {
+  div {
+    width: 100%;
+  }
+  ::ng-deep figure {
+    margin: 0;
+    img {
+      object-fit: cover;
+      max-height: 360px;
+      max-width: 100%;
+    }
+  }
+}

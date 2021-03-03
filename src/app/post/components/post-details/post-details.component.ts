@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../../models/post.model';
 import { PostService } from '../../services/post.service';
@@ -9,16 +10,22 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./post-details.component.scss'],
 })
 export class PostDetailsComponent implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private postService: PostService) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private postService: PostService,
+    private sanitizer: DomSanitizer
+  ) {}
   post: Post;
   ngOnInit(): void {
     if (history.state.data) {
       this.post = new Post(history.state.data);
+      this.post.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.post.html);
     } else {
       const postId = this.activatedRoute.snapshot.paramMap.get('id');
       this.postService.getPost(postId).subscribe((post) => {
         this.post = post.posts[0];
-        console.log(this.post);
+        this.post.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.post.html);
       });
     }
   }
