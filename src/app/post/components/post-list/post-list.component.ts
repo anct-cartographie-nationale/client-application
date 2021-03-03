@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TagEnum } from '../../enum/tag.enum';
 import { Post } from '../../models/post.model';
-import { PostWithMeta } from '../../models/postWithMeta.model';
 import { PostService } from '../../services/post.service';
 
 @Component({
@@ -10,18 +10,17 @@ import { PostService } from '../../services/post.service';
 })
 export class PostListComponent implements OnInit {
   constructor(private postService: PostService) {}
-  postsMobileView: Post[] = [];
-  leftColumnPosts: Post[] = [];
-  rightColumnPosts: Post[] = [];
-  projectsNew: Post[] = [];
-  bigNews: Post;
+  public postsMobileView: Post[] = [];
+  public leftColumnPosts: Post[] = [];
+  public rightColumnPosts: Post[] = [];
+  public projectsNew: Post[] = [];
+  public bigNews: Post;
 
   ngOnInit(): void {
     this.postService.getPosts().subscribe((news) => {
       news.posts.forEach((val, index) => {
         val = this.addAuthorToPost(val);
         this.postsMobileView.push(val);
-
         if (index % 2 == 0) {
           this.leftColumnPosts.push(val);
         } else {
@@ -29,10 +28,10 @@ export class PostListComponent implements OnInit {
         }
       });
     });
-    this.postService.getPosts(['a-la-une']).subscribe((news) => {
+    this.postService.getPosts([TagEnum.aLaUne]).subscribe((news) => {
       this.bigNews = this.addAuthorToPost(news.posts[0]);
     });
-    this.postService.getPosts(['appels']).subscribe((news) => {
+    this.postService.getPosts([TagEnum.appels]).subscribe((news) => {
       let projectNews = news.posts;
       projectNews.forEach((news) => {
         news = this.addAuthorToPost(news);

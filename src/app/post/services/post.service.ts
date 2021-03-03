@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TagEnum } from '../enum/tag.enum';
 import { PostWithMeta } from '../models/postWithMeta.model';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class PostService {
   public getPosts(tags?: string[]): Observable<PostWithMeta> {
     if (!tags) {
       return this.http
-        .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tag:-[appels,a-la-une]`)
+        .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tag:-[${TagEnum.aLaUne},${TagEnum.appels}]`)
         .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
     }
     let tagsString = '';
