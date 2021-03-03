@@ -2,4 +2,10 @@
   <div fxLayout="row" (click)="backToPosts()">
     <span>Retour à la liste d'acutalités</span>
   </div>
+  <app-post-card
+    [post]="news"
+    [class]="'project'"
+    [ngClass]="{ 'last-child': last }"
+    *ngFor="let news of projectsNew; let last = last"
+  ></app-post-card>
 </div>

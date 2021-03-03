@@ -12,7 +12,19 @@
       </div>
       <app-post-card [class]="'bigNew'" [post]="bigNews"></app-post-card>
     </div>
-
+    <div fxLayout="column" fxLayoutAlign=" center" class="project-container mobile">
+      <div class="background-project-container">
+        <div class="project-content mobile" fxLayout="column">
+          <h2>appels à projets</h2>
+          <app-post-card
+            [post]="news"
+            [class]="'project'"
+            [ngClass]="{ 'last-child': last }"
+            *ngFor="let news of projectsNew; let last = last"
+          ></app-post-card>
+        </div>
+      </div>
+    </div>
     <div fxLayout="column">
       <div fxLayout="row" class="row-border">
         <h2>autres actualités</h2>
@@ -24,10 +36,13 @@
         <div fxLayout="column" class="columnPosts">
           <app-post-card [post]="news" *ngFor="let news of rightColumnPosts"></app-post-card>
         </div>
+        <div fxLayout="column" class="columnPostsMobile">
+          <app-post-card [post]="news" *ngFor="let news of postsMobileView"></app-post-card>
+        </div>
       </div>
     </div>
   </div>
-  <div fxLayout="column" fxLayoutAlign=" center" class="project-container">
+  <div fxLayout="column" fxLayoutAlign=" center" class="project-container desktop">
     <div class="background-project-container">
       <div class="project-content" fxLayout="column">
         <app-svg-icon [iconClass]="'icon-80'" [iconColor]="'inherit'" [type]="'post'" [icon]="'project'"></app-svg-icon>

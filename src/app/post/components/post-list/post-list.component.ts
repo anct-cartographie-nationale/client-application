@@ -10,15 +10,18 @@ import { PostService } from '../../services/post.service';
 })
 export class PostListComponent implements OnInit {
   constructor(private postService: PostService) {}
+  postsMobileView: Post[] = [];
   leftColumnPosts: Post[] = [];
   rightColumnPosts: Post[] = [];
   projectsNew: Post[] = [];
   bigNews: Post;
-  projectsNews: Post[];
+
   ngOnInit(): void {
     this.postService.getPosts().subscribe((news) => {
       news.posts.forEach((val, index) => {
         val = this.addAuthorToPost(val);
+        this.postsMobileView.push(val);
+
         if (index % 2 == 0) {
           this.leftColumnPosts.push(val);
         } else {
