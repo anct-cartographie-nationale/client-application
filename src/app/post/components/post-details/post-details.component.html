@@ -1,5 +1,5 @@
-<div *ngIf="post">
-  <h2>{{ post.title }}</h2>
+<div *ngIf="post" fxLayout="column">
+  <div fxLayout="row" (click)="backToPosts()">
+    <span>Retour à la liste d'acutalités</span>
+  </div>
 </div>
-
-<button (click)="backToPosts()">Retour</button>
