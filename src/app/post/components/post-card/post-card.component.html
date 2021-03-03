@@ -1,11 +1,11 @@
 <div fxLayout="column" *ngIf="post" class="post" [ngClass]="class" fxLayoutGap="12px">
   <div fxLayout="column" fxLayoutGap="4px">
-    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="getIconOfTag(post.tags[0].slug)">
+    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="post.tags[0].slug != 'appels'">
       <app-svg-icon
         [iconClass]="'icon-32'"
         [iconColor]="'inherit'"
         [type]="'post'"
-        [icon]="getIconOfTag(post.tags[0].slug)"
+        [icon]="post.tags[0].slug"
       ></app-svg-icon>
       <span>{{ post.tags[0].name }}</span>
     </div>
