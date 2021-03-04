@@ -1,4 +1,4 @@
-<div class="postContainer" *ngIf="post" fxLayout="column" fxLayoutGap="8px">
+<div class="postContainer" *ngIf="post" fxLayout="column" fxLayoutGap="16px">
   <div fxLayout="row">
     <div class="backLink" fxLayout="row" fxLayoutAlign=" center" (click)="backToPosts()">
       <svg class="chevronLeft" aria-hidden="true">
@@ -8,7 +8,7 @@
     </div>
   </div>
   <div fxLayout="column">
-    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="post.tags[0].slug != 'appels'">
+    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px">
       <app-svg-icon
         [iconClass]="'icon-32'"
         [iconColor]="'inherit'"
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div fxLayout="column" class="informations">
+  <div fxLayout="column" class="informations" *ngIf="post.tags[0].slug != 'appels'">
     <div fxLayout="row">
       {{ post.published_at | date: 'shortDate' }}
     </div>

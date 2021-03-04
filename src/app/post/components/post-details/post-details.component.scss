@@ -1,13 +1,17 @@
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
 @import '../../../../assets/scss/layout';
+@import '../../../../assets/scss/breakpoint';
+@import '../../../../assets/scss/hyperlink';
 
 $margin-post: 20px;
 
 .postContainer {
   max-width: 832px;
   margin: $margin-post auto;
-  min-height: calc(100vh - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post}* 3);
+  min-height: calc(
+    var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post}* 3
+  );
   .chevronLeft {
     height: 24px;
     width: 24px;
@@ -44,6 +48,9 @@ $margin-post: 20px;
     object-fit: cover;
     height: 360px;
     width: 100%;
+    @media #{$large-phone} {
+      height: 147px;
+    }
   }
 }
 .description {
@@ -57,5 +64,10 @@ $margin-post: 20px;
       max-height: 360px;
       max-width: 100%;
     }
+  }
+  ::ng-deep a {
+    @include hyperlink;
+    padding: 0;
+    font-size: 18px;
   }
 }
