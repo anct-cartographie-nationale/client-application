@@ -21,5 +21,14 @@ export class AppComponent {
     if (this.authService.isLoggedIn()) {
       this.profilService.getProfile();
     }
+    this.setHeightApp();
+    window.addEventListener('resize', () => {
+      this.setHeightApp();
+    });
+  }
+
+  private setHeightApp(): void {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
 }
