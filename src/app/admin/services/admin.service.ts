@@ -15,11 +15,27 @@ export class AdminService {
     return this.http.get<DemandAttachment[]>(`${this.baseUrl}/pendingStructures`);
   }
 
-  public acceptStructureClaim(userEmail: string, structureId: number): Observable<DemandAttachment[]> {
-    return this.http.post<DemandAttachment[]>(`${this.baseUrl}/validatePendingStructure`, { userEmail, structureId });
+  public acceptStructureClaim(
+    userEmail: string,
+    structureId: number,
+    structureName: string
+  ): Observable<DemandAttachment[]> {
+    return this.http.post<DemandAttachment[]>(`${this.baseUrl}/validatePendingStructure`, {
+      userEmail,
+      structureId,
+      structureName,
+    });
   }
 
-  public refuseStructureClaim(userEmail: string, structureId: number): Observable<DemandAttachment[]> {
-    return this.http.post<DemandAttachment[]>(`${this.baseUrl}/rejectPendingStructure`, { userEmail, structureId });
+  public refuseStructureClaim(
+    userEmail: string,
+    structureId: number,
+    structureName: string
+  ): Observable<DemandAttachment[]> {
+    return this.http.post<DemandAttachment[]>(`${this.baseUrl}/rejectPendingStructure`, {
+      userEmail,
+      structureId,
+      structureName,
+    });
   }
 }
