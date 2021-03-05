@@ -12,10 +12,12 @@ export class PostService {
   private readonly baseUrl = 'api/posts';
   constructor(private http: HttpClient) {}
 
-  public getPosts(tags?: string[]): Observable<PostWithMeta> {
+  public getPosts(page: number, tags?: string[]): Observable<PostWithMeta> {
     if (!tags) {
       return this.http
-        .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tag:-[${TagEnum.aLaUne},${TagEnum.appels}]`)
+        .get<PostWithMeta>(
+          `${this.baseUrl}?page=${page}&include=tags,authors&filter=tag:-[${TagEnum.aLaUne},${TagEnum.appels}]`
+        )
         .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
     }
     let tagsString = '';
