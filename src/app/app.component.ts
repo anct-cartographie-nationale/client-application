@@ -17,7 +17,6 @@ export class AppComponent {
     public printService: PrintService,
     private authService: AuthService,
     private profilService: ProfileService,
-    private routerListenerService: RouterListenerService,
     private windowScrollService: WindowScrollService
   ) {
     if (this.authService.isLoggedIn()) {
