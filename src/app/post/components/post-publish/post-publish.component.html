@@ -1,0 +1,31 @@
+<div class="container" fxLayout="column" fxLayoutGap="16px">
+  <div fxLayout="row">
+    <div class="backLink" fxLayout="row" fxLayoutAlign=" center" (click)="backToPosts()">
+      <svg class="chevronLeft" aria-hidden="true">
+        <use [attr.xlink:href]="'assets/form/sprite.svg#chevronLeft'"></use>
+      </svg>
+      <span>Retour à la liste d'acutalités</span>
+    </div>
+  </div>
+  <div fxLayout="column" class="content" fxLayoutGap="16px">
+    <h2>Publier votre actualité</h2>
+    <div class="image">
+      <img src="../../assets/post/publishNews.svg" alt="logo publishNews" />
+    </div>
+    <div>
+      <p>Vous pouvez nous envoyer votre actualité en distinguant ces 4 éléments :</p>
+      <ul>
+        <li>- le titre</li>
+        <li>- le texte</li>
+        <li>- l’auteur</li>
+        <li>- l’image (facultatif)</li>
+      </ul>
+      <br />
+      <p>Si votre actualité existe déjà sur un autre site, envoyez-nous simplement son adresse URL</p>
+      <br />
+    </div>
+    <div>
+      <a class="btn-primary" href="mailto:inclusionnumerique@grandlyon.com">Envoyer votre actu par mail</a>
+    </div>
+  </div>
+</div>

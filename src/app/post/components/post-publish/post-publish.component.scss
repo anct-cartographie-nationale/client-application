@@ -1,0 +1,58 @@
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/layout';
+
+$margin-post: 20px;
+
+.container {
+  max-width: 832px;
+  width: 95%;
+  margin: $margin-post auto;
+  min-height: calc(
+    var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post}* 2
+  );
+}
+.chevronLeft {
+  height: 24px;
+  width: 24px;
+  stroke: $black;
+  margin-right: 10px;
+}
+.backLink {
+  cursor: pointer;
+  color: $grey-2;
+  @include cn-bold-16;
+  &:hover {
+    opacity: 0.4;
+  }
+}
+.content {
+  @include cn-regular-18;
+  color: $grey-1;
+  h2 {
+    margin: 0;
+    color: $grey-1;
+  }
+  .image {
+    width: 100%;
+    text-align: center;
+    img {
+      max-width: 300px;
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  p {
+    margin: 0;
+  }
+  a {
+    text-decoration: none;
+    width: auto;
+    padding: 10.5px 24px;
+    @include cn-regular-16;
+    font-size: 16px;
+  }
+}

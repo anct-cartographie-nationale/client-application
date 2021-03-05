@@ -28,6 +28,7 @@ export class PostListComponent implements OnInit {
   public bigNews: Post;
   public pagination: Pagination;
   public isLoading = false;
+  public isPublishMode = false;
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -43,7 +44,9 @@ export class PostListComponent implements OnInit {
     });
   }
 
-  public publishNews(): void {}
+  public togglePublishNews(): void {
+    this.isPublishMode = !this.isPublishMode;
+  }
 
   //Transform excerpt post to have a custom author.
   private addAuthorToPost(post: Post): Post {
