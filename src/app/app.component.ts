@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ProfileService } from './profile/services/profile.service';
 import { AuthService } from './services/auth.service';
-import { RouterListenerService } from './services/routerListener.service';
 import { PrintService } from './shared/service/print.service';
-import { WindowScrollService } from './shared/service/windowscroll.service';
+import { WindowScrollService } from './shared/service/windowScroll.service';
 
 @Component({
   selector: 'app-root',

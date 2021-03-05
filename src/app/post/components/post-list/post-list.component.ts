@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WindowScrollService } from '../../../shared/service/windowscroll.service';
+import { WindowScrollService } from '../../../shared/service/windowScroll.service';
 import { TagEnum } from '../../enum/tag.enum';
 import { Pagination } from '../../models/pagination.model';
 import { Post } from '../../models/post.model';
