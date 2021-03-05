@@ -73,9 +73,6 @@ a {
   &.full-screen {
     min-height: calc(100vh - #{$header-height} - #{$footer-height});
   }
-  @media #{$phone} {
-    padding-top: 30px;
-  }
 }
 .section-container {
   width: 80%;
@@ -157,6 +154,9 @@ button {
       -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
     }
+  }
+  &.no-width {
+    width: unset;
   }
 }
 
