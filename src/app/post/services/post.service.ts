@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Post } from '../models/post.model';
 import { TagEnum } from '../enum/tag.enum';
 import { PostWithMeta } from '../models/postWithMeta.model';
 
@@ -11,6 +12,17 @@ import { PostWithMeta } from '../models/postWithMeta.model';
 export class PostService {
   private readonly baseUrl = 'api/posts';
   constructor(private http: HttpClient) {}
+
+  public getPost(idPost: string): Observable<PostWithMeta> {
+    return this.http.get<PostWithMeta>(`${this.baseUrl}/` + idPost).pipe(
+      map((item: PostWithMeta) => {
+        item.posts.forEach((post) => {
+          post = this.addAuthorToPost(post);
+        });
+        return new PostWithMeta(item);
+      })
+    );
+  }
 
   public getPosts(page: number, tags?: string[]): Observable<PostWithMeta> {
     if (!tags) {
@@ -31,5 +43,11 @@ export class PostService {
     return this.http
       .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tag:[${tagsString}]`)
       .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
+  }
+
+  private addAuthorToPost(post: Post): Post {
+    post.author = post.excerpt;
+    post.excerpt = post.html.replace(/<[^>]*>/g, '');
+    return post;
   }
 }
