@@ -1,3 +1,4 @@
+import { SafeHtml } from '@angular/platform-browser';
 import { Tag } from './tag.model';
 
 export class Post {
@@ -9,4 +10,9 @@ export class Post {
   html: string;
   author: string;
   tags: Tag[];
+  safeHtml: SafeHtml;
+
+  constructor(obj?: any) {
+    Object.assign(this, obj);
+  }
 }

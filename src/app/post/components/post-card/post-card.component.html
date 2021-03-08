@@ -1,4 +1,4 @@
-<div fxLayout="column" *ngIf="post" class="post" [ngClass]="class" fxLayoutGap="12px">
+<div fxLayout="column" *ngIf="post" class="post" [ngClass]="class" fxLayoutGap="12px" (click)="showDetails(post)">
   <div fxLayout="column" fxLayoutGap="4px">
     <div
       fxLayout="row"

@@ -3,6 +3,7 @@
 @import '../../../../assets/scss/breakpoint';
 
 .post {
+  cursor: pointer;
   padding: 16px 0px;
   border-bottom: 1px dashed $grey-3;
   &.bigNew {
@@ -16,6 +17,13 @@
           height: 147px;
         }
       }
+    }
+    .title {
+      @include cn-bold-30;
+    }
+    .description {
+      @include cn-regular-18;
+      color: $grey-1;
     }
   }
   .imageContainer {

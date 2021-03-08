@@ -18,6 +18,11 @@
     text-transform: uppercase;
   }
 }
+h2 {
+  font-style: italic !important;
+  text-transform: uppercase;
+}
+
 .last-child {
   ::ng-deep .post {
     border: 0;
