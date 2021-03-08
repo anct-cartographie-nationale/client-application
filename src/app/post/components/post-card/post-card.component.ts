@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TagEnum } from '../../enum/tag.enum';
 import { Post } from '../../models/post.model';
 
 @Component({
@@ -10,6 +11,7 @@ import { Post } from '../../models/post.model';
 export class PostCardComponent implements OnInit {
   @Input() post: Post;
   @Input() class: string;
+  public tagEnum = TagEnum;
   constructor(private router: Router) {}
 
   ngOnInit(): void {}

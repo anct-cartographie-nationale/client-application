@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { PostListComponent } from './components/post-list/post-list.component';
-import { PostComponent } from './post.component';
+import { NewsComponent } from './news.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PostComponent,
+    component: NewsComponent,
     children: [
       {
         path: '',
@@ -20,7 +20,6 @@ const routes: Routes = [
     ],
   },
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

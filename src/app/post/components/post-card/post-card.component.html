@@ -1,6 +1,12 @@
 <div fxLayout="column" *ngIf="post" class="post" [ngClass]="class" fxLayoutGap="12px" (click)="showDetails(post)">
   <div fxLayout="column" fxLayoutGap="4px">
-    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="post.tags[0].slug != 'appels'">
+    <div
+      fxLayout="row"
+      class="tag"
+      fxLayoutAlign=" center"
+      fxLayoutGap="12px"
+      *ngIf="post.tags[0].slug != tagEnum.appels"
+    >
       <app-svg-icon
         [iconClass]="'icon-32'"
         [iconColor]="'inherit'"
