@@ -27,11 +27,10 @@ $margin-post: 20px;
   }
 }
 .content {
-  @include cn-regular-18;
   color: $grey-1;
   h2 {
+    @include cn-bold-30;
     margin: 0;
-    color: $grey-1;
   }
   .image {
     width: 100%;
@@ -40,14 +39,18 @@ $margin-post: 20px;
       max-width: 300px;
     }
   }
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  .informations {
+    @include cn-regular-18;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    p {
+      margin: 0;
+    }
   }
-  p {
-    margin: 0;
-  }
+
   a {
     text-decoration: none;
     width: auto;
