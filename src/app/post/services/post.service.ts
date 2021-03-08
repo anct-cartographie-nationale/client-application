@@ -24,16 +24,6 @@ export class PostService {
     );
   }
 
-  // public getPosts(tags?: string[]): Observable<PostWithMeta> {
-  //   if (!tags) {
-  //     return this.http.get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tag:-[appels,a-la-une]`).pipe(
-  //       map((item: PostWithMeta) => {
-  //         item.posts.forEach((post) => {
-  //           post = this.addAuthorToPost(post);
-  //         });
-  //         return new PostWithMeta(item);
-  //       })
-  //     );
   public getPosts(page: number, tags?: string[]): Observable<PostWithMeta> {
     if (!tags) {
       return this.http
