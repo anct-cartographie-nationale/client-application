@@ -1,0 +1,64 @@
+<div class="section-container" fxLayout="row" fxLayoutGap="32px">
+  <div fxLayout="column" class="list-container" fxLayoutGap="16px">
+    <div fxLayout="column">
+      <div fxLayout="row" class="row-border" fxLayoutAlign="space-between center">
+        <h2>à la une</h2>
+        <app-button
+          [type]="'button'"
+          [style]="'buttonWithHash'"
+          [text]="'Publier votre actu'"
+          (action)="publishNews()"
+        ></app-button>
+      </div>
+      <app-post-card [class]="'bigNew'" [post]="bigNews"></app-post-card>
+    </div>
+    <div fxLayout="column" fxLayoutAlign=" center" class="project-container mobile">
+      <div class="background-project-container">
+        <div class="project-content mobile" fxLayout="column">
+          <h2>appels à projets</h2>
+          <app-post-card
+            [post]="news"
+            [class]="'project'"
+            [ngClass]="{ 'last-child': last }"
+            *ngFor="let news of projectsNew; let last = last"
+          ></app-post-card>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div fxLayout="row" class="row-border otherNews">
+        <h2>autres actualités</h2>
+      </div>
+      <div fxLayout="row" fxLayoutGap="33px">
+        <div fxLayout="column" class="columnPosts">
+          <app-post-card [post]="news" *ngFor="let news of leftColumnPosts"></app-post-card>
+        </div>
+        <div fxLayout="column" class="columnPosts">
+          <app-post-card [post]="news" *ngFor="let news of rightColumnPosts"></app-post-card>
+        </div>
+        <div fxLayout="column" class="columnPostsMobile">
+          <app-post-card [post]="news" *ngFor="let news of postsMobileView"></app-post-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign=" center" class="project-container desktop">
+    <div class="background-project-container">
+      <div class="project-content" fxLayout="column">
+        <app-svg-icon
+          [iconClass]="'icon-80'"
+          [iconColor]="'inherit'"
+          [type]="'post'"
+          [icon]="'appel-a-projet'"
+        ></app-svg-icon>
+        <h2>appels à projets</h2>
+        <app-post-card
+          [post]="news"
+          [class]="'project'"
+          [ngClass]="{ 'last-child': last }"
+          *ngFor="let news of projectsNew; let last = last"
+        ></app-post-card>
+      </div>
+    </div>
+  </div>
+</div>

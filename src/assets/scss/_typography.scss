@@ -11,6 +11,7 @@ $font-size-medium: 1.25em; // 20px
 $font-size-xmedium: 1.375em; // 22px
 
 $font-size-large: 1.625em; // 26px
+$font-size-xlarge: 1.75em; // 28px
 
 html,
 body,
@@ -41,6 +42,13 @@ h6,
   font-family: $footer-text-font;
   font-style: normal;
   font-size: $font-size-small;
+}
+
+@mixin cn-bold-28 {
+  font-family: $title-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-xlarge;
 }
 
 @mixin cn-bold-26 {

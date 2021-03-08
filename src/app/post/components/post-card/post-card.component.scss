@@ -1,0 +1,69 @@
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/breakpoint';
+
+.post {
+  padding: 16px 0px;
+  border-bottom: 1px dashed $grey-3;
+  &.bigNew {
+    border: 0;
+    .imageContainer {
+      .image {
+        object-fit: cover;
+        height: 360px;
+        width: 100%;
+        @media #{$large-phone} {
+          height: 147px;
+        }
+      }
+    }
+  }
+  .imageContainer {
+    .image {
+      object-fit: cover;
+      height: 88px;
+      width: 195px;
+      @media #{$large-phone} {
+        height: 70px;
+      }
+    }
+  }
+  .tag {
+    @include cn-bold-16;
+    text-transform: uppercase;
+    color: $secondary-color;
+    fill: $secondary-color;
+    stroke: $secondary-color;
+  }
+  .title {
+    @media #{$large-phone} {
+      @include cn-bold-18;
+    }
+    @include cn-bold-20;
+    color: $grey-1;
+  }
+  .description {
+    @media #{$large-phone} {
+      display: none !important;
+    }
+    @include cn-regular-16;
+    color: $black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .informations {
+    @include cn-regular-16;
+    color: $grey-3;
+    font-style: italic;
+  }
+}
+.project {
+  text-align: left;
+  .imageContainer,
+  .informations {
+    display: none !important;
+  }
+}

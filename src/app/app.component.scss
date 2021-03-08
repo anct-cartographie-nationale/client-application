@@ -3,17 +3,16 @@
 @import '../assets/scss/layout';
 
 .app-container {
-  height: 100%;
   display: block;
   flex-direction: column;
-  overflow-y: auto;
 }
 
 .app-body {
   flex: 1 1 auto;
-  overflow-y: hidden;
+  overflow-y: auto;
   overflow-x: hidden;
   position: relative;
+  height: calc(var(--vh, 1vh) * 100 - #{$header-height});
 }
 
 .motif {
