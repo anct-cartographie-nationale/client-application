@@ -60,12 +60,13 @@
     }
   }
   .selected {
-    border-color: $primary-color !important;
-    color: inherit;
+    background-color: $secondary-color;
+    border-color: $secondary-color !important;
+    color: $white;
     .arrow {
       background-color: transparent;
-      border-bottom: 1px solid $primary-color;
-      border-right: 1px solid $primary-color;
+      border-bottom: 1px solid $white;
+      border-right: 1px solid $white;
       transform: translateY(25%) rotate(-135deg);
       margin: 0 5px 0 10px;
       height: 7px;
