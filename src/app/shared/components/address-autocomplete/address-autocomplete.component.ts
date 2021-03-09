@@ -20,7 +20,9 @@ export class AddressAutocompleteComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.address) {
-      const address_str = this.address.numero + ' ' + this.address.street + ' ' + this.address.commune;
+      const address_str = this.address.numero
+        ? this.address.numero + ' '
+        : '' + this.address.street + ' ' + this.address.commune;
       this.searchAddress.nativeElement.value = address_str;
     }
   }
@@ -37,7 +39,7 @@ export class AddressAutocompleteComponent implements OnInit {
 
   public selectedResult(hit: any): void {
     const address = new Address();
-    address.numero = hit.properties.housenumber ? hit.properties.housenumber : 0;
+    address.numero = hit.properties.housenumber ? hit.properties.housenumber : null;
     address.street = hit.properties.street;
     address.commune = hit.properties.city;
     const value = this.parseHitToAddress(hit);
