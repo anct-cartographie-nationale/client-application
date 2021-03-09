@@ -107,8 +107,10 @@ export class StructureDetailsComponent implements OnInit {
     }
   }
 
-  public close(refreshRequired: boolean): void {
-    this.closeDetails.emit(refreshRequired);
+  public close(): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+    });
   }
 
   public print(): void {
