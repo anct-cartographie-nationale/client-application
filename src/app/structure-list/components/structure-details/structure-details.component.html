@@ -196,6 +196,14 @@
           <div *ngFor="let public of structure.publics" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
             <p class="no-margin">{{ getPublicLabel(public) }}</p>
           </div>
+          <div
+            *ngFor="let accompaniment of structure.publicsAccompaniment"
+            fxLayout="row"
+            fxLayoutAlign="none flex-end"
+            fxLayoutGap="8px"
+          >
+            <p class="no-margin">{{ accompaniment }}</p>
+          </div>
         </div>
       </div>
     </div>

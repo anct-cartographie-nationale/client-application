@@ -1,8 +1,8 @@
 <div class="app-container">
   <app-header></app-header>
-  <div class="app-body">
+  <div (scroll)="onScrollDown($event)" class="app-body">
     <router-outlet></router-outlet>
     <router-outlet name="print"></router-outlet>
+    <app-footer></app-footer>
   </div>
-  <app-footer></app-footer>
 </div>

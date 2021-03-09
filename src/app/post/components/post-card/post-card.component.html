@@ -1,0 +1,34 @@
+<div fxLayout="column" *ngIf="post" class="post" [ngClass]="class" fxLayoutGap="12px" (click)="showDetails(post)">
+  <div fxLayout="column" fxLayoutGap="4px">
+    <div
+      fxLayout="row"
+      class="tag"
+      fxLayoutAlign=" center"
+      fxLayoutGap="12px"
+      *ngIf="post.tags[0].slug != tagEnum.appels"
+    >
+      <app-svg-icon
+        [iconClass]="'icon-32'"
+        [iconColor]="'inherit'"
+        [type]="'post'"
+        [icon]="post.tags[0].slug"
+      ></app-svg-icon>
+      <span>{{ post.tags[0].name }}</span>
+    </div>
+    <div fxLayout="row" class="imageContainer" *ngIf="post.feature_image">
+      <img class="image" [src]="post.feature_image" />
+    </div>
+    <div fxLayout="row" class="title">
+      {{ post.title }}
+    </div>
+  </div>
+  <div fxLayout="row" class="description">
+    {{ post.excerpt }}
+  </div>
+  <div fxLayout="column" class="informations">
+    <div fxLayout="row">
+      {{ post.published_at | date: 'shortDate' }}
+    </div>
+    <div fxLayout="row">par {{ post.author }}</div>
+  </div>
+</div>
