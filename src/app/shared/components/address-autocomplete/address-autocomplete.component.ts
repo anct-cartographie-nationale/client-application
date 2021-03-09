@@ -28,7 +28,7 @@ export class AddressAutocompleteComponent implements OnInit {
     if (!this.isAlreadySearching) {
       this.isAlreadySearching = true;
       this.addressService.searchAddress(searchString).subscribe((data) => {
-        this.data = data.hits.hits.slice(0, this.AUTOCOMPLETE_NBR);
+        this.data = data.features;
         this.isAlreadySearching = false;
       });
     }
@@ -37,9 +37,9 @@ export class AddressAutocompleteComponent implements OnInit {
 
   public selectedResult(hit: any): void {
     const address = new Address();
-    address.numero = hit._source['data-fr'].properties.numero_str;
-    address.street = hit._source['data-fr'].properties.voie_str;
-    address.commune = hit._source['data-fr'].properties.commune_str;
+    address.numero = hit.properties.housenumber ? hit.properties.housenumber : 0;
+    address.street = hit.properties.street;
+    address.commune = hit.properties.city;
     const value = this.parseHitToAddress(hit);
     // Set input value
     this.searchAddress.nativeElement.value = value;
@@ -50,6 +50,9 @@ export class AddressAutocompleteComponent implements OnInit {
   }
 
   public parseHitToAddress(hit: any): string {
-    return `${hit._source['data-fr'].properties.numero_str} ${hit._source['data-fr'].properties.voie_str} ${hit._source['data-fr'].properties.commune_str}`;
+    if (hit.properties.housenumber) {
+      return `${hit.properties.housenumber} ${hit.properties.street} ${hit.properties.city}`;
+    }
+    return `${hit.properties.street} ${hit.properties.city}`;
   }
 }
