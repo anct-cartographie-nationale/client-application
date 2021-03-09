@@ -1151,6 +1151,7 @@
         *ngIf="currentPage == nbPagesForm && profile"
         class="btn-primary unique"
         routerLink="/home"
+        [queryParams]="{ id: createdStructure._id }"
         [state]="{ data: createdStructure }"
       >
         Voir ma structure
@@ -1193,6 +1194,7 @@
       *ngIf="currentPage == nbPagesForm && profile"
       class="btn-primary unique"
       routerLink="/home"
+      [queryParams]="{ id: createdStructure._id }"
       [state]="{ data: createdStructure }"
     >
       Voir ma structure
