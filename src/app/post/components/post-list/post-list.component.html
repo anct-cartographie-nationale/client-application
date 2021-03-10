@@ -1,4 +1,4 @@
-<div class="section-container" fxLayout="row" fxLayoutGap="32px">
+<div *ngIf="!isPublishMode" class="section-container" fxLayout="row" fxLayoutGap="32px">
   <div fxLayout="column" class="list-container" fxLayoutGap="16px">
     <div fxLayout="column" *ngIf="displayTags()">
       <div fxLayout="row wrap" fxLayoutAlign="none center" fxLayoutGap="8px">
@@ -22,7 +22,7 @@
           [type]="'button'"
           [style]="'buttonWithHash'"
           [text]="'Publier votre actu'"
-          (action)="publishNews()"
+          (action)="togglePublishNews()"
         ></app-button>
       </div>
       <app-post-card [class]="'bigNew'" [post]="bigNews"></app-post-card>
@@ -92,3 +92,4 @@
     </div>
   </div>
 </div>
+<app-post-publish *ngIf="isPublishMode" (closePublish)="togglePublishNews()"></app-post-publish>

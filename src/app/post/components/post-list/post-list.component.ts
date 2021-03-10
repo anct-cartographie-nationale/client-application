@@ -27,6 +27,7 @@ export class PostListComponent implements OnInit {
   public bigNews: Post;
   public pagination: Pagination;
   public isLoading = false;
+  public isPublishMode = false;
 
   constructor(
     private postService: PostService,
@@ -76,6 +77,9 @@ export class PostListComponent implements OnInit {
     });
   }
 
+  public togglePublishNews(): void {
+    this.isPublishMode = !this.isPublishMode;
+  }
   public getPosts(filters?: Tag[]): void {
     // Parse filter
     let parsedFilters = null;
