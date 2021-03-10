@@ -10,7 +10,9 @@
   <div fxLayout="column" class="content" fxLayoutGap="16px">
     <h2>Publier votre actualité</h2>
     <div class="image">
-      <img src="../../assets/post/publishNews.svg" alt="logo publishNews" />
+      <svg aria-hidden="true">
+        <use [attr.xlink:href]="'../../../../assets/post/sprite.svg#publishLogo'"></use>
+      </svg>
     </div>
     <div class="informations">
       <p>Vous pouvez nous envoyer votre actualité en distinguant ces 4 éléments :</p>

@@ -35,8 +35,9 @@ $margin-post: 20px;
   .image {
     width: 100%;
     text-align: center;
-    img {
+    svg {
       max-width: 300px;
+      height: 300px;
     }
   }
   .informations {
