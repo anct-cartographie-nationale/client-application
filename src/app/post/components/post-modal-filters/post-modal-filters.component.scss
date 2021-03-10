@@ -1,0 +1,132 @@
+@import '../../../../assets/scss/icons';
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/breakpoint';
+@import '../../../../assets/scss/shapes';
+@import '../../../../assets/scss/hyperlink';
+@import '../../../../assets/scss/z-index';
+
+.modallocation {
+  margin-left: -341px;
+}
+.modalpublic {
+  @media #{$desktop} {
+    margin-left: -446px;
+  }
+  margin-left: -566px;
+}
+.modal {
+  max-width: 341px;
+  width: 94%;
+  z-index: $modal-z-index !important;
+  position: absolute;
+  border-radius: 6px;
+  margin-top: 24px;
+  @media #{$large-phone} {
+    height: 100%;
+    max-height: auto;
+    max-width: auto;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border: none;
+    padding: 0;
+  }
+  @include background-hash($grey-2);
+  border: 1px solid $grey-4;
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+  ::-webkit-scrollbar-track {
+    background: $grey-6;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: $grey;
+    border-radius: 6px;
+  }
+  .body-wrap {
+    @media #{$large-phone} {
+      height: 100vh;
+      height: -webkit-fill-available;
+    }
+    .titleFilter {
+      display: none !important;
+      margin: 27px 25px 0px 25px;
+      @include cn-bold-26;
+      @media #{$large-phone} {
+        display: flex !important;
+      }
+    }
+  }
+  .contentModal {
+    overflow-y: auto;
+    max-width: 1100px;
+    border-bottom: 1px solid $grey;
+    margin-bottom: 16px;
+    max-height: 40vh;
+    @media #{$large-phone} {
+      max-height: none;
+      height: 100%;
+    }
+    .blockFiltre {
+      width: 100%;
+      margin: 0 32px;
+      padding: 40px 0;
+      border-bottom: 1px dashed $grey-4;
+
+      &:last-child {
+        padding-bottom: 32px;
+        border-bottom: none;
+      }
+      @media #{$large-phone} {
+        margin: 0 18px;
+        padding: 25px 0;
+      }
+    }
+    .blockLigne {
+      padding-left: 0;
+      -moz-column-count: 1;
+      -moz-column-gap: 46px;
+      -webkit-column-count: 1;
+      -webkit-column-gap: 46px;
+      column-count: 1;
+      column-gap: 46px;
+      margin: 0px;
+      @media #{$large-phone} {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+      }
+    }
+    .ligneFiltre {
+      padding: 5px 0;
+    }
+    h4 {
+      @include cn-bold-16;
+      line-height: 17px;
+      text-transform: uppercase;
+      color: $grey-3;
+      display: flex;
+      align-items: center;
+      margin-top: 0;
+      margin-bottom: 9px;
+    }
+    .nbResult {
+      @include cn-regular-14;
+      line-height: 16px;
+      color: $grey-3;
+      padding-top: 3px;
+    }
+    label {
+      @include cn-regular-14;
+    }
+  }
+  .footer {
+    margin: 0px 20px 16px 0;
+    height: 32px;
+  }
+}
+a {
+  @include hyperlink;
+}
