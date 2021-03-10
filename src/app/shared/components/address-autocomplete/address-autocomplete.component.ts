@@ -20,9 +20,12 @@ export class AddressAutocompleteComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.address) {
-      const address_str = this.address.numero
-        ? this.address.numero + ' '
-        : '' + this.address.street + ' ' + this.address.commune;
+      let address_str = null;
+      if (this.address.numero) {
+        address_str = this.address.numero + ' ' + this.address.street + ' ' + this.address.commune;
+      } else {
+        address_str = this.address.street + ' ' + this.address.commune;
+      }
       this.searchAddress.nativeElement.value = address_str;
     }
   }
