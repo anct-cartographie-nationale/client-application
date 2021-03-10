@@ -31,6 +31,6 @@ export class PostDetailsComponent implements OnInit {
   }
 
   public backToPosts(): void {
-    this.router.navigateByUrl('/posts');
+    this.router.navigateByUrl('/news');
   }
 }

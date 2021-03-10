@@ -88,7 +88,7 @@ const routes: Routes = [
     canDeactivate: [DeactivateGuard],
   },
   {
-    path: 'posts',
+    path: 'news',
     loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
   },
   {

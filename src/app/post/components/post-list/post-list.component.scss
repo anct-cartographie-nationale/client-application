@@ -6,12 +6,11 @@
 .section-container {
   background: $grey-6;
   margin-top: 40px;
+  min-height: 68vh;
+  width: 100%;
   .row-border {
     border-bottom: 1px dashed $grey-4;
     padding-bottom: 16px;
-    &.otherNews {
-      padding-top: 24px;
-    }
   }
   h2 {
     font-style: italic !important;
@@ -99,4 +98,20 @@ h2 {
       }
     }
   }
+}
+.tag {
+  background: $grey-3;
+  color: $white;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 0 20px;
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.padding-16-Top {
+  padding-top: 16px;
 }
