@@ -13,7 +13,7 @@
 }
 
 #map {
-  height: calc(100vh - #{$header-height} - #{$footer-height} - 87px);
+  height: calc(100vh - #{$header-height} - #{$footer-height} - 60px);
   border: 10px solid $white;
   border-radius: 6px;
   @media #{$tablet} {
