@@ -16,6 +16,6 @@ export class PostCardComponent implements OnInit {
 
   ngOnInit(): void {}
   public showDetails(post: Post): void {
-    this.router.navigateByUrl('posts/details/' + post.id, { state: { data: post } });
+    this.router.navigateByUrl('news/details/' + post.id, { state: { data: post } });
   }
 }
