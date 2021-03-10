@@ -3,8 +3,12 @@ import { WindowScrollService } from '../../../shared/service/windowScroll.servic
 import { TagEnum } from '../../enum/tag.enum';
 import { Pagination } from '../../models/pagination.model';
 import { Post } from '../../models/post.model';
+import { Tag } from '../../models/tag.model';
 import { PostWithMeta } from '../../models/postWithMeta.model';
 import { PostService } from '../../services/post.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as _ from 'lodash';
+import { parseSlugToTag } from '../utils/NewsUtils';
 
 @Component({
   selector: 'app-post-list',
@@ -12,15 +16,10 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./post-list.component.scss'],
 })
 export class PostListComponent implements OnInit {
-  constructor(private postService: PostService, private windowScrollService: WindowScrollService) {
-    this.windowScrollService.scrollY$.subscribe((evt: any) => {
-      if (evt && evt.target.offsetHeight + evt.target.scrollTop >= evt.target.scrollHeight - 200) {
-        if (!this.isLoading) {
-          this.loadMore();
-        }
-      }
-    });
-  }
+  public selectedMainTagSlug = '';
+  public selectedLocationTagSlug = [];
+  public selectedPublicTagsSlug = [];
+  public filters: Tag[];
   public postsMobileView: Post[] = [];
   public leftColumnPosts: Post[] = [];
   public rightColumnPosts: Post[] = [];
@@ -30,23 +29,104 @@ export class PostListComponent implements OnInit {
   public isLoading = false;
   public isPublishMode = false;
 
+  constructor(
+    private postService: PostService,
+    private windowScrollService: WindowScrollService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.windowScrollService.scrollY$.subscribe((evt: any) => {
+      if (evt && evt.target.offsetHeight + evt.target.scrollTop >= evt.target.scrollHeight - 200) {
+        if (!this.isLoading) {
+          this.loadMore();
+        }
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.isLoading = true;
-    this.postService.getPosts(1).subscribe((news) => {
-      this.setNews(news);
+    // Init APP news list
+    this.postService.getPosts(1, [TagEnum.appels]).subscribe((news) => {
+      let projectNews = news.posts.map((news) => (news = this.addAuthorToPost(news)));
+      this.projectsNew = projectNews;
     });
     this.postService.getPosts(1, [TagEnum.aLaUne]).subscribe((news) => {
       this.bigNews = this.addAuthorToPost(news.posts[0]);
     });
-    this.postService.getPosts(1, [TagEnum.appels]).subscribe((news) => {
-      let projectNews = news.posts.map((news) => (news = this.addAuthorToPost(news)));
-      this.projectsNew = projectNews;
+    this.route.queryParams.subscribe((queryParams) => {
+      // If main tag is in route, set it
+      if (queryParams.mainTag) {
+        this.selectedMainTagSlug = queryParams.mainTag;
+        this.selectedPublicTagsSlug = parseSlugToTag(queryParams.publicTags);
+        this.selectedLocationTagSlug = parseSlugToTag(queryParams.locationTags);
+        // Set filters for search and display
+        this.filters = [
+          new Tag({ slug: queryParams.mainTag }),
+          ...this.selectedLocationTagSlug,
+          ...this.selectedPublicTagsSlug,
+        ];
+        // Apply search
+        this.getPosts(this.filters);
+      } else {
+        // Init default news list
+        this.postService.getPosts(1).subscribe((news) => {
+          this.setNews(news);
+        });
+      }
     });
   }
 
   public togglePublishNews(): void {
     this.isPublishMode = !this.isPublishMode;
   }
+  public getPosts(filters?: Tag[]): void {
+    // Parse filter
+    let parsedFilters = null;
+    if (filters) {
+      parsedFilters = filters.map((filter) => {
+        return filter.slug;
+      });
+
+      // remove 'a la une' filter
+      parsedFilters = parsedFilters.filter((item) => {
+        return item !== TagEnum.aLaUne;
+      });
+
+      if (parsedFilters.length <= 0) {
+        parsedFilters = null;
+      }
+    }
+
+    // Reset posts
+    this.resetPosts();
+
+    this.postService.getPosts(1, parsedFilters).subscribe((news) => {
+      this.setNews(news);
+    });
+  }
+
+  public getDisplayedTag(): string {
+    if (!this.isALaUneTag()) {
+      return this.selectedMainTagSlug;
+    }
+    return 'autres actualités';
+  }
+
+  public isALaUneTag(): boolean {
+    if (!this.filters || this.filters[0].slug === TagEnum.aLaUne) {
+      return true;
+    }
+    return false;
+  }
+
+  public resetPosts(): void {
+    this.leftColumnPosts = [];
+    this.rightColumnPosts = [];
+    this.postsMobileView = [];
+  }
+
+  public publishNews(): void {}
 
   //Transform excerpt post to have a custom author.
   private addAuthorToPost(post: Post): Post {
@@ -80,5 +160,23 @@ export class PostListComponent implements OnInit {
       this.postsMobileView.push(val);
     });
     this.isLoading = false;
+  }
+
+  public removeTag(tagToRemove: Tag): void {
+    _.remove(this.selectedPublicTagsSlug, { slug: tagToRemove.slug });
+    _.remove(this.selectedLocationTagSlug, { slug: tagToRemove.slug });
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        mainTag: this.selectedMainTagSlug,
+        publicTags: this.selectedPublicTagsSlug.map((tag) => tag.slug),
+        locationTags: this.selectedLocationTagSlug.map((tag) => tag.slug),
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
+
+  public displayTags(): boolean {
+    return this.selectedLocationTagSlug.length > 0 || this.selectedPublicTagsSlug.length > 0;
   }
 }
