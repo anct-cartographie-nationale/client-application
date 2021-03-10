@@ -107,8 +107,10 @@ export class StructureDetailsComponent implements OnInit {
     }
   }
 
-  public close(refreshRequired: boolean): void {
-    this.closeDetails.emit(refreshRequired);
+  public close(): void {
+    this.router.navigate([], {
+      relativeTo: this.route,
+    });
   }
 
   public print(): void {
@@ -202,7 +204,7 @@ export class StructureDetailsComponent implements OnInit {
       case PublicCategorie.young:
         return 'Jeunes (16 - 25 ans)';
       case PublicCategorie.adult:
-        return 'Adultes (25 - 65 ans)';
+        return 'Adultes';
       case PublicCategorie.elderly:
         return 'Séniors (+ de 65 ans)';
       case PublicCategorie.all:

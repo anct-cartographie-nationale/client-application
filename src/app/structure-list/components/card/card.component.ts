@@ -1,4 +1,5 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Structure } from '../../../models/structure.model';
 import { GeojsonService } from '../../../services/geojson.service';
 
@@ -12,7 +13,7 @@ export class CardComponent implements OnInit {
   @Output() public showDetails: EventEmitter<Structure> = new EventEmitter<Structure>();
   @Output() public hover: EventEmitter<Structure> = new EventEmitter<Structure>();
 
-  constructor(private geoJsonService: GeojsonService) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
   ngOnInit(): void {}
 
   /**
@@ -28,6 +29,12 @@ export class CardComponent implements OnInit {
 
   public cardClicked(): void {
     this.showDetails.emit(this.structure);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        id: this.structure._id,
+      },
+    });
   }
 
   public cardHover(): void {

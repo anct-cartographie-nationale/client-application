@@ -21,7 +21,10 @@
     @include cn-bold-18;
     padding-bottom: 5px;
     width: 100%;
-    text-transform: capitalize;
+    text-transform: lowercase;
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
   .distanceStructure {
     @include cn-regular-16;

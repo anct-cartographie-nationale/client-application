@@ -37,7 +37,13 @@
     ></div>
   </div>
   <div class="btnSection" fxLayout="row" fxLayoutAlign="space-around center">
-    <button *ngIf="structure && verificationSuccess" class="btn" routerLink="/home" [state]="{ data: structure }">
+    <button
+      *ngIf="structure && verificationSuccess"
+      class="btn"
+      routerLink="/home"
+      [queryParams]="{ id: structure._id }"
+      [state]="{ data: structure }"
+    >
       Voir ma structure
     </button>
   </div>
