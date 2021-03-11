@@ -1,9 +1,6 @@
 <div fxLayout="column" class="content-container full-screen" *ngIf="userProfile">
   <div class="profileSection">
     <div class="section-container" fxLayout="row">
-      <svg class="cameraProfile" aria-hidden="true">
-        <use [attr.xlink:href]="'assets/ico/sprite.svg#camera'"></use>
-      </svg>
       <div class="profileInformation" fxLayoutGap="18px" fxLayout="column">
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <p class="profileName">{{ userProfile.name | titlecase }} {{ userProfile.surname | titlecase }}</p>
