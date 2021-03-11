@@ -7,6 +7,11 @@
   flex-direction: column;
 }
 
+@media print {
+  .app-body {
+    height: 100% !important;
+  }
+}
 .app-body {
   flex: 1 1 auto;
   overflow-y: auto;

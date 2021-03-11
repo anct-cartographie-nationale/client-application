@@ -106,7 +106,7 @@ button {
     opacity: 0;
     display: none;
     &:checked ~ .customCheck {
-      background-color: $primary-color;
+      background-color: $green-1;
       border-color: transparent;
     }
     &:checked ~ .customCheck:after {

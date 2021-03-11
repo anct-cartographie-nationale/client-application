@@ -41,6 +41,11 @@ button {
   &.red {
     @include btn-red;
     border: none;
+    // user name ellipsis handling
+    white-space: nowrap;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

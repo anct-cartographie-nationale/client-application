@@ -40,7 +40,6 @@ export class ProfileService {
     if (!this.currentProfile) {
       return false;
     }
-    console.log(this.currentProfile.pendingStructuresLink);
     return this.currentProfile.pendingStructuresLink.includes(idStructure);
   }
 

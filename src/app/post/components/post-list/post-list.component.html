@@ -1,13 +1,28 @@
-<div class="section-container" fxLayout="row" fxLayoutGap="32px">
+<div *ngIf="!isPublishMode" class="section-container" fxLayout="row" fxLayoutGap="32px">
   <div fxLayout="column" class="list-container" fxLayoutGap="16px">
-    <div fxLayout="column">
+    <div fxLayout="column" *ngIf="displayTags()">
+      <div fxLayout="row wrap" fxLayoutAlign="none center" fxLayoutGap="8px">
+        <div
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="9px"
+          *ngFor="let filter of filters | slice: 1"
+          class="tag"
+          (click)="removeTag(filter)"
+        >
+          <p>{{ filter.slug | titlecase }}</p>
+          <app-svg-icon [type]="'ico'" [iconColor]="'currentColor'" [icon]="'cancel'"></app-svg-icon>
+        </div>
+      </div>
+    </div>
+    <div fxLayout="column" *ngIf="isALaUneTag() && !displayTags()">
       <div fxLayout="row" class="row-border" fxLayoutAlign="space-between center">
         <h2>à la une</h2>
         <app-button
           [type]="'button'"
           [style]="'buttonWithHash'"
           [text]="'Publier votre actu'"
-          (action)="publishNews()"
+          (action)="togglePublishNews()"
         ></app-button>
       </div>
       <app-post-card [class]="'bigNew'" [post]="bigNews"></app-post-card>
@@ -16,18 +31,33 @@
       <div class="background-project-container">
         <div class="project-content mobile" fxLayout="column">
           <h2>appels à projets</h2>
-          <app-post-card
-            [post]="news"
-            [class]="'project'"
-            [ngClass]="{ 'last-child': last }"
-            *ngFor="let news of projectsNew; let last = last"
-          ></app-post-card>
+          <div *ngIf="projectsNew.length !== 0">
+            <app-post-card
+              [post]="news"
+              [class]="'project'"
+              [ngClass]="{ 'last-child': last }"
+              *ngFor="let news of projectsNew; let last = last"
+            ></app-post-card>
+          </div>
+          <div *ngIf="projectsNew.length === 0">
+            <p>Aucun appels à projet pour le moment.</p>
+          </div>
         </div>
       </div>
     </div>
     <div fxLayout="column">
-      <div fxLayout="row" class="row-border otherNews">
-        <h2>autres actualités</h2>
+      <div fxLayout="row" class="row-border" fxLayoutAlign="space-between center">
+        <h2 [ngClass]="{ 'padding-16-Top': isALaUneTag() && !displayTags() }">{{ getDisplayedTag() }}</h2>
+        <app-button
+          *ngIf="displayTags() || !isALaUneTag()"
+          [type]="'button'"
+          [style]="'buttonWithHash'"
+          [text]="'Publier votre actu'"
+          (action)="publishNews()"
+        ></app-button>
+      </div>
+      <div *ngIf="leftColumnPosts.length <= 0" fxLayout="column">
+        <p>Aucun résultat ne correspond a votre recherche.</p>
       </div>
       <div fxLayout="row" fxLayoutGap="33px">
         <div fxLayout="column" class="columnPosts">
@@ -47,13 +77,19 @@
       <div class="project-content" fxLayout="column">
         <app-svg-icon [iconClass]="'icon-80'" [iconColor]="'inherit'" [type]="'post'" [icon]="'appels'"></app-svg-icon>
         <h2>appels à projets</h2>
-        <app-post-card
-          [post]="news"
-          [class]="'project'"
-          [ngClass]="{ 'last-child': last }"
-          *ngFor="let news of projectsNew; let last = last"
-        ></app-post-card>
+        <div *ngIf="projectsNew.length !== 0">
+          <app-post-card
+            [post]="news"
+            [class]="'project'"
+            [ngClass]="{ 'last-child': last }"
+            *ngFor="let news of projectsNew; let last = last"
+          ></app-post-card>
+        </div>
+        <div *ngIf="projectsNew.length === 0">
+          <p>Aucun appels à projet pour le moment.</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<app-post-publish *ngIf="isPublishMode" (closePublish)="togglePublishNews()"></app-post-publish>
