@@ -25,7 +25,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.profileService.getProfile().then((profile) => {
       this.userProfile = profile;
-      console.log(this.userProfile.profileImage)
       this.structures = [];
       profile.structuresLink.forEach((structureId) => {
         this.structureService.getStructureWithOwners(structureId, profile).subscribe((s) => {
