@@ -10,7 +10,7 @@
   </div>
   <div fxLayout="row" class="right-header" fxLayoutAlign="center center" fxLayoutGap="3vw">
     <a routerLink="/news" [routerLinkActive]="'active'" i18n>Actualités</a>
-    <a routerLink="/home" [routerLinkActive]="'active'" i18n>Cartographie de acteurs</a>
+    <a routerLink="/acteurs" [routerLinkActive]="'active'" i18n>Cartographie de acteurs</a>
     <a routerLink="/about" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
     <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'">Administration</a>
     <button *ngIf="isLoggedIn" class="red" routerLink="/profile" [routerLinkActive]="'active'">

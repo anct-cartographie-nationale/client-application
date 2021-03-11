@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { CartoComponent } from './carto/carto.component';
 import { CustomBreakPointsProvider } from './config/custom-breakpoint';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
@@ -38,7 +38,7 @@ import { StructureJoinComponent } from './structure-join/structure-join.componen
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    HomeComponent,
+    CartoComponent,
     StructureListComponent,
     CardComponent,
     SearchComponent,

@@ -6,7 +6,7 @@ import { FormComponent } from './form/form.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
-import { HomeComponent } from './home/home.component';
+import { CartoComponent } from './carto/carto.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ResetEmailComponent } from './reset-email/reset-email.component';
@@ -20,24 +20,16 @@ import { UserVerificationComponent } from './user-verification/user-verification
 const routes: Routes = [
   { path: 'print', outlet: 'print', children: [{ path: 'structure', component: StructureDetailsComponent }] },
   {
-    path: 'home',
-    component: HomeComponent,
-  },
-  {
-    path: 'projects',
-    component: HomeComponent,
+    path: 'acteurs',
+    component: CartoComponent,
   },
   {
     path: 'login',
-    component: HomeComponent,
+    component: CartoComponent,
   },
   {
-    path: 'sturctures',
+    path: 'structures',
     component: StructureListComponent,
-  },
-  {
-    path: 'resources',
-    component: HomeComponent,
   },
   {
     path: 'legal-notice',
@@ -92,8 +84,12 @@ const routes: Routes = [
     loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
   },
   {
+    path: 'home',
+    redirectTo: 'news',
+  },
+  {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'news',
   },
 ];
 
