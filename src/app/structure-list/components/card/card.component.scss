@@ -17,6 +17,9 @@
     font-style: italic;
   }
   .structure-name {
+    &.notClaimed {
+      color: $red-info;
+    }
     color: $grey-1;
     @include cn-bold-18;
     padding-bottom: 5px;
