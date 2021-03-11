@@ -1,7 +1,9 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Structure } from '../../../models/structure.model';
+import { ProfileService } from '../../../profile/services/profile.service';
 import { GeojsonService } from '../../../services/geojson.service';
+import { StructureService } from '../../../services/structure.service';
 
 @Component({
   selector: 'app-card',
@@ -12,9 +14,24 @@ export class CardComponent implements OnInit {
   @Input() public structure: Structure;
   @Output() public showDetails: EventEmitter<Structure> = new EventEmitter<Structure>();
   @Output() public hover: EventEmitter<Structure> = new EventEmitter<Structure>();
+  public isClaimed = true;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
-  ngOnInit(): void {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private profileService: ProfileService,
+    private structureService: StructureService
+  ) {}
+  ngOnInit(): void {
+    if (this.profileService.isAdmin()) {
+      this.setClaimIndicator();
+    }
+  }
+
+  // Check if structure haven't owners to help admin vision.
+  async setClaimIndicator() {
+    this.isClaimed = await this.structureService.isClaimed(this.structure._id, null).toPromise();
+  }
 
   /**
    * Display distance in m or km according to value
