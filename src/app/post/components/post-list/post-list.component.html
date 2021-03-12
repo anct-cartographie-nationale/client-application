@@ -17,7 +17,7 @@
     </div>
     <div fxLayout="column" *ngIf="isALaUneTag() && !displayTags()">
       <div fxLayout="row" class="row-border" fxLayoutAlign="space-between center">
-        <h2>à la une</h2>
+        <h2>dernières actualités</h2>
         <app-button
           [type]="'button'"
           [style]="'buttonWithHash'"
@@ -25,7 +25,7 @@
           (action)="togglePublishNews()"
         ></app-button>
       </div>
-      <app-post-card [class]="'bigNew'" [post]="bigNews"></app-post-card>
+      <app-post-card *ngIf="bigNews" [class]="'bigNew'" [post]="bigNews"></app-post-card>
     </div>
     <div fxLayout="column" fxLayoutAlign=" center" class="project-container mobile">
       <div class="background-project-container">
@@ -46,18 +46,22 @@
       </div>
     </div>
     <div fxLayout="column">
-      <div fxLayout="row" class="row-border" fxLayoutAlign="space-between center">
-        <h2 [ngClass]="{ 'padding-16-Top': isALaUneTag() && !displayTags() }">{{ getDisplayedTag() }}</h2>
+      <div
+        *ngIf="!isALaUneTag() || displayTags()"
+        fxLayout="row"
+        class="row-border"
+        fxLayoutAlign="space-between center"
+      >
+        <h2>{{ getDisplayedTag() }}</h2>
         <app-button
-          *ngIf="displayTags() || !isALaUneTag()"
           [type]="'button'"
           [style]="'buttonWithHash'"
           [text]="'Publier votre actu'"
-          (action)="publishNews()"
+          (action)="togglePublishNews()"
         ></app-button>
       </div>
       <div *ngIf="leftColumnPosts.length <= 0" fxLayout="column">
-        <p>Aucun résultat ne correspond a votre recherche.</p>
+        <p>Aucun résultat ne correspond à votre recherche.</p>
       </div>
       <div fxLayout="row" fxLayoutGap="33px">
         <div fxLayout="column" class="columnPosts">

@@ -5,9 +5,8 @@
 $margin-post: 20px;
 
 .container {
-  max-width: 832px;
-  width: 95%;
-  margin: $margin-post auto;
+  max-width: 860px;
+  margin: $margin-post 0 100px 0;
   min-height: calc(
     var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post} * 2
   );
