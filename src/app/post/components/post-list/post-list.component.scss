@@ -5,7 +5,6 @@
 
 .section-container {
   background: $grey-6;
-  margin-top: 40px;
   min-height: 68vh;
   width: 100%;
   .row-border {
@@ -31,7 +30,7 @@ h2 {
   @media #{$tablet} {
     width: 100%;
   }
-  width: 70%;
+  width: 80%;
   h2 {
     @media #{$large-phone} {
       @include cn-bold-22;
@@ -110,8 +109,4 @@ h2 {
     margin-top: 0;
     margin-bottom: 0;
   }
-}
-
-.padding-16-Top {
-  padding-top: 16px;
 }

@@ -1,6 +1,9 @@
 <div class="header-container">
   <div class="section-container" fxLayout="column" fxLayoutAlign="space-between">
-    <h1>Actualités</h1>
+    <h1>
+      Fil d’actualité
+      <p class="onlyOnDesktop">du réseau d’inclusion numérique</p>
+    </h1>
     <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between flex-end" class="overflow">
       <div fxLayout="row" class="row-mobile">
         <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let tag of tags.others">
@@ -9,7 +12,7 @@
             tabindex="0"
             (click)="activateTag(tag)"
             (keydown.enter)="activateTag(tag)"
-            [ngClass]="{ active: tag.slug === mainActiveTag.slug }"
+            [ngClass]="{ active: tag.slug === mainActiveTag.slug || tag.name === mainActiveTag.slug }"
             >{{ tag.name }}</span
           >
         </div>
@@ -35,7 +38,7 @@
           <app-svg-icon
             class="icon"
             [type]="'ico'"
-            [iconClass]="modalTypeOpened === TypeModal.public ? 'white' : 'grey-1'"
+            [iconClass]="modalTypeOpened === TypeModal.public ? 'white icon-32' : 'grey-1 icon-32'"
             [icon]="'news-public'"
           ></app-svg-icon>
           <div class="arrow"></div>

@@ -27,6 +27,12 @@ export class PostHeaderComponent implements OnInit {
     this.route.data.subscribe((data) => {
       if (data.tags) {
         this.tags = data.tags;
+        this.tags.others.forEach((tag) => {
+          tag.slug == TagEnum.aLaUne ? (tag.name = 'Les + récentes') : tag.name;
+        });
+        this.tags.commune.sort((tagA, tagB) => {
+          return this.sortArray(tagA, tagB);
+        });
       }
     });
 
@@ -43,6 +49,14 @@ export class PostHeaderComponent implements OnInit {
     });
   }
 
+  private sortArray(tagA: Tag, tagB: Tag): number {
+    const nameTagA = tagA.name.toUpperCase();
+    const nameTagB = tagB.name.toUpperCase();
+    if (nameTagA < nameTagB) {
+      return -1;
+    }
+    return 1;
+  }
   // Open the modal and display the list according to the right filter button
   public openModal(modalType: TypeModalNews): void {
     // if modal already opened, reset type
@@ -96,7 +110,7 @@ export class PostHeaderComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {
-        mainTag: this.mainActiveTag.slug,
+        mainTag: this.mainActiveTag.slug == this.tagEnum.etudes ? this.mainActiveTag.name : this.mainActiveTag.slug,
         publicTags: this.checkedPublicTags.map((tag) => tag.slug),
         locationTags: this.checkedLocationTags.map((tag) => tag.slug),
       },

@@ -27,7 +27,9 @@
       <br />
     </div>
     <div>
-      <a class="btn-primary" href="mailto:inclusionnumerique@grandlyon.com?subject=Nouvelle actualité à intégrer"
+      <a
+        class="btn-primary"
+        [href]="'mailto:inclusionnumerique@grandlyon.com?subject=Nouvelle actualité à intégrer&body=' + bodyMail"
         >Envoyer votre actu par mail</a
       >
     </div>

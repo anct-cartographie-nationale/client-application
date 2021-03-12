@@ -52,9 +52,12 @@ export class PostListComponent implements OnInit {
       this.projectsNew = projectNews;
     });
     this.postService.getPosts(1, [TagEnum.aLaUne]).subscribe((news) => {
-      this.bigNews = this.addAuthorToPost(news.posts[0]);
+      if (news.posts[0]) {
+        this.bigNews = this.addAuthorToPost(news.posts[0]);
+      }
     });
     this.route.queryParams.subscribe((queryParams) => {
+      this.isPublishMode = false;
       // If main tag is in route, set it
       if (queryParams.mainTag) {
         this.selectedMainTagSlug = queryParams.mainTag;

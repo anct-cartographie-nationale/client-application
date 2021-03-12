@@ -7,8 +7,8 @@
 $margin-post: 20px;
 
 .postContainer {
-  max-width: 832px;
-  margin: $margin-post auto;
+  max-width: 860px;
+  margin: $margin-post 0;
   min-height: calc(
     var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post} * 3
   );
@@ -67,6 +67,8 @@ $margin-post: 20px;
   ::ng-deep a {
     @include hyperlink;
     padding: 0;
-    font-size: 18px;
+  }
+  ::ng-deep p {
+    @include cn-regular-18;
   }
 }

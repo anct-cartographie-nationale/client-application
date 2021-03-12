@@ -19,6 +19,9 @@
       }
     }
     .title {
+      @media #{$large-phone} {
+        @include cn-bold-22;
+      }
       @include cn-bold-30;
     }
     .description {
@@ -27,6 +30,7 @@
     }
   }
   .imageContainer {
+    margin-bottom: 12px !important;
     .image {
       object-fit: cover;
       height: 88px;

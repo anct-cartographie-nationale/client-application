@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RouterListenerService } from '../../../services/routerListener.service';
 import { Post } from '../../models/post.model';
 import { PostService } from '../../services/post.service';
 
@@ -14,7 +15,8 @@ export class PostDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private postService: PostService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private routerListener: RouterListenerService
   ) {}
   post: Post;
   ngOnInit(): void {
@@ -31,6 +33,6 @@ export class PostDetailsComponent implements OnInit {
   }
 
   public backToPosts(): void {
-    this.router.navigateByUrl('/news');
+    this.routerListener.goToPreviousUrl();
   }
 }
