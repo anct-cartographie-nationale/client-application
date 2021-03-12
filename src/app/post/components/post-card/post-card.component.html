@@ -16,7 +16,7 @@
       <span>{{ post.tags[0].name }}</span>
     </div>
     <div fxLayout="row" class="imageContainer" *ngIf="post.feature_image">
-      <img class="image" [src]="post.feature_image" />
+      <img class="image" alt="image about the news" [src]="post.feature_image" />
     </div>
     <div fxLayout="row" class="title">
       {{ post.title }}

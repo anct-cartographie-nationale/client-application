@@ -9,7 +9,7 @@ $margin-post: 20px;
   width: 95%;
   margin: $margin-post auto;
   min-height: calc(
-    var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post}* 2
+    var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post} * 2
   );
 }
 .chevronLeft {

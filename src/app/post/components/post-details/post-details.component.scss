@@ -10,7 +10,7 @@ $margin-post: 20px;
   max-width: 832px;
   margin: $margin-post auto;
   min-height: calc(
-    var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post}* 3
+    var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post} * 3
   );
   .chevronLeft {
     height: 24px;

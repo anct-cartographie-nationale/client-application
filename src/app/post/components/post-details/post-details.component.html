@@ -29,7 +29,7 @@
     <div fxLayout="row">par {{ post.author }}</div>
   </div>
   <div fxLayout="row" class="imageContainer" *ngIf="post.feature_image">
-    <img class="image" [src]="post.feature_image" />
+    <img class="image" alt="image about the news" [src]="post.feature_image" />
   </div>
   <div fxLayout="row" class="description">
     <div [innerHtml]="post.safeHtml"></div>
