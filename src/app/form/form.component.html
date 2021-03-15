@@ -1098,25 +1098,27 @@
       <svg aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#emailVerification'"></use>
       </svg>
-      <h3>Un courriel vous a été envoyé afin de finaliser votre inscription</h3>
+      <h3>Un courriel vous a été envoyé afin de valider votre inscription</h3>
     </div>
-    <div *ngIf="currentPage == nbPagesForm && profile" class="page">
-      <div class="title">
-        <h3>
-          Bravo !<br />
-          Votre structure a bien été référencée.
-        </h3>
-      </div>
-
-      <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign="center">
-        <div class="structureInfoContent" fxLayout="column">
-          {{ getStructureControl('structureName').value }}
-          <span>{{ getStructureControl('structureType').value }}</span>
+    <div *ngIf="currentPage == nbPagesForm && profile" class="lastPage">
+      <div class="lastPage">
+        <div class="title">
+          <h3>
+            Bravo !<br />
+            Votre structure a bien été référencée.
+          </h3>
         </div>
-        <div class="validateSvg">
-          <svg class="validate" aria-hidden="true">
-            <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-          </svg>
+
+        <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign="center">
+          <div class="structureInfoContent" fxLayout="column">
+            {{ getStructureControl('structureName').value }}
+            <span>{{ getStructureControl('structureType').value }}</span>
+          </div>
+          <div class="validateSvg">
+            <svg class="validate" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
