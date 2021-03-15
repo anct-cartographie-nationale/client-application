@@ -15,7 +15,7 @@
 }
 .right-pane {
   width: 80%;
-  padding: 0 40px;
+  padding: 0 16px;
   @media #{$tablet} {
     display: none;
     &.mapPhone {

@@ -18,7 +18,7 @@ a {
   left: 0;
   max-width: 980px;
   width: 100%;
-  height: calc(100vh - #{$header-height} - #{$footer-height});
+  height: calc(100vh - #{$header-height} - #{$footer-height} - 20px);
   padding: 10px 24px;
   overflow: auto;
   @media #{$tablet} {

@@ -10,6 +10,7 @@ export class User {
   validationToken: string;
   structuresLink: string[];
   pendingStructuresLink: string[] = [];
+  profileImage: string;
 
   constructor(obj?: any) {
     Object.assign(this, obj);

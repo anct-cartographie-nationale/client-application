@@ -3,11 +3,19 @@
   display: inline-block;
   height: 2em;
   width: 1.5em;
+  &.icon-28 {
+    width: 28px;
+    height: 28px;
+  }
   &.icon-32 {
     width: 2em;
   }
   &.icon-75 {
     width: 4.688em;
+  }
+  &.icon-80 {
+    height: 80px;
+    width: 80px;
   }
   &.validation {
     height: 100%;
@@ -17,6 +25,14 @@
     cursor: pointer;
     &:hover {
       opacity: 0.8;
+    }
+  }
+  &.white {
+    fill: $white;
+    stroke: $white;
+    path {
+      stroke: $white;
+      fill: $white;
     }
   }
   &.grey {

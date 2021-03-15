@@ -1,6 +1,6 @@
 <div class="structure" fxLayout="column" (click)="cardClicked()" (mouseenter)="cardHover()">
   <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
-    <span class="structure-name">{{ structure.structureName }}</span>
+    <span class="structure-name" [ngClass]="{ notClaimed: !isClaimed }">{{ structure.structureName }}</span>
     <div
       *ngIf="structure.distance"
       class="distanceStructure"

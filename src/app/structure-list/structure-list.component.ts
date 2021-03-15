@@ -3,6 +3,8 @@ import { Filter } from './models/filter.model';
 import { Structure } from '../models/structure.model';
 import { GeoJson } from '../map/models/geojson.model';
 import * as _ from 'lodash';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StructureService } from '../services/structure.service';
 
 @Component({
   selector: 'app-structure-list',
@@ -28,11 +30,29 @@ export class StructureListComponent implements OnChanges {
   private arrayChunked: Structure[][] = [];
   private chunck = 10;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private router: Router, private structureService: StructureService) {
+    this.route.queryParams.subscribe((queryParams) => {
+      if (queryParams.id) {
+        if (!this.structure) {
+          this.structureService.getStructure(queryParams.id).subscribe((s) => {
+            this.showDetails(new Structure(s));
+          });
+        }
+      } else {
+        this.closeDetails();
+      }
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.selectedStructure && this.selectedStructure) {
       this.showDetails(this.selectedStructure);
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {
+          id: this.selectedStructure._id,
+        },
+      });
     }
     if (changes.structureList) {
       this.structuresListChunked = this.chunckAnArray(this.structureList);
