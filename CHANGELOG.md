@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://forge.grandlyon.com///compare/v1.5.0...v1.6.0) (2021-03-15)
+
+
+### Features
+
+* add jpg logo for mail ([431a07f](https://forge.grandlyon.com///commit/431a07fd8324099f0ecf22af102f7b52c1a0f1ff))
+* **post:** fix design html ([78d7e6c](https://forge.grandlyon.com///commit/78d7e6c50e4ceac4e2a902bb5747ee78db1db151))
+
+
+### Bug Fixes
+
+* bug on admin validation ([05a578b](https://forge.grandlyon.com///commit/05a578b79e3194e78b8ec6536a038c1775a3615d))
+* filter chevron margin + add structure link width ([012a5f0](https://forge.grandlyon.com///commit/012a5f0f17dbc28d5d57d8f80c4fd8746ad353ca))
+* header name display + address-autocomplete bug ([3827b09](https://forge.grandlyon.com///commit/3827b09673684feee871b939b4d104c24282052e))
+* remove commented code ([5b6c51e](https://forge.grandlyon.com///commit/5b6c51e73c7a9c24f28f5a5a36c829411bca3d5e))
+* remove consolelog ([bf474b7](https://forge.grandlyon.com///commit/bf474b7e0afe053b521420cbef63877a187725b3))
+* remove profil picture from profil page ([24a2f9f](https://forge.grandlyon.com///commit/24a2f9f7a1e7a4e48bfd3a7291d60ee62b6bd1b0))
+* search title ([e739dec](https://forge.grandlyon.com///commit/e739decf8fa52b3d47304ef2503031afaef1db9f))
+* temp hide of news features ([0ce9fb5](https://forge.grandlyon.com///commit/0ce9fb5c95a29ea800ccc96b88aaeefbf6504a3b))
+* update logo ([26e9943](https://forge.grandlyon.com///commit/26e9943f9c38e80e05be9cdb5a684259c5143662))
+* use profileImage attribute for profile picture ([7ac3511](https://forge.grandlyon.com///commit/7ac35111081af41bc95d072956dbe165b6397b07))
+* **task:** fix only first letter Upper on structure name ([5a29be5](https://forge.grandlyon.com///commit/5a29be5d857b9899af3532bed57cc4ac240ea153))
+* **task:** fix public name ([284c002](https://forge.grandlyon.com///commit/284c0024c7682acb4d40eb8fa34a5f09b033d29f))
+
 ## [1.5.0](https://forge.grandlyon.com///compare/v1.4.0...v1.5.0) (2021-02-25)
 
 

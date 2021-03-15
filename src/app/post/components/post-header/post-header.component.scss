@@ -1,0 +1,126 @@
+@import '../../../../assets/scss/color';
+@import '../../../../assets/scss/buttons';
+@import '../../../../assets/scss/typography';
+@import '../../../../assets/scss/breakpoint';
+@import '../../../../assets/scss/layout';
+
+h1 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+  .onlyOnDesktop {
+    margin: 0;
+  }
+  @media #{$large-phone} {
+    @include cn-bold-28;
+    .onlyOnDesktop {
+      display: none;
+    }
+  }
+}
+
+.header-container {
+  height: #{$header-post-height};
+  @media #{$large-phone} {
+    height: #{$header-post-height-mobile};
+  }
+  background: $white;
+}
+
+.section-container {
+  height: 100%;
+}
+
+.btnSection {
+  padding: 16px 0 0px 0;
+  button {
+    background: $white;
+    height: 40px;
+    width: 210px;
+    border: 1px solid $grey-4;
+    padding: 3px 16px 3px 16px;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+    @include btn-normal;
+    .arrow {
+      background-color: transparent;
+      border-bottom: 1px solid $grey-2;
+      border-right: 1px solid $grey-2;
+      transform: translateY(-25%) rotate(45deg);
+      margin: 0 5px 0 10px;
+      height: 7px;
+      width: 7px;
+    }
+    &:focus {
+      border-color: $blue-hover;
+    }
+  }
+  .selected {
+    background-color: $secondary-color;
+    border-color: $secondary-color !important;
+    color: $white;
+    .arrow {
+      background-color: transparent;
+      border-bottom: 1px solid $white;
+      border-right: 1px solid $white;
+      transform: translateY(25%) rotate(-135deg);
+      margin: 0 5px 0 10px;
+      height: 7px;
+      width: 7px;
+    }
+  }
+  .containCheckedFilters {
+    border-color: $secondary-color;
+  }
+  .icon {
+    display: none !important;
+  }
+  @media #{$desktop} {
+    button {
+      width: 90px;
+    }
+    .text {
+      display: none !important;
+    }
+    .icon {
+      display: inherit !important;
+    }
+  }
+  @media #{$tablet} {
+    button {
+      display: none !important;
+    }
+  }
+}
+
+.tag-button {
+  padding: 8px 10px;
+  @include cn-regular-16;
+  cursor: pointer;
+  white-space: nowrap;
+  &.active {
+    background-color: $secondary-color;
+    color: $white;
+  }
+  &:focus {
+    outline-color: $secondary-color;
+  }
+}
+
+// Remove margin right on filter pop-up trigger
+.btn-filter-no-margin {
+  margin-right: 0 !important;
+}
+
+.row-mobile {
+  @media #{$tablet} {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+.overflow {
+  @media #{$tablet} {
+    overflow-y: scroll;
+  }
+}

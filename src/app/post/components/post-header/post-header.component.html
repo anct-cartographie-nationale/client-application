@@ -1,0 +1,78 @@
+<div class="header-container">
+  <div class="section-container" fxLayout="column" fxLayoutAlign="space-between">
+    <h1>
+      Fil d’actualité
+      <p class="onlyOnDesktop">du réseau d’inclusion numérique</p>
+    </h1>
+    <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between flex-end" class="overflow">
+      <div fxLayout="row" class="row-mobile">
+        <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let tag of tags.others">
+          <span
+            class="tag-button"
+            tabindex="0"
+            (click)="activateTag(tag)"
+            (keydown.enter)="activateTag(tag)"
+            [ngClass]="{ active: tag.slug === mainActiveTag.slug || tag.name === mainActiveTag.slug }"
+            >{{ tag.name }}</span
+          >
+        </div>
+      </div>
+      <div
+        class="btnSection"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        fxLayoutGap="16px"
+        (clickOutside)="closeModal()"
+      >
+        <button
+          type="button"
+          fxLayout="row"
+          [ngClass]="{
+            selected: modalTypeOpened === TypeModal.public,
+            containCheckedFilters: checkedPublicTags.length > 0
+          }"
+          fxLayoutAlign="space-between center"
+          (click)="openModal(TypeModal.public)"
+        >
+          <span class="text">Tout public</span>
+          <app-svg-icon
+            class="icon"
+            [type]="'ico'"
+            [iconClass]="modalTypeOpened === TypeModal.public ? 'white icon-32' : 'grey-1 icon-32'"
+            [icon]="'news-public'"
+          ></app-svg-icon>
+          <div class="arrow"></div>
+        </button>
+        <button
+          class="btn-filter-no-margin"
+          type="button"
+          fxLayout="row"
+          [ngClass]="{
+            selected: modalTypeOpened === TypeModal.location,
+            containCheckedFilters: checkedLocationTags.length > 0
+          }"
+          fxLayoutAlign="space-between center"
+          (click)="openModal(TypeModal.location)"
+        >
+          <span class="text">Toutes les communes</span>
+          <app-svg-icon
+            class="icon"
+            [type]="'ico'"
+            [iconClass]="modalTypeOpened === TypeModal.location ? 'white' : 'grey-1'"
+            [icon]="'news-location'"
+          ></app-svg-icon>
+          <div class="arrow"></div>
+        </button>
+        <div *ngIf="modalTypeOpened">
+          <app-post-modal-filters
+            [modalType]="modalTypeOpened"
+            [tags]="getModalData()"
+            [inputCheckedTags]="getCheckedModalData()"
+            (searchEvent)="filter($event)"
+            (closeEvent)="closeModal()"
+          ></app-post-modal-filters>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

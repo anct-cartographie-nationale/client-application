@@ -16,11 +16,11 @@ h3 {
 .form {
   background: white;
   width: 100vw;
-  height: calc(100vh - #{$header-height} - #{$footer-height});
+  height: calc(var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height});
   top: #{$header-height};
   z-index: $structure-details-z-index;
   @media #{$tablet} {
-    height: calc(100vh - #{$header-height});
+    height: calc(var(--vh, 1vh) * 100 - #{$header-height});
     position: fixed; //Hide default header app.
   }
 }
@@ -115,9 +115,6 @@ h3 {
     span {
       color: $secondary-color;
     }
-    &.no-wrap {
-      white-space: nowrap;
-    }
   }
   h3 {
     @include cn-bold-26;
@@ -137,7 +134,6 @@ h3 {
     height: auto;
     color: $grey-1;
     &.home {
-      height: 100%;
       .btnStart {
         margin-top: 90px;
         margin-bottom: 10px;
@@ -534,4 +530,9 @@ img {
     text-overflow: ellipsis;
     overflow: hidden;
   }
+}
+
+.lastPage {
+  max-width: 530px;
+  margin: 0 auto;
 }

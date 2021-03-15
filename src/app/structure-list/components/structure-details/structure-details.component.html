@@ -1,7 +1,7 @@
 <div class="structrue-details-container" *ngIf="structure && !isLoading">
   <!-- Header info -->
   <div fxLayout="row" fxLayoutAlign="end center">
-    <div (click)="close(false)" class="ico-close-details"></div>
+    <div (click)="close()" class="ico-close-details"></div>
   </div>
   <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="8px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
@@ -196,6 +196,14 @@
           <div *ngFor="let public of structure.publics" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
             <p class="no-margin">{{ getPublicLabel(public) }}</p>
           </div>
+          <div
+            *ngFor="let accompaniment of structure.publicsAccompaniment"
+            fxLayout="row"
+            fxLayoutAlign="none flex-end"
+            fxLayoutGap="8px"
+          >
+            <p class="no-margin">{{ accompaniment }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -328,7 +336,7 @@
 <app-modal-confirmation
   [openned]="claimModalOpenned"
   [content]="
-    'Voulez-vous vraiment revendiquer cette structure&nbsp;? Une demande sera envoyée a l\'administrateur pour validation'
+    'Voulez-vous vraiment revendiquer cette structure&nbsp;? Une demande sera envoyée à l\'administrateur pour validation'
   "
   (closed)="claimStructure($event)"
 ></app-modal-confirmation>

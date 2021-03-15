@@ -17,14 +17,18 @@ export class ClaimStructureComponent implements OnInit {
   }
 
   public acceptDemand(demand: DemandAttachment): void {
-    this.adminService.acceptStructureClaim(demand.userEmail, demand.structureId).subscribe((data) => {
-      this.demandsAttachment = data;
-    });
+    this.adminService
+      .acceptStructureClaim(demand.userEmail, demand.structureId, demand.structureName)
+      .subscribe((data) => {
+        this.demandsAttachment = data;
+      });
   }
 
   public refuseDemand(demand: DemandAttachment): void {
-    this.adminService.refuseStructureClaim(demand.userEmail, demand.structureId).subscribe((data) => {
-      this.demandsAttachment = data;
-    });
+    this.adminService
+      .refuseStructureClaim(demand.userEmail, demand.structureId, demand.structureName)
+      .subscribe((data) => {
+        this.demandsAttachment = data;
+      });
   }
 }

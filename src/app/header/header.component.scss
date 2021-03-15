@@ -41,6 +41,11 @@ button {
   &.red {
     @include btn-red;
     border: none;
+    // user name ellipsis handling
+    white-space: nowrap;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -101,7 +106,7 @@ a {
   animation: slideMenu 0.5s;
   .menu-content {
     background-color: $white;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     width: 350px;
     padding: 27px 25px;
   }

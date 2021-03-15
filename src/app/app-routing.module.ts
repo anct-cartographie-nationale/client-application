@@ -88,6 +88,11 @@ const routes: Routes = [
     canDeactivate: [DeactivateGuard],
   },
   {
+    path: 'news',
+    canActivate: [AdminGuard],
+    loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

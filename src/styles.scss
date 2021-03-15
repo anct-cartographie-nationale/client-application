@@ -59,9 +59,8 @@ a {
 // Containers
 .content-container {
   margin: 0;
-  padding-top: 30px;
+  padding-top: 16px;
   width: 100%;
-  height: 100%;
   &.medium-pt {
     padding: 25px 0 30px 0;
   }
@@ -73,9 +72,6 @@ a {
   }
   &.full-screen {
     min-height: calc(100vh - #{$header-height} - #{$footer-height});
-  }
-  @media #{$phone} {
-    padding-top: 30px;
   }
 }
 .section-container {
@@ -110,7 +106,7 @@ button {
     opacity: 0;
     display: none;
     &:checked ~ .customCheck {
-      background-color: $primary-color;
+      background-color: $green-1;
       border-color: transparent;
     }
     &:checked ~ .customCheck:after {
@@ -158,6 +154,9 @@ button {
       -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
     }
+  }
+  &.no-width {
+    width: unset;
   }
 }
 
