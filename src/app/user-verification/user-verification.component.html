@@ -1,50 +1,74 @@
 <div fxLayout="column" class="content-container full-screen">
   <p *ngIf="!verificationSuccess && !verificationIssue">Votre email est en cours de vérification ...</p>
-  <div *ngIf="verificationSuccess">
-    <div class="title">
-      <h3 *ngIf="structure">
-        Bravo !<br />
-        Votre compte et votre structure ont bien été référencés.
-      </h3>
-      <h3 *ngIf="!structure">
-        Bravo !<br />
-        Votre compte a bien été créé.
-      </h3>
-    </div>
-    <div *ngIf="structure" class="structureCard">
-      <div class="structureInfo" fxLayout="column" fxLayoutGap="14px">
-        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
-          <a class="structureName" routerLink="/home" [state]="{ data: structure }">{{ structure.structureName }}</a>
+  <div class="formDiv" *ngIf="verificationSuccess">
+    <div *ngIf="structure">
+      <div class="title">
+        <h1 class="title-form">Bravo, votre compte et votre structure ont bien été référencés !</h1>
+      </div>
+      <div class="structureInfoBlock" fxLayout="row" fxLayoutAlign="center">
+        <div class="structureInfoContent" fxLayout="column">
+          {{ structure.structureName }}
+          <span>{{ structure.structureType }}</span>
         </div>
+        <div class="validateSvg">
+          <svg class="validate" aria-hidden="true">
+            <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+          </svg>
+        </div>
+      </div>
+      <div class="btnSection" fxLayout="row" fxLayoutAlign="space-around center">
+        <button
+          *ngIf="verificationSuccess"
+          class="btn"
+          routerLink="/home"
+          [queryParams]="{ id: structure._id }"
+          [state]="{ data: structure }"
+        >
+          Voir ma structure
+        </button>
+      </div>
+    </div>
+    <div *ngIf="!structure">
+      <div>
+        <h1 class="title-form">Une dernière validation de Rés'in et votre structure vous sera attribuée !</h1>
+        <div style="font-style: italic">Cela prendra 3 jours maximum si nous ne sommes pas le weekend ;)</div>
+        <svg class="formClock" aria-hidden="true">
+          <use [attr.xlink:href]="'assets/form/sprite.svg#formClock'"></use>
+        </svg>
       </div>
     </div>
   </div>
   <p *ngIf="verificationIssue">
     Une erreur est survenue lors de la validation de votre email... Veuillez envoyer un mail au support.
   </p>
-  <!-- TypeForm -->
-  <div *ngIf="!verificationIssue">
-    <iframe
-      *ngIf="structure"
-      class="typeform-widget custom-form"
-      title="typeform"
-      src="https://form.typeform.com/to/m7DV3CdW?typeform-medium=embed-snippet"
-    ></iframe>
-    <div
-      *ngIf="!structure"
-      class="typeform-widget custom-form"
-      data-url="https://form.typeform.com/to/ASJH3B7Z?typeform-medium=embed-snippet"
-    ></div>
-  </div>
-  <div class="btnSection" fxLayout="row" fxLayoutAlign="space-around center">
-    <button
-      *ngIf="structure && verificationSuccess"
-      class="btn"
-      routerLink="/home"
-      [queryParams]="{ id: structure._id }"
-      [state]="{ data: structure }"
-    >
-      Voir ma structure
-    </button>
+  <!-- formulaire -->
+  <div class="formDiv" *ngIf="!verificationIssue">
+    <div *ngIf="!structure">
+      En attendant, vous pouvez participer à l'amélioration de Rés'in en répondant à ces quelques questions
+    </div>
+    <div *ngIf="structure">
+      Donnez nous votre avis: vous pouvez participer à l'amélioration de Rés'in en répondant à ces quelques questions
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="24px" [style.margin-top]="'50px'">
+      <button class="button" routerLink="/home">Je passe mon tour</button>
+      <a
+        *ngIf="structure"
+        target="_blank"
+        class="btn custom-link"
+        rel="noopener noreferrer"
+        [href]="'https://form.typeform.com/to/m7DV3CdW?typeform-medium=embed-snippet'"
+      >
+        Nous aider
+      </a>
+      <a
+        *ngIf="!structure"
+        target="_blank"
+        class="btn custom-link"
+        rel="noopener noreferrer"
+        [href]="'https://form.typeform.com/to/ASJH3B7Z?typeform-medium=embed-snippet'"
+      >
+        Nous aider
+      </a>
+    </div>
   </div>
 </div>
