@@ -8,7 +8,7 @@
     </div>
   </div>
   <div fxLayout="column">
-    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px">
+    <div *ngIf="post.tags[0]" fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px">
       <app-svg-icon
         [iconClass]="'icon-32'"
         [iconColor]="'inherit'"
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div fxLayout="column" class="informations" *ngIf="post.tags[0].slug != 'appels'">
+  <div fxLayout="column" class="informations" *ngIf="post.tags[0] && post.tags[0].slug != 'appels'">
     <div fxLayout="row">
       {{ post.published_at | date: 'shortDate' }}
     </div>

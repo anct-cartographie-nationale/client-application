@@ -30,7 +30,7 @@ h2 {
   @media #{$tablet} {
     width: 100%;
   }
-  width: 80%;
+  width: 862px;
   h2 {
     @media #{$large-phone} {
       @include cn-bold-22;

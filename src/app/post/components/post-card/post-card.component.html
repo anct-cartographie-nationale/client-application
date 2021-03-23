@@ -5,7 +5,7 @@
       class="tag"
       fxLayoutAlign=" center"
       fxLayoutGap="12px"
-      *ngIf="post.tags[0].slug != tagEnum.appels"
+      *ngIf="post.tags[0] && post.tags[0].slug != tagEnum.appels"
     >
       <app-svg-icon
         [iconClass]="'icon-32'"

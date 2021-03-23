@@ -32,6 +32,7 @@ import { DeactivateGuard } from './guards/deactivate.guard';
 import { FooterFormComponent } from './form/footer-form/footer-form.component';
 import { TempUserResolver } from './resolvers/temp-user.resolver';
 import { StructureJoinComponent } from './structure-join/structure-join.component';
+import { RouterListenerService } from './services/routerListener.service';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { StructureJoinComponent } from './structure-join/structure-join.componen
     AdminGuard,
     DeactivateGuard,
     TempUserResolver,
+    RouterListenerService,
   ],
   bootstrap: [AppComponent],
 })
