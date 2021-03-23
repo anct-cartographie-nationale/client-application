@@ -119,3 +119,10 @@ p,
 .info {
   color: $ram-hover-principal;
 }
+
+.wrapper {
+  width: 100%;
+  display: grid;
+  gap: 20px 30px;
+  grid-template-columns: 1fr 1fr;
+}

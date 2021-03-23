@@ -21,4 +21,16 @@ export class Category {
   public isRigthtsAccess(): boolean {
     return this.name === 'Accès aux droits';
   }
+
+  public isParentingHelp(): boolean {
+    return this.name === 'Aide à la parentalité';
+  }
+
+  public isDigitalCultureSecurity(): boolean {
+    return this.name === 'Culture et sécurité numérique';
+  }
+
+  public isSocialAndProfessional(): boolean {
+    return this.name === 'Insertion sociale et professionnelle';
+  }
 }

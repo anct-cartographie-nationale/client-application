@@ -250,14 +250,26 @@
     <div *ngIf="!structure.freeWorkShop">
       <span class="bold-info">L'accès à ces ateliers est payant</span>
     </div>
-    <div fxLayout="row" class="w-100 mobile-column">
-      <div fxFlex="50%" *ngIf="isBaseSkills()">
+    <div class="wrapper">
+      <div *ngIf="isBaseSkills()">
         <h3 class="subtitle">Compétences de base</h3>
         <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>
       </div>
-      <div fxFlex="50%" *ngIf="isAccessRights()">
+      <div *ngIf="isAccessRights()">
         <h3 class="subtitle">Accès aux droits</h3>
         <p *ngFor="let rights of accessRights">{{ rights.text }}</p>
+      </div>
+      <div *ngIf="isParentingHelp()">
+        <h3 class="subtitle">Aide à la parentalité</h3>
+        <p *ngFor="let help of parentingHelp">{{ help.text }}</p>
+      </div>
+      <div *ngIf="isSocialAndProfessional()">
+        <h3 class="subtitle">Insertion sociale et professionnelle</h3>
+        <p *ngFor="let skill of socialAndProfessional">{{ skill.text }}</p>
+      </div>
+      <div *ngIf="isDigitalSecurity()">
+        <h3 class="subtitle">Culture et sécurité numérique</h3>
+        <p *ngFor="let skill of digitalCultureSecurity">{{ skill.text }}</p>
       </div>
     </div>
   </div>
