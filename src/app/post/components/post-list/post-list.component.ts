@@ -140,7 +140,7 @@ export class PostListComponent implements OnInit {
 
   // Load more news on scroll event.
   private loadMore(): void {
-    if (this.pagination.page < this.pagination.pages) {
+    if (this.pagination && this.pagination.page < this.pagination.pages) {
       this.isLoading = true;
       this.postService.getPosts(this.pagination.next).subscribe((news) => {
         this.setNews(news);
