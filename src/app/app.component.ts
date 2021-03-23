@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProfileService } from './profile/services/profile.service';
 import { AuthService } from './services/auth.service';
+import { RouterListenerService } from './services/routerListener.service';
 import { PrintService } from './shared/service/print.service';
 import { WindowScrollService } from './shared/service/windowScroll.service';
 
@@ -16,7 +17,8 @@ export class AppComponent {
     public printService: PrintService,
     private authService: AuthService,
     private profilService: ProfileService,
-    private windowScrollService: WindowScrollService
+    private windowScrollService: WindowScrollService,
+    private routerListener: RouterListenerService
   ) {
     if (this.authService.isLoggedIn()) {
       this.profilService.getProfile();
@@ -25,6 +27,7 @@ export class AppComponent {
     window.addEventListener('resize', () => {
       this.setHeightApp();
     });
+    this.routerListener.loadRouting();
   }
 
   private setHeightApp(): void {

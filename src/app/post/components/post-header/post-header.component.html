@@ -25,6 +25,7 @@
         (clickOutside)="closeModal()"
       >
         <button
+          *ngIf="tags.public && tags.public.length > 0"
           type="button"
           fxLayout="row"
           [ngClass]="{
@@ -44,6 +45,7 @@
           <div class="arrow"></div>
         </button>
         <button
+          *ngIf="tags.commune && tags.commune.length > 0"
           class="btn-filter-no-margin"
           type="button"
           fxLayout="row"

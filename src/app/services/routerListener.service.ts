@@ -7,7 +7,12 @@ import { filter, pairwise } from 'rxjs/operators';
 })
 export class RouterListenerService {
   private previousUrl: string;
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
+
+  /**
+   * Start recording navigation history
+   */
+  public loadRouting(): void {
     this.router.events
       .pipe(
         filter((evt: any) => evt instanceof RoutesRecognized),
