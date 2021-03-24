@@ -1,16 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { CartoComponent } from './carto.component';
 
 describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+  let component: CartoComponent;
+  let fixture: ComponentFixture<CartoComponent>;
   let originalTimeout;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeComponent],
+      declarations: [CartoComponent],
       imports: [HttpClientModule],
     }).compileComponents();
   });
@@ -22,7 +22,7 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(CartoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
