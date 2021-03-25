@@ -159,7 +159,6 @@
       <h2>Accueil</h2>
     </div>
     <!-- Openning Hours -->
-    <div *ngIf="structure.exceptionalClosures" class="bold-info">{{structure.exceptionalClosures}}</div>
     <div fxLayout="row" class="w-100 mobile-column">
       <div *ngIf="structure.hours.hasData()" fxFlex="50%">
         <h3 class="subtitle">Horaires d’ouverture au public</h3>
@@ -208,6 +207,8 @@
         </div>
       </div>
     </div>
+    <h4 class="subtitle">Précisions sur les horaires:</h4>
+    <div *ngIf="structure.exceptionalClosures" class="bold-info">{{structure.exceptionalClosures}}</div>
   </div>
   <!-- Démarches en ligne -->
   <div
