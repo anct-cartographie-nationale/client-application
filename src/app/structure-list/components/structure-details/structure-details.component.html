@@ -207,6 +207,10 @@
         </div>
       </div>
     </div>
+    <div *ngIf="structure.exceptionalClosures" class="bold-info">
+      <h3 class="subtitle">Précisions sur les horaires</h3>
+      <p>{{ structure.exceptionalClosures }}</p>
+    </div>
   </div>
   <!-- Démarches en ligne -->
   <div
@@ -233,7 +237,7 @@
   </div>
   <!-- Ateliers -->
   <div
-    *ngIf="isBaseSkills() || isAccessRights()"
+    *ngIf="isBaseSkills() || isAccessRights() || isParentingHelp() || isSocialAndProfessional() || isDigitalSecurity()"
     fxLayout="column"
     class="structure-details-block"
     fxLayoutAlign="baseline baseline"
@@ -243,15 +247,32 @@
       <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Ateliers</h2>
     </div>
-    <span class="bold-info">L'accès à ces ateliers peut être payant</span>
-    <div fxLayout="row" class="w-100 mobile-column">
-      <div fxFlex="50%" *ngIf="isBaseSkills()">
+    <div *ngIf="structure.freeWorkShop">
+      <span class="bold-info">L'accès à ces ateliers est gratuit</span>
+    </div>
+    <div *ngIf="!structure.freeWorkShop">
+      <span class="bold-info">L'accès à ces ateliers est payant</span>
+    </div>
+    <div class="wrapper">
+      <div *ngIf="isBaseSkills()">
         <h3 class="subtitle">Compétences de base</h3>
         <p *ngFor="let skill of baseSkills">{{ skill.text }}</p>
       </div>
-      <div fxFlex="50%" *ngIf="isAccessRights()">
+      <div *ngIf="isAccessRights()">
         <h3 class="subtitle">Accès aux droits</h3>
         <p *ngFor="let rights of accessRights">{{ rights.text }}</p>
+      </div>
+      <div *ngIf="isParentingHelp()">
+        <h3 class="subtitle">Aide à la parentalité</h3>
+        <p *ngFor="let help of parentingHelp">{{ help.text }}</p>
+      </div>
+      <div *ngIf="isSocialAndProfessional()">
+        <h3 class="subtitle">Insertion sociale et professionnelle</h3>
+        <p *ngFor="let skill of socialAndProfessional">{{ skill.text }}</p>
+      </div>
+      <div *ngIf="isDigitalSecurity()">
+        <h3 class="subtitle">Culture et sécurité numérique</h3>
+        <p *ngFor="let skill of digitalCultureSecurity">{{ skill.text }}</p>
       </div>
     </div>
   </div>
