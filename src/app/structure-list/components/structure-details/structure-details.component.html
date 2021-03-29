@@ -207,8 +207,10 @@
         </div>
       </div>
     </div>
-    <h4 class="subtitle">Précisions sur les horaires:</h4>
-    <div *ngIf="structure.exceptionalClosures" class="bold-info">{{structure.exceptionalClosures}}</div>
+    <div *ngIf="structure.exceptionalClosures" class="bold-info">
+      <h3 class="subtitle">Précisions sur les horaires</h3>
+      <p>{{ structure.exceptionalClosures }}</p>
+    </div>
   </div>
   <!-- Démarches en ligne -->
   <div
