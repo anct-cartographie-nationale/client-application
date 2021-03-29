@@ -180,7 +180,7 @@ describe('StructureListComponent', () => {
     spyOn(component.selectedMarkerId, 'emit');
     component.showDetails(structure);
     expect(component.selectedMarkerId.emit).toHaveBeenCalled();
-    expect(component.selectedMarkerId.emit).toHaveBeenCalledWith(structure.id);
+    expect(component.selectedMarkerId.emit).toHaveBeenCalledWith(structure._id);
     expect(component.showStructureDetails).toBe(true);
     expect(component.structure).toBe(structure);
   });
@@ -197,7 +197,7 @@ describe('StructureListComponent', () => {
     spyOn(component.displayMapMarkerId, 'emit');
     component.handleCardHover(structure);
     expect(component.displayMapMarkerId.emit).toHaveBeenCalled();
-    expect(component.displayMapMarkerId.emit).toHaveBeenCalledWith([structure.id]);
+    expect(component.displayMapMarkerId.emit).toHaveBeenCalledWith([structure._id]);
   });
 
   it('should emit undefined id structure to remove map marker', () => {
