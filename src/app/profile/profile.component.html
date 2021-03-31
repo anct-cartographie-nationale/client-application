@@ -28,7 +28,7 @@
         <div class="structureCard" *ngFor="let s of structures; let i = index">
           <div class="structureInfo" fxLayout="column" fxLayoutGap="14px">
             <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="20px">
-              <a class="structureName" routerLink="/home" [state]="{ data: s.structure }">{{
+              <a class="structureName" routerLink="/acteurs" [state]="{ data: s.structure }">{{
                 s.structure.structureName
               }}</a>
               <app-structure-options-modal [structure]="s" (closed)="ngOnInit()"></app-structure-options-modal>
