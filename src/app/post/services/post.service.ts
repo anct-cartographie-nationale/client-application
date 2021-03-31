@@ -17,7 +17,7 @@ export class PostService {
   public getPost(idPost: string): Observable<PostWithMeta> {
     return this.http.get<PostWithMeta>(`${this.baseUrl}/` + idPost).pipe(
       map((item: PostWithMeta) => {
-        item.posts.map((post) => this.addAuthorToPost(post));
+        item.posts.forEach((post) => this.addAuthorToPost(post));
         return new PostWithMeta(item);
       })
     );
