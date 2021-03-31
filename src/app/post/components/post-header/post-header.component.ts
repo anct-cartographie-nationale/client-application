@@ -107,7 +107,7 @@ export class PostHeaderComponent implements OnInit {
   }
 
   private setQueryParam(): void {
-    this.router.navigate([], {
+    this.router.navigate(['/news'], {
       relativeTo: this.route,
       queryParams: {
         mainTag: this.mainActiveTag.slug == this.tagEnum.etudes ? this.mainActiveTag.name : this.mainActiveTag.slug,
