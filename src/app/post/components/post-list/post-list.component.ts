@@ -48,7 +48,7 @@ export class PostListComponent implements OnInit {
     this.isLoading = true;
     // Init APP news list
     this.postService.getPosts(1, [TagEnum.appels]).subscribe((news) => {
-      let projectNews = news.posts.map((news) => (news = this.addAuthorToPost(news)));
+      let projectNews = news.posts.map((newsData) => this.addAuthorToPost(newsData));
       this.projectsNew = projectNews;
     });
     this.postService.getPosts(1, [TagEnum.aLaUne]).subscribe((news) => {

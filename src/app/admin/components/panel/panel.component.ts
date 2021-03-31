@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { AdminPannelEnum } from '../../../shared/enum/adminPanel.enum';
 
 @Component({
@@ -7,10 +6,9 @@ import { AdminPannelEnum } from '../../../shared/enum/adminPanel.enum';
   templateUrl: './panel.component.html',
 })
 export class PanelComponent implements OnInit {
-  
   public features = AdminPannelEnum;
   public selectedFeature;
-  
+
   constructor() {}
 
   ngOnInit(): void {

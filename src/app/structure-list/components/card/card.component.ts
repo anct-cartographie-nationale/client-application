@@ -2,7 +2,6 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Structure } from '../../../models/structure.model';
 import { ProfileService } from '../../../profile/services/profile.service';
-import { GeojsonService } from '../../../services/geojson.service';
 import { StructureService } from '../../../services/structure.service';
 
 @Component({

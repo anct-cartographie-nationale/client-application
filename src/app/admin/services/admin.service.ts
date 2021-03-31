@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
@@ -24,7 +23,6 @@ export class AdminService {
   public searchUsers(searchString: string): Observable<User[]> {
     return this.http.post<User[]>(`api/admin/searchUsers`, { searchString });
   }
-  
 
   public deleteUser(id: string): Observable<User> {
     return this.http.delete<User>(`api/admin/user/` + id);
