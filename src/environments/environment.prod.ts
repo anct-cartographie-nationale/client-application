@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  ghostAdmin: 'https://resin.grandlyon.com/blog/ghost',
 };

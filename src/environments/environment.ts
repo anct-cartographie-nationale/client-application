@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  registrationForm: 'https://services.formulaireextranet.grandlyon.com/saisie-fiche-structure',
-  addressApi: 'https://passerelle.formulaireextranet.grandlyon.com/base-adresse/base-adresse-nationale/streets',
-  geojsonApi: 'https://download.data.grandlyon.com/geocoding/photon/api',
+  ghostAdmin: 'https://resin-dev.grandlyon.com/blog/ghost',
   VERSION: require('../../package.json').version,
 };
 
