@@ -20,10 +20,10 @@ export class StructureJoinComponent implements OnInit {
           .validateStructureJoin(params.get('id'), params.get('userId'), params.get('status') === 'true' ? true : false)
           .subscribe(
             (res) => {
-              this.router.navigateByUrl('/home');
+              this.router.navigateByUrl('/acteurs');
             },
             (err) => {
-              this.router.navigateByUrl('/home');
+              this.router.navigateByUrl('/acteurs');
             }
           );
       }
