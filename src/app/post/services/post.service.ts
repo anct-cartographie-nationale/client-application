@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 import { Post } from '../models/post.model';
 import { TagEnum } from '../enum/tag.enum';
 import { PostWithMeta } from '../models/postWithMeta.model';
-import { Tag } from '../models/tag.model';
 import { TagWithMeta } from '../models/tagWithMeta.model';
 
 @Injectable({
@@ -18,9 +17,7 @@ export class PostService {
   public getPost(idPost: string): Observable<PostWithMeta> {
     return this.http.get<PostWithMeta>(`${this.baseUrl}/` + idPost).pipe(
       map((item: PostWithMeta) => {
-        item.posts.forEach((post) => {
-          post = this.addAuthorToPost(post);
-        });
+        item.posts.forEach((post) => this.addAuthorToPost(post));
         return new PostWithMeta(item);
       })
     );

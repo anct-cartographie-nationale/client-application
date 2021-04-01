@@ -27,8 +27,14 @@ export class StructureDetailsComponent implements OnInit {
 
   public baseSkillssReferentiel: Category;
   public accessRightsReferentiel: Category;
+  public digitalCultureSecuritysReferentiel: Category;
+  public socialAndProfessionalsReferentiel: Category;
+  public parentingHelpsReferentiel: Category;
   public baseSkills: Module[];
   public accessRights: Module[];
+  public parentingHelp: Module[];
+  public socialAndProfessional: Module[];
+  public digitalCultureSecurity: Module[];
   public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
   public isClaimed: boolean = null;
@@ -70,6 +76,12 @@ export class StructureDetailsComponent implements OnInit {
           this.baseSkillssReferentiel = referentiel;
         } else if (referentiel.isRigthtsAccess()) {
           this.accessRightsReferentiel = referentiel;
+        } else if (referentiel.isDigitalCultureSecurity()) {
+          this.digitalCultureSecuritysReferentiel = referentiel;
+        } else if (referentiel.isParentingHelp()) {
+          this.parentingHelpsReferentiel = referentiel;
+        } else if (referentiel.isSocialAndProfessional()) {
+          this.socialAndProfessionalsReferentiel = referentiel;
         }
       });
       this.setServiceCategories();
@@ -223,6 +235,15 @@ export class StructureDetailsComponent implements OnInit {
     this.accessRights = this.structure.accessRight.map((rights) =>
       _.find(this.accessRightsReferentiel.modules, { id: rights })
     );
+    this.parentingHelp = this.structure.parentingHelp.map((help) =>
+    _.find(this.parentingHelpsReferentiel.modules, { id: help })
+    );
+    this.socialAndProfessional = this.structure.socialAndProfessional.map((skill) =>
+    _.find(this.socialAndProfessionalsReferentiel.modules, { id: skill })
+    );
+    this.digitalCultureSecurity = this.structure.digitalCultureSecurity.map((skill) =>
+    _.find(this.digitalCultureSecuritysReferentiel.modules, { id: skill })
+    );
   }
 
   public keepOriginalOrder = (a, b) => a.key;
@@ -232,6 +253,15 @@ export class StructureDetailsComponent implements OnInit {
   }
   public isAccessRights(): boolean {
     return this.accessRights && this.accessRights[0] !== undefined;
+  }
+  public isParentingHelp(): boolean {
+    return this.parentingHelp && this.parentingHelp[0] !== undefined;
+  }
+  public isSocialAndProfessional(): boolean {
+    return this.socialAndProfessional && this.socialAndProfessional[0] !== undefined;
+  }
+  public isDigitalSecurity(): boolean {
+    return this.digitalCultureSecurity && this.digitalCultureSecurity[0] !== undefined;
   }
 
   public getTclStopPoints(): void {

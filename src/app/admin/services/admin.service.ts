@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../../models/user.model';
 import { DemandAttachment } from '../models/demandAttachment.model';
 
 @Injectable({
@@ -13,6 +14,18 @@ export class AdminService {
   // Return pendingAttachments of all profiles.
   public getPendingStructure(): Observable<DemandAttachment[]> {
     return this.http.get<DemandAttachment[]>(`${this.baseUrl}/pendingStructures`);
+  }
+
+  public getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`api/admin/searchUsers`);
+  }
+
+  public searchUsers(searchString: string): Observable<User[]> {
+    return this.http.post<User[]>(`api/admin/searchUsers`, { searchString });
+  }
+
+  public deleteUser(id: string): Observable<User> {
+    return this.http.delete<User>(`api/admin/user/` + id);
   }
 
   public acceptStructureClaim(

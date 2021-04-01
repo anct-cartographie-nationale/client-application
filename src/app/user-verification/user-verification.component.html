@@ -20,7 +20,7 @@
         <button
           *ngIf="verificationSuccess"
           class="btn"
-          routerLink="/home"
+          routerLink="/acteurs"
           [queryParams]="{ id: structure._id }"
           [state]="{ data: structure }"
         >
@@ -50,7 +50,7 @@
       Donnez nous votre avis: vous pouvez participer à l'amélioration de Rés'in en répondant à ces quelques questions
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="24px" [style.margin-top]="'50px'">
-      <button class="button" routerLink="/home">Je passe mon tour</button>
+      <button class="button" routerLink="/acteurs">Je passe mon tour</button>
       <a
         *ngIf="structure"
         target="_blank"

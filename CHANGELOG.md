@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://forge.grandlyon.com///compare/v1.6.0...v1.6.1) (2021-04-01)
+
+
+### Features
+
+* admin deletion pannel ([bd598ff](https://forge.grandlyon.com///commit/bd598ff25e2982e46aa134c261beeb61e78b3d7e))
+
+
+### Bug Fixes
+
+* **news:** change map for foreach ([65a71fa](https://forge.grandlyon.com///commit/65a71fad4a5b94f3f10e5380d8dfe19a9d5d46ec))
+* add protection in case of no tag ([21083b6](https://forge.grandlyon.com///commit/21083b60917f9bcf4e02698b29094ead02deedea))
+* broken link ([eef433a](https://forge.grandlyon.com///commit/eef433ac66e01595b2d9c400ec834d87cc003130))
+* display all workshop categories ([42d5b06](https://forge.grandlyon.com///commit/42d5b064b60481ffc203f1daedba98f63aefe5f5))
+* edit reset password page (waiting for official design) ([3a67662](https://forge.grandlyon.com///commit/3a676624b9f888d5e8849d715a31da378c3ad387))
+* modal background to fixed ([2e3d6be](https://forge.grandlyon.com///commit/2e3d6beb506c566af88a6d22a8b4b1a646321b07))
+* new condition for display ([18c3700](https://forge.grandlyon.com///commit/18c37001e2ea64f0d8ce7c8d5388d00243106e16))
+* news layout + update news routing navigation ([86621e0](https://forge.grandlyon.com///commit/86621e0d408c74e9dd561f428a69499a6196d2f1))
+* og update image size ([31e159a](https://forge.grandlyon.com///commit/31e159a182bb6dd3303ea667ece5080adc44b168))
+* remove admin guard from news ([57b9e0e](https://forge.grandlyon.com///commit/57b9e0ed6e7d912b0fb000522ad0643511bca002))
+* sonar issues ([bce0381](https://forge.grandlyon.com///commit/bce0381e516d422614e2cf9254cd5e6e13425694))
+* typo + news navigation issue ([9facb15](https://forge.grandlyon.com///commit/9facb1584aab72b298731bfc68c351936aeb4695))
+* typo in legal notice ([b7f9f38](https://forge.grandlyon.com///commit/b7f9f38491c7d6817da3e403081e2ecc1cf1fa2e))
+* update display of hours details title ([8f90f32](https://forge.grandlyon.com///commit/8f90f320f020056f1a0230bef1c54fe9e590072a))
+* update meta tag ([00ac466](https://forge.grandlyon.com///commit/00ac466f5e0f621c80e088a23a11223fc5d02047))
+* user-verification feedback form ([cd1ac48](https://forge.grandlyon.com///commit/cd1ac48abed6b399a365e7169e46e290ee49f59c))
+* workshop price and closures hours ([bcded9a](https://forge.grandlyon.com///commit/bcded9a8238f113cb8fa330a14363344e4e00205))
+
 ## [1.6.0](https://forge.grandlyon.com///compare/v1.5.0...v1.6.0) (2021-03-15)
 
 

@@ -1144,7 +1144,7 @@
       <button
         *ngIf="currentPage == nbPagesForm && !profile"
         class="btn-primary validate unique"
-        routerLink="/home"
+        routerLink="/acteurs"
         [routerLinkActive]="'active'"
       >
         Ok
@@ -1152,7 +1152,7 @@
       <button
         *ngIf="currentPage == nbPagesForm && profile"
         class="btn-primary unique"
-        routerLink="/home"
+        routerLink="/acteurs"
         [queryParams]="{ id: createdStructure._id }"
         [state]="{ data: createdStructure }"
       >
@@ -1187,7 +1187,7 @@
     <button
       *ngIf="currentPage == nbPagesForm && !profile"
       class="btn-primary validate unique"
-      routerLink="/home"
+      routerLink="/acteurs"
       [routerLinkActive]="'active'"
     >
       Ok
@@ -1195,7 +1195,7 @@
     <button
       *ngIf="currentPage == nbPagesForm && profile"
       class="btn-primary unique"
-      routerLink="/home"
+      routerLink="/acteurs"
       [queryParams]="{ id: createdStructure._id }"
       [state]="{ data: createdStructure }"
     >

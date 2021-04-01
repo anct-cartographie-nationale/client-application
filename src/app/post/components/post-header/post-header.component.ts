@@ -1,7 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Tag } from '../../models/tag.model';
 import { TagWithMeta } from '../../models/tagWithMeta.model';
-import * as _ from 'lodash';
 import { TypeModalNews } from '../../enum/typeModalNews.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TagEnum } from '../../enum/tag.enum';
@@ -28,7 +27,9 @@ export class PostHeaderComponent implements OnInit {
       if (data.tags) {
         this.tags = data.tags;
         this.tags.others.forEach((tag) => {
-          tag.slug == TagEnum.aLaUne ? (tag.name = 'Les + récentes') : tag.name;
+          if (tag.slug == TagEnum.aLaUne) {
+            tag.name = 'Les + récentes';
+          }
         });
         this.tags.commune.sort((tagA, tagB) => {
           return this.sortArray(tagA, tagB);
@@ -107,7 +108,7 @@ export class PostHeaderComponent implements OnInit {
   }
 
   private setQueryParam(): void {
-    this.router.navigate([], {
+    this.router.navigate(['/news'], {
       relativeTo: this.route,
       queryParams: {
         mainTag: this.mainActiveTag.slug == this.tagEnum.etudes ? this.mainActiveTag.name : this.mainActiveTag.slug,

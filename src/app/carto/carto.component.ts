@@ -10,11 +10,11 @@ import { GeojsonService } from '../services/geojson.service';
 import { CustomRegExp } from '../utils/CustomRegExp';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-carto',
+  templateUrl: './carto.component.html',
+  styleUrls: ['./carto.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class CartoComponent implements OnInit {
   public structures: Structure[] = [];
   public displayMarkerId: string;
   public selectedMarkerId: string;
