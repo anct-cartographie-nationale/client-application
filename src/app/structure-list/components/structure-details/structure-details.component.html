@@ -124,6 +124,14 @@
       <div fxLayout="row" fxLayoutAlign="center center" class="hide-on-print">
         <a *ngIf="!isClaimed" (click)="handleClaim()" class="primary" tabindex="0">Revendiquer cette structure</a>
         <a *ngIf="displayJoin()" (click)="handleJoin()" class="primary" tabindex="0">Rejoindre cette structure</a>
+        <a
+          *ngIf="!profileService.isLinkedToStructure(structure._id) && !profileService.isAdmin()"
+          (click)="displayModalError()"
+          class="primary"
+          tabindex="0"
+        >
+          Signaler une erreur
+        </a>
         <!-- temporary remove edit -->
         <a
           *ngIf="profileService.isLinkedToStructure(structure._id) || profileService.isAdmin()"
@@ -369,3 +377,12 @@
   "
   (closed)="joinStructure($event)"
 ></app-modal-confirmation>
+
+<app-text-input-modal
+  [openned]="structureErrorModalOpenned"
+  [placeholder]="'Décrivez l\'erreur ici'"
+  [content]="
+    'Voulez-vous notifier res\'in d\'une erreur sur la fiche de cet acteur&nbsp;? Votre commentaire sera envoyé aux administrateurs.'
+  "
+  (closed)="sendErrorEmail($event)"
+></app-text-input-modal>
