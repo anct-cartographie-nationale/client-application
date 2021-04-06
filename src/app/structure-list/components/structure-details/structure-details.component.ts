@@ -295,11 +295,12 @@ export class StructureDetailsComponent implements OnInit {
     this.structureErrorModalOpenned = !this.structureErrorModalOpenned;
   }
 
-  public sendErrorEmail(shouldSend: boolean, content: string): void {
+  public sendErrorEmail(modalValue: any): void {
     this.displayModalError();
-    if (shouldSend) {
-      console.log('conrtent is:', content);
-      this.structureService.sendMailOnStructureError(this.structure._id, '', this.currentProfile);
+    if (modalValue.shouldSend) {
+      this.structureService
+        .sendMailOnStructureError(this.structure._id, modalValue.content, this.currentProfile)
+        .subscribe(() => {});
     }
   }
 }

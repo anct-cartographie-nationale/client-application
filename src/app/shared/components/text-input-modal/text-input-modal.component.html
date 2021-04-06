@@ -3,12 +3,11 @@
     <div class="contentModal" fxLayout="column" fxLayoutAlign="space-around center">
       <h3>ATTENTION</h3>
       <p>{{ content }}</p>
-      <textarea ng-model="myContent" id="story" class="textarea" name="story" rows="6">{{ placeholder }}</textarea>
+      <textarea #myText id="story" class="textarea" name="story" rows="6">{{ placeholder }}</textarea>
       <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
-        <button class="btn-primary small leave" (click)="closeModal(true)">Confirmer</button>
-        <button class="btn-primary small" (click)="closeModal(false)">Annuler</button>
+        <button class="btn-primary small leave" (click)="closeModal(true, myText.value)">Confirmer</button>
+        <button class="btn-primary small" (click)="closeModal(false, myText.value)">Annuler</button>
       </div>
-      {{ myContent }}
     </div>
   </div>
 </div>

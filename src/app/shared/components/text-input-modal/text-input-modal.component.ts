@@ -10,11 +10,12 @@ export class TextInputModalComponent {
   @Input() public content: string;
   @Input() public placeholder: string;
   @Output() closed = new EventEmitter<boolean>();
+  @Output() newContent = new EventEmitter<{ content: string; shouldSend: boolean }>();
 
   public myContent: string;
   constructor() {}
 
-  public closeModal(value: boolean): void {
-    this.closed.emit(value);
+  public closeModal(shouldSend: boolean, content: string) {
+    this.newContent.emit({ content, shouldSend });
   }
 }
