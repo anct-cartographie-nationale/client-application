@@ -1,7 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DivIcon, divIcon, Map } from 'leaflet';
 import { Marker } from 'leaflet';
+import { Observable } from 'rxjs';
 import { MarkerType } from '../components/markerType.enum';
+import { AddressGeometry } from '../models/addressGeometry.model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +34,7 @@ export class MapService {
     iconSize: [19, 24],
     iconAnchor: [9, 0],
   });
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   public createMarker(lat: number, lon: number, markerType: MarkerType, id?: string, tooltip?: string): Marker {
     const marker = new Marker([lat, lon], {
