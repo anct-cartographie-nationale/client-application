@@ -42,6 +42,7 @@ export class StructureDetailsComponent implements OnInit {
   public currentProfile: User = null;
   public deleteModalOpenned = false;
   public claimModalOpenned = false;
+  public structureErrorModalOpenned = false;
   public joinModalOpenned = false;
 
   constructor(
@@ -236,13 +237,13 @@ export class StructureDetailsComponent implements OnInit {
       _.find(this.accessRightsReferentiel.modules, { id: rights })
     );
     this.parentingHelp = this.structure.parentingHelp.map((help) =>
-    _.find(this.parentingHelpsReferentiel.modules, { id: help })
+      _.find(this.parentingHelpsReferentiel.modules, { id: help })
     );
     this.socialAndProfessional = this.structure.socialAndProfessional.map((skill) =>
-    _.find(this.socialAndProfessionalsReferentiel.modules, { id: skill })
+      _.find(this.socialAndProfessionalsReferentiel.modules, { id: skill })
     );
     this.digitalCultureSecurity = this.structure.digitalCultureSecurity.map((skill) =>
-    _.find(this.digitalCultureSecuritysReferentiel.modules, { id: skill })
+      _.find(this.digitalCultureSecuritysReferentiel.modules, { id: skill })
     );
   }
 
@@ -287,5 +288,19 @@ export class StructureDetailsComponent implements OnInit {
       this.isClaimed &&
       !this.profileService.isPendingLinkedToStructure(this.structure._id)
     );
+  }
+
+  public displayModalError(): void {
+    //do we need to check for user is logged ?
+    this.structureErrorModalOpenned = !this.structureErrorModalOpenned;
+  }
+
+  public sendErrorEmail(modalValue: any): void {
+    this.displayModalError();
+    if (modalValue.shouldSend) {
+      this.structureService
+        .sendMailOnStructureError(this.structure._id, modalValue.content, this.currentProfile)
+        .subscribe(() => {});
+    }
   }
 }

@@ -14,6 +14,7 @@ import { RadioFormComponent } from './radio-form/radio-form.component';
 import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmation.component';
 import { StructureOptionsModalComponent } from './structure-options-modal/structure-options-modal.component';
 import { ModalOptionsComponent } from './modal-options/modal-options.component';
+import { TextInputModalComponent } from './text-input-modal/text-input-modal.component';
 
 // tslint:disable-next-line: max-line-length
 export {
@@ -33,6 +34,7 @@ export {
   ModalConfirmationComponent,
   StructureOptionsModalComponent,
   ModalOptionsComponent,
+  TextInputModalComponent,
 };
 
 // tslint:disable-next-line:variable-name
@@ -53,4 +55,5 @@ export const SharedComponents = [
   ModalConfirmationComponent,
   StructureOptionsModalComponent,
   ModalOptionsComponent,
+  TextInputModalComponent,
 ];
