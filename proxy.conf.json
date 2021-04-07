@@ -26,8 +26,8 @@
     "changeOrigin": true,
     "logLevel": "info"
   },
-  "/geocoding/photon/api": {
-    "target": "https://download.data.grandlyon.com",
+  "/geocoding/photon-bal/api": {
+    "target": "https://download.data.grandlyon.com/geocoding/photon-bal/api",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "info"
