@@ -902,7 +902,7 @@ export class FormComponent implements OnInit {
   }
 
   public closeEditMode(): void {
-    this.router.navigateByUrl('home', { state: { data: this.createdStructure } });
+    this.router.navigateByUrl('acteurs', { state: { data: this.createdStructure } });
   }
 
   public verifyUserExist(inputEmail): void {
@@ -925,6 +925,6 @@ export class FormComponent implements OnInit {
   }
 
   public structureDeleted(): void {
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('acteurs');
   }
 }
