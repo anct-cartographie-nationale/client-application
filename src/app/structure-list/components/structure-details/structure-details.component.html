@@ -380,9 +380,9 @@
 
 <app-text-input-modal
   [openned]="structureErrorModalOpenned"
-  [placeholder]="'Décrivez l\'erreur ici'"
+  [placeholder]="'Décrivez l\'erreur ici. Ex: Horaires faux...'"
   [content]="
-    'Voulez-vous notifier res\'in d\'une erreur sur la fiche de cet acteur&nbsp;? Votre commentaire sera envoyé aux administrateurs.'
+    'Voulez-vous notifier res\'in d\'une erreur sur la fiche de cet acteur &nbsp;? Votre commentaire sera envoyé à l\'acteur en question ainsi qu\'aux administrateurs.'
   "
   (closed)="sendErrorEmail($event)"
   (newContent)="sendErrorEmail($event)"

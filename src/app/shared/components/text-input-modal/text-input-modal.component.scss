@@ -47,6 +47,11 @@
 }
 
 .textarea {
+  padding: 13px 8px;
+  background: $grey-6;
+  border: 1px solid $grey-4;
+  border-radius: 1px;
+  resize: none;
   width: 100%;
-  background-color: #f8f8f8;
+  @include cn-regular-16;
 }
