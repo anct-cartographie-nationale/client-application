@@ -33,6 +33,7 @@ import { FooterFormComponent } from './form/footer-form/footer-form.component';
 import { TempUserResolver } from './resolvers/temp-user.resolver';
 import { StructureJoinComponent } from './structure-join/structure-join.component';
 import { RouterListenerService } from './services/routerListener.service';
+import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsletter-subscription.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { RouterListenerService } from './services/routerListener.service';
     FormComponent,
     FooterFormComponent,
     StructureJoinComponent,
+    NewsletterSubscriptionComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule, AdminModule],
   providers: [

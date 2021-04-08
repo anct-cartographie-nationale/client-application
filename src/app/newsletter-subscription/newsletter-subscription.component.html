@@ -1,0 +1,34 @@
+<div fxLayout="column" class="content-container full-screen">
+  <div class="section-container" fxLayout="column" fxLayoutAlign="center center">
+    <div class="subscriptionForm">
+      <div *ngIf="subscriptionMod"><h1>Inscription à la newsletter</h1></div>
+      <div *ngIf="!subscriptionMod"><h1>Désinscription de la newsletter</h1></div>
+      <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">Courriel personnel</label>
+          <div fxLayout="row" fxLayoutGap="13px">
+            <input
+              type="email"
+              autocomplete="on"
+              formControlName="email"
+              class="form-input"
+              [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+            />
+          </div>
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">L'adresse e-mail est requise</div>
+            <div *ngIf="f.email.errors.pattern">L'adresse e-mail doit être valide</div>
+          </div>
+        </div>
+        <div class="button" fxLayout="row" fxLayoutAlign="space-around center">
+          <a routerLink="../home" class="btn btn-link">Annuler</a>
+          <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            <div *ngIf="subscriptionMod">S'inscrire</div>
+            <div *ngIf="!subscriptionMod">Se désinscrire</div>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

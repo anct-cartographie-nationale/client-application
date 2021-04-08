@@ -16,6 +16,7 @@ import { StructureJoinComponent } from './structure-join/structure-join.componen
 import { StructureDetailsComponent } from './structure-list/components/structure-details/structure-details.component';
 import { StructureListComponent } from './structure-list/structure-list.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
+import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsletter-subscription.component';
 
 const routes: Routes = [
   { path: 'print', outlet: 'print', children: [{ path: 'structure', component: StructureDetailsComponent }] },
@@ -79,6 +80,16 @@ const routes: Routes = [
     component: FormComponent,
     canDeactivate: [DeactivateGuard],
   },
+  {
+    path: 'newsletter',
+    component: NewsletterSubscriptionComponent,
+  },
+
+  {
+    path: 'newsletter-unsubscribe',
+    component: NewsletterSubscriptionComponent,
+  },
+
   {
     path: 'news',
     loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
