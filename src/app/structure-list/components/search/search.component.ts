@@ -184,38 +184,41 @@ export class SearchComponent implements OnInit, OnChanges {
   // Get the correct list of checkbox/modules depending on the type of modal.
   private getData(option: TypeModal): void {
     if (option === TypeModal.accompaniment) {
-      forkJoin([this.searchService.getCategoriesAccompaniment(), this.searchService.getFakeCounterModule()]).subscribe(
-        (res) => {
-          const categories: Category[] = res[0];
-          const structureCounter: StructureCounter[] = res[1];
-          categories.forEach((category) => {
-            category = this.searchService.setCountModules(category, structureCounter);
-            this.categories.push(category);
-          });
-        }
-      );
+      forkJoin([
+        this.searchService.getCategoriesAccompaniment(),
+        this.searchService.getFakeCounterModule(this.checkedModulesFilter),
+      ]).subscribe((res) => {
+        const categories: Category[] = res[0];
+        const structureCounter: StructureCounter[] = res[1];
+        categories.forEach((category) => {
+          category = this.searchService.setCountModules(category, structureCounter);
+          this.categories.push(category);
+        });
+      });
     } else if (option === TypeModal.training) {
-      forkJoin([this.searchService.getCategoriesTraining(), this.searchService.getFakeCounterModule()]).subscribe(
-        (res) => {
-          const categories: Category[] = res[0];
-          const structureCounter: StructureCounter[] = res[1];
-          categories.forEach((category) => {
-            category = this.searchService.setCountModules(category, structureCounter);
-            this.categories.push(category);
-          });
-        }
-      );
+      forkJoin([
+        this.searchService.getCategoriesTraining(),
+        this.searchService.getFakeCounterModule(this.checkedModulesFilter),
+      ]).subscribe((res) => {
+        const categories: Category[] = res[0];
+        const structureCounter: StructureCounter[] = res[1];
+        categories.forEach((category) => {
+          category = this.searchService.setCountModules(category, structureCounter);
+          this.categories.push(category);
+        });
+      });
     } else if (option === TypeModal.moreFilters) {
-      forkJoin([this.searchService.getCategoriesMoreFilters(), this.searchService.getFakeCounterModule()]).subscribe(
-        (res) => {
-          const categories: Category[] = res[0];
-          const structureCounter: StructureCounter[] = res[1];
-          categories.forEach((category) => {
-            category = this.searchService.setCountModules(category, structureCounter);
-            this.categories.push(category);
-          });
-        }
-      );
+      forkJoin([
+        this.searchService.getCategoriesMoreFilters(),
+        this.searchService.getFakeCounterModule(this.checkedModulesFilter),
+      ]).subscribe((res) => {
+        const categories: Category[] = res[0];
+        const structureCounter: StructureCounter[] = res[1];
+        categories.forEach((category) => {
+          category = this.searchService.setCountModules(category, structureCounter);
+          this.categories.push(category);
+        });
+      });
     }
   }
 }
