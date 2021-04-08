@@ -1,5 +1,5 @@
 <div class="structure" fxLayout="column" (click)="cardClicked()" (mouseenter)="cardHover()">
-  <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+  <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="16px">
     <div fxLayout="column" fxLayoutAlign="end">
       <span class="structure-name" [ngClass]="{ notClaimed: !isClaimed }">{{ structure.structureName }}</span>
       <span class="typeStructure">{{ structure.getLabelTypeStructure() }}</span>
