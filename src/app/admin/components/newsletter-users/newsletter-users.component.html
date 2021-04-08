@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center" class="userBlock">
+  <h2>Gestion abonnement newsletter</h2>
+  <div fxLayout="row">
+    <button (click)="copySubscription()">Copier les adresses dans le presse papier</button>
+  </div>
+  <div fxLayout="row">
+    <input #searchstring (keyup)="(0)" />
+    <button (click)="searchSubscribedEmail(searchstring.value)">Rechercher</button>
+  </div>
+  <div class="userList">
+    <tr *ngFor="let subscription of subscriptions">
+      <td>{{ subscription.email }}</td>
+      <td>
+        <button (click)="toggleUnsubscribeModal(subscription.email)">Désabonner</button>
+      </td>
+    </tr>
+    <app-modal-confirmation
+      *ngIf="emailToUnsubscribe"
+      [openned]="deleteModalOpenned"
+      [content]="'Voulez-vous vraiment supprimer ' + emailToUnsubscribe + ' de la newsletter &nbsp;?'"
+      (closed)="unsubscribeEmail(emailToUnsubscribe, $event)"
+    ></app-modal-confirmation>
+    <div *ngIf="subscriptions && subscriptions.length == 0">Aucun résultat</div>
+  </div>
+</div>
