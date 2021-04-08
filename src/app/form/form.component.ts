@@ -470,8 +470,8 @@ export class FormComponent implements OnInit {
         name: 'Nom et adresse',
       };
       this.pagesValidation[PageTypeEnum.structurePhone] = {
-        valid: this.getStructureControl('contactPhone').valid,
-        name: 'Téléphone',
+        valid: this.getStructureControl('contactMail').valid && this.getStructureControl('contactPhone').valid,
+        name: 'Contact structure',
       };
       this.pagesValidation[PageTypeEnum.structureType] = {
         valid: this.getStructureControl('structureType').valid,
@@ -479,7 +479,7 @@ export class FormComponent implements OnInit {
       };
       this.pagesValidation[PageTypeEnum.structureAccessModality] = {
         valid: this.getStructureControl('accessModality').valid,
-        name: "Modalités d'accueil ",
+        name: "Modalités d'accueil",
       };
       this.pagesValidation[PageTypeEnum.structureHours] = { valid: this.hoursForm.valid, name: "Horaires d'ouverture" };
       this.pagesValidation[PageTypeEnum.structureHoursDetails] = {
@@ -492,7 +492,6 @@ export class FormComponent implements OnInit {
       };
       this.pagesValidation[PageTypeEnum.structureWebAndSocialNetwork] = {
         valid:
-          this.getStructureControl('contactMail').valid &&
           (this.getStructureControl('website').valid || !this.showWebsite) &&
           ((this.getStructureControl('facebook').valid &&
             this.getStructureControl('twitter').valid &&
