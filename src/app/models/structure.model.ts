@@ -177,6 +177,11 @@ export class Structure {
   }
 
   public hasSocialNetwork(): boolean {
-    return this.facebook !== null || this.instagram !== null || this.twitter !== null || this.linkedin !== null;
+    return (
+      (this.facebook !== null && this.facebook !== '') ||
+      (this.instagram !== null && this.instagram !== '') ||
+      (this.linkedin !== null && this.linkedin !== '') ||
+      (this.twitter !== null && this.twitter !== '')
+    );
   }
 }
