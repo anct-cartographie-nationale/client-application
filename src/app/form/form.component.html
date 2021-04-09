@@ -1075,15 +1075,17 @@
         (checkEvent)="acceptDataBeSaved($event)"
       >
       </app-checkbox-form>
-      <div class="title">
-        <h3>Acceptez-vous de recevoir des mails d'informations de la part de Res'in ?</h3>
+      <div *ngIf="!profile">
+        <div class="title">
+          <h3>Acceptez-vous de recevoir des mails d'informations de la part de Res'in ?</h3>
+        </div>
+        <app-checkbox-form
+          [isChecked]="userAcceptNewsletter"
+          [text]="'J\'accepte'"
+          (checkEvent)="acceptReceiveNewsletter($event)"
+        >
+        </app-checkbox-form>
       </div>
-      <app-checkbox-form
-        [isChecked]="userAcceptNewsletter"
-        [text]="'J\'accepte'"
-        (checkEvent)="acceptReceiveNewsletter($event)"
-      >
-      </app-checkbox-form>
       <p class="informationEndForm">
         <span class="asterisk">*</span> Les informations recueillies sont enregistrées dans un fichier par la Métropole
         de Lyon en vue de l'animation du réseau des acteurs de la médiation numérique. Elles sont conservées pendant 24
