@@ -848,9 +848,6 @@ export class FormComponent implements OnInit {
           user = this.profile;
           structure.accountVerified = true;
           this.createStructure(structure, user);
-          if (this.userAcceptNewsletter) {
-            this.newsletterService.newsletterSubscribe(user.email).subscribe(() => {});
-          }
         } else {
           if (this.accountForm.valid) {
             user = new User(this.accountForm.value);
