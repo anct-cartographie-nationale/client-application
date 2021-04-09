@@ -19,6 +19,7 @@
             <div *ngIf="f.email.errors.required">L'adresse e-mail est requise</div>
             <div *ngIf="f.email.errors.pattern">L'adresse e-mail doit être valide</div>
           </div>
+          <div *ngIf="subscriptionFailed">L'adresse e-mail est déja renseignée</div>
         </div>
         <div class="button" fxLayout="row" fxLayoutAlign="space-around center">
           <a routerLink="../home" class="btn btn-link">Annuler</a>
