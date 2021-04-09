@@ -11,6 +11,8 @@
   z-index: 99;
   background-color: #fff;
   cursor: pointer;
+  max-height: 250px;
+  overflow: auto;
 }
 .autocomplete-item {
   margin: 0;
