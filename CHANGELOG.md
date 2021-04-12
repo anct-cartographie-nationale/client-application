@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://forge.grandlyon.com///compare/v1.6.1...v1.7.0) (2021-04-12)
+
+
+### Features
+
+* **structures:** add owners list for admin ([6e303e7](https://forge.grandlyon.com///commit/6e303e79e140bbb7eac82fd31f87b36da5efb65e))
+* add newsletter subscription from footer and registration ([f5b79b1](https://forge.grandlyon.com///commit/f5b79b1d9348aa004bfd5b9034fb30f6f8853e3b))
+* **form:** move email section ([fbe2999](https://forge.grandlyon.com///commit/fbe2999413bebed5bd0d0bbdf4078d43532c401f))
+* **structure-list:** add city display on card ([12067e1](https://forge.grandlyon.com///commit/12067e19850ac7fbbefaa4cd143bc7138582f0de))
+* add township locate ([7bafac2](https://forge.grandlyon.com///commit/7bafac2029038677d2baaecac375f99da8b28879))
+
+
+### Bug Fixes
+
+* add subscription newsletter link to unsubscribe ([09be911](https://forge.grandlyon.com///commit/09be91172f638fb488e89d81c6fdf2af5249e3dc))
+* **structures:** fix card layout ([6a7ccad](https://forge.grandlyon.com///commit/6a7ccadc666967935c0911e94f5571eaa61ba09b))
+* **structures:** social network display bug ([7f1563e](https://forge.grandlyon.com///commit/7f1563e3d1942ae6b14017bc9cab81da28edb0d1))
+* broken link ([3d658cc](https://forge.grandlyon.com///commit/3d658cc7fe1f49f046ff5a3ffe7ae3eb9155be59))
+* broken link in mobile menu and admin panel ([099b834](https://forge.grandlyon.com///commit/099b834118ac9bd5ed7c857fef0af8d63d80818a))
+* broken links ([ed39304](https://forge.grandlyon.com///commit/ed39304ec9a00fc8c5efb0a4a55260ce27fbb14f))
+* structure-card title ([004da53](https://forge.grandlyon.com///commit/004da5332cca7bcb1c11912a6459f037d1aa482b))
+
 ### [1.6.1](https://forge.grandlyon.com///compare/v1.6.0...v1.6.1) (2021-04-01)
 
 
