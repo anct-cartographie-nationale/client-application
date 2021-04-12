@@ -2,7 +2,7 @@
   <div class="section-container" fxLayout="column" fxLayoutAlign="center center">
     <div class="subscriptionForm">
       <div *ngIf="subscriptionMod"><h1>Inscription à la newsletter</h1></div>
-      <div *ngIf="!subscriptionMod"><h1>Désinscription de la newsletter</h1></div>
+      <div *ngIf="!subscriptionMod"><h1>Désabonnement de la newsletter</h1></div>
       <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="email">Courriel personnel</label>
@@ -30,6 +30,12 @@
           </button>
         </div>
       </form>
+    </div>
+    <div *ngIf="!subscriptionMod">
+      <a class="btn-side" routerLink="/newsletter">Inscription</a>
+    </div>
+    <div *ngIf="subscriptionMod">
+      <a class="btn-side" routerLink="/newsletter-unsubscribe"> Désabonnement </a>
     </div>
   </div>
 </div>
