@@ -15,6 +15,7 @@ import { ProfileService } from '../../../profile/services/profile.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth.service';
 import { PublicCategorie } from '../../enum/public.enum';
+import { Owner } from '../../../models/owner.model';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -42,7 +43,9 @@ export class StructureDetailsComponent implements OnInit {
   public currentProfile: User = null;
   public deleteModalOpenned = false;
   public claimModalOpenned = false;
+  public structureErrorModalOpenned = false;
   public joinModalOpenned = false;
+  public structureAdmins: Owner[] = [];
 
   constructor(
     private printService: PrintService,
@@ -66,8 +69,15 @@ export class StructureDetailsComponent implements OnInit {
     this.isLoading = true;
     if (this.userIsLoggedIn()) {
       this.currentProfile = await this.profileService.getProfile();
+
+      if (this.profileService.isAdmin()) {
+        this.structureService.getStructureWithOwners(this.structure._id, this.currentProfile).subscribe((res) => {
+          this.structureAdmins = res.owners;
+        });
+      }
     }
     this.isClaimed = await this.structureService.isClaimed(this.structure._id, this.currentProfile).toPromise();
+
     // GetTclStopPoints
     this.getTclStopPoints();
     this.searchService.getCategoriesTraining().subscribe((referentiels) => {
@@ -236,13 +246,13 @@ export class StructureDetailsComponent implements OnInit {
       _.find(this.accessRightsReferentiel.modules, { id: rights })
     );
     this.parentingHelp = this.structure.parentingHelp.map((help) =>
-    _.find(this.parentingHelpsReferentiel.modules, { id: help })
+      _.find(this.parentingHelpsReferentiel.modules, { id: help })
     );
     this.socialAndProfessional = this.structure.socialAndProfessional.map((skill) =>
-    _.find(this.socialAndProfessionalsReferentiel.modules, { id: skill })
+      _.find(this.socialAndProfessionalsReferentiel.modules, { id: skill })
     );
     this.digitalCultureSecurity = this.structure.digitalCultureSecurity.map((skill) =>
-    _.find(this.digitalCultureSecuritysReferentiel.modules, { id: skill })
+      _.find(this.digitalCultureSecuritysReferentiel.modules, { id: skill })
     );
   }
 
@@ -287,5 +297,19 @@ export class StructureDetailsComponent implements OnInit {
       this.isClaimed &&
       !this.profileService.isPendingLinkedToStructure(this.structure._id)
     );
+  }
+
+  public displayModalError(): void {
+    //do we need to check for user is logged ?
+    this.structureErrorModalOpenned = !this.structureErrorModalOpenned;
+  }
+
+  public sendErrorEmail(modalValue: any): void {
+    this.displayModalError();
+    if (modalValue.shouldSend) {
+      this.structureService
+        .sendMailOnStructureError(this.structure._id, modalValue.content, this.currentProfile)
+        .subscribe(() => {});
+    }
   }
 }

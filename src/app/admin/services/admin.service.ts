@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NewsletterSubscription } from '../../models/subscription-model';
 import { User } from '../../models/user.model';
 import { DemandAttachment } from '../models/demandAttachment.model';
 
@@ -26,6 +27,14 @@ export class AdminService {
 
   public deleteUser(id: string): Observable<User> {
     return this.http.delete<User>(`api/admin/user/` + id);
+  }
+
+  public searchNewsletterSubscriptions(searchString: string): Observable<NewsletterSubscription[]> {
+    return this.http.post<NewsletterSubscription[]>(`api/admin/searchNewsletterSubscriptions`, { searchString });
+  }
+
+  public unsubscribeEmail(email: string): Observable<string> {
+    return this.http.delete<string>(`api/admin/newsletterSubscription/` + email);
   }
 
   public acceptStructureClaim(

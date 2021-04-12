@@ -49,8 +49,12 @@ export class GeojsonService {
    */
   public getCoord(numero: string, address: string, zipcode: string): Observable<GeoJson> {
     return this.http
-      .get('/geocoding/photon/api' + '?q=' + numero + ' ' + address + ' ' + zipcode, { headers: { skip: 'true' } })
+      .get('/geocoding/photon-bal/api' + '?q=' + numero + ' ' + address + ' ' + zipcode, { headers: { skip: 'true' } })
       .pipe(map((data: { features: any[]; type: string }) => new GeoJson(data.features[0])));
+  }
+
+  public getTownshipCoord(town: string): Observable<Array<any>> {
+    return this.http.get<Array<any>>(`/api/structures/coordinates/` + town);
   }
 
   // :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

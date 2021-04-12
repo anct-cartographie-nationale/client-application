@@ -22,9 +22,10 @@ export class MapComponent implements OnChanges {
   @Input() public selectedMarkerId: string;
   @Input() public isMapPhone: boolean;
   @Input() public locate = false;
+  @Input() public searchedValue: string;
   @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
   @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private lc;
+  private lc; // Locate control
   private currentStructure: Structure;
 
   public map: Map;
@@ -51,6 +52,13 @@ export class MapComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.searchedValue && !changes.searchedValue.firstChange) {
+      if (changes.searchedValue.currentValue) {
+        this.processTownCoordinate(changes.searchedValue.currentValue);
+      } else {
+        this.map.setView(this.mapOptions.center, this.mapOptions.zoom);
+      }
+    }
     if (changes.isMapPhone) {
       if (this.isMapPhone) {
         setTimeout(() => {
@@ -91,6 +99,20 @@ export class MapComponent implements OnChanges {
     }
   }
 
+  public processTownCoordinate(queryString: string): void {
+    this.geoJsonService.getTownshipCoord(queryString).subscribe(
+      (townData) => {
+        if (townData.length > 0) {
+          const bounds = new L.LatLngBounds(townData.map((dataArray) => dataArray.reverse()));
+          this.map.fitBounds(bounds);
+        }
+      },
+      (err) => {
+        this.map.setView(this.mapOptions.center, this.mapOptions.zoom);
+      }
+    );
+  }
+
   /**
    * Get structures positions and add marker corresponding to those positons on the map
    */
@@ -108,8 +130,8 @@ export class MapComponent implements OnChanges {
     }
   }
 
-  private getStructuresPositions(structureListe: Structure[]): void {
-    structureListe.forEach((structure: Structure) => {
+  private getStructuresPositions(structureList: Structure[]): void {
+    structureList.forEach((structure: Structure) => {
       this.mapService
         .createMarker(
           structure.getLat(),

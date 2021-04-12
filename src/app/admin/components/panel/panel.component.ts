@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 import { AdminPannelEnum } from '../../../shared/enum/adminPanel.enum';
 
 @Component({
@@ -7,6 +8,7 @@ import { AdminPannelEnum } from '../../../shared/enum/adminPanel.enum';
 })
 export class PanelComponent implements OnInit {
   public features = AdminPannelEnum;
+  public ghostLink = environment.ghostAdmin;
   public selectedFeature;
 
   constructor() {}

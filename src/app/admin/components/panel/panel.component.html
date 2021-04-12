@@ -3,7 +3,8 @@
   <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
     <button (click)="changeActiveFeature(features.pendingStructures)">Gestion structure</button>
     <button (click)="changeActiveFeature(features.deleteUsers)">Suppression d'utilisateurs</button>
-    <button routerLink="/blog/ghost/">Ghost</button>
+    <button (click)="changeActiveFeature(features.newsletterUsers)">Désabonnement newsletter</button>
+    <a target="_blank" class="custom-link" rel="noopener noreferrer" [href]="ghostLink">Ghost</a>
   </div>
   <div *ngIf="selectedFeature === features.deleteUsers">
     <app-admin-delete-user></app-admin-delete-user>
@@ -11,4 +12,8 @@
   <div *ngIf="selectedFeature === features.pendingStructures">
     <app-admin-claim-structure></app-admin-claim-structure>
   </div>
+  <div *ngIf="selectedFeature === features.newsletterUsers">
+    <app-admin-newsletter-users></app-admin-newsletter-users>
+  </div>
+  
 </div>

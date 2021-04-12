@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { MapModule } from './map/map.module';
 import { StructureListComponent } from './structure-list/structure-list.component';
 import { CardComponent } from './structure-list/components/card/card.component';
-import { SearchComponent } from './structure-list/components/search/search.component';
+import { StructureListSearchComponent } from './structure-list/components/structure-list-search/structure-list-search.component';
 import { StructureDetailsComponent } from './structure-list/components/structure-details/structure-details.component';
 import { StructureOpeningStatusComponent } from './structure-list/components/structure-opening-status/structure-opening-status.component';
 import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
@@ -33,6 +33,7 @@ import { FooterFormComponent } from './form/footer-form/footer-form.component';
 import { TempUserResolver } from './resolvers/temp-user.resolver';
 import { StructureJoinComponent } from './structure-join/structure-join.component';
 import { RouterListenerService } from './services/routerListener.service';
+import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsletter-subscription.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { RouterListenerService } from './services/routerListener.service';
     CartoComponent,
     StructureListComponent,
     CardComponent,
-    SearchComponent,
+    StructureListSearchComponent,
     ModalFilterComponent,
     StructureDetailsComponent,
     StructureOpeningStatusComponent,
@@ -54,6 +55,7 @@ import { RouterListenerService } from './services/routerListener.service';
     FormComponent,
     FooterFormComponent,
     StructureJoinComponent,
+    NewsletterSubscriptionComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule, AdminModule],
   providers: [

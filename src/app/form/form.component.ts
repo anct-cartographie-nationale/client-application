@@ -20,6 +20,7 @@ import { PageTypeEnum } from './pageType.enum';
 import { CustomRegExp } from '../utils/CustomRegExp';
 import { StructureWithOwners } from '../models/structureWithOwners.model';
 import { RouterListenerService } from '../services/routerListener.service';
+import { NewsletterService } from '../services/newsletter.service';
 const { DateTime } = require('luxon');
 @Component({
   selector: 'app-structureForm',
@@ -66,6 +67,7 @@ export class FormComponent implements OnInit {
   public isShowConfirmPassword = false;
   public isShowPassword = false;
   public userAcceptSavedDate = false;
+  public userAcceptNewsletter = false;
   public showMenu = false;
   public isEditMode = false;
   public isClaimMode = false;
@@ -82,7 +84,8 @@ export class FormComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private routerListener: RouterListenerService
+    private routerListener: RouterListenerService,
+    private newsletterService: NewsletterService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -470,8 +473,8 @@ export class FormComponent implements OnInit {
         name: 'Nom et adresse',
       };
       this.pagesValidation[PageTypeEnum.structurePhone] = {
-        valid: this.getStructureControl('contactPhone').valid,
-        name: 'Téléphone',
+        valid: this.getStructureControl('contactMail').valid && this.getStructureControl('contactPhone').valid,
+        name: 'Contact structure',
       };
       this.pagesValidation[PageTypeEnum.structureType] = {
         valid: this.getStructureControl('structureType').valid,
@@ -479,7 +482,7 @@ export class FormComponent implements OnInit {
       };
       this.pagesValidation[PageTypeEnum.structureAccessModality] = {
         valid: this.getStructureControl('accessModality').valid,
-        name: "Modalités d'accueil ",
+        name: "Modalités d'accueil",
       };
       this.pagesValidation[PageTypeEnum.structureHours] = { valid: this.hoursForm.valid, name: "Horaires d'ouverture" };
       this.pagesValidation[PageTypeEnum.structureHoursDetails] = {
@@ -492,7 +495,6 @@ export class FormComponent implements OnInit {
       };
       this.pagesValidation[PageTypeEnum.structureWebAndSocialNetwork] = {
         valid:
-          this.getStructureControl('contactMail').valid &&
           (this.getStructureControl('website').valid || !this.showWebsite) &&
           ((this.getStructureControl('facebook').valid &&
             this.getStructureControl('twitter').valid &&
@@ -574,6 +576,9 @@ export class FormComponent implements OnInit {
       const user = new User(this.accountForm.value);
       // Create user and claim structure
       this.authService.register(user).subscribe(() => {
+        if (this.userAcceptNewsletter) {
+          this.newsletterService.newsletterSubscribe(user.email).subscribe(() => {});
+        }
         // If joinMode, send join request, if not send claim request;
         if (this.isJoinMode) {
           this.structureService.joinStructure(this.claimStructure._id, user.email).subscribe(() => {
@@ -824,6 +829,10 @@ export class FormComponent implements OnInit {
     this.setValidationsForm();
   }
 
+  public acceptReceiveNewsletter(isAccepted: boolean): void {
+    this.userAcceptNewsletter = isAccepted;
+  }
+
   public validateForm(): void {
     if (this.structureForm.valid && this.hoursForm.valid) {
       let structure: Structure = this.structureForm.value;
@@ -848,6 +857,9 @@ export class FormComponent implements OnInit {
               .subscribe(() => {
                 this.createStructure(structure, user);
               });
+            if (this.userAcceptNewsletter) {
+              this.newsletterService.newsletterSubscribe(user.email).subscribe(() => {});
+            }
           }
         }
       }
@@ -902,7 +914,7 @@ export class FormComponent implements OnInit {
   }
 
   public closeEditMode(): void {
-    this.router.navigateByUrl('home', { state: { data: this.createdStructure } });
+    this.router.navigateByUrl('acteurs', { state: { data: this.createdStructure } });
   }
 
   public verifyUserExist(inputEmail): void {
@@ -925,6 +937,6 @@ export class FormComponent implements OnInit {
   }
 
   public structureDeleted(): void {
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('acteurs');
   }
 }

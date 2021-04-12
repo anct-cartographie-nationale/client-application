@@ -30,7 +30,7 @@ module.exports = function (config) {
         target: 'https://passerelle.formulaireextranet.grandlyon.com',
         changeOrigin: true,
       },
-      '/geocoding/photon/api': {
+      '/geocoding/photon-bal/api': {
         target: 'https://download.data.grandlyon.com',
         changeOrigin: true,
       },

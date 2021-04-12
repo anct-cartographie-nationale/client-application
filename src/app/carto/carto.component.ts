@@ -24,6 +24,7 @@ export class CartoComponent implements OnInit {
   public userLatitude: number;
   public userLongitude: number;
   public isMapPhone = false;
+  public searchedValue = null;
   public locate = false; // Use to sync location between search and map
   constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
 
@@ -41,6 +42,7 @@ export class CartoComponent implements OnInit {
   public getStructures(filters: Filter[]): void {
     const queryString = _.find(filters, { name: 'query' });
     if (queryString) {
+      this.searchedValue = queryString.value;
       if (this.isLocationRequest(queryString.value)) {
         this.getCoordByAddress(queryString.value).then((res) => {
           this.currentLocation = res;
@@ -60,6 +62,7 @@ export class CartoComponent implements OnInit {
         });
       }
     } else {
+      this.searchedValue = null;
       this.structureService.getStructures(filters).subscribe((structures) => {
         if (structures) {
           this.updateStructuresdistance(structures, this.userLongitude, this.userLatitude);

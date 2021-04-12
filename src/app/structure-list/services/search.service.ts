@@ -28,9 +28,9 @@ export class SearchService {
       .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
 
-  public getFakeCounterModule(): Observable<StructureCounter[]> {
+  public getFakeCounterModule(selectedFilters: { id: string; text: string }[]): Observable<StructureCounter[]> {
     return this.http
-      .get('/api/structures/count')
+      .post('/api/structures/count', selectedFilters)
       .pipe(map((data: any[]) => data.map((item) => new StructureCounter(item))));
   }
   public setCountModules(category: Category, structureCountTab: StructureCounter[]): Category {

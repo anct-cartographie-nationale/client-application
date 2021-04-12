@@ -193,4 +193,11 @@ export class StructureService {
   public getStructureWithOwners(structureId: string, profile: User): Observable<StructureWithOwners> {
     return this.http.post<any>(`${this.baseUrl}/${structureId}/withOwners`, { emailUser: profile.email });
   }
+
+  public sendMailOnStructureError(structureId: string, content: string, profile: User) {
+    return this.http.post<any>(`${this.baseUrl}/reportStructureError`, {
+      structureId,
+      content: content,
+    });
+  }
 }

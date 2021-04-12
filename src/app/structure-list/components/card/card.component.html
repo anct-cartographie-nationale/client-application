@@ -1,19 +1,18 @@
 <div class="structure" fxLayout="column" (click)="cardClicked()" (mouseenter)="cardHover()">
-  <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
-    <span class="structure-name" [ngClass]="{ notClaimed: !isClaimed }">{{ structure.structureName }}</span>
-    <div
-      *ngIf="structure.distance"
-      class="distanceStructure"
-      fxLayout="row"
-      fxLayoutAlign="end center"
-      fxLayoutGap="20px"
-    >
+  <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="16px">
+    <div fxLayout="column" fxLayoutAlign="end">
+      <span class="structure-name" [ngClass]="{ notClaimed: !isClaimed }">{{ structure.structureName }}</span>
+      <span class="typeStructure">{{ structure.getLabelTypeStructure() }}</span>
+    </div>
+    <div class="distanceStructure" fxLayout="column" fxLayoutAlign="none end">
       <div>
+        {{ this.structure.address.commune }}
+      </div>
+      <div *ngIf="structure.distance">
         {{ this.formatDistance() }}
       </div>
     </div>
   </div>
-  <span class="typeStructure">{{ structure.getLabelTypeStructure() }}</span>
   <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="7px" *ngIf="structure.hasEquipments()">
     <app-svg-icon
       *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)"

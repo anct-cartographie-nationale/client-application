@@ -6,7 +6,6 @@ import { AdminService } from '../../services/admin.service';
 @Component({
   selector: 'app-admin-delete-user',
   templateUrl: './delete-user.component.html',
-  styleUrls: ['./delete-user.component.scss'],
 })
 export class DeleteUserComponent {
   public users: User[];
