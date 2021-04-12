@@ -6,6 +6,7 @@
 
 .button {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .form-input {
@@ -15,4 +16,9 @@
 
 .existingEmail {
   color: $orange-warning;
+}
+
+.btn-side {
+  color: #4f4f4f;
+  text-decoration: underline;
 }
