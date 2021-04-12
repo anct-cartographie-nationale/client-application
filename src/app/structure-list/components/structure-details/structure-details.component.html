@@ -121,6 +121,15 @@
           </div>
         </div>
       </div>
+      <div *ngIf="profileService.isAdmin()" class="hide-on-print">
+        Administrateur(s) de cette structure:
+        <div *ngIf="structureAdmins.length === 0">Aucun administrateur</div>
+        <div *ngIf="structureAdmins.length > 0">
+          <div *ngFor="let structureAdmin of structureAdmins">
+            {{ structureAdmin.email }}
+          </div>
+        </div>
+      </div>
       <div fxLayout="row" fxLayoutAlign="center center" class="hide-on-print">
         <a *ngIf="!isClaimed" (click)="handleClaim()" class="primary" tabindex="0">Revendiquer cette structure</a>
         <a *ngIf="displayJoin()" (click)="handleJoin()" class="primary" tabindex="0">Rejoindre cette structure</a>

@@ -15,6 +15,7 @@ import { ProfileService } from '../../../profile/services/profile.service';
 import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth.service';
 import { PublicCategorie } from '../../enum/public.enum';
+import { Owner } from '../../../models/owner.model';
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
@@ -44,6 +45,7 @@ export class StructureDetailsComponent implements OnInit {
   public claimModalOpenned = false;
   public structureErrorModalOpenned = false;
   public joinModalOpenned = false;
+  public structureAdmins: Owner[] = [];
 
   constructor(
     private printService: PrintService,
@@ -67,8 +69,15 @@ export class StructureDetailsComponent implements OnInit {
     this.isLoading = true;
     if (this.userIsLoggedIn()) {
       this.currentProfile = await this.profileService.getProfile();
+
+      if (this.profileService.isAdmin()) {
+        this.structureService.getStructureWithOwners(this.structure._id, this.currentProfile).subscribe((res) => {
+          this.structureAdmins = res.owners;
+        });
+      }
     }
     this.isClaimed = await this.structureService.isClaimed(this.structure._id, this.currentProfile).toPromise();
+
     // GetTclStopPoints
     this.getTclStopPoints();
     this.searchService.getCategoriesTraining().subscribe((referentiels) => {
