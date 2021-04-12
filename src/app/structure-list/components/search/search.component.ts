@@ -9,6 +9,8 @@ import { Filter } from '../../models/filter.model';
 import { Module } from '../../models/module.model';
 import { StructureCounter } from '../../models/structureCounter.model';
 import { SearchService } from '../../services/search.service';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-structure-list-search',
@@ -36,20 +38,34 @@ export class SearchComponent implements OnInit, OnChanges {
   public numberAccompanimentChecked = 0;
   public numberMoreFiltersChecked = 0;
 
+  public queryString = 'placeholder';
   // Modal confirmation variable
   public isConfirmationModalOpen = false;
   public confirmationModalContent =
     'Afin d’ajouter votre structure,vous allez être redirigé vers le formulaire Grand Lyon à remplir.';
 
-  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
+  constructor(
+    public searchService: SearchService,
+    private fb: FormBuilder,
+    private geoJsonService: GeojsonService,
+    private activatedRoute: ActivatedRoute,
+    private location: Location
+  ) {
     this.searchForm = this.fb.group({
       searchTerm: '',
     });
   }
   ngOnInit(): void {
     // Will store the different categories
+    this.queryString = this.activatedRoute.snapshot.queryParamMap.get('search');
     this.categories = [];
     this.checkedModulesFilter = new Array();
+    if (this.queryString) {
+      console.log('we search', this.queryString);
+      const filters: Filter[] = [];
+      filters.push(new Filter('query', this.queryString));
+      this.searchEvent.emit(filters);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -75,6 +91,13 @@ export class SearchComponent implements OnInit, OnChanges {
   // Sends an array containing all filters
   public applyFilter(term: string): void {
     // Add search input filter
+    if (term) {
+      this.location.go('/acteurs?search=' + term);
+    } else {
+      this.location.go('/acteurs');
+    }
+    this.queryString = this.activatedRoute.snapshot.queryParamMap.get('search');
+    console.log('query string is:', this.queryString);
     const filters: Filter[] = [];
     if (term) {
       filters.push(new Filter('query', term));
