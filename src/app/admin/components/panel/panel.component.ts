@@ -15,7 +15,6 @@ export class PanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedFeature = this.features.pendingStructures;
-    console.log(this.ghostLink);
   }
 
   public changeActiveFeature(newFeature: AdminPannelEnum) {

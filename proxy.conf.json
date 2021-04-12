@@ -27,7 +27,7 @@
     "logLevel": "info"
   },
   "/geocoding/photon-bal/api": {
-    "target": "https://download.data.grandlyon.com/geocoding/photon-bal/api",
+    "target": "https://download.data.grandlyon.com",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "info"

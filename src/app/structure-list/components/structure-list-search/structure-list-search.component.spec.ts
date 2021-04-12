@@ -2,26 +2,26 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Filter } from '../../models/filter.model';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { SearchComponent } from './search.component';
+import { StructureListSearchComponent } from './structure-list-search.component';
 import { Module } from '../../models/module.model';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { GeojsonService } from '../../../services/geojson.service';
 import { GeoJson } from '../../../map/models/geojson.model';
 import { of } from 'rxjs';
 
-describe('SearchComponent', () => {
-  let component: SearchComponent;
-  let fixture: ComponentFixture<SearchComponent>;
+describe('StructureListSearchComponent', () => {
+  let component: StructureListSearchComponent;
+  let fixture: ComponentFixture<StructureListSearchComponent>;
   let geoService: GeojsonService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SearchComponent],
+      declarations: [StructureListSearchComponent],
       imports: [HttpClientTestingModule, ReactiveFormsModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchComponent);
+    fixture = TestBed.createComponent(StructureListSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     geoService = TestBed.inject(GeojsonService);

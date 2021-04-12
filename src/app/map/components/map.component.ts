@@ -53,8 +53,11 @@ export class MapComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.searchedValue && !changes.searchedValue.firstChange) {
-      if (changes.searchedValue.currentValue) this.processTownCoordinate(changes.searchedValue.currentValue);
-      else this.map.setView(this.mapOptions.center, this.mapOptions.zoom);
+      if (changes.searchedValue.currentValue) {
+        this.processTownCoordinate(changes.searchedValue.currentValue);
+      } else {
+        this.map.setView(this.mapOptions.center, this.mapOptions.zoom);
+      }
     }
     if (changes.isMapPhone) {
       if (this.isMapPhone) {
@@ -99,8 +102,10 @@ export class MapComponent implements OnChanges {
   public processTownCoordinate(queryString: string): void {
     this.geoJsonService.getTownshipCoord(queryString).subscribe(
       (townData) => {
-        const bounds = new L.LatLngBounds(townData.map((dataArray) => dataArray.reverse()));
-        this.map.fitBounds(bounds);
+        if (townData.length > 0) {
+          const bounds = new L.LatLngBounds(townData.map((dataArray) => dataArray.reverse()));
+          this.map.fitBounds(bounds);
+        }
       },
       (err) => {
         this.map.setView(this.mapOptions.center, this.mapOptions.zoom);

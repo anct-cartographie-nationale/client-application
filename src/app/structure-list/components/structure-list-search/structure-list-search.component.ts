@@ -12,10 +12,10 @@ import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-structure-list-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  templateUrl: './structure-list-search.component.html',
+  styleUrls: ['./structure-list-search.component.scss'],
 })
-export class SearchComponent implements OnInit, OnChanges {
+export class StructureListSearchComponent implements OnInit, OnChanges {
   @Output() searchEvent = new EventEmitter();
 
   // Show/hide form createStructure
