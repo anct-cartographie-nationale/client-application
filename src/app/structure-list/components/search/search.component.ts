@@ -61,7 +61,6 @@ export class SearchComponent implements OnInit, OnChanges {
     this.categories = [];
     this.checkedModulesFilter = new Array();
     if (this.queryString) {
-      console.log('we search', this.queryString);
       const filters: Filter[] = [];
       filters.push(new Filter('query', this.queryString));
       this.searchEvent.emit(filters);
@@ -97,7 +96,6 @@ export class SearchComponent implements OnInit, OnChanges {
       this.location.go('/acteurs');
     }
     this.queryString = this.activatedRoute.snapshot.queryParamMap.get('search');
-    console.log('query string is:', this.queryString);
     const filters: Filter[] = [];
     if (term) {
       filters.push(new Filter('query', term));
