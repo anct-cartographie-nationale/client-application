@@ -16,7 +16,7 @@
   <app-card
     *ngFor="let structure of structuresListChunked"
     [structure]="structure"
-    (showDetails)="showDetails($event)"
+    (showDetails)="showDetails($event, filters)"
     (hover)="handleCardHover($event)"
   ></app-card>
   <p *ngIf="structureList && structureList.length <= 0">Il n'y a aucune réponse correspondant à votre recherche</p>
