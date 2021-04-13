@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit, OnChanges {
   public numberAccompanimentChecked = 0;
   public numberMoreFiltersChecked = 0;
 
-  public queryString = 'placeholder';
+  public queryString: string;
   // Modal confirmation variable
   public isConfirmationModalOpen = false;
   public confirmationModalContent =
@@ -95,7 +95,6 @@ export class SearchComponent implements OnInit, OnChanges {
     } else {
       this.location.go('/acteurs');
     }
-    this.queryString = this.activatedRoute.snapshot.queryParamMap.get('search');
     const filters: Filter[] = [];
     if (term) {
       filters.push(new Filter('query', term));
