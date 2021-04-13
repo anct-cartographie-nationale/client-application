@@ -6,7 +6,7 @@ export class CustomRegExp {
   /**
    * Validate an email
    */
-  public static readonly EMAIL: RegExp = /^[a-z0-9.-]+@[a-z0-9.-]+[.][a-z]{2,3}/; //NOSONAR
+  public static readonly EMAIL: RegExp = /^[a-z0-9.-_]+@[a-z0-9.-]+[.][a-z]{2,3}/; //NOSONAR
   public static readonly TEXT_WITHOUT_NUMBER: RegExp = /^[A-Za-zÀ-ÖØ-öø-ÿ- ]{1,}$/; //NOSONAR
   /**
    * Validate a password (at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character)
