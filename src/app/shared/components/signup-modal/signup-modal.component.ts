@@ -33,7 +33,7 @@ export class SignUpModalComponent implements OnInit {
       password: ['', [Validators.required, Validators.pattern(CustomRegExp.PASSWORD)]],
     });
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/acteurs';
   }
 
   // getter for form fields
