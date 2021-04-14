@@ -42,7 +42,6 @@ describe('FormComponent', () => {
       contactSurname: new FormControl('structure.contactSurname'),
       fonction: new FormControl('structure.fonction'),
       pmrAccess: new FormControl('structure.pmrAccess'),
-      documentsMeeting: new FormControl('structure.documentsMeeting'),
       hours: new FormGroup({
         monday: new FormGroup({
           open: new FormControl(true, Validators.required),
