@@ -45,11 +45,17 @@ export class CardComponent implements OnInit {
 
   public cardClicked(): void {
     this.showDetails.emit(this.structure);
+    const queryString = this.route.snapshot.queryParamMap.get('search');
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: {
-        id: this.structure._id,
-      },
+      queryParams: queryString
+        ? {
+            id: this.structure._id,
+            search: queryString,
+          }
+        : {
+            id: this.structure._id,
+          },
     });
   }
 

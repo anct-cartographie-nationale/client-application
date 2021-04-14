@@ -8,6 +8,7 @@ import { Filter } from '../structure-list/models/filter.model';
 import { GeoJson } from '../map/models/geojson.model';
 import { GeojsonService } from '../services/geojson.service';
 import { CustomRegExp } from '../utils/CustomRegExp';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-carto',
@@ -26,14 +27,21 @@ export class CartoComponent implements OnInit {
   public isMapPhone = false;
   public searchedValue = null;
   public locate = false; // Use to sync location between search and map
-  constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
+  constructor(
+    private structureService: StructureService,
+    private geoJsonService: GeojsonService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    if (navigator.geolocation) {
-      this.getLocation();
-    } else {
-      this.getStructures(null);
+    if (!this.activatedRoute.snapshot.queryParamMap.get('search')) {
+      if (navigator.geolocation) {
+        this.getLocation();
+      } else {
+        this.getStructures(null);
+      }
     }
+
     if (history.state.data) {
       this.currentStructure = new Structure(history.state.data);
     }

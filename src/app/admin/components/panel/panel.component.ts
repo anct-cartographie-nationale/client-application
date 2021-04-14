@@ -17,7 +17,7 @@ export class PanelComponent implements OnInit {
     this.selectedFeature = this.features.pendingStructures;
   }
 
-  public changeActiveFeature(newFeature: AdminPannelEnum) {
+  public changeActiveFeature(newFeature: AdminPannelEnum): void {
     this.selectedFeature = newFeature;
   }
 }

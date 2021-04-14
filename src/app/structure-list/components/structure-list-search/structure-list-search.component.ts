@@ -9,6 +9,8 @@ import { Filter } from '../../models/filter.model';
 import { Module } from '../../models/module.model';
 import { StructureCounter } from '../../models/structureCounter.model';
 import { SearchService } from '../../services/search.service';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-structure-list-search',
@@ -36,20 +38,35 @@ export class StructureListSearchComponent implements OnInit, OnChanges {
   public numberAccompanimentChecked = 0;
   public numberMoreFiltersChecked = 0;
 
+  public queryString: string;
   // Modal confirmation variable
   public isConfirmationModalOpen = false;
   public confirmationModalContent =
     'Afin d’ajouter votre structure,vous allez être redirigé vers le formulaire Grand Lyon à remplir.';
 
-  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
+  constructor(
+    public searchService: SearchService,
+    private fb: FormBuilder,
+    private geoJsonService: GeojsonService,
+    private activatedRoute: ActivatedRoute,
+    private location: Location,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.searchForm = this.fb.group({
       searchTerm: '',
     });
   }
   ngOnInit(): void {
     // Will store the different categories
+    this.queryString = this.activatedRoute.snapshot.queryParamMap.get('search');
     this.categories = [];
     this.checkedModulesFilter = new Array();
+    if (this.queryString) {
+      const filters: Filter[] = [];
+      filters.push(new Filter('query', this.queryString));
+      this.searchEvent.emit(filters);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -75,6 +92,15 @@ export class StructureListSearchComponent implements OnInit, OnChanges {
   // Sends an array containing all filters
   public applyFilter(term: string): void {
     // Add search input filter
+    if (term) {
+      this.router.navigate(['/acteurs'], {
+        relativeTo: this.route,
+        queryParams: {
+          search: term,
+        },
+        queryParamsHandling: 'merge',
+      });
+    }
     const filters: Filter[] = [];
     if (term) {
       filters.push(new Filter('query', term));
