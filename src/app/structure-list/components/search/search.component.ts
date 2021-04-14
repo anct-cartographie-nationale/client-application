@@ -10,7 +10,7 @@ import { Module } from '../../models/module.model';
 import { StructureCounter } from '../../models/structureCounter.model';
 import { SearchService } from '../../services/search.service';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-structure-list-search',
@@ -49,7 +49,9 @@ export class SearchComponent implements OnInit, OnChanges {
     private fb: FormBuilder,
     private geoJsonService: GeojsonService,
     private activatedRoute: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.searchForm = this.fb.group({
       searchTerm: '',
@@ -91,9 +93,13 @@ export class SearchComponent implements OnInit, OnChanges {
   public applyFilter(term: string): void {
     // Add search input filter
     if (term) {
-      this.location.go('/acteurs?search=' + term);
-    } else {
-      this.location.go('/acteurs');
+      this.router.navigate(['/acteurs'], {
+        relativeTo: this.route,
+        queryParams: {
+          search: term,
+        },
+        queryParamsHandling: 'merge',
+      });
     }
     const filters: Filter[] = [];
     if (term) {

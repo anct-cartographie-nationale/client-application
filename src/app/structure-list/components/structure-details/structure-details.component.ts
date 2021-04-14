@@ -121,8 +121,12 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   public close(): void {
-    this.router.navigate([], {
+    this.router.navigate(['/acteurs'], {
       relativeTo: this.route,
+      queryParams: {
+        id: null,
+      },
+      queryParamsHandling: 'merge',
     });
   }
 
