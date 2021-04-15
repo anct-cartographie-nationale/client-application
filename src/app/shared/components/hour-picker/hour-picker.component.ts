@@ -97,21 +97,21 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
           .map((hour: Time) => {
             if (hour.openning && hour.closing) {
               return {
-                start: this.formatNumericalHours(hour.openning),
-                end: this.formatNumericalHours(hour.closing),
+                start: hour.openning,
+                end: hour.closing,
                 error: null,
               };
             } else {
               if (hour.openning) {
                 return {
-                  start: this.formatNumericalHours(hour.openning),
+                  start: hour.openning,
                   end: '',
                   error: 'incomplete',
                 };
               } else {
                 return {
                   start: '',
-                  end: this.formatNumericalHours(hour.closing),
+                  end: hour.closing,
                   error: 'incomplete',
                 };
               }
@@ -135,8 +135,8 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
       time: data.hours.map(
         (hour) =>
           new Time({
-            openning: this.formatStringHours(hour.start),
-            closing: this.formatStringHours(hour.end),
+            openning: hour.start,
+            closing: hour.end,
           })
       ),
     });
@@ -152,27 +152,6 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
       saturday: this.createDay(this.parseToDay(this.structure.hours[5])),
       sunday: this.createDay(this.parseToDay(this.structure.hours[6])),
     });
-  }
-
-  /**
-   * convert 1300 to '13:00'
-   */
-  private formatNumericalHours(hour: number): string {
-    const numberStr = hour.toString();
-    if (numberStr.length === 3) {
-      return `0${numberStr[0]}:${numberStr[1]}${numberStr[2]}`;
-    } else {
-      const splitStr = numberStr.match(/.{1,2}/g);
-      return `${splitStr[0]}:${splitStr[1]}`;
-    }
-  }
-
-  /**
-   * convert '13:00' to 1300
-   */
-  private formatStringHours(hour: string): number {
-    const numberStr = hour.split(':')[0] + hour.split(':')[1];
-    return parseInt(numberStr);
   }
 
   /**

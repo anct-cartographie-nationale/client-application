@@ -840,7 +840,7 @@ export class FormComponent implements OnInit {
       let user: User;
       if (this.isEditMode) {
         this.structureService.editStructure(structure).subscribe((s: Structure) => {
-          this.createdStructure = this.structureService.updateOpeningStructure(s, DateTime.local());
+          this.createdStructure = this.structureService.updateOpeningStructure(s);
           this.editForm = this.createStructureForm(s);
         });
       } else {

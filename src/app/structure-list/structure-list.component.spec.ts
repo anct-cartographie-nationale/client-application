@@ -56,7 +56,6 @@ describe('StructureListComponent', () => {
       bornesNumeriques: '',
       imprimantes: '',
       autresEspacesProposesParLaStructure: 'Espace libre service',
-      statutJuridique: '',
       appartenezVousAUnReseauDeMediation: '',
       precisezLequel: '',
       idDeLitemStructureDansDirectus: 123,

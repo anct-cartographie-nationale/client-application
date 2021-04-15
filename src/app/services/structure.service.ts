@@ -4,6 +4,7 @@ import { WeekDay } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
+const { DateTime } = require('luxon');
 
 import { Structure } from '../models/structure.model';
 import { Day } from '../models/day.model';
@@ -98,18 +99,10 @@ export class StructureService {
    * Update opening hours of structure
    * @param structure Structure model
    */
-  public updateOpeningStructure(structure: Structure, dateTime): Structure {
+  public updateOpeningStructure(structure: Structure): Structure {
     // Get current day of week
-    const currentDate = dateTime;
+    const currentDate = DateTime.local();
     const dayOfWeek: number = currentDate.weekday;
-
-    // Checks if minutes start with zero to avoid deletion
-    let now: number;
-    if (currentDate.minute.toString().length !== 1) {
-      now = parseInt('' + currentDate.hour + currentDate.minute, 10);
-    } else {
-      now = parseInt('' + currentDate.hour + 0 + currentDate.minute, 10);
-    }
 
     // Get the schedules of a structure according to his day to indicate if it's open
     const structureSchedules: Day = structure.getDayhours(dayOfWeek);
@@ -117,12 +110,12 @@ export class StructureService {
     structure.isOpen = false;
     if (structureSchedules.open) {
       structureSchedules.time.forEach((period: Time) => {
-        if (this.compareSchedules(period.openning, period.closing, now)) {
+        if (this.compareSchedules(period.openning, period.closing, currentDate)) {
           structure.isOpen = true;
         }
       });
     }
-    structure.openedOn = this.getNextOpening(structure, dayOfWeek, now);
+    structure.openedOn = this.getNextOpening(structure, dayOfWeek, currentDate); //TODO:
     return structure;
   }
 
@@ -132,8 +125,14 @@ export class StructureService {
    * @param endTime end of period
    * @param currentTime actual time
    */
-  private compareSchedules(startTime: number, endTime: number, currentTime: number): boolean {
-    return currentTime >= startTime && currentTime <= endTime;
+  private compareSchedules(startTime: string, endTime: string, currentTime: typeof DateTime): boolean {
+    const day = currentTime.toISO().split('T')[0];
+    let start = DateTime.fromISO(`${day}T${startTime}`);
+    if (startTime.length === 4) {
+      start = DateTime.fromISO(`${day}T0${startTime}`);
+    }
+    const end = DateTime.fromISO(`${day}T${endTime}`);
+    return currentTime > start && currentTime < end;
   }
 
   // Get enum key
@@ -145,8 +144,11 @@ export class StructureService {
     });
     return keys.length > 0 ? parseInt(keys[0]) : null;
   }
-  private getNextOpening(s: Structure, dayOfWeek: number, hourBase: number): OpeningDay {
+
+  private getNextOpening(s: Structure, dayOfWeek: number, currentTime: typeof DateTime): OpeningDay {
     let periodBeforeCurrentDay = null;
+    const time = currentTime.toISO().split('T')[1];
+    const currentHour = new Date('1/1/1999 ' + time.split('+')[0]);
 
     // Browse day of week
     for (const [i, period] of Object.entries(s.hours)) {
@@ -154,13 +156,16 @@ export class StructureService {
         // Check if it's current day
         if (i === this.numberToDay(dayOfWeek)) {
           if (
-            (period.time[0].openning <= hourBase && period.time[0].closing >= hourBase) ||
-            (period.time[1] && period.time[1].openning <= hourBase && period.time[1].closing >= hourBase)
+            (new Date('1/1/1999 ' + period.time[0].openning) <= currentHour &&
+              new Date('1/1/1999 ' + period.time[0].closing) >= currentHour) ||
+            (period.time[1] &&
+              new Date('1/1/1999 ' + period.time[1].openning) <= currentHour &&
+              new Date('1/1/1999 ' + period.time[1].closing) >= currentHour)
           ) {
             return new OpeningDay(i, null);
-          } else if (period.time[0].openning >= hourBase) {
+          } else if (new Date('1/1/1999 ' + period.time[0].openning) > currentHour) {
             return new OpeningDay(i, this.numberToHour(period.time[0].openning));
-          } else if (period.time[1] && period.time[1].openning >= hourBase) {
+          } else if (period.time[1] && new Date('1/1/1999 ' + period.time[1].openning) > currentHour) {
             return new OpeningDay(i, this.numberToHour(period.time[1].openning));
           }
           // Return the next day > current day.
@@ -181,23 +186,18 @@ export class StructureService {
     return Weekday[n];
   }
 
-  private numberToHour(n: number): string {
-    if (n.toString().length === 3) {
-      const tabNum = n.toString().match(/.{1,1}/g);
-      return tabNum[0] + 'h' + tabNum[1] + tabNum[2];
-    } else if (n.toString().length === 4) {
-      const tabNum = n.toString().match(/.{1,2}/g);
-      return tabNum[0] + 'h' + tabNum[1];
-    }
+  private numberToHour(n: string): string {
+    return n.replace(':', 'h');
   }
+
   public getStructureWithOwners(structureId: string, profile: User): Observable<StructureWithOwners> {
     return this.http.post<any>(`${this.baseUrl}/${structureId}/withOwners`, { emailUser: profile.email });
   }
 
-  public sendMailOnStructureError(structureId: string, content: string, profile: User) {
+  public sendMailOnStructureError(structureId: string, content: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/reportStructureError`, {
       structureId,
-      content: content,
+      content,
     });
   }
 }

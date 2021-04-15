@@ -93,7 +93,7 @@ export class CartoComponent implements OnInit {
         if (this.geolocation) {
           structure = this.getStructurePosition(structure, lon, lat);
         }
-        return this.structureService.updateOpeningStructure(structure, DateTime.local());
+        return this.structureService.updateOpeningStructure(structure);
       })
     ).then((structureList) => {
       structureList = _.sortBy(structureList, ['distance']);
