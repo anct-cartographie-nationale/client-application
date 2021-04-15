@@ -15,7 +15,6 @@ export class SignUpModalComponent implements OnInit {
   public loading = false;
   public submitted = false;
   public authFailed = false;
-  public returnUrl: string;
   public isShowPassword = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -32,8 +31,6 @@ export class SignUpModalComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern(CustomRegExp.EMAIL)]],
       password: ['', [Validators.required, Validators.pattern(CustomRegExp.PASSWORD)]],
     });
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // getter for form fields
@@ -68,7 +65,7 @@ export class SignUpModalComponent implements OnInit {
       .pipe(first())
       .subscribe(
         () => {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate([this.router.url]);
           this.closeModal();
         },
         () => {
