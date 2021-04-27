@@ -10,8 +10,15 @@ export class NewsletterUsersComponent {
   public subscriptions: NewsletterSubscription[];
   public deleteModalOpenned = false;
   public emailToUnsubscribe: string = null;
+  public subscriptionsCount: number = 0;
 
   constructor(private adminService: AdminService) {}
+
+  ngOnInit(): void {
+    this.adminService.countNewsletterSubscriptions().subscribe((count) => {
+      this.subscriptionsCount = count;
+    });
+  }
 
   public toggleUnsubscribeModal(emailToUnsubscribe: string): void {
     this.emailToUnsubscribe = emailToUnsubscribe;

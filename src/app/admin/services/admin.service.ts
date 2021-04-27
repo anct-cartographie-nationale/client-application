@@ -33,6 +33,10 @@ export class AdminService {
     return this.http.post<NewsletterSubscription[]>(`api/admin/searchNewsletterSubscriptions`, { searchString });
   }
 
+  public countNewsletterSubscriptions(): Observable<number> {
+    return this.http.get<number>(`api/admin/countNewsletterSubscriptions`);
+  }
+
   public unsubscribeEmail(email: string): Observable<string> {
     return this.http.delete<string>(`api/admin/newsletterSubscription/` + email);
   }
