@@ -18,7 +18,7 @@ export enum PageTypeEnum {
   structureWifi = 16,
   structureEquipments = 17,
   structureLabels = 18,
-  structureOtherServices = 29,
+  structureOtherServices = 19,
   structureDescription = 20,
   structureCovidInfo = 21,
   cgu = 22,
