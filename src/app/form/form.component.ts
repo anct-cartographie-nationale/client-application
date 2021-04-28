@@ -484,10 +484,9 @@ export class FormComponent implements OnInit {
         valid: this.getStructureControl('accessModality').valid,
         name: "Modalités d'accueil",
       };
-      this.pagesValidation[PageTypeEnum.structureHours] = { valid: this.hoursForm.valid, name: "Horaires d'ouverture" };
-      this.pagesValidation[PageTypeEnum.structureHoursDetails] = {
-        valid: this.getStructureControl('exceptionalClosures').valid,
-        name: 'Précisions sur les horaires',
+      this.pagesValidation[PageTypeEnum.structureHours] = {
+        valid: this.hoursForm.valid && this.getStructureControl('exceptionalClosures').valid,
+        name: "Horaires d'ouverture",
       };
       this.pagesValidation[PageTypeEnum.structurePmr] = {
         valid: this.getStructureControl('pmrAccess').valid,

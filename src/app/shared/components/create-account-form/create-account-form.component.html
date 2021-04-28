@@ -1,6 +1,6 @@
 <form [formGroup]="accountForm" *ngIf="accountForm" (ngSubmit)="onSubmit(accountForm)">
   <div class="form-group" fxLayout="column">
-    <label for="email">Courriel personnel</label>
+    <label for="email">Courriel du compte</label>
     <div fxLayout="row" fxLayoutGap="13px">
       <input type="text" autocomplete="on" formControlName="email" class="form-input" />
       <img *ngIf="f.email.invalid && f.email.value" src="../../assets/form/notvalidate.svg" alt="logo invalid" />
