@@ -77,6 +77,9 @@ export class FormComponent implements OnInit {
   public isWifiChoosen = null;
   public structureWithOwners: StructureWithOwners;
 
+  public isPopUpOpen = false;
+  public displaySignUp = true;
+
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
@@ -136,6 +139,27 @@ export class FormComponent implements OnInit {
     } else {
       this.routerListener.goToPreviousUrl();
     }
+  }
+
+  public closeSignUpModal(value: boolean): void {
+    if (!value) {
+      this.displaySignUp = false;
+    } else {
+      this.isPopUpOpen = false;
+    }
+    if (this.isLoggedIn) {
+      this.updateFormOnLogin();
+    }
+  }
+
+  public updateFormOnLogin() {
+    //TODO -> switch to signed mode, update user data, validate/delete previous field, skip 2 pages
+    this.isAccountMode = true;
+    this.currentPage = PageTypeEnum.structureNameAndAddress;
+  }
+
+  public get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   async setCategories(): Promise<void> {

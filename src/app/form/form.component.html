@@ -121,6 +121,13 @@
           <h3>Qui êtes-vous ?</h3>
           <p>Ces informations ne seront pas visibles sur la plateforme</p>
         </div>
+        <div class="title">
+          <h4>Vous possédez déja un compte ? Connectez-vous:</h4>
+          <button class="btn-primary small next" *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
+            Se connecter
+          </button>
+          <h4>Sinon, inscrivez-vous en suivant le formulaire ci-dessous:</h4>
+        </div>
         <div class="form-group" fxLayout="column">
           <label for="surname">Nom</label>
           <div fxLayout="row" fxLayoutGap="13px">
@@ -1213,4 +1220,9 @@
       Voir ma structure
     </button>
   </div>
+  <app-signup-modal
+    *ngIf="displaySignUp"
+    [openned]="isPopUpOpen"
+    (closed)="closeSignUpModal($event)"
+  ></app-signup-modal>
 </div>
