@@ -3,6 +3,7 @@
   <div fxLayout="row">
     <button (click)="copySubscription()">Copier les adresses dans le presse papier</button>
   </div>
+  <div fxLayout="row">Il y a actuellement {{ subscriptionsCount }} abonnés à la newsletter.</div>
   <div fxLayout="row">
     <input #searchstring (keyup)="(0)" />
     <button (click)="searchSubscribedEmail(searchstring.value)">Rechercher</button>
