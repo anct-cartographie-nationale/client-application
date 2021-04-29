@@ -36,6 +36,7 @@ export class NewsletterUsersComponent {
     if (shouldUnsubscribe) {
       this.adminService.unsubscribeEmail(email).subscribe((data) => {
         this.subscriptions = this.subscriptions.filter((obj) => obj.email !== email);
+        this.subscriptionsCount = this.subscriptions.length;
       });
     }
   }
