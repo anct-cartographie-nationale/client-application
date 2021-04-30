@@ -153,8 +153,12 @@ export class FormComponent implements OnInit {
   }
 
   public updateFormOnLogin() {
-    //TODO -> switch to signed mode, update user data, validate/delete previous field, skip 2 pages
-    this.isAccountMode = true;
+    this.profileService.getProfile().then((user: User) => {
+      this.profile = user;
+    });
+    this.router.navigateByUrl('create-structure');
+    this.pagesValidation[PageTypeEnum.accountInfo] = { valid: true };
+    this.pagesValidation[PageTypeEnum.accountCredentials] = { valid: true };
     this.currentPage = PageTypeEnum.structureNameAndAddress;
   }
 
