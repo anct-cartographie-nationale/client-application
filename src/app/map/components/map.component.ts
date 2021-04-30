@@ -193,7 +193,6 @@ export class MapComponent implements OnChanges {
     this.map = map;
     // Handle location
     this.lc = L.control.locate(this.locateOptions).addTo(this.map);
-    // .locate(this.locateOptions).addTo(this.map);
     this.map.on('locationfound', () => {
       this.locatationTrigger.emit(true);
     });

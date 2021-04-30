@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
-import { GeoJson } from '../../../map/models/geojson.model';
 import { GeojsonService } from '../../../services/geojson.service';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
@@ -17,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './structure-list-search.component.html',
   styleUrls: ['./structure-list-search.component.scss'],
 })
-export class StructureListSearchComponent implements OnInit, OnChanges {
+export class StructureListSearchComponent implements OnInit {
   @Output() searchEvent = new EventEmitter();
 
   // Show/hide form createStructure
@@ -47,9 +46,7 @@ export class StructureListSearchComponent implements OnInit, OnChanges {
   constructor(
     public searchService: SearchService,
     private fb: FormBuilder,
-    private geoJsonService: GeojsonService,
     private activatedRoute: ActivatedRoute,
-    private location: Location,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -66,12 +63,6 @@ export class StructureListSearchComponent implements OnInit, OnChanges {
       const filters: Filter[] = [];
       filters.push(new Filter('query', this.queryString));
       this.searchEvent.emit(filters);
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.locate && changes.locate.currentValue && !changes.locate.previousValue) {
-      this.locateMe();
     }
   }
 
@@ -173,19 +164,6 @@ export class StructureListSearchComponent implements OnInit, OnChanges {
     this.modalTypeOpened = undefined;
   }
 
-  // Get adress and put it in input
-  public locateMe(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const longitude = position.coords.longitude;
-      const latitude = position.coords.latitude;
-      this.geoJsonService.getAddressByCoord(longitude, latitude).subscribe((geoPosition: GeoJson) => {
-        const adress = geoPosition.properties.name;
-        this.searchForm.setValue({ searchTerm: adress });
-        this.applyFilter(adress);
-      });
-      this.locatationTrigger.emit(true);
-    });
-  }
   // Management of the checkbox event (Check / Uncheck)
   public numericPassCheck(event, categ): void {
     const checkValue: string = event.target.value;
