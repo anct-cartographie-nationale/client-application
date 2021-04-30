@@ -157,6 +157,7 @@ export class FormComponent implements OnInit {
       this.profile = user;
     });
     this.router.navigateByUrl('create-structure');
+    this.progressStatus += (100 / this.nbPagesForm) * 2;
     this.pagesValidation[PageTypeEnum.accountInfo] = { valid: true };
     this.pagesValidation[PageTypeEnum.accountCredentials] = { valid: true };
     this.currentPage = PageTypeEnum.structureNameAndAddress;
@@ -714,8 +715,6 @@ export class FormComponent implements OnInit {
       }
 
       if (this.currentPage == PageTypeEnum.structureWorkshop) {
-        //console.log('procedure:', this.proceduresAccompaniment.);
-        // console.log('public:', this..modules);
         if (
           !this.structureForm.get('baseSkills').value.length &&
           !this.structureForm.get('accessRight').value.length &&
@@ -756,8 +755,6 @@ export class FormComponent implements OnInit {
         this.progressStatus -= 100 / this.nbPagesForm;
       }
       if (this.currentPage == PageTypeEnum.structureWifi) {
-        //console.log('procedure:', this.proceduresAccompaniment.);
-        // console.log('public:', this..modules);
         if (
           !this.structureForm.get('baseSkills').value.length &&
           !this.structureForm.get('accessRight').value.length &&
