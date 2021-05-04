@@ -1,6 +1,13 @@
 <div fxLayout="row" class="header hide-on-print">
   <div class="logo clickable" routerLink="/home">
-    <img *ngIf="displayLogo(); else customTitle" class="logo-grand-lyon" src="/assets/logos/resin.svg" alt />
+    <img
+      *ngIf="displayLogo(); else customTitle"
+      class="logo-grand-lyon"
+      width="108"
+      height="37"
+      src="/assets/logos/resin.svg"
+      alt
+    />
     <div class="logo-text" fxLayout="column" fxLayoutAlign="center">
       <p>Réseau des acteurs de l'inclusion numérique de la métropole de Lyon</p>
     </div>
@@ -46,6 +53,6 @@
 <app-signup-modal *ngIf="displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignUpModal($event)"></app-signup-modal>
 
 <ng-template #customTitle>
-  <img class="desktop-show logo-grand-lyon" src="/assets/logos/resin.svg" alt />
+  <img class="desktop-show logo-grand-lyon" width="108" height="37" src="/assets/logos/resin.svg" alt />
   <p class="mobile-show">Création de compte</p>
 </ng-template>
