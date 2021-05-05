@@ -309,7 +309,7 @@ export class FormComponent implements OnInit {
         Validators.required,
         Validators.pattern(CustomRegExp.NO_NULL_NUMBER),
       ]),
-      freeWorkShop: new FormControl(structure.freeWorkShop),
+      freeWorkShop: new FormControl(structure.freeWorkShop, [Validators.required]),
     });
     return form;
   }
@@ -888,6 +888,9 @@ export class FormComponent implements OnInit {
   }
 
   public validateForm(): void {
+    if (this.getStructureControl('freeWorkShop').value === null) {
+      this.getStructureControl('freeWorkShop').setValue(false);
+    }
     if (this.structureForm.valid && this.hoursForm.valid) {
       let structure: Structure = this.structureForm.value;
       structure.hours = this.hoursForm.value;
