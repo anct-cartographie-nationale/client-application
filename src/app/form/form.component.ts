@@ -152,7 +152,7 @@ export class FormComponent implements OnInit {
     }
   }
 
-  public updateFormOnLogin() {
+  public updateFormOnLogin(): void {
     this.profileService.getProfile().then((user: User) => {
       this.profile = user;
     });
