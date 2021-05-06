@@ -110,7 +110,7 @@ export class StructureService {
     structure.isOpen = false;
     if (structureSchedules.open) {
       structureSchedules.time.forEach((period: Time) => {
-        if (this.compareSchedules(period.openning, period.closing, currentDate)) {
+        if (this.compareSchedules(period.opening, period.closing, currentDate)) {
           structure.isOpen = true;
         }
       });
@@ -156,26 +156,26 @@ export class StructureService {
         // Check if it's current day
         if (i === this.numberToDay(dayOfWeek)) {
           if (
-            (new Date('1/1/1999 ' + period.time[0].openning) <= currentHour &&
+            (new Date('1/1/1999 ' + period.time[0].opening) <= currentHour &&
               new Date('1/1/1999 ' + period.time[0].closing) >= currentHour) ||
             (period.time[1] &&
-              new Date('1/1/1999 ' + period.time[1].openning) <= currentHour &&
+              new Date('1/1/1999 ' + period.time[1].opening) <= currentHour &&
               new Date('1/1/1999 ' + period.time[1].closing) >= currentHour)
           ) {
             return new OpeningDay(i, null);
-          } else if (new Date('1/1/1999 ' + period.time[0].openning) > currentHour) {
-            return new OpeningDay(i, this.numberToHour(period.time[0].openning));
-          } else if (period.time[1] && new Date('1/1/1999 ' + period.time[1].openning) > currentHour) {
-            return new OpeningDay(i, this.numberToHour(period.time[1].openning));
+          } else if (new Date('1/1/1999 ' + period.time[0].opening) > currentHour) {
+            return new OpeningDay(i, this.numberToHour(period.time[0].opening));
+          } else if (period.time[1] && new Date('1/1/1999 ' + period.time[1].opening) > currentHour) {
+            return new OpeningDay(i, this.numberToHour(period.time[1].opening));
           }
           // Return the next day > current day.
         } else if (
           this.getEnumKeyByEnumValue(WeekDay, i) > this.getEnumKeyByEnumValue(WeekDay, this.numberToDay(dayOfWeek))
         ) {
-          return new OpeningDay(i, this.numberToHour(period.time[0].openning));
+          return new OpeningDay(i, this.numberToHour(period.time[0].opening));
           // Return the next day < current day.
         } else if (!periodBeforeCurrentDay) {
-          periodBeforeCurrentDay = new OpeningDay(i, this.numberToHour(period.time[0].openning));
+          periodBeforeCurrentDay = new OpeningDay(i, this.numberToHour(period.time[0].opening));
         }
       }
     }

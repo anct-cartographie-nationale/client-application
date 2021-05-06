@@ -421,7 +421,7 @@ export class FormComponent implements OnInit {
   }
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning),
+      opening: new FormControl(time.opening),
       closing: new FormControl(time.closing),
     });
   }

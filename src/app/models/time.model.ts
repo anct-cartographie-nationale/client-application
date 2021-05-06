@@ -1,13 +1,13 @@
 export class Time {
-  openning: string;
+  opening: string;
   closing: string;
 
   constructor(obj?: any) {
     Object.assign(this, obj);
   }
 
-  public formatOpenningDate(): string {
-    return this.formatDate(this.openning);
+  public formatOpeningDate(): string {
+    return this.formatDate(this.opening);
   }
 
   public formatClosingDate(): string {

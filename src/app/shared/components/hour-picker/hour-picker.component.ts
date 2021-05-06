@@ -95,16 +95,16 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
         element.active = day.open;
         element.hours = day.time
           .map((hour: Time) => {
-            if (hour.openning && hour.closing) {
+            if (hour.opening && hour.closing) {
               return {
-                start: hour.openning,
+                start: hour.opening,
                 end: hour.closing,
                 error: null,
               };
             } else {
-              if (hour.openning) {
+              if (hour.opening) {
                 return {
-                  start: hour.openning,
+                  start: hour.opening,
                   end: '',
                   error: 'incomplete',
                 };
@@ -135,7 +135,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
       time: data.hours.map(
         (hour) =>
           new Time({
-            openning: hour.start,
+            opening: hour.start,
             closing: hour.end,
           })
       ),
@@ -298,8 +298,8 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
 
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning, Validators.required),
-      closing: new FormControl(time.closing, [Validators.required, CheckHours(time.openning)]),
+      opening: new FormControl(time.opening, Validators.required),
+      closing: new FormControl(time.closing, [Validators.required, CheckHours(time.opening)]),
     });
   }
 }
