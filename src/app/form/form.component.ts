@@ -832,7 +832,7 @@ export class FormComponent implements OnInit {
   }
   public toggleProceduresAccompaniment(): void {
     this.showProceduresAccompaniment = !this.showProceduresAccompaniment;
-    if (!this.showProceduresAccompaniment) {
+    if (!this.showProceduresAccompaniment && !this.isEditMode) {
       this.getStructureControl('proceduresAccompaniment').reset();
     }
     this.setValidationsForm();
