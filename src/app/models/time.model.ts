@@ -6,7 +6,7 @@ export class Time {
     Object.assign(this, obj);
   }
 
-  public formatOpenningDate(): string {
+  public formatOpeningDate(): string {
     return this.formatDate(this.opening);
   }
 

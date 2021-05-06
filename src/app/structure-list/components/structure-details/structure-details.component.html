@@ -175,7 +175,7 @@
       <app-svg-icon [type]="'ico'" [icon]="'accueil'" [iconClass]="'icon-32'"></app-svg-icon>
       <h2>Accueil</h2>
     </div>
-    <!-- Openning Hours -->
+    <!-- Opening Hours -->
     <div fxLayout="row" class="w-100 mobile-column">
       <div *ngIf="structure.hours.hasData()" fxFlex="50%">
         <h3 class="subtitle">Horaires d’ouverture au public</h3>
@@ -185,9 +185,9 @@
               <h4>{{ day.key | day }}</h4>
               <div class="opening-time" fxLayout="row" fxLayoutAlign="none flex-end">
                 <div *ngFor="let timeRange of day.value.time; let isFirst = first">
-                  <p *ngIf="isFirst">de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}</p>
+                  <p *ngIf="isFirst">de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}</p>
                   <p *ngIf="!isFirst && timeRange.opening">
-                    et de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}
+                    et de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}
                   </p>
                 </div>
               </div>
