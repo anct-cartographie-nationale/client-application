@@ -1,5 +1,8 @@
 <div *ngIf="!isPublishMode" class="section-container" fxLayout="row" fxLayoutGap="32px">
-  <div fxLayout="column" class="list-container" fxLayoutGap="16px">
+  <div *ngIf="isLoading" class="loader">
+    <img class="loader-gif" src="/assets/gif/loader_circle.gif" alt />
+  </div>
+  <div *ngIf="!isLoading" fxLayout="column" class="list-container" fxLayoutGap="16px">
     <div fxLayout="column" *ngIf="displayTags()">
       <div fxLayout="row wrap" fxLayoutAlign="none center" fxLayoutGap="8px">
         <div
@@ -76,7 +79,7 @@
       </div>
     </div>
   </div>
-  <div fxLayout="column" fxLayoutAlign=" center" class="project-container desktop">
+  <div *ngIf="!isLoading" fxLayout="column" fxLayoutAlign=" center" class="project-container desktop">
     <div class="background-project-container">
       <div class="project-content" fxLayout="column">
         <app-svg-icon [iconClass]="'icon-80'" [iconColor]="'inherit'" [type]="'post'" [icon]="'appels'"></app-svg-icon>
