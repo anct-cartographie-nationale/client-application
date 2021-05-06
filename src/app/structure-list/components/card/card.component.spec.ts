@@ -58,11 +58,11 @@ describe('CardComponent', () => {
           open: true,
           time: [
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1630,
             },
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
           ],
@@ -71,11 +71,11 @@ describe('CardComponent', () => {
           open: true,
           time: [
             {
-              openning: 830,
+              opening: 830,
               closing: 1130,
             },
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1630,
             },
           ],
@@ -84,11 +84,11 @@ describe('CardComponent', () => {
           open: true,
           time: [
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1630,
             },
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
           ],
@@ -97,11 +97,11 @@ describe('CardComponent', () => {
           open: true,
           time: [
             {
-              openning: 830,
+              opening: 830,
               closing: 1130,
             },
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1630,
             },
           ],
@@ -110,11 +110,11 @@ describe('CardComponent', () => {
           open: true,
           time: [
             {
-              openning: 830,
+              opening: 830,
               closing: 1130,
             },
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1530,
             },
           ],
@@ -123,11 +123,11 @@ describe('CardComponent', () => {
           open: false,
           time: [
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
           ],
@@ -136,11 +136,11 @@ describe('CardComponent', () => {
           open: false,
           time: [
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
           ],

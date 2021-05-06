@@ -1,5 +1,5 @@
 export class Time {
-  openning: string;
+  opening: string;
   closing: string;
 
   constructor(obj?: any) {
@@ -7,7 +7,7 @@ export class Time {
   }
 
   public formatOpenningDate(): string {
-    return this.formatDate(this.openning);
+    return this.formatDate(this.opening);
   }
 
   public formatClosingDate(): string {

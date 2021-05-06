@@ -183,10 +183,10 @@
           <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
             <div *ngIf="day.value.open">
               <h4>{{ day.key | day }}</h4>
-              <div class="openning-time" fxLayout="row" fxLayoutAlign="none flex-end">
+              <div class="opening-time" fxLayout="row" fxLayoutAlign="none flex-end">
                 <div *ngFor="let timeRange of day.value.time; let isFirst = first">
                   <p *ngIf="isFirst">de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}</p>
-                  <p *ngIf="!isFirst && timeRange.openning">
+                  <p *ngIf="!isFirst && timeRange.opening">
                     et de {{ timeRange.formatOpenningDate() }} à {{ timeRange.formatClosingDate() }}
                   </p>
                 </div>

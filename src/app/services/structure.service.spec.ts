@@ -31,13 +31,13 @@ describe('StructureService', () => {
     s.hours.sunday = new Day(false);
     s.hours.thursday.open = true;
     s.hours.thursday.time = new Array(
-      new Time({ openning: 805, closing: 1200 }),
-      new Time({ openning: 1400, closing: 1600 })
+      new Time({ opening: 805, closing: 1200 }),
+      new Time({ opening: 1400, closing: 1600 })
     );
 
     // Init date sur un jeudi à 9h05
     const dt = new DateTime.local(2020, 10, 8, 9, 5);
-    const result = structureService.updateOpeningStructure(s, dt);
+    const result = structureService.updateOpeningStructure(s);
     expect(result.isOpen).toEqual(true);
   });
 
@@ -54,10 +54,10 @@ describe('StructureService', () => {
     s.hours.sunday = new Day();
 
     s.hours.thursday.open = true;
-    s.hours.thursday.time = new Array(new Time({ openning: 1400, closing: 1600 }));
+    s.hours.thursday.time = new Array(new Time({ opening: 1400, closing: 1600 }));
     // Init date sur un jeudi à 9h05
     const dt = new DateTime.local(2020, 10, 8, 9, 5);
-    const result = structureService.updateOpeningStructure(s, dt);
+    const result = structureService.updateOpeningStructure(s);
     expect(result.isOpen).toEqual(false);
   });
 });
