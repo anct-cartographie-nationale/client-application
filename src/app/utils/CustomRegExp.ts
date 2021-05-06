@@ -12,7 +12,7 @@ export class CustomRegExp {
    * Validate a password (at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character)
    */
   public static readonly PHONE: RegExp = /^(?:(?:\+|00)|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/; //NOSONAR
-  public static readonly WEBSITE: RegExp = /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/; //NOSONAR
+  public static readonly WEBSITE: RegExp = /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}|[a-zA-Z0-9]+\.[^\s]{2,})/; //NOSONAR
   public static readonly LINKEDIN: string = '(linkedin.com/in/.{1,})';
   public static readonly FACEBOOK: string = '(facebook.com/.{1,})';
   public static readonly TWITTER: string = '(twitter.com/.{1,})';

@@ -49,7 +49,7 @@ export class FormComponent implements OnInit {
   // Page and progress var
   public currentPage = 0;
   public progressStatus = 0;
-  public nbPagesForm = 24;
+  public nbPagesForm = 23;
   public isPageValid: boolean;
   public pagesValidation = [];
 
@@ -76,6 +76,9 @@ export class FormComponent implements OnInit {
   public isLoading = false;
   public isWifiChoosen = null;
   public structureWithOwners: StructureWithOwners;
+
+  public isPopUpOpen = false;
+  public displaySignUp = true;
 
   constructor(
     private structureService: StructureService,
@@ -136,6 +139,32 @@ export class FormComponent implements OnInit {
     } else {
       this.routerListener.goToPreviousUrl();
     }
+  }
+
+  public closeSignUpModal(value: boolean): void {
+    if (!value) {
+      this.displaySignUp = false;
+    } else {
+      this.isPopUpOpen = false;
+    }
+    if (this.isLoggedIn) {
+      this.updateFormOnLogin();
+    }
+  }
+
+  public updateFormOnLogin(): void {
+    this.profileService.getProfile().then((user: User) => {
+      this.profile = user;
+    });
+    this.router.navigateByUrl('create-structure');
+    this.progressStatus += (100 / this.nbPagesForm) * 2;
+    this.pagesValidation[PageTypeEnum.accountInfo] = { valid: true };
+    this.pagesValidation[PageTypeEnum.accountCredentials] = { valid: true };
+    this.currentPage = PageTypeEnum.structureNameAndAddress;
+  }
+
+  public get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   async setCategories(): Promise<void> {
@@ -280,7 +309,7 @@ export class FormComponent implements OnInit {
         Validators.required,
         Validators.pattern(CustomRegExp.NO_NULL_NUMBER),
       ]),
-      freeWorkShop: new FormControl(structure.freeWorkShop, Validators.required),
+      freeWorkShop: new FormControl(structure.freeWorkShop, [Validators.required]),
     });
     return form;
   }
@@ -484,10 +513,9 @@ export class FormComponent implements OnInit {
         valid: this.getStructureControl('accessModality').valid,
         name: "Modalités d'accueil",
       };
-      this.pagesValidation[PageTypeEnum.structureHours] = { valid: this.hoursForm.valid, name: "Horaires d'ouverture" };
-      this.pagesValidation[PageTypeEnum.structureHoursDetails] = {
-        valid: this.getStructureControl('exceptionalClosures').valid,
-        name: 'Précisions sur les horaires',
+      this.pagesValidation[PageTypeEnum.structureHours] = {
+        valid: this.hoursForm.valid && this.getStructureControl('exceptionalClosures').valid,
+        name: "Horaires d'ouverture",
       };
       this.pagesValidation[PageTypeEnum.structurePmr] = {
         valid: this.getStructureControl('pmrAccess').valid,
@@ -685,6 +713,20 @@ export class FormComponent implements OnInit {
         this.currentPage++; // page structureOtherAccompaniment skip and go to page structureWorkshop
         this.progressStatus += 100 / this.nbPagesForm;
       }
+
+      if (this.currentPage == PageTypeEnum.structureWorkshop) {
+        if (
+          !this.structureForm.get('baseSkills').value.length &&
+          !this.structureForm.get('accessRight').value.length &&
+          !this.structureForm.get('parentingHelp').value.length &&
+          !this.structureForm.get('socialAndProfessional').value.length &&
+          !this.structureForm.get('digitalCultureSecurity').value.length
+        ) {
+          this.getStructureControl('freeWorkShop').reset();
+          this.currentPage++;
+          this.progressStatus += 100 / this.nbPagesForm;
+        }
+      }
       // Check if going to the last page to submit form and send email verification.
       if (this.currentPage == this.nbPagesForm - 1) {
         this.validateForm();
@@ -711,6 +753,18 @@ export class FormComponent implements OnInit {
       if (this.currentPage == PageTypeEnum.structureWorkshop && !this.isInArray('autres', 'proceduresAccompaniment')) {
         this.currentPage--; // page 14 skip and go to page 13
         this.progressStatus -= 100 / this.nbPagesForm;
+      }
+      if (this.currentPage == PageTypeEnum.structureWifi) {
+        if (
+          !this.structureForm.get('baseSkills').value.length &&
+          !this.structureForm.get('accessRight').value.length &&
+          !this.structureForm.get('parentingHelp').value.length &&
+          !this.structureForm.get('socialAndProfessional').value.length &&
+          !this.structureForm.get('digitalCultureSecurity').value.length
+        ) {
+          this.currentPage--;
+          this.progressStatus -= 100 / this.nbPagesForm;
+        }
       }
       this.currentPage--;
       this.progressStatus -= 100 / this.nbPagesForm;
@@ -834,6 +888,9 @@ export class FormComponent implements OnInit {
   }
 
   public validateForm(): void {
+    if (this.getStructureControl('freeWorkShop').value === null) {
+      this.getStructureControl('freeWorkShop').setValue(false);
+    }
     if (this.structureForm.valid && this.hoursForm.valid) {
       let structure: Structure = this.structureForm.value;
       structure.hours = this.hoursForm.value;
