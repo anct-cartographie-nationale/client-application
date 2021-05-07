@@ -115,15 +115,15 @@ export class StructureDetailsComponent implements OnInit {
       case Equipment.wifi:
         return 'Wifi en accès libre';
       case Equipment.bornes:
-        return 'Bornes numériques';
+        return this.structure.nbNumericTerminal > 1 ? 'Bornes numériques' : 'Borne numérique';
       case Equipment.printer:
-        return 'Imprimantes';
+        return this.structure.nbPrinters > 1 ? 'Imprimantes' : 'Imprimante';
       case Equipment.tablet:
-        return 'Tablettes';
+        return this.structure.nbTablets > 1 ? 'Tablettes' : 'Tablette';
       case Equipment.computer:
-        return 'Ordinateurs à disposition';
+        return this.structure.nbComputers > 1 ? 'Ordinateurs à disposition' : 'Ordinateur à disposition';
       case Equipment.scanner:
-        return 'Scanners';
+        return this.structure.nbScanners > 1 ? 'Scanners' : 'Scanner';
       default:
         return null;
     }
@@ -312,5 +312,43 @@ export class StructureDetailsComponent implements OnInit {
     if (modalValue.shouldSend) {
       this.structureService.sendMailOnStructureError(this.structure._id, modalValue.content).subscribe(() => {});
     }
+  }
+
+  public multipleWorkshop(): boolean {
+    if (
+      this.structure.baseSkills.length +
+        this.structure.accessRight.length +
+        this.structure.parentingHelp.length +
+        this.structure.socialAndProfessional.length +
+        this.structure.digitalCultureSecurity.length >
+      1
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  public multipleEquipement(): boolean {
+    if (
+      this.structure.nbComputers +
+        this.structure.nbNumericTerminal +
+        this.structure.nbPrinters +
+        this.structure.nbScanners +
+        this.structure.nbTablets >
+      1
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  public multipleAccompaniment(): boolean {
+    if (
+      (this.structure.otherDescription && this.structure.proceduresAccompaniment.length > 0) ||
+      this.structure.proceduresAccompaniment.length > 1
+    ) {
+      return true;
+    }
+    return false;
   }
 }
