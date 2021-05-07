@@ -95,23 +95,23 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
         element.active = day.open;
         element.hours = day.time
           .map((hour: Time) => {
-            if (hour.openning && hour.closing) {
+            if (hour.opening && hour.closing) {
               return {
-                start: this.formatNumericalHours(hour.openning),
-                end: this.formatNumericalHours(hour.closing),
+                start: hour.opening,
+                end: hour.closing,
                 error: null,
               };
             } else {
-              if (hour.openning) {
+              if (hour.opening) {
                 return {
-                  start: this.formatNumericalHours(hour.openning),
+                  start: hour.opening,
                   end: '',
                   error: 'incomplete',
                 };
               } else {
                 return {
                   start: '',
-                  end: this.formatNumericalHours(hour.closing),
+                  end: hour.closing,
                   error: 'incomplete',
                 };
               }
@@ -135,8 +135,8 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
       time: data.hours.map(
         (hour) =>
           new Time({
-            openning: this.formatStringHours(hour.start),
-            closing: this.formatStringHours(hour.end),
+            opening: hour.start,
+            closing: hour.end,
           })
       ),
     });
@@ -152,27 +152,6 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
       saturday: this.createDay(this.parseToDay(this.structure.hours[5])),
       sunday: this.createDay(this.parseToDay(this.structure.hours[6])),
     });
-  }
-
-  /**
-   * convert 1300 to '13:00'
-   */
-  private formatNumericalHours(hour: number): string {
-    const numberStr = hour.toString();
-    if (numberStr.length === 3) {
-      return `0${numberStr[0]}:${numberStr[1]}${numberStr[2]}`;
-    } else {
-      const splitStr = numberStr.match(/.{1,2}/g);
-      return `${splitStr[0]}:${splitStr[1]}`;
-    }
-  }
-
-  /**
-   * convert '13:00' to 1300
-   */
-  private formatStringHours(hour: string): number {
-    const numberStr = hour.split(':')[0] + hour.split(':')[1];
-    return parseInt(numberStr);
   }
 
   /**
@@ -319,8 +298,8 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
 
   private createTime(time: Time): FormGroup {
     return new FormGroup({
-      openning: new FormControl(time.openning, Validators.required),
-      closing: new FormControl(time.closing, [Validators.required, CheckHours(time.openning)]),
+      opening: new FormControl(time.opening, Validators.required),
+      closing: new FormControl(time.closing, [Validators.required, CheckHours(time.opening)]),
     });
   }
 }

@@ -130,8 +130,12 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   public close(): void {
-    this.router.navigate([], {
+    this.router.navigate(['/acteurs'], {
       relativeTo: this.route,
+      queryParams: {
+        id: null,
+      },
+      queryParamsHandling: 'merge',
     });
   }
 
@@ -300,16 +304,13 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   public displayModalError(): void {
-    //do we need to check for user is logged ?
     this.structureErrorModalOpenned = !this.structureErrorModalOpenned;
   }
 
   public sendErrorEmail(modalValue: any): void {
     this.displayModalError();
     if (modalValue.shouldSend) {
-      this.structureService
-        .sendMailOnStructureError(this.structure._id, modalValue.content, this.currentProfile)
-        .subscribe(() => {});
+      this.structureService.sendMailOnStructureError(this.structure._id, modalValue.content).subscribe(() => {});
     }
   }
 }

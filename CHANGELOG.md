@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://forge.grandlyon.com///compare/v1.7.0...v1.8.0) (2021-05-06)
+
+
+### Features
+
+* add a loader gif on news loadding ([538e996](https://forge.grandlyon.com///commit/538e99674b24a48d209f8c1bac34be218f9e376b))
+* add count on newsletter and change button ([d01ad95](https://forge.grandlyon.com///commit/d01ad9532ba9d50ae1ebf26443f242ce8636dbd0))
+* add robots.txt and sitemap ([606b5b8](https://forge.grandlyon.com///commit/606b5b8e5852f46d6231ef0a28f509f1e6566534))
+* add subresource-integrity ([2dc3e6f](https://forge.grandlyon.com///commit/2dc3e6f3a726a161ded050be16b706d8ec877b08))
+* allow connexion from structure form ([4e7ee07](https://forge.grandlyon.com///commit/4e7ee0722a28f66e2a9f0f5d14805d107fe5920a))
+* ghost css display ([34609fb](https://forge.grandlyon.com///commit/34609fb0751d31dd45230c028193f7d1a1e11640))
+* regex web + precision horaire + placeholder (ticket 496/497/500) ([88216e5](https://forge.grandlyon.com///commit/88216e5f2dc86465de9f06df1576ab20547f9fe4))
+* remove workshop price if no workshop ([b1d1ec3](https://forge.grandlyon.com///commit/b1d1ec36418ae0602d64a9a87bc649d1789ee18f))
+* remover unused fields ([cd6af4d](https://forge.grandlyon.com///commit/cd6af4d6f0b7d8860594264f883c2714d22f9f53))
+* update to angular 11 ([c9a7040](https://forge.grandlyon.com///commit/c9a70408c2bbeac526d43ae0794b86a5cdc07540))
+* **search:** add protection on distance filter for structure in case of search query. Increase search result display ([ff69b22](https://forge.grandlyon.com///commit/ff69b22a1525fe53e3af04ff404a08582d058532))
+
+
+### Bug Fixes
+
+* change login redirection ([3e259fb](https://forge.grandlyon.com///commit/3e259fb09f8a8f57571aa9cbcebbf8e2cb7fce2f))
+* change openning to opening ([5c5c99f](https://forge.grandlyon.com///commit/5c5c99fe9e7fdc660eeeb789a1ad38376ef0b1ba))
+* change other Openning to Opening ([a9d3923](https://forge.grandlyon.com///commit/a9d3923f6b4b8e38bc0fefded379fb2a01a6984b))
+* changes after review ([66287ff](https://forge.grandlyon.com///commit/66287ff7c54a670fdfc688a80d998087e90f4799))
+* changes after review ([16146f2](https://forge.grandlyon.com///commit/16146f2aabf39c28edf42e062328d8bf6bbbb5fa))
+* map locate causing search issue ([37d049f](https://forge.grandlyon.com///commit/37d049f6fc23c0e85a5cb13b60c8a53c9096a17d))
+* missing type ([d47ec01](https://forge.grandlyon.com///commit/d47ec01448d93b86b5ada4ab86c14f123472b5b1))
+* packages vulnerability ([25ea7cc](https://forge.grandlyon.com///commit/25ea7cc188d6218d76a46faf29bb3f751c9b7675))
+* search query param ([4cafe7d](https://forge.grandlyon.com///commit/4cafe7d707f9c90f7c6822520837248be9c568ec))
+* send query string to structure details components ([cd68c31](https://forge.grandlyon.com///commit/cd68c31ed73329d0ff244e92ce4bd7b9ef5059c2))
+* workshop price to required and default value ([fd520be](https://forge.grandlyon.com///commit/fd520be55efbc4f42f445c52d4bffca520c94aa2))
+
 ## [1.7.0](https://forge.grandlyon.com///compare/v1.6.1...v1.7.0) (2021-04-12)
 
 

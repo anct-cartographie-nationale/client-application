@@ -3,6 +3,15 @@
 @import '../../../../assets/scss/shapes';
 @import '../../../../assets/scss/breakpoint';
 
+.loader {
+  width: 100%;
+  text-align: center;
+  .loader-gif {
+    min-width: 10%;
+    min-height: 10%;
+  }
+}
+
 .section-container {
   background: $grey-6;
   min-height: 68vh;

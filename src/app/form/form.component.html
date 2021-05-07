@@ -121,6 +121,13 @@
           <h3>Qui êtes-vous ?</h3>
           <p>Ces informations ne seront pas visibles sur la plateforme</p>
         </div>
+        <div class="title">
+          <h4>Vous possédez déja un compte ? Connectez-vous:</h4>
+          <button class="btn-primary small next" *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
+            Se connecter
+          </button>
+          <h4>Sinon, inscrivez-vous en suivant le formulaire ci-dessous:</h4>
+        </div>
         <div class="form-group" fxLayout="column">
           <label for="surname">Nom</label>
           <div fxLayout="row" fxLayoutGap="13px">
@@ -186,7 +193,7 @@
           <h3>Quels identifiants utiliserez-vous pour vous connecter ?</h3>
         </div>
         <div class="form-group" fxLayout="column">
-          <label for="email">Courriel personnel</label>
+          <label for="email">Courriel du compte</label>
           <p class="special invalid" *ngIf="this.accountForm.get('email').hasError('alreadyExist')">
             L'email est déja utilisé.
           </p>
@@ -196,6 +203,7 @@
               (input)="setValidationsForm()"
               (keyup)="verifyUserExist($event.target.value)"
               formControlName="email"
+              placeholder="thomas@grandlyon.com"
               class="form-input"
               [readonly]="isAccountMode"
               [ngClass]="{ disabled: isAccountMode }"
@@ -416,9 +424,7 @@
           (updateFormError)="setHoursError()"
           [structureInput]="hoursForm"
         ></app-hour-picker>
-      </div>
-      <div *ngIf="currentPage == pageTypeEnum.structureHoursDetails" class="page">
-        <div class="title">
+        <div class="nextTitle">
           <h3>Avez-vous des précisions à apporter sur les horaires ?</h3>
           <p class="notRequired">facultatif</p>
         </div>
@@ -472,7 +478,7 @@
                 <div fxLayout="row" fxLayoutGap="27px">
                   <input
                     type="text"
-                    placeholder="www.resonum.com"
+                    placeholder="www.resin.grandlyon.com"
                     (input)="setValidationsForm()"
                     formControlName="website"
                     class="form-input"
@@ -1042,7 +1048,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureCovidInfo" class="page">
         <div class="title">
-          <h3>Y a-t-il des informations spécifique à la période COVID ?</h3>
+          <h3>Y a-t-il des informations spécifiques à la période COVID ?</h3>
           <p class="notRequired">facultatif</p>
         </div>
         <div class="textareaBlock" fxLayout="column">
@@ -1214,4 +1220,9 @@
       Voir ma structure
     </button>
   </div>
+  <app-signup-modal
+    *ngIf="displaySignUp"
+    [openned]="isPopUpOpen"
+    (closed)="closeSignUpModal($event)"
+  ></app-signup-modal>
 </div>

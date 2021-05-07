@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
-import { GeoJson } from '../../../map/models/geojson.model';
 import { GeojsonService } from '../../../services/geojson.service';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
@@ -9,13 +8,15 @@ import { Filter } from '../../models/filter.model';
 import { Module } from '../../models/module.model';
 import { StructureCounter } from '../../models/structureCounter.model';
 import { SearchService } from '../../services/search.service';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-structure-list-search',
   templateUrl: './structure-list-search.component.html',
   styleUrls: ['./structure-list-search.component.scss'],
 })
-export class StructureListSearchComponent implements OnInit, OnChanges {
+export class StructureListSearchComponent implements OnInit {
   @Output() searchEvent = new EventEmitter();
 
   // Show/hide form createStructure
@@ -36,25 +37,32 @@ export class StructureListSearchComponent implements OnInit, OnChanges {
   public numberAccompanimentChecked = 0;
   public numberMoreFiltersChecked = 0;
 
+  public queryString: string;
   // Modal confirmation variable
   public isConfirmationModalOpen = false;
   public confirmationModalContent =
     'Afin d’ajouter votre structure,vous allez être redirigé vers le formulaire Grand Lyon à remplir.';
 
-  constructor(public searchService: SearchService, private fb: FormBuilder, private geoJsonService: GeojsonService) {
+  constructor(
+    public searchService: SearchService,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.searchForm = this.fb.group({
       searchTerm: '',
     });
   }
   ngOnInit(): void {
     // Will store the different categories
+    this.queryString = this.activatedRoute.snapshot.queryParamMap.get('search');
     this.categories = [];
     this.checkedModulesFilter = new Array();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.locate && changes.locate.currentValue && !changes.locate.previousValue) {
-      this.locateMe();
+    if (this.queryString) {
+      const filters: Filter[] = [];
+      filters.push(new Filter('query', this.queryString));
+      this.searchEvent.emit(filters);
     }
   }
 
@@ -75,6 +83,15 @@ export class StructureListSearchComponent implements OnInit, OnChanges {
   // Sends an array containing all filters
   public applyFilter(term: string): void {
     // Add search input filter
+    if (term) {
+      this.router.navigate(['/acteurs'], {
+        relativeTo: this.route,
+        queryParams: {
+          search: term,
+        },
+        queryParamsHandling: 'merge',
+      });
+    }
     const filters: Filter[] = [];
     if (term) {
       filters.push(new Filter('query', term));
@@ -147,19 +164,6 @@ export class StructureListSearchComponent implements OnInit, OnChanges {
     this.modalTypeOpened = undefined;
   }
 
-  // Get adress and put it in input
-  public locateMe(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const longitude = position.coords.longitude;
-      const latitude = position.coords.latitude;
-      this.geoJsonService.getAddressByCoord(longitude, latitude).subscribe((geoPosition: GeoJson) => {
-        const adress = geoPosition.properties.name;
-        this.searchForm.setValue({ searchTerm: adress });
-        this.applyFilter(adress);
-      });
-      this.locatationTrigger.emit(true);
-    });
-  }
   // Management of the checkbox event (Check / Uncheck)
   public numericPassCheck(event, categ): void {
     const checkValue: string = event.target.value;

@@ -39,6 +39,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/sitemap.xml",
+              "src/robots.txt",
               {
                 "glob": "**/*",
                 "input": "./node_modules/leaflet/dist/images",

@@ -8,6 +8,7 @@ import { Filter } from '../structure-list/models/filter.model';
 import { GeoJson } from '../map/models/geojson.model';
 import { GeojsonService } from '../services/geojson.service';
 import { CustomRegExp } from '../utils/CustomRegExp';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-carto',
@@ -26,14 +27,21 @@ export class CartoComponent implements OnInit {
   public isMapPhone = false;
   public searchedValue = null;
   public locate = false; // Use to sync location between search and map
-  constructor(private structureService: StructureService, private geoJsonService: GeojsonService) {}
+  constructor(
+    private structureService: StructureService,
+    private geoJsonService: GeojsonService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    if (navigator.geolocation) {
-      this.getLocation();
-    } else {
-      this.getStructures(null);
+    if (!this.activatedRoute.snapshot.queryParamMap.get('search')) {
+      if (navigator.geolocation) {
+        this.getLocation();
+      } else {
+        this.getStructures(null);
+      }
     }
+
     if (history.state.data) {
       this.currentStructure = new Structure(history.state.data);
     }
@@ -55,7 +63,7 @@ export class CartoComponent implements OnInit {
       } else {
         this.structureService.getStructures(filters).subscribe((structures) => {
           if (structures) {
-            this.updateStructuresdistance(structures, this.userLongitude, this.userLatitude);
+            this.updateStructuresdistance(structures, this.userLongitude, this.userLatitude, false);
           } else {
             this.structures = null;
           }
@@ -79,16 +87,30 @@ export class CartoComponent implements OnInit {
     });
   }
 
-  private updateStructuresdistance(structures: Structure[], lon: number, lat: number): void {
+  /**
+   * Update structure distance according to user actual position.
+   * @param structures structures data to update
+   * @param lon user longitude
+   * @param lat user latitde
+   * @param sortByDistance if set to `true`, structures data is sort by distance. Default value is `true`
+   */
+  private updateStructuresdistance(
+    structures: Structure[],
+    lon: number,
+    lat: number,
+    sortByDistance: boolean = true
+  ): void {
     Promise.all(
       structures.map((structure) => {
         if (this.geolocation) {
           structure = this.getStructurePosition(structure, lon, lat);
         }
-        return this.structureService.updateOpeningStructure(structure, DateTime.local());
+        return this.structureService.updateOpeningStructure(structure);
       })
     ).then((structureList) => {
-      structureList = _.sortBy(structureList, ['distance']);
+      if (sortByDistance) {
+        structureList = _.sortBy(structureList, ['distance']);
+      }
       this.structures = structureList;
     });
   }

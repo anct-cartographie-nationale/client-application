@@ -56,7 +56,6 @@ describe('StructureListComponent', () => {
       bornesNumeriques: '',
       imprimantes: '',
       autresEspacesProposesParLaStructure: 'Espace libre service',
-      statutJuridique: '',
       appartenezVousAUnReseauDeMediation: '',
       precisezLequel: '',
       idDeLitemStructureDansDirectus: 123,
@@ -68,11 +67,11 @@ describe('StructureListComponent', () => {
           open: true,
           time: [
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1630,
             },
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
           ],
@@ -81,11 +80,11 @@ describe('StructureListComponent', () => {
           open: true,
           time: [
             {
-              openning: 830,
+              opening: 830,
               closing: 1130,
             },
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1630,
             },
           ],
@@ -94,11 +93,11 @@ describe('StructureListComponent', () => {
           open: true,
           time: [
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1630,
             },
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
           ],
@@ -107,11 +106,11 @@ describe('StructureListComponent', () => {
           open: true,
           time: [
             {
-              openning: 830,
+              opening: 830,
               closing: 1130,
             },
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1630,
             },
           ],
@@ -120,11 +119,11 @@ describe('StructureListComponent', () => {
           open: true,
           time: [
             {
-              openning: 830,
+              opening: 830,
               closing: 1130,
             },
             {
-              openning: 1330,
+              opening: 1330,
               closing: 1530,
             },
           ],
@@ -133,11 +132,11 @@ describe('StructureListComponent', () => {
           open: false,
           time: [
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
           ],
@@ -146,11 +145,11 @@ describe('StructureListComponent', () => {
           open: false,
           time: [
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
             {
-              openning: null,
+              opening: null,
               closing: null,
             },
           ],

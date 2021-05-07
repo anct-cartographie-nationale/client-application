@@ -22,19 +22,23 @@ export class AdminService {
   }
 
   public searchUsers(searchString: string): Observable<User[]> {
-    return this.http.post<User[]>(`api/admin/searchUsers`, { searchString });
+    return this.http.post<User[]>(`${this.baseUrl}/searchUsers`, { searchString });
   }
 
   public deleteUser(id: string): Observable<User> {
-    return this.http.delete<User>(`api/admin/user/` + id);
+    return this.http.delete<User>(`${this.baseUrl}/user/` + id);
   }
 
   public searchNewsletterSubscriptions(searchString: string): Observable<NewsletterSubscription[]> {
-    return this.http.post<NewsletterSubscription[]>(`api/admin/searchNewsletterSubscriptions`, { searchString });
+    return this.http.post<NewsletterSubscription[]>(`${this.baseUrl}/searchNewsletterSubscriptions`, { searchString });
+  }
+
+  public countNewsletterSubscriptions(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/countNewsletterSubscriptions`);
   }
 
   public unsubscribeEmail(email: string): Observable<string> {
-    return this.http.delete<string>(`api/admin/newsletterSubscription/` + email);
+    return this.http.delete<string>(`${this.baseUrl}/newsletterSubscription/` + email);
   }
 
   public acceptStructureClaim(

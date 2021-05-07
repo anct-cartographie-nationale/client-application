@@ -56,19 +56,112 @@ $margin-post: 20px;
 .description {
   div {
     width: 100%;
+    line-height: 180%;
   }
   ::ng-deep figure {
     margin: 0;
-    img {
-      object-fit: cover;
-      max-width: 100%;
-    }
   }
   ::ng-deep a {
     @include hyperlink;
     padding: 0;
   }
   ::ng-deep p {
-    @include cn-regular-18;
+    @include cn-regular-16;
+  }
+  ::ng-deep li {
+    @include cn-regular-16;
+    margin-bottom: 10px;
+  }
+  ::ng-deep h2 {
+    margin-top: 50px;
+  }
+  ::ng-deep blockquote {
+    margin: 1.5em 0;
+    padding: 0 1.6em;
+    border-left: 3px solid $blue;
+  }
+  ::ng-deep .kg-image-card {
+    margin: 0 auto;
+    max-width: 100%;
+    ::ng-deep .kg-image {
+      max-width: 100%;
+      margin-top: 10px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  ::ng-deep .kg-bookmark-card {
+    margin-top: 30px;
+    font: inherit;
+    vertical-align: baseline;
+    ::ng-deep .kg-bookmark-container {
+      display: flex;
+      border-radius: 3px;
+      color: var(--darkgrey);
+      text-decoration: none;
+      box-shadow: 0 2px 5px -1px rgb(0 0 0 / 15%), 0 0 1px rgb(0 0 0 / 9%);
+      ::ng-deep .kg-bookmark-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
+        ::ng-deep .kg-bookmark-title {
+          color: $grey-1;
+          @include cn-regular-18;
+        }
+        ::ng-deep .kg-bookmark-description {
+          display: -webkit-box;
+          overflow-y: hidden;
+          margin-top: 12px;
+          max-height: 48px;
+          color: $grey-2;
+          line-height: 1.5em;
+          font-weight: 400;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+        ::ng-deep .kg-bookmark-metadata {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          margin-top: 14px;
+          color: var(--darkgrey);
+          font-weight: 500;
+          ::ng-deep .kg-bookmark-icon {
+            margin-right: 8px;
+            width: 22px;
+            height: 22px;
+            display: block;
+          }
+          ::ng-deep .kg-bookmark-author {
+            line-height: 1.5em;
+            @include cn-regular-18;
+          }
+          ::ng-deep .kg-bookmark-publisher {
+            overflow: hidden;
+            line-height: 1.5em;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: $grey-2;
+          }
+        }
+      }
+      ::ng-deep .kg-bookmark-thumbnail {
+        position: relative;
+        min-width: 33%;
+        max-height: 100%;
+        img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 0 3px 3px 0;
+          -o-object-fit: cover;
+          object-fit: cover;
+        }
+      }
+    }
   }
 }
