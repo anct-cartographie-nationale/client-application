@@ -208,7 +208,7 @@
             >
               <p class="no-margin">{{ getAccessLabel(acces) }}</p>
             </div>
-            <p *ngIf="structure.pmrAccess" class="no-margin">Accessibles aux personnes à mobilité réduite</p>
+            <p *ngIf="structure.pmrAccess" class="no-margin">Accessible aux personnes à mobilité réduite</p>
           </div>
           <div *ngFor="let public of structure.publics" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
             <p class="no-margin">{{ getPublicLabel(public) }}</p>
@@ -239,7 +239,8 @@
   >
     <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'demarches'" [iconClass]="'icon-32'"></app-svg-icon>
-      <h2>Démarches en ligne</h2>
+      <h2 *ngIf="multipleAccompaniment()">Démarches en ligne</h2>
+      <h2 *ngIf="!multipleAccompaniment()">Démarche en ligne</h2>
     </div>
     <div fxLayout="column">
       <div fxLayout="row wrap" fxLayoutGap="24px">
@@ -262,13 +263,16 @@
   >
     <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'services'" [iconClass]="'icon-32'"></app-svg-icon>
-      <h2>Ateliers</h2>
+      <h2 *ngIf="multipleWorkshop()">Ateliers</h2>
+      <h2 *ngIf="!multipleWorkshop()">Atelier</h2>
     </div>
     <div *ngIf="structure.freeWorkShop">
-      <span class="bold-info">L'accès à ces ateliers est gratuit</span>
+      <span *ngIf="multipleWorkshop()" class="bold-info">L'accès à ces ateliers est gratuit</span>
+      <span *ngIf="!multipleWorkshop()" class="bold-info">L'accès à cet atelier est gratuit</span>
     </div>
     <div *ngIf="!structure.freeWorkShop">
-      <span class="bold-info">L'accès à ces ateliers est payant</span>
+      <span *ngIf="multipleWorkshop()" class="bold-info">L'accès à ces ateliers est payant</span>
+      <span *ngIf="!multipleWorkshop()" class="bold-info">L'accès à cet atelier est payant</span>
     </div>
     <div class="wrapper">
       <div *ngIf="isBaseSkills()">
@@ -302,7 +306,8 @@
   >
     <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
       <app-svg-icon [type]="'ico'" [icon]="'equipement'" [iconClass]="'icon-32'"></app-svg-icon>
-      <h2>Équipements</h2>
+      <h2 *ngIf="multipleEquipement()">Équipements</h2>
+      <h2 *ngIf="!multipleEquipement()">Équipement</h2>
     </div>
     <div fxLayout="column">
       <p *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)" class="no-margin-bottom">
