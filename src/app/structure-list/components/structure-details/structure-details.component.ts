@@ -237,6 +237,8 @@ export class StructureDetailsComponent implements OnInit {
         return 'Tout public';
       case PublicCategorie.under16Years:
         return 'Moins de 16 ans';
+      case PublicCategorie.women:
+        return 'Uniquement femmes';
       default:
         return null;
     }
