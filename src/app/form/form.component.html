@@ -121,7 +121,7 @@
           <h3>Qui êtes-vous ?</h3>
           <p>Ces informations ne seront pas visibles sur la plateforme</p>
         </div>
-        <div class="title">
+        <div *ngIf="!isClaimMode" class="title">
           <h4>Vous possédez déja un compte ? Connectez-vous:</h4>
           <button class="btn-primary small next" *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
             Se connecter

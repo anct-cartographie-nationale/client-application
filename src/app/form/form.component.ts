@@ -155,12 +155,12 @@ export class FormComponent implements OnInit {
   public updateFormOnLogin(): void {
     this.profileService.getProfile().then((user: User) => {
       this.profile = user;
+      this.router.navigateByUrl('create-structure');
+      this.progressStatus += (100 / this.nbPagesForm) * 2;
+      this.pagesValidation[PageTypeEnum.accountInfo] = { valid: true };
+      this.pagesValidation[PageTypeEnum.accountCredentials] = { valid: true };
+      this.currentPage = PageTypeEnum.structureNameAndAddress;
     });
-    this.router.navigateByUrl('create-structure');
-    this.progressStatus += (100 / this.nbPagesForm) * 2;
-    this.pagesValidation[PageTypeEnum.accountInfo] = { valid: true };
-    this.pagesValidation[PageTypeEnum.accountCredentials] = { valid: true };
-    this.currentPage = PageTypeEnum.structureNameAndAddress;
   }
 
   public get isLoggedIn(): boolean {

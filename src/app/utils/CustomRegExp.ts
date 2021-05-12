@@ -2,7 +2,7 @@ export class CustomRegExp {
   /**
    * Validate a password (at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character)
    */
-  public static readonly PASSWORD: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-!@#$%^&*])(?=.{8,})/; //NOSONAR
+  public static readonly PASSWORD: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[*.! @#$%^&(){}\[\]:;<>,?\/\\~_+\-=|])(?=.{8,})/; //NOSONAR
   /**
    * Validate an email
    */
