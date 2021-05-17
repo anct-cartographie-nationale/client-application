@@ -21,9 +21,8 @@ import { CustomRegExp } from '../utils/CustomRegExp';
 import { StructureWithOwners } from '../models/structureWithOwners.model';
 import { RouterListenerService } from '../services/routerListener.service';
 import { NewsletterService } from '../services/newsletter.service';
-const { DateTime } = require('luxon');
 @Component({
-  selector: 'app-structureForm',
+  selector: 'app-structure-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
@@ -47,7 +46,7 @@ export class FormComponent implements OnInit {
   public linkedStructureId: Array<string> = null;
 
   // Page and progress var
-  public currentPage = 0;
+  public currentPage = 0; // Change this value to start on a different page for dev testing
   public progressStatus = 0;
   public nbPagesForm = 23;
   public isPageValid: boolean;
@@ -198,7 +197,7 @@ export class FormComponent implements OnInit {
         }
       }
     });
-    let categs = await this.searchService.getCategoriesTraining().toPromise();
+    const categs = await this.searchService.getCategoriesTraining().toPromise();
     categs.forEach((categ) => {
       this.trainingCategories.push({ category: categ, openned: false });
     });
@@ -313,6 +312,7 @@ export class FormComponent implements OnInit {
     });
     return form;
   }
+
   private showCollapse(s: Structure): void {
     if (s.website) {
       this.showWebsite = true;
@@ -404,9 +404,9 @@ export class FormComponent implements OnInit {
 
   public modifyPhoneInput(form: FormGroup, controlName: string, phoneNumber: string): void {
     // Take length of phone number without spaces.
-    let phoneNoSpace = phoneNumber.replace(/\s/g, '');
+    const phoneNoSpace = phoneNumber.replace(/\s/g, '');
     // Check to refresh every 2 number.
-    if (phoneNoSpace.length % 2 == 0) {
+    if (phoneNoSpace.length % 2 === 0) {
       // Add space every 2 number
       form.get(controlName).setValue(phoneNoSpace.replace(/(?!^)(?=(?:\d{2})+$)/g, ' ')); //NOSONAR
     }
@@ -427,7 +427,7 @@ export class FormComponent implements OnInit {
   }
 
   public onCheckChange(event: boolean, formControlName: string, value: string): void {
-    if (value == 'wifiEnAccesLibre') {
+    if (value === 'wifiEnAccesLibre') {
       this.isWifiChoosen = true;
     }
     const formArray: FormArray = this.structureForm.get(formControlName) as FormArray;
@@ -436,7 +436,7 @@ export class FormComponent implements OnInit {
       formArray.push(new FormControl(value));
     } else {
       // Remove uncheck control in the arrayForm
-      const index = formArray.controls.findIndex((element) => element.value == value);
+      const index = formArray.controls.findIndex((element) => element.value === value);
       formArray.removeAt(index);
     }
     this.setValidationsForm();
@@ -600,7 +600,7 @@ export class FormComponent implements OnInit {
    * Page algo for claim structure case
    */
   public nextPageClaim(): void {
-    if (this.currentPage == this.nbPagesForm - 1) {
+    if (this.currentPage === this.nbPagesForm - 1) {
       const user = new User(this.accountForm.value);
       // Create user and claim structure
       this.authService.register(user).subscribe(() => {
@@ -620,16 +620,16 @@ export class FormComponent implements OnInit {
       });
     }
 
-    if (this.currentPage == PageTypeEnum.summary) {
+    if (this.currentPage === PageTypeEnum.summary) {
       this.currentPage = PageTypeEnum.accountInfo;
       this.updatePageValid();
-    } else if (this.currentPage == PageTypeEnum.accountInfo) {
+    } else if (this.currentPage === PageTypeEnum.accountInfo) {
       this.currentPage = PageTypeEnum.accountCredentials;
       this.updatePageValid();
-    } else if (this.currentPage == PageTypeEnum.accountCredentials) {
+    } else if (this.currentPage === PageTypeEnum.accountCredentials) {
       this.currentPage = PageTypeEnum.cgu;
       this.updatePageValid();
-    } else if (this.currentPage == PageTypeEnum.cgu) {
+    } else if (this.currentPage === PageTypeEnum.cgu) {
       this.currentPage = this.nbPagesForm;
     }
 
@@ -639,7 +639,7 @@ export class FormComponent implements OnInit {
    * Page algo for create account case
    */
   public nextPageAccount(): void {
-    if (this.currentPage == this.nbPagesForm - 1) {
+    if (this.currentPage === this.nbPagesForm - 1) {
       const user = new User(this.accountForm.value);
       // Create user with structure
       user.structuresLink = this.linkedStructureId;
@@ -648,13 +648,13 @@ export class FormComponent implements OnInit {
       });
     }
 
-    if (this.currentPage == PageTypeEnum.accountInfo) {
+    if (this.currentPage === PageTypeEnum.accountInfo) {
       this.currentPage = PageTypeEnum.accountCredentials;
       this.updatePageValid();
-    } else if (this.currentPage == PageTypeEnum.accountCredentials) {
+    } else if (this.currentPage === PageTypeEnum.accountCredentials) {
       this.currentPage = PageTypeEnum.cgu;
       this.updatePageValid();
-    } else if (this.currentPage == PageTypeEnum.cgu) {
+    } else if (this.currentPage === PageTypeEnum.cgu) {
       this.currentPage = this.nbPagesForm;
     }
 
@@ -665,13 +665,13 @@ export class FormComponent implements OnInit {
    * Page algo for claim structure case
    */
   public previousPageClaim(): void {
-    if (this.currentPage == PageTypeEnum.accountInfo) {
+    if (this.currentPage === PageTypeEnum.accountInfo) {
       this.currentPage = PageTypeEnum.summary;
       this.updatePageValid();
-    } else if (this.currentPage == PageTypeEnum.accountCredentials) {
+    } else if (this.currentPage === PageTypeEnum.accountCredentials) {
       this.currentPage = PageTypeEnum.accountInfo;
       this.updatePageValid();
-    } else if (this.currentPage == PageTypeEnum.cgu) {
+    } else if (this.currentPage === PageTypeEnum.cgu) {
       this.currentPage = PageTypeEnum.accountCredentials;
       this.updatePageValid();
     }
@@ -683,10 +683,10 @@ export class FormComponent implements OnInit {
    * Page algo for claim structure case
    */
   public previousPageAccount(): void {
-    if (this.currentPage == PageTypeEnum.accountCredentials) {
+    if (this.currentPage === PageTypeEnum.accountCredentials) {
       this.currentPage = PageTypeEnum.accountInfo;
       this.updatePageValid();
-    } else if (this.currentPage == PageTypeEnum.cgu) {
+    } else if (this.currentPage === PageTypeEnum.cgu) {
       this.currentPage = PageTypeEnum.accountCredentials;
       this.updatePageValid();
     }
@@ -701,20 +701,20 @@ export class FormComponent implements OnInit {
       this.nextPageAccount();
     } else {
       // Check if user already connected to skip accountForm pages.
-      if (this.currentPage == PageTypeEnum.info && this.profile) {
+      if (this.currentPage === PageTypeEnum.info && this.profile) {
         this.currentPage += 2; // Skip accountInfo pages from AccountForm
         this.progressStatus += 2 * (100 / this.nbPagesForm);
       }
       // Check if "other" isn't check to hide "other description" page
       if (
-        this.currentPage == PageTypeEnum.structureAccompaniment &&
+        this.currentPage === PageTypeEnum.structureAccompaniment &&
         !this.isInArray('autres', 'proceduresAccompaniment')
       ) {
         this.currentPage++; // page structureOtherAccompaniment skip and go to page structureWorkshop
         this.progressStatus += 100 / this.nbPagesForm;
       }
 
-      if (this.currentPage == PageTypeEnum.structureWorkshop) {
+      if (this.currentPage === PageTypeEnum.structureWorkshop) {
         if (
           !this.structureForm.get('baseSkills').value.length &&
           !this.structureForm.get('accessRight').value.length &&
@@ -728,7 +728,7 @@ export class FormComponent implements OnInit {
         }
       }
       // Check if going to the last page to submit form and send email verification.
-      if (this.currentPage == this.nbPagesForm - 1) {
+      if (this.currentPage === this.nbPagesForm - 1) {
         this.validateForm();
       } else {
         this.currentPage++;
@@ -744,17 +744,17 @@ export class FormComponent implements OnInit {
       this.previousPageAccount();
     } else {
       // Check if user already connected to skip accountForm pages.
-      if (this.currentPage == PageTypeEnum.structureNameAndAddress && this.profile) {
+      if (this.currentPage === PageTypeEnum.structureNameAndAddress && this.profile) {
         this.currentPage -= 2; // Skip 2 pages from AccountForm
         this.progressStatus -= 2 * (100 / this.nbPagesForm);
       }
 
       // Check if "other" isn't check to hide "other description" page
-      if (this.currentPage == PageTypeEnum.structureWorkshop && !this.isInArray('autres', 'proceduresAccompaniment')) {
+      if (this.currentPage === PageTypeEnum.structureWorkshop && !this.isInArray('autres', 'proceduresAccompaniment')) {
         this.currentPage--; // page 14 skip and go to page 13
         this.progressStatus -= 100 / this.nbPagesForm;
       }
-      if (this.currentPage == PageTypeEnum.structureWifi) {
+      if (this.currentPage === PageTypeEnum.structureWifi) {
         if (
           !this.structureForm.get('baseSkills').value.length &&
           !this.structureForm.get('accessRight').value.length &&
@@ -892,7 +892,7 @@ export class FormComponent implements OnInit {
       this.getStructureControl('freeWorkShop').setValue(false);
     }
     if (this.structureForm.valid && this.hoursForm.valid) {
-      let structure: Structure = this.structureForm.value;
+      const structure: Structure = this.structureForm.value;
       structure.hours = this.hoursForm.value;
       let user: User;
       if (this.isEditMode) {
@@ -940,7 +940,7 @@ export class FormComponent implements OnInit {
 
   public canExit(): Promise<boolean> {
     // Avoid confirmation when user submit form and leave.
-    if (this.currentPage == this.nbPagesForm || this.currentPage < 3 || this.isEditMode) {
+    if (this.currentPage === this.nbPagesForm || this.currentPage < 3 || this.isEditMode) {
       return new Promise((resolve) => resolve(true));
     } else {
       return new Promise((resolve) => this.showModal(resolve));
@@ -986,11 +986,11 @@ export class FormComponent implements OnInit {
   }
 
   public displayAddStructure(): boolean {
-    return this.currentPage == this.pageTypeEnum.summary && !this.isEditMode && !this.isClaimMode;
+    return this.currentPage === this.pageTypeEnum.summary && !this.isEditMode && !this.isClaimMode;
   }
 
   public displayClaimStructure(): boolean {
-    return this.currentPage == this.pageTypeEnum.summary && !this.isEditMode && this.isClaimMode;
+    return this.currentPage === this.pageTypeEnum.summary && !this.isEditMode && this.isClaimMode;
   }
 
   public structureDeleted(): void {
