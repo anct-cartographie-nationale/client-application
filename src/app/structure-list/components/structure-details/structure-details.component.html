@@ -18,6 +18,7 @@
               [type]="'ico'"
               [iconColor]="'currentColor'"
               [icon]="structure.getEquipmentsIcon(equipement)"
+              [title]="getEquipmentsLabel(equipement)"
             ></app-svg-icon>
           </div>
         </div>
@@ -39,14 +40,15 @@
               class="hide-on-print"
               [structure]="structure"
               [isCalledByDetails]="true"
+              [title]="'Horaire d\'ouverture'"
             ></app-structure-opening-status>
           </div>
           <div *ngIf="structure.address" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
-            <app-svg-icon [type]="'ico'" [icon]="'adress'"></app-svg-icon>
+            <app-svg-icon [type]="'ico'" [icon]="'adress'" [title]="'Adresse'"></app-svg-icon>
             <p>{{ structure.address.numero }} {{ structure.address.street }}, {{ structure.address.commune }}</p>
           </div>
           <div *ngIf="structure.website" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
-            <app-svg-icon [type]="'ico'" [icon]="'web'"></app-svg-icon>
+            <app-svg-icon [type]="'ico'" [icon]="'web'" [title]="'Site web'"></app-svg-icon>
             <a
               target="_blank"
               class="custom-link"
@@ -65,7 +67,7 @@
                 rel="noopener noreferrer"
                 [href]="'http://' + structure.facebook"
               >
-                <app-svg-icon [type]="'ico'" [icon]="'facebook'" [title]="Facebook"></app-svg-icon
+                <app-svg-icon [type]="'ico'" [icon]="'facebook'" [title]="'Facebook'"></app-svg-icon
               ></a>
               <a
                 *ngIf="structure.twitter"
@@ -74,7 +76,7 @@
                 rel="noopener noreferrer"
                 [href]="'http://' + structure.twitter"
               >
-                <app-svg-icon [type]="'ico'" [icon]="'twitter'" [title]="Twitter"></app-svg-icon
+                <app-svg-icon [type]="'ico'" [icon]="'twitter'" [title]="'Twitter'"></app-svg-icon
               ></a>
               <a
                 *ngIf="structure.instagram"
@@ -83,7 +85,7 @@
                 rel="noopener noreferrer"
                 [href]="'http://' + structure.instagram"
               >
-                <app-svg-icon [type]="'ico'" [icon]="'instagram'" [title]="Instagram"></app-svg-icon
+                <app-svg-icon [type]="'ico'" [icon]="'instagram'" [title]="'Instagram'"></app-svg-icon
               ></a>
               <a
                 *ngIf="structure.linkedin"
@@ -92,12 +94,12 @@
                 rel="noopener noreferrer"
                 [href]="'http://' + structure.linkedin"
               >
-                <app-svg-icon [type]="'ico'" [icon]="'linkedin'" [title]="Linkedin"></app-svg-icon
+                <app-svg-icon [type]="'ico'" [icon]="'linkedin'" [title]="'Linkedin'"></app-svg-icon
               ></a>
             </div>
           </div>
           <div *ngIf="structure.contactPhone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
-            <app-svg-icon [type]="'ico'" [icon]="'tel'"></app-svg-icon>
+            <app-svg-icon [type]="'ico'" [icon]="'tel'" [title]="'Téléphone'"></app-svg-icon>
             <p>{{ structure.contactPhone | phone }}</p>
           </div>
         </div>
@@ -108,11 +110,11 @@
             fxLayoutAlign="none center"
             fxLayoutGap="13px"
           >
-            <app-svg-icon [type]="'ico'" [iconClass]="'grey-1'" [icon]="'email'"></app-svg-icon>
+            <app-svg-icon [type]="'ico'" [iconClass]="'grey-1'" [icon]="'email'" [title]="'Email'"></app-svg-icon>
             <p>{{ structure.contactMail }}</p>
           </div>
           <div *ngIf="structure.hasPassNumeric()" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
-            <app-svg-icon [type]="'ico'" [icon]="'pass'"></app-svg-icon>
+            <app-svg-icon [type]="'ico'" [icon]="'pass'" [title]="'Pass numérique'"></app-svg-icon>
             <p>agréé Pass Numérique</p>
           </div>
           <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
