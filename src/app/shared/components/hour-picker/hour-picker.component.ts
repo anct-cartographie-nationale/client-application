@@ -20,7 +20,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   public error = false;
 
   private copiedDay: any;
-  private isInputSeleceted = false;
+  private isInputSelected = false;
   public copiedDayName = '';
   public structure = {
     hours: this.initHoursDefault(),
@@ -283,17 +283,16 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   }
 
   public onFocus(): void {
-    this.isInputSeleceted = true;
+    this.isInputSelected = true;
   }
 
   public onBlur(): void {
-    this.isInputSeleceted = false;
+    this.isInputSelected = false;
     this.submitForm();
   }
 
   public submitForm(): void {
-    console.log('submit ? ', this.isInputSeleceted);
-    if (this.checkHoursValid() && this.isInputSeleceted === false) {
+    if (this.checkHoursValid() && this.isInputSelected === false) {
       this.updateForm.emit(this.parseHoursToForm());
     } else {
       this.updateFormError.emit();
