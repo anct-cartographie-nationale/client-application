@@ -36,6 +36,7 @@
             "tsConfig": "tsconfig.app.json",
             "localize": true,
             "aot": true,
+            "allowedCommonJsDependencies": ["lodash", "leaflet.locatecontrol"],
             "assets": [
               "src/favicon.ico",
               "src/assets",

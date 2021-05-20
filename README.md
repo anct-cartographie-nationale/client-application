@@ -35,6 +35,12 @@ Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.pr
 
 Use conventional commit format. For more info please read this article on [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
+## Documentation 
+A documentation is generated with compodoc in addition of the existing documentation on the wiki.
+```sh
+npm run doc:serve
+```
+You can now visualize it at : `localhost:8080`
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
