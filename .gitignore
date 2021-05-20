@@ -49,3 +49,6 @@ Thumbs.db
 .env
 # apiMock
 api/db.json
+
+# Documentation generated with compodoc
+documentation
