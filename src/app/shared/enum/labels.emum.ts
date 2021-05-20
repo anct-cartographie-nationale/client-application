@@ -4,4 +4,5 @@ export enum Labels {
   aidantsConnect = 'Aidants connect',
   fabriqueDeTerritoire = 'Fabrique de territoire',
   demarcheMetropolitaine = 'Démarches Métropolitaines',
+  pix = 'Évaluation des compétences numériques',
 }
