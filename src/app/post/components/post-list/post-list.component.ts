@@ -150,6 +150,11 @@ export class PostListComponent implements OnInit {
 
   // Split news on two columns on desktop mode or one column in mobile mode.
   private setNews(news: PostWithMeta): void {
+    if (this.bigNews) {
+      news.posts = news.posts.filter((elem) => {
+        return elem.id != this.bigNews.id;
+      });
+    }
     this.pagination = news.meta.pagination;
     const customIndex = this.postsMobileView.length; // For scroll loading, start with previous index.
     news.posts.forEach((val, index) => {

@@ -26,9 +26,7 @@ export class PostService {
   public getPosts(page: number, tags?: string[]): Observable<PostWithMeta> {
     if (!tags) {
       return this.http
-        .get<PostWithMeta>(
-          `${this.baseUrl}?page=${page}&include=tags,authors&filter=tag:-[${TagEnum.aLaUne},${TagEnum.appels}]`
-        )
+        .get<PostWithMeta>(`${this.baseUrl}?page=${page}&include=tags,authors&filter=tag:-[${TagEnum.appels}]`)
         .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
     }
     let tagsString = '';
