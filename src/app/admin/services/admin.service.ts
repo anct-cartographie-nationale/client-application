@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NewsletterSubscription } from '../../models/subscription-model';
 import { User } from '../../models/user.model';
-import { DemandAttachment } from '../models/demandAttachment.model';
+import { StructureAdminInfo } from '../models/demandAttachment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,16 @@ export class AdminService {
   constructor(private http: HttpClient) {}
 
   // Return pendingAttachments of all profiles.
-  public getPendingStructure(): Observable<DemandAttachment[]> {
-    return this.http.get<DemandAttachment[]>(`${this.baseUrl}/pendingStructures`);
+  public getPendingStructure(): Observable<StructureAdminInfo[]> {
+    return this.http.get<StructureAdminInfo[]>(`${this.baseUrl}/pendingStructures`);
+  }
+
+  public getToClaimStructure(): Observable<StructureAdminInfo[]> {
+    return this.http.get<StructureAdminInfo[]>(`${this.baseUrl}/unclaimedStructures`);
+  }
+
+  public getAllStructureAdmin(): Observable<any> {
+    return this.http.get<StructureAdminInfo[]>(`${this.baseUrl}/adminStructuresList`);
   }
 
   public getUsers(): Observable<User[]> {
@@ -45,8 +53,8 @@ export class AdminService {
     userEmail: string,
     structureId: number,
     structureName: string
-  ): Observable<DemandAttachment[]> {
-    return this.http.post<DemandAttachment[]>(`${this.baseUrl}/validatePendingStructure`, {
+  ): Observable<StructureAdminInfo[]> {
+    return this.http.post<StructureAdminInfo[]>(`${this.baseUrl}/validatePendingStructure`, {
       userEmail,
       structureId,
       structureName,
@@ -57,8 +65,8 @@ export class AdminService {
     userEmail: string,
     structureId: number,
     structureName: string
-  ): Observable<DemandAttachment[]> {
-    return this.http.post<DemandAttachment[]>(`${this.baseUrl}/rejectPendingStructure`, {
+  ): Observable<StructureAdminInfo[]> {
+    return this.http.post<StructureAdminInfo[]>(`${this.baseUrl}/rejectPendingStructure`, {
       userEmail,
       structureId,
       structureName,

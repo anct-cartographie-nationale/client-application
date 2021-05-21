@@ -1,5 +1,6 @@
 export enum AdminPannelEnum {
   deleteUsers,
   pendingStructures,
-  newsletterUsers
+  newsletterUsers,
+  structuresList,
 }
