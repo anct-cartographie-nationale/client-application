@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
   // Page and progress var
   public currentPage = 0; // Change this value to start on a different page for dev testing
   public progressStatus = 0;
-  public nbPagesForm = 23;
+  public nbPagesForm = 24;
   public isPageValid: boolean;
   public pagesValidation = [];
 
@@ -248,7 +248,7 @@ export class FormComponent implements OnInit {
   }
 
   private createStructureForm(structure): FormGroup {
-    const form = new FormGroup({
+    return new FormGroup({
       _id: new FormControl(structure._id),
       coord: new FormControl(structure.coord),
       structureType: new FormControl(structure.structureType, Validators.required),
@@ -280,6 +280,7 @@ export class FormComponent implements OnInit {
       accessModality: this.loadArrayForCheckbox(structure.accessModality, true),
       publicsAccompaniment: this.loadArrayForCheckbox(structure.publicsAccompaniment, false),
       proceduresAccompaniment: this.loadArrayForCheckbox(structure.proceduresAccompaniment, false),
+      remoteAccompaniment: new FormControl(structure.remoteAccompaniment, Validators.required),
       otherDescription: new FormControl(structure.otherDescription),
       equipmentsAndServices: this.loadArrayForCheckbox(structure.equipmentsAndServices, false),
       publics: this.loadArrayForCheckbox(structure.publics, true),
@@ -310,7 +311,6 @@ export class FormComponent implements OnInit {
       ]),
       freeWorkShop: new FormControl(structure.freeWorkShop, [Validators.required]),
     });
-    return form;
   }
 
   private showCollapse(s: Structure): void {
@@ -544,6 +544,10 @@ export class FormComponent implements OnInit {
         valid: this.getStructureControl('otherDescription').value,
         name: 'Autres démarches proposés',
       };
+      this.pagesValidation[PageTypeEnum.structureRemoteAccompaniment] = {
+        valid: this.getStructureControl('remoteAccompaniment').valid,
+        name: 'Accompagnement à distance',
+      };
       this.pagesValidation[PageTypeEnum.structureWorkshop] = {
         valid:
           this.getStructureControl('accessRight').valid &&
@@ -750,7 +754,10 @@ export class FormComponent implements OnInit {
       }
 
       // Check if "other" isn't check to hide "other description" page
-      if (this.currentPage === PageTypeEnum.structureWorkshop && !this.isInArray('autres', 'proceduresAccompaniment')) {
+      if (
+        this.currentPage === PageTypeEnum.structureRemoteAccompaniment &&
+        !this.isInArray('autres', 'proceduresAccompaniment')
+      ) {
         this.currentPage--; // page 14 skip and go to page 13
         this.progressStatus -= 100 / this.nbPagesForm;
       }

@@ -25,6 +25,7 @@ export class Structure {
   public pmrAccess: boolean = null;
   public publicsAccompaniment: string[] = [];
   public proceduresAccompaniment: string[] = [];
+  public remoteAccompaniment: boolean = null;
   public accessModality: string[] = [];
   public labelsQualifications: string[] = [];
   public publics: string[] = [];

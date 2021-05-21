@@ -167,7 +167,7 @@
   </div>
   <!-- Accueil -->
   <div
-    *ngIf="structure.accessModality.length > 0 || structure.hours.hasData()"
+    *ngIf="structure.accessModality.length > 0 || structure.hours.hasData() || structure.remoteAccompaniment"
     fxLayout="column"
     class="structure-details-block"
     fxLayoutAlign="baseline baseline"
@@ -229,6 +229,9 @@
     <div *ngIf="structure.exceptionalClosures" class="bold-info">
       <h3 class="subtitle">Précisions sur les horaires</h3>
       <p>{{ structure.exceptionalClosures }}</p>
+    </div>
+    <div *ngIf="structure.remoteAccompaniment" class="bold-info">
+      <h3>Cette structure propose un accompagnement à distance.</h3>
     </div>
   </div>
   <!-- Démarches en ligne -->
