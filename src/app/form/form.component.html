@@ -770,6 +770,16 @@
           </p>
         </div>
       </div>
+      <div *ngIf="currentPage == pageTypeEnum.structureRemoteAccompaniment" class="page">
+        <div class="title">
+          <h3>Proposez vous un accompagnement à distance ?</h3>
+        </div>
+        <app-radio-form
+          [selectedOption]="getStructureControl('remoteAccompaniment').value"
+          (selectedEvent)="onRadioBtnChange('remoteAccompaniment', $event)"
+        >
+        </app-radio-form>
+      </div>
       <div *ngIf="currentPage == pageTypeEnum.structureWorkshop" class="page">
         <div class="title">
           <h3>Quel(s) atelier(s) au numérique proposez-vous ?</h3>
