@@ -1,19 +1,20 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-  <table *ngIf="demandsAttachment" aria-describedby="demands attachment results">
+<div fxLayout="column" fxLayoutAlign="center center">
+  <table *ngIf="isClaimedStructure" aria-describedby="demands attachment results" class="results-tab">
     <thead>
       <th scope="col">Utilisateur</th>
       <th scope="col">Structure</th>
       <th scope="col">Options</th>
     </thead>
     <tbody>
-      <tr *ngFor="let demand of demandsAttachment">
-        <td>{{ demand.userEmail }}</td>
-        <td>{{ demand.structureName }}</td>
+      <tr *ngFor="let structure of demandsAttachment">
+        <td>{{ structure.userEmail }}</td>
+        <td>{{ structure.structureName }}</td>
         <td>
-          <button (click)="acceptDemand(demand)">Valider</button><button (click)="refuseDemand(demand)">Refuser</button>
+          <button (click)="acceptDemand(structure)">Valider</button
+          ><button (click)="refuseDemand(structure)">Refuser</button>
         </td>
       </tr>
-      <tr *ngIf="!demandsAttachment.length">
+      <tr *ngIf="!demandsAttachment?.length">
         <td colspan="3">Aucune demande en attente</td>
       </tr>
     </tbody>

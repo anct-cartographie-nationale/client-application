@@ -1,0 +1,82 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="row" class="selector">
+    <div fxLayout="row" class="checkbox no-width">
+      <div class="checkboxItem">
+        <label>
+          <input type="checkbox" [checked]="isInClaimStructure" (change)="inClaimStructure($event)" />
+          <span class="customCheck"></span>
+          <div class="label pass option">En revendication</div>
+        </label>
+      </div>
+      <div class="checkboxItem">
+        <label>
+          <input type="checkbox" [checked]="isClaimedStructure" (change)="claimedStructure($event)" />
+          <span class="customCheck"></span>
+          <div class="label pass option">Revendiquées</div>
+        </label>
+      </div>
+      <div class="checkboxItem">
+        <label>
+          <input type="checkbox" [checked]="isToClaimStructure" (change)="toClaimStructure($event)" />
+          <span class="customCheck"></span>
+          <div class="label pass option">Non revendiquées</div>
+        </label>
+      </div>
+      <div class="checkboxItem">
+        <label>
+          <input type="checkbox" [checked]="isAll" (change)="allStructure($event)" />
+          <span class="customCheck"></span>
+          <div class="label pass option">Toutes</div>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isInClaimStructure && !isToClaimStructure && !isClaimedStructure">
+    Choisir un filtre pour afficher la liste des structures
+  </div>
+  <table *ngIf="isInClaimStructure" aria-describedby="demands attachment results" class="results-tab results-column">
+    <thead>
+      <th scope="col">Structures en cours de revendication ({{ structuresInClaim.length }})</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let structure of structuresInClaim">
+        <td>
+          <a href="/acteurs?id={{ structure.structureId }}" target="_blank"> {{ structure.structureName }}</a>
+        </td>
+      </tr>
+      <tr *ngIf="!structuresInClaim?.length">
+        <td colspan="3">Aucune structure</td>
+      </tr>
+    </tbody>
+  </table>
+  <table *ngIf="isToClaimStructure" aria-describedby="demands attachment results" class="results-tab results-column">
+    <thead>
+      <th scope="col">Structures à revendiquer ({{ structuresToClaim.length }})</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let structure of structuresToClaim">
+        <td>
+          <a href="/acteurs?id={{ structure.structureId }}" target="_blank"> {{ structure.structureName }}</a>
+        </td>
+      </tr>
+      <tr *ngIf="!structuresToClaim?.length">
+        <td colspan="3">Aucune structure</td>
+      </tr>
+    </tbody>
+  </table>
+  <table *ngIf="isClaimedStructure" aria-describedby="demands attachment results" class="results-tab results-column">
+    <thead>
+      <th scope="col">Structures revendiquées ({{ structuresClaimed.length }})</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let structure of structuresClaimed">
+        <td>
+          <a href="/acteurs?id={{ structure.structureId }}" target="_blank"> {{ structure.structureName }}</a>
+        </td>
+      </tr>
+      <tr *ngIf="!structuresInClaim?.length">
+        <td colspan="3">Aucune structure</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
