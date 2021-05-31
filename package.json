@@ -1,11 +1,13 @@
 {
   "name": "pamn",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration=fr --proxy-config proxy.conf.json",
     "build:prod": "ng build --prod --configuration=production,fr --output-path=dist --subresource-integrity",
     "build:dev": "ng build --prod --configuration=fr --output-path=dist --subresource-integrity",
+    "doc": "npx @compodoc/compodoc -p tsconfig.doc.json",
+    "doc:serve": "npm run doc && npx compodoc -s",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -42,6 +44,7 @@
     "@angular/cli": "^11.2.11",
     "@angular/compiler-cli": "~11.2.12",
     "@angular/localize": "^11.2.12",
+    "@compodoc/compodoc": "^1.1.11",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/leaflet": "^1.5.17",

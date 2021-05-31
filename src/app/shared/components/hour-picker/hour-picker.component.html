@@ -6,13 +6,6 @@
     >
       <div class="header">
         <div class="grid-center">
-          <!-- <input
-            type="checkbox"
-            id="{{ day.name }}"
-            class="toggle-checkbox hidden"
-            (click)="toggleOpenDay(day, $event.target.checked)"
-            [checked]="day.open"
-          /> -->
           <label class="switch">
             <input
               type="checkbox"
@@ -31,20 +24,6 @@
       </div>
     </div>
 
-    <!-- <div *ngIf="!day.open">
-      <div class="active">
-        <div class="grid-center">
-          <app-copy-paste
-            [day]="day"
-            [copiedDayName]="copiedDayName"
-            (copyEvent)="copy($event)"
-            (pasteEvent)="paste($event)"
-            (cancelEvent)="cancelCopy()"
-          ></app-copy-paste>
-        </div>
-      </div>
-    </div> -->
-
     <div *ngIf="day.open" class="row-container">
       <div class="active" *ngIf="day.active">
         <div class="hour" *ngFor="let hour of day.hours; let i = index">
@@ -57,7 +36,7 @@
           <div>à</div>
 
           <div class="input-container">
-            <input type="time" [(ngModel)]="hour.end" (change)="submitForm()" />
+            <input type="time" [(ngModel)]="hour.end" (change)="submitForm()" (blur)="onBlur()" (focus)="onFocus()" />
           </div>
 
           <div>
@@ -79,71 +58,8 @@
           >
             <app-svg-icon [type]="'ico'" [icon]="'add'" [iconColor]="'currentColor'"></app-svg-icon>Ajouter
           </div>
-          <!-- <div class="grid-center">
-            <app-copy-paste
-              [day]="day"
-              [copiedDayName]="copiedDayName"
-              (copyEvent)="copy($event)"
-              (pasteEvent)="paste($event)"
-              (cancelEvent)="cancelCopy()"
-            ></app-copy-paste>
-          </div> -->
         </div>
-
-        <!-- <div *ngIf="day.hours.length === 2" class="grid-center">
-          <app-copy-paste
-            [day]="day"
-            [copiedDayName]="copiedDayName"
-            (copyEvent)="copy($event)"
-            (pasteEvent)="paste($event)"
-            (cancelEvent)="cancelCopy()"
-          ></app-copy-paste>
-        </div> -->
       </div>
-
-      <!-- <div class="inactive hour" *ngIf="!day.active">
-        <div>De</div>
-
-        <div>
-          <input type="time" [(ngModel)]="day.hours[0].start" (change)="checkHoursValid()" />
-        </div>
-
-        <div>à</div>
-
-        <div>
-          <input type="time" [(ngModel)]="day.hours[0].end" (change)="checkHoursValid()" />
-        </div>
-
-        <div>
-          <div
-            *ngIf="
-              day.hours[0].error === 'incomplete' ||
-                (day.hours[1] && day.hours[1].error === 'incomplete') ||
-                (day.hours[2] && day.hours[2].error === 'incomplete') ||
-                (day.hours[3] && day.hours[3].error === 'incomplete') ||
-                (day.hours[4] && day.hours[4].error === 'incomplete');
-              else wrong
-            "
-            class="warning-message"
-          >
-            <app-svg-icon [type]="'ico'" [icon]="'nok'"></app-svg-icon>
-          </div>
-          <ng-template #wrong>
-            <div
-              *ngIf="
-                day.hours[0].error === 'wrong' ||
-                (day.hours[1] && day.hours[1].error === 'wrong') ||
-                (day.hours[2] && day.hours[2].error === 'wrong') ||
-                (day.hours[23] && day.hours[3].error === 'wrong') ||
-                (day.hours[4] && day.hours[4].error === 'wrong')
-              "
-              class="error-message"
-            >
-              <app-svg-icon [type]="'ico'" [icon]="'nok'"></app-svg-icon>
-            </div>
-          </ng-template>
-        </div>
-      </div> -->
     </div>
   </div>
 </div>

@@ -1,4 +1,8 @@
-<svg aria-hidden="true" class="icon" [ngClass]="iconClass" [attr.fill]="iconColor" [attr.stroke]="iconColor">
-  <title *ngIf="title">{{ title }}</title>
-  <use [attr.xlink:href]="'assets/' + type + '/sprite.svg#' + icon"></use>
-</svg>
+<div app-tooltipDirective title="{{ title }}">
+  <ng-template #tooltipTemplate>
+    <div class="tooltip">{{ title }}</div>
+  </ng-template>
+  <svg aria-hidden="true" class="icon" [ngClass]="iconClass" [attr.fill]="iconColor" [attr.stroke]="iconColor">
+    <use [attr.xlink:href]="'assets/' + type + '/sprite.svg#' + icon"></use>
+  </svg>
+</div>

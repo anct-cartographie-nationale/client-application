@@ -1,10 +1,14 @@
 <div fxLayout="column" fxLayoutGap="20px" class="content-container full-screen">
   <div fxLayout="row" fxLayoutAlign="center center"><h1>Administration</h1></div>
   <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-    <button (click)="changeActiveFeature(features.pendingStructures)">Gestion structure</button>
+    <button (click)="changeActiveFeature(features.pendingStructures)">Revendication structure</button>
+    <button (click)="changeActiveFeature(features.structuresList)">Liste structures</button>
     <button (click)="changeActiveFeature(features.deleteUsers)">Suppression d'utilisateurs</button>
     <button (click)="changeActiveFeature(features.newsletterUsers)">Newsletter</button>
     <a target="_blank" class="custom-link" rel="noopener noreferrer" [href]="ghostLink">Ghost</a>
+  </div>
+  <div *ngIf="selectedFeature === features.structuresList">
+    <app-admin-structures-list></app-admin-structures-list>
   </div>
   <div *ngIf="selectedFeature === features.deleteUsers">
     <app-admin-delete-user></app-admin-delete-user>

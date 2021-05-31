@@ -2,6 +2,42 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://forge.grandlyon.com///compare/v1.8.0...v1.9.0) (2021-05-31)
+
+
+### Features
+
+* **admin:** add visualisation of unclaimed structure ([20fa1b0](https://forge.grandlyon.com///commit/20fa1b024f8536270282dc1bdcf88312ddfee91b))
+* **structure-form:** add remote accompaniment step ([509129b](https://forge.grandlyon.com///commit/509129bc9931a2cbcbdf069bfecf844f64051f95))
+* add admin and profile as lazy loaded modules ([a4b3181](https://forge.grandlyon.com///commit/a4b31817444dd340521cd6aabd5bac37793d4767))
+* **doc:** add compodoc ([407aeed](https://forge.grandlyon.com///commit/407aeed22daef3b78a5399b90c78e66efd555e1a))
+* add pix label ([ff5a522](https://forge.grandlyon.com///commit/ff5a522989d5ca2208650d3652ce4ff76c91e7b0))
+* add women public ([d9a5d4f](https://forge.grandlyon.com///commit/d9a5d4faa42aeae32d1a2dc40c4f9a23da4d51e0))
+* update cgu ([0f1d634](https://forge.grandlyon.com///commit/0f1d634e6967f095232db42a89e78b80302ef293))
+
+
+### Bug Fixes
+
+* **news:** 'a-la-une' tag was creating bug in other news display. Multiple 'a-la-une' tag is now possible. ([a44912e](https://forge.grandlyon.com///commit/a44912e0737ac96c72a131c11aa9acf9f368bb02))
+* add titles for tooltip of structure details ([56358bd](https://forge.grandlyon.com///commit/56358bd58c90601499f827d9aa0420b077d285fb))
+* align of validation icon ([0abdd3e](https://forge.grandlyon.com///commit/0abdd3e14581ce7f7844220bbfda32cc07039e80))
+* angular lib warning + update readme ([a77f6da](https://forge.grandlyon.com///commit/a77f6dacc28ead8ce0da7c6f74338c7966b18d99))
+* change filter modal padding ([1f148f4](https://forge.grandlyon.com///commit/1f148f4c8cdbb05a460ba61cf0a1529381c0608c))
+* change regex for email (special character) ([2250272](https://forge.grandlyon.com///commit/225027237ba0b2e1e9e22ca1c37a94e8410ba07a))
+* check for opening hours of structure on component init ([2117c68](https://forge.grandlyon.com///commit/2117c68d3daea77dd6ffdb8f3cb70c77d324ae7e))
+* display updated_at instead of published_at ([36a68a4](https://forge.grandlyon.com///commit/36a68a4582ee2ebdd1ed4c5e5fa1f1be6370215a))
+* fill the query input with url param and reset url param on query changes ([b123f00](https://forge.grandlyon.com///commit/b123f00c8a48c5cdb69cc3dc5da2ab3517251e4c))
+* height of label card ([b4489cd](https://forge.grandlyon.com///commit/b4489cdf136e80cdb001908236472d1ab7f02f75))
+* issue on hour-picker focus + clean code ([1fdc33f](https://forge.grandlyon.com///commit/1fdc33f2f7242894e0c542d2851fcdefd8a818a7))
+* opengraph logo ([c54587c](https://forge.grandlyon.com///commit/c54587c3ff6851f0201d63a97cd88e4ab0c9226d))
+* plural handling ([43d2440](https://forge.grandlyon.com///commit/43d2440d66db2571b17ab56dd20532743929a34c))
+* posts image size ([b085c5d](https://forge.grandlyon.com///commit/b085c5d085fa432f2ce8ae21b01c7c0bafce1338))
+* remove console.log + clean code ([bd4bba8](https://forge.grandlyon.com///commit/bd4bba845fa8ee1bd36038093886b640e4cbd5c8))
+* remove deletion of accompaniement on strucutre edit ([76f4332](https://forge.grandlyon.com///commit/76f4332bb3cf3dbd33448a38cef9177afbdd3b4a))
+* revendication on login ([f9de450](https://forge.grandlyon.com///commit/f9de450a28a84b7a5870dc436dedb7e27f3d92df))
+* update linkedin regex to allow compagny pages ([a4a032b](https://forge.grandlyon.com///commit/a4a032bba9122dc66af45a88bd82bbd4bf4f1fcd))
+* update regex of password and email to handle hyphen ([31193b7](https://forge.grandlyon.com///commit/31193b7ab8c8179a21bab435a309c46926a61453))
+
 ## [1.8.0](https://forge.grandlyon.com///compare/v1.7.0...v1.8.0) (2021-05-06)
 
 

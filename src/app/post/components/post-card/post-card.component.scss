@@ -33,8 +33,8 @@
     margin-bottom: 12px !important;
     .image {
       object-fit: cover;
-      height: 88px;
-      width: 195px;
+      max-height: 180px;
+      max-width: 90%;
       @media #{$large-phone} {
         height: 70px;
       }

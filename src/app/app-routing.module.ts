@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
-import { PanelComponent } from './admin/components/panel/panel.component';
 import { FormComponent } from './form/form.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
 import { CartoComponent } from './carto/carto.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
-import { ProfileComponent } from './profile/profile.component';
 import { ResetEmailComponent } from './reset-email/reset-email.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { TempUserResolver } from './resolvers/temp-user.resolver';
@@ -59,7 +57,7 @@ const routes: Routes = [
   {
     path: 'profile',
     canActivate: [AuthGuard],
-    component: ProfileComponent,
+    loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule),
   },
   {
     path: 'join',
@@ -69,11 +67,6 @@ const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
-  },
-  {
-    path: 'admin',
-    canActivate: [AdminGuard],
-    component: PanelComponent,
   },
   {
     path: 'create-structure',
@@ -93,6 +86,11 @@ const routes: Routes = [
   {
     path: 'news',
     loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
+  },
+  {
+    path: 'admin',
+    canActivate: [AdminGuard],
+    loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule),
   },
   {
     path: 'home',

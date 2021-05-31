@@ -24,7 +24,7 @@
 
   <div fxLayout="column" class="informations" *ngIf="post.tags[0] && post.tags[0].slug != 'appels'">
     <div fxLayout="row">
-      {{ post.published_at | date: 'shortDate' }}
+      {{ post.updated_at | date: 'shortDate' }}
     </div>
     <div fxLayout="row">par {{ post.author }}</div>
   </div>

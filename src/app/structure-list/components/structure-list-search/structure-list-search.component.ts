@@ -51,7 +51,9 @@ export class StructureListSearchComponent implements OnInit {
     private router: Router
   ) {
     this.searchForm = this.fb.group({
-      searchTerm: '',
+      searchTerm: this.activatedRoute.snapshot.queryParamMap.get('search')
+        ? this.activatedRoute.snapshot.queryParamMap.get('search')
+        : '',
     });
   }
   ngOnInit(): void {
@@ -90,6 +92,10 @@ export class StructureListSearchComponent implements OnInit {
           search: term,
         },
         queryParamsHandling: 'merge',
+      });
+    } else if (!term) {
+      this.router.navigate(['/acteurs'], {
+        relativeTo: this.route,
       });
     }
     const filters: Filter[] = [];

@@ -278,3 +278,18 @@ button {
   max-width: 50%;
   margin: 0 auto;
 }
+
+[app-tooltipDirective] {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  white-space: nowrap;
+  left: 0;
+  padding: 10px;
+  background: $grey;
+  color: $white;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.6);
+}

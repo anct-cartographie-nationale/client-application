@@ -25,6 +25,7 @@ export class Structure {
   public pmrAccess: boolean = null;
   public publicsAccompaniment: string[] = [];
   public proceduresAccompaniment: string[] = [];
+  public remoteAccompaniment: boolean = null;
   public accessModality: string[] = [];
   public labelsQualifications: string[] = [];
   public publics: string[] = [];
@@ -158,15 +159,17 @@ export class Structure {
   public getEquipmentsTitle(equipment: Equipment): string {
     switch (equipment) {
       case Equipment.wifi:
-        return 'Wifi';
+        return 'Wifi en accès libre';
       case Equipment.bornes:
-        return 'Bornes';
+        return this.nbNumericTerminal > 1 ? 'Bornes numériques' : 'Borne numérique';
       case Equipment.printer:
-        return 'Imprimantes';
+        return this.nbPrinters > 1 ? 'Imprimantes' : 'Imprimante';
       case Equipment.tablet:
-        return 'Tablettes';
+        return this.nbTablets > 1 ? 'Tablettes' : 'Tablette';
       case Equipment.computer:
-        return 'Ordinateurs';
+        return this.nbComputers > 1 ? 'Ordinateurs à disposition' : 'Ordinateur à disposition';
+      case Equipment.scanner:
+        return this.nbScanners > 1 ? 'Scanners' : 'Scanner';
       default:
         return null;
     }

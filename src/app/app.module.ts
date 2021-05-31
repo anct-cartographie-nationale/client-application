@@ -57,7 +57,7 @@ import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsl
     StructureJoinComponent,
     NewsletterSubscriptionComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, ProfileModule, AdminModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },
