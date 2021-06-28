@@ -1,0 +1,100 @@
+@import '../../../assets/scss/breakpoint';
+@import '../../../assets/scss/layout';
+@import '../../../assets/scss/z-index';
+@import '../../../assets/scss/color';
+@import '../../../assets/scss/typography';
+
+.title {
+  margin-top: 20px;
+}
+
+.body-wrap {
+  height: 400px;
+}
+
+.left-pane {
+  width: 529px;
+  min-width: 500px;
+  height: 600px;
+  overflow: auto;
+  overflow-x: hidden;
+  padding: 0 25px 0 0;
+  @media #{$tablet} {
+    width: 100%;
+    min-width: unset;
+    &.mapPhone {
+      display: none !important;
+    }
+  }
+}
+
+.right-pane {
+  width: 400px;
+  max-height: 400px;
+  padding: 0 16px;
+  @media #{$tablet} {
+    display: none;
+    &.mapPhone {
+      display: block;
+    }
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.deep-map ::ng-deep #map {
+  height: 380px;
+}
+
+.tags-cloud {
+  font-style: normal;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  border-radius: 20px;
+  padding: 5px 15px;
+  color: white;
+  border-style: none;
+  margin-top: 15px;
+  background: #348899;
+  &.unchecked {
+    background: #bdbdbd;
+  }
+}
+
+.titleCateg {
+  width: 100%;
+  @include cn-bold-16;
+  padding: 1.5em;
+  color: $grey-2;
+}
+
+.titleInfo {
+  padding: 1em 0;
+}
+
+.inputRow {
+  height: auto;
+  .validateIcon {
+    height: 38px !important;
+  }
+  .markerIcon {
+    height: 38px !important;
+    cursor: pointer;
+  }
+}
+
+.nbStructure-panel {
+  width: 545px;
+}
+
+.nbStructuresLabel {
+  color: $white;
+  @include cn-regular-16;
+  display: grid;
+  align-items: center;
+  height: 32px;
+  background-color: $grey-4;
+  padding-left: 9px;
+  width: 100%;
+}

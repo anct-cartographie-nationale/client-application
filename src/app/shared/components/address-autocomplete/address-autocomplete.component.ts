@@ -29,6 +29,19 @@ export class AddressAutocompleteComponent implements OnInit {
       this.searchAddress.nativeElement.value = address_str;
     }
   }
+
+  ngOnChanges(): void {
+    if (this.address) {
+      let address_str = null;
+      if (this.address.numero) {
+        address_str = this.address.numero + ' ' + this.address.street + ' ' + this.address.commune;
+      } else {
+        address_str = this.address.street + ' ' + this.address.commune;
+      }
+      this.searchAddress.nativeElement.value = address_str;
+    }
+  }
+
   public onSearchChange(searchString: string) {
     if (!this.isAlreadySearching) {
       this.isAlreadySearching = true;

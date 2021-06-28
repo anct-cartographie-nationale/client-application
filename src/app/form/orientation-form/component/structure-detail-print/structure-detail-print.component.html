@@ -1,0 +1,158 @@
+<div class="structrue-details-container" *ngIf="structure">
+  <!-- Header info -->
+  <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="8px">
+    <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
+      <div fxLayout="column" class="no-margin" fxLayoutAlign="space-between start">
+        <h2 class="bold">{{ structure.structureName }}</h2>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="typeInformationHeader" fxLayout="column">
+          <h3>{{ structure.getLabelTypeStructure() }}</h3>
+        </div>
+      </div>
+      <div fxLayout="row" class="mobile-column">
+        <div fxLayout="column" fxFlex="50%">
+          <div *ngIf="structure.address" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'adress'" [title]="'Adresse'"></app-svg-icon>
+            <p>{{ structure.address.numero }} {{ structure.address.street }}, {{ structure.address.commune }}</p>
+          </div>
+          <div *ngIf="structure.website" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'web'" [title]="'Site web'"></app-svg-icon>
+            <a
+              target="_blank"
+              class="custom-link"
+              rel="noopener noreferrer"
+              [href]="structure.website.includes('http') ? structure.website : 'http://' + structure.website"
+              >{{ structure.website | url }}</a
+            >
+          </div>
+          <div *ngIf="structure.hasSocialNetwork()" fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'network'"></app-svg-icon>
+            <div fxLayout="row" fxLayoutAlign="none baseline" fxLayoutGap="8px">
+              <a
+                *ngIf="structure.facebook"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.facebook"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'facebook'" [title]="'Facebook'"></app-svg-icon
+              ></a>
+              <a
+                *ngIf="structure.twitter"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.twitter"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'twitter'" [title]="'Twitter'"></app-svg-icon
+              ></a>
+              <a
+                *ngIf="structure.instagram"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.instagram"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'instagram'" [title]="'Instagram'"></app-svg-icon
+              ></a>
+              <a
+                *ngIf="structure.linkedin"
+                target="_blank"
+                class="custom-link"
+                rel="noopener noreferrer"
+                [href]="'http://' + structure.linkedin"
+              >
+                <app-svg-icon [type]="'ico'" [icon]="'linkedin'" [title]="'Linkedin'"></app-svg-icon
+              ></a>
+            </div>
+          </div>
+          <div *ngIf="structure.contactPhone" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'tel'" [title]="'Téléphone'"></app-svg-icon>
+            <p>{{ structure.contactPhone | phone }}</p>
+          </div>
+        </div>
+        <div fxLayout="column" fxFlex="50%">
+          <div
+            *ngIf="structure.contactMail && structure.contactMail !== 'unknown@unknown.com'"
+            fxLayout="row"
+            fxLayoutAlign="none center"
+            fxLayoutGap="13px"
+          >
+            <app-svg-icon [type]="'ico'" [iconClass]="'grey-1'" [icon]="'email'" [title]="'Email'"></app-svg-icon>
+            <p>{{ structure.contactMail }}</p>
+          </div>
+          <div *ngIf="structure.hasPassNumeric()" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'pass'" [title]="'Pass numérique'"></app-svg-icon>
+            <p>agréé Pass Numérique</p>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
+            <app-svg-icon [type]="'ico'" [icon]="'calendar'"></app-svg-icon>
+            <p>Mise à jour le {{ structure.updatedAt | date: 'mediumDate' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        {{ structure.description }}
+      </div>
+      <div class="info">
+        {{ structure.lockdownActivity }}
+      </div>
+    </div>
+  </div>
+  <!-- Accueil -->
+  <div
+    *ngIf="structure.accessModality.length > 0 || structure.hours.hasData() || structure.remoteAccompaniment"
+    fxLayout="column"
+    class="structure-details-block"
+    fxLayoutAlign="baseline baseline"
+    fxLayoutGap="20px"
+  >
+    <!-- Opening Hours -->
+    <div fxLayout="row" class="w-100 mobile-column">
+      <div *ngIf="structure.hours.hasData()" fxFlex="50%">
+        <h3 class="subtitle">Horaires d’ouverture au public</h3>
+        <div fxLayout="column">
+          <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
+            <div *ngIf="day.value.open">
+              <h4>{{ day.key | day }}</h4>
+              <div class="opening-time" fxLayout="row" fxLayoutAlign="none flex-end">
+                <div *ngFor="let timeRange of day.value.time; let isFirst = first">
+                  <p *ngIf="isFirst">de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}</p>
+                  <p *ngIf="!isFirst && timeRange.opening">
+                    et de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- accessModality -->
+      <div *ngIf="structure.accessModality.length > 0" fxFlex="40%">
+        <h3 class="subtitle">Accès transports en commun</h3>
+        <div fxLayout="column">
+          <div *ngFor="let tclStop of tclStopPoints">
+            <div fxLayout="row wrap" fxLayoutGap="5px">
+              <p>{{ tclStop.name }}:</p>
+              <p *ngIf="tclStop.subLines.length > 0">Métro</p>
+              <p *ngFor="let sub of tclStop.subLines">{{ sub }}</p>
+              <p *ngIf="tclStop.tramLines.length > 0">Tram</p>
+              <p *ngFor="let tram of tclStop.tramLines">{{ tram }}</p>
+              <p *ngIf="tclStop.busLines.length > 0">Bus</p>
+              <p *ngFor="let bus of tclStop.busLines">{{ bus }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="structure.exceptionalClosures" class="bold-info">
+      <h3 class="subtitle">Précisions sur les horaires</h3>
+      <p>{{ structure.exceptionalClosures }}</p>
+    </div>
+    <div *ngIf="structure.remoteAccompaniment" class="bold-info">
+      <h3>Cette structure propose un accompagnement à distance.</h3>
+    </div>
+  </div>
+</div>

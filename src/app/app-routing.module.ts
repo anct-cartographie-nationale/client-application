@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
-import { FormComponent } from './form/form.component';
+import { FormComponent } from './form/structure-form/form.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
@@ -15,9 +15,16 @@ import { StructureDetailsComponent } from './structure-list/components/structure
 import { StructureListComponent } from './structure-list/structure-list.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
 import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsletter-subscription.component';
+import { OrientationFormComponent } from './form/orientation-form/orientation-form.component';
+import { StructureListPrintComponent } from './form/orientation-form/component/structure-list-print/structure-list-print.component';
 
 const routes: Routes = [
   { path: 'print', outlet: 'print', children: [{ path: 'structure', component: StructureDetailsComponent }] },
+  { path: 'print', outlet: 'print', children: [{ path: 'structures', component: StructureListPrintComponent }] },
+  {
+    path: 'orientation',
+    component: OrientationFormComponent,
+  },
   {
     path: 'acteurs',
     component: CartoComponent,

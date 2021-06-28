@@ -1,0 +1,12 @@
+<app-structure-print-header
+  class="multi-print"
+  [beneficiaryNeedCommentary]="beneficiaryNeedCommentary"
+  [beneficiaryName]="beneficiaryName"
+  [structureAccompaniment]="structureAccompaniment"
+  [beneficiaryPassNumeric]="beneficiaryPassNumeric"
+  [contactAccompaniment]="contactAccompaniment"
+  [filters]="filters"
+></app-structure-print-header>
+<div class="multi-print" *ngFor="let structure of structures">
+  <app-structure-detail-print [structure]="structure"></app-structure-detail-print>
+</div>

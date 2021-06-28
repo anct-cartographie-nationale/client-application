@@ -26,6 +26,7 @@ export class ModalFilterComponent implements OnInit {
   // Management of the checkbox event (Check / Uncheck)
   public onCheckboxChange(event, categ: string): void {
     const checkValue: string = event.target.value;
+    console.log(checkValue);
     if (event.target.checked) {
       this.checkedModules.push(new Module(checkValue, categ));
     } else {
