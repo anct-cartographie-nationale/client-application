@@ -34,3 +34,28 @@
     border-bottom: none;
   }
 }
+
+.selection-button {
+  font-style: normal;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  min-width: 180px;
+  height: 30px;
+  border-radius: 20px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+
+.selected {
+  border-style: solid;
+  border-width: 2px;
+  background-color: $white;
+  border-color: $black;
+  color: $black;
+}
+.to-select {
+  color: white;
+  border-style: none;
+  background: #47c562;
+}

@@ -8,12 +8,26 @@ import { Structure } from '../../models/structure.model';
 export class PrintService {
   public isPrinting = false;
   public structure: Structure;
+  public structures: Structure[];
 
   constructor(private router: Router) {}
 
   public printDocument(documentName: string, structure: Structure): void {
     this.isPrinting = true;
     this.structure = structure;
+    this.router.navigate([
+      '/',
+      {
+        outlets: {
+          print: ['print', documentName],
+        },
+      },
+    ]);
+  }
+
+  public printDocuments(documentName: string, structures: Structure[]): void {
+    this.isPrinting = true;
+    this.structures = structures;
     this.router.navigate([
       '/',
       {

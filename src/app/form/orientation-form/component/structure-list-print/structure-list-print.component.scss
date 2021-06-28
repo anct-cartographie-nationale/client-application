@@ -1,0 +1,18 @@
+.list-to-print {
+  height: 600px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.multi-print {
+  ::ng-deep {
+    .structrue-details-container {
+      page-break-after: always;
+      height: 100%;
+    }
+    .print-header {
+      page-break-after: always;
+      height: 100%;
+    }
+  }
+}

@@ -5,8 +5,25 @@
       <span class="typeStructure">{{ structure.getLabelTypeStructure() }}</span>
     </div>
     <div class="distanceStructure" fxLayout="column" fxLayoutAlign="none end">
-      <div>
+      <div *ngIf="!isOrientation">
         {{ this.structure.address.commune }}
+      </div>
+      <div
+        fxLayout="row"
+        *ngIf="isOrientation && !isSelected"
+        class="selection-button selected"
+        (click)="cardAddToList(); $event.stopPropagation()"
+      >
+        <app-svg-icon [type]="'ico'" [icon]="'add'" [iconColor]="'black'"></app-svg-icon>ajouter à la liste
+      </div>
+      <div
+        fxLayout="row"
+        *ngIf="isOrientation && isSelected"
+        class="selection-button to-select"
+        (click)="cardAddToList(); $event.stopPropagation()"
+      >
+        <app-svg-icon [type]="'ico'" [icon]="'validate'" [iconColor]="'white'"></app-svg-icon>
+        retirer de la liste
       </div>
       <div *ngIf="structure.distance">
         {{ this.formatDistance() }}

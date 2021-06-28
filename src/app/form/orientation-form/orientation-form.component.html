@@ -1,0 +1,456 @@
+<div *ngIf="!multiPrint" class="form" fxLayout="column">
+  <app-modal-confirmation
+    [openned]="showConfirmationModal"
+    [content]="'Il vous faudra de nouveau remplir le formulaire si vous quittez'"
+    (closed)="hasRedirectionAccepted($event)"
+  ></app-modal-confirmation>
+  <div class="content">
+    <div class="progressBar" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+      <label [ngClass]="{ validate: currentPage == nbPagesForm }" for="progressForm"
+        >{{ progressStatus | number: '1.0-0' }}%
+      </label>
+      <progress
+        id="progressForm"
+        [ngClass]="{ validate: currentPage == nbPagesForm }"
+        max="100"
+        [value]="progressStatus"
+      ></progress>
+    </div>
+    <!-- BESOIN BENEFICIAIRE -->
+    <div *ngIf="currentPage == pageTypeEnum.beneficiaryNeed" class="page">
+      <div class="titleInfo">
+        Cet espace vise à favoriser l'orientation de l'usager en partant de son besoin.<br />
+        Merci de remplir ces quelques questions qui vous permettront d'identifier le lieu à proximité le plus adapté.
+      </div>
+      <div class="title">
+        <h3>De quoi le bénéficiaire a-t-il besoin ?</h3>
+      </div>
+      <div class="collapse" [ngClass]="{ notCollapsed: !showEquipments }">
+        <div fxLayout="column">
+          <div
+            class="collapseHeader"
+            fxLayout="row"
+            fxLayoutGap="20px"
+            fxLayoutAlign=" center"
+            (click)="toggleEquipments()"
+          >
+            <div class="titleCollapse">Accéder à du matériel</div>
+            <div class="logo">
+              <svg class="show" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
+              </svg>
+              <svg class="hide" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
+              </svg>
+            </div>
+          </div>
+          <div *ngIf="showEquipments" class="tags">
+            <button
+              *ngFor="let choice of equipments"
+              (click)="updateChoice(choice.id, 'equipments')"
+              [ngClass]="{ selectedChoice: isInArray(choice.id, 'equipments') }"
+            >
+              <div fxLayout="row" fxLayoutAlign=" center">
+                <svg class="validate" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                </svg>
+                <div class="textBtn">
+                  {{ choice.text }}
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="collapse" [ngClass]="{ notCollapsed: !showAssistance }">
+        <div fxLayout="column">
+          <div
+            class="collapseHeader"
+            fxLayout="row"
+            fxLayoutGap="20px"
+            fxLayoutAlign=" center"
+            (click)="toggleAssistance()"
+          >
+            <div class="titleCollapse">Être aidé</div>
+            <div class="logo">
+              <svg class="show" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
+              </svg>
+              <svg class="hide" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
+              </svg>
+            </div>
+          </div>
+          <div *ngIf="showAssistance" class="tags">
+            <button
+              *ngFor="let choice of assistance"
+              (click)="updateChoice(choice.id, 'assistance')"
+              [ngClass]="{ selectedChoice: isInArray(choice.id, 'assistance') }"
+            >
+              <div fxLayout="row" fxLayoutAlign=" center">
+                <svg class="validate" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                </svg>
+                <div class="textBtn">
+                  {{ choice.text }}
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="collapse" [ngClass]="{ notCollapsed: !showFormation }">
+        <div fxLayout="column">
+          <div
+            class="collapseHeader"
+            fxLayout="row"
+            fxLayoutGap="20px"
+            fxLayoutAlign=" center"
+            (click)="toggleFormation()"
+          >
+            <div class="titleCollapse">Être formé</div>
+            <div class="logo">
+              <svg class="show" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
+              </svg>
+              <svg class="hide" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
+              </svg>
+            </div>
+          </div>
+          <div *ngIf="showFormation" class="tags">
+            <p class="titleCateg">{{ baseSkillssReferentiel.name }}</p>
+            <button
+              *ngFor="let choice of baseSkillssReferentiel.modules"
+              (click)="updateChoice(choice.id, 'formation')"
+              [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
+            >
+              <div fxLayout="row" fxLayoutAlign=" center">
+                <svg class="validate" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                </svg>
+                <div class="textBtn">
+                  {{ choice.text }}
+                </div>
+              </div>
+            </button>
+
+            <p class="titleCateg">{{ accessRightsReferentiel.name }}</p>
+            <button
+              *ngFor="let choice of accessRightsReferentiel.modules"
+              (click)="updateChoice(choice.id, 'formation')"
+              [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
+            >
+              <div fxLayout="row" fxLayoutAlign=" center">
+                <svg class="validate" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                </svg>
+                <div class="textBtn">
+                  {{ choice.text }}
+                </div>
+              </div>
+            </button>
+
+            <p class="titleCateg">{{ digitalCultureSecuritysReferentiel.name }}</p>
+            <button
+              *ngFor="let choice of digitalCultureSecuritysReferentiel.modules"
+              (click)="updateChoice(choice.id, 'formation')"
+              [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
+            >
+              <div fxLayout="row" fxLayoutAlign=" center">
+                <svg class="validate" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                </svg>
+                <div class="textBtn">
+                  {{ choice.text }}
+                </div>
+              </div>
+            </button>
+
+            <p class="titleCateg">{{ parentingHelpsReferentiel.name }}</p>
+            <button
+              *ngFor="let choice of parentingHelpsReferentiel.modules"
+              (click)="updateChoice(choice.id, 'formation')"
+              [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
+            >
+              <div fxLayout="row" fxLayoutAlign=" center">
+                <svg class="validate" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                </svg>
+                <div class="textBtn">
+                  {{ choice.text }}
+                </div>
+              </div>
+            </button>
+
+            <p class="titleCateg">{{ socialAndProfessionalsReferentiel.name }}</p>
+            <button
+              *ngFor="let choice of socialAndProfessionalsReferentiel.modules"
+              (click)="updateChoice(choice.id, 'formation')"
+              [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
+            >
+              <div fxLayout="row" fxLayoutAlign=" center">
+                <svg class="validate" aria-hidden="true">
+                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+                </svg>
+                <div class="textBtn">
+                  {{ choice.text }}
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- NUMERIC PASS -->
+    <div *ngIf="currentPage == pageTypeEnum.beneficiaryPassNumeric" class="page">
+      <div class="title">
+        <h3>Le bénéficiaire possède-t-il un Pass numérique ?</h3>
+      </div>
+      <app-radio-form
+        [selectedOption]="getOrientationControl('passNumeric').value"
+        [horizontal]="true"
+        (selectedEvent)="onRadioBtnChange('passNumeric', $event)"
+      >
+      </app-radio-form>
+    </div>
+    <!-- PROFIL BENEFICIAIRE -->
+    <div *ngIf="currentPage == pageTypeEnum.beneficiaryInfo" class="page">
+      <div class="title">
+        <h3>Autour de quelle adresse chercher une structure ?</h3>
+      </div>
+      <div class="form-group" fxLayout="column">
+        <label for="address">Adresse</label>
+
+        <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
+          <app-address-autocomplete
+            [address]="getOrientationControl('address').valid ? getOrientationControl('address').value : null"
+            (inputAddress)="setAddressBeneficiary()"
+            (selectedAddress)="setAddressBeneficiary($event)"
+          ></app-address-autocomplete>
+          <app-svg-icon
+            *ngIf="getOrientationControl('address').valid"
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'validate'"
+            class="validateIcon"
+          ></app-svg-icon>
+          <div *ngIf="!getOrientationControl('address').valid" (click)="getAddress()">
+            <app-svg-icon [type]="'ico'" [icon]="'locateMe'" class="markerIcon"></app-svg-icon>
+          </div>
+        </div>
+      </div>
+      <div class="title">
+        <h3>Le bénéficiaire a-t-il un profil spécifique ?</h3>
+        <p class="notRequired">facultatif</p>
+      </div>
+
+      <div class="tags">
+        <button
+          *ngFor="let choice of specificProfile.modules"
+          (click)="updateChoice(choice.id, 'specificProfile')"
+          [ngClass]="{ selectedChoice: isInArray(choice.id, 'specificProfile') }"
+        >
+          <div fxLayout="row" fxLayoutAlign=" center">
+            <svg class="validate" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+            </svg>
+            <div class="textBtn">
+              {{ choice.text }}
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <!-- STRUCTURE SEARCH -->
+    <div *ngIf="currentPage == pageTypeEnum.structuresSelection" class="page">
+      Filtres séléctionnés
+      <div fxLayout="row wrap" fxLayoutGap="16px">
+        <div *ngFor="let filter of filters" class="tags-cloud" fxLayout="row" (click)="removeFilter(filter)">
+          {{ filter.text ? filter.text : filter.value }}
+          <app-svg-icon [type]="'ico'" [icon]="'delete'" [iconColor]="'white'"></app-svg-icon>
+        </div>
+        <div
+          *ngFor="let uncheckedFilter of uncheckedFilters"
+          class="tags-cloud unchecked"
+          fxLayout="row"
+          (click)="restoreFilter(uncheckedFilter)"
+        >
+          {{ uncheckedFilter.text ? uncheckedFilter.text : uncheckedFilter.value }}
+          <app-svg-icon [type]="'ico'" [icon]="'validate'" [iconColor]="'white'"></app-svg-icon>
+        </div>
+      </div>
+      <div fxLayout="row" class="content-container">
+        <div class="nbStructure-panel">
+          <div class="nbStructuresLabel" [ngPlural]="structuresList.length">
+            <ng-template ngPluralCase="0">0 structure trouvée</ng-template>
+            <ng-template ngPluralCase="1">1 structure trouvée</ng-template>
+            <ng-template ngPluralCase="other">{{ structuresList.length }} structures trouvées</ng-template>
+          </div>
+          <div id="listCard" class="left-pane" (mouseleave)="mouseLeave()">
+            <app-card
+              *ngFor="let structure of structuresList"
+              [structure]="structure"
+              [isOrientation]="true"
+              [isSelected]="isInPrintList(structure._id)"
+              (addToList)="addToList($event, structure)"
+              (hover)="handleCardHover($event)"
+              (showDetails)="showDetails($event)"
+            ></app-card>
+            <p *ngIf="structureList && structureList.length <= 0">
+              Il n'y a aucune réponse correspondant à votre recherche
+            </p>
+          </div>
+        </div>
+        <div class="right-pane">
+          <div class="deep-map">
+            <app-map
+              [structures]="structuresList"
+              [structuresToPrint]="structuresToPrint"
+              [toogleToolTipId]="displayMapMarkerId"
+              [selectedMarkerId]="selectedMarkerId"
+              [locate]="locate"
+              (locatationTrigger)="locatationTrigger($event)"
+              (selectedStructure)="showDetailStructure($event)"
+              [isMapPhone]="isMapPhone"
+              [searchedValue]="searchedValue"
+              [ngClass]="{ mapPhone: isMapPhone == true }"
+            ></app-map>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- BENEFICIARY ACCOMPANIMENT -->
+    <div *ngIf="currentPage == pageTypeEnum.beneficiaryAccompaniment" class="page">
+      <div class="title">
+        <h3>Qui oriente le bénéficiaire ?</h3>
+      </div>
+      <label>Votre structure (MDM, Caf, Pôle Emploi...)</label>
+      <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
+        <input
+          type="text"
+          [value]="getOrientationControl('structureAccompaniment').value"
+          (input)="setStructureAccompaniment($event.target.value)"
+          class="form-input"
+        />
+      </div>
+
+      <div class="title">
+        <h3>Comment contacter cette structure ?</h3>
+        <p class="notRequired">facultatif</p>
+      </div>
+      <label>Contact (email ou n° de téléphone)</label>
+      <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
+        <input
+          type="text"
+          [value]="getOrientationControl('contactAccompaniment').value"
+          (input)="setContactAccompaniment($event.target.value)"
+          class="form-input"
+        />
+      </div>
+
+      <div class="title">
+        <h3>Qui est le bénéficiaire ?</h3>
+        <p class="notRequired">facultatif</p>
+      </div>
+      <label>Nom du bénéficiaire</label>
+      <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
+        <input
+          type="text"
+          [value]="getOrientationControl('beneficiaryName').value"
+          (input)="setBeneficiaryName($event.target.value)"
+          class="form-input"
+        />
+      </div>
+    </div>
+    <!-- BENEFICIARY NEEDS COMMENTARY -->
+    <div *ngIf="currentPage == pageTypeEnum.beneficiaryNeedCommentary" class="page">
+      <div class="title">
+        <h3>Précisez le besoin</h3>
+        <p class="notRequired">facultatif</p>
+      </div>
+      <label>Ces informations sont à destination de la structure</label>
+      <div class="textareaBlock" fxLayout="column">
+        <textarea
+          rows="8"
+          maxlength="500"
+          [value]="getOrientationControl('beneficiaryNeedCommentary').value"
+          (input)="setBeneficiaryNeedCommentary($event.target.value)"
+        ></textarea>
+        <p>
+          {{
+            getOrientationControl('beneficiaryNeedCommentary').value
+              ? getOrientationControl('beneficiaryNeedCommentary').value.length
+              : 0
+          }}/500
+        </p>
+      </div>
+    </div>
+    <!-- PRINT RESULTS -->
+    <div *ngIf="currentPage == pageTypeEnum.printResults" class="page">
+      <div class="title">
+        <app-structure-print-header
+          [beneficiaryNeedCommentary]="getOrientationControl('beneficiaryNeedCommentary').value"
+          [beneficiaryName]="getOrientationControl('beneficiaryName').value"
+          [structureAccompaniment]="getOrientationControl('structureAccompaniment').value"
+          [beneficiaryPassNumeric]="getOrientationControl('passNumeric').value"
+          [contactAccompaniment]="getOrientationControl('contactAccompaniment').value"
+          [filters]="filters"
+        ></app-structure-print-header>
+
+        <app-structure-detail-print
+          *ngFor="let structure of structuresToPrint"
+          [structure]="structure"
+        ></app-structure-detail-print>
+      </div>
+    </div>
+  </div>
+  <!-- FOOTER AVEC SUIVANT / PRECEDENT ET VALIDATION -->
+  <div *ngIf="currentPage == 0" class="footer desktop" fxLayout="column" fxLayoutAlign="space-between">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <app-footer-form
+        [btnName]="['Précédent', 'Suivant']"
+        (previousPage)="previousUrl()"
+        (nextPage)="nextPage()"
+        [isValid]="isPageValid"
+      ></app-footer-form>
+    </div>
+  </div>
+  <div *ngIf="currentPage != 0 && currentPage != pageTypeEnum.printResults" class="footer desktop">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <app-footer-form
+        [btnName]="['Précédent', 'Suivant']"
+        (previousPage)="previousPage()"
+        (nextPage)="nextPage()"
+        [isValid]="isPageValid"
+      ></app-footer-form>
+    </div>
+  </div>
+  <div *ngIf="currentPage == pageTypeEnum.printResults" class="footer desktop">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <app-footer-form
+        [btnName]="['Précédent', 'Imprimer']"
+        (previousPage)="previousPage()"
+        (nextPage)="runMultiPrint(true)"
+        [isValid]="isPageValid"
+      ></app-footer-form>
+    </div>
+  </div>
+</div>
+
+<app-structure-list-print
+  *ngIf="multiPrint"
+  [structures]="structuresToPrint"
+  [beneficiaryNeedCommentary]="getOrientationControl('beneficiaryNeedCommentary').value"
+  [beneficiaryName]="getOrientationControl('beneficiaryName').value"
+  [structureAccompaniment]="getOrientationControl('structureAccompaniment').value"
+  [beneficiaryPassNumeric]="getOrientationControl('passNumeric').value"
+  [contactAccompaniment]="getOrientationControl('contactAccompaniment').value"
+  [filters]="filters"
+></app-structure-list-print>
+
+<app-structure-details
+  *ngIf="showStructureDetails"
+  [structure]="selectedStructure"
+  (closeDetails)="closeDetails()"
+></app-structure-details>

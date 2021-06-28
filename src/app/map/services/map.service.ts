@@ -19,6 +19,14 @@ export class MapService {
     iconAnchor: [20, 46],
     popupAnchor: [0, -46],
   });
+  public markerIconAddedToList = divIcon({
+    className: null,
+    html:
+      '<svg width="40" height="46" fill="#47C562" stroke="#fff" stroke-width="2"><use xlink:href="assets/ico/sprite.svg#map-marker-added"></use></svg>',
+    iconSize: [40, 46],
+    iconAnchor: [20, 46],
+    popupAnchor: [0, -46],
+  });
   public markerIcon = divIcon({
     className: null,
     html:
@@ -78,6 +86,10 @@ export class MapService {
    */
   public setActiveMarker(id: string): void {
     this.getMarker(id).setIcon(this.markerIconActive);
+  }
+
+  public setAddedToListMarker(id: string): void {
+    this.getMarker(id).setIcon(this.markerIconAddedToList);
   }
 
   public setUnactiveMarker(id: string): void {

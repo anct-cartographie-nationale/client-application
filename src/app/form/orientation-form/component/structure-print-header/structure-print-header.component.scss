@@ -1,0 +1,60 @@
+@import '../../../../../assets/scss/layout';
+@import '../../../../../assets/scss/breakpoint';
+@import '../../../../../assets/scss/color';
+@import '../../../../../assets/scss/typography';
+@import '../../../../../assets/scss/shapes';
+@import '../../../../../assets/scss/z-index';
+
+.header-print {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.print-header {
+  page-break-after: always;
+  height: 100%;
+}
+
+.typeInformationHeader {
+  @include cn-bold-16;
+  margin-bottom: 5px;
+  color: $grey-3;
+}
+
+.contactAccompaniment {
+  width: 67%;
+}
+
+.tags-cloud {
+  font-style: normal;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  border-radius: 20px;
+  padding: 5px 15px;
+  color: white;
+  border-style: none;
+  margin-top: 5px;
+  background: #348899;
+  &.unchecked {
+    background: #bdbdbd;
+  }
+}
+
+.textareaBlock {
+  @media #{$tablet} {
+    max-width: 90%;
+  }
+  textarea {
+    padding: 13px 8px;
+    background: $grey-6;
+    border: 1px solid $grey-4;
+    border-radius: 1px;
+    resize: none;
+    @include cn-regular-16;
+  }
+  p {
+    text-align: right;
+  }
+}

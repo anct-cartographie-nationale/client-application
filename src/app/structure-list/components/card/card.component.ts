@@ -11,7 +11,10 @@ import { StructureService } from '../../../services/structure.service';
 })
 export class CardComponent implements OnInit {
   @Input() public structure: Structure;
+  @Input() public isSelected: boolean;
+  @Input() public isOrientation: boolean;
   @Output() public showDetails: EventEmitter<Structure> = new EventEmitter<Structure>();
+  @Output() public addToList: EventEmitter<Structure> = new EventEmitter<Structure>();
   @Output() public hover: EventEmitter<Structure> = new EventEmitter<Structure>();
   public isClaimed = true;
 
@@ -45,22 +48,28 @@ export class CardComponent implements OnInit {
 
   public cardClicked(): void {
     this.showDetails.emit(this.structure);
-    const queryString = this.route.snapshot.queryParamMap.get('search');
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: queryString
-        ? {
-            id: this.structure._id,
-            search: queryString,
-          }
-        : {
-            id: this.structure._id,
-          },
-    });
+    if (!this.isOrientation) {
+      const queryString = this.route.snapshot.queryParamMap.get('search');
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: queryString
+          ? {
+              id: this.structure._id,
+              search: queryString,
+            }
+          : {
+              id: this.structure._id,
+            },
+      });
+    }
   }
 
   public cardHover(): void {
     this.hover.emit(this.structure);
+  }
+
+  public cardAddToList(): void {
+    this.addToList.emit(this.structure);
   }
   public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
     return equipmentsAndServices.filter((eqpt) =>

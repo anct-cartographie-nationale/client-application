@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Structure } from '../models/structure.model';
-import { Time } from '../models/time.model';
-import { Day } from '../models/day.model';
-import { StructureService } from '../services/structure.service';
-import { SearchService } from '../structure-list/services/search.service';
-import { Category } from '../structure-list/models/category.model';
-import { CategoryEnum } from '../shared/enum/category.enum';
-import { ProfileService } from '../profile/services/profile.service';
-import { User } from '../models/user.model';
-import { MustMatch } from '../shared/validator/form';
-import { Address } from '../models/address.model';
-import { Module } from '../structure-list/models/module.model';
-import { Equipment } from '../structure-list/enum/equipment.enum';
+import { Structure } from '../../models/structure.model';
+import { Time } from '../../models/time.model';
+import { Day } from '../../models/day.model';
+import { StructureService } from '../../services/structure.service';
+import { SearchService } from '../../structure-list/services/search.service';
+import { Category } from '../../structure-list/models/category.model';
+import { CategoryEnum } from '../../shared/enum/category.enum';
+import { ProfileService } from '../../profile/services/profile.service';
+import { User } from '../../models/user.model';
+import { MustMatch } from '../../shared/validator/form';
+import { Address } from '../../models/address.model';
+import { Module } from '../../structure-list/models/module.model';
+import { Equipment } from '../../structure-list/enum/equipment.enum';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { first } from 'rxjs/operators';
 import { PageTypeEnum } from './pageType.enum';
-import { CustomRegExp } from '../utils/CustomRegExp';
-import { StructureWithOwners } from '../models/structureWithOwners.model';
-import { RouterListenerService } from '../services/routerListener.service';
-import { NewsletterService } from '../services/newsletter.service';
+import { CustomRegExp } from '../../utils/CustomRegExp';
+import { StructureWithOwners } from '../../models/structureWithOwners.model';
+import { RouterListenerService } from '../../services/routerListener.service';
+import { NewsletterService } from '../../services/newsletter.service';
 @Component({
   selector: 'app-structure-form',
   templateUrl: './form.component.html',

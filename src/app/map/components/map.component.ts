@@ -18,6 +18,7 @@ import 'leaflet.locatecontrol';
 })
 export class MapComponent implements OnChanges {
   @Input() public structures: Structure[] = [];
+  @Input() public structuresToPrint: Structure[] = [];
   @Input() public toogleToolTipId: string;
   @Input() public selectedMarkerId: string;
   @Input() public isMapPhone: boolean;
@@ -80,7 +81,11 @@ export class MapComponent implements OnChanges {
     // Handle map marker tooltip
     if (changes.toogleToolTipId && changes.toogleToolTipId.currentValue !== changes.toogleToolTipId.previousValue) {
       if (changes.toogleToolTipId.previousValue !== undefined) {
-        this.mapService.setUnactiveMarker(changes.toogleToolTipId.previousValue);
+        if (this.isToPrint(changes.toogleToolTipId.previousValue)) {
+          this.mapService.setAddedToListMarker(changes.toogleToolTipId.previousValue);
+        } else {
+          this.mapService.setUnactiveMarker(changes.toogleToolTipId.previousValue);
+        }
       }
       if (changes.toogleToolTipId.currentValue !== undefined) {
         this.mapService.setActiveMarker(changes.toogleToolTipId.currentValue);
@@ -96,6 +101,15 @@ export class MapComponent implements OnChanges {
         this.mapService.setSelectedMarker(changes.selectedMarkerId.currentValue);
         this.centerLeafletMapOnMarker(changes.selectedMarkerId.currentValue);
       }
+    }
+
+    if (changes.structuresToPrint) {
+      if (changes.structuresToPrint.currentValue < changes.structuresToPrint.previousValue) {
+        this.mapService.setUnactiveMarker(this.toogleToolTipId);
+      }
+      this.structuresToPrint.forEach((structure: Structure) => {
+        this.mapService.setAddedToListMarker(structure._id);
+      });
     }
   }
 
@@ -128,6 +142,10 @@ export class MapComponent implements OnChanges {
       this.map = this.mapService.cleanMap(this.map);
       this.getStructuresPositions(this.structures);
     }
+  }
+
+  private isToPrint(id: String): boolean {
+    return this.structuresToPrint.findIndex((elem) => elem._id == id) > -1 ? true : false;
   }
 
   private getStructuresPositions(structureList: Structure[]): void {

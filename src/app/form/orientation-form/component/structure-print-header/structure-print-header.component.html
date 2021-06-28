@@ -1,0 +1,67 @@
+<div class="print-header" fxLayout="column">
+  <div class="header-print" fxLayout="row" fxLayoutAlign="space-between center">
+    <h3>Fiche d'orientation</h3>
+    <h4 class="typeInformationHeader">{{ date }}</h4>
+  </div>
+
+  <!-- Name -->
+  <div *ngIf="beneficiaryName">
+    <p class="bold">{{ beneficiaryName }}</p>
+  </div>
+
+  <!-- Accompaniment -->
+  <div *ngIf="structureAccompaniment">
+    <div class="typeInformationHeader">Orienté par</div>
+    <div class="contactAccompaniment" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="bold">{{ structureAccompaniment }}</div>
+      <!-- Contact -->
+      <div class="bold" *ngIf="contactAccompaniment">{{ contactAccompaniment }}</div>
+    </div>
+  </div>
+
+  <!-- Needs -->
+  <div *ngIf="equipments.length > 0">
+    <p class="typeInformationHeader">Besoins en matériel</p>
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <div *ngFor="let equipmentTag of equipments" class="tags-cloud" fxLayout="row">
+        {{ equipmentTag.text ? equipmentTag.text : equipmentTag.value }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="formations.length > 0">
+    <p class="typeInformationHeader">Besoins en formation</p>
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <div *ngFor="let formationTag of formations" class="tags-cloud" fxLayout="row">
+        {{ formationTag.text ? formationTag.text : formationTag.value }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="assistances.length > 0">
+    <p class="typeInformationHeader">Besoins d'accompagnement</p>
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <div *ngFor="let assistanceTag of assistances" class="tags-cloud" fxLayout="row">
+        {{ assistanceTag.text ? assistanceTag.text : assistanceTag.value }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="specificNeeds.length > 0">
+    <div class="typeInformationHeader">Besoins spécifiques'</div>
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <div *ngFor="let specificNeed of specificNeeds" class="tags-cloud" fxLayout="row">
+        {{ specificNeed.text ? specificNeed.text : specificNeed.value }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Pass Numeric -->
+  <div *ngIf="beneficiaryPassNumeric" class="inputRow" fxLayout="row" fxLayoutGap="13px">
+    <app-svg-icon [type]="'ico'" [icon]="'passNumeric'"></app-svg-icon>
+    <p class="bold">Pass Numérique</p>
+  </div>
+
+  <!-- Comments -->
+  <div *ngIf="beneficiaryNeedCommentary">
+    <div class="typeInformationHeader">Informations à destination de la structure</div>
+    <p>{{ beneficiaryNeedCommentary }}</p>
+  </div>
+</div>

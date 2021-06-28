@@ -19,7 +19,7 @@ import { StructureOpeningStatusComponent } from './structure-list/components/str
 import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { AboutComponent } from './about/about.component';
-import { FormComponent } from './form/form.component';
+import { FormComponent } from './form/structure-form/form.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CustomHttpInterceptor } from './config/http-interceptor';
@@ -34,6 +34,10 @@ import { TempUserResolver } from './resolvers/temp-user.resolver';
 import { StructureJoinComponent } from './structure-join/structure-join.component';
 import { RouterListenerService } from './services/routerListener.service';
 import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsletter-subscription.component';
+import { OrientationFormComponent } from './form/orientation-form/orientation-form.component';
+import { StructureDetailPrintComponent } from './form/orientation-form/component/structure-detail-print/structure-detail-print.component';
+import { StructureListPrintComponent } from './form/orientation-form/component/structure-list-print/structure-list-print.component';
+import { StructurePrintHeaderComponent } from './form/orientation-form/component/structure-print-header/structure-print-header.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +60,10 @@ import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsl
     FooterFormComponent,
     StructureJoinComponent,
     NewsletterSubscriptionComponent,
+    OrientationFormComponent,
+    StructureDetailPrintComponent,
+    StructureListPrintComponent,
+    StructurePrintHeaderComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule],
   providers: [
