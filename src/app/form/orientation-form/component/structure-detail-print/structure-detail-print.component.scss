@@ -21,7 +21,7 @@ a {
   padding: 10px 24px;
   @media #{$tablet} {
     width: calc(100% - 2 * 24px);
-    position: fixed;
+    position: inherit;
     height: 100%;
     .printButton {
       display: none !important;

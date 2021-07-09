@@ -281,13 +281,13 @@
         </div>
       </div>
       <div fxLayout="row" class="content-container">
-        <div class="nbStructure-panel">
+        <div class="nbStructure-panel left-pane" [ngClass]="{ mapPhone: isMapPhone == true }">
           <div class="nbStructuresLabel" [ngPlural]="structuresList.length">
             <ng-template ngPluralCase="0">0 structure trouvée</ng-template>
             <ng-template ngPluralCase="1">1 structure trouvée</ng-template>
             <ng-template ngPluralCase="other">{{ structuresList.length }} structures trouvées</ng-template>
           </div>
-          <div id="listCard" class="left-pane" (mouseleave)="mouseLeave()">
+          <div id="listCard" (mouseleave)="mouseLeave()">
             <app-card
               *ngFor="let structure of structuresList"
               [structure]="structure"
@@ -302,22 +302,27 @@
             </p>
           </div>
         </div>
-        <div class="right-pane">
-          <div class="deep-map">
-            <app-map
-              [structures]="structuresList"
-              [structuresToPrint]="structuresToPrint"
-              [toogleToolTipId]="displayMapMarkerId"
-              [selectedMarkerId]="selectedMarkerId"
-              [locate]="locate"
-              (locatationTrigger)="locatationTrigger($event)"
-              (selectedStructure)="showDetailStructure($event)"
-              [isMapPhone]="isMapPhone"
-              [searchedValue]="searchedValue"
-              [ngClass]="{ mapPhone: isMapPhone == true }"
-            ></app-map>
-          </div>
+        <div class="btnSwitch">
+          <app-button
+            [style]="'roundedButton'"
+            [text]="isMapPhone ? 'Liste' : 'Carte'"
+            [iconBtn]="isMapPhone ? 'liste' : 'map-marker'"
+            (action)="switchMapList()"
+          ></app-button>
         </div>
+        <app-map
+          [structures]="structuresList"
+          [structuresToPrint]="structuresToPrint"
+          [toogleToolTipId]="displayMapMarkerId"
+          [selectedMarkerId]="selectedMarkerId"
+          [locate]="locate"
+          (locatationTrigger)="locatationTrigger($event)"
+          (selectedStructure)="showDetailStructure($event)"
+          [isMapPhone]="isMapPhone"
+          [searchedValue]="searchedValue"
+          class="right-pane deep-map"
+          [ngClass]="{ mapPhone: isMapPhone == true }"
+        ></app-map>
       </div>
     </div>
     <!-- BENEFICIARY ACCOMPANIMENT -->
@@ -427,6 +432,27 @@
     </div>
   </div>
   <div *ngIf="currentPage == pageTypeEnum.printResults" class="footer desktop">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <app-footer-form
+        [btnName]="['Précédent', 'Imprimer']"
+        (previousPage)="previousPage()"
+        (nextPage)="runMultiPrint(true)"
+        [isValid]="isPageValid"
+      ></app-footer-form>
+    </div>
+  </div>
+
+  <div *ngIf="currentPage != 0 && currentPage != pageTypeEnum.printResults" class="footer phone">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <app-footer-form
+        [btnName]="['Précédent', 'Suivant']"
+        (previousPage)="previousPage()"
+        (nextPage)="nextPage()"
+        [isValid]="isPageValid"
+      ></app-footer-form>
+    </div>
+  </div>
+  <div *ngIf="currentPage == pageTypeEnum.printResults" class="footer phone">
     <div fxLayout="row" fxLayoutAlign="center center">
       <app-footer-form
         [btnName]="['Précédent', 'Imprimer']"

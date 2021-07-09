@@ -26,6 +26,7 @@ export class OrientationFormComponent implements OnInit {
   public selectedMarkerId: string;
   public locate = false;
   public noPassNumeric = false;
+  public isMapPhone = false;
 
   public orientationForm: FormGroup;
 
@@ -341,7 +342,7 @@ export class OrientationFormComponent implements OnInit {
   public searchStructures(): void {
     this.filters = [];
     if (this.orientationForm.value.passNumeric) {
-      this.filters.push(new Filter('labelsQualifications', 'passNumerique', 'Passe Numérique'));
+      this.filters.push(new Filter('labelsQualifications', 'passNumerique', 'Pass Numérique'));
     }
     if (this.orientationForm.value.specificProfile) {
       this.orientationForm.get('specificProfile').value.forEach((element) => {
@@ -501,6 +502,10 @@ export class OrientationFormComponent implements OnInit {
     this.uncheckedFilters = this.uncheckedFilters.filter((elem) => elem != filter);
     this.filters.push(filter);
     this.setStructuresAndCoord();
+  }
+
+  public switchMapList(): void {
+    this.isMapPhone = !this.isMapPhone;
   }
 
   public getAddress(): void {
