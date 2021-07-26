@@ -229,14 +229,17 @@
             (selectedAddress)="setAddressBeneficiary($event)"
           ></app-address-autocomplete>
           <app-svg-icon
-            *ngIf="getOrientationControl('address').valid"
+            *ngIf="getOrientationControl('address').valid && !isLoading"
             [iconClass]="'validation'"
             [type]="'form'"
             [icon]="'validate'"
             class="validateIcon"
           ></app-svg-icon>
-          <div *ngIf="!getOrientationControl('address').valid" (click)="getAddress()">
+          <div *ngIf="!getOrientationControl('address').valid && !isLoading" (click)="getAddress()">
             <app-svg-icon [type]="'ico'" [icon]="'locateMe'" class="markerIcon"></app-svg-icon>
+          </div>
+          <div *ngIf="isLoading">
+            <img class="loader-gif" src="/assets/gif/loader_circle.gif" alt />
           </div>
         </div>
       </div>

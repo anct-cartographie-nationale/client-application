@@ -36,7 +36,7 @@ export class StructurePrintHeaderComponent implements OnInit {
       minute: 'numeric',
     });
 
-    this.filters.map((elem) => {
+    this.filters.forEach((elem) => {
       switch (elem.name) {
         case 'proceduresAccompaniment':
           this.assistances.push(elem);

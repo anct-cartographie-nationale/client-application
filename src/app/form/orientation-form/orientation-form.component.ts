@@ -27,6 +27,7 @@ export class OrientationFormComponent implements OnInit {
   public locate = false;
   public noPassNumeric = false;
   public isMapPhone = false;
+  public isLoading = false;
 
   public orientationForm: FormGroup;
 
@@ -372,7 +373,7 @@ export class OrientationFormComponent implements OnInit {
   }
 
   public removeDoublonFilters(): void {
-    this.uncheckedFilters.map((elem) => {
+    this.uncheckedFilters.forEach((elem) => {
       this.filters = this.filters.filter((filter) => filter.value != elem.value);
     });
     this.setStructuresAndCoord();
@@ -380,7 +381,7 @@ export class OrientationFormComponent implements OnInit {
 
   public findEquipmentName(equipment): string {
     let name;
-    this.equipmentReferentiel.modules.map((elem) => {
+    this.equipmentReferentiel.modules.forEach((elem) => {
       if (elem.id === equipment) {
         name = elem.text;
       }
@@ -390,7 +391,7 @@ export class OrientationFormComponent implements OnInit {
 
   public findAssistanceName(skill): string {
     let name;
-    this.assistanceReferentiel.modules.map((elem) => {
+    this.assistanceReferentiel.modules.forEach((elem) => {
       if (elem.id === skill) {
         name = elem.text;
       }
@@ -401,31 +402,31 @@ export class OrientationFormComponent implements OnInit {
 
   public findTrainingCategoryForSkill(skill): any {
     let infos = { categ: '', name: '' };
-    this.baseSkillssReferentiel.modules.map((elem) => {
+    this.baseSkillssReferentiel.modules.forEach((elem) => {
       if (elem.id === skill) {
         infos.categ = this.baseSkillssReferentiel.id;
         infos.name = elem.text;
       }
     });
-    this.accessRightsReferentiel.modules.map((elem) => {
+    this.accessRightsReferentiel.modules.forEach((elem) => {
       if (elem.id === skill) {
         infos.categ = this.accessRightsReferentiel.id;
         infos.name = elem.text;
       }
     });
-    this.parentingHelpsReferentiel.modules.map((elem) => {
+    this.parentingHelpsReferentiel.modules.forEach((elem) => {
       if (elem.id === skill) {
         infos.categ = this.parentingHelpsReferentiel.id;
         infos.name = elem.text;
       }
     });
-    this.socialAndProfessionalsReferentiel.modules.map((elem) => {
+    this.socialAndProfessionalsReferentiel.modules.forEach((elem) => {
       if (elem.id === skill) {
         infos.categ = this.socialAndProfessionalsReferentiel.id;
         infos.name = elem.text;
       }
     });
-    this.digitalCultureSecuritysReferentiel.modules.map((elem) => {
+    this.digitalCultureSecuritysReferentiel.modules.forEach((elem) => {
       if (elem.id === skill) {
         infos.categ = this.digitalCultureSecuritysReferentiel.id;
         infos.name = elem.text;
@@ -510,16 +511,19 @@ export class OrientationFormComponent implements OnInit {
 
   public getAddress(): void {
     navigator.geolocation.getCurrentPosition((position) => {
+      this.isLoading = true;
       this.geoJsonService.getAddressByCoord(position.coords.longitude, position.coords.latitude).subscribe(
         (location) => {
-          location.properties.housenumber
-            ? this.getOrientationControl('address').get('numero').setValue(location.properties.housenumber)
-            : null;
+          if (location.properties.housenumber) {
+            this.getOrientationControl('address').get('numero').setValue(location.properties.housenumber);
+          }
           this.getOrientationControl('address').get('street').setValue(location.properties.street);
           this.getOrientationControl('address').get('commune').setValue(location.properties.city);
           this.setValidationsForm();
+          this.isLoading = false;
         },
         (err) => {
+          this.isLoading = false;
           throw new Error(err);
         }
       );
