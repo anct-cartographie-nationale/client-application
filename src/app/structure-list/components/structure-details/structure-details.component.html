@@ -187,7 +187,7 @@
               <h4>{{ day.key | day }}</h4>
               <div class="opening-time" fxLayout="row" fxLayoutAlign="none flex-end">
                 <div *ngFor="let timeRange of day.value.time; let isFirst = first">
-                  <p *ngIf="isFirst">de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}</p>
+                  <p *ngIf="isFirst && timeRange.opening">de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}</p>
                   <p *ngIf="!isFirst && timeRange.opening">
                     et de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}
                   </p>

@@ -10,7 +10,7 @@
           <h3>{{ structure.getLabelTypeStructure() }}</h3>
         </div>
       </div>
-      <div fxLayout="row" class="mobile-column">
+      <div class="mobile-column">
         <div fxLayout="column" fxFlex="50%">
           <div *ngIf="structure.address" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'adress'" [title]="'Adresse'"></app-svg-icon>
@@ -119,7 +119,7 @@
               <h4>{{ day.key | day }}</h4>
               <div class="opening-time" fxLayout="row" fxLayoutAlign="none flex-end">
                 <div *ngFor="let timeRange of day.value.time; let isFirst = first">
-                  <p *ngIf="isFirst">de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}</p>
+                  <p *ngIf="isFirst && timeRange.opening">de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}</p>
                   <p *ngIf="!isFirst && timeRange.opening">
                     et de {{ timeRange.formatOpeningDate() }} à {{ timeRange.formatClosingDate() }}
                   </p>

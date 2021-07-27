@@ -137,3 +137,24 @@ p,
   margin-top: 15px;
   background: #348899;
 }
+
+.mobile-column {
+  @media #{$tablet} {
+    flex-direction: row;
+  }
+  @media #{$desktop} {
+    flex-direction: row;
+  }
+  @media #{$large-desktop} {
+    flex-direction: row;
+  }
+  @media #{$phone} {
+    flex-direction: column;
+  }
+  @media #{$small-phone} {
+    flex-direction: column;
+  }
+  @media #{$large-phone} {
+    flex-direction: column;
+  }
+}

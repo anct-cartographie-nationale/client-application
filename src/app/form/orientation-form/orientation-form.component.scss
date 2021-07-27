@@ -124,7 +124,7 @@
 .btnSwitch {
   position: fixed;
   left: 50%;
-  bottom: $footer-height;
+  bottom: $footer-height + 5px;
   transform: translate(-50%, -50%);
   margin: 0 auto;
   display: none;
@@ -138,5 +138,19 @@
 }
 
 .loader-gif {
-  width: 20%;
+  @media #{$desktop} {
+    width: 20%;
+  }
+  @media #{$large-desktop} {
+    width: 20%;
+  }
+  @media #{$large-phone} {
+    width: 100%;
+  }
+  @media #{$small-phone} {
+    width: 100%;
+  }
+  @media #{$phone} {
+    width: 100%;
+  }
 }
