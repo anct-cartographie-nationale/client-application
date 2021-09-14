@@ -141,6 +141,10 @@ export class MapComponent implements OnChanges {
     } else if (this.structures) {
       this.map = this.mapService.cleanMap(this.map);
       this.getStructuresPositions(this.structures);
+      this.structuresToPrint.forEach((structure: Structure) => {
+        this.mapService.setAddedToListMarker(structure._id);
+      });
+
     }
   }
 

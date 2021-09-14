@@ -196,6 +196,7 @@ export class OrientationFormComponent implements OnInit {
       }
       this.currentPage--;
       this.progressStatus -= 100 / this.nbPagesForm;
+      this.setStructuresAndCoord();
       this.updatePageValid();
     }
   }
