@@ -5,4 +5,5 @@ export enum Labels {
   fabriqueDeTerritoire = 'Fabrique de territoire',
   demarcheMetropolitaine = 'Démarches Métropolitaines',
   pix = 'Évaluation des compétences numériques',
+  conseillerNumFranceServices = 'Conseiller numérique France services',
 }
