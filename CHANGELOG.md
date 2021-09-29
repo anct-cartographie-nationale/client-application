@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.9.1](https://forge.grandlyon.com///compare/v1.9.0...v1.9.1) (2021-09-29)
+
 ## [1.9.0](https://forge.grandlyon.com///compare/v1.8.0...v1.9.0) (2021-05-31)
 
 
