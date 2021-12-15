@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
       this.userProfile = profile;
       this.structures = [];
       profile.structuresLink.forEach((structureId) => {
-        this.structureService.getStructureWithOwners(structureId, profile).subscribe((s) => {
+        this.structureService.getStructureWithOwners(structureId, null).subscribe((s) => {
           this.structures.push(s);
         });
       });
