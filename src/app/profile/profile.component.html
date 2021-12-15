@@ -31,7 +31,11 @@
               <a class="structureName" routerLink="/acteurs" [state]="{ data: s.structure }">{{
                 s.structure.structureName
               }}</a>
-              <app-structure-options-modal [structure]="s" (closed)="ngOnInit()"></app-structure-options-modal>
+              <app-structure-options-modal
+                [structure]="s"
+                (closed)="ngOnInit()"
+                (closedWithRefresh)="ngOnInit()"
+              ></app-structure-options-modal>
             </div>
             <div fxLayout="column" fxLayoutGap="14px" class="ownersBlock">
               <p class="ownerName" *ngFor="let owner of s.owners">{{ owner.email }}</p>
