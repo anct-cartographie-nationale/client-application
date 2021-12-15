@@ -23,6 +23,7 @@ export class StructureOptionsModalComponent implements OnInit {
   @Input() public userProfile?: User;
   @Input() public isEditFormView? = false;
   @Output() closed = new EventEmitter();
+  @Output() closedWithRefresh = new EventEmitter();
   public active: boolean;
 
   // Password profile
@@ -136,9 +137,16 @@ export class StructureOptionsModalComponent implements OnInit {
   // Profile Section
   public closeModalOptsProfile(): void {
     this.editModal = null;
+    this.formEmail.reset();
+    this.formPassword.reset();
+  }
+
+  public closeModalOptsProfileAndRefresh(): void {
+    this.editModal = null;
     //this.formAddAccount.reset();
     this.formEmail.reset();
     this.formPassword.reset();
+    this.closedWithRefresh.emit();
   }
 
   private toggleDeleteAccountModal(): void {
@@ -196,6 +204,7 @@ export class StructureOptionsModalComponent implements OnInit {
     user.email = this.fAddAccount.email.value;
     this.structureService.addOwnerToStructure(user, this.structure.structure._id).subscribe(
       () => {
+        this.closedWithRefresh.emit('');
         this.closeModalOptsProfile();
         this.formAddAccount.reset();
       },
@@ -209,7 +218,7 @@ export class StructureOptionsModalComponent implements OnInit {
     this.structureService.removeOwnerFromStructure(owner, this.structure.structure._id).subscribe(() => {
       this.structure.owners = this.structure.owners.filter((o) => o.id !== owner);
       if (this.structure.owners.length == 0) {
-        this.closeModalOptsProfile();
+        this.closeModalOptsProfileAndRefresh();
       }
     });
   }
