@@ -98,12 +98,13 @@ deploy_rec:
     - docker system prune -a -f
 
 code_analysis:
-  image: skilldlabs/sonar-scanner:3.4.0
+  image: registry.forge.grandlyon.com/apoyen2/sonnar-scanner-gl:master
   services:
     - docker:18.09-dind
   stage: sonar-analysis
   only:
     - dev
+    - merge_requests
   before_script:
     - export NODE_PATH=$NODE_PATH:`npm root -g`
     - npm install -g typescript
@@ -116,7 +117,9 @@ code_analysis:
       -Dsonar.projectBaseDir=.
       -Dsonar.host.url=${SONAR_URL}
       -Dsonar.projectKey=${SONAR_PROJECT_KEY}
+      -Dsonar.exclusions=**/*mock.*.ts,**/*spec.ts
       -Dsonar.login=${SONAR_TOKEN}
+      -Dsonar.qualitygate.wait=true
 
 mr:
   image: docker:18.09
