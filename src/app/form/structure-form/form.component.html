@@ -88,13 +88,21 @@
           [ngClass]="{ last: index == 22 }"
           fxLayout="row"
           fxLayoutAlign="space-between center"
-          *ngIf="page.name"
+          *ngIf="page.name && shouldDisplayPage(index)"
           (click)="goToSpecificPage(index, false)"
         >
           {{ page.name }}
-          <svg class="chevronRight" aria-hidden="true">
-            <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
-          </svg>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <app-svg-icon
+              *ngIf="!updatePageValid(index, page)"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
+            <svg class="chevronRight" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
+            </svg>
+          </div>
         </div>
       </div>
     </div>

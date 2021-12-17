@@ -17,6 +17,9 @@ import { UserVerificationComponent } from './user-verification/user-verification
 import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsletter-subscription.component';
 import { OrientationFormComponent } from './form/orientation-form/orientation-form.component';
 import { StructureListPrintComponent } from './form/orientation-form/component/structure-list-print/structure-list-print.component';
+import { StructureResolver } from './resolvers/structure.resolver';
+import { RoleGuard } from './guards/role.guard';
+import { RouteRole } from './shared/enum/routeRole.enum';
 
 const routes: Routes = [
   { path: 'print', outlet: 'print', children: [{ path: 'structure', component: StructureDetailsComponent }] },
@@ -79,6 +82,16 @@ const routes: Routes = [
     path: 'create-structure',
     component: FormComponent,
     canDeactivate: [DeactivateGuard],
+  },
+  {
+    path: 'create-structure/:id',
+    component: FormComponent,
+    canDeactivate: [DeactivateGuard],
+    canActivate: [RoleGuard],
+    data: { allowedRoles: [RouteRole.structureAdmin] },
+    resolve: {
+      structure: StructureResolver,
+    },
   },
   {
     path: 'newsletter',

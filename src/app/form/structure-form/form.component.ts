@@ -79,6 +79,9 @@ export class FormComponent implements OnInit {
   public isPopUpOpen = false;
   public displaySignUp = true;
 
+  // Structure id for edit mode
+  public structureId: string;
+
   constructor(
     private structureService: StructureService,
     private searchService: SearchService,
@@ -98,15 +101,7 @@ export class FormComponent implements OnInit {
     await this.setCategories();
     // Check if it's a new structure or edit structure
     this.isLoading = false;
-    if (history.state.data) {
-      this.isEditMode = true;
-      this.isWifiChoosen = true;
-      const editStructure = new Structure(history.state.data);
-      this.initForm(editStructure);
-      this.structureService.getStructureWithOwners(editStructure._id, this.profile).subscribe((s) => {
-        this.structureWithOwners = s;
-      });
-    } else if (history.state.newUser) {
+    if (history.state.newUser) {
       this.isClaimMode = true;
       // Handle join strucutre, the case is very similar to claim
       if (history.state.isJoin) {
@@ -126,6 +121,15 @@ export class FormComponent implements OnInit {
         this.linkedStructureId = data.user.pendingStructuresLink;
         this.setValidationsForm();
         this.currentPage = PageTypeEnum.accountInfo;
+      }
+      if (data.structure) {
+        this.isEditMode = true;
+        this.isWifiChoosen = true;
+        const editStructure = new Structure(data.structure);
+        this.initForm(editStructure);
+        this.structureService.getStructureWithOwners(editStructure._id, this.profile).subscribe((s) => {
+          this.structureWithOwners = s;
+        });
       }
     });
   }
@@ -596,8 +600,16 @@ export class FormComponent implements OnInit {
     }
   }
 
-  private updatePageValid(): void {
+  /**
+   * Update valid page or return page validity of the given index
+   * @param {number} [index] - Page index
+   */
+  private updatePageValid(index?: number): boolean {
+    if (index) {
+      return this.pagesValidation[index].valid;
+    }
     this.isPageValid = this.pagesValidation[this.currentPage].valid;
+    return this.isPageValid;
   }
 
   /**
@@ -898,16 +910,18 @@ export class FormComponent implements OnInit {
     if (this.getStructureControl('freeWorkShop').value === null) {
       this.getStructureControl('freeWorkShop').setValue(false);
     }
-    if (this.structureForm.valid && this.hoursForm.valid) {
-      const structure: Structure = this.structureForm.value;
-      structure.hours = this.hoursForm.value;
-      let user: User;
-      if (this.isEditMode) {
-        this.structureService.editStructure(structure).subscribe((s: Structure) => {
-          this.createdStructure = this.structureService.updateOpeningStructure(s);
-          this.editForm = this.createStructureForm(s);
-        });
-      } else {
+    const structure: Structure = this.structureForm.value;
+    structure.hours = this.hoursForm.value;
+    let user: User;
+    // If edit mode, update setbystep
+    if (this.isEditMode) {
+      this.structureService.editStructure(structure).subscribe((s: Structure) => {
+        this.createdStructure = this.structureService.updateOpeningStructure(s);
+        this.editForm = this.createStructureForm(s);
+      });
+    } else {
+      if (this.structureForm.valid && this.hoursForm.valid) {
+        // For creation mode, check structure validity
         if (this.profile) {
           user = this.profile;
           structure.accountVerified = true;
@@ -1002,5 +1016,14 @@ export class FormComponent implements OnInit {
 
   public structureDeleted(): void {
     this.router.navigateByUrl('acteurs');
+  }
+
+  public shouldDisplayPage(index: number): boolean {
+    // handle OtherAccompaniment
+    if (index == this.pageTypeEnum.structureOtherAccompaniment) {
+      if (this.structureForm.value.proceduresAccompaniment.includes('autres')) return true;
+      else return false;
+    }
+    return true;
   }
 }
