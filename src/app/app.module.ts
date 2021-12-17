@@ -23,10 +23,8 @@ import { FormComponent } from './form/structure-form/form.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CustomHttpInterceptor } from './config/http-interceptor';
-import { ProfileModule } from './profile/profile.module';
 import { ResetEmailComponent } from './reset-email/reset-email.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { AdminModule } from './admin/admin.module';
 import { AdminGuard } from './guards/admin.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
 import { FooterFormComponent } from './form/footer-form/footer-form.component';
@@ -38,6 +36,8 @@ import { OrientationFormComponent } from './form/orientation-form/orientation-fo
 import { StructureDetailPrintComponent } from './form/orientation-form/component/structure-detail-print/structure-detail-print.component';
 import { StructureListPrintComponent } from './form/orientation-form/component/structure-list-print/structure-list-print.component';
 import { StructurePrintHeaderComponent } from './form/orientation-form/component/structure-print-header/structure-print-header.component';
+import { StructureResolver } from './resolvers/structure.resolver';
+import { RoleGuard } from './guards/role.guard';
 
 @NgModule({
   declarations: [
@@ -72,8 +72,10 @@ import { StructurePrintHeaderComponent } from './form/orientation-form/component
     CustomBreakPointsProvider,
     AuthGuard,
     AdminGuard,
+    RoleGuard,
     DeactivateGuard,
     TempUserResolver,
+    StructureResolver,
     RouterListenerService,
   ],
   bootstrap: [AppComponent],
