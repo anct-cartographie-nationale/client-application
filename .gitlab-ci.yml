@@ -1,15 +1,10 @@
-image: docker:git
-
-services:
-  - docker:dind
-
 stages:
   - sonar-analysis
   - build
   - deploy
 
 build:
-  image: docker:18.09
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   services:
     - docker:18.09-dind
   stage: build
@@ -22,7 +17,7 @@ build:
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
 
 build_dev:
-  image: docker:18.09
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   services:
     - docker:18.09-dind
   stage: build
@@ -34,7 +29,7 @@ build_dev:
     - docker push "$CI_REGISTRY_IMAGE:dev"
 
 build_mobile:
-  image: docker:18.09
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   services:
     - docker:18.09-dind
   stage: build
@@ -46,7 +41,7 @@ build_mobile:
     - docker push "$CI_REGISTRY_IMAGE:mobile"
 
 build_json_server:
-  image: docker:18.09
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   services:
     - docker:18.09-dind
   stage: build
@@ -97,32 +92,29 @@ deploy_rec:
     - docker-compose up -d web-app-rec
     - docker system prune -a -f
 
-code_analysis:
-  image: registry.forge.grandlyon.com/apoyen2/sonnar-scanner-gl:master
-  services:
-    - docker:18.09-dind
-  stage: sonar-analysis
-  only:
-    - dev
-    - merge_requests
-  before_script:
-    - export NODE_PATH=$NODE_PATH:`npm root -g`
-    - npm install -g typescript
-  script:
-    - >
-      sonar-scanner
-      -Dsonar.projectName=${SONAR_PROJECT_KEY}
-      -Dsonar.projectVersion=1.0
-      -Dsonar.sourceEncoding=UTF-8
-      -Dsonar.projectBaseDir=.
-      -Dsonar.host.url=${SONAR_URL}
-      -Dsonar.projectKey=${SONAR_PROJECT_KEY}
-      -Dsonar.exclusions=**/*mock.*.ts,**/*spec.ts
-      -Dsonar.login=${SONAR_TOKEN}
-      -Dsonar.qualitygate.wait=true
+# code_analysis:
+#   image: skilldlabs/sonar-scanner:3.4.0
+#   services:
+#     - docker:18.09-dind
+#   stage: sonar-analysis
+#   only:
+#     - dev
+#   before_script:
+#     - export NODE_PATH=$NODE_PATH:`npm root -g`
+#     - npm install -g typescript
+#   script:
+#     - >
+#       sonar-scanner
+#       -Dsonar.projectName=${SONAR_PROJECT_KEY}
+#       -Dsonar.projectVersion=1.0
+#       -Dsonar.sourceEncoding=UTF-8
+#       -Dsonar.projectBaseDir=.
+#       -Dsonar.host.url=${SONAR_URL}
+#       -Dsonar.projectKey=${SONAR_PROJECT_KEY}
+#       -Dsonar.login=${SONAR_TOKEN}
 
 mr:
-  image: docker:18.09
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   services:
     - docker:18.09-dind
   stage: build
