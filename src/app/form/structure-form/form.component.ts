@@ -103,7 +103,7 @@ export class FormComponent implements OnInit {
     this.isLoading = false;
     if (history.state.newUser) {
       this.isClaimMode = true;
-      // Handle join strucutre, the case is very similar to claim
+      // Handle join structure, the case is very similar to claim
       if (history.state.isJoin) {
         this.isJoinMode = true;
       }
