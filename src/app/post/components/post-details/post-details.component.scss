@@ -47,7 +47,7 @@ $margin-post: 20px;
   .image {
     object-fit: cover;
     height: 360px;
-    width: 100%;
+    width: 80%;
     @media #{$large-phone} {
       height: 147px;
     }
@@ -55,11 +55,44 @@ $margin-post: 20px;
 }
 .description {
   div {
-    width: 100%;
+    width: 80%;
     line-height: 180%;
+  }
+  ::ng-deep hr {
+    display: block;
+    margin: 3.2em 0;
+    padding: 0;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #dfe1e3;
   }
   ::ng-deep figure {
     margin: 0;
+    figcaption {
+      margin-top: 1%;
+      font-size: small;
+      text-align: center;
+      color: #626d79;
+    }
+  }
+  ::ng-deep img {
+    width: 100%;
+    height: 100%;
+  }
+  ::ng-deep .kg-embed-card {
+    position: relative;
+    width: 110%;
+    padding-top: 65%;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
   }
   ::ng-deep a {
     @include hyperlink;
