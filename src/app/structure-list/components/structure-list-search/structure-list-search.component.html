@@ -101,10 +101,26 @@
             type="checkbox"
             value="passNumerique"
             [checked]="searchService.getIndex(checkedModulesFilter, 'passNumerique', 'labelsQualifications') > -1"
-            (change)="numericPassCheck($event, 'labelsQualifications')"
+            (change)="externalCheckboxCheck($event, 'labelsQualifications')"
           />
           <span class="customCheck"></span>
           <div class="label pass">Pass numérique</div>
+        </label>
+      </div>
+    </div>
+    <div class="checkbox no-width">
+      <div class="checkboxItem">
+        <label>
+          <input
+            type="checkbox"
+            value="conseillerNumFranceServices"
+            [checked]="
+              searchService.getIndex(checkedModulesFilter, 'conseillerNumFranceServices', 'labelsQualifications') > -1
+            "
+            (change)="externalCheckboxCheck($event, 'labelsQualifications')"
+          />
+          <span class="customCheck"></span>
+          <div class="label pass">Conseiller numérique</div>
         </label>
       </div>
     </div>

@@ -171,7 +171,7 @@ export class StructureListSearchComponent implements OnInit {
   }
 
   // Management of the checkbox event (Check / Uncheck)
-  public numericPassCheck(event, categ): void {
+  public externalCheckboxCheck(event, categ): void {
     const checkValue: string = event.target.value;
     const inputTerm = this.searchForm.get('searchTerm').value;
     if (event.target.checked) {
