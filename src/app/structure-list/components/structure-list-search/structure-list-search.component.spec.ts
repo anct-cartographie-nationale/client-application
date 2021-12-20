@@ -89,11 +89,29 @@ describe('StructureListSearchComponent', () => {
     component.closeModal();
     expect(component.modalTypeOpened).toBeUndefined();
   });
-  // numericPassCheck function
+  // externalCheckboxCheck function
   it('should add numericPass filter to array of current filters and increment by one number of moreFilters element', () => {
     const evt = { target: { checked: true, value: 'Pass numérique' } };
     const categ = 'Labels et qualifications';
-    component.numericPassCheck(evt, categ);
+    component.externalCheckboxCheck(evt, categ);
+    const expectArray: Module[] = [new Module(evt.target.value, categ)];
+    expect(component.checkedModulesFilter).toEqual(expectArray);
+    expect(component.numberMoreFiltersChecked).toEqual(1);
+  });
+  it('should remove conseillerNumFranceServices filter to array of current filters and increment by one number of moreFilters element', () => {
+    const evt = { target: { checked: false, value: 'Conseiller numérique' } };
+    const categ = 'Labels et qualifications';
+    const checkedModules: Module[] = [{ id: evt.target.value, text: categ, count: 0 }];
+    component.checkedModulesFilter = checkedModules;
+    component.externalCheckboxCheck(evt, categ);
+    new Module(evt.target.value, categ);
+    expect(component.checkedModulesFilter.length).toEqual(0);
+    expect(component.numberMoreFiltersChecked).toEqual(0);
+  });
+  it('should add conseillerNumFranceServices filter to array of current filters and increment by one number of moreFilters element', () => {
+    const evt = { target: { checked: true, value: 'Conseiller numérique' } };
+    const categ = 'Labels et qualifications';
+    component.externalCheckboxCheck(evt, categ);
     const expectArray: Module[] = [new Module(evt.target.value, categ)];
     expect(component.checkedModulesFilter).toEqual(expectArray);
     expect(component.numberMoreFiltersChecked).toEqual(1);
@@ -103,7 +121,7 @@ describe('StructureListSearchComponent', () => {
     const categ = 'Labels et qualifications';
     const checkedModules: Module[] = [{ id: evt.target.value, text: categ, count: 0 }];
     component.checkedModulesFilter = checkedModules;
-    component.numericPassCheck(evt, categ);
+    component.externalCheckboxCheck(evt, categ);
     new Module(evt.target.value, categ);
     expect(component.checkedModulesFilter.length).toEqual(0);
     expect(component.numberMoreFiltersChecked).toEqual(0);
