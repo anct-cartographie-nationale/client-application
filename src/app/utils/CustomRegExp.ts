@@ -2,7 +2,18 @@ export class CustomRegExp {
   /**
    * Validate a password (at least 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character)
    */
-  public static readonly PASSWORD: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[*.! @#$%^&(){}\[\]:;<>,?\/\\~_+\-=|])(?=.{8,})/; //NOSONAR
+  public static readonly DIGIT: RegExp = /^(?=.*[0-9])/; //NOSONAR
+  public static readonly SPECHAR: RegExp = /^(?=.*[*.! @#$%^&(){}\[\]:;<>,?\/\\~_+\-=|])/; //NOSONAR
+  public static readonly UPPERCASE: RegExp = /^(?=.*[A-Z])/; //NOSONAR
+  public static readonly LOWERCASE: RegExp = /^(?=.*[a-z])/; //NOSONAR
+  public static readonly MINLENGTH: RegExp = /^(?=.{8,})/; //NOSONAR
+  public static readonly PASSWORD: RegExp = new RegExp(
+    CustomRegExp.LOWERCASE.source +
+      CustomRegExp.UPPERCASE.source +
+      CustomRegExp.DIGIT.source +
+      CustomRegExp.SPECHAR.source +
+      CustomRegExp.MINLENGTH.source
+  ); //NOSONAR
   /**
    * Validate an email
    */

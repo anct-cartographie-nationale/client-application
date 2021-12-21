@@ -211,8 +211,8 @@
               (input)="setValidationsForm()"
               (keyup)="verifyUserExist($event.target.value)"
               formControlName="email"
-              placeholder="thomas@grandlyon.com"
-              class="form-input"
+              placeholder="exemple: prenom.nom@grandlyon.com"
+              class="form-input email-placeholder"
               [readonly]="isAccountMode"
               [ngClass]="{ disabled: isAccountMode }"
             />
@@ -235,10 +235,90 @@
           <p
             class="special"
             [ngClass]="{ invalid: accountForm.get('password').invalid && accountForm.get('password').value }"
-          >
-            Le mot de passe doit contenir au minimum : 8 caractères dont un caractère spécial, un caractère en majuscule
-            et un chiffre.
-          </p>
+          ></p>
+          Le mot de passe doit contenir au minimum :
+          <ul>
+            <li
+              [ngClass]="{
+                invalid: accountForm.get('password').value.length < 8,
+                valid: accountForm.get('password').value.length >= 8
+              }"
+            >
+              <app-svg-icon
+                *ngIf="accountForm.get('password').value.length >= 8"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="accountForm.get('password').value.length < 8"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+              <p>8 caractères</p>
+            </li>
+            <li
+              [ngClass]="{
+                invalid: !checkIfPasswordHasSpecialChar(accountForm.get('password').value),
+                valid: checkIfPasswordHasSpecialChar(accountForm.get('password').value)
+              }"
+            >
+              <app-svg-icon
+                *ngIf="checkIfPasswordHasSpecialChar(accountForm.get('password').value)"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="!checkIfPasswordHasSpecialChar(accountForm.get('password').value)"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+              <p>dont un caractère spécial</p>
+            </li>
+            <li
+              [ngClass]="{
+                invalid: !checkIfPasswordHasUpperCase(accountForm.get('password').value),
+                valid: checkIfPasswordHasUpperCase(accountForm.get('password').value)
+              }"
+            >
+              <app-svg-icon
+                *ngIf="checkIfPasswordHasUpperCase(accountForm.get('password').value)"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="!checkIfPasswordHasUpperCase(accountForm.get('password').value); s"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+              <p>un caractère en majuscule</p>
+            </li>
+            <li
+              [ngClass]="{
+                invalid: !checkIfPasswordHasDigit(accountForm.get('password').value),
+                valid: checkIfPasswordHasDigit(accountForm.get('password').value)
+              }"
+            >
+              <app-svg-icon
+                *ngIf="checkIfPasswordHasDigit(accountForm.get('password').value)"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="!checkIfPasswordHasDigit(accountForm.get('password').value)"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+              <p>et un chiffre.</p>
+            </li>
+          </ul>
           <div fxLayout="row" fxLayoutGap="13px">
             <input
               [type]="isShowPassword ? 'text' : 'password'"

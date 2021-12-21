@@ -1,14 +1,15 @@
 <div *ngIf="openned" class="modalBackground">
   <div class="modal">
     <div (clickOutside)="closeModal(false)" class="contentModal" fxLayout="column" fxLayoutAlign="space-around start">
-      <div class="ico-close" fxLayout="row" fxLayoutAlign="end center">
-        <div class="ico-close-wrapper">
-          <div (click)="closeModal()" class="ico-close-details"></div>
-        </div>
-      </div>
-
       <div class="form">
-        <h3>Se connecter</h3>
+        <div class="modalTitle">
+          <h3>Se connecter</h3>
+          <div class="ico-close" fxLayout="row" fxLayoutAlign="end center">
+            <div class="ico-close-wrapper">
+              <div (click)="closeModal()" class="ico-close-details"></div>
+            </div>
+          </div>
+        </div>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="form-group" fxLayout="column">
             <label for="email">Courriel du compte</label>

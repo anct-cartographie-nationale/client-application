@@ -4,8 +4,15 @@
 @import '../../../../assets/scss/z-index';
 @import '../../../../assets/scss/hyperlink';
 
-.ico-close {
-  width: 100%;
+.modalTitle {
+  display: flex;
+  h3 {
+    margin-top: 6%;
+    width: 50%;
+  }
+  .ico-close {
+    width: 50%;
+  }
 }
 
 .incorrectId {
@@ -20,6 +27,7 @@ h3 {
 .form {
   max-width: 391px;
   margin: auto;
+  margin-bottom: 8%;
 }
 
 .form-group {
@@ -36,7 +44,6 @@ h3 {
   }
   input {
     width: 100%;
-    margin-right: 39px;
   }
   &.password {
     margin-bottom: 39px;
@@ -45,14 +52,12 @@ h3 {
       color: $grey-3;
       margin-top: 0;
       margin-bottom: 4px;
-      padding-right: 39px;
       &.invalid {
         color: $orange-warning;
       }
     }
     .eyePassword {
       cursor: pointer;
-      margin-right: 39px;
       width: 24px;
       height: 40px;
       stroke: $grey-3;
@@ -61,7 +66,6 @@ h3 {
   }
 }
 .footerModal {
-  padding-right: 39px;
   button {
     width: 100% !important;
     &.invalid {
