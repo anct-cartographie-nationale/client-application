@@ -29,6 +29,7 @@ export class CustomRegExp {
   public static readonly TWITTER: string = '(twitter.com/.{1,})';
   public static readonly INSTAGRAM: string = '(instagram.com/.{1,})';
   public static readonly NO_NULL_NUMBER: string = '[1-9]{1}[0-9]*?';
+  public static readonly NO_NEGATIVE_NUMBER: RegExp = /^\d+$/;
   /**
    * Validate a location request in search bar
    */

@@ -317,14 +317,21 @@
     </div>
     <div fxLayout="column">
       <p *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)" class="no-margin-bottom">
-        {{ getEquipmentsLabel(equipement) }}
-        <span *ngIf="equipement == 'ordinateurs' && structure.nbComputers"> : {{ structure.nbComputers }}</span>
-        <span *ngIf="equipement == 'tablettes' && structure.nbTablets"> : {{ structure.nbTablets }}</span>
-        <span *ngIf="equipement == 'bornesNumeriques' && structure.nbNumericTerminal">
-          : {{ structure.nbNumericTerminal }}</span
+        <span *ngIf="equipement == 'ordinateurs' && structure.nbComputers"
+          >{{ getEquipmentsLabel(equipement) }} : {{ structure.nbComputers }}</span
         >
-        <span *ngIf="equipement == 'imprimantes' && structure.nbPrinters"> : {{ structure.nbPrinters }}</span>
-        <span *ngIf="equipement == 'scanners' && structure.nbScanners"> : {{ structure.nbScanners }}</span>
+        <span *ngIf="equipement == 'tablettes' && structure.nbTablets"
+          >{{ getEquipmentsLabel(equipement) }} : {{ structure.nbTablets }}</span
+        >
+        <span *ngIf="equipement == 'bornesNumeriques' && structure.nbNumericTerminal">
+          {{ getEquipmentsLabel(equipement) }} : {{ structure.nbNumericTerminal }}</span
+        >
+        <span *ngIf="equipement == 'imprimantes' && structure.nbPrinters"
+          >{{ getEquipmentsLabel(equipement) }} : {{ structure.nbPrinters }}</span
+        >
+        <span *ngIf="equipement == 'scanners' && structure.nbScanners"
+          >{{ getEquipmentsLabel(equipement) }} : {{ structure.nbScanners }}</span
+        >
       </p>
     </div>
   </div>
