@@ -1018,6 +1018,15 @@ export class FormComponent implements OnInit {
     this.router.navigateByUrl('acteurs');
   }
 
+  public shouldDisplayPage(index: number): boolean {
+    // handle OtherAccompaniment
+    if (index == this.pageTypeEnum.structureOtherAccompaniment) {
+      if (this.structureForm.value.proceduresAccompaniment.includes('autres')) return true;
+      else return false;
+    }
+    return true;
+  }
+
   public checkIfPasswordHasSpecialChar(password: string): boolean {
     if (password.match(CustomRegExp.SPECHAR)) return true;
     return false;
