@@ -1,3 +1,5 @@
+@import '../../assets/scss/color';
+
 .selector {
   margin-bottom: 20px;
   .option {
@@ -11,4 +13,8 @@
 
 .results-column {
   width: 30%;
+}
+
+.incomplete {
+  color: $red;
 }

@@ -1,7 +1,21 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-  <div *ngIf="!isInClaimStructure && !isToClaimStructure && !isClaimedStructure">
-    Choisir un filtre pour afficher la liste des structures
-  </div>
+  <table aria-describedby="demands attachment results" class="results-tab results-column">
+    <thead>
+      <th scope="col">Structures avec des données manquantes ({{ structuresIncomplete?.length }})</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let structure of structuresIncomplete">
+        <td>
+          <a class="incomplete" href="/acteurs?id={{ structure.structureId }}" target="_blank">
+            {{ structure.structureName }}</a
+          >
+        </td>
+      </tr>
+      <tr *ngIf="!structuresIncomplete?.length">
+        <td colspan="3">Aucune structure</td>
+      </tr>
+    </tbody>
+  </table>
   <table aria-describedby="demands attachment results" class="results-tab results-column">
     <thead>
       <th scope="col">Structures en cours de revendication ({{ structuresInClaim.length }})</th>
