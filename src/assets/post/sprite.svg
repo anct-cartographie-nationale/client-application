@@ -104,4 +104,43 @@
 </defs>
 </symbol>
 
+<symbol id="a-la-une" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<path d="M23 25.5H9.44949C10.0978 24.8647 10.5 23.9793 10.5 23V5.5H25.5V23C25.5 24.3807 24.3807 25.5 23 25.5Z" fill="none"/>
+<rect x="12" y="16" width="12" height="1" rx="0.5" stroke="none"/>
+<rect x="12" y="19" width="12" height="1" rx="0.5" stroke="none"/>
+<rect x="12" y="22" width="12" height="1" rx="0.5" stroke="none"/>
+<rect x="12" y="8" width="12" height="6" rx="1" stroke="none"/>
+<path d="M11 12V13.5L5.00001 20.5V17.2273L9.60001 12H11Z" stroke="none"/>
+<path d="M5.00001 22.5V22.2273L11 15.4091L11 18.5L6 24.5C5.48214 24.0507 5.00001 23.1722 5.00001 22.5Z" stroke="none"/>
+<path d="M7.06819 24.8771C7.36151 24.9569 7.67471 25 8.00001 25C9.65686 25 11 23.8807 11 22.5V20.4091L7.06819 24.8771Z" stroke="none"/>
+<path d="M8 12H5.00001L5 15.5L8 12Z" stroke="none"/>
+<path d="M5.5 12.5H10.5V23C10.5 24.3807 9.38071 25.5 8 25.5C6.61929 25.5 5.5 24.3807 5.5 23V12.5Z" fill="none"/>
+</symbol>
+
+<symbol id="allophones" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<path d="M23 25.5H9.44949C10.0978 24.8647 10.5 23.9793 10.5 23V5.5H25.5V23C25.5 24.3807 24.3807 25.5 23 25.5Z" fill="none"/>
+<rect x="12" y="16" width="12" height="1" rx="0.5" stroke="none"/>
+<rect x="12" y="19" width="12" height="1" rx="0.5" stroke="none"/>
+<rect x="12" y="22" width="12" height="1" rx="0.5" stroke="none"/>
+<rect x="12" y="8" width="12" height="6" rx="1" stroke="none"/>
+<path d="M11 12V13.5L5.00001 20.5V17.2273L9.60001 12H11Z" stroke="none"/>
+<path d="M5.00001 22.5V22.2273L11 15.4091L11 18.5L6 24.5C5.48214 24.0507 5.00001 23.1722 5.00001 22.5Z" stroke="none"/>
+<path d="M7.06819 24.8771C7.36151 24.9569 7.67471 25 8.00001 25C9.65686 25 11 23.8807 11 22.5V20.4091L7.06819 24.8771Z" stroke="none"/>
+<path d="M8 12H5.00001L5 15.5L8 12Z" stroke="none"/>
+<path d="M5.5 12.5H10.5V23C10.5 24.3807 9.38071 25.5 8 25.5C6.61929 25.5 5.5 24.3807 5.5 23V12.5Z" fill="none"/>
+</symbol>
+
+<symbol id="tout-public" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<path d="M23 25.5H9.44949C10.0978 24.8647 10.5 23.9793 10.5 23V5.5H25.5V23C25.5 24.3807 24.3807 25.5 23 25.5Z" fill="none"/>
+<rect x="12" y="16" width="12" height="1" rx="0.5" stroke="none"/>
+<rect x="12" y="19" width="12" height="1" rx="0.5" stroke="none"/>
+<rect x="12" y="22" width="12" height="1" rx="0.5" stroke="none"/>
+<rect x="12" y="8" width="12" height="6" rx="1" stroke="none"/>
+<path d="M11 12V13.5L5.00001 20.5V17.2273L9.60001 12H11Z" stroke="none"/>
+<path d="M5.00001 22.5V22.2273L11 15.4091L11 18.5L6 24.5C5.48214 24.0507 5.00001 23.1722 5.00001 22.5Z" stroke="none"/>
+<path d="M7.06819 24.8771C7.36151 24.9569 7.67471 25 8.00001 25C9.65686 25 11 23.8807 11 22.5V20.4091L7.06819 24.8771Z" stroke="none"/>
+<path d="M8 12H5.00001L5 15.5L8 12Z" stroke="none"/>
+<path d="M5.5 12.5H10.5V23C10.5 24.3807 9.38071 25.5 8 25.5C6.61929 25.5 5.5 24.3807 5.5 23V12.5Z" fill="none"/>
+</symbol>
+
 </svg>
