@@ -1,7 +1,12 @@
-<div fxLayout="column" fxLayoutAlign="center center">
+<div *ngIf="isLoading" class="loader">
+  <img class="loader-gif" src="/assets/gif/loader_circle.gif" alt />
+</div>
+<div *ngIf="!isLoading" fxLayout="column" fxLayoutAlign="center center">
   <table aria-describedby="demands attachment results" class="results-tab results-column">
     <thead>
-      <th scope="col">Structures avec des données manquantes ({{ structuresIncomplete?.length }})</th>
+      <th scope="col">
+        Structures avec des données manquantes ({{ structuresIncomplete ? structuresIncomplete.length : 0 }})
+      </th>
     </thead>
     <tbody>
       <tr *ngFor="let structure of structuresIncomplete">
