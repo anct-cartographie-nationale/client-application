@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://forge.grandlyon.com///compare/v1.9.1...v1.10.0) (2021-12-22)
+
+
+### Features
+
+* **admin:** remove filters from structures list ([93a21c2](https://forge.grandlyon.com///commit/93a21c273c6ad100a6a5fa979a6d5254736fec07))
+* **admin:** see incomplete structure in structure list ([b842e2d](https://forge.grandlyon.com///commit/b842e2d9b5f56350033cc6b9122f3d63b5d1f9df))
+* **admin-structure-list:** remove filters checkboxes && show all structures with their tag by default ([f3112e4](https://forge.grandlyon.com///commit/f3112e45bec8cc7a9e3cef341acdf8bafd8e9be0))
+* **create-user:** change password validation visual && change login modal visual ([2e274e0](https://forge.grandlyon.com///commit/2e274e057e94e7ba86f34c9a6f961f45106c3c55))
+* **post:** add ghost prevualisation ([35fa63c](https://forge.grandlyon.com///commit/35fa63c7a87da819f8eee3f798849a7860d55f73))
+* **structure:** add service venteMaterielPrixSolidaire ([ae92ec2](https://forge.grandlyon.com///commit/ae92ec2270e01705a2c8729a8a0d088580eed7bf))
+* **structure:** remove bad char from CGU ([8ae2c7d](https://forge.grandlyon.com///commit/8ae2c7d80221efd39d07af8331014fa275ddbc31))
+* **structure-form:** remove broked character from CGU text ([b7cc1a1](https://forge.grandlyon.com///commit/b7cc1a18e853b7afae2ce0691b601eb9acc2a91b))
+* **structure-list:** add checkbox "conseiller numérique" ([3465e9f](https://forge.grandlyon.com///commit/3465e9f51e7f189c5457940fb8d1004c7f2fbe9d))
+* **structures:** update edit with warning hint on missing required field. Rework of edit structure routing with adding dedicated route. ([9ee52d1](https://forge.grandlyon.com///commit/9ee52d129505824c88dd7abe415ca1b9f8d3a720))
+* add admin remove from structure ([23f1ad8](https://forge.grandlyon.com///commit/23f1ad8b5927879dcdab41446036512f8dc63efb))
+
+
+### Bug Fixes
+
+* fix ghost icons & create user password ([1797937](https://forge.grandlyon.com///commit/179793733824c6632ea0b79ef4677f9622dfb16c))
+* fix v1.10 ([d4cd070](https://forge.grandlyon.com///commit/d4cd07051825e01d4ddf24324573bb21400899cf))
+* open graph and loader ([4ce17b8](https://forge.grandlyon.com///commit/4ce17b865eb5704ca619f83e00f98a6689efdd83))
+* **cicd:** add dependencies proxy handling  ([1bd2a15](https://forge.grandlyon.com///commit/1bd2a1519f53496c59aa205f49a3b0e1bf43a747))
+* **open-graph:** update images and description ([cf51443](https://forge.grandlyon.com///commit/cf5144354dce37410a46ee05c710aefea00df37f))
+* **open-graph:** update title for social networks ([57b8bdc](https://forge.grandlyon.com///commit/57b8bdc9a552d10f492dc8bef9bda7fb7dbeb7f6))
+* **structure:** last member can now delete himself from structure ([22c1c52](https://forge.grandlyon.com///commit/22c1c5233796fb73ae73553510dcef1242e47a22))
+* **structure-form:** add missing method after merge issue ([82d03d0](https://forge.grandlyon.com///commit/82d03d0bc32bff9960b0fb5b80b63cc9400f596a))
+* make sonar job fail in case of quality gate issue ([94227f8](https://forge.grandlyon.com///commit/94227f8f2fe4e6bd7757577eed36e7628c03dc73))
+
 ### [1.9.1](https://forge.grandlyon.com///compare/v1.9.0...v1.9.1) (2021-09-29)
 
 ### Features
