@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RouterListenerService } from '../../../services/routerListener.service';
 import { Post } from '../../models/post.model';
 import { PostService } from '../../services/post.service';
@@ -11,15 +11,17 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./post-details.component.scss'],
 })
 export class PostDetailsComponent implements OnInit {
+  public post: Post;
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router,
     private postService: PostService,
     private sanitizer: DomSanitizer,
     private routerListener: RouterListenerService
   ) {}
-  post: Post;
+
   ngOnInit(): void {
+    this.resetScroll();
     if (history.state.data) {
       this.post = new Post(history.state.data);
       this.post.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.post.html);
@@ -34,5 +36,11 @@ export class PostDetailsComponent implements OnInit {
 
   public backToPosts(): void {
     this.routerListener.goToPreviousUrl();
+  }
+
+  private resetScroll(): void {
+    if (window.scrollY) {
+      window.scroll(0, 0); // reset the scroll position to the top left of the document.
+    }
   }
 }
