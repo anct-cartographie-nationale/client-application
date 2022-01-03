@@ -1,48 +1,24 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { DivIcon, divIcon, Map } from 'leaflet';
-import { Marker } from 'leaflet';
-import { Observable } from 'rxjs';
+import { DivIcon, divIcon, Map, Marker } from 'leaflet';
 import { MarkerType } from '../components/markerType.enum';
-import { AddressGeometry } from '../models/addressGeometry.model';
-
+import {
+  markerIcon,
+  markerIconActive,
+  markerIconAddedToList,
+  markerIconFranceService,
+  markerIconFranceServiceActive,
+  markerIconFranceServiceAddedToList,
+  markerIconFranceServiceHover,
+  markerIconHover,
+  markerIconMdm,
+  markerIconMdmActive,
+} from './marker';
 @Injectable({
   providedIn: 'root',
 })
 export class MapService {
   private static markersList = {};
   private isMarkerActive = false;
-  public markerIconActive = divIcon({
-    className: null,
-    html: '<svg width="40" height="46" fill="#A00000"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
-    iconSize: [40, 46],
-    iconAnchor: [20, 46],
-    popupAnchor: [0, -46],
-  });
-  public markerIconAddedToList = divIcon({
-    className: null,
-    html:
-      '<svg width="40" height="46" fill="#47C562" stroke="#fff" stroke-width="2"><use xlink:href="assets/ico/sprite.svg#map-marker-added"></use></svg>',
-    iconSize: [40, 46],
-    iconAnchor: [20, 46],
-    popupAnchor: [0, -46],
-  });
-  public markerIcon = divIcon({
-    className: null,
-    html:
-      '<svg width="40" height="46" fill="#348899" stroke="#fff" stroke-width="2"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
-    iconSize: [40, 46],
-    iconAnchor: [20, 46],
-    popupAnchor: [0, -46],
-  });
-  public markerIconMdm = divIcon({
-    className: null,
-    html:
-      '<svg width="19" height="24" fill="#D4C4A9" class="mdm"><use xlink:href="assets/ico/sprite.svg#mdm"></use></svg>',
-    iconSize: [19, 24],
-    iconAnchor: [9, 0],
-  });
-  constructor(private http: HttpClient) {}
 
   public createMarker(lat: number, lon: number, markerType: MarkerType, id?: string, tooltip?: string): Marker {
     const marker = new Marker([lat, lon], {
@@ -53,9 +29,19 @@ export class MapService {
       evt.target.openPopup();
     });
 
+    // handle icon change when select marker
+    marker.on('click', (evt) => {
+      evt.target.setIcon(this.getActiveMarkerIcon(markerType));
+    });
+
     if (tooltip) {
       marker.bindPopup(tooltip, {
         autoPan: false,
+      });
+
+      // handle icon change when unselect
+      marker.getPopup().on('remove', (evt) => {
+        marker.setIcon(this.getMarkerIcon(markerType));
       });
     }
 
@@ -75,27 +61,55 @@ export class MapService {
 
   private getMarkerIcon(markerType: MarkerType): DivIcon {
     if (markerType === MarkerType.mdm) {
-      return this.markerIconMdm;
+      return markerIconMdm;
+    } else if (markerType === MarkerType.conseillerFrance) {
+      return markerIconFranceService;
     } else {
-      return this.markerIcon;
+      return markerIcon;
+    }
+  }
+
+  private getActiveMarkerIcon(markerType: MarkerType): DivIcon {
+    if (markerType === MarkerType.mdm) {
+      return markerIconMdmActive;
+    } else if (markerType === MarkerType.conseillerFrance) {
+      return markerIconFranceServiceActive;
+    } else {
+      return markerIconActive;
+    }
+  }
+
+  private getAddedToListMarkerIcon(markerType: MarkerType): DivIcon {
+    if (markerType === MarkerType.conseillerFrance) {
+      return markerIconFranceServiceAddedToList;
+    } else {
+      return markerIconAddedToList;
+    }
+  }
+
+  private getHoverMarkerIcon(markerType: MarkerType): DivIcon {
+    if (markerType === MarkerType.conseillerFrance) {
+      return markerIconFranceServiceHover;
+    } else {
+      return markerIconHover;
     }
   }
 
   /**
    * @param id marker id
    */
-  public setActiveMarker(id: string): void {
-    this.getMarker(id).setIcon(this.markerIconActive);
+  public setActiveMarker(id: string, type: MarkerType = MarkerType.structure): void {
+    this.getMarker(id).setIcon(this.getHoverMarkerIcon(type));
   }
 
-  public setAddedToListMarker(id: string): void {
-    this.getMarker(id).setIcon(this.markerIconAddedToList);
+  public setAddedToListMarker(id: string, type: MarkerType = MarkerType.structure): void {
+    this.getMarker(id).setIcon(this.getAddedToListMarkerIcon(type));
   }
 
-  public setUnactiveMarker(id: string): void {
+  public setUnactiveMarker(id: string, type: MarkerType = MarkerType.structure): void {
     // To skip mouseleave when user emit click on structure list
     if (!this.isMarkerActive) {
-      this.getMarker(id).setIcon(this.getMarkerIcon(MarkerType.structure));
+      this.getMarker(id).setIcon(this.getMarkerIcon(type));
     }
     this.isMarkerActive = false;
   }
@@ -114,9 +128,9 @@ export class MapService {
    * @param id markerId
    * @param html html to display
    */
-  public setSelectedMarker(id: string): void {
+  public setSelectedMarker(id: string, type: MarkerType = MarkerType.structure): void {
     if (id) {
-      this.getMarker(id).setIcon(this.markerIconActive);
+      this.getMarker(id).setIcon(this.getActiveMarkerIcon(type));
       this.isMarkerActive = true;
     }
   }
@@ -126,16 +140,9 @@ export class MapService {
    * @param id markerId
    * @param html html to display
    */
-  public setDefaultMarker(id: string): void {
+  public setDefaultMarker(id: string, type: MarkerType = MarkerType.structure): void {
     if (id) {
-      const markerIcon = divIcon({
-        className: null,
-        html:
-          '<svg width="40" height="46" fill="#348899" stroke="#fff" stroke-width="2"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
-        iconSize: [35, 41],
-        iconAnchor: [13, 41],
-      });
-      this.getMarker(id).setIcon(markerIcon);
+      this.getMarker(id).setIcon(this.getMarkerIcon(type));
     }
   }
 

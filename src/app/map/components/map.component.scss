@@ -87,9 +87,12 @@
   }
   &:hover {
     svg {
-      fill: $red-info;
+      fill: $blue-hover;
       &.mdm {
         fill: #bd9e6a;
+      }
+      &.france-service {
+        fill: $red-info;
       }
     }
   }
