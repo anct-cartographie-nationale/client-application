@@ -94,9 +94,18 @@ export class Structure {
    * Check if a structure has equipments
    */
   public hasEquipments(): boolean {
-    if (this.equipmentsAndServices.length) {
+    if (this.equipmentsAndServices.length && this.hasNotOnlyEmptyEquipments()) {
       return true;
     }
+    return false;
+  }
+
+  /**
+   * Verify that a structure as not only equipments with 0 as value. This is mostly use for display.
+   * @returns {Boolean} validation
+   */
+  public hasNotOnlyEmptyEquipments(): boolean {
+    if (this.nbComputers + this.nbPrinters + this.nbTablets + this.nbNumericTerminal + this.nbScanners > 0) return true;
     return false;
   }
 

@@ -294,24 +294,27 @@ export class FormComponent implements OnInit {
       socialAndProfessional: this.loadArrayForCheckbox(structure.socialAndProfessional, false),
       digitalCultureSecurity: this.loadArrayForCheckbox(structure.digitalCultureSecurity, false),
       nbComputers: new FormControl(
-        structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 1,
-        [Validators.required, Validators.pattern(CustomRegExp.NO_NULL_NUMBER)]
+        structure.equipmentsAndServices.includes('ordinateurs') ? structure.nbComputers : 0,
+        [Validators.required, Validators.pattern(CustomRegExp.NO_NEGATIVE_NUMBER), Validators.min(0)]
       ),
-      nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 1, [
+      nbPrinters: new FormControl(structure.equipmentsAndServices.includes('imprimantes') ? structure.nbPrinters : 0, [
         Validators.required,
-        Validators.pattern(CustomRegExp.NO_NULL_NUMBER),
+        Validators.pattern(CustomRegExp.NO_NEGATIVE_NUMBER),
+        Validators.min(0),
       ]),
-      nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 1, [
+      nbTablets: new FormControl(structure.equipmentsAndServices.includes('tablettes') ? structure.nbTablets : 0, [
         Validators.required,
-        Validators.pattern(CustomRegExp.NO_NULL_NUMBER),
+        Validators.pattern(CustomRegExp.NO_NEGATIVE_NUMBER),
+        Validators.min(0),
       ]),
       nbNumericTerminal: new FormControl(
-        structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 1,
-        [Validators.required, Validators.pattern(CustomRegExp.NO_NULL_NUMBER)]
+        structure.equipmentsAndServices.includes('bornesNumeriques') ? structure.nbNumericTerminal : 0,
+        [Validators.required, Validators.pattern(CustomRegExp.NO_NEGATIVE_NUMBER), Validators.min(0)]
       ),
-      nbScanners: new FormControl(structure.equipmentsAndServices.includes('scanners') ? structure.nbScanners : 1, [
+      nbScanners: new FormControl(structure.equipmentsAndServices.includes('scanners') ? structure.nbScanners : 0, [
         Validators.required,
-        Validators.pattern(CustomRegExp.NO_NULL_NUMBER),
+        Validators.pattern(CustomRegExp.NO_NEGATIVE_NUMBER),
+        Validators.min(0),
       ]),
       freeWorkShop: new FormControl(structure.freeWorkShop, [Validators.required]),
     });
@@ -872,23 +875,23 @@ export class FormComponent implements OnInit {
         if (!equipment.openned) {
           switch (e.module.id) {
             case Equipment.computer: {
-              this.getStructureControl('nbComputers').setValue(1);
+              this.getStructureControl('nbComputers').setValue(0);
               break;
             }
             case Equipment.printer: {
-              this.getStructureControl('nbPrinters').setValue(1);
+              this.getStructureControl('nbPrinters').setValue(0);
               break;
             }
             case Equipment.tablet: {
-              this.getStructureControl('nbTablets').setValue(1);
+              this.getStructureControl('nbTablets').setValue(0);
               break;
             }
             case Equipment.bornes: {
-              this.getStructureControl('nbNumericTerminal').setValue(1);
+              this.getStructureControl('nbNumericTerminal').setValue(0);
               break;
             }
             case Equipment.scanner: {
-              this.getStructureControl('nbScanners').setValue(1);
+              this.getStructureControl('nbScanners').setValue(0);
               break;
             }
           }
@@ -910,8 +913,17 @@ export class FormComponent implements OnInit {
     if (this.getStructureControl('freeWorkShop').value === null) {
       this.getStructureControl('freeWorkShop').setValue(false);
     }
-    const structure: Structure = this.structureForm.value;
+    let structure: Structure = this.structureForm.value;
     structure.hours = this.hoursForm.value;
+    // Remove equipments if value is 0
+    structure.equipmentsAndServices = structure.equipmentsAndServices.filter((equipments) => {
+      if (equipments === 'ordinateurs' && structure.nbComputers === 0) return false;
+      if (equipments === 'tablettes' && structure.nbTablets === 0) return false;
+      if (equipments === 'scanners' && structure.nbScanners === 0) return false;
+      if (equipments === 'bornesNumeriques' && structure.nbNumericTerminal === 0) return false;
+      if (equipments === 'imprimantes' && structure.nbPrinters === 0) return false;
+      return true;
+    });
     let user: User;
     // If edit mode, update setbystep
     if (this.isEditMode) {

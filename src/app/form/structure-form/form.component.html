@@ -957,7 +957,14 @@
                 fxLayoutAlign=" center"
                 (click)="toggleEquipmentsServices(equipment)"
               >
-                <div class="titleCollapse">{{ equipment.module.text }}</div>
+                <div class="titleCollapse">
+                  <p [ngClass]="{ show: equipment.openned, hide: !equipment.openned }" class="no-margin">
+                    Ajouter des {{ equipment.module.text | lowercase }}
+                  </p>
+                  <p [ngClass]="{ show: !equipment.openned, hide: equipment.openned }" class="no-margin">
+                    Retirer les {{ equipment.module.text | lowercase }}
+                  </p>
+                </div>
                 <div class="logo">
                   <svg class="show" aria-hidden="true">
                     <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
@@ -976,6 +983,7 @@
                         type="number"
                         (input)="setValidationsForm()"
                         formControlName="nbComputers"
+                        min="0"
                         class="form-input nbEquipment"
                       />
                       <app-svg-icon
@@ -998,6 +1006,7 @@
                         type="number"
                         (input)="setValidationsForm()"
                         formControlName="nbTablets"
+                        min="0"
                         class="form-input nbEquipment"
                       />
                       <app-svg-icon
@@ -1020,6 +1029,7 @@
                         type="number"
                         (input)="setValidationsForm()"
                         formControlName="nbPrinters"
+                        min="0"
                         class="form-input nbEquipment"
                       />
                       <app-svg-icon
@@ -1042,6 +1052,7 @@
                         type="number"
                         (input)="setValidationsForm()"
                         formControlName="nbNumericTerminal"
+                        min="0"
                         class="form-input nbEquipment"
                       />
                       <app-svg-icon
@@ -1064,6 +1075,7 @@
                         type="number"
                         (input)="setValidationsForm()"
                         formControlName="nbScanners"
+                        min="0"
                         class="form-input nbEquipment"
                       />
                       <app-svg-icon
