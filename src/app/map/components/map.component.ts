@@ -82,33 +82,51 @@ export class MapComponent implements OnChanges {
     if (changes.toogleToolTipId && changes.toogleToolTipId.currentValue !== changes.toogleToolTipId.previousValue) {
       if (changes.toogleToolTipId.previousValue !== undefined) {
         if (this.isToPrint(changes.toogleToolTipId.previousValue)) {
-          this.mapService.setAddedToListMarker(changes.toogleToolTipId.previousValue);
+          this.mapService.setAddedToListMarker(
+            changes.toogleToolTipId.previousValue,
+            this.getMarkerTypeByStructureId(changes.toogleToolTipId.previousValue)
+          );
         } else {
-          this.mapService.setUnactiveMarker(changes.toogleToolTipId.previousValue);
+          this.mapService.setUnactiveMarker(
+            changes.toogleToolTipId.previousValue,
+            this.getMarkerTypeByStructureId(changes.toogleToolTipId.previousValue)
+          );
         }
       }
       if (changes.toogleToolTipId.currentValue !== undefined) {
-        this.mapService.setActiveMarker(changes.toogleToolTipId.currentValue);
+        this.mapService.setActiveMarker(
+          changes.toogleToolTipId.currentValue,
+          this.getMarkerTypeByStructureId(changes.toogleToolTipId.currentValue)
+        );
       }
     }
     // Handle map marker selection
     if (changes.selectedMarkerId && this.map) {
       this.map.closePopup();
       if (changes.selectedMarkerId.currentValue === undefined) {
-        this.mapService.setDefaultMarker(changes.selectedMarkerId.previousValue);
+        this.mapService.setDefaultMarker(
+          changes.selectedMarkerId.previousValue,
+          this.getMarkerTypeByStructureId(changes.selectedMarkerId.previousValue)
+        );
         this.map.setView(this.mapOptions.center, this.mapOptions.zoom);
       } else {
-        this.mapService.setSelectedMarker(changes.selectedMarkerId.currentValue);
+        this.mapService.setSelectedMarker(
+          changes.selectedMarkerId.currentValue,
+          this.getMarkerTypeByStructureId(changes.selectedMarkerId.currentValue)
+        );
         this.centerLeafletMapOnMarker(changes.selectedMarkerId.currentValue);
       }
     }
 
     if (changes.structuresToPrint) {
       if (changes.structuresToPrint.currentValue < changes.structuresToPrint.previousValue) {
-        this.mapService.setUnactiveMarker(this.toogleToolTipId);
+        this.mapService.setUnactiveMarker(
+          this.toogleToolTipId,
+          this.getMarkerTypeByStructureId(changes.structuresToPrint.previousValue)
+        );
       }
       this.structuresToPrint.forEach((structure: Structure) => {
-        this.mapService.setAddedToListMarker(structure._id);
+        this.mapService.setAddedToListMarker(structure._id, this.getMarkerTypeByStructureId(structure._id));
       });
     }
   }
@@ -142,14 +160,33 @@ export class MapComponent implements OnChanges {
       this.map = this.mapService.cleanMap(this.map);
       this.getStructuresPositions(this.structures);
       this.structuresToPrint.forEach((structure: Structure) => {
-        this.mapService.setAddedToListMarker(structure._id);
+        this.mapService.setAddedToListMarker(structure._id, this.getMarkerTypeByStructureId(structure._id));
       });
-
     }
   }
 
   private isToPrint(id: String): boolean {
     return this.structuresToPrint.findIndex((elem) => elem._id == id) > -1 ? true : false;
+  }
+
+  /**
+   * Returns according marker type base on {MarkerType}
+   * @param {Structure} structure
+   * @returns {MarkerType}
+   */
+  private getMarkerType(structure: Structure): MarkerType {
+    return structure.labelsQualifications.includes('conseillerNumFranceServices')
+      ? MarkerType.conseillerFrance
+      : MarkerType.structure;
+  }
+
+  /**
+   * Return the map marker type given a structure id
+   * @param {string} id - Structure id
+   * @returns {MarkerType}
+   */
+  private getMarkerTypeByStructureId(id: string): MarkerType {
+    return this.getMarkerType(this.structures.find((structure) => structure._id === id));
   }
 
   private getStructuresPositions(structureList: Structure[]): void {
@@ -158,7 +195,7 @@ export class MapComponent implements OnChanges {
         .createMarker(
           structure.getLat(),
           structure.getLon(),
-          MarkerType.structure,
+          this.getMarkerType(structure),
           structure._id,
           this.buildToolTip(structure)
         )
