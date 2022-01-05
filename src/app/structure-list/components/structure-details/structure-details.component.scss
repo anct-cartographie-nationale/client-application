@@ -120,6 +120,11 @@ p,
   color: $ram-hover-principal;
 }
 
+.description {
+  white-space: pre-wrap;
+  float: left;
+}
+
 .wrapper {
   width: 100%;
   display: grid;
