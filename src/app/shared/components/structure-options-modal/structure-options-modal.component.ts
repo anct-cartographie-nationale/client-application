@@ -122,7 +122,7 @@ export class StructureOptionsModalComponent implements OnInit {
         this.editModal = TypeModalProfile.deleteAccount;
         break;
       case FunctionTypeModalOptions.editStructure:
-        this.router.navigateByUrl('/create-structure', { state: { data: this.structure.structure } });
+        this.router.navigateByUrl(`/create-structure/${this.structure.structure._id}`);
         break;
       case FunctionTypeModalOptions.removeStructure:
         this.toggleDeleteStructureModal();
