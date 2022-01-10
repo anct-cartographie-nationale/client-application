@@ -27,6 +27,7 @@
   @include cn-regular-14;
   text-align: initial;
   outline: none;
+  margin-right: 70px;
   p {
     margin: 0;
   }
@@ -74,7 +75,7 @@ a {
   }
 }
 
-@media #{$tablet} {
+@media #{$desktop} {
   .logo-text {
     display: none !important;
   }

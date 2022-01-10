@@ -130,10 +130,12 @@
           <p>Ces informations ne seront pas visibles sur la plateforme</p>
         </div>
         <div *ngIf="!isClaimMode" class="title">
-          <h4>Vous possédez déja un compte ? Connectez-vous:</h4>
-          <button class="btn-primary small next" *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
-            Se connecter
-          </button>
+          <div class="section">
+            <h4>Vous possédez déja un compte ? Connectez-vous:</h4>
+            <button class="btn-primary small next" *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
+              Se connecter
+            </button>
+          </div>
           <h4>Sinon, inscrivez-vous en suivant le formulaire ci-dessous:</h4>
         </div>
         <div class="form-group" fxLayout="column">
@@ -243,16 +245,17 @@
                 invalid: accountForm.get('password').value.length < 8,
                 valid: accountForm.get('password').value.length >= 8
               }"
+              class=""
             >
               <app-svg-icon
                 *ngIf="accountForm.get('password').value.length >= 8"
-                [iconClass]="'validation'"
+                [iconClass]="'validation-small'"
                 [type]="'form'"
                 [icon]="'validate'"
               ></app-svg-icon>
               <app-svg-icon
                 *ngIf="accountForm.get('password').value.length < 8"
-                [iconClass]="'validation'"
+                [iconClass]="'validation-small'"
                 [type]="'form'"
                 [icon]="'notValidate'"
               ></app-svg-icon>
@@ -266,17 +269,37 @@
             >
               <app-svg-icon
                 *ngIf="checkIfPasswordHasSpecialChar(accountForm.get('password').value)"
-                [iconClass]="'validation'"
+                [iconClass]="'validation-small'"
                 [type]="'form'"
                 [icon]="'validate'"
               ></app-svg-icon>
               <app-svg-icon
                 *ngIf="!checkIfPasswordHasSpecialChar(accountForm.get('password').value)"
-                [iconClass]="'validation'"
+                [iconClass]="'validation-small'"
                 [type]="'form'"
                 [icon]="'notValidate'"
               ></app-svg-icon>
               <p>un caractère spécial</p>
+            </li>
+            <li
+              [ngClass]="{
+                invalid: !checkIfPasswordHasLowerCase(accountForm.get('password').value),
+                valid: checkIfPasswordHasLowerCase(accountForm.get('password').value)
+              }"
+            >
+              <app-svg-icon
+                *ngIf="checkIfPasswordHasLowerCase(accountForm.get('password').value)"
+                [iconClass]="'validation-small'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="!checkIfPasswordHasLowerCase(accountForm.get('password').value); s"
+                [iconClass]="'validation-small'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+              <p>un caractère en minuscule</p>
             </li>
             <li
               [ngClass]="{
@@ -286,13 +309,13 @@
             >
               <app-svg-icon
                 *ngIf="checkIfPasswordHasUpperCase(accountForm.get('password').value)"
-                [iconClass]="'validation'"
+                [iconClass]="'validation-small'"
                 [type]="'form'"
                 [icon]="'validate'"
               ></app-svg-icon>
               <app-svg-icon
                 *ngIf="!checkIfPasswordHasUpperCase(accountForm.get('password').value); s"
-                [iconClass]="'validation'"
+                [iconClass]="'validation-small'"
                 [type]="'form'"
                 [icon]="'notValidate'"
               ></app-svg-icon>
@@ -306,20 +329,20 @@
             >
               <app-svg-icon
                 *ngIf="checkIfPasswordHasDigit(accountForm.get('password').value)"
-                [iconClass]="'validation'"
+                [iconClass]="'validation-small'"
                 [type]="'form'"
                 [icon]="'validate'"
               ></app-svg-icon>
               <app-svg-icon
                 *ngIf="!checkIfPasswordHasDigit(accountForm.get('password').value)"
-                [iconClass]="'validation'"
+                [iconClass]="'validation-small'"
                 [type]="'form'"
                 [icon]="'notValidate'"
               ></app-svg-icon>
               <p>un chiffre</p>
             </li>
           </ul>
-          <div fxLayout="row" fxLayoutGap="13px">
+          <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
             <input
               [type]="isShowPassword ? 'text' : 'password'"
               formControlName="password"
@@ -350,7 +373,7 @@
         </div>
         <div class="form-group" fxLayout="column">
           <label for="confirmPassword">Vérification du mot de passe</label>
-          <div fxLayout="row" fxLayoutGap="13px">
+          <div fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="13px">
             <input
               [type]="isShowConfirmPassword ? 'text' : 'password'"
               formControlName="confirmPassword"
@@ -502,34 +525,38 @@
         </div>
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureHours" class="page">
-        <div class="title">
-          <h3>Quels sont les horaires d'ouverture ?</h3>
-          <p class="notRequired">facultatif</p>
+        <div class="section">
+          <div class="title">
+            <h3>Quels sont les horaires d'ouverture ?</h3>
+            <p class="notRequired">facultatif</p>
+          </div>
+          <app-hour-picker
+            *ngIf="hoursForm"
+            (updateForm)="updateHours($event)"
+            (updateFormError)="setHoursError()"
+            [structureInput]="hoursForm"
+          ></app-hour-picker>
         </div>
-        <app-hour-picker
-          *ngIf="hoursForm"
-          (updateForm)="updateHours($event)"
-          (updateFormError)="setHoursError()"
-          [structureInput]="hoursForm"
-        ></app-hour-picker>
-        <div class="nextTitle">
-          <h3>Avez-vous des précisions à apporter sur les horaires ?</h3>
-          <p class="notRequired">facultatif</p>
-        </div>
-        <div class="textareaBlock" fxLayout="column">
-          <textarea
-            rows="8"
-            placeholder="Exemple : nous ne sommes ouvert que le 1er mercredi du mois."
-            maxlength="500"
-            formControlName="exceptionalClosures"
-          ></textarea>
-          <p>
-            {{
-              getStructureControl('exceptionalClosures').value
-                ? getStructureControl('exceptionalClosures').value.length
-                : 0
-            }}/500
-          </p>
+        <div>
+          <div class="title">
+            <h3>Avez-vous des précisions à apporter sur les horaires ?</h3>
+            <p class="notRequired">facultatif</p>
+          </div>
+          <div class="textareaBlock" fxLayout="column">
+            <textarea
+              rows="8"
+              placeholder="Exemple : nous ne sommes ouvert que le 1er mercredi du mois."
+              maxlength="500"
+              formControlName="exceptionalClosures"
+            ></textarea>
+            <p>
+              {{
+                getStructureControl('exceptionalClosures').value
+                  ? getStructureControl('exceptionalClosures').value.length
+                  : 0
+              }}/500
+            </p>
+          </div>
         </div>
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structurePmr" class="page">
@@ -612,7 +639,7 @@
                   <input
                     type="text"
                     (input)="setValidationsForm()"
-                    placeholder="facebook.com/resonum"
+                    placeholder="facebook.com/resin"
                     formControlName="facebook"
                     class="form-input withIcon"
                   />
@@ -644,7 +671,7 @@
                   <input
                     type="text"
                     (input)="setValidationsForm()"
-                    placeholder="twitter.com/resonum"
+                    placeholder="twitter.com/resin"
                     formControlName="twitter"
                     class="form-input withIcon"
                   />
@@ -677,7 +704,7 @@
                     type="text"
                     (input)="setValidationsForm()"
                     formControlName="instagram"
-                    placeholder="instagram.com/resonum"
+                    placeholder="instagram.com/resin"
                     class="form-input withIcon"
                   />
 
@@ -710,7 +737,7 @@
                     type="text"
                     (input)="setValidationsForm()"
                     formControlName="linkedin"
-                    placeholder="linkedin.com/in/resonum"
+                    placeholder="linkedin.com/in/resin"
                     class="form-input withIcon"
                   />
                   <app-svg-icon
@@ -1180,20 +1207,23 @@
       </div>
     </form>
     <div *ngIf="currentPage == pageTypeEnum.cgu" class="page">
-      <div class="title">
-        <h3>
-          Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon<span class="asterisk"
-            >*</span
-          >
-          ?
-        </h3>
+      <div class="section">
+        <div class="title">
+          <h3>
+            Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon<span
+              class="asterisk"
+              >*</span
+            >
+            ?
+          </h3>
+        </div>
+        <app-checkbox-form
+          [isChecked]="userAcceptSavedDate"
+          [text]="'J\'accepte'"
+          (checkEvent)="acceptDataBeSaved($event)"
+        >
+        </app-checkbox-form>
       </div>
-      <app-checkbox-form
-        [isChecked]="userAcceptSavedDate"
-        [text]="'J\'accepte'"
-        (checkEvent)="acceptDataBeSaved($event)"
-      >
-      </app-checkbox-form>
       <div *ngIf="!profile">
         <div class="title">
           <h3>Acceptez-vous de recevoir des mails d'informations de la part de Res'in ?</h3>

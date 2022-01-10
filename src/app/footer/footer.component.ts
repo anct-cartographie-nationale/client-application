@@ -7,12 +7,4 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   constructor() {}
-
-  public openLegalNotice(): void {
-    console.log('openLegalNotice');
-  }
-
-  public openContactDialog(): void {
-    console.log('openContactDialog');
-  }
 }

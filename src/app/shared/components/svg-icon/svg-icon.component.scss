@@ -19,7 +19,11 @@
   }
   &.validation {
     height: 40px;
-    width: 26px;
+    width: 20px;
+  }
+  &.validation-small {
+    height: 26px;
+    width: 20px;
   }
   &.hover {
     cursor: pointer;

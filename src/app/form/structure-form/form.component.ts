@@ -1049,8 +1049,13 @@ export class FormComponent implements OnInit {
     return false;
   }
 
-  public checkIfPasswordHasUpperCase(password): boolean {
+  public checkIfPasswordHasUpperCase(password: string): boolean {
     if (password.match(CustomRegExp.UPPERCASE)) return true;
+    return false;
+  }
+
+  public checkIfPasswordHasLowerCase(password: string): boolean {
+    if (password.match(CustomRegExp.LOWERCASE)) return true;
     return false;
   }
 }

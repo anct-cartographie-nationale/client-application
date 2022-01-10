@@ -12,10 +12,13 @@ import { CustomRegExp } from '../utils/CustomRegExp';
 })
 export class ResetPasswordComponent implements OnInit {
   public resetForm: FormGroup;
-  public resetFormChangePassword: FormGroup;
+  public accountForm: FormGroup;
   public token: string;
   public loading = false;
   public submitted = false;
+  // Condition form
+  public isShowConfirmPassword = false;
+  public isShowPassword = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,7 +39,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   private initPasswordForm(): void {
-    this.resetFormChangePassword = this.formBuilder.group(
+    this.accountForm = this.formBuilder.group(
       {
         password: ['', [Validators.required, Validators.pattern(CustomRegExp.PASSWORD)]],
         confirmPassword: [''],
@@ -51,7 +54,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   get fPassword(): { [key: string]: AbstractControl } {
-    return this.resetFormChangePassword.controls;
+    return this.accountForm.controls;
   }
 
   public onSubmit(): void {
@@ -77,7 +80,7 @@ export class ResetPasswordComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.resetFormChangePassword.invalid) {
+    if (this.accountForm.invalid) {
       return;
     }
 
@@ -90,5 +93,33 @@ export class ResetPasswordComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  public checkIfPasswordHasSpecialChar(password: string): boolean {
+    if (password.match(CustomRegExp.SPECHAR)) return true;
+    return false;
+  }
+
+  public checkIfPasswordHasDigit(password: string): boolean {
+    if (password.match(CustomRegExp.DIGIT)) return true;
+    return false;
+  }
+
+  public checkIfPasswordHasUpperCase(password: string): boolean {
+    if (password.match(CustomRegExp.UPPERCASE)) return true;
+    return false;
+  }
+
+  public checkIfPasswordHasLowerCase(password: string): boolean {
+    if (password.match(CustomRegExp.LOWERCASE)) return true;
+    return false;
+  }
+
+  public showPassword(): void {
+    this.isShowPassword = !this.isShowPassword;
+  }
+
+  public showConfirmPassword(): void {
+    this.isShowConfirmPassword = !this.isShowConfirmPassword;
   }
 }

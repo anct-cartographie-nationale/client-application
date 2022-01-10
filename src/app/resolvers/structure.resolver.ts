@@ -11,8 +11,6 @@ export class StructureResolver implements Resolve<Structure> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<Structure> {
     const structureId = route.params.id;
-    console.log(route);
-    console.info(`Resolver: ${structureId}`);
     return this.structureService.getStructure(structureId).pipe(
       map((res) => res),
       catchError(() => {

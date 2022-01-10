@@ -13,6 +13,11 @@
 h3 {
   margin: 0;
 }
+
+h4 {
+  margin-bottom: 16px;
+}
+
 .form {
   background: white;
   width: 100vw;
@@ -158,7 +163,7 @@ h3 {
       }
     }
     .title {
-      margin-bottom: 26px;
+      margin-bottom: 10px;
     }
     .nextTitle {
       margin-bottom: 10px;
@@ -187,6 +192,7 @@ h3 {
       }
     }
     &.notRequired {
+      margin-top: 0px;
       font-style: italic;
       color: $secondary-color;
     }
@@ -296,15 +302,16 @@ h3 {
     display: flex;
     margin-left: 1%;
     font-size: small;
+    align-items: center;
     p {
       margin-left: 10px;
-      margin-top: 12px;
+      margin-top: unset;
     }
     &.valid {
       color: $green;
     }
     &.invalid {
-      color: $red;
+      color: $orange-warning;
     }
   }
   .addressRow {
@@ -564,4 +571,8 @@ img {
 .lastPage {
   max-width: 530px;
   margin: 0 auto;
+}
+
+.section {
+  padding-bottom: 2rem;
 }
