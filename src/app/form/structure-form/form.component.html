@@ -410,6 +410,18 @@
         <div class="title">
           <h3>Quelle structure voulez-vous réferencer ?</h3>
         </div>
+        <p
+          class="missing-information"
+          *ngIf="isEditMode && (!getStructureControl('structureName').valid || !getStructureControl('address').valid)"
+        >
+          <app-svg-icon
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'notValidate'"
+            class="validationIcon"
+          ></app-svg-icon>
+          <span>Il faut renseigner tous les champs</span>
+        </p>
         <div class="form-group" fxLayout="column">
           <label for="structureName">Nom de la structure</label>
           <div fxLayout="row" fxLayoutGap="13px">
@@ -450,6 +462,20 @@
         <div class="title">
           <h3>Comment joindre votre structure ?</h3>
         </div>
+        <p
+          class="missing-information"
+          *ngIf="
+            isEditMode && (!getStructureControl('contactPhone').valid || !getStructureControl('contactMail').valid)
+          "
+        >
+          <app-svg-icon
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'notValidate'"
+            class="validationIcon"
+          ></app-svg-icon>
+          <span>Il faut renseigner tous les champs</span>
+        </p>
         <div class="form-group" fxLayout="column">
           <label for="contactPhone">Téléphone de la structure</label>
           <div fxLayout="row" fxLayoutGap="13px">
@@ -497,6 +523,15 @@
           <h3>Quel type de structure ?</h3>
           <p>1 seul choix possible</p>
         </div>
+        <p class="missing-information" *ngIf="isEditMode && !getStructureControl('structureType').valid">
+          <app-svg-icon
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'notValidate'"
+            class="validationIcon"
+          ></app-svg-icon>
+          <span>Il faut renseigner un champ</span>
+        </p>
         <div class="type-picker">
           <app-structure-type-picker
             [pickedChoice]="
@@ -511,6 +546,15 @@
           <h3>Quelles sont les modalités d'accueil ?</h3>
           <p>Plusieurs choix possibles</p>
         </div>
+        <p class="missing-information" *ngIf="isEditMode && !getStructureControl('accessModality').valid">
+          <app-svg-icon
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'notValidate'"
+            class="validationIcon"
+          ></app-svg-icon>
+          <span>Il faut renseigner au moins un champ</span>
+        </p>
         <div *ngIf="accessModality" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="flex-start">
           <app-checkbox-form
             *ngFor="let module of accessModality.modules"
@@ -561,6 +605,15 @@
         <div class="title">
           <h3>Est-ce accessible pour les personnes à mobilité réduite ?</h3>
         </div>
+        <p class="missing-information" *ngIf="isEditMode && !getStructureControl('pmrAccess').valid">
+          <app-svg-icon
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'notValidate'"
+            class="validationIcon"
+          ></app-svg-icon>
+          <span>Il faut renseigner un champ</span>
+        </p>
         <app-radio-form
           [selectedOption]="getStructureControl('pmrAccess').value"
           (selectedEvent)="onRadioBtnChange('pmrAccess', $event)"
@@ -767,6 +820,15 @@
           <h3>Quel public peut venir vous consulter ?</h3>
           <p>Plusieurs choix possibles</p>
         </div>
+        <p class="missing-information" *ngIf="isEditMode && !getStructureControl('publics').valid">
+          <app-svg-icon
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'notValidate'"
+            class="validationIcon"
+          ></app-svg-icon>
+          <span>Il faut renseigner au moins un champ</span>
+        </p>
         <div class="tags" *ngIf="publics">
           <button
             *ngFor="let choice of publics.modules"
@@ -887,6 +949,15 @@
         <div class="title">
           <h3>Proposez vous un accompagnement à distance ?</h3>
         </div>
+        <p class="missing-information" *ngIf="isEditMode && !getStructureControl('remoteAccompaniment').valid">
+          <app-svg-icon
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'notValidate'"
+            class="validationIcon"
+          ></app-svg-icon>
+          <span>Il faut renseigner un champ</span>
+        </p>
         <app-radio-form
           [selectedOption]="getStructureControl('remoteAccompaniment').value"
           (selectedEvent)="onRadioBtnChange('remoteAccompaniment', $event)"

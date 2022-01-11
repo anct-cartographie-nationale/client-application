@@ -576,3 +576,12 @@ img {
 .section {
   padding-bottom: 2rem;
 }
+
+.missing-information {
+  display: flex;
+  color: $orange-warning;
+  span {
+    margin-top: 12px;
+    margin-left: 1%;
+  }
+}
