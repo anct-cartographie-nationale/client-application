@@ -628,7 +628,10 @@
         <div class="collapse" [ngClass]="{ notCollapsed: !showWebsite }">
           <div fxLayout="column">
             <div class="collapseHeader" fxLayout="row" fxLayoutAlign=" center" (click)="toggleWebSite()">
-              <div class="titleCollapse">J’ajoute un site web</div>
+              <div class="titleCollapse">
+                <p [ngClass]="{ show: showWebsite, hide: !showWebsite }" class="no-margin">J'ajoute un site web</p>
+                <p [ngClass]="{ show: !showWebsite, hide: showWebsite }" class="no-margin">Je retire un site web</p>
+              </div>
               <div class="logo">
                 <svg class="show" aria-hidden="true">
                   <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
@@ -671,7 +674,14 @@
         <div class="collapse" [ngClass]="{ notCollapsed: !showSocialNetwork }">
           <div fxLayout="column">
             <div class="collapseHeader" fxLayout="row" fxLayoutAlign=" center" (click)="toggleSocialNetwork()">
-              <div class="titleCollapse">J’ajoute les réseaux sociaux</div>
+              <div class="titleCollapse">
+                <p [ngClass]="{ show: showSocialNetwork, hide: !showSocialNetwork }" class="no-margin">
+                  J’ajoute les réseaux sociaux
+                </p>
+                <p [ngClass]="{ show: !showSocialNetwork, hide: showSocialNetwork }" class="no-margin">
+                  Je retire des réseaux sociaux
+                </p>
+              </div>
               <div class="logo">
                 <svg class="show" aria-hidden="true">
                   <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>

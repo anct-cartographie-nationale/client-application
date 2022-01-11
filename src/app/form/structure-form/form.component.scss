@@ -439,6 +439,10 @@ img {
     width: 100%;
     @include cn-bold-16;
     color: $grey-2;
+    p {
+      color: $grey-2;
+      @include cn-bold-16;
+    }
   }
   .collapseHeader {
     height: 65px;
