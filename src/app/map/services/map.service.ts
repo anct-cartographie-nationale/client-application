@@ -59,11 +59,14 @@ export class MapService {
     }
   }
 
+  // Note: Marke IconFranceService has been removed temporarly on order to rework on buisness needs.
+  // This comment is applied for the next 4 methods
   private getMarkerIcon(markerType: MarkerType): DivIcon {
     if (markerType === MarkerType.mdm) {
       return markerIconMdm;
     } else if (markerType === MarkerType.conseillerFrance) {
-      return markerIconFranceService;
+      // return markerIconFranceService;
+      return markerIcon;
     } else {
       return markerIcon;
     }
@@ -73,7 +76,8 @@ export class MapService {
     if (markerType === MarkerType.mdm) {
       return markerIconMdmActive;
     } else if (markerType === MarkerType.conseillerFrance) {
-      return markerIconFranceServiceActive;
+      // return markerIconFranceServiceActive;
+      return markerIconActive;
     } else {
       return markerIconActive;
     }
@@ -81,7 +85,8 @@ export class MapService {
 
   private getAddedToListMarkerIcon(markerType: MarkerType): DivIcon {
     if (markerType === MarkerType.conseillerFrance) {
-      return markerIconFranceServiceAddedToList;
+      // return markerIconFranceServiceAddedToList;
+      return markerIconAddedToList;
     } else {
       return markerIconAddedToList;
     }
@@ -89,7 +94,8 @@ export class MapService {
 
   private getHoverMarkerIcon(markerType: MarkerType): DivIcon {
     if (markerType === MarkerType.conseillerFrance) {
-      return markerIconFranceServiceHover;
+      // return markerIconFranceServiceHover;
+      return markerIconHover;
     } else {
       return markerIconHover;
     }
