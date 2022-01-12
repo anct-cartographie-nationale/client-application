@@ -167,7 +167,7 @@
       </div>
       <div fxLayout="column" fxLayoutGap="16px" class="ownersBlock">
         <div class="row removeOwner" *ngFor="let owner of structure.owners" fxLayoutGap="16px">
-          <button class="btn-primary small" (click)="removeOwner(owner.id)">X</button>
+          <button class="btn-primary" (click)="removeOwner(owner.id)">Supprimer</button>
           <span>
             {{ owner.email }}
           </span>

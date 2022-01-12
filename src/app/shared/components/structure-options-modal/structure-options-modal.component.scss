@@ -63,12 +63,13 @@ button {
     white-space: nowrap;
     width: 84%;
     text-overflow: ellipsis;
+    @include cn-regular-16;
     button {
-      width: 40px;
+      width: 130px;
       background-color: $red-default;
     }
     span {
-      @include cn-bold-18;
+      @include cn-regular-18;
     }
   }
   button {
