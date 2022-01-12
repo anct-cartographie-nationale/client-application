@@ -27,10 +27,6 @@ export class StructureOptionsModalComponent implements OnInit {
   public active: boolean;
 
   // Password profile
-  public formPassword: FormGroup;
-  public isShowOldPassword = false;
-  public isShowPassword = false;
-  public isShowConfirmPassword = false;
   public passwordError = false;
 
   // AddAccount
@@ -57,14 +53,6 @@ export class StructureOptionsModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.formPassword = this.formBuilder.group(
-      {
-        oldPassword: ['', [Validators.required, Validators.pattern(CustomRegExp.PASSWORD)]],
-        password: ['', [Validators.required, Validators.pattern(CustomRegExp.PASSWORD)]],
-        confirmPassword: [''],
-      },
-      { validator: MustMatch('password', 'confirmPassword') }
-    );
     this.formEmail = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(CustomRegExp.EMAIL)]],
     });
@@ -86,21 +74,6 @@ export class StructureOptionsModalComponent implements OnInit {
   // getter for form fields
   get fAddAccount(): { [key: string]: AbstractControl } {
     return this.formAddAccount.controls;
-  }
-
-  // getter for form fields
-  get fpass(): { [key: string]: AbstractControl } {
-    return this.formPassword.controls;
-  }
-
-  public showOldPassword(): void {
-    this.isShowOldPassword = !this.isShowOldPassword;
-  }
-  public showPassword(): void {
-    this.isShowPassword = !this.isShowPassword;
-  }
-  public showConfirmPassword(): void {
-    this.isShowConfirmPassword = !this.isShowConfirmPassword;
   }
 
   public closeModalOpts(functionType: number): void {
@@ -138,14 +111,12 @@ export class StructureOptionsModalComponent implements OnInit {
   public closeModalOptsProfile(): void {
     this.editModal = null;
     this.formEmail.reset();
-    this.formPassword.reset();
   }
 
   public closeModalOptsProfileAndRefresh(): void {
     this.editModal = null;
     //this.formAddAccount.reset();
     this.formEmail.reset();
-    this.formPassword.reset();
     this.closedWithRefresh.emit();
   }
 
@@ -178,15 +149,12 @@ export class StructureOptionsModalComponent implements OnInit {
     this.authService.logout();
   }
 
-  public submitPassword(): void {
+  public submitPassword(passwords: string[]): void {
     // stop here if form is invalid
-    if (this.formPassword.invalid) {
-      return;
-    }
-    this.profileService.changePassword(this.formPassword.value.password, this.formPassword.value.oldPassword).subscribe(
+    this.passwordError = false;
+    this.profileService.changePassword(passwords[0], passwords[1]).subscribe(
       () => {
         this.closeModalOptsProfile();
-        this.formPassword.reset();
         this.passwordError = false;
       },
       (error) => {

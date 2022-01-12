@@ -17,9 +17,8 @@
 </nav>
 <div *ngIf="editModal" class="modalBackground">
   <div class="modal" (clickOutside)="closeModalOptsProfile()">
-    <form
+    <div
       *ngIf="editModal == typeModalProfile.password"
-      [formGroup]="formPassword"
       class="contentModal"
       fxLayout="column"
       fxLayoutAlign="center start"
@@ -29,90 +28,9 @@
         <h2>Changer de mot de passe</h2>
         <div class="ico-close-details" (click)="closeModalOptsProfile()"></div>
       </div>
-      <div class="form-group" fxLayout="column" fxLayoutGap="4px">
-        <label for="oldPassword">Ancien mot de passe</label>
-        <p *ngIf="passwordError" class="special invalid">Votre ancien mot de passe est incorrect.</p>
-        <div fxLayout="row" fxLayoutGap="13px">
-          <input
-            [type]="isShowOldPassword ? 'text' : 'password'"
-            formControlName="oldPassword"
-            class="form-input password"
-            autocomplete="on"
-          />
-          <app-svg-icon
-            (click)="showOldPassword()"
-            [type]="'form'"
-            [iconClass]="'grey'"
-            [icon]="'eyePassword'"
-          ></app-svg-icon>
-          <app-svg-icon *ngIf="passwordError" [type]="'form'" [icon]="'notValidate'"></app-svg-icon>
-        </div>
-      </div>
-      <div class="form-group" fxLayout="column">
-        <label for="password">Nouveau mot de passe</label>
-        <p class="special" [ngClass]="{ invalid: fpass.password.invalid && fpass.password.value }">
-          Le mot de passe doit contenir au minimum : 8 caractères dont un caractère spécial, un caractère en majuscule
-          et un chiffre.
-        </p>
-        <div fxLayout="row" fxLayoutGap="13px">
-          <input
-            [type]="isShowPassword ? 'text' : 'password'"
-            formControlName="password"
-            class="form-input password"
-            autocomplete="on"
-          />
-          <app-svg-icon
-            (click)="showPassword()"
-            [type]="'form'"
-            [iconClass]="'grey'"
-            [icon]="'eyePassword'"
-          ></app-svg-icon>
-          <app-svg-icon *ngIf="fpass.password.valid" [type]="'form'" [icon]="'validate'"></app-svg-icon>
-          <app-svg-icon
-            *ngIf="fpass.password.invalid && fpass.password.value"
-            [type]="'form'"
-            [icon]="'notValidate'"
-          ></app-svg-icon>
-        </div>
-      </div>
-      <div class="form-group" fxLayout="column">
-        <label for="confirmPassword">Confirmation du mot de passe</label>
-        <div fxLayout="row" fxLayoutGap="13px">
-          <input
-            [type]="isShowConfirmPassword ? 'text' : 'password'"
-            formControlName="confirmPassword"
-            class="form-input password"
-            autocomplete="on"
-          />
-          <app-svg-icon
-            (click)="showConfirmPassword()"
-            [type]="'form'"
-            [iconClass]="'grey'"
-            [icon]="'eyePassword'"
-          ></app-svg-icon>
-          <app-svg-icon
-            *ngIf="fpass.confirmPassword.valid && fpass.password.value"
-            [type]="'form'"
-            [icon]="'validate'"
-          ></app-svg-icon>
-          <app-svg-icon
-            *ngIf="fpass.confirmPassword.invalid && fpass.confirmPassword.value"
-            [type]="'form'"
-            [icon]="'notValidate'"
-          ></app-svg-icon>
-        </div>
-      </div>
-      <div class="footerModal" fxLayout="row" fxLayoutAlign="center center">
-        <button
-          type="submit"
-          [ngClass]="{ invalid: formPassword.invalid }"
-          class="btn-primary small leave"
-          (click)="submitPassword()"
-        >
-          Valider
-        </button>
-      </div>
-    </form>
+      <app-password-form [oldPasswordNeeded]="true" (passwordForm)="submitPassword($event)"></app-password-form>
+      <p *ngIf="passwordError" class="special invalid">Votre ancien mot de passe est incorrect.</p>
+    </div>
     <form
       *ngIf="editModal == typeModalProfile.email"
       [formGroup]="formEmail"

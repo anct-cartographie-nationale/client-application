@@ -15,6 +15,7 @@ import { ModalConfirmationComponent } from './modal-confirmation/modal-confirmat
 import { StructureOptionsModalComponent } from './structure-options-modal/structure-options-modal.component';
 import { ModalOptionsComponent } from './modal-options/modal-options.component';
 import { TextInputModalComponent } from './text-input-modal/text-input-modal.component';
+import { PasswordFormComponent } from './password-form/password-form.component';
 
 // tslint:disable-next-line: max-line-length
 export {
@@ -35,6 +36,7 @@ export {
   StructureOptionsModalComponent,
   ModalOptionsComponent,
   TextInputModalComponent,
+  PasswordFormComponent,
 };
 
 // tslint:disable-next-line:variable-name
@@ -56,4 +58,5 @@ export const SharedComponents = [
   StructureOptionsModalComponent,
   ModalOptionsComponent,
   TextInputModalComponent,
+  PasswordFormComponent,
 ];
