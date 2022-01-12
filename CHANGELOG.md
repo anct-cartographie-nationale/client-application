@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://forge.grandlyon.com///compare/v1.10.0...v1.11.0) (2022-01-12)
+
+
+### Features
+
+* refactor of reset password and change password ([e90b4a5](https://forge.grandlyon.com///commit/e90b4a5234b33bd6ab2c407c7157876b707a0009))
+* **create-structure:** add alert when structure info is deprecated in structure modification modules ([f03fd00](https://forge.grandlyon.com///commit/f03fd00b0d4e979100ae23177d2386f6550dd02e))
+* **map:** temp remove of france service makers. Use instead default makers ([c6f1a68](https://forge.grandlyon.com///commit/c6f1a68947d9f94ef6c9cde9d47cdc0f9205f626))
+* design refacto for form, pop-up, carto and password-reset ([60337f9](https://forge.grandlyon.com///commit/60337f91071cb501cd80eb9914a564506d1c9a22))
+* **newsletter:** admin can now see newsletter recipients at first loading ([8fa515a](https://forge.grandlyon.com///commit/8fa515acbe59fa0436a8b3017769d27dcbc2386f))
+* add structure description shaping ([f01e39f](https://forge.grandlyon.com///commit/f01e39fbd60cdab1c4b7977102ba0027494f8c0b))
+* **carto:** add 'Conseillers numérique' display on map and code refactor for pin style ([dbddccf](https://forge.grandlyon.com///commit/dbddccf4d66865a28c6ed1e445c2b5f08265a809))
+* handle 0 as default of equipments ([a265f8d](https://forge.grandlyon.com///commit/a265f8de8cf8c86bf23a26523a4d5a49641100b6))
+
+
+### Bug Fixes
+
+* **profile:** update remove user from structure style ([6f56bee](https://forge.grandlyon.com///commit/6f56beec1a2e046e2ad29117021d392b693201b6))
+* **structure-form:** add missing info alert in structure modification categories ([f959d45](https://forge.grandlyon.com///commit/f959d4594140bb9cb7e5e4964c2364379def9a74))
+* **structure-form:** update internet add/remove items text ([d161279](https://forge.grandlyon.com///commit/d1612790d77d6e685f84831f64eaed30b85776f0))
+* add space after ':' ([813fdc0](https://forge.grandlyon.com///commit/813fdc0e1d9b2d1ea24207f6e0b21deef2de272e))
+* borken link un profil for editing structure and .gitlabci rollback ([f3e5884](https://forge.grandlyon.com///commit/f3e5884cb98c8d28802e80b3adeb84f279059bd2))
+* fix create-structure typo ([46a8475](https://forge.grandlyon.com///commit/46a8475deead58480aaac8830a285588e99f1cc6))
+* typo in title tag ([5f51a8f](https://forge.grandlyon.com///commit/5f51a8fa62b9983a5df0768656c1f599f0b4964b))
+* **cicd:** add stop cmd for deploy job ([7c19cd0](https://forge.grandlyon.com///commit/7c19cd089c6104b8551a1cca57a6dd473a1bd616))
+* **news:** fix scroll position when going on an article page ([1a9bd9d](https://forge.grandlyon.com///commit/1a9bd9d63ebf7155eee1a7495a1682e976d14c95))
+
 ## [1.10.0](https://forge.grandlyon.com///compare/v1.9.1...v1.10.0) (2021-12-22)
 
 
