@@ -21,6 +21,8 @@ import { CustomRegExp } from '../../utils/CustomRegExp';
 import { StructureWithOwners } from '../../models/structureWithOwners.model';
 import { RouterListenerService } from '../../services/routerListener.service';
 import { NewsletterService } from '../../services/newsletter.service';
+import { Utils } from '../../utils/utils';
+
 @Component({
   selector: 'app-structure-form',
   templateUrl: './form.component.html',
@@ -90,7 +92,8 @@ export class FormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private routerListener: RouterListenerService,
-    private newsletterService: NewsletterService
+    private newsletterService: NewsletterService,
+    public utils: Utils
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -407,17 +410,6 @@ export class FormComponent implements OnInit {
 
   public getAddressControl(nameControl: string): AbstractControl {
     return this.structureForm.get('address').get(nameControl);
-  }
-
-  public modifyPhoneInput(form: FormGroup, controlName: string, phoneNumber: string): void {
-    // Take length of phone number without spaces.
-    const phoneNoSpace = phoneNumber.replace(/\s/g, '');
-    // Check to refresh every 2 number.
-    if (phoneNoSpace.length % 2 === 0) {
-      // Add space every 2 number
-      form.get(controlName).setValue(phoneNoSpace.replace(/(?!^)(?=(?:\d{2})+$)/g, ' ')); //NOSONAR
-    }
-    this.setValidationsForm();
   }
 
   private createDay(day: Day): FormGroup {
