@@ -8,14 +8,17 @@ import { Post } from '../../models/post.model';
   templateUrl: './post-card.component.html',
   styleUrls: ['./post-card.component.scss'],
 })
-export class PostCardComponent implements OnInit {
+export class PostCardComponent {
   @Input() post: Post;
   @Input() class: string;
   public tagEnum = TagEnum;
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
   public showDetails(post: Post): void {
     this.router.navigateByUrl('news/details/' + post.id, { state: { data: post } });
+  }
+
+  public isAppelAProjet(): boolean {
+    return this.post.tags[0].slug === this.tagEnum.appels;
   }
 }

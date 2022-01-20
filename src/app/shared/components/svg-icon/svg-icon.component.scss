@@ -3,6 +3,10 @@
   display: inline-block;
   height: 2em;
   width: 1.5em;
+  &.icon-full {
+    width: unset;
+    height: unset;
+  }
   &.icon-28 {
     width: 28px;
     height: 28px;

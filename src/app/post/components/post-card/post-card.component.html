@@ -1,34 +1,37 @@
 <div fxLayout="column" *ngIf="post" class="post" [ngClass]="class" fxLayoutGap="12px" (click)="showDetails(post)">
-  <div fxLayout="column" fxLayoutGap="4px">
-    <div
-      fxLayout="row"
-      class="tag"
-      fxLayoutAlign=" center"
-      fxLayoutGap="12px"
-      *ngIf="post.tags[0] && post.tags[0].slug != tagEnum.appels"
-    >
-      <app-svg-icon
-        [iconClass]="'icon-32'"
-        [iconColor]="'inherit'"
-        [type]="'post'"
-        [icon]="post.tags[0].slug"
-      ></app-svg-icon>
+  <div fxLayout="column" class="imageContainer" *ngIf="post.feature_image">
+    <img class="image" alt="image about the news" [src]="post.feature_image" />
+  </div>
+  <div fxLayout="column" class="imageContainer" *ngIf="!post.feature_image">
+    <img
+      *ngIf="isAppelAProjet()"
+      class="image"
+      alt="image about appels a projets"
+      src="../../../../assets/post/aap.png"
+    />
+    <img
+      *ngIf="!isAppelAProjet()"
+      class="image"
+      alt="image about appels a projets"
+      src="../../../../assets/post/placeholder.png"
+    />
+  </div>
+  <div fxLayout="column" fxLayoutGap="8px" fxLayoutAlign="center">
+    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="post.tags[0]">
       <span>{{ post.tags[0].name }}</span>
     </div>
-    <div fxLayout="row" class="imageContainer" *ngIf="post.feature_image">
-      <img class="image" alt="image about the news" [src]="post.feature_image" />
+    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="!post.tags[0]">
+      <span>info</span>
     </div>
+
     <div fxLayout="row" class="title">
       {{ post.title }}
     </div>
-  </div>
-  <div fxLayout="row" class="description">
-    {{ post.excerpt }}
-  </div>
-  <div fxLayout="column" class="informations">
-    <div fxLayout="row">
-      {{ post.updated_at | date: 'shortDate' }}
+    <div fxLayout="column" class="informations">
+      <div>{{ post.author }}</div>
+      <div>
+        {{ post.updated_at | date: 'dd MMM y' }}
+      </div>
     </div>
-    <div fxLayout="row">par {{ post.author }}</div>
   </div>
 </div>

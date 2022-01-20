@@ -7,7 +7,7 @@
 $margin-post: 20px;
 
 .postContainer {
-  max-width: 860px;
+  max-width: 1200px;
   margin: $margin-post 0;
   min-height: calc(
     var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post} * 3
@@ -17,14 +17,6 @@ $margin-post: 20px;
     width: 24px;
     stroke: $black;
     margin-right: 10px;
-  }
-  .backLink {
-    cursor: pointer;
-    color: $grey-2;
-    @include cn-bold-16;
-    &:hover {
-      opacity: 0.4;
-    }
   }
 }
 .tag {
@@ -37,25 +29,19 @@ $margin-post: 20px;
 .title {
   @include cn-bold-30;
   color: $grey-1;
+  margin-bottom: 8px;
 }
 .informations {
   @include cn-regular-16;
-  color: $grey-3;
-  font-style: italic;
-}
-.imageContainer {
-  .image {
-    object-fit: cover;
-    height: 360px;
-    width: 80%;
-    @media #{$large-phone} {
-      height: 147px;
-    }
+  div:nth-child(2n) {
+    text-transform: uppercase;
+    color: $grey-3;
   }
 }
+
 .description {
   div {
-    width: 80%;
+    max-width: 860px;
     line-height: 180%;
   }
   ::ng-deep hr {
@@ -99,10 +85,12 @@ $margin-post: 20px;
     padding: 0;
   }
   ::ng-deep p {
-    @include cn-regular-16;
+    @include cn-regular-20;
+    line-height: 1.6em;
   }
   ::ng-deep li {
-    @include cn-regular-16;
+    @include cn-regular-20;
+    line-height: 1.6em;
     margin-bottom: 10px;
   }
   ::ng-deep h2 {
@@ -196,5 +184,28 @@ $margin-post: 20px;
         }
       }
     }
+  }
+}
+
+.gh-canvas {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(4vmin, auto) [wide-start] minmax(auto, 240px) [main-start] min(720px, calc(100% - 8vw))
+    [main-end] minmax(auto, 240px) [wide-end] minmax(4vmin, auto) [full-end];
+}
+
+.gh-canvas > * {
+  grid-column: main-start/main-end;
+}
+
+.gh-canvas .article-image {
+  grid-column: wide-start/wide-end;
+  width: 100%;
+  margin: 6vmin 0 0;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
   }
 }
