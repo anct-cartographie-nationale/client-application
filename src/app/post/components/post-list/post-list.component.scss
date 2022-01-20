@@ -84,7 +84,7 @@ h2 {
     @media #{$news-max} {
       ::ng-deep .post .imageContainer .image {
         height: unset;
-        max-height: unset;
+        max-height: 320px;
       }
     }
   }

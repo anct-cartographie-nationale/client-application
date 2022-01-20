@@ -38,9 +38,13 @@ export class PostDetailsComponent implements OnInit {
     this.routerListener.goToPreviousUrl();
   }
 
+  /**
+   * Reset scroll to top for article reading
+   */
   private resetScroll(): void {
-    if (window.scrollY) {
-      window.scroll(0, 0); // reset the scroll position to the top left of the document.
+    const classElement = document.getElementsByClassName('header-container');
+    if (classElement.length > 0) {
+      classElement[0].scrollIntoView();
     }
   }
 }
