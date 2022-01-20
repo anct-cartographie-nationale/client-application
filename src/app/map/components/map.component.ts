@@ -7,7 +7,6 @@ import * as _ from 'lodash';
 import { GeoJsonProperties } from '../models/geoJsonProperties.model';
 import { MarkerType } from './markerType.enum';
 import metropole from '../../../assets/geojson/metropole.json';
-import brignais from '../../../assets/geojson/brignais.json';
 import L from 'leaflet';
 import 'leaflet.locatecontrol';
 
@@ -295,7 +294,6 @@ export class MapComponent implements OnChanges {
           )
           .addTo(this.map);
       });
-      this.initBrignaisLayer();
       this.initMetropoleLayer();
     });
   }
@@ -306,18 +304,6 @@ export class MapComponent implements OnChanges {
     const markerBounds = latLngBounds(latLngs);
     // paddingTopLeft is used for centering marker because of structure details pane
     this.map.fitBounds(markerBounds, { paddingTopLeft: [300, 0] });
-  }
-
-  private initBrignaisLayer(): void {
-    this.map.addLayer(
-      geoJSON(
-        {
-          type: brignais.features[0].geometry.type,
-          coordinates: brignais.features[0].geometry.coordinates,
-        } as any,
-        { style: () => ({ color: '#a00000', fillOpacity: 0, weight: 1 }) }
-      )
-    );
   }
 
   private initMetropoleLayer(): void {
