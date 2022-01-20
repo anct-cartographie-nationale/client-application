@@ -88,6 +88,12 @@ a {
     margin-bottom: 1rem;
     width: unset;
   }
+  &.news {
+    max-width: 1080px;
+  }
+  &.no-padding {
+    padding: 0;
+  }
 }
 
 /** Buttons **/
@@ -278,6 +284,16 @@ button {
   margin: 0 !important;
 }
 
+.backLink {
+  cursor: pointer;
+  color: $grey-2;
+  margin-bottom: 40px;
+  @include cn-bold-16;
+  &:hover {
+    opacity: 0.4;
+  }
+}
+
 .userList {
   max-width: 50%;
 }
@@ -300,4 +316,10 @@ button {
   background: $grey;
   color: $white;
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.6);
+}
+
+.hide-on-mobile {
+  @media #{$tablet} {
+    display: none !important;
+  }
 }

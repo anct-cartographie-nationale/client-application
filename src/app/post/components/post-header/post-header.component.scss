@@ -5,8 +5,6 @@
 @import '../../../../assets/scss/layout';
 
 h1 {
-  margin-top: 25px;
-  margin-bottom: 0px;
   .onlyOnDesktop {
     margin: 0;
   }
@@ -19,11 +17,19 @@ h1 {
 }
 
 .header-container {
-  height: #{$header-post-height};
-  @media #{$large-phone} {
-    height: #{$header-post-height-mobile};
-  }
   background: $white;
+  .title {
+    margin: 32px 0;
+    width: 100%;
+  }
+  .subtitle {
+    @include cn-regular-24;
+    color: $grey-3;
+
+    @media #{$large-phone} {
+      @include cn-regular-18;
+    }
+  }
 }
 
 .section-container {
@@ -97,11 +103,14 @@ h1 {
 .tag-button {
   padding: 8px 10px;
   @include cn-regular-16;
+  color: $grey-3;
   cursor: pointer;
   white-space: nowrap;
   &.active {
-    background-color: $secondary-color;
-    color: $white;
+    @include cn-bold-16;
+    color: $grey-2;
+    text-decoration: underline $button-secondary;
+    text-underline-offset: 3px;
   }
   &:focus {
     outline-color: $secondary-color;
@@ -115,7 +124,6 @@ h1 {
 
 .row-mobile {
   @media #{$tablet} {
-    width: 100%;
     justify-content: space-between;
   }
 }
@@ -123,4 +131,8 @@ h1 {
   @media #{$tablet} {
     overflow-x: auto;
   }
+}
+
+.publish-button {
+  white-space: nowrap;
 }

@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Tag } from '../../models/tag.model';
 import { TagWithMeta } from '../../models/tagWithMeta.model';
 import { TypeModalNews } from '../../enum/typeModalNews.enum';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TagEnum } from '../../enum/tag.enum';
 import { parseSlugToTag } from '../utils/NewsUtils';
-
 @Component({
   selector: 'app-post-header',
   templateUrl: './post-header.component.html',
@@ -19,13 +18,13 @@ export class PostHeaderComponent implements OnInit {
 
   public checkedPublicTags: Tag[] = [];
   public checkedLocationTags: Tag[] = [];
-
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       if (data.tags) {
         this.tags = data.tags;
+        // this.tags = data.tags.filter((tag) => tag.slug === TagEnum.aLaUne);
         this.tags.others.forEach((tag) => {
           if (tag.slug == TagEnum.aLaUne) {
             tag.name = 'Les + récentes';
@@ -111,11 +110,22 @@ export class PostHeaderComponent implements OnInit {
     this.router.navigate(['/news'], {
       relativeTo: this.route,
       queryParams: {
-        mainTag: this.mainActiveTag.slug == this.tagEnum.etudes ? this.mainActiveTag.name : this.mainActiveTag.slug,
+        mainTag: this.getMainTag(),
         publicTags: this.checkedPublicTags.map((tag) => tag.slug),
         locationTags: this.checkedLocationTags.map((tag) => tag.slug),
       },
       queryParamsHandling: 'merge',
     });
+  }
+
+  public getMainTag(): string {
+    if (this.mainActiveTag.slug === TagEnum.aLaUne) {
+      return '';
+    }
+    return this.mainActiveTag.slug == this.tagEnum.etudes ? this.mainActiveTag.name : this.mainActiveTag.slug;
+  }
+
+  public togglePublishNews(): void {
+    this.router.navigate(['publish'], { relativeTo: this.route });
   }
 }

@@ -20,10 +20,9 @@ export class PostListComponent implements OnInit {
   public selectedLocationTagSlug = [];
   public selectedPublicTagsSlug = [];
   public filters: Tag[];
-  public postsMobileView: Post[] = [];
+  public allPosts: Post[] = [];
   public leftColumnPosts: Post[] = [];
   public rightColumnPosts: Post[] = [];
-  public projectsNew: Post[] = [];
   public bigNews: Post;
   public pagination: Pagination;
   public isLoading = false;
@@ -47,10 +46,6 @@ export class PostListComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     // Init APP news list
-    this.postService.getPosts(1, [TagEnum.appels]).subscribe((news) => {
-      let projectNews = news.posts.map((newsData) => this.addAuthorToPost(newsData));
-      this.projectsNew = projectNews;
-    });
     this.postService.getPosts(1, [TagEnum.aLaUne]).subscribe((news) => {
       if (news.posts[0]) {
         this.bigNews = this.addAuthorToPost(news.posts[0]);
@@ -75,25 +70,18 @@ export class PostListComponent implements OnInit {
         // Init default news list
         this.postService.getPosts(1).subscribe((news) => {
           this.setNews(news);
+          this.allPosts.unshift(this.bigNews);
         });
       }
     });
   }
 
-  public togglePublishNews(): void {
-    this.isPublishMode = !this.isPublishMode;
-  }
   public getPosts(filters?: Tag[]): void {
     // Parse filter
     let parsedFilters = null;
     if (filters) {
       parsedFilters = filters.map((filter) => {
         return filter.slug;
-      });
-
-      // remove 'a la une' filter
-      parsedFilters = parsedFilters.filter((item) => {
-        return item !== TagEnum.aLaUne;
       });
 
       if (parsedFilters.length <= 0) {
@@ -104,6 +92,7 @@ export class PostListComponent implements OnInit {
     // Reset posts
     this.resetPosts();
 
+    this.isLoading = true;
     this.postService.getPosts(1, parsedFilters).subscribe((news) => {
       this.setNews(news);
     });
@@ -126,7 +115,7 @@ export class PostListComponent implements OnInit {
   public resetPosts(): void {
     this.leftColumnPosts = [];
     this.rightColumnPosts = [];
-    this.postsMobileView = [];
+    this.allPosts = [];
   }
 
   public publishNews(): void {}
@@ -150,22 +139,12 @@ export class PostListComponent implements OnInit {
 
   // Split news on two columns on desktop mode or one column in mobile mode.
   private setNews(news: PostWithMeta): void {
-    if (this.bigNews) {
-      news.posts = news.posts.filter((elem) => {
-        return elem.id != this.bigNews.id;
-      });
-    }
     this.pagination = news.meta.pagination;
-    const customIndex = this.postsMobileView.length; // For scroll loading, start with previous index.
-    news.posts.forEach((val, index) => {
+    const customIndex = this.allPosts.length; // For scroll loading, start with previous index.
+    this.allPosts = news.posts.map((val, index) => {
       val = this.addAuthorToPost(val);
       index += customIndex;
-      if (index % 2 == 0) {
-        this.leftColumnPosts.push(val);
-      } else {
-        this.rightColumnPosts.push(val);
-      }
-      this.postsMobileView.push(val);
+      return val;
     });
     this.isLoading = false;
   }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 import { PostListComponent } from './components/post-list/post-list.component';
+import { PostPublishComponent } from './components/post-publish/post-publish.component';
 import { NewsComponent } from './news.component';
 import { TagResolver } from './resolvers/tags.resolver';
 
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'details/:id',
         component: PostDetailsComponent,
+      },
+      {
+        path: 'publish',
+        component: PostPublishComponent,
       },
     ],
   },

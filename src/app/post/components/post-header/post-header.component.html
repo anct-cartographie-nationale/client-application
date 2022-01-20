@@ -1,9 +1,12 @@
 <div class="header-container">
-  <div class="section-container" fxLayout="column" fxLayoutAlign="space-between">
-    <h1>
-      Fil d’actualité
-      <p class="onlyOnDesktop">du réseau d’inclusion numérique</p>
-    </h1>
+  <div class="section-container news" fxLayout="column" fxLayoutAlign="space-between">
+    <div class="section-container title" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+      <app-svg-icon class="icon" [type]="'ico'" [iconClass]="'icon-80'" [icon]="'news-header'"></app-svg-icon>
+      <div>
+        <h1 class="no-margin">Fil d’actualité</h1>
+        <p class="subtitle no-margin onlyOnDesktop">du réseau d’inclusion numérique</p>
+      </div>
+    </div>
     <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between flex-end" class="overflow">
       <div fxLayout="row" class="row-mobile">
         <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let tag of tags.others">
@@ -17,7 +20,16 @@
           >
         </div>
       </div>
-      <div
+      <div fxLayout="row" class="row-mobile">
+        <app-button
+          class="publish-button hide-on-mobile"
+          [type]="'button'"
+          [style]="'buttonWithHash'"
+          [text]="'Publier votre actu'"
+          (action)="togglePublishNews()"
+        ></app-button>
+      </div>
+      <!-- <div
         class="btnSection"
         fxLayout="row"
         fxLayoutAlign="space-between center"
@@ -74,7 +86,7 @@
             (closeEvent)="closeModal()"
           ></app-post-modal-filters>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

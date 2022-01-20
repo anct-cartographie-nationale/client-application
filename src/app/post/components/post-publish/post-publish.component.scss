@@ -17,14 +17,7 @@ $margin-post: 20px;
   stroke: $black;
   margin-right: 10px;
 }
-.backLink {
-  cursor: pointer;
-  color: $grey-2;
-  @include cn-bold-16;
-  &:hover {
-    opacity: 0.4;
-  }
-}
+
 .content {
   color: $grey-1;
   h2 {

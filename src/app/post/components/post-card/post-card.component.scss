@@ -5,36 +5,11 @@
 .post {
   cursor: pointer;
   padding: 16px 0px;
-  border-bottom: 1px dashed $grey-3;
-  &.bigNew {
-    border: 0;
-    .imageContainer {
-      .image {
-        object-fit: cover;
-        height: 360px;
-        width: 100%;
-        @media #{$large-phone} {
-          height: 147px;
-        }
-      }
-    }
-    .title {
-      @media #{$large-phone} {
-        @include cn-bold-22;
-      }
-      @include cn-bold-30;
-    }
-    .description {
-      @include cn-regular-18;
-      color: $grey-1;
-    }
-  }
   .imageContainer {
     margin-bottom: 12px !important;
+    max-width: 600px;
     .image {
       object-fit: cover;
-      max-height: 180px;
-      max-width: 90%;
       @media #{$large-phone} {
         height: 70px;
       }
@@ -51,7 +26,7 @@
     @media #{$large-phone} {
       @include cn-bold-18;
     }
-    @include cn-bold-20;
+    @include cn-bold-22;
     color: $grey-1;
   }
   .description {
@@ -68,8 +43,10 @@
   }
   .informations {
     @include cn-regular-16;
-    color: $grey-3;
-    font-style: italic;
+    div:nth-child(2n) {
+      text-transform: uppercase;
+      color: $grey-3;
+    }
   }
 }
 .project {
