@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 import { FormComponent } from './form/structure-form/form.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
   },
   {
     path: 'users/verify/:id',

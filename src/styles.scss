@@ -10,6 +10,7 @@
 @import 'assets/scss/layout';
 @import 'assets/scss/buttons';
 @import '../node_modules/leaflet.locatecontrol/dist/L.Control.Locate.css';
+@import '~ngx-toastr/toastr';
 
 html {
   height: -webkit-fill-available;
@@ -90,6 +91,36 @@ a {
   }
 }
 
+// Forms
+.form-group {
+  margin-bottom: 26px;
+  label {
+    color: $grey-2;
+  }
+}
+form p.notRequired {
+  margin-top: 0px;
+  font-style: italic;
+  color: $secondary-color;
+}
+
+/** Inputs **/
+input {
+  margin-top: 4px;
+}
+
+/** Textarea **/
+.textareaBlock {
+  textarea {
+    padding: 13px 8px;
+    background: $grey-6;
+    border: 1px solid $grey-4;
+    border-radius: $input-radius;
+    resize: none;
+    @include cn-regular-16;
+  }
+}
+
 /** Buttons **/
 button {
   &:focus {
@@ -98,7 +129,6 @@ button {
 }
 
 /** Checkboxes **/
-
 .checkbox {
   list-style-type: none;
   width: 100%;

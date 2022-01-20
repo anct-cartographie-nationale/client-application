@@ -1,6 +1,8 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -19,6 +21,7 @@ import { StructureOpeningStatusComponent } from './structure-list/components/str
 import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 import { FormComponent } from './form/structure-form/form.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -53,6 +56,7 @@ import { RoleGuard } from './guards/role.guard';
     StructureOpeningStatusComponent,
     LegalNoticeComponent,
     AboutComponent,
+    ContactComponent,
     UserVerificationComponent,
     ResetEmailComponent,
     ResetPasswordComponent,
@@ -65,7 +69,7 @@ import { RoleGuard } from './guards/role.guard';
     StructureListPrintComponent,
     StructurePrintHeaderComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, BrowserAnimationsModule, ToastrModule.forRoot()],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },

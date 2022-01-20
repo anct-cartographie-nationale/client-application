@@ -1,0 +1,125 @@
+<div fxLayout="column" class="form content-container full-screen">
+  <div class="section-container">
+    <div class="contactForm">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <div class="form-fields">
+          <h2>Nous contacter</h2>
+          <div class="form-group">
+            <label for="name">Prénom et Nom</label>
+            <div fxLayout="row" fxLayoutGap="15px">
+              <input type="text" autocomplete="on" formControlName="name" class="form-input" />
+              <app-svg-icon
+                *ngIf="contactForm.get('name').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="contactForm.get('name').value && !contactForm.get('name').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Adresse mail</label>
+            <div fxLayout="row" fxLayoutGap="15px">
+              <input type="text" autocomplete="on" formControlName="email" class="form-input" />
+              <app-svg-icon
+                *ngIf="contactForm.get('email').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="contactForm.get('email').value && !contactForm.get('email').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">N° de téléphone</label>
+            <p class="notRequired">facultatif</p>
+            <div fxLayout="row" fxLayoutGap="15px">
+              <input
+                type="text"
+                autocomplete="on"
+                formControlName="phone"
+                class="form-input phone"
+                (input)="utils.modifyPhoneInput(contactForm, 'phone', $event.target.value)"
+              />
+              <app-svg-icon
+                *ngIf="contactForm.get('phone').value && contactForm.get('phone').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="contactForm.get('phone').value && !contactForm.get('phone').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Objet du message</label>
+            <div fxLayout="row" fxLayoutGap="15px">
+              <input type="text" maxlength="100" formControlName="subject" class="form-input subject" />
+              <app-svg-icon
+                *ngIf="contactForm.get('subject').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="contactForm.get('subject').value && !contactForm.get('subject').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+            </div>
+          </div>
+
+          <div class="form-group" fx-layout="column">
+            <label for="message">Message</label>
+            <div class="textareaBlock" fxLayout="row" fxLayoutGap="15px">
+              <textarea
+                rows="8"
+                placeholder="Exemple : J'aimerais avoir de l'aide sur Rés'IN."
+                maxlength="500"
+                formControlName="message"
+              ></textarea>
+              <app-svg-icon
+                *ngIf="contactForm.get('message').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'validate'"
+              ></app-svg-icon>
+              <app-svg-icon
+                *ngIf="contactForm.get('message').value && !contactForm.get('message').valid"
+                [iconClass]="'validation'"
+                [type]="'form'"
+                [icon]="'notValidate'"
+              ></app-svg-icon>
+            </div>
+            <p>{{ contactForm.get('message').value ? contactForm.get('message').value.length : 0 }}/500</p>
+          </div>
+        </div>
+        <div class="button" fxLayout="row" fxLayoutAlign="center center">
+          <a routerLink="../home" class="btn btn-link">Annuler</a>
+          <button type="submit" class="btn btn-primary" [ngClass]="{ invalid: !contactForm.valid || loading }">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Envoyer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -191,11 +191,6 @@ h4 {
         color: $orange-warning;
       }
     }
-    &.notRequired {
-      margin-top: 0px;
-      font-style: italic;
-      color: $secondary-color;
-    }
     &.informationEndForm {
       margin-top: 18px;
       color: $grey-2;
@@ -205,14 +200,6 @@ h4 {
   .textareaBlock {
     @media #{$tablet} {
       max-width: 90%;
-    }
-    textarea {
-      padding: 13px 8px;
-      background: $grey-6;
-      border: 1px solid $grey-4;
-      border-radius: 1px;
-      resize: none;
-      @include cn-regular-16;
     }
     p {
       text-align: right;
@@ -275,10 +262,6 @@ h4 {
   }
 }
 .form-group {
-  margin-bottom: 26px;
-  label {
-    color: $grey-2;
-  }
   &.facebook,
   &.twitter,
   &.instagram,
@@ -321,8 +304,8 @@ h4 {
     }
   }
 }
+
 input {
-  margin-top: 4px;
   &.email-placeholder::placeholder {
     color: #cacccb;
     font-style: italic;

@@ -46,6 +46,14 @@ export class AuthService {
     return `${this.userValue.name}`;
   }
 
+  public getUsersurnameDisplay(): string {
+    return `${this.userValue.surname}`;
+  }
+
+  public getUserEmailDisplay(): string {
+    return `${this.userValue.username}`;
+  }
+
   private getExpiration(): DateTime {
     return DateTime.fromISO(this.userValue.expiresAt, { zone: 'Europe/Paris' });
   }
