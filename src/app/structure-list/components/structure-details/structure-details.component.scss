@@ -18,13 +18,14 @@ a {
   left: 0;
   max-width: 980px;
   width: 100%;
-  height: calc(100vh - #{$header-height} - #{$footer-height} - 20px);
-  padding: 10px 24px;
+  height: calc(100vh - #{$header-height} - #{$footer-height});
+  padding: 0px 24px;
   overflow: auto;
   @media #{$tablet} {
     width: calc(100% - 2 * 24px);
     position: inherit;
     height: 100%;
+    overflow: unset;
     .printButton {
       display: none !important;
     }
@@ -130,4 +131,24 @@ p,
   display: grid;
   gap: 20px 30px;
   grid-template-columns: 1fr 1fr;
+}
+.ico-close {
+  margin-left: auto;
+  padding-top: 10px;
+}
+.sticky-title {
+  position: sticky;
+  top: 0px;
+  max-width: 980px;
+  width: 100%;
+  background-color: $white;
+  height: 80px;
+  z-index: 1;
+  @media #{$tablet} {
+    height: auto;
+  }
+  @media #{$small-phone} {
+    width: 111%;
+    padding-right: 20px;
+  }
 }

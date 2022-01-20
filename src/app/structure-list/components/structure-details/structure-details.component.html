@@ -1,13 +1,15 @@
 <div class="structrue-details-container" *ngIf="structure && !isLoading">
   <!-- Header info -->
-  <div fxLayout="row" fxLayoutAlign="end center">
-    <div (click)="close()" class="ico-close-details"></div>
+  <div fxLayout="space-between wrap-reverse" class="sticky-title">
+    <div fxLayout="column" class="no-margin" fxLayoutAlign="end end">
+      <h2 class="bold">{{ structure.structureName }}</h2>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="start start" class="ico-close">
+      <div (click)="close()" class="ico-close-details"></div>
+    </div>
   </div>
   <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="8px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
-      <div fxLayout="column" class="no-margin" fxLayoutAlign="space-between start">
-        <h2 class="bold">{{ structure.structureName }}</h2>
-      </div>
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <div class="typeInformationHeader" fxLayout="column">
           <h3>{{ structure.getLabelTypeStructure() }}</h3>
