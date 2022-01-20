@@ -69,7 +69,15 @@ import { RoleGuard } from './guards/role.guard';
     StructureListPrintComponent,
     StructurePrintHeaderComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule, MapModule, BrowserAnimationsModule, ToastrModule.forRoot()],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    SharedModule,
+    MapModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+  ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true },

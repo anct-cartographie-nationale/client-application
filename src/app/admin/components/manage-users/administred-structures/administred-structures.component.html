@@ -1,0 +1,5 @@
+<div id="structure-list" *ngIf="structures.data.structures && structures.data.structures.length != 0">
+  <p *ngFor="let structure of structures.data.structures">
+    <a href="/acteurs?id={{ structure._id }}" target="_blank">{{ structure.structureName }}</a>
+  </p>
+</div>

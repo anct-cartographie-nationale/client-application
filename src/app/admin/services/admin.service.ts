@@ -29,6 +29,18 @@ export class AdminService {
     return this.http.get<User[]>(`api/admin/searchUsers`);
   }
 
+  public getAttachedUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`api/admin/getAttachedUsers`);
+  }
+
+  public getUnAttachedUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`api/admin/getUnAttachedUsers`);
+  }
+
+  public getUnVerifiedUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`api/admin/getUnVerifiedUsers`);
+  }
+
   public searchUsers(searchString: string): Observable<User[]> {
     return this.http.post<User[]>(`${this.baseUrl}/searchUsers`, { searchString });
   }

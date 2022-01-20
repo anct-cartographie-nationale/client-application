@@ -2,11 +2,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
-import { DeleteUserComponent } from './delete-user.component';
+import { ManageUsersComponent } from './manage-users.component';
 
-describe('DeleteUserComponent', () => {
-  let component: DeleteUserComponent;
-  let fixture: ComponentFixture<DeleteUserComponent>;
+describe('ManageUsersComponent', () => {
+  let component: ManageUsersComponent;
+  let fixture: ComponentFixture<ManageUsersComponent>;
   let USERS;
   let service;
 
@@ -18,17 +18,17 @@ describe('DeleteUserComponent', () => {
     ];
     await TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      declarations: [DeleteUserComponent],
+      declarations: [ManageUsersComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeleteUserComponent);
+    fixture = TestBed.createComponent(ManageUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    service = jasmine.createSpyObj(['searchUsers', 'deleteUser']);
-    component = new DeleteUserComponent(service);
+    service = jasmine.createSpyObj(['searchUsers', 'manageUsers']);
+    component = new ManageUsersComponent(service, null);
   });
 
   it('should create', () => {
@@ -61,7 +61,7 @@ describe('DeleteUserComponent', () => {
         )
       )
     );
-    component.deleteUser(component.users[0]);
+    component.deleteUser(component.users[0], true);
     expect(component.users.length).toBe(2);
   });
 });
