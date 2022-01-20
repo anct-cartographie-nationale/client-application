@@ -19,18 +19,14 @@ export class AddressAutocompleteComponent implements OnInit {
   constructor(private addressService: AddressService) {}
 
   ngOnInit(): void {
-    if (this.address) {
-      let address_str = null;
-      if (this.address.numero) {
-        address_str = this.address.numero + ' ' + this.address.street + ' ' + this.address.commune;
-      } else {
-        address_str = this.address.street + ' ' + this.address.commune;
-      }
-      this.searchAddress.nativeElement.value = address_str;
-    }
+    this.lauchSearch();
   }
 
   ngOnChanges(): void {
+    this.lauchSearch();
+  }
+
+  public lauchSearch(): void {
     if (this.address) {
       let address_str = null;
       if (this.address.numero) {
@@ -46,7 +42,12 @@ export class AddressAutocompleteComponent implements OnInit {
     if (!this.isAlreadySearching) {
       this.isAlreadySearching = true;
       this.addressService.searchAddress(searchString).subscribe((data) => {
-        this.data = data.features;
+        data.features = data.features.map((el) => {
+          el.displayedName = this.parseHitToAddress(el);
+          return el;
+        });
+        // Filtering duplicate displayed string. This duplication is caused by the API used for gathering addresse info.
+        this.data = [...new Map(data.features.map((item) => [item['displayedName'], item])).values()];
         this.isAlreadySearching = false;
       });
     }
@@ -67,10 +68,17 @@ export class AddressAutocompleteComponent implements OnInit {
     this.selectedAddress.emit(address);
   }
 
-  public parseHitToAddress(hit: any): string {
+  private parseHitToAddress(hit: any): string {
+    let parsedAddress = '';
     if (hit.properties.housenumber) {
-      return `${hit.properties.housenumber} ${hit.properties.street} ${hit.properties.city}`;
+      parsedAddress += `${hit.properties.housenumber} `;
     }
-    return `${hit.properties.street} ${hit.properties.city}`;
+    if (hit.properties.street) {
+      parsedAddress += `${hit.properties.street}, `;
+    } else {
+      parsedAddress += `${hit.properties.name}, `;
+    }
+    parsedAddress += `${hit.properties.city}`;
+    return parsedAddress;
   }
 }
