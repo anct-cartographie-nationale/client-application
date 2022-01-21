@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { ProfileService } from './profile/services/profile.service';
 import { AuthService } from './services/auth.service';
 import { RouterListenerService } from './services/routerListener.service';
@@ -10,7 +11,7 @@ import { WindowScrollService } from './shared/service/windowScroll.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'pamn';
 
   constructor(
@@ -18,7 +19,8 @@ export class AppComponent {
     private authService: AuthService,
     private profilService: ProfileService,
     private windowScrollService: WindowScrollService,
-    private routerListener: RouterListenerService
+    private routerListener: RouterListenerService,
+    private router: Router
   ) {
     if (this.authService.isLoggedIn()) {
       this.profilService.getProfile();
@@ -28,6 +30,18 @@ export class AppComponent {
       this.setHeightApp();
     });
     this.routerListener.loadRouting();
+  }
+
+  ngOnInit(): void {
+    /**
+     * Reset scroll to top for article reading
+     */
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      document.getElementsByClassName('app-body')[0].scrollTo(0, 0);
+    });
   }
 
   private setHeightApp(): void {

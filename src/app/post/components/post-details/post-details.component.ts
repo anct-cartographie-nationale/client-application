@@ -21,7 +21,6 @@ export class PostDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.resetScroll();
     if (history.state.data) {
       this.post = new Post(history.state.data);
       this.post.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.post.html);
@@ -36,15 +35,5 @@ export class PostDetailsComponent implements OnInit {
 
   public backToPosts(): void {
     this.routerListener.goToPreviousUrl();
-  }
-
-  /**
-   * Reset scroll to top for article reading
-   */
-  private resetScroll(): void {
-    const classElement = document.getElementsByClassName('header-container');
-    if (classElement.length > 0) {
-      classElement[0].scrollIntoView();
-    }
   }
 }
