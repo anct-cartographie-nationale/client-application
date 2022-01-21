@@ -34,7 +34,6 @@ $margin-post: 20px;
 .informations {
   @include cn-regular-16;
   div:nth-child(2n) {
-    text-transform: uppercase;
     color: $grey-3;
   }
 }
@@ -201,7 +200,7 @@ $margin-post: 20px;
 .gh-canvas .article-image {
   grid-column: wide-start/wide-end;
   width: 100%;
-  margin: 6vmin 0 0;
+  margin: 4vmin 0 0;
   img {
     display: block;
     margin-left: auto;

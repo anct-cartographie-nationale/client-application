@@ -44,7 +44,6 @@
   .informations {
     @include cn-regular-16;
     div:nth-child(2n) {
-      text-transform: uppercase;
       color: $grey-3;
     }
   }

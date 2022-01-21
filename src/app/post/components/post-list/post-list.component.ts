@@ -21,9 +21,6 @@ export class PostListComponent implements OnInit {
   public selectedPublicTagsSlug = [];
   public filters: Tag[];
   public allPosts: Post[] = [];
-  public leftColumnPosts: Post[] = [];
-  public rightColumnPosts: Post[] = [];
-  public bigNews: Post;
   public pagination: Pagination;
   public isLoading = false;
   public isPublishMode = false;
@@ -46,11 +43,6 @@ export class PostListComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     // Init APP news list
-    this.postService.getPosts(1, [TagEnum.aLaUne]).subscribe((news) => {
-      if (news.posts[0]) {
-        this.bigNews = this.addAuthorToPost(news.posts[0]);
-      }
-    });
     this.route.queryParams.subscribe((queryParams) => {
       this.isPublishMode = false;
       // If main tag is in route, set it
@@ -70,7 +62,8 @@ export class PostListComponent implements OnInit {
         // Init default news list
         this.postService.getPosts(1).subscribe((news) => {
           this.setNews(news);
-          this.allPosts.unshift(this.bigNews);
+          const headLineTag = this.allPosts.find((post: Post) => post.tags.some((tag) => tag.slug === TagEnum.aLaUne));
+          this.allPosts.unshift(headLineTag);
         });
       }
     });
@@ -113,14 +106,10 @@ export class PostListComponent implements OnInit {
   }
 
   public resetPosts(): void {
-    this.leftColumnPosts = [];
-    this.rightColumnPosts = [];
     this.allPosts = [];
   }
 
-  public publishNews(): void {}
-
-  //Transform excerpt post to have a custom author.
+  // Transform excerpt post to have a custom author.
   private addAuthorToPost(post: Post): Post {
     post.author = post.excerpt;
     post.excerpt = post.html.replace(/<[^>]*>/g, '');
