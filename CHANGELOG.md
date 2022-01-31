@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://forge.grandlyon.com///compare/v1.11.0...v1.11.1) (2022-01-31)
+
+
+### Bug Fixes
+
+* **carto:** remove of 'Conseillers numérique' checkbox ([e4594b3](https://forge.grandlyon.com///commit/e4594b31640673401c762dca6a0e0892e4f7440c))
+
 ## [1.11.0](https://forge.grandlyon.com///compare/v1.10.0...v1.11.0) (2022-01-12)
 
 
