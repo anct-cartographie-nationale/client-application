@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.12.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.11.1...v1.12.0) (2022-02-01)
+
+
+### Features
+
+* **contact:** Add a contact form ([ecfa689](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/ecfa68943176727234e531d58e556bb9283ff54a))
+* **news:** redesign of news page, filter system on tag as 'Allophone'... is now disabled for display.  ([de858d8](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/de858d864cc79ff6ca160c5bb6def2490b6a5003))
+* **structure:** change addresse api in order to cover the all department. Filtering duplicated addresses in order to dispaly one occurence for user. Brignais is now removed from carto. ([17e97fd](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/17e97fdb4571ffa2dfb55f59e761a12ac00e2299))
+* **stucture-details:** sticky close button and structure name ([6ddb95d](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/6ddb95d2a4e491b17b7c2641cf8be07e7c8b6e79))
+* **user-management:** add table with all users in admin user management page ([461fed5](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/461fed507396b5d988faae9bd0e3171633197e2e))
+* **version:** Display app version ([3c5f554](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/3c5f554b0a00de8e2dfef0cb76b76ed30d090036))
+
+
+### Bug Fixes
+
+* better handling of scroll reset inside the app in case of navigation ([560955b](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/560955bb189a879e0095f9e3cb0e6d7a1d21fd4e))
+* **heder:** logo position was not centered perfectly ([391e4d4](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/391e4d4e7108306be1b62dab46a05eb10b26eba8))
+* **news:** clean code and remove unecesary api call for 'a-la-une' tag ([5ada347](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/5ada347d12c24339a1fa1ee4d2da2a30eeb5c4bf))
+* **news:** fix scroll issue and css display on mobile ([7a2fa9a](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/7a2fa9aa8c9ff65d9770a554434bd607ec8af321))
+* set missing validation form on phone input ([95ffed1](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/95ffed17fd618e963fa037e80d2f2e59c7c0748f))
+* **structure-list:** border-bottom is now correctly removed on last element ([1f5a501](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/1f5a50128b1f8521a85c302468783a45c51f2b03))
+* **style:** header display on mobile. Logo is now properly centered ([667288f](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/667288fd4d58e58fa97aba86f68dd4324df01d51))
+
 ### [1.11.1](https://forge.grandlyon.com///compare/v1.11.0...v1.11.1) (2022-01-31)
 
 
