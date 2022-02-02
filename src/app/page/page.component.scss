@@ -1,0 +1,13 @@
+@import '../../assets/scss/typography';
+@import '../../assets/scss/color';
+@import '../../assets/scss/ghost';
+
+.version {
+  padding-top: 80px;
+  font-size: $font-size-xxsmall;
+  color: $grey-3;
+}
+
+.articleContainer {
+  padding-top: 20px;
+}

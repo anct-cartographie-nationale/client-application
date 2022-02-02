@@ -20,7 +20,7 @@ import { StructureDetailsComponent } from './structure-list/components/structure
 import { StructureOpeningStatusComponent } from './structure-list/components/structure-opening-status/structure-opening-status.component';
 import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
-import { AboutComponent } from './about/about.component';
+import { PageComponent } from './page/page.component';
 import { ContactComponent } from './contact/contact.component';
 import { FormComponent } from './form/structure-form/form.component';
 import { UserVerificationComponent } from './user-verification/user-verification.component';
@@ -55,7 +55,7 @@ import { RoleGuard } from './guards/role.guard';
     StructureDetailsComponent,
     StructureOpeningStatusComponent,
     LegalNoticeComponent,
-    AboutComponent,
+    PageComponent,
     ContactComponent,
     UserVerificationComponent,
     ResetEmailComponent,

@@ -1,0 +1,18 @@
+<div fxLayout="column" class="content-container full-screen">
+  <div class="section-container">
+    <div class="postContainer" *ngIf="page" fxLayout="column" fxLayoutGap="16px">
+      <div class="gh-canvas">
+        <div fxLayout="column" fxLayoutAlign="center none">
+          <div fxLayout="row" class="title">{{ page.title }}</div>
+        </div>
+        <div fxLayout="row" class="article-image" *ngIf="page.feature_image">
+          <img class="image" alt="image about the news" [src]="page.feature_image" />
+        </div>
+        <div fxLayout="row" class="description">
+          <div [innerHtml]="page.safeHtml"></div>
+        </div>
+        <p *ngIf="version" class="version" fxLayoutAlign="center center">Version : {{ version }}</p>
+      </div>
+    </div>
+  </div>
+</div>
