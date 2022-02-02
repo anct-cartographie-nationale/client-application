@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
+import { PageComponent } from './page/page.component';
 import { ContactComponent } from './contact/contact.component';
 import { FormComponent } from './form/structure-form/form.component';
 import { AdminGuard } from './guards/admin.guard';
@@ -46,8 +46,8 @@ const routes: Routes = [
     component: LegalNoticeComponent,
   },
   {
-    path: 'about',
-    component: AboutComponent,
+    path: 'page/:slugPage',
+    component: PageComponent,
   },
   {
     path: 'contact',

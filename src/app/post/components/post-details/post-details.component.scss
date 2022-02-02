@@ -3,15 +3,9 @@
 @import '../../../../assets/scss/layout';
 @import '../../../../assets/scss/breakpoint';
 @import '../../../../assets/scss/hyperlink';
-
-$margin-post: 20px;
+@import '../../../../assets/scss/ghost';
 
 .postContainer {
-  max-width: 1200px;
-  margin: $margin-post 0;
-  min-height: calc(
-    var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height} - #{$header-post-height} - #{$margin-post} * 3
-  );
   .chevronLeft {
     height: 24px;
     width: 24px;
@@ -19,17 +13,13 @@ $margin-post: 20px;
     margin-right: 10px;
   }
 }
+
 .tag {
   @include cn-bold-16;
   text-transform: uppercase;
   color: $secondary-color;
   fill: $secondary-color;
   stroke: $secondary-color;
-}
-.title {
-  @include cn-bold-30;
-  color: $grey-1;
-  margin-bottom: 8px;
 }
 .informations {
   @include cn-regular-16;
@@ -39,172 +29,14 @@ $margin-post: 20px;
 }
 
 .description {
-  div {
-    max-width: 860px;
-    line-height: 180%;
-  }
-  ::ng-deep hr {
-    display: block;
-    margin: 3.2em 0;
-    padding: 0;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #dfe1e3;
-  }
-  ::ng-deep figure {
-    margin: 0;
-    figcaption {
-      margin-top: 1%;
-      font-size: small;
-      text-align: center;
-      color: #626d79;
-    }
-  }
   ::ng-deep img {
     width: 100%;
     height: 100%;
   }
-  ::ng-deep .kg-embed-card {
-    position: relative;
-    width: 110%;
-    padding-top: 65%;
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
+  ::ng-deep figure {
+    figcaption {
+      margin-top: 1%;
+      text-align: center;
     }
-  }
-  ::ng-deep a {
-    @include hyperlink;
-    padding: 0;
-  }
-  ::ng-deep p {
-    @include cn-regular-20;
-    line-height: 1.6em;
-  }
-  ::ng-deep li {
-    @include cn-regular-20;
-    line-height: 1.6em;
-    margin-bottom: 10px;
-  }
-  ::ng-deep h2 {
-    margin-top: 50px;
-  }
-  ::ng-deep blockquote {
-    margin: 1.5em 0;
-    padding: 0 1.6em;
-    border-left: 3px solid $blue;
-  }
-  ::ng-deep .kg-image-card {
-    margin: 0 auto;
-    max-width: 100%;
-    ::ng-deep .kg-image {
-      max-width: 100%;
-      margin-top: 10px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-  ::ng-deep .kg-bookmark-card {
-    margin-top: 30px;
-    font: inherit;
-    vertical-align: baseline;
-    ::ng-deep .kg-bookmark-container {
-      display: flex;
-      border-radius: 3px;
-      color: var(--darkgrey);
-      text-decoration: none;
-      box-shadow: 0 2px 5px -1px rgb(0 0 0 / 15%), 0 0 1px rgb(0 0 0 / 9%);
-      ::ng-deep .kg-bookmark-content {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 20px;
-        ::ng-deep .kg-bookmark-title {
-          color: $grey-1;
-          @include cn-regular-18;
-        }
-        ::ng-deep .kg-bookmark-description {
-          display: -webkit-box;
-          overflow-y: hidden;
-          margin-top: 12px;
-          max-height: 48px;
-          color: $grey-2;
-          line-height: 1.5em;
-          font-weight: 400;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-        }
-        ::ng-deep .kg-bookmark-metadata {
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          margin-top: 14px;
-          color: var(--darkgrey);
-          font-weight: 500;
-          ::ng-deep .kg-bookmark-icon {
-            margin-right: 8px;
-            width: 22px;
-            height: 22px;
-            display: block;
-          }
-          ::ng-deep .kg-bookmark-author {
-            line-height: 1.5em;
-            @include cn-regular-18;
-          }
-          ::ng-deep .kg-bookmark-publisher {
-            overflow: hidden;
-            line-height: 1.5em;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            color: $grey-2;
-          }
-        }
-      }
-      ::ng-deep .kg-bookmark-thumbnail {
-        position: relative;
-        min-width: 33%;
-        max-height: 100%;
-        img {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border-radius: 0 3px 3px 0;
-          -o-object-fit: cover;
-          object-fit: cover;
-        }
-      }
-    }
-  }
-}
-
-.gh-canvas {
-  display: grid;
-  grid-template-columns:
-    [full-start] minmax(4vmin, auto) [wide-start] minmax(auto, 240px) [main-start] min(720px, calc(100% - 8vw))
-    [main-end] minmax(auto, 240px) [wide-end] minmax(4vmin, auto) [full-end];
-}
-
-.gh-canvas > * {
-  grid-column: main-start/main-end;
-}
-
-.gh-canvas .article-image {
-  grid-column: wide-start/wide-end;
-  width: 100%;
-  margin: 4vmin 0 0;
-  img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
   }
 }
