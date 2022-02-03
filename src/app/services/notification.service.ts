@@ -24,7 +24,7 @@ export class NotificationService {
   // Par defaut, l'erreur reste affichée jusqu'à ce qu'on clique dessus
   public showAppNewVersion(): void {
     const update = this.toastr.info(
-      'Une nouvelle version est disponible, cliquer ici pour mettre a jour.',
+      'Une nouvelle version est disponible, cliquer ici pour mettre à jour.',
       'Nouvelle version',
       {
         disableTimeOut: true,
