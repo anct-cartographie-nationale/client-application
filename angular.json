@@ -35,13 +35,15 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "localize": true,
-            "aot": true,
             "allowedCommonJsDependencies": ["lodash", "leaflet.locatecontrol"],
             "assets": [
               "src/favicon.ico",
               "src/assets",
               "src/sitemap.xml",
               "src/robots.txt",
+              "src/ngsw-worker.js",
+              "src/ngsw.json",
+              "src/manifest.webmanifest",
               {
                 "glob": "**/*",
                 "input": "./node_modules/leaflet/dist/images",
@@ -53,7 +55,15 @@
               "./node_modules/leaflet/dist/leaflet.css",
               "./node_modules/leaflet.locatecontrol/dist/L.Control.Locate.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json",
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -63,15 +73,12 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "aot": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -83,7 +90,9 @@
                   "maximumWarning": "10kb",
                   "maximumError": "15kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             },
             "fr": {
               "localize": ["fr"]
@@ -91,7 +100,8 @@
             "en": {
               "localize": ["en"]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -124,16 +134,9 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
             "styles": ["src/styles.scss"],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
-            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {

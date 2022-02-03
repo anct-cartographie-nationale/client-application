@@ -3,10 +3,7 @@
     "target": "http://localhost:3000",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug",
-    "pathRewrite": {
-      "^/api": ""
-    }
+    "logLevel": "debug"
   },
   "/base-adresse/base-adresse-nationale/streets": {
     "target": "https://passerelle.formulaireextranet.grandlyon.com",
