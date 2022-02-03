@@ -1,5 +1,5 @@
 # Stage 0, based on Node.js, to build and compile Angular
-FROM node:12.16-slim as build
+FROM node:14.18-slim as build
 
 WORKDIR /app
 
@@ -14,6 +14,7 @@ RUN npm install --silent
 COPY angular.json .
 COPY tsconfig.json .
 COPY tsconfig.app.json .
+COPY ngsw-config.json .
 COPY /nginx/nginx.conf .
 COPY /src ./src
 

@@ -3,6 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { ProfileService } from './profile/services/profile.service';
 import { AuthService } from './services/auth.service';
 import { RouterListenerService } from './services/routerListener.service';
+import { UpdateService } from './services/update.service';
 import { PrintService } from './shared/service/print.service';
 import { WindowScrollService } from './shared/service/windowScroll.service';
 
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     private profilService: ProfileService,
     private windowScrollService: WindowScrollService,
     private routerListener: RouterListenerService,
+    private updateService: UpdateService,
     private router: Router
   ) {
     if (this.authService.isLoggedIn()) {
@@ -30,6 +32,8 @@ export class AppComponent implements OnInit {
       this.setHeightApp();
     });
     this.routerListener.loadRouting();
+    // handle pwa update
+    this.updateService.subscribeUpdate();
   }
 
   ngOnInit(): void {

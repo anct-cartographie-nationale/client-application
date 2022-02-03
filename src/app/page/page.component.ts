@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { version } from '../../../package.json';
+import packageJson from '../../../package.json';
 import { Page } from './models/page.model';
 import { PageService } from './services/page.service';
 import { PageEnum } from './enum/page.enum';
@@ -27,7 +27,7 @@ export class PageComponent implements OnInit {
         this.page.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.page.html);
       });
       // Display version number in 'About' page only
-      this.slugPage == this.quiSommesNous ? (this.version = version) : (this.version = '');
+      this.slugPage == this.quiSommesNous ? (this.version = packageJson.version) : (this.version = '');
     });
   }
 }

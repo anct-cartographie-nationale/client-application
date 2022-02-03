@@ -39,8 +39,11 @@ import { OrientationFormComponent } from './form/orientation-form/orientation-fo
 import { StructureDetailPrintComponent } from './form/orientation-form/component/structure-detail-print/structure-detail-print.component';
 import { StructureListPrintComponent } from './form/orientation-form/component/structure-list-print/structure-list-print.component';
 import { StructurePrintHeaderComponent } from './form/orientation-form/component/structure-print-header/structure-print-header.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 import { StructureResolver } from './resolvers/structure.resolver';
 import { RoleGuard } from './guards/role.guard';
+import { UpdateService } from './services/update.service';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import { RoleGuard } from './guards/role.guard';
     MapModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
@@ -89,6 +95,7 @@ import { RoleGuard } from './guards/role.guard';
     TempUserResolver,
     StructureResolver,
     RouterListenerService,
+    UpdateService,
   ],
   bootstrap: [AppComponent],
 })
