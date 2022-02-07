@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.12.0...v1.13.0) (2022-02-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* app is now working with PWA handling
+
+### Features
+
+* add pwa handling ([d951ced](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/d951ced8a2641fa42b441da47fe1304b05e78c15))
+* **pages:** display pages from ghost (eg. : about page and accessibility page) ([64ce8ca](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/64ce8ca54ea67210436a267242435c25d5987609))
+
+
+### Bug Fixes
+
+* **footer:** temporarily hide accessibility link in footer until page is ready ([5cd7490](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/5cd7490c5b2b1b656f13b39c01c125a03247dc13))
+* **pwa:** ghost caching in pwa was making ui unavailable ([d845a32](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/d845a32a3abf1e4d269c79c59cc01f9744687721))
+* **pwa:** typo in update notification ([6734cfe](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/6734cfec748b3952a417c6809200bf7f64b49430))
+
 ## [1.12.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.11.1...v1.12.0) (2022-02-01)
 
 
