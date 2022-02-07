@@ -60,13 +60,22 @@ export class PostListComponent implements OnInit {
         this.getPosts(this.filters);
       } else {
         // Init default news list
+        this.allPosts = [];
         this.postService.getPosts(1).subscribe((news) => {
-          this.setNews(news);
-          const headLineTag = this.allPosts.find((post: Post) => post.tags.some((tag) => tag.slug === TagEnum.aLaUne));
-          this.allPosts.unshift(headLineTag);
+          this.fillArticles(news);
         });
       }
     });
+  }
+
+  public fillArticles(news: PostWithMeta): void {
+    this.setNews(news);
+    const headLineTag = this.allPosts.filter((post: Post) => post.tags.some((tag) => tag.slug === TagEnum.aLaUne));
+
+    const headIndex = this.allPosts.findIndex((post) => post.id === headLineTag[0].id);
+    this.allPosts.splice(headIndex, 1);
+
+    this.allPosts = [...headLineTag, ...this.allPosts];
   }
 
   public getPosts(filters?: Tag[]): void {
@@ -87,7 +96,7 @@ export class PostListComponent implements OnInit {
 
     this.isLoading = true;
     this.postService.getPosts(1, parsedFilters).subscribe((news) => {
-      this.setNews(news);
+      this.fillArticles(news);
     });
   }
 
@@ -121,7 +130,7 @@ export class PostListComponent implements OnInit {
     if (this.pagination && this.pagination.page < this.pagination.pages) {
       this.isLoading = true;
       this.postService.getPosts(this.pagination.next).subscribe((news) => {
-        this.setNews(news);
+        this.fillArticles(news);
       });
     }
   }
@@ -130,11 +139,12 @@ export class PostListComponent implements OnInit {
   private setNews(news: PostWithMeta): void {
     this.pagination = news.meta.pagination;
     const customIndex = this.allPosts.length; // For scroll loading, start with previous index.
-    this.allPosts = news.posts.map((val, index) => {
+    const newPosts = news.posts.map((val, index) => {
       val = this.addAuthorToPost(val);
       index += customIndex;
       return val;
     });
+    this.allPosts = [...this.allPosts, ...newPosts];
     this.isLoading = false;
   }
 
