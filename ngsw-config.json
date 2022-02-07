@@ -28,6 +28,16 @@
         "maxAge": "12h",
         "timeout": "5s"
       }
+    },
+    {
+      "name": "api",
+      "urls": ["/api/**"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 10000,
+        "maxAge": "12h",
+        "timeout": "5s"
+      }
     }
   ]
 }
