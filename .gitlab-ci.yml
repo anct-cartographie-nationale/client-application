@@ -65,6 +65,7 @@ build_dev:
 
 deploy_dev:
   stage: deploy
+  variables: {}
   tags:
     - deploy
   only:
@@ -81,6 +82,7 @@ deploy_dev:
 
 deploy_rec:
   stage: deploy
+  variables: {}
   tags:
     - deploy
   only:
