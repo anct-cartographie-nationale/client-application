@@ -35,9 +35,7 @@ export class MapService {
     });
 
     if (tooltip) {
-      marker.bindPopup(tooltip, {
-        autoPan: false,
-      });
+      marker.bindPopup(tooltip);
 
       // handle icon change when unselect
       marker.getPopup().on('remove', (evt) => {
