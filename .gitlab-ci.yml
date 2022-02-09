@@ -28,8 +28,6 @@ build_branch:
 
 build:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
-  services:
-    - ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/:18.09-dind
   stage: build
   only:
     - master
@@ -41,8 +39,6 @@ build:
 
 build-release:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
-  services:
-    - ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/:18.09-dind
   stage: build
   only:
     - tags
@@ -53,8 +49,6 @@ build-release:
 
 build_dev:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
-  services:
-    - ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09-dind
   stage: build
   only:
     - dev
