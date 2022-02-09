@@ -5,6 +5,7 @@
 @import '../../../assets/scss/shapes';
 @import '../../../assets/scss/buttons';
 @import '../../../assets/scss/breakpoint';
+@import '../../../assets/scss/z-index';
 
 .map-wrapper {
   border-radius: 6px;
@@ -86,6 +87,7 @@
     }
   }
   &:hover {
+    z-index: calc($map-selected-marker - 1) !important;
     svg {
       fill: $blue-hover;
       &.mdm {
@@ -159,4 +161,8 @@
 
 .body-wrap {
   height: 400px;
+}
+
+::ng-deep .on-top-marker {
+  z-index: $map-selected-marker !important;
 }

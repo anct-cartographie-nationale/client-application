@@ -8,14 +8,14 @@ export const markerIcon = divIcon({
   popupAnchor: [0, -48],
 });
 export const markerIconActive = divIcon({
-  className: null,
+  className: 'on-top-marker',
   html: '<svg width="48" height="48"><use xlink:href="assets/ico/sprite.svg#map-markerSelected"></use></svg>',
   iconSize: [48, 48],
   iconAnchor: [24, 48],
   popupAnchor: [0, -48],
 });
 export const markerIconHover = divIcon({
-  className: null,
+  className: 'on-top-marker',
   html: '<svg width="48" height="48"><use xlink:href="assets/ico/sprite.svg#map-markerHover"></use></svg>',
   iconSize: [48, 48],
   iconAnchor: [24, 48],
