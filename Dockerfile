@@ -1,5 +1,6 @@
 # Stage 0, based on Node.js, to build and compile Angular
-FROM node:14.18-slim as build
+ARG DEPENDENCY_PROXY=
+FROM ${DEPENDENCY_PROXY}node:14.18-slim as build
 
 WORKDIR /app
 
@@ -24,7 +25,7 @@ ARG conf
 RUN npm run build:prod
 
 # Stage 1, based on Nginx, to have only the compiled app
-FROM nginx
+FROM ${DEPENDENCY_PROXY}nginx
 
 # copy artifact build from the 'build environment'
 RUN apt-get update
