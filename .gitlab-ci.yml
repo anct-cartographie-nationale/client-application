@@ -3,20 +3,33 @@ stages:
   - build
   - deploy
 
+default:
+  services:
+    - name: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09-dind
+      alias: docker
+
+variables:
+  DOCKER_TLS_CERTDIR: ''
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+  DEPENDENCY_PROXY: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/
+
 build_branch:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
-  services:
-    - docker:18.09-dind
   stage: build
+  except:
+    - master
+    - recette
+    - dev
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" --build-arg conf=prod .
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/feat:$CI_COMMIT_REF_SLUG" --build-arg conf=prod .
+    - docker push "$CI_REGISTRY_IMAGE/feat:$CI_COMMIT_REF_SLUG"
 
 build:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   services:
-    - docker:18.09-dind
+    - ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/:18.09-dind
   stage: build
   only:
     - master
@@ -26,10 +39,22 @@ build:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" --build-arg conf=prod .
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
 
+build-release:
+  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
+  services:
+    - ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/:18.09-dind
+  stage: build
+  only:
+    - tags
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/tags:$CI_COMMIT_TAG" --build-arg conf=prod .
+    - docker push "$CI_REGISTRY_IMAGE/tags:$CI_COMMIT_TAG"
+
 build_dev:
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   services:
-    - docker:18.09-dind
+    - ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09-dind
   stage: build
   only:
     - dev
@@ -37,19 +62,6 @@ build_dev:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
     - docker push "$CI_REGISTRY_IMAGE:dev"
-
-build_json_server:
-  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
-  services:
-    - docker:18.09-dind
-  stage: build
-  only:
-    - dev
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:json_server"  ./api/
-    - docker push "$CI_REGISTRY_IMAGE:json_server"
-  when: manual
 
 deploy_dev:
   stage: deploy
@@ -63,19 +75,9 @@ deploy_dev:
     - docker-compose pull web-app
     - docker-compose up -d web-app
     - docker system prune -a -f
-
-deploy_mobile:
-  stage: deploy
-  tags:
-    - deploy
-  only:
-    - mobile
-  script:
-    - cd /home/mps/ram
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker-compose pull web-app
-    - docker-compose up -d web-app
-    - docker system prune -a -f
+  environment:
+    name: dev
+    url: https://resin-dev.grandlyon.com
 
 deploy_rec:
   stage: deploy
@@ -89,6 +91,10 @@ deploy_rec:
     - docker-compose pull web-app-rec
     - docker-compose up -d web-app-rec
     - docker system prune -a -f
+  when: manual
+  environment:
+    name: rec
+    url: https://resin-rec.grandlyon.com
 
 # code_analysis:
 #   image: skilldlabs/sonar-scanner:3.4.0
@@ -121,17 +127,3 @@ mr:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
-
-# Job for auto building pwa in case of issue
-# Juste create a new branche 'pwa'
-pwa-build:
-  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
-  services:
-    - docker:18.09-dind
-  stage: build
-  only:
-    - feat/poc-pwa
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:pwa" --build-arg conf=dev .
-    - docker push "$CI_REGISTRY_IMAGE:pwa"
