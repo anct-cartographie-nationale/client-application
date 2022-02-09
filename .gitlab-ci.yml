@@ -9,12 +9,13 @@ default:
       alias: docker
 
 variables:
-  DOCKER_TLS_CERTDIR: ''
-  DOCKER_HOST: tcp://docker:2375/
-  DOCKER_DRIVER: overlay2
   DEPENDENCY_PROXY: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/
 
 build_branch:
+  variables:
+    DOCKER_TLS_CERTDIR: ''
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   stage: build
   except:
@@ -27,6 +28,10 @@ build_branch:
     - docker push "$CI_REGISTRY_IMAGE/feat:$CI_COMMIT_REF_SLUG"
 
 build:
+  variables:
+    DOCKER_TLS_CERTDIR: ''
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   stage: build
   only:
@@ -38,6 +43,10 @@ build:
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
 
 build-release:
+  variables:
+    DOCKER_TLS_CERTDIR: ''
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   stage: build
   only:
@@ -48,6 +57,10 @@ build-release:
     - docker push "$CI_REGISTRY_IMAGE/tags:$CI_COMMIT_TAG"
 
 build_dev:
+  variables:
+    DOCKER_TLS_CERTDIR: ''
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
   stage: build
   only:
@@ -59,7 +72,6 @@ build_dev:
 
 deploy_dev:
   stage: deploy
-  variables: {}
   tags:
     - deploy
   only:
@@ -76,7 +88,6 @@ deploy_dev:
 
 deploy_rec:
   stage: deploy
-  variables: {}
   tags:
     - deploy
   only:
@@ -114,9 +125,11 @@ deploy_rec:
 #       -Dsonar.login=${SONAR_TOKEN}
 
 mr:
+  variables:
+    DOCKER_TLS_CERTDIR: ''
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
-  services:
-    - docker:18.09-dind
   stage: build
   only:
     - merge_requests
