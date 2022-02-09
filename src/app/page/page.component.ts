@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Meta } from '@angular/platform-browser';
 import packageJson from '../../../package.json';
 import { Page } from './models/page.model';
 import { PageService } from './services/page.service';
@@ -17,7 +18,12 @@ export class PageComponent implements OnInit {
   private slugPage: string;
   private quiSommesNous = PageEnum.quiSommesNous;
 
-  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private pageService: PageService) {}
+  constructor(
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
+    private pageService: PageService,
+    private meta: Meta
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((routeParams) => {
@@ -25,6 +31,10 @@ export class PageComponent implements OnInit {
       this.pageService.getPage(this.slugPage).subscribe((page) => {
         this.page = page.pages[0];
         this.page.safeHtml = this.sanitizer.bypassSecurityTrustHtml(this.page.html);
+        this.meta.updateTag({
+          name: 'description',
+          content: this.page.meta_description,
+        });
       });
       // Display version number in 'About' page only
       this.slugPage == this.quiSommesNous ? (this.version = packageJson.version) : (this.version = '');

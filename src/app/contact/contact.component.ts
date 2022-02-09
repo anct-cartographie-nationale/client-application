@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Meta } from '@angular/platform-browser';
 import { ContactMessage } from '../models/contact-message.model';
 import { AuthService } from '../services/auth.service';
 import { ContactService } from '../services/contact.service';
@@ -23,7 +24,8 @@ export class ContactComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private notificationService: NotificationService,
-    public utils: Utils
+    public utils: Utils,
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +38,12 @@ export class ContactComponent implements OnInit {
       email: [this.isLoggedIn ? this.displayEmail : '', [Validators.required, Validators.pattern(CustomRegExp.EMAIL)]],
       subject: ['', Validators.required],
       message: ['', Validators.required],
+    });
+
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        "Formulaire pour contacter Rés'IN, le Réseau des acteurs de l'inclusion numérique de la métropole de Lyon",
     });
   }
 

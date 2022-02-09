@@ -1,6 +1,7 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { AbstractControl, Form, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Meta } from '@angular/platform-browser';
 import { GeoJson } from '../../map/models/geojson.model';
 import { Address } from '../../models/address.model';
 import { OrientationFormFilters } from '../../models/orientation-filter.object';
@@ -79,13 +80,19 @@ export class OrientationFormComponent implements OnInit {
     private routerListener: RouterListenerService,
     private searchService: SearchService,
     private structureService: StructureService,
-    private geoJsonService: GeojsonService
+    private geoJsonService: GeojsonService,
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
     this.orientationForm = this.createOrientationForm(new OrientationFormFilters());
     this.setValidationsForm();
     this.setCategories();
+    this.meta.updateTag({
+      name: 'description',
+      content:
+        "Permet aux professionnels d'être aidés dans l'accompagnement d'un usager en fragilité numérique pour trouver une réponse adaptée.",
+    });
   }
 
   private async setCategories(): Promise<void> {

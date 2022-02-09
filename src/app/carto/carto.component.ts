@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 const { DateTime } = require('luxon');
 import * as _ from 'lodash';
 
@@ -30,7 +31,8 @@ export class CartoComponent implements OnInit {
   constructor(
     private structureService: StructureService,
     private geoJsonService: GeojsonService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,11 @@ export class CartoComponent implements OnInit {
     if (history.state.data) {
       this.currentStructure = new Structure(history.state.data);
     }
+
+    this.meta.updateTag({
+      name: 'description',
+      content: 'Recense tous les lieux, accompagnements et ateliers de médiation numérique de la Métropole de Lyon.',
+    });
   }
 
   public getStructures(filters: Filter[]): void {

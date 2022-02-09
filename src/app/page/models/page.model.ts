@@ -10,6 +10,7 @@ export class Page {
   feature_image: string;
   html: string;
   safeHtml: SafeHtml;
+  meta_description: string;
 
   constructor(obj?: any) {
     Object.assign(this, obj);
