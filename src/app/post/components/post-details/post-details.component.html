@@ -15,19 +15,13 @@
       <div *ngIf="!post.tags[0]" fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px">
         <span>Infos</span>
       </div>
-      <div fxLayout="row" class="title">
-        {{ post.title }}
-      </div>
+      <div fxLayout="row" class="title">{{ post.title }}</div>
       <div fxLayout="column" class="informations">
         <div>{{ post.author }}</div>
         <div>
           {{ post.created_at | date: 'dd MMM y' }}
         </div>
       </div>
-    </div>
-
-    <div fxLayout="row" class="article-image" *ngIf="post.feature_image">
-      <img class="image" alt="image about the news" [src]="post.feature_image" />
     </div>
     <div fxLayout="row" class="description">
       <div [innerHtml]="post.safeHtml"></div>
