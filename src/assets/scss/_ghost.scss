@@ -85,6 +85,74 @@ $margin-post: 20px;
       margin-right: auto;
     }
   }
+  ::ng-deep .kg-file-card {
+    margin-top: 6vmin;
+    ::ng-deep .kg-file-card-container {
+      display: flex;
+      justify-content: space-between;
+      color: inherit;
+      padding: 6px;
+      border: 1px solid rgb(124 139 154/25%);
+      border-radius: 3px;
+      text-decoration: none;
+      ::ng-deep .kg-file-card-contents {
+        margin: 4px 8px;
+        ::ng-deep .kg-file-card-title + .kg-file-card-caption {
+          margin-top: -3px;
+        }
+        ::ng-deep .kg-file-card-title {
+          font-size: 1.15em;
+          line-height: 1.3em;
+        }
+        ::ng-deep .kg-file-card-caption,
+        .kg-file-card-filesize {
+          font-weight: normal;
+          font-size: 0.95em;
+          opacity: 0.6;
+        }
+        ::ng-deep .kg-file-card-filesize {
+          display: inline-block;
+        }
+        ::ng-deep .kg-file-card-metadata {
+          font-size: 0.825em;
+          margin-top: 4px;
+          ::ng-deep .kg-file-card-filename {
+            display: inline;
+            font-weight: 500;
+          }
+          ::ng-deep .kg-file-card-filesize:before {
+            display: inline-block;
+            content: '\2022';
+            margin-right: 4px;
+          }
+        }
+      }
+      ::ng-deep .kg-file-card-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+      }
+      ::ng-deep .kg-file-card-icon:before {
+        position: absolute;
+        display: block;
+        content: '';
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: currentColor;
+        opacity: 0.06;
+        border-radius: 2px;
+      }
+      ::ng-deep .kg-file-card-icon svg {
+        width: 24px;
+        height: 24px;
+        color: $red;
+      }
+    }
+  }
   ::ng-deep .kg-bookmark-card {
     margin-top: 30px;
     font: inherit;
