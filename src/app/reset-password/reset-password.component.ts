@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -21,7 +22,8 @@ export class ResetPasswordComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +52,10 @@ export class ResetPasswordComponent implements OnInit {
     this.loading = true;
     this.authService.resetPassword(this.f.email.value).subscribe(
       () => {
+        this.notificationService.showSuccess(
+          'Un mail de confirmation de modification de votre mot de passe vous a été envoyé.',
+          ''
+        );
         this.router.navigate(['']);
       },
       () => {
