@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { DivIcon, divIcon, Map, Marker } from 'leaflet';
+import { Layers } from '../components/layers.enum';
 import { MarkerType } from '../components/markerType.enum';
 import {
   markerIcon,
   markerIconActive,
   markerIconAddedToList,
-  markerIconFranceService,
-  markerIconFranceServiceActive,
-  markerIconFranceServiceAddedToList,
-  markerIconFranceServiceHover,
   markerIconHover,
   markerIconMdm,
   markerIconMdmActive,
+  userLocationIcon,
 } from './marker';
 @Injectable({
   providedIn: 'root',
@@ -51,51 +49,63 @@ export class MapService {
 
   private getLayerAttributton(markerType: MarkerType): string {
     if (markerType === MarkerType.mdm) {
-      return 'mdm';
+      return Layers.mdm;
+    } else if (markerType === MarkerType.user) {
+      return Layers.user;
     } else {
-      return 'structure';
+      return Layers.structure;
     }
   }
 
   // Note: Marke IconFranceService has been removed temporarly on order to rework on buisness needs.
   // This comment is applied for the next 4 methods
   private getMarkerIcon(markerType: MarkerType): DivIcon {
-    if (markerType === MarkerType.mdm) {
-      return markerIconMdm;
-    } else if (markerType === MarkerType.conseillerFrance) {
-      // return markerIconFranceService;
-      return markerIcon;
-    } else {
-      return markerIcon;
+    switch (markerType) {
+      case MarkerType.mdm:
+        return markerIconMdm;
+      case MarkerType.conseillerFrance:
+        return markerIcon;
+      case MarkerType.user:
+        return userLocationIcon;
+      default:
+        return markerIcon;
     }
   }
 
   private getActiveMarkerIcon(markerType: MarkerType): DivIcon {
-    if (markerType === MarkerType.mdm) {
-      return markerIconMdmActive;
-    } else if (markerType === MarkerType.conseillerFrance) {
-      // return markerIconFranceServiceActive;
-      return markerIconActive;
-    } else {
-      return markerIconActive;
+    switch (markerType) {
+      case MarkerType.mdm:
+        return markerIconMdmActive;
+      case MarkerType.conseillerFrance:
+        // return markerIconFranceServiceActive;
+        return markerIconActive;
+      case MarkerType.user:
+        return userLocationIcon;
+      default:
+        return markerIconActive;
     }
   }
 
   private getAddedToListMarkerIcon(markerType: MarkerType): DivIcon {
-    if (markerType === MarkerType.conseillerFrance) {
-      // return markerIconFranceServiceAddedToList;
-      return markerIconAddedToList;
-    } else {
-      return markerIconAddedToList;
+    switch (markerType) {
+      case MarkerType.conseillerFrance:
+        // return markerIconFranceServiceAddedToList;
+        return markerIconAddedToList;
+      case MarkerType.user:
+        return userLocationIcon;
+      default:
+        return markerIconAddedToList;
     }
   }
 
   private getHoverMarkerIcon(markerType: MarkerType): DivIcon {
-    if (markerType === MarkerType.conseillerFrance) {
-      // return markerIconFranceServiceHover;
-      return markerIconHover;
-    } else {
-      return markerIconHover;
+    switch (markerType) {
+      case MarkerType.conseillerFrance:
+        return markerIconHover;
+      case MarkerType.user:
+        return userLocationIcon;
+      default:
+        return markerIconHover;
     }
   }
 
@@ -161,7 +171,7 @@ export class MapService {
     MapService.markersList = {};
     if (map) {
       map.eachLayer((layer) => {
-        if (layer instanceof Marker && layer.options.attribution !== 'mdm') {
+        if (layer instanceof Marker && layer.options.attribution == Layers.structure) {
           map.removeLayer(layer);
         }
       });

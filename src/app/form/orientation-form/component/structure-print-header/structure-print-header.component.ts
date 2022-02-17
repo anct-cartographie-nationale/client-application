@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Structure } from '../../../../models/structure.model';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 import { PrintService } from '../../../../shared/service/print.service';
-import Module from 'module';
 import { Filter } from '../../../../structure-list/models/filter.model';
 @Component({
   selector: 'app-structure-print-header',
@@ -16,6 +14,7 @@ export class StructurePrintHeaderComponent implements OnInit {
   @Input() public structureAccompaniment: string;
   @Input() public beneficiaryPassNumeric: boolean;
   @Input() public contactAccompaniment: string | null;
+  @Input() public contactAccompanimentPhone: string | null;
   @Input() public filters: Filter[];
 
   public date: string;
