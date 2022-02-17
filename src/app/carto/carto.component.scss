@@ -29,7 +29,7 @@
   height: calc(100vh - #{$header-height} - #{$footer-height});
   @media #{$tablet} {
     padding: 0;
-    height: 100%;
+    height: calc(100vh - #{$header-height});
   }
 }
 .btnSwitch {

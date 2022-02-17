@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { latLng, MapOptions, geoJSON, tileLayer, Map, latLngBounds, layerGroup } from 'leaflet';
 import { Structure } from '../../models/structure.model';
 import { GeojsonService } from '../../services/geojson.service';
@@ -9,6 +9,7 @@ import { MarkerType } from './markerType.enum';
 import metropole from '../../../assets/geojson/metropole.json';
 import L from 'leaflet';
 import 'leaflet.locatecontrol';
+import { ZoomLevel } from './zoomLevel.enum';
 
 @Component({
   selector: 'app-map',
@@ -16,14 +17,16 @@ import 'leaflet.locatecontrol';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnChanges {
+  @Input() public isOrientationForm = false;
   @Input() public structures: Structure[] = [];
   @Input() public structuresToPrint: Structure[] = [];
   @Input() public toogleToolTipId: string;
   @Input() public selectedMarkerId: string;
   @Input() public isMapPhone: boolean;
   @Input() public locate = false;
-  @Input() public searchedValue: string;
-  @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+  @Input() public searchedValue: string | [number, number];
+  @Output() public selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
+  @Output() public onOrientationButtonClick: EventEmitter<Structure> = new EventEmitter<Structure>();
   @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
   private lc; // Locate control
   private currentStructure: Structure;
@@ -44,6 +47,10 @@ export class MapComponent implements OnChanges {
   public clickout(event): void {
     if (event.target.classList.contains('btnShowDetails')) {
       this.selectedStructure.emit(this.currentStructure);
+    }
+    if (event.target.classList.contains('add')) {
+      this.onOrientationButtonClick.emit(this.currentStructure);
+      this.getStructuresPositions(this.structures);
     }
   }
 
@@ -119,7 +126,7 @@ export class MapComponent implements OnChanges {
 
     if (changes.structuresToPrint) {
       if (changes.structuresToPrint.currentValue < changes.structuresToPrint.previousValue) {
-        this.mapService.setUnactiveMarker(
+        this.mapService?.setUnactiveMarker(
           this.toogleToolTipId,
           this.getMarkerTypeByStructureId(changes.structuresToPrint.previousValue)
         );
@@ -142,6 +149,15 @@ export class MapComponent implements OnChanges {
         this.map.setView(this.mapOptions.center, this.mapOptions.zoom);
       }
     );
+  }
+
+  /**
+   * Create a user position marcker and center the map on it with a zoom level defined in ZoomLevel
+   * @param coords {[number, number]} Map center position
+   */
+  public centerOnCoordinates(coords: [number, number]): void {
+    this.mapService.createMarker(coords[1], coords[0], MarkerType.user, 'userLocation').addTo(this.map);
+    this.map.setView(new L.LatLng(coords[1], coords[0]), ZoomLevel.userPosition);
   }
 
   /**
@@ -174,7 +190,7 @@ export class MapComponent implements OnChanges {
    * @returns {MarkerType}
    */
   private getMarkerType(structure: Structure): MarkerType {
-    return structure.labelsQualifications.includes('conseillerNumFranceServices')
+    return structure?.labelsQualifications?.includes('conseillerNumFranceServices')
       ? MarkerType.conseillerFrance
       : MarkerType.structure;
   }
@@ -230,12 +246,18 @@ export class MapComponent implements OnChanges {
       '</h1>' +
       '<p>' +
       structure.getLabelTypeStructure() +
-      '</p><div>' +
-      '<span class="ico-dot-' +
-      cssAvailabilityClass +
-      '"></span><span>' +
-      structure.openDisplay() +
-      '</span></div><div class="pop-up"><button type="button" class="btnShowDetails">Voir</button></div>'
+      '</p>' +
+      (this.isOrientationForm
+        ? ''
+        : '<div>' +
+          '<span class="ico-dot-' +
+          cssAvailabilityClass +
+          '"></span><span>' +
+          structure.openDisplay() +
+          '</span></div>') +
+      (this.isOrientationForm
+        ? '<div class="pop-up orientation"><button type="button" class="orientationButton btnShowDetails"><span class="ico-gg-eye-alt eye"></span>Voir</button></div>'
+        : '<div class="pop-up"><button type="button" class="btnShowDetails">Voir</button></div>')
     );
   }
 
@@ -254,6 +276,12 @@ export class MapComponent implements OnChanges {
     this.map.on('locationfound', () => {
       this.locatationTrigger.emit(true);
     });
+
+    if (this.searchedValue) {
+      if (Array.isArray(this.searchedValue)) {
+        this.centerOnCoordinates(this.searchedValue);
+      }
+    }
   }
 
   /**
@@ -268,15 +296,15 @@ export class MapComponent implements OnChanges {
     layerGroup();
     const carteLayer = tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
-      maxZoom: 19,
+      maxZoom: ZoomLevel.max,
     });
     // Center is set on townhall
     // Zoom is blocked on 11 to prevent people to zoom out from metropole
     this.mapOptions = {
       center: latLng(45.764043, 4.835659),
-      maxZoom: 19,
-      zoom: 12,
-      minZoom: 10,
+      maxZoom: ZoomLevel.max,
+      zoom: ZoomLevel.regular,
+      minZoom: ZoomLevel.min,
       layers: [carteLayer],
     };
   }

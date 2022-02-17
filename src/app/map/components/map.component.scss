@@ -23,6 +23,9 @@
   @media #{$large-phone} {
     height: calc(100vh - #{$header-height} - 28px);
   }
+  &.orientation {
+    height: calc(96vh - #{$header-height} - #{$footer-height} - 68px);
+  }
 }
 
 ::ng-deep .leaflet-popup-close-button {
@@ -132,15 +135,33 @@
   .pop-up {
     text-align: center;
     padding-top: 20px;
+    &.orientation {
+      padding: 0;
+      text-align: -webkit-center;
+    }
 
     button {
       @include btn-search-filter;
       @include cn-bold-14;
       font-size: 16px;
     }
+
+    .orientationButton {
+      display: flex;
+      padding: 10px 20px;
+      border-radius: 20px;
+      margin: 0 4px;
+      color: $black;
+      background-color: $white;
+      border: solid 1px $grey-3;
+      min-width: 120px;
+    }
   }
   span {
-    display: inline-block;
+    margin-right: 4px;
+    &.eye {
+      margin-right: 11px;
+    }
   }
 }
 ::ng-deep .leaflet-popup-content-wrapper {

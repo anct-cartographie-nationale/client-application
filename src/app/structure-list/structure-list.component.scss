@@ -12,9 +12,14 @@
   padding-left: 9px;
   margin: 0 16px;
 }
+
 .listCard {
   overflow-y: auto;
   padding: 0 25px;
+}
+
+::ng-deep .structure-card:last-child .structure {
+  border-bottom: unset !important;
 }
 
 @media print {

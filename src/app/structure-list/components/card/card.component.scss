@@ -30,9 +30,6 @@
     color: $grey-3;
     width: 50%;
   }
-  &:last-child {
-    border-bottom: none;
-  }
 }
 
 .selection-button {
@@ -40,22 +37,44 @@
   font-weight: bold;
   justify-content: center;
   align-items: center;
-  min-width: 180px;
-  height: 30px;
+  min-width: 120px;
+  height: 40px;
   border-radius: 20px;
-  padding: 3px 10px;
-  margin-bottom: 10px;
 }
 
 .selected {
-  border-style: solid;
-  border-width: 2px;
+  border: solid 1px $grey-3;
   background-color: $white;
-  border-color: $black;
   color: $black;
 }
 .to-select {
-  color: white;
+  color: $white;
   border-style: none;
   background: #47c562;
+}
+
+.distance {
+  color: $grey-3;
+}
+
+.add-icon {
+  color: $green-1;
+}
+
+.orientation {
+  flex-direction: row !important;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 70%;
+  }
+
+  .right {
+    margin-top: 6%;
+    @media #{$large-phone} {
+      margin-left: unset;
+    }
+  }
 }

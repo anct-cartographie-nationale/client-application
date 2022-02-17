@@ -9,6 +9,30 @@
   margin-top: 20px;
   margin-bottom: 20px;
   width: 100%;
+  border-bottom: solid black 1px;
+}
+
+.header-infos {
+  height: 80px;
+  display: flex;
+
+  .header-title {
+    width: 70%;
+    float: left;
+  }
+
+  h3 {
+    margin-top: 3px;
+  }
+
+  svg {
+    max-width: fit-content;
+    width: 30%;
+  }
+}
+
+.date {
+  float: right;
 }
 
 .print-header {
@@ -20,6 +44,10 @@
   @include cn-bold-16;
   margin-bottom: 5px;
   color: $grey-3;
+  &.date {
+    color: $grey-3;
+    font-style: italic;
+  }
 }
 
 .contactAccompaniment {
@@ -33,7 +61,7 @@
   height: 28px;
   border-radius: 20px;
   padding: 5px 15px;
-  color: white;
+  color: $white;
   border-style: none;
   margin-top: 5px;
   background: #348899;
@@ -56,5 +84,24 @@
   }
   p {
     text-align: right;
+  }
+}
+
+.informations {
+  width: 100%;
+  display: flex;
+  .helper {
+    max-height: 300px;
+    background-color: $grey-6;
+    width: 30%;
+    height: fit-content;
+    padding: 2%;
+  }
+
+  .beneficiary {
+    background-color: $grey-6;
+    margin-left: 2%;
+    padding: 2%;
+    width: 70%;
   }
 }
