@@ -7,8 +7,7 @@ export class OrientationFormFilters {
   handicap: boolean;
   passNumeric: boolean;
   structureAccompaniment: string;
-  contactAccompanimentPhone: string;
-  contactAccompanimentEmail: string;
+  contactAccompaniment: string;
   beneficiaryName: string;
   beneficiaryNeedCommentary: string;
   address: Address;

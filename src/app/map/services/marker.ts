@@ -28,12 +28,6 @@ export const markerIconAddedToList = divIcon({
   iconAnchor: [24, 48],
   popupAnchor: [0, -48],
 });
-export const userLocationIcon = divIcon({
-  className: null,
-  html: '<svg width="34" height="34"><use xlink:href="assets/ico/sprite.svg#user-location"></use></svg>',
-  iconSize: [34, 34],
-  iconAnchor: [17, 0],
-});
 export const markerIconMdm = divIcon({
   className: null,
   html:

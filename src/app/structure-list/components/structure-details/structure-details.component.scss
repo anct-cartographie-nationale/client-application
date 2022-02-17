@@ -22,12 +22,12 @@ a {
   padding: 0px 24px;
   overflow: auto;
   @media #{$tablet} {
+    width: calc(100% - 2 * 24px);
+    position: inherit;
+    height: 100%;
+    overflow: unset;
     .printButton {
       display: none !important;
-    }
-
-    .ico-close {
-      margin-left: 16px;
     }
   }
   .printButton {
