@@ -19,7 +19,7 @@ h4 {
 }
 
 .form {
-  background: $white;
+  background: white;
   width: 100vw;
   height: calc(var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height});
   top: #{$header-height};
@@ -46,7 +46,7 @@ h4 {
     display: none;
     @media #{$tablet} {
       margin: 0 auto;
-      //border-top: 1px solid $grey-4;
+      border-top: 1px solid $grey-4;
       display: block;
     }
   }
@@ -96,6 +96,7 @@ h4 {
     ) !important; // -1px because of header border
   }
   @media #{$tablet} {
+    height: 100%;
     &.editMode {
       .page {
         height: calc(
@@ -130,6 +131,11 @@ h4 {
   .page {
     max-width: 960px;
     margin: auto;
+    @media #{$tablet} {
+      height: calc(
+        100vh - #{$header-height-phone} - #{$progressBar-height} - #{$footer-height-phone} - 1px
+      ); // -1px because of header border
+    }
     height: auto;
     color: $grey-1;
     &.home {
@@ -301,7 +307,7 @@ h4 {
 
 input {
   &.email-placeholder::placeholder {
-    color: $white-2;
+    color: #cacccb;
     font-style: italic;
   }
   &.phone {
@@ -329,9 +335,6 @@ img {
   border: 1px solid $grey-4;
   border-radius: 4px;
   margin-bottom: 13px;
-  @media #{$small-phone} {
-    width: 95% !important;
-  }
   @media #{$tablet} {
     width: 296px;
   }

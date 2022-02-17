@@ -1,77 +1,67 @@
 <div class="print-header" fxLayout="column">
-  <div class="header-print">
-    <div class="header-infos">
-      <svg aria-hidden="true" aria-hidden="true">
-        <use [attr.xlink:href]="'assets/form/sprite.svg#grandLyonLaMetropole'"></use>
-      </svg>
-      <div class="header-title">
-        <div>RES’IN : Réseau des acteurs de l'inclusion numérique de la Métropole de Lyon</div>
-        <h3>Fiche d'orientation</h3>
-      </div>
-    </div>
-    <p class="typeInformationHeader date">{{ date }}</p>
+  <div class="header-print" fxLayout="row" fxLayoutAlign="space-between center">
+    <h3>Fiche d'orientation</h3>
+    <h4 class="typeInformationHeader">{{ date }}</h4>
   </div>
 
-  <div class="informations">
-    <div class="helper">
-      <!-- Accompaniment -->
-      <div *ngIf="structureAccompaniment">
-        <div class="typeInformationHeader">{{ 'Orienté par' | uppercase }}</div>
-        <p class="bold">{{ structureAccompaniment }}</p>
-        <!-- Contact -->
-        <p class="bold" *ngIf="contactAccompaniment">{{ contactAccompaniment }}</p>
-        <p class="bold" *ngIf="contactAccompanimentPhone">{{ contactAccompanimentPhone }}</p>
+  <!-- Name -->
+  <div *ngIf="beneficiaryName">
+    <p class="bold">{{ beneficiaryName }}</p>
+  </div>
+
+  <!-- Accompaniment -->
+  <div *ngIf="structureAccompaniment">
+    <div class="typeInformationHeader">Orienté par</div>
+    <div class="contactAccompaniment" fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="bold">{{ structureAccompaniment }}</div>
+      <!-- Contact -->
+      <div class="bold" *ngIf="contactAccompaniment">{{ contactAccompaniment }}</div>
+    </div>
+  </div>
+
+  <!-- Needs -->
+  <div *ngIf="equipments.length > 0">
+    <p class="typeInformationHeader">Besoins en matériel</p>
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <div *ngFor="let equipmentTag of equipments" class="tags-cloud" fxLayout="row">
+        {{ equipmentTag.text ? equipmentTag.text : equipmentTag.value }}
       </div>
     </div>
-    <div class="beneficiary">
-      <div class="typeInformationHeader">{{ 'Bénéficiaire' | uppercase }}</div>
-      <!-- Name -->
-      <table>
-        <tr>
-          <td class="typeInformationHeader">Nom</td>
-          <td class="bold">{{ beneficiaryName }}</td>
-        </tr>
-        <tr *ngIf="equipments.length > 0">
-          <td class="typeInformationHeader">Besoin(s) en matériel</td>
-          <td class="bold">
-            <div *ngFor="let equipmentTag of equipments">
-              {{ equipmentTag.text ? equipmentTag.text : equipmentTag.value }}
-            </div>
-          </td>
-        </tr>
-        <tr *ngIf="formations.length > 0">
-          <td class="typeInformationHeader">Besoin(s) en formation</td>
-          <td class="bold">
-            <div *ngFor="let formationTag of formations">
-              {{ formationTag.text ? formationTag.text : formationTag.value }}
-            </div>
-          </td>
-        </tr>
-        <tr *ngIf="assistances.length > 0">
-          <td class="typeInformationHeader">Besoin(s) d'accompagnement</td>
-          <td class="bold">
-            <div *ngFor="let assistanceTag of assistances">
-              {{ assistanceTag.text ? assistanceTag.text : assistanceTag.value }}
-            </div>
-          </td>
-        </tr>
-        <tr *ngIf="specificNeeds.length > 0">
-          <td class="typeInformationHeader">Besoin(s) spécifiques</td>
-          <td class="bold">
-            <div *ngFor="let specificNeed of specificNeeds">
-              {{ specificNeed.text ? specificNeed.text : specificNeed.value }}
-            </div>
-          </td>
-        </tr>
-        <tr *ngIf="beneficiaryPassNumeric">
-          <td class="typeInformationHeader">Pass Numérique</td>
-          <td class="bold">Oui</td>
-        </tr>
-        <tr *ngIf="beneficiaryNeedCommentary">
-          <td class="typeInformationHeader">Informations</td>
-          <td class="bold">{{ beneficiaryNeedCommentary }}</td>
-        </tr>
-      </table>
+  </div>
+  <div *ngIf="formations.length > 0">
+    <p class="typeInformationHeader">Besoins en formation</p>
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <div *ngFor="let formationTag of formations" class="tags-cloud" fxLayout="row">
+        {{ formationTag.text ? formationTag.text : formationTag.value }}
+      </div>
     </div>
+  </div>
+  <div *ngIf="assistances.length > 0">
+    <p class="typeInformationHeader">Besoins d'accompagnement</p>
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <div *ngFor="let assistanceTag of assistances" class="tags-cloud" fxLayout="row">
+        {{ assistanceTag.text ? assistanceTag.text : assistanceTag.value }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="specificNeeds.length > 0">
+    <div class="typeInformationHeader">Besoins spécifiques'</div>
+    <div fxLayout="row wrap" fxLayoutGap="16px">
+      <div *ngFor="let specificNeed of specificNeeds" class="tags-cloud" fxLayout="row">
+        {{ specificNeed.text ? specificNeed.text : specificNeed.value }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Pass Numeric -->
+  <div *ngIf="beneficiaryPassNumeric" class="inputRow" fxLayout="row" fxLayoutGap="13px">
+    <app-svg-icon [type]="'ico'" [icon]="'passNumeric'"></app-svg-icon>
+    <p class="bold">Pass Numérique</p>
+  </div>
+
+  <!-- Comments -->
+  <div *ngIf="beneficiaryNeedCommentary">
+    <div class="typeInformationHeader">Informations à destination de la structure</div>
+    <p>{{ beneficiaryNeedCommentary }}</p>
   </div>
 </div>

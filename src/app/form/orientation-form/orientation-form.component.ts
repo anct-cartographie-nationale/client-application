@@ -16,8 +16,6 @@ import { Filter } from '../../structure-list/models/filter.model';
 import { Module } from '../../structure-list/models/module.model';
 import { SearchService } from '../../structure-list/services/search.service';
 import { PageTypeEnum } from './pageType.enum';
-import { Utils } from '../../utils/utils';
-import { CustomRegExp } from '../../utils/CustomRegExp';
 
 @Component({
   selector: 'app-orientation-form',
@@ -31,9 +29,6 @@ export class OrientationFormComponent implements OnInit {
   public noPassNumeric = false;
   public isMapPhone = false;
   public isLoading = false;
-
-  // Map auto locate with address
-  public userLocation = [];
 
   public orientationForm: FormGroup;
 
@@ -57,11 +52,11 @@ export class OrientationFormComponent implements OnInit {
 
   public numberAssistanceChecked;
   public filters: Filter[] = [];
+  public uncheckedFilters: Filter[] = [];
 
   public equipments: Module[] = [];
   public assistance: Module[] = [];
   public formation: Module[] = [];
-  public selectedFormations: Category[] = [];
   public baseSkillssReferentiel: Category;
   public accessRightsReferentiel: Category;
   public digitalCultureSecuritysReferentiel: Category;
@@ -86,8 +81,7 @@ export class OrientationFormComponent implements OnInit {
     private searchService: SearchService,
     private structureService: StructureService,
     private geoJsonService: GeojsonService,
-    private meta: Meta,
-    public utils: Utils
+    private meta: Meta
   ) {}
 
   ngOnInit(): void {
@@ -108,7 +102,6 @@ export class OrientationFormComponent implements OnInit {
     });
     const categs = await this.searchService.getCategoriesTraining().toPromise();
     categs.forEach((categ) => {
-      this.selectedFormations.push(categ);
       categ.modules.forEach((module) => {
         this.formation.push(module);
       });
@@ -164,15 +157,8 @@ export class OrientationFormComponent implements OnInit {
         commune: new FormControl('', Validators.required),
       }),
       structureAccompaniment: new FormControl(orientationFormFilters.structureAccompaniment, Validators.required),
-      contactAccompanimentPhone: new FormControl(
-        orientationFormFilters.contactAccompanimentPhone,
-        Validators.pattern(CustomRegExp.PHONE)
-      ),
-      contactAccompanimentEmail: new FormControl(
-        orientationFormFilters.contactAccompanimentEmail,
-        Validators.pattern(CustomRegExp.EMAIL)
-      ),
-      beneficiaryName: new FormControl(orientationFormFilters.beneficiaryName, Validators.required),
+      contactAccompaniment: new FormControl(orientationFormFilters.contactAccompaniment),
+      beneficiaryName: new FormControl(orientationFormFilters.beneficiaryName),
       beneficiaryNeedCommentary: new FormControl(orientationFormFilters.beneficiaryNeedCommentary),
     });
   }
@@ -190,18 +176,31 @@ export class OrientationFormComponent implements OnInit {
     if (this.currentPage === this.nbPagesForm - 1) {
       this.validateForm();
     } else {
+      if (
+        this.currentPage === this.pageTypeEnum.beneficiaryNeed &&
+        this.orientationForm.get('assistance').value.length + this.orientationForm.get('formation').value.length == 0 &&
+        this.orientationForm.get('equipments').value.length > 0
+      ) {
+        this.noPassNumeric = true;
+        this.getOrientationControl('passNumeric').setValue(false);
+
+        this.currentPage++;
+        this.progressStatus += 100 / this.nbPagesForm;
+      }
       this.currentPage++;
       this.progressStatus += 100 / this.nbPagesForm;
       this.updatePageValid();
-      document.getElementsByClassName('content')[0].scrollTo(0, 0);
     }
   }
 
   public previousPage(): void {
     // Check if going to the first page
     if (this.currentPage === 0) {
-      this.previousUrl();
+      //go back to home ? previous page
     } else {
+      if (this.currentPage === this.pageTypeEnum.beneficiaryInfo && this.noPassNumeric) {
+        this.currentPage--;
+      }
       this.currentPage--;
       this.progressStatus -= 100 / this.nbPagesForm;
       this.setStructuresAndCoord();
@@ -232,23 +231,18 @@ export class OrientationFormComponent implements OnInit {
           this.orientationForm.get('formation').value.length >
         0,
     };
-    this.pagesValidation[PageTypeEnum.beneficiaryInfo] = {
-      valid:
-        this.getOrientationControl('passNumeric').value != null &&
-        this.getOrientationControl('beneficiaryName').value &&
-        this.getOrientationControl('beneficiaryName').value.length != 0,
+    this.pagesValidation[PageTypeEnum.beneficiaryPassNumeric] = {
+      valid: this.getOrientationControl('passNumeric').valid,
     };
+    this.pagesValidation[PageTypeEnum.beneficiaryInfo] = { valid: this.orientationForm.get('address').valid };
     this.pagesValidation[PageTypeEnum.beneficiaryAccompaniment] = {
       valid:
         this.getOrientationControl('structureAccompaniment').valid &&
-        this.getOrientationControl('contactAccompanimentPhone').valid &&
-        this.getOrientationControl('contactAccompanimentEmail').valid,
+        this.getOrientationControl('contactAccompaniment').valid &&
+        this.getOrientationControl('beneficiaryName').valid,
     };
     this.pagesValidation[PageTypeEnum.beneficiaryNeedCommentary] = {
       valid: this.getOrientationControl('beneficiaryNeedCommentary').valid,
-    };
-    this.pagesValidation[PageTypeEnum.beneficiaryAddress] = {
-      valid: true,
     };
     this.pagesValidation[PageTypeEnum.printResults] = { valid: true };
     this.pagesValidation[PageTypeEnum.structuresSelection] = { valid: this.structuresToPrint.length > 0 };
@@ -298,18 +292,7 @@ export class OrientationFormComponent implements OnInit {
   }
 
   public updateChoice(choice: string, controlName: string): void {
-    if (choice == null) this.unCheckAll(controlName);
-    else this.onCheckChange(!this.isInArray(choice, controlName), controlName, choice);
-  }
-
-  public isEmpty(formControlName: string): boolean {
-    const formArray: FormArray = this.orientationForm.get(formControlName) as FormArray;
-    return formArray.length < 1;
-  }
-
-  public unCheckAll(formControlName: string) {
-    const formArray: FormArray = this.orientationForm.get(formControlName) as FormArray;
-    formArray.clear();
+    this.onCheckChange(!this.isInArray(choice, controlName), controlName, choice);
   }
 
   public onCheckChange(event: boolean, formControlName: string, value: string): void {
@@ -339,10 +322,8 @@ export class OrientationFormComponent implements OnInit {
       this.getOrientationControl('address').get('numero').setValue(address.numero);
       this.getOrientationControl('address').get('street').setValue(address.street);
       this.getOrientationControl('address').get('commune').setValue(address.commune);
-      this.userLocation = address.coordinates;
     } else {
       this.orientationForm.get('address').reset();
-      this.userLocation = null;
     }
     this.setValidationsForm();
   }
@@ -352,13 +333,8 @@ export class OrientationFormComponent implements OnInit {
     this.setValidationsForm();
   }
 
-  public setContactAccompanimentPhone(phone: string): void {
-    this.getOrientationControl('contactAccompanimentPhone').setValue(this.utils.modifyPhoneValue(phone));
-    this.setValidationsForm();
-  }
-
-  public setContactAccompanimentEmail(email: string): void {
-    this.getOrientationControl('contactAccompanimentEmail').setValue(email);
+  public setContactAccompaniment(contact: string): void {
+    this.getOrientationControl('contactAccompaniment').setValue(contact);
     this.setValidationsForm();
   }
 
@@ -389,7 +365,7 @@ export class OrientationFormComponent implements OnInit {
       this.filters.push(new Filter('equipmentsAndServices', element, this.findEquipmentName(element)));
     });
     this.orientationForm.get('formation').value.forEach((element) => {
-      this.findTrainingCategoryForSkill(element);
+      this.orientationForm.get('formation');
       // Put higher cat like accessRight and so on here
       this.filters.push(
         new Filter(
@@ -398,6 +374,15 @@ export class OrientationFormComponent implements OnInit {
           this.findTrainingCategoryForSkill(element).name
         )
       );
+    });
+
+    // todo - fix
+    this.removeDoublonFilters();
+  }
+
+  public removeDoublonFilters(): void {
+    this.uncheckedFilters.forEach((elem) => {
+      this.filters = this.filters.filter((filter) => filter.value != elem.value);
     });
     this.setStructuresAndCoord();
   }
@@ -425,10 +410,34 @@ export class OrientationFormComponent implements OnInit {
 
   public findTrainingCategoryForSkill(skill): any {
     let infos = { categ: '', name: '' };
-    this.selectedFormations.forEach((elem) => {
+    this.baseSkillssReferentiel.modules.forEach((elem) => {
       if (elem.id === skill) {
-        infos.categ = '';
-        infos.name = elem.name;
+        infos.categ = this.baseSkillssReferentiel.id;
+        infos.name = elem.text;
+      }
+    });
+    this.accessRightsReferentiel.modules.forEach((elem) => {
+      if (elem.id === skill) {
+        infos.categ = this.accessRightsReferentiel.id;
+        infos.name = elem.text;
+      }
+    });
+    this.parentingHelpsReferentiel.modules.forEach((elem) => {
+      if (elem.id === skill) {
+        infos.categ = this.parentingHelpsReferentiel.id;
+        infos.name = elem.text;
+      }
+    });
+    this.socialAndProfessionalsReferentiel.modules.forEach((elem) => {
+      if (elem.id === skill) {
+        infos.categ = this.socialAndProfessionalsReferentiel.id;
+        infos.name = elem.text;
+      }
+    });
+    this.digitalCultureSecuritysReferentiel.modules.forEach((elem) => {
+      if (elem.id === skill) {
+        infos.categ = this.digitalCultureSecuritysReferentiel.id;
+        infos.name = elem.text;
       }
     });
     return infos;
@@ -438,7 +447,7 @@ export class OrientationFormComponent implements OnInit {
     this.geoJsonService
       .getCoord(this.orientationForm.value.address.numero, this.orientationForm.value.address.street, '69000')
       .subscribe((res) => {
-        this.structureService.getStructures(this.filters.filter((elem) => elem.checked == true)).subscribe((data) => {
+        this.structureService.getStructures(this.filters).subscribe((data) => {
           data.map((structure) => {
             structure.distance = parseInt(
               this.geoJsonService.getDistance(
@@ -492,10 +501,15 @@ export class OrientationFormComponent implements OnInit {
     this.showStructureDetails = false;
   }
 
-  public checkFilter(filter: Filter): void {
-    this.filters.forEach((element) => {
-      if (element == filter) element.checked = !element.checked;
-    });
+  public removeFilter(filter: Filter): void {
+    this.filters = this.filters.filter((elem) => elem != filter);
+    this.uncheckedFilters.push(filter);
+    this.setStructuresAndCoord();
+  }
+
+  public restoreFilter(filter: Filter): void {
+    this.uncheckedFilters = this.uncheckedFilters.filter((elem) => elem != filter);
+    this.filters.push(filter);
     this.setStructuresAndCoord();
   }
 

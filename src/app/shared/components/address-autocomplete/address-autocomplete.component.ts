@@ -59,7 +59,6 @@ export class AddressAutocompleteComponent implements OnInit {
     address.numero = hit.properties.housenumber ? hit.properties.housenumber : null;
     address.street = hit.properties.street;
     address.commune = hit.properties.city;
-    address.coordinates = hit.geometry.coordinates;
     const value = this.parseHitToAddress(hit);
     // Set input value
     this.searchAddress.nativeElement.value = value;

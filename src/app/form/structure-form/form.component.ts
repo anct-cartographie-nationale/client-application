@@ -744,7 +744,6 @@ export class FormComponent implements OnInit {
       } else {
         this.currentPage++;
         this.progressStatus += 100 / this.nbPagesForm;
-        document.getElementsByClassName('content')[0].scrollTo(0, 0);
         this.updatePageValid();
       }
     }

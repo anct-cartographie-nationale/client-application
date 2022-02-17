@@ -2,7 +2,6 @@ import { Module } from './module.model';
 
 export class Category {
   name: string;
-  surname: string;
   id: string;
   modules: Module[];
 

@@ -3,9 +3,8 @@
 
 .btn-primary {
   &.previous {
-    background-color: $white;
+    background-color: initial;
     color: $grey-2;
-    border: solid $grey-4 1px;
   }
   &.next {
     .rowBtn {
@@ -26,6 +25,6 @@
 .chevronRight {
   height: 24px;
   width: 24px;
-  // stroke: inherit;
+  stroke: inherit;
   margin-left: 10px;
 }
