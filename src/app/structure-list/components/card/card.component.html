@@ -1,42 +1,57 @@
-<div class="structure" fxLayout="column" (click)="cardClicked()" (mouseenter)="cardHover()">
-  <div class="headerStructure" fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="16px">
-    <div fxLayout="column" fxLayoutAlign="end">
-      <span class="structure-name" [ngClass]="{ notClaimed: !isClaimed }">{{ structure.structureName }}</span>
-      <span class="typeStructure">{{ structure.getLabelTypeStructure() }}</span>
+<div
+  class="structure"
+  fxLayout="column"
+  (click)="cardClicked()"
+  (mouseenter)="cardHover()"
+  [ngClass]="{ orientation: isOrientation }"
+>
+  <div class="left">
+    <div fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="16px">
+      <div fxLayout="column" fxLayoutAlign="end">
+        <span class="structure-name" [ngClass]="{ notClaimed: !isClaimed }">{{ structure.structureName }}</span>
+        <span class="typeStructure">{{ structure.getLabelTypeStructure() }}</span>
+      </div>
+      <div class="distanceStructure" fxLayout="column" fxLayoutAlign="none end">
+        <div *ngIf="!isOrientation">
+          {{ this.structure.address.commune }}
+        </div>
+      </div>
     </div>
-    <div class="distanceStructure" fxLayout="column" fxLayoutAlign="none end">
-      <div *ngIf="!isOrientation">
-        {{ this.structure.address.commune }}
-      </div>
-      <div
-        fxLayout="row"
-        *ngIf="isOrientation && !isSelected"
-        class="selection-button selected"
-        (click)="cardAddToList(); $event.stopPropagation()"
-      >
-        <app-svg-icon [type]="'ico'" [icon]="'add'" [iconColor]="'black'"></app-svg-icon>ajouter à la liste
-      </div>
-      <div
-        fxLayout="row"
-        *ngIf="isOrientation && isSelected"
-        class="selection-button to-select"
-        (click)="cardAddToList(); $event.stopPropagation()"
-      >
-        <app-svg-icon [type]="'ico'" [icon]="'validate'" [iconColor]="'white'"></app-svg-icon>
-        retirer de la liste
-      </div>
-      <div *ngIf="structure.distance">
-        {{ this.formatDistance() }}
-      </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="none flex-end"
+      fxLayoutGap="7px"
+      *ngIf="structure.hasEquipments() && !isOrientation"
+    >
+      <app-svg-icon
+        *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)"
+        [type]="'ico'"
+        [iconColor]="'grey'"
+        [icon]="structure.getEquipmentsIcon(equipement)"
+        [title]="structure.getEquipmentsTitle(equipement)"
+      ></app-svg-icon>
+    </div>
+    <div class="distance" *ngIf="structure.distance">
+      {{ this.formatDistance() }}
     </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="7px" *ngIf="structure.hasEquipments()">
-    <app-svg-icon
-      *ngFor="let equipement of filterOnlyEquipments(structure.equipmentsAndServices)"
-      [type]="'ico'"
-      [iconColor]="'grey'"
-      [icon]="structure.getEquipmentsIcon(equipement)"
-      [title]="structure.getEquipmentsTitle(equipement)"
-    ></app-svg-icon>
+  <div class="actions right" *ngIf="isOrientation">
+    <div
+      fxLayout="row"
+      *ngIf="!isSelected"
+      class="selection-button selected"
+      (click)="cardAddToList(); $event.stopPropagation()"
+    >
+      <app-svg-icon class="add-icon" [type]="'ico'" [icon]="'add'" [iconColor]="'green'"></app-svg-icon>Ajouter
+    </div>
+    <div
+      fxLayout="row"
+      *ngIf="isSelected"
+      class="selection-button to-select"
+      (click)="cardAddToList(); $event.stopPropagation()"
+    >
+      <app-svg-icon class="add-icon" [type]="'ico'" [icon]="'validate'" [iconColor]="'white'"></app-svg-icon>
+      Ajouté
+    </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
-  <button class="btn-primary small previous" (click)="goToPreviousPage()">
+  <button *ngIf="displayPreviousButton" class="btn-primary small previous" (click)="goToPreviousPage()">
     <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
       <svg class="chevronLeft" aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#chevronLeft'"></use>

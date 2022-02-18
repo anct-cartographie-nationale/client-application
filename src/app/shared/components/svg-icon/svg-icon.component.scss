@@ -51,6 +51,10 @@
     fill: $grey-1;
     stroke: $grey-1;
   }
+  &.green {
+    fill: $green-1;
+    stroke: $green-1;
+  }
 }
 
 svg {

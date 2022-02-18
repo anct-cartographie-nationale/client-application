@@ -1,10 +1,10 @@
-<div *ngIf="!multiPrint" class="form" fxLayout="column">
+<div id="body" *ngIf="!multiPrint" class="form" fxLayout="column">
   <app-modal-confirmation
     [openned]="showConfirmationModal"
     [content]="'Il vous faudra de nouveau remplir le formulaire si vous quittez'"
     (closed)="hasRedirectionAccepted($event)"
   ></app-modal-confirmation>
-  <div class="content">
+  <div class="progress-container">
     <div class="progressBar" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
       <label [ngClass]="{ validate: currentPage == nbPagesForm }" for="progressForm"
         >{{ progressStatus | number: '1.0-0' }}%
@@ -16,6 +16,8 @@
         [value]="progressStatus"
       ></progress>
     </div>
+  </div>
+  <div class="content" *ngIf="currentPage != pageTypeEnum.structuresSelection">
     <!-- BESOIN BENEFICIAIRE -->
     <div *ngIf="currentPage == pageTypeEnum.beneficiaryNeed" class="page">
       <div class="titleInfo">
@@ -23,7 +25,7 @@
         Merci de remplir ces quelques questions qui vous permettront d'identifier le lieu à proximité le plus adapté.
       </div>
       <div class="title">
-        <h3>De quoi le bénéficiaire a-t-il besoin ?</h3>
+        <h3>Quels sont les besoins du bénéficiaire ?</h3>
       </div>
       <div class="collapse" [ngClass]="{ notCollapsed: !showEquipments }">
         <div fxLayout="column">
@@ -119,9 +121,8 @@
             </div>
           </div>
           <div *ngIf="showFormation" class="tags">
-            <p class="titleCateg">{{ baseSkillssReferentiel.name }}</p>
             <button
-              *ngFor="let choice of baseSkillssReferentiel.modules"
+              *ngFor="let choice of formations"
               (click)="updateChoice(choice.id, 'formation')"
               [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
             >
@@ -129,99 +130,173 @@
                 <svg class="validate" aria-hidden="true">
                   <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
                 </svg>
-                <div class="textBtn">
-                  {{ choice.text }}
-                </div>
-              </div>
-            </button>
-
-            <p class="titleCateg">{{ accessRightsReferentiel.name }}</p>
-            <button
-              *ngFor="let choice of accessRightsReferentiel.modules"
-              (click)="updateChoice(choice.id, 'formation')"
-              [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
-            >
-              <div fxLayout="row" fxLayoutAlign=" center">
-                <svg class="validate" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-                </svg>
-                <div class="textBtn">
-                  {{ choice.text }}
-                </div>
-              </div>
-            </button>
-
-            <p class="titleCateg">{{ digitalCultureSecuritysReferentiel.name }}</p>
-            <button
-              *ngFor="let choice of digitalCultureSecuritysReferentiel.modules"
-              (click)="updateChoice(choice.id, 'formation')"
-              [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
-            >
-              <div fxLayout="row" fxLayoutAlign=" center">
-                <svg class="validate" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-                </svg>
-                <div class="textBtn">
-                  {{ choice.text }}
-                </div>
-              </div>
-            </button>
-
-            <p class="titleCateg">{{ parentingHelpsReferentiel.name }}</p>
-            <button
-              *ngFor="let choice of parentingHelpsReferentiel.modules"
-              (click)="updateChoice(choice.id, 'formation')"
-              [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
-            >
-              <div fxLayout="row" fxLayoutAlign=" center">
-                <svg class="validate" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-                </svg>
-                <div class="textBtn">
-                  {{ choice.text }}
-                </div>
-              </div>
-            </button>
-
-            <p class="titleCateg">{{ socialAndProfessionalsReferentiel.name }}</p>
-            <button
-              *ngFor="let choice of socialAndProfessionalsReferentiel.modules"
-              (click)="updateChoice(choice.id, 'formation')"
-              [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
-            >
-              <div fxLayout="row" fxLayoutAlign=" center">
-                <svg class="validate" aria-hidden="true">
-                  <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-                </svg>
-                <div class="textBtn">
-                  {{ choice.text }}
-                </div>
+                <div class="textBtn">{{ choice.name }} ({{ choice.surname }}...)</div>
               </div>
             </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- NUMERIC PASS -->
-    <div *ngIf="currentPage == pageTypeEnum.beneficiaryPassNumeric" class="page">
-      <div class="title">
-        <h3>Le bénéficiaire possède-t-il un Pass numérique ?</h3>
-      </div>
-      <app-radio-form
-        [selectedOption]="getOrientationControl('passNumeric').value"
-        [horizontal]="true"
-        (selectedEvent)="onRadioBtnChange('passNumeric', $event)"
-      >
-      </app-radio-form>
-    </div>
     <!-- PROFIL BENEFICIAIRE -->
     <div *ngIf="currentPage == pageTypeEnum.beneficiaryInfo" class="page">
       <div class="title">
+        <h3>Quel est le profil du bénéficiaire ?</h3>
+      </div>
+      <div class="section">
+        <label>Nom</label>
+        <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
+          <input
+            type="text"
+            [value]="getOrientationControl('beneficiaryName').value"
+            (input)="setBeneficiaryName($event.target.value)"
+            class="form-input"
+          />
+        </div>
+      </div>
+      <div class="section">
+        <label>Possède-t-il un Pass numérique ?</label>
+        <app-radio-form [horizontal]="true" (selectedEvent)="onRadioBtnChange('passNumeric', $event)"> </app-radio-form>
+      </div>
+      <div class="section">
+        <label>A-t-il un profil spécifique ?</label>
+        <div class="tags">
+          <button
+            (click)="updateChoice(null, 'specificProfile')"
+            [ngClass]="{ selectedChoice: isEmpty('specificProfile') }"
+          >
+            <div fxLayout="row" fxLayoutAlign=" center">
+              <svg class="validate" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+              </svg>
+              <div class="textBtn">Aucun</div>
+            </div>
+          </button>
+          <button
+            *ngFor="let choice of specificProfile.modules"
+            (click)="updateChoice(choice.id, 'specificProfile')"
+            [ngClass]="{ selectedChoice: isInArray(choice.id, 'specificProfile') }"
+          >
+            <div fxLayout="row" fxLayoutAlign=" center">
+              <svg class="validate" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+              </svg>
+              <div class="textBtn">
+                {{ choice.text }}
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- BENEFICIARY ACCOMPANIMENT -->
+    <div *ngIf="currentPage == pageTypeEnum.beneficiaryAccompaniment" class="page">
+      <div class="title">
+        <h3>Qui oriente le bénéficiaire ?</h3>
+      </div>
+      <div class="section">
+        <label>De quelle structure êtes-vous ? (MDM, Caf, Pôle Emploi...)</label>
+        <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
+          <input
+            type="text"
+            [value]="getOrientationControl('structureAccompaniment').value"
+            (input)="setStructureAccompaniment($event.target.value)"
+            class="form-input"
+          />
+        </div>
+      </div>
+      <div class="section">
+        <label>Courriel de votre structure</label>
+        <p class="notRequired">facultatif</p>
+        <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
+          <input
+            type="text"
+            [value]="getOrientationControl('contactAccompanimentEmail').value"
+            placeholder="exemple: prenom.nom@grandlyon.com"
+            (input)="setContactAccompanimentEmail($event.target.value)"
+            class="form-input"
+          />
+          <app-svg-icon
+            *ngIf="
+              getOrientationControl('contactAccompanimentEmail').valid &&
+              getOrientationControl('contactAccompanimentEmail').value
+            "
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'validate'"
+          ></app-svg-icon>
+          <app-svg-icon
+            *ngIf="
+              getOrientationControl('contactAccompanimentEmail').invalid &&
+              getOrientationControl('contactAccompanimentEmail').value
+            "
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'notValidate'"
+          ></app-svg-icon>
+        </div>
+      </div>
+      <div class="section">
+        <label>Téléphone de votre structure</label>
+        <p class="notRequired">facultatif</p>
+        <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
+          <input
+            type="text"
+            [value]="getOrientationControl('contactAccompanimentPhone').value"
+            (input)="setContactAccompanimentPhone($event.target.value)"
+            class="form-input"
+          />
+          <app-svg-icon
+            *ngIf="
+              getOrientationControl('contactAccompanimentPhone').value &&
+              getOrientationControl('contactAccompanimentPhone').valid
+            "
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'validate'"
+          ></app-svg-icon>
+          <app-svg-icon
+            *ngIf="
+              getOrientationControl('contactAccompanimentPhone').invalid &&
+              getOrientationControl('contactAccompanimentPhone').value
+            "
+            [iconClass]="'validation'"
+            [type]="'form'"
+            [icon]="'notValidate'"
+          ></app-svg-icon>
+        </div>
+      </div>
+    </div>
+    <!-- BENEFICIARY NEEDS COMMENTARY -->
+    <div *ngIf="currentPage == pageTypeEnum.beneficiaryNeedCommentary" class="page">
+      <div class="title">
+        <h3>Avez-vous des précisions à apporter ?</h3>
+        <p class="notRequired lg">facultatif</p>
+      </div>
+      <label>Ces informations accompagneront la fiche d'orientation du bénéficiaire</label>
+      <div class="textareaBlock" fxLayout="column">
+        <textarea
+          rows="8"
+          maxlength="500"
+          placeholder="Exemple: le bénéficiaire n'a pas d'adresse e-mail"
+          [value]="getOrientationControl('beneficiaryNeedCommentary').value"
+          (input)="setBeneficiaryNeedCommentary($event.target.value)"
+        ></textarea>
+        <p class="textarea-char">
+          {{
+            getOrientationControl('beneficiaryNeedCommentary').value
+              ? getOrientationControl('beneficiaryNeedCommentary').value.length
+              : 0
+          }}/500
+        </p>
+      </div>
+    </div>
+    <!-- ADDRESS SEARCH -->
+    <div *ngIf="currentPage == pageTypeEnum.beneficiaryAddress" class="page">
+      <div class="title">
         <h3>Autour de quelle adresse chercher une structure ?</h3>
+        <p class="notRequired lg">facultatif</p>
       </div>
       <div class="form-group" fxLayout="column">
-        <label for="address">Adresse</label>
-
         <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
           <app-address-autocomplete
             [address]="getOrientationControl('address').valid ? getOrientationControl('address').value : null"
@@ -235,174 +310,23 @@
             [icon]="'validate'"
             class="validateIcon"
           ></app-svg-icon>
-          <div *ngIf="!getOrientationControl('address').valid && !isLoading" (click)="getAddress()">
-            <app-svg-icon [type]="'ico'" [icon]="'locateMe'" class="markerIcon"></app-svg-icon>
-          </div>
-          <div *ngIf="isLoading">
-            <img class="loader-gif" src="/assets/gif/loader_circle.gif" alt />
-          </div>
         </div>
-      </div>
-      <div class="title">
-        <h3>Le bénéficiaire a-t-il un profil spécifique ?</h3>
-        <p class="notRequired">facultatif</p>
-      </div>
-
-      <div class="tags">
-        <button
-          *ngFor="let choice of specificProfile.modules"
-          (click)="updateChoice(choice.id, 'specificProfile')"
-          [ngClass]="{ selectedChoice: isInArray(choice.id, 'specificProfile') }"
-        >
-          <div fxLayout="row" fxLayoutAlign=" center">
-            <svg class="validate" aria-hidden="true">
-              <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-            </svg>
-            <div class="textBtn">
-              {{ choice.text }}
-            </div>
-          </div>
-        </button>
-      </div>
-    </div>
-    <!-- STRUCTURE SEARCH -->
-    <div *ngIf="currentPage == pageTypeEnum.structuresSelection" class="page">
-      Filtres séléctionnés
-      <div fxLayout="row wrap" fxLayoutGap="16px">
-        <div *ngFor="let filter of filters" class="tags-cloud" fxLayout="row" (click)="removeFilter(filter)">
-          {{ filter.text ? filter.text : filter.value }}
-          <app-svg-icon [type]="'ico'" [icon]="'delete'" [iconColor]="'white'"></app-svg-icon>
-        </div>
-        <div
-          *ngFor="let uncheckedFilter of uncheckedFilters"
-          class="tags-cloud unchecked"
-          fxLayout="row"
-          (click)="restoreFilter(uncheckedFilter)"
-        >
-          {{ uncheckedFilter.text ? uncheckedFilter.text : uncheckedFilter.value }}
-          <app-svg-icon [type]="'ico'" [icon]="'validate'" [iconColor]="'white'"></app-svg-icon>
-        </div>
-      </div>
-      <div fxLayout="row" class="content-container">
-        <div class="nbStructure-panel left-pane" [ngClass]="{ mapPhone: isMapPhone == true }">
-          <div class="nbStructuresLabel" [ngPlural]="structuresList.length">
-            <ng-template ngPluralCase="0">0 structure trouvée</ng-template>
-            <ng-template ngPluralCase="1">1 structure trouvée</ng-template>
-            <ng-template ngPluralCase="other">{{ structuresList.length }} structures trouvées</ng-template>
-          </div>
-          <div id="listCard" (mouseleave)="mouseLeave()">
-            <app-card
-              *ngFor="let structure of structuresList"
-              [structure]="structure"
-              [isOrientation]="true"
-              [isSelected]="isInPrintList(structure._id)"
-              (addToList)="addToList($event, structure)"
-              (hover)="handleCardHover($event)"
-              (showDetails)="showDetails($event)"
-            ></app-card>
-            <p *ngIf="structureList && structureList.length <= 0">
-              Il n'y a aucune réponse correspondant à votre recherche
-            </p>
-          </div>
-        </div>
-        <div class="btnSwitch">
-          <app-button
-            [style]="'roundedButton'"
-            [text]="isMapPhone ? 'Liste' : 'Carte'"
-            [iconBtn]="isMapPhone ? 'liste' : 'map-marker'"
-            (action)="switchMapList()"
-          ></app-button>
-        </div>
-        <app-map
-          [structures]="structuresList"
-          [structuresToPrint]="structuresToPrint"
-          [toogleToolTipId]="displayMapMarkerId"
-          [selectedMarkerId]="selectedMarkerId"
-          [locate]="locate"
-          (locatationTrigger)="locatationTrigger($event)"
-          (selectedStructure)="showDetails($event)"
-          [isMapPhone]="isMapPhone"
-          [searchedValue]="searchedValue"
-          class="right-pane deep-map"
-          [ngClass]="{ mapPhone: isMapPhone == true }"
-        ></app-map>
-      </div>
-    </div>
-    <!-- BENEFICIARY ACCOMPANIMENT -->
-    <div *ngIf="currentPage == pageTypeEnum.beneficiaryAccompaniment" class="page">
-      <div class="title">
-        <h3>Qui oriente le bénéficiaire ?</h3>
-      </div>
-      <label>Votre structure (MDM, Caf, Pôle Emploi...)</label>
-      <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
-        <input
-          type="text"
-          [value]="getOrientationControl('structureAccompaniment').value"
-          (input)="setStructureAccompaniment($event.target.value)"
-          class="form-input"
-        />
-      </div>
-
-      <div class="title">
-        <h3>Comment contacter cette structure ?</h3>
-        <p class="notRequired">facultatif</p>
-      </div>
-      <label>Contact (email ou n° de téléphone)</label>
-      <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
-        <input
-          type="text"
-          [value]="getOrientationControl('contactAccompaniment').value"
-          (input)="setContactAccompaniment($event.target.value)"
-          class="form-input"
-        />
-      </div>
-
-      <div class="title">
-        <h3>Qui est le bénéficiaire ?</h3>
-        <p class="notRequired">facultatif</p>
-      </div>
-      <label>Nom du bénéficiaire</label>
-      <div class="inputRow" fxLayout="row" fxLayoutGap="13px">
-        <input
-          type="text"
-          [value]="getOrientationControl('beneficiaryName').value"
-          (input)="setBeneficiaryName($event.target.value)"
-          class="form-input"
-        />
-      </div>
-    </div>
-    <!-- BENEFICIARY NEEDS COMMENTARY -->
-    <div *ngIf="currentPage == pageTypeEnum.beneficiaryNeedCommentary" class="page">
-      <div class="title">
-        <h3>Précisez le besoin</h3>
-        <p class="notRequired">facultatif</p>
-      </div>
-      <label>Ces informations sont à destination de la structure</label>
-      <div class="textareaBlock" fxLayout="column">
-        <textarea
-          rows="8"
-          maxlength="500"
-          [value]="getOrientationControl('beneficiaryNeedCommentary').value"
-          (input)="setBeneficiaryNeedCommentary($event.target.value)"
-        ></textarea>
-        <p>
-          {{
-            getOrientationControl('beneficiaryNeedCommentary').value
-              ? getOrientationControl('beneficiaryNeedCommentary').value.length
-              : 0
-          }}/500
-        </p>
       </div>
     </div>
     <!-- PRINT RESULTS -->
-    <div *ngIf="currentPage == pageTypeEnum.printResults" class="page">
+    <div *ngIf="currentPage == pageTypeEnum.printResults" class="last-page">
       <div class="title">
         <app-structure-print-header
-          [beneficiaryNeedCommentary]="getOrientationControl('beneficiaryNeedCommentary').value"
-          [beneficiaryName]="getOrientationControl('beneficiaryName').value"
-          [structureAccompaniment]="getOrientationControl('structureAccompaniment').value"
-          [beneficiaryPassNumeric]="getOrientationControl('passNumeric').value"
-          [contactAccompaniment]="getOrientationControl('contactAccompaniment').value"
+          [beneficiaryNeedCommentary]="
+            getOrientationControl('beneficiaryNeedCommentary')
+              ? getOrientationControl('beneficiaryNeedCommentary').value
+              : ''
+          "
+          [beneficiaryName]="getOrientationControl('beneficiaryName')?.value"
+          [structureAccompaniment]="getOrientationControl('structureAccompaniment')?.value"
+          [beneficiaryPassNumeric]="getOrientationControl('passNumeric')?.value"
+          [contactAccompaniment]="getOrientationControl('contactAccompanimentEmail')?.value"
+          [contactAccompanimentPhone]="getOrientationControl('contactAccompanimentPhone')?.value"
           [filters]="filters"
         ></app-structure-print-header>
 
@@ -413,49 +337,94 @@
       </div>
     </div>
   </div>
+  <!-- STRUCTURE SEARCH -->
+  <div *ngIf="currentPage == pageTypeEnum.structuresSelection" class="carto">
+    <div class="left-col" [ngClass]="{ mapPhone: isMapPhone == true }">
+      <div class="filters">
+        <span class="filters-title">Filtre(s) séléctionné(s)</span>
+        <div fxLayout="row wrap" fxLayoutGap="4px">
+          <div
+            class="tags-cloud"
+            *ngFor="let filter of filters"
+            [class.unchecked]="!filter.checked"
+            fxLayout="row"
+            (click)="checkFilter(filter)"
+          >
+            <app-svg-icon
+              *ngIf="filter.checked"
+              [type]="'ico'"
+              [icon]="'validate'"
+              [iconColor]="'white'"
+            ></app-svg-icon>
+            <app-svg-icon *ngIf="!filter.checked" [type]="'ico'" [icon]="'delete'" [iconColor]="'white'"></app-svg-icon>
+            <div>{{ filter.text ? filter.text : filter.value }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="nbStructuresLabel" [ngPlural]="structuresList.length">
+        <ng-template ngPluralCase="0">0 structure</ng-template>
+        <ng-template ngPluralCase="1">1 structure</ng-template>
+        <ng-template ngPluralCase="other">{{ structuresList.length }} structures</ng-template>
+      </div>
+      <div fxLayout="row" class="content-container">
+        <div class="nbStructure-panel left-pane">
+          <div id="listCard" (mouseleave)="mouseLeave()">
+            <app-card
+              *ngFor="let structure of structuresList"
+              [structure]="structure"
+              [isOrientation]="true"
+              [isSelected]="isInPrintList(structure._id)"
+              (addToList)="addToList($event, structure)"
+              (hover)="handleCardHover($event)"
+              (showDetails)="showDetails($event)"
+              class="structure-card"
+            ></app-card>
+            <p *ngIf="structureList && structureList.length <= 0">
+              Il n'y a aucune réponse correspondant à votre recherche
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btnSwitch">
+      <app-button
+        [style]="'roundedButton'"
+        [text]="isMapPhone ? 'Liste' : 'Carte'"
+        [iconBtn]="isMapPhone ? 'liste' : 'map-marker'"
+        (action)="switchMapList()"
+      ></app-button>
+    </div>
+    <div class="right-col" [ngClass]="{ mapPhone: isMapPhone == true }">
+      <app-map
+        [isOrientationForm]="true"
+        [structures]="structuresList"
+        [structuresToPrint]="structuresToPrint"
+        [toogleToolTipId]="displayMapMarkerId"
+        [selectedMarkerId]="selectedMarkerId"
+        [locate]="locate"
+        (locatationTrigger)="locatationTrigger($event)"
+        (selectedStructure)="showDetails($event)"
+        [isMapPhone]="isMapPhone"
+        [searchedValue]="userLocation"
+        (onOrientationButtonClick)="addToList($event, structure)"
+        class="right-pane deep-map"
+        [ngClass]="{ mapPhone: isMapPhone == true }"
+      ></app-map>
+    </div>
+  </div>
   <!-- FOOTER AVEC SUIVANT / PRECEDENT ET VALIDATION -->
-  <div *ngIf="currentPage == 0" class="footer desktop" fxLayout="column" fxLayoutAlign="space-between">
+  <div *ngIf="currentPage != pageTypeEnum.printResults" class="form-footer">
     <div fxLayout="row" fxLayoutAlign="center center">
       <app-footer-form
         [btnName]="['Précédent', 'Suivant']"
-        (previousPage)="previousUrl()"
+        (previousPage)="previousPage()"
+        [displayPreviousButton]="currentPage !== pageTypeEnum.beneficiaryNeed"
         (nextPage)="nextPage()"
         [isValid]="isPageValid"
       ></app-footer-form>
     </div>
   </div>
-  <div *ngIf="currentPage != 0 && currentPage != pageTypeEnum.printResults" class="footer desktop">
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <app-footer-form
-        [btnName]="['Précédent', 'Suivant']"
-        (previousPage)="previousPage()"
-        (nextPage)="nextPage()"
-        [isValid]="isPageValid"
-      ></app-footer-form>
-    </div>
-  </div>
-  <div *ngIf="currentPage == pageTypeEnum.printResults" class="footer desktop">
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <app-footer-form
-        [btnName]="['Précédent', 'Imprimer']"
-        (previousPage)="previousPage()"
-        (nextPage)="runMultiPrint(true)"
-        [isValid]="isPageValid"
-      ></app-footer-form>
-    </div>
-  </div>
-
-  <div *ngIf="currentPage != 0 && currentPage != pageTypeEnum.printResults" class="footer phone">
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <app-footer-form
-        [btnName]="['Précédent', 'Suivant']"
-        (previousPage)="previousPage()"
-        (nextPage)="nextPage()"
-        [isValid]="isPageValid"
-      ></app-footer-form>
-    </div>
-  </div>
-  <div *ngIf="currentPage == pageTypeEnum.printResults" class="footer phone">
+  <div *ngIf="currentPage == pageTypeEnum.printResults" class="form-footer">
     <div fxLayout="row" fxLayoutAlign="center center">
       <app-footer-form
         [btnName]="['Précédent', 'Imprimer']"
