@@ -122,7 +122,7 @@
           </div>
           <div *ngIf="showFormation" class="tags">
             <button
-              *ngFor="let choice of formations"
+              *ngFor="let choice of selectedFormations"
               (click)="updateChoice(choice.id, 'formation')"
               [ngClass]="{ selectedChoice: isInArray(choice.id, 'formation') }"
             >
