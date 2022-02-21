@@ -130,6 +130,7 @@ h2 {
     grid-template-columns: repeat(auto-fill, minmax(7%, 1fr));
     grid-column-gap: 1%;
     grid-row-gap: 40px;
+    max-width: 1080px;
     .col:nth-child(6n + 1) {
       @include big-container;
       @media #{$news-max} {
