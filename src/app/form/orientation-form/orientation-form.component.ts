@@ -77,6 +77,7 @@ export class OrientationFormComponent implements OnInit {
   public showFormation: boolean;
 
   public multiPrint: boolean = false;
+  public displayModal = false;
 
   public structuresList: Structure[];
   public structuresToPrint: Structure[] = [];
@@ -246,6 +247,9 @@ export class OrientationFormComponent implements OnInit {
     };
     this.pagesValidation[PageTypeEnum.beneficiaryNeedCommentary] = {
       valid: this.getOrientationControl('beneficiaryNeedCommentary').valid,
+    };
+    this.pagesValidation[PageTypeEnum.beneficiaryAddress] = {
+      valid: true,
     };
     this.pagesValidation[PageTypeEnum.beneficiaryAddress] = {
       valid: true,
@@ -534,5 +538,13 @@ export class OrientationFormComponent implements OnInit {
   @HostListener('window:afterprint', [])
   onWindowAfterPrint() {
     this.multiPrint = false;
+  }
+
+  public displayFinishModal(): void {
+    this.displayModal = true;
+  }
+
+  public closeFinishModal(): void {
+    this.displayModal = false;
   }
 }

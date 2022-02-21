@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+<div fxLayout="row" [ngClass]="{ column: hasFinishButton() }" fxLayoutGap="10px" fxLayoutAlign="center center">
   <button *ngIf="displayPreviousButton" class="btn-primary small previous" (click)="goToPreviousPage()">
     <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
       <svg class="chevronLeft" aria-hidden="true">
@@ -7,6 +7,16 @@
       {{ btnName[0] }}
     </div>
   </button>
+
+  <button *ngIf="hasFinishButton()" class="btn-primary small previous" (click)="finishedModal()">
+    <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
+      <svg class="flag" aria-hidden="true">
+        <use [attr.xlink:href]="'/assets/ico/flag.svg'"></use>
+      </svg>
+      {{ btnName[2] }}
+    </div>
+  </button>
+
   <button
     class="btn-primary small next"
     (click)="goToNextPage()"
@@ -14,9 +24,15 @@
     type="submit"
     [ngClass]="{ invalid: !isValid }"
   >
-    <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
-      {{ btnName[1]
-      }}<svg class="chevronRight" aria-hidden="true">
+    <div *ngIf="btnName[1] == 'Imprimer'" fxLayout="row" fxLayoutAlign="center center">
+      <svg class="print" aria-hidden="true">
+        <use [attr.xlink:href]="'/assets/ico/print.svg'"></use>
+      </svg>
+      {{ btnName[1] }}
+    </div>
+    <div *ngIf="btnName[1] == 'Suivant'" class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
+      {{ btnName[1] }}
+      <svg class="chevronRight" aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
       </svg>
     </div>

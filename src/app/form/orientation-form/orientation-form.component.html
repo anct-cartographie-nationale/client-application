@@ -333,6 +333,7 @@
         <app-structure-detail-print
           *ngFor="let structure of structuresToPrint"
           [structure]="structure"
+          class="print-structure-container"
         ></app-structure-detail-print>
       </div>
     </div>
@@ -427,9 +428,10 @@
   <div *ngIf="currentPage == pageTypeEnum.printResults" class="form-footer">
     <div fxLayout="row" fxLayoutAlign="center center">
       <app-footer-form
-        [btnName]="['Précédent', 'Imprimer']"
+        [btnName]="['Précédent', 'Imprimer', 'Terminer']"
         (previousPage)="previousPage()"
         (nextPage)="runMultiPrint(true)"
+        (endPage)="displayFinishModal()"
         [isValid]="isPageValid"
       ></app-footer-form>
     </div>
@@ -443,7 +445,7 @@
   [beneficiaryName]="getOrientationControl('beneficiaryName').value"
   [structureAccompaniment]="getOrientationControl('structureAccompaniment').value"
   [beneficiaryPassNumeric]="getOrientationControl('passNumeric').value"
-  [contactAccompaniment]="getOrientationControl('contactAccompaniment').value"
+  [contactAccompaniment]="getOrientationControl('contactAccompanimentPhone').value"
   [filters]="filters"
 ></app-structure-list-print>
 
@@ -452,3 +454,10 @@
   [structure]="selectedStructure"
   (closeDetails)="closeDetails()"
 ></app-structure-details>
+
+<app-orientation-modal
+  *ngIf="displayModal"
+  [openned]="true"
+  (closed)="closeFinishModal($event)"
+  (previousPage)="previousPage()"
+></app-orientation-modal>

@@ -1,0 +1,27 @@
+@import '../../../../../assets/scss/typography';
+@import '../../../../../assets/scss/color';
+
+.ico-close-details {
+  margin-right: 16px;
+}
+h3 {
+  margin: 8% 15%;
+  text-align: center;
+  @include cn-regular-18;
+  color: $grey-2;
+}
+.modalContent {
+  margin: 0 32px;
+  width: 100%;
+}
+.footerModal {
+  margin: 25px;
+}
+.modalBackground .modal .footerModal .btn.confirm {
+  font-size: 14px;
+  font-weight: normal;
+}
+.flag {
+  padding-right: 10px;
+  stroke: $white;
+}

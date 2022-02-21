@@ -39,6 +39,7 @@ import { OrientationFormComponent } from './form/orientation-form/orientation-fo
 import { StructureDetailPrintComponent } from './form/orientation-form/component/structure-detail-print/structure-detail-print.component';
 import { StructureListPrintComponent } from './form/orientation-form/component/structure-list-print/structure-list-print.component';
 import { StructurePrintHeaderComponent } from './form/orientation-form/component/structure-print-header/structure-print-header.component';
+import { OrientationComponent } from './form/orientation-form/component/orientation-modal/orientation-modal.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { StructureResolver } from './resolvers/structure.resolver';
@@ -71,6 +72,7 @@ import { UpdateService } from './services/update.service';
     StructureDetailPrintComponent,
     StructureListPrintComponent,
     StructurePrintHeaderComponent,
+    OrientationComponent,
   ],
   imports: [
     BrowserModule,
