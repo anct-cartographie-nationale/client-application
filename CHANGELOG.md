@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.13.0...v1.14.0) (2022-02-21)
+
+
+### Features
+
+* **carto:** enable pop-up autopan for markers in order to have a better display on small screen ([758b319](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/758b3193f1263bb31bf46d45a67b136e5fcdaa9f))
+* **carto:** put selected and hover marker on top of the others ([cc3c16c](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/cc3c16c34682f8baaed15caaf8ba70a91ecf4024))
+* **cicd:** rework on automation. Add feature and tag build. Better handling of dependencie proxy ([b9a6764](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/b9a67640b4c7aae589019ae57330d734e5ce3300))
+* **nginx:** new conf for PWA handling ([a38b929](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/a38b929207e0543857867efa355c7c014e96a99e))
+* **orientation-form:** change orientation form design ([1946312](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/1946312fe8b9e1a025693c53ecea6c08d21e5031))
+* **post:** display attachment in post ([020c192](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/020c192182d3d275ecfecd27cdc59bdabe1e0387))
+* **previewImages:** Manage post preview image independantly from post details images ([1761f74](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/1761f7412c9b2645925a6ed925a585fdae8326f9))
+* **print-orientation:** graphic update for the print at the end of the orientation ([335ba0a](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/335ba0af1e97893ba2f3107366598eb67a9fd1fd))
+* **reset-password:** add notification when reset email is sent ([ed857c5](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/ed857c5ca45086ac30a4f1977ac5ae524b15161a))
+* **searchResults:** Add page descriptions ([c15012f](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/c15012fc12aaa9d43e27d273d75b12f77ac90e44))
+
+
+### Bug Fixes
+
+* **admin:** broken link in structure was making admin panel crash ([51ffbb4](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/51ffbb429cbf546c44765cf7f80e37e2dae48d0c))
+* **cicd:** fix deploy issue after variables adding ([0d9f2fc](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/0d9f2fca8ed2ee8aca43d839f8ceb69053f7359a))
+* **cicd:** job build issue on service ([74c091f](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/74c091f0486b2f7db555b825c15189b32967e581))
+* **cicd:** variable usage was making deploy job fail ([2461c64](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/2461c64b7a88dd2f6cd5f90ad530be726c5537da))
+* missing label on footer button ([9662f7e](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/9662f7e78b8ba74a0e2c182bd670b088891baf9b))
+* **news:** change updated date display to created date ([b4c323c](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/b4c323c464ef361b0568af56d550c8a4953be2e1))
+* **news:** created date in post list ([6d2ada7](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/6d2ada7c02b4c1efdb83c0f2e2770a385f4856a2))
+* **news:** issue in responsive, width of post-container is now fixed ([8fa4923](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/8fa492345262bdcea440010d467d0a0179d49ae3))
+* **news:** issue on news display, tag duplication and page display were broken  ([7099003](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/70990035c6c417ad82f00c5d560e239c7d9a86fe))
+* **news:** tag refactor for 'a-la-une' tag. This tag is no longer display if there is another tag on the same post. ([9d0be47](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/9d0be47f1e6fe7a4cd684d6c2b65299bc6ccb0f0))
+* **orientation-form:** fix formation list ([2b5a449](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/2b5a4490f8287d045be49481ab475027cf596219))
+* **orientation-form:** remove geoloc button in carto from orientation form  ([070d15d](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/070d15d913900a40186ab06f43504880b3b1b20e))
+* **posts:** remove image width forced to 100% in post details ([055e9cb](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/055e9cbe0db90f9409192d7d03b6363ee0f9a2a3))
+* **print-orientation:** progression percentage is 100% when printing ([5a2c196](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/5a2c196462a126646d2ae1e0b76760dd338876ab))
+* typo in mobile menu ([cb3ebc7](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/cb3ebc7a5dc6c20d9451a0cee1558f5241554f63))
+
 ## [1.13.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.12.0...v1.13.0) (2022-02-07)
 
 
