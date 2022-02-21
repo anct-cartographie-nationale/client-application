@@ -203,8 +203,9 @@ export class OrientationFormComponent implements OnInit {
     if (this.currentPage === 0) {
       this.previousUrl();
     } else {
+      if (this.currentPage == this.nbPagesForm - 1) this.progressStatus -= (100 / this.nbPagesForm) * 2;
+      else this.progressStatus -= 100 / this.nbPagesForm;
       this.currentPage--;
-      this.progressStatus -= 100 / this.nbPagesForm;
       this.setStructuresAndCoord();
       this.updatePageValid();
     }
@@ -532,6 +533,7 @@ export class OrientationFormComponent implements OnInit {
     this.multiPrint = event;
     setTimeout(() => {
       window.print();
+      this.progressStatus = 100;
     }, 1000);
   }
 
