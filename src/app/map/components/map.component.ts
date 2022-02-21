@@ -272,10 +272,12 @@ export class MapComponent implements OnChanges {
   public onMapReady(map: Map): void {
     this.map = map;
     // Handle location
-    this.lc = L.control.locate(this.locateOptions).addTo(this.map);
-    this.map.on('locationfound', () => {
-      this.locatationTrigger.emit(true);
-    });
+    if (!this.isOrientationForm) {
+      this.lc = L.control.locate(this.locateOptions).addTo(this.map);
+      this.map.on('locationfound', () => {
+        this.locatationTrigger.emit(true);
+      });
+    }
 
     if (this.searchedValue) {
       if (Array.isArray(this.searchedValue)) {
