@@ -30,7 +30,7 @@
       </svg>
       {{ btnName[1] }}
     </div>
-    <div *ngIf="btnName[1] == 'Suivant'" class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
+    <div *ngIf="btnName[1] != 'Imprimer'" class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
       {{ btnName[1] }}
       <svg class="chevronRight" aria-hidden="true">
         <use [attr.xlink:href]="'assets/form/sprite.svg#chevronRight'"></use>
