@@ -35,9 +35,18 @@
   float: right;
 }
 
-.print-header {
-  page-break-after: always;
-  height: 100%;
+.beneficiaryNeeds {
+  td {
+    vertical-align: top;
+  }
+  border-collapse: separate;
+  border-spacing: 10px 15px;
+}
+
+.informationsHeader {
+  min-width: 35%;
+  margin-bottom: 5px;
+  color: $black;
 }
 
 .typeInformationHeader {
@@ -103,5 +112,9 @@
     margin-left: 2%;
     padding: 2%;
     width: 70%;
+  }
+
+  tr {
+    margin-bottom: 8px;
   }
 }

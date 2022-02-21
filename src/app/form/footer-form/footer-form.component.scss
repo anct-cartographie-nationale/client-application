@@ -1,5 +1,6 @@
 @import '../../../assets/scss/color';
 @import '../../../assets/scss/typography';
+@import '../../../assets/scss/breakpoint';
 
 .btn-primary {
   &.previous {
@@ -7,13 +8,28 @@
     color: $grey-2;
     border: solid $grey-4 1px;
   }
+  &.invalid {
+    opacity: 0.4;
+  }
+
+  &:focus .print {
+    background-color: $secondary-color;
+  }
+
   &.next {
     .rowBtn {
       margin-left: 24px;
     }
   }
-  &.invalid {
-    opacity: 0.4;
+}
+
+.column {
+  @media #{$phone} {
+    flex-direction: column !important;
+    button {
+      margin-bottom: 10px !important;
+      margin-right: 0 !important;
+    }
   }
 }
 
@@ -26,6 +42,22 @@
 .chevronRight {
   height: 24px;
   width: 24px;
-  // stroke: inherit;
   margin-left: 10px;
+}
+
+.print {
+  stroke: $white;
+  width: 20px;
+  height: 20px;
+  padding-right: 20px;
+  background-color: $white;
+  mask: url(/assets/ico/print.svg) no-repeat center;
+}
+.flag {
+  padding-right: 10px;
+  stroke: $black;
+  width: 20px;
+  height: 20px;
+  background-color: $grey-1;
+  mask: url(/assets/ico/flag.svg) no-repeat center;
 }

@@ -24,7 +24,7 @@
     height: calc(100vh - #{$header-height} - 28px);
   }
   &.orientation {
-    height: calc(96vh - #{$header-height} - #{$footer-height} - 68px);
+    height: calc(96vh - #{$header-height} - #{$footer-height} - 68px - #{$footer-height-phone});
   }
 }
 

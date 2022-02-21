@@ -9,14 +9,14 @@
         <h3>Fiche d'orientation</h3>
       </div>
     </div>
-    <p class="typeInformationHeader date">{{ date }}</p>
+    <p class="informationHeader date">{{ date }}</p>
   </div>
 
   <div class="informations">
     <div class="helper">
       <!-- Accompaniment -->
       <div *ngIf="structureAccompaniment">
-        <div class="typeInformationHeader">{{ 'Orienté par' | uppercase }}</div>
+        <div class="informationHeader">{{ 'Orienté par' | uppercase }}</div>
         <p class="bold">{{ structureAccompaniment }}</p>
         <!-- Contact -->
         <p class="bold" *ngIf="contactAccompaniment">{{ contactAccompaniment }}</p>
@@ -24,39 +24,39 @@
       </div>
     </div>
     <div class="beneficiary">
-      <div class="typeInformationHeader">{{ 'Bénéficiaire' | uppercase }}</div>
+      <div class="informationHeader">{{ 'Bénéficiaire' | uppercase }}</div>
       <!-- Name -->
-      <table>
+      <table class="beneficiaryNeeds">
         <tr>
-          <td class="typeInformationHeader">Nom</td>
+          <td class="informationHeader">Nom</td>
           <td class="bold">{{ beneficiaryName }}</td>
         </tr>
         <tr *ngIf="equipments.length > 0">
-          <td class="typeInformationHeader">Besoin(s) en matériel</td>
+          <td class="informationHeader">Besoin(s) en matériel</td>
           <td class="bold">
             <div *ngFor="let equipmentTag of equipments">
               {{ equipmentTag.text ? equipmentTag.text : equipmentTag.value }}
             </div>
           </td>
         </tr>
-        <tr *ngIf="formations.length > 0">
-          <td class="typeInformationHeader">Besoin(s) en formation</td>
-          <td class="bold">
-            <div *ngFor="let formationTag of formations">
-              {{ formationTag.text ? formationTag.text : formationTag.value }}
-            </div>
-          </td>
-        </tr>
         <tr *ngIf="assistances.length > 0">
-          <td class="typeInformationHeader">Besoin(s) d'accompagnement</td>
+          <td class="informationHeader">Besoin(s) en formation</td>
           <td class="bold">
             <div *ngFor="let assistanceTag of assistances">
               {{ assistanceTag.text ? assistanceTag.text : assistanceTag.value }}
             </div>
           </td>
         </tr>
+        <tr *ngIf="formations.length > 0">
+          <td class="informationHeader">Besoin(s) d'accompagnement</td>
+          <td class="bold">
+            <div *ngFor="let formationTag of formations">
+              {{ formationTag.text ? formationTag.text : formationTag.value }}
+            </div>
+          </td>
+        </tr>
         <tr *ngIf="specificNeeds.length > 0">
-          <td class="typeInformationHeader">Besoin(s) spécifiques</td>
+          <td class="informationHeader">Besoin(s) spécifiques</td>
           <td class="bold">
             <div *ngFor="let specificNeed of specificNeeds">
               {{ specificNeed.text ? specificNeed.text : specificNeed.value }}
@@ -64,11 +64,11 @@
           </td>
         </tr>
         <tr *ngIf="beneficiaryPassNumeric">
-          <td class="typeInformationHeader">Pass Numérique</td>
+          <td class="informationHeader">Pass Numérique</td>
           <td class="bold">Oui</td>
         </tr>
         <tr *ngIf="beneficiaryNeedCommentary">
-          <td class="typeInformationHeader">Informations</td>
+          <td class="informationHeader">Informations</td>
           <td class="bold">{{ beneficiaryNeedCommentary }}</td>
         </tr>
       </table>

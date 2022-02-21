@@ -6,7 +6,7 @@
         <h3 class="bold">{{ structure.structureName }}</h3>
       </div>
       <div class="mobile-column">
-        <div fxLayout="column" fxFlex="50%">
+        <div fxLayout="column" fxFlex="100%">
           <div *ngIf="structure.address" fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="13px">
             <app-svg-icon [type]="'ico'" [icon]="'adress'" [title]="'Adresse'"></app-svg-icon>
             <p>{{ structure.address.numero }} {{ structure.address.street }}, {{ structure.address.commune }}</p>

@@ -1,0 +1,30 @@
+<div *ngIf="openned" class="modalBackground">
+  <div class="modal">
+    <div
+      (clickOutside)="closeModal(false)"
+      class="contentModal"
+      fxLayout="row-reverse"
+      fxLayoutAlign="space-around start"
+    >
+      <div class="ico-close">
+        <div class="ico-close-wrapper">
+          <div (click)="closeModal()" class="ico-close-details"></div>
+        </div>
+      </div>
+
+      <div class="modalContent">
+        <h3 fxLayoutAlign="center center">Souhaitez-vous terminer cette orientation ?</h3>
+
+        <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center">
+          <button type="button" class="btn confirm" (click)="goToPreviousPage()">Revenir aux résultats</button>
+          <button class="btn-primary small previous" routerLink="../home">
+            <div class="rowBtn" fxLayout="row" fxLayoutAlign="center center">
+              <img class="flag" src="/assets/ico/flag.svg" alt />
+              Terminer
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ export class FooterFormComponent {
   @Input() displayPreviousButton: boolean = true;
   @Output() nextPage = new EventEmitter<any>();
   @Output() previousPage = new EventEmitter<any>();
+  @Output() endPage = new EventEmitter<any>();
 
   public goToNextPage(): void {
     this.nextPage.emit();
@@ -18,5 +19,12 @@ export class FooterFormComponent {
 
   public goToPreviousPage(): void {
     this.previousPage.emit();
+  }
+
+  public hasFinishButton(): boolean {
+    return this.btnName.length == 3;
+  }
+  public finishedModal(): void {
+    this.endPage.emit();
   }
 }
