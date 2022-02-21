@@ -10,6 +10,7 @@ import { PostCardComponent } from './components/post-card/post-card.component';
 import { PostPublishComponent } from './components/post-publish/post-publish.component';
 import { PostModalFiltersComponent } from './components/post-modal-filters/post-modal-filters.component';
 import { TagResolver } from './resolvers/tags.resolver';
+import { PostTagComponent } from './components/post-tag/post-tag.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TagResolver } from './resolvers/tags.resolver';
     PostCardComponent,
     PostModalFiltersComponent,
     PostPublishComponent,
+    PostTagComponent,
   ],
   imports: [CommonModule, PostRoutingModule, SharedModule],
   providers: [TagResolver],

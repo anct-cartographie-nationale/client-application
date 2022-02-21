@@ -68,14 +68,20 @@ export class PostListComponent implements OnInit {
     });
   }
 
+  /**
+   * Fill articles list with headline handling
+   * @param news {PostWithMeta}
+   */
   public fillArticles(news: PostWithMeta): void {
     this.setNews(news);
-    const headLineTag = this.allPosts.filter((post: Post) => post.tags.some((tag) => tag.slug === TagEnum.aLaUne));
+    const headLineTag = this.allPosts.filter((post: Post) =>
+      post.tags.some((tag) => tag && tag.slug === TagEnum.aLaUne)
+    );
 
     const headIndex = this.allPosts.findIndex((post) => post.id === headLineTag[0].id);
     this.allPosts.splice(headIndex, 1);
 
-    this.allPosts = [...headLineTag, ...this.allPosts];
+    this.allPosts = [...headLineTag, ..._.difference(this.allPosts, headLineTag)];
   }
 
   public getPosts(filters?: Tag[]): void {

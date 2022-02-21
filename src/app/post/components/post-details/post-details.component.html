@@ -9,12 +9,7 @@
   </div>
   <div class="gh-canvas">
     <div fxLayout="column" fxLayoutAlign="center none">
-      <div *ngIf="post.tags[0]" fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px">
-        <span>{{ post.tags[0].name }}</span>
-      </div>
-      <div *ngIf="!post.tags[0]" fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px">
-        <span>Infos</span>
-      </div>
+      <app-post-tag [post]="post"></app-post-tag>
       <div fxLayout="row" class="title">{{ post.title }}</div>
       <div fxLayout="column" class="informations">
         <div>{{ post.author }}</div>

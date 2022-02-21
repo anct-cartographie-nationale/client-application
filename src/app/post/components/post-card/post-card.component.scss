@@ -15,13 +15,7 @@
       }
     }
   }
-  .tag {
-    @include cn-bold-16;
-    text-transform: uppercase;
-    color: $secondary-color;
-    fill: $secondary-color;
-    stroke: $secondary-color;
-  }
+
   .title {
     @media #{$large-phone} {
       @include cn-bold-18;

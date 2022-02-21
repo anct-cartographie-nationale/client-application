@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { TagEnum } from '../../enum/tag.enum';
 import { Post } from '../../models/post.model';
@@ -19,6 +19,6 @@ export class PostCardComponent {
   }
 
   public isAppelAProjet(): boolean {
-    return this.post.tags[0].slug === this.tagEnum.appels;
+    return this.post.tags[0] && this.post.tags[0].slug === this.tagEnum.appels;
   }
 }

@@ -14,13 +14,6 @@
   }
 }
 
-.tag {
-  @include cn-bold-16;
-  text-transform: uppercase;
-  color: $secondary-color;
-  fill: $secondary-color;
-  stroke: $secondary-color;
-}
 .informations {
   @include cn-regular-16;
   div:nth-child(2n) {

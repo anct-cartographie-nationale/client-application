@@ -1,0 +1,8 @@
+<div>
+  <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="post.tags[0]">
+    <span>{{ displayTag(post) }}</span>
+  </div>
+  <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="!post.tags[0]">
+    <span>infos</span>
+  </div>
+</div>

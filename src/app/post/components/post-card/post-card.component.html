@@ -17,13 +17,7 @@
     />
   </div>
   <div fxLayout="column" fxLayoutGap="8px" fxLayoutAlign="center">
-    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="post.tags[0]">
-      <span>{{ post.tags[0].name }}</span>
-    </div>
-    <div fxLayout="row" class="tag" fxLayoutAlign=" center" fxLayoutGap="12px" *ngIf="!post.tags[0]">
-      <span>info</span>
-    </div>
-
+    <app-post-tag [post]="post"></app-post-tag>
     <div fxLayout="row" class="title">
       {{ post.title }}
     </div>
