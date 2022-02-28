@@ -2,6 +2,12 @@
 @import '../../assets/scss/layout';
 @import '../../assets/scss/z-index';
 
+::ng-deep .footer {
+  @media #{$tablet} {
+    display: none !important;
+  }
+}
+
 .left-pane {
   width: 640px;
   min-width: 640px;
