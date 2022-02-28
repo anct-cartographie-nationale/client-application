@@ -63,6 +63,7 @@ export class ManageUsersComponent {
       },
       {
         headerName: 'Actions',
+        editable: false,
         minWidth: 150,
         cellRenderer: 'deleteUserComponent',
         cellRendererParams: {
