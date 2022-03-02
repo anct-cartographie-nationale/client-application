@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-radio-form',
@@ -10,8 +11,20 @@ export class RadioFormComponent implements OnInit {
 
   @Input() public selectedOption: boolean;
   @Input() public horizontal: boolean;
+  @Input() public layoutGap: string;
+  @Input() public name: string;
+  @Input() events: Observable<Object>;
   @Output() selectedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
-  ngOnInit(): void {}
+
+  private eventsSubscription: Subscription;
+
+  ngOnInit(): void {
+    if (this.events) this.eventsSubscription = this.events.subscribe((data: boolean) => (this.selectedOption = data));
+  }
+
+  ngOnDestroy() {
+    if (this.eventsSubscription) this.eventsSubscription.unsubscribe();
+  }
 
   public clicked(bool: boolean): void {
     this.selectedOption = bool;

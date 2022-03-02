@@ -5,6 +5,8 @@ import { User } from '../../models/user.model';
 import decode from 'jwt-decode';
 import { UserRole } from '../../shared/enum/userRole.enum';
 import { AuthService } from '../../services/auth.service';
+import { Structure } from '../../models/structure.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -80,5 +82,9 @@ export class ProfileService {
 
   public isEmailAlreadyUsed(newMail: string): Observable<boolean> {
     return this.http.post<boolean>(`${this.baseUrl}/verify-exist-user`, { newMail });
+  }
+
+  public getAllDataConsentPendingStructures(): Observable<Structure[]> {
+    return this.http.get<Structure[]>(`${this.baseUrl}/dataConsentValidation`);
   }
 }

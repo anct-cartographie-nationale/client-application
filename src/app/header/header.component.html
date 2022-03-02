@@ -57,6 +57,10 @@
 </div>
 
 <app-signup-modal *ngIf="displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignUpModal($event)"></app-signup-modal>
+<app-data-share-consent
+  *ngIf="isDisplayDataShare"
+  [dataConsentPendingStructures]="dataConsentPendingStructures"
+></app-data-share-consent>
 
 <ng-template #customTitle>
   <img class="desktop-show logo-grand-lyon" width="108" height="37" src="/assets/logos/resin.svg" alt />

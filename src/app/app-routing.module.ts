@@ -102,7 +102,6 @@ const routes: Routes = [
     path: 'newsletter',
     component: NewsletterSubscriptionComponent,
   },
-
   {
     path: 'newsletter-unsubscribe',
     component: NewsletterSubscriptionComponent,

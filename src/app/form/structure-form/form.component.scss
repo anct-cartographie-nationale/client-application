@@ -189,6 +189,11 @@ h4 {
       margin-top: 18px;
       color: $grey-2;
       @include cn-regular-14;
+      a {
+        color: $default-link-color;
+        text-decoration: underline;
+        font-weight: bold;
+      }
     }
   }
   .textareaBlock {
@@ -560,7 +565,11 @@ img {
 .section {
   padding-bottom: 2rem;
 }
-
+.dataShareConsent {
+  ::ng-deep button p {
+    font-weight: normal !important;
+  }
+}
 .missing-information {
   display: flex;
   color: $orange-warning;

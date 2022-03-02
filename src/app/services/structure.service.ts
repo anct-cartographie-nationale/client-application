@@ -36,6 +36,11 @@ export class StructureService {
 
   public editStructure(structure: Structure): Observable<Structure> {
     structure.updatedAt = new Date().toString();
+    if (structure.dataShareConsentDate) {
+      structure.dataShareConsentDate = new Date().toString();
+    } else {
+      structure.dataShareConsentDate = null;
+    }
     const id = structure._id;
     delete structure._id; // id should not be provided for update
     return this.http.put(`${this.baseUrl}/${id}`, structure).pipe(map((item: Structure) => new Structure(item)));

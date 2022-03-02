@@ -1,10 +1,13 @@
-<div [fxLayout]="horizontal ? 'row' : 'column'" [fxLayoutGap]="horizontal ? '17px' : ''">
+<div [fxLayout]="horizontal ? 'row' : 'column'" [fxLayoutGap]="horizontal ? (layoutGap ? layoutGap : '17px') : ''">
+  <div *ngIf="name" fxLayout="row" fxLayoutAlign=" center" [fxLayoutGap]="layoutGap ? layoutGap : '17px'" class="name">
+    {{ name }}
+  </div>
   <button
     (click)="clicked(true)"
     [ngClass]="{ selected: selectedOption && selectedOption != null }"
     fxLayout="row"
     fxLayoutAlign=" center"
-    fxLayoutGap="17px"
+    [fxLayoutGap]="layoutGap ? layoutGap : '17px'"
   >
     <div class="checkmark">
       <svg class="validate" aria-hidden="true">
@@ -18,7 +21,7 @@
     [ngClass]="{ selected: !selectedOption && selectedOption != null }"
     fxLayout="row"
     fxLayoutAlign=" center"
-    fxLayoutGap="17px"
+    [fxLayoutGap]="layoutGap ? layoutGap : '17px'"
   >
     <div class="checkmark">
       <svg class="validate" aria-hidden="true">
