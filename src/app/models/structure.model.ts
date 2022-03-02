@@ -50,6 +50,7 @@ export class Structure {
 
   public distance?: number;
   public coord?: number[] = [];
+  public dataShareConsentDate?: string;
 
   public accountVerified: boolean = false;
 

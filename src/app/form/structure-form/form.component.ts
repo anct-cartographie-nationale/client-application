@@ -83,6 +83,8 @@ export class FormComponent implements OnInit {
 
   // Structure id for edit mode
   public structureId: string;
+  // last page for edit form
+  public lastPage = this.pageTypeEnum.cgu;
 
   constructor(
     private structureService: StructureService,
@@ -320,6 +322,7 @@ export class FormComponent implements OnInit {
         Validators.min(0),
       ]),
       freeWorkShop: new FormControl(structure.freeWorkShop, [Validators.required]),
+      dataShareConsentDate: new FormControl(structure.dataShareConsentDate),
     });
   }
 
@@ -590,7 +593,14 @@ export class FormComponent implements OnInit {
         valid: this.getStructureControl('lockdownActivity').valid,
         name: 'Informations spécifiques à la période COVID',
       };
-      this.pagesValidation[PageTypeEnum.cgu] = { valid: this.userAcceptSavedDate };
+      if (this.isEditMode) {
+        this.pagesValidation[PageTypeEnum.cgu] = {
+          valid: this.getStructureControl('dataShareConsentDate').valid,
+          name: 'Partage de données sur data.grandlyon.com',
+        };
+      } else {
+        this.pagesValidation[PageTypeEnum.cgu] = { valid: this.userAcceptSavedDate };
+      }
       this.updatePageValid();
     }
   }
@@ -895,6 +905,12 @@ export class FormComponent implements OnInit {
   }
   public acceptDataBeSaved(isAccepted: boolean): void {
     this.userAcceptSavedDate = isAccepted;
+    this.setValidationsForm();
+  }
+
+  public acceptOpenData(isAccepted: boolean): void {
+    let now = new Date().toString();
+    this.getStructureControl('dataShareConsentDate').setValue(now);
     this.setValidationsForm();
   }
 

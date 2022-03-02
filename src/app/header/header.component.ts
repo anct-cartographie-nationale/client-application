@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Structure } from '../models/structure.model';
 import { ProfileService } from '../profile/services/profile.service';
 import { AuthService } from '../services/auth.service';
 
@@ -15,6 +16,9 @@ export class HeaderComponent implements OnInit {
   public currentRoute = '';
   public formRoute = '/create-structure';
   public returnUrl = null;
+  public dataConsentPendingStructures: Structure[];
+  private displayDataShare = false;
+  private loadingDataShare = false;
 
   constructor(
     private authService: AuthService,
@@ -51,6 +55,24 @@ export class HeaderComponent implements OnInit {
 
   public get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
+  }
+
+  public get isDisplayDataShare(): boolean {
+    if (this.displayDataShare) {
+      return this.displayDataShare;
+    } else {
+      if (this.isLoggedIn && !this.loadingDataShare) {
+        this.loadingDataShare = true;
+        this.profileService.getAllDataConsentPendingStructures().subscribe((dataConsentPendingStructures) => {
+          if (dataConsentPendingStructures.length) {
+            this.displayDataShare = true;
+            this.dataConsentPendingStructures = dataConsentPendingStructures;
+            return this.displayDataShare;
+          }
+        });
+      }
+    }
+    return false;
   }
 
   public closeSignInModal(): void {

@@ -49,3 +49,14 @@ button {
     border-radius: 10px;
   }
 }
+
+.name {
+  width: 310px;
+  background: $grey-6;
+  border-radius: 4px;
+  padding: 0 16px;
+  font-size: $font-size-small;
+  outline: none;
+  border: none;
+  margin: 8px 0;
+}

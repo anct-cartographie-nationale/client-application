@@ -85,7 +85,7 @@
       <div class="summary" *ngFor="let page of pagesValidation; let index = index">
         <div
           class="itemSummary"
-          [ngClass]="{ last: index == 22 }"
+          [ngClass]="{ last: index == lastPage }"
           fxLayout="row"
           fxLayoutAlign="space-between center"
           *ngIf="page.name && shouldDisplayPage(index)"
@@ -1285,49 +1285,88 @@
         </div>
       </div>
     </form>
-    <div *ngIf="currentPage == pageTypeEnum.cgu" class="page">
-      <div class="section">
-        <div class="title">
-          <h3>
-            Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon<span
-              class="asterisk"
-              >*</span
+    <form>
+      <div *ngIf="currentPage == pageTypeEnum.cgu" class="page">
+        <div class="section" *ngIf="!isEditMode">
+          <div class="title">
+            <h3>
+              Acceptez-vous que les informations saisies soient enregistrées par la Métropole de Lyon<span
+                class="asterisk"
+                >*</span
+              >
+              ?
+            </h3>
+          </div>
+          <app-checkbox-form
+            [isChecked]="userAcceptSavedDate"
+            [text]="'J\'accepte'"
+            (checkEvent)="acceptDataBeSaved($event)"
+          >
+          </app-checkbox-form>
+        </div>
+        <div class="section">
+          <div class="title">
+            <h3>
+              Acceptez-vous que les informations de votre structure soient mises à disposition sur la plateforme
+              data.grandlyon.com<span class="asterisk" *ngIf="!isEditMode">**</span
+              ><span class="asterisk" *ngIf="isEditMode">*</span> ?
+            </h3>
+            <p class="notRequired" *ngIf="!isEditMode">facultatif</p>
+          </div>
+          <app-checkbox-form
+            *ngIf="!isEditMode"
+            [text]="'J\'accepte'"
+            (checkEvent)="acceptOpenData($event)"
+          ></app-checkbox-form>
+          <div class="dataShareConsent">
+            <app-radio-form
+              *ngIf="isEditMode"
+              name="{{ getStructureControl('structureName').value }}"
+              horizontal="true"
+              [selectedOption]="getStructureControl('dataShareConsentDate').value === null ? false : true"
+              (selectedEvent)="onRadioBtnChange('dataShareConsentDate', $event)"
             >
-            ?
-          </h3>
+            </app-radio-form>
+          </div>
         </div>
-        <app-checkbox-form
-          [isChecked]="userAcceptSavedDate"
-          [text]="'J\'accepte'"
-          (checkEvent)="acceptDataBeSaved($event)"
-        >
-        </app-checkbox-form>
-      </div>
-      <div *ngIf="!profile">
-        <div class="title">
-          <h3>Acceptez-vous de recevoir des mails d'informations de la part de Res'in ?</h3>
+        <div *ngIf="!profile">
+          <div class="title">
+            <h3>Souhaitez-vous vous abonner à la lettre d’information de Res'in ?</h3>
+            <p class="notRequired" *ngIf="!isEditMode">facultatif</p>
+          </div>
+          <app-checkbox-form
+            [isChecked]="userAcceptNewsletter"
+            [text]="'J\'accepte'"
+            (checkEvent)="acceptReceiveNewsletter($event)"
+          >
+          </app-checkbox-form>
         </div>
-        <app-checkbox-form
-          [isChecked]="userAcceptNewsletter"
-          [text]="'J\'accepte'"
-          (checkEvent)="acceptReceiveNewsletter($event)"
-        >
-        </app-checkbox-form>
+        <p *ngIf="!isEditMode" class="informationEndForm">
+          <span class="asterisk">*</span> Les informations recueillies sont enregistrées dans un fichier par la
+          Métropole de Lyon en vue de l'animation du réseau des acteurs de la médiation numérique. Elles sont conservées
+          pendant 24 mois et sont destinées aux seuls intervenants habilités de la Métropole de Lyon. Vos données
+          personnelles sont traitées dans ce cadre aux fins de recensement des actions de médiation numérique sur le
+          territoire de la métropole. Conformément à la loi 78-17 du 6 janvier 1978 modifiée relative à l'information,
+          aux fichiers et aux libertés, et au Règlement Général européen à la Protection des Données, vous avez la
+          possibilité d’exercer vos droits d’accès, de rectification, d’effacement, d’opposition, de limitation du
+          traitement et de révocation de votre consentement. Afin d'exercer vos droits, vous pouvez vous adresser : par
+          courrier postal à : Métropole de Lyon - Direction des Affaires Juridiques et de la Commande Publique - 20, rue
+          du Lac - BP 33569 - 69505 Lyon Cedex par courrier électronique en remplissant le formulaire dédié sur Toodego,
+          le site des services et démarches en ligne dans la Métropole de Lyon
+        </p>
+        <div class="page" *ngIf="currentPage == pageTypeEnum.cgu">
+          <p class="informationEndForm">
+            <span class="asterisk" *ngIf="!isEditMode">**</span><span class="asterisk" *ngIf="isEditMode">*</span> La
+            Métropole de Lyon, engagée pour la transparence de l’action publique et la valorisation de ses partenaires,
+            encourage l’ouverture des données. Les données de votre structure seront publiées sur la plateforme
+            <a href="https://data.grandlyon.com/" target="_blank">https://data.grandlyon.com/</a> sous la licence
+            ouverte (open data) et seront donc librement accessibles et réutilisables. Vous pourrez modifier votre choix
+            à tout moment, exercer vos droits d’accès et de modification, en le signifiant, par tout moyen à votre
+            convenance, auprès de vos interlocuteurs de la Métropole de Lyon.
+          </p>
+        </div>
       </div>
-      <p class="informationEndForm">
-        <span class="asterisk">*</span> Les informations recueillies sont enregistrées dans un fichier par la Métropole
-        de Lyon en vue de l'animation du réseau des acteurs de la médiation numérique. Elles sont conservées pendant 24
-        mois et sont destinées aux seuls intervenants habilités de la Métropole de Lyon. Vos données personnelles sont
-        traitées dans ce cadre aux fins de recensement des actions de médiation numérique sur le territoire de la
-        métropole. Conformément à la loi 78-17 du 6 janvier 1978 modifiée relative à l'information, aux fichiers et aux
-        libertés, et au Règlement Général européen à la Protection des Données, vous avez la possibilité d’exercer vos
-        droits d’accès, de rectification, d’effacement, d’opposition, de limitation du traitement et de révocation de
-        votre consentement. Afin d'exercer vos droits, vous pouvez vous adresser : par courrier postal à : Métropole de
-        Lyon - Direction des Affaires Juridiques et de la Commande Publique - 20, rue du Lac - BP 33569 - 69505 Lyon
-        Cedex par courrier électronique en remplissant le formulaire dédié sur Toodego, le site des services et
-        démarches en ligne dans la Métropole de Lyon
-      </p>
-    </div>
+    </form>
     <div
       *ngIf="currentPage == nbPagesForm && !profile"
       class="page"
@@ -1340,7 +1379,7 @@
       </svg>
       <h3>Un courriel vous a été envoyé afin de valider votre inscription</h3>
     </div>
-    <div *ngIf="currentPage == nbPagesForm && profile" class="lastPage">
+    <div *ngIf="currentPage == nbPagesForm && profile && !isEditMode" class="lastPage">
       <div class="lastPage">
         <div class="title">
           <h3>
@@ -1390,7 +1429,7 @@
         Ok
       </button>
       <button
-        *ngIf="currentPage == nbPagesForm && profile"
+        *ngIf="currentPage == nbPagesForm && profile && !isEditMode"
         class="btn-primary unique"
         routerLink="/acteurs"
         [queryParams]="{ id: createdStructure._id }"

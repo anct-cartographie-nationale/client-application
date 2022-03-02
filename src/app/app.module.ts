@@ -45,6 +45,7 @@ import { environment } from '../environments/environment';
 import { StructureResolver } from './resolvers/structure.resolver';
 import { RoleGuard } from './guards/role.guard';
 import { UpdateService } from './services/update.service';
+import { DataShareConsentComponent } from './shared/components/data-share-consent/data-share-consent.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { UpdateService } from './services/update.service';
     StructureDetailPrintComponent,
     StructureListPrintComponent,
     StructurePrintHeaderComponent,
+    DataShareConsentComponent,
     OrientationComponent,
   ],
   imports: [
