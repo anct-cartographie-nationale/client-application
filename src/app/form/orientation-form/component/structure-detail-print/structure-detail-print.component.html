@@ -39,7 +39,7 @@
     <!-- Opening Hours -->
     <div fxLayout="row" class="w-100 mobile-column">
       <div *ngIf="structure.hours.hasData()" fxFlex="50%">
-        <h3 class="subtitle">Horaires d’ouverture au public</h3>
+        <h3 class="subtitle">Horaires</h3>
         <div fxLayout="column">
           <div *ngFor="let day of structure.hours | keyvalue: keepOriginalOrder">
             <div *ngIf="day.value.open">
@@ -60,7 +60,7 @@
       </div>
       <!-- accessModality -->
       <div *ngIf="structure.accessModality.length > 0" fxFlex="40%">
-        <h3 class="subtitle">Accès transports en commun</h3>
+        <h3 class="subtitle">Accès</h3>
         <div fxLayout="column">
           <div *ngFor="let tclStop of tclStopPoints">
             <div fxLayout="row wrap" fxLayoutGap="5px">

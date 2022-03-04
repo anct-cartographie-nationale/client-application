@@ -195,6 +195,9 @@ h4 {
         font-weight: bold;
       }
     }
+    &.notRequired {
+      font-style: italic;
+    }
   }
   .textareaBlock {
     @media #{$tablet} {
