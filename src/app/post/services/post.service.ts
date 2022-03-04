@@ -23,22 +23,21 @@ export class PostService {
   }
 
   public getPosts(page: number, tags?: string[]): Observable<PostWithMeta> {
-    if (!tags) {
-      return this.http
-        .get<PostWithMeta>(`${this.baseUrl}?page=${page}&include=tags,authors`)
-        .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
+    let tagsFilter = '';
+
+    if (tags) {
+      let tagsString = '';
+      // Transform tab filters to string filters
+      tags.forEach((tag, index) => {
+        tagsString += tag;
+        if (index != tags.length - 1) {
+          tagsString += '+tags:';
+        }
+      });
+      tagsFilter = `&filter=tags:${encodeURIComponent(tagsString)}`;
     }
-    let tagsString = '';
-    // Transform tab filters to string filters
-    tags.forEach((tag, index) => {
-      tagsString += tag;
-      if (index != tags.length - 1) {
-        tagsString += '+tags:';
-      }
-    });
-    return this.http
-      .get<PostWithMeta>(`${this.baseUrl}?include=tags,authors&filter=tags:${encodeURIComponent(tagsString)}`)
-      .pipe(map((item: PostWithMeta) => new PostWithMeta(item)));
+
+    return this.http.get<PostWithMeta>(`${this.baseUrl}?page=${page}&include=tags,authors${tagsFilter}`);
   }
 
   public getTags(): Observable<TagWithMeta> {
