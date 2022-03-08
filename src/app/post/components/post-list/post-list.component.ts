@@ -56,11 +56,14 @@ export class PostListComponent implements OnInit {
           ...this.selectedLocationTagSlug,
           ...this.selectedPublicTagsSlug,
         ];
+        // Reset posts
+        this.resetPosts();
         // Apply search
-        this.getPosts(this.filters);
+        this.getPosts(1, this.filters);
       } else {
         // Init default news list
         this.allPosts = [];
+        this.filters = [];
         this.postService.getPosts(1).subscribe((news) => {
           this.fillArticles(news);
         });
@@ -84,7 +87,7 @@ export class PostListComponent implements OnInit {
     this.allPosts = [...headLineTag, ..._.difference(this.allPosts, headLineTag)];
   }
 
-  public getPosts(filters?: Tag[]): void {
+  public getPosts(page: number, filters?: Tag[]): void {
     // Parse filter
     let parsedFilters = null;
     if (filters) {
@@ -97,11 +100,8 @@ export class PostListComponent implements OnInit {
       }
     }
 
-    // Reset posts
-    this.resetPosts();
-
     this.isLoading = true;
-    this.postService.getPosts(1, parsedFilters).subscribe((news) => {
+    this.postService.getPosts(page, parsedFilters).subscribe((news) => {
       this.fillArticles(news);
     });
   }
@@ -135,9 +135,13 @@ export class PostListComponent implements OnInit {
   private loadMore(): void {
     if (this.pagination && this.pagination.page < this.pagination.pages) {
       this.isLoading = true;
-      this.postService.getPosts(this.pagination.next).subscribe((news) => {
-        this.fillArticles(news);
-      });
+      if (this.filters) {
+        this.getPosts(this.pagination.next, this.filters);
+      } else {
+        this.postService.getPosts(this.pagination.next).subscribe((news) => {
+          this.fillArticles(news);
+        });
+      }
     }
   }
 
