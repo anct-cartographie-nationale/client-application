@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.14.0...v1.15.0) (2022-03-08)
+
+
+### Features
+
+* **data-consent:** add data sharing consent when creating and editing a structure and at log-in if no consent was ever registered for at least one of the user's structures ([4214766](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/42147665ecc287079acc03c169708b87daedcd2d))
+
+
+### Bug Fixes
+
+* **orientation-form:** set progression to 100 when clicking print ([e52fbf5](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/e52fbf5657b0a41d638f153bd6af708ec9f5cd60))
+* **posts:** load more posts with tag ([a003d05](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/a003d055cf594db61cdf4ca773194bd913aa4159))
+* typo and labels ([916739f](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/916739f91d9fb14334278a44a953a7bcdf1f575b))
+
 ## [1.14.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.13.0...v1.14.0) (2022-02-21)
 
 
