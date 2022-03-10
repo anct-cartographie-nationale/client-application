@@ -10,7 +10,7 @@ button {
   border: none;
 }
 .tags {
-  background: $grey-6;
+  background: $grey-8;
   padding: 15px;
   width: calc(100% + 2px);
   margin-left: -16px;
@@ -24,7 +24,7 @@ button {
     height: 40px;
     padding: 0 28px;
     cursor: pointer;
-    @include cn-bold-14;
+    @include lato-bold-14;
   }
 }
 .selectedChoice {
@@ -32,13 +32,13 @@ button {
   color: $white;
 }
 .selectedType {
-  background: $grey-6;
+  background: $grey-8;
   .btnText {
-    color: $secondary-color;
+    color: $primary-color;
   }
   .containerBtn {
     background: none !important;
-    border-color: $secondary-color;
+    border-color: $primary-color;
   }
 }
 .boutonSection {
@@ -48,7 +48,7 @@ button {
   border-radius: 6px 6px 0px 0px;
   .btnText {
     min-height: 36px;
-    @include cn-bold-14;
+    @include lato-bold-14;
     margin-bottom: 12px;
   }
 
@@ -66,7 +66,7 @@ button {
       background: $white;
       height: 53px;
       width: 35px;
-      color: $secondary-color;
+      color: $primary-color;
       padding: 3px 16px 0px 12px;
       display: table-cell;
       vertical-align: middle;
@@ -83,8 +83,8 @@ button {
 svg {
   width: 28px;
   height: 40px;
-  fill: $secondary-color;
-  stroke: $secondary-color;
+  fill: $primary-color;
+  stroke: $primary-color;
   &.validate {
     width: 13px;
     height: 10px;

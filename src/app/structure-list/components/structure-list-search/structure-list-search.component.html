@@ -18,12 +18,7 @@
           <input type="text" formControlName="searchTerm" placeholder="Une commune, une association..." />
           <button (click)="clearInput()" class="icon close" type="button"><div class="ico-close-search"></div></button>
         </div>
-        <app-button
-          class="isntPhoneContent"
-          [style]="'buttonWithHash'"
-          [text]="'Rechercher'"
-          [type]="'submit'"
-        ></app-button>
+        <app-button class="isntPhoneContent" [style]="'regular'" [text]="'Rechercher'" [type]="'submit'"></app-button>
       </form>
     </div>
     <div (clickOutside)="closeModal()">

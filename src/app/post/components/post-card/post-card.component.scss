@@ -18,16 +18,16 @@
 
   .title {
     @media #{$large-phone} {
-      @include cn-bold-18;
+      @include lato-bold-18;
     }
-    @include cn-bold-22;
+    @include lato-bold-22;
     color: $grey-1;
   }
   .description {
     @media #{$large-phone} {
       display: none !important;
     }
-    @include cn-regular-16;
+    @include lato-regular-16;
     color: $black;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -36,7 +36,7 @@
     -webkit-box-orient: vertical;
   }
   .informations {
-    @include cn-regular-16;
+    @include lato-regular-16;
     div:nth-child(2n) {
       color: $grey-3;
     }

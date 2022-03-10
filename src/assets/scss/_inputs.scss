@@ -14,13 +14,13 @@
 
 .form-input {
   width: 296px;
-  background: $grey-6;
+  background: $grey-8;
   border: 1px solid $grey-4;
   box-sizing: border-box;
   border-radius: $input-radius;
   height: 40px;
   padding: 8px;
-  @include cn-regular-14;
+  @include lato-regular-14;
 }
 .form-input:focus {
   border: 1px solid $blue;
@@ -68,12 +68,12 @@
 }
 
 input:checked + .slider {
-  border: 1px solid $secondary-color;
+  border: 1px solid $primary-color;
 }
 
 input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
-  background-color: $secondary-color;
+  background-color: $primary-color;
 }

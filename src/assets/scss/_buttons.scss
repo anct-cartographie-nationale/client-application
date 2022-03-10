@@ -26,7 +26,7 @@
   @include btn-bold;
 }
 @mixin btn-search-filter {
-  background: $secondary-color;
+  background: $primary-color;
   height: 40px;
   color: $white;
   padding: 4px 37px;
@@ -34,12 +34,12 @@
   outline: none;
   border: 1px solid transparent;
   cursor: pointer;
-  @include cn-bold-16;
+  @include lato-bold-16;
   line-break: 18px;
 }
 @mixin btn-search-addStructure {
   @include btn-bold-underline;
-  color: $secondary-color;
+  color: $primary-color;
   outline: none;
 }
 @mixin btn-grey {
@@ -47,24 +47,25 @@
   box-sizing: border-box;
   border-radius: 6px;
   background: $white;
-  color: $grey-2;
+  color: $grey-1;
+  border: 1px solid $grey-1;
   cursor: pointer;
-  @include cn-regular-12;
+  @include lato-regular-12;
   line-height: 18px;
   padding: 8px 15px;
 }
 @mixin btn-red {
   border-radius: 6px;
-  background: $red-default;
+  background: $red;
   color: $white;
   cursor: pointer;
-  @include cn-regular-12;
+  @include lato-regular-12;
   line-height: 18px;
   padding: 8px 15px;
 }
 
 .btn-primary {
-  background: $secondary-color;
+  background: $primary-color;
   border-radius: 4px;
   outline: none;
   cursor: pointer;
@@ -74,6 +75,7 @@
   width: 192px;
   @include btn-bold;
   stroke: $white;
+  border: 1px solid $grey-1;
   &.small {
     width: 149px;
   }
@@ -82,8 +84,24 @@
   }
   &:focus {
     background: $white;
-    color: $secondary-color;
-    border: 1px solid $secondary-color;
-    stroke: $secondary-color;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+    stroke: $primary-color;
+  }
+}
+
+.tags-cloud {
+  font-style: normal;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  border-radius: 20px;
+  padding: 5px 15px;
+  color: $white;
+  border-style: none;
+  margin-top: 5px;
+  background: $grey-1;
+  &.unchecked {
+    background: $grey-4;
   }
 }

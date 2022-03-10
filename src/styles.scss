@@ -16,14 +16,14 @@ html {
   height: -webkit-fill-available;
   margin: 0;
   padding: 0;
-  background-color: $grey-6;
+  background-color: $grey-8;
 }
 body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: $grey-6;
+  background-color: $grey-8;
   min-height: 100vh;
   min-height: -webkit-fill-available;
 }
@@ -31,14 +31,15 @@ a {
   color: $default-link-color;
   text-decoration: none;
   background-color: transparent;
-  @include cn-regular-14;
+  @include lato-regular-14;
   cursor: pointer;
   &:focus {
     text-decoration: none;
+    outline-color: $primary-color;
   }
   &:hover {
     text-decoration: underline;
-    outline-color: $blue-hover;
+    outline-color: $blue-middle;
   }
   &.primary {
     @include hyperlink;
@@ -107,7 +108,7 @@ a {
 form p.notRequired {
   margin-top: 0px;
   font-style: italic;
-  color: $secondary-color;
+  color: $primary-color;
 }
 
 /** Inputs **/
@@ -119,18 +120,19 @@ input {
 .textareaBlock {
   textarea {
     padding: 13px 8px;
-    background: $grey-6;
+    background: $grey-8;
     border: 1px solid $grey-4;
     border-radius: $input-radius;
     resize: none;
-    @include cn-regular-16;
+    @include lato-regular-16;
   }
 }
 
 /** Buttons **/
 button {
-  &:focus {
-    outline-color: $blue-hover;
+  &:focus,
+  &:focus-within {
+    outline-color: $primary-color;
   }
 }
 
@@ -142,7 +144,11 @@ button {
     opacity: 0;
     display: none;
     &:checked ~ .customCheck {
-      background-color: $green-1;
+      background-color: $grey-1;
+      border-color: transparent;
+    }
+    &:checked ~ .customCheckPrimary {
+      background-color: $primary-color;
       border-color: transparent;
     }
     &:checked ~ .customCheck:after {
@@ -159,7 +165,7 @@ button {
     padding-right: 10px;
     @include btn-pass;
     &.pass {
-      @include cn-regular-16;
+      @include lato-regular-16;
     }
   }
   .customCheck {
@@ -174,7 +180,7 @@ button {
     top: 0;
     left: 0;
     &:hover {
-      background-color: $grey-6;
+      background-color: $grey-8;
     }
     &:after {
       content: '';
@@ -243,9 +249,9 @@ button {
     .footerModal {
       width: 100%;
       margin-top: 14px;
-      @include cn-bold-16;
+      @include lato-bold-16;
       .btn {
-        background: $secondary-color;
+        background: $primary-color;
         border-radius: 4px;
         outline: none;
         cursor: pointer;
@@ -265,7 +271,6 @@ button {
     max-width: 560px;
     margin: auto;
     border-radius: 6px;
-    @include background-hash($grey-2);
     border: 1px solid $grey-4;
     position: fixed;
     top: 50%;
@@ -288,13 +293,13 @@ button {
     a {
       margin: 0;
       &.structureName {
-        @include cn-bold-26;
-        color: $secondary-color;
+        @include lato-bold-26;
+        color: $primary-color;
         text-decoration: underline;
       }
     }
     .ownerName {
-      @include cn-regular-18;
+      @include lato-regular-18;
       color: $grey-2;
     }
   }
@@ -318,7 +323,7 @@ button {
   cursor: pointer;
   color: $grey-2;
   margin-bottom: 40px;
-  @include cn-bold-16;
+  @include lato-bold-16;
   &:hover {
     opacity: 0.4;
   }

@@ -32,17 +32,17 @@
   background: $white;
   border-bottom: 1px solid $grey-4;
   .profileName {
-    @include cn-bold-26;
+    @include lato-bold-26;
     margin: 0 !important;
   }
   .profileEmail {
     span {
-      @include cn-regular-16;
+      @include lato-regular-16;
       color: $grey-2;
     }
     p {
       margin: 0;
-      @include cn-regular-18;
+      @include lato-regular-18;
     }
   }
 }
@@ -57,7 +57,7 @@
 
 .addSection {
   button {
-    background: $red-default;
+    background: $red;
     color: $white;
   }
 }

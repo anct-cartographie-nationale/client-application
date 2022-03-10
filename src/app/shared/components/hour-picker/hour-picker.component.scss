@@ -58,7 +58,7 @@
   border: 1px solid $grey-4;
   box-sizing: border-box;
   border-radius: 22px;
-  @include cn-regular-14;
+  @include lato-regular-14;
   color: $grey-2;
   display: flex;
   justify-content: center;
@@ -70,12 +70,12 @@
 }
 
 input {
-  background: $grey-6;
+  background: $grey-8;
   border: 1px solid $grey-4;
   box-sizing: border-box;
   border-radius: 4px;
   height: 40px;
-  @include cn-regular-14;
+  @include lato-regular-14;
   min-width: 56px;
   text-align: center;
   outline: none;

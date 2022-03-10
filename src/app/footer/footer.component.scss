@@ -14,7 +14,7 @@
     color: $white;
     margin: 0px 0px 0px 10px;
     text-decoration: none;
-    @include cn-regular-12;
+    @include lato-regular-12;
     &:hover {
       text-decoration: underline;
     }

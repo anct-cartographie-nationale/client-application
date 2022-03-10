@@ -4,7 +4,7 @@
 @import '../../../../assets/scss/breakpoint';
 
 .section-container {
-  background: $grey-6;
+  background: $grey-8;
   min-height: 68vh;
   width: 100%;
   .row-border {
@@ -33,9 +33,9 @@ h2 {
 
   h2 {
     @media #{$large-phone} {
-      @include cn-bold-22;
+      @include lato-bold-22;
     }
-    @include cn-bold-28;
+    @include lato-bold-28;
     color: $grey-2;
     margin: 0;
   }
@@ -51,7 +51,7 @@ h2 {
     ::ng-deep .post {
       flex-direction: row !important;
       .title {
-        @include cn-regular-32;
+        @include lato-regular-32;
       }
     }
     ::ng-deep .post .imageContainer {
@@ -74,7 +74,7 @@ h2 {
     ::ng-deep .post {
       flex-direction: column !important;
       .title {
-        @include cn-regular-32;
+        @include lato-regular-32;
       }
     }
     ::ng-deep .post .imageContainer {
@@ -197,8 +197,8 @@ h2 {
   width: 20%;
   height: 100%;
   min-width: 306px;
-  @include background-hash($secondary-color);
-  border: 1px solid $secondary-color;
+  @include background-hash($primary-color);
+  border: 1px solid $primary-color;
   border-radius: 6px;
   .background-project-container {
     width: 100%;
@@ -210,18 +210,18 @@ h2 {
         padding: 38px 32px 14px 36px;
       }
       padding: 39px 32px 26px 36px;
-      fill: $secondary-color;
-      stroke: $secondary-color;
+      fill: $primary-color;
+      stroke: $primary-color;
       &.mobile {
         text-align: left;
       }
       text-align: center;
       h2 {
         @media #{$large-phone} {
-          @include cn-bold-22;
+          @include lato-bold-22;
         }
-        @include cn-bold-26;
-        color: $secondary-color;
+        @include lato-bold-26;
+        color: $primary-color;
         margin-bottom: 0;
       }
     }

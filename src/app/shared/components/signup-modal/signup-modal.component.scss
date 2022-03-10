@@ -20,7 +20,7 @@
 }
 
 h3 {
-  @include cn-bold-26;
+  @include lato-bold-26;
   color: $black;
   margin-top: 0;
 }
@@ -39,7 +39,7 @@ h3 {
   }
   label {
     margin-bottom: 4px;
-    @include cn-regular-14;
+    @include lato-regular-14;
     color: $grey-2;
   }
   input {
@@ -48,7 +48,7 @@ h3 {
   &.password {
     margin-bottom: 39px;
     p {
-      @include cn-regular-14;
+      @include lato-regular-14;
       color: $grey-3;
       margin-top: 0;
       margin-bottom: 4px;
@@ -77,7 +77,7 @@ h3 {
     &.register {
       background: $white;
       border: 1px solid $grey-4;
-      color: $secondary-color;
+      color: $primary-color;
       height: 38px;
     }
   }

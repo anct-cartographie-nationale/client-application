@@ -4,6 +4,7 @@
 @import '../../../../../assets/scss/typography';
 @import '../../../../../assets/scss/shapes';
 @import '../../../../../assets/scss/z-index';
+@import '../../../../../assets/scss/buttons';
 
 .header-print {
   margin-top: 20px;
@@ -50,7 +51,7 @@
 }
 
 .typeInformationHeader {
-  @include cn-bold-16;
+  @include lato-bold-16;
   margin-bottom: 5px;
   color: $grey-3;
   &.date {
@@ -63,33 +64,17 @@
   width: 67%;
 }
 
-.tags-cloud {
-  font-style: normal;
-  justify-content: center;
-  align-items: center;
-  height: 28px;
-  border-radius: 20px;
-  padding: 5px 15px;
-  color: $white;
-  border-style: none;
-  margin-top: 5px;
-  background: #348899;
-  &.unchecked {
-    background: #bdbdbd;
-  }
-}
-
 .textareaBlock {
   @media #{$tablet} {
     max-width: 90%;
   }
   textarea {
     padding: 13px 8px;
-    background: $grey-6;
+    background: $grey-8;
     border: 1px solid $grey-4;
     border-radius: 1px;
     resize: none;
-    @include cn-regular-16;
+    @include lato-regular-16;
   }
   p {
     text-align: right;
@@ -101,14 +86,14 @@
   display: flex;
   .helper {
     max-height: 300px;
-    background-color: $grey-6;
+    background-color: $grey-8;
     width: 30%;
     height: fit-content;
     padding: 2%;
   }
 
   .beneficiary {
-    background-color: $grey-6;
+    background-color: $grey-8;
     margin-left: 2%;
     padding: 2%;
     width: 70%;

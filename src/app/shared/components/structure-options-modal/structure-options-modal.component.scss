@@ -8,7 +8,7 @@ ul {
 }
 
 li {
-  fill: $secondary-color;
+  fill: $primary-color;
   color: $black;
   display: block;
   float: left;
@@ -16,16 +16,16 @@ li {
   text-decoration: none;
   button {
     width: 40px;
-    fill: $secondary-color;
+    fill: $primary-color;
     &.active {
-      background-color: $secondary-color;
+      background-color: $primary-color;
       fill: $white;
-      border-color: $secondary-color;
+      border-color: $primary-color;
     }
     &:hover {
-      background-color: $secondary-color;
+      background-color: $primary-color;
       fill: $white;
-      border-color: $secondary-color;
+      border-color: $primary-color;
     }
   }
 }
@@ -55,7 +55,7 @@ button {
   p {
     &.special {
       margin: 8px 0;
-      @include cn-regular-14;
+      @include lato-regular-14;
       color: $grey-3;
       &.invalid {
         color: $orange-warning;
@@ -66,13 +66,13 @@ button {
     white-space: nowrap;
     width: 84%;
     text-overflow: ellipsis;
-    @include cn-regular-16;
+    @include lato-regular-16;
     button {
       width: 130px;
-      background-color: $red-default;
+      background-color: $red;
     }
     span {
-      @include cn-regular-18;
+      @include lato-regular-18;
     }
   }
   button {

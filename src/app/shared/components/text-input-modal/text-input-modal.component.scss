@@ -17,18 +17,18 @@
       background: $white;
       padding: 35px 20px 18px 20px;
       h3 {
-        @include cn-bold-18;
+        @include lato-bold-18;
         color: $orange-warning;
       }
       p {
-        @include cn-bold-16;
+        @include lato-bold-16;
         color: $grey-1;
         text-align: center;
       }
       .footerModal {
         width: 100%;
         margin-top: 14px;
-        @include cn-bold-16;
+        @include lato-bold-16;
         .leave {
           background: none;
           color: $grey-1;
@@ -48,10 +48,10 @@
 
 .textarea {
   padding: 13px 8px;
-  background: $grey-6;
+  background: $grey-8;
   border: 1px solid $grey-4;
   border-radius: 1px;
   resize: none;
   width: 100%;
-  @include cn-regular-16;
+  @include lato-regular-16;
 }

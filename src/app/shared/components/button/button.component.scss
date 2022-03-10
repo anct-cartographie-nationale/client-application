@@ -3,7 +3,7 @@
 @import '../../../../assets/scss/shapes';
 
 @mixin btn-bold {
-  @include cn-bold-16;
+  @include lato-bold-14;
   line-height: 18px;
 }
 @mixin btn-bold-underline {
@@ -11,7 +11,7 @@
   text-decoration: underline;
 }
 @mixin btn-regular {
-  @include cn-regular-16;
+  @include lato-regular-14;
   line-height: 19px;
 }
 
@@ -20,40 +20,73 @@ button {
   border-radius: 4px;
   cursor: pointer;
   border: 1px solid;
+  padding: 0;
 }
-.btnSearch {
-  @include background-hash($grey-2);
-  border-color: $grey-4;
-  padding: 0 0 4px 4px;
+
+.btn-regular {
+  padding: 0 0 1px 1px;
+  background: $grey-8;
+  div:first-child {
+    width: 125px;
+  }
   &:hover {
-    border-color: $grey-6;
-    .searchButton {
-      color: $grey-3 !important;
-    }
+    @include background-hash($grey-1);
   }
   &:focus {
-    border-color: $blue-hover;
+    border-color: $primary-color;
   }
   &:active {
     background: none;
-    border-color: $grey-6;
+    border-color: $grey-8;
   }
-  .searchButton {
+  &.primary {
+    background: $primary-color;
+    @include btn-bold;
+    .text {
+      background: $primary-color;
+      color: $white;
+      &.withIcon {
+        color: $white;
+      }
+    }
+  }
+  &.secondary {
+    width: 132px;
+    background: $white;
+    @include btn-regular;
+    .text {
+      background: $white;
+      color: $grey-1;
+      font-size: 12px;
+      height: 0;
+      // @include btn-regular;
+      &.withIcon {
+        color: $grey-1;
+      }
+    }
+  }
+  .text {
     background: $white;
     height: 31px;
-    color: $secondary-color;
-    padding: 3px 16px 3px 16px;
+    color: $primary-color;
+    padding: 3px 15px;
     display: table-cell;
     vertical-align: middle;
-    border-radius: 2px;
-    @include btn-bold;
-    font-size: 16px;
+    border-radius: 4px;
+    font-size: 14px;
     &.withIcon {
       color: $black;
       height: 36px;
+      &.left {
+        padding-left: 8px !important;
+      }
+      &.right {
+        padding-right: 8px !important;
+      }
     }
   }
 }
+
 .btn-switch-phone {
   background: $black;
   height: 40px;
@@ -61,26 +94,28 @@ button {
   padding: 4px 37px 4px 37px;
   border-radius: 20px;
 }
-.btn-search-filter {
-  background: $secondary-color;
-  height: 40px;
-  color: $white;
-  padding: 4px 37px 4px 37px;
-  border-color: transparent;
-  @include btn-bold;
-  line-break: 18px;
-  &:hover {
-    background-color: $blue-hover;
-  }
-  &:focus {
-    background-color: $white;
-    border-color: $secondary-color;
-    color: $secondary-color;
-  }
-  &:active {
-    background-color: $blue-active;
-  }
-}
+
+// .btn-secondary {
+//   background: $white;
+//   height: 30px;
+//   width: 132px;
+//   color: $grey-1;
+//   padding: 0 0 1px 1px;
+//   // padding: 4px 37px 4px 37px;
+//   border-color: transparent;
+//   line-break: 18px;
+//   &:hover {
+//     @include background-hash($grey-1);
+//   }
+//   &:focus {
+//     background-color: $white;
+//     border-color: $primary-color;
+//     color: $primary-color;
+//   }
+//   &:active {
+//     background-color: $blue-light;
+//   }
+// }
 .btn-filter-phone {
   background: $white;
   height: 40px;
@@ -89,6 +124,11 @@ button {
   border-color: $grey-4;
   @include btn-normal;
   &.containCheckedFilters {
-    border-color: $secondary-color;
+    border-color: $primary-color;
   }
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

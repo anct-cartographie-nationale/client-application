@@ -9,7 +9,7 @@
 }
 
 .btn {
-  background: $secondary-color;
+  background: $primary-color;
   border-radius: 4px;
   outline: none;
   cursor: pointer;
@@ -73,13 +73,13 @@ button {
   color: $white;
   padding: 16px;
   border-radius: 6px;
-  @include cn-bold-18;
+  @include lato-bold-18;
   .structureInfoContent {
     width: 100%;
   }
   span {
     font-style: italic;
-    @include cn-regular-14;
+    @include lato-regular-14;
   }
   .validateSvg {
     stroke: $white;
