@@ -13,20 +13,20 @@
   }
   .typeStructure {
     color: $grey-3;
-    @include cn-regular-16;
+    @include lato-regular-16;
     font-style: italic;
   }
   .structure-name {
     &.notClaimed {
-      color: $red-info;
+      color: $primary-color;
     }
     color: $grey-1;
-    @include cn-bold-18;
+    @include lato-bold-18;
     padding-bottom: 5px;
     width: 100%;
   }
   .distanceStructure {
-    @include cn-regular-16;
+    @include lato-regular-16;
     color: $grey-3;
     width: 50%;
   }

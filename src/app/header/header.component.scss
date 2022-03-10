@@ -24,7 +24,7 @@
 }
 
 .logo {
-  @include cn-regular-14;
+  @include lato-regular-14;
   text-align: initial;
   outline: none;
   margin-right: 70px;
@@ -54,13 +54,25 @@ button {
 
 a {
   color: $grey-2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  &:hover {
+    text-decoration: none !important;
+    opacity: 0.75;
+  }
   &.active {
+    height: unset;
     font-weight: bold;
     color: $grey-1;
-    border-bottom: 2px solid $red-default;
+    border-bottom: 1px solid $red;
+    padding: 4px 0;
     text-decoration: none;
+    &:hover {
+      opacity: 1;
+    }
   }
-  @include cn-regular-14;
+  @include lato-regular-14;
 }
 
 @media print {
@@ -122,7 +134,7 @@ a {
 }
 .title {
   margin-bottom: 35px;
-  @include cn-regular-26;
+  @include lato-regular-26;
   span {
     color: $grey-2;
   }
@@ -137,7 +149,7 @@ a {
 
 .mobile-show {
   display: none;
-  @include cn-bold-16;
+  @include lato-bold-16;
   @media #{$tablet} {
     display: block;
   }

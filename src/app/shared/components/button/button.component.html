@@ -1,35 +1,126 @@
-<ng-container *ngIf="style === 'buttonWithHash'">
-  <button class="btnSearch" type="{{ type }}" (click)="doAction()">
-    <div *ngIf="!iconBtn" class="searchButton">{{ text }}</div>
+<ng-container *ngIf="style === 'regular'">
+  <button
+    class="btn-regular"
+    type="{{ type }}"
+    (click)="doAction()"
+    [disabled]="disabled"
+    [ngClass]="{ disabled: disabled }"
+  >
+    <div *ngIf="!iconBtn" class="text">{{ text }}</div>
     <div
-      *ngIf="iconBtn"
+      *ngIf="iconBtn && iconPos === 'left'"
       fxLayout="row center"
-      class="searchButton withIcon"
-      fxLayoutAlign="space-between center"
-      fxLayoutGap="5px"
+      class="text withIcon left"
+      fxLayoutAlign="space-around center"
     >
-      <app-svg-icon [type]="'ico'" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
       <span>{{ text }}</span>
+    </div>
+    <div
+      *ngIf="iconBtn && iconPos === 'right'"
+      fxLayout="row center"
+      class="text withIcon right"
+      fxLayoutAlign="space-around center"
+    >
+      <span>{{ text }}</span>
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
     </div>
   </button>
 </ng-container>
 
-<ng-container *ngIf="style === 'button'">
-  <button class="btn-search-filter" type="{{ type }}">{{ text }}</button>
+<ng-container *ngIf="style === 'primary'">
+  <button
+    class="btn-regular primary"
+    type="{{ type }}"
+    (click)="doAction()"
+    [disabled]="disabled"
+    [ngClass]="{ disabled: disabled }"
+  >
+    <div *ngIf="!iconBtn" class="text">{{ text }}</div>
+    <div
+      *ngIf="iconBtn && iconPos === 'left'"
+      fxLayout="row center"
+      class="text withIcon"
+      fxLayoutAlign="space-around center"
+    >
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+      <span>{{ text }}</span>
+    </div>
+    <div
+      *ngIf="iconBtn && iconPos === 'right'"
+      fxLayout="row center"
+      class="text withIcon"
+      fxLayoutAlign="space-around center"
+    >
+      <span>{{ text }}</span>
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+    </div>
+  </button>
+</ng-container>
+
+<!-- <ng-container *ngIf="style === 'secondary'">
+  <button [disabled]="disabled" class="btn-secondary" type="{{ type }}" [ngClass]="{ disabled: disabled }">
+    <div class="text">{{ text }}</div>
+  </button>
+</ng-container> -->
+
+<ng-container *ngIf="style === 'secondary'">
+  <button
+    class="btn-regular secondary"
+    type="{{ type }}"
+    (click)="doAction()"
+    [disabled]="disabled"
+    [ngClass]="{ disabled: disabled }"
+  >
+    <div *ngIf="!iconBtn" class="text">{{ text }}</div>
+    <div
+      *ngIf="iconBtn && iconPos === 'left'"
+      fxLayout="row center"
+      class="text withIcon"
+      fxLayoutAlign="space-around center"
+    >
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+      <span>{{ text }}</span>
+    </div>
+    <div
+      *ngIf="iconBtn && iconPos === 'right'"
+      fxLayout="row center"
+      class="text withIcon"
+      fxLayoutAlign="space-around center"
+    >
+      <span>{{ text }}</span>
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+    </div>
+  </button>
 </ng-container>
 
 <ng-container *ngIf="style === 'buttonPhone'">
-  <button class="btn-filter-phone" [ngClass]="extraClass" type="{{ type }}" (click)="doAction()">{{ text }}</button>
+  <button
+    [disabled]="disabled"
+    class="btn-filter-phone"
+    [ngClass]="extraClass"
+    type="{{ type }}"
+    (click)="doAction()"
+    [ngClass]="{ disabled: disabled }"
+  >
+    {{ text }}
+  </button>
 </ng-container>
 
 <ng-container *ngIf="style === 'roundedButton'">
-  <button class="btn-switch-phone" type="{{ type }}" (click)="doAction()">
-    <div *ngIf="!iconBtn" class="searchButton">{{ text }}</div>
+  <button
+    [disabled]="disabled"
+    class="btn-switch-phone"
+    type="{{ type }}"
+    (click)="doAction()"
+    [ngClass]="{ disabled: disabled }"
+  >
+    <div *ngIf="!iconBtn" class="text">{{ text }}</div>
     <div
       *ngIf="iconBtn"
       fxLayout="row center"
-      class="searchButton withIcon"
-      fxLayoutAlign="space-between center"
+      class="text withIcon"
+      fxLayoutAlign="space-around center"
       fxLayoutGap="13px"
     >
       <app-svg-icon [type]="'ico'" [iconClass]="'icon-32'" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>

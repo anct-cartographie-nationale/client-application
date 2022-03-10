@@ -4,6 +4,7 @@
 @import '../../../../../assets/scss/z-index';
 @import '../../../../../assets/scss/layout';
 @import '../../../../../assets/scss/breakpoint';
+@import '../../../../../assets/scss/buttons';
 
 a {
   padding: unset;
@@ -30,7 +31,7 @@ a {
 .structrue-details-container > .structure-details-block {
   .subtitle {
     text-transform: uppercase;
-    @include cn-bold-16;
+    @include lato-bold-16;
     margin-bottom: 10px;
     color: $grey-3;
   }
@@ -55,23 +56,23 @@ a {
 h2 {
   margin-top: 0;
   margin-bottom: 5px;
-  @include cn-regular-26;
+  @include lato-regular-26;
 }
 h3 {
   margin: 0 0 8px 0;
-  @include cn-regular-16;
+  @include lato-regular-16;
 }
 h4 {
   margin-left: 0;
   margin-bottom: 0;
   margin-top: 4px;
-  @include cn-regular-14;
+  @include lato-regular-14;
   color: $grey-2;
   text-transform: uppercase;
 }
 p,
 .custom-link {
-  @include cn-regular-16;
+  @include lato-regular-16;
   margin-top: 9px;
   margin-bottom: 9px;
   &.no-margin {
@@ -84,7 +85,7 @@ p,
 }
 
 .bold-info {
-  @include cn-bold-16;
+  @include lato-bold-16;
 }
 
 @media print {
@@ -116,19 +117,6 @@ p,
   display: grid;
   gap: 20px 30px;
   grid-template-columns: 1fr 1fr;
-}
-
-.tags-cloud {
-  font-style: normal;
-  justify-content: center;
-  align-items: center;
-  height: 25px;
-  border-radius: 20px;
-  padding: 5px 15px;
-  color: $white;
-  border-style: none;
-  margin-top: 15px;
-  background: #348899;
 }
 
 .mobile-column {

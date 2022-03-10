@@ -9,7 +9,7 @@
 }
 .header {
   .title {
-    @include cn-bold-26;
+    @include lato-bold-26;
     padding-bottom: 16px;
     display: flex;
     align-items: center;
@@ -19,7 +19,7 @@
   margin: 10px 0 0px 0;
 
   input {
-    @include cn-regular-14;
+    @include lato-regular-14;
     @include input-search;
   }
   .searchSection {
@@ -55,12 +55,12 @@
       width: 7px;
     }
     &:focus {
-      border-color: $blue-hover;
+      border-color: $blue-middle;
     }
   }
   .selected {
-    background-color: $secondary-color;
-    border-color: $secondary-color !important;
+    background-color: $primary-color;
+    border-color: $primary-color !important;
     color: $white;
     .arrow {
       background-color: transparent;
@@ -73,7 +73,7 @@
     }
   }
   .containCheckedFilters {
-    border-color: $secondary-color;
+    border-color: $primary-color;
   }
 }
 
@@ -91,25 +91,25 @@
     padding: 4px 6px 8px 6px;
     &:hover {
       .ico-pin-search {
-        background-color: $blue-hover;
+        background-color: $blue-middle;
       }
     }
     &:focus {
-      border-color: $secondary-color;
+      border-color: $primary-color;
       .ico-pin-search {
-        background-color: $secondary-color;
+        background-color: $primary-color;
       }
     }
     &:active {
       border-color: transparent;
       .ico-pin-search {
-        background-color: $blue-active;
+        background-color: $blue-light;
       }
     }
   }
   &.close {
     &:focus {
-      border-color: $secondary-color;
+      border-color: $primary-color;
     }
     &:active {
       border-color: transparent;

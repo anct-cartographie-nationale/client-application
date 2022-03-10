@@ -4,8 +4,8 @@
 svg {
   width: 40px;
   height: 100%;
-  fill: $secondary-color;
-  stroke: $secondary-color;
+  fill: $primary-color;
+  stroke: $primary-color;
   &.validate {
     width: 13px;
     height: 100%;
@@ -16,7 +16,7 @@ svg {
 
 button {
   width: 296px;
-  background: $grey-6;
+  background: $grey-8;
   border-radius: 4px;
   padding: 0 16px;
   height: 65px;
@@ -39,7 +39,7 @@ button {
     }
   }
   p {
-    @include cn-bold-16;
+    @include lato-bold-16;
   }
   .checkmark {
     width: 18px;
@@ -52,7 +52,7 @@ button {
 
 .name {
   width: 310px;
-  background: $grey-6;
+  background: $grey-8;
   border-radius: 4px;
   padding: 0 16px;
   font-size: $font-size-small;

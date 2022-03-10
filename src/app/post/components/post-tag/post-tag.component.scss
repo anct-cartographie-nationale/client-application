@@ -2,9 +2,9 @@
 @import '../../../../assets/scss/color';
 
 .tag {
-  @include cn-bold-16;
+  @include lato-bold-16;
   text-transform: uppercase;
-  color: $secondary-color;
-  fill: $secondary-color;
-  stroke: $secondary-color;
+  color: $primary-color;
+  fill: $primary-color;
+  stroke: $primary-color;
 }

@@ -13,7 +13,7 @@ $margin-post: 20px;
   );
 }
 .title {
-  @include cn-bold-30;
+  @include lato-bold-30;
   color: $grey-1;
   margin-bottom: 8px;
 }
@@ -58,11 +58,11 @@ $margin-post: 20px;
     padding: 0;
   }
   ::ng-deep p {
-    @include cn-regular-20;
+    @include lato-regular-20;
     line-height: 1.6em;
   }
   ::ng-deep li {
-    @include cn-regular-20;
+    @include lato-regular-20;
     line-height: 1.6em;
     margin-bottom: 10px;
   }
@@ -172,7 +172,7 @@ $margin-post: 20px;
         padding: 20px;
         ::ng-deep .kg-bookmark-title {
           color: $grey-1;
-          @include cn-regular-18;
+          @include lato-regular-18;
         }
         ::ng-deep .kg-bookmark-description {
           display: -webkit-box;
@@ -200,7 +200,7 @@ $margin-post: 20px;
           }
           ::ng-deep .kg-bookmark-author {
             line-height: 1.5em;
-            @include cn-regular-18;
+            @include lato-regular-18;
           }
           ::ng-deep .kg-bookmark-publisher {
             overflow: hidden;

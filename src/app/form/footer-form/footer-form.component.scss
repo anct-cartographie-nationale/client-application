@@ -5,15 +5,15 @@
 .btn-primary {
   &.previous {
     background-color: $white;
-    color: $grey-2;
-    border: solid $grey-4 1px;
+    color: $grey-1;
+    border: 1px solid $grey-1;
   }
   &.invalid {
     opacity: 0.4;
   }
 
   &:focus .print {
-    background-color: $secondary-color;
+    background-color: $primary-color;
   }
 
   &.next {

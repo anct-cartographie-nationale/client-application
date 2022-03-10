@@ -15,7 +15,7 @@
 }
 
 .informations {
-  @include cn-regular-16;
+  @include lato-regular-16;
   div:nth-child(2n) {
     color: $grey-3;
   }

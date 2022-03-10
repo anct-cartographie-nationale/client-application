@@ -1,6 +1,6 @@
-$text-font: 'Trebuchet MS', 'Helvetica', sans-serif;
+$text-font: 'Lato', 'Helvetica', sans-serif;
 $footer-text-font: 'Arial', 'Helvetica', sans-serif;
-$title-font: 'Trebuchet MS', 'Helvetica', sans-serif;
+$title-font: 'Lato', 'Helvetica', sans-serif;
 
 $font-size-xxsmall: 0.75em; // 12px
 $font-size-xsmall: 0.875em; // 14px
@@ -46,119 +46,119 @@ h6,
   font-size: $font-size-small;
 }
 
-@mixin cn-regular-32 {
+@mixin lato-regular-32 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-xcxlarge;
 }
-@mixin cn-bold-30 {
+@mixin lato-bold-30 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-xxlarge;
 }
 
-@mixin cn-bold-28 {
+@mixin lato-bold-28 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-xlarge;
 }
 
-@mixin cn-bold-26 {
+@mixin lato-bold-26 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-large;
 }
-@mixin cn-regular-26 {
+@mixin lato-regular-26 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-large;
 }
 
-@mixin cn-regular-24 {
+@mixin lato-regular-24 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-xxmedium;
 }
-@mixin cn-regular-22 {
+@mixin lato-regular-22 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-xmedium;
 }
 
-@mixin cn-bold-22 {
+@mixin lato-bold-22 {
   font-family: $text-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-xmedium;
 }
-@mixin cn-bold-20 {
+@mixin lato-bold-20 {
   font-family: $text-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-medium;
 }
-@mixin cn-regular-20 {
+@mixin lato-regular-20 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-medium;
 }
-@mixin cn-bold-20 {
+@mixin lato-bold-20 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-medium;
 }
-@mixin cn-regular-20 {
+@mixin lato-regular-20 {
   font-family: $title-font;
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-medium;
 }
-@mixin cn-regular-18 {
+@mixin lato-regular-18 {
   font-family: $title-font;
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-smedium;
 }
-@mixin cn-bold-18 {
+@mixin lato-bold-18 {
   font-family: $title-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-smedium;
 }
-@mixin cn-bold-16 {
+@mixin lato-bold-16 {
   font-family: $text-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-small;
 }
-@mixin cn-regular-16 {
+@mixin lato-regular-16 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-small;
 }
-@mixin cn-bold-14 {
+@mixin lato-bold-14 {
   font-family: $text-font;
   font-style: normal;
   font-weight: bold;
   font-size: $font-size-xsmall;
 }
-@mixin cn-regular-14 {
+@mixin lato-regular-14 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-xsmall;
 }
-@mixin cn-regular-12 {
+@mixin lato-regular-12 {
   font-family: $text-font;
   font-style: normal;
   font-weight: normal;
@@ -172,7 +172,7 @@ h6,
 }
 
 @mixin btn-bold {
-  @include cn-bold-16;
+  @include lato-bold-16;
   line-height: 18px;
 }
 
@@ -181,11 +181,11 @@ h6,
   text-decoration: underline;
 }
 @mixin btn-normal {
-  @include cn-regular-16;
+  @include lato-regular-16;
   line-height: 19px;
 }
 
 @mixin btn-pass {
-  @include cn-regular-14;
+  @include lato-regular-14;
   line-height: 15.5px;
 }
