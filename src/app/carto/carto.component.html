@@ -16,7 +16,7 @@
   ></app-structure-list>
   <div class="btnSwitch">
     <app-button
-      [style]="'roundedButton'"
+      [style]="buttonTypeEnum.Tertiary"
       [text]="isMapPhone ? 'Liste' : 'Carte'"
       [iconBtn]="isMapPhone ? 'liste' : 'map-marker'"
       (action)="switchMapList()"

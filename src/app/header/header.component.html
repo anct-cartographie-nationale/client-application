@@ -8,9 +8,6 @@
       src="/assets/logos/resin.svg"
       alt
     />
-    <div class="logo-text" fxLayout="column" fxLayoutAlign="center">
-      <p>Réseau des acteurs de l'inclusion numérique de la métropole de Lyon</p>
-    </div>
   </div>
   <div class="containerIconMenu">
     <app-svg-icon (click)="openMenu()" [type]="'ico'" [icon]="'menu'" [iconClass]="'icon-32'"></app-svg-icon>
@@ -28,7 +25,7 @@
       *ngIf="!isLoggedIn"
       (action)="isPopUpOpen = !isPopUpOpen"
       [text]="'Se connecter'"
-      [style]="'secondary'"
+      [style]="buttonTypeEnum.Secondary"
     ></app-button>
   </div>
 </div>

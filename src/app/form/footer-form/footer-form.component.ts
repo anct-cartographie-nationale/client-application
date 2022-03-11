@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ButtonType } from '../../shared/components/button/buttonType.enum';
 
 @Component({
   selector: 'app-footer-form',
@@ -13,6 +14,7 @@ export class FooterFormComponent {
   @Output() previousPage = new EventEmitter<any>();
   @Output() endPage = new EventEmitter<any>();
 
+  public buttonTypeEnum = ButtonType;
   public goToNextPage(): void {
     this.nextPage.emit();
   }

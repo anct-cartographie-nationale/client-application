@@ -10,6 +10,7 @@ import { GeoJson } from '../map/models/geojson.model';
 import { GeojsonService } from '../services/geojson.service';
 import { CustomRegExp } from '../utils/CustomRegExp';
 import { ActivatedRoute } from '@angular/router';
+import { ButtonType } from '../shared/components/button/buttonType.enum';
 
 @Component({
   selector: 'app-carto',
@@ -28,6 +29,7 @@ export class CartoComponent implements OnInit {
   public isMapPhone = false;
   public searchedValue = null;
   public locate = false; // Use to sync location between search and map
+  public buttonTypeEnum = ButtonType;
   constructor(
     private structureService: StructureService,
     private geoJsonService: GeojsonService,

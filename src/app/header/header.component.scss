@@ -88,12 +88,6 @@ a {
   }
 }
 
-@media #{$desktop} {
-  .logo-text {
-    display: none !important;
-  }
-}
-
 @keyframes slideMenu {
   from {
     width: 0;

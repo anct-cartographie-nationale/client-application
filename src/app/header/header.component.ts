@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Structure } from '../models/structure.model';
 import { ProfileService } from '../profile/services/profile.service';
 import { AuthService } from '../services/auth.service';
+import { ButtonType } from '../shared/components/button/buttonType.enum';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit {
   public dataConsentPendingStructures: Structure[];
   private displayDataShare = false;
   private loadingDataShare = false;
+  public buttonTypeEnum = ButtonType;
 
   constructor(
     private authService: AuthService,

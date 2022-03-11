@@ -1,4 +1,4 @@
-<ng-container *ngIf="style === 'regular'">
+<ng-container *ngIf="style === buttonTypeEnum.Regular">
   <button
     class="btn-regular"
     type="{{ type }}"
@@ -28,7 +28,7 @@
   </button>
 </ng-container>
 
-<ng-container *ngIf="style === 'primary'">
+<ng-container *ngIf="style === buttonTypeEnum.Primary">
   <button
     class="btn-regular primary"
     type="{{ type }}"
@@ -58,13 +58,7 @@
   </button>
 </ng-container>
 
-<!-- <ng-container *ngIf="style === 'secondary'">
-  <button [disabled]="disabled" class="btn-secondary" type="{{ type }}" [ngClass]="{ disabled: disabled }">
-    <div class="text">{{ text }}</div>
-  </button>
-</ng-container> -->
-
-<ng-container *ngIf="style === 'secondary'">
+<ng-container *ngIf="style === buttonTypeEnum.Secondary">
   <button
     class="btn-regular secondary"
     type="{{ type }}"
@@ -94,7 +88,7 @@
   </button>
 </ng-container>
 
-<ng-container *ngIf="style === 'buttonPhone'">
+<ng-container *ngIf="style === buttonTypeEnum.ButtonPhone">
   <button
     [disabled]="disabled"
     class="btn-filter-phone"
@@ -107,7 +101,7 @@
   </button>
 </ng-container>
 
-<ng-container *ngIf="style === 'roundedButton'">
+<ng-container *ngIf="style === buttonTypeEnum.Filter">
   <button
     [disabled]="disabled"
     class="btn-switch-phone"
@@ -125,6 +119,39 @@
     >
       <app-svg-icon [type]="'ico'" [iconClass]="'icon-32'" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
       {{ text }}
+    </div>
+  </button>
+</ng-container>
+
+<ng-container *ngIf="style === buttonTypeEnum.Tertiary">
+  <button
+    class="btn-regular tertiary"
+    type="{{ type }}"
+    (click)="doAction()"
+    [disabled]="disabled"
+    [ngClass]="{ disabled: disabled }"
+  >
+    <div>{{ text }}</div>
+  </button>
+</ng-container>
+
+<ng-container *ngIf="style === buttonTypeEnum.IconOnly">
+  <button
+    class="btn-regular icon-only"
+    type="{{ type }}"
+    (click)="doAction()"
+    [disabled]="disabled"
+    [ngClass]="{ disabled: disabled, active: active }"
+  >
+    <div *ngIf="iconBtn" class="text withIcon">
+      <app-svg-icon
+        *ngIf="iconBtn"
+        [type]="iconType"
+        [icon]="iconBtn"
+        [iconColor]=""
+        [iconClass]="'icon-28'"
+        [iconColor]="active ? 'green' : 'currentColor'"
+      ></app-svg-icon>
     </div>
   </button>
 </ng-container>
