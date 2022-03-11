@@ -18,16 +18,14 @@ a {
   left: 0;
   max-width: 980px;
   width: 100%;
+  box-sizing: border-box;
   height: calc(100vh - #{$header-height} - #{$footer-height});
   padding: 0px 24px;
   overflow: auto;
   @media #{$tablet} {
+    height: calc(100vh - #{$header-height});
     .printButton {
       display: none !important;
-    }
-
-    .ico-close {
-      margin-left: 16px;
     }
   }
   .printButton {
