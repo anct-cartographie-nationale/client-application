@@ -24,13 +24,15 @@ button {
 }
 
 .btn-regular {
-  padding: 0 0 1px 1px;
   background: $grey-8;
+  border-radius: 5px;
+  border: 0;
   div:first-child {
     width: 125px;
   }
   &:hover {
     @include background-hash($grey-1);
+    padding: 0;
   }
   &:focus {
     border-color: $primary-color;
@@ -40,10 +42,12 @@ button {
     border-color: $grey-8;
   }
   &.primary {
-    background: $primary-color;
+    border: 0;
     @include btn-bold;
     .text {
       background: $primary-color;
+      border: 1px solid $grey-1;
+
       color: $white;
       &.withIcon {
         color: $white;
@@ -54,10 +58,12 @@ button {
     div:first-child {
       width: unset;
     }
+    border: 0;
     background: $white;
     @include btn-regular;
     .text {
       background: $white;
+      border: 1px solid $grey-1;
       color: $grey-1;
       font-size: 12px;
       height: 0;
@@ -68,6 +74,11 @@ button {
     }
   }
   .text {
+    position: relative;
+    top: -1px;
+    right: -1px;
+    border: 1px solid $grey-1;
+
     background: $white;
     height: 31px;
     color: $primary-color;
