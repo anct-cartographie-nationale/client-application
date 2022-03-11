@@ -122,9 +122,7 @@ export class MapService {
 
   public setUnactiveMarker(id: string, type: MarkerType = MarkerType.structure): void {
     // To skip mouseleave when user emit click on structure list
-    if (!this.isMarkerActive) {
-      this.getMarker(id).setIcon(this.getMarkerIcon(type));
-    }
+    this.getMarker(id)?.setIcon(this.getMarkerIcon(type));
     this.isMarkerActive = false;
   }
 
@@ -144,7 +142,7 @@ export class MapService {
    */
   public setSelectedMarker(id: string, type: MarkerType = MarkerType.structure): void {
     if (id) {
-      this.getMarker(id).setIcon(this.getActiveMarkerIcon(type));
+      this.getMarker(id)?.setIcon(this.getActiveMarkerIcon(type));
       this.isMarkerActive = true;
     }
   }
