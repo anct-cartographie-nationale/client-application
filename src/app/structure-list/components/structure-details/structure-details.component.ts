@@ -94,6 +94,7 @@ export class StructureDetailsComponent implements OnInit {
           this.socialAndProfessionalsReferentiel = referentiel;
         }
       });
+      this.setServiceCategories();
       if (this.printMode) {
         this.printService.onDataReady();
       }
@@ -247,6 +248,24 @@ export class StructureDetailsComponent implements OnInit {
       default:
         return null;
     }
+  }
+
+  public setServiceCategories(): void {
+    this.baseSkills = this.structure.baseSkills.map((skill) =>
+      _.find(this.baseSkillssReferentiel.modules, { id: skill })
+    );
+    this.accessRights = this.structure.accessRight.map((rights) =>
+      _.find(this.accessRightsReferentiel.modules, { id: rights })
+    );
+    this.parentingHelp = this.structure.parentingHelp.map((help) =>
+      _.find(this.parentingHelpsReferentiel.modules, { id: help })
+    );
+    this.socialAndProfessional = this.structure.socialAndProfessional.map((skill) =>
+      _.find(this.socialAndProfessionalsReferentiel.modules, { id: skill })
+    );
+    this.digitalCultureSecurity = this.structure.digitalCultureSecurity.map((skill) =>
+      _.find(this.digitalCultureSecuritysReferentiel.modules, { id: skill })
+    );
   }
 
   public keepOriginalOrder = (a, b) => a.key;
