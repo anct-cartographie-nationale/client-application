@@ -16,22 +16,22 @@ export class Category {
   }
 
   public isBaseSkills(): boolean {
-    return this.name === 'Les compétences de base';
+    return this.id === 'baseSkills';
   }
 
   public isRigthtsAccess(): boolean {
-    return this.name === 'Accès aux droits';
+    return this.id === 'accessRight';
   }
 
   public isParentingHelp(): boolean {
-    return this.name === 'Aide à la parentalité';
+    return this.id === 'parentingHelp';
   }
 
   public isDigitalCultureSecurity(): boolean {
-    return this.name === 'Culture et sécurité numérique';
+    return this.id === 'digitalCultureSecurity';
   }
 
   public isSocialAndProfessional(): boolean {
-    return this.name === 'Insertion sociale et professionnelle';
+    return this.id === 'socialAndProfessional';
   }
 }
