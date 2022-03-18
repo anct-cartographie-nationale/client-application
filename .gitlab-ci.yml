@@ -102,7 +102,6 @@ deploy_rec:
   environment:
     name: rec
     url: https://resin-rec.grandlyon.com
-
 # code_analysis:
 #   image: skilldlabs/sonar-scanner:3.4.0
 #   services:
@@ -124,15 +123,15 @@ deploy_rec:
 #       -Dsonar.projectKey=${SONAR_PROJECT_KEY}
 #       -Dsonar.login=${SONAR_TOKEN}
 
-mr:
-  variables:
-    DOCKER_TLS_CERTDIR: ''
-    DOCKER_HOST: tcp://docker:2375/
-    DOCKER_DRIVER: overlay2
-  image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
-  stage: build
-  only:
-    - merge_requests
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
+# mr:
+#   variables:
+#     DOCKER_TLS_CERTDIR: ''
+#     DOCKER_HOST: tcp://docker:2375/
+#     DOCKER_DRIVER: overlay2
+#   image: ${CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX}/docker:18.09
+#   stage: build
+#   only:
+#     - merge_requests
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#     - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
