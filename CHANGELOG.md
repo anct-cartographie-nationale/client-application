@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.15.0...v1.16.0) (2022-03-18)
+
+
+### Bug Fixes
+
+* **carto:** issue [#11](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/issues/11) responsive structure details ([ad5e3bf](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/ad5e3bf7e824c5e0cde1cafa1019035a51aecb07))
+* **carto:** issue on category name after migration ([41f6d76](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/41f6d76839755d8e0d725ccb1e0fa6eb84258071))
+* **carto:** maker not setting in some case ([a13de9a](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/a13de9a2d184fac6569564a4953b5aeb6a100b04))
+* **pwa:** add icon for ios ([e18c936](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/e18c93606c14a41ba0da4a407d7ec94c492f8089))
+* **structure-details:** display workshops again in structure details ([897a215](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/897a215b2bada359b8ee587902a8a313e7960829))
+* **structures:** Impossible de rentrer des adresses sans numéro ([4d79383](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/4d79383c2703396c9fa0c48bebed8b40ee1543c0))
+
 ## [1.15.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.14.0...v1.15.0) (2022-03-08)
 
 
