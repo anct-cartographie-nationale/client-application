@@ -65,6 +65,7 @@ build_dev:
   stage: build
   only:
     - dev
+    - V2.0
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY_IMAGE:dev" --build-arg conf=dev .
