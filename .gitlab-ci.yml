@@ -74,7 +74,7 @@ deploy_dev:
   stage: deploy
   tags:
     - deploy
-    - V2.0
+    - branches
   only:
     - dev
   script:
