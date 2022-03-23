@@ -4,6 +4,7 @@ import { Day } from '../../../models/day.model';
 import { Time } from '../../../models/time.model';
 import { WeekDayEnum } from '../../enum/weekDay.enum';
 import { CheckHours } from '../../validator/form';
+import { ButtonType } from '../button/buttonType.enum';
 
 @Component({
   selector: 'app-hour-picker',
@@ -16,7 +17,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
 
   @Output() updateFormError = new EventEmitter<any>();
   @Output() updateForm = new EventEmitter<FormGroup>();
-
+  public buttonTypeEnum = ButtonType;
   public error = false;
 
   private copiedDay: any;

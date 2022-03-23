@@ -1,7 +1,8 @@
 <div class="form" fxLayout="column">
   <app-modal-confirmation
     [openned]="showConfirmationModal"
-    [content]="'Il vous faudra de nouveau remplir le formulaire si vous quittez'"
+    [content]="'Il vous faudra de nouveau remplir le formulaire si vous quittez maintenant'"
+    [customConfirmationText]="'Quitter quand même'"
     (closed)="hasRedirectionAccepted($event)"
   ></app-modal-confirmation>
   <div class="content" *ngIf="!isLoading" [ngClass]="{ editMode: isEditMode }">
@@ -23,24 +24,21 @@
         </div>
       </button>
     </div>
-    <div
-      class="progressBar"
-      *ngIf="currentPage != 0 && !isEditMode"
-      fxLayout="row"
-      fxLayoutAlign="space-between center"
-      fxLayoutGap="20px"
-    >
-      <label [ngClass]="{ validate: currentPage == nbPagesForm }" for="progressForm"
-        >{{ progressStatus | number: '1.0-0' }}%
-      </label>
-      <progress
-        id="progressForm"
-        [ngClass]="{ validate: currentPage == nbPagesForm }"
-        max="100"
-        [value]="progressStatus"
-      ></progress>
+    <div class="progressBar" *ngIf="currentPage != 0 && !isEditMode">
+      <p>Création de compte</p>
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+        <label [ngClass]="{ validate: currentPage == nbPagesForm }" for="progressForm"
+          >{{ progressStatus | number: '1.0-0' }}%
+        </label>
+        <progress
+          id="progressForm"
+          [ngClass]="{ validate: currentPage == nbPagesForm }"
+          max="100"
+          [value]="progressStatus"
+        ></progress>
+      </div>
     </div>
-    <div *ngIf="displayAddStructure()" class="home page" fxLayout="column" fxLayoutAlign="space-between">
+    <div *ngIf="displayAddStructure()" class="home page" fxLayout="column" fxLayoutAlign="center center">
       <h2>Ajouter votre structure</h2>
       <img src="../../assets/form/schedule.svg" alt="logo schedule" />
       <div>
@@ -107,7 +105,7 @@
       </div>
     </div>
     <div *ngIf="currentPage == pageTypeEnum.info" class="informations page" fxLayout="column" fxLayoutGap="28px">
-      <h3>De quelles informations faut-il vous munir ?</h3>
+      <h3>De quelles informations faut-il vous munir&nbsp;?</h3>
       <img src="../../assets/form/factures.svg" alt="logo factures" />
       <div>
         <ul>
@@ -126,33 +124,18 @@
     >
       <div *ngIf="currentPage == pageTypeEnum.accountInfo" class="page">
         <div class="title">
-          <h3>Qui êtes-vous ?</h3>
-          <p>Ces informations ne seront pas visibles sur la plateforme</p>
+          <h3>Qui êtes-vous&nbsp;?</h3>
+          <p>Vous pourrez choisir de rendre visibles ces informations sur votre profil public</p>
         </div>
         <div *ngIf="!isClaimMode" class="title">
-          <h4>Vous possédez déja un compte ? Connectez-vous :</h4>
+          <h4>
+            Vous possédez déja un compte&nbsp;?<br />
+            Connectez-vous :
+          </h4>
           <button class="btn-primary small next" *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen">
             Se connecter
           </button>
           <h4>Sinon, inscrivez-vous en suivant le formulaire ci-dessous :</h4>
-        </div>
-        <div class="form-group" fxLayout="column">
-          <label for="surname">Nom</label>
-          <div fxLayout="row" fxLayoutGap="13px">
-            <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-input" />
-            <app-svg-icon
-              *ngIf="accountForm.get('surname').valid"
-              [iconClass]="'validation'"
-              [type]="'form'"
-              [icon]="'validate'"
-            ></app-svg-icon>
-            <app-svg-icon
-              *ngIf="accountForm.get('surname').invalid && accountForm.get('surname').value"
-              [iconClass]="'validation'"
-              [type]="'form'"
-              [icon]="'notValidate'"
-            ></app-svg-icon>
-          </div>
         </div>
         <div class="form-group" fxLayout="column">
           <label for="name">Prénom</label>
@@ -166,6 +149,24 @@
             ></app-svg-icon>
             <app-svg-icon
               *ngIf="accountForm.get('name').invalid && accountForm.get('name').value"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'notValidate'"
+            ></app-svg-icon>
+          </div>
+        </div>
+        <div class="form-group" fxLayout="column">
+          <label for="surname">Nom</label>
+          <div fxLayout="row" fxLayoutGap="13px">
+            <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-input" />
+            <app-svg-icon
+              *ngIf="accountForm.get('surname').valid"
+              [iconClass]="'validation'"
+              [type]="'form'"
+              [icon]="'validate'"
+            ></app-svg-icon>
+            <app-svg-icon
+              *ngIf="accountForm.get('surname').invalid && accountForm.get('surname').value"
               [iconClass]="'validation'"
               [type]="'form'"
               [icon]="'notValidate'"
@@ -198,10 +199,10 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.accountCredentials" class="page">
         <div class="title">
-          <h3>Quels identifiants utiliserez-vous pour vous connecter ?</h3>
+          <h3>Quels identifiants utiliserez-vous pour vous connecter&nbsp;?</h3>
         </div>
         <div class="form-group" fxLayout="column">
-          <label for="email">Courriel du compte</label>
+          <label for="email">Email du compte</label>
           <p class="special invalid" *ngIf="this.accountForm.get('email').hasError('alreadyExist')">
             L'email est déja utilisé.
           </p>
@@ -236,7 +237,7 @@
             class="special"
             [ngClass]="{ invalid: accountForm.get('password').invalid && accountForm.get('password').value }"
           ></p>
-          Le mot de passe doit contenir au minimum :
+          <span class="passwordInfo">Le mot de passe doit contenir au minimum</span>
           <ul>
             <li
               [ngClass]="{
@@ -247,13 +248,13 @@
             >
               <app-svg-icon
                 *ngIf="accountForm.get('password').value.length >= 8"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'validate'"
               ></app-svg-icon>
               <app-svg-icon
                 *ngIf="accountForm.get('password').value.length < 8"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'notValidate'"
               ></app-svg-icon>
@@ -267,13 +268,13 @@
             >
               <app-svg-icon
                 *ngIf="checkIfPasswordHasSpecialChar(accountForm.get('password').value)"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'validate'"
               ></app-svg-icon>
               <app-svg-icon
                 *ngIf="!checkIfPasswordHasSpecialChar(accountForm.get('password').value)"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'notValidate'"
               ></app-svg-icon>
@@ -287,13 +288,13 @@
             >
               <app-svg-icon
                 *ngIf="checkIfPasswordHasLowerCase(accountForm.get('password').value)"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'validate'"
               ></app-svg-icon>
               <app-svg-icon
                 *ngIf="!checkIfPasswordHasLowerCase(accountForm.get('password').value); s"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'notValidate'"
               ></app-svg-icon>
@@ -307,13 +308,13 @@
             >
               <app-svg-icon
                 *ngIf="checkIfPasswordHasUpperCase(accountForm.get('password').value)"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'validate'"
               ></app-svg-icon>
               <app-svg-icon
                 *ngIf="!checkIfPasswordHasUpperCase(accountForm.get('password').value); s"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'notValidate'"
               ></app-svg-icon>
@@ -327,13 +328,13 @@
             >
               <app-svg-icon
                 *ngIf="checkIfPasswordHasDigit(accountForm.get('password').value)"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'validate'"
               ></app-svg-icon>
               <app-svg-icon
                 *ngIf="!checkIfPasswordHasDigit(accountForm.get('password').value)"
-                [iconClass]="'validation-small'"
+                [iconClass]="'icon-16'"
                 [type]="'form'"
                 [icon]="'notValidate'"
               ></app-svg-icon>
@@ -408,7 +409,7 @@
     >
       <div *ngIf="currentPage == pageTypeEnum.structureNameAndAddress" class="page">
         <div class="title">
-          <h3>Quelle structure voulez-vous référencer ?</h3>
+          <h3>Quelle structure voulez-vous référencer&nbsp;?</h3>
         </div>
         <p
           class="missing-information"
@@ -460,7 +461,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structurePhone" class="page">
         <div class="title">
-          <h3>Comment joindre votre structure ?</h3>
+          <h3>Comment joindre votre structure&nbsp;?</h3>
         </div>
         <p
           class="missing-information"
@@ -500,7 +501,7 @@
           </div>
         </div>
         <div class="form-group" fxLayout="column">
-          <label for="structureName">Courriel de la structure</label>
+          <label for="structureName">Email de la structure</label>
           <div fxLayout="row" fxLayoutGap="13px">
             <input type="text" (input)="setValidationsForm()" formControlName="contactMail" class="form-input" />
             <app-svg-icon
@@ -520,7 +521,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureType" class="page" fxLayout="column">
         <div class="title">
-          <h3>Quel type de structure ?</h3>
+          <h3>Quel type de structure&nbsp;?</h3>
           <p>1 seul choix possible</p>
         </div>
         <p class="missing-information" *ngIf="isEditMode && !getStructureControl('structureType').valid">
@@ -543,7 +544,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureAccessModality" class="page">
         <div class="title">
-          <h3>Quelles sont les modalités d'accueil ?</h3>
+          <h3>Quelles sont les modalités d'accueil de la structure&nbsp;?</h3>
           <p>Plusieurs choix possibles</p>
         </div>
         <p class="missing-information" *ngIf="isEditMode && !getStructureControl('accessModality').valid">
@@ -555,7 +556,13 @@
           ></app-svg-icon>
           <span>Il faut renseigner au moins un champ</span>
         </p>
-        <div *ngIf="accessModality" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="flex-start">
+        <div
+          *ngIf="accessModality"
+          fxLayout="row wrap"
+          fxLayoutGap="16px"
+          fxLayoutAlign="flex-start"
+          class="welcomingTerms"
+        >
           <app-checkbox-form
             *ngFor="let module of accessModality.modules"
             [isChecked]="isInArray(module.id, accessModality.id)"
@@ -569,8 +576,8 @@
       <div *ngIf="currentPage == pageTypeEnum.structureHours" class="page">
         <div class="section">
           <div class="title">
-            <h3>Quels sont les horaires d'ouverture ?</h3>
-            <p class="notRequired">facultatif</p>
+            <h3>Quels sont les horaires d'ouverture de la structure&nbsp;?</h3>
+            <p class="notRequired">Facultatif</p>
           </div>
           <app-hour-picker
             *ngIf="hoursForm"
@@ -581,8 +588,8 @@
         </div>
         <div>
           <div class="title">
-            <h3>Avez-vous des précisions à apporter sur les horaires ?</h3>
-            <p class="notRequired">facultatif</p>
+            <h3>Avez-vous des précisions à apporter sur les horaires&nbsp;?</h3>
+            <p class="notRequired">Facultatif</p>
           </div>
           <div class="textareaBlock" fxLayout="column">
             <textarea
@@ -596,14 +603,14 @@
                 getStructureControl('exceptionalClosures').value
                   ? getStructureControl('exceptionalClosures').value.length
                   : 0
-              }}/500
+              }}&nbsp;/&nbsp;500
             </p>
           </div>
         </div>
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structurePmr" class="page">
         <div class="title">
-          <h3>Est-ce accessible pour les personnes à mobilité réduite ?</h3>
+          <h3>La structure est-elle accessible pour les personnes à mobilité réduite&nbsp;?</h3>
         </div>
         <p class="missing-information" *ngIf="isEditMode && !getStructureControl('pmrAccess').valid">
           <app-svg-icon
@@ -622,8 +629,8 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureWebAndSocialNetwork" class="page">
         <div class="title">
-          <h3>Comment vous trouver sur internet ?</h3>
-          <p class="notRequired">facultatif</p>
+          <h3>Comment trouver la structure sur internet&nbsp;?</h3>
+          <p class="notRequired">Facultatif</p>
         </div>
         <div class="collapse" [ngClass]="{ notCollapsed: !showWebsite }">
           <div fxLayout="column">
@@ -644,7 +651,7 @@
             <div *ngIf="showWebsite" class="inputSection">
               <div class="form-group website" fxLayout="column">
                 <label for="website">Adresse du site web</label>
-                <div fxLayout="row" fxLayoutGap="27px">
+                <div fxLayout="row" fxLayoutGap="7px">
                   <input
                     type="text"
                     placeholder="www.resin.grandlyon.com"
@@ -654,14 +661,14 @@
                   />
                   <app-svg-icon
                     *ngIf="getStructureControl('website').valid && getStructureControl('website').value"
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'validate'"
                     class="validationIcon"
                   ></app-svg-icon>
                   <app-svg-icon
                     *ngIf="getStructureControl('website').invalid"
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'notValidate'"
                     class="validationIcon"
@@ -693,7 +700,7 @@
             </div>
             <div *ngIf="showSocialNetwork" class="inputSection">
               <div class="form-group facebook">
-                <div fxLayout="row" fxLayoutGap="27px">
+                <div fxLayout="row" fxLayoutGap="7px">
                   <svg class="facebook" aria-hidden="true">
                     <use [attr.xlink:href]="'assets/form/sprite.svg#facebook'"></use>
                   </svg>
@@ -710,14 +717,14 @@
                       getStructureControl('facebook').value != null &&
                       getStructureControl('facebook').value != ''
                     "
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'validate'"
                     class="validationIcon"
                   ></app-svg-icon>
                   <app-svg-icon
                     *ngIf="getStructureControl('facebook').invalid"
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'notValidate'"
                     class="validationIcon"
@@ -725,7 +732,7 @@
                 </div>
               </div>
               <div class="form-group twitter">
-                <div fxLayout="row" fxLayoutGap="27px">
+                <div fxLayout="row" fxLayoutGap="7px">
                   <svg class="twitter" aria-hidden="true">
                     <use [attr.xlink:href]="'assets/form/sprite.svg#twitter'"></use>
                   </svg>
@@ -742,14 +749,14 @@
                       getStructureControl('twitter').value != null &&
                       getStructureControl('twitter').value != ''
                     "
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'validate'"
                     class="validationIcon"
                   ></app-svg-icon>
                   <app-svg-icon
                     *ngIf="getStructureControl('twitter').invalid"
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'notValidate'"
                     class="validationIcon"
@@ -757,7 +764,7 @@
                 </div>
               </div>
               <div class="form-group instagram">
-                <div fxLayout="row" fxLayoutGap="27px">
+                <div fxLayout="row" fxLayoutGap="7px">
                   <svg class="instagram" aria-hidden="true">
                     <use [attr.xlink:href]="'assets/form/sprite.svg#instagram'"></use>
                   </svg>
@@ -775,14 +782,14 @@
                       getStructureControl('instagram').value != null &&
                       getStructureControl('instagram').value != ''
                     "
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'validate'"
                     class="validationIcon"
                   ></app-svg-icon>
                   <app-svg-icon
                     *ngIf="getStructureControl('instagram').invalid"
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'notValidate'"
                     class="validationIcon"
@@ -790,7 +797,7 @@
                 </div>
               </div>
               <div class="form-group linkedin">
-                <div fxLayout="row" fxLayoutGap="27px">
+                <div fxLayout="row" fxLayoutGap="7px">
                   <svg class="linkedin" aria-hidden="true">
                     <use [attr.xlink:href]="'assets/form/sprite.svg#linkedin'"></use>
                   </svg>
@@ -807,14 +814,14 @@
                       getStructureControl('linkedin').value != null &&
                       getStructureControl('linkedin').value != ''
                     "
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'validate'"
                     class="validationIcon"
                   ></app-svg-icon>
                   <app-svg-icon
                     *ngIf="getStructureControl('linkedin').invalid"
-                    [iconClass]="'validation'"
+                    [iconClass]="'icon-26'"
                     [type]="'form'"
                     [icon]="'notValidate'"
                     class="validationIcon"
@@ -827,7 +834,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structurePublicTarget" class="page">
         <div class="title">
-          <h3>Quel public peut venir vous consulter ?</h3>
+          <h3>Quel public peut être accueilli dans cette structure&nbsp;?</h3>
           <p>Plusieurs choix possibles</p>
         </div>
         <p class="missing-information" *ngIf="isEditMode && !getStructureControl('publics').valid">
@@ -845,7 +852,7 @@
             (click)="updateChoice(choice.id, 'publics')"
             [ngClass]="{ selectedChoice: isInArray(choice.id, 'publics') }"
           >
-            <div fxLayout="row" fxLayoutAlign=" center">
+            <div fxLayout="row" fxLayoutAlign="center">
               <svg class="validate" aria-hidden="true">
                 <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
               </svg>
@@ -858,8 +865,8 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureAccompaniment" class="page">
         <div class="title">
-          <h3>Quel(s) accompagnement(s) proposez-vous ?</h3>
-          <p class="notRequired">facultatif</p>
+          <h3>Quel(s) accompagnement(s) proposez-vous&nbsp;?</h3>
+          <p class="notRequired">Facultatif</p>
         </div>
         <div class="collapse" [ngClass]="{ notCollapsed: !showProceduresAccompaniment }">
           <div fxLayout="column">
@@ -907,7 +914,7 @@
               fxLayoutAlign=" center"
               (click)="togglePublicsAccompaniment()"
             >
-              <div class="titleCollapse">Publics spécifiques (handicap...) ?</div>
+              <div class="titleCollapse">Publics spécifiques (handicap...)&nbsp;?</div>
               <div class="logo">
                 <svg class="show" aria-hidden="true">
                   <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
@@ -938,9 +945,9 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureOtherAccompaniment" class="page">
         <div class="title">
-          <h3>Quelles sont les autres démarches ?</h3>
+          <h3>Quelles sont les autres démarches&nbsp;?</h3>
         </div>
-        <div class="textareaBlock" fxLayout="column">
+        <div class="textareaBlock procedureContainer" fxLayout="column">
           <textarea
             rows="8"
             placeholder="Exemple : tout ce qui est en lien avec la création d'entreprise..."
@@ -951,13 +958,14 @@
           <p>
             {{
               getStructureControl('otherDescription').value ? getStructureControl('otherDescription').value.length : 0
-            }}/500
+            }}
+            &nbsp;/&nbsp;500
           </p>
         </div>
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureRemoteAccompaniment" class="page">
         <div class="title">
-          <h3>Proposez vous un accompagnement à distance ?</h3>
+          <h3>Proposez vous un accompagnement à distance&nbsp;?</h3>
         </div>
         <p class="missing-information" *ngIf="isEditMode && !getStructureControl('remoteAccompaniment').valid">
           <app-svg-icon
@@ -976,8 +984,8 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureWorkshop" class="page">
         <div class="title">
-          <h3>Quel(s) atelier(s) au numérique proposez-vous ?</h3>
-          <p class="notRequired">facultatif</p>
+          <h3>Quelles formations au numérique sont proposées&nbsp;?</h3>
+          <p class="notRequired">Facultatif</p>
         </div>
         <div class="collapse" *ngFor="let categ of trainingCategories" [ngClass]="{ notCollapsed: !categ.openned }">
           <div fxLayout="column">
@@ -1019,7 +1027,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureWorkshopPrice" class="page">
         <div class="title">
-          <h3>Ces ateliers sont-ils gratuits ?</h3>
+          <h3>Ces ateliers sont-ils gratuits&nbsp;?</h3>
         </div>
         <app-radio-form
           [selectedOption]="getStructureControl('freeWorkShop').value"
@@ -1029,7 +1037,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureWifi" class="page">
         <div class="title">
-          <h3>Proposez-vous le wifi en accès libre ?</h3>
+          <h3>Le wifi est-il proposé en accès libre&nbsp;?</h3>
         </div>
         <app-radio-form
           [selectedOption]="
@@ -1045,161 +1053,115 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureEquipments" class="page">
         <div class="title">
-          <h3>Quel matériel mettez-vous à disposition ?</h3>
-          <p class="notRequired">facultatif</p>
+          <h3>Quel matériel est mis à disposition par la structure&nbsp;?</h3>
+          <p class="notRequired">Facultatif</p>
         </div>
         <ng-container *ngFor="let equipment of equipmentsAndServices">
           <div
-            class="collapse equipments"
-            [ngClass]="{ notCollapsed: !equipment.openned }"
+            class="controller equipments"
             *ngIf="
               ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners'].includes(equipment.module.id)
             "
           >
             <div fxLayout="column">
-              <div
-                class="collapseHeader"
-                fxLayout="row"
-                fxLayoutAlign=" center"
-                (click)="toggleEquipmentsServices(equipment)"
-              >
-                <div class="titleCollapse">
-                  <p [ngClass]="{ show: equipment.openned, hide: !equipment.openned }" class="no-margin">
-                    Ajouter des {{ equipment.module.text | lowercase }}
-                  </p>
-                  <p [ngClass]="{ show: !equipment.openned, hide: equipment.openned }" class="no-margin">
-                    Retirer les {{ equipment.module.text | lowercase }}
-                  </p>
+              <div class="contorllerHeader" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="flex-item">
+                  <p class="no-margin">Nombre de {{ equipment.module.text | lowercase }}</p>
                 </div>
-                <div class="logo">
-                  <svg class="show" aria-hidden="true">
-                    <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
+                <div class="inputSection flex-item equipments" fxLayout="row" fxLayoutAlign="center center">
+                  <ng-container *ngIf="equipment.module.id == 'ordinateurs'">
+                    <svg
+                      class="hide"
+                      aria-hidden="true"
+                      (click)="changeValueHandler(equipment.module.id, -1)"
+                      [ngClass]="{ disabled: structureForm.value.nbComputers === 0 }"
+                    >
+                      <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+                    </svg>
+                    <input
+                      type="number"
+                      (input)="setValidationsForm()"
+                      formControlName="nbComputers"
+                      min="0"
+                      class="form-input nbEquipment"
+                      [(value)]="structureForm.value.nbComputers"
+                    />
+                  </ng-container>
+                  <ng-container *ngIf="equipment.module.id == 'tablettes'">
+                    <svg
+                      class="hide"
+                      aria-hidden="true"
+                      (click)="changeValueHandler(equipment.module.id, -1)"
+                      [ngClass]="{ disabled: structureForm.value.nbTablets === 0 }"
+                    >
+                      <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+                    </svg>
+                    <input
+                      type="number"
+                      (input)="setValidationsForm()"
+                      formControlName="nbTablets"
+                      min="0"
+                      class="form-input nbEquipment"
+                      [(value)]="structureForm.value.nbTablets"
+                    />
+                  </ng-container>
+                  <ng-container *ngIf="equipment.module.id == 'imprimantes'">
+                    <svg
+                      class="hide"
+                      aria-hidden="true"
+                      (click)="changeValueHandler(equipment.module.id, -1)"
+                      [ngClass]="{ disabled: structureForm.value.nbPrinters === 0 }"
+                    >
+                      <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+                    </svg>
+                    <input
+                      type="number"
+                      (input)="setValidationsForm()"
+                      formControlName="nbPrinters"
+                      min="0"
+                      class="form-input nbEquipment"
+                      [(value)]="structureForm.value.nbPrinters"
+                    />
+                  </ng-container>
+                  <ng-container *ngIf="equipment.module.id == 'bornesNumeriques'">
+                    <svg
+                      class="hide"
+                      aria-hidden="true"
+                      (click)="changeValueHandler(equipment.module.id, -1)"
+                      [ngClass]="{ disabled: structureForm.value.nbNumericTerminal === 0 }"
+                    >
+                      <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+                    </svg>
+                    <input
+                      type="number"
+                      (input)="setValidationsForm()"
+                      formControlName="nbNumericTerminal"
+                      min="0"
+                      class="form-input nbEquipment"
+                      [(value)]="structureForm.value.nbNumericTerminal"
+                    />
+                  </ng-container>
+                  <ng-container *ngIf="equipment.module.id == 'scanners'">
+                    <svg
+                      class="hide"
+                      aria-hidden="true"
+                      (click)="changeValueHandler(equipment.module.id, -1)"
+                      [ngClass]="{ disabled: structureForm.value.nbScanners === 0 }"
+                    >
+                      <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+                    </svg>
+                    <input
+                      type="number"
+                      (input)="setValidationsForm()"
+                      formControlName="nbScanners"
+                      min="0"
+                      class="form-input nbEquipment"
+                      [(value)]="structureForm.value.nbScanners"
+                    />
+                  </ng-container>
+                  <svg class="show" aria-hidden="true" (click)="changeValueHandler(equipment.module.id, 1)">
+                    <use [attr.xlink:href]="'assets/form/sprite.svg#plus'"></use>
                   </svg>
-                  <svg class="hide" aria-hidden="true">
-                    <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
-                  </svg>
-                </div>
-              </div>
-              <div *ngIf="equipment.openned" class="inputSection">
-                <div class="form-group equipments" fxLayout="column">
-                  <label for="equipment">Nombre</label>
-                  <div fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="27px">
-                    <ng-container *ngIf="equipment.module.id == 'ordinateurs'">
-                      <input
-                        type="number"
-                        (input)="setValidationsForm()"
-                        formControlName="nbComputers"
-                        min="0"
-                        class="form-input nbEquipment"
-                      />
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbComputers').valid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'validate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbComputers').invalid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'notValidate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                    </ng-container>
-                    <ng-container *ngIf="equipment.module.id == 'tablettes'">
-                      <input
-                        type="number"
-                        (input)="setValidationsForm()"
-                        formControlName="nbTablets"
-                        min="0"
-                        class="form-input nbEquipment"
-                      />
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbTablets').valid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'validate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbTablets').invalid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'notValidate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                    </ng-container>
-                    <ng-container *ngIf="equipment.module.id == 'imprimantes'">
-                      <input
-                        type="number"
-                        (input)="setValidationsForm()"
-                        formControlName="nbPrinters"
-                        min="0"
-                        class="form-input nbEquipment"
-                      />
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbPrinters').valid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'validate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbPrinters').invalid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'notValidate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                    </ng-container>
-                    <ng-container *ngIf="equipment.module.id == 'bornesNumeriques'">
-                      <input
-                        type="number"
-                        (input)="setValidationsForm()"
-                        formControlName="nbNumericTerminal"
-                        min="0"
-                        class="form-input nbEquipment"
-                      />
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbNumericTerminal').valid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'validate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbNumericTerminal').invalid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'notValidate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                    </ng-container>
-                    <ng-container *ngIf="equipment.module.id == 'scanners'">
-                      <input
-                        type="number"
-                        (input)="setValidationsForm()"
-                        formControlName="nbScanners"
-                        min="0"
-                        class="form-input nbEquipment"
-                      />
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbScanners').valid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'validate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                      <app-svg-icon
-                        *ngIf="getStructureControl('nbScanners').invalid"
-                        [iconClass]="'validation'"
-                        [type]="'form'"
-                        [icon]="'notValidate'"
-                        class="validationIcon"
-                      ></app-svg-icon>
-                    </ng-container>
-                  </div>
                 </div>
               </div>
             </div>
@@ -1208,10 +1170,10 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureLabels" class="page">
         <div class="title">
-          <h3>Quelle(s) labelisation proposez-vous ?</h3>
-          <p class="notRequired">facultatif</p>
+          <h3>La structure est labellisée&nbsp;?</h3>
+          <p class="notRequired">Facultatif</p>
         </div>
-        <div *ngIf="labelsQualifications" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="flex-start">
+        <div class="labelsQualifications" *ngIf="labelsQualifications" fxLayout="row wrap" fxLayoutAlign="flex-start">
           <app-checkbox-form
             *ngFor="let module of labelsQualifications.modules"
             [isChecked]="isInArray(module.id, labelsQualifications.id)"
@@ -1225,10 +1187,16 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureOtherServices" class="page">
         <div class="title">
-          <h3>Quels autres services proposez-vous ?</h3>
-          <p class="notRequired">facultatif</p>
+          <h3>Quels autres services sont proposés par la structure&nbsp;?</h3>
+          <p class="notRequired">Facultatif</p>
         </div>
-        <div *ngIf="labelsQualifications" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="flex-start">
+        <div
+          *ngIf="labelsQualifications"
+          fxLayout="row wrap"
+          fxLayoutGap="16px"
+          fxLayoutAlign="flex-start"
+          class="otherServices"
+        >
           <ng-container *ngFor="let equipment of equipmentsAndServices">
             <app-checkbox-form
               *ngIf="
@@ -1250,10 +1218,10 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureDescription" class="page">
         <div class="title">
-          <h3>Pouvez vous présentez votre structure ?</h3>
-          <p class="notRequired">facultatif</p>
+          <h3>Pouvez-vous présenter votre structure en quelques mots&nbsp;?</h3>
+          <p class="notRequired">Facultatif</p>
         </div>
-        <div class="textareaBlock" fxLayout="column">
+        <div class="textareaBlock introduceStructure" fxLayout="column">
           <textarea
             rows="8"
             placeholder="Exemple : nous sommes une équipe de 7 bénévoles qui orientons les personnes pour qui le numérique est une langue étrangère"
@@ -1261,14 +1229,16 @@
             formControlName="description"
           ></textarea>
           <p>
-            {{ getStructureControl('description').value ? getStructureControl('description').value.length : 0 }}/500
+            {{
+              getStructureControl('description').value ? getStructureControl('description').value.length : 0
+            }}&nbsp;/&nbsp;500
           </p>
         </div>
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureCovidInfo" class="page">
         <div class="title">
-          <h3>Y a-t-il des informations spécifiques à la période COVID ?</h3>
-          <p class="notRequired">facultatif</p>
+          <h3>Y a-t-il des informations spécifiques à la période COVID&nbsp;?</h3>
+          <p class="notRequired">Facultatif</p>
         </div>
         <div class="textareaBlock" fxLayout="column">
           <textarea
@@ -1280,13 +1250,13 @@
           <p>
             {{
               getStructureControl('lockdownActivity').value ? getStructureControl('lockdownActivity').value.length : 0
-            }}/500
+            }}&nbsp;/&nbsp;500
           </p>
         </div>
       </div>
     </form>
     <form>
-      <div *ngIf="currentPage == pageTypeEnum.cgu" class="page">
+      <div *ngIf="currentPage == pageTypeEnum.cgu" class="page cgu">
         <div class="section" *ngIf="!isEditMode">
           <div class="title">
             <h3>
@@ -1311,7 +1281,7 @@
               data.grandlyon.com<span class="asterisk" *ngIf="!isEditMode">**</span
               ><span class="asterisk" *ngIf="isEditMode">*</span> ?
             </h3>
-            <p class="notRequired" *ngIf="!isEditMode">facultatif</p>
+            <p class="notRequired" *ngIf="!isEditMode">Facultatif</p>
           </div>
           <app-checkbox-form
             *ngIf="!isEditMode"
@@ -1331,8 +1301,8 @@
         </div>
         <div *ngIf="!profile">
           <div class="title">
-            <h3>Souhaitez-vous vous abonner à la lettre d’information de Res'in ?</h3>
-            <p class="notRequired" *ngIf="!isEditMode">facultatif</p>
+            <h3>Souhaitez-vous vous abonner à la lettre d’information de Res'in&nbsp;?</h3>
+            <p class="notRequired" *ngIf="!isEditMode">Facultatif</p>
           </div>
           <app-checkbox-form
             [isChecked]="userAcceptNewsletter"
@@ -1344,27 +1314,27 @@
         <p *ngIf="!isEditMode" class="informationEndForm">
           <span class="asterisk">*</span> Les informations recueillies sont enregistrées dans un fichier par la
           Métropole de Lyon en vue de l'animation du réseau des acteurs de la médiation numérique. Elles sont conservées
-          pendant 24 mois et sont destinées aux seuls intervenants habilités de la Métropole de Lyon. Vos données
-          personnelles sont traitées dans ce cadre aux fins de recensement des actions de médiation numérique sur le
-          territoire de la métropole. Conformément à la loi 78-17 du 6 janvier 1978 modifiée relative à l'information,
-          aux fichiers et aux libertés, et au Règlement Général européen à la Protection des Données, vous avez la
-          possibilité d’exercer vos droits d’accès, de rectification, d’effacement, d’opposition, de limitation du
-          traitement et de révocation de votre consentement. Afin d'exercer vos droits, vous pouvez vous adresser : par
-          courrier postal à : Métropole de Lyon - Direction des Affaires Juridiques et de la Commande Publique - 20, rue
-          du Lac - BP 33569 - 69505 Lyon Cedex par courrier électronique en remplissant le formulaire dédié sur Toodego,
-          le site des services et démarches en ligne dans la Métropole de Lyon
+          pendant 24 mois et sont destinées aux seuls intervenants habilités de la Métropole de Lyon.<br />
+          Vos données personnelles sont traitées dans ce cadre aux fins de recensement des actions de médiation
+          numérique sur le territoire de la métropole. Conformément à la loi 78-17 du 6 janvier 1978 modifiée relative à
+          l'information, aux fichiers et aux libertés, et au Règlement Général européen à la Protection des Données,
+          vous avez la possibilité d’exercer vos droits d’accès, de rectification, d’effacement, d’opposition, de
+          limitation du traitement et de révocation de votre consentement. Afin d'exercer vos droits, vous pouvez vous
+          adresser : <br />
+          - par courrier postal à : Métropole de Lyon - Direction des Affaires Juridiques et de la Commande Publique -
+          20, rue du Lac - BP 33569 - 69505 Lyon Cedex<br />
+          - par courrier électronique en remplissant le formulaire dédié sur Toodego, le site des services et démarches
+          en ligne dans la Métropole de Lyon
         </p>
-        <div class="page" *ngIf="currentPage == pageTypeEnum.cgu">
-          <p class="informationEndForm">
-            <span class="asterisk" *ngIf="!isEditMode">**</span><span class="asterisk" *ngIf="isEditMode">*</span> La
-            Métropole de Lyon, engagée pour la transparence de l’action publique et la valorisation de ses partenaires,
-            encourage l’ouverture des données. Les données de votre structure seront publiées sur la plateforme
-            <a href="https://data.grandlyon.com/" target="_blank">https://data.grandlyon.com/</a> sous la licence
-            ouverte (open data) et seront donc librement accessibles et réutilisables. Vous pourrez modifier votre choix
-            à tout moment, exercer vos droits d’accès et de modification, en le signifiant, par tout moyen à votre
-            convenance, auprès de vos interlocuteurs de la Métropole de Lyon.
-          </p>
-        </div>
+        <p class="informationEndForm" *ngIf="currentPage == pageTypeEnum.cgu">
+          <span class="asterisk" *ngIf="!isEditMode">**</span><span class="asterisk" *ngIf="isEditMode">*</span> La
+          Métropole de Lyon, engagée pour la transparence de l’action publique et la valorisation de ses partenaires,
+          encourage l’ouverture des données. Les données de votre structure seront publiées sur la plateforme
+          <a href="https://data.grandlyon.com/" target="_blank">https://data.grandlyon.com/</a> sous la licence ouverte
+          (open data) et seront donc librement accessibles et réutilisables. Vous pourrez modifier votre choix à tout
+          moment, exercer vos droits d’accès et de modification, en le signifiant, par tout moyen à votre convenance,
+          auprès de vos interlocuteurs de la Métropole de Lyon.
+        </p>
       </div>
     </form>
     <div

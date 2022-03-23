@@ -49,15 +49,13 @@
           </div>
         </div>
         <div class="add" *ngIf="day.hours.length === 1">
-          <div
-            (click)="addHours(day)"
-            fxLayout="row"
-            fxLayoutAlign="center center"
-            fxLayoutGap="3px"
-            class="grey-rounded-border"
-          >
-            <app-svg-icon [type]="'ico'" [icon]="'add'" [iconColor]="'currentColor'"></app-svg-icon>Ajouter
-          </div>
+          <app-button
+            (action)="addHours(day)"
+            [text]="'Ajouter'"
+            [iconType]="'form'"
+            [iconBtn]="'show'"
+            [style]="buttonTypeEnum.Secondary"
+          ></app-button>
         </div>
       </div>
     </div>

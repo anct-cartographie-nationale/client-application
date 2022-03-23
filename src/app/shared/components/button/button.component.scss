@@ -111,7 +111,7 @@ button {
 
     background: $white;
     height: 31px;
-    color: $primary-color;
+    color: $grey-1;
     padding: 3px 15px;
     display: table-cell;
     vertical-align: middle;
@@ -138,27 +138,6 @@ button {
   border-radius: 20px;
 }
 
-// .btn-secondary {
-//   background: $white;
-//   height: 30px;
-//   width: 132px;
-//   color: $grey-1;
-//   padding: 0 0 1px 1px;
-//   // padding: 4px 37px 4px 37px;
-//   border-color: transparent;
-//   line-break: 18px;
-//   &:hover {
-//     @include background-hash($grey-1);
-//   }
-//   &:focus {
-//     background-color: $white;
-//     border-color: $primary-color;
-//     color: $primary-color;
-//   }
-//   &:active {
-//     background-color: $blue-light;
-//   }
-// }
 .btn-filter-phone {
   background: $white;
   height: 40px;

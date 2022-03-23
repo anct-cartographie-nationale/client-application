@@ -26,8 +26,9 @@
       grid-template-columns: auto 1fr;
     }
     .active {
-      display: grid;
-      grid-template-columns: 1fr 250px 40px;
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 400px;
       @media #{$large-phone} {
         grid-template-columns: unset;
         grid-template-rows: 1fr 1fr;
@@ -74,7 +75,8 @@ input {
   border: 1px solid $grey-4;
   box-sizing: border-box;
   border-radius: 4px;
-  height: 40px;
+  height: 36px;
+  margin-top: 0;
   @include lato-regular-14;
   min-width: 56px;
   text-align: center;
@@ -113,4 +115,10 @@ img {
 input[type='time']::-webkit-calendar-picker-indicator {
   background: none;
   display: none;
+}
+
+::ng-deep .add app-button button {
+  div.text {
+    height: 32px !important;
+  }
 }

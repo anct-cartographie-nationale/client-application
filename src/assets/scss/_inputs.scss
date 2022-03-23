@@ -15,15 +15,15 @@
 .form-input {
   width: 296px;
   background: $grey-8;
-  border: 1px solid $grey-4;
+  border: 1px solid $grey-5;
   box-sizing: border-box;
   border-radius: $input-radius;
-  height: 40px;
+  height: 36px;
   padding: 8px;
   @include lato-regular-14;
 }
 .form-input:focus {
-  border: 1px solid $blue;
+  border: 1px solid $grey-3;
   outline: none !important;
 }
 

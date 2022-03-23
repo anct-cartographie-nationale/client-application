@@ -2,16 +2,12 @@
 @import '../../../../assets/scss/typography';
 
 svg {
-  min-width: 30px;
-  width: 30px;
-  height: 100%;
+  width: 44px;
+  height: 44px;
   fill: $primary-color;
   stroke: $primary-color;
   &.validate {
-    min-width: 13px;
-    width: 13px;
-    height: 100%;
-    stroke: $green-1;
+    stroke: none;
     display: none;
   }
   &.labels {
@@ -29,19 +25,21 @@ button {
   outline: none;
   border: none;
   cursor: pointer;
-  margin: 8px 0;
+  margin: 8px 0 0 0;
   &.selected {
-    background: $green-1;
+    background: $white;
+    border: 3px solid $green-1;
     .validate {
       display: initial;
-    }
-    p {
-      color: $white;
+      width: 100%;
+      height: 100%;
     }
     .checkmark {
-      min-width: 20px;
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
+      // to compensate viewbox of svg
+      margin-right: 8px !important;
+      transform: translate(-5px);
       border: none;
     }
   }
@@ -51,10 +49,12 @@ button {
     color: $grey-2;
   }
   .checkmark {
-    min-width: 18px;
     width: 18px;
     height: 18px;
+    min-width: 18px;
     background: $white;
     border: 1px solid $grey-3;
+    border-radius: 4px;
+    box-sizing: border-box;
   }
 }

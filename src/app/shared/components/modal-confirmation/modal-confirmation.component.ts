@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ButtonType } from '../button/buttonType.enum';
 
 @Component({
   selector: 'app-modal-confirmation',
@@ -8,9 +9,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ModalConfirmationComponent {
   @Input() public openned: boolean;
   @Input() public content: string;
+  @Input() public customConfirmationText?: string;
   @Output() closed = new EventEmitter<boolean>();
-
-  constructor() {}
+  public buttonTypeEnum = ButtonType;
 
   public closeModal(value: boolean): void {
     this.closed.emit(value);
