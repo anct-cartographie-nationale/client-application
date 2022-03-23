@@ -28,6 +28,14 @@
   </button>
 </ng-container>
 
+<ng-container *ngIf="style === buttonTypeEnum.searchIcon">
+  <button class="searchIcon" type="{{ type }}" (click)="doAction()">
+    <div fxLayout="row center" class="searchIcon withIcon" fxLayoutAlign="space-between center">
+      <app-svg-icon [type]="'ico'" [icon]="iconBtn" [iconColor]="'currentColor'" [iconClass]="'icon-30'"></app-svg-icon>
+    </div>
+  </button>
+</ng-container>
+
 <ng-container *ngIf="style === buttonTypeEnum.Primary">
   <button
     class="btn-regular primary"
@@ -52,6 +60,26 @@
       class="text withIcon right"
       fxLayoutAlign="space-around center"
     >
+      <span>{{ text }}</span>
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+    </div>
+  </button>
+</ng-container>
+
+<ng-container *ngIf="style === buttonTypeEnum.modalPrimary">
+  <button
+    class="btn-regular modal-primary"
+    type="{{ type }}"
+    (click)="doAction()"
+    [disabled]="disabled"
+    [ngClass]="{ disabled: disabled }"
+  >
+    <div *ngIf="!iconBtn" class="text">{{ text }}</div>
+    <div *ngIf="iconBtn && iconPos === 'left'" fxLayout="row center" class="text" fxLayoutAlign="space-around center">
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+      <span>{{ text }}</span>
+    </div>
+    <div *ngIf="iconBtn && iconPos === 'right'" fxLayout="row center" class="text" fxLayoutAlign="space-around center">
       <span>{{ text }}</span>
       <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
     </div>
@@ -91,20 +119,35 @@
 <ng-container *ngIf="style === buttonTypeEnum.ButtonPhone">
   <button
     [disabled]="disabled"
-    class="btn-filter-phone"
-    [ngClass]="extraClass"
+    class="btn-switch-phone"
     type="{{ type }}"
     (click)="doAction()"
     [ngClass]="{ disabled: disabled }"
   >
-    {{ text }}
+    <div *ngIf="!iconBtn" class="text">{{ text }}</div>
+    <div
+      *ngIf="iconBtn"
+      fxLayout="row center"
+      class="text withIcon"
+      fxLayoutAlign="space-around center"
+      fxLayoutGap="13px"
+    >
+      <app-svg-icon
+        class="iconBtn"
+        [type]="'ico'"
+        [iconClass]="'icon-32'"
+        [icon]="iconBtn"
+        [iconColor]="'currentColor'"
+      ></app-svg-icon>
+      {{ text }}
+    </div>
   </button>
 </ng-container>
 
 <ng-container *ngIf="style === buttonTypeEnum.Filter">
   <button
     [disabled]="disabled"
-    class="btn-switch-phone"
+    class="btn-filter-phone"
     type="{{ type }}"
     (click)="doAction()"
     [ngClass]="{ disabled: disabled }"
@@ -153,5 +196,16 @@
         [iconColor]="active ? 'green' : 'currentColor'"
       ></app-svg-icon>
     </div>
+  </button>
+</ng-container>
+<ng-container *ngIf="style === buttonTypeEnum.TagCloudButton">
+  <button class="btn-tags-cloud" fxLayout="row" (click)="doAction()">
+    <span>{{ text }}</span>
+    <app-svg-icon
+      [type]="'ico'"
+      [iconClass]="'icon-centered'"
+      [icon]="'tagDelete'"
+      [iconColor]="'white'"
+    ></app-svg-icon>
   </button>
 </ng-container>

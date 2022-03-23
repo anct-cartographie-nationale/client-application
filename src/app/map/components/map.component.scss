@@ -7,94 +7,50 @@
 @import '../../../assets/scss/breakpoint';
 @import '../../../assets/scss/z-index';
 
-.map-wrapper {
-  border-radius: 6px;
-  @include background-hash($grey-2);
-  border: 1px solid $grey-4;
-}
-
 #map {
-  height: calc(100vh - #{$header-height} - #{$footer-height} - 60px);
-  border: 10px solid $white;
-  border-radius: 6px;
-  @media #{$tablet} {
-    height: calc(100vh - #{$header-height} - #{$footer-height} - 24px);
-  }
-  @media #{$large-phone} {
-    height: calc(100vh - #{$header-height} - 28px);
-  }
-  &.orientation {
-    height: calc(96vh - #{$header-height} - #{$footer-height} - 68px - #{$footer-height-phone});
-  }
+  height: 100%;
 }
 
+/*** Right controls ***/
 ::ng-deep .leaflet-popup-close-button {
   display: none;
 }
-::ng-deep .leaflet-bar-part-single {
-  &:hover {
-    .fa-map-marker {
-      background-color: $blue-middle;
+::ng-deep .leaflet-left {
+  right: 0;
+  left: unset;
+  .leaflet-control {
+    margin-left: 0;
+    margin-right: 10px;
+    border: none;
+    box-shadow: 0px 2px 8px rgba($black, 0.25);
+    &.leaflet-bar a:first-child {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    &.leaflet-bar a:last-child {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
     }
   }
-  &:active {
-    .fa-map-marker {
-      background-color: $blue-light;
-    }
-  }
 }
-::ng-deep .fa-map-marker {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 50% 50% 50% 0;
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  background-color: $grey-3;
-  margin-left: -8px;
-  margin-top: 4px;
-  &:before {
-    content: '';
-    position: absolute;
-    left: 5px;
-    top: 6px;
-    width: 7px;
-    height: 7px;
-    border-radius: 4px;
-    background-color: $white;
-  }
-}
-
-::ng-deep .leaflet-control-locate-circle {
-  &.leaflet-interactive {
-    stroke: $white !important;
-    fill: $black !important;
-    stroke-width: 2px !important;
-  }
-}
-
 ::ng-deep .leaflet-control-zoom {
   a {
-    color: $grey-3;
+    color: $grey-1;
+    opacity: 0.55;
     &:hover {
-      color: $blue-middle;
+      opacity: 1;
     }
   }
 }
 
+/*** Marker ***/
 ::ng-deep .leaflet-marker-icon {
-  &.leaflet-interactive {
-    circle {
-      fill: $primary-color !important;
-      stroke-width: unset !important;
-    }
-  }
   &:hover {
     z-index: calc($map-selected-marker - 1) !important;
     svg {
-      fill: $blue-middle;
+      fill: $primary-color-dark;
       &.mdm {
-        fill: #bd9e6a;
+        fill: $gold;
       }
       &.france-service {
         fill: $primary-color;
@@ -103,16 +59,7 @@
   }
 }
 
-::ng-deep .leaflet-left {
-  right: 0;
-  left: unset;
-  .leaflet-control {
-    margin-left: 0;
-    margin-right: 10px;
-  }
-}
 /*** POP-UP ***/
-
 ::ng-deep .leaflet-popup {
   border-radius: 6px;
   @include background-hash($grey-2);

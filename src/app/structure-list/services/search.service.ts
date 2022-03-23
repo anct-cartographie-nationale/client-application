@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Category } from '../models/category.model';
 import { Module } from '../models/module.model';
-import { StructureCounter } from '../models/structureCounter.model';
 
 @Injectable({
   providedIn: 'root',
@@ -22,28 +21,11 @@ export class SearchService {
       .get('/api/categories/categoriesAccompagnement')
       .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
-  public getCategoriesMoreFilters(): Observable<Category[]> {
+  public getCategoriesOthers(): Observable<Category[]> {
     return this.http
       .get('/api/categories/categoriesOthers')
       .pipe(map((data: any[]) => data.map((item) => new Category(item))));
   }
-
-  public getFakeCounterModule(selectedFilters: { id: string; text: string }[]): Observable<StructureCounter[]> {
-    return this.http
-      .post('/api/structures/count', selectedFilters)
-      .pipe(map((data: any[]) => data.map((item) => new StructureCounter(item))));
-  }
-  public setCountModules(category: Category, structureCountTab: StructureCounter[]): Category {
-    category.modules.forEach((m: Module) => {
-      for (let i = 0; i < structureCountTab.length; i++) {
-        if (structureCountTab[i].id === m.id) {
-          m.count = structureCountTab[i].count;
-        }
-      }
-    });
-    return category;
-  }
-
   public getIndex(array: Module[], id: string, categ: string): number {
     return array.findIndex((m: Module) => m.id === id && m.text === categ);
   }

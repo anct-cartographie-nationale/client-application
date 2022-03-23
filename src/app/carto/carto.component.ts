@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
-const { DateTime } = require('luxon');
 import * as _ from 'lodash';
 
 import { Structure } from '../models/structure.model';
@@ -18,6 +17,7 @@ import { ButtonType } from '../shared/components/button/buttonType.enum';
   styleUrls: ['./carto.component.scss'],
 })
 export class CartoComponent implements OnInit {
+  public filters: Filter[] = [];
   public structures: Structure[] = [];
   public displayMarkerId: string;
   public selectedMarkerId: string;
@@ -28,7 +28,6 @@ export class CartoComponent implements OnInit {
   public userLongitude: number;
   public isMapPhone = false;
   public searchedValue = null;
-  public locate = false; // Use to sync location between search and map
   public buttonTypeEnum = ButtonType;
   constructor(
     private structureService: StructureService,
@@ -208,18 +207,5 @@ export class CartoComponent implements OnInit {
 
   public switchMapList(): void {
     this.isMapPhone = !this.isMapPhone;
-  }
-
-  public locatationTrigger(event: any): void {
-    if (event && event !== this.locate) {
-      this.locate = !this.locate;
-    }
-    if (!event) {
-      this.locate = true;
-    }
-  }
-
-  public locatationReset(): void {
-    this.locate = false;
   }
 }

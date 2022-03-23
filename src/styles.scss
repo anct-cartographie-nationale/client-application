@@ -63,6 +63,7 @@ a {
   margin: 0;
   padding-top: 16px;
   width: 100%;
+  box-sizing: border-box;
   &.medium-pt {
     padding: 25px 0 30px 0;
   }
@@ -176,11 +177,13 @@ button {
     display: inline-grid;
     width: 18px;
     height: 18px;
+    min-width: 18px;
+    min-height: 18px;
     background-color: $white;
     border: 1px solid $grey;
     cursor: pointer;
     position: relative;
-
+    border-radius: 4px;
     top: 0;
     left: 0;
     &:hover {

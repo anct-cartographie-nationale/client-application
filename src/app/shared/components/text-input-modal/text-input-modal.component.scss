@@ -45,6 +45,13 @@
     transform: translateY(-50%);
   }
 }
+.modalBackground {
+  .modal {
+    .contentModal {
+      padding: 20px;
+    }
+  }
+}
 
 .textarea {
   padding: 13px 8px;

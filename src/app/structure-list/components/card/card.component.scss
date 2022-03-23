@@ -4,9 +4,11 @@
 @import '../../../../assets/scss/breakpoint';
 
 .structure {
-  padding: 12px 0 12px 0;
-  border-bottom: 1px dashed $grey !important;
+  padding: 12px 24px;
+  border-bottom: 1px solid $grey-8 !important;
   min-height: 110px;
+  display: flex;
+  justify-content: center;
   cursor: pointer;
   @media #{$large-phone} {
     height: unset;
@@ -16,19 +18,24 @@
     @include lato-regular-16;
     font-style: italic;
   }
+  &:hover {
+    .structure-name {
+      text-decoration: underline;
+    }
+  }
   .structure-name {
+    @include lato-bold-18;
+    color: $grey-1;
+    padding-bottom: 5px;
+    width: 100%;
+
     &.notClaimed {
       color: $primary-color;
     }
-    color: $grey-1;
-    @include lato-bold-18;
-    padding-bottom: 5px;
-    width: 100%;
   }
   .distanceStructure {
     @include lato-regular-16;
     color: $grey-3;
-    width: 50%;
   }
 }
 
@@ -54,6 +61,7 @@
 }
 
 .distance {
+  @include lato-regular-14;
   color: $grey-3;
 }
 

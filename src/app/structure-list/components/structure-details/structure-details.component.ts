@@ -16,10 +16,24 @@ import { User } from '../../../models/user.model';
 import { AuthService } from '../../../services/auth.service';
 import { PublicCategorie } from '../../enum/public.enum';
 import { Owner } from '../../../models/owner.model';
+import { style, animate, transition, trigger, group } from '@angular/animations';
+
 @Component({
   selector: 'app-structure-details',
   templateUrl: './structure-details.component.html',
   styleUrls: ['./structure-details.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ height: '0', opacity: 0 }),
+        group([animate(200, style({ height: '*' })), animate('200ms ease-in-out', style({ opacity: '1' }))]),
+      ]),
+      transition(':leave', [
+        style({ height: '*', opacity: 1 }),
+        group([animate(1, style({ height: 0 })), animate(1, style({ opacity: '0' }))]),
+      ]),
+    ]),
+  ],
 })
 export class StructureDetailsComponent implements OnInit {
   @Input() public structure: Structure;
@@ -36,6 +50,11 @@ export class StructureDetailsComponent implements OnInit {
   public parentingHelp: Module[];
   public socialAndProfessional: Module[];
   public digitalCultureSecurity: Module[];
+  public showBaseSkills: boolean;
+  public showAccessRights: boolean;
+  public showParentingHelp: boolean;
+  public showSocialAndProfessional: boolean;
+  public showDigitalSecurity: boolean;
   public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
   public isClaimed: boolean = null;
@@ -94,6 +113,7 @@ export class StructureDetailsComponent implements OnInit {
           this.socialAndProfessionalsReferentiel = referentiel;
         }
       });
+      this.setServiceCategories();
       if (this.printMode) {
         this.printService.onDataReady();
       }
@@ -167,13 +187,15 @@ export class StructureDetailsComponent implements OnInit {
       this.router.navigate(['create-structure'], { state: { newUser: this.structure } });
     }
   }
-
   public handleJoin(): void {
     if (this.userIsLoggedIn()) {
       this.toggleJoinModal();
     } else {
       this.router.navigate(['create-structure'], { state: { newUser: this.structure, isJoin: true } });
     }
+  }
+  public handleModify(): void {
+    this.router.navigate(['create-structure', this.structure._id]);
   }
 
   public deleteStructure(shouldDelete: boolean): void {
@@ -190,7 +212,6 @@ export class StructureDetailsComponent implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['./'], { relativeTo: this.route });
   }
-
   public claimStructure(shouldClaim: boolean): void {
     this.toggleClaimModal();
     if (shouldClaim) {
@@ -249,6 +270,24 @@ export class StructureDetailsComponent implements OnInit {
     }
   }
 
+  public setServiceCategories(): void {
+    this.baseSkills = this.structure.baseSkills.map((skill) =>
+      _.find(this.baseSkillssReferentiel.modules, { id: skill })
+    );
+    this.accessRights = this.structure.accessRight.map((rights) =>
+      _.find(this.accessRightsReferentiel.modules, { id: rights })
+    );
+    this.parentingHelp = this.structure.parentingHelp.map((help) =>
+      _.find(this.parentingHelpsReferentiel.modules, { id: help })
+    );
+    this.socialAndProfessional = this.structure.socialAndProfessional.map((skill) =>
+      _.find(this.socialAndProfessionalsReferentiel.modules, { id: skill })
+    );
+    this.digitalCultureSecurity = this.structure.digitalCultureSecurity.map((skill) =>
+      _.find(this.digitalCultureSecuritysReferentiel.modules, { id: skill })
+    );
+  }
+
   public keepOriginalOrder = (a, b) => a.key;
 
   public isBaseSkills(): boolean {
@@ -272,12 +311,7 @@ export class StructureDetailsComponent implements OnInit {
       this.tclStopPoints = res;
     });
   }
-  public canDelete(): boolean {
-    if (this.profileService.isAdmin()) {
-      return true;
-    }
-    return false;
-  }
+
   public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
     return equipmentsAndServices.filter((eqpt) =>
       ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners', 'wifiEnAccesLibre'].includes(eqpt)
@@ -317,27 +351,23 @@ export class StructureDetailsComponent implements OnInit {
     return false;
   }
 
-  public multipleEquipement(): boolean {
-    if (
-      this.structure.nbComputers +
-        this.structure.nbNumericTerminal +
-        this.structure.nbPrinters +
-        this.structure.nbScanners +
-        this.structure.nbTablets >
-      1
-    ) {
-      return true;
-    }
-    return false;
+  public toggleBaseSkills(): void {
+    this.showBaseSkills = !this.showBaseSkills;
+  }
+  public toggleAccessRights(): void {
+    this.showAccessRights = !this.showAccessRights;
+  }
+  public toggleParentingHelp(): void {
+    this.showParentingHelp = !this.showParentingHelp;
+  }
+  public toggleSocialAndProfessional(): void {
+    this.showSocialAndProfessional = !this.showSocialAndProfessional;
+  }
+  public toggleDigitalSecurity(): void {
+    this.showDigitalSecurity = !this.showDigitalSecurity;
   }
 
-  public multipleAccompaniment(): boolean {
-    if (
-      (this.structure.otherDescription && this.structure.proceduresAccompaniment.length > 0) ||
-      this.structure.proceduresAccompaniment.length > 1
-    ) {
-      return true;
-    }
-    return false;
+  public goToWebsite(): void {
+    window.open(this.structure.website, '_blank');
   }
 }

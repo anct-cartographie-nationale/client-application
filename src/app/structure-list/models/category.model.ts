@@ -10,28 +10,30 @@ export class Category {
     Object.assign(this, obj, {
       modules:
         obj && obj.modules
-          ? obj.modules.map((module) => new Module(module.display_id ? module.display_id : module.id, module.text))
+          ? obj.modules.map(
+              (module) => new Module(module.display_id ? module.display_id : module.id, module.text, module.text)
+            )
           : null,
     });
   }
 
   public isBaseSkills(): boolean {
-    return this.name === 'Les compétences de base';
+    return this.id === 'baseSkills';
   }
 
   public isRigthtsAccess(): boolean {
-    return this.name === 'Accès aux droits';
+    return this.id === 'accessRight';
   }
 
   public isParentingHelp(): boolean {
-    return this.name === 'Aide à la parentalité';
+    return this.id === 'parentingHelp';
   }
 
   public isDigitalCultureSecurity(): boolean {
-    return this.name === 'Culture et sécurité numérique';
+    return this.id === 'digitalCultureSecurity';
   }
 
   public isSocialAndProfessional(): boolean {
-    return this.name === 'Insertion sociale et professionnelle';
+    return this.id === 'socialAndProfessional';
   }
 }

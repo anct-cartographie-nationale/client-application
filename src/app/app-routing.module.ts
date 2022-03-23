@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Route } from '@angular/router';
 import { PageComponent } from './page/page.component';
 import { ContactComponent } from './contact/contact.component';
 import { FormComponent } from './form/structure-form/form.component';
@@ -21,13 +21,34 @@ import { StructureListPrintComponent } from './form/orientation-form/component/s
 import { StructureResolver } from './resolvers/structure.resolver';
 import { RoleGuard } from './guards/role.guard';
 import { RouteRole } from './shared/enum/routeRole.enum';
+import { FooterComponent } from './footer/footer.component';
+
+const footerOutletRoute: Route = {
+  path: '',
+  outlet: 'footer',
+  component: FooterComponent,
+};
 
 const routes: Routes = [
-  { path: 'print', outlet: 'print', children: [{ path: 'structure', component: StructureDetailsComponent }] },
-  { path: 'print', outlet: 'print', children: [{ path: 'structures', component: StructureListPrintComponent }] },
+  {
+    path: 'print',
+    outlet: 'print',
+    children: [{ path: 'structure', component: StructureDetailsComponent }, footerOutletRoute],
+  },
+  {
+    path: 'print',
+    outlet: 'print',
+    children: [{ path: 'structures', component: StructureListPrintComponent }, footerOutletRoute],
+  },
   {
     path: 'orientation',
-    component: OrientationFormComponent,
+    children: [
+      {
+        path: '',
+        component: OrientationFormComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'acteurs',
@@ -35,86 +56,188 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: CartoComponent,
+    children: [
+      {
+        path: '',
+        component: CartoComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'structures',
-    component: StructureListComponent,
+    children: [
+      {
+        path: '',
+        component: StructureListComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'legal-notice',
-    component: LegalNoticeComponent,
+    children: [
+      {
+        path: '',
+        component: LegalNoticeComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'page/:slugPage',
-    component: PageComponent,
+    children: [
+      {
+        path: '',
+        component: PageComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'contact',
-    component: ContactComponent,
+    children: [
+      {
+        path: '',
+        component: ContactComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'users/verify/:id',
-    component: UserVerificationComponent,
+    children: [
+      {
+        path: '',
+        component: UserVerificationComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'register',
-    component: FormComponent,
-    canDeactivate: [DeactivateGuard],
-    resolve: {
-      user: TempUserResolver,
-    },
+    children: [
+      {
+        path: '',
+        component: FormComponent,
+        canDeactivate: [DeactivateGuard],
+        resolve: {
+          user: TempUserResolver,
+        },
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'change-email/:id',
-    component: ResetEmailComponent,
+    children: [
+      {
+        path: '',
+        component: ResetEmailComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'profile',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule),
+    children: [
+      {
+        path: '',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('./profile/profile.module').then((m) => m.ProfileModule),
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'join',
-    canActivate: [AuthGuard],
-    component: StructureJoinComponent,
+    children: [
+      {
+        path: '',
+        canActivate: [AuthGuard],
+        component: StructureJoinComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'reset-password',
-    component: ResetPasswordComponent,
+    children: [
+      {
+        path: '',
+        component: ResetPasswordComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'create-structure',
-    component: FormComponent,
-    canDeactivate: [DeactivateGuard],
+    children: [
+      {
+        path: '',
+        component: FormComponent,
+        canDeactivate: [DeactivateGuard],
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'create-structure/:id',
-    component: FormComponent,
-    canDeactivate: [DeactivateGuard],
-    canActivate: [RoleGuard],
-    data: { allowedRoles: [RouteRole.structureAdmin] },
-    resolve: {
-      structure: StructureResolver,
-    },
+    children: [
+      {
+        path: '',
+        component: FormComponent,
+        canDeactivate: [DeactivateGuard],
+        canActivate: [RoleGuard],
+        data: { allowedRoles: [RouteRole.structureAdmin] },
+        resolve: {
+          structure: StructureResolver,
+        },
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'newsletter',
-    component: NewsletterSubscriptionComponent,
+    children: [
+      {
+        path: '',
+        component: NewsletterSubscriptionComponent,
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'newsletter-unsubscribe',
-    component: NewsletterSubscriptionComponent,
+    children: [
+      {
+        path: '',
+        component: NewsletterSubscriptionComponent,
+      },
+      footerOutletRoute,
+    ],
   },
 
   {
     path: 'news',
-    loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./post/post.module').then((m) => m.PostModule),
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'admin',
-    canActivate: [AdminGuard],
-    loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule),
+    children: [
+      {
+        path: '',
+        canActivate: [AdminGuard],
+        loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule),
+      },
+      footerOutletRoute,
+    ],
   },
   {
     path: 'home',

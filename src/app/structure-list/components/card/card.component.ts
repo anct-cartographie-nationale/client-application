@@ -71,9 +71,4 @@ export class CardComponent implements OnInit {
   public cardAddToList(): void {
     this.addToList.emit(this.structure);
   }
-  public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
-    return equipmentsAndServices.filter((eqpt) =>
-      ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners', 'wifiEnAccesLibre'].includes(eqpt)
-    );
-  }
 }

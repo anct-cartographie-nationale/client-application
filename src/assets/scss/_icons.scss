@@ -542,10 +542,9 @@
 }
 
 .ico-close-details {
-  width: 40px;
-  height: 40px;
-  border-radius: 40px;
-  background-color: $black;
+  width: 44px;
+  height: 44px;
+  border-radius: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -555,13 +554,15 @@
   &:before,
   &:after {
     content: '';
-    width: 23px;
+    width: 24px;
     height: 2px;
-    background-color: $white;
+    background-color: $grey-1;
     position: absolute;
     border-radius: 1px;
   }
-
+  &:hover {
+    background-color: $grey-7;
+  }
   &:before {
     transform: rotate(45deg);
   }

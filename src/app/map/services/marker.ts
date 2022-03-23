@@ -2,7 +2,7 @@ import { divIcon } from 'leaflet';
 
 export const markerIcon = divIcon({
   className: null,
-  html: '<svg width="48" height="48" fill="#348899"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
+  html: '<svg width="48" height="48" fill="#4C4D53"><use xlink:href="assets/ico/sprite.svg#map-marker"></use></svg>',
   iconSize: [48, 48],
   iconAnchor: [24, 48],
   popupAnchor: [0, -48],

@@ -3,6 +3,7 @@ $footer-text-font: 'Arial', 'Helvetica', sans-serif;
 $title-font: 'Lato', 'Helvetica', sans-serif;
 
 $font-size-xxsmall: 0.75em; // 12px
+$font-size-xmsmall: 0.813em; // 13px
 $font-size-xsmall: 0.875em; // 14px
 $font-size-small: 1em; // 16px
 
@@ -157,6 +158,18 @@ h6,
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-xsmall;
+}
+@mixin lato-regular-13 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-xmsmall;
+}
+@mixin lato-bold-13 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-xmsmall;
 }
 @mixin lato-regular-12 {
   font-family: $text-font;

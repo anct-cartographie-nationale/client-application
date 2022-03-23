@@ -1,5 +1,5 @@
-import { Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { latLng, MapOptions, geoJSON, tileLayer, Map, latLngBounds, layerGroup } from 'leaflet';
+import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import L, { latLng, MapOptions, geoJSON, tileLayer, Map, latLngBounds, layerGroup } from 'leaflet';
 import { Structure } from '../../models/structure.model';
 import { GeojsonService } from '../../services/geojson.service';
 import { MapService } from '../services/map.service';
@@ -7,8 +7,6 @@ import * as _ from 'lodash';
 import { GeoJsonProperties } from '../models/geoJsonProperties.model';
 import { MarkerType } from './markerType.enum';
 import metropole from '../../../assets/geojson/metropole.json';
-import L from 'leaflet';
-import 'leaflet.locatecontrol';
 import { ZoomLevel } from './zoomLevel.enum';
 
 @Component({
@@ -23,24 +21,13 @@ export class MapComponent implements OnChanges {
   @Input() public toogleToolTipId: string;
   @Input() public selectedMarkerId: string;
   @Input() public isMapPhone: boolean;
-  @Input() public locate = false;
   @Input() public searchedValue: string | [number, number];
   @Output() public selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
   @Output() public onOrientationButtonClick: EventEmitter<Structure> = new EventEmitter<Structure>();
-  @Output() locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
-  private lc; // Locate control
   private currentStructure: Structure;
 
   public map: Map;
   public mapOptions: MapOptions;
-  // Init locate options
-  public locateOptions = {
-    flyTo: false,
-    keepCurrentZoomLevel: false,
-    icon: 'fa-map-marker',
-    clickBehavior: { inView: 'stop', outOfView: 'setView', inViewNotFollowing: 'setView' },
-    circlePadding: [5, 5],
-  };
 
   // Add listener on the popup button to show details of structure
   @HostListener('document:click', ['$event'])
@@ -73,14 +60,6 @@ export class MapComponent implements OnChanges {
         }, 0);
       }
     }
-    // Handle map locate from search bar
-    if (changes.locate && !changes.locate.isFirstChange()) {
-      if (changes.locate.currentValue) {
-        this.lc.start();
-      } else {
-        this.lc.stop();
-      }
-    }
     if (changes.structures) {
       this.handleStructurePosition(changes.structures.previousValue);
     }
@@ -106,7 +85,7 @@ export class MapComponent implements OnChanges {
         );
       }
     }
-    // Handle map marker selection
+    // Handle map marker if none selected
     if (changes.selectedMarkerId && this.map) {
       this.map.closePopup();
       if (changes.selectedMarkerId.currentValue === undefined) {
@@ -115,14 +94,15 @@ export class MapComponent implements OnChanges {
           this.getMarkerTypeByStructureId(changes.selectedMarkerId.previousValue)
         );
         this.map.setView(this.mapOptions.center, this.mapOptions.zoom);
-      } else {
-        this.mapService.setSelectedMarker(
-          changes.selectedMarkerId.currentValue,
-          this.getMarkerTypeByStructureId(changes.selectedMarkerId.currentValue)
-        );
-        this.centerLeafletMapOnMarker(changes.selectedMarkerId.currentValue);
       }
     }
+    // Handle map marker if one is set with url or selected
+    if (this.mapService.getMarker(this.selectedMarkerId)) {
+      this.mapService.setSelectedMarker(this.selectedMarkerId, this.getMarkerTypeByStructureId(this.selectedMarkerId));
+      this.centerLeafletMapOnMarker(this.selectedMarkerId);
+    }
+
+    this.closePreviousMarker(changes);
 
     if (changes.structuresToPrint) {
       if (changes.structuresToPrint.currentValue < changes.structuresToPrint.previousValue) {
@@ -180,7 +160,7 @@ export class MapComponent implements OnChanges {
     }
   }
 
-  private isToPrint(id: String): boolean {
+  private isToPrint(id: string): boolean {
     return this.structuresToPrint.findIndex((elem) => elem._id == id) > -1 ? true : false;
   }
 
@@ -205,7 +185,7 @@ export class MapComponent implements OnChanges {
   }
 
   private getStructuresPositions(structureList: Structure[]): void {
-    structureList.forEach((structure: Structure) => {
+    for (const structure of structureList) {
       this.mapService
         .createMarker(
           structure.getLat(),
@@ -219,11 +199,6 @@ export class MapComponent implements OnChanges {
         .on('popupopen', () => {
           this.currentStructure = structure;
         });
-    });
-    // Reset location if active to prevent graphical issue
-    if (this.locate) {
-      this.lc.stop();
-      this.lc.start();
     }
   }
 
@@ -271,14 +246,6 @@ export class MapComponent implements OnChanges {
    */
   public onMapReady(map: Map): void {
     this.map = map;
-    // Handle location
-    if (!this.isOrientationForm) {
-      this.lc = L.control.locate(this.locateOptions).addTo(this.map);
-      this.map.on('locationfound', () => {
-        this.locatationTrigger.emit(true);
-      });
-    }
-
     if (this.searchedValue) {
       if (Array.isArray(this.searchedValue)) {
         this.centerOnCoordinates(this.searchedValue);
@@ -329,11 +296,13 @@ export class MapComponent implements OnChanges {
   }
 
   private centerLeafletMapOnMarker(markerId: string): void {
-    const marker = this.mapService.getMarker(markerId);
-    const latLngs = [marker.getLatLng()];
-    const markerBounds = latLngBounds(latLngs);
-    // paddingTopLeft is used for centering marker because of structure details pane
-    this.map.fitBounds(markerBounds, { paddingTopLeft: [300, 0] });
+    if (this.mapService.getMarker(markerId)) {
+      const marker = this.mapService.getMarker(markerId);
+      const latLngs = [marker.getLatLng()];
+      const markerBounds = latLngBounds(latLngs);
+      // paddingTopLeft is used for centering marker because of structure details pane
+      this.map.fitBounds(markerBounds, { paddingTopLeft: [300, 0] });
+    }
   }
 
   private initMetropoleLayer(): void {
@@ -346,5 +315,22 @@ export class MapComponent implements OnChanges {
         { style: () => ({ color: '#a00000', fillOpacity: 0, weight: 1 }) }
       )
     );
+  }
+
+  /**
+   * Close previous markers
+   * - if strucure is closed
+   * - if a new marker is selected
+   */
+  private closePreviousMarker(changes: SimpleChanges): void {
+    if (
+      (changes.selectedMarkerId?.currentValue === undefined && changes.selectedMarkerId?.previousValue) ||
+      changes.selectedMarkerId?.currentValue !== changes.selectedMarkerId?.previousValue
+    ) {
+      this.mapService.setUnactiveMarker(
+        changes.selectedMarkerId.previousValue,
+        this.getMarkerTypeByStructureId(changes.selectedMarkerId.previousValue)
+      );
+    }
   }
 }

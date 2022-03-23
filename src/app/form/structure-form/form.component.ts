@@ -179,7 +179,7 @@ export class FormComponent implements OnInit {
     this.searchService.getCategoriesAccompaniment().subscribe((categories: Category[]) => {
       this.proceduresAccompaniment = categories[0];
     });
-    const equipmentsCategs = await this.searchService.getCategoriesMoreFilters().toPromise();
+    const equipmentsCategs = await this.searchService.getCategoriesOthers().toPromise();
     equipmentsCategs.forEach((categ) => {
       switch (categ.id) {
         case CategoryEnum.accessModality: {

@@ -1,6 +1,7 @@
 @import '../../assets/scss/breakpoint';
 @import '../../assets/scss/layout';
 @import '../../assets/scss/z-index';
+@import '../../assets/scss/color';
 
 ::ng-deep .footer {
   @media #{$tablet} {
@@ -8,36 +9,48 @@
   }
 }
 
-.left-pane {
-  width: 640px;
-  min-width: 640px;
-  @media #{$tablet} {
-    width: 100%;
-    min-width: unset;
-    &.mapPhone {
-      display: none !important;
-    }
-  }
-}
-.right-pane {
-  width: 80%;
-  padding: 0 16px;
-  @media #{$tablet} {
-    display: none;
-    &.mapPhone {
-      display: block;
-    }
-    width: 100%;
-    padding: 0;
-  }
-}
 .content-container {
-  height: calc(100vh - #{$header-height} - #{$footer-height});
-  @media #{$tablet} {
-    padding: 0;
-    height: calc(100vh - #{$header-height});
+  height: calc(100vh - #{$header-height});
+  background: $white;
+  padding-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.panes-container {
+  width: 100%;
+  position: relative;
+  flex: 1;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  .left-pane {
+    height: 100%;
+    width: 600px;
+    min-width: 600px;
+    overflow-y: auto;
+    border-right: 1px solid $grey-4;
+    @media #{$tablet} {
+      width: 100%;
+      min-width: unset;
+      border-right: none;
+      &.mapPhone {
+        display: none !important;
+      }
+    }
+  }
+  .right-pane {
+    height: 100%;
+    width: 100%;
+    @media #{$tablet} {
+      display: none;
+      &.mapPhone {
+        display: block;
+      }
+      padding: 0;
+    }
   }
 }
+
 .btnSwitch {
   position: fixed;
   left: 50%;
