@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { Filter } from './models/filter.model';
 import { Structure } from '../models/structure.model';
 import { GeoJson } from '../map/models/geojson.model';
 import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StructureService } from '../services/structure.service';
+import { ButtonType } from '../shared/components/button/buttonType.enum';
 
 @Component({
   selector: 'app-structure-list',
@@ -13,16 +13,13 @@ import { StructureService } from '../services/structure.service';
 })
 export class StructureListComponent implements OnChanges {
   @Input() public structureList: Structure[];
-  @Output() searchEvent = new EventEmitter();
   @Input() public location: GeoJson;
   @Input() public selectedStructure: Structure = new Structure();
-  @Input() public locate = false;
   @Output() public displayMapMarkerId: EventEmitter<string> = new EventEmitter<string>();
   @Output() public selectedMarkerId: EventEmitter<string> = new EventEmitter<string>();
   @Output() public updatedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
-  @Output() public locatationReset: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() public locatationTrigger: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  public buttonTypeEnum = ButtonType;
   public showStructureDetails = false;
   public structure: Structure;
   public structuresListChunked: Structure[];
@@ -59,9 +56,11 @@ export class StructureListComponent implements OnChanges {
       document.getElementById('listCard').scrollTo(0, 0);
     }
   }
-  public fetchResults(filters: Filter[]): void {
-    this.searchEvent.emit(filters);
+
+  public addStructure(): void {
+    this.router.navigate(['/create-structure']);
   }
+
   public showDetails(event: Structure): void {
     this.showStructureDetails = true;
     this.structure = event;
@@ -105,13 +104,5 @@ export class StructureListComponent implements OnChanges {
       const newStructures = _.map(this.arrayChunked[this.pageStructures]);
       this.structuresListChunked = [...this.structuresListChunked, ...newStructures];
     }
-  }
-
-  public sendLocatationReset(): void {
-    this.locatationReset.emit(true);
-  }
-
-  public sendlocatationTrigger(): void {
-    this.locatationTrigger.emit(true);
   }
 }

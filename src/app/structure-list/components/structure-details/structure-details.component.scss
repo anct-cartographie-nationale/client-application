@@ -1,84 +1,251 @@
-@import '../../../../assets/scss/icons';
 @import '../../../../assets/scss/color';
 @import '../../../../assets/scss/typography';
-@import '../../../../assets/scss/z-index';
-@import '../../../../assets/scss/layout';
 @import '../../../../assets/scss/breakpoint';
 
 a {
   padding: unset;
+  text-decoration: underline;
+  font-size: inherit;
+  font-weight: inherit;
 }
 
-.structrue-details-container {
-  border-right: solid 1px $grey-4;
+p:empty {
+  margin: 0;
+}
+
+h1 {
+  @include lato-bold-20;
+  color: $grey-1;
+}
+h2 {
+  @include lato-bold-14;
+  color: $grey-3;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+h3 {
+  @include lato-regular-16;
+  margin: 0 0 8px 0;
+}
+
+.structure-details-container {
+  position: relative;
+  height: 100%;
+  width: calc(100% - 1px);
   background-color: $white;
-  z-index: $structure-details-z-index;
-  position: absolute;
-  top: 0;
-  left: 0;
-  max-width: 980px;
+  overflow: hidden;
+  border-bottom: 1px solid $grey-5;
+}
+
+.structure-details-title {
+  height: 65px;
+  border-bottom: 1px solid $grey-5;
+  padding: 2px 16px 2px 24px;
+  .ico-close {
+    margin-left: auto;
+  }
+}
+
+.structure-details-content {
+  height: calc(100% - 65px);
+  padding: 0px 8px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  @include lato-regular-14;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: $scrollbar-track;
+  }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $scrollbar-thumb;
+    border-radius: 8px;
+  }
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: $grey-3;
+    border-radius: 8px;
+  }
+}
+
+.structure-buttons {
   width: 100%;
-  height: calc(100vh - #{$header-height} - #{$footer-height});
-  padding: 0px 24px;
-  overflow: auto;
+  margin: 0 0 16px 0;
+  position: relative;
+  .clickableDiv {
+    text-align: center;
+    height: 90px;
+    width: 115.2px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    .icon {
+      margin-top: 20px;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .iconTitle {
+      @include lato-regular-13;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   @media #{$tablet} {
     .printButton {
       display: none !important;
     }
+  }
+}
 
-    .ico-close {
-      margin-left: 16px;
+.structure-details-block {
+  margin: 0 20px;
+  padding: 24px 0;
+  border-bottom: 2px solid $grey-8;
+  &.noSeparator {
+    border-bottom: none;
+    padding-bottom: 0px;
+  }
+
+  .info-block > div {
+    margin-top: 4px;
+    &:first-of-type {
+      margin-top: 0px;
     }
   }
-  .printButton {
-    margin-right: 75px;
-  }
-}
 
-.structrue-details-container > .structure-details-block {
-  padding: 0px 0px 24px 0;
-  border-bottom: 1px dashed $grey-2;
-  .subtitle {
-    text-transform: uppercase;
-    @include lato-bold-16;
-    margin-bottom: 10px;
+  .description {
+    white-space: pre-wrap;
+    margin-top: 8px;
+  }
+
+  .info {
+    color: $red-1;
+    margin-top: 8px;
+  }
+
+  .hours-services-block {
+    display: flex;
+    flex-direction: row;
+    & > div {
+      flex: 1;
+    }
+    @media #{$large-phone} {
+      flex-direction: column;
+    }
+
+    .opening-hours {
+      margin-bottom: 8px;
+      .opening-hour {
+        margin-bottom: 8px;
+        .day {
+          min-width: 70px;
+          margin-top: 0;
+          margin-left: 0;
+          margin-bottom: 0;
+          @include lato-regular-14;
+          color: $grey-3;
+          text-transform: capitalize;
+        }
+        .daily-opening-time {
+          p {
+            margin: 0 0 4px 0;
+          }
+        }
+      }
+    }
+  }
+
+  .services-block {
+    margin-bottom: 8px;
+    p {
+      display: list-item;
+      margin: 0 0 0 25px;
+    }
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    @media #{$large-phone} {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .formationDetails {
+    width: 100%;
+    .collapse {
+      margin-bottom: 13px;
+      @media #{$small-phone} {
+        width: 95% !important;
+      }
+      &.notCollapsed {
+        margin-bottom: 8px;
+        height: 40px;
+        border-bottom: 2px solid $grey-8;
+        .logo {
+          .hide {
+            display: none;
+          }
+          .show {
+            display: block;
+          }
+        }
+      }
+      .titleCollapse {
+        width: 100%;
+        @include lato-regular-16;
+      }
+      .collapseHeader {
+        cursor: pointer;
+      }
+      .logo {
+        height: 24px;
+        width: 24px;
+        svg {
+          width: 100%;
+          height: 100%;
+          fill: $grey-1;
+        }
+      }
+      .logo,
+      .titleCollapse {
+        .hide {
+          display: block;
+        }
+        .show {
+          display: none;
+        }
+      }
+      .detailsContainer {
+        margin: 8px 0px;
+        padding: 8px 0;
+        background-color: $grey-8;
+      }
+      .details {
+        padding: 8px 16px;
+      }
+    }
+  }
+
+  .updated {
+    @include lato-regular-14;
     color: $grey-3;
+    font-style: italic;
   }
 }
 
-.structrue-details-container > .structure-details-block ~ .structure-details-block {
-  padding: 24px 0;
-}
-
-.structure-details-block:last-child {
-  border-bottom: none !important;
-}
-
-.opening-time {
-  p {
-    margin: 0 5px 12px 0;
-  }
-}
-.typeInformationHeader {
-  color: $grey-3;
-}
-h2 {
-  margin-top: 0;
-  margin-bottom: 5px;
-  @include lato-regular-26;
-}
-h3 {
-  margin: 0 0 8px 0;
-  @include lato-regular-16;
-}
-h4 {
-  margin-left: 0;
-  margin-bottom: 0;
-  margin-top: 4px;
-  @include lato-regular-14;
-  color: $grey-2;
-  text-transform: uppercase;
-}
 p,
 .custom-link {
   @include lato-regular-16;
@@ -92,13 +259,22 @@ p,
     margin-bottom: unset;
   }
 }
+.custom-link {
+  ::ng-deep svg {
+    border: 1px solid $white;
+    border-radius: 20px;
+  }
+  ::ng-deep svg:hover {
+    border-color: $grey-4;
+  }
+}
 
 .bold-info {
   @include lato-bold-16;
 }
 
 @media print {
-  .structrue-details-container {
+  .structure-details-container {
     background-color: unset;
     z-index: unset;
     position: unset;
@@ -114,48 +290,5 @@ p,
 
   .hide-on-print {
     display: none !important;
-  }
-}
-
-.info {
-  color: $ram-hover-principal;
-}
-
-.description {
-  white-space: pre-wrap;
-  float: left;
-}
-
-.wrapper {
-  width: 100%;
-  display: grid;
-  gap: 20px 30px;
-  grid-template-columns: 1fr 1fr;
-}
-.ico-close {
-  margin-left: auto;
-  padding-top: 10px;
-}
-.sticky-title {
-  position: sticky;
-  top: 0px;
-  max-width: 980px;
-  width: 100%;
-  background-color: $white;
-  height: 60px;
-  z-index: 1;
-  border-bottom: solid 1px $grey-4;
-  padding-bottom: 2px;
-  @media #{$tablet} {
-    height: auto;
-  }
-  @media #{$small-phone} {
-    width: 111%;
-    padding-right: 20px;
-  }
-  h2 {
-    @media #{$large-phone} {
-      font-size: $font-size-medium;
-    }
   }
 }

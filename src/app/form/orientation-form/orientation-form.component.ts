@@ -131,7 +131,7 @@ export class OrientationFormComponent implements OnInit {
       });
     });
 
-    const equipmentsCategs = await this.searchService.getCategoriesMoreFilters().toPromise();
+    const equipmentsCategs = await this.searchService.getCategoriesOthers().toPromise();
     equipmentsCategs.forEach((categ) => {
       if (categ.id == CategoryEnum.equipmentsAndServices) {
         categ.modules = this.filterOnlyEquipments(categ.modules);
@@ -141,7 +141,7 @@ export class OrientationFormComponent implements OnInit {
         });
       }
     });
-    const specificProfileCategs = await this.searchService.getCategoriesMoreFilters().toPromise();
+    const specificProfileCategs = await this.searchService.getCategoriesOthers().toPromise();
     specificProfileCategs.forEach((categ) => {
       switch (categ.id) {
         case CategoryEnum.publicsAccompaniment: {

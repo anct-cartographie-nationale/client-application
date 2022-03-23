@@ -19,6 +19,10 @@
     width: 28px;
     height: 28px;
   }
+  &.icon-30 {
+    width: 30px;
+    height: 30px;
+  }
   &.icon-32 {
     width: 2em;
   }
@@ -70,4 +74,7 @@ svg {
 
   top: 0.125em;
   position: relative;
+}
+.icon-centered {
+  padding-top: 0.15rem;
 }

@@ -3,7 +3,7 @@
 @import '../../../../assets/scss/shapes';
 
 @mixin btn-bold {
-  @include lato-bold-14;
+  @include lato-bold-13;
   line-height: 18px;
 }
 @mixin btn-bold-underline {
@@ -11,16 +11,28 @@
   text-decoration: underline;
 }
 @mixin btn-regular {
-  @include lato-regular-14;
+  @include lato-regular-13;
   line-height: 19px;
 }
-
 button {
   outline: none;
   border-radius: 4px;
   cursor: pointer;
   border: 1px solid;
   padding: 0;
+}
+.searchIcon {
+  background: transparent;
+  border: none;
+  & > svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+.btnSearch {
+  @include background-hash($grey-2);
+  border-color: $grey-4;
+  padding: 0 0 4px 4px;
 }
 
 .btn-regular {
@@ -41,6 +53,9 @@ button {
     background: none;
     border-color: $grey-8;
   }
+  .searchButton {
+    background: $grey-6;
+  }
   &.primary {
     border: 0;
     @include btn-bold;
@@ -49,6 +64,26 @@ button {
       border: 1px solid $grey-1;
 
       color: $white;
+      &.withIcon {
+        color: $white;
+      }
+    }
+  }
+  &.modal-primary {
+    background: $primary-color;
+    border: none;
+    width: 100%;
+    @include btn-bold;
+    .text {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      background: $primary-color;
+      text-align: center;
+      margin: auto;
+      color: $white;
+      width: auto;
       &.withIcon {
         color: $white;
       }
@@ -75,6 +110,7 @@ button {
   }
   &.tertiary {
     div:first-child {
+      min-width: 50px;
       width: unset;
     }
     &:hover {
@@ -88,6 +124,8 @@ button {
     color: $black;
     padding: 0px 16px;
     border-radius: 20px;
+    min-width: 50px;
+
     @include btn-regular;
   }
   &.icon-only {
@@ -133,9 +171,13 @@ button {
 .btn-switch-phone {
   background: $black;
   height: 40px;
+  width: 124px;
   color: $white;
-  padding: 4px 37px 4px 37px;
+  padding: 4px 28px;
   border-radius: 20px;
+  .iconBtn {
+    margin-right: 6px;
+  }
 }
 
 .btn-filter-phone {
@@ -149,7 +191,35 @@ button {
     border-color: $primary-color;
   }
 }
+.btn-tags-cloud {
+  appearance: none;
 
+  @include lato-regular-12;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: 25px;
+  border-radius: 20px;
+  padding: 5px 10px 5px 15px;
+  max-width: 150px;
+  color: $grey-8;
+  border-style: none;
+  margin-top: 5px;
+  background: $grey-1;
+  text-overflow: ellipsis;
+
+  span {
+    text-overflow: ellipsis;
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  &.unchecked {
+    background: $grey-1;
+  }
+}
 .disabled {
   opacity: 0.4;
   cursor: not-allowed;

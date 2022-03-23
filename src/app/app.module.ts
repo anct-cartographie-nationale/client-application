@@ -17,7 +17,6 @@ import { StructureListComponent } from './structure-list/structure-list.componen
 import { CardComponent } from './structure-list/components/card/card.component';
 import { StructureListSearchComponent } from './structure-list/components/structure-list-search/structure-list-search.component';
 import { StructureDetailsComponent } from './structure-list/components/structure-details/structure-details.component';
-import { StructureOpeningStatusComponent } from './structure-list/components/structure-opening-status/structure-opening-status.component';
 import { ModalFilterComponent } from './structure-list/components/modal-filter/modal-filter.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { PageComponent } from './page/page.component';
@@ -58,7 +57,6 @@ import { DataShareConsentComponent } from './shared/components/data-share-consen
     StructureListSearchComponent,
     ModalFilterComponent,
     StructureDetailsComponent,
-    StructureOpeningStatusComponent,
     LegalNoticeComponent,
     PageComponent,
     ContactComponent,

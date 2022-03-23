@@ -10,8 +10,8 @@ a {
   padding: unset;
 }
 
-.structrue-details-container {
-  max-width: 980px;
+.structure-details-container {
+  width: 980px;
   width: 64%;
   margin-top: 1%;
   float: right;
@@ -28,7 +28,7 @@ a {
   }
 }
 
-.structrue-details-container > .structure-details-block {
+.structure-details-container > .structure-details-block {
   .subtitle {
     text-transform: uppercase;
     @include lato-bold-16;
@@ -37,7 +37,7 @@ a {
   }
 }
 
-.structrue-details-container > .structure-details-block ~ .structure-details-block {
+.structure-details-container > .structure-details-block ~ .structure-details-block {
   padding: 24px 0;
 }
 
@@ -89,7 +89,7 @@ p,
 }
 
 @media print {
-  .structrue-details-container {
+  .structure-details-container {
     background-color: unset;
     z-index: unset;
     position: unset;

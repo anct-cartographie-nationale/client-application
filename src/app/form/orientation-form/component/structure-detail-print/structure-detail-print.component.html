@@ -1,4 +1,4 @@
-<div class="structrue-details-container" *ngIf="structure">
+<div class="structure-details-container" *ngIf="structure">
   <!-- Header info -->
   <div fxLayout="row" class="structure-details-block" fxLayoutAlign="baseline baseline" fxLayoutGap="8px">
     <div fxLayout="column" fxLayoutGap="10px" fxFlex="100%">
@@ -62,7 +62,7 @@
       <div *ngIf="structure.accessModality.length > 0" fxFlex="40%">
         <h3 class="subtitle">Accès</h3>
         <div fxLayout="column">
-          <div *ngFor="let tclStop of tclStopPoints">
+          <div *ngFor="let tclStop of tclStopPoints | slice: 0:3">
             <div fxLayout="row wrap" fxLayoutGap="5px">
               <p>{{ tclStop.name }}:</p>
               <p *ngIf="tclStop.subLines.length > 0">Métro</p>

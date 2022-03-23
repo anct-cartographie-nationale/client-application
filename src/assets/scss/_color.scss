@@ -14,6 +14,9 @@ $grey-8: #f8f8f8;
 /* REDS */
 $red: #da3635;
 $red-dark: #b85959;
+$red-1: #f35453;
+/* GOLD */
+$gold: #bd9e6a;
 /* form colors */
 $green-1: #47c562;
 /* Status colors */
@@ -34,3 +37,5 @@ $app-background: $grey-8;
 $modal-background: rgba($grey-1, 0.75);
 $app-background: $grey-8;
 $ram-hover-principal: $primary-color;
+$scrollbar-track: rgba($grey-8, 0.65);
+$scrollbar-thumb: $grey-4;
