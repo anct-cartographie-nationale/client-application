@@ -19,9 +19,9 @@ h4 {
 }
 
 .form {
-  background: $white;
+  background: $grey-7;
   width: 100vw;
-  height: calc(var(--vh, 1vh) * 100 - #{$header-height} - #{$footer-height});
+  height: calc(var(--vh, 1vh) * 100 - #{$header-height});
   top: #{$header-height};
   z-index: $structure-details-z-index;
   @media #{$tablet} {
@@ -31,9 +31,8 @@ h4 {
 }
 
 .footer {
-  padding: 17px 0;
   width: 100%;
-  max-width: 960px;
+  max-width: 1000px;
   margin: 20px auto;
   text-align: center;
   &.desktop {
@@ -128,10 +127,20 @@ h4 {
     }
   }
   .page {
-    max-width: 960px;
+    max-width: 1000px;
+    box-sizing: border-box;
     margin: auto;
-    height: auto;
+    min-height: 450px;
+    max-height: 75vh;
+    overflow-y: auto;
     color: $grey-1;
+    background: $white;
+    border-radius: 8px;
+    border: 1px solid $grey-6;
+    padding: 32px 24px 32px 48px;
+    * {
+      max-width: 600px;
+    }
     &.home {
       .btnStart {
         margin-top: 90px;
@@ -157,7 +166,7 @@ h4 {
       }
     }
     .title {
-      margin-bottom: 10px;
+      margin-bottom: 16px;
     }
     .nextTitle {
       margin-bottom: 10px;
@@ -166,15 +175,24 @@ h4 {
     .type-picker {
       height: 100%;
     }
+    .welcomingTerms,
+    .procedureContainer,
+    .otherServices,
+    .textareaBlock {
+      max-width: 600px;
+    }
+    .labelsQualifications {
+      gap: 0 8px;
+    }
   }
   .titleDesc {
     @include lato-bold-20;
     margin-bottom: 20px;
   }
   p {
-    margin-top: 10px;
-    margin-bottom: 0;
-    @include lato-regular-18;
+    color: $grey-1;
+    @include lato-regular-14;
+    margin: 7px 0 0 0;
     &.special {
       @include lato-regular-14;
       color: $grey-3;
@@ -196,8 +214,16 @@ h4 {
       }
     }
     &.notRequired {
+      @include lato-regular-18;
+      color: $grey-3;
       font-style: italic;
+      margin-top: 4px;
     }
+  }
+  .passwordInfo {
+    @include lato-regular-14;
+    font-style: italic;
+    color: $grey-3;
   }
   .textareaBlock {
     @media #{$tablet} {
@@ -205,6 +231,9 @@ h4 {
     }
     p {
       text-align: right;
+      @include lato-regular-14;
+      color: $grey-3;
+      font-style: italic;
     }
   }
 }
@@ -235,32 +264,31 @@ h4 {
 }
 .progressBar {
   height: #{$progressBar-height};
-  max-width: 960px;
-  margin: auto;
+  max-width: 1000px;
+  margin: 16px auto;
+  p {
+    @include lato-bold-14;
+    color: $red;
+    margin-bottom: 7px;
+  }
+
   progress {
     width: 100%;
     height: 6px;
     border-radius: 7px;
     &::-webkit-progress-bar {
-      background-color: $grey-8;
+      background-color: $grey-6;
+      border-radius: 7px;
     }
     &::-webkit-progress-value {
       background-color: $primary-color;
       border-radius: 12px;
-    }
-    &.validate {
-      &::-webkit-progress-value {
-        background-color: $green-1;
-      }
     }
   }
   label {
     @include lato-bold-14;
     color: $primary-color;
     min-width: 26px;
-    &.validate {
-      color: $green-1;
-    }
   }
 }
 .form-group {
@@ -282,21 +310,25 @@ h4 {
   }
   ul {
     padding-left: 0;
-  }
-  li {
-    display: flex;
-    margin-left: 1%;
-    font-size: small;
-    align-items: center;
-    p {
-      margin-left: 10px;
-      margin-top: unset;
-    }
-    &.valid {
-      color: $green;
-    }
-    &.invalid {
-      color: $orange-warning;
+    li {
+      display: flex;
+      margin-left: 1%;
+      font-size: small;
+      align-items: center;
+      p {
+        margin-left: 10px;
+        margin-top: unset;
+        @include lato-regular-14;
+      }
+      &.valid {
+        color: $green;
+      }
+      &.invalid {
+        color: $orange-warning;
+        p {
+          color: $orange-warning;
+        }
+      }
     }
   }
   .addressRow {
@@ -332,11 +364,54 @@ img {
   }
 }
 
-// collapse
-.collapse {
-  border: 1px solid $grey-4;
+//section equipments controller
+.controller {
+  border: 1px solid $grey-5;
   border-radius: 4px;
   margin-bottom: 13px;
+  max-width: 600px;
+  @media #{$small-phone} {
+    width: 95% !important;
+  }
+  @media #{$tablet} {
+    width: 296px;
+  }
+  .contorllerHeader {
+    height: 65px;
+    padding: 0 15px 0 12px;
+    p {
+      @include lato-bold-14;
+    }
+  }
+  .equipments {
+    svg {
+      width: 32px;
+      height: 32px;
+      background-color: $grey-8;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    input {
+      width: 56px;
+      margin: 0 6px;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
+  }
+}
+
+// collapse
+.collapse {
+  border: 1px solid $grey-5;
+  border-radius: 4px;
+  margin-bottom: 13px;
+  max-width: 600px;
   @media #{$small-phone} {
     width: 95% !important;
   }
@@ -359,11 +434,42 @@ img {
     margin: 0;
     color: $grey-2;
     @include lato-regular-14;
+    &.website,
+    &.facebook,
+    &.twitter,
+    &.instagram,
+    &.linkedin {
+      svg {
+        height: 22px;
+        width: 22px;
+        padding: 6px;
+      }
+      &:focus-within {
+        input {
+          border-color: $grey-3;
+          fill: $primary-color;
+        }
+      }
+    }
+    app-svg-icon {
+      padding-top: 12px;
+      margin-right: 0 !important;
+    }
+    &.website {
+      &:focus-within {
+        svg {
+          &.website {
+            border-color: $grey-3;
+            fill: $primary-color;
+          }
+        }
+      }
+    }
     &.facebook {
       &:focus-within {
         svg {
           &.facebook {
-            border-color: $primary-color;
+            border-color: $grey-3;
             fill: $primary-color;
           }
         }
@@ -373,7 +479,7 @@ img {
       &:focus-within {
         svg {
           &.instagram {
-            border-color: $primary-color;
+            border-color: $grey-3;
             fill: $primary-color;
           }
         }
@@ -383,7 +489,7 @@ img {
       &:focus-within {
         svg {
           &.twitter {
-            border-color: $primary-color;
+            border-color: $grey-3;
             fill: $primary-color;
           }
         }
@@ -393,7 +499,7 @@ img {
       &:focus-within {
         svg {
           &.linkedin {
-            border-color: $primary-color;
+            border-color: $grey-3;
             fill: $primary-color;
           }
         }
@@ -416,7 +522,7 @@ img {
       height: 38px;
       fill: $grey-3;
       margin-right: 0 !important;
-      border: 1px solid $grey-4;
+      border: 1px solid $grey-5;
       border-radius: 4px 0 0 4px;
       border-right: 0;
       padding-left: 16px;
@@ -492,8 +598,13 @@ img {
   margin-right: 12px;
 }
 
-.asterisk {
-  color: $primary-color;
+.cgu {
+  h3 {
+    @include lato-bold-18;
+  }
+  .asterisk {
+    color: $primary-color;
+  }
 }
 
 .structureInfoBlock {

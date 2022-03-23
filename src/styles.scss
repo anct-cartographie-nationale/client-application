@@ -100,9 +100,9 @@ a {
 
 // Forms
 .form-group {
-  margin-bottom: 26px;
+  margin-bottom: 16px;
   label {
-    color: $grey-2;
+    color: $grey-1;
   }
 }
 form p.notRequired {
@@ -121,10 +121,14 @@ input {
   textarea {
     padding: 13px 8px;
     background: $grey-8;
-    border: 1px solid $grey-4;
+    border: 1px solid $grey-5;
     border-radius: $input-radius;
     resize: none;
+    outline: none;
     @include lato-regular-16;
+    &:focus {
+      border: 1px solid $grey-3;
+    }
   }
 }
 
@@ -270,8 +274,7 @@ button {
     min-width: 350px;
     max-width: 560px;
     margin: auto;
-    border-radius: 6px;
-    border: 1px solid $grey-4;
+    border-radius: 8px;
     position: fixed;
     top: 50%;
     left: 50%;

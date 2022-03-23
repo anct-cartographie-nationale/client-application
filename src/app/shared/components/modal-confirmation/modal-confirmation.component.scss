@@ -5,8 +5,49 @@
 
 .modalBackground {
   .modal {
+    max-width: 390px;
     .contentModal {
-      padding: 20px !important;
+      padding: 20px 40px;
+
+      .headerModal {
+        width: 390px;
+        padding: 0 8px;
+        h3 {
+          @include lato-bold-18;
+          color: $red;
+          margin: 10px 0;
+        }
+        svg,
+        .empty {
+          height: 40px;
+          width: 40px;
+        }
+        svg {
+          cursor: pointer;
+        }
+      }
+      p {
+        text-align: center;
+        margin: 10px 0;
+      }
+      .footerModal {
+        gap: 8px;
+      }
     }
+  }
+}
+
+::ng-deep .modal app-button {
+  margin-right: 0 !important;
+  .text {
+    width: 150px !important;
+    height: 36px !important;
+    padding: 8px 0 !important;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+  .text:first-child {
+    font-size: 14px !important;
+    line-height: 18px !important;
   }
 }

@@ -1,32 +1,133 @@
-<div class="container" fxLayout="column">
-  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px">
-    <div
-      class="boutonSection"
-      [ngClass]="{ selectedType: type.name == pickedType }"
-      *ngFor="let type of structureTypes"
-    >
-      <button (click)="pickType(type.name)">
-        <div class="containerBtn">
-          <div class="btn">
+<div class="container">
+  <div
+    class="boutonSection"
+    [ngClass]="{ selectedType: type.name == pickedType }"
+    *ngFor="let type of structureTypes"
+    fxLayout="column"
+    fxLayoutGap="8px"
+  >
+    <ng-container *ngIf="type.name === 'Publique'">
+      <div fxLayout="column" class="collapse" [ngClass]="{ notCollapsed: !showPublic }">
+        <div
+          class="collapseHeader"
+          fxLayoutAlign="flex-start center"
+          fxLayout="row"
+          (click)="toggleCollapse(type.name)"
+        >
+          <div class="svgContainer">
             <svg aria-hidden="true">
               <use [attr.xlink:href]="'assets/form/sprite.svg#' + getStructureTypeIcon(type.name)"></use>
             </svg>
           </div>
+          <div class="titleCollapse">
+            {{ type.name }}
+          </div>
+          <div class="logo">
+            <svg class="show" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
+            </svg>
+            <svg class="hide" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
+            </svg>
+          </div>
         </div>
-      </button>
-      <div class="btnText" fxLayoutAlign="center center">{{ type.name }}</div>
-    </div>
-  </div>
-  <div *ngIf="pickedType" class="tags">
-    <button
-      *ngFor="let choice of getChoices(pickedType)"
-      (click)="pickChoice(choice)"
-      [ngClass]="{ selectedChoice: choice == pickedChoice }"
-    >
-      <svg *ngIf="choice == pickedChoice" class="validate" aria-hidden="true">
-        <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-      </svg>
-      {{ getStructureTypeName(choice) }}
-    </button>
+        <div *ngIf="showPublic" class="inputSection">
+          <div class="tags">
+            <button
+              *ngFor="let choice of getChoices(pickedType)"
+              (click)="pickChoice(choice)"
+              [ngClass]="{ selectedChoice: choice == pickedChoice }"
+            >
+              <svg *ngIf="choice == pickedChoice" class="validate" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+              </svg>
+              {{ getStructureTypeName(choice) }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="type.name === 'Privée à but non lucratif'">
+      <div fxLayout="column" class="collapse" [ngClass]="{ notCollapsed: !showPrivate }">
+        <div
+          class="collapseHeader"
+          fxLayoutAlign="flex-start center"
+          fxLayout="row"
+          (click)="toggleCollapse(type.name)"
+        >
+          <div class="svgContainer">
+            <svg aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#' + getStructureTypeIcon(type.name)"></use>
+            </svg>
+          </div>
+          <div class="titleCollapse">
+            {{ type.name }}
+          </div>
+          <div class="logo">
+            <svg class="show" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
+            </svg>
+            <svg class="hide" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
+            </svg>
+          </div>
+        </div>
+        <div *ngIf="showPrivate" class="inputSection">
+          <div class="tags">
+            <button
+              *ngFor="let choice of getChoices(pickedType)"
+              (click)="pickChoice(choice)"
+              [ngClass]="{ selectedChoice: choice == pickedChoice }"
+            >
+              <svg *ngIf="choice == pickedChoice" class="validate" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+              </svg>
+              {{ getStructureTypeName(choice) }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="type.name === 'Privée à but lucratif'">
+      <div fxLayout="column" class="collapse" [ngClass]="{ notCollapsed: !showPrivateLucrative }">
+        <div
+          class="collapseHeader"
+          fxLayoutAlign="flex-start center"
+          fxLayout="row"
+          (click)="toggleCollapse(type.name)"
+        >
+          <div class="svgContainer">
+            <svg aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#' + getStructureTypeIcon(type.name)"></use>
+            </svg>
+          </div>
+          <div class="titleCollapse">
+            {{ type.name }}
+          </div>
+          <div class="logo">
+            <svg class="show" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
+            </svg>
+            <svg class="hide" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
+            </svg>
+          </div>
+        </div>
+        <div *ngIf="showPrivateLucrative" class="inputSection">
+          <div class="tags">
+            <button
+              *ngFor="let choice of getChoices(pickedType)"
+              (click)="pickChoice(choice)"
+              [ngClass]="{ selectedChoice: choice == pickedChoice }"
+            >
+              <svg *ngIf="choice == pickedChoice" class="validate" aria-hidden="true">
+                <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
+              </svg>
+              {{ getStructureTypeName(choice) }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>

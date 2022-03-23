@@ -918,6 +918,18 @@ export class FormComponent implements OnInit {
     this.userAcceptNewsletter = isAccepted;
   }
 
+  private changeValueHandler(equipment: string, value = 0): void {
+    let field = '';
+    if (equipment === 'ordinateurs') field = 'nbComputers';
+    if (equipment === 'tablettes') field = 'nbTablets';
+    if (equipment === 'scanners') field = 'nbScanners';
+    if (equipment === 'bornesNumeriques') field = 'nbNumericTerminal';
+    if (equipment === 'imprimantes') field = 'nbPrinters';
+
+    if (value === -1 && this.structureForm.value[field] === 0) return;
+    this.getStructureControl(field).setValue(this.structureForm.value[field] + value);
+  }
+
   public validateForm(): void {
     if (this.getStructureControl('freeWorkShop').value === null) {
       this.getStructureControl('freeWorkShop').setValue(false);
