@@ -140,7 +140,8 @@
     }
     label {
       cursor: pointer;
-      @include lato-regular-13;
+      font-size: inherit;
+      font-weight: inherit;
     }
     input[type='checkbox'] {
       appearance: none;
