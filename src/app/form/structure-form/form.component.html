@@ -629,7 +629,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureWebAndSocialNetwork" class="page">
         <div class="title">
-          <h3>Comment trouver la structure sur internet&nbsp;?</h3>
+          <h3>Comment vous trouver la structure sur internet&nbsp;?</h3>
           <p class="notRequired">Facultatif</p>
         </div>
         <div class="collapse" [ngClass]="{ notCollapsed: !showWebsite }">
@@ -1170,7 +1170,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureLabels" class="page">
         <div class="title">
-          <h3>La structure est labellisée&nbsp;?</h3>
+          <h3>La sturcture est labellisée&nbsp;?</h3>
           <p class="notRequired">Facultatif</p>
         </div>
         <div class="labelsQualifications" *ngIf="labelsQualifications" fxLayout="row wrap" fxLayoutAlign="flex-start">
@@ -1187,7 +1187,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureOtherServices" class="page">
         <div class="title">
-          <h3>Quels autres services sont proposés par la structure&nbsp;?</h3>
+          <h3>Quels autres services sont proposées par la structure&nbsp;?</h3>
           <p class="notRequired">Facultatif</p>
         </div>
         <div
@@ -1218,7 +1218,7 @@
       </div>
       <div *ngIf="currentPage == pageTypeEnum.structureDescription" class="page">
         <div class="title">
-          <h3>Pouvez-vous présenter votre structure en quelques mots&nbsp;?</h3>
+          <h3>Pouvez-vous présentez votre structure en quelques mots&nbsp;?</h3>
           <p class="notRequired">Facultatif</p>
         </div>
         <div class="textareaBlock introduceStructure" fxLayout="column">
@@ -1451,9 +1451,4 @@
       Voir ma structure
     </button>
   </div>
-  <app-signup-modal
-    *ngIf="displaySignUp"
-    [openned]="isPopUpOpen"
-    (closed)="closeSignUpModal($event)"
-  ></app-signup-modal>
 </div>

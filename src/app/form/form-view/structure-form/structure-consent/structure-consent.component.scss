@@ -1,0 +1,13 @@
+@import '../../../../../assets/scss/typography';
+@import '../../../../../assets/scss/color';
+
+h3 {
+  @include lato-bold-18;
+  margin-top: 1.5rem;
+}
+.asterisk {
+  color: $primary-color;
+}
+.informationEndForm {
+  @include lato-regular-12;
+}

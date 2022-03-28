@@ -1,0 +1,8 @@
+<form [formGroup]="personalOfferForm" *ngIf="personalOfferForm">
+  <div class="title">
+    <p class="overtitle">{{ structureName }}</p>
+    <h3>Intervenez-vous dans une autre structure&nbsp;?</h3>
+  </div>
+
+  <app-radio-form [selectedOption]="" (selectedEvent)="onRadioChange($event)"> </app-radio-form>
+</form>

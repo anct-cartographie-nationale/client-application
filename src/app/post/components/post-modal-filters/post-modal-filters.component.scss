@@ -35,16 +35,6 @@
   }
   @include background-hash($grey-2);
   border: 1px solid $grey-4;
-  ::-webkit-scrollbar {
-    width: 16px;
-  }
-  ::-webkit-scrollbar-track {
-    background: $grey-8;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: $grey;
-    border-radius: 6px;
-  }
   .body-wrap {
     @media #{$large-phone} {
       height: 100vh;

@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StructureType } from '../../../models/structure-type.model';
+import { Structure } from '../../../models/structure.model';
 import { StructureTypeService } from '../../../services/structure-type.service';
 import { typeStructureEnum } from '../../enum/typeStructure.enum';
+import { ButtonType } from '../button/buttonType.enum';
 
 export enum structureTypes {
   public = 'Publique',
@@ -24,6 +26,8 @@ export class StructureTypePickerComponent implements OnInit {
   public showPublic: boolean;
   public showPrivate: boolean;
   public showPrivateLucrative: boolean;
+
+  public buttonTypeEnum = ButtonType;
 
   constructor(private structureTypeService: StructureTypeService) {}
 

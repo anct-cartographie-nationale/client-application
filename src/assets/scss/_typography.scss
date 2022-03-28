@@ -2,9 +2,11 @@ $text-font: 'Lato', 'Helvetica', sans-serif;
 $footer-text-font: 'Arial', 'Helvetica', sans-serif;
 $title-font: 'Lato', 'Helvetica', sans-serif;
 
+$font-size-xxxxsmall: 0.625em; // 10px
 $font-size-xxsmall: 0.75em; // 12px
 $font-size-xmsmall: 0.813em; // 13px
 $font-size-xsmall: 0.875em; // 14px
+$font-size-xismall: 0.9375em; // 15px
 $font-size-small: 1em; // 16px
 
 $font-size-smedium: 1.125em; // 18px
@@ -79,7 +81,12 @@ h6,
   font-weight: normal;
   font-size: $font-size-large;
 }
-
+@mixin lato-bold-24 {
+  font-family: $title-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-xxmedium;
+}
 @mixin lato-regular-24 {
   font-family: $text-font;
   font-style: normal;
@@ -147,6 +154,18 @@ h6,
   font-weight: normal;
   font-size: $font-size-small;
 }
+@mixin lato-bold-15 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: $font-size-xismall;
+}
+@mixin lato-regular-15 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-xismall;
+}
 @mixin lato-bold-14 {
   font-family: $text-font;
   font-style: normal;
@@ -176,6 +195,12 @@ h6,
   font-style: normal;
   font-weight: normal;
   font-size: $font-size-xxsmall;
+}
+@mixin lato-regular-10 {
+  font-family: $text-font;
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size-xxxxsmall;
 }
 
 @mixin text-ellipsis {

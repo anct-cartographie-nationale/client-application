@@ -1,0 +1,14 @@
+<form [formGroup]="structureForm" *ngIf="structureForm">
+  <div class="title">
+    <h3>Quelles formations au numérique proposez-vous&nbsp;?</h3>
+    <p class="notRequired">Facultatif</p>
+  </div>
+  <app-training-type-picker
+    [baseSkills]="structureForm.get('baseSkills').value"
+    [accessRight]="structureForm.get('accessRight').value"
+    [digitalCultureSecurity]="structureForm.get('digitalCultureSecurity').value"
+    [socialAndProfessional]="structureForm.get('socialAndProfessional').value"
+    [parentingHelp]="structureForm.get('parentingHelp').value"
+    (selectedType)="setTrainingsFromCategories($event)"
+  ></app-training-type-picker>
+</form>

@@ -1,0 +1,11 @@
+<form [formGroup]="structureForm" *ngIf="structureForm" (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null">
+  <div class="title">
+    <h3>Souhaitez-vous renseigner les informations de la structure&nbsp;?</h3>
+    <p>Exemple : téléphone, email, type d'établissement, accessibilité PMR, type de public&nbsp;?</p>
+  </div>
+  <app-radio-form
+    [selectedOption]="structureForm.get('choiceCompletion').value"
+    (selectedEvent)="onRadioChange('choiceCompletion', $event)"
+  >
+  </app-radio-form>
+</form>

@@ -7,16 +7,28 @@
 @import '../../../../assets/scss/z-index';
 
 .modalaccompaniment {
-  left: 205px;
+  left: 212px;
+  @media #{$large-desktop} {
+    left: 273px;
+  }
 }
 .modaltraining {
-  left: 305px;
+  left: 331px;
+  @media #{$large-desktop} {
+    left: 417px;
+  }
 }
 .modalpublic {
-  left: 405px;
+  left: 431px;
+  @media #{$large-desktop} {
+    left: 513px;
+  }
 }
 .modalequipments {
-  left: 505px;
+  left: 519px;
+  @media #{$large-desktop} {
+    left: 603px;
+  }
 }
 .maxModal .blockLigne {
   box-sizing: border-box;
@@ -50,18 +62,6 @@
     padding: 0;
   }
   background: white;
-  ::-webkit-scrollbar {
-    width: 8px;
-    border-radius: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: $grey-8;
-    border-radius: 8px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: $grey-4;
-    border-radius: 6px;
-  }
   .body-wrap {
     @media #{$large-phone} {
       height: 100vh;
@@ -148,7 +148,7 @@
   .footer {
     box-sizing: border-box;
     height: 50px;
-    padding: 0.5rem 0.5rem 0.5rem 0;
+    padding: 0.5rem;
     .reset {
       width: 45%;
       text-align: center;
@@ -156,6 +156,7 @@
     }
     .half-width {
       width: 50%;
+      padding: 0 4px;
     }
   }
 }

@@ -6,23 +6,6 @@
 .structureList-container {
   overflow-y: auto;
   scrollbar-gutter: stable;
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: $scrollbar-track;
-  }
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: $scrollbar-thumb;
-    border-radius: 8px;
-  }
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: $grey-3;
-    border-radius: 8px;
-  }
 }
 
 .listCard > p {
@@ -34,8 +17,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 1rem;
-  margin-right: 0.5rem;
+  margin: 8px 16px;
   .nbStructuresLabel {
     @include lato-regular-14;
     color: $grey-3;

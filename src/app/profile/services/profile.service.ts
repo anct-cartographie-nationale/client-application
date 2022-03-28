@@ -6,7 +6,8 @@ import decode from 'jwt-decode';
 import { UserRole } from '../../shared/enum/userRole.enum';
 import { AuthService } from '../../services/auth.service';
 import { Structure } from '../../models/structure.model';
-import { map } from 'rxjs/operators';
+import { Employer } from '../../models/employer.model';
+import { Job } from '../../models/job.model';
 
 @Injectable({
   providedIn: 'root',
@@ -86,5 +87,25 @@ export class ProfileService {
 
   public getAllDataConsentPendingStructures(): Observable<Structure[]> {
     return this.http.get<Structure[]>(`${this.baseUrl}/dataConsentValidation`);
+  }
+
+  public getEmployers(searchString: string): Observable<Employer[]> {
+    return this.http.get<Employer[]>(`api/employer?search=${searchString}`);
+  }
+
+  public getJobs(): Observable<Job[]> {
+    return this.http.get<Job[]>(`api/jobs`);
+  }
+
+  public createJob(value: Job): Observable<Job> {
+    return this.http.post<Job>(`api/jobs`, value);
+  }
+
+  public createEmployer(value: Employer): Observable<Employer> {
+    return this.http.post<Employer>(`api/employer`, value);
+  }
+
+  public updateProfile(employerName: string, jobName: string): Observable<User> {
+    return this.http.post<User>(`${this.baseUrl}/profile`, { employerName, jobName });
   }
 }

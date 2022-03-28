@@ -1,11 +1,5 @@
 <ng-container *ngIf="style === buttonTypeEnum.Regular">
-  <button
-    class="btn-regular"
-    type="{{ type }}"
-    (click)="doAction()"
-    [disabled]="disabled"
-    [ngClass]="{ disabled: disabled }"
-  >
+  <button class="btn-regular" type="{{ type }}" (click)="doAction()" [disabled]="disabled">
     <div *ngIf="!iconBtn" class="text">{{ text }}</div>
     <div
       *ngIf="iconBtn && iconPos === 'left'"
@@ -42,7 +36,7 @@
     type="{{ type }}"
     (click)="doAction()"
     [disabled]="disabled"
-    [ngClass]="{ disabled: disabled }"
+    [ngClass]="extraClass"
   >
     <div *ngIf="!iconBtn" class="text">{{ text }}</div>
     <div
@@ -52,7 +46,7 @@
       fxLayoutAlign="space-around center"
     >
       <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
-      <span>{{ text }}</span>
+      <span [ngClass]="extraClass">{{ text }}</span>
     </div>
     <div
       *ngIf="iconBtn && iconPos === 'right'"
@@ -60,15 +54,29 @@
       class="text withIcon right"
       fxLayoutAlign="space-around center"
     >
-      <span>{{ text }}</span>
+      <span [ngClass]="extraClass">{{ text }}</span>
       <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
     </div>
   </button>
 </ng-container>
 
 <ng-container *ngIf="style === buttonTypeEnum.modalPrimary">
+  <button class="btn-regular modal-primary" type="{{ type }}" (click)="doAction()" [disabled]="disabled">
+    <div *ngIf="!iconBtn" class="text">{{ text }}</div>
+    <div *ngIf="iconBtn && iconPos === 'left'" fxLayout="row center" class="text" fxLayoutAlign="space-around center">
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+      <span>{{ text }}</span>
+    </div>
+    <div *ngIf="iconBtn && iconPos === 'right'" fxLayout="row center" class="text" fxLayoutAlign="space-around center">
+      <span>{{ text }}</span>
+      <app-svg-icon [type]="iconType" [icon]="iconBtn" [iconColor]="'currentColor'"></app-svg-icon>
+    </div>
+  </button>
+</ng-container>
+
+<ng-container *ngIf="style === buttonTypeEnum.modalSecondary">
   <button
-    class="btn-regular modal-primary"
+    class="btn-regular modal-secondary"
     type="{{ type }}"
     (click)="doAction()"
     [disabled]="disabled"
@@ -87,14 +95,8 @@
 </ng-container>
 
 <ng-container *ngIf="style === buttonTypeEnum.Secondary">
-  <button
-    class="btn-regular secondary"
-    type="{{ type }}"
-    (click)="doAction()"
-    [disabled]="disabled"
-    [ngClass]="{ disabled: disabled }"
-  >
-    <div *ngIf="!iconBtn" class="text">{{ text }}</div>
+  <button class="btn-regular secondary" type="{{ type }}" (click)="doAction()" [disabled]="disabled">
+    <div *ngIf="!iconBtn" [ngClass]="extraClass" class="text">{{ text }}</div>
     <div
       *ngIf="iconBtn && iconPos === 'left'"
       fxLayout="row center"
@@ -117,13 +119,7 @@
 </ng-container>
 
 <ng-container *ngIf="style === buttonTypeEnum.ButtonPhone">
-  <button
-    [disabled]="disabled"
-    class="btn-switch-phone"
-    type="{{ type }}"
-    (click)="doAction()"
-    [ngClass]="{ disabled: disabled }"
-  >
+  <button [disabled]="disabled" class="btn-switch-phone" type="{{ type }}" (click)="doAction()">
     <div *ngIf="!iconBtn" class="text">{{ text }}</div>
     <div
       *ngIf="iconBtn"
@@ -172,9 +168,30 @@
     type="{{ type }}"
     (click)="doAction()"
     [disabled]="disabled"
-    [ngClass]="{ disabled: disabled }"
+    [ngClass]="extraClass"
   >
     <div>{{ text }}</div>
+  </button>
+</ng-container>
+
+<ng-container *ngIf="style === buttonTypeEnum.CheckButton">
+  <button
+    class="btn-regular tertiary checkButton"
+    type="{{ type }}"
+    (click)="doAction()"
+    [disabled]="disabled"
+    [ngClass]="extraClass"
+  >
+    <div fxLayout="row center" fxLayoutAlign="space-around center" fxLayoutGap="13px">
+      <app-svg-icon
+        *ngIf="extraClass"
+        [type]="'ico'"
+        [icon]="'validate'"
+        [iconClass]="'icon-28'"
+        [iconColor]="'currentColor'"
+      ></app-svg-icon>
+      {{ text }}
+    </div>
   </button>
 </ng-container>
 
@@ -184,7 +201,7 @@
     type="{{ type }}"
     (click)="doAction()"
     [disabled]="disabled"
-    [ngClass]="{ disabled: disabled, active: active }"
+    [ngClass]="{ active: active }"
   >
     <div *ngIf="iconBtn" class="text withIcon">
       <app-svg-icon

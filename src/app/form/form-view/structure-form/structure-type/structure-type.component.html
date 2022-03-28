@@ -1,0 +1,16 @@
+<form [formGroup]="structureForm" *ngIf="structureForm" (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null">
+  <div class="title">
+    <h3>Quel type de structure&nbsp;?</h3>
+    <p>1 seul choix possible</p>
+  </div>
+  <p class="missing-information" *ngIf="isEditMode && !structureForm.get('structureType').valid">
+    <app-svg-icon [iconClass]="'icon-26'" [type]="'form'" [icon]="'notValidate'" class="validationIcon"></app-svg-icon>
+    <span>Il faut renseigner un champ</span>
+  </p>
+  <div class="type-picker">
+    <app-structure-type-picker
+      [pickedChoice]="structureForm.get('structureType').valid ? structureForm.get('structureType').value : null"
+      (selectedType)="setTypeStructure($event)"
+    ></app-structure-type-picker>
+  </div>
+</form>

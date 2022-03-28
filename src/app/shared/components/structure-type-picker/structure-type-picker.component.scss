@@ -7,24 +7,6 @@ button {
   outline: none;
   border: none;
 }
-.tags {
-  padding: 15px;
-  width: calc(100% + 2px);
-  margin-left: -16px;
-  height: 100%;
-  button {
-    background: $grey-8;
-    text-align: center;
-    border-radius: 20px;
-    margin: 4px;
-    max-width: 100%;
-    white-space: nowrap;
-    height: 40px;
-    padding: 0 28px;
-    cursor: pointer;
-    @include lato-bold-14;
-  }
-}
 .selectedChoice {
   background: $green-1 !important;
   color: $white;
@@ -106,12 +88,8 @@ svg {
       }
     }
   }
-  .inputSection {
+  .btn-grid {
     padding: 0px 15px 19px 12px;
-    svg {
-      border-right: 0;
-      padding-left: 16px;
-    }
   }
   .collapseHeader {
     .titleCollapse {

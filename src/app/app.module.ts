@@ -22,14 +22,12 @@ import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import { PageComponent } from './page/page.component';
 import { ContactComponent } from './contact/contact.component';
 import { FormComponent } from './form/structure-form/form.component';
-import { UserVerificationComponent } from './user-verification/user-verification.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CustomHttpInterceptor } from './config/http-interceptor';
 import { ResetEmailComponent } from './reset-email/reset-email.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { AdminGuard } from './guards/admin.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
-import { FooterFormComponent } from './form/footer-form/footer-form.component';
 import { TempUserResolver } from './resolvers/temp-user.resolver';
 import { StructureJoinComponent } from './structure-join/structure-join.component';
 import { RouterListenerService } from './services/routerListener.service';
@@ -45,6 +43,8 @@ import { StructureResolver } from './resolvers/structure.resolver';
 import { RoleGuard } from './guards/role.guard';
 import { UpdateService } from './services/update.service';
 import { DataShareConsentComponent } from './shared/components/data-share-consent/data-share-consent.component';
+import { FormViewModule } from './form/form-view/form-view.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -60,11 +60,9 @@ import { DataShareConsentComponent } from './shared/components/data-share-consen
     LegalNoticeComponent,
     PageComponent,
     ContactComponent,
-    UserVerificationComponent,
     ResetEmailComponent,
     ResetPasswordComponent,
     FormComponent,
-    FooterFormComponent,
     StructureJoinComponent,
     NewsletterSubscriptionComponent,
     OrientationFormComponent,
@@ -73,6 +71,7 @@ import { DataShareConsentComponent } from './shared/components/data-share-consen
     StructurePrintHeaderComponent,
     DataShareConsentComponent,
     OrientationComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +81,7 @@ import { DataShareConsentComponent } from './shared/components/data-share-consen
     MapModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    FormViewModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),

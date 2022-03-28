@@ -22,7 +22,7 @@ import { StructureWithOwners } from '../../models/structureWithOwners.model';
 import { RouterListenerService } from '../../services/routerListener.service';
 import { NewsletterService } from '../../services/newsletter.service';
 import { Utils } from '../../utils/utils';
-
+//TODO: Delete whole component when form refacto is done
 @Component({
   selector: 'app-structure-form',
   templateUrl: './form.component.html',
@@ -323,6 +323,7 @@ export class FormComponent implements OnInit {
       ]),
       freeWorkShop: new FormControl(structure.freeWorkShop, [Validators.required]),
       dataShareConsentDate: new FormControl(structure.dataShareConsentDate),
+      personalOffers: new FormControl(structure.personalOffers),
     });
   }
 

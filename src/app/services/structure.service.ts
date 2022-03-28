@@ -77,9 +77,13 @@ export class StructureService {
     return this.http.post<any>(`${this.baseUrl}/${idStructure}/addOwner`, user);
   }
 
-  public getStructures(filters: Filter[]): Observable<Structure[]> {
+  public getStructuresByName(filters: Filter[]): Observable<Structure[]> {
+    return this.getStructures(filters, 'searchByName');
+  }
+
+  public getStructures(filters: Filter[], searchUrl: string = 'search'): Observable<Structure[]> {
     if (filters && filters.length > 0) {
-      let requestUrl = `${this.baseUrl}/search`;
+      let requestUrl = `${this.baseUrl}/${searchUrl}`;
       const queryString = _.find(filters, { name: 'query' });
       if (queryString) {
         _.remove(filters, { name: 'query' });

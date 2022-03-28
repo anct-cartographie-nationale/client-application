@@ -1,0 +1,104 @@
+@import '../../assets/scss/color';
+@import '../../assets/scss/breakpoint';
+@import '../../assets/scss/layout';
+@import '../../assets/scss/typography';
+@import '../../assets/scss/layout';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - $footer-height);
+}
+.loginPage {
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  margin: auto;
+  min-height: 450px;
+  max-height: 75vh;
+  overflow-y: auto;
+  color: $grey-1;
+  background: $white;
+  border-radius: 8px;
+  border: 1px solid $grey-6;
+  padding: 32px 24px 32px 48px;
+
+  .title {
+    text-align: center;
+    h3 {
+      margin: 0;
+      @include lato-bold-24;
+    }
+    p {
+      @include lato-regular-14;
+      margin-top: 0.5rem;
+    }
+  }
+  .inputInvalid {
+    border-color: $orange-warning;
+  }
+  .incorrectId {
+    @include lato-regular-14;
+    color: $orange-warning;
+  }
+
+  .form {
+    max-width: 340px;
+    margin: auto;
+  }
+
+  .form-group {
+    margin: 2rem 0;
+    .notValidate {
+      min-width: 26px;
+      width: 26px;
+      height: 40px;
+    }
+    label {
+      margin-bottom: 4px;
+      @include lato-regular-16;
+      color: $grey-1;
+    }
+    input {
+      width: 100%;
+      max-width: 301px;
+    }
+    &.password {
+      input {
+        max-width: 264px;
+      }
+      p {
+        @include lato-regular-14;
+        color: $grey-3;
+        margin-top: 0;
+        margin-bottom: 4px;
+        &.invalid {
+          color: $orange-warning;
+        }
+      }
+      .eyePassword {
+        cursor: pointer;
+        width: 24px;
+        height: 40px;
+        stroke: $grey-3;
+        fill: $grey-3;
+      }
+      .passHint {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+  .footer {
+    margin-bottom: 1rem;
+  }
+}
+
+@media #{$tablet} {
+  .loginPage {
+    height: calc(
+      100vh - #{$header-height-phone} - #{$footer-height-phone} - 87px - 1px
+    ); // -1px because of header border
+  }
+}

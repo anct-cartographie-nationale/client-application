@@ -1,0 +1,67 @@
+<div>
+  <app-progress-bar
+    [formType]="formType[routeParam]"
+    [isEditMode]="isEditMode"
+    [currentPage]="currentPage - 1"
+    [nbSteps]="nbSteps"
+  ></app-progress-bar>
+  <div class="page">
+    <ng-container *ngIf="formType[routeParam] === formType.account">
+      <app-account-form
+        [nbSteps]="nbSteps"
+        [accountForm]="accountForm"
+        [hoursForm]="hoursForm"
+        [currentStep]="currentPage"
+        (goNext)="nextPage()"
+        (pageValid)="validatePage($event)"
+        (acceptNewsletter)="acceptReceiveNewsletter($event)"
+      ></app-account-form>
+    </ng-container>
+    <ng-container *ngIf="formType[routeParam] === formType.profile">
+      <app-profile-form
+        [nbSteps]="nbSteps"
+        [profileForm]="profileForm"
+        [currentStep]="currentPage"
+        (goNext)="nextPage()"
+        (pageValid)="validatePage($event)"
+      ></app-profile-form>
+    </ng-container>
+    <ng-container *ngIf="formType[routeParam] === formType.structure">
+      <app-structure-form
+        [nbSteps]="nbSteps"
+        [structureForm]="structureForm"
+        [hoursForm]="hoursForm"
+        [currentStep]="currentPage"
+        [structure]="structure"
+        (goNext)="nextPage()"
+        (isNotExistingStructure)="nextPage()"
+        (pageValid)="validatePage($event)"
+        (updateHoursForm)="updateHours($event)"
+      ></app-structure-form>
+    </ng-container>
+    <ng-container *ngIf="formType[routeParam] === formType.personaloffer">
+      <app-personal-offer-form
+        [nbSteps]="nbSteps"
+        [personalOfferForm]="personalOfferForm"
+        [currentStep]="currentPage"
+        [structureName]="structure.structureName"
+        (setHasOtherOffer)="setHasOtherPersonalOffer($event)"
+        (pageValid)="validatePage($event)"
+      ></app-personal-offer-form>
+    </ng-container>
+  </div>
+  <app-footer-form
+    *ngIf="displayFooterForm()"
+    [currentStep]="currentPage"
+    [currentForm]="currentFormType"
+    [form]="currentForm"
+    [btnName]="['Précédent', 'Suivant']"
+    [isValid]="isPageValid"
+    [acceptNewsletter]="userAcceptNewsletter"
+    [hasOtherPersonalOffer]="hasOtherPersonalOffer"
+    (goNext)="nextPage()"
+    (goPrev)="prevPage()"
+    (endForm)="endForm($event)"
+    (changeCurrentStep)="setCurrentStep($event)"
+  ></app-footer-form>
+</div>

@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, Validators, AbstractControl, FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProfileService } from '../../../profile/services/profile.service';
+import { AuthService } from '../../../services/auth.service';
 import { CustomRegExp } from '../../../utils/CustomRegExp';
 import { MustMatch } from '../../validator/form';
+import { ButtonType } from '../button/buttonType.enum';
 @Component({
   selector: 'app-password-form',
   templateUrl: './password-form.component.html',
@@ -9,17 +13,32 @@ import { MustMatch } from '../../validator/form';
 })
 export class PasswordFormComponent implements OnInit {
   public accountForm: FormGroup;
+  public buttonTypeEnum = ButtonType;
+  public token: string;
+  public passwordError = false;
   // Condition form
   public isShowOldPassword = false;
   public isShowConfirmPassword = false;
   public isShowPassword = false;
   // Form output
-  @Input() oldPasswordNeeded: boolean = false;
-  @Output() passwordForm = new EventEmitter<string[]>();
+  public oldPasswordNeeded: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private auth: AuthService,
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
+    private profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.token = params['token'];
+    });
+    if (this.auth.isLoggedIn()) {
+      this.oldPasswordNeeded = true;
+    }
     this.initPasswordForm();
   }
 
@@ -79,17 +98,41 @@ export class PasswordFormComponent implements OnInit {
     if (password.match(CustomRegExp.LOWERCASE)) return true;
     return false;
   }
+  public checkOldPassword(password: string): boolean {
+    if (
+      password !== '' &&
+      (!this.checkIfPasswordHasSpecialChar(password) ||
+        !this.checkIfPasswordHasDigit(password) ||
+        !this.checkIfPasswordHasUpperCase(password) ||
+        !this.checkIfPasswordHasLowerCase(password))
+    ) {
+      return false;
+    } else return true;
+  }
 
   public onSubmitPassword(): void {
     // stop here if form is invalid
-    if (this.accountForm.invalid) {
+    if (this.oldPasswordNeeded && !this.checkOldPassword(this.accountForm.value.oldPassword)) {
+      this.passwordError = true;
       return;
-    }
-
-    if (this.oldPasswordNeeded) {
-      this.passwordForm.emit([this.accountForm.value.password, this.accountForm.value.oldPassword]);
+    } else if (this.oldPasswordNeeded) {
+      // stop here if form is invalid
+      this.passwordError = false;
+      this.profileService.changePassword(this.accountForm.value.password, this.accountForm.value.oldPassword).subscribe(
+        () => {
+          this.passwordError = false;
+        },
+        (error) => {
+          this.passwordError = true;
+        }
+      );
     } else {
-      this.passwordForm.emit([this.accountForm.value.password]);
+      this.authService.resetPasswordApply(this.token, this.accountForm.value.password).subscribe(() => {
+        this.router.navigate(['']);
+      });
     }
+  }
+  public goHome(): void {
+    this.router.navigateByUrl('news');
   }
 }

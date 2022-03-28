@@ -6,7 +6,9 @@ export enum ButtonType {
   ButtonPhone,
   Filter,
   IconOnly,
+  CheckButton,
   searchIcon,
   modalPrimary,
+  modalSecondary,
   TagCloudButton,
 }

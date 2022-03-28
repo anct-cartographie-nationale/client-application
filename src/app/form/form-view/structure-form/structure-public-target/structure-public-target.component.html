@@ -1,0 +1,21 @@
+<form [formGroup]="structureForm" *ngIf="structureForm" (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null">
+  <div class="title">
+    <h3>Quel public peut être accueilli dans cette structure&nbsp;?</h3>
+    <p>Plusieurs choix possibles</p>
+  </div>
+  <p class="missing-information" *ngIf="isEditMode && !structureForm.get('publics').valid">
+    <app-svg-icon [iconClass]="'icon-26'" [type]="'form'" [icon]="'notValidate'" class="validationIcon"></app-svg-icon>
+    <span>Il faut renseigner au moins un champ</span>
+  </p>
+  <div *ngIf="publics" class="btn-grid">
+    <span *ngFor="let choice of publics.modules">
+      <app-button
+        [ngClass]="{ selectedChoice: true }"
+        [extraClass]="isInArray(choice.id) ? 'selected' : ''"
+        [style]="buttonTypeEnum.CheckButton"
+        [text]="choice.text"
+        (action)="updateChoicePublic(choice.id)"
+      ></app-button>
+    </span>
+  </div>
+</form>

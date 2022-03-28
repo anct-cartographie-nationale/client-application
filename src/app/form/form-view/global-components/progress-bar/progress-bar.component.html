@@ -1,0 +1,17 @@
+<div class="progressBar" *ngIf="!isEditMode">
+  <p *ngIf="formType === formTypeEnum.account">Création de compte</p>
+  <p *ngIf="formType === formTypeEnum.profile">Création du profil</p>
+  <p *ngIf="formType === formTypeEnum.structure">Création de la structure</p>
+  <p *ngIf="formType === formTypeEnum.personaloffer">Création d'offre de service</p>
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+    <label [ngClass]="{ validate: currentPage == nbPagesForm }" for="progressForm"
+      >{{ progressStatus > 100 ? 100 : (progressStatus | number: '1.0-0') }}%
+    </label>
+    <progress
+      id="progressForm"
+      [ngClass]="{ validate: currentPage == nbPagesForm }"
+      max="100"
+      [value]="progressStatus"
+    ></progress>
+  </div>
+</div>

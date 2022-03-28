@@ -28,8 +28,6 @@
         <h2>Changer de mot de passe</h2>
         <div class="ico-close-details" (click)="closeModalOptsProfile()"></div>
       </div>
-      <app-password-form [oldPasswordNeeded]="true" (passwordForm)="submitPassword($event)"></app-password-form>
-      <p *ngIf="passwordError" class="special invalid">Votre ancien mot de passe est incorrect.</p>
     </div>
     <form
       *ngIf="editModal == typeModalProfile.email"

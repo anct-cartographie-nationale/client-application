@@ -70,7 +70,6 @@ button {
     }
   }
   &.modal-primary {
-    background: $primary-color;
     border: none;
     width: 100%;
     @include btn-bold;
@@ -89,6 +88,24 @@ button {
       }
     }
   }
+  &.modal-secondary {
+    border: none;
+    width: 100%;
+    @include btn-regular;
+    .text {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: auto;
+      color: $grey-1;
+      width: auto;
+      &.withIcon {
+        color: $grey-1;
+      }
+    }
+  }
   &.secondary {
     div:first-child {
       width: unset;
@@ -100,12 +117,14 @@ button {
       background: $white;
       border: 1px solid $grey-1;
       color: $grey-1;
-      font-size: 12px;
-      height: 0;
+      font-size: 14px;
       // @include btn-regular;
       &.withIcon {
         color: $grey-1;
       }
+    }
+    .small-text {
+      height: 22px !important;
     }
   }
   &.tertiary {
@@ -127,7 +146,25 @@ button {
     min-width: 50px;
 
     @include btn-regular;
+    &.selected {
+      background-color: $green-1 !important;
+      color: white !important;
+      &:hover {
+        background-color: $green-1 !important;
+      }
+    }
+    &.checkButton {
+      padding: 0px 14px;
+      font-weight: bold;
+      div:first-child {
+        padding: 0 14px;
+      }
+      &.selected {
+        padding: unset;
+      }
+    }
   }
+
   &.icon-only {
     div:first-child {
       width: unset;
@@ -191,6 +228,19 @@ button {
     border-color: $primary-color;
   }
 }
+.fullButton {
+  @include lato-regular-14;
+  width: 125px !important;
+}
+.fullWidth {
+  width: 100%;
+}
+.bigButton {
+  width: 280px !important;
+  .text {
+    width: inherit !important;
+  }
+}
 .btn-tags-cloud {
   appearance: none;
 
@@ -220,7 +270,7 @@ button {
     background: $grey-1;
   }
 }
-.disabled {
+button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }

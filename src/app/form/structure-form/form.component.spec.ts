@@ -93,6 +93,7 @@ describe('FormComponent', () => {
       nbTablets: new FormControl('structure.nbTablets'),
       nbNumericTerminal: new FormControl('structure.nbNumericTerminal'),
       equipmentsDetails: new FormControl('structure.equipmentsDetails'),
+      personalOffers: new FormControl([]),
     });
   });
 

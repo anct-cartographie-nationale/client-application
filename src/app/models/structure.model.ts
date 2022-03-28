@@ -5,6 +5,8 @@ import { Address } from './address.model';
 import { Day } from './day.model';
 import { OpeningDay } from './openingDay.model';
 import { Week } from './week.model';
+import { PersonalOffer } from './personalOffer.model';
+
 export class Structure {
   public _id: string = null;
   public numero: string = null;
@@ -23,6 +25,11 @@ export class Structure {
   public linkedin: string = null;
   public lockdownActivity: string = null;
   public pmrAccess: boolean = null;
+  public placeOfReception: boolean = null;
+  public choiceCompletion: boolean = null;
+  public contactPersonFirstName: string = null;
+  public contactPersonLastName: string = null;
+  public contactPersonEmail: string = null;
   public publicsAccompaniment: string[] = [];
   public proceduresAccompaniment: string[] = [];
   public remoteAccompaniment: boolean = null;
@@ -54,6 +61,8 @@ export class Structure {
 
   public accountVerified: boolean = false;
 
+  public personalOffers: PersonalOffer[] = [];
+
   constructor(obj?: any) {
     Object.assign(this, obj, {
       hours: obj && obj.hours ? new Week(obj.hours) : new Week(),
@@ -78,16 +87,6 @@ export class Structure {
         return this.hours.sunday;
       default:
         return null;
-    }
-  }
-
-  public openDisplay(): string {
-    if (this.isOpen) {
-      return 'Ouvert actuellement';
-    } else if (this.openedOn.day) {
-      return 'Fermé - Ouvre ' + this.hours.getDayTranslation(this.openedOn.day) + ' à ' + this.openedOn.schedule;
-    } else {
-      return 'Aucun horaire disponible';
     }
   }
 

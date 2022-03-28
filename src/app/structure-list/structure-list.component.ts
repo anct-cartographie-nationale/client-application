@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StructureService } from '../services/structure.service';
 import { ButtonType } from '../shared/components/button/buttonType.enum';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-structure-list',
@@ -27,7 +28,12 @@ export class StructureListComponent implements OnChanges {
   private arrayChunked: Structure[][] = [];
   private chunck = 10;
 
-  constructor(private route: ActivatedRoute, private router: Router, private structureService: StructureService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private structureService: StructureService,
+    private authService: AuthService
+  ) {
     this.route.queryParams.subscribe((queryParams) => {
       if (queryParams.id) {
         if (!this.structure) {
@@ -58,7 +64,11 @@ export class StructureListComponent implements OnChanges {
   }
 
   public addStructure(): void {
-    this.router.navigate(['/create-structure']);
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigateByUrl('/login');
+    } else {
+      this.router.navigateByUrl('/form/structure');
+    }
   }
 
   public showDetails(event: Structure): void {

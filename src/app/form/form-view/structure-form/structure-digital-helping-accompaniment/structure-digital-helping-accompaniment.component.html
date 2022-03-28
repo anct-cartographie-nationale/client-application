@@ -1,0 +1,18 @@
+<form [formGroup]="structureForm" *ngIf="structureForm" (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null">
+  <div class="title">
+    <h3>Quelles aides au numérique propose la structure&nbsp;?</h3>
+    <p>Facultatif</p>
+  </div>
+
+  <div class="btn-grid">
+    <span *ngFor="let accompaniment of proceduresAccompaniment.modules">
+      <app-button
+        [ngClass]="{ selectedChoice: true }"
+        [extraClass]="isInArray(accompaniment.id) ? 'selected' : ''"
+        [style]="buttonTypeEnum.CheckButton"
+        [text]="accompaniment.text"
+        (action)="updateChoiceAccompaniment(accompaniment.id)"
+      ></app-button>
+    </span>
+  </div>
+</form>

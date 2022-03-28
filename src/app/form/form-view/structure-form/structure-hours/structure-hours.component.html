@@ -1,0 +1,30 @@
+<form [formGroup]="structureForm">
+  <div class="title">
+    <h3>Quels sont les horaires d'ouverture de la structure&nbsp;?</h3>
+    <p class="notRequired">Facultatif</p>
+  </div>
+  <app-hour-picker
+    *ngIf="hoursForm"
+    (updateForm)="updateHours($event)"
+    (updateFormError)="setHoursError()"
+    [structureInput]="hoursForm"
+  ></app-hour-picker>
+
+  <div class="title secondTitle">
+    <h3>Avez-vous des précisions à apporter sur les horaires&nbsp;?</h3>
+    <p class="notRequired">Facultatif</p>
+  </div>
+  <div class="textareaBlock" fxLayout="column">
+    <textarea
+      rows="8"
+      placeholder="Exemple : nous ne sommes ouvert que le 1er mercredi du mois."
+      maxlength="500"
+      formControlName="exceptionalClosures"
+    ></textarea>
+    <p>
+      {{
+        structureForm.get('exceptionalClosures').value ? structureForm.get('exceptionalClosures').value.length : 0
+      }}&nbsp;/&nbsp;500
+    </p>
+  </div>
+</form>

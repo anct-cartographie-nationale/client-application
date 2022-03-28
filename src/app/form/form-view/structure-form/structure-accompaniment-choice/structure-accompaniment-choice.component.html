@@ -1,0 +1,11 @@
+<form [formGroup]="structureForm" *ngIf="structureForm" (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null">
+  <div class="title">
+    <h3>La structure dispose-t-elle d'un lieu d'accueil pour faire de l'accompagnement / formation&nbsp;?</h3>
+    <p>Exemple : accompagnement aux démarches administratives...</p>
+  </div>
+  <app-radio-form
+    [selectedOption]="structureForm.get('placeOfReception').value"
+    (selectedEvent)="onRadioChange('placeOfReception', $event)"
+  >
+  </app-radio-form>
+</form>

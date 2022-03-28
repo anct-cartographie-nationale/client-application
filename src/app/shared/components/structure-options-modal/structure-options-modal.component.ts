@@ -26,9 +26,6 @@ export class StructureOptionsModalComponent implements OnInit {
   @Output() closedWithRefresh = new EventEmitter();
   public active: boolean;
 
-  // Password profile
-  public passwordError = false;
-
   // AddAccount
   public formAddAccount: FormGroup;
   public ownerAlreadyLinked = false;
@@ -82,7 +79,7 @@ export class StructureOptionsModalComponent implements OnInit {
         this.editModal = TypeModalProfile.email;
         break;
       case FunctionTypeModalOptions.changePassword:
-        this.editModal = TypeModalProfile.password;
+        this.router.navigateByUrl('new-password');
         break;
       case FunctionTypeModalOptions.deleteAccount:
         this.toggleDeleteAccountModal();
@@ -147,20 +144,6 @@ export class StructureOptionsModalComponent implements OnInit {
 
   public logout(): void {
     this.authService.logout();
-  }
-
-  public submitPassword(passwords: string[]): void {
-    // stop here if form is invalid
-    this.passwordError = false;
-    this.profileService.changePassword(passwords[0], passwords[1]).subscribe(
-      () => {
-        this.closeModalOptsProfile();
-        this.passwordError = false;
-      },
-      (error) => {
-        this.passwordError = true;
-      }
-    );
   }
 
   public addOwner(): void {

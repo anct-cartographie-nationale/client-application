@@ -1,0 +1,28 @@
+<form [formGroup]="profileForm">
+  <div class="title">
+    <h3>Qui vous emploie&nbsp;?</h3>
+    <p>L’employeur demandé est celui qui figure sur votre fiche de paie (ou fiche de poste)</p>
+  </div>
+  <div class="search-structure">
+    <div fxLayout="column" fxLayoutAlign="space-between" class="form-group search">
+      <label for="employer">Employeur</label>
+      <div fxLayout="row" fxLayoutGap="13px">
+        <input
+          id="search-employer"
+          type="text"
+          (input)="onSearchChange($event.target.value)"
+          class="form-input"
+          autocomplete="off"
+          #searchEmployer
+        />
+      </div>
+    </div>
+    <div class="scroll">
+      <div class="autocomplete-items" *ngIf="!isAlreadySearching">
+        <p *ngFor="let employer of employers" (click)="selectedResult(employer)" class="autocomplete-item">
+          {{ employer.name }}
+        </p>
+      </div>
+    </div>
+  </div>
+</form>
