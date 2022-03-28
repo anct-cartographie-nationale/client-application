@@ -32,22 +32,10 @@
       }
       .footerModal {
         gap: 8px;
+        app-button {
+          flex: 1;
+        }
       }
     }
-  }
-}
-
-::ng-deep .modal app-button {
-  margin-right: 0 !important;
-  .text {
-    width: 150px !important;
-    height: 36px !important;
-    padding: 8px 0 !important;
-    white-space: nowrap;
-    box-sizing: border-box;
-  }
-  .text:first-child {
-    font-size: 14px !important;
-    line-height: 18px !important;
   }
 }

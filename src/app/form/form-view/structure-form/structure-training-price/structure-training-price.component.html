@@ -1,0 +1,11 @@
+<form [formGroup]="structureForm">
+  <div class="title">
+    <h3>Ces formations sont-elles gratuites&nbsp;?</h3>
+  </div>
+  <app-radio-form
+    [selectedOption]="getStructureControl('freeWorkShop').value"
+    [isThreeChoices]="true"
+    (selectedEvent)="onRadioChange('freeWorkShop', $event)"
+  >
+  </app-radio-form>
+</form>

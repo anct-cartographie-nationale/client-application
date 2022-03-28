@@ -1,0 +1,65 @@
+<form [formGroup]="accountForm" *ngIf="accountForm && !profile">
+  <div class="title">
+    <h3>Qui êtes-vous&nbsp;?</h3>
+    <p>Vous pourrez choisir de rendre visibles ces informations sur votre profil public</p>
+  </div>
+  <div class="form-group" fxLayout="column">
+    <label for="name">Prénom</label>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input type="text" (input)="setValidationsForm()" formControlName="name" class="form-input" />
+      <app-svg-icon
+        *ngIf="accountForm.get('name').valid"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'validate'"
+      ></app-svg-icon>
+      <app-svg-icon
+        *ngIf="accountForm.get('name').invalid && accountForm.get('name').value"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'notValidate'"
+      ></app-svg-icon>
+    </div>
+  </div>
+  <div class="form-group" fxLayout="column">
+    <label for="surname">Nom</label>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input type="text" (input)="setValidationsForm()" formControlName="surname" class="form-input" />
+      <app-svg-icon
+        *ngIf="accountForm.get('surname').valid"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'validate'"
+      ></app-svg-icon>
+      <app-svg-icon
+        *ngIf="accountForm.get('surname').invalid && accountForm.get('surname').value"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'notValidate'"
+      ></app-svg-icon>
+    </div>
+  </div>
+  <div class="form-group" fxLayout="column">
+    <label for="phone">Téléphone</label>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input
+        type="text"
+        formControlName="phone"
+        class="form-input phone"
+        (input)="utils.modifyPhoneInput(accountForm, 'phone', $event.target.value); setValidationsForm()"
+      />
+      <app-svg-icon
+        *ngIf="accountForm.get('phone').valid"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'validate'"
+      ></app-svg-icon>
+      <app-svg-icon
+        *ngIf="accountForm.get('phone').invalid && accountForm.get('phone').value"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'notValidate'"
+      ></app-svg-icon>
+    </div>
+  </div>
+</form>

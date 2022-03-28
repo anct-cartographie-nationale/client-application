@@ -79,7 +79,14 @@
           fxLayoutAlign="center center"
           [ngClass]="{ backDropModalFooter: getModalType() === 'moreFilters' }"
         >
-          <a class="reset" (click)="clearFilters()" tabindex="0">Effacer</a>
+          <div class="half-width">
+            <app-button
+              [style]="buttonTypeEnum.modalSecondary"
+              [text]="'Effacer'"
+              (click)="clearFilters()"
+              tabindex="0"
+            ></app-button>
+          </div>
           <div class="half-width">
             <app-button
               [style]="buttonTypeEnum.modalPrimary"
@@ -151,7 +158,14 @@
       [ngClass]="{ backDropModalFooter: getModalType() === 'moreFilters' }"
       *ngIf="getModalType() !== 'moreFilters'"
     >
-      <a class="reset" (click)="clearFilters()" tabindex="0">Effacer</a>
+      <div class="half-width">
+        <app-button
+          [style]="buttonTypeEnum.modalSecondary"
+          [text]="'Effacer'"
+          (click)="clearFilters()"
+          tabindex="0"
+        ></app-button>
+      </div>
       <div class="half-width">
         <app-button
           [style]="buttonTypeEnum.modalPrimary"

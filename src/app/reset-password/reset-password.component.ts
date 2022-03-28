@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NotificationService } from '../services/notification.service';
+import { ButtonType } from '../shared/components/button/buttonType.enum';
 
 @Component({
   selector: 'app-reset-password',
@@ -11,12 +12,12 @@ import { NotificationService } from '../services/notification.service';
 })
 export class ResetPasswordComponent implements OnInit {
   public resetForm: FormGroup;
-  public token: string;
   public loading = false;
   public submitted = false;
   // Condition form
   public isShowConfirmPassword = false;
   public isShowPassword = false;
+  public buttonTypeEnum = ButtonType;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,10 +28,6 @@ export class ResetPasswordComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.token = params['token'];
-    });
-
     this.resetForm = this.formBuilder.group({
       email: ['', Validators.required],
     });
@@ -64,14 +61,7 @@ export class ResetPasswordComponent implements OnInit {
     );
   }
 
-  public onSubmitPassword(password: string[]): void {
-    this.authService.resetPasswordApply(this.token, password[0]).subscribe(
-      () => {
-        this.router.navigate(['']);
-      },
-      () => {
-        this.loading = false;
-      }
-    );
+  public goLogin(): void {
+    this.router.navigateByUrl('/login');
   }
 }

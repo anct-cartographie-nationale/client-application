@@ -12,8 +12,6 @@ import { ButtonType } from '../shared/components/button/buttonType.enum';
 })
 export class HeaderComponent implements OnInit {
   public showMenu = false;
-  public isPopUpOpen = false;
-  public displaySignUp = true;
   public currentRoute = '';
   public formRoute = '/create-structure';
   public returnUrl = null;
@@ -35,17 +33,17 @@ export class HeaderComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      if (params.verified || params.returnUrl) {
-        Promise.resolve().then(() => {
-          if (!this.isLoggedIn) {
-            this.isPopUpOpen = true;
-            this.displaySignUp = true;
-          }
-        });
-        this.returnUrl = params.returnUrl;
-      }
-    });
+    // this.route.queryParams.subscribe((params) => {
+    //   if (params.verified || params.returnUrl) {
+    //     Promise.resolve().then(() => {
+    //       if (!this.isLoggedIn) {
+    //         this.isPopUpOpen = true;
+    //         this.displaySignUp = true;
+    //       }
+    //     });
+    //     this.returnUrl = params.returnUrl;
+    //   }
+    // });
   }
 
   public openMenu(): void {
@@ -76,23 +74,9 @@ export class HeaderComponent implements OnInit {
     }
     return false;
   }
-
-  public closeSignInModal(): void {
-    this.isPopUpOpen = false;
-    this.displaySignUp = true;
+  public goToLoginPage(): void {
+    this.router.navigateByUrl('login');
   }
-
-  public closeSignUpModal(value: boolean): void {
-    if (!value) {
-      this.displaySignUp = false;
-    } else {
-      this.isPopUpOpen = false;
-    }
-    if (this.returnUrl && this.isLoggedIn) {
-      this.router.navigateByUrl(this.returnUrl);
-    }
-  }
-
   public get isAdmin(): boolean {
     return this.profileService.isAdmin();
   }

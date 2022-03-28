@@ -36,6 +36,7 @@
   .distanceStructure {
     @include lato-regular-16;
     color: $grey-3;
+    text-align: right;
   }
 }
 

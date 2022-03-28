@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="boutonSection" *ngFor="let categorie of categories" fxLayout="column" fxLayoutGap="8px">
+    <ng-container>
+      <div fxLayout="column" class="collapse" [ngClass]="{ notCollapsed: !isCategorieExpanded(categorie.id) }">
+        <div
+          class="collapseHeader"
+          fxLayoutAlign="flex-start center"
+          fxLayout="row"
+          (click)="toggleCollapse(categorie.id)"
+        >
+          <div class="titleCollapse">
+            {{ categorie.name }}
+          </div>
+          <div class="logo">
+            <svg class="show" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#show'"></use>
+            </svg>
+            <svg class="hide" aria-hidden="true">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#hide'"></use>
+            </svg>
+          </div>
+        </div>
+        <div *ngIf="isCategorieExpanded(categorie.id)" class="inputSection btn-grid">
+          <ng-container *ngFor="let module of categorie.modules">
+            <app-button
+              [extraClass]="isModulePicked(categorie, module) ? 'selected' : ''"
+              [style]="buttonTypeEnum.CheckButton"
+              [text]="module.text"
+              (action)="pickChoice(categorie, module)"
+            ></app-button>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

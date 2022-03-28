@@ -1,0 +1,21 @@
+<div class="no-max-width">
+  <ng-container *ngIf="currentStep === profileFormStepEnum.profileBeginningInfo">
+    <app-information-step
+      [step]="0"
+      (goNext)="setValidationsForm()"
+      [formType]="formTypeEnum.profile"
+    ></app-information-step>
+  </ng-container>
+  <ng-container *ngIf="currentStep === profileFormStepEnum.profileEmployerSelection">
+    <app-profile-employer-selection
+      [profileForm]="profileForm"
+      (validateForm)="setValidationsForm()"
+    ></app-profile-employer-selection>
+  </ng-container>
+  <ng-container *ngIf="currentStep === profileFormStepEnum.profileJobSelection">
+    <app-profile-job-selection
+      [profileForm]="profileForm"
+      (validateForm)="setValidationsForm()"
+    ></app-profile-job-selection>
+  </ng-container>
+</div>

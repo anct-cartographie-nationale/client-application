@@ -9,12 +9,13 @@ import { Observable, Subscription } from 'rxjs';
 export class RadioFormComponent implements OnInit {
   constructor() {}
 
-  @Input() public selectedOption: boolean;
+  @Input() public selectedOption: boolean | string;
   @Input() public horizontal: boolean;
   @Input() public layoutGap: string;
   @Input() public name: string;
   @Input() events: Observable<Object>;
-  @Output() selectedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() isThreeChoices: boolean = false;
+  @Output() selectedEvent = new EventEmitter<any>();
 
   private eventsSubscription: Subscription;
 
@@ -26,8 +27,8 @@ export class RadioFormComponent implements OnInit {
     if (this.eventsSubscription) this.eventsSubscription.unsubscribe();
   }
 
-  public clicked(bool: boolean): void {
-    this.selectedOption = bool;
+  public clicked(val: boolean | string): void {
+    this.selectedOption = val;
     this.selectedEvent.emit(this.selectedOption);
   }
 }

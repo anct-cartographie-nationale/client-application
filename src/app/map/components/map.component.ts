@@ -223,14 +223,6 @@ export class MapComponent implements OnChanges {
       structure.getLabelTypeStructure() +
       '</p>' +
       (this.isOrientationForm
-        ? ''
-        : '<div>' +
-          '<span class="ico-dot-' +
-          cssAvailabilityClass +
-          '"></span><span>' +
-          structure.openDisplay() +
-          '</span></div>') +
-      (this.isOrientationForm
         ? '<div class="pop-up orientation"><button type="button" class="orientationButton btnShowDetails"><span class="ico-gg-eye-alt eye"></span>Voir</button></div>'
         : '<div class="pop-up"><button type="button" class="btnShowDetails">Voir</button></div>')
     );

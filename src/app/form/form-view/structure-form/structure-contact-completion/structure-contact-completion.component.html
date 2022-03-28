@@ -1,0 +1,70 @@
+<form [formGroup]="structureForm" *ngIf="structureForm" (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null">
+  <div class="title">
+    <h3>Quelle personne pourrait connaître ces informations&nbsp;?</h3>
+    <p>Informations demandées : téléphone, email, accessibilité PMR, type de public...</p>
+  </div>
+
+  <div class="form-group" fxLayout="column">
+    <label for="contactPersonFirstname">Prénom</label>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input
+        type="text"
+        name="contactPersonFirstname"
+        id="contactPersonFirstname"
+        formControlName="contactPersonFirstname"
+        (input)="setValidationsForm()"
+        class="form-input"
+      />
+      <app-svg-icon
+        *ngIf="structureForm.get('contactPersonFirstname').valid"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'validate'"
+      ></app-svg-icon>
+    </div>
+  </div>
+  <div class="form-group" fxLayout="column">
+    <label for="contactPersonLastname">Nom</label>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input
+        type="text"
+        id="contactPersonLastname"
+        name="contactPersonLastname"
+        formControlName="contactPersonLastname"
+        (input)="setValidationsForm()"
+        class="form-input"
+      />
+      <app-svg-icon
+        *ngIf="structureForm.get('contactPersonLastname').valid"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'validate'"
+      ></app-svg-icon>
+    </div>
+  </div>
+  <div class="form-group" fxLayout="column">
+    <label for="contactPersonEmail">Email</label>
+    <div fxLayout="row" fxLayoutGap="13px">
+      <input
+        type="text"
+        id="contactPersonEmail"
+        name="contactPersonEmail"
+        formControlName="contactPersonEmail"
+        (input)="setValidationsForm()"
+        class="form-input"
+      />
+      <app-svg-icon
+        *ngIf="structureForm.get('contactPersonEmail').valid"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'validate'"
+      ></app-svg-icon>
+      <app-svg-icon
+        *ngIf="structureForm.get('contactPersonEmail').invalid && structureForm.get('contactPersonEmail').value"
+        [iconClass]="'icon-26'"
+        [type]="'form'"
+        [icon]="'notValidate'"
+      ></app-svg-icon>
+    </div>
+  </div>
+</form>

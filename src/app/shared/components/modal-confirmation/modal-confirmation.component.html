@@ -10,11 +10,15 @@
       </div>
       <p>{{ content }}</p>
       <div class="footerModal" fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="8px">
-        <app-button (action)="closeModal(false)" [text]="'Annuler'" [style]="buttonTypeEnum.Secondary"></app-button>
+        <app-button
+          (action)="closeModal(false)"
+          [text]="'Annuler'"
+          [style]="buttonTypeEnum.modalSecondary"
+        ></app-button>
         <app-button
           (action)="closeModal(true)"
           [text]="customConfirmationText ? customConfirmationText : 'Confirmer'"
-          [style]="buttonTypeEnum.Primary"
+          [style]="buttonTypeEnum.modalPrimary"
         ></app-button>
       </div>
     </div>

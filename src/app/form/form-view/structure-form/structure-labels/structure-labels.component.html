@@ -1,0 +1,17 @@
+<form [formGroup]="structureForm" class="labelStep" (keyup.enter)="(!isEditMode ? '' : null)">
+  <div class="title">
+    <h3>La structure est-elle labellisée&nbsp;?</h3>
+    <p class="notRequired">Facultatif</p>
+  </div>
+  <div class="labelsQualifications" *ngIf="labelsQualifications" fxLayout="row wrap" fxLayoutAlign="flex-start">
+    <app-checkbox-form
+      *ngFor="let module of labelsQualifications.modules"
+      [isChecked]="isInArray(module.id, labelsQualifications.id)"
+      [text]="module.text"
+      [iconSvg]="module.id"
+      [iconType]="'labels'"
+      (checkEvent)="onCheckChange($event, labelsQualifications.id, module.id)"
+    >
+    </app-checkbox-form>
+  </div>
+</form>

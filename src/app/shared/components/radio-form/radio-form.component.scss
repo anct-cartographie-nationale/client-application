@@ -40,6 +40,14 @@ button {
   p {
     @include lato-bold-16;
   }
+  .nomargin {
+    text-align: left !important;
+    margin: 0;
+  }
+  .hint {
+    @include lato-regular-14;
+    margin: 0;
+  }
   .checkmark {
     width: 20px;
     height: 20px;

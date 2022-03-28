@@ -31,19 +31,15 @@
             </svg>
           </div>
         </div>
-        <div *ngIf="showPublic" class="inputSection">
-          <div class="tags">
-            <button
-              *ngFor="let choice of getChoices(pickedType)"
-              (click)="pickChoice(choice)"
-              [ngClass]="{ selectedChoice: choice == pickedChoice }"
-            >
-              <svg *ngIf="choice == pickedChoice" class="validate" aria-hidden="true">
-                <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-              </svg>
-              {{ getStructureTypeName(choice) }}
-            </button>
-          </div>
+        <div *ngIf="showPublic" class="btn-grid">
+          <span *ngFor="let choice of getChoices(pickedType)">
+            <app-button
+              [extraClass]="choice == pickedChoice ? 'selected' : ''"
+              [style]="buttonTypeEnum.CheckButton"
+              [text]="getStructureTypeName(choice)"
+              (action)="pickChoice(choice)"
+            ></app-button>
+          </span>
         </div>
       </div>
     </ng-container>
@@ -72,19 +68,15 @@
             </svg>
           </div>
         </div>
-        <div *ngIf="showPrivate" class="inputSection">
-          <div class="tags">
-            <button
-              *ngFor="let choice of getChoices(pickedType)"
-              (click)="pickChoice(choice)"
-              [ngClass]="{ selectedChoice: choice == pickedChoice }"
-            >
-              <svg *ngIf="choice == pickedChoice" class="validate" aria-hidden="true">
-                <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-              </svg>
-              {{ getStructureTypeName(choice) }}
-            </button>
-          </div>
+        <div *ngIf="showPrivate" class="btn-grid">
+          <span *ngFor="let choice of getChoices(pickedType)">
+            <app-button
+              [extraClass]="choice == pickedChoice ? 'selected' : ''"
+              [style]="buttonTypeEnum.CheckButton"
+              [text]="getStructureTypeName(choice)"
+              (action)="pickChoice(choice)"
+            ></app-button>
+          </span>
         </div>
       </div>
     </ng-container>
@@ -113,19 +105,15 @@
             </svg>
           </div>
         </div>
-        <div *ngIf="showPrivateLucrative" class="inputSection">
-          <div class="tags">
-            <button
-              *ngFor="let choice of getChoices(pickedType)"
-              (click)="pickChoice(choice)"
-              [ngClass]="{ selectedChoice: choice == pickedChoice }"
-            >
-              <svg *ngIf="choice == pickedChoice" class="validate" aria-hidden="true">
-                <use [attr.xlink:href]="'assets/form/sprite.svg#checkVector'"></use>
-              </svg>
-              {{ getStructureTypeName(choice) }}
-            </button>
-          </div>
+        <div *ngIf="showPrivateLucrative" class="btn-grid">
+          <span *ngFor="let choice of getChoices(pickedType)">
+            <app-button
+              [extraClass]="choice == pickedChoice ? 'selected' : ''"
+              [style]="buttonTypeEnum.CheckButton"
+              [text]="getStructureTypeName(choice)"
+              (action)="pickChoice(choice)"
+            ></app-button>
+          </span>
         </div>
       </div>
     </ng-container>

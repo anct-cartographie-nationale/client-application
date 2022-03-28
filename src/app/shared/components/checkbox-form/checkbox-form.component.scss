@@ -2,6 +2,7 @@
 @import '../../../../assets/scss/typography';
 
 svg {
+  min-width: 44px;
   width: 44px;
   height: 44px;
   fill: $primary-color;

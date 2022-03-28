@@ -1,0 +1,115 @@
+<form [formGroup]="structureForm" (keyup.enter)="(!isEditMode ? '' : null)">
+  <div class="title">
+    <h3>Quel matériel est mis à disposition par la structure&nbsp;?</h3>
+    <p class="notRequired">Facultatif</p>
+  </div>
+  <ng-container *ngFor="let equipment of equipmentsAndServices">
+    <div
+      class="controller equipments"
+      *ngIf="['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners'].includes(equipment.module.id)"
+    >
+      <div fxLayout="column">
+        <div class="controllerHeader" fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="flex-item">
+            <p class="no-margin">Nombre {{ formatEquipment(equipment.module.text) }}</p>
+          </div>
+          <div class="inputSection flex-item equipments" fxLayout="row" fxLayoutAlign="center center">
+            <ng-container *ngIf="equipment.module.id == 'ordinateurs'">
+              <svg
+                class="hide"
+                aria-hidden="true"
+                (click)="changeValueHandler(equipment.module.id, -1)"
+                [ngClass]="{ disabled: structureForm.value.nbComputers === 0 }"
+              >
+                <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+              </svg>
+              <input
+                type="number"
+                (input)="setValidationsForm()"
+                formControlName="nbComputers"
+                min="0"
+                class="form-input nbEquipment"
+                [(value)]="structureForm.value.nbComputers"
+              />
+            </ng-container>
+            <ng-container *ngIf="equipment.module.id == 'tablettes'">
+              <svg
+                class="hide"
+                aria-hidden="true"
+                (click)="changeValueHandler(equipment.module.id, -1)"
+                [ngClass]="{ disabled: structureForm.value.nbTablets === 0 }"
+              >
+                <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+              </svg>
+              <input
+                type="number"
+                (input)="setValidationsForm()"
+                formControlName="nbTablets"
+                min="0"
+                class="form-input nbEquipment"
+                [(value)]="structureForm.value.nbTablets"
+              />
+            </ng-container>
+            <ng-container *ngIf="equipment.module.id == 'imprimantes'">
+              <svg
+                class="hide"
+                aria-hidden="true"
+                (click)="changeValueHandler(equipment.module.id, -1)"
+                [ngClass]="{ disabled: structureForm.value.nbPrinters === 0 }"
+              >
+                <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+              </svg>
+              <input
+                type="number"
+                (input)="setValidationsForm()"
+                formControlName="nbPrinters"
+                min="0"
+                class="form-input nbEquipment"
+                [(value)]="structureForm.value.nbPrinters"
+              />
+            </ng-container>
+            <ng-container *ngIf="equipment.module.id == 'bornesNumeriques'">
+              <svg
+                class="hide"
+                aria-hidden="true"
+                (click)="changeValueHandler(equipment.module.id, -1)"
+                [ngClass]="{ disabled: structureForm.value.nbNumericTerminal === 0 }"
+              >
+                <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+              </svg>
+              <input
+                type="number"
+                (input)="setValidationsForm()"
+                formControlName="nbNumericTerminal"
+                min="0"
+                class="form-input nbEquipment"
+                [(value)]="structureForm.value.nbNumericTerminal"
+              />
+            </ng-container>
+            <ng-container *ngIf="equipment.module.id == 'scanners'">
+              <svg
+                class="hide"
+                aria-hidden="true"
+                (click)="changeValueHandler(equipment.module.id, -1)"
+                [ngClass]="{ disabled: structureForm.value.nbScanners === 0 }"
+              >
+                <use [attr.xlink:href]="'assets/form/sprite.svg#minus'"></use>
+              </svg>
+              <input
+                type="number"
+                (input)="setValidationsForm()"
+                formControlName="nbScanners"
+                min="0"
+                class="form-input nbEquipment"
+                [(value)]="structureForm.value.nbScanners"
+              />
+            </ng-container>
+            <svg class="show" aria-hidden="true" (click)="changeValueHandler(equipment.module.id, 1)">
+              <use [attr.xlink:href]="'assets/form/sprite.svg#plus'"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</form>

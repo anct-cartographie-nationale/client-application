@@ -23,7 +23,7 @@
     </button>
     <app-button
       *ngIf="!isLoggedIn"
-      (action)="isPopUpOpen = !isPopUpOpen"
+      (action)="goToLoginPage()"
       [text]="'Se connecter'"
       [style]="buttonTypeEnum.Secondary"
     ></app-button>
@@ -58,7 +58,6 @@
   </div>
 </div>
 
-<app-signup-modal *ngIf="displaySignUp" [openned]="isPopUpOpen" (closed)="closeSignUpModal($event)"></app-signup-modal>
 <app-data-share-consent
   *ngIf="isDisplayDataShare"
   [dataConsentPendingStructures]="dataConsentPendingStructures"

@@ -26,6 +26,23 @@ body {
   background-color: $grey-8;
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $scrollbar-track;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $scrollbar-thumb;
+    border-radius: 8px;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: $grey-3;
+    border-radius: 8px;
+  }
 }
 a {
   color: $default-link-color;
@@ -109,7 +126,7 @@ a {
 form p.notRequired {
   margin-top: 0px;
   font-style: italic;
-  color: $primary-color;
+  color: $grey-3;
 }
 
 /** Inputs **/
@@ -363,4 +380,25 @@ button {
   @media #{$tablet} {
     display: none !important;
   }
+}
+
+.autocomplete-items {
+  border: 0.0625rem solid #d4d4d4;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  border-top: none;
+  border-bottom: none;
+  z-index: 99;
+  background-color: #fff;
+  cursor: pointer;
+  max-height: 250px;
+  overflow: auto;
+}
+.autocomplete-item {
+  margin: 0;
+  padding: 1em;
+}
+.autocomplete-item:hover {
+  background-color: #dee6ee;
+  cursor: pointer;
 }

@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public addStructure(): void {
-    this.router.navigateByUrl('/create-structure');
+    this.router.navigateByUrl('/form/structure');
   }
 
   public logout(): void {

@@ -1,0 +1,14 @@
+<form [formGroup]="structureForm" (keyup.enter)="isPageValid && !isEditMode ? nextPage() : null">
+  <div class="title">
+    <h3>La structure est-elle accessible pour les personnes à mobilité réduite&nbsp;?</h3>
+  </div>
+  <p class="missing-information" *ngIf="isEditMode && !structureForm.get('pmrAccess').valid">
+    <app-svg-icon [iconClass]="'icon-26'" [type]="'form'" [icon]="'notValidate'" class="validationIcon"></app-svg-icon>
+    <span>Il faut renseigner un champ</span>
+  </p>
+  <app-radio-form
+    [selectedOption]="structureForm.get('pmrAccess').value"
+    (selectedEvent)="onRadioChange('pmrAccess', $event)"
+  >
+  </app-radio-form>
+</form>

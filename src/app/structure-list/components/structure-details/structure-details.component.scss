@@ -53,24 +53,6 @@ h3 {
   overflow-y: auto;
   scrollbar-gutter: stable;
   @include lato-regular-14;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: $scrollbar-track;
-  }
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: $scrollbar-thumb;
-    border-radius: 8px;
-  }
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: $grey-3;
-    border-radius: 8px;
-  }
 }
 
 .structure-buttons {

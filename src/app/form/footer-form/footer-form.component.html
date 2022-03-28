@@ -1,16 +1,23 @@
-<div fxLayout="row" [ngClass]="{ column: hasFinishButton() }" fxLayoutGap="10px" fxLayoutAlign="center center">
+<div
+  class="footerForm"
+  fxLayout="row"
+  [ngClass]="{ column: hasFinishButton() }"
+  fxLayoutGap="10px"
+  fxLayoutAlign="center center"
+>
   <app-button
-    *ngIf="displayPreviousButton"
-    (action)="goToPreviousPage()"
+    *ngIf="!isLastFormStep && !isNextFormTransition && !isStructureLastPage() && !isPersonalOfferFirstPage()"
+    (action)="prevPage()"
     [text]="btnName[0]"
     [iconType]="'form'"
     [iconBtn]="'chevronLeft'"
   ></app-button>
 
-  <app-button *ngIf="hasFinishButton()" (action)="finishedModal()" [text]="btnName[2]" [iconBtn]="'flag'"></app-button>
+  <app-button *ngIf="isLastFormStep" (action)="goToHome()" [text]="'Ok'" [style]="buttonTypeEnum.Primary"></app-button>
 
   <app-button
-    (action)="goToNextPage()"
+    *ngIf="!isLastFormStep && !isNextFormTransition"
+    (action)="nextPage()"
     [disabled]="!isValid"
     [text]="btnName[1]"
     [iconBtn]="btnName[1] == 'Imprimer' ? 'print' : 'chevronRight'"

@@ -20,6 +20,7 @@
   input {
     @include lato-regular-13;
     @include input-search;
+    margin-top: unset;
   }
   .inputSearch {
     padding: 6px 10px 6px 6px;
@@ -30,6 +31,7 @@
     height: 36px;
     border-radius: 50px;
     margin-right: 0.25rem;
+    height: 40px;
     @media #{$large-desktop} {
       width: 300px;
       min-width: 250px;
@@ -41,6 +43,7 @@
     }
     .container {
       width: 100%;
+      height: 40px;
       .separation {
         border-right: solid 1px $grey-4;
         width: 5px;
@@ -60,7 +63,7 @@
 .btnSection {
   width: 100%;
   @media #{$large-tablet} {
-    justify-content: center !important;
+    display: contents !important;
   }
   button {
     background: $white;
@@ -175,6 +178,12 @@
     }
   }
 }
+::ng-deep .btn-regular.tertiary {
+  height: 40px !important;
+  div {
+    line-height: normal;
+  }
+}
 .last-button {
   margin-left: auto;
 }
@@ -241,6 +250,7 @@ a {
   margin: 0.5rem 0 0 0;
   .title {
     margin-top: 5px;
+    color: $grey-3;
   }
   .reset-icon {
     padding-top: 0.2rem;

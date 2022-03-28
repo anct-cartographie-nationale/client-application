@@ -14,13 +14,14 @@ import { TempUserResolver } from './resolvers/temp-user.resolver';
 import { StructureJoinComponent } from './structure-join/structure-join.component';
 import { StructureDetailsComponent } from './structure-list/components/structure-details/structure-details.component';
 import { StructureListComponent } from './structure-list/structure-list.component';
-import { UserVerificationComponent } from './user-verification/user-verification.component';
 import { NewsletterSubscriptionComponent } from './newsletter-subscription/newsletter-subscription.component';
 import { OrientationFormComponent } from './form/orientation-form/orientation-form.component';
 import { StructureListPrintComponent } from './form/orientation-form/component/structure-list-print/structure-list-print.component';
 import { StructureResolver } from './resolvers/structure.resolver';
 import { RoleGuard } from './guards/role.guard';
 import { RouteRole } from './shared/enum/routeRole.enum';
+import { LoginComponent } from './login/login.component';
+import { PasswordFormComponent } from './shared/components';
 import { FooterComponent } from './footer/footer.component';
 
 const footerOutletRoute: Route = {
@@ -59,7 +60,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: CartoComponent,
+        component: LoginComponent,
       },
       footerOutletRoute,
     ],
@@ -109,7 +110,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: UserVerificationComponent,
+        component: LoginComponent,
       },
       footerOutletRoute,
     ],
@@ -169,6 +170,10 @@ const routes: Routes = [
       },
       footerOutletRoute,
     ],
+  },
+  {
+    path: 'new-password',
+    component: PasswordFormComponent,
   },
   {
     path: 'create-structure',
@@ -238,6 +243,10 @@ const routes: Routes = [
       },
       footerOutletRoute,
     ],
+  },
+  {
+    path: 'form',
+    loadChildren: () => import('./form/form-view/form-view.module').then((m) => m.FormViewModule),
   },
   {
     path: 'home',

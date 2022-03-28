@@ -95,3 +95,25 @@
     stroke: $primary-color;
   }
 }
+
+.btn-grid {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tags-cloud {
+  font-style: normal;
+  justify-content: center;
+  align-items: center;
+  height: 28px;
+  border-radius: 20px;
+  padding: 5px 15px;
+  color: $white;
+  border-style: none;
+  margin-top: 5px;
+  background: $grey-1;
+  &.unchecked {
+    background: $grey-4;
+  }
+}

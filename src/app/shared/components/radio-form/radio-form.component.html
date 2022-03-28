@@ -4,7 +4,7 @@
   </div>
   <button
     (click)="clicked(true)"
-    [ngClass]="{ selected: selectedOption && selectedOption != null }"
+    [ngClass]="{ selected: selectedOption === true && selectedOption != null }"
     fxLayout="row"
     fxLayoutAlign=" center"
     [fxLayoutGap]="layoutGap ? layoutGap : '17px'"
@@ -15,6 +15,24 @@
       </svg>
     </div>
     <p>Oui</p>
+  </button>
+  <button
+    *ngIf="isThreeChoices"
+    (click)="clicked('underCondition')"
+    [ngClass]="{ selected: selectedOption === 'underCondition' && selectedOption != null }"
+    fxLayout="row"
+    fxLayoutAlign=" center"
+    [fxLayoutGap]="layoutGap ? layoutGap : '17px'"
+  >
+    <div class="checkmark">
+      <svg class="validate" aria-hidden="true">
+        <use [attr.xlink:href]="'assets/form/sprite.svg#checkVectorFull'"></use>
+      </svg>
+    </div>
+    <div>
+      <p class="nomargin">Oui, sous condition</p>
+      <p class="hint">(adhésion à l'association...)</p>
+    </div>
   </button>
   <button
     (click)="clicked(false)"
