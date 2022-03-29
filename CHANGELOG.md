@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta1](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.16.0...v2.0.0-beta1) (2022-03-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* **onboarding:** Some fileds are now added to user structure, there is no coming back
+
+### Features
+
+* **carto:** rework carto, search bar and structure detail screen ([aa058b5](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/aa058b5d18fb3d90aa77d0aab700424babeff93e))
+* **cicd:** temp remove of mr jobs ([5c9a74a](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/5c9a74ad2916b986a7626ffb8726db3260d8990a))
+* **cicd:** update deploy for V2.0 ([4440154](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/4440154a4bac74f32da1f79178acab19ba89b83a))
+* **cicd:** update wrong prop ([d311dd9](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/d311dd9f5539f9187672d6e5dbc350d121d00729))
+* **onboarding:** form refactor for structure and account creation. Add new onboarding cases for profile and personal offer. ([bb89936](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/bb89936f2869564cfa6bc0e1de239aac53315c0a))
+* **style:** add tertiary and icon onlybutton. Update logo and header. Button refacto with enum ([276dc59](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/276dc594376cf4054490ccea327323e391bd1571))
+* **style:** change colors, buttons, header, typo ([38629d8](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/38629d8ca71eaaa831109b101f71971bb94f53c4))
+
+
+### Bug Fixes
+
+* add missing layout import ([621d77d](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/621d77d1610e02a47bc4e6b29d8c973e68d6cebe))
+* **carto:** review icons and font ([60d23c3](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/60d23c3c00c0f957aad6eaea627f3196fa9d9361))
+* **cicd:** change to branches ([79bf80f](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/79bf80f4bb377e3910b9f04e952c814ecbba3ca4))
+* **cicd:** wrong job targeted ([0237564](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/0237564284901f584a122d69f5815836a4acca41))
+* **filters:** review more filter background ([da44d38](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/da44d38716db680299a27c46a60a4cff79098b9b))
+* **gitalb-ci:** autodeploy for V2.0 ([cd1d43d](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/cd1d43d0da89798a175d77179b0a72d346ee520c))
+* secondary button width ([375adfe](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/375adfe94efa04e5e1d193e669a75f3d805d9f34))
+* **style:** button hover ([122fcfc](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/122fcfc1412282af29734f33985f375b83606b30))
+* **style:** update button style ([c8ade31](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/c8ade31b7d4f187a2c9cb0db321dd5355e7ebb88))
+
 ## [1.16.0](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.15.0...v1.16.0) (2022-03-18)
 
 

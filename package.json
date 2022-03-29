@@ -1,6 +1,6 @@
 {
   "name": "pamn",
-  "version": "1.16.0",
+  "version": "2.0.0-beta1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration=fr --proxy-config proxy.conf.json",
