@@ -235,9 +235,7 @@
       fxLayoutAlign="baseline baseline"
       fxLayoutGap="12px"
     >
-      <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
-        <h2>Labellisations</h2>
-      </div>
+      <h2>Labellisations</h2>
       <div class="wrapper">
         <div *ngFor="let labels of structure.labelsQualifications">
           <app-logo-card [name]="labels"></app-logo-card>
@@ -253,9 +251,7 @@
       fxLayoutAlign="baseline baseline"
       fxLayoutGap="12px"
     >
-      <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
-        <h2>Aides numérique</h2>
-      </div>
+      <h2>Aides numérique</h2>
       <div fxLayout="column">
         <div class="wrapper">
           <div *ngFor="let accompagnement of structure.proceduresAccompaniment">
@@ -276,11 +272,8 @@
       fxLayout="column"
       class="structure-details-block noSeparator"
       fxLayoutAlign="baseline baseline"
-      fxLayoutGap="20px"
     >
-      <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
-        <h2>Formations</h2>
-      </div>
+      <h2>Formations</h2>
       <div *ngIf="structure.freeWorkShop">
         <span *ngIf="multipleWorkshop()" class="bold-info">L'accès à ces formations est gratuit</span>
         <span *ngIf="!multipleWorkshop()" class="bold-info">L'accès à cette formation est gratuit</span>
@@ -424,11 +417,8 @@
       fxLayout="column"
       class="structure-details-block"
       fxLayoutAlign="baseline baseline"
-      fxLayoutGap="20px"
     >
-      <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
-        <h2>Matériel et wifi</h2>
-      </div>
+      <h2>Matériel et wifi</h2>
       <div fxLayout="column">
         <div *ngIf="filterOnlyEquipments(structure.equipmentsAndServices).includes('wifiEnAccesLibre')">
           {{ getEquipmentsLabel('wifiEnAccesLibre') }}
@@ -459,15 +449,12 @@
       fxLayout="column"
       class="structure-details-block noSeparator"
       fxLayoutAlign="baseline baseline"
-      fxLayoutGap="20px"
     >
-      <div fxLayout="row" fxLayoutAlign="none flex-end" fxLayoutGap="8px">
-        <h2>Accès</h2>
-      </div>
+      <h2>Accès</h2>
       <div fxLayout="column wrap" fxLayoutGap="24px">
         <div *ngFor="let tclStop of tclStopPoints | slice: 0:3">
           {{ tclStop.name }}
-          <div fxLayout="row wrap" fxLayoutGap="24px">
+          <div fxLayout="row wrap" fxLayoutGap="16px">
             <p *ngFor="let sub of tclStop.subLines">
               <app-svg-icon [type]="'tcl'" [icon]="sub" [iconClass]="'icon-75'"></app-svg-icon>
             </p>

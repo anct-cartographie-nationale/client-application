@@ -86,7 +86,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         () => {
           if (this.isWelcome) {
-            console.log('la ?');
             this.router.navigateByUrl('form/profile');
           } else {
             this.router.navigateByUrl('news');

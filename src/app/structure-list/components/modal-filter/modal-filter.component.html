@@ -99,7 +99,7 @@
     </div>
     <!-- Filter with multiple categories -->
     <div
-      class="contentModal maxModal"
+      class="contentModal maxModal max-height"
       fxLayout="row wrap"
       fxLayoutAlign="flex-start"
       *ngIf="categories.length > 1 && getModalType() !== 'moreFilters'"
@@ -120,13 +120,16 @@
                     class="customCheck customCheckPrimary"
                     [ngClass]="{ halfCheck: getCategoryCheckboxStatus(c) === 'halfChecked' }"
                   ></span>
-                  <div class="label">{{ c.name }}</div>
                 </label>
                 <div
-                  class="arrow"
+                  fxLayout="row"
+                  fxLayoutAlign="space-between center"
+                  class="w-100 clickable"
                   (click)="toggleShowCategory(c.id)"
-                  [ngClass]="{ toggled: this.toggledCategories.includes(c.id) }"
-                ></div>
+                >
+                  <div class="label">{{ c.name }}</div>
+                  <div class="arrow" [ngClass]="{ toggled: this.toggledCategories.includes(c.id) }"></div>
+                </div>
               </div>
               <ul class="blockLigne smallList" [ngClass]="{ show: this.toggledCategories.includes(c.id) }">
                 <div fxLayout="row" fxLayoutAlign="start center" class="ligneFiltre" *ngFor="let module of c.modules">
@@ -137,7 +140,7 @@
                           type="checkbox"
                           [checked]="searchService.getIndex(checkedModules, module.id, c.id) > -1"
                           [value]="module.id"
-                          (change)="onCheckboxChange($event, c.id)"
+                          (change)="onCheckboxChange($event, c.id, module.text)"
                         />
                         <span class="customCheck customCheckPrimary"></span>
                         <div class="label">{{ module.text }}</div>

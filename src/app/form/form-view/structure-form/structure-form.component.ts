@@ -352,7 +352,8 @@ export class StructureFormComponent implements OnChanges {
     this.setValidationsForm();
   }
 
-  public goToCreateStructure(): void {
+  public goToCreateStructure(structureName = ''): void {
+    this.structureForm.patchValue({ _id: null, structureName });
     this.isNotExistingStructure.emit();
   }
 }

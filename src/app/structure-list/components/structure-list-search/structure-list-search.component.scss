@@ -92,7 +92,7 @@
       transition: all 300ms ease;
     }
     &:focus {
-      border-color: $blue-middle;
+      border-color: $focus-color;
     }
   }
   .selected {
@@ -154,7 +154,7 @@
       height: 20px;
       border: solid 1px $grey-4;
       background: white;
-      margin-left: 0;
+      margin: 0;
       margin-right: 5px;
       transition: all 300ms ease;
       position: relative;
@@ -201,7 +201,7 @@
     padding: 4px 6px 8px 6px;
     &:hover {
       .ico-pin-search {
-        background-color: $blue-middle;
+        background-color: $primary-color;
       }
     }
     &:focus {

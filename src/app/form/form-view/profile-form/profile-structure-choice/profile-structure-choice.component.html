@@ -32,11 +32,7 @@
               fxLayoutAlign="space-around"
               class="form-list"
               [class]="
-                structure['alreadySelected']
-                  ? 'already-selected'
-                  : isSelectedStructure(structure)
-                  ? 'item-selected'
-                  : ''
+                structure.alreadySelected ? 'already-selected' : isSelectedStructure(structure) ? 'item-selected' : ''
               "
             >
               <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -51,7 +47,7 @@
                   [type]="'form'"
                   [icon]="'validate'"
                 ></app-svg-icon>
-                <div *ngIf="structure['alreadySelected']" class="sticker">Déjà<br />sélectionnée</div>
+                <div *ngIf="structure.alreadySelected" class="sticker">Déjà<br />sélectionnée</div>
               </div>
             </div>
           </div>
