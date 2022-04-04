@@ -125,10 +125,6 @@ export class FooterFormComponent implements OnChanges {
         //TODO Go to send mail page and send the mail
         return;
       }
-      if (this.currentStep === structureFormStep.structureConsent) {
-        const user: User = await this.profileService.getProfile();
-        this.structureService.createStructure(this.form.value, user).subscribe(() => {});
-      }
     }
     if (this.isPersonalOfferpage()) {
       this.endForm.emit({ formType: this.currentForm });

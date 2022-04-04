@@ -59,7 +59,7 @@ h1 {
       width: 7px;
     }
     &:focus {
-      border-color: $blue-middle;
+      border-color: $focus-color;
     }
   }
   .selected {

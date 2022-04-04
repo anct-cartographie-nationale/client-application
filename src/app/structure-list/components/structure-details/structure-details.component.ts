@@ -140,7 +140,7 @@ export class StructureDetailsComponent implements OnInit {
       case Equipment.tablet:
         return this.structure.nbTablets > 1 ? 'Tablettes' : 'Tablette';
       case Equipment.computer:
-        return this.structure.nbComputers > 1 ? 'Ordinateurs à disposition' : 'Ordinateur à disposition';
+        return this.structure.nbComputers > 1 ? 'Ordinateurs' : 'Ordinateur';
       case Equipment.scanner:
         return this.structure.nbScanners > 1 ? 'Scanners' : 'Scanner';
       default:

@@ -86,7 +86,6 @@ h3 {
     }
   }
   @media #{$tablet} {
-    height: calc(100vh - #{$header-height});
     .printButton {
       display: none !important;
     }

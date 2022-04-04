@@ -63,6 +63,8 @@ export class Structure {
 
   public personalOffers: PersonalOffer[] = [];
 
+  public alreadySelected? = false;
+
   constructor(obj?: any) {
     Object.assign(this, obj, {
       hours: obj && obj.hours ? new Week(obj.hours) : new Week(),
@@ -176,7 +178,7 @@ export class Structure {
       case Equipment.tablet:
         return this.nbTablets > 1 ? 'Tablettes' : 'Tablette';
       case Equipment.computer:
-        return this.nbComputers > 1 ? 'Ordinateurs à disposition' : 'Ordinateur à disposition';
+        return this.nbComputers > 1 ? 'Ordinateurs' : 'Ordinateur';
       case Equipment.scanner:
         return this.nbScanners > 1 ? 'Scanners' : 'Scanner';
       default:

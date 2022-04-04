@@ -56,7 +56,7 @@ a {
   }
   &:hover {
     text-decoration: underline;
-    outline-color: $blue-middle;
+    outline-color: $primary-color;
   }
   &.primary {
     @include hyperlink;

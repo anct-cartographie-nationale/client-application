@@ -23,10 +23,6 @@ export class StructureListComponent implements OnChanges {
   public buttonTypeEnum = ButtonType;
   public showStructureDetails = false;
   public structure: Structure;
-  public structuresListChunked: Structure[];
-  private pageStructures = 0;
-  private arrayChunked: Structure[][] = [];
-  private chunck = 10;
 
   constructor(
     private route: ActivatedRoute,
@@ -58,7 +54,6 @@ export class StructureListComponent implements OnChanges {
       });
     }
     if (changes.structureList) {
-      this.structuresListChunked = this.chunckAnArray(this.structureList);
       document.getElementById('listCard').scrollTo(0, 0);
     }
   }
@@ -92,27 +87,5 @@ export class StructureListComponent implements OnChanges {
 
   public emitUpdatedStructure(s: Structure): void {
     this.updatedStructure.emit(s);
-  }
-
-  private chunckAnArray(structures: Structure[]): Structure[] {
-    this.arrayChunked = [];
-    this.pageStructures = 0;
-    for (let i = 0; i < structures.length; i += this.chunck) {
-      this.arrayChunked.push(structures.slice(i, i + this.chunck));
-    }
-    return this.arrayChunked[0];
-  }
-
-  public onScrollDown(event): void {
-    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 50) {
-      this.loadMoreStructures();
-    }
-  }
-  private loadMoreStructures(): void {
-    if (this.pageStructures < this.arrayChunked.length - 1) {
-      this.pageStructures++;
-      const newStructures = _.map(this.arrayChunked[this.pageStructures]);
-      this.structuresListChunked = [...this.structuresListChunked, ...newStructures];
-    }
   }
 }

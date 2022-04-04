@@ -15,8 +15,8 @@ export class ProfileStructureChoiceComponent implements OnInit {
   @Input() structureForm: FormGroup;
   @Output() validateForm = new EventEmitter<Structure>();
   @Output() selectedStructure: EventEmitter<Structure> = new EventEmitter<Structure>();
-  @Output() createStructure = new EventEmitter<any>();
-  public searchString: string = '';
+  @Output() createStructure = new EventEmitter<string>();
+  public searchString = '';
   public structures: Structure[];
   public selectedStructureItem: Structure;
   public isAlreadySearching = false;
@@ -29,13 +29,15 @@ export class ProfileStructureChoiceComponent implements OnInit {
     this.isAlreadySearching = true;
     this.profileService.getProfile().then((profile) => {
       this.isAlreadySearching = false;
-      this.profileStructuresLink = profile.structuresLink;
+      this.profileStructuresLink = [...profile.structuresLink, ...profile.pendingStructuresLink];
       this.getStructures(null);
     });
   }
 
-  public onSearchChange(searchString: string) {
-    if (searchString.length < 3 && this.searchString == '') return;
+  public onSearchChange(searchString: string): void {
+    if (searchString.length < 3 && this.searchString === '') {
+      return;
+    }
     this.searchString = searchString;
     const filters: Filter[] = [];
     if (searchString.length > 0) {
@@ -45,28 +47,32 @@ export class ProfileStructureChoiceComponent implements OnInit {
   }
 
   public selectedResult(structure: Structure): void {
-    if (structure['alreadySelected']) return;
-    if (this.selectedStructureItem) this.selectedStructureItem['selected'] = false;
+    if (structure.alreadySelected) {
+      return;
+    }
     this.selectedStructureItem = structure;
     this.structureForm.patchValue({ _id: structure._id, structureName: structure.structureName });
     this.validateForm.emit();
   }
 
   public isSelectedStructure(structure: Structure): boolean {
-    if (this.selectedStructureItem && this.selectedStructureItem._id === structure._id) return true;
-    return false;
+    if (this.selectedStructureItem && this.selectedStructureItem._id === structure._id) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  private getStructures(filters: Filter[]) {
+  private getStructures(filters: Filter[]): void {
     if (!this.isAlreadySearching) {
       this.isAlreadySearching = true;
       this.structureService.getStructuresByName(filters).subscribe((structures) => {
         structures.forEach((structure) => {
           if (this.profileStructuresLink.includes(structure._id)) {
-            structure['alreadySelected'] = true;
+            structure.alreadySelected = true;
           }
         });
-        if (this.searchString == '') {
+        if (this.searchString === '') {
           structures.sort((a, b) => a.structureName.localeCompare(b.structureName));
         }
         this.structures = structures;
@@ -76,6 +82,6 @@ export class ProfileStructureChoiceComponent implements OnInit {
   }
 
   public addStructure(): void {
-    this.createStructure.emit();
+    this.createStructure.emit(this.searchString);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { ButtonType } from '../../../shared/components/button/buttonType.enum';
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
@@ -10,8 +10,9 @@ import { SearchService } from '../../services/search.service';
   templateUrl: './modal-filter.component.html',
   styleUrls: ['./modal-filter.component.scss'],
 })
-export class ModalFilterComponent implements OnInit {
+export class ModalFilterComponent implements OnInit, OnChanges {
   constructor(public searchService: SearchService) {}
+
   @Input() public modalType: TypeModal;
   @Input() public categories: Category[];
   //checked modules filter list
@@ -26,6 +27,12 @@ export class ModalFilterComponent implements OnInit {
   ngOnInit(): void {
     // Manage checkbox
     this.checkedModules = this.modules.slice();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.modalType) {
+      this.checkedModules = this.modules.slice();
+    }
   }
 
   // Management of the checkbox event (Check / Uncheck)

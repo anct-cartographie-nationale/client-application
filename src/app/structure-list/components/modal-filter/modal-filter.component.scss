@@ -144,6 +144,10 @@
     .toggled {
       transform: translateY(25%) rotate(-135deg);
     }
+    &.max-height {
+      max-height: 50vh;
+      overflow-y: overlay;
+    }
   }
   .footer {
     box-sizing: border-box;
@@ -182,6 +186,7 @@
     background: white;
     margin-top: 10%;
     border-radius: 8px;
+    // overflow: hidden;
   }
   .backDropModal {
     background: white;

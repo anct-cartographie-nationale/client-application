@@ -3,7 +3,7 @@
     <app-profile-structure-choice
       [structureForm]="structureForm"
       (validateForm)="setValidationsForm()"
-      (createStructure)="goToCreateStructure()"
+      (createStructure)="goToCreateStructure($event)"
     ></app-profile-structure-choice>
   </ng-container>
   <ng-container *ngIf="currentStep === structureFormStep.structureFormTime" class="no-max-width">

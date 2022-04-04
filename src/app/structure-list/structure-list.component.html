@@ -1,4 +1,4 @@
-<div class="structureList-container" (scroll)="onScrollDown($event)">
+<div class="structureList-container">
   <div class="structureListHeader hide-on-print">
     <div class="nbStructuresLabel" [ngPlural]="structureList.length">
       <ng-template ngPluralCase="0">0 structure</ng-template>
@@ -16,7 +16,7 @@
 
   <div id="listCard" class="listCard" (mouseleave)="mouseLeave()">
     <app-card
-      *ngFor="let structure of structuresListChunked"
+      *ngFor="let structure of structureList"
       [structure]="structure"
       (showDetails)="showDetails($event, filters)"
       (hover)="handleCardHover($event)"
