@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0-beta1.1](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v2.0.0-beta1...v2.0.0-beta1.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* V2.0.0-beta1 various design returns for onboarding, carto ans structures ([a9b2386](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/commit/a9b2386538bdbf731660a71bee86dfb19a240906))
+
 ## [2.0.0-beta1](https://forge.grandlyon.com/web-et-numerique/pamn_plateforme-des-acteurs-de-la-mediation-numerique/pamn_client/compare/v1.16.0...v2.0.0-beta1) (2022-03-29)
 
 
