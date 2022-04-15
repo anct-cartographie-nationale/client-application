@@ -9,11 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PrintService } from '../../../shared/service/print.service';
 import { Equipment } from '../../enum/equipment.enum';
 import { StructureService } from '../../../services/structure.service';
-import { TclService } from '../../../services/tcl.service';
-import { TclStopPoint } from '../../../models/tclStopPoint.model';
-import { ProfileService } from '../../../profile/services/profile.service';
-import { User } from '../../../models/user.model';
-import { AuthService } from '../../../services/auth.service';
 import { PublicCategorie } from '../../enum/public.enum';
 import { Owner } from '../../../models/owner.model';
 import { style, animate, transition, trigger, group } from '@angular/animations';
@@ -55,11 +50,8 @@ export class StructureDetailsComponent implements OnInit {
   public showParentingHelp: boolean;
   public showSocialAndProfessional: boolean;
   public showDigitalSecurity: boolean;
-  public tclStopPoints: TclStopPoint[] = [];
   public printMode = false;
-  public isClaimed: boolean = null;
   public isLoading: boolean = false;
-  public currentProfile: User = null;
   public deleteModalOpenned = false;
   public claimModalOpenned = false;
   public structureErrorModalOpenned = false;
@@ -70,9 +62,6 @@ export class StructureDetailsComponent implements OnInit {
     private printService: PrintService,
     private searchService: SearchService,
     private structureService: StructureService,
-    private tclService: TclService,
-    private profileService: ProfileService,
-    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -86,19 +75,8 @@ export class StructureDetailsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.isLoading = true;
-    if (this.userIsLoggedIn()) {
-      this.currentProfile = await this.profileService.getProfile();
-
-      if (this.profileService.isAdmin()) {
-        this.structureService.getStructureWithOwners(this.structure._id, this.currentProfile).subscribe((res) => {
-          this.structureAdmins = res.owners;
-        });
-      }
-    }
-    this.isClaimed = await this.structureService.isClaimed(this.structure._id, this.currentProfile).toPromise();
 
     // GetTclStopPoints
-    this.getTclStopPoints();
     this.searchService.getCategoriesTraining().subscribe((referentiels) => {
       referentiels.forEach((referentiel) => {
         if (referentiel.isBaseSkills()) {
@@ -123,10 +101,6 @@ export class StructureDetailsComponent implements OnInit {
     if (index > -1) {
       this.structure.proceduresAccompaniment.splice(index, 1);
     }
-  }
-
-  public userIsLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
   }
 
   public getEquipmentsLabel(equipment: Equipment): string {
@@ -180,60 +154,8 @@ export class StructureDetailsComponent implements OnInit {
     this.joinModalOpenned = !this.joinModalOpenned;
   }
 
-  public handleClaim(): void {
-    if (this.userIsLoggedIn()) {
-      this.toggleClaimModal();
-    } else {
-      this.router.navigate(['create-structure'], { state: { newUser: this.structure } });
-    }
-  }
-  public handleJoin(): void {
-    if (this.userIsLoggedIn()) {
-      this.toggleJoinModal();
-    } else {
-      this.router.navigate(['create-structure'], { state: { newUser: this.structure, isJoin: true } });
-    }
-  }
   public handleModify(): void {
     this.router.navigate(['create-structure', this.structure._id]);
-  }
-
-  public deleteStructure(shouldDelete: boolean): void {
-    this.toggleDeleteModal();
-    if (shouldDelete) {
-      this.structureService.delete(this.structure._id).subscribe((res) => {
-        this.reload();
-      });
-    }
-  }
-
-  private reload(): void {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['./'], { relativeTo: this.route });
-  }
-  public claimStructure(shouldClaim: boolean): void {
-    this.toggleClaimModal();
-    if (shouldClaim) {
-      this.structureService
-        .claimStructureWithAccount(this.structure._id, this.authService.userValue.username)
-        .subscribe(() => {
-          this.profileService.getProfile().then((user: User) => {
-            this.isClaimed = true;
-          });
-        });
-    }
-  }
-
-  public joinStructure(shouldClaim: boolean): void {
-    this.toggleJoinModal();
-    if (shouldClaim) {
-      this.structureService.joinStructure(this.structure._id, this.authService.userValue.username).subscribe((res) => {
-        this.profileService.getProfile().then((user: User) => {
-          this.isClaimed = true;
-        });
-      });
-    }
   }
 
   public getAccessLabel(accessModality: AccessModality): string {
@@ -306,23 +228,9 @@ export class StructureDetailsComponent implements OnInit {
     return this.digitalCultureSecurity && this.digitalCultureSecurity[0] !== undefined;
   }
 
-  public getTclStopPoints(): void {
-    this.tclService.getTclStopPointBycoord(this.structure.getLon(), this.structure.getLat()).subscribe((res) => {
-      this.tclStopPoints = res;
-    });
-  }
-
   public filterOnlyEquipments(equipmentsAndServices: string[]): string[] {
     return equipmentsAndServices.filter((eqpt) =>
       ['ordinateurs', 'tablettes', 'bornesNumeriques', 'imprimantes', 'scanners', 'wifiEnAccesLibre'].includes(eqpt)
-    );
-  }
-
-  public displayJoin(): boolean {
-    return (
-      !(this.profileService.isLinkedToStructure(this.structure._id) || this.profileService.isAdmin()) &&
-      this.isClaimed &&
-      !this.profileService.isPendingLinkedToStructure(this.structure._id)
     );
   }
 

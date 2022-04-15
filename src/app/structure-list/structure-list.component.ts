@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Structure } from '../models/structure.model';
 import { GeoJson } from '../map/models/geojson.model';
-import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StructureService } from '../services/structure.service';
 import { ButtonType } from '../shared/components/button/buttonType.enum';
-import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-structure-list',
@@ -27,8 +25,7 @@ export class StructureListComponent implements OnChanges {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private structureService: StructureService,
-    private authService: AuthService
+    private structureService: StructureService
   ) {
     this.route.queryParams.subscribe((queryParams) => {
       if (queryParams.id) {
@@ -55,14 +52,6 @@ export class StructureListComponent implements OnChanges {
     }
     if (changes.structureList) {
       document.getElementById('listCard').scrollTo(0, 0);
-    }
-  }
-
-  public addStructure(): void {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigateByUrl('/login');
-    } else {
-      this.router.navigateByUrl('/form/structure');
     }
   }
 

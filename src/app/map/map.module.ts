@@ -4,6 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MapComponents } from './components';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { BrowserModule } from '@angular/platform-browser';
+
 @NgModule({
   imports: [CommonModule, BrowserModule, SharedModule, LeafletModule],
   declarations: [MapComponents],

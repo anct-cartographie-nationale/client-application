@@ -13,20 +13,7 @@
     <app-svg-icon (click)="openMenu()" [type]="'ico'" [icon]="'menu'" [iconClass]="'icon-32'"></app-svg-icon>
   </div>
   <div fxLayout="row" class="right-header" fxLayoutAlign="center center" fxLayoutGap="3vw">
-    <a routerLink="/news" [routerLinkActive]="'active'" i18n>Actualités</a>
     <a routerLink="/acteurs" [routerLinkActive]="'active'" i18n>Cartographie</a>
-    <a routerLink="/orientation" [routerLinkActive]="'active'" i18n>Orienter un bénéficiaire</a>
-    <a routerLink="/page/qui-sommes-nous" [routerLinkActive]="'active'" i18n>Qui sommes-nous ?</a>
-    <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'">Administration</a>
-    <button *ngIf="isLoggedIn" class="red" routerLink="/profile" [routerLinkActive]="'active'">
-      {{ displayName }}
-    </button>
-    <app-button
-      *ngIf="!isLoggedIn"
-      (action)="goToLoginPage()"
-      [text]="'Se connecter'"
-      [style]="buttonTypeEnum.Secondary"
-    ></app-button>
   </div>
 </div>
 <div *ngIf="showMenu" class="mobile-menu" fxLayout="row">
@@ -46,14 +33,7 @@
         <a routerLink="/page/qui-sommes-nous" [routerLinkActive]="'active'" (click)="closeMenu()" i18n
           >Qui sommes-nous ?</a
         >
-        <a *ngIf="isAdmin" routerLink="/admin" [routerLinkActive]="'active'" (click)="closeMenu()">Administration</a>
       </div>
-    </div>
-    <div>
-      <button *ngIf="isLoggedIn" class="red" routerLink="/profile" [routerLinkActive]="'active'" (click)="closeMenu()">
-        {{ displayName }}
-      </button>
-      <button *ngIf="!isLoggedIn" (click)="isPopUpOpen = !isPopUpOpen; closeMenu()">Se connecter</button>
     </div>
   </div>
 </div>

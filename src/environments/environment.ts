@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  ghostAdmin: 'https://resin-dev.grandlyon.com/blog/ghost',
   VERSION: require('../../package.json').version,
 };
 

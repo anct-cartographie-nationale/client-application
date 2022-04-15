@@ -5,20 +5,13 @@
       <ng-template ngPluralCase="1">1 structure</ng-template>
       <ng-template ngPluralCase="other">{{ structureList.length }} structures</ng-template>
     </div>
-    <app-button
-      tabindex="0"
-      (action)="addStructure()"
-      [text]="'Ajouter une structure'"
-      [style]="buttonTypeEnum.Secondary"
-      [extraClass]="'small-text'"
-    ></app-button>
   </div>
 
   <div id="listCard" class="listCard" (mouseleave)="mouseLeave()">
     <app-card
       *ngFor="let structure of structureList"
       [structure]="structure"
-      (showDetails)="showDetails($event, filters)"
+      (showDetails)="showDetails($event)"
       (hover)="handleCardHover($event)"
       class="structure-card"
     ></app-card>

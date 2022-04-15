@@ -1,15 +1,13 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Structure } from '../../../models/structure.model';
-import { ProfileService } from '../../../profile/services/profile.service';
-import { StructureService } from '../../../services/structure.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() public structure: Structure;
   @Input() public isSelected: boolean;
   @Input() public isOrientation: boolean;
@@ -21,19 +19,7 @@ export class CardComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private profileService: ProfileService,
-    private structureService: StructureService
   ) {}
-  ngOnInit(): void {
-    if (this.profileService.isAdmin()) {
-      this.setClaimIndicator();
-    }
-  }
-
-  // Check if structure haven't owners to help admin vision.
-  async setClaimIndicator() {
-    this.isClaimed = await this.structureService.isClaimed(this.structure._id, null).toPromise();
-  }
 
   /**
    * Display distance in m or km according to value
