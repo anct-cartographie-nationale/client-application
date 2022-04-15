@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WeekDay } from '@angular/common';
-import { Observable } from 'rxjs';
+import {Observable, of} from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 const { DateTime } = require('luxon');
@@ -12,6 +12,8 @@ import { OpeningDay } from '../models/openingDay.model';
 import { Weekday } from '../structure-list/enum/weekday.enum';
 import { Time } from '../models/time.model';
 import { Filter } from '../structure-list/models/filter.model';
+
+import structures from '../../assets/data/structures.json';
 
 @Injectable({
   providedIn: 'root',
@@ -29,20 +31,22 @@ export class StructureService {
   }
 
   public getStructures(filters: Filter[], searchUrl: string = 'search'): Observable<Structure[]> {
-    if (filters && filters.length > 0) {
-      let requestUrl = `${this.baseUrl}/${searchUrl}`;
-      const queryString = _.find(filters, { name: 'query' });
-      if (queryString) {
-        _.remove(filters, { name: 'query' });
-        requestUrl += `?query=${queryString.value}`;
-      }
-      const formatedFilters = this.formatFilters(filters);
-      return this.http
-        .post(requestUrl, { filters: formatedFilters })
-        .pipe(map((data: any[]) => data.map((item) => new Structure(item))));
-    } else {
-      return this.http.get(`${this.baseUrl}`).pipe(map((data: any[]) => data.map((item) => new Structure(item))));
-    }
+    // if (filters && filters.length > 0) {
+    //   let requestUrl = `${this.baseUrl}/${searchUrl}`;
+    //   const queryString = _.find(filters, { name: 'query' });
+    //   if (queryString) {
+    //     _.remove(filters, { name: 'query' });
+    //     requestUrl += `?query=${queryString.value}`;
+    //   }
+    //   const formatedFilters = this.formatFilters(filters);
+    //   return this.http
+    //     .post(requestUrl, { filters: formatedFilters })
+    //     .pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+    // } else {
+    //   return this.http.get(`${this.baseUrl}`).pipe(map((data: any[]) => data.map((item) => new Structure(item))));
+    // }
+
+    return of(structures.map(structure => new Structure(structure)));
   }
 
   private formatFilters(filters: Filter[]): object {

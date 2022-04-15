@@ -1,6 +1,6 @@
 export enum ZoomLevel {
-  min = 10,
-  regular = 12,
+  min = 3,
+  regular = 6,
   userPosition = 15,
   max = 19,
 }

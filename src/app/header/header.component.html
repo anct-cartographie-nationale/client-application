@@ -1,14 +1,7 @@
 <div fxLayout="row" class="header hide-on-print">
-  <div class="logo clickable" routerLink="/home">
-    <img
-      *ngIf="displayLogo(); else customTitle"
-      class="logo-grand-lyon"
-      width="108"
-      height="37"
-      src="/assets/logos/resin.svg"
-      alt
-    />
-  </div>
+  <h1 routerLink="/home">
+    POC Cartographie nationale
+  </h1>
   <div class="containerIconMenu">
     <app-svg-icon (click)="openMenu()" [type]="'ico'" [icon]="'menu'" [iconClass]="'icon-32'"></app-svg-icon>
   </div>

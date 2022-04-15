@@ -262,7 +262,7 @@ export class MapComponent implements OnChanges {
     // Center is set on townhall
     // Zoom is blocked on 11 to prevent people to zoom out from metropole
     this.mapOptions = {
-      center: latLng(45.764043, 4.835659),
+      center: latLng(46.28146057911664, 4.468874066180609),
       maxZoom: ZoomLevel.max,
       zoom: ZoomLevel.regular,
       minZoom: ZoomLevel.min,
