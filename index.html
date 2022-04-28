@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="fr" dir="ltr"><head>
+    <base href="/">
+
+    <!-- COMMON TAGS -->
+    <meta charset="utf-8">
+    <title>Cartographie Nationale des lieux de l'inclusion numérique</title>
+
+    <!-- Search Engine -->
+    <meta name="title" content="Cartographie Nationale des lieux de l'inclusion numérique">
+    <meta name="description" content="Dédiée aux acteurs de l'inclusion numérique au niveau national, la Cartographie Nationale des lieux de l'inclusion numérique recense tous les lieux qui proposent une offre de médiation numérique sur le territoire et vise à permettre une meilleure orientation des usagers. Actualités, appels à projets, outils et ressources en ligne sont également proposés pour faciliter l'accompagnement des personnes en fragilité numérique.">
+    <meta name="image" content="https://resin.grandlyon.com/assets/logos/resin-logo-1024x512.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="gam2SZSqu_MO1xoHwcvhqPCXNsXf60qxXPalwPVKfLM">
+
+    <!-- Open Graph general -->
+    <meta property="og:title" content="Rés'In | Cartographie Nationale des lieux de l'inclusion numérique">
+    <meta property="og:description" content="Retrouver tous les lieux de la médiation numérique de la métropole mais aussi les actualités, projets, ressources, études et appels à projet liès à l'inclusion numérique...">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://resin.grandlyon.com/assets/logos/resin-logo-1024x512.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1024">
+    <meta property="og:image:height" content="512">
+    <meta property="og:url" content="https://resin.grandlyon.com">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rés'In | Cartographie Nationale des lieux de l'inclusion numérique">
+    <meta name="twitter:description" content="Retrouver tous les lieux de la médiation numérique de la métropole mais aussi les actualités, projets, ressources, études et appels à projet liès à l'inclusion numérique...">
+    <meta name="twitter:image" content="https://resin.grandlyon.com/assets/logos/resin-logo-1200x630.png">
+    <meta name="twitter:url" content="https://resin.grandlyon.com">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- PWA -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+
+    <!-- CSS & scripts -->
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js" integrity="sha256-VC4mGHI/SvHwjGxD7oBob8kzwzbHy1MsgiCcrR5SbHg= sha384-/UhW2uuxuN/GcGRUL3CJA5ftmLinDAWEV5khyWrOKJ04xesUihAW/UNXf4VMvAuS sha512-WZO+8H/x0lzH/hIMaAan179GT2iyGNzbEA9nCGS7ju1jPPkUUr7uTHJGh3kxVG2GhDlxItuH1gbmFzHZiMul1Q==" crossorigin="anonymous"></script>
+    <script src="https://embed.typeform.com/embed.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <style type="text/css">@font-face{font-family:'Lato';font-style:italic;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/lato/v23/S6u8w4BMUTPHjxsAUi-qNiXg7eU0.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Lato';font-style:italic;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/lato/v23/S6u8w4BMUTPHjxsAXC-qNiXg7Q.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Lato';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/lato/v23/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Lato';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/lato/v23/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}@font-face{font-family:'Lato';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/lato/v23/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');unicode-range:U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;}@font-face{font-family:'Lato';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/lato/v23/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}</style>
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#333333">
+  <style>html,body{font-family:Lato,Helvetica,sans-serif}html,body{font-family:Lato,Helvetica,sans-serif}html,body{font-family:Lato,Helvetica,sans-serif}html{height:-webkit-fill-available;margin:0;padding:0;background-color:#f8f8f8}body{width:100%;height:100%;margin:0;padding:0;background-color:#f8f8f8;min-height:100vh;min-height:-webkit-fill-available}body ::-webkit-scrollbar{width:8px}body ::-webkit-scrollbar-track{background:rgba(248,248,248,.65)}body ::-webkit-scrollbar-thumb{background:#bdbdbd;border-radius:8px}body ::-webkit-scrollbar-thumb:hover{background:#696969;border-radius:8px}@media print{body,html{height:auto}}</style><link rel="stylesheet" href="styles.9066ca00280cde23.css" crossorigin="anonymous" integrity="sha384-fS0E05o5TSr8T+gWyzZpIun7lxI8V98La3Ktl85rbqQklN4ygUmeBgXnJry7qPlp" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.9066ca00280cde23.css"></noscript></head>
+  <body>
+    <app-root></app-root>
+    <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <script src="runtime.4e41b1883f938235.js" type="module" crossorigin="anonymous" integrity="sha384-8C7F0Apm81C4l2FBygqyC7ZPpuoUg2R5gMsHDIp0zNEwFmDW8OEWm5DgLiV0eNRQ"></script><script src="polyfills.93208bfc21febc7f.js" type="module" crossorigin="anonymous" integrity="sha384-bB8NlEjmy1DAoo891Gxx90tvJI4ylOjimag1YyUBs+eH+I6ZtbEyd2KpExeWkhMc"></script><script src="main.d764d35c441da7b5.js" type="module" crossorigin="anonymous" integrity="sha384-ltoH4xXD2yAHeXDsbK1bEOfn6WeMcgcaIwkzZcIhxDfRsj90G0j7+x5LeVZYwaDZ"></script>
+
+</body></html>
