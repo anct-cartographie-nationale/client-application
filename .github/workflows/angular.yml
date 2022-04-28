@@ -26,8 +26,5 @@ jobs:
       - name: Install NPM Modules
         run: npm ci
 
-      - name: Check code style
-        run: npm run lint
-
       - name: Build Project
-        run: npm run build
+        run: npm run build:prod
