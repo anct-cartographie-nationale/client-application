@@ -8,13 +8,13 @@ import { ButtonType } from '../button/buttonType.enum';
 export enum structureTypes {
   public = 'Publique',
   private = 'Privée à but non lucratif',
-  privateLucratif = 'Privée à but lucratif',
+  privateLucratif = 'Privée à but lucratif'
 }
 
 @Component({
   selector: 'app-structure-type-picker',
   templateUrl: './structure-type-picker.component.html',
-  styleUrls: ['./structure-type-picker.component.scss'],
+  styleUrls: ['./structure-type-picker.component.scss']
 })
 export class StructureTypePickerComponent implements OnInit {
   public pickedType: string;

@@ -11,7 +11,7 @@ import { ButtonType } from '../../../shared/components/button/buttonType.enum';
 @Component({
   selector: 'app-structure-list-search',
   templateUrl: './structure-list-search.component.html',
-  styleUrls: ['./structure-list-search.component.scss'],
+  styleUrls: ['./structure-list-search.component.scss']
 })
 export class StructureListSearchComponent implements OnInit {
   @Output() searchEvent = new EventEmitter();
@@ -55,7 +55,7 @@ export class StructureListSearchComponent implements OnInit {
     this.searchForm = this.fb.group({
       searchTerm: this.activatedRoute.snapshot.queryParamMap.get('search')
         ? this.activatedRoute.snapshot.queryParamMap.get('search')
-        : '',
+        : ''
     });
   }
   ngOnInit(): void {
@@ -100,13 +100,13 @@ export class StructureListSearchComponent implements OnInit {
       this.router.navigate(['/acteurs'], {
         relativeTo: this.route,
         queryParams: {
-          search: term,
+          search: term
         },
-        queryParamsHandling: 'merge',
+        queryParamsHandling: 'merge'
       });
     } else if (!term) {
       this.router.navigate(['/acteurs'], {
-        relativeTo: this.route,
+        relativeTo: this.route
       });
     }
     const filters = this.convertModulesTofilters(this.checkedModulesFilter, term);
@@ -129,9 +129,7 @@ export class StructureListSearchComponent implements OnInit {
 
   // Check if some modules is checked on filter and store number of modules checked
   public countCheckFiltersOnModules(checkedModules: Module[]): void {
-    this.numberAccompanimentChecked = checkedModules.filter(
-      (module) => module.text === 'proceduresAccompaniment'
-    ).length;
+    this.numberAccompanimentChecked = checkedModules.filter((module) => module.text === 'proceduresAccompaniment').length;
     this.numberTrainingChecked = checkedModules.filter(
       (module) =>
         module.text === 'baseSkills' ||

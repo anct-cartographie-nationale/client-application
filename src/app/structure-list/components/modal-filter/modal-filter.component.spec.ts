@@ -14,7 +14,7 @@ describe('ModalFilterComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ModalFilterComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule],
+      imports: [HttpClientTestingModule, ReactiveFormsModule]
     }).compileComponents();
   });
 
@@ -33,7 +33,7 @@ describe('ModalFilterComponent', () => {
     const modules: Module[] = [
       { id: '176', text: 'training', count: 3 },
       { id: '173', text: 'training', count: 2 },
-      { id: '172', text: 'training', count: 2 },
+      { id: '172', text: 'training', count: 2 }
     ];
     spyOn(component.searchEvent, 'emit');
     component.emitModules(modules);
@@ -46,7 +46,7 @@ describe('ModalFilterComponent', () => {
     const modules: Module[] = [
       { id: '176', text: 'training', count: 0 },
       { id: '173', text: 'training', count: 0 },
-      { id: '172', text: 'training', count: 0 },
+      { id: '172', text: 'training', count: 0 }
     ];
     component.checkedModules = modules;
     const evt = { target: { checked: true, value: '175' } };
@@ -57,7 +57,7 @@ describe('ModalFilterComponent', () => {
     const modules: Module[] = [
       { id: '176', text: 'training', count: 0 },
       { id: '173', text: 'training', count: 0 },
-      { id: '172', text: 'training', count: 0 },
+      { id: '172', text: 'training', count: 0 }
     ];
     component.checkedModules = modules;
     const evt = { target: { checked: false, value: '173' } };
@@ -73,7 +73,7 @@ describe('ModalFilterComponent', () => {
       { id: '172', text: 'morefilters', count: 0 },
       { id: '179', text: 'training', count: 0 },
       { id: '190', text: 'training', count: 0 },
-      { id: '167', text: 'training', count: 0 },
+      { id: '167', text: 'training', count: 0 }
     ];
     component.checkedModules = modules;
     const category: Category = new Category({ id: 'morefilters', modules: [modules[0], modules[1], modules[2]] });

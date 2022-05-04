@@ -8,9 +8,8 @@ describe('CheckboxFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CheckboxFormComponent ]
-    })
-    .compileComponents();
+      declarations: [CheckboxFormComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

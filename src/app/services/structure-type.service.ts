@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { StructureType } from '../models/structure-type.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class StructureTypeService {
   constructor(private http: HttpClient) {}

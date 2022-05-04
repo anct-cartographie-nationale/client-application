@@ -25,7 +25,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     const newHeader = new HttpHeaders(headerSettings);
 
     changedRequest = request.clone({
-      headers: newHeader,
+      headers: newHeader
     });
     return next.handle(changedRequest);
   }

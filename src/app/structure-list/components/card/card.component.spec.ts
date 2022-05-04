@@ -12,7 +12,7 @@ describe('CardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      declarations: [CardComponent],
+      declarations: [CardComponent]
     }).compileComponents();
   });
 
@@ -30,7 +30,7 @@ describe('CardComponent', () => {
       address: {
         numero: 2,
         street: 'rue du test',
-        commune: 'villeurbanne',
+        commune: 'villeurbanne'
       },
 
       contactPhone: '04 72 21 03 07',
@@ -59,95 +59,95 @@ describe('CardComponent', () => {
           time: [
             {
               opening: 1330,
-              closing: 1630,
+              closing: 1630
             },
             {
               opening: null,
-              closing: null,
-            },
-          ],
+              closing: null
+            }
+          ]
         },
         tuesday: {
           open: true,
           time: [
             {
               opening: 830,
-              closing: 1130,
+              closing: 1130
             },
             {
               opening: 1330,
-              closing: 1630,
-            },
-          ],
+              closing: 1630
+            }
+          ]
         },
         wednesday: {
           open: true,
           time: [
             {
               opening: 1330,
-              closing: 1630,
+              closing: 1630
             },
             {
               opening: null,
-              closing: null,
-            },
-          ],
+              closing: null
+            }
+          ]
         },
         thursday: {
           open: true,
           time: [
             {
               opening: 830,
-              closing: 1130,
+              closing: 1130
             },
             {
               opening: 1330,
-              closing: 1630,
-            },
-          ],
+              closing: 1630
+            }
+          ]
         },
         friday: {
           open: true,
           time: [
             {
               opening: 830,
-              closing: 1130,
+              closing: 1130
             },
             {
               opening: 1330,
-              closing: 1530,
-            },
-          ],
+              closing: 1530
+            }
+          ]
         },
         saturday: {
           open: false,
           time: [
             {
               opening: null,
-              closing: null,
+              closing: null
             },
             {
               opening: null,
-              closing: null,
-            },
-          ],
+              closing: null
+            }
+          ]
         },
         sunday: {
           open: false,
           time: [
             {
               opening: null,
-              closing: null,
+              closing: null
             },
             {
               opening: null,
-              closing: null,
-            },
-          ],
+              closing: null
+            }
+          ]
         },
-        openedOn: new OpeningDay('monday', null),
+        openedOn: new OpeningDay('monday', null)
       },
-      openedOn: new OpeningDay('monday', null),
+      openedOn: new OpeningDay('monday', null)
     });
     component.structure = structure;
     fixture.detectChanges(); // calls NgOnit

@@ -1,7 +1,5 @@
 <div fxLayout="row" class="header hide-on-print">
-  <h1 routerLink="/home">
-    POC Cartographie nationale
-  </h1>
+  <h1 routerLink="/home">POC Cartographie nationale</h1>
   <div class="containerIconMenu">
     <app-svg-icon (click)="openMenu()" [type]="'ico'" [icon]="'menu'" [iconClass]="'icon-32'"></app-svg-icon>
   </div>
@@ -20,12 +18,8 @@
       <div fxLayout="column" class="right-header" fxLayoutAlign="none baseline" fxLayoutGap="5vw">
         <a routerLink="/news" [routerLinkActive]="'active'" (click)="closeMenu()" i18n>Actualités</a>
         <a routerLink="/acteurs" [routerLinkActive]="'active'" (click)="closeMenu()" i18n>Cartographie</a>
-        <a routerLink="/orientation" [routerLinkActive]="'active'" (click)="closeMenu()" i18n
-          >Orienter un bénéficiaire</a
-        >
-        <a routerLink="/page/qui-sommes-nous" [routerLinkActive]="'active'" (click)="closeMenu()" i18n
-          >Qui sommes-nous ?</a
-        >
+        <a routerLink="/orientation" [routerLinkActive]="'active'" (click)="closeMenu()" i18n>Orienter un bénéficiaire</a>
+        <a routerLink="/page/qui-sommes-nous" [routerLinkActive]="'active'" (click)="closeMenu()" i18n>Qui sommes-nous ?</a>
       </div>
     </div>
   </div>
@@ -33,8 +27,7 @@
 
 <app-data-share-consent
   *ngIf="isDisplayDataShare"
-  [dataConsentPendingStructures]="dataConsentPendingStructures"
-></app-data-share-consent>
+  [dataConsentPendingStructures]="dataConsentPendingStructures"></app-data-share-consent>
 
 <ng-template #customTitle>
   <img class="desktop-show logo-grand-lyon" width="108" height="37" src="/assets/logos/resin.svg" alt />

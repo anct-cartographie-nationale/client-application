@@ -8,29 +8,29 @@ const routes: Routes = [
   {
     path: 'print',
     outlet: 'print',
-    children: [{ path: 'structure', component: StructureDetailsComponent }],
+    children: [{ path: 'structure', component: StructureDetailsComponent }]
   },
   {
     path: 'acteurs',
-    component: CartoComponent,
+    component: CartoComponent
   },
   {
     path: 'structures',
     children: [
       {
         path: '',
-        component: StructureListComponent,
+        component: StructureListComponent
       }
-    ],
+    ]
   },
   {
     path: '**',
-    redirectTo: 'acteurs',
-  },
+    redirectTo: 'acteurs'
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

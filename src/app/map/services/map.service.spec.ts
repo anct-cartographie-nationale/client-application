@@ -33,14 +33,14 @@ describe('MapService', () => {
   });
 
   it('should get marker', () => {
-    const marker = service.createMarker(45.764043, 4.835659, 1, "53", '<p>Hello <br/>World !</p>');
-    expect(marker).toEqual(service.getMarker("53"));
+    const marker = service.createMarker(45.764043, 4.835659, 1, '53', '<p>Hello <br/>World !</p>');
+    expect(marker).toEqual(service.getMarker('53'));
   });
   it('should not get marker, with missing id', () => {
     service.createMarker(45.764043, 4.835659, 1, null, '<p>Hello <br/>World !</p>');
-    expect(service.getMarker("2")).toEqual(null);
+    expect(service.getMarker('2')).toEqual(null);
   });
   it('should not get marker, empty', () => {
-    expect(service.getMarker("2")).toEqual(null);
+    expect(service.getMarker('2')).toEqual(null);
   });
 });

@@ -10,10 +10,8 @@ export class Category {
     Object.assign(this, obj, {
       modules:
         obj && obj.modules
-          ? obj.modules.map(
-              (module) => new Module(module.display_id ? module.display_id : module.id, module.text, module.text)
-            )
-          : null,
+          ? obj.modules.map((module) => new Module(module.display_id ? module.display_id : module.id, module.text, module.text))
+          : null
     });
   }
 

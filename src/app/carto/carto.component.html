@@ -13,15 +13,13 @@
       (updatedStructure)="updateStructures($event)"
       class="left-pane"
       [ngClass]="{ mapPhone: isMapPhone == true }"
-      fxLayout="column"
-    ></app-structure-list>
+      fxLayout="column"></app-structure-list>
     <div class="btnSwitch">
       <app-button
         [style]="buttonTypeEnum.ButtonPhone"
         [text]="isMapPhone ? 'Liste' : 'Carte'"
         [iconBtn]="isMapPhone ? 'liste' : 'map-markerButtonPhone'"
-        (action)="switchMapList()"
-      ></app-button>
+        (action)="switchMapList()"></app-button>
     </div>
     <app-map
       [structures]="structures"
@@ -31,7 +29,6 @@
       [isMapPhone]="isMapPhone"
       [searchedValue]="searchedValue"
       class="right-pane"
-      [ngClass]="{ mapPhone: isMapPhone == true }"
-    ></app-map>
+      [ngClass]="{ mapPhone: isMapPhone == true }"></app-map>
   </div>
 </div>

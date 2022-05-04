@@ -6,7 +6,7 @@ import { GeoJson } from '../map/models/geojson.model';
 import * as _ from 'lodash';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class GeojsonService {
   constructor(private http: HttpClient) {}

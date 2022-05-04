@@ -4,7 +4,7 @@ import { ButtonType } from '../button/buttonType.enum';
 @Component({
   selector: 'app-modal-confirmation',
   templateUrl: './modal-confirmation.component.html',
-  styleUrls: ['./modal-confirmation.component.scss'],
+  styleUrls: ['./modal-confirmation.component.scss']
 })
 export class ModalConfirmationComponent {
   @Input() public openned: boolean;

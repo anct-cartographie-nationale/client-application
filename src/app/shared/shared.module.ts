@@ -18,7 +18,7 @@ import { HourPickerComponent } from './components/hour-picker/hour-picker.compon
     ...SharedDirectives,
     SvgIconComponent,
     AddressAutocompleteComponent,
-    HourPickerComponent,
+    HourPickerComponent
   ],
   exports: [
     ...SharedPipes,
@@ -28,7 +28,7 @@ import { HourPickerComponent } from './components/hour-picker/hour-picker.compon
     RouterModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule,
-  ],
+    ReactiveFormsModule
+  ]
 })
 export class SharedModule {}

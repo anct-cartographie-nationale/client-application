@@ -5,7 +5,7 @@ import { Structure } from '../../../models/structure.model';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
+  styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
   @Input() public structure: Structure;
@@ -16,10 +16,7 @@ export class CardComponent {
   @Output() public hover: EventEmitter<Structure> = new EventEmitter<Structure>();
   public isClaimed = true;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   /**
    * Display distance in m or km according to value
@@ -41,11 +38,11 @@ export class CardComponent {
         queryParams: queryString
           ? {
               id: this.structure._id,
-              search: queryString,
+              search: queryString
             }
           : {
-              id: this.structure._id,
-            },
+              id: this.structure._id
+            }
       });
     }
   }

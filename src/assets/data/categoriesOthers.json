@@ -1,1 +1,71 @@
-[{"modules":[{"id":"toutPublic","text":"Tout public"},{"id":"moinsDe16Ans","text":"Moins de 16 ans"},{"id":"jeunes1625Ans","text":"Jeunes (16-25 ans)"},{"id":"adultes","text":"Adultes"},{"id":"seniorsPlusDe65Ans","text":"Séniors (+ de 65 ans)"}],"_id":"5fbb92dd80a5c257dc0161ef","name":"Publics acceptés","id":"publics","__v":0},{"modules":[{"id":"aidantsConnect","text":"Aidants Connect"},{"id":"espacePublicNumeriqueepn","text":"Espace public numérique"},{"id":"fabriqueDeTerritoire","text":"Fabrique de territoire"},{"id":"maisonFranceService","text":"Maison France Service"},{"id":"passNumerique","text":"Pass numérique"},{"id":"conseillerNumFranceServices","text":"Conseiller numérique France services"}],"_id":"5fbb92e480a5c257dc0161f0","name":"Labels et qualifications","id":"labelsQualifications","__v":0},{"modules":[{"id":"wifiEnAccesLibre","text":"Wifi en accès libre"},{"id":"ordinateurs","text":"Ordinateurs"},{"id":"tablettes","text":"Tablettes"},{"id":"bornesNumeriques","text":"Bornes numériques"},{"id":"imprimantes","text":"Imprimantes"},{"id":"scanners","text":"Scanners"},{"id":"donDeMateriels","text":"Prêt / don de matériels"},{"id":"reconditionnementsDeMateriel","text":"Reconditionnements de matériel"},{"id":"accesLivresInformatiques","text":"Accès à des revues ou livres informatiques et numériques"}],"_id":"5fbb92f380a5c257dc0161f3","name":"Équipements et services proposés","id":"equipmentsAndServices","__v":0},{"modules":[{"id":"accesLibre","text":"Accès libre"},{"id":"telephoneVisio","text":"Téléphone / Visio"},{"id":"surRdv","text":"Sur RDV"}],"_id":"5fbb92e980a5c257dc0161f1","name":"Modalités d'accès","id":"accessModality","__v":0},{"modules":[{"id":"Personnes en situation d'illetrisme","text":"Personnes en situation d'illetrisme"},{"id":"Langue étrangère (anglais)","text":"Langue étrangère (anglais)"},{"id":"Langues étrangères (autres)","text":"Langues étrangères (autres)"},{"id":"Surdité","text":"Surdité"},{"id":"Déficience visuelle","text":"Déficience visuelle"},{"id":"Handicap moteur","text":"Handicap moteur"}],"_id":"5fbb92ef80a5c257dc0161f2","name":"Accompagnement des publics spécifiques","id":"publicsAccompaniment","__v":0}]
+[
+  {
+    "modules": [
+      { "id": "toutPublic", "text": "Tout public" },
+      { "id": "moinsDe16Ans", "text": "Moins de 16 ans" },
+      { "id": "jeunes1625Ans", "text": "Jeunes (16-25 ans)" },
+      { "id": "adultes", "text": "Adultes" },
+      { "id": "seniorsPlusDe65Ans", "text": "Séniors (+ de 65 ans)" }
+    ],
+    "_id": "5fbb92dd80a5c257dc0161ef",
+    "name": "Publics acceptés",
+    "id": "publics",
+    "__v": 0
+  },
+  {
+    "modules": [
+      { "id": "aidantsConnect", "text": "Aidants Connect" },
+      { "id": "espacePublicNumeriqueepn", "text": "Espace public numérique" },
+      { "id": "fabriqueDeTerritoire", "text": "Fabrique de territoire" },
+      { "id": "maisonFranceService", "text": "Maison France Service" },
+      { "id": "passNumerique", "text": "Pass numérique" },
+      { "id": "conseillerNumFranceServices", "text": "Conseiller numérique France services" }
+    ],
+    "_id": "5fbb92e480a5c257dc0161f0",
+    "name": "Labels et qualifications",
+    "id": "labelsQualifications",
+    "__v": 0
+  },
+  {
+    "modules": [
+      { "id": "wifiEnAccesLibre", "text": "Wifi en accès libre" },
+      { "id": "ordinateurs", "text": "Ordinateurs" },
+      { "id": "tablettes", "text": "Tablettes" },
+      { "id": "bornesNumeriques", "text": "Bornes numériques" },
+      { "id": "imprimantes", "text": "Imprimantes" },
+      { "id": "scanners", "text": "Scanners" },
+      { "id": "donDeMateriels", "text": "Prêt / don de matériels" },
+      { "id": "reconditionnementsDeMateriel", "text": "Reconditionnements de matériel" },
+      { "id": "accesLivresInformatiques", "text": "Accès à des revues ou livres informatiques et numériques" }
+    ],
+    "_id": "5fbb92f380a5c257dc0161f3",
+    "name": "Équipements et services proposés",
+    "id": "equipmentsAndServices",
+    "__v": 0
+  },
+  {
+    "modules": [
+      { "id": "accesLibre", "text": "Accès libre" },
+      { "id": "telephoneVisio", "text": "Téléphone / Visio" },
+      { "id": "surRdv", "text": "Sur RDV" }
+    ],
+    "_id": "5fbb92e980a5c257dc0161f1",
+    "name": "Modalités d'accès",
+    "id": "accessModality",
+    "__v": 0
+  },
+  {
+    "modules": [
+      { "id": "Personnes en situation d'illetrisme", "text": "Personnes en situation d'illetrisme" },
+      { "id": "Langue étrangère (anglais)", "text": "Langue étrangère (anglais)" },
+      { "id": "Langues étrangères (autres)", "text": "Langues étrangères (autres)" },
+      { "id": "Surdité", "text": "Surdité" },
+      { "id": "Déficience visuelle", "text": "Déficience visuelle" },
+      { "id": "Handicap moteur", "text": "Handicap moteur" }
+    ],
+    "_id": "5fbb92ef80a5c257dc0161f2",
+    "name": "Accompagnement des publics spécifiques",
+    "id": "publicsAccompaniment",
+    "__v": 0
+  }
+]

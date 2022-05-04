@@ -3,7 +3,7 @@ import { Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class RouterListenerService {
   private previousUrl: string;

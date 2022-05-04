@@ -2,12 +2,7 @@
   <div class="boutonSection" *ngFor="let categorie of categories" fxLayout="column" fxLayoutGap="8px">
     <ng-container>
       <div fxLayout="column" class="collapse" [ngClass]="{ notCollapsed: !isCategorieExpanded(categorie.id) }">
-        <div
-          class="collapseHeader"
-          fxLayoutAlign="flex-start center"
-          fxLayout="row"
-          (click)="toggleCollapse(categorie.id)"
-        >
+        <div class="collapseHeader" fxLayoutAlign="flex-start center" fxLayout="row" (click)="toggleCollapse(categorie.id)">
           <div class="titleCollapse">
             {{ categorie.name }}
           </div>
@@ -26,8 +21,7 @@
               [extraClass]="isModulePicked(categorie, module) ? 'selected' : ''"
               [style]="buttonTypeEnum.CheckButton"
               [text]="module.text"
-              (action)="pickChoice(categorie, module)"
-            ></app-button>
+              (action)="pickChoice(categorie, module)"></app-button>
           </ng-container>
         </div>
       </div>

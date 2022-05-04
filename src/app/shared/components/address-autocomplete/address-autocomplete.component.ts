@@ -5,7 +5,7 @@ import { AddressService } from '../../service/address.service';
 @Component({
   selector: 'app-address-autocomplete',
   templateUrl: './address-autocomplete.component.html',
-  styleUrls: ['./address-autocomplete.component.scss'],
+  styleUrls: ['./address-autocomplete.component.scss']
 })
 export class AddressAutocompleteComponent implements OnInit {
   public readonly AUTOCOMPLETE_NBR = 5;

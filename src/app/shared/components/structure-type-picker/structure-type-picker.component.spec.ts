@@ -8,9 +8,8 @@ describe('StructureTypePickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StructureTypePickerComponent ]
-    })
-    .compileComponents();
+      declarations: [StructureTypePickerComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,10 +1,4 @@
-<button
-  (click)="clicked()"
-  [ngClass]="{ selected: isChecked }"
-  fxLayout="row"
-  fxLayoutAlign=" center"
-  fxLayoutGap="17px"
->
+<button (click)="clicked()" [ngClass]="{ selected: isChecked }" fxLayout="row" fxLayoutAlign=" center" fxLayoutGap="17px">
   <div class="checkmark">
     <svg class="validate" aria-hidden="true">
       <use [attr.xlink:href]="'assets/form/sprite.svg#checkVectorSquareFull'"></use>

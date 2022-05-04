@@ -8,7 +8,7 @@ export class GeoJson {
 
   constructor(obj?: any) {
     Object.assign(this, obj, {
-      geometry: obj && obj.geometry ? new AddressGeometry(obj.geometry) : null,
+      geometry: obj && obj.geometry ? new AddressGeometry(obj.geometry) : null
     });
   }
 }

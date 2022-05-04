@@ -4,7 +4,7 @@ import { ButtonType } from './buttonType.enum';
 @Component({
   selector: 'app-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
   @Input() public style: ButtonType = ButtonType.Regular;

@@ -9,6 +9,6 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [CommonModule, BrowserModule, SharedModule, LeafletModule],
   declarations: [MapComponents],
   providers: [DatePipe],
-  exports: [MapComponents],
+  exports: [MapComponents]
 })
 export class MapModule {}

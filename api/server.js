@@ -2,7 +2,7 @@ const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const routes = {
-  '/api/*': '/$1',
+  '/api/*': '/$1'
 };
 const middlewares = [jsonServer.defaults(), jsonServer.rewriter(routes)];
 

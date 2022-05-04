@@ -8,7 +8,7 @@ describe('GeojsonService', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientModule]
     }).compileComponents();
   });
 

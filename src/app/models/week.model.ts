@@ -17,7 +17,7 @@ export class Week {
       thursday: obj && obj.thursday ? new Day(obj.thursday) : new Day(),
       friday: obj && obj.friday ? new Day(obj.friday) : new Day(),
       saturday: obj && obj.saturday ? new Day(obj.saturday) : new Day(),
-      sunday: obj && obj.sunday ? new Day(obj.sunday) : new Day(),
+      sunday: obj && obj.sunday ? new Day(obj.sunday) : new Day()
     });
   }
 

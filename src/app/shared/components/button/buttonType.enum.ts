@@ -10,5 +10,5 @@ export enum ButtonType {
   searchIcon,
   modalPrimary,
   modalSecondary,
-  TagCloudButton,
+  TagCloudButton
 }

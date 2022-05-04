@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 @Component({
   selector: 'app-radio-form',
   templateUrl: './radio-form.component.html',
-  styleUrls: ['./radio-form.component.scss'],
+  styleUrls: ['./radio-form.component.scss']
 })
 export class RadioFormComponent implements OnInit {
   constructor() {}

@@ -2,8 +2,7 @@
   <div *ngFor="let day of structure.hours" (click)="activateDay(day)" class="day" [ngClass]="{ active: day.active }">
     <div
       class="header-container sub-text"
-      [ngClass]="modifiedFields && modifiedFields.hours && modifiedFields.hours[day.name] ? 'modified' : ''"
-    >
+      [ngClass]="modifiedFields && modifiedFields.hours && modifiedFields.hours[day.name] ? 'modified' : ''">
       <div class="header">
         <div class="grid-center">
           <label class="switch">
@@ -11,8 +10,7 @@
               type="checkbox"
               id="{{ day.name }}"
               (click)="toggleOpenDay(day, $event.target.checked)"
-              [checked]="day.open"
-            />
+              [checked]="day.open" />
             <span class="slider"></span>
           </label>
           <label for="{{ day.name }}" class="toggle-label"></label>
@@ -54,8 +52,7 @@
             [text]="'Ajouter'"
             [iconType]="'form'"
             [iconBtn]="'show'"
-            [style]="buttonTypeEnum.Secondary"
-          ></app-button>
+            [style]="buttonTypeEnum.Secondary"></app-button>
         </div>
       </div>
     </div>

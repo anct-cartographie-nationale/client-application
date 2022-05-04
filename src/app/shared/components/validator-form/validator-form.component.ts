@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-validator-form',
   templateUrl: './validator-form.component.html',
-  styleUrls: ['./validator-form.component.scss'],
+  styleUrls: ['./validator-form.component.scss']
 })
 export class ValidatorFormComponent implements OnInit {
   @Input() public control: FormControl;

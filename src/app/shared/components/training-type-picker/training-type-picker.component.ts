@@ -8,7 +8,7 @@ import { ButtonType } from '../button/buttonType.enum';
 @Component({
   selector: 'app-training-type-picker',
   templateUrl: './training-type-picker.component.html',
-  styleUrls: ['./training-type-picker.component.scss'],
+  styleUrls: ['./training-type-picker.component.scss']
 })
 export class TrainingTypePickerComponent implements OnInit {
   @Input() public baseSkills: string[];

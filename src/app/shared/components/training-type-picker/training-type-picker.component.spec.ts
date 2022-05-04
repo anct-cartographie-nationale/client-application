@@ -8,7 +8,7 @@ describe('TypePickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TrainingTypePickerComponent],
+      declarations: [TrainingTypePickerComponent]
     }).compileComponents();
   });
 

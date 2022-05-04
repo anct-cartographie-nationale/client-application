@@ -23,8 +23,7 @@
       fxLayout="row"
       fxLayoutAlign="start center"
       fxLayoutGap="9px"
-      [ngClass]="{ invalid: !hasOwners }"
-    >
+      [ngClass]="{ invalid: !hasOwners }">
       <app-svg-icon [type]="'ico'" [iconColor]="'inherit'" [icon]="'remove'"></app-svg-icon>
       <p>Supprimer un compte</p>
     </div>
@@ -33,8 +32,7 @@
       (click)="closeModal(functionType.editStructure)"
       fxLayout="row"
       fxLayoutAlign="start center"
-      fxLayoutGap="9px"
-    >
+      fxLayoutGap="9px">
       <app-svg-icon [type]="'ico'" [iconColor]="'inherit'" [icon]="'edit'"></app-svg-icon>
       <p>Modifier la structure</p>
     </div>
@@ -43,8 +41,7 @@
       fxLayout="row"
       class="deleteItem"
       fxLayoutAlign="start center"
-      fxLayoutGap="9px"
-    >
+      fxLayoutGap="9px">
       <app-svg-icon [type]="'ico'" [iconColor]="'inherit'" [icon]="'cancel'"></app-svg-icon>
       <p>Supprimer la structure</p>
     </div>

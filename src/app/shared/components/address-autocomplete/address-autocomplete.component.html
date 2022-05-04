@@ -7,8 +7,7 @@
       (input)="onSearchChange($event.target.value)"
       class="form-input"
       autocomplete="off"
-      #searchAddress
-    />
+      #searchAddress />
   </div>
   <div class="autocomplete-items" *ngIf="!isAlreadySearching">
     <p *ngFor="let hit of data" (click)="selectedResult(hit)" class="autocomplete-item">

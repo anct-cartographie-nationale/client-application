@@ -11,7 +11,7 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CartoComponent],
-      imports: [HttpClientModule],
+      imports: [HttpClientModule]
     }).compileComponents();
   });
 
@@ -41,8 +41,8 @@ describe('HomeComponent', () => {
           heading: null,
           latitude: 45.747404800000005,
           longitude: 4.8529408,
-          speed: null,
-        },
+          speed: null
+        }
       };
       return position;
     });

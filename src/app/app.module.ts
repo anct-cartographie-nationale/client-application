@@ -41,8 +41,8 @@ import { StructureResolver } from './resolvers/structure.resolver';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-    }),
+      enabled: environment.production
+    })
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
@@ -51,6 +51,6 @@ import { StructureResolver } from './resolvers/structure.resolver';
     StructureResolver,
     RouterListenerService
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

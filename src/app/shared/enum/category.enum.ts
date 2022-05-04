@@ -3,5 +3,5 @@ export enum CategoryEnum {
   labelsQualifications = 'labelsQualifications',
   accessModality = 'accessModality',
   publicsAccompaniment = 'publicsAccompaniment',
-  equipmentsAndServices = 'equipmentsAndServices',
+  equipmentsAndServices = 'equipmentsAndServices'
 }

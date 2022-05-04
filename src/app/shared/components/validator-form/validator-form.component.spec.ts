@@ -8,7 +8,7 @@ describe('validatorForm', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ValidatorFormComponent],
+      declarations: [ValidatorFormComponent]
     }).compileComponents();
   });
 

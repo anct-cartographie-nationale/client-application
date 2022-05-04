@@ -28,7 +28,7 @@ export {
   ModalConfirmationComponent,
   ModalOptionsComponent,
   TextInputModalComponent,
-  TrainingTypePickerComponent,
+  TrainingTypePickerComponent
 };
 
 // tslint:disable-next-line:variable-name
@@ -46,5 +46,5 @@ export const SharedComponents = [
   ModalConfirmationComponent,
   ModalOptionsComponent,
   TextInputModalComponent,
-  TrainingTypePickerComponent,
+  TrainingTypePickerComponent
 ];

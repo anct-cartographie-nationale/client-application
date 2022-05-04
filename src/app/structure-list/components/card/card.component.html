@@ -3,8 +3,7 @@
   fxLayout="column"
   (click)="cardClicked()"
   (mouseenter)="cardHover()"
-  [ngClass]="{ orientation: isOrientation }"
->
+  [ngClass]="{ orientation: isOrientation }">
   <div class="left">
     <div fxLayout="row" fxLayoutAlign="space-between baseline" fxLayoutGap="16px">
       <div fxLayout="column" fxLayoutAlign="end">
@@ -29,16 +28,15 @@
       fxLayout="row"
       *ngIf="!isSelected"
       class="selection-button selected"
-      (click)="cardAddToList(); $event.stopPropagation()"
-    >
-      <app-svg-icon class="add-icon" [type]="'ico'" [icon]="'add'" [iconColor]="'green'"></app-svg-icon>Ajouter
+      (click)="cardAddToList(); $event.stopPropagation()">
+      <app-svg-icon class="add-icon" [type]="'ico'" [icon]="'add'" [iconColor]="'green'"></app-svg-icon>
+      Ajouter
     </div>
     <div
       fxLayout="row"
       *ngIf="isSelected"
       class="selection-button to-select"
-      (click)="cardAddToList(); $event.stopPropagation()"
-    >
+      (click)="cardAddToList(); $event.stopPropagation()">
       <app-svg-icon class="add-icon" [type]="'ico'" [icon]="'validate'" [iconColor]="'white'"></app-svg-icon>
       Ajouté
     </div>

@@ -8,7 +8,7 @@ import { SearchService } from '../../services/search.service';
 @Component({
   selector: 'app-modal-filter',
   templateUrl: './modal-filter.component.html',
-  styleUrls: ['./modal-filter.component.scss'],
+  styleUrls: ['./modal-filter.component.scss']
 })
 export class ModalFilterComponent implements OnInit, OnChanges {
   constructor(public searchService: SearchService) {}

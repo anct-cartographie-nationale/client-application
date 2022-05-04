@@ -6,7 +6,7 @@ export class Day {
 
   constructor(obj?: any) {
     Object.assign(this, obj, {
-      time: obj && obj.time ? obj.time.map((time) => new Time(time)) : [],
+      time: obj && obj.time ? obj.time.map((time) => new Time(time)) : []
     });
   }
 }

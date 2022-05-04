@@ -21,14 +21,14 @@ import { style, animate, transition, trigger, group } from '@angular/animations'
     trigger('slideInOut', [
       transition(':enter', [
         style({ height: '0', opacity: 0 }),
-        group([animate(200, style({ height: '*' })), animate('200ms ease-in-out', style({ opacity: '1' }))]),
+        group([animate(200, style({ height: '*' })), animate('200ms ease-in-out', style({ opacity: '1' }))])
       ]),
       transition(':leave', [
         style({ height: '*', opacity: 1 }),
-        group([animate(1, style({ height: 0 })), animate(1, style({ opacity: '0' }))]),
-      ]),
-    ]),
-  ],
+        group([animate(1, style({ height: 0 })), animate(1, style({ opacity: '0' }))])
+      ])
+    ])
+  ]
 })
 export class StructureDetailsComponent implements OnInit {
   @Input() public structure: Structure;
@@ -128,9 +128,9 @@ export class StructureDetailsComponent implements OnInit {
         this.router.navigate(['/acteurs'], {
           relativeTo: this.route,
           queryParams: {
-            id: null,
+            id: null
           },
-          queryParamsHandling: 'merge',
+          queryParamsHandling: 'merge'
         });
       } else {
         this.closeDetails.emit();
@@ -193,9 +193,7 @@ export class StructureDetailsComponent implements OnInit {
   }
 
   public setServiceCategories(): void {
-    this.baseSkills = this.structure.baseSkills.map((skill) =>
-      _.find(this.baseSkillssReferentiel.modules, { id: skill })
-    );
+    this.baseSkills = this.structure.baseSkills.map((skill) => _.find(this.baseSkillssReferentiel.modules, { id: skill }));
     this.accessRights = this.structure.accessRight.map((rights) =>
       _.find(this.accessRightsReferentiel.modules, { id: rights })
     );

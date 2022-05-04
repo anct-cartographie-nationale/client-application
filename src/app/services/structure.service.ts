@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WeekDay } from '@angular/common';
-import {Observable, of} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 const { DateTime } = require('luxon');
@@ -16,7 +16,7 @@ import { Filter } from '../structure-list/models/filter.model';
 import structures from '../../assets/data/structures.json';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class StructureService {
   private readonly baseUrl = 'api/structures';
@@ -46,7 +46,7 @@ export class StructureService {
     //   return this.http.get(`${this.baseUrl}`).pipe(map((data: any[]) => data.map((item) => new Structure(item))));
     // }
 
-    return of(structures.map(structure => new Structure(structure)));
+    return of(structures.map((structure) => new Structure(structure)));
   }
 
   private formatFilters(filters: Filter[]): object {
@@ -129,9 +129,7 @@ export class StructureService {
             return new OpeningDay(i, this.numberToHour(period.time[1].opening));
           }
           // Return the next day > current day.
-        } else if (
-          this.getEnumKeyByEnumValue(WeekDay, i) > this.getEnumKeyByEnumValue(WeekDay, this.numberToDay(dayOfWeek))
-        ) {
+        } else if (this.getEnumKeyByEnumValue(WeekDay, i) > this.getEnumKeyByEnumValue(WeekDay, this.numberToDay(dayOfWeek))) {
           return new OpeningDay(i, this.numberToHour(period.time[0].opening));
           // Return the next day < current day.
         } else if (!periodBeforeCurrentDay) {
@@ -153,7 +151,7 @@ export class StructureService {
   public sendMailOnStructureError(structureId: string, content: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/reportStructureError`, {
       structureId,
-      content,
+      content
     });
   }
 }

@@ -8,9 +8,8 @@ describe('HourPickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HourPickerComponent ]
-    })
-    .compileComponents();
+      declarations: [HourPickerComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -3,5 +3,5 @@ export enum TypeModal {
   training,
   public,
   equipments,
-  moreFilters,
+  moreFilters
 }

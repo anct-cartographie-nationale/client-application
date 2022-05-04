@@ -14,7 +14,7 @@ import { ButtonType } from '../shared/components/button/buttonType.enum';
 @Component({
   selector: 'app-carto',
   templateUrl: './carto.component.html',
-  styleUrls: ['./carto.component.scss'],
+  styleUrls: ['./carto.component.scss']
 })
 export class CartoComponent implements OnInit {
   public filters: Filter[] = [];
@@ -51,7 +51,7 @@ export class CartoComponent implements OnInit {
 
     this.meta.updateTag({
       name: 'description',
-      content: 'Recense tous les lieux, accompagnements et ateliers de médiation numérique de la Métropole de Lyon.',
+      content: 'Recense tous les lieux, accompagnements et ateliers de médiation numérique de la Métropole de Lyon.'
     });
   }
 
@@ -102,12 +102,7 @@ export class CartoComponent implements OnInit {
    * @param lat user latitde
    * @param sortByDistance if set to `true`, structures data is sort by distance. Default value is `true`
    */
-  private updateStructuresdistance(
-    structures: Structure[],
-    lon: number,
-    lat: number,
-    sortByDistance: boolean = true
-  ): void {
+  private updateStructuresdistance(structures: Structure[], lon: number, lat: number, sortByDistance: boolean = true): void {
     Promise.all(
       structures.map((structure) => {
         if (this.geolocation) {
@@ -153,10 +148,7 @@ export class CartoComponent implements OnInit {
    * @param lat number
    */
   private getStructurePosition(structure: Structure, lon: number, lat: number): Structure {
-    structure.distance = parseInt(
-      this.geoJsonService.getDistance(structure.getLat(), structure.getLon(), lat, lon, 'M'),
-      10
-    );
+    structure.distance = parseInt(this.geoJsonService.getDistance(structure.getLat(), structure.getLon(), lat, lon, 'M'), 10);
     return structure;
   }
 

@@ -4,16 +4,10 @@
     [ngClass]="{ selectedType: type.name == pickedType }"
     *ngFor="let type of structureTypes"
     fxLayout="column"
-    fxLayoutGap="8px"
-  >
+    fxLayoutGap="8px">
     <ng-container *ngIf="type.name === 'Publique'">
       <div fxLayout="column" class="collapse" [ngClass]="{ notCollapsed: !showPublic }">
-        <div
-          class="collapseHeader"
-          fxLayoutAlign="flex-start center"
-          fxLayout="row"
-          (click)="toggleCollapse(type.name)"
-        >
+        <div class="collapseHeader" fxLayoutAlign="flex-start center" fxLayout="row" (click)="toggleCollapse(type.name)">
           <div class="svgContainer">
             <svg aria-hidden="true">
               <use [attr.xlink:href]="'assets/form/sprite.svg#' + getStructureTypeIcon(type.name)"></use>
@@ -37,20 +31,14 @@
               [extraClass]="choice == pickedChoice ? 'selected' : ''"
               [style]="buttonTypeEnum.CheckButton"
               [text]="getStructureTypeName(choice)"
-              (action)="pickChoice(choice)"
-            ></app-button>
+              (action)="pickChoice(choice)"></app-button>
           </span>
         </div>
       </div>
     </ng-container>
     <ng-container *ngIf="type.name === 'Privée à but non lucratif'">
       <div fxLayout="column" class="collapse" [ngClass]="{ notCollapsed: !showPrivate }">
-        <div
-          class="collapseHeader"
-          fxLayoutAlign="flex-start center"
-          fxLayout="row"
-          (click)="toggleCollapse(type.name)"
-        >
+        <div class="collapseHeader" fxLayoutAlign="flex-start center" fxLayout="row" (click)="toggleCollapse(type.name)">
           <div class="svgContainer">
             <svg aria-hidden="true">
               <use [attr.xlink:href]="'assets/form/sprite.svg#' + getStructureTypeIcon(type.name)"></use>
@@ -74,20 +62,14 @@
               [extraClass]="choice == pickedChoice ? 'selected' : ''"
               [style]="buttonTypeEnum.CheckButton"
               [text]="getStructureTypeName(choice)"
-              (action)="pickChoice(choice)"
-            ></app-button>
+              (action)="pickChoice(choice)"></app-button>
           </span>
         </div>
       </div>
     </ng-container>
     <ng-container *ngIf="type.name === 'Privée à but lucratif'">
       <div fxLayout="column" class="collapse" [ngClass]="{ notCollapsed: !showPrivateLucrative }">
-        <div
-          class="collapseHeader"
-          fxLayoutAlign="flex-start center"
-          fxLayout="row"
-          (click)="toggleCollapse(type.name)"
-        >
+        <div class="collapseHeader" fxLayoutAlign="flex-start center" fxLayout="row" (click)="toggleCollapse(type.name)">
           <div class="svgContainer">
             <svg aria-hidden="true">
               <use [attr.xlink:href]="'assets/form/sprite.svg#' + getStructureTypeIcon(type.name)"></use>
@@ -111,8 +93,7 @@
               [extraClass]="choice == pickedChoice ? 'selected' : ''"
               [style]="buttonTypeEnum.CheckButton"
               [text]="getStructureTypeName(choice)"
-              (action)="pickChoice(choice)"
-            ></app-button>
+              (action)="pickChoice(choice)"></app-button>
           </span>
         </div>
       </div>

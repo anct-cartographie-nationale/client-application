@@ -16,7 +16,7 @@ describe('StructureListSearchComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [StructureListSearchComponent],
-      imports: [HttpClientTestingModule, ReactiveFormsModule],
+      imports: [HttpClientTestingModule, ReactiveFormsModule]
     }).compileComponents();
   });
 
@@ -45,7 +45,7 @@ describe('StructureListSearchComponent', () => {
     const checkedModules: Module[] = [
       { id: '176', text: 'training', count: 0 },
       { id: '173', text: 'training', count: 0 },
-      { id: '172', text: 'training', count: 0 },
+      { id: '172', text: 'training', count: 0 }
     ];
 
     const nbCheckedElements: number = component.countCheckFiltersOnModules(checkedModules, 2);
@@ -55,7 +55,7 @@ describe('StructureListSearchComponent', () => {
     const checkedModules: Module[] = [
       { id: '176', text: 'training', count: 0 },
       { id: '173', text: 'training', count: 0 },
-      { id: '172', text: 'training', count: 0 },
+      { id: '172', text: 'training', count: 0 }
     ];
 
     const nbCheckedElements: number = component.countCheckFiltersOnModules(checkedModules, 3);
@@ -70,7 +70,7 @@ describe('StructureListSearchComponent', () => {
       { id: '172', text: 'accompaniment', count: 0 },
       { id: '180', text: 'moreFilters', count: 0 },
       { id: '130', text: 'moreFilters', count: 0 },
-      { id: '219', text: 'moreFilters', count: 0 },
+      { id: '219', text: 'moreFilters', count: 0 }
     ];
     component.modalTypeOpened = TypeModal.training;
     component.numberAccompanimentChecked = 2;

@@ -10,7 +10,7 @@ describe('SearchService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule]
     });
     service = TestBed.inject(SearchService);
   });
@@ -23,7 +23,7 @@ describe('SearchService', () => {
     const structureCount: StructureCounter[] = [
       { id: '176', count: 2 },
       { id: '172', count: 1 },
-      { id: '173', count: 1 },
+      { id: '173', count: 1 }
     ];
     const m1: Module = new Module('176', 'strm1');
     const m2: Module = new Module('173', 'strm2');

@@ -6,7 +6,7 @@ import { ButtonType } from '../shared/components/button/buttonType.enum';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
   public showMenu = false;
@@ -16,9 +16,7 @@ export class HeaderComponent {
   private displayDataShare = false;
   public buttonTypeEnum = ButtonType;
 
-  constructor(
-    private router: Router,
-  ) {
+  constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;

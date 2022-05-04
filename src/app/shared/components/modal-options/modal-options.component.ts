@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-modal-options',
   templateUrl: './modal-options.component.html',
-  styleUrls: ['./modal-options.component.scss'],
+  styleUrls: ['./modal-options.component.scss']
 })
 export class ModalOptionsComponent implements OnInit {
   constructor() {}

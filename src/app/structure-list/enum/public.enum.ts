@@ -4,5 +4,5 @@ export enum PublicCategorie {
   adult = 'adultes',
   elderly = 'seniorsPlusDe65Ans',
   all = 'toutPublic',
-  women = 'uniquementFemmes',
+  women = 'uniquementFemmes'
 }

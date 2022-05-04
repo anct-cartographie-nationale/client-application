@@ -9,7 +9,7 @@ import { ButtonType } from '../button/buttonType.enum';
 @Component({
   selector: 'app-hour-picker',
   templateUrl: './hour-picker.component.html',
-  styleUrls: ['./hour-picker.component.scss'],
+  styleUrls: ['./hour-picker.component.scss']
 })
 export class HourPickerComponent implements OnChanges, OnDestroy {
   @Input() modifiedFields: any;
@@ -24,7 +24,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   private isInputSelected = false;
   public copiedDayName = '';
   public structure = {
-    hours: this.initHoursDefault(),
+    hours: this.initHoursDefault()
   };
   public structureHoursDefault: any[] = this.initHoursDefault();
 
@@ -46,44 +46,44 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
         name: 'Lundi',
         hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
-        active: false,
+        active: false
       },
       {
         name: 'Mardi',
         hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
-        active: false,
+        active: false
       },
       {
         name: 'Mercredi',
         hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
-        active: false,
+        active: false
       },
       {
         name: 'Jeudi',
         hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
-        active: false,
+        active: false
       },
       {
         name: 'Vendredi',
         hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
-        active: false,
+        active: false
       },
       {
         name: 'Samedi',
         hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
-        active: false,
+        active: false
       },
       {
         name: 'Dimanche',
         hours: [{ start: '', end: '', error: 'incomplete' }],
         open: false,
-        active: false,
-      },
+        active: false
+      }
     ];
   }
 
@@ -101,20 +101,20 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
               return {
                 start: hour.opening,
                 end: hour.closing,
-                error: null,
+                error: null
               };
             } else {
               if (hour.opening) {
                 return {
                   start: hour.opening,
                   end: '',
-                  error: 'incomplete',
+                  error: 'incomplete'
                 };
               } else {
                 return {
                   start: '',
                   end: hour.closing,
-                  error: 'incomplete',
+                  error: 'incomplete'
                 };
               }
             }
@@ -126,21 +126,16 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
     this.structure.hours = this.structureHoursDefault;
   }
 
-  private parseToDay(data: {
-    name: string;
-    hours: { start: string; end: string }[];
-    open: boolean;
-    active: boolean;
-  }): Day {
+  private parseToDay(data: { name: string; hours: { start: string; end: string }[]; open: boolean; active: boolean }): Day {
     return new Day({
       open: data.open,
       time: data.hours.map(
         (hour) =>
           new Time({
             opening: hour.start,
-            closing: hour.end,
+            closing: hour.end
           })
-      ),
+      )
     });
   }
 
@@ -152,7 +147,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
       thursday: this.createDay(this.parseToDay(this.structure.hours[3])),
       friday: this.createDay(this.parseToDay(this.structure.hours[4])),
       saturday: this.createDay(this.parseToDay(this.structure.hours[5])),
-      sunday: this.createDay(this.parseToDay(this.structure.hours[6])),
+      sunday: this.createDay(this.parseToDay(this.structure.hours[6]))
     });
   }
 
@@ -215,7 +210,7 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
     day.hours.push({
       start: '',
       end: '',
-      error: 'incomplete',
+      error: 'incomplete'
     });
     this.submitForm();
   }
@@ -303,14 +298,14 @@ export class HourPickerComponent implements OnChanges, OnDestroy {
   private createDay(day: Day): FormGroup {
     return new FormGroup({
       open: new FormControl(day.open, Validators.required),
-      time: new FormArray(day.time.map((oneTime) => this.createTime(oneTime))) as FormArray,
+      time: new FormArray(day.time.map((oneTime) => this.createTime(oneTime))) as FormArray
     });
   }
 
   private createTime(time: Time): FormGroup {
     return new FormGroup({
       opening: new FormControl(time.opening, Validators.required),
-      closing: new FormControl(time.closing, [Validators.required, CheckHours(time.opening)]),
+      closing: new FormControl(time.closing, [Validators.required, CheckHours(time.opening)])
     });
   }
 }

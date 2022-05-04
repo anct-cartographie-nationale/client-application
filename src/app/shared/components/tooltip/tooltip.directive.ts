@@ -6,17 +6,13 @@ import {
   ElementRef,
   TemplateRef,
   ViewContainerRef,
-  ContentChild,
+  ContentChild
 } from '@angular/core';
 
 @Directive({ selector: '[app-tooltipDirective]' })
 export class TooltipDirective {
   @Input() title: string;
-  constructor(
-    private renderer: Renderer2,
-    private elementRef: ElementRef,
-    private viewContainerRef: ViewContainerRef
-  ) {}
+  constructor(private renderer: Renderer2, private elementRef: ElementRef, private viewContainerRef: ViewContainerRef) {}
 
   @Input() parametroPlantilla: TemplateRef<any>;
 

@@ -5,7 +5,7 @@ import { Labels } from '../../enum/labels.emum';
 @Component({
   selector: 'app-logo-card',
   templateUrl: './logo-card.component.html',
-  styleUrls: ['./logo-card.component.scss'],
+  styleUrls: ['./logo-card.component.scss']
 })
 export class LogoCardComponent implements OnInit {
   @Input() public logoPath: string;

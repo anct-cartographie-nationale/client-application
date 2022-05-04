@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Structure } from '../../models/structure.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PrintService {
   public isPrinting = false;
@@ -19,9 +19,9 @@ export class PrintService {
       '/',
       {
         outlets: {
-          print: ['print', documentName],
-        },
-      },
+          print: ['print', documentName]
+        }
+      }
     ]);
   }
 
@@ -32,9 +32,9 @@ export class PrintService {
       '/',
       {
         outlets: {
-          print: ['print', documentName],
-        },
-      },
+          print: ['print', documentName]
+        }
+      }
     ]);
   }
 

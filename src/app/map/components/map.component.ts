@@ -12,7 +12,7 @@ import { ZoomLevel } from './zoomLevel.enum';
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.scss'],
+  styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnChanges {
   @Input() public isOrientationForm = false;
@@ -257,7 +257,7 @@ export class MapComponent implements OnChanges {
     layerGroup();
     const carteLayer = tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/attributions">CARTO</a>',
-      maxZoom: ZoomLevel.max,
+      maxZoom: ZoomLevel.max
     });
     // Center is set on townhall
     // Zoom is blocked on 11 to prevent people to zoom out from metropole
@@ -266,7 +266,7 @@ export class MapComponent implements OnChanges {
       maxZoom: ZoomLevel.max,
       zoom: ZoomLevel.regular,
       minZoom: ZoomLevel.min,
-      layers: [carteLayer],
+      layers: [carteLayer]
     };
   }
 
@@ -274,13 +274,7 @@ export class MapComponent implements OnChanges {
     this.geoJsonService.getMDMGeoJson().subscribe((res) => {
       res.forEach((mdm) => {
         this.mapService
-          .createMarker(
-            mdm.geometry.getLat(),
-            mdm.geometry.getLon(),
-            MarkerType.mdm,
-            null,
-            this.buildMdmPopUp(mdm.properties)
-          )
+          .createMarker(mdm.geometry.getLat(), mdm.geometry.getLon(), MarkerType.mdm, null, this.buildMdmPopUp(mdm.properties))
           .addTo(this.map);
       });
       this.initMetropoleLayer();
@@ -302,7 +296,7 @@ export class MapComponent implements OnChanges {
       geoJSON(
         {
           type: metropole.features[0].geometry.type,
-          coordinates: metropole.features[0].geometry.coordinates,
+          coordinates: metropole.features[0].geometry.coordinates
         } as any,
         { style: () => ({ color: '#a00000', fillOpacity: 0, weight: 1 }) }
       )

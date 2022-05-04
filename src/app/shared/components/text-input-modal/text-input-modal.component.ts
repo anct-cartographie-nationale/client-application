@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-text-input-modal',
   templateUrl: './text-input-modal.component.html',
-  styleUrls: ['./text-input-modal.component.scss'],
+  styleUrls: ['./text-input-modal.component.scss']
 })
 export class TextInputModalComponent {
   @Input() public openned: boolean;

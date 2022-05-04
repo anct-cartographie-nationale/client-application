@@ -9,7 +9,7 @@ describe('LogoCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LogoCardComponent],
+      declarations: [LogoCardComponent]
     }).compileComponents();
   });
 

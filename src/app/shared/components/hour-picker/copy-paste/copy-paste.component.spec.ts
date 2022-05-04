@@ -8,9 +8,8 @@ describe('CopyPasteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CopyPasteComponent ]
-    })
-    .compileComponents();
+      declarations: [CopyPasteComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
