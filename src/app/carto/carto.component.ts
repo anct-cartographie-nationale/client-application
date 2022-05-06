@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
+import { GeoJson } from '@gouvfr-anct/mediation-numerique';
 import { ButtonType } from '@gouvfr-anct/mediation-numerique/shared';
 import * as _ from 'lodash';
 
 import { Structure } from '../models/structure.model';
 import { StructureService } from '../services/structure.service';
 import { Filter } from '../structure-list/models/filter.model';
-import { GeoJson } from '../map/models/geojson.model';
 import { GeojsonService } from '../services/geojson.service';
 import { CustomRegExp } from '../utils/CustomRegExp';
 import { ActivatedRoute } from '@angular/router';

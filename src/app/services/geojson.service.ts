@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GeoJson } from '@gouvfr-anct/mediation-numerique';
+
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GeoJson } from '../map/models/geojson.model';
 import * as _ from 'lodash';
 
 @Injectable({
