@@ -34,7 +34,9 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Build Project
-        run: npm run build --configuration=production,fr
+        run: |
+          mv tsconfig.base.json tsconfig.json
+          npm run build --configuration=production,fr
 
       - name: Archive build
         if: success()
