@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ButtonType } from '../../../shared/components/button/buttonType.enum';
+import { ButtonType } from '@gouvfr-anct/mediation-numerique/shared';
+
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
 import { Module } from '../../models/module.model';

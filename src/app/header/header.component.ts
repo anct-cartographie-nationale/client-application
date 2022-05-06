@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ButtonType } from '@gouvfr-anct/mediation-numerique/shared';
+
 import { Structure } from '../models/structure.model';
-import { ButtonType } from '../shared/components/button/buttonType.enum';
 
 @Component({
   selector: 'app-header',

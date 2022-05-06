@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { ButtonType } from '@gouvfr-anct/mediation-numerique/shared';
+
 import { Structure } from '../models/structure.model';
 import { GeoJson } from '../map/models/geojson.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StructureService } from '../services/structure.service';
-import { ButtonType } from '../shared/components/button/buttonType.enum';
 
 @Component({
   selector: 'app-structure-list',

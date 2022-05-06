@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
+import { ButtonType } from '@gouvfr-anct/mediation-numerique/shared';
 import * as _ from 'lodash';
 
 import { Structure } from '../models/structure.model';
@@ -9,7 +10,6 @@ import { GeoJson } from '../map/models/geojson.model';
 import { GeojsonService } from '../services/geojson.service';
 import { CustomRegExp } from '../utils/CustomRegExp';
 import { ActivatedRoute } from '@angular/router';
-import { ButtonType } from '../shared/components/button/buttonType.enum';
 
 @Component({
   selector: 'app-carto',

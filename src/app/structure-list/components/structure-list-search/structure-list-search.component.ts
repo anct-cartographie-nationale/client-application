@@ -1,12 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ButtonType } from '@gouvfr-anct/mediation-numerique/shared';
+
 import { TypeModal } from '../../enum/typeModal.enum';
 import { Category } from '../../models/category.model';
 import { Filter } from '../../models/filter.model';
 import { Module } from '../../models/module.model';
 import { SearchService } from '../../services/search.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ButtonType } from '../../../shared/components/button/buttonType.enum';
 
 @Component({
   selector: 'app-structure-list-search',

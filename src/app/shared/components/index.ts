@@ -1,6 +1,4 @@
-import { ButtonComponent } from './button/button.component';
 import { LogoCardComponent } from './logo-card/logo-card.component';
-import { SvgIconComponent } from './svg-icon/svg-icon.component';
 import { ValidatorFormComponent } from './validator-form/validator-form.component';
 import { AddressAutocompleteComponent } from './address-autocomplete/address-autocomplete.component';
 import { StructureTypePickerComponent } from './structure-type-picker/structure-type-picker.component';
@@ -16,8 +14,6 @@ import { TrainingTypePickerComponent } from './training-type-picker/training-typ
 // tslint:disable-next-line: max-line-length
 export {
   LogoCardComponent,
-  SvgIconComponent,
-  ButtonComponent,
   ValidatorFormComponent,
   AddressAutocompleteComponent,
   StructureTypePickerComponent,
@@ -34,8 +30,6 @@ export {
 // tslint:disable-next-line:variable-name
 export const SharedComponents = [
   LogoCardComponent,
-  SvgIconComponent,
-  ButtonComponent,
   ValidatorFormComponent,
   AddressAutocompleteComponent,
   StructureTypePickerComponent,
