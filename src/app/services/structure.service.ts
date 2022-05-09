@@ -2,18 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WeekDay } from '@angular/common';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import * as _ from 'lodash';
 const { DateTime } = require('luxon');
 
-import { Structure } from '../models/structure.model';
-import { Day } from '../models/day.model';
-import { OpeningDay } from '../models/openingDay.model';
-import { Weekday } from '../structure-list/enum/weekday.enum';
-import { Time } from '../models/time.model';
-import { Filter } from '../structure-list/models/filter.model';
+import { Structure } from '@gouvfr-anct/mediation-numerique';
 
 import structures from '../../assets/data/structures.json';
+import { Day, Filter, OpeningDay, Time, Weekday } from '@gouvfr-anct/mediation-numerique';
 
 @Injectable({
   providedIn: 'root'

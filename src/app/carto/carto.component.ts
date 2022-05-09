@@ -4,12 +4,14 @@ import { GeoJson } from '@gouvfr-anct/mediation-numerique';
 import { ButtonType } from '@gouvfr-anct/mediation-numerique/shared';
 import * as _ from 'lodash';
 
-import { Structure } from '../models/structure.model';
+import { Filter, Structure } from '@gouvfr-anct/mediation-numerique';
 import { StructureService } from '../services/structure.service';
-import { Filter } from '../structure-list/models/filter.model';
 import { GeojsonService } from '../services/geojson.service';
-import { CustomRegExp } from '../utils/CustomRegExp';
 import { ActivatedRoute } from '@angular/router';
+
+class CustomRegExp {
+  public static readonly LOCATION: RegExp = /^\d+\s[A-z]+\s[A-z]+/g;
+}
 
 @Component({
   selector: 'app-carto',

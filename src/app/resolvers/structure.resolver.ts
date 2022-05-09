@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { Structure } from '../models/structure.model';
+import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { StructureService } from '../services/structure.service';
 
 @Injectable()

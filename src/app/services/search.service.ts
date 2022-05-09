@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Category, Module } from '@gouvfr-anct/mediation-numerique';
 import { Observable, of } from 'rxjs';
-import { Category } from '../models/category.model';
-import { Module } from '../models/module.model';
-import categoriesAccompagnement from '../../../assets/data/categoriesAccompagnement.json';
-import categoriesFormations from '../../../assets/data/categoriesFormations.json';
-import categoriesOthers from '../../../assets/data/categoriesOthers.json';
+import categoriesAccompagnement from '../../assets/data/categoriesAccompagnement.json';
+import categoriesFormations from '../../assets/data/categoriesFormations.json';
+import categoriesOthers from '../../assets/data/categoriesOthers.json';
 
 @Injectable({
   providedIn: 'root'

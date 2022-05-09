@@ -12,7 +12,7 @@
       [selectedStructure]="currentStructure"
       (updatedStructure)="updateStructures($event)"
       class="left-pane"
-      [ngClass]="{ mapPhone: isMapPhone == true }"
+      [ngClass]="{ mapPhone: isMapPhone === true }"
       fxLayout="column"></app-structure-list>
     <div class="btnSwitch">
       <app-button
@@ -29,6 +29,6 @@
       [isMapPhone]="isMapPhone"
       [searchedValue]="searchedValue"
       class="right-pane"
-      [ngClass]="{ mapPhone: isMapPhone == true }"></app-map>
+      [ngClass]="{ mapPhone: isMapPhone === true }"></app-map>
   </div>
 </div>

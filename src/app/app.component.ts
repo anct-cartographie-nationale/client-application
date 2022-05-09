@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { RouterListenerService } from './services/routerListener.service';
-import { WindowScrollService } from './shared/service/windowScroll.service';
+import { WindowScrollService } from './services/windowScroll.service';
 
 @Component({
   selector: 'app-root',

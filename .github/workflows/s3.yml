@@ -31,7 +31,9 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: |
+          yarn --frozen-lockfile
+          yarn add @gouvfr-anct/mediation-numerique
 
       - name: Build Project
         run: |

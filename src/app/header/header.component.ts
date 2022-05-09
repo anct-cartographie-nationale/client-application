@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { ButtonType } from '@gouvfr-anct/mediation-numerique/shared';
 
-import { Structure } from '../models/structure.model';
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,7 +11,6 @@ export class HeaderComponent {
   public showMenu = false;
   public currentRoute = '';
   public formRoute = '/create-structure';
-  public dataConsentPendingStructures: Structure[];
   private displayDataShare = false;
   public buttonTypeEnum = ButtonType;
 
