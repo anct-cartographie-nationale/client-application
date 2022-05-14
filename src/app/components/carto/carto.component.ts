@@ -5,8 +5,8 @@ import { ButtonType } from '@gouvfr-anct/mediation-numerique/shared';
 import * as _ from 'lodash';
 
 import { Filter, Structure } from '@gouvfr-anct/mediation-numerique';
-import { StructureService } from '../services/structure.service';
-import { GeojsonService } from '../services/geojson.service';
+import { StructureService } from '../../services/structure.service';
+import { GeojsonService } from '../../services/geojson.service';
 import { ActivatedRoute } from '@angular/router';
 
 class CustomRegExp {

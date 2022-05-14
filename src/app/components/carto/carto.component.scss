@@ -1,7 +1,7 @@
-@import '../../assets/scss/breakpoint';
-@import '../../assets/scss/layout';
-@import '../../assets/scss/z-index';
-@import '../../assets/scss/color';
+@import '../../../assets/scss/breakpoint';
+@import '../../../assets/scss/layout';
+@import '../../../assets/scss/z-index';
+@import '../../../assets/scss/color';
 
 ::ng-deep .footer {
   @media #{$tablet} {

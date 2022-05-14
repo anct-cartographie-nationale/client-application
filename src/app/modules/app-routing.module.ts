@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CartoComponent } from './carto/carto.component';
 import { StructureDetailsComponent, StructureListComponent } from '@gouvfr-anct/mediation-numerique';
+import { CartoComponent } from '../components/carto/carto.component';
 
 const routes: Routes = [
   {
