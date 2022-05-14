@@ -1,48 +1,104 @@
-[![Quality Gate Status](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=alert_status)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
-[![Bugs](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=bugs)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
-[![Lines of Code](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=ncloc)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
-[![Maintainability Rating](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=sqale_rating)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
-[![Security Rating](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=security_rating)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
-[![Vulnerabilities](https://sonarqube.forge.grandlyon.com/api/project_badges/measure?project=pamn_client&metric=vulnerabilities)](https://sonarqube.forge.grandlyon.com/dashboard?id=pamn_client)
+# Client pour la cartographie nationale de l’offre de médiation numérique
 
-# Pamn
+## À propos
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
+Ce client permet l'affichage de la [cartographie nationale de l’offre de médiation numérique](https://d2pzn8br7bs1l.cloudfront.net/) dans un navigateur web, il est construit à partir des éléments présents dans la bibliothèque pour la cartographie de l’offre de médiation numérique.
 
-## Development server
+## Table des matières
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- 🪧 [À propos](#à-propos)
+- 📦 [Prérequis](#prérequis)
+- 🚀 [Installation](#installation)
+- 🛠️ [Utilisation](#utilisation)
+- 🤝 [Contribution](#contribution)
+- 🏗️ [Construit avec](#construit-avec)
+- 📝 [Licence](#licence)
 
-## Code scaffolding
+## Prérequis
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Git](https://git-scm.com/) : Système de contrôle de versions distribué d'un ensemble de fichiers
+- [Node](https://nodejs.org/) : Environnement d'exécution pour Javascript
+- [Yarn](https://yarnpkg.com/) : Gestionnaire de paquets pour les produits développés dans des environnements Node
 
-## Build
+> Node et Yarn peuvent être installés via [nvm](https://github.com/nvm-sh/nvm) qui permet d'obtenir et d'utiliser rapidement différentes versions de Node via la ligne de commande.
 
-Run `npm run build:dev` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `npm run build:prod` flag for a production build.
+## Installation
 
-## Running unit tests
+Ce projet a été construit dans un espace de travail Angular, pour fonctionner correctement, il est nécessaire de le cloner dans l'environnement prévu à cet effet :
 
-Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Suivre la procédure d'installation du projet [Client Base](https://github.com/anct-cartographie-nationale/client-base)
+- Puis cloner le dépôt en local dans le dossier `projects` : `git clone git@github.com:anct-cartographie-nationale/client-application.git`
 
-## Running end-to-end tests
+## Utilisation
 
-Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Ces commandes servent dans un contexte de développement de l'application et doivent être exécutées depuis la racine de l'espace de travail, c'est-à-dire depuis le dossier parent du dossier `projects`.
 
-## Contributing
+### Lancement
 
-Use conventional commit format. For more info please read this article on [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
+Exécuter `yarn start`, puis naviguer vers `http://localhost:4200/`.
 
-## Documentation
+### Construction
 
-A documentation is generated with compodoc in addition of the existing documentation on the wiki.
+Exécuter `yarn build` pour construire le projet. Les fichiers de sortie sont écrits dans le dossier `dist/`.
 
-```sh
-npm run doc:serve
-```
+### Test
 
-You can now visualize it at : `localhost:8080`
+Exécuter `yarn test` pour tester le projet.
 
-## Further help
+### Lint
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Exécuter `yarn lint` pour une analyse statique des fichiers `.ts` du projet.
+
+### Prettier
+
+Exécuter `yarn prettier` pour mettre à niveau la syntaxe de l'ensemble des fichiers du projet.
+
+## Contribution
+
+### Nommage des branches
+
+- Une branche qui apporte une nouvelle fonctionnalité doit ête préfixé par `feature/` : `feature/ma-fonctionnalite`
+- Une branche qui apporte une correction doit ête préfixé par `fix/` : `fix/ma-correction`
+
+### Déployer
+
+Lorsqu'une branche est fusionnée avec `main`, cela déclenche automatiquement la publication du build sur l'espace dédié à la production ainsi que l'invalidation du cache sur le CDN.
+
+## Construit avec
+
+### langages & Frameworks
+
+- [TypeScript](https://www.typescriptlang.org/) est un langage open source construit à partir de JavaScript
+- [Angular](https://angular.io/) est une boîte à outils open source pour construire des clients web
+
+### Outils
+
+#### CLI
+
+- [Jest](https://jestjs.io/) est une boîte à outils pour écrire des tests automatisés en JavaScript
+- [Eslint](https://eslint.org/) est un analyseur statique de JavaScript avec les plugins suivants :
+- [Prettier](https://prettier.io/) est un magnificateur de code source en JavaScript
+
+#### CI
+
+- [Github Actions](https://docs.github.com/en/actions) est l'outil d'intégration et de déploiement continu intégré à GitHub
+  - L'historique des déploiements est disponible [sous l'onglet Actions](https://github.com/anct-cartographie-nationale/client-application/actions/)
+- Secrets du dépôt :
+  - `AWS_ACCESS_KEY_ID` : Clé d'accès AWS du compte `cartographie-nationale.client.ci`
+  - `AWS_SECRET_ACCESS_KEY` : Secret associé à la clé d'accès à AWS du compte `cartographie-nationale.client.ci`
+  - `AWS_S3_BUCKET` : Identifiant de l'espace sur AWS S3 dans lequel est publié le build du projet pour un accès public
+  - `AWS_CLOUDFRONT_DISTRIBUTION_ID` : Identifiant de la distribution CloudFront qui est le CDN par lequel le site est exposé sur internet
+
+#### Déploiement
+
+- L'infrastructure de déploiement est décrite avec Terraform dans les dépôts :
+  - [Client Infrastructure](https://github.com/anct-cartographie-nationale/client-infrastructure)
+  - [Network Infrastructure](https://github.com/anct-cartographie-nationale/network-infrastructure)
+- [AWS](https://aws.amazon.com/) est la plateforme de services Cloud proposée par Amazon.
+  - Compte de déploiement : `cartographie-nationale.client.ci`
+  - Groupe : `publisher.client`
+  - Environnement cible : https://d2pzn8br7bs1l.cloudfront.net/
+
+## Licence
+
+Voir le fichier [LICENSE.md](./LICENSE.md) du dépôt.
