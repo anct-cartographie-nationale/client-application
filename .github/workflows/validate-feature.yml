@@ -31,7 +31,7 @@ jobs:
         with:
           repository: anct-cartographie-nationale/client-base
 
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
         with:
           path: projects/client-application
@@ -58,7 +58,7 @@ jobs:
         with:
           repository: anct-cartographie-nationale/client-base
 
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
         with:
           path: projects/client-application
@@ -85,7 +85,7 @@ jobs:
         with:
           repository: anct-cartographie-nationale/client-base
 
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -151,7 +151,7 @@ jobs:
         with:
           repository: anct-cartographie-nationale/client-base
 
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
         with:
           path: projects/client-application
