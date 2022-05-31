@@ -1,0 +1,13 @@
+<div class="d-flex h-100">
+  <div class="col-2 overflow-auto">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="col overflow-auto">
+    <!--    <app-structure-list-search></app-structure-list-search>-->
+    <app-map
+      [structures]="(structures$ | async) ?? []"
+      [toogleToolTipId]="(markersPresenter.focused$ | async) ?? ''"
+      [selectedMarkerId]="(markersPresenter.highlighted$ | async) ?? ''"
+      (selectedStructure)="showDetailStructure($event)"></app-map>
+  </div>
+</div>

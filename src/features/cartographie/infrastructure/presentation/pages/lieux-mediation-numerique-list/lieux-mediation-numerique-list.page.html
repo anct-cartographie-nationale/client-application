@@ -1,0 +1,19 @@
+<button class="btn btn-primary" (click)="geolocationPresenter.locate(geolocationProvider)">Géolocalisation</button>
+
+<ng-container *ngIf="(structures$ | async) as structures">
+  <app-structure-list
+    #structureList
+    [structureList]="structures"
+    (displayMapMarkerId)="markersPresenter.focus($event)"
+    (selectedMarkerId)="markersPresenter.highlight($event)"
+    [selectedStructure]="currentStructure">
+    <div slot="structure-list-elements">
+      <app-card
+        *ngFor="let structure of structureList.structureList"
+        [structure]="structure"
+        (showDetails)="structureList.showDetails($event)"
+        (hover)="structureList.handleCardHover($event)"
+        class="structure-card"></app-card>
+    </div>
+  </app-structure-list>
+</ng-container>
