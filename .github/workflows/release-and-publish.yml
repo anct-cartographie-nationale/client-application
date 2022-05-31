@@ -1,5 +1,5 @@
 ---
-name: Release
+name: Release and publish
 
 on:
   push:
@@ -124,6 +124,12 @@ jobs:
       - name: Build
         run: yarn build client-application
 
+      - name: Add readme, license and package files
+        run: |
+          mv projects/client-application/README.md dist/client-application/
+          mv projects/client-application/LICENSE.md dist/client-application/
+          mv projects/client-application/package.json dist/client-application/
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
@@ -184,8 +190,11 @@ jobs:
           name: build
           path: dist
 
-      - name: Add license file
-        run: mv LICENSE.md dist/client-application/
+      - name: Add readme, license and package files
+        run: |
+          mv README.md dist/client-application/
+          mv LICENSE.md dist/client-application/
+          mv package.json dist/client-application/
 
       - name: Zip release
         run: zip -r release.zip dist/client-application/
@@ -194,3 +203,30 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: release.zip
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    needs: [release]
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          always-auth: true
+          node-version: '16.x'
+          registry-url: https://registry.npmjs.org
+          scope: '@gouvfr-anct'
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: release
+
+      - name: Publish on npm
+        run: |
+          cd release/client-application/
+          yarn publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
