@@ -1,0 +1,12 @@
+<svg id="logement" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M28 11H18V22.2705C18.9579 23.0955 20.2428 24.1821 21.6 25.2L22 25.5V26V26.4229V26.4248V34H28V11ZM21 34V33V26.4248V26.4229V26C19.9111 25.1833 18.8661 24.3217 18 23.5865V34H20H21Z" fill="#0F5282"/>
+<rect x="20" y="19" width="2" height="2" fill="white"/>
+<rect x="20" y="14" width="2" height="2" fill="white"/>
+<rect x="24" y="19" width="2" height="2" fill="white"/>
+<rect x="24" y="14" width="2" height="2" fill="white"/>
+<rect x="24" y="24" width="2" height="2" fill="white"/>
+<rect x="24" y="29" width="2" height="2" fill="white"/>
+<path d="M16.2809 22.1075C16.1131 21.9642 15.8869 21.9642 15.7191 22.1075C14.8518 22.8483 13.5 24 11 26V26.4237V34H21V26.4248V26.4229V26C19 24.5 17.1482 22.8483 16.2809 22.1075Z" fill="#0F5282"/>
+<rect x="13" y="28" width="2" height="2" fill="white"/>
+<rect x="17" y="28" width="2" height="2" fill="white"/>
+</svg>
