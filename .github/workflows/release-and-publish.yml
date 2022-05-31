@@ -33,7 +33,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn
 
       - name: Prettier
         run: yarn prettier --check .
@@ -60,7 +60,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn
 
       - name: Lint
         run: yarn lint client-application
@@ -88,7 +88,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn
 
       - name: commitlint
         run: |
@@ -118,7 +118,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn --frozen-lockfile
+          yarn
           yarn add @gouvfr-anct/mediation-numerique
 
       - name: Build
@@ -166,7 +166,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn --frozen-lockfile
+          yarn
           yarn add @gouvfr-anct/mediation-numerique
           yarn global add @angular/cli
 
