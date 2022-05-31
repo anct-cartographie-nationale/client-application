@@ -21,7 +21,7 @@ jobs:
         with:
           repository: anct-cartographie-nationale/client-base
 
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
         with:
           path: projects/client-application
@@ -48,7 +48,7 @@ jobs:
         with:
           repository: anct-cartographie-nationale/client-base
 
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
         with:
           path: projects/client-application
@@ -63,7 +63,7 @@ jobs:
         run: yarn --frozen-lockfile
 
       - name: Lint
-        run: yarn run lint client-application
+        run: yarn lint client-application
 
   commitlint:
     name: CommitLint
@@ -75,7 +75,7 @@ jobs:
         with:
           repository: anct-cartographie-nationale/client-base
 
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -105,7 +105,7 @@ jobs:
         with:
           repository: anct-cartographie-nationale/client-base
 
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
         with:
           path: projects/client-application
@@ -117,10 +117,12 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: |
+          yarn --frozen-lockfile
+          yarn add @gouvfr-anct/mediation-numerique
 
       - name: Build
-        run: yarn run build client-application
+        run: yarn build client-application
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
@@ -139,7 +141,7 @@ jobs:
         with:
           repository: anct-cartographie-nationale/client-base
 
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
         with:
           path: projects/client-application
@@ -159,6 +161,7 @@ jobs:
       - name: Install dependencies
         run: |
           yarn --frozen-lockfile
+          yarn add @gouvfr-anct/mediation-numerique
           yarn global add @angular/cli
 
       - name: Test
@@ -172,7 +175,7 @@ jobs:
     needs: [prettier, eslint, commitlint, test, build]
 
     steps:
-      - name: Checkout mediation-numerique library repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
 
       - name: Download build artifact
