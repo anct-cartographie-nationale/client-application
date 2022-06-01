@@ -212,9 +212,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <head>
   <title>Page Title</title>
   <base href="/" />
-  <link
-    href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/styles.2f4e488dcce0ca4f.css"
-    rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/styles.css" rel="stylesheet" />
 </head>
 ...
 ```
@@ -227,18 +225,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
   <h1>My First Heading</h1>
   <p>My first paragraph.</p>
 
-  <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/926.e4d1b92c669584f5.js"
-    type="module"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/runtime.c8746024bc0fd61e.js"
-    type="module"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/polyfills.cc012abe0531a278.js"
-    type="module"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/main.6f3035769f99d29d.js"
-    type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/script.js" type="module"></script>
 </body>
 ...
 ```
@@ -250,18 +237,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <body>
   <fr-mediation-numerique></fr-mediation-numerique>
 
-  <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/926.e4d1b92c669584f5.js"
-    type="module"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/runtime.c8746024bc0fd61e.js"
-    type="module"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/polyfills.cc012abe0531a278.js"
-    type="module"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/main.6f3035769f99d29d.js"
-    type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/script.js" type="module"></script>
 </body>
 ...
 ```
@@ -274,25 +250,12 @@ La version finale devrait ressembler à celà :
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/styles.2f4e488dcce0ca4f.css"
-      rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/styles.css" rel="stylesheet" />
   </head>
   <body>
     <fr-mediation-numerique></fr-mediation-numerique>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/926.e4d1b92c669584f5.js"
-      type="module"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/runtime.c8746024bc0fd61e.js"
-      type="module"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/polyfills.cc012abe0531a278.js"
-      type="module"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.0/main.6f3035769f99d29d.js"
-      type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/script.js" type="module"></script>
   </body>
 </html>
 ```

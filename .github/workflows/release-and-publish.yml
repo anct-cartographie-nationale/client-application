@@ -122,13 +122,16 @@ jobs:
           yarn add @gouvfr-anct/mediation-numerique
 
       - name: Build
-        run: yarn build client-application
+        run: yarn build client-application --named-chunks --output-hashing none
 
       - name: Add readme, license and package files
         run: |
           mv projects/client-application/README.md dist/client-application/
           mv projects/client-application/LICENSE.md dist/client-application/
           mv projects/client-application/package.json dist/client-application/
+
+      - name: Merge all script files
+        run: cat dist/client-application/*.js > dist/client-application/script.js
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
