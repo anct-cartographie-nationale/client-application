@@ -38,7 +38,7 @@ describe('CartographieLayout', (): void => {
       });
   });
 
-  it('should create the app', (): void => {
+  it('should create the component', (): void => {
     const fixture: ComponentFixture<CartographieLayout> = TestBed.createComponent(CartographieLayout);
     const cartographieLayout: CartographieLayout = fixture.componentInstance;
     expect(cartographieLayout).toBeTruthy();

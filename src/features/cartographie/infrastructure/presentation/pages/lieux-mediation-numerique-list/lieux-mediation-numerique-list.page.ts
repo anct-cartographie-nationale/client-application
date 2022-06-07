@@ -1,15 +1,21 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Structure } from '@gouvfr-anct/mediation-numerique';
+import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Coordinates } from '../../../../domain';
 import { StructureService } from '../../../repositories/http';
-import { MarkersPresenter, byStructureDistance, toStructureWithDistance } from '../../layouts/cartographie';
-import { GeolocationPresenter, GeolocationProvider } from './geolocation/geolocation.presenter';
+import {
+  GeolocationPresenter,
+  GeolocationProvider,
+  MarkersPresenter,
+  byStructureDistance,
+  toStructureWithDistance
+} from '../../layouts/cartographie';
 
 @Component({
-  templateUrl: 'lieux-mediation-numerique-list.page.html',
-  providers: [GeolocationPresenter]
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: 'lieux-mediation-numerique-list.page.html'
 })
 export class LieuxMediationNumeriqueListPage {
   public geolocationProvider: GeolocationProvider = window.navigator.geolocation;
@@ -23,11 +29,15 @@ export class LieuxMediationNumeriqueListPage {
     )
   );
 
-  public currentStructure: Structure = new Structure();
-
   public constructor(
     private readonly structureService: StructureService,
     public readonly geolocationPresenter: GeolocationPresenter,
-    public readonly markersPresenter: MarkersPresenter
+    public readonly markersPresenter: MarkersPresenter,
+    private readonly router: Router
   ) {}
+
+  public select(lieuMediationId: string) {
+    this.markersPresenter.select(lieuMediationId);
+    this.router.navigate(['cartographie', lieuMediationId]);
+  }
 }

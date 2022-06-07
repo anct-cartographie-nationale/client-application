@@ -1,19 +1,14 @@
 <button class="btn btn-primary" (click)="geolocationPresenter.locate(geolocationProvider)">Géolocalisation</button>
 
 <ng-container *ngIf="(structures$ | async) as structures">
-  <app-structure-list
-    #structureList
-    [structureList]="structures"
-    (displayMapMarkerId)="markersPresenter.focus($event)"
-    (selectedMarkerId)="markersPresenter.highlight($event)"
-    [selectedStructure]="currentStructure">
+  <fr-lieux-mediation-numerique-list (displayMapMarkerId)="markersPresenter.highlight($event)" [structureList]="structures">
     <div slot="structure-list-elements">
-      <app-card
-        *ngFor="let structure of structureList.structureList"
+      <fr-lieux-mediation-numerique-item
+        *ngFor="let structure of structures"
         [structure]="structure"
-        (showDetails)="structureList.showDetails($event)"
-        (hover)="structureList.handleCardHover($event)"
-        class="structure-card"></app-card>
+        (showDetails)="select($event._id)"
+        (hover)="markersPresenter.highlight($event._id)"
+        class="structure-card"></fr-lieux-mediation-numerique-item>
     </div>
-  </app-structure-list>
+  </fr-lieux-mediation-numerique-list>
 </ng-container>
