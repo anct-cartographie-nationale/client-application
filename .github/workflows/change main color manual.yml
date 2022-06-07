@@ -1,0 +1,64 @@
+
+name: Manual workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Primary Color'
+        default: ''
+
+jobs:   
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn add @gouvfr-anct/mediation-numerique
+      - name: Build
+        run: |
+         yarn build client-application --named-chunks --output-hashing none
+         
+      - name: Main theme color change
+        run: |
+          cd dist/client-application
+          substring=$(find styles.css -type f -print | xargs grep "${bs-primary}" | xargs)
+          substringAfterMatch=${substring#*bs-primary:*}
+          defaultColor=${substringAfterMatch%%;*}
+          sed -i "s/--bs-primary:$defaultColor;/--bs-primary: ${{github.event.inputs.name }};/" styles.css
+          
+      - name: Theme has been changed
+        run: echo "La couleur du nouveau thème est ${{ github.event.inputs.name }}"
+      
+      - name: Add readme, license and package files
+        run: |
+          mv projects/client-application/README.md dist/client-application/
+          mv projects/client-application/LICENSE.md dist/client-application/
+          mv projects/client-application/package.json dist/client-application/
+      - name: Merge all script files
+        run: cat dist/client-application/*.js > dist/client-application/script.js
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
