@@ -1,6 +1,6 @@
-import { GeolocationPresenter, GeolocationProvider } from './geolocation.presenter';
 import { firstValueFrom } from 'rxjs';
-import { Coordinates, NO_COORDINATES } from '../../../../../domain';
+import { Coordinates, NO_COORDINATES } from '../../value-objects';
+import { GeolocationPresenter, GeolocationProvider } from './geolocation.presenter';
 
 const geolocationSuccessProvider: GeolocationProvider = {
   getCurrentPosition: (successCallback: PositionCallback) =>

@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
 import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { Observable, of } from 'rxjs';
-import structures from '../static/structures.json';
+import structures from './assets/structures.json';
+import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class StructureService {
   public getStructure(id: string): Observable<Structure> {
     return of(new Structure());

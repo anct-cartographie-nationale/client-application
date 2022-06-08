@@ -1,1 +1,2 @@
-export * from './presentation/modules';
+export * from './modules';
+export * from './services';

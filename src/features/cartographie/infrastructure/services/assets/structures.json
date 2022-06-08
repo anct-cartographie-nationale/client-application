@@ -1,0 +1,584 @@
+[
+  {
+    "personalOffers": [],
+    "coord": [4.8563106, 45.6693619],
+    "equipmentsAndServices": ["ordinateurs", "imprimantes", "wifiEnAccesLibre"],
+    "digitalCultureSecurity": [],
+    "parentingHelp": [],
+    "socialAndProfessional": [],
+    "accessRight": ["84"],
+    "baseSkills": [],
+    "proceduresAccompaniment": ["poleEmploi", "accompagnantCaf"],
+    "publicsAccompaniment": [],
+    "publics": ["toutPublic"],
+    "labelsQualifications": [],
+    "accessModality": ["accesLibre", "surRdv"],
+    "_id": "6001a35f16b08100062e415f",
+    "freeWorkShop": false,
+    "createdAt": "2020-11-16T15:37:00.000Z",
+    "updatedAt": "2021-03-02T12:36:53.000Z",
+    "structureName": "Maison de l'Emploi (Feyzin)",
+    "description": "- Permanence de médiation numérique (sur rdv) les lundis; mardi, mercredi apres midi 13h30 - 17h30 et les vendredi matins 9h-12h - mise à disposition d'ordinateurs aux horaires d'ouverture de la structure lundi, mercredi, jeudi 9h-12h; 13h30-17h30 ; mardi 10h-12h 13h30- 17h30 et vendredi matin 9h-12H. - mise à disposition (sur rdv)de matériels pour suivre des formations / informations collectives à distance et participer à un entretien en visio - cours de code et entrainement en ligne sur rdv",
+    "lockdownActivity": "Toutes les activités sont maintenues durant le confinement. Toutes nécessitent cependant de prendre rdv préalablement",
+    "contactPhone": "04 04 04 04 04",
+    "contactMail": "m.annequin@test.fr",
+    "website": "",
+    "facebook": null,
+    "twitter": null,
+    "instagram": null,
+    "pmrAccess": true,
+    "exceptionalClosures": "Jours fériés",
+    "nbComputers": 5,
+    "nbPrinters": 1,
+    "nbTablets": 1,
+    "nbNumericTerminal": 1,
+    "structureType": "mairie",
+    "hours": {
+      "monday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "12:00",
+            "opening": "9:00"
+          },
+          {
+            "closing": "17:30",
+            "opening": "13:30"
+          }
+        ]
+      },
+      "tuesday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "12:00",
+            "opening": "10:00"
+          },
+          {
+            "closing": "17:30",
+            "opening": "13:30"
+          }
+        ]
+      },
+      "wednesday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "12:00",
+            "opening": "9:00"
+          },
+          {
+            "closing": "17:30",
+            "opening": "13:30"
+          }
+        ]
+      },
+      "thursday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "12:00",
+            "opening": "9:00"
+          },
+          {
+            "closing": "17:30",
+            "opening": "13:30"
+          }
+        ]
+      },
+      "friday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "12:00",
+            "opening": "9:00"
+          }
+        ]
+      },
+      "saturday": {
+        "open": false,
+        "time": []
+      },
+      "sunday": {
+        "open": false,
+        "time": []
+      }
+    },
+    "address": {
+      "numero": "18",
+      "street": "Rue de la Mairie",
+      "commune": "Feyzin"
+    },
+    "accountVerified": true,
+    "linkedin": null,
+    "nbScanners": 1,
+    "otherDescription": null,
+    "__v": 0
+  },
+  {
+    "personalOffers": [],
+    "coord": [4.88428, 45.727292],
+    "equipmentsAndServices": [],
+    "digitalCultureSecurity": ["2", "5", "9", "28", "34", "39", "42", "51", "52", "54", "65", "96", "97", "98"],
+    "parentingHelp": ["3", "22", "82", "94"],
+    "socialAndProfessional": ["6", "20", "66", "67", "68", "69", "124", "125", "127"],
+    "accessRight": ["84", "85", "86", "87", "88", "89", "93", "95"],
+    "baseSkills": ["1", "11", "38", "48", "74", "77"],
+    "proceduresAccompaniment": [],
+    "publicsAccompaniment": [],
+    "publics": ["toutPublic"],
+    "labelsQualifications": ["passNumerique"],
+    "accessModality": ["accesLibre"],
+    "_id": "61e9260c2ac971550065e262",
+    "structureName": "Maison Lyon pour l'Emploi - Lyon 8",
+    "contactPhone": "04 04 04 04 04",
+    "contactMail": "a@a.com",
+    "structureType": "autre",
+    "pmrAccess": false,
+    "remoteAccompaniment": false,
+    "accountVerified": true,
+    "freeWorkShop": false,
+    "nbComputers": 0,
+    "nbPrinters": 0,
+    "nbScanners": 0,
+    "nbTablets": 0,
+    "nbNumericTerminal": 0,
+    "address": {
+      "numero": "172",
+      "street": "Avenue Général Frère",
+      "commune": "Lyon"
+    },
+    "createdAt": "Thu Jan 20 2022 10:06:20 GMT+0100 (heure normale d’Europe centrale)",
+    "updatedAt": "Thu Jan 20 2022 10:06:20 GMT+0100 (heure normale d’Europe centrale)",
+    "__v": 0
+  },
+  {
+    "personalOffers": [],
+    "coord": [4.8188378, 45.7157896],
+    "equipmentsAndServices": ["ordinateurs", "imprimantes"],
+    "digitalCultureSecurity": ["2", "5", "28", "34", "39", "42", "51", "52", "54", "65", "96", "97", "98"],
+    "parentingHelp": ["3", "82", "94"],
+    "socialAndProfessional": ["6", "20", "66", "67", "68", "69", "124", "125", "127"],
+    "accessRight": ["84", "85", "86", "87", "88", "89", "93", "95"],
+    "baseSkills": ["260", "1", "11", "38", "48", "74", "77"],
+    "proceduresAccompaniment": ["cpam", "impots", "poleEmploi"],
+    "publicsAccompaniment": [],
+    "publics": ["toutPublic"],
+    "labelsQualifications": ["passNumerique"],
+    "accessModality": ["accesLibre", "surRdv"],
+    "_id": "6001a3b116b08100062e4167",
+    "structureType": "association",
+    "freeWorkShop": false,
+    "createdAt": "2020-11-04T09:27:00.000Z",
+    "updatedAt": "2021-03-02T10:07:48.000Z",
+    "structureName": "Oasis Informatique",
+    "description": "",
+    "lockdownActivity": "",
+    "contactPhone": "06 06 06 60 60",
+    "contactMail": "iip.oasis@test.fr",
+    "website": "http://oasis-informatique.fr/",
+    "facebook": null,
+    "twitter": null,
+    "instagram": null,
+    "pmrAccess": true,
+    "exceptionalClosures": "",
+    "nbComputers": 8,
+    "nbPrinters": 1,
+    "nbTablets": 1,
+    "nbNumericTerminal": 1,
+    "hours": {
+      "monday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:30",
+            "opening": "14:30"
+          }
+        ]
+      },
+      "tuesday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:30",
+            "opening": "14:30"
+          }
+        ]
+      },
+      "wednesday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:30",
+            "opening": "14:30"
+          }
+        ]
+      },
+      "thursday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:30",
+            "opening": "14:30"
+          }
+        ]
+      },
+      "friday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:30",
+            "opening": "14:30"
+          }
+        ]
+      },
+      "saturday": {
+        "open": false,
+        "time": []
+      },
+      "sunday": {
+        "open": false,
+        "time": []
+      }
+    },
+    "__v": 0,
+    "address": {
+      "numero": "3",
+      "street": "Rue Louis Normand",
+      "commune": "Oullins"
+    },
+    "accountVerified": true,
+    "linkedin": null,
+    "nbScanners": 1,
+    "otherDescription": null
+  },
+  {
+    "personalOffers": [],
+    "coord": [4.8343466, 45.7689958],
+    "equipmentsAndServices": ["ordinateurs", "imprimantes"],
+    "digitalCultureSecurity": ["2", "28", "34", "39", "42", "52", "65"],
+    "parentingHelp": ["3", "22", "82", "94"],
+    "socialAndProfessional": ["66", "67", "68", "69", "124"],
+    "accessRight": ["84", "85", "86", "87", "88", "89", "93", "95"],
+    "baseSkills": ["260", "1", "11", "38", "48", "74", "77"],
+    "proceduresAccompaniment": ["poleEmploi", "cpam", "impots", "logement", "carsat", "accompagnantCaf"],
+    "publicsAccompaniment": [],
+    "publics": ["jeunes1625Ans", "adultes", "seniorsPlusDe65Ans", "toutPublic"],
+    "labelsQualifications": [],
+    "accessModality": ["telephoneVisio", "surRdv"],
+    "_id": "6001a38516b08100062e4161",
+    "freeWorkShop": false,
+    "createdAt": "2020-11-16T14:15:00.000Z",
+    "updatedAt": "2021-04-27T14:19:17.000Z",
+    "structureName": "Centre social Quartier Vitalité",
+    "description": "Le centre social s'inscrit dans une démarche d'animation de la vie sociale locale afin de permettre aux habitants d'exprimer, de concevoir, de réaliser leurs projets. C'est un lieu de proximité à vocation familiale et intergénérationnelle qui propose des activités sociales, éducatives et culturelles pour répondre aux besoins de chacun.",
+    "lockdownActivity": "Aide aux démarches administratives et médiation numérique, sur rendez vous uniquement",
+    "contactPhone": "04 05 05 05 05",
+    "contactMail": "test@gmail.com",
+    "website": "www.centresocialquartiervitalite.i-citoyen.com",
+    "facebook": null,
+    "twitter": null,
+    "instagram": null,
+    "pmrAccess": true,
+    "exceptionalClosures": "vacances de Noel + tout le mois d'Aout",
+    "nbComputers": 3,
+    "nbPrinters": 1,
+    "nbTablets": 1,
+    "nbNumericTerminal": 1,
+    "structureType": "centreSocio",
+    "address": {
+      "numero": "7",
+      "street": "Rue Saint Polycarpe",
+      "commune": "Lyon 1er Arrondissement"
+    },
+    "hours": {
+      "monday": {
+        "open": false,
+        "time": []
+      },
+      "tuesday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:00",
+            "opening": "13:30"
+          }
+        ]
+      },
+      "wednesday": {
+        "open": false,
+        "time": []
+      },
+      "thursday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "12:00",
+            "opening": "9:30"
+          }
+        ]
+      },
+      "friday": {
+        "open": false,
+        "time": []
+      },
+      "saturday": {
+        "open": false,
+        "time": []
+      },
+      "sunday": {
+        "open": false,
+        "time": []
+      }
+    },
+    "accountVerified": true,
+    "linkedin": null,
+    "nbScanners": 1,
+    "otherDescription": null,
+    "__v": 0
+  },
+  {
+    "personalOffers": [],
+    "coord": [4.8608585, 45.7086482],
+    "equipmentsAndServices": ["ordinateurs"],
+    "digitalCultureSecurity": ["2", "5", "28", "34", "39", "42", "51", "52", "54", "65", "96", "97", "98"],
+    "parentingHelp": ["82", "94"],
+    "socialAndProfessional": ["6", "20", "66", "67", "68", "69", "124", "125", "127"],
+    "accessRight": ["84", "85", "87", "88", "89", "93", "95"],
+    "baseSkills": ["260", "1", "11", "38", "48", "74", "77"],
+    "proceduresAccompaniment": ["poleEmploi", "cpam", "impots", "carsat", "accompagnantCaf"],
+    "publicsAccompaniment": [],
+    "publics": ["toutPublic"],
+    "labelsQualifications": ["passNumerique"],
+    "accessModality": ["telephoneVisio", "surRdv"],
+    "_id": "6001a3b716b08100062e4168",
+    "structureType": "coworking",
+    "freeWorkShop": false,
+    "createdAt": "2020-11-13T14:13:00.000Z",
+    "updatedAt": "2021-03-02T10:09:30.000Z",
+    "structureName": "Le Son du Clic",
+    "description": "Entreprise de médiation numérique assurant l'animation d'atelier numériques en collectif ou l'accompagnement au numérique des particuliers en individuel. Structure agréée APTIC sur la métropole de Lyon, acceptant à ce titre le règlement de ses prestations en chèque PASS NUMERIQUE",
+    "lockdownActivity": "Médiation numérique et formation pour les particuliers, en individuel, à domicile ou en visioconférence",
+    "contactPhone": "06 60 60 60 60",
+    "contactMail": "jean-francois@test.fr",
+    "website": "http://lesonduclic.fr/site1/",
+    "facebook": null,
+    "twitter": null,
+    "instagram": null,
+    "pmrAccess": true,
+    "exceptionalClosures": "",
+    "nbComputers": 8,
+    "nbPrinters": 1,
+    "nbTablets": 1,
+    "nbNumericTerminal": 1,
+    "hours": {
+      "monday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:00",
+            "opening": "9:00"
+          }
+        ]
+      },
+      "tuesday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:00",
+            "opening": "9:00"
+          }
+        ]
+      },
+      "wednesday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:00",
+            "opening": "9:00"
+          }
+        ]
+      },
+      "thursday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:00",
+            "opening": "9:00"
+          }
+        ]
+      },
+      "friday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "17:00",
+            "opening": "9:00"
+          }
+        ]
+      },
+      "saturday": {
+        "open": false,
+        "time": []
+      },
+      "sunday": {
+        "open": false,
+        "time": []
+      }
+    },
+    "__v": 0,
+    "address": {
+      "numero": "7",
+      "street": "Rue Robert et Reynier ",
+      "commune": "Saint-Fons"
+    },
+    "accountVerified": true,
+    "linkedin": null,
+    "nbScanners": 1,
+    "otherDescription": null
+  },
+  {
+    "personalOffers": [],
+    "coord": [4.844309, 45.865288],
+    "equipmentsAndServices": [],
+    "digitalCultureSecurity": ["2", "5", "9", "28", "34", "39", "42", "51", "52", "54", "65", "96", "97", "98"],
+    "parentingHelp": ["3", "22", "82", "94"],
+    "socialAndProfessional": ["6", "20", "66", "67", "68", "69", "124", "125", "127"],
+    "accessRight": ["84", "85", "86", "87", "88", "89", "93", "95"],
+    "baseSkills": ["1", "11", "38", "48", "74", "77"],
+    "proceduresAccompaniment": [],
+    "publicsAccompaniment": [],
+    "publics": ["toutPublic"],
+    "labelsQualifications": ["passNumerique"],
+    "accessModality": ["accesLibre"],
+    "_id": "61e9260b2ac971550065e261",
+    "structureName": "mon assistant numérique val de saone",
+    "contactPhone": "04 04 04 04 04",
+    "contactMail": "a@a.com",
+    "structureType": "autre",
+    "pmrAccess": false,
+    "remoteAccompaniment": false,
+    "accountVerified": true,
+    "freeWorkShop": false,
+    "nbComputers": 0,
+    "nbPrinters": 0,
+    "nbScanners": 0,
+    "nbTablets": 0,
+    "nbNumericTerminal": 0,
+    "address": {
+      "numero": "2",
+      "street": "Rue Neuve",
+      "commune": "Fleurieu-sur-Saône"
+    },
+    "createdAt": "Thu Jan 20 2022 10:06:19 GMT+0100 (heure normale d’Europe centrale)",
+    "updatedAt": "Thu Jan 20 2022 10:06:19 GMT+0100 (heure normale d’Europe centrale)",
+    "__v": 0
+  },
+  {
+    "personalOffers": [],
+    "coord": [4.9149121, 45.7311648],
+    "equipmentsAndServices": [
+      "wifiEnAccesLibre",
+      "ordinateurs",
+      "tablettes",
+      "imprimantes",
+      "scanners",
+      "accesLivresInformatiques"
+    ],
+    "digitalCultureSecurity": ["2", "5", "9", "28", "34", "39", "42", "51", "52", "54", "65", "96", "97", "98"],
+    "parentingHelp": ["3", "22", "82", "94"],
+    "socialAndProfessional": ["66", "67", "68", "69"],
+    "accessRight": [],
+    "baseSkills": ["260", "1", "11", "38", "48", "74", "77"],
+    "proceduresAccompaniment": [],
+    "publicsAccompaniment": [],
+    "publics": ["toutPublic"],
+    "labelsQualifications": ["passNumerique", "espacePublicNumeriqueepn"],
+    "accessModality": ["accesLibre", "telephoneVisio", "surRdv"],
+    "_id": "6001a3aa16b08100062e4166",
+    "structureType": "mjc",
+    "freeWorkShop": false,
+    "createdAt": "2020-11-16T08:53:00.000Z",
+    "updatedAt": "2021-04-27T17:06:46.000Z",
+    "structureName": "Cyber-base / MJC Louis Aragon",
+    "description": "Notre espace est un lieu de DÉCOUVERTE, d’APPRENTISSAGE et de SOUTIEN de votre pratique numérique. Ouvert à tous, c’est un aussi un lieu de vie, d’échanges et de partage de savoirs. La Cyber-base est un lieu ressource pour les acteurs sociaux, éducatifs et culturels . Elle a vocation à ACCOMPAGNER : • les projets des structures impliquant le numérique comme levier social d’inclusion des citoyens • l’éducation aux médias des jeunes générations • à la parentalité.",
+    "lockdownActivity": "OUVERT au public pour un libre accès INTERNET et impressions de documents.\nUne permanence téléphonique d'AIDE NUMERIQUE (logiciel VISIO, envoyer une pièce jointe, se connecter au WIFI, récupération mot de passe,...) est maintenue : mercredi / vendredi, 11h à 13h et 18h à 19h au 04 72 81 76 87. Les activités enfants / ados sont SUSPENDUES. \nDes soirées conviviales sont organisées A DISTANCE les vendredis soirs, de 18h30 à 19h30 -> https://cyberbase.mjcbron.fr/les-vendredis-conviviaux/",
+    "contactPhone": "04 06 06 06 60",
+    "contactMail": "cyberbase@test.fr",
+    "website": "http://cyberbase.mjcbron.fr",
+    "facebook": "facebook.com/CyberBaseMJCBron",
+    "twitter": "twitter.com/cyberbasebron",
+    "instagram": "instagram.com/mjc_louis_aragon_bron/",
+    "pmrAccess": true,
+    "exceptionalClosures": "",
+    "nbComputers": 9,
+    "nbPrinters": 1,
+    "nbTablets": 6,
+    "nbNumericTerminal": 1,
+    "hours": {
+      "monday": {
+        "open": false,
+        "time": []
+      },
+      "tuesday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "18:30",
+            "opening": "16:00"
+          }
+        ]
+      },
+      "wednesday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "18:30",
+            "opening": "16:00"
+          }
+        ]
+      },
+      "thursday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "18:30",
+            "opening": "16:00"
+          }
+        ]
+      },
+      "friday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "18:30",
+            "opening": "16:00"
+          }
+        ]
+      },
+      "saturday": {
+        "open": true,
+        "time": [
+          {
+            "closing": "18:00",
+            "opening": "14:00"
+          }
+        ]
+      },
+      "sunday": {
+        "open": false,
+        "time": []
+      }
+    },
+    "__v": 0,
+    "address": {
+      "numero": "212",
+      "street": "Avenue Franklin Roosevelt",
+      "commune": "Bron"
+    },
+    "accountVerified": true,
+    "linkedin": null,
+    "nbScanners": 1,
+    "otherDescription": null
+  }
+]

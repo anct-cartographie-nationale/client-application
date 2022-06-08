@@ -1,5 +1,8 @@
 import { Structure } from '@gouvfr-anct/mediation-numerique';
-import { Coordinates, NO_COORDINATES } from '../../../../../domain';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { LieuxMediationNumeriqueRepository } from '../../repositories';
+import { Coordinates, NO_COORDINATES } from '../../value-objects';
 
 const HALF_CIRCLE_DEGREE: number = 180;
 
@@ -37,7 +40,7 @@ const geographicDistance = (coordinatesA: Coordinates, coordinatesB: Coordinates
   return usingHaversineFormula(latitudeARadian, latitudeBRadian, deltaLatitudeRadian, deltaLongitudeRadian);
 };
 
-export const toStructureWithDistance = (structure: Structure, coordinates: Coordinates): Structure =>
+const toStructureWithDistance = (structure: Structure, coordinates: Coordinates): Structure =>
   coordinates === NO_COORDINATES
     ? structure
     : new Structure({
@@ -51,5 +54,17 @@ export const toStructureWithDistance = (structure: Structure, coordinates: Coord
         )
       });
 
-export const byStructureDistance = (structureA: Structure, structureB: Structure) =>
+const byStructureDistance = (structureA: Structure, structureB: Structure) =>
   (structureA?.distance ?? 0) - (structureB?.distance ?? 0);
+
+export class LieuxMediationNumeriqueListPresenter {
+  public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
+
+  public structuresByDistance$(location$: Observable<Coordinates>) {
+    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), location$]).pipe(
+      map(([structures, coordinates]: [Structure[], Coordinates]) =>
+        structures.map((structures: Structure) => toStructureWithDistance(structures, coordinates)).sort(byStructureDistance)
+      )
+    );
+  }
+}
