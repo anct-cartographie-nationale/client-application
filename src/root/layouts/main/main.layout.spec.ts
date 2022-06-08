@@ -14,7 +14,7 @@ describe('MainLayout', (): void => {
       });
   });
 
-  it('should create the app', (): void => {
+  it('should create the component', (): void => {
     const fixture: ComponentFixture<MainLayout> = TestBed.createComponent(MainLayout);
     const mainLayout: MainLayout = fixture.componentInstance;
     expect(mainLayout).toBeTruthy();

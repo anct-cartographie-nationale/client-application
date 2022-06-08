@@ -1,3 +1,18 @@
 {
-  "extends": ["../../.eslintrc.json"]
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["projects/client-application/tsconfig.app.json", "projects/client-application/tsconfig.spec.json"],
+        "createDefaultProgram": true
+      },
+      "rules": {}
+    },
+    {
+      "files": ["*.html"],
+      "rules": {}
+    }
+  ]
 }

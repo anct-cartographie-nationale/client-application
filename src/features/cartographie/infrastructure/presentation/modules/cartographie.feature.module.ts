@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { GeometryPolygonConfiguration, MapModule, StructureModule } from '@gouvfr-anct/mediation-numerique';
+import { UiLieuxMediationNumeriqueModule } from '@gouvfr-anct/mediation-numerique/ui';
 import { CartographieLayout } from '../layouts';
 import { LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } from '../pages';
 import { InitialPosition, MarkerType, ZoomLevel } from '../../configuration/mediation-numerique';
@@ -16,7 +17,8 @@ import { CartographieFeatureRoutingModule } from './cartographie.feature-routing
     MapModule.forRoot(metropole as GeometryPolygonConfiguration, ZoomLevel, InitialPosition, MarkerType, GeojsonService),
     StructureModule.forRoot(SearchService, StructureService),
     CartographieFeatureRoutingModule,
-    CommonModule
+    CommonModule,
+    UiLieuxMediationNumeriqueModule
   ],
   providers: [GeojsonService]
 })

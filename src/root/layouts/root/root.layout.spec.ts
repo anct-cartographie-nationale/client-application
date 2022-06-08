@@ -14,7 +14,7 @@ describe('RootLayout', (): void => {
       });
   });
 
-  it('should create the app', (): void => {
+  it('should create the component', (): void => {
     const fixture: ComponentFixture<RootLayout> = TestBed.createComponent(RootLayout);
     const rootLayout: RootLayout = fixture.componentInstance;
     expect(rootLayout).toBeTruthy();

@@ -21,7 +21,7 @@ describe('LieuxMediationNumeriqueDetailsPage', (): void => {
       });
   });
 
-  it('should create the app', (): void => {
+  it('should create the component', (): void => {
     const fixture: ComponentFixture<LieuxMediationNumeriqueDetailsPage> = TestBed.createComponent(
       LieuxMediationNumeriqueDetailsPage
     );
