@@ -70,6 +70,10 @@ Exécuter `yarn test client-application` pour tester le projet.
 
 Exécuter `yarn lint client-application` pour une analyse statique des fichiers `.ts` du projet.
 
+### StyleLint
+
+Exécuter `yarn stylelint "projects/client-application/**/*.scss"` pour une analyse statique des fichiers `.scss` du projet.
+
 ### Commit lint
 
 Exécuter `yarn commitlint --from HEAD~1` pour valider la syntaxe du dernier commit.
@@ -107,6 +111,7 @@ La branche `main`, ainsi que l'ensemble des branches de travail avec un préfixe
   - Qu'il est possible de créer un build sans erreur
   - Que la syntaxe correspond bien à ce qui est [défini par Prettier](https://github.com/anct-cartographie-nationale/client-base/blob/main/.prettierrc.json)
   - Que le code écrit en TypeScript respecte les conventions décrites par les [règles ESLint](https://github.com/anct-cartographie-nationale/client-base/blob/main/.eslintrc.json)
+  - Que le style écrit en SCSS respecte les conventions décrites par les [règles Standard](https://github.com/anct-cartographie-nationale/client-base/blob/main/.stylelintrc.json)
   - Que les messages des commits suivent le standard établi par [Conventional Commits](https://www.conventionalcommits.org/fr)
 - Une fois les développements terminés, il faut créer une [pull request](https://github.com/anct-cartographie-nationale/client-application/pulls) avec la banche de travail comme origin et la branche `main` comme destination.
 - La pull request ne peut être fusionné que si :
@@ -150,7 +155,8 @@ Il est possible d'automatiser ce processus en utilisant la commande `standard-ve
 #### CLI
 
 - [Jest](https://jestjs.io/) est une boîte à outils pour écrire des tests automatisés en JavaScript
-- [Eslint](https://eslint.org/) est un analyseur statique de JavaScript avec les plugins suivants :
+- [Eslint](https://eslint.org/) est un analyseur statique de JavaScript
+- [Stylelint](https://stylelint.io/) est un analyseur statique de fichiers de style (css, scss, etc.)
 - [Prettier](https://prettier.io/) est un magnificateur de code source en JavaScript
 
 #### CI
