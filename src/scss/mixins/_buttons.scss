@@ -1,4 +1,5 @@
-// scss-docs-start btn-variant-mixin
+@use 'sass:color';
+
 @mixin button-variant(
   $background,
   $border,
@@ -35,35 +36,49 @@
 ) {
   color: $color;
   @include gradient-bg($background);
+
   border-color: $border;
   @include box-shadow($btn-box-shadow);
-  box-shadow: 0 0 0 1px #000000;
+
+  box-shadow: 0 0 0 1px #000;
 
   &:hover {
     color: $hover-color;
-    box-shadow: -0.5px 0.5px 0px 1.5px #000000;
+    box-shadow: -0.5px 0.5px 0 1.5px #000;
   }
 
-  .btn-check:focus + &,
-  &:focus {
+  &.disabled,
+  &:disabled {
+    color: $disabled-color;
+    background-color: $disabled-background;
+
+    // Remove CSS gradients if they're enabled
+    background-image: if($enable-gradients, none, null);
+    border-color: $disabled-border;
+  }
+
+  &:focus,
+  .btn-check:focus + & {
     color: $hover-color;
     @include gradient-bg($hover-background);
+
     border-color: $hover-border;
     @if $enable-shadows {
-      @include box-shadow($btn-box-shadow, 0 0 0 $btn-focus-width rgba(mix($color, $border, 15%), 0.5));
+      @include box-shadow($btn-box-shadow, 0 0 0 $btn-focus-width rgba(color.mix($color, $border, 15%), 0.5));
     } @else {
       // Avoid using mixin so we can pass custom focus shadow properly
-      box-shadow: 0 0 0 $btn-focus-width rgba(mix($color, $border, 15%), 0.5);
+      box-shadow: 0 0 0 $btn-focus-width rgba(color.mix($color, $border, 15%), 0.5);
     }
   }
 
+  &.active,
+  &:active,
   .btn-check:checked + &,
   .btn-check:active + &,
-  &:active,
-  &.active,
   .show > &.dropdown-toggle {
     color: $active-color;
     background-color: $active-background;
+
     // Remove CSS gradients if they're enabled
     background-image: if($enable-gradients, none, null);
     border-color: $active-border;
@@ -73,18 +88,8 @@
         @include box-shadow($btn-active-box-shadow, 0 0 0 $btn-focus-width rgba(mix($color, $border, 15%), 0.5));
       } @else {
         // Avoid using mixin so we can pass custom focus shadow properly
-        box-shadow: 0 0 0 $btn-focus-width rgba(mix($color, $border, 15%), 0.5);
+        box-shadow: 0 0 0 $btn-focus-width rgba(color.mix($color, $border, 15%), 0.5);
       }
     }
   }
-
-  &:disabled,
-  &.disabled {
-    color: $disabled-color;
-    background-color: $disabled-background;
-    // Remove CSS gradients if they're enabled
-    background-image: if($enable-gradients, none, null);
-    border-color: $disabled-border;
-  }
 }
-// scss-docs-end btn-variant-mixin
