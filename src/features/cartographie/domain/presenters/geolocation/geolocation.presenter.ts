@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Coordinates, NO_COORDINATES } from '../../../../../domain';
+import { Coordinates, NO_COORDINATES } from '../../value-objects';
 
 export interface GeolocationProvider {
   getCurrentPosition: (successCallback: PositionCallback, errorCallback?: PositionErrorCallback) => void;

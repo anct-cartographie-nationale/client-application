@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CartographieLayout } from '../layouts';
-import { LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } from '../pages';
+import { CartographieLayout } from '../presentation/layouts';
+import { LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } from '../presentation/pages';
 
 const ROUTES: Routes = [
   {

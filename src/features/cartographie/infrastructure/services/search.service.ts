@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Category, Module } from '@gouvfr-anct/mediation-numerique';
 import { Observable, of } from 'rxjs';
-import categoriesAccompagnement from '../static/categoriesAccompagnement.json';
-import categoriesFormations from '../static/categoriesFormations.json';
-import categoriesOthers from '../static/categoriesOthers.json';
+import categoriesAccompagnement from './assets/categoriesAccompagnement.json';
+import categoriesFormations from './assets/categoriesFormations.json';
+import categoriesOthers from './assets/categoriesOthers.json';
 
 @Injectable()
 export class SearchService {

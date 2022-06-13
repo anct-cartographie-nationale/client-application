@@ -4,7 +4,7 @@ import { GeoJson } from '@gouvfr-anct/mediation-numerique';
 import { delay, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
-import wfsGrandLyon from '../static/wfs-grandlyon.json';
+import wfsGrandLyon from './assets/wfs-grandlyon.json';
 
 @Injectable()
 export class GeojsonService {

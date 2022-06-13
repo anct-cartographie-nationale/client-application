@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CartographieLayout } from './cartographie.layout';
-import { StructureService } from '../../../repositories/http';
 import {
   CardStubComponent,
   MapStubComponent,
@@ -10,6 +9,7 @@ import {
   StructureDetailsStubComponent
 } from '@gouvfr-anct/mediation-numerique/testing';
 import { of } from 'rxjs';
+import { LieuxMediationNumeriqueRepository } from '../../../../domain';
 
 describe('CartographieLayout', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -25,9 +25,9 @@ describe('CartographieLayout', (): void => {
       imports: [RouterTestingModule],
       providers: [
         {
-          provide: StructureService,
+          provide: LieuxMediationNumeriqueRepository,
           useValue: {
-            getStructures: () => of([])
+            getAll$: () => of([])
           }
         }
       ]
