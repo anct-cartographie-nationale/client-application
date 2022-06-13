@@ -1,5 +1,5 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/mixins';
-$primary: #0d6efd;
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/bootstrap';
+@import './scss/functions/functions';
+@import './scss/variables/variables';
+@import './scss/mixins/mixins';
+@import './scss/utilities/utilities';
+@import './scss/components/components';
