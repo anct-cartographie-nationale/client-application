@@ -1,0 +1,13 @@
+.active-primary {
+  &.active,
+  &:active,
+  .btn-check:checked + &,
+  .btn-check:active + & {
+    color: $primary !important;
+    box-shadow: 0 0 0 1px $primary;
+
+    &:hover {
+      box-shadow: -0.5px 0.5px 0 1.5px $primary;
+    }
+  }
+}

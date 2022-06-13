@@ -38,9 +38,9 @@ jobs:
       - name: Main theme color change
         run: |
           cd projects/client-application/src
-          defaultColor=$($primary | grep primary styles.scss)
+          defaultColor=$($primary | grep primary scss/variables/_variables.scss)
           newColor='$primary: ${{ github.event.inputs.name }};'
-          sed -i "s/$defaultColor/$newColor/g" styles.scss
+          sed -i "s/$defaultColor/$newColor/g" scss/variables/_variables.scss
 
       - name: Theme has been changed
         run: echo "La couleur du nouveau thème est ${{ github.event.inputs.name }}"

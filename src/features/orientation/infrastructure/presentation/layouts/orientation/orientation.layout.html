@@ -1,0 +1,47 @@
+<div class="d-flex h-100 bg-light">
+  <div class="d-flex flex-column w-100">
+    <div class="container bg-white shadow-sm mt-5 flex-grow-1">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="container my-5">
+      <ul class="nav nav-pills justify-content-center">
+        <li class="nav-item">
+          <a
+            class="btn btn-secondary mx-2"
+            [routerLink]="['/', 'orientation', 'besoin']"
+            routerLinkActive="active active-primary"
+            ariaCurrentWhenActive="page">
+            Besoin
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="btn btn-secondary mx-2"
+            [routerLink]="['/', 'orientation', 'localisation']"
+            routerLinkActive="active active-primary"
+            ariaCurrentWhenActive="page">
+            Localisation
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="btn btn-secondary mx-2"
+            [routerLink]="['/', 'orientation', 'specificite']"
+            routerLinkActive="active active-primary"
+            ariaCurrentWhenActive="page">
+            Spécificité
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="btn btn-secondary mx-2"
+            [routerLink]="['/', 'orientation', 'date']"
+            routerLinkActive="active active-primary"
+            ariaCurrentWhenActive="page">
+            Date
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
