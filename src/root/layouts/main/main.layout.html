@@ -1,19 +1,35 @@
 <div class="main vh-100 d-flex flex-column">
-  <header class="navbar navbar-expand-lg navbar-dark bg-white border-bottom">
-    <div class="container-fluid d-flex" aria-label="Main navigation">
-      <div class="flex-grow-1">
-        <a [routerLink]="['/', 'cartographie']" class="active-link-primary p-2" routerLinkActive="link-selected">
-          Cartographie Nationale
-        </a>
+  <nav class="navbar navbar-expand-lg bg-white">
+    <div class="container-fluid">
+      <a [routerLink]="['/', 'cartographie']" class="navbar-brand" ariaCurrentWhenActive routerLinkActive="active">
+        Cartographie Nationale
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a [routerLink]="['/', 'orientation']" class="nav-link" ariaCurrentWhenActive="page" routerLinkActive="active">
+              Orienter un bénéficiaire
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/', 'cartographie']" class="nav-link" ariaCurrentWhenActive="page" routerLinkActive="active">
+              Accéder à la cartographie
+            </a>
+          </li>
+        </ul>
       </div>
-      <a [routerLink]="['/', 'orientation']" class="active-link-primary p-2" routerLinkActive="link-selected">
-        Orienter un bénéficiaire
-      </a>
-      <a [routerLink]="['/', 'cartographie']" class="active-link-primary p-2" routerLinkActive="link-selected">
-        Accéder à la cartographie
-      </a>
     </div>
-  </header>
+  </nav>
   <div class="overflow-hidden h-100">
     <router-outlet></router-outlet>
   </div>
