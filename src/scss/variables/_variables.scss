@@ -4,6 +4,7 @@ $light: #f4f4f4;
 $black: #000 !default;
 $min-contrast-ratio: 2.7;
 $box-shadow-sm: 0 0.25rem 0.25rem rgba($black, 0.25);
+$font-family-prim: 'Lato';
 
 @import './buttons';
 @import '~bootstrap/scss/variables';

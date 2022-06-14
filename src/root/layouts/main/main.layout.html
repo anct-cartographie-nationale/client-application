@@ -2,10 +2,28 @@
   <header class="navbar navbar-expand-lg navbar-dark bg-white border-bottom">
     <div class="container-fluid d-flex" aria-label="Main navigation">
       <div class="flex-grow-1">
-        <a [routerLink]="['/']" class="p-2" routerLinkActive="active">Cartographie Nationale</a>
+        <a
+          [routerLink]="['/']"
+          [class.selected]="this.currentRoute === '/cartographie'"
+          class="active-link-primary p-2"
+          routerLinkActive="active-link-primary">
+          Cartographie Nationale
+        </a>
       </div>
-      <a [routerLink]="['/orientation']" class="p-2" routerLinkActive="active">Orienter un bénéficiaire</a>
-      <a [routerLink]="['/']" class="p-2" routerLinkActive="active">Accéder à la cartographie</a>
+      <a
+        [routerLink]="['/orientation']"
+        [class.selected]="this.currentRoute === '/orientation'"
+        class="active-link-primary p-2"
+        routerLinkActive="active-link-primary">
+        Orienter un bénéficiaire
+      </a>
+      <a
+        [routerLink]="['/']"
+        [class.selected]="this.currentRoute === '/cartographie'"
+        class="active-link-primary p-2"
+        routerLinkActive="active-link-primary">
+        Accéder à la cartographie
+      </a>
     </div>
   </header>
   <div class="overflow-hidden h-100">

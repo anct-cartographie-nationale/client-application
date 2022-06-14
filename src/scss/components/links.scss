@@ -1,0 +1,20 @@
+.active-link-primary {
+  font-family: $font-family-prim;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14.4px;
+  color: $black !important;
+  text-decoration: none;
+
+  &:hover {
+    color: #0d6efd !important;
+  }
+}
+
+.selected {
+  border-bottom: 1px solid $primary;
+}
+
+.navbar {
+  min-height: 55px;
+}
