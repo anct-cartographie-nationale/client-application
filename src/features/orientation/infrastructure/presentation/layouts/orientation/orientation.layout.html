@@ -1,6 +1,6 @@
 <div class="d-flex h-100 bg-light">
   <div class="d-flex flex-column w-100">
-    <div class="container bg-white shadow-sm mt-5 flex-grow-1">
+    <div class="container bg-white shadow-sm mt-5 flex-grow-1 overflow-hidden" [@routeAnimations]="getRouteAnimationData()">
       <router-outlet></router-outlet>
     </div>
     <div class="container my-5">
