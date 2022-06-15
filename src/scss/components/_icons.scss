@@ -1,0 +1,175 @@
+@font-face {
+  font-family: remixicon;
+  src: url('/assets/fonts/remixicon/remixicon.eot?t=1655309578621');
+  src: url('/assets/fonts/remixicon/remixicon.eot?t=1655309578621#iefix') format('embedded-opentype'),
+    url('/assets/fonts/remixicon/remixicon.woff2?t=1655309578621') format('woff2'),
+    url('/assets/fonts/remixicon/remixicon.woff?t=1655309578621') format('woff'),
+    url('/assets/fonts/remixicon/remixicon.ttf?t=1655309578621') format('truetype'),
+    url('/assets/fonts/remixicon/remixicon.svg?t=1655309578621#remixicon') format('svg');
+  font-display: swap;
+}
+
+[class^='ri-'],
+[class*='ri-'] {
+  font-family: remixicon, sans-serif !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ri-lg {
+  font-size: 1.3333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.ri-xl {
+  font-size: 1.5em;
+  line-height: 0.6666em;
+  vertical-align: -0.075em;
+}
+
+.ri-xxs {
+  font-size: 0.5em;
+}
+
+.ri-xs {
+  font-size: 0.75em;
+}
+
+.ri-sm {
+  font-size: 0.875em;
+}
+
+.ri-1x {
+  font-size: 1em;
+}
+
+.ri-2x {
+  font-size: 2em;
+}
+
+.ri-3x {
+  font-size: 3em;
+}
+
+.ri-4x {
+  font-size: 4em;
+}
+
+.ri-5x {
+  font-size: 5em;
+}
+
+.ri-6x {
+  font-size: 6em;
+}
+
+.ri-7x {
+  font-size: 7em;
+}
+
+.ri-8x {
+  font-size: 8em;
+}
+
+.ri-9x {
+  font-size: 9em;
+}
+
+.ri-10x {
+  font-size: 10em;
+}
+
+.ri-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.ri-car-line::before {
+  content: '\eb39';
+}
+
+.ri-walk-line::before {
+  content: '\f2a8';
+}
+
+.ri-stock-line::before {
+  content: '\f19d';
+}
+
+.ri-user-search-line::before {
+  content: '\f26c';
+}
+
+.ri-wifi-line::before {
+  content: '\f2c0';
+}
+
+.ri-computer-line::before {
+  content: '\ebca';
+}
+
+.ri-printer-line::before {
+  content: '\f029';
+}
+
+.ri-folder-user-line::before {
+  content: '\ed84';
+}
+
+.ri-search-eye-line::before {
+  content: '\f0cf';
+}
+
+.ri-speed-line::before {
+  content: '\f177';
+}
+
+.ri-thumb-up-line::before {
+  content: '\f207';
+}
+
+.ri-phone-line::before {
+  content: '\efec';
+}
+
+.ri-map-pin-2-line::before {
+  content: '\ef0a';
+}
+
+.ri-add-line::before {
+  content: '\ea13';
+}
+
+.ri-check-line::before {
+  content: '\eb7b';
+}
+
+.ri-close-line::before {
+  content: '\eb99';
+}
+
+.ri-radio-button-line::before {
+  content: '\f050';
+}
+
+.ri-checkbox-blank-circle-line::before {
+  content: '\eb7d';
+}
+
+.ri-search-line::before {
+  content: '\f0d1';
+}
+
+.ri-home-5-line::before {
+  content: '\ee1f';
+}
+
+.ri-calendar-check-line::before {
+  content: '\eb23';
+}
+
+.ri-error-warning-line::before {
+  content: '\eca1';
+}
