@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .active-primary {
   &.active,
   &:active,
@@ -8,6 +10,10 @@
 
     &:hover {
       box-shadow: -0.5px 0.5px 0 1.5px $primary;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 $btn-focus-width rgba($primary, 0.25);
     }
   }
 }
