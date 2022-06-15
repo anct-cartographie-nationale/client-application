@@ -82,6 +82,16 @@ Exécuter `yarn commitlint --from HEAD~1` pour valider la syntaxe du dernier com
 
 Exécuter `yarn prettier` pour mettre à niveau la syntaxe de l'ensemble des fichiers du projet.
 
+### Ajouter des icônes au projet
+
+- Aller sur [Remixicon](https://remixicon.com/)
+- Cliquer sur le dossier à droite de la barre de recherche, puis importer la [collection du projet](./src/assets/fonts/remixicon/collection.remixicon) en cliquant sur la flèche vers le bas dans la modale.
+- Rechercher et sélectionner les icônes à ajouter
+- Une fois les ajouts terminés
+  - Cliquer sur le dossier à droite de la barre de recherche pour télécharger le nouveau fichier de collection en cliquant sur la flèche vers le haut, le renommer `collection.remixicon`, puis remplacer l'ancienne version [dans le dossier des fonts](./src/assets/fonts/remixicon/)
+  - Sans quitter la modale qui affiche la collection, télécharger les fonts en cliquant sur le bouton correspondant en bas à droite, puis extraire les fichiers de l'archive pour les copier [dans le dossier des fonts](./src/assets/fonts/remixicon/) excepté les fichiers `remixicon.css` et `remixicon.less`
+  - Ajouter les nouveaux `codepoint` à la fin du fichier [icons.scss](./src/scss/components/_icons.scss) disponibles dans le fichier `remixicon.css`
+
 ## Contribution
 
 ### Nommage des branches
@@ -149,6 +159,7 @@ Il est possible d'automatiser ce processus en utilisant la commande `standard-ve
 
 - [TypeScript](https://www.typescriptlang.org/) est un langage open source construit à partir de JavaScript
 - [Angular](https://angular.io/) est une boîte à outils open source pour construire des clients web
+- [Remixicon](https://remixicon.com/) est un ensemble de symboles open-source élaborés pour les designers et les développeurs.
 
 ### Outils
 
