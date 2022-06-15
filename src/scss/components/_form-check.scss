@@ -1,0 +1,22 @@
+.form-chip {
+  padding-left: $form-chip-padding-start;
+
+  .form-check-input {
+    display: none;
+
+    & + .form-check-label {
+      transition: all 250ms ease;
+      @include transition($form-chip-transition);
+      @include border-radius($form-chip-border-radius);
+
+      padding: $form-chip-padding-y $form-chip-padding-x;
+      border: 1px solid transparent;
+    }
+
+    &:not(:checked) + .form-check-label {
+      color: $body-color !important;
+      background-color: $form-chip-padding-background-color !important;
+      border: 1px solid $form-chip-padding-border-color;
+    }
+  }
+}

@@ -3,6 +3,7 @@
 @import '~bootstrap/scss/type';
 @import '~bootstrap/scss/containers';
 @import '~bootstrap/scss/grid';
+@import '~bootstrap/scss/forms';
 @import '~bootstrap/scss/buttons';
 @import '~bootstrap/scss/nav';
 @import '~bootstrap/scss/navbar';
@@ -13,6 +14,7 @@
 @import '~bootstrap/scss/utilities/api';
 
 @import './buttons';
+@import './form-check';
 @import './icons';
 @import './navbar';
 @import './accordion';
