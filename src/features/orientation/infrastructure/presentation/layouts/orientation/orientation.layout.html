@@ -1,10 +1,6 @@
 <div class="d-flex h-100 bg-light">
   <div class="d-flex flex-column w-100">
-    <div class="container bg-white shadow-sm mt-5 flex-grow-1 overflow-hidden" [@routeAnimations]="getRouteAnimationData()">
-      <app-collapse title="Démarches"><div class="d-flex justify-content-center"></div></app-collapse>
-      <router-outlet></router-outlet>
-    </div>
-    <div class="container my-5">
+    <div class="container mt-5 mb-4">
       <ul class="nav nav-pills justify-content-center">
         <li class="nav-item">
           <a
@@ -43,6 +39,9 @@
           </a>
         </li>
       </ul>
+    </div>
+    <div class="container bg-white shadow-sm mb-5 overflow-visible flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

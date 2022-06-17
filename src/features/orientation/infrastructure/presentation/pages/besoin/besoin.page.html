@@ -2,11 +2,90 @@
   Quel est
   <span class="text-primary">votre besoin ?</span>
 </h1>
-<ul class="nav nav-pills justify-content-center">
-  <li class="nav-item">
-    <a class="btn btn-secondary mx-3" [routerLink]="['/', 'orientation']">< Précédent</a>
-  </li>
-  <li class="nav-item">
-    <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'localisation']">Suivant ></a>
-  </li>
-</ul>
+<app-collapse title="Démarches" icon="ri-folder-user-line ri-lg" class="d-flex justify-content-center my-3">
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of demarche[0]; index as i">
+      <input type="checkbox" class="form-check-input" id="demarcheLabelChip{{i}}" />
+      <label class="form-check-label bg-success text-white" for="demarcheLabelChip{{i}}">
+        <i class="ri-add-line label-icon"></i>
+        {{label}}
+      </label>
+    </div>
+  </div>
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of demarche[1]; index as i">
+      <input type="checkbox" class="form-check-input" id="demarcheLabelChip[1]{{i}}" />
+      <label class="form-check-label bg-success text-white" for="demarcheLabelChip[1]{{i}}">
+        <i class="ri-add-line label-icon"></i>
+        {{label}}
+      </label>
+    </div>
+  </div>
+</app-collapse>
+<app-collapse title="Savoir" icon="ri-search-eye-line ri-lg" class="d-flex justify-content-center my-3">
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of savoir[0]; index as i">
+      <input type="checkbox" class="form-check-input" id="savoirLabelChip{{i}}" />
+      <label class="form-check-label bg-success text-white" for="savoirLabelChip{{i}}">
+        <i class="ri-add-line label-icon"></i>
+        {{label}}
+      </label>
+    </div>
+  </div>
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of savoir[1]; index as i">
+      <input type="checkbox" class="form-check-input" id="savoirLabelChip[1]{{i}}" />
+      <label class="form-check-label bg-success text-white" for="savoirLabelChip[1]{{i}}">
+        <i class="ri-add-line label-icon"></i>
+        {{label}}
+      </label>
+    </div>
+  </div>
+</app-collapse>
+<app-collapse title="&#201;quipement" icon="ri-computer-line ri-lg" class="d-flex justify-content-center my-3">
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of equipement[0]; index as i">
+      <input type="checkbox" class="form-check-input" id="equipementLabelChip{{i}}" />
+      <label class="form-check-label bg-success text-white" for="equipementLabelChip{{i}}">
+        <i class="ri-add-line label-icon"></i>
+        {{label}}
+      </label>
+    </div>
+  </div>
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of equipement[1]; index as i">
+      <input type="checkbox" class="form-check-input" id="equipementLabelChip[1]{{i}}" />
+      <label class="form-check-label bg-success text-white" for="equipementLabelChip[1]{{i}}">
+        <i class="ri-add-line label-icon"></i>
+        {{label}}
+      </label>
+    </div>
+  </div>
+</app-collapse>
+<app-collapse title="Autres besoins" icon="ri-speed-line ri-lg" class="d-flex justify-content-center my-3">
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="mb-3 form-check form-check-inline form-chip">
+      <input type="checkbox" class="form-check-input" id="autresBesoinsChip1" />
+      <label class="form-check-label bg-success text-white" for="autresBesoinsChip1">
+        <i class="ri-add-line label-icon"></i>
+        Je souhaite contacter un spécialiste de la réorientation
+      </label>
+    </div>
+  </div>
+  <div class="col-md-12 d-flex justify-content-center">
+    <div class="mb-3 form-check form-check-inline form-chip">
+      <input type="checkbox" class="form-check-input" id="autresBesoinsChip2" />
+      <label class="form-check-label bg-success text-white" for="autresBesoinsChip2">
+        <i class="ri-mail-line label-icon"></i>
+        Je ne trouve pas ma démarche (être recontacté par mail)
+      </label>
+    </div>
+  </div>
+</app-collapse>
+<div class="container my-5">
+  <ul class="nav nav-pills justify-content-center">
+    <li class="nav-item">
+      <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'localisation']">Suivant ></a>
+    </li>
+  </ul>
+</div>

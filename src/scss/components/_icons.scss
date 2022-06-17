@@ -9,10 +9,23 @@
   font-display: swap;
 }
 
+.circle-icon {
+  background: $primary;
+  padding: 20px;
+  border-radius: 100%;
+}
+
+.label-icon {
+  color: $black !important;
+  vertical-align: bottom;
+}
+
 [class^='ri-'],
 [class*='ri-'] {
   font-family: remixicon, sans-serif !important;
   font-style: normal;
+  font-weight: 100;
+  color: $secondary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -172,4 +185,8 @@
 
 .ri-error-warning-line::before {
   content: '\eca1';
+}
+
+.ri-mail-line::before {
+  content: '\eef6';
 }
