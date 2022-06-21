@@ -9,6 +9,11 @@
   font-display: swap;
 }
 
+.icon-circle {
+  padding: 20px;
+  border-radius: 100%;
+}
+
 [class^='ri-'],
 [class*='ri-'] {
   font-family: remixicon, sans-serif !important;
@@ -172,4 +177,8 @@
 
 .ri-error-warning-line::before {
   content: '\eca1';
+}
+
+.ri-mail-line::before {
+  content: '\eef6';
 }
