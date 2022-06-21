@@ -8,7 +8,7 @@
         type="button"
         [attr.aria-expanded]="!isCollapsed"
         aria-controls="collapseControl">
-        <i *ngIf="icon" class="{{icon}} icon-circle m-2 bg-primary text-light"></i>
+        <i *ngIf="icon" [class]="icon" class="icon-circle m-2 bg-primary text-light"></i>
         {{title}}
       </button>
     </h2>
