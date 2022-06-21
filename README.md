@@ -91,6 +91,7 @@ Exécuter `yarn prettier` pour mettre à niveau la syntaxe de l'ensemble des fic
   - Cliquer sur le dossier à droite de la barre de recherche pour télécharger le nouveau fichier de collection en cliquant sur la flèche vers le haut, le renommer `collection.remixicon`, puis remplacer l'ancienne version [dans le dossier des fonts](./src/assets/fonts/remixicon/)
   - Sans quitter la modale qui affiche la collection, télécharger les fonts en cliquant sur le bouton correspondant en bas à droite, puis extraire les fichiers de l'archive pour les copier [dans le dossier des fonts](./src/assets/fonts/remixicon/) excepté les fichiers `remixicon.css` et `remixicon.less`
   - Ajouter les nouveaux `codepoint` à la fin du fichier [icons.scss](./src/scss/components/_icons.scss) disponibles dans le fichier `remixicon.css`
+  - Relancer le serveur pour appliquer les changements
 
 ## Contribution
 
