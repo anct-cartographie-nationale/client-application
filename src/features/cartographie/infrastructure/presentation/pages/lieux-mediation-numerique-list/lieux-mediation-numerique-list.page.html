@@ -10,9 +10,9 @@
         (hover)="markersPresenter.highlight($event._id)"
         class="structure-card"></fr-lieux-mediation-numerique-item>
     </div>
-    <div class="container-fluid bg-primary d-flex p-2" *ngIf="(structures$ | async) as structures">
+    <div class="bg-primary d-flex p-2" *ngIf="(structures$ | async) as structures">
       <div class="ms-auto flex-grow-1">
-        <button class="btn border border-white text-white bg-transparent" (click)="printPage()">
+        <button class="btn btn-outline-light" (click)="printPage()">
           <i class="ri-printer-line me-2 align-bottom"></i>
           <span>Imprimer les résultats</span>
         </button>
