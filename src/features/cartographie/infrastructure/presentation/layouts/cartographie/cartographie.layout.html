@@ -1,26 +1,7 @@
 <!--<app-structure-list-search></app-structure-list-search>-->
 <div class="d-flex h-100">
-  <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 col-12 overflow-auto">
+  <div class="col-lg-5 col-md-6 col-12 overflow-auto">
     <router-outlet></router-outlet>
-    <nav class="navbar sticky-bottom bg-primary">
-      <div class="container-fluid" *ngIf="(structures$ | async) as structures">
-        <ul class="nav me-auto">
-          <li class="nav-item mx-2">
-            <button class="btn border border-white text-white bg-transparent">
-              <i class="ri-printer-line me-2 align-bottom"></i>
-              <span>Imprimer les résultats</span>
-            </button>
-          </li>
-          <li class="nav-item ml-2">
-            <button class="btn border border-white text-white bg-transparent">
-              <i class="ri-download-cloud-line me-2 align-bottom"></i>
-              <span>Exporter la recherche</span>
-            </button>
-          </li>
-        </ul>
-        <span class="d-flex align-items-center text-white">{{structures?.length}} Structures</span>
-      </div>
-    </nav>
   </div>
   <div class="col overflow-auto">
     <app-map

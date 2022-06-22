@@ -39,4 +39,8 @@ export class LieuxMediationNumeriqueListPage {
     this.markersPresenter.select(lieuMediationId);
     this.router.navigate(['cartographie', lieuMediationId]);
   }
+
+  public printPage() {
+    window.print();
+  }
 }
