@@ -10,5 +10,14 @@
         (hover)="markersPresenter.highlight($event._id)"
         class="structure-card"></fr-lieux-mediation-numerique-item>
     </div>
+    <div class="bg-primary d-flex p-2" *ngIf="(structures$ | async) as structures">
+      <div class="ms-auto flex-grow-1">
+        <button class="btn btn-outline-light" (click)="printPage()">
+          <i class="ri-printer-line me-2 align-bottom"></i>
+          <span>Imprimer les résultats</span>
+        </button>
+      </div>
+      <span class="d-flex align-items-center text-white me-auto">{{structures?.length}} Structures</span>
+    </div>
   </fr-lieux-mediation-numerique-list>
 </ng-container>

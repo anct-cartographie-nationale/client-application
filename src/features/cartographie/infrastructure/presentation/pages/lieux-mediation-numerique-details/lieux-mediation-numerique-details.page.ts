@@ -23,4 +23,7 @@ export class LieuxMediationNumeriqueDetailsPage {
     private readonly lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
     private readonly route: ActivatedRoute
   ) {}
+  public printPage() {
+    window.print();
+  }
 }
