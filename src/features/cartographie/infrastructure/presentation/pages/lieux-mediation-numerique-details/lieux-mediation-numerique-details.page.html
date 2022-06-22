@@ -1,11 +1,15 @@
 <ng-container *ngIf="(structure$ | async) as structure">
-  <app-structure-details class="structureList-details" [structure]="structure"></app-structure-details>
-  <div class="bg-primary d-flex p-2">
-    <div class="ms-auto flex-grow-1">
-      <button class="btn btn-outline-light" (click)="printPage()">
-        <i class="ri-printer-line me-2 align-bottom"></i>
-        <span>Imprimer les détails</span>
-      </button>
+  <div class="h-100 overflow-auto d-flex flex-column">
+    <div class="flex-grow-1">
+      <app-structure-details class="structureList-details flex-grow-1" [structure]="structure"></app-structure-details>
+    </div>
+    <div class="bg-primary d-flex p-2">
+      <div class="ms-auto flex-grow-1">
+        <button class="btn btn-outline-light" (click)="printPage()">
+          <i class="ri-printer-line me-2 align-bottom"></i>
+          <span>Imprimer les détails</span>
+        </button>
+      </div>
     </div>
   </div>
 </ng-container>
