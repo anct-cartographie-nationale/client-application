@@ -1,0 +1,19 @@
+$font-family-main: lato;
+$font-path-main: '/assets/fonts/';
+$font-extensions-main: eot woff2 ttf woff svg;
+$font-normal-main: (
+  100: 'thin',
+  300: 'light',
+  400: 'regular',
+  700: 'bold',
+  900: 'black'
+);
+$font-italic-main: (
+  100: 'thin',
+  300: 'light',
+  400: 'regular',
+  700: 'bold',
+  900: 'black'
+);
+$font-family-sans-serif: $font-family-main, system-ui, -apple-system, 'Segoe UI', roboto, 'Helvetica Neue', arial, 'Noto Sans',
+  'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;

@@ -1,13 +1,13 @@
-@font-face {
-  font-family: remixicon;
-  src: url('/assets/fonts/remixicon/remixicon.eot?t=1655309578621');
-  src: url('/assets/fonts/remixicon/remixicon.eot?t=1655309578621#iefix') format('embedded-opentype'),
-    url('/assets/fonts/remixicon/remixicon.woff2?t=1655309578621') format('woff2'),
-    url('/assets/fonts/remixicon/remixicon.woff?t=1655309578621') format('woff'),
-    url('/assets/fonts/remixicon/remixicon.ttf?t=1655309578621') format('truetype'),
-    url('/assets/fonts/remixicon/remixicon.svg?t=1655309578621#remixicon') format('svg');
-  font-display: swap;
-}
+@use 'sass:string';
+
+$font-family-icons-lower: string.to-lower-case($font-family-icons);
+
+@include font-face(
+  $font-family-icons,
+  $font-path-icons + $font-family-icons-lower + '/',
+  $font-family-icons-lower,
+  $font-extensions-icons
+);
 
 .icon-circle {
   padding: 20px;
