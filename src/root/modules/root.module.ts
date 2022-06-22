@@ -4,10 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartographieProviders } from '@features/cartographie/infrastructure';
 import { MainLayout, RootLayout } from '../layouts';
 import { RootRoutingModule } from './root-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [MainLayout, RootLayout],
-  imports: [BrowserAnimationsModule, RootRoutingModule],
+  imports: [BrowserAnimationsModule, RootRoutingModule, HttpClientModule],
   entryComponents: [RootLayout],
   providers: [...CartographieProviders]
 })
