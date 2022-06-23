@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DATA_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../configuration';
+import { DATA_CONFIGURATION, BRAND_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../configuration';
 
 @Component({
   templateUrl: './root.layout.html'
@@ -12,6 +12,14 @@ export class RootLayout implements OnInit {
 
   @Input() set longitude(longitude: string) {
     POSITION_CONFIGURATION.longitude = parseInt(longitude);
+  }
+
+  @Input() set titre(name: string) {
+    BRAND_CONFIGURATION.name = name;
+  }
+
+  @Input() set logo(logo: string) {
+    BRAND_CONFIGURATION.logo = logo;
   }
 
   @Input() set source(source: string) {
