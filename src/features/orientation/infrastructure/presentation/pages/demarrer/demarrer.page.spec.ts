@@ -1,10 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DemarrerPage } from './demarrer.page';
+import { BRAND_TOKEN } from '../../../../../../root';
 
 describe('DemarrerPage', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
-      declarations: [DemarrerPage]
+      declarations: [DemarrerPage],
+      providers: [
+        {
+          provide: BRAND_TOKEN,
+          useValue: {}
+        }
+      ]
     })
       .compileComponents()
       .catch((): void => {
