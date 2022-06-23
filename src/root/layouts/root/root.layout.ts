@@ -7,11 +7,11 @@ import { DATA_CONFIGURATION, BRAND_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_L
 })
 export class RootLayout implements OnInit {
   @Input() set latitude(latitude: string) {
-    POSITION_CONFIGURATION.latitude = parseInt(latitude);
+    POSITION_CONFIGURATION.latitude = parseFloat(latitude);
   }
 
   @Input() set longitude(longitude: string) {
-    POSITION_CONFIGURATION.longitude = parseInt(longitude);
+    POSITION_CONFIGURATION.longitude = parseFloat(longitude);
   }
 
   @Input() set titre(name: string) {
