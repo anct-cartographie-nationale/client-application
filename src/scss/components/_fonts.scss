@@ -1,0 +1,25 @@
+@use 'sass:string';
+
+$font-family-main-lower: string.to-lower-case($font-family-main);
+
+@each $font-weight, $font-weight-alias in $font-normal-main {
+  @include font-face(
+    $font-family-main,
+    $font-path-main + $font-family-main-lower + '/' + $font-weight-alias + '/',
+    $font-family-main-lower + '-' + $font-weight-alias,
+    $font-extensions-main,
+    normal,
+    $font-weight
+  );
+}
+
+@each $font-weight, $font-weight-alias in $font-italic-main {
+  @include font-face(
+    $font-family-main,
+    $font-path-main + $font-family-main-lower + '/' + $font-weight-alias + '-italic/',
+    $font-family-main-lower + '-' + $font-weight-alias + '-italic',
+    $font-extensions-main,
+    italic,
+    $font-weight
+  );
+}
