@@ -1,4 +1,4 @@
-name: Manual workflow
+name: Generate custom style
 
 on:
   workflow_dispatch:
@@ -37,10 +37,10 @@ jobs:
 
       - name: Main theme color change
         run: |
-          cd projects/client-application/src
-          defaultColor=$($primary | grep primary scss/variables/_variables.scss)
+          cd projects/client-application
+          defaultColor=$(grep primary src/scss/variables/_variables.scss)
           newColor='$primary: ${{ github.event.inputs.name }};'
-          sed -i "s/$defaultColor/$newColor/g" scss/variables/_variables.scss
+          sed -i "s|$defaultColor|$newColor|g" src/scss/variables/_variables.scss
 
       - name: Theme has been changed
         run: echo "La couleur du nouveau thème est ${{ github.event.inputs.name }}"
@@ -49,16 +49,8 @@ jobs:
         run: |
           yarn build client-application --named-chunks --output-hashing none
 
-      - name: Add readme, license and package files
-        run: |
-          mv projects/client-application/README.md dist/client-application/
-          mv projects/client-application/LICENSE.md dist/client-application/
-          mv projects/client-application/package.json dist/client-application/
-      - name: Merge all script files
-        run: cat dist/client-application/*.js > dist/client-application/script.js
-
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: dist
+          path: dist/client-application/styles.css
