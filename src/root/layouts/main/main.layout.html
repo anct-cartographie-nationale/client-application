@@ -1,8 +1,13 @@
 <div class="main vh-100 d-flex flex-column">
   <nav class="navbar navbar-expand-lg bg-white">
     <div class="container-fluid">
-      <a [routerLink]="['/', 'cartographie']" class="navbar-brand" ariaCurrentWhenActive="page" routerLinkActive="active">
-        Cartographie Nationale
+      <a [routerLink]="['/', 'cartographie']" class="navbar-brand">
+        <img
+          *ngIf="brandConfiguration.logo; else: brandName"
+          [src]="brandConfiguration.logo"
+          [alt]="'Accueil cartographie' + brandConfiguration.name"
+          height="36" />
+        <ng-template #brandName>{{ brandConfiguration.name }}</ng-template>
       </a>
       <button
         class="navbar-toggler"
