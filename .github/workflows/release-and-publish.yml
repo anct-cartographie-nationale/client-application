@@ -209,7 +209,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [prettier, eslint, commitlint, test, build]
+    needs: [prettier, eslint, stylelint, commitlint, test, build]
 
     steps:
       - name: Checkout client-application repository

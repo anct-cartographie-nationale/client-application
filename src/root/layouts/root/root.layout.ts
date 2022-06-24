@@ -14,12 +14,12 @@ export class RootLayout implements OnInit {
     POSITION_CONFIGURATION.longitude = parseFloat(longitude);
   }
 
-  @Input() set titre(name: string) {
-    BRAND_CONFIGURATION.name = name;
-  }
-
   @Input() set logo(logo: string) {
     BRAND_CONFIGURATION.logo = logo;
+  }
+
+  @Input() set titre(name: string) {
+    BRAND_CONFIGURATION.name = name;
   }
 
   @Input() set source(source: string) {
