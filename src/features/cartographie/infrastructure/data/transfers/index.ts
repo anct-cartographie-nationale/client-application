@@ -1,1 +1,1 @@
-export * from './lieux-mediation-numerique.transfer';
+export * from './lieu-mediation-numerique.transfer';
