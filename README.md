@@ -205,6 +205,7 @@ Il est possible d'automatiser ce processus en utilisant la commande `standard-ve
 ### Table des matières
 
 - [Intégration dans une page HTML](#intégration-dans-une-page-HTML)
+- [Personnalisation](#personnalisation)
 
 ### Intégration dans une page HTML
 
@@ -230,7 +231,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <head>
   <title>Page Title</title>
   <base href="/" />
-  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.1.0/styles.css" rel="stylesheet" />
 </head>
 ...
 ```
@@ -243,7 +244,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
   <h1>My First Heading</h1>
   <p>My first paragraph.</p>
 
-  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/script.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.1.0/script.js" type="module"></script>
 </body>
 ...
 ```
@@ -255,7 +256,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <body>
   <fr-mediation-numerique></fr-mediation-numerique>
 
-  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/script.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.1.0/script.js" type="module"></script>
 </body>
 ...
 ```
@@ -268,17 +269,113 @@ La version finale devrait ressembler à celà :
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.1.0/styles.css" rel="stylesheet" />
   </head>
   <body>
     <fr-mediation-numerique></fr-mediation-numerique>
 
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.0.1/script.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.1.0/script.js" type="module"></script>
   </body>
 </html>
 ```
 
 Cliquez sur `Run >` pour voir la cartographie s'afficher.
+
+### Personnalisation
+
+#### Titre et logo
+
+Exemple :
+
+```html
+<fr-mediation-numerique
+  titre="Hub B"
+  logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"></fr-mediation-numerique>
+```
+
+#### Source de données
+
+Par défaut la source de données affiche les CnFS, pour utiliser une autre source il faut préciser une url qui fournit les données conformes au [schéma de données des lieux de médiation numérique](https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique)
+
+Exemple :
+
+```html
+<fr-mediation-numerique
+  source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.1.0/assets/data/lieux-de-mediation-numerique.json"></fr-mediation-numerique>
+```
+
+#### Localisation initiale
+
+Par défaut la carte est centrée sur le milieu de la France avec un niveau de zoom qui permet d'afficher le territoire métropolitain, il est possible de préciser la latitude et la longitude sur laquelle la carte doit être centrée ainsi que le niveau de zoom.
+
+Exemple :
+
+```html
+<fr-mediation-numerique latitude="45.77647396140311" longitude="4.55431157343317" zoom="12"></fr-mediation-numerique>
+```
+
+- Il est possible de récupérer la latitude et la longitude sur [openStreetMap](https://www.openstreetmap.org/node/3228260561) en recherchant une localité.
+- Le zoom doit être une valeur entière comprise entre 0 et 20.
+
+#### Couleur
+
+Il est possible de changer certaines couleurs utilisées par la cartographie, pour cela il faut remplacer le style par une alternative comprenant les modifications des couleurs, notre outil disponible sur [GitHub](https://github.com/) permet de faire cela :
+
+- [Créer un compte GitHub](https://github.com/signup?ref_cta=Sign+up) si besoin
+- Récupérer les sources de la cartographie [avec l'aide d'un `Fork`](https://github.com/anct-cartographie-nationale/client-application/fork) puis cliquer sur le bouton vert pour créer le `Fork`
+- Une fois l'opération terminée, cliquer sur l'onglet `Actions` en haut de la page
+- Autoriser l'utilisation des `Workflows`, c'est cela qui va permettre de modifier le fichier de style
+- Cliquer sur `Generate custom style` dans la liste à gauche
+- Cliquer sur le bouton `Run workflow` à droite, vous devez entrer une valeur pour `Primary Color` avant de cliquer sur le bouton `Run workflow` vert, la valeur de la couleur doit avoir cette forme : `#712cf9`, sans oublier le `#`
+- Patienter quelques instants puis cliquer sur la tâche nommée `Generate custom style` dès qu'elle apparaît
+- Le fichier est généré au bout de quelques minutes, lorsque c'est terminé, un `Artifact` nommé `build` apparaît dans la liste en bas, cliquer dessus pour le télécharger puis décompresser l'archive `build.zip`, qui contient uniquement le fichier `style.css`
+- Idéalement il faudrait héberger correctement le fichier `style.css` avec le reste des fichiers du site, par exemple dans un dossier `assets/`, il faudrait alors remplacer le contenu de `<link />` vers ce chemin :
+  ```html
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="/assets/style.css" rel="stylesheet" />
+  </head>
+  ```
+  Mais pour aller au bout de cet exemple, une autre méthode permet de renseigner directement le style dans la page html que nous sommes en train d'éditer, pour cela il faut ouvrir le fichier `style.css` avec le programme `notepad` sur Windows, copier l'intégralité du contenu et le coller dans l'emplacement `<style></style>`
+  ```html
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <style>
+      Remplacer ce texte par le contenu du fichier style.css (@charset "UTF-8" etc.)
+    </style>
+  </head>
+  ```
+
+#### Exemple complet de personnalisation
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <style>
+      @charset "UTF-8";:root{...
+    </style>
+    <link
+      href="https://gist.githubusercontent.com/Kyappy/1e38c73048929c1df34d44749e3542e0/raw/5e4a06b49f3bb8431ca9cfc8f93631f4a36ba75d/styles.css"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <fr-mediation-numerique
+      titre="Médiation numérique à Bessenay"
+      logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.1.0/assets/data/lieux-de-mediation-numerique.json"
+      latitude="45.77647396140311"
+      longitude="4.55431157343317"
+      zoom="12"></fr-mediation-numerique>
+
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.1.0/script.js" type="module"></script>
+  </body>
+</html>
+```
 
 ## Gestion des versions
 
