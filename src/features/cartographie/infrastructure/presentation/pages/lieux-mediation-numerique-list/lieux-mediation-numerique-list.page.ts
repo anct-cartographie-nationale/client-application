@@ -9,6 +9,8 @@ import {
   LieuxMediationNumeriqueRepository,
   MarkersPresenter
 } from '../../../../domain';
+import { toStructuresPresentation } from '../../models/structure';
+import { map } from 'rxjs/operators';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,9 +26,9 @@ import {
 export class LieuxMediationNumeriqueListPage {
   public geolocationProvider: GeolocationProvider = window.navigator.geolocation;
 
-  public structures$: Observable<Structure[]> = this.lieuxMediationNumeriqueListPresenter.structuresByDistance$(
-    this.geolocationPresenter.location$
-  );
+  public structures$: Observable<Structure[]> = this.lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueByDistance$(this.geolocationPresenter.location$)
+    .pipe(map(toStructuresPresentation));
 
   public constructor(
     private readonly lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,

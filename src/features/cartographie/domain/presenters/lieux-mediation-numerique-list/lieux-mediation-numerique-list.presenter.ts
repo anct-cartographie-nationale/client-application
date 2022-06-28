@@ -1,8 +1,8 @@
-import { Structure } from '@gouvfr-anct/mediation-numerique';
-import { combineLatest, Observable } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import { Coordinates, NO_COORDINATES } from '../../value-objects';
+import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
 
 const HALF_CIRCLE_DEGREE: number = 180;
 
@@ -40,30 +40,49 @@ const geographicDistance = (coordinatesA: Coordinates, coordinatesB: Coordinates
   return usingHaversineFormula(latitudeARadian, latitudeBRadian, deltaLatitudeRadian, deltaLongitudeRadian);
 };
 
-const toStructureWithDistance = (structure: Structure, coordinates: Coordinates): Structure =>
+// todo: add distance
+const toLieuxMediationNumeriqueWithDistance = (
+  lieuMediationNumerique: LieuMediationNumerique,
+  coordinates: Coordinates
+): LieuMediationNumerique =>
   coordinates === NO_COORDINATES
-    ? structure
-    : new Structure({
-        ...structure,
-        distance: geographicDistance(
-          {
-            latitude: structure.getLat(),
-            longitude: structure.getLon()
-          },
-          coordinates
-        )
-      });
+    ? lieuMediationNumerique
+    : {
+        ...lieuMediationNumerique
+        // distance: geographicDistance(
+        //   {
+        //     latitude: lieuMediationNumerique.getLat(),
+        //     longitude: lieuMediationNumerique.getLon()
+        //   },
+        //   coordinates
+        // )
+      };
 
-const byStructureDistance = (structureA: Structure, structureB: Structure) =>
-  (structureA?.distance ?? 0) - (structureB?.distance ?? 0);
+const byDistance = (LieuMediationNumeriqueA: LieuMediationNumerique, LieuMediationNumeriqueB: LieuMediationNumerique) => 0;
+// (LieuMediationNumeriqueA?.distance ?? 0) - (LieuMediationNumeriqueB?.distance ?? 0);
 
 export class LieuxMediationNumeriqueListPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
-  public structuresByDistance$(location$: Observable<Coordinates>) {
-    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), location$]).pipe(
-      map(([structures, coordinates]: [Structure[], Coordinates]) =>
-        structures.map((structures: Structure) => toStructureWithDistance(structures, coordinates)).sort(byStructureDistance)
+  public lieuxMediationNumeriqueByDistance$(
+    location$: Observable<Coordinates>,
+    filter$: Observable<string> = of('')
+  ): Observable<LieuMediationNumerique[]> {
+    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), location$, filter$]).pipe(
+      map(
+        ([lieuxMediationNumerique, coordinates, filter]: [
+          LieuMediationNumerique[],
+          Coordinates,
+          string
+        ]): LieuMediationNumerique[] =>
+          lieuxMediationNumerique
+            .map((lieuMediationNumerique: LieuMediationNumerique) =>
+              toLieuxMediationNumeriqueWithDistance(lieuMediationNumerique, coordinates)
+            )
+            .filter((lieuMediationNumerique: LieuMediationNumerique) => {
+              return filter ? lieuMediationNumerique.id === filter : true;
+            })
+            .sort(byDistance)
       )
     );
   }
