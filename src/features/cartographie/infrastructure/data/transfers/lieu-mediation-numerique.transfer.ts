@@ -1,4 +1,3 @@
-import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { Typologie } from '../../../../../models/typologie';
 import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
 import { Siret } from '../../../../../models/siret/siret';
@@ -12,6 +11,7 @@ import { Presentation } from '../../../../../models/presentation';
 import { Siren } from '../../../../../models/siren/siren';
 import { Public } from '../../../../../models/public';
 import { TypeAccompagnement } from '../../../../../models/type-accompagnement';
+import { ifAny, ifAnyInObject } from '../../utilities/if-any';
 
 export interface LieuMediationNumeriqueTransfer {
   id: string;
@@ -43,47 +43,10 @@ export interface LieuMediationNumeriqueTransfer {
   prise_rdv?: string;
 }
 
-const canDisplayOnMap = (lieuxMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
-  lieuxMediationNumeriqueTransfer.latitude != null && lieuxMediationNumeriqueTransfer.longitude != null;
-
-const contactMailIfAny = (contactMail?: string) => (contactMail ? { contactMail } : {});
-
-const contactPhoneIfAny = (contactPhone?: string) => (contactPhone ? { contactPhone } : {});
-
-const websiteIfAny = (website?: string) => (website ? { website } : {});
-
-const labelsQualificationsIfAny = (labelsQualifications?: string[]) => (labelsQualifications ? { labelsQualifications } : {});
-
-const updatedAtIfAny = (updatedAt?: string) => (updatedAt ? { updatedAt } : {});
-
-export const toResinStructures = (lieuxMediationNumeriqueTransfers: LieuMediationNumeriqueTransfer[]): Structure[] =>
-  lieuxMediationNumeriqueTransfers.filter(canDisplayOnMap).map(
-    (lieuxMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer): Structure =>
-      new Structure({
-        _id: lieuxMediationNumeriqueTransfer.id,
-        structureName: lieuxMediationNumeriqueTransfer.nom,
-        address: {
-          street: lieuxMediationNumeriqueTransfer.adresse,
-          commune: lieuxMediationNumeriqueTransfer.commune,
-          postcode: lieuxMediationNumeriqueTransfer.code_postal,
-          coordinates: [lieuxMediationNumeriqueTransfer.longitude, lieuxMediationNumeriqueTransfer.latitude]
-        },
-        coord: [lieuxMediationNumeriqueTransfer.longitude, lieuxMediationNumeriqueTransfer.latitude],
-        ...contactPhoneIfAny(lieuxMediationNumeriqueTransfer.telephone),
-        ...contactMailIfAny(lieuxMediationNumeriqueTransfer.courriel),
-        ...websiteIfAny(lieuxMediationNumeriqueTransfer.site_web),
-        ...labelsQualificationsIfAny(lieuxMediationNumeriqueTransfer.labels_nationaux?.split(', ')),
-        ...updatedAtIfAny(lieuxMediationNumeriqueTransfer.date_maj)
-      })
-  );
-
-const ifAny = <TData, TParam = null>(field: string, data?: TParam | TData, callback?: (data: TParam) => TData) =>
-  data ? { [field]: callback ? callback(data as TParam) : data } : {};
-
 const toArray = <T extends string>(stringArray: string) => stringArray.split(', ') as T[];
 
-const ifAnyInObject = <TContainer>(field: string, container: TContainer) =>
-  Object.keys(container).length > 0 ? { [field]: container } : {};
+const canDisplayOnMap = (lieuxMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
+  lieuxMediationNumeriqueTransfer.latitude != null && lieuxMediationNumeriqueTransfer.longitude != null;
 
 export const toLieuxMediationNumerique = (
   lieuxMediationNumeriqueTransfers: LieuMediationNumeriqueTransfer[]
