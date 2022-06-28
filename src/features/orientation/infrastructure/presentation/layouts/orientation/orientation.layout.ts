@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ChildrenOutletContexts } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Injectable } from '@angular/core';
+import { ChildrenOutletContexts, Router } from '@angular/router';
+import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { slideInAnimation } from '../../animation';
 import {
   GeolocationPresenter,

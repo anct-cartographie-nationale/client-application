@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Injectable } from '@angular/core';
 import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -17,6 +17,9 @@ import { NO_LOCALISATION } from '../../../../../../models/localisation/localisat
     }
   ],
   templateUrl: 'lieux-mediation-numerique-list.page.html'
+})
+@Injectable({
+  providedIn: 'root'
 })
 export class LieuxMediationNumeriqueListPage {
   public structures$: Observable<Structure[]> = this.lieuxMediationNumeriqueListPresenter
