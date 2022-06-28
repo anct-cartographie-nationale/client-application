@@ -19,7 +19,9 @@ describe('lieux médiation numérique details presenter', (): void => {
         getAll$: () => of(lieuxMediationNumerique)
       } as LieuxMediationNumeriqueRepository);
 
-    const structure = await firstValueFrom(lieuxMediationNumeriqueDetailsPresenter.structureFromParams$(of(params)));
+    const structure = await firstValueFrom(
+      lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(of(params))
+    );
 
     expect(structure).toStrictEqual({ id: '6001a35f16b08100062e415f' } as LieuMediationNumerique);
   });
@@ -40,7 +42,9 @@ describe('lieux médiation numérique details presenter', (): void => {
         getAll$: () => of(lieuxMediationNumerique)
       } as LieuxMediationNumeriqueRepository);
 
-    const structure = await firstValueFrom(lieuxMediationNumeriqueDetailsPresenter.structureFromParams$(of(params)));
+    const structure = await firstValueFrom(
+      lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(of(params))
+    );
 
     expect(structure).toStrictEqual({ id: '6001a35f16b08100062e415f' } as LieuMediationNumerique);
   });

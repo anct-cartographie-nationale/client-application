@@ -18,7 +18,7 @@ import { toStructurePresentation } from '../../models/structure';
 })
 export class LieuxMediationNumeriqueDetailsPage {
   public structure$: Observable<Structure> = this.lieuxMediationNumeriqueDetailsPresenter
-    .structureFromParams$(this.route.params)
+    .lieuMediationNumeriqueFromParams$(this.route.params)
     .pipe(map(toStructurePresentation));
 
   public constructor(

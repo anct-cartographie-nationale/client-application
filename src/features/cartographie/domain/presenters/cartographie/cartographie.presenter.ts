@@ -8,7 +8,7 @@ import { toStructuresPresentation } from '../../../infrastructure/presentation/m
 export class CartographiePresenter {
   public constructor(public readonly lieuMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
-  getStructures$(): Observable<Structure[]> {
+  public getStructures$(): Observable<Structure[]> {
     return this.lieuMediationNumeriqueRepository
       .getAll$()
       .pipe(map((lieuxMediationNumerique: LieuMediationNumerique[]) => toStructuresPresentation(lieuxMediationNumerique)));
