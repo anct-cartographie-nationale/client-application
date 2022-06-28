@@ -2,7 +2,6 @@ import { LieuxMediationNumeriqueHttp } from './lieux-mediation-numerique.http';
 import { DataConfiguration } from '../../../../../../root';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, Observable, of } from 'rxjs';
-import { LieuMediationNumeriqueTransfer } from '../../transfers';
 import { Siret } from '../../../../../../models/siret/siret';
 import { Adresse } from '../../../../../../models/adresse/adresse';
 import { Localisation } from '../../../../../../models/localisation/localisation';
@@ -10,6 +9,7 @@ import { Contact } from '../../../../../../models/contact/contact';
 import { Url } from '../../../../../../models/url/url';
 import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
 import { Siren } from '../../../../../../models/siren/siren';
+import { LieuMediationNumeriqueTransfer } from '../../transfers/lieu-mediation-numerique.transfer';
 
 describe('lieux mediation numérique http', (): void => {
   it('should get all', async (): Promise<void> => {
