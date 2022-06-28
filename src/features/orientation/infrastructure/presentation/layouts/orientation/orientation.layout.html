@@ -43,5 +43,10 @@
     <div class="container bg-white shadow-sm mb-5 overflow-hidden flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
       <router-outlet></router-outlet>
     </div>
+    <!-- todo: Exemple à supprimer-->
+    <div>{{ (lieuxMediationNumerique$ | async)?.length }}</div>
+    <button (click)="filter$.next('21050061700019')">21050061700019</button>
+    <button (click)="filter$.next('53851847300011')">53851847300011</button>
+    <button (click)="filter$.next('')">clear</button>
   </div>
 </div>

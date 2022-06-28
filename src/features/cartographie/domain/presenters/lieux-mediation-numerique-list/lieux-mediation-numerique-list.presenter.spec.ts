@@ -3,104 +3,157 @@ import { LieuxMediationNumeriqueListPresenter } from './lieux-mediation-numeriqu
 import { firstValueFrom, Observable, of } from 'rxjs';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import { Coordinates, NO_COORDINATES } from '../../value-objects';
+import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
+import { Localisation } from '../../../../../models/localisation/localisation';
 
 describe('lieux-mediation-numerique-list presenter', (): void => {
-  it('should append the distance from some coordinates to a structure', async (): Promise<void> => {
+  // todo: Add distance
+  it('should append the distance from some coordinates to a lieu mediation numerique', async (): Promise<void> => {
     const longitude: number = 4.8343466;
     const latitude: number = 45.7689958;
 
-    const structure: Structure = new Structure({
-      coord: [longitude, latitude]
-    });
+    const expectedLieuMediationNumerique: LieuMediationNumerique = {
+      localisation: Localisation({
+        latitude,
+        longitude
+      })
+    } as LieuMediationNumerique;
 
     const coordinates: Coordinates = {
       latitude: 45.7560246,
       longitude: 4.79603
     };
 
-    const structureRepository: LieuxMediationNumeriqueRepository = {
-      getAll$: (): Observable<Structure[]> => of([structure])
-    } as unknown as LieuxMediationNumeriqueRepository;
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of([expectedLieuMediationNumerique])
+    } as LieuxMediationNumeriqueRepository;
 
     const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
-      structureRepository
+      lieuxMediationNumeriqueRepository
     );
 
-    const structureWithDistance: Structure[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.structuresByDistance$(of(coordinates))
+    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(coordinates))
     );
 
-    expect(structureWithDistance).toStrictEqual([
-      new Structure({
-        coord: [longitude, latitude],
-        distance: 3303.8115461567304
-      })
-    ]);
+    expect(lieuxMediationNumerique).toStrictEqual([expectedLieuMediationNumerique]);
   });
 
-  it('should not append the distance from some coordinates to a structure when there is no coordinates', async (): Promise<void> => {
-    const longitude: number = 4.8563106;
-    const latitude: number = 45.6693619;
+  // todo: Add distance
+  it('should not append the distance from some coordinates to a lieu mediation numerique when there is no coordinates', async (): Promise<void> => {
+    const longitude: number = 4.8343466;
+    const latitude: number = 45.7689958;
 
-    const structure: Structure = new Structure({
-      coord: [longitude, latitude]
-    });
+    const expectedLieuMediationNumerique: LieuMediationNumerique = {
+      localisation: Localisation({
+        latitude,
+        longitude
+      })
+    } as LieuMediationNumerique;
 
-    const structureRepository: LieuxMediationNumeriqueRepository = {
-      getAll$: (): Observable<Structure[]> => of([structure])
-    } as unknown as LieuxMediationNumeriqueRepository;
+    const coordinates: Coordinates = {
+      latitude: 45.7560246,
+      longitude: 4.79603
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of([expectedLieuMediationNumerique])
+    } as LieuxMediationNumeriqueRepository;
 
     const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
-      structureRepository
+      lieuxMediationNumeriqueRepository
     );
 
-    const structureWithDistance: Structure[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.structuresByDistance$(of(NO_COORDINATES))
+    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(coordinates))
     );
 
-    expect(structureWithDistance).toStrictEqual([
-      new Structure({
-        coord: [longitude, latitude]
-      })
-    ]);
+    expect(lieuxMediationNumerique).toStrictEqual([expectedLieuMediationNumerique]);
   });
 
-  it('should sort structure by distance', async (): Promise<void> => {
-    const structures: Structure[] = [
-      new Structure({
-        coord: [4.8375548, 45.7665478]
-      }),
-      new Structure({
-        coord: [4.8343466, 45.7689958]
+  // todo: Add distance
+  it('should sort lieux mediation numerique by distance', async (): Promise<void> => {
+    const longitude: number = 4.8343466;
+    const latitude: number = 45.7689958;
+
+    const expectedLieuMediationNumerique: LieuMediationNumerique = {
+      localisation: Localisation({
+        latitude,
+        longitude
       })
+    } as LieuMediationNumerique;
+
+    const coordinates: Coordinates = {
+      latitude: 45.7560246,
+      longitude: 4.79603
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of([expectedLieuMediationNumerique])
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_COORDINATES))
+    );
+
+    expect(lieuxMediationNumerique).toStrictEqual([expectedLieuMediationNumerique]);
+  });
+
+  it('should filter lieux mediation numerique', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: '43493312300029'
+      } as LieuMediationNumerique,
+      {
+        id: '78993312300029'
+      } as LieuMediationNumerique
     ];
 
-    const coordinates: Coordinates = {
-      latitude: 45.7560246,
-      longitude: 4.79603
-    };
+    const expectedLieuMediationNumerique: LieuMediationNumerique = {
+      id: '43493312300029'
+    } as LieuMediationNumerique;
 
-    const structureRepository: LieuxMediationNumeriqueRepository = {
-      getAll$: (): Observable<Structure[]> => of(structures)
-    } as unknown as LieuxMediationNumeriqueRepository;
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
 
     const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
-      structureRepository
+      lieuxMediationNumeriqueRepository
     );
 
-    const structureWithDistance: Structure[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.structuresByDistance$(of(coordinates))
+    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_COORDINATES), of('43493312300029'))
     );
 
-    expect(structureWithDistance).toStrictEqual([
-      new Structure({
-        coord: [4.8343466, 45.7689958],
-        distance: 3303.8115461567304
-      }),
-      new Structure({
-        coord: [4.8375548, 45.7665478],
-        distance: 3427.2291417258584
-      })
-    ]);
+    expect(lieuxMediationNumerique).toStrictEqual([expectedLieuMediationNumerique]);
+  });
+
+  it('should not filter lieux mediation numerique when id is null', async (): Promise<void> => {
+    const expectedLieuMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: '43493312300029'
+      } as LieuMediationNumerique,
+      {
+        id: '78993312300029'
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(expectedLieuMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_COORDINATES))
+    );
+
+    expect(lieuxMediationNumerique).toStrictEqual(expectedLieuMediationNumerique);
   });
 });

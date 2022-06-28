@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { slideInAnimation } from '../../animation';
+import {
+  GeolocationPresenter,
+  LieuxMediationNumeriqueListPresenter,
+  LieuxMediationNumeriqueRepository
+} from '../../../../../cartographie/domain';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,10 +25,30 @@ import { slideInAnimation } from '../../animation';
       ['LocalisationPage', 'DatePage'],
       ['SpecificitePage', 'DatePage']
     ])
+  ],
+  providers: [
+    GeolocationPresenter,
+    {
+      deps: [LieuxMediationNumeriqueRepository],
+      provide: LieuxMediationNumeriqueListPresenter,
+      useClass: LieuxMediationNumeriqueListPresenter
+    }
   ]
 })
 export class OrientationLayout {
-  public constructor(private contexts: ChildrenOutletContexts) {}
+  public filter$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+  public lieuxMediationNumerique$: Observable<LieuMediationNumerique[]> =
+    this.lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+      this.geolocationPresenter.location$,
+      this.filter$
+    );
+
+  public constructor(
+    private readonly lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,
+    public readonly geolocationPresenter: GeolocationPresenter,
+    private contexts: ChildrenOutletContexts
+  ) {}
 
   public getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
