@@ -1,56 +1,59 @@
 <div class="d-flex h-100 bg-light">
-  <div class="d-flex flex-column w-100">
-    <div class="container mt-5 mb-4">
-      <ul class="nav nav-pills justify-content-center">
-        <li class="nav-item">
-          <a
-            class="btn btn-secondary mx-2"
-            [routerLink]="['/', 'orientation', 'besoin']"
-            routerLinkActive="active active-primary"
-            ariaCurrentWhenActive="page">
-            Besoin
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="btn btn-secondary mx-2"
-            [routerLink]="['/', 'orientation', 'localisation']"
-            routerLinkActive="active active-primary"
-            ariaCurrentWhenActive="page">
-            Localisation
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="btn btn-secondary mx-2"
-            [routerLink]="['/', 'orientation', 'specificite']"
-            routerLinkActive="active active-primary"
-            ariaCurrentWhenActive="page">
-            Spécificité
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="btn btn-secondary mx-2"
-            [routerLink]="['/', 'orientation', 'date']"
-            routerLinkActive="active active-primary"
-            ariaCurrentWhenActive="page">
-            Date
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="d-flex container flex-grow-1">
+  <div class="d-flex flex-column w-100 mt-5">
+    <div class="d-flex container">
       <div
         class="col container bg-white shadow-sm mb-5 overflow-hidden flex-grow-1"
         [@routeAnimations]="getRouteAnimationData()">
-        <router-outlet></router-outlet>
+        <router-outlet>
+          <div class="container my-5">
+            <ul class="nav nav-pills justify-content-center">
+              <li class="nav-item">
+                <a
+                  class="btn btn-secondary mx-2"
+                  [routerLink]="['/', 'orientation', 'besoin']"
+                  routerLinkActive="active active-primary"
+                  ariaCurrentWhenActive="page">
+                  Besoin
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="btn btn-secondary mx-2"
+                  [routerLink]="['/', 'orientation', 'localisation']"
+                  routerLinkActive="active active-primary"
+                  ariaCurrentWhenActive="page">
+                  Localisation
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="btn btn-secondary mx-2"
+                  [routerLink]="['/', 'orientation', 'specificite']"
+                  routerLinkActive="active active-primary"
+                  ariaCurrentWhenActive="page">
+                  Spécificité
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="btn btn-secondary mx-2"
+                  [routerLink]="['/', 'orientation', 'date']"
+                  routerLinkActive="active active-primary"
+                  ariaCurrentWhenActive="page">
+                  Date
+                </a>
+              </li>
+            </ul>
+          </div>
+        </router-outlet>
       </div>
       <div
-        class="col-lg-3 col-md-6 col-12 bg-primary shadow-sm mb-5 overflow-hidden"
-        *ngIf="(structures$ | async) as structures">
-        <div class="text-center d-flex flex-column h-100">
-          <div class="my-5">
+        class="col-lg-4 col-md-6 col-12 bg-primary mb-5 shadow-sm overflow-hidden"
+        *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+        <div
+          class="text-center d-flex flex-column h-100"
+          *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
+          <div class="mt-2 p-2">
             <h1 class="h2 text-center text-secondary">
               Structures
               <br />
@@ -58,35 +61,33 @@
               <span *ngIf="this.router.url !==  '/orientation'">correspondantes</span>
             </h1>
           </div>
-          <div class="d-flex mx-auto my-3 justify-content-center" *ngIf="this.router.url ===  '/orientation'">
-            <div class="border rounded-circle py-4 px-4">
+
+          <div class="d-flex p-2 widget-header">
+            <div class="border rounded-circle py-4 px-4 test mx-auto widget">
               <div
                 role="progressbar"
                 data-bg="success"
                 aria-valuenow="65"
                 aria-valuemin="0"
-                aria-valuemax="structures.length"
-                style="--value-int: {{structures.length}} ; --value-percentage: {{((structures.length) / (structures.length)) * 100}}"></div>
+                aria-valuemax="lieuxMediationNumerique.length"
+                style="--value-int: {{lieuxMediationNumerique.length}} ; --value-percentage: {{((lieuxMediationNumerique.length) / (lieuxMediationNumeriqueTotal.length)) * 100}}"></div>
             </div>
           </div>
-          <div class="d-flex mx-auto my-3 justify-content-center" *ngIf="this.router.url !==  '/orientation'">
-            <div class="border rounded-circle py-4 px-4">
-              <div
-                role="progressbar"
-                data-bg="success"
-                aria-valuenow="65"
-                aria-valuemin="0"
-                aria-valuemax="structures.length"
-                style="--value-int: {{structures.length - 200}} ; --value-percentage: {{((structures.length - 200) / (structures.length)) * 100}}"></div>
-            </div>
+          <div class="bg-image" style="background-image: url('assets/logos/carteFrancePerspective.svg')"></div>
+          <div *ngIf="this.router.url !==  '/orientation'" class="d-flex flex-grow-1 justify-content-center">
+            <h1 class="h5 text-center text-secondary">
+              Structures trouvée
+              <br />
+              <span class="h6" style="opacity: 0.5">
+                / {{lieuxMediationNumeriqueTotal.length}} structures sur le territoire
+              </span>
+            </h1>
+          </div>
+          <div class="ml-2 d-flex justify-content-center mb-4">
+            <a class="btn btn-secondary my-4" [routerLink]="['cartographie']">Afficher les résultats sur la cartographie ></a>
           </div>
         </div>
       </div>
     </div>
-    <!-- todo: Exemple à supprimer-->
-    <div>{{ (lieuxMediationNumerique$ | async)?.length }}</div>
-    <button (click)="filter$.next('21050061700019')">21050061700019</button>
-    <button (click)="filter$.next('53851847300011')">53851847300011</button>
-    <button (click)="filter$.next('')">clear</button>
   </div>
 </div>

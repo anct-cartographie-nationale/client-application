@@ -58,28 +58,52 @@ const byDistance = (
   LieuMediationNumeriqueB: LieuMediationNumeriqueListItemPresentation
 ) => (LieuMediationNumeriqueA?.distance ?? 0) - (LieuMediationNumeriqueB?.distance ?? 0);
 
+const filterByType = (lieuMediationNumerique: LieuMediationNumerique, filter: any) => {
+  let condition: boolean = true;
+  filter.map((label: any) => {
+    switch (label.type) {
+      case 'modalites':
+        return (condition = lieuMediationNumerique.modalites_access?.includes(label.name) || false);
+      case 'services':
+        return (condition = lieuMediationNumerique.services?.includes(label.name) || false);
+      default:
+        return false;
+    }
+  });
+  return condition;
+};
+
 export class LieuxMediationNumeriqueListPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
   public lieuxMediationNumeriqueByDistance$(
     location$: Observable<Localisation>,
-    filter$: Observable<string> = of('')
+    filter$: Observable<{ name: string; type: string }[]> = of([{ name: '', type: '' }])
+    // typeOfFilter$: Observable<string> = of('')
   ): Observable<LieuMediationNumeriqueListItemPresentation[]> {
     return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), location$, filter$]).pipe(
       map(
         ([lieuxMediationNumerique, coordinates, filter]: [
           LieuMediationNumerique[],
           Localisation,
-          string
+          any
         ]): LieuMediationNumeriqueListItemPresentation[] =>
           lieuxMediationNumerique
             .map((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
               toLieuxMediationNumeriqueMistItemPresentation(lieuMediationNumerique, coordinates)
             )
             .filter((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) => {
-              return filter ? lieuMediationNumerique.id === filter : true;
+              return Object.values(filter).length > 0 ? filterByType(lieuMediationNumerique, filter) : true;
             })
             .sort(byDistance)
+      )
+    );
+  }
+
+  public lieuxMediationNumeriqueTotal$(): Observable<LieuMediationNumerique[]> {
+    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$()]).pipe(
+      map(([lieuxMediationNumerique]: [LieuMediationNumerique[]]): LieuMediationNumerique[] =>
+        lieuxMediationNumerique.map((lieuMediationNumerique: LieuMediationNumerique) => lieuMediationNumerique).sort(byDistance)
       )
     );
   }

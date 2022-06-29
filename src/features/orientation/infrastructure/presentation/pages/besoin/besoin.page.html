@@ -3,81 +3,43 @@
   <span class="text-primary">votre besoin ?</span>
 </h1>
 <app-collapse title="Démarches" icon="ri-folder-user-line ri-xl" class="d-flex justify-content-center my-3">
-  <div class="col-md-12 d-flex justify-content-center">
-    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of demarche[0]; index as i">
-      <input type="checkbox" class="form-check-input" [attr.id]="'demarcheLabelChip' + i" />
-      <label class="form-check-label bg-success text-white" [attr.for]="'demarcheLabelChip' +i">
-        <i class="ri-add-line text-black align-bottom"></i>
-        {{label}}
-      </label>
-    </div>
-  </div>
-  <div class="col-md-12 d-flex justify-content-center">
-    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of demarche[1]; index as i">
-      <input type="checkbox" class="form-check-input" [attr.id]="'demarcheLabelChip[1]' + i" />
-      <label class="form-check-label bg-success text-white" [attr.for]="'demarcheLabelChip[1]' +i">
-        <i class="ri-add-line text-black align-bottom"></i>
-        {{label}}
-      </label>
-    </div>
-  </div>
-</app-collapse>
-<app-collapse title="Savoir" icon="ri-search-eye-line ri-xl" class="d-flex justify-content-center my-3">
-  <div class="col-md-12 d-flex justify-content-center">
-    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of savoir[0]; index as i">
-      <input type="checkbox" class="form-check-input" [attr.id]="'savoirLabelChip' + i" />
-      <label class="form-check-label bg-success text-white" [attr.for]="'savoirLabelChip' +i">
-        <i class="ri-add-line text-black align-bottom"></i>
-        {{label}}
-      </label>
-    </div>
-  </div>
-  <div class="col-md-12 d-flex justify-content-center">
-    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of savoir[1]; index as i">
-      <input type="checkbox" class="form-check-input" [attr.id]="'savoirLabelChip[1]' + i" />
-      <label class="form-check-label bg-success text-white" [attr.for]="'savoirLabelChip[1]' +i">
-        <i class="ri-add-line text-black align-bottom"></i>
-        {{label}}
-      </label>
-    </div>
-  </div>
-</app-collapse>
-<app-collapse title="&#201;quipement" icon="ri-computer-line ri-xl" class="d-flex justify-content-center my-3">
-  <div class="col-md-12 d-flex justify-content-center">
-    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of equipement[0]; index as i">
-      <input type="checkbox" class="form-check-input" [attr.id]="'equipementLabelChip' + i" />
-      <label class="form-check-label bg-success text-white" [attr.for]="'equipementLabelChip' +i">
-        <i class="ri-add-line text-black align-bottom"></i>
-        {{label}}
-      </label>
-    </div>
-  </div>
-  <div class="col-md-12 d-flex justify-content-center">
-    <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of equipement[1]; index as i">
-      <input type="checkbox" class="form-check-input" [attr.id]="'equipementLabelChip[1]' + i" />
-      <label class="form-check-label bg-success text-white" [attr.for]="'equipementLabelChip[1]' +i">
-        <i class="ri-add-line text-black align-bottom"></i>
-        {{label}}
-      </label>
-    </div>
-  </div>
-</app-collapse>
-<app-collapse title="Autres besoins" icon="ri-speed-line ri-xl" class="d-flex justify-content-center my-3">
-  <div class="col-md-12 d-flex justify-content-center">
+  <div class="col-12 col-md-12 d-flex justify-content-center" *ngFor="let label of demarche; index as i">
     <div class="mb-3 form-check form-check-inline form-chip">
-      <input type="checkbox" class="form-check-input" id="autresBesoinsChip1" />
-      <label class="form-check-label bg-success text-white" for="autresBesoinsChip1">
-        <i class="ri-add-line text-black align-bottom"></i>
-        Je souhaite contacter un spécialiste de la réorientation
+      <input type="radio" name="besoin" class="form-check-input" [attr.id]="'demarcheLabelChip' + i" />
+      <label class="form-check-label bg-primary text-white" [attr.for]="'demarcheLabelChip' +i" (click)="triggerFilter(label)">
+        {{label}}
       </label>
     </div>
   </div>
-  <div class="col-md-12 d-flex justify-content-center">
+</app-collapse>
+<app-collapse title="Mise à niveau" icon="ri-compasses-2-fill ri-xl" class="d-flex justify-content-center my-3">
+  <div class="col-6 col-md-12 d-flex justify-content-center" *ngFor="let label of niveau; index as i">
     <div class="mb-3 form-check form-check-inline form-chip">
-      <input type="checkbox" class="form-check-input" id="autresBesoinsChip2" />
-      <label class="form-check-label bg-success text-white" for="autresBesoinsChip2">
-        <i class="ri-mail-line text-black align-bottom"></i>
-        Je ne trouve pas ma démarche (être recontacté par mail)
+      <input type="radio" name="besoin" class="form-check-input" [attr.id]="'niveauLabelChip' + i" />
+      <label class="form-check-label bg-primary text-white" [attr.for]="'niveauLabelChip' +i" (click)="triggerFilter(label)">
+        {{label}}
+      </label>
+    </div>
+  </div>
+</app-collapse>
+<app-collapse title="Manque de matériel" icon="ri-wifi-line ri-xl" class="d-flex justify-content-center my-3">
+  <div class="col-6 col-md-12 d-flex justify-content-center" *ngFor="let label of manqueDeMateriel; index as i">
+    <div class="mb-3 form-check form-check-inline form-chip">
+      <input type="radio" name="besoin" class="form-check-input" [attr.id]="'manqueDeMateriel' + i" />
+      <label class="form-check-label bg-primary text-white" [attr.for]="'manqueDeMateriel' +i" (click)="triggerFilter(label)">
+        {{label}}
+      </label>
+    </div>
+  </div>
+</app-collapse>
+<app-collapse title="Autres besoins" icon="ri-notification-3-line ri-xl" class="d-flex justify-content-center my-3">
+  <div class="col-12 col-md-12 d-flex justify-content-center">
+    <div class="mb-3 form-check form-check-inline form-chip">
+      <input type="radio" name="besoin" class="form-check-input" [attr.id]="'autresBesoins'" />
+      <label class="form-check-label bg-primary text-white" [attr.for]="'autresBesoins'">
+        <a href="mailto:carto-support@cartonat.com" style="text-decoration: none" class="text-black" target="_blank">
+          Je ne trouve pas mon besoin (poser une question par mail)
+        </a>
       </label>
     </div>
   </div>

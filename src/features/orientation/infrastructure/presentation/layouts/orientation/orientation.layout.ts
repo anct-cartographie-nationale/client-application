@@ -9,6 +9,7 @@ import {
 } from '../../../../../cartographie/domain';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
+import { FilterPresenter } from '../filter/filter.presenter';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,6 +30,7 @@ import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-
   ],
   providers: [
     GeolocationPresenter,
+    FilterPresenter,
     {
       deps: [LieuxMediationNumeriqueRepository],
       provide: LieuxMediationNumeriqueListPresenter,
@@ -37,17 +39,21 @@ import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-
   ]
 })
 export class OrientationLayout {
-  public filter$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
   public lieuxMediationNumerique$: Observable<LieuMediationNumerique[]> =
     this.lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       this.geolocationPresenter.location$,
-      this.filter$
+      this.filterPresenter.filter$
+      // this.filterPresenter.typeOfFilter$
     );
 
+  public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> =
+    this.lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueTotal$();
+
   public constructor(
+    public router: Router,
     private readonly lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,
     public readonly geolocationPresenter: GeolocationPresenter,
+    public readonly filterPresenter: FilterPresenter,
     private contexts: ChildrenOutletContexts
   ) {}
 

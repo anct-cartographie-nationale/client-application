@@ -16,7 +16,7 @@
 }
 
 div[role='progressbar'] {
-  --size: 12rem;
+  --size: 11rem;
   --pg-percentage: var(--value-percentage);
 
   animation: grow-progress-bar 3s 1 forwards;
@@ -32,7 +32,27 @@ div[role='progressbar'] {
   color: var(--fg);
 }
 
+.widget-header {
+  position: absolute;
+}
+
+.widget {
+  position: relative;
+  top: 11rem;
+  left: 6rem;
+}
+
 div[role='progressbar']::before {
   counter-reset: percentage var(--value-int);
   content: counter(percentage);
+}
+
+.bg-image {
+  height: 20rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  left: 2.5rem;
+  bottom: -2rem;
+  margin-bottom: 1rem;
 }
