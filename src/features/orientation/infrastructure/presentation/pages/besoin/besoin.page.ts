@@ -25,19 +25,6 @@ export class BesoinPage {
   ];
   public manqueDeMateriel: string[] = ['Accéder à une connexion internet', 'Accéder à du matériel'];
 
-  // public demarche: string[][] = [
-  //   ['Accès aux droits', 'Logement', 'Accompagnement CAF', 'Insertion Pro'],
-  //   ['Assistance et coups de pouce', 'Autres démarches']
-  // ];
-  public savoir: string[][] = [
-    ['Diagnostic', 'Compétences de base', 'Culture numérique'],
-    ['Formation', 'Outils de bureautique', 'Outils créatifs', 'Aide à la parentalité']
-  ];
-  public equipement: string[][] = [
-    ['Wifi', 'Ordinateur', 'Imprimante', 'Scanner'],
-    ['Prêt / Don matériel', 'Revues informatiques', 'FabLab']
-  ];
-
   public lieuxMediationNumerique$: Observable<LieuMediationNumerique[]> =
     this.lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       this.geolocationPresenter.location$,
