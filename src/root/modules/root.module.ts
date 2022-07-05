@@ -2,6 +2,7 @@ import { DoBootstrap, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartographieProviders } from '@features/cartographie/infrastructure';
+import { OrientationProviders } from '@features/orientation/infrastructure';
 import { MainLayout, RootLayout } from '../layouts';
 import { RootRoutingModule } from './root-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +14,7 @@ import { BRAND_CONFIGURATION, BRAND_TOKEN } from '../configuration';
   entryComponents: [RootLayout],
   providers: [
     ...CartographieProviders,
+    ...OrientationProviders,
     {
       provide: BRAND_TOKEN,
       useValue: BRAND_CONFIGURATION
