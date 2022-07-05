@@ -1,0 +1,41 @@
+<ng-container [formGroup]="searchForm">
+  <label for="address" class="visually-hidden">Quelle est votre adresse ?</label>
+  <input
+    #addressInput
+    type="search"
+    placeholder="Entrez une adresse"
+    name="address"
+    id="address"
+    class="form-control"
+    autocomplete="off"
+    aria-describedby="address"
+    aria-haspopup="true"
+    formControlName="address"
+    [attr.aria-describedby]="addressNotFound ? 'address-desc-error' : null"
+    [attr.aria-expanded]="dropdownPane.expanded$ | async"
+    (input)="search(addressInput.value); addressInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
+    (focus)="addressInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
+    (keyup.escape)="dropdownPane.reduce()" />
+  <ul
+    #dropdownPane="dropdownPane"
+    appDropdownPane
+    [dropdownControl]="addressInput"
+    [class.show]="(dropdownPane.expanded$ | async) && addressSuggestions.length > 0"
+    class="dropdown-menu position-absolute mt-1"
+    aria-labelledby="address">
+    <li *ngFor="let address of addressSuggestions; index as addressIndex; trackBy: trackByAddressName">
+      <button
+        type="button"
+        class="dropdown-item"
+        [class.active]="dropdownPane.activeIndex === addressIndex"
+        [attr.aria-current]="dropdownPane.activeIndex === addressIndex ? true : null"
+        (focusin)="dropdownPane.setIndex(addressIndex); setAddressSuggestion(address)"
+        (focusout)="dropdownPane.setIndex(-1)"
+        (click)="setAddressSuggestion(address); dropdownPane.reduce()">
+        <b>{{ address.label }}</b>
+        <br />
+        <small>{{ address.context }}</small>
+      </button>
+    </li>
+  </ul>
+</ng-container>

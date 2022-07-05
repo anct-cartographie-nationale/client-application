@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-collapse',
-  templateUrl: 'collapse.html'
+  templateUrl: './collapse.component.html'
 })
 export class CollapseComponent {
   @Input() public isCollapsed: boolean = true;
