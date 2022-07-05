@@ -4,6 +4,7 @@ import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
 import { Localisation, NO_LOCALISATION } from '../../../../../models/localisation/localisation';
 import { LieuMediationNumeriqueListItemPresentation } from './lieu-mediation-numerique-list-item.presentation';
+import { FilterPresentation } from '../../../../orientation/domain/presenters/filter/filter.presenter';
 
 const HALF_CIRCLE_DEGREE: number = 180;
 
@@ -78,15 +79,14 @@ export class LieuxMediationNumeriqueListPresenter {
 
   public lieuxMediationNumeriqueByDistance$(
     location$: Observable<Localisation>,
-    filter$: Observable<{ name: string; type: string }[]> = of([{ name: '', type: '' }])
-    // typeOfFilter$: Observable<string> = of('')
+    filter$: Observable<FilterPresentation[]> = of([{ name: '', type: '' }])
   ): Observable<LieuMediationNumeriqueListItemPresentation[]> {
     return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), location$, filter$]).pipe(
       map(
         ([lieuxMediationNumerique, coordinates, filter]: [
           LieuMediationNumerique[],
           Localisation,
-          any
+          FilterPresentation[]
         ]): LieuMediationNumeriqueListItemPresentation[] =>
           lieuxMediationNumerique
             .map((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
@@ -101,10 +101,6 @@ export class LieuxMediationNumeriqueListPresenter {
   }
 
   public lieuxMediationNumeriqueTotal$(): Observable<LieuMediationNumerique[]> {
-    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$()]).pipe(
-      map(([lieuxMediationNumerique]: [LieuMediationNumerique[]]): LieuMediationNumerique[] =>
-        lieuxMediationNumerique.map((lieuMediationNumerique: LieuMediationNumerique) => lieuMediationNumerique).sort(byDistance)
-      )
-    );
+    return this.lieuxMediationNumeriqueRepository.getAll$();
   }
 }

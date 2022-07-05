@@ -1,11 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BesoinPage } from './besoin.page';
 import { CollapseStubComponent } from '../../test-doubles';
+import { LieuxMediationNumeriqueListPresenter } from '../../../../../cartographie/domain';
+import { FilterPresenter } from '../../../../domain/presenters/filter/filter.presenter';
 
 describe('BesoinPage', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
-      declarations: [BesoinPage, CollapseStubComponent]
+      declarations: [BesoinPage, CollapseStubComponent],
+      providers: [
+        {
+          provide: LieuxMediationNumeriqueListPresenter,
+          useValue: {
+            lieuxMediationNumeriqueByDistance$: () => {}
+          }
+        },
+        {
+          provide: FilterPresenter,
+          useValue: {}
+        }
+      ]
     })
       .compileComponents()
       .catch((): void => {

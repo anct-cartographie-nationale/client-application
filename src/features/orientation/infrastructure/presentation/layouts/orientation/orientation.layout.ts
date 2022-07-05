@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component, Injectable } from '@angular/core';
 import { ChildrenOutletContexts, Router } from '@angular/router';
-import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { slideInAnimation } from '../../animation';
 import {
   GeolocationPresenter,
   LieuxMediationNumeriqueListPresenter,
   LieuxMediationNumeriqueRepository
 } from '../../../../../cartographie/domain';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
-import { FilterPresenter } from '../filter/filter.presenter';
+import { FilterPresenter } from '../../../../domain/presenters/filter/filter.presenter';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,8 +41,7 @@ export class OrientationLayout {
   public lieuxMediationNumerique$: Observable<LieuMediationNumerique[]> =
     this.lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       this.geolocationPresenter.location$,
-      this.filterPresenter.filter$
-      // this.filterPresenter.typeOfFilter$
+      this.filterPresenter.filters$
     );
 
   public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> =

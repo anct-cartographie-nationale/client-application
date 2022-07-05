@@ -18,9 +18,6 @@ import { NO_LOCALISATION } from '../../../../../../models/localisation/localisat
   ],
   templateUrl: 'lieux-mediation-numerique-list.page.html'
 })
-@Injectable({
-  providedIn: 'root'
-})
 export class LieuxMediationNumeriqueListPage {
   public structures$: Observable<Structure[]> = this.lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION))

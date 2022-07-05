@@ -1,19 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { BehaviorSubject, Observable, of, merge } from 'rxjs';
-import {
-  GeolocationPresenter,
-  LieuxMediationNumeriqueListPresenter,
-  LieuxMediationNumeriqueRepository
-} from '../../../../../cartographie/domain';
-import { FilterPresenter } from '../../layouts/filter/filter.presenter';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { LieuxMediationNumeriqueListPresenter } from '../../../../../cartographie/domain';
 import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
+import { FilterPresenter } from '../../../../domain/presenters/filter/filter.presenter';
+import { NO_LOCALISATION } from '../../../../../../models/localisation/localisation';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'besoin.page.html'
 })
 export class BesoinPage {
-  // public modalite: string[] = ['Gratuit', 'Payant'];
   public demarche: string[] = ['Etre accompagné dans les démarches administratives', 'Créer et développer mon entreprise'];
   public niveau: string[] = [
     'Prendre en main un smartphone ou une tablette',
@@ -27,17 +23,16 @@ export class BesoinPage {
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumerique[]> =
     this.lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
-      this.geolocationPresenter.location$,
-      this.filterPresenter.filter$
+      of(NO_LOCALISATION),
+      this.filterPresenter.filters$
     );
 
   public constructor(
     private readonly lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,
-    public readonly geolocationPresenter: GeolocationPresenter,
     public readonly filterPresenter: FilterPresenter
   ) {}
 
-  public triggerFilter(label: string) {
-    this.filterPresenter.filter$.next([...this.filterPresenter.filter$.value, { name: label, type: 'services' }]);
+  public triggerFilter(name: string) {
+    this.filterPresenter.setFilter({ name, type: 'services' });
   }
 }

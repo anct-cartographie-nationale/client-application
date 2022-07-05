@@ -112,18 +112,18 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
-  it('should filter lieux mediation numerique', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on ', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
-        id: '43493312300029'
+        services: ['Etre accompagné dans les démarches administratives']
       } as LieuMediationNumerique,
       {
-        id: '78993312300029'
+        services: ['Créer et développer mon entreprise']
       } as LieuMediationNumerique
     ];
 
     const expectedLieuMediationNumerique: LieuMediationNumerique = {
-      id: '43493312300029'
+      services: ['Créer et développer mon entreprise']
     } as LieuMediationNumerique;
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
@@ -135,13 +135,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     );
 
     const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of('43493312300029'))
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of([{ name: 'Créer et développer mon entreprise', type: 'services' }])
+      )
     );
 
     expect(lieuxMediationNumerique).toStrictEqual([expectedLieuMediationNumerique]);
   });
 
-  it('should not filter lieux mediation numerique when id is null', async (): Promise<void> => {
+  it('should not filter lieux mediation numerique when filter is null', async (): Promise<void> => {
     const expectedLieuMediationNumerique: LieuMediationNumerique[] = [
       {
         id: '43493312300029'
