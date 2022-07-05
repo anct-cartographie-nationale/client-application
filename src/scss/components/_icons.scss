@@ -9,11 +9,6 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   $font-extensions-icons
 );
 
-.icon-circle {
-  padding: 20px;
-  border-radius: 100%;
-}
-
 [class^='ri-'],
 [class*='ri-'] {
   font-family: remixicon, sans-serif !important;
@@ -84,6 +79,11 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-10x {
   font-size: 10em;
+}
+
+.ri-space {
+  min-width: 2em;
+  line-height: 2em;
 }
 
 .ri-fw {

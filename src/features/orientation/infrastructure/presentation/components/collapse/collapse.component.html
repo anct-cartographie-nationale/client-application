@@ -8,8 +8,8 @@
         type="button"
         [attr.aria-expanded]="!isCollapsed"
         aria-controls="collapseControl">
-        <i *ngIf="icon" [class]="icon" class="icon-circle m-2 bg-primary text-light"></i>
-        {{title}}
+        <i *ngIf="icon" [class]="icon" class="ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+        {{ title }}
       </button>
     </h2>
     <div [class.collapse]="isCollapsed" id="collapseControl" class="accordion-collapse" aria-labelledby="headingOne">

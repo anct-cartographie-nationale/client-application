@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CollapseComponent } from './collapse';
+import { CollapseComponent } from './collapse.component';
 
 describe('CollapseComponent', (): void => {
   beforeEach(async (): Promise<void> => {

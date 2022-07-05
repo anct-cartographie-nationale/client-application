@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BesoinPage } from './besoin.page';
+import { CollapseStubComponent } from '../../test-doubles';
 
 describe('BesoinPage', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
-      declarations: [BesoinPage]
+      declarations: [BesoinPage, CollapseStubComponent]
     })
       .compileComponents()
       .catch((): void => {

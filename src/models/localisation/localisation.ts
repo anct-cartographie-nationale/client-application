@@ -51,3 +51,7 @@ const throwLocalisationError = (localisationData: LocalisationToValidate): Local
 export const Localisation = (localisationData: LocalisationToValidate): Localisation => {
   return isLocalisation(localisationData) ? { ...localisationData } : throwLocalisationError(localisationData);
 };
+
+type NoLocalisation = null & { noLocalisation: true };
+
+export const NO_LOCALISATION: Localisation = null as NoLocalisation;

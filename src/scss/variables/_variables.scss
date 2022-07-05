@@ -8,8 +8,10 @@ $box-shadow-sm: 0 0.25rem 0.25rem rgba($black, 0.25);
 
 @import './accordion';
 @import './buttons';
+@import './dropdown';
 @import './fonts';
 @import './icons';
+@import './inputs';
 @import './navbar';
 @import '~bootstrap/scss/variables';
 @import './form-check';
