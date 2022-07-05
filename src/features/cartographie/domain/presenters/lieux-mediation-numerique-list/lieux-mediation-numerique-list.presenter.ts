@@ -1,8 +1,9 @@
 import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
-import { Coordinates, NO_COORDINATES } from '../../value-objects';
 import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
+import { Localisation, NO_LOCALISATION } from '../../../../../models/localisation/localisation';
+import { LieuMediationNumeriqueListItemPresentation } from './lieu-mediation-numerique-list-item.presentation';
 
 const HALF_CIRCLE_DEGREE: number = 180;
 
@@ -31,7 +32,7 @@ const usingHaversineFormula = (
     )
   );
 
-const geographicDistance = (coordinatesA: Coordinates, coordinatesB: Coordinates): number => {
+const geographicDistance = (coordinatesA: Localisation, coordinatesB: Localisation): number => {
   const latitudeARadian: number = coordinatesA.latitude * DEGREE_TO_RADIANS_FACTOR;
   const latitudeBRadian: number = coordinatesB.latitude * DEGREE_TO_RADIANS_FACTOR;
   const deltaLatitudeRadian: number = latitudeBRadian - latitudeARadian;
@@ -41,45 +42,41 @@ const geographicDistance = (coordinatesA: Coordinates, coordinatesB: Coordinates
 };
 
 // todo: add distance
-const toLieuxMediationNumeriqueWithDistance = (
+const toLieuxMediationNumeriqueMistItemPresentation = (
   lieuMediationNumerique: LieuMediationNumerique,
-  coordinates: Coordinates
-): LieuMediationNumerique =>
-  coordinates === NO_COORDINATES
+  localisation: Localisation
+): LieuMediationNumeriqueListItemPresentation =>
+  localisation === NO_LOCALISATION
     ? lieuMediationNumerique
     : {
-        ...lieuMediationNumerique
-        // distance: geographicDistance(
-        //   {
-        //     latitude: lieuMediationNumerique.getLat(),
-        //     longitude: lieuMediationNumerique.getLon()
-        //   },
-        //   coordinates
-        // )
+        ...lieuMediationNumerique,
+        distance: geographicDistance(lieuMediationNumerique.localisation, localisation)
       };
 
-const byDistance = (LieuMediationNumeriqueA: LieuMediationNumerique, LieuMediationNumeriqueB: LieuMediationNumerique) => 0;
-// (LieuMediationNumeriqueA?.distance ?? 0) - (LieuMediationNumeriqueB?.distance ?? 0);
+const byDistance = (
+  LieuMediationNumeriqueA: LieuMediationNumeriqueListItemPresentation,
+  LieuMediationNumeriqueB: LieuMediationNumeriqueListItemPresentation
+) => (LieuMediationNumeriqueA?.distance ?? 0) - (LieuMediationNumeriqueB?.distance ?? 0);
 
 export class LieuxMediationNumeriqueListPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
   public lieuxMediationNumeriqueByDistance$(
-    location$: Observable<Coordinates>,
+    location$: Observable<Localisation>,
     filter$: Observable<string> = of('')
-  ): Observable<LieuMediationNumerique[]> {
+  ): Observable<LieuMediationNumeriqueListItemPresentation[]> {
     return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), location$, filter$]).pipe(
       map(
         ([lieuxMediationNumerique, coordinates, filter]: [
           LieuMediationNumerique[],
-          Coordinates,
+          Localisation,
           string
-        ]): LieuMediationNumerique[] =>
+        ]): LieuMediationNumeriqueListItemPresentation[] =>
           lieuxMediationNumerique
-            .map((lieuMediationNumerique: LieuMediationNumerique) =>
-              toLieuxMediationNumeriqueWithDistance(lieuMediationNumerique, coordinates)
+            .map((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
+              toLieuxMediationNumeriqueMistItemPresentation(lieuMediationNumerique, coordinates)
             )
-            .filter((lieuMediationNumerique: LieuMediationNumerique) => {
+            .filter((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) => {
               return filter ? lieuMediationNumerique.id === filter : true;
             })
             .sort(byDistance)
