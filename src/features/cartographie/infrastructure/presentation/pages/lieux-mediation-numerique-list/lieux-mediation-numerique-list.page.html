@@ -1,5 +1,3 @@
-<button class="btn btn-primary" (click)="geolocationPresenter.locate(geolocationProvider)">Géolocalisation</button>
-
 <ng-container *ngIf="(structures$ | async) as structures">
   <fr-lieux-mediation-numerique-list (displayMapMarkerId)="markersPresenter.highlight($event)" [structureList]="structures">
     <div slot="structure-list-elements">
