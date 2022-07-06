@@ -1,11 +1,11 @@
 <div class="text-center d-flex flex-column h-100">
-  <div class="mt-5">
+  <div class="mt-5" *ngIf="((orientationLayout.filterForm.valueChanges | async) === null); else: restart">
     <img *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" alt="" />
     <h1 class="h2 mb-3">
       Bienvenue sur la cartographie
       <span class="text-primary">{{ brandConfiguration.name }}</span>
     </h1>
-    <p class="lead">
+    <p class="lead my-5">
       Vous rencontrez un problème lié au numérique ?
       <br />
       Des structures sont à votre disposition sur le territoire pour répondre à votre besoin,
@@ -14,4 +14,10 @@
     </p>
     <a class="btn btn-primary my-4" [routerLink]="['besoin']">Démarrer l'orientation</a>
   </div>
+  <ng-template #restart>
+    <h1 class="h2 mb-3">
+      Souhaitez-vous vraiment
+      <span class="text-primary">redémarrer l'orientation ?</span>
+    </h1>
+  </ng-template>
 </div>

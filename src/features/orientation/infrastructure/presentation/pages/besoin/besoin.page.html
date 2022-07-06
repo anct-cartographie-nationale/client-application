@@ -2,52 +2,57 @@
   Quel est
   <span class="text-primary">votre besoin ?</span>
 </h1>
-<app-collapse title="Démarches" icon="ri-folder-user-line ri-xl" class="d-flex justify-content-center my-3">
-  <div class="col-12 col-md-12 d-flex justify-content-center" *ngFor="let label of demarche; index as i">
-    <div class="mb-3 form-check form-check-inline form-chip">
-      <input type="radio" name="besoin" class="form-check-input" [attr.id]="'demarcheLabelChip' + i" />
-      <label class="form-check-label bg-primary text-white" [attr.for]="'demarcheLabelChip' +i" (click)="triggerFilter(label)">
-        {{label}}
-      </label>
+<form [formGroup]="orientationLayout.filterForm">
+  <app-collapse title="Démarches" icon="ri-file-list-3-line ri-xl" class="d-flex justify-content-center my-3">
+    <div class="text-center">
+      <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of demarche; index as i">
+        <input
+          type="radio"
+          appUncheckableRadio
+          name="services"
+          formControlName="services"
+          class="form-check-input"
+          [value]="label"
+          [attr.id]="'demarcheLabelChip' + i" />
+        <label class="form-check-label bg-primary text-white" [attr.for]="'demarcheLabelChip' + i">{{ label }}</label>
+      </div>
     </div>
-  </div>
-</app-collapse>
-<app-collapse title="Mise à niveau" icon="ri-compasses-2-fill ri-xl" class="d-flex justify-content-center my-3">
-  <div class="col-6 col-md-12 d-flex justify-content-center" *ngFor="let label of niveau; index as i">
-    <div class="mb-3 form-check form-check-inline form-chip">
-      <input type="radio" name="besoin" class="form-check-input" [attr.id]="'niveauLabelChip' + i" />
-      <label class="form-check-label bg-primary text-white" [attr.for]="'niveauLabelChip' +i" (click)="triggerFilter(label)">
-        {{label}}
-      </label>
+  </app-collapse>
+  <app-collapse title="Mise à niveau" icon="ri-compasses-2-fill ri-xl" class="d-flex justify-content-center my-3">
+    <div class="text-center">
+      <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of niveau; index as i">
+        <input
+          type="radio"
+          appUncheckableRadio
+          name="services"
+          formControlName="services"
+          class="form-check-input"
+          [value]="label"
+          [attr.id]="'niveauLabelChip' + i" />
+        <label class="form-check-label bg-primary text-white" [attr.for]="'niveauLabelChip' + i">{{ label }}</label>
+      </div>
     </div>
-  </div>
-</app-collapse>
-<app-collapse title="Manque de matériel" icon="ri-wifi-line ri-xl" class="d-flex justify-content-center my-3">
-  <div class="col-6 col-md-12 d-flex justify-content-center" *ngFor="let label of manqueDeMateriel; index as i">
-    <div class="mb-3 form-check form-check-inline form-chip">
-      <input type="radio" name="besoin" class="form-check-input" [attr.id]="'manqueDeMateriel' + i" />
-      <label class="form-check-label bg-primary text-white" [attr.for]="'manqueDeMateriel' +i" (click)="triggerFilter(label)">
-        {{label}}
-      </label>
+  </app-collapse>
+  <app-collapse title="Manque de matériel" icon="ri-wifi-line ri-xl" class="d-flex justify-content-center my-3">
+    <div class="text-center">
+      <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of manqueDeMateriel; index as i">
+        <input
+          type="radio"
+          appUncheckableRadio
+          name="services"
+          formControlName="services"
+          class="form-check-input"
+          [value]="label"
+          [attr.id]="'manqueDeMateriel' + i" />
+        <label class="form-check-label bg-primary text-white" [attr.for]="'manqueDeMateriel' + i">{{ label }}</label>
+      </div>
     </div>
+  </app-collapse>
+  <div class="container my-5">
+    <ul class="nav nav-pills justify-content-center">
+      <li class="nav-item">
+        <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'localisation']">Suivant ></a>
+      </li>
+    </ul>
   </div>
-</app-collapse>
-<app-collapse title="Autres besoins" icon="ri-notification-3-line ri-xl" class="d-flex justify-content-center my-3">
-  <div class="col-12 col-md-12 d-flex justify-content-center">
-    <div class="mb-3 form-check form-check-inline form-chip">
-      <input type="radio" name="besoin" class="form-check-input" [attr.id]="'autresBesoins'" />
-      <label class="form-check-label bg-primary text-white" [attr.for]="'autresBesoins'">
-        <a href="mailto:carto-support@cartonat.com" style="text-decoration: none" class="text-black" target="_blank">
-          Je ne trouve pas mon besoin (poser une question par mail)
-        </a>
-      </label>
-    </div>
-  </div>
-</app-collapse>
-<div class="container my-5">
-  <ul class="nav nav-pills justify-content-center">
-    <li class="nav-item">
-      <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'localisation']">Suivant ></a>
-    </li>
-  </ul>
-</div>
+</form>

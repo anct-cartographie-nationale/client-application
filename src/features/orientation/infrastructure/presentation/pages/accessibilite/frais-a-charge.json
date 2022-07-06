@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Gratuit",
+    "value": "Gratuit"
+  },
+  {
+    "label": "Payant",
+    "value": "Payant"
+  },
+  {
+    "label": "Adhésion",
+    "value": "Adhésion"
+  },
+  {
+    "label": "Gratuit sous condition (situation, pass numérique, convention avec un organisme, etc.)",
+    "value": "Gratuit sous condition"
+  }
+]

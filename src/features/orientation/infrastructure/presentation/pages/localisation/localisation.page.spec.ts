@@ -5,6 +5,8 @@ import { AddressRepository } from '../../../../domain/repositories';
 import { GeolocationPresenter } from '../../../../../cartographie/domain';
 import { AddressFieldStubComponent, CollapseStubComponent } from '../../test-doubles';
 import { LocalisationPage } from './localisation.page';
+import { OrientationLayout } from '../../layouts';
+import { FormGroup } from '@angular/forms';
 
 describe('LocalisationPage', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -24,6 +26,12 @@ describe('LocalisationPage', (): void => {
         {
           provide: GeolocationPresenter,
           useValue: {}
+        },
+        {
+          provide: OrientationLayout,
+          useValue: {
+            filterForm: new FormGroup({})
+          }
         }
       ]
     })

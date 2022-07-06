@@ -42,7 +42,6 @@ const geographicDistance = (coordinatesA: Localisation, coordinatesB: Localisati
   return usingHaversineFormula(latitudeARadian, latitudeBRadian, deltaLatitudeRadian, deltaLongitudeRadian);
 };
 
-// todo: add distance
 const toLieuxMediationNumeriqueMistItemPresentation = (
   lieuMediationNumerique: LieuMediationNumerique,
   localisation: Localisation
@@ -59,42 +58,62 @@ const byDistance = (
   LieuMediationNumeriqueB: LieuMediationNumeriqueListItemPresentation
 ) => (LieuMediationNumeriqueA?.distance ?? 0) - (LieuMediationNumeriqueB?.distance ?? 0);
 
-const filterByType = (lieuMediationNumerique: LieuMediationNumerique, filter: any) => {
-  let condition: boolean = true;
-  filter.map((label: any) => {
-    switch (label.type) {
-      case 'modalites':
-        return (condition = lieuMediationNumerique.modalites_access?.includes(label.name) || false);
-      case 'services':
-        return (condition = lieuMediationNumerique.services?.includes(label.name) || false);
-      default:
-        return false;
-    }
-  });
-  return condition;
-};
+type FilterOperator = (
+  lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation,
+  filter: FilterPresentation
+) => boolean;
+
+const filterOperatorsMap: Map<string, FilterOperator> = new Map([
+  [
+    'distance',
+    (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation, filter: FilterPresentation): boolean =>
+      lieuMediationNumerique.distance && filter.distance ? lieuMediationNumerique.distance <= filter.distance : true
+  ],
+  [
+    'services',
+    (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation, filter: FilterPresentation): boolean =>
+      lieuMediationNumerique.services && filter.services ? lieuMediationNumerique.services.includes(filter.services) : true
+  ],
+  [
+    'accessibilite',
+    (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation, filter: FilterPresentation): boolean =>
+      filter.accessibilite ? lieuMediationNumerique.accessibilite != null : true
+  ]
+]);
+
+const applyFilter = (
+  lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation,
+  filter: FilterPresentation = {},
+  operator?: FilterOperator
+): boolean => (operator ? operator(lieuMediationNumerique, filter ?? {}) : true);
+
+const byOrientationFilter =
+  (filter: FilterPresentation) => (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
+    Object.keys(filter).reduce(
+      (filterResult: boolean, filterProperty: string) =>
+        filterResult && applyFilter(lieuMediationNumerique, filter, filterOperatorsMap.get(filterProperty)),
+      true
+    );
 
 export class LieuxMediationNumeriqueListPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
   public lieuxMediationNumeriqueByDistance$(
     location$: Observable<Localisation>,
-    filter$: Observable<FilterPresentation[]> = of([{ name: '', type: '' }])
+    filter$: Observable<FilterPresentation | undefined> = of(undefined)
   ): Observable<LieuMediationNumeriqueListItemPresentation[]> {
     return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), location$, filter$]).pipe(
       map(
         ([lieuxMediationNumerique, coordinates, filter]: [
           LieuMediationNumerique[],
           Localisation,
-          FilterPresentation[]
+          FilterPresentation | undefined
         ]): LieuMediationNumeriqueListItemPresentation[] =>
           lieuxMediationNumerique
             .map((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
               toLieuxMediationNumeriqueMistItemPresentation(lieuMediationNumerique, coordinates)
             )
-            .filter((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) => {
-              return Object.values(filter).length > 0 ? filterByType(lieuMediationNumerique, filter) : true;
-            })
+            .filter(byOrientationFilter(filter ?? {}))
             .sort(byDistance)
       )
     );

@@ -3,10 +3,10 @@ export type Public =
   | 'Familles/enfants'
   | 'Adultes'
   | 'Jeunes (16-26 ans)'
-  | 'Public langues étrangères'
+  | 'Langues étrangères'
   | 'Déficience visuelle'
   | 'Surdité'
-  | 'Handicaps psychiques : troubles psychiatriques donnant lieu à des atteintes comportementales'
-  | 'Handicaps mentaux : déficiences limitant les activités d’une personne'
+  | 'Handicaps psychiques'
+  | 'Handicaps mentaux'
   | 'Uniquement femmes'
   | 'Personnes en situation d’illettrisme';

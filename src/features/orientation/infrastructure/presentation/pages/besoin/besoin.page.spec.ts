@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BesoinPage } from './besoin.page';
 import { CollapseStubComponent } from '../../test-doubles';
 import { LieuxMediationNumeriqueListPresenter } from '../../../../../cartographie/domain';
-import { FilterPresenter } from '../../../../domain/presenters/filter/filter.presenter';
+import { OrientationLayout } from '../../layouts';
+import { FormGroup } from '@angular/forms';
 
 describe('BesoinPage', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -16,8 +17,10 @@ describe('BesoinPage', (): void => {
           }
         },
         {
-          provide: FilterPresenter,
-          useValue: {}
+          provide: OrientationLayout,
+          useValue: {
+            filterForm: new FormGroup({})
+          }
         }
       ]
     })

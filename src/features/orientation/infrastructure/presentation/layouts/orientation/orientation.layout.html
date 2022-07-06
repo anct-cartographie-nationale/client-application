@@ -2,50 +2,51 @@
   <div class="d-flex flex-column w-100 mt-5">
     <div class="d-flex container">
       <div
-        class="col container bg-white shadow-sm mb-5 overflow-hidden flex-grow-1"
+        class="col container bg-white shadow-sm mb-5 overflow-hidden flex-grow-1 p-4"
         [@routeAnimations]="getRouteAnimationData()">
-        <router-outlet>
-          <div class="container my-5">
-            <ul class="nav nav-pills justify-content-center">
-              <li class="nav-item">
-                <a
-                  class="btn btn-secondary mx-2"
-                  [routerLink]="['/', 'orientation', 'besoin']"
-                  routerLinkActive="active active-primary"
-                  ariaCurrentWhenActive="page">
-                  Besoin
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="btn btn-secondary mx-2"
-                  [routerLink]="['/', 'orientation', 'localisation']"
-                  routerLinkActive="active active-primary"
-                  ariaCurrentWhenActive="page">
-                  Localisation
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="btn btn-secondary mx-2"
-                  [routerLink]="['/', 'orientation', 'specificite']"
-                  routerLinkActive="active active-primary"
-                  ariaCurrentWhenActive="page">
-                  Spécificité
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="btn btn-secondary mx-2"
-                  [routerLink]="['/', 'orientation', 'date']"
-                  routerLinkActive="active active-primary"
-                  ariaCurrentWhenActive="page">
-                  Date
-                </a>
-              </li>
-            </ul>
-          </div>
-        </router-outlet>
+        <div class="container">
+          <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+              <a
+                class="btn btn-secondary mx-2"
+                [routerLink]="['/', 'orientation', 'besoin']"
+                routerLinkActive="active active-primary"
+                ariaCurrentWhenActive="page">
+                Besoin
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-secondary mx-2"
+                [routerLink]="['/', 'orientation', 'localisation']"
+                routerLinkActive="active active-primary"
+                ariaCurrentWhenActive="page">
+                Localisation
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-secondary mx-2"
+                [routerLink]="['/', 'orientation', 'accessibilite']"
+                routerLinkActive="active active-primary"
+                ariaCurrentWhenActive="page">
+                Accessibilité
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-secondary mx-2"
+                [routerLink]="['/', 'orientation', 'date']"
+                routerLinkActive="active active-primary"
+                ariaCurrentWhenActive="page">
+                Date
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="position-relative">
+          <router-outlet></router-outlet>
+        </div>
       </div>
       <div
         class="col-lg-4 col-md-6 col-12 bg-primary mb-5 shadow-sm overflow-hidden"
@@ -57,8 +58,8 @@
             <h1 class="h2 text-center text-secondary">
               Structures
               <br />
-              <span *ngIf="this.router.url ===  '/orientation'">sur le territoire</span>
-              <span *ngIf="this.router.url !==  '/orientation'">correspondantes</span>
+              <span *ngIf="this.router.url === '/orientation'">sur le territoire</span>
+              <span *ngIf="this.router.url !== '/orientation'">correspondantes</span>
             </h1>
           </div>
           <div class="d-flex p-2 widget-header">
@@ -88,5 +89,6 @@
         </div>
       </div>
     </div>
+    <pre>{{ filterForm.valueChanges | async | json }}</pre>
   </div>
 </div>

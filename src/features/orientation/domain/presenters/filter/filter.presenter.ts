@@ -1,13 +1,7 @@
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Service } from '../../../../../models/service';
 
-export type FilterPresentation = { name: string; type: string };
-
-export class FilterPresenter {
-  private _filters$: BehaviorSubject<FilterPresentation[]> = new BehaviorSubject<FilterPresentation[]>([]);
-
-  public filters$: Observable<FilterPresentation[]> = this._filters$.asObservable();
-
-  public setFilter(filter: FilterPresentation) {
-    this._filters$.next([...this._filters$.value, filter]);
-  }
-}
+export type FilterPresentation = {
+  services?: Service;
+  distance?: 5000 | 20000;
+  accessibilite?: boolean;
+};

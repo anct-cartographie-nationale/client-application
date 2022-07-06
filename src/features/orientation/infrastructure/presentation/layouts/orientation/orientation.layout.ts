@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Injectable } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChildrenOutletContexts, Router } from '@angular/router';
 import { slideInAnimation } from '../../animation';
 import {
@@ -6,9 +6,10 @@ import {
   LieuxMediationNumeriqueListPresenter,
   LieuxMediationNumeriqueRepository
 } from '../../../../../cartographie/domain';
-import { Observable } from 'rxjs';
+import { defaultIfEmpty, Observable, startWith } from 'rxjs';
 import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
-import { FilterPresenter } from '../../../../domain/presenters/filter/filter.presenter';
+import { FormControl, FormGroup } from '@angular/forms';
+import { FilterPresentation } from '../../../../domain/presenters/filter/filter.presenter';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,19 +18,18 @@ import { FilterPresenter } from '../../../../domain/presenters/filter/filter.pre
     slideInAnimation([
       ['DemarrerPage', 'BesoinPage'],
       ['DemarrerPage', 'LocalisationPage'],
-      ['DemarrerPage', 'SpecificitePage'],
+      ['DemarrerPage', 'AccessibilitePage'],
       ['DemarrerPage', 'DatePage'],
       ['BesoinPage', 'LocalisationPage'],
-      ['BesoinPage', 'SpecificitePage'],
+      ['BesoinPage', 'AccessibilitePage'],
       ['BesoinPage', 'DatePage'],
-      ['LocalisationPage', 'SpecificitePage'],
+      ['LocalisationPage', 'AccessibilitePage'],
       ['LocalisationPage', 'DatePage'],
-      ['SpecificitePage', 'DatePage']
+      ['AccessibilitePage', 'DatePage']
     ])
   ],
   providers: [
     GeolocationPresenter,
-    FilterPresenter,
     {
       deps: [LieuxMediationNumeriqueRepository],
       provide: LieuxMediationNumeriqueListPresenter,
@@ -38,10 +38,14 @@ import { FilterPresenter } from '../../../../domain/presenters/filter/filter.pre
   ]
 })
 export class OrientationLayout {
+  public filterForm = new FormGroup({});
+
+  private filter$: Observable<FilterPresentation | undefined> = this.filterForm.valueChanges.pipe(startWith(undefined));
+
   public lieuxMediationNumerique$: Observable<LieuMediationNumerique[]> =
     this.lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       this.geolocationPresenter.location$,
-      this.filterPresenter.filters$
+      this.filter$
     );
 
   public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> =
@@ -51,7 +55,6 @@ export class OrientationLayout {
     public router: Router,
     private readonly lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,
     public readonly geolocationPresenter: GeolocationPresenter,
-    public readonly filterPresenter: FilterPresenter,
     private contexts: ChildrenOutletContexts
   ) {}
 
