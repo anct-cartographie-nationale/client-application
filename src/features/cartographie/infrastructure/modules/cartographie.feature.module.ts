@@ -16,10 +16,11 @@ import { LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } f
 import { GeojsonService, SearchService, StructureService } from '../services';
 import metropole from '../services/assets/metropole.json';
 import { CartographieFeatureRoutingModule } from './cartographie.feature-routing.module';
+import { LieuCardComponent } from '../presentation/components/lieu-card/lieu-card.component';
 import { MARKER_TYPE_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../../../root';
 
 @NgModule({
-  declarations: [CartographieLayout, LieuxMediationNumeriqueListPage, LieuxMediationNumeriqueDetailsPage],
+  declarations: [CartographieLayout, LieuxMediationNumeriqueListPage, LieuxMediationNumeriqueDetailsPage, LieuCardComponent],
   imports: [
     HttpClientModule,
     MapModule.forRoot(

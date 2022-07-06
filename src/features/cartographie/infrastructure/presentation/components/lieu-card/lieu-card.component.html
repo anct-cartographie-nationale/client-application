@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="border-bottom my-3">
+    <div class="d-flex">
+      <h1
+        class="h4 mt-4 flex-grow-1 structure-name"
+        (click)="showDetails.emit(lieuMediationNumerique)"
+        (mouseenter)="hover.emit(lieuMediationNumerique)">
+        {{ lieuMediationNumerique.nom }}
+      </h1>
+      <a
+        class="btn btn-sm btn-outline-dark mt-3 py-2 d-flex align-items-center"
+        href="mailto:{{ lieuMediationNumerique.contact?.courriel }}">
+        <i class="ri-mail-line me-2 align-bottom"></i>
+        <span>Contacter par mail</span>
+      </a>
+    </div>
+    <div class="d-flex">
+      <p class="text-info flex-grow-1">
+        {{ lieuMediationNumerique.adresse.voie }} {{ lieuMediationNumerique.adresse.code_postal }}
+        {{ lieuMediationNumerique.adresse.commune }}
+      </p>
+      <p class="mt-1">
+        <i class="ri-phone-line me-2 align-bottom"></i>
+        <span>{{ lieuMediationNumerique.contact?.telephone }}</span>
+      </p>
+    </div>
+    <div class="my-2">
+      <!-- <p *ngIf="isOrientation && lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</p> -->
+      <span class="text-primary">- {{ lieuMediationNumerique.modalites_access }}</span>
+    </div>
+    <p class="text-info" style="font-size: 11px">Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}</p>
+  </div>
+</div>

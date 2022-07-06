@@ -2,7 +2,7 @@
   {
     "id": "77556026100015",
     "nom": "Association l'espoir (Groupe SOS)",
-    "commune": "MARSEILLE",
+    "commune": "Marseille",
     "code_postal": "13011",
     "code_insee": "13011",
     "adresse": "4 AV DE SAINT MENET",
@@ -12,12 +12,13 @@
     "courriel": "accueil@chrs-laselonne.fr",
     "source": "conseiller-numerique",
     "date_maj": "2022-05-09",
-    "modalites_access": "Gratuit"
+    "modalites_access": "Gratuit",
+    "telephone": "+33492532673"
   },
   {
     "id": "53851847300011",
     "nom": "HARMONIE MUTUELLE",
-    "commune": "PAMIERS",
+    "commune": "Pamiers",
     "code_postal": "09100",
     "code_insee": "09100",
     "adresse": "26 av 9ème RCP",
@@ -29,12 +30,17 @@
     "source": "conseiller-numerique",
     "structure_parente": "538518473",
     "date_maj": "2022-04-15",
+<<<<<<< HEAD
     "modalites_access": "Payant"
+=======
+    "modalites_access": "Gratuit",
+    "telephone": "+33492532673"
+>>>>>>> feat: add lieu mediation numerique card component
   },
   {
     "id": "21050061700019",
     "nom": "Médiathèque de Gap",
-    "commune": "GAP",
+    "commune": "Gap",
     "code_postal": "05000",
     "code_insee": "05000",
     "adresse": "137 boulevard Georges Pompidou",
