@@ -65,12 +65,11 @@
           <div class="d-flex p-2 widget-header">
             <div class="border rounded-circle py-4 px-4 test mx-auto widget">
               <div
-                role="progressbar"
-                data-bg="success"
-                aria-valuenow="65"
+                [attr.aria-valuemax]="lieuxMediationNumeriqueTotal.length"
+                [attr.aria-valuenow]="lieuxMediationNumerique.length"
                 aria-valuemin="0"
-                aria-valuemax="lieuxMediationNumerique.length"
-                style="--value-int: {{lieuxMediationNumerique.length}} ; --value-percentage: {{((lieuxMediationNumerique.length) / (lieuxMediationNumeriqueTotal.length)) * 100}}"></div>
+                role="progressbar"
+                style="--value-int: {{lieuxMediationNumerique.length}} ; --value-percentage: {{(lieuxMediationNumerique.length / lieuxMediationNumeriqueTotal.length) * 100}}"></div>
             </div>
           </div>
           <div class="bg-image" style="background-image: url('assets/logos/carteFrancePerspective.svg')"></div>
@@ -79,7 +78,7 @@
               Structures trouvée
               <br />
               <span class="h6" style="opacity: 0.5">
-                / {{lieuxMediationNumeriqueTotal.length}} structures sur le territoire
+                / {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire
               </span>
             </h1>
           </div>
