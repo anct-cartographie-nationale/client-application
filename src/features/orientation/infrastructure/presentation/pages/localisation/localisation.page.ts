@@ -6,6 +6,8 @@ import { AddressRepository } from '../../../../domain/repositories';
 import { GeolocationPresenter } from '../../../../../cartographie/domain';
 import { Localisation } from '../../../../../../models/localisation/localisation';
 import { AddressFoundPresentation } from '../../../../domain/presenters/address/address-found.presentation';
+import { FormControl } from '@angular/forms';
+import { OrientationLayout } from '../../layouts';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
@@ -19,7 +21,7 @@ const SEARCH_DEBOUNCE_TIME: number = 300;
       useClass: AddressPresenter
     }
   ],
-  templateUrl: 'localisation.page.html'
+  templateUrl: './localisation.page.html'
 })
 export class LocalisationPage {
   private readonly _searchTerm$: Subject<string> = new Subject<string>();
@@ -36,8 +38,11 @@ export class LocalisationPage {
 
   public constructor(
     private readonly _addressPresenter: AddressPresenter,
-    public readonly geolocationPresenter: GeolocationPresenter
-  ) {}
+    public readonly geolocationPresenter: GeolocationPresenter,
+    public readonly orientationLayout: OrientationLayout
+  ) {
+    orientationLayout.filterForm.addControl('distance', new FormControl());
+  }
 
   public onSelectAddress(address: AddressFoundPresentation): void {
     this.geolocationPresenter.setLocalisation(address.localisation);

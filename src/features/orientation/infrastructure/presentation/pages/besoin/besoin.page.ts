@@ -1,20 +1,26 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { OrientationLayout } from '../../layouts';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'besoin.page.html'
 })
 export class BesoinPage {
-  public demarche: string[][] = [
-    ['Accès aux droits', 'Logement', 'Accompagnement CAF', 'Insertion Pro'],
-    ['Assistance et coups de pouce', 'Autres démarches']
+  public demarche: string[] = ['Etre accompagné dans les démarches administratives', 'Créer et développer mon entreprise'];
+
+  public niveau: string[] = [
+    'Prendre en main un smartphone ou une tablette',
+    'Utiliser le numérique au quotidien',
+    'Gagner en autonomie dans les démarches administratives',
+    'Approfondir ma culture numérique',
+    'Favoriser mon insertion professionnelle',
+    'Prendre en main un ordinateur'
   ];
-  public savoir: string[][] = [
-    ['Diagnostic', 'Compétences de base', 'Culture numérique'],
-    ['Formation', 'Outils de bureautique', 'Outils créatifs', 'Aide à la parentalité']
-  ];
-  public equipement: string[][] = [
-    ['Wifi', 'Ordinateur', 'Imprimante', 'Scanner'],
-    ['Prêt / Don matériel', 'Revues informatiques', 'FabLab']
-  ];
+
+  public manqueDeMateriel: string[] = ['Accéder à une connexion internet', 'Accéder à du matériel'];
+
+  public constructor(public readonly orientationLayout: OrientationLayout) {
+    orientationLayout.filterForm.addControl('services', new FormControl());
+  }
 }

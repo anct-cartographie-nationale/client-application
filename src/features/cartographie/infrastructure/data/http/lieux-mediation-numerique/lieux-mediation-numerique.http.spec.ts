@@ -43,7 +43,7 @@ describe('lieux mediation numérique http', (): void => {
             structure_parente: '775560261',
             publics: 'Familles/enfants, Adultes, Déficience visuelle',
             labels_autres: 'SudLabs, Nièvre médiation numérique',
-            types_accompagnement: 'seul, avec de l’aide',
+            types_accompagnement: "seul, avec de l'aide",
             accessibilite:
               'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/',
             prise_rdv: 'https://www.rdv-solidarites.fr/'
@@ -98,7 +98,7 @@ describe('lieux mediation numérique http', (): void => {
         structure_parente: Siren('775560261'),
         publics: ['Familles/enfants', 'Adultes', 'Déficience visuelle'],
         labels_autres: ['SudLabs', 'Nièvre médiation numérique'],
-        types_accompagnement: ['seul', 'avec de l’aide'],
+        types_accompagnement: ['seul', "avec de l'aide"],
         accessibilite: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
         ),

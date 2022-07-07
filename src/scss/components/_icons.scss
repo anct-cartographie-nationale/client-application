@@ -91,22 +91,6 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   width: 1.25em;
 }
 
-.ri-car-line::before {
-  content: '\eb39';
-}
-
-.ri-walk-line::before {
-  content: '\f2a8';
-}
-
-.ri-stock-line::before {
-  content: '\f19d';
-}
-
-.ri-user-search-line::before {
-  content: '\f26c';
-}
-
 .ri-wifi-line::before {
   content: '\f2c0';
 }
@@ -117,22 +101,6 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-printer-line::before {
   content: '\f029';
-}
-
-.ri-folder-user-line::before {
-  content: '\ed84';
-}
-
-.ri-search-eye-line::before {
-  content: '\f0cf';
-}
-
-.ri-speed-line::before {
-  content: '\f177';
-}
-
-.ri-thumb-up-line::before {
-  content: '\f207';
 }
 
 .ri-phone-line::before {
@@ -175,10 +143,66 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\eb23';
 }
 
-.ri-error-warning-line::before {
-  content: '\eca1';
-}
-
 .ri-mail-line::before {
   content: '\eef6';
+}
+
+.ri-compasses-2-fill::before {
+  content: '\ebc5';
+}
+
+.ri-arrow-right-s-line::before {
+  content: '\ea6e';
+}
+
+.ri-arrow-left-s-line::before {
+  content: '\ea64';
+}
+
+.ri-file-list-3-line::before {
+  content: '\ecef';
+}
+
+.ri-notification-3-line::before {
+  content: '\ef94';
+}
+
+.ri-mouse-line::before {
+  content: '\ef7d';
+}
+
+.ri-price-tag-3-line::before {
+  content: '\f023';
+}
+
+.ri-group-line::before {
+  content: '\ede3';
+}
+
+.ri-wheelchair-line::before {
+  content: '\f2be';
+}
+
+.ri-parent-line::before {
+  content: '\efca';
+}
+
+.ri-calendar-event-line::before {
+  content: '\eb25';
+}
+
+.ri-translate-2::before {
+  content: '\f226';
+}
+
+.ri-user-3-line::before {
+  content: '\f256';
+}
+
+.ri-tools-line::before {
+  content: '\f21b';
+}
+
+.ri-service-line::before {
+  content: '\f0e2';
 }

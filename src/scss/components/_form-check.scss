@@ -16,7 +16,6 @@
     &:not(:checked) + .form-check-label {
       color: $body-color !important;
       background-color: $form-chip-padding-background-color !important;
-      border: 1px solid $form-chip-padding-border-color;
     }
   }
 }

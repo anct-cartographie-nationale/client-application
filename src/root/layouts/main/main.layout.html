@@ -5,7 +5,7 @@
         <img
           *ngIf="brandConfiguration.logo; else: brandName"
           [src]="brandConfiguration.logo"
-          [alt]="'Accueil cartographie' + brandConfiguration.name"
+          [alt]="'Accueil cartographie ' + brandConfiguration.name"
           height="36" />
         <ng-template #brandName>{{ brandConfiguration.name }}</ng-template>
       </a>

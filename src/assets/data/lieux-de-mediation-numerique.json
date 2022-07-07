@@ -6,7 +6,7 @@
     "code_postal": "13011",
     "code_insee": "13011",
     "adresse": "4 AV DE SAINT MENET",
-    "services": "Prendre en main un smartphone ou une tablette, Prendre en main un ordinateur, Utiliser le numérique au quotidien, Approfondir ma culture numérique",
+    "services": "Accéder à du matériel",
     "latitude": 43.289439,
     "longitude": 5.496495,
     "courriel": "accueil@chrs-laselonne.fr",
@@ -21,7 +21,7 @@
     "code_postal": "09100",
     "code_insee": "09100",
     "adresse": "26 av 9ème RCP",
-    "services": "Prendre en main un smartphone ou une tablette, Prendre en main un ordinateur, Utiliser le numérique au quotidien, Approfondir ma culture numérique",
+    "services": "Créer et développer mon entreprise",
     "latitude": 43.115658,
     "longitude": 1.624305,
     "site_web": "https://www.harmonie-mutuelle.fr",
@@ -29,7 +29,7 @@
     "source": "conseiller-numerique",
     "structure_parente": "538518473",
     "date_maj": "2022-04-15",
-    "modalites_access": "Gratuit"
+    "modalites_access": "Payant"
   },
   {
     "id": "21050061700019",
@@ -38,7 +38,7 @@
     "code_postal": "05000",
     "code_insee": "05000",
     "adresse": "137 boulevard Georges Pompidou",
-    "services": "Prendre en main un smartphone ou une tablette, Prendre en main un ordinateur, Utiliser le numérique au quotidien, Approfondir ma culture numérique",
+    "services": "Accéder à une connexion internet",
     "latitude": 44.555545,
     "longitude": 6.078166,
     "telephone": "+33492532673",

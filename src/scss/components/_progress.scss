@@ -1,0 +1,58 @@
+@keyframes grow-progress-bar {
+  0%,
+  33% {
+    --pg-percentage: 0;
+  }
+
+  100% {
+    --pg-percentage: var(--value-percentage);
+  }
+}
+
+:root {
+  --fg: #{$secondary};
+  --bg: #{$transparent};
+  --fullbg: #{$primary};
+}
+
+div[role='progressbar'] {
+  --size: 11rem;
+  --pg-percentage: var(--value-percentage);
+
+  animation: grow-progress-bar 3s 1 forwards;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(closest-side, var(--fullbg) 80%, transparent 0 99.9%, var(--fullbg) 0),
+    conic-gradient(var(--fg) calc(var(--pg-percentage) * 1%), var(--bg) 0);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: calc(var(--size) / 5);
+  color: var(--fg);
+}
+
+.widget-header {
+  position: absolute;
+}
+
+.widget {
+  position: relative;
+  top: 11rem;
+  left: 6rem;
+}
+
+div[role='progressbar']::before {
+  counter-reset: percentage var(--value-int);
+  content: counter(percentage);
+}
+
+.bg-image {
+  height: 20rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  left: 2.5rem;
+  bottom: -2rem;
+  margin-bottom: 1rem;
+}

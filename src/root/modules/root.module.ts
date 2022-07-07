@@ -1,5 +1,6 @@
 import { DoBootstrap, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartographieProviders } from '@features/cartographie/infrastructure';
 import { OrientationProviders } from '@features/orientation/infrastructure';
@@ -10,7 +11,7 @@ import { BRAND_CONFIGURATION, BRAND_TOKEN } from '../configuration';
 
 @NgModule({
   declarations: [MainLayout, RootLayout],
-  imports: [BrowserAnimationsModule, RootRoutingModule, HttpClientModule],
+  imports: [BrowserAnimationsModule, RootRoutingModule, HttpClientModule, ReactiveFormsModule],
   entryComponents: [RootLayout],
   providers: [
     ...CartographieProviders,
