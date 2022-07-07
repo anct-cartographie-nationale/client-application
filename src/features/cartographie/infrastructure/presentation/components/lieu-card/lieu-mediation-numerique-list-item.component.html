@@ -1,0 +1,37 @@
+<div class="container border-bottom my-3">
+  <div class="d-flex">
+    <a
+      class="h4 mt-4 flex-grow-1 link-dark"
+      [routerLink]="[lieuMediationNumerique.id]"
+      (click)="showDetails.emit(lieuMediationNumerique)"
+      (mouseenter)="hover.emit(lieuMediationNumerique)">
+      {{ lieuMediationNumerique.nom }}
+    </a>
+    <a
+      *ngIf="lieuMediationNumerique.contact?.courriel as courriel"
+      class="btn btn-sm btn-outline-dark mt-3 py-2 d-flex align-items-center"
+      href="mailto:{{ courriel }}">
+      <i class="ri-mail-line me-2 align-bottom"></i>
+      <span>Contacter par mail</span>
+    </a>
+  </div>
+  <div class="d-flex">
+    <p class="text-info flex-grow-1">
+      {{ lieuMediationNumerique.adresse.voie }} {{ lieuMediationNumerique.adresse.code_postal }}
+      {{ lieuMediationNumerique.adresse.commune }}
+    </p>
+    <p class="mt-1" *ngIf="lieuMediationNumerique.contact?.telephone as telephone">
+      <i class="ri-phone-line me-2 align-bottom"></i>
+      <span>{{ telephone }}</span>
+    </p>
+  </div>
+  <div class="my-2 d-flex" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.modalites_access">
+    <p *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</p>
+    <span class="text-primary" *ngIf="lieuMediationNumerique.modalites_access">
+      &nbsp;- {{ lieuMediationNumerique.modalites_access }}
+    </span>
+  </div>
+  <p *ngIf="lieuMediationNumerique.date_maj" class="text-info" style="font-size: 11px">
+    Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
+  </p>
+</div>

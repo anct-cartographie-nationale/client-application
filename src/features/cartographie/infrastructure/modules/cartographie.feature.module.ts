@@ -10,17 +10,23 @@ import {
   ZOOM_LEVEL_TOKEN,
   ZoomLevelConfiguration
 } from '@gouvfr-anct/mediation-numerique';
+import { DistanceModule } from '@gouvfr-anct/mediation-numerique/shared';
 import { UiLieuxMediationNumeriqueModule } from '@gouvfr-anct/mediation-numerique/ui';
 import { CartographieLayout } from '../presentation/layouts';
 import { LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } from '../presentation/pages';
 import { GeojsonService, SearchService, StructureService } from '../services';
 import metropole from '../services/assets/metropole.json';
 import { CartographieFeatureRoutingModule } from './cartographie.feature-routing.module';
-import { LieuCardComponent } from '../presentation/components/lieu-card/lieu-card.component';
+import { LieuMediationNumeriqueListItemComponent } from '../presentation/components/lieu-card/lieu-mediation-numerique-list-item.component';
 import { MARKER_TYPE_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../../../root';
 
 @NgModule({
-  declarations: [CartographieLayout, LieuxMediationNumeriqueListPage, LieuxMediationNumeriqueDetailsPage, LieuCardComponent],
+  declarations: [
+    CartographieLayout,
+    LieuxMediationNumeriqueListPage,
+    LieuxMediationNumeriqueDetailsPage,
+    LieuMediationNumeriqueListItemComponent
+  ],
   imports: [
     HttpClientModule,
     MapModule.forRoot(
@@ -33,7 +39,8 @@ import { MARKER_TYPE_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURA
     StructureModule.forRoot(SearchService, StructureService),
     CartographieFeatureRoutingModule,
     CommonModule,
-    UiLieuxMediationNumeriqueModule
+    UiLieuxMediationNumeriqueModule,
+    DistanceModule
   ],
   providers: [
     GeojsonService,

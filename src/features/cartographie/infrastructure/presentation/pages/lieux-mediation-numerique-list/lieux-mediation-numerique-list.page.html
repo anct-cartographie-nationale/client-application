@@ -1,11 +1,11 @@
 <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
   <div class="h-100 overflow-auto d-flex flex-column">
     <div slot="structure-list-elements" class="flex-grow-1">
-      <app-lieu-card
+      <app-mediation-numerique-list-item
         (showDetails)="select($event.id)"
         (hover)="markersPresenter.highlight($event.id)"
         *ngFor="let lieuMediationNumerique of lieuxMediationNumerique"
-        [lieuMediationNumerique]="lieuMediationNumerique"></app-lieu-card>
+        [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
     </div>
     <div class="bg-primary d-flex p-2">
       <div class="ms-auto flex-grow-1">
