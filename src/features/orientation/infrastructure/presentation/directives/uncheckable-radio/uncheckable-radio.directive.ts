@@ -2,7 +2,7 @@ import { Directive, HostListener, Input } from '@angular/core';
 import { FormControlName, FormGroupDirective } from '@angular/forms';
 
 @Directive({
-  selector: 'input[type=radio][appUncheckableRadio]'
+  selector: 'input[type=radio][formControlName][appUncheckableRadio]'
 })
 export class UncheckableRadioDirective<T> {
   @Input() value?: T = undefined;

@@ -5,6 +5,14 @@ import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-num
 import { Localisation, NO_LOCALISATION } from '../../../../../models/localisation/localisation';
 import { LieuMediationNumeriqueListItemPresentation } from './lieu-mediation-numerique-list-item.presentation';
 import { FilterPresentation } from '../../../../orientation/domain/presenters/filter/filter.presenter';
+import {
+  accessibiliteFilterOperator,
+  distanceFilterOperator,
+  modalitesAccessFilterOperator,
+  publicsFilterOperator,
+  serviceFilterOperator,
+  typesAccompagnementFilterOperator
+} from './filter-operators';
 
 const HALF_CIRCLE_DEGREE: number = 180;
 
@@ -58,27 +66,18 @@ const byDistance = (
   LieuMediationNumeriqueB: LieuMediationNumeriqueListItemPresentation
 ) => (LieuMediationNumeriqueA?.distance ?? 0) - (LieuMediationNumeriqueB?.distance ?? 0);
 
-type FilterOperator = (
+export type FilterOperator = (
   lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation,
   filter: FilterPresentation
 ) => boolean;
 
 const filterOperatorsMap: Map<string, FilterOperator> = new Map([
-  [
-    'distance',
-    (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation, filter: FilterPresentation): boolean =>
-      lieuMediationNumerique.distance && filter.distance ? lieuMediationNumerique.distance <= filter.distance : true
-  ],
-  [
-    'services',
-    (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation, filter: FilterPresentation): boolean =>
-      lieuMediationNumerique.services && filter.services ? lieuMediationNumerique.services.includes(filter.services) : true
-  ],
-  [
-    'accessibilite',
-    (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation, filter: FilterPresentation): boolean =>
-      filter.accessibilite ? lieuMediationNumerique.accessibilite != null : true
-  ]
+  ['distance', distanceFilterOperator],
+  ['services', serviceFilterOperator],
+  ['accessibilite', accessibiliteFilterOperator],
+  ['modalites_access', modalitesAccessFilterOperator],
+  ['publics', publicsFilterOperator],
+  ['types_accompagnement', typesAccompagnementFilterOperator]
 ]);
 
 const applyFilter = (

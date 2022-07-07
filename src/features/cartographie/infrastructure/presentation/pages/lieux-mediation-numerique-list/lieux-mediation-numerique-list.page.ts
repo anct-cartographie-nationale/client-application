@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Injectable } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
