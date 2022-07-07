@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { LieuxMediationNumeriqueListPresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../../domain';
-import { toStructuresPresentation } from '../../models/structure';
-import { map } from 'rxjs/operators';
 import { NO_LOCALISATION } from '../../../../../../models/localisation/localisation';
+import { LieuMediationNumeriqueListItemPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,9 +17,8 @@ import { NO_LOCALISATION } from '../../../../../../models/localisation/localisat
   templateUrl: 'lieux-mediation-numerique-list.page.html'
 })
 export class LieuxMediationNumeriqueListPage {
-  public structures$: Observable<Structure[]> = this.lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION))
-    .pipe(map(toStructuresPresentation));
+  public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation[]> =
+    this.lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION));
 
   public constructor(
     private readonly lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,
@@ -31,7 +28,6 @@ export class LieuxMediationNumeriqueListPage {
 
   public select(lieuMediationId: string) {
     this.markersPresenter.select(lieuMediationId);
-    this.router.navigate(['cartographie', lieuMediationId]);
   }
 
   public printPage() {

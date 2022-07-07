@@ -1,12 +1,11 @@
-<ng-container *ngIf="(structures$ | async) as structures">
-  <fr-lieux-mediation-numerique-list (displayMapMarkerId)="markersPresenter.highlight($event)" [structureList]="structures">
-    <div slot="structure-list-elements">
-      <fr-lieux-mediation-numerique-item
-        *ngFor="let structure of structures"
-        [structure]="structure"
-        (showDetails)="select($event._id)"
-        (hover)="markersPresenter.highlight($event._id)"
-        class="structure-card"></fr-lieux-mediation-numerique-item>
+<ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+  <div class="h-100 overflow-auto d-flex flex-column">
+    <div slot="structure-list-elements" class="flex-grow-1">
+      <app-mediation-numerique-list-item
+        (showDetails)="select($event.id)"
+        (hover)="markersPresenter.highlight($event.id)"
+        *ngFor="let lieuMediationNumerique of lieuxMediationNumerique"
+        [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
     </div>
     <div class="bg-primary d-flex p-2">
       <div class="ms-auto flex-grow-1">
@@ -15,7 +14,7 @@
           <span>Imprimer les résultats</span>
         </button>
       </div>
-      <span class="d-flex align-items-center text-white me-auto">{{structures.length}} Structures</span>
+      <span class="d-flex align-items-center text-white me-auto">{{lieuxMediationNumerique?.length}} Structures</span>
     </div>
-  </fr-lieux-mediation-numerique-list>
+  </div>
 </ng-container>
