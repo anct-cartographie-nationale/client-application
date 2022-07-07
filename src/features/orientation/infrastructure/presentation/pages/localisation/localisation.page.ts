@@ -21,7 +21,7 @@ const SEARCH_DEBOUNCE_TIME: number = 300;
       useClass: AddressPresenter
     }
   ],
-  templateUrl: 'localisation.page.html'
+  templateUrl: './localisation.page.html'
 })
 export class LocalisationPage {
   private readonly _searchTerm$: Subject<string> = new Subject<string>();

@@ -5,7 +5,7 @@ import { OrientationLayout } from '../layouts';
 import { AddressFieldComponent, CollapseComponent, DropdownPaneComponent } from '../components';
 import { OrientationFeatureRoutingModule } from './orientation.feature-routing.module';
 import { BesoinPage, DatePage, DemarrerPage, LocalisationPage, AccessibilitePage } from '../pages';
-import { UncheckableRadioDirective } from '../directives';
+import { CheckboxArrayDirective, UncheckableRadioDirective } from '../directives';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { UncheckableRadioDirective } from '../directives';
     AddressFieldComponent,
     CollapseComponent,
     DropdownPaneComponent,
-    UncheckableRadioDirective
+    UncheckableRadioDirective,
+    CheckboxArrayDirective
   ],
   imports: [OrientationFeatureRoutingModule, CommonModule, ReactiveFormsModule]
 })

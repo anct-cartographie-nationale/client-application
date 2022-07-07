@@ -9,8 +9,9 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let fraisAChargeOption of fraisAChargeOptions; index as i">
         <input
-          type="radio"
+          type="checkbox"
           name="modalites_access"
+          appCheckboxArray
           formControlName="modalites_access"
           class="form-check-input"
           [value]="fraisAChargeOption.value"
@@ -18,7 +19,7 @@
         <label class="form-check-label bg-primary text-white" [attr.for]="'fraisAChargeLabelChip' + i">
           <i
             class="align-bottom"
-            [class]="orientationLayout.filterForm.get('modalites_access')?.value === fraisAChargeOption.value ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+            [class]="orientationLayout.filterForm.get('modalites_access')?.value?.includes(fraisAChargeOption.value) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ fraisAChargeOption.label }}
         </label>
       </div>
@@ -30,8 +31,9 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let accompagnementsOption of accompagnementsOptions; index as i">
         <input
-          type="radio"
+          type="checkbox"
           name="types_accompagnement"
+          appCheckboxArray
           formControlName="types_accompagnement"
           class="form-check-input"
           [value]="accompagnementsOption.value"
@@ -39,7 +41,7 @@
         <label class="form-check-label bg-primary text-white" [attr.for]="'accompagnementLabelChip' + i">
           <i
             class="align-bottom"
-            [class]="orientationLayout.filterForm.get('types_accompagnement')?.value === accompagnementsOption.value ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+            [class]="orientationLayout.filterForm.get('types_accompagnement')?.value?.includes(accompagnementsOption.value) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ accompagnementsOption.label }}
         </label>
       </div>
@@ -66,8 +68,9 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let accueilSpecifiqueOption of accueilSpecifiqueOptions; index as i">
         <input
-          type="radio"
+          type="checkbox"
           name="publics"
+          appCheckboxArray
           formControlName="publics"
           class="form-check-input"
           [value]="accueilSpecifiqueOption.value"
@@ -75,7 +78,7 @@
         <label class="form-check-label bg-primary text-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
           <i
             class="align-bottom"
-            [class]="orientationLayout.filterForm.get('publics')?.value === accueilSpecifiqueOption.value ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+            [class]="orientationLayout.filterForm.get('publics')?.value?.includes(accueilSpecifiqueOption.value) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ accueilSpecifiqueOption.label }}
         </label>
       </div>
@@ -90,8 +93,9 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let publicPrecisOption of publicPrecisOptions; index as i">
         <input
-          type="radio"
+          type="checkbox"
           name="publics"
+          appCheckboxArray
           formControlName="publics"
           class="form-check-input"
           [value]="publicPrecisOption.value"
@@ -99,7 +103,7 @@
         <label class="form-check-label bg-primary text-white" [attr.for]="'publicPrecisLabelChip' + i">
           <i
             class="align-bottom"
-            [class]="orientationLayout.filterForm.get('publics')?.value === publicPrecisOption.value ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+            [class]="orientationLayout.filterForm.get('publics')?.value?.includes(publicPrecisOption.value) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ publicPrecisOption.label }}
         </label>
       </div>
