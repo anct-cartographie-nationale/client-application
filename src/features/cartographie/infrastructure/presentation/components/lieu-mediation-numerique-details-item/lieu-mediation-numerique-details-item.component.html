@@ -1,0 +1,161 @@
+<div class="container border-bottom p-3 sticky-top bg-secondary">
+  <div class="d-flex">
+    <div class="flex-grow-1">
+      <p class="text-info m-0" *ngIf="lieuMediationNumerique.typologie">{{ lieuMediationNumerique.typologie }}</p>
+      <h1 class="h2">
+        {{ lieuMediationNumerique.nom }}
+      </h1>
+    </div>
+    <button type="button" class="btn-close" aria-label="Close" (click)="navigateList()"></button>
+  </div>
+  <p *ngIf="lieuMediationNumerique.date_maj" class="text-info mb-3" style="font-size: 11px">
+    Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
+  </p>
+</div>
+<div class="container border-bottom bg-light">
+  <div class="d-flex justify-content-center align-items-center">
+    <button type="button" class="btn pt-5" (click)="printPage()">
+      <i class="ri-printer-line ri-xl bg-primary text-light rounded-circle p-3 me-auto"></i>
+      <p class="my-3 me-auto">Imprimer</p>
+    </button>
+    <button type="button" class="btn pt-5">
+      <i class="ri-home-5-line ri-xl bg-primary text-light rounded-circle p-3 me-auto"></i>
+      <p class="my-3 me-auto">Je travaille ici</p>
+    </button>
+    <a type="button" class="btn pt-5" *ngIf="lieuMediationNumerique.contact?.courriel as courriel" href="mailto:{{ courriel }}">
+      <i class="ri-error-warning-line ri-xl bg-primary text-light rounded-circle p-3 me-auto"></i>
+      <p class="my-3 me-auto">Signaler erreur</p>
+    </a>
+    <a
+      type="button"
+      class="btn pt-5"
+      *ngIf="lieuMediationNumerique.contact?.site_web as site_web"
+      href="{{ site_web }}"
+      target="_blank">
+      <i class="ri-computer-line ri-xl bg-primary text-light rounded-circle me-auto p-3"></i>
+      <p class="my-3 me-auto">Voir le site</p>
+    </a>
+  </div>
+</div>
+<div class="container">
+  <div class="d-flex border-bottom">
+    <div class="my-3 flex-grow-1">
+      <p>
+        {{ lieuMediationNumerique.adresse.voie }} {{ lieuMediationNumerique.adresse.code_postal }}
+        {{ lieuMediationNumerique.adresse.commune }}
+      </p>
+      <div class="d-flex" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.modalites_access">
+        <p *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</p>
+        <span class="text-primary" *ngIf="lieuMediationNumerique.modalites_access">
+          &nbsp;- {{ lieuMediationNumerique.modalites_access }}
+        </span>
+      </div>
+      <a
+        class="d-flex mt-3 btn me-auto p-0"
+        *ngIf="lieuMediationNumerique.accessibilite"
+        href="{{ lieuMediationNumerique.accessibilite }}"
+        target="_blank">
+        <i class="ri-wheelchair-line ri-xl p-1 align-bottom text-primary"></i>
+        <p class="text-primary">Consulter les informations d'accessibilité</p>
+      </a>
+    </div>
+    <div class="mb-3">
+      <a
+        *ngIf="lieuMediationNumerique.contact?.courriel as courriel"
+        class="btn btn-sm btn-outline-dark mt-3 py-2 d-flex align-items-center"
+        href="mailto:{{ courriel }}">
+        <i class="ri-mail-line me-2 align-bottom"></i>
+        <span>Contacter par mail</span>
+      </a>
+      <p class="mt-2" *ngIf="lieuMediationNumerique.contact?.telephone as telephone">
+        <i class="ri-phone-line me-2 align-bottom"></i>
+        <span>{{ telephone }}</span>
+      </p>
+    </div>
+  </div>
+  <div class="border-bottom p-3" *ngIf="lieuMediationNumerique.presentation">
+    <b class="my-3">{{ lieuMediationNumerique.presentation.resumee }}</b>
+    <p class="my-3">{{ lieuMediationNumerique.presentation.detail }}</p>
+  </div>
+  <div class="border-bottom p-3" *ngIf="lieuMediationNumerique.horaires">
+    <div class="row">
+      <div class="col-4 mt-3">
+        <h1 class="h5 text-info">HORAIRES</h1>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-info p-0" style="border-style: none">Lundi</li>
+          <li class="list-group-item text-info p-0" style="border-style: none">Mardi</li>
+          <li class="list-group-item text-info p-0" style="border-style: none">Mercredi</li>
+          <li class="list-group-item text-info p-0" style="border-style: none">Jeudi</li>
+          <li class="list-group-item text-info p-0" style="border-style: none">Vendredi</li>
+          <li class="list-group-item text-info p-0" style="border-style: none">Samedi</li>
+          <li class="list-group-item text-info p-0" style="border-style: none">Dimanche</li>
+        </ul>
+      </div>
+      <div class="col-8">
+        <div class="card bg-light py-3">
+          <div class="container">
+            <h1 class="h5 text-info">SERVICES</h1>
+            <div class="card-body p-0">
+              <ul class="card-text list-group list-group-flush" *ngIf="lieuMediationNumerique.services as services">
+                <li
+                  class="list-group-item p-0 bg-light"
+                  style="border-style: none"
+                  *ngFor="let service of splitArrayTypes(services)">
+                  - {{ service }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border-bottom p-3">
+    <div
+      class="d-flex justify-content-center align-items-center my-3"
+      *ngIf="lieuMediationNumerique.types_accompagnement as types_accompagnement">
+      <div *ngFor="let type of splitArrayTypes(types_accompagnement)" class="col-3 flex-column d-flex me-2">
+        <div *ngFor="let typeAccompagnement of typesAccompagnement">
+          <div *ngIf="typeAccompagnement.title === type.toLowerCase()">
+            <span class="d-flex justify-content-center">
+              <i class="{{ typeAccompagnement.icon }} ri-xl bg-light rounded-circle p-3"></i>
+            </span>
+            <p class="my-3 text-center">{{ typeAccompagnement.title }}</p>
+            <p class="my-3 text-info text-center" style="font-size: 14px">
+              {{ typeAccompagnement.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border-bottom p-3">
+    <h1 class="h5 text-info">PUBLIC PRIS EN CHARGE</h1>
+    <div class="row p-1" *ngIf="lieuMediationNumerique.publics as publics">
+      <div class="col-auto my-1 form-check form-check-inline form-chip p-0" *ngFor="let public of splitArrayTypes(publics)">
+        <input type="radio" name="publics" class="form-check-input" [value]="public" />
+        <label class="form-check-label bg-primary text-white">{{ public }}</label>
+      </div>
+    </div>
+  </div>
+  <div class="border-bottom p-3">
+    <div *ngIf="lieuMediationNumerique.labels_nationaux as labels_nationaux">
+      <h1 class="h5 text-info d-flex flex-grow-1">LABELLISATIONS</h1>
+      <div class="d-flex flex-row align-items-center">
+        <div *ngFor="let label of splitArrayTypes(labels_nationaux)">
+          <div class="me-3" *ngFor="let labelNational of labelsNationaux">
+            <div *ngIf="labelNational.title === label">
+              <img src="{{ labelNational.icon }}" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="lieuMediationNumerique.labels_autres as labels_autres">
+      <div class="my-1 form-check form-check-inline form-chip p-0" *ngFor="let labelAutres of splitArrayTypes(labels_autres)">
+        <input type="radio" name="labelAutres" class="form-check-input" [value]="labelAutres" />
+        <label class="form-check-label bg-primary text-white">{{ labelAutres }}</label>
+      </div>
+    </div>
+  </div>
+</div>

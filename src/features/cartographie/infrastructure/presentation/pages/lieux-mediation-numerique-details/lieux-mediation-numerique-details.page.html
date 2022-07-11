@@ -1,7 +1,9 @@
-<ng-container *ngIf="(structure$ | async) as structure">
+<ng-container *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique">
   <div class="h-100 overflow-auto d-flex flex-column">
     <div class="flex-grow-1">
-      <app-structure-details class="structureList-details flex-grow-1" [structure]="structure"></app-structure-details>
+      <app-mediation-numerique-details-item
+        class="flex-grow-1"
+        [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-details-item>
     </div>
     <div class="bg-primary d-flex p-2">
       <div class="ms-auto flex-grow-1">

@@ -19,13 +19,15 @@ import metropole from '../services/assets/metropole.json';
 import { CartographieFeatureRoutingModule } from './cartographie.feature-routing.module';
 import { LieuMediationNumeriqueListItemComponent } from '../presentation/components/lieu-mediation-numerique-list-item/lieu-mediation-numerique-list-item.component';
 import { MARKER_TYPE_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../../../root';
+import { LieuMediationNumeriqueDetailsItemComponent } from '../presentation/components/lieu-mediation-numerique-details-item/lieu-mediation-numerique-details-item.component';
 
 @NgModule({
   declarations: [
     CartographieLayout,
     LieuxMediationNumeriqueListPage,
     LieuxMediationNumeriqueDetailsPage,
-    LieuMediationNumeriqueListItemComponent
+    LieuMediationNumeriqueListItemComponent,
+    LieuMediationNumeriqueDetailsItemComponent
   ],
   imports: [
     HttpClientModule,
