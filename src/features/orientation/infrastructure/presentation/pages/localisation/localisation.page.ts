@@ -3,10 +3,7 @@ import { debounceTime, distinctUntilChanged, filter, Observable, of, Subject, sw
 import { map } from 'rxjs/operators';
 import { AddressPresenter } from '../../../../domain/presenters';
 import { AddressRepository } from '../../../../domain/repositories';
-import { GeolocationPresenter } from '../../../../../cartographie/domain';
-import { Localisation } from '../../../../../../models/localisation/localisation';
 import { AddressFoundPresentation } from '../../../../domain/presenters/address/address-found.presentation';
-import { FormControl } from '@angular/forms';
 import { OrientationLayout } from '../../layouts';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
@@ -38,25 +35,20 @@ export class LocalisationPage {
 
   public constructor(
     private readonly _addressPresenter: AddressPresenter,
-    public readonly geolocationPresenter: GeolocationPresenter,
     public readonly orientationLayout: OrientationLayout
-  ) {
-    orientationLayout.filterForm.addControl('distance', new FormControl());
-  }
+  ) {}
 
   public onSelectAddress(address: AddressFoundPresentation): void {
-    this.geolocationPresenter.setLocalisation(address.localisation);
+    this.orientationLayout.filterForm.get('latitude')?.setValue(address.localisation.latitude);
+    this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);
   }
 
   public onGeoLocate(): void {
-    window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void =>
-      this.geolocationPresenter.setLocalisation(
-        Localisation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        })
-      )
-    );
+    window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
+      this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
+      this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
+      this.orientationLayout.filterForm.get('address')?.setValue(null);
+    });
   }
 
   public onSearchAddress(searchTerm: string): void {

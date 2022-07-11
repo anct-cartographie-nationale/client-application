@@ -9,6 +9,7 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let fraisAChargeOption of fraisAChargeOptions; index as i">
         <input
+          #modalitesAccess
           type="checkbox"
           name="modalites_access"
           appCheckboxArray
@@ -19,7 +20,7 @@
         <label class="form-check-label bg-primary text-white" [attr.for]="'fraisAChargeLabelChip' + i">
           <i
             class="align-bottom"
-            [class]="orientationLayout.filterForm.get('modalites_access')?.value?.includes(fraisAChargeOption.value) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+            [class]="modalitesAccess.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ fraisAChargeOption.label }}
         </label>
       </div>
@@ -31,6 +32,7 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let accompagnementsOption of accompagnementsOptions; index as i">
         <input
+          #typesAccompagnement
           type="checkbox"
           name="types_accompagnement"
           appCheckboxArray
@@ -41,7 +43,7 @@
         <label class="form-check-label bg-primary text-white" [attr.for]="'accompagnementLabelChip' + i">
           <i
             class="align-bottom"
-            [class]="orientationLayout.filterForm.get('types_accompagnement')?.value?.includes(accompagnementsOption.value) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+            [class]="typesAccompagnement.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ accompagnementsOption.label }}
         </label>
       </div>
@@ -51,6 +53,7 @@
     <div class="text-center">
       <div class="mb-3 form-check form-check-inline form-chip">
         <input
+          #accessibilite
           type="checkbox"
           name="accessibilite"
           [value]="true"
@@ -60,7 +63,7 @@
         <label class="form-check-label bg-primary text-white" for="accessibiliteLabelChip">
           <i
             class="align-bottom"
-            [class]="orientationLayout.filterForm.get('accessibilite')?.value === true ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+            [class]="accessibilite.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           Critère d'accessibilité précisés
         </label>
       </div>
@@ -68,6 +71,7 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let accueilSpecifiqueOption of accueilSpecifiqueOptions; index as i">
         <input
+          #publics
           type="checkbox"
           name="publics"
           appCheckboxArray
@@ -76,9 +80,7 @@
           [value]="accueilSpecifiqueOption.value"
           [attr.id]="'accueilSpecifiqueLabelChip' + i" />
         <label class="form-check-label bg-primary text-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
-          <i
-            class="align-bottom"
-            [class]="orientationLayout.filterForm.get('publics')?.value?.includes(accueilSpecifiqueOption.value) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+          <i class="align-bottom" [class]="publics.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ accueilSpecifiqueOption.label }}
         </label>
       </div>
@@ -93,6 +95,7 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let publicPrecisOption of publicPrecisOptions; index as i">
         <input
+          #publics
           type="checkbox"
           name="publics"
           appCheckboxArray
@@ -101,9 +104,7 @@
           [value]="publicPrecisOption.value"
           [attr.id]="'publicPrecisLabelChip' + i" />
         <label class="form-check-label bg-primary text-white" [attr.for]="'publicPrecisLabelChip' + i">
-          <i
-            class="align-bottom"
-            [class]="orientationLayout.filterForm.get('publics')?.value?.includes(publicPrecisOption.value) ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+          <i class="align-bottom" [class]="publics.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ publicPrecisOption.label }}
         </label>
       </div>
@@ -112,9 +113,11 @@
 </form>
 <ul class="nav nav-pills justify-content-center">
   <li class="nav-item">
-    <a class="btn btn-secondary mx-3" [routerLink]="['/', 'orientation', 'localisation']">< Précédent</a>
+    <a class="btn btn-secondary mx-3" [routerLink]="['/', 'orientation', 'localisation']" queryParamsHandling="preserve">
+      < Précédent
+    </a>
   </li>
   <li class="nav-item">
-    <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'date']">Suivant ></a>
+    <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'date']" queryParamsHandling="preserve">Suivant ></a>
   </li>
 </ul>

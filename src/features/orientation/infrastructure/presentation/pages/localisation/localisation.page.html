@@ -9,6 +9,7 @@
         <app-address-field
           [addressSuggestions]="(addressesFound$ | async) ?? []"
           [addressNotFound]="(addressNotFound$ | async) ?? false"
+          [formGroup]="orientationLayout.filterForm"
           (selectAddress)="onSelectAddress($event)"
           (searchAddress)="onSearchAddress($event)"></app-address-field>
       </div>
@@ -19,7 +20,9 @@
         </button>
       </div>
     </div>
-    <div class="row justify-content-center" *ngIf="geolocationPresenter.location$ | async">
+    <div
+      class="row justify-content-center"
+      *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value">
       <div class="col-auto mb-3 form-check form-check-inline form-chip">
         <input
           type="radio"
@@ -46,10 +49,14 @@
   </app-collapse>
   <ul class="nav nav-pills justify-content-center mt-5">
     <li class="nav-item">
-      <a class="btn btn-secondary mx-3" [routerLink]="['/', 'orientation', 'besoin']">< Précédent</a>
+      <a class="btn btn-secondary mx-3" [routerLink]="['/', 'orientation', 'besoin']" queryParamsHandling="preserve">
+        < Précédent
+      </a>
     </li>
     <li class="nav-item">
-      <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'accessibilite']">Suivant ></a>
+      <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'accessibilite']" queryParamsHandling="preserve">
+        Suivant >
+      </a>
     </li>
   </ul>
 </form>

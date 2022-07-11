@@ -12,7 +12,9 @@
       <br />
       vous pourrez les localiser en quelques minutes grâce à notre outil d'orientation.
     </p>
-    <a class="btn btn-primary my-4" [routerLink]="['besoin']">Démarrer l'orientation</a>
+    <a class="btn btn-primary my-4" [routerLink]="['/', 'orientation', 'besoin']" queryParamsHandling="preserve">
+      Démarrer l'orientation
+    </a>
   </div>
   <ng-template #restart>
     <h1 class="h2 mb-3">
