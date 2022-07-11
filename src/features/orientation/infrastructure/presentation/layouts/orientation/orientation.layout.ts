@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
 import { slideInAnimation } from '../../animation';
 import { LieuxMediationNumeriqueListPresenter, LieuxMediationNumeriqueRepository } from '../../../../../cartographie/domain';
-import { Observable, startWith, tap } from 'rxjs';
+import { delay, Observable, startWith, tap } from 'rxjs';
 import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
@@ -63,7 +63,10 @@ export class OrientationLayout {
     map(toLocalisationFromFilterFormPresentation)
   );
 
-  private _filter$: Observable<FilterPresentation> = this._filterPresentation$.pipe(tap(this.setFilterToQueryString()));
+  private _filter$: Observable<FilterPresentation> = this._filterPresentation$.pipe(
+    delay(0),
+    tap(this.setFilterToQueryString())
+  );
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation[]> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(this._localisation$, this._filter$);
