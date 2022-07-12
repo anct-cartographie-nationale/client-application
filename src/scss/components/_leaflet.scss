@@ -1,0 +1,14 @@
+.leaflet-tooltip-top::before,
+.leaflet-tooltip-bottom::before,
+.leaflet-tooltip-left::before,
+.leaflet-tooltip-right::before {
+  border: 0 solid transparent !important;
+}
+
+.leaflet-tooltip {
+  padding: 0 !important;
+  border: none;
+  border-radius: 0 !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
