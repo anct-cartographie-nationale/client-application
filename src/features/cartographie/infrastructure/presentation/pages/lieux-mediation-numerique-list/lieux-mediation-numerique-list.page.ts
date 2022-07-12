@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of, startWith } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { LieuxMediationNumeriqueListPresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../../domain';
 import { Localisation } from '../../../../../../models/localisation/localisation';
 import { LieuMediationNumeriqueListItemPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
-import { map } from 'rxjs/operators';
 import {
-  FilterFormPresentation,
   FilterPresentation,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { AddressFoundPresentation } from '../../../../domain/presenters/address/address-found.presentation';
-import { OrientationLayout } from '../../layouts';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
