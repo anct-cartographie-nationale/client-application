@@ -1,23 +1,38 @@
 <div class="text-center d-flex flex-column h-100">
-  <div class="mt-5" *ngIf="((orientationLayout.filterForm.valueChanges | async) === null); else: restart">
-    <img *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" alt="" />
-    <h1 class="h2 mb-3">
-      Bienvenue sur la cartographie
-      <span class="text-primary">{{ brandConfiguration.name }}</span>
-    </h1>
-    <p class="lead my-5">
-      Vous rencontrez un problème lié au numérique ?
-      <br />
-      Des structures sont à votre disposition sur le territoire pour répondre à votre besoin,
-      <br />
-      vous pourrez les localiser en quelques minutes grâce à notre outil d'orientation.
-    </p>
-    <a class="btn btn-primary my-4" [routerLink]="['besoin']">Démarrer l'orientation</a>
+  <div class="mt-5">
+    <ng-container *ngIf="((route.queryParamMap | async)?.keys?.length ?? 0) === 0; else: restart">
+      <img *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" alt="" />
+      <h1 class="h2 mb-3">
+        Bienvenue sur la cartographie
+        <span class="text-primary">{{ brandConfiguration.name }}</span>
+      </h1>
+      <p class="lead my-5">
+        Vous rencontrez un problème lié au numérique ?
+        <br />
+        Des structures sont à votre disposition sur le territoire pour répondre à votre besoin,
+        <br />
+        vous pourrez les localiser en quelques minutes grâce à notre outil d'orientation.
+      </p>
+      <a class="btn btn-primary my-4" [routerLink]="['/', 'orientation', 'besoin']" queryParamsHandling="preserve">
+        Démarrer l'orientation
+      </a>
+    </ng-container>
+    <ng-template #restart>
+      <h1 class="h2 mb-3">
+        Souhaitez-vous
+        <span class="text-primary">redémarrer l'orientation ?</span>
+      </h1>
+      <div class="my-5">
+        <a class="btn btn-primary me-3" [routerLink]="['/', 'orientation', 'besoin']" queryParamsHandling="preserve">
+          < Reprendre l'orientation
+        </a>
+        <a
+          class="btn btn-secondary"
+          [routerLink]="['/', 'orientation', 'besoin']"
+          (click)="orientationLayout.filterForm.reset()">
+          Nouvelle orientation >
+        </a>
+      </div>
+    </ng-template>
   </div>
-  <ng-template #restart>
-    <h1 class="h2 mb-3">
-      Souhaitez-vous vraiment
-      <span class="text-primary">redémarrer l'orientation ?</span>
-    </h1>
-  </ng-template>
 </div>

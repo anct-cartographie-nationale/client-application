@@ -208,6 +208,40 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
+  it('should not filter lieux mediation numerique on accessibilite property', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
+      {} as LieuMediationNumeriqueListItemPresentation,
+      {
+        accessibilite: Url(
+          'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
+        )
+      } as LieuMediationNumeriqueListItemPresentation
+    ];
+
+    const filter: FilterPresentation = { accessibilite: false };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+    );
+
+    expect(lieuxMediationNumerique).toStrictEqual([
+      {} as LieuMediationNumeriqueListItemPresentation,
+      {
+        accessibilite: Url(
+          'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
+        )
+      } as LieuMediationNumeriqueListItemPresentation
+    ]);
+  });
+
   it('should not filter lieux mediation numerique on modalites_access property when filter is empty', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
       {} as LieuMediationNumeriqueListItemPresentation,

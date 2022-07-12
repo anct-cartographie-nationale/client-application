@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { OrientationLayout } from '../../layouts';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'besoin.page.html'
+  templateUrl: './besoin.page.html'
 })
 export class BesoinPage {
   public demarche: string[] = ['Etre accompagné dans les démarches administratives', 'Créer et développer mon entreprise'];
@@ -20,7 +19,5 @@ export class BesoinPage {
 
   public manqueDeMateriel: string[] = ['Accéder à une connexion internet', 'Accéder à du matériel'];
 
-  public constructor(public readonly orientationLayout: OrientationLayout) {
-    orientationLayout.filterForm.addControl('services', new FormControl());
-  }
+  public constructor(public readonly orientationLayout: OrientationLayout) {}
 }

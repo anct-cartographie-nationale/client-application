@@ -98,19 +98,19 @@ export class LieuxMediationNumeriqueListPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
   public lieuxMediationNumeriqueByDistance$(
-    location$: Observable<Localisation>,
+    localisation$: Observable<Localisation>,
     filter$: Observable<FilterPresentation | undefined> = of(undefined)
   ): Observable<LieuMediationNumeriqueListItemPresentation[]> {
-    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), location$, filter$]).pipe(
+    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), localisation$, filter$]).pipe(
       map(
-        ([lieuxMediationNumerique, coordinates, filter]: [
+        ([lieuxMediationNumerique, localisation, filter]: [
           LieuMediationNumerique[],
           Localisation,
           FilterPresentation | undefined
         ]): LieuMediationNumeriqueListItemPresentation[] =>
           lieuxMediationNumerique
             .map((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
-              toLieuxMediationNumeriqueMistItemPresentation(lieuMediationNumerique, coordinates)
+              toLieuxMediationNumeriqueMistItemPresentation(lieuMediationNumerique, localisation)
             )
             .filter(byOrientationFilter(filter ?? {}))
             .sort(byDistance)

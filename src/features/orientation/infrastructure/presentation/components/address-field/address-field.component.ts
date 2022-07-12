@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { AddressFoundPresentation } from '../../../../domain/presenters/address/address-found.presentation';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,16 +17,14 @@ export class AddressFieldComponent {
 
   @Input() public addressNotFound: boolean = false;
 
-  public readonly searchForm: FormGroup = new FormGroup({
-    address: new FormControl('')
-  });
+  @Input() public formGroup: FormGroup = new FormGroup({ address: new FormControl() });
 
   public search(addressInput: string): void {
     this.searchAddress.next(addressInput);
   }
 
   public setAddressSuggestion(address: AddressFoundPresentation): void {
-    this.searchForm.setValue({ address: address.label });
+    this.formGroup.get('address')?.setValue(address.label);
     this.searchAddress.next(address.label);
     this.selectAddress.next(address);
   }

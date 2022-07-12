@@ -51,7 +51,9 @@
   <div class="container my-5">
     <ul class="nav nav-pills justify-content-center">
       <li class="nav-item">
-        <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'localisation']">Suivant ></a>
+        <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'localisation']" queryParamsHandling="preserve">
+          Suivant >
+        </a>
       </li>
     </ul>
   </div>
