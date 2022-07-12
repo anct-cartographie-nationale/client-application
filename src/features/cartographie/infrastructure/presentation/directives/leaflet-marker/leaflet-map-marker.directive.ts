@@ -25,7 +25,7 @@ export interface MarkerEvent<T> {
     { provide: CanHavePopupDirective, useExisting: LeafletMapMarkerDirective },
     { provide: CanHaveTooltipDirective, useExisting: LeafletMapMarkerDirective }
   ],
-  selector: 'app-leaflet-map-marker[markerFactoryKey]'
+  selector: 'app-leaflet-map-marker[markerFactoryKey][latitude][longitude]'
 })
 export class LeafletMapMarkerDirective<TProperty, TIcon extends DivIcon | Icon>
   implements OnChanges, OnDestroy, CanHavePopup<Marker>, CanHaveTooltip<Marker>
