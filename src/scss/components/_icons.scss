@@ -203,6 +203,10 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\f21b';
 }
 
+.ri-error-warning-line::before {
+  content: '\eca1';
+}
+
 .ri-service-line::before {
   content: '\f0e2';
 }

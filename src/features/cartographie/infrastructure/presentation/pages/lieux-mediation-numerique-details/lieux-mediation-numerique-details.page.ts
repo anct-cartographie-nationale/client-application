@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, tap } from 'rxjs';
 import { LieuxMediationNumeriqueDetailsPresenter, LieuxMediationNumeriqueRepository } from '../../../../domain';
-import { toStructurePresentation } from '../../models/structure';
+import { LieuMediationNumeriqueListItemPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
 
 @Component({
   providers: [
@@ -17,14 +15,14 @@ import { toStructurePresentation } from '../../models/structure';
   templateUrl: 'lieux-mediation-numerique-details.page.html'
 })
 export class LieuxMediationNumeriqueDetailsPage {
-  public structure$: Observable<Structure> = this.lieuxMediationNumeriqueDetailsPresenter
-    .lieuMediationNumeriqueFromParams$(this.route.params)
-    .pipe(map(toStructurePresentation));
+  public lieuMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation> =
+    this.lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(this.route.params);
 
   public constructor(
     private readonly lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
     private readonly route: ActivatedRoute
   ) {}
+
   public printPage() {
     window.print();
   }
