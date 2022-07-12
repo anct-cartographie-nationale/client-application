@@ -1,0 +1,11 @@
+<div class="container" *ngIf="lieuMediationNumerique.publics as publics">
+  <div class="border-bottom p-3">
+    <h1 class="h5 text-info">PUBLIC PRIS EN CHARGE</h1>
+    <div class="row p-1">
+      <div class="col-auto my-1 form-check form-check-inline form-chip p-0" *ngFor="let public of publics">
+        <input type="radio" name="publics" class="form-check-input" [value]="public" />
+        <label class="form-check-label bg-primary text-white">{{ public }}</label>
+      </div>
+    </div>
+  </div>
+</div>
