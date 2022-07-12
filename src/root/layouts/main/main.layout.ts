@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { BRAND_TOKEN, BrandConfiguration } from '../../configuration';
 
 @Component({
