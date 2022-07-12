@@ -1,27 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CartographieLayout } from './cartographie.layout';
-import {
-  CardStubComponent,
-  MapStubComponent,
-  StructureListStubComponent,
-  StructureListSearchStubComponent,
-  StructureDetailsStubComponent
-} from '@gouvfr-anct/mediation-numerique/testing';
 import { of } from 'rxjs';
 import { LieuxMediationNumeriqueRepository } from '../../../../domain';
+import { LeafletMapStubComponent } from '../../test-doubles';
+import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 
 describe('CartographieLayout', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
-      declarations: [
-        CartographieLayout,
-        CardStubComponent,
-        MapStubComponent,
-        StructureListStubComponent,
-        StructureListSearchStubComponent,
-        StructureDetailsStubComponent
-      ],
+      declarations: [CartographieLayout, LeafletMapStubComponent],
       imports: [RouterTestingModule],
       providers: [
         {
@@ -29,6 +17,14 @@ describe('CartographieLayout', (): void => {
           useValue: {
             getAll$: () => of([])
           }
+        },
+        {
+          provide: ZOOM_LEVEL_TOKEN,
+          useValue: {}
+        },
+        {
+          provide: INITIAL_POSITION_TOKEN,
+          useValue: {}
         }
       ]
     })

@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LieuxMediationNumeriqueListPage } from './lieux-mediation-numerique-list.page';
 import { of } from 'rxjs';
 import { GeolocationPresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../../domain';
+import { ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 
 describe('LieuxMediationNumeriqueListPage', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -16,6 +17,10 @@ describe('LieuxMediationNumeriqueListPage', (): void => {
         },
         {
           provide: GeolocationPresenter,
+          useValue: {}
+        },
+        {
+          provide: ZOOM_LEVEL_TOKEN,
           useValue: {}
         },
         {
