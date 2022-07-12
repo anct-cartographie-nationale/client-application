@@ -7,7 +7,6 @@ import {
   InitialPositionConfiguration,
   MapModule,
   StructureModule,
-  ZOOM_LEVEL_TOKEN,
   ZoomLevelConfiguration
 } from '@gouvfr-anct/mediation-numerique';
 import { DistanceModule } from '@gouvfr-anct/mediation-numerique/shared';
@@ -19,8 +18,6 @@ import { CartographieLayout } from '../presentation/layouts';
 import { LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } from '../presentation/pages';
 import { LeafletMapComponent, LieuMediationNumeriqueListItemComponent } from '../presentation/components';
 import { CartographieFeatureRoutingModule } from './cartographie.feature-routing.module';
-import { LieuMediationNumeriqueListItemComponent } from '../presentation/components/lieu-mediation-numerique-list-item/lieu-mediation-numerique-list-item.component';
-import { MARKER_TYPE_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../../../root';
 import { InformationsGeneralesComponent } from '../presentation/components/informations-generales/informations-generales.component';
 import { BoutonsActionComponent } from '../presentation/components/boutons-action/boutons-action.component';
 import { InformationsPratiquesComponent } from '../presentation/components/informations-pratiques/informations-pratiques.component';
