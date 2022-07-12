@@ -7,18 +7,17 @@ import {
   InitialPositionConfiguration,
   MapModule,
   StructureModule,
-  ZOOM_LEVEL_TOKEN,
   ZoomLevelConfiguration
 } from '@gouvfr-anct/mediation-numerique';
 import { DistanceModule } from '@gouvfr-anct/mediation-numerique/shared';
 import { UiLieuxMediationNumeriqueModule } from '@gouvfr-anct/mediation-numerique/ui';
+import { MARKER_TYPE_CONFIGURATION, POSITION_CONFIGURATION } from '../../../../root';
+import metropole from '../services/assets/metropole.json';
+import { GeojsonService, SearchService, StructureService } from '../services';
 import { CartographieLayout } from '../presentation/layouts';
 import { LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } from '../presentation/pages';
-import { GeojsonService, SearchService, StructureService } from '../services';
-import metropole from '../services/assets/metropole.json';
+import { LeafletMapComponent, LieuMediationNumeriqueListItemComponent } from '../presentation/components';
 import { CartographieFeatureRoutingModule } from './cartographie.feature-routing.module';
-import { LieuMediationNumeriqueListItemComponent } from '../presentation/components/lieu-mediation-numerique-list-item/lieu-mediation-numerique-list-item.component';
-import { MARKER_TYPE_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../../../root';
 import { InformationsGeneralesComponent } from '../presentation/components/informations-generales/informations-generales.component';
 import { BoutonsActionComponent } from '../presentation/components/boutons-action/boutons-action.component';
 import { InformationsPratiquesComponent } from '../presentation/components/informations-pratiques/informations-pratiques.component';
@@ -36,6 +35,12 @@ import { FrenchTechComponent } from '../presentation/components/labellisations/f
 import { GrandesEcolesDuNumeriqueComponent } from '../presentation/components/labellisations/grandes-ecoles-du-numerique/grandes-ecoles-du-numerique.component';
 import { PointRelaisCafComponent } from '../presentation/components/labellisations/point-relais-caf/point-relais-caf.component';
 import { RelaisPoleEmploiComponent } from '../presentation/components/labellisations/relais-pole-emploi/relais-pole-emploi.component';
+import {
+  LeafletMapMarkerDirective,
+  LeafletMapPopupDirective,
+  LeafletMapStateChangeDirective,
+  LeafletMapTooltipDirective
+} from '../presentation/directives';
 
 @NgModule({
   declarations: [
@@ -59,7 +64,12 @@ import { RelaisPoleEmploiComponent } from '../presentation/components/labellisat
     FrenchTechComponent,
     GrandesEcolesDuNumeriqueComponent,
     PointRelaisCafComponent,
-    RelaisPoleEmploiComponent
+    RelaisPoleEmploiComponent,
+    LeafletMapComponent,
+    LeafletMapPopupDirective,
+    LeafletMapStateChangeDirective,
+    LeafletMapTooltipDirective,
+    LeafletMapMarkerDirective
   ],
   imports: [
     HttpClientModule,
@@ -76,10 +86,6 @@ import { RelaisPoleEmploiComponent } from '../presentation/components/labellisat
     UiLieuxMediationNumeriqueModule,
     DistanceModule
   ],
-  providers: [
-    GeojsonService,
-    { provide: INITIAL_POSITION_TOKEN, useValue: POSITION_CONFIGURATION },
-    { provide: ZOOM_LEVEL_TOKEN, useValue: ZOOM_LEVEL_CONFIGURATION }
-  ]
+  providers: [GeojsonService, { provide: INITIAL_POSITION_TOKEN, useValue: POSITION_CONFIGURATION }]
 })
 export class CartographieFeatureModule {}

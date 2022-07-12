@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { LieuxMediationNumeriqueListPresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../../domain';
 import { Localisation } from '../../../../../../models/localisation/localisation';
 import { LieuMediationNumeriqueListItemPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
@@ -9,6 +10,7 @@ import {
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../../../orientation/domain/presenters/filter/filter.presenter';
+import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,11 +37,13 @@ export class LieuxMediationNumeriqueListPage {
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,
     private readonly _route: ActivatedRoute,
+    @Inject(ZOOM_LEVEL_TOKEN)
+    private readonly _zoomLevel: ZoomLevelConfiguration,
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
-  public select(lieuMediationId: string) {
-    this.markersPresenter.select(lieuMediationId);
+  public select(lieuMediationNumerique: LieuMediationNumerique) {
+    this.markersPresenter.focus(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
   }
 
   public printPage() {
