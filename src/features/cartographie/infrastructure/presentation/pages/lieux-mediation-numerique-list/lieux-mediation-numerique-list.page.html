@@ -1,6 +1,6 @@
 <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
   <div class="h-100 overflow-auto d-flex flex-column">
-    <div slot="structure-list-elements" class="flex-grow-1">
+    <div slot="structure-list-elements" class="list-group flex-grow-1">
       <app-mediation-numerique-list-item
         (showDetails)="select($event)"
         (hover)="markersPresenter.highlight($event.id)"
