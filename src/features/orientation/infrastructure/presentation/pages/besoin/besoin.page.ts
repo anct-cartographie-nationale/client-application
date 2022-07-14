@@ -1,23 +1,20 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { OrientationLayout } from '../../layouts';
+import { OrientationItemPresentation } from '../../../../domain/presenters';
+import demarches from './demarches.json';
+import miseANiveau from './miseANiveau.json';
+import manqueDeMateriel from './manqueDeMateriel.json';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './besoin.page.html'
 })
 export class BesoinPage {
-  public demarche: string[] = ['Etre accompagné dans les démarches administratives', 'Créer et développer mon entreprise'];
+  public demarcheOrientationItems: OrientationItemPresentation<string>[] = demarches;
 
-  public niveau: string[] = [
-    'Prendre en main un smartphone ou une tablette',
-    'Utiliser le numérique au quotidien',
-    'Gagner en autonomie dans les démarches administratives',
-    'Approfondir ma culture numérique',
-    'Favoriser mon insertion professionnelle',
-    'Prendre en main un ordinateur'
-  ];
+  public miseANiveauOrientationItems: OrientationItemPresentation<string>[] = miseANiveau;
 
-  public manqueDeMateriel: string[] = ['Accéder à une connexion internet', 'Accéder à du matériel'];
+  public manqueDeMaterielItems: OrientationItemPresentation<string>[] = manqueDeMateriel;
 
   public constructor(public readonly orientationLayout: OrientationLayout) {}
 }

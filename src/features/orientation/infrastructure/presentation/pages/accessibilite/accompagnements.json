@@ -1,18 +1,18 @@
 [
   {
     "label": "Individuel",
-    "value": "avec de l'aide"
+    "value": "Avec de l'aide"
   },
   {
     "label": "Collectif",
-    "value": "dans un atelier"
+    "value": "Dans un atelier"
   },
   {
     "label": "En autonomie",
-    "value": "seul"
+    "value": "Seul"
   },
   {
     "label": "Effectuer un démarche à ma place",
-    "value": "à ma place"
+    "value": "A ma place"
   }
 ]

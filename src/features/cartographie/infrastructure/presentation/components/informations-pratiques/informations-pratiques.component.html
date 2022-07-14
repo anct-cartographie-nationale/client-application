@@ -5,10 +5,10 @@
         {{ lieuMediationNumerique.adresse.voie }} {{ lieuMediationNumerique.adresse.code_postal }}
         {{ lieuMediationNumerique.adresse.commune }}
       </p>
-      <div class="d-flex" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.modalites_access">
+      <div class="d-flex" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.conditions_access">
         <p *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</p>
-        <span class="text-primary" *ngIf="lieuMediationNumerique.modalites_access">
-          &nbsp;- {{ lieuMediationNumerique.modalites_access }}
+        <span class="text-primary" *ngIf="lieuMediationNumerique.conditions_access">
+          &nbsp;- {{ lieuMediationNumerique.conditions_access }}
         </span>
       </div>
       <a

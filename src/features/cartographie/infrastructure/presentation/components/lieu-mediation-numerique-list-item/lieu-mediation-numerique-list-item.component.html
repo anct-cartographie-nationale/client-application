@@ -31,11 +31,11 @@
       <span>{{ telephone }}</span>
     </p>
   </div>
-  <div class="my-2 d-flex" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.modalites_access">
+  <div class="my-2 d-flex" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.conditions_access">
     <p *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</p>
-    <span class="text-primary" *ngIf="lieuMediationNumerique.modalites_access?.includes('Payant')">
+    <span class="text-primary" *ngIf="lieuMediationNumerique.conditions_access?.includes('Payant')">
       &nbsp;-
-      {{ lieuMediationNumerique.modalites_access }}
+      {{ lieuMediationNumerique.conditions_access }}
     </span>
   </div>
   <p *ngIf="lieuMediationNumerique.date_maj" class="text-info" style="font-size: 11px">

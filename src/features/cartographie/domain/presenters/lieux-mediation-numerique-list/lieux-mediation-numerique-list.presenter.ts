@@ -1,17 +1,16 @@
 import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
-import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
-import { Localisation, NO_LOCALISATION } from '../../../../../models/localisation/localisation';
+import { Localisation, NO_LOCALISATION, LieuMediationNumerique } from '../../../../../models';
 import { LieuMediationNumeriqueListItemPresentation } from './lieu-mediation-numerique-list-item.presentation';
 import { FilterPresentation } from '../../../../orientation/domain/presenters/filter/filter.presenter';
 import {
   accessibiliteFilterOperator,
   distanceFilterOperator,
-  modalitesAccessFilterOperator,
-  publicsFilterOperator,
+  conditionsAccessFilterOperator,
+  publicsAccueillisFilterOperator,
   serviceFilterOperator,
-  typesAccompagnementFilterOperator
+  modalitesAccompagnementFilterOperator
 } from './filter-operators';
 
 const HALF_CIRCLE_DEGREE: number = 180;
@@ -75,9 +74,9 @@ const filterOperatorsMap: Map<string, FilterOperator> = new Map([
   ['distance', distanceFilterOperator],
   ['services', serviceFilterOperator],
   ['accessibilite', accessibiliteFilterOperator],
-  ['modalites_access', modalitesAccessFilterOperator],
-  ['publics', publicsFilterOperator],
-  ['types_accompagnement', typesAccompagnementFilterOperator]
+  ['conditions_access', conditionsAccessFilterOperator],
+  ['publics_accueillis', publicsAccueillisFilterOperator],
+  ['modalites_accompagnement', modalitesAccompagnementFilterOperator]
 ]);
 
 const applyFilter = (

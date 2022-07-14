@@ -5,46 +5,58 @@
 <form [formGroup]="orientationLayout.filterForm">
   <app-collapse title="Démarches" icon="ri-file-list-3-line ri-xl" class="d-flex justify-content-center my-3">
     <div class="text-center">
-      <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of demarche; index as i">
+      <div
+        class="mb-3 form-check form-check-inline form-chip"
+        *ngFor="let demarcheOrientationItem of demarcheOrientationItems; index as i">
         <input
           type="radio"
           appUncheckableRadio
           name="services"
           formControlName="services"
           class="form-check-input"
-          [value]="label"
+          [value]="demarcheOrientationItem.value"
           [attr.id]="'demarcheLabelChip' + i" />
-        <label class="form-check-label bg-primary text-white" [attr.for]="'demarcheLabelChip' + i">{{ label }}</label>
+        <label class="form-check-label bg-primary text-white" [attr.for]="'demarcheLabelChip' + i">
+          {{ demarcheOrientationItem.label }}
+        </label>
       </div>
     </div>
   </app-collapse>
   <app-collapse title="Mise à niveau" icon="ri-compasses-2-fill ri-xl" class="d-flex justify-content-center my-3">
     <div class="text-center">
-      <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of niveau; index as i">
+      <div
+        class="mb-3 form-check form-check-inline form-chip"
+        *ngFor="let miseANiveauItem of miseANiveauOrientationItems; index as i">
         <input
           type="radio"
           appUncheckableRadio
           name="services"
           formControlName="services"
           class="form-check-input"
-          [value]="label"
+          [value]="miseANiveauItem.value"
           [attr.id]="'niveauLabelChip' + i" />
-        <label class="form-check-label bg-primary text-white" [attr.for]="'niveauLabelChip' + i">{{ label }}</label>
+        <label class="form-check-label bg-primary text-white" [attr.for]="'niveauLabelChip' + i">
+          {{ miseANiveauItem.label }}
+        </label>
       </div>
     </div>
   </app-collapse>
   <app-collapse title="Manque de matériel" icon="ri-wifi-line ri-xl" class="d-flex justify-content-center my-3">
     <div class="text-center">
-      <div class="mb-3 form-check form-check-inline form-chip" *ngFor="let label of manqueDeMateriel; index as i">
+      <div
+        class="mb-3 form-check form-check-inline form-chip"
+        *ngFor="let manqueDeMaterielItem of manqueDeMaterielItems; index as i">
         <input
           type="radio"
           appUncheckableRadio
           name="services"
           formControlName="services"
           class="form-check-input"
-          [value]="label"
+          [value]="manqueDeMaterielItem.value"
           [attr.id]="'manqueDeMateriel' + i" />
-        <label class="form-check-label bg-primary text-white" [attr.for]="'manqueDeMateriel' + i">{{ label }}</label>
+        <label class="form-check-label bg-primary text-white" [attr.for]="'manqueDeMateriel' + i">
+          {{ manqueDeMaterielItem.label }}
+        </label>
       </div>
     </div>
   </app-collapse>

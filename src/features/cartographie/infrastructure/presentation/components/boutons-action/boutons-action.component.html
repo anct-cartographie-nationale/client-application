@@ -16,7 +16,7 @@
       type="button"
       class="btn pt-5"
       *ngIf="lieuMediationNumerique.contact?.site_web as site_web"
-      href="{{ site_web }}"
+      href="{{ site_web[0] }}"
       target="_blank">
       <i class="ri-computer-line ri-xl bg-primary text-light rounded-circle me-auto p-3"></i>
       <p class="my-3 me-auto">Voir le site</p>

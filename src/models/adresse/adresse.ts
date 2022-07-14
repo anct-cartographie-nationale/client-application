@@ -21,13 +21,13 @@ export class CommuneError extends Error {
 export const Adresse = (adresseData: Omit<Adresse, 'isAdresse'>): Adresse => {
   const codePostalRegEx = /^\d{5}$/;
   const codeInseeRegEx = /^\d[\dAB](?:0?\d{3}|-\d-\d{2}-\d{3})$/;
-  const communeRegEx = /^[A-zÀ-ú- ]+$/;
+  const communeRegEx = /^[A-Za-z\dÀ-ú- ]+$/;
 
   if (!codePostalRegEx.test(adresseData.code_postal)) {
     throw new CodePostalError(adresseData.code_postal);
   }
 
-  if (!codeInseeRegEx.test(adresseData.code_insee)) {
+  if (adresseData.code_insee && !codeInseeRegEx.test(adresseData.code_insee)) {
     throw new CodeInseeError(adresseData.code_insee);
   }
 
@@ -44,7 +44,7 @@ export type Adresse = Model<
     voie: string;
     complement_adresse?: string;
     code_postal: string;
-    code_insee: string;
+    code_insee?: string;
     commune: string;
   }
 >;
