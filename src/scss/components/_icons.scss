@@ -4,8 +4,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 @include font-face(
   $font-family-icons,
-  $font-path-icons + $font-family-icons-lower + '/',
-  $font-family-icons-lower,
+  $font-path-icons + $font-family-icons-lower + '/' + $font-family-icons-lower,
   $font-extensions-icons
 );
 

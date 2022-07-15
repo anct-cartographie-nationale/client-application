@@ -1,7 +1,7 @@
 @use 'sass:string';
 @use 'sass:list';
 
-@mixin font-face($font-family, $font-path, $font-file-name, $font-extensions, $font-style: null, $font-weight: null) {
+@mixin font-face($font-family, $font-path, $font-extensions, $font-style: null, $font-weight: null) {
   @font-face {
     font-family: $font-family;
     @if $font-style {
@@ -13,9 +13,9 @@
 
     font-display: swap;
     @if list.index($font-extensions, eot) {
-      src: string.unquote("url('" + $font-path + $font-file-name + ".eot')");
+      src: string.unquote("url('" + $font-path + ".eot')");
     }
 
-    src: font-face-src($font-family, $font-path, $font-file-name, $font-extensions);
+    src: font-face-src($font-family, $font-path, $font-extensions);
   }
 }

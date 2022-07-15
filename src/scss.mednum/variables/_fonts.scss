@@ -1,0 +1,15 @@
+$font-family-main: marianne;
+$font-path-main: 'https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.5.1/dist/fonts/';
+$font-extensions-main: woff2 woff;
+$font-normal-main: (
+  300: 'Marianne-Light',
+  400: 'Marianne-Regular',
+  700: 'Marianne-Bold'
+);
+$font-italic-main: (
+  300: 'Marianne-Light_Italic',
+  400: 'Marianne-Regular_Italic',
+  700: 'Marianne-Bold_Italic'
+);
+$font-family-sans-serif: $font-family-main, system-ui, -apple-system, 'Segoe UI', roboto, 'Helvetica Neue', arial, 'Noto Sans',
+  'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !default;
