@@ -7,7 +7,7 @@ describe('rna model', (): void => {
     expect(rna).toStrictEqual('W9R2003255');
   });
 
-  it('should throw RnaError if rna len is different than 14', (): void => {
+  it('should throw RnaError if rna do no match required format', (): void => {
     expect(() => {
       Rna('42');
     }).toThrow(new RnaError('42'));

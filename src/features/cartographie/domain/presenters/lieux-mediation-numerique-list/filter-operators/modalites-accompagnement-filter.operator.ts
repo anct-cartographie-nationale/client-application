@@ -8,8 +8,8 @@ const shouldFilter = (filter: FilterPresentation) =>
 
 const hasAtLeastOneOfTheFilterProperties =
   (filter: FilterPresentation) =>
-  (hasOneOfTheFilteredTypesAccompagnement: boolean, typeAccompagnement: ModalitesAccompagnement) =>
-    hasOneOfTheFilteredTypesAccompagnement || (filter.modalites_accompagnement ?? []).includes(typeAccompagnement);
+  (hasOneOfTheFilteredModalitesAccompagnement: boolean, modaliteAccompagnement: ModalitesAccompagnement) =>
+    hasOneOfTheFilteredModalitesAccompagnement || (filter.modalites_accompagnement ?? []).includes(modaliteAccompagnement);
 
 export const modalitesAccompagnementFilterOperator: FilterOperator = (
   lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation,

@@ -13,7 +13,7 @@ describe('pivot model', (): void => {
     expect(pivot).toStrictEqual('W9R2003255');
   });
 
-  it('should throw PivotError if pivot length is different than 14', (): void => {
+  it('should throw PivotError if pivot do no match required format', (): void => {
     expect(() => {
       Pivot('42');
     }).toThrow(new PivotError('42'));

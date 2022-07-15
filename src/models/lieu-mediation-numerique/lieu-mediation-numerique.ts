@@ -4,7 +4,7 @@ import { Localisation } from '../localisation/localisation';
 import { Contact } from '../contact/contact';
 import { Presentation } from '../presentation';
 import { Service } from '../service';
-import { PublicAccueilli } from '../publicAccueilli';
+import { PublicAccueilli } from '../public-accueilli';
 import { ConditionAccess } from '../condition-access';
 import { ModalitesAccompagnement } from '../modalites-accompagnement';
 import { Url } from '../url/url';

@@ -6,8 +6,8 @@ import { FilterOperator } from '../lieux-mediation-numerique-list.presenter';
 const shouldFilter = (filter: FilterPresentation) => filter.conditions_access != null && filter.conditions_access.length > 0;
 
 const hasAtLeastOneOfTheFilterProperties =
-  (filter: FilterPresentation) => (hasOneOfTheFilteredModaliteAccess: boolean, modaliteAccess: ConditionAccess) =>
-    hasOneOfTheFilteredModaliteAccess || (filter.conditions_access ?? []).includes(modaliteAccess);
+  (filter: FilterPresentation) => (hasOneOfTheFilteredConditionAccess: boolean, conditionAccess: ConditionAccess) =>
+    hasOneOfTheFilteredConditionAccess || (filter.conditions_access ?? []).includes(conditionAccess);
 
 export const conditionsAccessFilterOperator: FilterOperator = (
   lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation,

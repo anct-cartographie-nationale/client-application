@@ -6,8 +6,8 @@ import { PublicAccueilli } from '../../../../../../models';
 const shouldFilter = (filter: FilterPresentation) => filter.publics_accueillis != null && filter.publics_accueillis.length > 0;
 
 const hasAtLeastOneOfTheFilterProperties =
-  (filter: FilterPresentation) => (hasOneOfTheFilteredPublic: boolean, publicToFilter: PublicAccueilli) =>
-    hasOneOfTheFilteredPublic || (filter.publics_accueillis ?? []).includes(publicToFilter);
+  (filter: FilterPresentation) => (hasOneOfTheFilteredPublicAccueilli: boolean, publicAccueilliToFilter: PublicAccueilli) =>
+    hasOneOfTheFilteredPublicAccueilli || (filter.publics_accueillis ?? []).includes(publicAccueilliToFilter);
 
 export const publicsAccueillisFilterOperator: FilterOperator = (
   lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation,

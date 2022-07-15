@@ -1,8 +1,4 @@
-import { Service } from '../../../../../models/service';
-import { ConditionAccess } from '../../../../../models/condition-access';
-import { PublicAccueilli } from '../../../../../models/publicAccueilli';
-import { ModalitesAccompagnement } from '../../../../../models/modalites-accompagnement';
-import { Localisation } from '../../../../../models/localisation/localisation';
+import { ConditionAccess, Localisation, ModalitesAccompagnement, PublicAccueilli, Service } from '../../../../../models';
 
 export type FilterPresentation = {
   services?: Service;

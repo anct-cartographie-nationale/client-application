@@ -11,7 +11,7 @@ export * from './labels-nationaux';
 export * from './condition-access';
 export * from './model';
 export * from './presentation';
-export * from './publicAccueilli';
+export * from './public-accueilli';
 export * from './service';
 export * from './modalites-accompagnement';
 export * from './typologie';
