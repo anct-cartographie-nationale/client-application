@@ -33,6 +33,10 @@ jobs:
           yarn
           yarn add @gouvfr-anct/mediation-numerique
 
+      - name: Set mednum custom style
+        run: |
+          cp -r projects/client-application/src/scss.mednum/* projects/client-application/src/scss
+
       - name: Build
         run: yarn build client-application
 
