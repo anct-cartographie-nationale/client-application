@@ -9,7 +9,7 @@ on:
         required: true
       version:
         description: 'Version'
-        default: '2.1.0'
+        default: '2.2.0'
         required: true
 
 jobs:
