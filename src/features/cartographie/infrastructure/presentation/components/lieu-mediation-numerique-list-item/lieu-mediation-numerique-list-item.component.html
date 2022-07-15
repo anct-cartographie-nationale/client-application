@@ -1,15 +1,17 @@
-<div class="container border-bottom my-3">
+<a
+  class="border-bottom container list-group-item list-group-item-action"
+  style="border: none"
+  [routerLink]="[lieuMediationNumerique.id]"
+  (click)="showDetails.emit(lieuMediationNumerique)"
+  (mouseenter)="hover.emit(lieuMediationNumerique)">
   <div class="d-flex">
-    <a
-      class="h4 mt-4 flex-grow-1 link-dark"
-      [routerLink]="[lieuMediationNumerique.id]"
-      (click)="showDetails.emit(lieuMediationNumerique)"
-      (mouseenter)="hover.emit(lieuMediationNumerique)">
+    <h1 class="h4 mt-4 flex-grow-1 link-dark">
       {{ lieuMediationNumerique.nom }}
-    </a>
+    </h1>
     <a
       *ngIf="lieuMediationNumerique.contact?.courriel as courriel"
-      class="btn btn-sm btn-outline-dark mt-3 py-2 d-flex align-items-center"
+      class="btn btn-sm btn-secondary mt-3 py-2 d-flex align-items-center"
+      (click)="$event.stopPropagation()"
       href="mailto:{{ courriel }}">
       <i class="ri-mail-line me-2 align-bottom"></i>
       <span>Contacter par mail</span>
@@ -17,8 +19,12 @@
   </div>
   <div class="d-flex">
     <p class="text-info flex-grow-1">
-      {{ lieuMediationNumerique.adresse.voie }} {{ lieuMediationNumerique.adresse.code_postal }}
-      {{ lieuMediationNumerique.adresse.commune }}
+      {{ lieuMediationNumerique.adresse.voie.toLowerCase() }}
+      {{ lieuMediationNumerique.adresse.code_postal }}
+      {{
+        lieuMediationNumerique.adresse.commune.charAt(0).toUpperCase() +
+          lieuMediationNumerique.adresse.commune.substring(1).toLowerCase()
+      }}
     </p>
     <p class="mt-1" *ngIf="lieuMediationNumerique.contact?.telephone as telephone">
       <i class="ri-phone-line me-2 align-bottom"></i>
@@ -27,11 +33,12 @@
   </div>
   <div class="my-2 d-flex" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.modalites_access">
     <p *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</p>
-    <span class="text-primary" *ngIf="lieuMediationNumerique.modalites_access">
-      &nbsp;- {{ lieuMediationNumerique.modalites_access }}
+    <span class="text-primary" *ngIf="lieuMediationNumerique.modalites_access?.includes('Payant')">
+      &nbsp;-
+      {{ lieuMediationNumerique.modalites_access }}
     </span>
   </div>
   <p *ngIf="lieuMediationNumerique.date_maj" class="text-info" style="font-size: 11px">
     Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
   </p>
-</div>
+</a>

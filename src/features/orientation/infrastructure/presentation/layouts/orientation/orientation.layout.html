@@ -2,7 +2,7 @@
   <div class="d-flex flex-column w-100 mt-5">
     <div class="d-flex container">
       <div
-        class="col container bg-white shadow-sm mb-5 overflow-hidden flex-grow-1 p-4"
+        class="col container bg-white shadow-sm mb-5 overflow-auto flex-grow-1 p-4"
         [@routeAnimations]="getRouteAnimationData()">
         <div class="container">
           <ul class="nav nav-pills justify-content-center">
@@ -48,7 +48,7 @@
             </li>
           </ul>
         </div>
-        <div class="position-relative">
+        <div class="position-relative" style="height: 500px">
           <router-outlet></router-outlet>
         </div>
       </div>
@@ -79,7 +79,11 @@
           <div class="bg-image" style="background-image: url('assets/logos/carteFrancePerspective.svg')"></div>
           <div *ngIf="router.url !==  '/orientation'" class="d-flex flex-grow-1 justify-content-center">
             <h1 class="h5 text-center text-secondary">
-              Structures trouvée
+              <div [ngPlural]="lieuxMediationNumerique.length">
+                <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
+                <ng-template ngPluralCase="=1">Structure trouvée</ng-template>
+                <ng-template ngPluralCase="other">Structures trouvées</ng-template>
+              </div>
               <br />
               <span class="h6" style="opacity: 0.5">
                 / {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire
@@ -87,7 +91,11 @@
             </h1>
           </div>
           <div class="ml-2 d-flex justify-content-center mb-4">
-            <a class="btn btn-secondary my-4" [routerLink]="['cartographie']" queryParamsHandling="preserve">
+            <a
+              class="btn btn-secondary my-4"
+              [class.disabled]="lieuxMediationNumerique.length === 0"
+              [routerLink]="['cartographie']"
+              queryParamsHandling="preserve">
               Afficher les résultats sur la cartographie >
             </a>
           </div>
