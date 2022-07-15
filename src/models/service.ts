@@ -1,6 +1,6 @@
 export type Service =
-  | 'Gagner en autonomie dans les démarches administratives'
-  | 'Etre accompagné dans les démarches administratives'
+  | 'Devenir autonome dans les démarches administratives'
+  | 'Réaliser des démarches administratives avec un accompagnement'
   | 'Prendre en main un smartphone ou une tablette'
   | 'Prendre en main un ordinateur'
   | 'Utiliser le numérique au quotidien'
@@ -8,4 +8,8 @@ export type Service =
   | 'Favoriser mon insertion professionnelle'
   | 'Accéder à une connexion internet'
   | 'Accéder à du matériel'
-  | 'Créer et développer mon entreprise';
+  | "S'équiper en matériel informatique"
+  | 'Créer et développer mon entreprise'
+  | 'Créer avec le numérique'
+  | 'Accompagner les démarches de santé'
+  | 'Promouvoir la citoyenneté numérique';

@@ -7,7 +7,7 @@ describe('siret model', (): void => {
     expect(siret).toStrictEqual('12345678910111');
   });
 
-  it('should throw SiretError if siret len is different than 14', (): void => {
+  it('should throw SiretError if siret do no match required format', (): void => {
     expect(() => {
       Siret('42');
     }).toThrow(new SiretError('42'));

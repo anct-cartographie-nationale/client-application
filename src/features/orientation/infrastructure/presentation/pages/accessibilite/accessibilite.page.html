@@ -9,18 +9,18 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let fraisAChargeOption of fraisAChargeOptions; index as i">
         <input
-          #modalitesAccess
+          #conditionsAccess
           type="checkbox"
-          name="modalites_access"
+          name="conditions_access"
           appCheckboxArray
-          formControlName="modalites_access"
+          formControlName="conditions_access"
           class="form-check-input"
           [value]="fraisAChargeOption.value"
           [attr.id]="'fraisAChargeLabelChip' + i" />
         <label class="form-check-label bg-primary text-white" [attr.for]="'fraisAChargeLabelChip' + i">
           <i
             class="align-bottom"
-            [class]="modalitesAccess.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+            [class]="conditionsAccess.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ fraisAChargeOption.label }}
         </label>
       </div>
@@ -34,9 +34,9 @@
         <input
           #typesAccompagnement
           type="checkbox"
-          name="types_accompagnement"
+          name="modalites_accompagnement"
           appCheckboxArray
-          formControlName="types_accompagnement"
+          formControlName="modalites_accompagnement"
           class="form-check-input"
           [value]="accompagnementsOption.value"
           [attr.id]="'accompagnementLabelChip' + i" />
@@ -71,16 +71,18 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let accueilSpecifiqueOption of accueilSpecifiqueOptions; index as i">
         <input
-          #publics
+          #publicsAccueillis
           type="checkbox"
-          name="publics"
+          name="publics_accueillis"
           appCheckboxArray
-          formControlName="publics"
+          formControlName="publics_accueillis"
           class="form-check-input"
           [value]="accueilSpecifiqueOption.value"
           [attr.id]="'accueilSpecifiqueLabelChip' + i" />
         <label class="form-check-label bg-primary text-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
-          <i class="align-bottom" [class]="publics.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+          <i
+            class="align-bottom"
+            [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ accueilSpecifiqueOption.label }}
         </label>
       </div>
@@ -95,16 +97,18 @@
         class="mb-3 form-check form-check-inline form-chip"
         *ngFor="let publicPrecisOption of publicPrecisOptions; index as i">
         <input
-          #publics
+          #publicsAccueillis
           type="checkbox"
-          name="publics"
+          name="publics_accueillis"
           appCheckboxArray
-          formControlName="publics"
+          formControlName="publics_accueillis"
           class="form-check-input"
           [value]="publicPrecisOption.value"
           [attr.id]="'publicPrecisLabelChip' + i" />
         <label class="form-check-label bg-primary text-white" [attr.for]="'publicPrecisLabelChip' + i">
-          <i class="align-bottom" [class]="publics.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+          <i
+            class="align-bottom"
+            [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
           {{ publicPrecisOption.label }}
         </label>
       </div>

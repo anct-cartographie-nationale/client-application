@@ -1,16 +1,12 @@
-import { Service } from '../../../../../models/service';
-import { ModalitesAccess } from '../../../../../models/modalites-access';
-import { Public } from '../../../../../models/public';
-import { TypeAccompagnement } from '../../../../../models/type-accompagnement';
-import { Localisation } from '../../../../../models/localisation/localisation';
+import { ConditionAccess, Localisation, ModalitesAccompagnement, PublicAccueilli, Service } from '../../../../../models';
 
 export type FilterPresentation = {
   services?: Service;
   distance?: number;
   accessibilite?: boolean;
-  modalites_access?: ModalitesAccess[];
-  publics?: Public[];
-  types_accompagnement?: TypeAccompagnement[];
+  conditions_access?: ConditionAccess[];
+  publics_accueillis?: PublicAccueilli[];
+  modalites_accompagnement?: ModalitesAccompagnement[];
 };
 
 export type FilterQueryParamsPresentation = {
@@ -20,9 +16,9 @@ export type FilterQueryParamsPresentation = {
   longitude?: `${number}`;
   distance?: '5000' | '20000';
   accessibilite?: 'true' | 'false';
-  modalites_access?: ModalitesAccess[];
-  publics?: Public[];
-  types_accompagnement?: TypeAccompagnement[];
+  conditions_access?: ConditionAccess[];
+  publics_accueillis?: PublicAccueilli[];
+  modalites_accompagnement?: ModalitesAccompagnement[];
 };
 
 export type FilterFormPresentation = FilterPresentation & {
@@ -38,9 +34,9 @@ export const toFilterFormPresentationFromQuery = (queryParams: FilterQueryParams
   longitude: queryParams.longitude ? parseFloat(queryParams.longitude) : undefined,
   distance: queryParams.distance ? parseInt(queryParams.distance) : undefined,
   accessibilite: queryParams.accessibilite === 'true' ? true : undefined,
-  modalites_access: queryParams.modalites_access,
-  publics: queryParams.publics,
-  types_accompagnement: queryParams.types_accompagnement
+  conditions_access: queryParams.conditions_access,
+  publics_accueillis: queryParams.publics_accueillis,
+  modalites_accompagnement: queryParams.modalites_accompagnement
 });
 
 export const toLocalisationFromFilterFormPresentation = (filter: FilterFormPresentation): Localisation =>

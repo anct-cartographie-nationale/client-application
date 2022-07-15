@@ -36,6 +36,6 @@ export type Contact = Model<
   {
     telephone?: string;
     courriel?: string;
-    site_web?: Url;
+    site_web?: Url[];
   }
 >;

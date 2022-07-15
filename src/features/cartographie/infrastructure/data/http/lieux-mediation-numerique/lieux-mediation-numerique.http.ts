@@ -2,9 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LieuxMediationNumeriqueRepository } from '../../../../domain';
 import { DataConfiguration } from '../../../../../../root';
-
 import { map } from 'rxjs/operators';
-import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
+import { LieuMediationNumerique } from '../../../../../../models';
 import { LieuMediationNumeriqueTransfer, toLieuxMediationNumerique } from '../../transfers/lieu-mediation-numerique.transfer';
 
 export class LieuxMediationNumeriqueHttp extends LieuxMediationNumeriqueRepository {

@@ -12,7 +12,6 @@ const throwSiretError = (siretNumber: string): Siret => {
   throw new SiretError(siretNumber);
 };
 
-const hasSiretLength = (siretNumber: string) => siretNumber.length === 14;
+export const isSiret = (siret: string): siret is Siret => siret.length === 14;
 
-export const Siret = (siretNumber: string) =>
-  hasSiretLength(siretNumber) ? (siretNumber as Siret) : throwSiretError(siretNumber);
+export const Siret = (siret: string): Siret => (isSiret(siret) ? siret : throwSiretError(siret));

@@ -12,7 +12,11 @@
     "value": "Adhésion"
   },
   {
-    "label": "Gratuit sous condition (situation, pass numérique, convention avec un organisme, etc.)",
+    "label": "Accepte le Pass numérique",
+    "value": "Accepte le Pass numérique"
+  },
+  {
+    "label": "Gratuit sous condition (situation, convention avec un organisme, etc.)",
     "value": "Gratuit sous condition"
   }
 ]

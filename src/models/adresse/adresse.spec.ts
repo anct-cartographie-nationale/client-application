@@ -92,11 +92,23 @@ describe('adresse model', (): void => {
     expect(adresse).toStrictEqual({ ...adresseData } as Adresse);
   });
 
-  it('should create a valid address with commune with accents', (): void => {
+  it('should create a valid address with commune containing accents', (): void => {
     const adresseData = {
       voie: '4 rue des Acacias',
       code_postal: '17410',
       code_insee: '17369',
+      commune: 'Saint-Martin de Ré'
+    };
+
+    const adresse = Adresse(adresseData);
+
+    expect(adresse).toStrictEqual({ ...adresseData } as Adresse);
+  });
+
+  it('should create a valid address without code insee', (): void => {
+    const adresseData = {
+      voie: '4 rue des Acacias',
+      code_postal: '17410',
       commune: 'Saint-Martin de Ré'
     };
 
@@ -110,7 +122,7 @@ describe('adresse model', (): void => {
       voie: '4 rue des Acacias',
       code_postal: '57100',
       code_insee: '57236',
-      commune: 'Metz0'
+      commune: 'Metz$'
     };
 
     expect(() => {

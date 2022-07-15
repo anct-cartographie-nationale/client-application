@@ -7,4 +7,6 @@ export type LabelNational =
   | 'Point relais CAF'
   | 'Relais pôle emploi'
   | 'French Tech'
-  | 'Campus connecté';
+  | 'Campus connecté'
+  | 'Point numérique CAF'
+  | 'CNFS';

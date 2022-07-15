@@ -6,7 +6,7 @@ describe('contact model', (): void => {
     const contactData = {
       telephone: '+33145896378',
       courriel: 'contact@cartographienationale.fr',
-      site_web: Url('http://www.cartographienationale.fr')
+      site_web: [Url('http://www.cartographienationale.fr')]
     };
 
     const contact = Contact(contactData);

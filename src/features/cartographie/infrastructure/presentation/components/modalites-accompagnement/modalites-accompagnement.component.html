@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="border-bottom p-3" *ngIf="lieuMediationNumerique.modalites_accompagnement as modalites_accompagnement">
+    <div class="d-flex justify-content-center align-items-center my-3">
+      <div *ngFor="let type of modalites_accompagnement" class="col-3 flex-column d-flex me-2">
+        <div *ngFor="let modaliteAccompagnement of modalitesAccompagnement">
+          <div *ngIf="modaliteAccompagnement.title === type.toLowerCase()">
+            <span class="d-flex justify-content-center">
+              <i class="{{ modaliteAccompagnement.icon }} ri-xl bg-light rounded-circle p-3"></i>
+            </span>
+            <p class="my-3 text-center">{{ modaliteAccompagnement.title }}</p>
+            <p class="my-3 text-info text-center" style="font-size: 14px">
+              {{ modaliteAccompagnement.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

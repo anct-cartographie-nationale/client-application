@@ -1,11 +1,9 @@
 import { LieuxMediationNumeriqueListPresenter } from './lieux-mediation-numerique-list.presenter';
 import { firstValueFrom, Observable, of } from 'rxjs';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
-import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
-import { Localisation, NO_LOCALISATION } from '../../../../../models/localisation/localisation';
+import { LieuMediationNumerique, Localisation, NO_LOCALISATION, Url } from '../../../../../models';
 import { LieuMediationNumeriqueListItemPresentation } from './lieu-mediation-numerique-list-item.presentation';
 import { FilterPresentation } from '../../../../orientation/domain/presenters/filter/filter.presenter';
-import { Url } from '../../../../../models/url/url';
 
 describe('lieux-mediation-numerique-list presenter', (): void => {
   it('should append the distance from some localisation to a lieu mediation numerique', async (): Promise<void> => {
@@ -116,7 +114,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
   it('should filter lieux mediation numerique on service property', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
       {
-        services: ['Etre accompagné dans les démarches administratives']
+        services: ['Réaliser des démarches administratives avec un accompagnement']
       } as LieuMediationNumeriqueListItemPresentation,
       {
         services: ['Créer et développer mon entreprise']
@@ -242,24 +240,24 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
-  it('should not filter lieux mediation numerique on modalites_access property when filter is empty', async (): Promise<void> => {
+  it('should not filter lieux mediation numerique on conditions_access property when filter is empty', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
       {} as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit', 'Gratuit sous condition']
+        conditions_access: ['Gratuit', 'Gratuit sous condition']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit']
+        conditions_access: ['Gratuit']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit sous condition']
+        conditions_access: ['Gratuit sous condition']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Payant']
+        conditions_access: ['Payant']
       } as LieuMediationNumeriqueListItemPresentation
     ];
 
-    const filter: FilterPresentation = { modalites_access: [] };
+    const filter: FilterPresentation = { conditions_access: [] };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -276,38 +274,40 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     expect(lieuxMediationNumerique).toStrictEqual([
       {} as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit', 'Gratuit sous condition']
+        conditions_access: ['Gratuit', 'Gratuit sous condition']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit']
+        conditions_access: ['Gratuit']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit sous condition']
+        conditions_access: ['Gratuit sous condition']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Payant']
+        conditions_access: ['Payant']
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
 
-  it('should filter lieux mediation numerique on modalites_access property', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on conditions_access property', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
       {} as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit', 'Gratuit sous condition']
+        conditions_access: ['Gratuit', 'Gratuit sous condition']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit']
+        conditions_access: ['Gratuit']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit sous condition']
+        conditions_access: ['Gratuit sous condition']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Payant']
+        conditions_access: ['Payant']
       } as LieuMediationNumeriqueListItemPresentation
     ];
 
-    const filter: FilterPresentation = { modalites_access: ['Gratuit', 'Gratuit sous condition'] };
+    const filter: FilterPresentation = {
+      conditions_access: ['Gratuit', 'Gratuit sous condition']
+    };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -323,35 +323,35 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual([
       {
-        modalites_access: ['Gratuit', 'Gratuit sous condition']
+        conditions_access: ['Gratuit', 'Gratuit sous condition']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit']
+        conditions_access: ['Gratuit']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_access: ['Gratuit sous condition']
+        conditions_access: ['Gratuit sous condition']
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
 
-  it('should not filter lieux mediation numerique on publics property when filter is empty', async (): Promise<void> => {
+  it('should not filter lieux mediation numerique on publics_accueillis property when filter is empty', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
       {} as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Adultes', 'Surdité']
+        publics_accueillis: ['Adultes', 'Surdité']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Adultes']
+        publics_accueillis: ['Adultes']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Surdité']
+        publics_accueillis: ['Surdité']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Déficience visuelle']
+        publics_accueillis: ['Déficience visuelle']
       } as LieuMediationNumeriqueListItemPresentation
     ];
 
-    const filter: FilterPresentation = { publics: [] };
+    const filter: FilterPresentation = { publics_accueillis: [] };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -368,38 +368,38 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     expect(lieuxMediationNumerique).toStrictEqual([
       {} as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Adultes', 'Surdité']
+        publics_accueillis: ['Adultes', 'Surdité']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Adultes']
+        publics_accueillis: ['Adultes']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Surdité']
+        publics_accueillis: ['Surdité']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Déficience visuelle']
+        publics_accueillis: ['Déficience visuelle']
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
 
-  it('should filter lieux mediation numerique on publics property', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on publics_accueillis property', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
       {} as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Adultes', 'Surdité']
+        publics_accueillis: ['Adultes', 'Surdité']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Adultes']
+        publics_accueillis: ['Adultes']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Surdité']
+        publics_accueillis: ['Surdité']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Déficience visuelle']
+        publics_accueillis: ['Déficience visuelle']
       } as LieuMediationNumeriqueListItemPresentation
     ];
 
-    const filter: FilterPresentation = { publics: ['Adultes', 'Surdité'] };
+    const filter: FilterPresentation = { publics_accueillis: ['Adultes', 'Surdité'] };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -415,35 +415,35 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual([
       {
-        publics: ['Adultes', 'Surdité']
+        publics_accueillis: ['Adultes', 'Surdité']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Adultes']
+        publics_accueillis: ['Adultes']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics: ['Surdité']
+        publics_accueillis: ['Surdité']
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
 
-  it('should not filter lieux mediation numerique on types_accompagnement property when filter is empty', async (): Promise<void> => {
+  it('should not filter lieux mediation numerique on modalites_accompagnement property when filter is empty', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
       {} as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['seul', "avec de l'aide"]
+        modalites_accompagnement: ['Seul', "Avec de l'aide"]
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['seul']
+        modalites_accompagnement: ['Seul']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ["avec de l'aide"]
+        modalites_accompagnement: ["Avec de l'aide"]
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['dans un atelier']
+        modalites_accompagnement: ['Dans un atelier']
       } as LieuMediationNumeriqueListItemPresentation
     ];
 
-    const filter: FilterPresentation = { types_accompagnement: [] };
+    const filter: FilterPresentation = { modalites_accompagnement: [] };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -460,38 +460,38 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     expect(lieuxMediationNumerique).toStrictEqual([
       {} as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['seul', "avec de l'aide"]
+        modalites_accompagnement: ['Seul', "Avec de l'aide"]
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['seul']
+        modalites_accompagnement: ['Seul']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ["avec de l'aide"]
+        modalites_accompagnement: ["Avec de l'aide"]
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['dans un atelier']
+        modalites_accompagnement: ['Dans un atelier']
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
 
-  it('should filter lieux mediation numerique on types_accompagnement property', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on modalites_accompagnement property', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
       {} as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['seul', "avec de l'aide"]
+        modalites_accompagnement: ['Seul', "Avec de l'aide"]
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['seul']
+        modalites_accompagnement: ['Seul']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ["avec de l'aide"]
+        modalites_accompagnement: ["Avec de l'aide"]
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['dans un atelier']
+        modalites_accompagnement: ['Dans un atelier']
       } as LieuMediationNumeriqueListItemPresentation
     ];
 
-    const filter: FilterPresentation = { types_accompagnement: ['seul', "avec de l'aide"] };
+    const filter: FilterPresentation = { modalites_accompagnement: ['Seul', "Avec de l'aide"] };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -507,13 +507,13 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual([
       {
-        types_accompagnement: ['seul', "avec de l'aide"]
+        modalites_accompagnement: ['Seul', "Avec de l'aide"]
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ['seul']
+        modalites_accompagnement: ['Seul']
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        types_accompagnement: ["avec de l'aide"]
+        modalites_accompagnement: ["Avec de l'aide"]
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });

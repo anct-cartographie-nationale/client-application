@@ -16,31 +16,34 @@ import metropole from '../services/assets/metropole.json';
 import { GeojsonService, SearchService, StructureService } from '../services';
 import { CartographieLayout } from '../presentation/layouts';
 import { LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } from '../presentation/pages';
-import { LeafletMapComponent, LieuMediationNumeriqueListItemComponent } from '../presentation/components';
 import { CartographieFeatureRoutingModule } from './cartographie.feature-routing.module';
-import { InformationsGeneralesComponent } from '../presentation/components/informations-generales/informations-generales.component';
-import { BoutonsActionComponent } from '../presentation/components/boutons-action/boutons-action.component';
-import { InformationsPratiquesComponent } from '../presentation/components/informations-pratiques/informations-pratiques.component';
-import { DescriptionComponent } from '../presentation/components/description/description.component';
-import { ServicesComponent } from '../presentation/components/services/services.component';
-import { TypesAccompagnementComponent } from '../presentation/components/types-accompagnement/types-accompagnement.component';
-import { PublicPrisEnChargeComponent } from '../presentation/components/public-pris-en-charge/public-pris-en-charge.component';
-import { LabellisationsComponent } from '../presentation/components/labellisations/labellisations.component';
-import { MaisonFranceServiceComponent } from '../presentation/components/labellisations/maison-france-service/maison-france-service.component';
-import { AidantsConnectComponent } from '../presentation/components/labellisations/aidants-connect/aidants-connect.component';
-import { ApticComponent } from '../presentation/components/labellisations/aptic/aptic.component';
-import { CampusConnecteComponent } from '../presentation/components/labellisations/campus-connecte/campus-connecte.component';
-import { FabriqueDeTerritoireComponent } from '../presentation/components/labellisations/fabriques-de-territoire/fabriques-de-territoire.component';
-import { FrenchTechComponent } from '../presentation/components/labellisations/french-tech/french-tech.component';
-import { GrandesEcolesDuNumeriqueComponent } from '../presentation/components/labellisations/grandes-ecoles-du-numerique/grandes-ecoles-du-numerique.component';
-import { PointRelaisCafComponent } from '../presentation/components/labellisations/point-relais-caf/point-relais-caf.component';
-import { RelaisPoleEmploiComponent } from '../presentation/components/labellisations/relais-pole-emploi/relais-pole-emploi.component';
 import {
   LeafletMapMarkerDirective,
   LeafletMapPopupDirective,
   LeafletMapStateChangeDirective,
   LeafletMapTooltipDirective
 } from '../presentation/directives';
+import {
+  AidantsConnectComponent,
+  ApticComponent,
+  BoutonsActionComponent,
+  CampusConnecteComponent,
+  DescriptionComponent,
+  FabriqueDeTerritoireComponent,
+  FrenchTechComponent,
+  GrandesEcolesDuNumeriqueComponent,
+  InformationsGeneralesComponent,
+  InformationsPratiquesComponent,
+  LabellisationsComponent,
+  LeafletMapComponent,
+  LieuMediationNumeriqueListItemComponent,
+  MaisonFranceServiceComponent,
+  PointRelaisCafComponent,
+  PublicPrisEnChargeComponent,
+  RelaisPoleEmploiComponent
+} from '../presentation/components';
+import { ServicesComponent } from '../presentation/components/services/services.component';
+import { ModalitesAccompagnementComponent } from '../presentation/components/modalites-accompagnement/modalites-accompagnement.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,7 @@ import {
     InformationsPratiquesComponent,
     DescriptionComponent,
     ServicesComponent,
-    TypesAccompagnementComponent,
+    ModalitesAccompagnementComponent,
     PublicPrisEnChargeComponent,
     LabellisationsComponent,
     MaisonFranceServiceComponent,

@@ -1,7 +1,7 @@
 <div class="border-bottom p-3 sticky-top bg-secondary">
   <div class="d-flex">
     <div class="flex-grow-1">
-      <p class="text-info m-0" *ngIf="lieuMediationNumerique.typologie">{{ lieuMediationNumerique.typologie }}</p>
+      <p class="text-info m-0" *ngIf="lieuMediationNumerique.typologie">{{ lieuMediationNumerique.typologie.join(', ') }}</p>
       <h1 class="h2">{{ lieuMediationNumerique.nom }}</h1>
     </div>
     <button type="button" class="btn-close" aria-label="Close" (click)="navigateList()"></button>
