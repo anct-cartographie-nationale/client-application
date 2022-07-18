@@ -1,62 +1,68 @@
-<h1 class="h2 text-center my-5">
-  <span class="text-primary">Où</span>
-  êtes-vous ?
-</h1>
-<form [formGroup]="orientationLayout.filterForm">
-  <app-collapse title="Localisation" icon="ri-map-pin-2-line ri-xl" class="d-flex justify-content-center my-3">
-    <div class="row justify-content-center">
-      <div class="col-md-5 mb-3">
-        <app-address-field
-          [addressSuggestions]="(addressesFound$ | async) ?? []"
-          [addressNotFound]="(addressNotFound$ | async) ?? false"
-          [formGroup]="orientationLayout.filterForm"
-          (selectAddress)="onSelectAddress($event)"
-          (searchAddress)="onSearchAddress($event)"></app-address-field>
-      </div>
-      <div class="col-auto">
-        <button class="btn btn-secondary" (click)="onGeoLocate()">
-          <i class="ri-map-pin-2-line align-bottom"></i>
-          Me géolocaliser
-        </button>
-      </div>
-    </div>
-    <div
-      class="row justify-content-center"
-      *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value">
-      <div class="col-auto mb-3 form-check form-check-inline form-chip">
-        <input
-          type="radio"
-          appUncheckableRadio
-          name="distance"
-          formControlName="distance"
-          [value]="20000"
-          class="form-check-input"
-          id="distance-20km" />
-        <label class="form-check-label bg-primary text-white" for="distance-20km">Moins de 20 km</label>
-      </div>
-      <div class="col-auto mb-3 form-check form-check-inline form-chip">
-        <input
-          type="radio"
-          appUncheckableRadio
-          name="distance"
-          formControlName="distance"
-          [value]="5000"
-          class="form-check-input"
-          id="distance-5km" />
-        <label class="form-check-label bg-primary text-white" for="distance-5km">Moins de 5 km</label>
-      </div>
-    </div>
-  </app-collapse>
-  <ul class="nav nav-pills justify-content-center mt-5">
-    <li class="nav-item">
-      <a class="btn btn-secondary mx-3" [routerLink]="['/', 'orientation', 'besoin']" queryParamsHandling="preserve">
-        < Précédent
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'accessibilite']" queryParamsHandling="preserve">
-        Suivant >
-      </a>
-    </li>
-  </ul>
-</form>
+<div class="h-100 d-flex flex-column">
+  <div class="my-auto">
+    <h1 class="h2 text-center my-5">
+      <span class="text-primary">Où</span>
+      êtes-vous ?
+    </h1>
+    <form [formGroup]="orientationLayout.filterForm">
+      <app-collapse title="Localisation" icon="ri-map-pin-2-line ri-xl" class="d-flex justify-content-center my-3">
+        <div class="row justify-content-center">
+          <div class="col-md-5 mb-3">
+            <app-address-field
+              [addressSuggestions]="(addressesFound$ | async) ?? []"
+              [addressNotFound]="(addressNotFound$ | async) ?? false"
+              [formGroup]="orientationLayout.filterForm"
+              (selectAddress)="onSelectAddress($event)"
+              (searchAddress)="onSearchAddress($event)"></app-address-field>
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-secondary" (click)="onGeoLocate()">
+              <i class="ri-map-pin-2-line align-bottom"></i>
+              Me géolocaliser
+            </button>
+          </div>
+        </div>
+        <div
+          class="row justify-content-center"
+          *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value">
+          <div class="col-auto mb-3 form-check form-check-inline form-chip">
+            <input
+              type="radio"
+              appUncheckableRadio
+              name="distance"
+              formControlName="distance"
+              [value]="20000"
+              class="form-check-input"
+              id="distance-20km" />
+            <label class="form-check-label bg-primary text-white" for="distance-20km">Moins de 20 km</label>
+          </div>
+          <div class="col-auto mb-3 form-check form-check-inline form-chip">
+            <input
+              type="radio"
+              appUncheckableRadio
+              name="distance"
+              formControlName="distance"
+              [value]="5000"
+              class="form-check-input"
+              id="distance-5km" />
+            <label class="form-check-label bg-primary text-white" for="distance-5km">Moins de 5 km</label>
+          </div>
+        </div>
+      </app-collapse>
+    </form>
+    <ul class="nav nav-pills justify-content-center my-5">
+      <li class="nav-item">
+        <a class="btn btn-secondary mx-3" [routerLink]="['/', 'orientation', 'besoin']" queryParamsHandling="preserve">
+          <i class="ri-arrow-left-s-line align-bottom"></i>
+          Précédent
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'accessibilite']" queryParamsHandling="preserve">
+          Suivant
+          <i class="ri-arrow-right-s-line align-bottom"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

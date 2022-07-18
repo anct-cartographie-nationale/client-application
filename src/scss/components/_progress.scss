@@ -32,27 +32,12 @@ div[role='progressbar'] {
   color: var(--fg);
 }
 
-.widget-header {
-  position: absolute;
-}
-
-.widget {
-  position: relative;
-  top: 11rem;
-  left: 6rem;
-}
-
 div[role='progressbar']::before {
   counter-reset: percentage var(--value-int);
   content: counter(percentage);
 }
 
 .bg-image {
-  height: 20rem;
-  background-size: contain;
   background-repeat: no-repeat;
-  position: relative;
-  left: 2.5rem;
-  bottom: -2rem;
-  margin-bottom: 1rem;
+  background-position: center;
 }

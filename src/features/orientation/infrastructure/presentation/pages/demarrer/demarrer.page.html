@@ -1,5 +1,5 @@
 <div class="text-center d-flex flex-column h-100">
-  <div class="mt-5">
+  <div class="my-auto">
     <ng-container *ngIf="((route.queryParamMap | async)?.keys?.length ?? 0) === 0; else: restart">
       <img *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" alt="" />
       <h1 class="h2 mb-3">
@@ -24,13 +24,15 @@
       </h1>
       <div class="my-5">
         <a class="btn btn-primary me-3" [routerLink]="['/', 'orientation', 'besoin']" queryParamsHandling="preserve">
-          < Reprendre l'orientation
+          <i class="ri-arrow-left-s-line align-bottom"></i>
+          Reprendre l'orientation
         </a>
         <a
           class="btn btn-secondary"
           [routerLink]="['/', 'orientation', 'besoin']"
           (click)="orientationLayout.filterForm.reset()">
-          Nouvelle orientation >
+          Nouvelle orientation
+          <i class="ri-arrow-right-s-line align-bottom"></i>
         </a>
       </div>
     </ng-template>

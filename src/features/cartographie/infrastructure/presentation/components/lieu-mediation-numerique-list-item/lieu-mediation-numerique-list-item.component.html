@@ -5,9 +5,9 @@
   (click)="showDetails.emit(lieuMediationNumerique)"
   (mouseenter)="hover.emit(lieuMediationNumerique)">
   <div class="d-flex">
-    <h1 class="h4 mt-4 flex-grow-1 link-dark">
+    <h2 class="h4 mt-4 flex-grow-1 link-dark">
       {{ lieuMediationNumerique.nom }}
-    </h1>
+    </h2>
     <a
       *ngIf="lieuMediationNumerique.contact?.courriel as courriel"
       class="btn btn-sm btn-secondary mt-3 py-2 d-flex align-items-center"
@@ -33,10 +33,7 @@
   </div>
   <div class="my-2 d-flex" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.conditions_access">
     <p *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</p>
-    <span class="text-primary" *ngIf="lieuMediationNumerique.conditions_access?.includes('Payant')">
-      &nbsp;-
-      {{ lieuMediationNumerique.conditions_access }}
-    </span>
+    <span class="text-primary" *ngIf="lieuMediationNumerique.conditions_access?.includes('Payant')">Payant</span>
   </div>
   <p *ngIf="lieuMediationNumerique.date_maj" class="text-info" style="font-size: 11px">
     Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
