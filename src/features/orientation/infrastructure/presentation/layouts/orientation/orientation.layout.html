@@ -1,105 +1,97 @@
-<div class="d-flex h-100 bg-light">
-  <div class="d-flex flex-column w-100 mt-5">
-    <div class="d-flex container">
-      <div
-        class="col container bg-white shadow-sm mb-5 overflow-auto flex-grow-1 p-4"
-        [@routeAnimations]="getRouteAnimationData()">
-        <div class="container">
-          <ul class="nav nav-pills justify-content-center">
-            <li class="nav-item">
-              <a
-                class="btn btn-secondary mx-2"
-                [routerLink]="['/', 'orientation', 'besoin']"
-                queryParamsHandling="preserve"
-                routerLinkActive="active active-primary"
-                ariaCurrentWhenActive="page">
-                Besoin
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="btn btn-secondary mx-2"
-                [routerLink]="['/', 'orientation', 'localisation']"
-                queryParamsHandling="preserve"
-                routerLinkActive="active active-primary"
-                ariaCurrentWhenActive="page">
-                Localisation
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="btn btn-secondary mx-2"
-                [routerLink]="['/', 'orientation', 'accessibilite']"
-                queryParamsHandling="preserve"
-                routerLinkActive="active active-primary"
-                ariaCurrentWhenActive="page">
-                Accessibilité
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="btn btn-secondary mx-2"
-                [routerLink]="['/', 'orientation', 'date']"
-                queryParamsHandling="preserve"
-                routerLinkActive="active active-primary"
-                ariaCurrentWhenActive="page">
-                Date
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="position-relative" style="height: 500px">
+<div class="bg-light h-100 p-5">
+  <div class="container h-100">
+    <div class="row g-0 h-100 shadow">
+      <div class="col bg-white p-3 h-100 overflow-auto d-flex flex-column">
+        <ul class="nav nav-pills justify-content-center pb-3">
+          <li class="nav-item">
+            <a
+              class="btn btn-secondary mx-2"
+              [routerLink]="['/', 'orientation', 'besoin']"
+              queryParamsHandling="preserve"
+              routerLinkActive="active active-primary"
+              ariaCurrentWhenActive="page">
+              Besoin
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="btn btn-secondary mx-2"
+              [routerLink]="['/', 'orientation', 'localisation']"
+              queryParamsHandling="preserve"
+              routerLinkActive="active active-primary"
+              ariaCurrentWhenActive="page">
+              Localisation
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="btn btn-secondary mx-2"
+              [routerLink]="['/', 'orientation', 'accessibilite']"
+              queryParamsHandling="preserve"
+              routerLinkActive="active active-primary"
+              ariaCurrentWhenActive="page">
+              Accessibilité
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="btn btn-secondary mx-2"
+              [routerLink]="['/', 'orientation', 'date']"
+              queryParamsHandling="preserve"
+              routerLinkActive="active active-primary"
+              ariaCurrentWhenActive="page">
+              Date
+            </a>
+          </li>
+        </ul>
+        <div class="h-100" [@routeAnimations]="getRouteAnimationData()">
           <router-outlet></router-outlet>
         </div>
       </div>
-      <div
-        class="col-lg-4 col-md-6 col-12 bg-primary mb-5 shadow-sm overflow-hidden"
-        *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
-        <div
-          class="text-center d-flex flex-column h-100"
-          *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
-          <div class="mt-2 p-2">
+      <div class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4">
+        <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+          <div class="d-flex flex-column h-100" *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
             <h1 class="h2 text-center text-secondary">
               Structures
               <br />
               <span *ngIf="router.url === '/orientation'">sur le territoire</span>
               <span *ngIf="router.url !== '/orientation'">correspondantes</span>
             </h1>
-          </div>
-          <div class="d-flex p-2 widget-header">
-            <div class="border rounded-circle py-4 px-4 test mx-auto widget">
-              <div
-                [attr.aria-valuemax]="lieuxMediationNumeriqueTotal.length"
-                [attr.aria-valuenow]="lieuxMediationNumerique.length"
-                aria-valuemin="0"
-                role="progressbar"
-                style="--value-int: {{lieuxMediationNumerique.length}} ; --value-percentage: {{(lieuxMediationNumerique.length / lieuxMediationNumeriqueTotal.length) * 100}}"></div>
+            <div class="text-center my-auto">
+              <div class="bg-image p-5" style="background-image: url('assets/logos/carteFrancePerspective.svg')">
+                <div class="d-flex p-2">
+                  <div class="border rounded-circle p-4 m-auto">
+                    <div
+                      [attr.aria-valuemax]="lieuxMediationNumeriqueTotal.length"
+                      [attr.aria-valuenow]="lieuxMediationNumerique.length"
+                      aria-valuemin="0"
+                      role="progressbar"
+                      style="--value-int: {{lieuxMediationNumerique.length}} ; --value-percentage: {{(lieuxMediationNumerique.length / lieuxMediationNumeriqueTotal.length) * 100}}"></div>
+                  </div>
+                </div>
+              </div>
+              <ng-container *ngIf="router.url !==  '/orientation'">
+                <b class="fs-5 text" [ngPlural]="lieuxMediationNumerique.length">
+                  <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
+                  <ng-template ngPluralCase="=1">Structure trouvée</ng-template>
+                  <ng-template ngPluralCase="other">Structures trouvées</ng-template>
+                </b>
+                <br />
+                <span class="opacity-50">/ {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire</span>
+              </ng-container>
+            </div>
+            <div class="text-center mt-auto">
+              <a
+                class="btn btn-secondary"
+                [class.disabled]="lieuxMediationNumerique.length === 0"
+                [routerLink]="['cartographie']"
+                queryParamsHandling="preserve">
+                Afficher les résultats sur la cartographie
+                <i class="ri-arrow-right-s-line align-bottom"></i>
+              </a>
             </div>
           </div>
-          <div class="bg-image" style="background-image: url('assets/logos/carteFrancePerspective.svg')"></div>
-          <div *ngIf="router.url !==  '/orientation'" class="d-flex flex-grow-1 justify-content-center">
-            <h1 class="h5 text-center text-secondary">
-              <div [ngPlural]="lieuxMediationNumerique.length">
-                <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
-                <ng-template ngPluralCase="=1">Structure trouvée</ng-template>
-                <ng-template ngPluralCase="other">Structures trouvées</ng-template>
-              </div>
-              <br />
-              <span class="h6" style="opacity: 0.5">
-                / {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire
-              </span>
-            </h1>
-          </div>
-          <div class="ml-2 d-flex justify-content-center mb-4">
-            <a
-              class="btn btn-secondary my-4"
-              [class.disabled]="lieuxMediationNumerique.length === 0"
-              [routerLink]="['cartographie']"
-              queryParamsHandling="preserve">
-              Afficher les résultats sur la cartographie >
-            </a>
-          </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </div>
