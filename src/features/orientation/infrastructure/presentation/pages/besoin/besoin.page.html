@@ -1,72 +1,75 @@
-<h1 class="h2 text-center my-5">
-  Quel est
-  <span class="text-primary">votre besoin ?</span>
-</h1>
-<form [formGroup]="orientationLayout.filterForm">
-  <app-collapse title="Démarches" icon="ri-file-list-3-line ri-xl" class="d-flex justify-content-center my-3">
-    <div class="text-center">
-      <div
-        class="mb-3 form-check form-check-inline form-chip"
-        *ngFor="let demarcheOrientationItem of demarcheOrientationItems; index as i">
-        <input
-          type="radio"
-          appUncheckableRadio
-          name="services"
-          formControlName="services"
-          class="form-check-input"
-          [value]="demarcheOrientationItem.value"
-          [attr.id]="'demarcheLabelChip' + i" />
-        <label class="form-check-label bg-primary text-white" [attr.for]="'demarcheLabelChip' + i">
-          {{ demarcheOrientationItem.label }}
-        </label>
-      </div>
-    </div>
-  </app-collapse>
-  <app-collapse title="Mise à niveau" icon="ri-compasses-2-fill ri-xl" class="d-flex justify-content-center my-3">
-    <div class="text-center">
-      <div
-        class="mb-3 form-check form-check-inline form-chip"
-        *ngFor="let miseANiveauItem of miseANiveauOrientationItems; index as i">
-        <input
-          type="radio"
-          appUncheckableRadio
-          name="services"
-          formControlName="services"
-          class="form-check-input"
-          [value]="miseANiveauItem.value"
-          [attr.id]="'niveauLabelChip' + i" />
-        <label class="form-check-label bg-primary text-white" [attr.for]="'niveauLabelChip' + i">
-          {{ miseANiveauItem.label }}
-        </label>
-      </div>
-    </div>
-  </app-collapse>
-  <app-collapse title="Manque de matériel" icon="ri-wifi-line ri-xl" class="d-flex justify-content-center my-3">
-    <div class="text-center">
-      <div
-        class="mb-3 form-check form-check-inline form-chip"
-        *ngFor="let manqueDeMaterielItem of manqueDeMaterielItems; index as i">
-        <input
-          type="radio"
-          appUncheckableRadio
-          name="services"
-          formControlName="services"
-          class="form-check-input"
-          [value]="manqueDeMaterielItem.value"
-          [attr.id]="'manqueDeMateriel' + i" />
-        <label class="form-check-label bg-primary text-white" [attr.for]="'manqueDeMateriel' + i">
-          {{ manqueDeMaterielItem.label }}
-        </label>
-      </div>
-    </div>
-  </app-collapse>
-  <div class="container my-5">
-    <ul class="nav nav-pills justify-content-center">
+<div class="h-100 d-flex flex-column">
+  <div class="my-auto">
+    <h1 class="h2 text-center">
+      Quel est
+      <span class="text-primary">votre besoin ?</span>
+    </h1>
+    <form [formGroup]="orientationLayout.filterForm">
+      <app-collapse title="Démarches" icon="ri-file-list-3-line ri-xl" class="d-flex justify-content-center my-3">
+        <div class="text-center">
+          <div
+            class="mb-3 form-check form-check-inline form-chip"
+            *ngFor="let demarcheOrientationItem of demarcheOrientationItems; index as i">
+            <input
+              type="radio"
+              appUncheckableRadio
+              name="services"
+              formControlName="services"
+              class="form-check-input"
+              [value]="demarcheOrientationItem.value"
+              [attr.id]="'demarcheLabelChip' + i" />
+            <label class="form-check-label bg-primary text-white" [attr.for]="'demarcheLabelChip' + i">
+              {{ demarcheOrientationItem.label }}
+            </label>
+          </div>
+        </div>
+      </app-collapse>
+      <app-collapse title="Mise à niveau" icon="ri-compasses-2-fill ri-xl" class="d-flex justify-content-center my-3">
+        <div class="text-center">
+          <div
+            class="mb-3 form-check form-check-inline form-chip"
+            *ngFor="let miseANiveauItem of miseANiveauOrientationItems; index as i">
+            <input
+              type="radio"
+              appUncheckableRadio
+              name="services"
+              formControlName="services"
+              class="form-check-input"
+              [value]="miseANiveauItem.value"
+              [attr.id]="'niveauLabelChip' + i" />
+            <label class="form-check-label bg-primary text-white" [attr.for]="'niveauLabelChip' + i">
+              {{ miseANiveauItem.label }}
+            </label>
+          </div>
+        </div>
+      </app-collapse>
+      <app-collapse title="Manque de matériel" icon="ri-wifi-line ri-xl" class="d-flex justify-content-center my-3">
+        <div class="text-center">
+          <div
+            class="mb-3 form-check form-check-inline form-chip"
+            *ngFor="let manqueDeMaterielItem of manqueDeMaterielItems; index as i">
+            <input
+              type="radio"
+              appUncheckableRadio
+              name="services"
+              formControlName="services"
+              class="form-check-input"
+              [value]="manqueDeMaterielItem.value"
+              [attr.id]="'manqueDeMateriel' + i" />
+            <label class="form-check-label bg-primary text-white" [attr.for]="'manqueDeMateriel' + i">
+              {{ manqueDeMaterielItem.label }}
+            </label>
+          </div>
+        </div>
+      </app-collapse>
+    </form>
+    <ul class="nav nav-pills justify-content-center my-5">
       <li class="nav-item">
         <a class="btn btn-primary mx-3" [routerLink]="['/', 'orientation', 'localisation']" queryParamsHandling="preserve">
-          Suivant >
+          Suivant
+          <i class="ri-arrow-right-s-line align-bottom"></i>
         </a>
       </li>
     </ul>
   </div>
-</form>
+</div>
