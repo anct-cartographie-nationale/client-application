@@ -1,37 +1,43 @@
 <div class="container">
   <div class="border-bottom p-3" *ngIf="lieuMediationNumerique.labels_nationaux as labels_nationaux">
     <h1 class="h5 text-info d-flex flex-grow-1">LABELLISATIONS</h1>
-    <!-- <div class="d-flex flex-row align-items-center">
-      <ng-container *ngFor="let label of labels_nationaux">
-        <div class="me-3" *ngIf="label === 'France Services'">
+    <div class="row align-items-center">
+      <ng-container class="row" *ngFor="let label of labels_nationaux">
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'France Services'">
           <app-maison-france-service></app-maison-france-service>
         </div>
-        <div class="me-3" *ngIf="label === 'APTIC'">
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'APTIC'">
           <app-aptic></app-aptic>
         </div>
-        <div class="me-3" *ngIf="label === 'Aidants Connect'">
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'Aidants Connect'">
           <app-aidants-connect></app-aidants-connect>
         </div>
-        <div class="me-3" *ngIf="label === 'Fabriques de Territoire'">
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'Fabriques de Territoire'">
           <app-fabriques-de-territoire></app-fabriques-de-territoire>
         </div>
-        <div class="me-3" *ngIf="label === 'Grandes écoles du numérique'">
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'Grandes écoles du numérique'">
           <app-grandes-ecoles-du-numerique></app-grandes-ecoles-du-numerique>
         </div>
-        <div class="me-3" *ngIf="label === 'Point relais CAF'">
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'Point relais CAF'">
           <app-point-relais-caf></app-point-relais-caf>
         </div>
-        <div class="me-3" *ngIf="label === 'Relais pôle emploi'">
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'Point numérique CAF'">
+          <app-point-numerique-caf></app-point-numerique-caf>
+        </div>
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'Relais pôle emploi'">
           <app-relais-pole-emploi></app-relais-pole-emploi>
         </div>
-        <div class="me-3" *ngIf="label === 'French Tech'">
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'French Tech'">
           <app-french-tech></app-french-tech>
         </div>
-        <div class="me-3" *ngIf="label === 'Campus connecté'">
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'CNFS'">
+          <app-cnfs></app-cnfs>
+        </div>
+        <div class="me-1 ms-auto col-sm" *ngIf="label === 'Campus connecté'">
           <app-campus-connecte></app-campus-connecte>
         </div>
       </ng-container>
-    </div> -->
+    </div>
     <div *ngIf="lieuMediationNumerique.labels_autres as labels_autres">
       <div class="my-1 form-check form-check-inline form-chip p-0" *ngFor="let labelAutres of labels_autres">
         <input type="radio" name="labelAutres" class="form-check-input" [value]="labelAutres" />

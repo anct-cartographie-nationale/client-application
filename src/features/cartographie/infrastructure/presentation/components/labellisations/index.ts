@@ -7,3 +7,5 @@ export * from './grandes-ecoles-du-numerique/grandes-ecoles-du-numerique.compone
 export * from './maison-france-service/maison-france-service.component';
 export * from './point-relais-caf/point-relais-caf.component';
 export * from './relais-pole-emploi/relais-pole-emploi.component';
+export * from './cnfs/cnfs.component';
+export * from './point-numerique-caf/point-numerique-caf.component';

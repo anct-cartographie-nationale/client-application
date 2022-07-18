@@ -27,7 +27,6 @@ import {
   AidantsConnectComponent,
   ApticComponent,
   BoutonsActionComponent,
-  CampusConnecteComponent,
   DescriptionComponent,
   FabriqueDeTerritoireComponent,
   FrenchTechComponent,
@@ -40,7 +39,10 @@ import {
   MaisonFranceServiceComponent,
   PointRelaisCafComponent,
   PublicPrisEnChargeComponent,
-  RelaisPoleEmploiComponent
+  RelaisPoleEmploiComponent,
+  CnfsComponent,
+  CampusConnecteComponent,
+  PointNumeriqueCafComponent
 } from '../presentation/components';
 import { ServicesComponent } from '../presentation/components/services/services.component';
 import { ModalitesAccompagnementComponent } from '../presentation/components/modalites-accompagnement/modalites-accompagnement.component';
@@ -68,6 +70,8 @@ import { ModalitesAccompagnementComponent } from '../presentation/components/mod
     GrandesEcolesDuNumeriqueComponent,
     PointRelaisCafComponent,
     RelaisPoleEmploiComponent,
+    CnfsComponent,
+    PointNumeriqueCafComponent,
     LeafletMapComponent,
     LeafletMapPopupDirective,
     LeafletMapStateChangeDirective,
