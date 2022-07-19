@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-aptic',
-  templateUrl: './aptic.component.html'
+  templateUrl: './aptic.component.svg'
 })
 export class ApticComponent {}
