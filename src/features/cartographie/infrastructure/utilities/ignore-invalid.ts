@@ -4,8 +4,10 @@ export class OptionalPropertyError extends Error {
   }
 }
 
-const filterObject = <TModel>(payload: { [k: string]: unknown }, propertyToIgnore: string) =>
-  Object.fromEntries(Object.entries(payload).filter(([property]: [string, unknown]) => property !== propertyToIgnore));
+const filterObject = (property: string, payload: { [k: string]: unknown }) => {
+  const { [property]: _, ...filteredPayload } = payload;
+  return filteredPayload;
+};
 
 export const ignoreInvalidPropertiesOf = <TModel>(
   payload: { [k: string]: unknown },
@@ -15,7 +17,7 @@ export const ignoreInvalidPropertiesOf = <TModel>(
     return factory(payload);
   } catch (error) {
     if (error instanceof OptionalPropertyError) {
-      return ignoreInvalidPropertiesOf<TModel>(filterObject(payload, error.key), factory);
+      return ignoreInvalidPropertiesOf<TModel>(filterObject(error.key, payload), factory);
     }
 
     throw error;
@@ -27,7 +29,7 @@ export const ignoreInvalidValueOf =
   (data: TValue): TModel => {
     try {
       return factory(data);
-    } catch (error) {
+    } catch {
       return null as unknown as TModel;
     }
   };
