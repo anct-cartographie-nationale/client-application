@@ -8,12 +8,14 @@ import {
   ConditionAccess,
   Presentation,
   PublicAccueilli,
-  Siret,
   ModalitesAccompagnement,
   Typologie,
-  Url
+  Url,
+  Pivot,
+  isValidLocalisation,
+  isValidAddress
 } from '../../../../../models';
-import { ifAny, ifAnyInObject } from '../../utilities/if-any';
+import { ifAny, ifAnyInObject, ignoreInvalidPropertiesOf, ignoreInvalidValueOf } from '../../utilities';
 
 export interface LieuMediationNumeriqueTransfer {
   id: string;
@@ -49,41 +51,40 @@ export interface LieuMediationNumeriqueTransfer {
 
 const toArray = <T extends string>(stringArray: string) => stringArray.split(/,\s*/) as T[];
 
-const canDisplayOnMap = (lieuxMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
-  lieuxMediationNumeriqueTransfer.latitude != null && lieuxMediationNumeriqueTransfer.longitude != null;
+const adressePayload = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) => ({
+  commune: lieuMediationNumeriqueTransfer.commune,
+  code_postal: lieuMediationNumeriqueTransfer.code_postal,
+  ...ifAny('code_insee', lieuMediationNumeriqueTransfer.code_insee),
+  voie: lieuMediationNumeriqueTransfer.adresse,
+  ...ifAny('complement_adresse', lieuMediationNumeriqueTransfer.complement_adresse)
+});
+
+const contactPayload = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) => ({
+  ...ifAny('courriel', lieuMediationNumeriqueTransfer.courriel),
+  ...ifAny('telephone', lieuMediationNumeriqueTransfer.telephone),
+  ...ifAny<Url[], string>('site_web', lieuMediationNumeriqueTransfer.site_web, (siteWeb: string) => toArray(siteWeb).map(Url))
+});
+
+const onlyValidRequiredFields = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
+  isValidLocalisation(lieuMediationNumeriqueTransfer) && isValidAddress(adressePayload(lieuMediationNumeriqueTransfer));
 
 export const toLieuxMediationNumerique = (
   lieuxMediationNumeriqueTransfers: LieuMediationNumeriqueTransfer[]
 ): LieuMediationNumerique[] =>
-  lieuxMediationNumeriqueTransfers.filter(canDisplayOnMap).map(
+  lieuxMediationNumeriqueTransfers.filter(onlyValidRequiredFields).map(
     (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
       ({
         id: lieuMediationNumeriqueTransfer.id,
-        ...ifAny<Siret, string>('pivot', lieuMediationNumeriqueTransfer.pivot, Siret),
+        ...ifAny<Pivot, string>('pivot', lieuMediationNumeriqueTransfer.pivot, ignoreInvalidValueOf(Pivot)),
         nom: lieuMediationNumeriqueTransfer.nom,
-        adresse: Adresse({
-          commune: lieuMediationNumeriqueTransfer.commune,
-          code_postal: lieuMediationNumeriqueTransfer.code_postal,
-          ...ifAny('code_insee', lieuMediationNumeriqueTransfer.code_insee),
-          voie: lieuMediationNumeriqueTransfer.adresse,
-          ...ifAny('complement_adresse', lieuMediationNumeriqueTransfer.complement_adresse)
-        }),
+        adresse: Adresse(adressePayload(lieuMediationNumeriqueTransfer)),
         localisation: Localisation({
           latitude: lieuMediationNumeriqueTransfer.latitude,
           longitude: lieuMediationNumeriqueTransfer.longitude
         }),
         ...ifAny('cle_ban', lieuMediationNumeriqueTransfer.cle_ban, CleBan),
         ...ifAny<Typologie[], string>('typologie', lieuMediationNumeriqueTransfer.typologie, toArray),
-        ...ifAnyInObject(
-          'contact',
-          Contact({
-            ...ifAny('courriel', lieuMediationNumeriqueTransfer.courriel),
-            ...ifAny('telephone', lieuMediationNumeriqueTransfer.telephone),
-            ...ifAny<Url[], string>('site_web', lieuMediationNumeriqueTransfer.site_web, (siteWeb: string) =>
-              toArray(siteWeb).map(Url)
-            )
-          })
-        ),
+        ...ifAnyInObject('contact', ignoreInvalidPropertiesOf(contactPayload(lieuMediationNumeriqueTransfer), Contact)),
         services: toArray(lieuMediationNumeriqueTransfer.services),
         ...ifAny<Date, string>('date_maj', lieuMediationNumeriqueTransfer.date_maj, (dateMaj: string) => new Date(dateMaj)),
         ...ifAny<LabelNational[], string>('labels_nationaux', lieuMediationNumeriqueTransfer.labels_nationaux, toArray),
