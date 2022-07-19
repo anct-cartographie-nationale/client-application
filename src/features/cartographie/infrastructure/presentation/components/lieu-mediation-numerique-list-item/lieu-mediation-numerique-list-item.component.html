@@ -1,41 +1,45 @@
-<a
-  class="border-bottom container list-group-item list-group-item-action"
-  style="border: none"
-  [routerLink]="[lieuMediationNumerique.id]"
-  (click)="showDetails.emit(lieuMediationNumerique)"
-  (mouseenter)="hover.emit(lieuMediationNumerique)">
-  <div class="d-flex">
-    <h2 class="h4 mt-4 flex-grow-1 link-dark">
-      {{ lieuMediationNumerique.nom }}
-    </h2>
-    <a
-      *ngIf="lieuMediationNumerique.contact?.courriel as courriel"
-      class="btn btn-sm btn-secondary mt-3 py-2 d-flex align-items-center"
-      (click)="$event.stopPropagation()"
-      href="mailto:{{ courriel }}">
-      <i class="ri-mail-line me-2 align-bottom"></i>
-      <span>Contacter par mail</span>
-    </a>
-  </div>
-  <div class="d-flex">
-    <p class="text-info flex-grow-1">
+<div class="row">
+  <div class="col">
+    <h5 class="fw-bold mb-0">{{ lieuMediationNumerique.nom }}</h5>
+    <div class="text-muted">
       {{ lieuMediationNumerique.adresse.voie.toLowerCase() }}
       {{ lieuMediationNumerique.adresse.code_postal }}
       {{
         lieuMediationNumerique.adresse.commune.charAt(0).toUpperCase() +
           lieuMediationNumerique.adresse.commune.substring(1).toLowerCase()
       }}
-    </p>
-    <p class="mt-1" *ngIf="lieuMediationNumerique.contact?.telephone as telephone">
-      <i class="ri-phone-line me-2 align-bottom"></i>
-      <span>{{ telephone }}</span>
-    </p>
+    </div>
+    <div class="mt-1" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.conditions_access">
+      <span *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</span>
+      <ng-container *ngIf="lieuMediationNumerique.distance && lieuMediationNumerique.conditions_access?.includes('Payant')">
+        -
+      </ng-container>
+      <span class="text-muted" *ngIf="lieuMediationNumerique.conditions_access?.includes('Payant')">Payant</span>
+    </div>
   </div>
-  <div class="my-2 d-flex" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.conditions_access">
-    <p *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</p>
-    <span class="text-primary" *ngIf="lieuMediationNumerique.conditions_access?.includes('Payant')">Payant</span>
+  <div class="col-auto text-end">
+    <a
+      *ngIf="lieuMediationNumerique.contact?.courriel as courriel"
+      href="mailto:{{ courriel }}"
+      class="btn btn-sm btn-secondary d-block mb-2"
+      (click)="$event.stopPropagation()">
+      <i class="ri-mail-line me-2 align-bottom text-right"></i>
+      <span>Contacter par mail</span>
+    </a>
+    <a
+      *ngIf="lieuMediationNumerique.contact?.telephone as telephone"
+      href="tel://+33678049164"
+      class="text-decoration-none d-block mb-2"
+      (click)="$event.stopPropagation()">
+      <i class="ri-phone-line align-bottom"></i>
+      {{ telephone }}
+    </a>
   </div>
-  <p *ngIf="lieuMediationNumerique.date_maj" class="text-info" style="font-size: 11px">
-    Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
-  </p>
-</a>
+</div>
+<div class="row">
+  <div class="col mt-3" *ngIf="lieuMediationNumerique.date_maj">
+    <small *ngIf="lieuMediationNumerique.date_maj" class="text-muted fst-italic">
+      Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
+    </small>
+  </div>
+</div>

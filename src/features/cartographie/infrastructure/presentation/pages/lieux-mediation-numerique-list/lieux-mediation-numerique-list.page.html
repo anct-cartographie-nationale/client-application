@@ -1,11 +1,15 @@
 <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
   <div class="h-100 overflow-auto d-flex flex-column">
-    <div slot="structure-list-elements" class="list-group flex-grow-1">
-      <app-mediation-numerique-list-item
-        (showDetails)="select($event)"
-        (hover)="markersPresenter.highlight($event.id)"
+    <div class="list-group list-group-flush flex-grow-1">
+      <a
+        class="list-group-item list-group-item-action p-4"
         *ngFor="let lieuMediationNumerique of lieuxMediationNumerique"
-        [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
+        [routerLink]="[lieuMediationNumerique.id]"
+        (click)="select(lieuMediationNumerique)"
+        (mouseenter)="markersPresenter.highlight(lieuMediationNumerique.id)">
+        <app-mediation-numerique-list-item
+          [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
+      </a>
     </div>
     <div class="bg-primary d-flex p-2">
       <div class="ms-auto flex-grow-1">
