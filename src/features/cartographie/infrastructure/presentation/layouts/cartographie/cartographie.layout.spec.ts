@@ -24,7 +24,10 @@ describe('CartographieLayout', (): void => {
         },
         {
           provide: INITIAL_POSITION_TOKEN,
-          useValue: {}
+          useValue: {
+            latitude: 44.555545,
+            longitude: 6.078166
+          }
         }
       ]
     })
