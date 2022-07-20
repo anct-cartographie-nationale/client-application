@@ -1,16 +1,14 @@
-<div class="container">
-  <div class="border-bottom p-3" *ngIf="lieuMediationNumerique.services as services">
-    <div class="row">
-      <div class="card bg-light py-3">
-        <div class="container">
-          <h1 class="h5 text-info">SERVICES</h1>
-          <div class="card-body p-0">
-            <ul class="card-text list-group list-group-flush">
-              <li class="list-group-item p-0 bg-light" style="border-style: none" *ngFor="let service of services">
-                {{ service }}
-              </li>
-            </ul>
-          </div>
+<div *ngIf="services">
+  <div class="row">
+    <div class="card bg-light py-3">
+      <div class="container">
+        <h1 class="h5 text-info">SERVICES</h1>
+        <div class="card-body p-0">
+          <ul class="card-text list-group list-group-flush">
+            <li class="list-group-item p-0 bg-light" style="border-style: none" *ngFor="let service of services">
+              - {{ service }}
+            </li>
+          </ul>
         </div>
       </div>
     </div>

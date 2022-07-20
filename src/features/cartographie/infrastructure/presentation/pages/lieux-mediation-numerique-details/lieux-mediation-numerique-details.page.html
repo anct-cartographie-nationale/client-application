@@ -1,14 +1,31 @@
 <ng-container *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique">
   <div class="h-100 overflow-auto d-flex flex-column">
     <div class="flex-grow-1">
-      <app-informations-generales [lieuMediationNumerique]="lieuMediationNumerique"></app-informations-generales>
-      <app-boutons-action [lieuMediationNumerique]="lieuMediationNumerique"></app-boutons-action>
+      <app-informations-generales
+        [nom]="lieuMediationNumerique.nom"
+        [typologie]="lieuMediationNumerique.typologie"
+        [date]="lieuMediationNumerique.date_maj"></app-informations-generales>
+      <app-boutons-action
+        [courriel]="lieuMediationNumerique.contact?.courriel"
+        [siteWeb]="lieuMediationNumerique.contact?.site_web"></app-boutons-action>
       <app-informations-pratiques [lieuMediationNumerique]="lieuMediationNumerique"></app-informations-pratiques>
-      <app-description [lieuMediationNumerique]="lieuMediationNumerique"></app-description>
-      <app-services [lieuMediationNumerique]="lieuMediationNumerique"></app-services>
-      <app-modalites-accompagnement [lieuMediationNumerique]="lieuMediationNumerique"></app-modalites-accompagnement>
-      <app-public-pris-en-charge [lieuMediationNumerique]="lieuMediationNumerique"></app-public-pris-en-charge>
-      <app-labellisations [lieuMediationNumerique]="lieuMediationNumerique"></app-labellisations>
+      <app-description
+        [detail]="lieuMediationNumerique.presentation?.detail"
+        [resumee]="lieuMediationNumerique.presentation?.resumee"></app-description>
+      <div class="container">
+        <div class="border-bottom p-3">
+          <div class="row">
+            <app-horaires class="col-lg-6" [horaires]="lieuMediationNumerique.horaires"></app-horaires>
+            <app-services class="col-lg-6" [services]="lieuMediationNumerique.services"></app-services>
+          </div>
+        </div>
+      </div>
+      <app-modalites-accompagnement
+        [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
+      <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
+      <app-labellisations
+        [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
+        [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
     </div>
     <div class="bg-primary d-flex p-2">
       <div class="ms-auto flex-grow-1">

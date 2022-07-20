@@ -42,7 +42,8 @@ import {
   RelaisPoleEmploiComponent,
   CnfsComponent,
   CampusConnecteComponent,
-  PointNumeriqueCafComponent
+  PointNumeriqueCafComponent,
+  HorairesComponent
 } from '../presentation/components';
 import { ServicesComponent } from '../presentation/components/services/services.component';
 import { ModalitesAccompagnementComponent } from '../presentation/components/modalites-accompagnement/modalites-accompagnement.component';
@@ -58,6 +59,7 @@ import { ModalitesAccompagnementComponent } from '../presentation/components/mod
     InformationsPratiquesComponent,
     DescriptionComponent,
     ServicesComponent,
+    HorairesComponent,
     ModalitesAccompagnementComponent,
     PublicPrisEnChargeComponent,
     LabellisationsComponent,

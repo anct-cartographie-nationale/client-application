@@ -1,4 +1,4 @@
-<div class="container border-bottom bg-light">
+<div class="container border-bottom bg-light p-3">
   <div class="d-flex justify-content-center align-items-center">
     <button type="button" class="btn pt-5" (click)="printPage()">
       <i class="ri-printer-line ri-xl bg-primary text-light rounded-circle p-3 me-auto"></i>
@@ -8,16 +8,11 @@
       <i class="ri-home-5-line ri-xl bg-primary text-light rounded-circle p-3 me-auto"></i>
       <p class="my-3 me-auto">Je travaille ici</p>
     </button>
-    <a type="button" class="btn pt-5" *ngIf="lieuMediationNumerique.contact?.courriel as courriel" href="mailto:{{ courriel }}">
+    <a type="button" class="btn pt-5" *ngIf="courriel" href="mailto:{{ courriel }}">
       <i class="ri-error-warning-line ri-xl bg-primary text-light rounded-circle p-3 me-auto"></i>
       <p class="my-3 me-auto">Signaler erreur</p>
     </a>
-    <a
-      type="button"
-      class="btn pt-5"
-      *ngIf="lieuMediationNumerique.contact?.site_web as site_web"
-      href="{{ site_web[0] }}"
-      target="_blank">
+    <a type="button" class="btn pt-5" *ngIf="siteWeb" href="{{ siteWeb[0] }}" target="_blank">
       <i class="ri-computer-line ri-xl bg-primary text-light rounded-circle me-auto p-3"></i>
       <p class="my-3 me-auto">Voir le site</p>
     </a>

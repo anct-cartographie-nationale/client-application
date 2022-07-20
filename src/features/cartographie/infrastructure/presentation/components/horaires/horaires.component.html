@@ -1,0 +1,33 @@
+<div *ngIf="horaires">
+  <h1 class="h5 text-info mt-3">HORAIRES</h1>
+  <div>
+    <div class="row my-1">
+      <div class="col-3 text-info">Lundi</div>
+      <div class="col-9">{{ horaires['Lundi'] ? horaires['Lundi'] : 'Fermé' }}</div>
+    </div>
+    <div class="row my-1">
+      <div class="col-3 text-info">Mardi</div>
+      <div class="col-9">{{ horaires['Mardi'] ? horaires['Mardi'] : 'Fermé' }}</div>
+    </div>
+    <div class="row my-1">
+      <div class="col-3 text-info">Mercredi</div>
+      <div class="col-9">{{ horaires['Mercredi'] ? horaires['Mercredi'] : 'Fermé' }}</div>
+    </div>
+    <div class="row my-1">
+      <div class="col-3 text-info">Jeudi</div>
+      <div class="col-9">{{ horaires['Jeudi'] ? horaires['Jeudi'] : 'Fermé' }}</div>
+    </div>
+    <div class="row my-1">
+      <div class="col-3 text-info">Vendredi</div>
+      <div class="col-9">{{ horaires['Vendredi'] ? horaires['Vendredi'] : 'Fermé' }}</div>
+    </div>
+    <div class="row my-1">
+      <div class="col-3 text-info">Samedi</div>
+      <div class="col-9">{{ horaires['Samedi'] ? horaires['Samedi'] : 'Fermé' }}</div>
+    </div>
+    <div class="row my-1">
+      <div class="col-3 text-info">Dimanche</div>
+      <div class="col-9">{{ horaires['Dimanche'] ? horaires['Dimanche'] : 'Fermé' }}</div>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,10 @@
 <div class="border-bottom p-3 sticky-top bg-secondary">
   <div class="d-flex">
     <div class="flex-grow-1">
-      <p class="text-info m-0" *ngIf="lieuMediationNumerique.typologie">{{ lieuMediationNumerique.typologie.join(', ') }}</p>
-      <h1 class="h2">{{ lieuMediationNumerique.nom }}</h1>
+      <p class="text-info m-0" *ngIf="typologie">{{ typologie }}</p>
+      <h1 class="h2">{{ nom }}</h1>
     </div>
     <button type="button" class="btn-close" aria-label="Close" (click)="navigateList()"></button>
   </div>
-  <p *ngIf="lieuMediationNumerique.date_maj" class="text-info mb-3" style="font-size: 11px">
-    Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
-  </p>
+  <p *ngIf="date" class="text-info mb-3" style="font-size: 11px">Mise à jour le {{ date | date: 'dd/MM/y' }}</p>
 </div>
