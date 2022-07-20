@@ -191,4 +191,106 @@ describe('lieux mediation numérique http', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual([]);
   });
+
+  it('should get lieu mediation numerique without contact email error', async (): Promise<void> => {
+    const dataConfiguration: DataConfiguration = {} as DataConfiguration;
+    const httpClient: HttpClient = {
+      get: (): Observable<LieuMediationNumeriqueTransfer[]> => {
+        return of([
+          {
+            id: 'cf52c480-2461-4011-b299-10353b64e323',
+            nom: "Association l'espoir (Groupe SOS)",
+            commune: 'MARSEILLE',
+            code_postal: '13211',
+            adresse: '4 AV DE SAINT MENET',
+            services:
+              'Prendre en main un smartphone ou une tablette, Prendre en main un ordinateur, Utiliser le numérique au quotidien, Approfondir ma culture numérique',
+            latitude: 4.8375548,
+            longitude: 45.7665478,
+            courriel: 'contactlaquincaillerie.tl'
+          }
+        ]);
+      }
+    } as unknown as HttpClient;
+
+    const lieuxMediationNumeriqueHttp: LieuxMediationNumeriqueHttp = new LieuxMediationNumeriqueHttp(
+      dataConfiguration,
+      httpClient
+    );
+
+    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(lieuxMediationNumeriqueHttp.getAll$());
+
+    expect(lieuxMediationNumerique).toStrictEqual([
+      {
+        id: 'cf52c480-2461-4011-b299-10353b64e323',
+        nom: "Association l'espoir (Groupe SOS)",
+        adresse: Adresse({
+          commune: 'MARSEILLE',
+          code_postal: '13211',
+          voie: '4 AV DE SAINT MENET'
+        }),
+        localisation: Localisation({
+          latitude: 4.8375548,
+          longitude: 45.7665478
+        }),
+        services: [
+          'Prendre en main un smartphone ou une tablette',
+          'Prendre en main un ordinateur',
+          'Utiliser le numérique au quotidien',
+          'Approfondir ma culture numérique'
+        ]
+      }
+    ]);
+  });
+
+  it('should get lieu mediation numerique without pivot error', async (): Promise<void> => {
+    const dataConfiguration: DataConfiguration = {} as DataConfiguration;
+    const httpClient: HttpClient = {
+      get: (): Observable<LieuMediationNumeriqueTransfer[]> => {
+        return of([
+          {
+            id: 'cf52c480-2461-4011-b299-10353b64e323',
+            pivot: '123456',
+            nom: "Association l'espoir (Groupe SOS)",
+            commune: 'MARSEILLE',
+            code_postal: '13211',
+            adresse: '4 AV DE SAINT MENET',
+            services:
+              'Prendre en main un smartphone ou une tablette, Prendre en main un ordinateur, Utiliser le numérique au quotidien, Approfondir ma culture numérique',
+            latitude: 4.8375548,
+            longitude: 45.7665478
+          }
+        ]);
+      }
+    } as unknown as HttpClient;
+
+    const lieuxMediationNumeriqueHttp: LieuxMediationNumeriqueHttp = new LieuxMediationNumeriqueHttp(
+      dataConfiguration,
+      httpClient
+    );
+
+    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(lieuxMediationNumeriqueHttp.getAll$());
+
+    expect(lieuxMediationNumerique).toStrictEqual([
+      {
+        id: 'cf52c480-2461-4011-b299-10353b64e323',
+        nom: "Association l'espoir (Groupe SOS)",
+        adresse: Adresse({
+          commune: 'MARSEILLE',
+          code_postal: '13211',
+          voie: '4 AV DE SAINT MENET'
+        }),
+        localisation: Localisation({
+          latitude: 4.8375548,
+          longitude: 45.7665478
+        }),
+        services: [
+          'Prendre en main un smartphone ou une tablette',
+          'Prendre en main un ordinateur',
+          'Utiliser le numérique au quotidien',
+          'Approfondir ma culture numérique'
+        ]
+      }
+    ]);
+  });
 });

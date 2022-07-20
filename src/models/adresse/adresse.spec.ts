@@ -105,6 +105,18 @@ describe('adresse model', (): void => {
     expect(adresse).toStrictEqual({ ...adresseData } as Adresse);
   });
 
+  it('should create a valid address with commune containing apostrophes', (): void => {
+    const adresseData = {
+      voie: 'Ante 1 rue Denfert Rochereau',
+      code_postal: '79400',
+      commune: 'Saint-Maixent-l’Ecole'
+    };
+
+    const adresse = Adresse(adresseData);
+
+    expect(adresse).toStrictEqual({ ...adresseData } as Adresse);
+  });
+
   it('should create a valid address without code insee', (): void => {
     const adresseData = {
       voie: '4 rue des Acacias',

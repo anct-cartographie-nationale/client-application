@@ -1,5 +1,4 @@
 import { LatitudeError, LongitudeError, Localisation } from './localisation';
-import { Adresse, CommuneError } from '../adresse/adresse';
 
 describe('localisation model', (): void => {
   it('should create a valid localisation', (): void => {

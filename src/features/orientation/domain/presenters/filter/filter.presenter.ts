@@ -1,4 +1,11 @@
-import { ConditionAccess, Localisation, ModalitesAccompagnement, PublicAccueilli, Service } from '../../../../../models';
+import {
+  ConditionAccess,
+  Localisation,
+  ModalitesAccompagnement,
+  NO_LOCALISATION,
+  PublicAccueilli,
+  Service
+} from '../../../../../models';
 
 export type FilterPresentation = {
   services?: Service;
@@ -40,4 +47,6 @@ export const toFilterFormPresentationFromQuery = (queryParams: FilterQueryParams
 });
 
 export const toLocalisationFromFilterFormPresentation = (filter: FilterFormPresentation): Localisation =>
-  Localisation({ latitude: filter.latitude, longitude: filter.longitude });
+  filter.latitude && filter.longitude
+    ? Localisation({ latitude: filter.latitude, longitude: filter.longitude })
+    : NO_LOCALISATION;

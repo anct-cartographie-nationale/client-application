@@ -26,31 +26,28 @@ export class LongitudeError extends Error {
 }
 
 const isValidLatitude = (localisationData: LocalisationToValidate) =>
-  (localisationData?.latitude && localisationData.latitude < -90) ||
-  (localisationData?.latitude && localisationData.latitude > 90);
+  localisationData.latitude != null && localisationData.latitude >= -90 && localisationData.latitude <= 90;
 
 const isValidLongitude = (localisationData: LocalisationToValidate) =>
-  (localisationData?.longitude && localisationData.longitude < -180) ||
-  (localisationData?.longitude && localisationData.longitude > 180);
+  localisationData.longitude != null && localisationData.longitude >= -180 && localisationData.longitude <= 180;
 
-const isLocalisation = (localisationData: LocalisationToValidate): localisationData is Localisation =>
-  !(isValidLatitude(localisationData) || isValidLongitude(localisationData));
+export const isValidLocalisation = (localisationData: LocalisationToValidate): localisationData is Localisation =>
+  isValidLatitude(localisationData) && isValidLongitude(localisationData);
 
 const throwLocalisationError = (localisationData: LocalisationToValidate): Localisation => {
-  if (isValidLatitude(localisationData)) {
+  if (!isValidLatitude(localisationData)) {
     throw new LatitudeError(localisationData?.latitude ?? 'indéfinie');
   }
 
-  if (isValidLongitude(localisationData)) {
+  if (!isValidLongitude(localisationData)) {
     throw new LongitudeError(localisationData?.longitude ?? 'indéfinie');
   }
 
   throw new Error();
 };
 
-export const Localisation = (localisationData: LocalisationToValidate): Localisation => {
-  return isLocalisation(localisationData) ? { ...localisationData } : throwLocalisationError(localisationData);
-};
+export const Localisation = (localisation: LocalisationToValidate): Localisation =>
+  isValidLocalisation(localisation) ? { ...localisation } : throwLocalisationError(localisation);
 
 type NoLocalisation = null & { noLocalisation: true };
 

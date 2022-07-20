@@ -8,12 +8,14 @@ import {
   ConditionAccess,
   Presentation,
   PublicAccueilli,
-  Siret,
   ModalitesAccompagnement,
   Typologie,
-  Url
+  Url,
+  Pivot,
+  isValidLocalisation,
+  isValidAddress
 } from '../../../../../models';
-import { ifAny, ifAnyInObject } from '../../utilities/if-any';
+import { ifAny, ifAnyInObject, ignoreInvalidPropertiesOf, ignoreInvalidValueOf } from '../../utilities';
 
 export interface LieuMediationNumeriqueTransfer {
   id: string;
@@ -49,60 +51,58 @@ export interface LieuMediationNumeriqueTransfer {
 
 const toArray = <T extends string>(stringArray: string) => stringArray.split(/,\s*/) as T[];
 
-const canDisplayOnMap = (lieuxMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
-  lieuxMediationNumeriqueTransfer.latitude != null && lieuxMediationNumeriqueTransfer.longitude != null;
+const adressePayload = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) => ({
+  commune: lieuMediationNumeriqueTransfer.commune,
+  code_postal: lieuMediationNumeriqueTransfer.code_postal,
+  ...ifAny('code_insee', lieuMediationNumeriqueTransfer.code_insee),
+  voie: lieuMediationNumeriqueTransfer.adresse,
+  ...ifAny('complement_adresse', lieuMediationNumeriqueTransfer.complement_adresse)
+});
+
+const contactPayload = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) => ({
+  ...ifAny('courriel', lieuMediationNumeriqueTransfer.courriel),
+  ...ifAny('telephone', lieuMediationNumeriqueTransfer.telephone),
+  ...ifAny<Url[], string>('site_web', lieuMediationNumeriqueTransfer.site_web, (siteWeb: string) => toArray(siteWeb).map(Url))
+});
+
+const allRequiredFieldsAreValid = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
+  isValidLocalisation(lieuMediationNumeriqueTransfer) && isValidAddress(adressePayload(lieuMediationNumeriqueTransfer));
+
+const toDomain = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
+  ({
+    id: lieuMediationNumeriqueTransfer.id,
+    ...ifAny<Pivot, string>('pivot', lieuMediationNumeriqueTransfer.pivot, ignoreInvalidValueOf(Pivot)),
+    nom: lieuMediationNumeriqueTransfer.nom,
+    adresse: Adresse(adressePayload(lieuMediationNumeriqueTransfer)),
+    localisation: Localisation({
+      latitude: lieuMediationNumeriqueTransfer.latitude,
+      longitude: lieuMediationNumeriqueTransfer.longitude
+    }),
+    ...ifAny('cle_ban', lieuMediationNumeriqueTransfer.cle_ban, CleBan),
+    ...ifAny<Typologie[], string>('typologie', lieuMediationNumeriqueTransfer.typologie, toArray),
+    ...ifAnyInObject('contact', ignoreInvalidPropertiesOf(contactPayload(lieuMediationNumeriqueTransfer), Contact)),
+    services: toArray(lieuMediationNumeriqueTransfer.services),
+    ...ifAny<Date, string>('date_maj', lieuMediationNumeriqueTransfer.date_maj, (dateMaj: string) => new Date(dateMaj)),
+    ...ifAny<LabelNational[], string>('labels_nationaux', lieuMediationNumeriqueTransfer.labels_nationaux, toArray),
+    ...ifAny<ConditionAccess[], string>('conditions_access', lieuMediationNumeriqueTransfer.conditions_access, toArray),
+    ...ifAny('source', lieuMediationNumeriqueTransfer.source),
+    ...ifAny('horaires', lieuMediationNumeriqueTransfer.horaires),
+    ...ifAnyInObject<Presentation>('presentation', {
+      ...ifAny('resumee', lieuMediationNumeriqueTransfer.presentation_resumee),
+      ...ifAny('detail', lieuMediationNumeriqueTransfer.presentation_detail)
+    }),
+    ...ifAny('structure_parente', lieuMediationNumeriqueTransfer.structure_parente),
+    ...ifAny<PublicAccueilli[], string>('publics_accueillis', lieuMediationNumeriqueTransfer.publics_accueillis, toArray),
+    ...ifAny<string[], string>('labels_autres', lieuMediationNumeriqueTransfer.labels_autres, toArray),
+    ...ifAny<ModalitesAccompagnement[], string>(
+      'modalites_accompagnement',
+      lieuMediationNumeriqueTransfer.modalites_accompagnement,
+      toArray
+    ),
+    ...ifAny<Url, string>('accessibilite', lieuMediationNumeriqueTransfer.accessibilite, Url),
+    ...ifAny<Url, string>('prise_rdv', lieuMediationNumeriqueTransfer.prise_rdv, Url)
+  } as LieuMediationNumerique);
 
 export const toLieuxMediationNumerique = (
   lieuxMediationNumeriqueTransfers: LieuMediationNumeriqueTransfer[]
-): LieuMediationNumerique[] =>
-  lieuxMediationNumeriqueTransfers.filter(canDisplayOnMap).map(
-    (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
-      ({
-        id: lieuMediationNumeriqueTransfer.id,
-        ...ifAny<Siret, string>('pivot', lieuMediationNumeriqueTransfer.pivot, Siret),
-        nom: lieuMediationNumeriqueTransfer.nom,
-        adresse: Adresse({
-          commune: lieuMediationNumeriqueTransfer.commune,
-          code_postal: lieuMediationNumeriqueTransfer.code_postal,
-          ...ifAny('code_insee', lieuMediationNumeriqueTransfer.code_insee),
-          voie: lieuMediationNumeriqueTransfer.adresse,
-          ...ifAny('complement_adresse', lieuMediationNumeriqueTransfer.complement_adresse)
-        }),
-        localisation: Localisation({
-          latitude: lieuMediationNumeriqueTransfer.latitude,
-          longitude: lieuMediationNumeriqueTransfer.longitude
-        }),
-        ...ifAny('cle_ban', lieuMediationNumeriqueTransfer.cle_ban, CleBan),
-        ...ifAny<Typologie[], string>('typologie', lieuMediationNumeriqueTransfer.typologie, toArray),
-        ...ifAnyInObject(
-          'contact',
-          Contact({
-            ...ifAny('courriel', lieuMediationNumeriqueTransfer.courriel),
-            ...ifAny('telephone', lieuMediationNumeriqueTransfer.telephone),
-            ...ifAny<Url[], string>('site_web', lieuMediationNumeriqueTransfer.site_web, (siteWeb: string) =>
-              toArray(siteWeb).map(Url)
-            )
-          })
-        ),
-        services: toArray(lieuMediationNumeriqueTransfer.services),
-        ...ifAny<Date, string>('date_maj', lieuMediationNumeriqueTransfer.date_maj, (dateMaj: string) => new Date(dateMaj)),
-        ...ifAny<LabelNational[], string>('labels_nationaux', lieuMediationNumeriqueTransfer.labels_nationaux, toArray),
-        ...ifAny<ConditionAccess[], string>('conditions_access', lieuMediationNumeriqueTransfer.conditions_access, toArray),
-        ...ifAny('source', lieuMediationNumeriqueTransfer.source),
-        ...ifAny('horaires', lieuMediationNumeriqueTransfer.horaires),
-        ...ifAnyInObject<Presentation>('presentation', {
-          ...ifAny('resumee', lieuMediationNumeriqueTransfer.presentation_resumee),
-          ...ifAny('detail', lieuMediationNumeriqueTransfer.presentation_detail)
-        }),
-        ...ifAny('structure_parente', lieuMediationNumeriqueTransfer.structure_parente),
-        ...ifAny<PublicAccueilli[], string>('publics_accueillis', lieuMediationNumeriqueTransfer.publics_accueillis, toArray),
-        ...ifAny<string[], string>('labels_autres', lieuMediationNumeriqueTransfer.labels_autres, toArray),
-        ...ifAny<ModalitesAccompagnement[], string>(
-          'modalites_accompagnement',
-          lieuMediationNumeriqueTransfer.modalites_accompagnement,
-          toArray
-        ),
-        ...ifAny<Url, string>('accessibilite', lieuMediationNumeriqueTransfer.accessibilite, Url),
-        ...ifAny<Url, string>('prise_rdv', lieuMediationNumeriqueTransfer.prise_rdv, Url)
-      } as LieuMediationNumerique)
-  );
+): LieuMediationNumerique[] => lieuxMediationNumeriqueTransfers.filter(allRequiredFieldsAreValid).map(toDomain);
