@@ -2,6 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'date.page.html'
+  templateUrl: './disponibilite.page.html'
 })
-export class DatePage {}
+export class DisponibilitePage {}

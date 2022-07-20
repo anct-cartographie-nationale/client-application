@@ -33,13 +33,13 @@ const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresent
       ['DemarrerPage', 'BesoinPage'],
       ['DemarrerPage', 'LocalisationPage'],
       ['DemarrerPage', 'AccessibilitePage'],
-      ['DemarrerPage', 'DatePage'],
+      ['DemarrerPage', 'DisponibilitePage'],
       ['BesoinPage', 'LocalisationPage'],
       ['BesoinPage', 'AccessibilitePage'],
-      ['BesoinPage', 'DatePage'],
+      ['BesoinPage', 'DisponibilitePage'],
       ['LocalisationPage', 'AccessibilitePage'],
-      ['LocalisationPage', 'DatePage'],
-      ['AccessibilitePage', 'DatePage']
+      ['LocalisationPage', 'DisponibilitePage'],
+      ['AccessibilitePage', 'DisponibilitePage']
     ])
   ],
   providers: [
