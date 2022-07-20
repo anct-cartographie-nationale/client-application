@@ -1,5 +1,9 @@
 [
   {
+    "label": "Réaliser des démarches administratives avec un accompagnement",
+    "value": "Réaliser des démarches administratives avec un accompagnement"
+  },
+  {
     "label": "Devenir autonome dans les démarches administratives",
     "value": "Devenir autonome dans les démarches administratives"
   },
@@ -10,9 +14,5 @@
   {
     "label": "Accompagner les démarches de santé",
     "value": "Accompagner les démarches de santé"
-  },
-  {
-    "label": "Promouvoir la citoyenneté numérique",
-    "value": "Promouvoir la citoyenneté numérique"
   }
 ]
