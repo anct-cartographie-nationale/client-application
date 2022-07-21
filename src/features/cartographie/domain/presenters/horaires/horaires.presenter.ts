@@ -1,33 +1,32 @@
 import { HorairesPresentation } from './horaires.presentation';
-
-const opening_hours = require('opening_hours');
+import opening_hours from 'opening_hours';
 
 export const parseHoraires = (horairesOSM: string): HorairesPresentation => {
   const schedule: HorairesPresentation = {};
   const horairesRegEx = /[^0-9]+/;
   const replaceColonRegEx = /:/g;
-  let openingHours = new opening_hours(horairesOSM, {}, { locale: 'fr' });
-  let horaires = openingHours.prettifyValue({ conf: { locale: 'fr' } }).split(';');
+  let openingHours = new opening_hours(horairesOSM);
+  let horaires = openingHours.prettifyValue().split(';');
   horaires.forEach((sche: string) => {
-    if (sche.includes('lun')) {
+    if (sche.includes('Mo')) {
       schedule['Lundi'] = sche.replace(horairesRegEx, '').replace(replaceColonRegEx, 'h');
     }
-    if (sche.includes('mar')) {
+    if (sche.includes('Tu')) {
       schedule['Mardi'] = sche.replace(horairesRegEx, '').replace(replaceColonRegEx, 'h');
     }
-    if (sche.includes('mer')) {
+    if (sche.includes('We')) {
       schedule['Mercredi'] = sche.replace(horairesRegEx, '').replace(replaceColonRegEx, 'h');
     }
-    if (sche.includes('jeu')) {
+    if (sche.includes('Th')) {
       schedule['Jeudi'] = sche.replace(horairesRegEx, '').replace(replaceColonRegEx, 'h');
     }
-    if (sche.includes('ven')) {
+    if (sche.includes('Fr')) {
       schedule['Vendredi'] = sche.replace(horairesRegEx, '').replace(replaceColonRegEx, 'h');
     }
-    if (sche.includes('sam')) {
+    if (sche.includes('Sa')) {
       schedule['Samedi'] = sche.replace(horairesRegEx, '').replace(replaceColonRegEx, 'h');
     }
-    if (sche.includes('dim')) {
+    if (sche.includes('Su')) {
       schedule['Dimanche'] = sche.replace(horairesRegEx, '').replace(replaceColonRegEx, 'h');
     }
   });

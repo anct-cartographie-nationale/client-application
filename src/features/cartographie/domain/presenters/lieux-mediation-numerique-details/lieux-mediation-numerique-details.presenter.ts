@@ -4,6 +4,8 @@ import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
 import { parseHoraires } from '../horaires/horaires.presenter';
+import { ifAny } from '@features/cartographie/infrastructure/utilities';
+import { HorairesPresentation } from '../horaires/horaires.presentation';
 
 const definedLieuMediationNumeriqueOnly = (
   LieuMediationNumerique: LieuMediationNumerique | undefined
@@ -27,9 +29,11 @@ export class LieuxMediationNumeriqueDetailsPresenter {
       map((lieu: LieuMediationNumerique): LieuMediationNumeriqueDetailsPresentation => {
         return {
           ...lieu,
-          horaires: parseHoraires(lieu.horaires ?? ''),
+          horaires: lieu.horaires !== '' && lieu.horaires != null ? parseHoraires(lieu.horaires ?? '') : undefined,
           typologie: lieu.typologie?.join(', '),
-          adresse: lieu.adresse.voie.concat(' ', lieu.adresse.code_postal, ' ', lieu.adresse.commune)
+          adresse: [lieu.adresse.voie, lieu.adresse.complement_adresse, lieu.adresse.code_postal, lieu.adresse.commune].join(
+            ' '
+          )
         };
       })
     );
