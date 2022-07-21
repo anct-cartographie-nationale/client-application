@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainLayout } from '../layouts';
-import { CartographieFeatureModule } from '@features/cartographie/infrastructure';
-import { OrientationFeatureModule } from '@features/orientation/infrastructure';
 
 const ROUTES: Routes = [
   {
     children: [
       {
-        loadChildren: async (): Promise<CartographieFeatureModule> =>
-          (await import('@features/cartographie/infrastructure')).CartographieFeatureModule,
+        loadChildren: async () => (await import('@features/cartographie/infrastructure')).CartographieFeatureModule,
         path: ''
       }
     ],
@@ -19,8 +16,7 @@ const ROUTES: Routes = [
   {
     children: [
       {
-        loadChildren: async (): Promise<OrientationFeatureModule> =>
-          (await import('@features/orientation/infrastructure')).OrientationFeatureModule,
+        loadChildren: async () => (await import('@features/orientation/infrastructure')).OrientationFeatureModule,
         path: ''
       }
     ],
