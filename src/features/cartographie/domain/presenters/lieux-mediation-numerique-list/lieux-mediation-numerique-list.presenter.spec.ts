@@ -35,7 +35,8 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           latitude: 46.2814605,
           longitude: 4.468874
         }),
-        distance: 63586.94404350499
+        distance: 63586.94404350499,
+        status: undefined
       }
     ]);
   });
@@ -44,12 +45,13 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     const longitude: number = 4.8343466;
     const latitude: number = 45.7689958;
 
-    const expectedLieuMediationNumerique: LieuMediationNumerique = {
+    const expectedLieuMediationNumerique: LieuMediationNumeriqueListItemPresentation = {
       localisation: Localisation({
         latitude,
         longitude
-      })
-    } as LieuMediationNumerique;
+      }),
+      status: undefined
+    } as LieuMediationNumeriqueListItemPresentation;
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of([expectedLieuMediationNumerique])
@@ -99,14 +101,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         localisation: {
           latitude: 45.7689958,
           longitude: 4.8343466
-        }
+        },
+        status: undefined
       },
       {
         distance: 63653.064922230085,
         localisation: {
           latitude: 46.2814605,
           longitude: 4.468874
-        }
+        },
+        status: undefined
       }
     ]);
   });
@@ -137,7 +141,8 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual([
       {
-        services: ['Créer et développer mon entreprise']
+        services: ['Créer et développer mon entreprise'],
+        status: undefined
       }
     ]);
   });
@@ -168,7 +173,8 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual([
       {
-        distance: 2500
+        distance: 2500,
+        status: undefined
       }
     ]);
   });
@@ -201,7 +207,8 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       {
         accessibilite: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
-        )
+        ),
+        status: undefined
       }
     ]);
   });
@@ -231,11 +238,12 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     );
 
     expect(lieuxMediationNumerique).toStrictEqual([
-      {} as LieuMediationNumeriqueListItemPresentation,
+      { status: undefined } as LieuMediationNumeriqueListItemPresentation,
       {
         accessibilite: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
-        )
+        ),
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
@@ -272,18 +280,22 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     );
 
     expect(lieuxMediationNumerique).toStrictEqual([
-      {} as LieuMediationNumeriqueListItemPresentation,
+      { status: undefined } as LieuMediationNumeriqueListItemPresentation,
       {
-        conditions_access: ['Gratuit', 'Gratuit sous condition']
+        conditions_access: ['Gratuit', 'Gratuit sous condition'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        conditions_access: ['Gratuit']
+        conditions_access: ['Gratuit'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        conditions_access: ['Gratuit sous condition']
+        conditions_access: ['Gratuit sous condition'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        conditions_access: ['Payant']
+        conditions_access: ['Payant'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
@@ -323,13 +335,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual([
       {
-        conditions_access: ['Gratuit', 'Gratuit sous condition']
+        conditions_access: ['Gratuit', 'Gratuit sous condition'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        conditions_access: ['Gratuit']
+        conditions_access: ['Gratuit'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        conditions_access: ['Gratuit sous condition']
+        conditions_access: ['Gratuit sous condition'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
@@ -366,18 +381,22 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     );
 
     expect(lieuxMediationNumerique).toStrictEqual([
-      {} as LieuMediationNumeriqueListItemPresentation,
+      { status: undefined } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics_accueillis: ['Adultes', 'Surdité']
+        publics_accueillis: ['Adultes', 'Surdité'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics_accueillis: ['Adultes']
+        publics_accueillis: ['Adultes'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics_accueillis: ['Surdité']
+        publics_accueillis: ['Surdité'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics_accueillis: ['Déficience visuelle']
+        publics_accueillis: ['Déficience visuelle'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
@@ -415,13 +434,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual([
       {
-        publics_accueillis: ['Adultes', 'Surdité']
+        publics_accueillis: ['Adultes', 'Surdité'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics_accueillis: ['Adultes']
+        publics_accueillis: ['Adultes'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        publics_accueillis: ['Surdité']
+        publics_accueillis: ['Surdité'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
@@ -458,18 +480,22 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     );
 
     expect(lieuxMediationNumerique).toStrictEqual([
-      {} as LieuMediationNumeriqueListItemPresentation,
+      { status: undefined } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_accompagnement: ['Seul', "Avec de l'aide"]
+        modalites_accompagnement: ['Seul', "Avec de l'aide"],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_accompagnement: ['Seul']
+        modalites_accompagnement: ['Seul'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_accompagnement: ["Avec de l'aide"]
+        modalites_accompagnement: ["Avec de l'aide"],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_accompagnement: ['Dans un atelier']
+        modalites_accompagnement: ['Dans un atelier'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
@@ -507,25 +533,30 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual([
       {
-        modalites_accompagnement: ['Seul', "Avec de l'aide"]
+        modalites_accompagnement: ['Seul', "Avec de l'aide"],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_accompagnement: ['Seul']
+        modalites_accompagnement: ['Seul'],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation,
       {
-        modalites_accompagnement: ["Avec de l'aide"]
+        modalites_accompagnement: ["Avec de l'aide"],
+        status: undefined
       } as LieuMediationNumeriqueListItemPresentation
     ]);
   });
 
   it('should not filter lieux mediation numerique when filter is null', async (): Promise<void> => {
-    const expectedLieuMediationNumerique: LieuMediationNumerique[] = [
+    const expectedLieuMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
       {
-        id: '43493312300029'
-      } as LieuMediationNumerique,
+        id: '43493312300029',
+        status: undefined
+      } as LieuMediationNumeriqueListItemPresentation,
       {
-        id: '78993312300029'
-      } as LieuMediationNumerique
+        id: '78993312300029',
+        status: undefined
+      } as LieuMediationNumeriqueListItemPresentation
     ];
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
