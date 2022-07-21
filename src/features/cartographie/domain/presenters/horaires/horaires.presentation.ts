@@ -1,1 +1,5 @@
-export type HorairesPresentation = { [jour: string]: string };
+type Jour = 'Lundi' | 'Mardi' | 'Mercredi' | 'Jeudi' | 'Vendredi' | 'Samedi' | 'Dimanche';
+
+export type HorairesPresentation = {
+  [jour in Jour]?: string;
+};

@@ -2,12 +2,11 @@ import { HorairesPresentation } from './horaires.presentation';
 
 const opening_hours = require('opening_hours');
 
-export const parseHoraires = (input_value: string): HorairesPresentation => {
-  const schedule: { [day: string]: string } = {};
-  console.log('input', input_value);
+export const parseHoraires = (horairesOSM: string): HorairesPresentation => {
+  const schedule: HorairesPresentation = {};
   const horairesRegEx = /[^0-9]+/;
   const replaceColonRegEx = /:/g;
-  let openingHours = new opening_hours(input_value, {}, { locale: 'fr' });
+  let openingHours = new opening_hours(horairesOSM, {}, { locale: 'fr' });
   let horaires = openingHours.prettifyValue({ conf: { locale: 'fr' } }).split(';');
   horaires.forEach((sche: string) => {
     if (sche.includes('lun')) {

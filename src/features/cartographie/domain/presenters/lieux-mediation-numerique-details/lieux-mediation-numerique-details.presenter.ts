@@ -28,7 +28,8 @@ export class LieuxMediationNumeriqueDetailsPresenter {
         return {
           ...lieu,
           horaires: parseHoraires(lieu.horaires ?? ''),
-          typologie: lieu.typologie?.join(', ')
+          typologie: lieu.typologie?.join(', '),
+          adresse: lieu.adresse.voie.concat(' ', lieu.adresse.code_postal, ' ', lieu.adresse.commune)
         };
       })
     );

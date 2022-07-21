@@ -8,7 +8,12 @@
       <app-boutons-action
         [courriel]="lieuMediationNumerique.contact?.courriel"
         [siteWeb]="lieuMediationNumerique.contact?.site_web"></app-boutons-action>
-      <app-informations-pratiques [lieuMediationNumerique]="lieuMediationNumerique"></app-informations-pratiques>
+      <app-informations-pratiques
+        [adresse]="lieuMediationNumerique.adresse"
+        [conditionAccess]="lieuMediationNumerique.conditions_access"
+        [accessibilite]="lieuMediationNumerique.accessibilite"
+        [courriel]="lieuMediationNumerique.contact?.courriel"
+        [telephone]="lieuMediationNumerique.contact?.telephone"></app-informations-pratiques>
       <app-description
         [detail]="lieuMediationNumerique.presentation?.detail"
         [resumee]="lieuMediationNumerique.presentation?.resumee"></app-description>
