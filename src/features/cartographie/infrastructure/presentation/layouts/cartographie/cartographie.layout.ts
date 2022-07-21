@@ -13,7 +13,7 @@ import {
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../../../orientation/domain/presenters/filter/filter.presenter';
-import { Localisation } from '../../../../../../models/localisation/localisation';
+import { Localisation } from '../../../../../../models';
 import { CenterView } from '../../components/leaflet-map/leaflet-map.presenter';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration/marker';
 import { LieuMediationNumeriqueListItemPresentation } from '../../../../domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
