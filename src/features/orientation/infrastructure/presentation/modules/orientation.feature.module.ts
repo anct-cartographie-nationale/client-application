@@ -4,14 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { OrientationLayout } from '../layouts';
 import { AddressFieldComponent, CollapseComponent, DropdownPaneComponent } from '../components';
 import { OrientationFeatureRoutingModule } from './orientation.feature-routing.module';
-import { BesoinPage, DatePage, DemarrerPage, LocalisationPage, AccessibilitePage } from '../pages';
+import { BesoinPage, DisponibilitePage, DemarrerPage, LocalisationPage, AccessibilitePage } from '../pages';
 import { CheckboxArrayDirective, UncheckableRadioDirective } from '../directives';
 
 @NgModule({
   declarations: [
     OrientationLayout,
     BesoinPage,
-    DatePage,
+    DisponibilitePage,
     DemarrerPage,
     LocalisationPage,
     AccessibilitePage,

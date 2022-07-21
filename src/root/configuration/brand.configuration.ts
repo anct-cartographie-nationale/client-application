@@ -8,6 +8,6 @@ export type BrandConfiguration = {
 export const BRAND_TOKEN: InjectionToken<BrandConfiguration> = new InjectionToken<BrandConfiguration>('brand.configuration');
 
 export const BRAND_CONFIGURATION: BrandConfiguration = {
-  name: 'Cartographie Nationale',
+  name: 'Nationale',
   logo: ''
 };

@@ -36,11 +36,11 @@
           <li class="nav-item">
             <a
               class="btn btn-secondary mx-2"
-              [routerLink]="['/', 'orientation', 'date']"
+              [routerLink]="['/', 'orientation', 'disponibilite']"
               queryParamsHandling="preserve"
               routerLinkActive="active active-primary"
               ariaCurrentWhenActive="page">
-              Date
+              Disponibilité
             </a>
           </li>
         </ul>
@@ -51,7 +51,7 @@
       <div class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4">
         <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
           <div class="d-flex flex-column h-100" *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
-            <h1 class="h2 text-center text-secondary">
+            <h1 class="h2 text-center text-secondary fw-bold">
               Structures
               <br />
               <span *ngIf="router.url === '/orientation'">sur le territoire</span>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OrientationLayout } from '../layouts';
-import { BesoinPage, DatePage, DemarrerPage, LocalisationPage, AccessibilitePage } from '../pages';
+import { BesoinPage, DisponibilitePage, DemarrerPage, LocalisationPage, AccessibilitePage } from '../pages';
 
 const ROUTES: Routes = [
   {
@@ -12,9 +12,9 @@ const ROUTES: Routes = [
         data: { animation: 'BesoinPage' }
       },
       {
-        component: DatePage,
-        path: 'date',
-        data: { animation: 'DatePage' }
+        component: DisponibilitePage,
+        path: 'disponibilite',
+        data: { animation: 'DisponibilitePage' }
       },
       {
         component: LocalisationPage,

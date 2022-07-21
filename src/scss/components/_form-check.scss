@@ -2,7 +2,9 @@
   padding-left: $form-chip-padding-start;
 
   .form-check-input {
-    display: none;
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
 
     & + .form-check-label {
       transition: all 250ms ease;
@@ -16,6 +18,11 @@
     &:not(:checked) + .form-check-label {
       color: $body-color !important;
       background-color: $form-chip-padding-background-color !important;
+    }
+
+    &:focus + .form-check-label {
+      outline: 0;
+      box-shadow: $input-focus-box-shadow;
     }
   }
 }

@@ -1,21 +1,3 @@
-<div class="accordion w-100">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button
-        (click)="isCollapsed = !isCollapsed"
-        [class.collapsed]="isCollapsed"
-        class="accordion-button p-3"
-        type="button"
-        [attr.aria-expanded]="!isCollapsed"
-        aria-controls="collapseControl">
-        <i *ngIf="icon" [class]="icon" class="ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-        {{ title }}
-      </button>
-    </h2>
-    <div [class.collapse]="isCollapsed" id="collapseControl" class="accordion-collapse" aria-labelledby="headingOne">
-      <div class="accordion-body">
-        <ng-content></ng-content>
-      </div>
-    </div>
-  </div>
+<div [@collapse]="state$ | async">
+  <ng-content></ng-content>
 </div>
