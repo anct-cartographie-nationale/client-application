@@ -7,5 +7,5 @@ export type DataConfiguration = {
 export const DATA_TOKEN: InjectionToken<DataConfiguration> = new InjectionToken<DataConfiguration>('data.configuration');
 
 export const DATA_CONFIGURATION: DataConfiguration = {
-  lieuxDeMediationNumerique: ''
+  lieuxDeMediationNumerique: 'https://api.conseiller-numerique.gouv.fr/permanences'
 };
