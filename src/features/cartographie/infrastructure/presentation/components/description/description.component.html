@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="border-bottom p-3">
+  <div class="border-bottom p-3" *ngIf="resumee || detail">
     <b class="my-3" *ngIf="resumee">{{ resumee }}</b>
     <p class="my-3" *ngIf="detail">{{ detail }}</p>
   </div>
