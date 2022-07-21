@@ -37,9 +37,16 @@
   </div>
 </div>
 <div class="row">
-  <div class="col mt-3" *ngIf="lieuMediationNumerique.date_maj">
-    <small *ngIf="lieuMediationNumerique.date_maj" class="text-muted fst-italic">
+  <div class="col mt-3 d-flex" *ngIf="lieuMediationNumerique.date_maj">
+    <small *ngIf="lieuMediationNumerique.date_maj" class="text-muted fst-italic flex-grow-1">
       Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
     </small>
+
+    <p [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'text-primary' : 'text-muted'">
+      {{ lieuMediationNumerique.status }}
+      <span
+        [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'bg-primary' : 'bg-muted'"
+        style="display: inline-block; width: 8px; height: 8px; border-radius: 50%"></span>
+    </p>
   </div>
 </div>

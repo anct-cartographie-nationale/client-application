@@ -12,6 +12,7 @@ import {
   serviceFilterOperator,
   modalitesAccompagnementFilterOperator
 } from './filter-operators';
+import { gestionOuvertFerme } from '../horaires/horaires.presenter';
 
 const HALF_CIRCLE_DEGREE: number = 180;
 
@@ -54,10 +55,20 @@ const toLieuxMediationNumeriqueMistItemPresentation = (
   localisation: Localisation
 ): LieuMediationNumeriqueListItemPresentation =>
   localisation === NO_LOCALISATION
-    ? lieuMediationNumerique
+    ? {
+        ...lieuMediationNumerique,
+        status:
+          lieuMediationNumerique.horaires !== '' && lieuMediationNumerique.horaires != null
+            ? gestionOuvertFerme(lieuMediationNumerique.horaires ?? '')
+            : undefined
+      }
     : {
         ...lieuMediationNumerique,
-        distance: geographicDistance(lieuMediationNumerique.localisation, localisation)
+        distance: geographicDistance(lieuMediationNumerique.localisation, localisation),
+        status:
+          lieuMediationNumerique.horaires !== '' && lieuMediationNumerique.horaires != null
+            ? gestionOuvertFerme(lieuMediationNumerique.horaires ?? '')
+            : undefined
       };
 
 const byDistance = (

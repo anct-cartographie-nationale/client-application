@@ -4,8 +4,6 @@ import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
 import { parseHoraires } from '../horaires/horaires.presenter';
-import { ifAny } from '@features/cartographie/infrastructure/utilities';
-import { HorairesPresentation } from '../horaires/horaires.presentation';
 
 const definedLieuMediationNumeriqueOnly = (
   LieuMediationNumerique: LieuMediationNumerique | undefined
