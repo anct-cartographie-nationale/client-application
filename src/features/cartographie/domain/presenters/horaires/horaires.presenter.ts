@@ -44,6 +44,6 @@ export const gestionOuvertFerme = (horairesOSM: string): string => {
   if (is_open && !next_change) currentStatus = 'Ouvert';
   else if (is_open && next_change) currentStatus = 'Ferme bientôt';
   else if (!is_open && !next_change) currentStatus = 'Fermé';
-  else currentStatus = 'Ferme bientôt';
+  else currentStatus = 'Ouvre bientôt';
   return currentStatus;
 };
