@@ -1,10 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { LieuMediationNumeriqueListItemPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
+import { Adresse, ConditionAccess, Contact, Url } from 'projects/client-application/src/models';
 
 @Component({
   selector: 'app-informations-pratiques',
   templateUrl: './informations-pratiques.component.html'
 })
 export class InformationsPratiquesComponent {
-  @Input() public lieuMediationNumerique!: LieuMediationNumeriqueListItemPresentation;
+  @Input() public adresse!: string;
+  @Input() public conditionAccess?: ConditionAccess[];
+  @Input() public accessibilite?: Url;
+  @Input() public courriel?: string;
+  @Input() public telephone?: string;
 }

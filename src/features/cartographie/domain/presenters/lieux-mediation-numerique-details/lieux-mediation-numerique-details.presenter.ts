@@ -2,6 +2,10 @@ import { combineLatest, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import { LieuMediationNumerique } from '../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
+import { LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
+import { parseHoraires } from '../horaires/horaires.presenter';
+import { ifAny } from '@features/cartographie/infrastructure/utilities';
+import { HorairesPresentation } from '../horaires/horaires.presentation';
 
 const definedLieuMediationNumeriqueOnly = (
   LieuMediationNumerique: LieuMediationNumerique | undefined
@@ -16,10 +20,22 @@ const toLieuMediationNumeriqueMatchingRouteId = ([LieuMediationNumerique, params
 export class LieuxMediationNumeriqueDetailsPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
-  public lieuMediationNumeriqueFromParams$(params: Observable<{ [key: string]: string }>): Observable<LieuMediationNumerique> {
+  public lieuMediationNumeriqueFromParams$(
+    params: Observable<{ [key: string]: string }>
+  ): Observable<LieuMediationNumeriqueDetailsPresentation> {
     return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), params]).pipe(
       map(toLieuMediationNumeriqueMatchingRouteId),
-      filter(definedLieuMediationNumeriqueOnly)
+      filter(definedLieuMediationNumeriqueOnly),
+      map((lieu: LieuMediationNumerique): LieuMediationNumeriqueDetailsPresentation => {
+        return {
+          ...lieu,
+          horaires: lieu.horaires !== '' && lieu.horaires != null ? parseHoraires(lieu.horaires ?? '') : undefined,
+          typologie: lieu.typologie?.join(', '),
+          adresse: [lieu.adresse.voie, lieu.adresse.complement_adresse, lieu.adresse.code_postal, lieu.adresse.commune].join(
+            ' '
+          )
+        };
+      })
     );
   }
 }

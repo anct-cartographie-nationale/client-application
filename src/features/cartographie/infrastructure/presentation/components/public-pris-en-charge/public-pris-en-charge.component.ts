@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { LieuMediationNumeriqueListItemPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
+import { PublicAccueilli } from 'projects/client-application/src/models';
 
 @Component({
   selector: 'app-public-pris-en-charge',
   templateUrl: './public-pris-en-charge.component.html'
 })
 export class PublicPrisEnChargeComponent {
-  @Input() public lieuMediationNumerique!: LieuMediationNumeriqueListItemPresentation;
+  @Input() public publicsAccueillis?: PublicAccueilli[];
 }
