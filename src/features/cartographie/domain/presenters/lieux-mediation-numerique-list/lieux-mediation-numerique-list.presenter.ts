@@ -10,9 +10,11 @@ import {
   conditionsAccessFilterOperator,
   publicsAccueillisFilterOperator,
   serviceFilterOperator,
-  modalitesAccompagnementFilterOperator
+  modalitesAccompagnementFilterOperator,
+  dateOuvertureFilterOperator
 } from './filter-operators';
 import { gestionOuvertFerme } from '../horaires/horaires.presenter';
+import { ifAny } from '../../../infrastructure/utilities';
 
 const HALF_CIRCLE_DEGREE: number = 180;
 
@@ -52,23 +54,18 @@ const geographicDistance = (coordinatesA: Localisation, coordinatesB: Localisati
 
 const toLieuxMediationNumeriqueMistItemPresentation = (
   lieuMediationNumerique: LieuMediationNumerique,
-  localisation: Localisation
+  localisation: Localisation,
+  date: Date
 ): LieuMediationNumeriqueListItemPresentation =>
   localisation === NO_LOCALISATION
     ? {
         ...lieuMediationNumerique,
-        status:
-          lieuMediationNumerique.horaires !== '' && lieuMediationNumerique.horaires != null
-            ? gestionOuvertFerme(lieuMediationNumerique.horaires ?? '')
-            : undefined
+        ...ifAny('status', gestionOuvertFerme(lieuMediationNumerique.horaires, date))
       }
     : {
         ...lieuMediationNumerique,
         distance: geographicDistance(lieuMediationNumerique.localisation, localisation),
-        status:
-          lieuMediationNumerique.horaires !== '' && lieuMediationNumerique.horaires != null
-            ? gestionOuvertFerme(lieuMediationNumerique.horaires ?? '')
-            : undefined
+        ...ifAny('status', gestionOuvertFerme(lieuMediationNumerique.horaires, date))
       };
 
 const byDistance = (
@@ -78,7 +75,8 @@ const byDistance = (
 
 export type FilterOperator = (
   lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation,
-  filter: FilterPresentation
+  filter: FilterPresentation,
+  date: Date
 ) => boolean;
 
 const filterOperatorsMap: Map<string, FilterOperator> = new Map([
@@ -87,20 +85,22 @@ const filterOperatorsMap: Map<string, FilterOperator> = new Map([
   ['accessibilite', accessibiliteFilterOperator],
   ['conditions_access', conditionsAccessFilterOperator],
   ['publics_accueillis', publicsAccueillisFilterOperator],
-  ['modalites_accompagnement', modalitesAccompagnementFilterOperator]
+  ['modalites_accompagnement', modalitesAccompagnementFilterOperator],
+  ['date_ouverture', dateOuvertureFilterOperator]
 ]);
 
 const applyFilter = (
   lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation,
+  date: Date,
   filter: FilterPresentation = {},
   operator?: FilterOperator
-): boolean => (operator ? operator(lieuMediationNumerique, filter ?? {}) : true);
+): boolean => (operator ? operator(lieuMediationNumerique, filter ?? {}, date) : true);
 
 const byOrientationFilter =
-  (filter: FilterPresentation) => (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
+  (filter: FilterPresentation, date: Date) => (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
     Object.keys(filter).reduce(
       (filterResult: boolean, filterProperty: string) =>
-        filterResult && applyFilter(lieuMediationNumerique, filter, filterOperatorsMap.get(filterProperty)),
+        filterResult && applyFilter(lieuMediationNumerique, date, filter, filterOperatorsMap.get(filterProperty)),
       true
     );
 
@@ -109,20 +109,21 @@ export class LieuxMediationNumeriqueListPresenter {
 
   public lieuxMediationNumeriqueByDistance$(
     localisation$: Observable<Localisation>,
-    filter$: Observable<FilterPresentation | undefined> = of(undefined)
+    filter$: Observable<FilterPresentation | undefined> = of(undefined),
+    date: Date = new Date()
   ): Observable<LieuMediationNumeriqueListItemPresentation[]> {
     return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), localisation$, filter$]).pipe(
       map(
         ([lieuxMediationNumerique, localisation, filter]: [
           LieuMediationNumerique[],
           Localisation,
-          FilterPresentation | undefined
+          FilterPresentation?
         ]): LieuMediationNumeriqueListItemPresentation[] =>
           lieuxMediationNumerique
             .map((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
-              toLieuxMediationNumeriqueMistItemPresentation(lieuMediationNumerique, localisation)
+              toLieuxMediationNumeriqueMistItemPresentation(lieuMediationNumerique, localisation, date)
             )
-            .filter(byOrientationFilter(filter ?? {}))
+            .filter(byOrientationFilter(filter ?? {}, date))
             .sort(byDistance)
       )
     );

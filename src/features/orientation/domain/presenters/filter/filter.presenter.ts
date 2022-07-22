@@ -14,6 +14,8 @@ export type FilterPresentation = {
   conditions_access?: ConditionAccess[];
   publics_accueillis?: PublicAccueilli[];
   modalites_accompagnement?: ModalitesAccompagnement[];
+  date_ouverture?: string;
+  ouvert_actuellement?: string;
 };
 
 export type FilterQueryParamsPresentation = {
@@ -27,7 +29,7 @@ export type FilterQueryParamsPresentation = {
   publics_accueillis?: PublicAccueilli[];
   modalites_accompagnement?: ModalitesAccompagnement[];
   date_ouverture?: string;
-  heure_ouverture?: string;
+  ouvert_actuellement?: string;
 };
 
 export type FilterFormPresentation = FilterPresentation & {
@@ -35,7 +37,7 @@ export type FilterFormPresentation = FilterPresentation & {
   latitude?: number;
   longitude?: number;
   date_ouverture?: string;
-  heure_ouverture?: string;
+  ouvert_actuellement?: string;
 };
 
 export const toFilterFormPresentationFromQuery = (queryParams: FilterQueryParamsPresentation): FilterFormPresentation => ({
@@ -49,7 +51,7 @@ export const toFilterFormPresentationFromQuery = (queryParams: FilterQueryParams
   publics_accueillis: queryParams.publics_accueillis,
   modalites_accompagnement: queryParams.modalites_accompagnement,
   date_ouverture: queryParams.date_ouverture,
-  heure_ouverture: queryParams.heure_ouverture
+  ouvert_actuellement: queryParams.ouvert_actuellement
 });
 
 export const toLocalisationFromFilterFormPresentation = (filter: FilterFormPresentation): Localisation =>

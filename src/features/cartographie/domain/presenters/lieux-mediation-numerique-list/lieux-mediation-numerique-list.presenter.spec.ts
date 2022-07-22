@@ -7,8 +7,6 @@ import { FilterPresentation } from '../../../../orientation/domain/presenters/fi
 
 describe('lieux-mediation-numerique-list presenter', (): void => {
   it('should append the distance from some localisation to a lieu mediation numerique', async (): Promise<void> => {
-    const localisation: Localisation = Localisation({ latitude: 45.7689958, longitude: 4.8343466 });
-
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> =>
         of([
@@ -25,18 +23,19 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(localisation))
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(Localisation({ latitude: 45.7689958, longitude: 4.8343466 }))
+      )
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
       {
         localisation: Localisation({
           latitude: 46.2814605,
           longitude: 4.468874
         }),
-        distance: 63586.94404350499,
-        status: undefined
+        distance: 63586.94404350499
       }
     ]);
   });
@@ -45,42 +44,43 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     const longitude: number = 4.8343466;
     const latitude: number = 45.7689958;
 
-    const expectedLieuMediationNumerique: LieuMediationNumeriqueListItemPresentation = {
+    const lieuMediationNumerique: LieuMediationNumerique = {
       localisation: Localisation({
         latitude,
         longitude
-      }),
-      status: undefined
-    } as LieuMediationNumeriqueListItemPresentation;
+      })
+    } as LieuMediationNumerique;
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
-      getAll$: (): Observable<LieuMediationNumerique[]> => of([expectedLieuMediationNumerique])
+      getAll$: (): Observable<LieuMediationNumerique[]> => of([lieuMediationNumerique])
     } as LieuxMediationNumeriqueRepository;
 
     const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumerique[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([expectedLieuMediationNumerique]);
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        localisation: Localisation({
+          latitude,
+          longitude
+        })
+      }
+    ]);
   });
 
   it('should sort lieux mediation numerique by distance', async (): Promise<void> => {
-    const localisation: Localisation = Localisation({
-      latitude: 45.7560246,
-      longitude: 4.79603
-    });
-
-    const lieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
+    const lieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
@@ -92,37 +92,42 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     );
 
     const lieuxMediationNumeriqueByDistance: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(localisation))
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(
+          Localisation({
+            latitude: 45.7560246,
+            longitude: 4.79603
+          })
+        )
+      )
     );
 
-    expect(lieuxMediationNumeriqueByDistance).toStrictEqual([
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriqueByDistance).toStrictEqual([
       {
         distance: 3303.8115461567304,
         localisation: {
           latitude: 45.7689958,
           longitude: 4.8343466
-        },
-        status: undefined
+        }
       },
       {
         distance: 63653.064922230085,
         localisation: {
           latitude: 46.2814605,
           longitude: 4.468874
-        },
-        status: undefined
+        }
       }
     ]);
   });
 
   it('should filter lieux mediation numerique on service property', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         services: ['Réaliser des démarches administratives avec un accompagnement']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         services: ['Créer et développer mon entreprise']
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = { services: 'Créer et développer mon entreprise' };
@@ -135,26 +140,31 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
       {
-        services: ['Créer et développer mon entreprise'],
-        status: undefined
+        services: ['Créer et développer mon entreprise']
       }
     ]);
   });
 
   it('should filter lieux mediation numerique on distance property', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
-        distance: 357000
-      } as LieuMediationNumeriqueListItemPresentation,
+        localisation: Localisation({
+          latitude: 47,
+          longitude: 5
+        })
+      } as LieuMediationNumerique,
       {
-        distance: 2500
-      } as LieuMediationNumeriqueListItemPresentation
+        localisation: Localisation({
+          latitude: 46,
+          longitude: 4
+        })
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = { distance: 5000 };
@@ -167,26 +177,37 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(
+          Localisation({
+            latitude: 46.035,
+            longitude: 4.035
+          })
+        ),
+        of(filter)
+      )
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
       {
-        distance: 2500,
-        status: undefined
+        distance: 4738.19581538169,
+        localisation: {
+          latitude: 46,
+          longitude: 4
+        }
       }
     ]);
   });
 
   it('should filter lieux mediation numerique on accessibilite property', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
-      {} as LieuMediationNumeriqueListItemPresentation,
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
       {
         accessibilite: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
         )
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = { accessibilite: true };
@@ -199,28 +220,27 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
       {
         accessibilite: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
-        ),
-        status: undefined
+        )
       }
     ]);
   });
 
   it('should not filter lieux mediation numerique on accessibilite property', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
-      {} as LieuMediationNumeriqueListItemPresentation,
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
       {
         accessibilite: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
         )
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = { accessibilite: false };
@@ -233,36 +253,35 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
-      { status: undefined } as LieuMediationNumeriqueListItemPresentation,
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {},
       {
         accessibilite: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
-        ),
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation
+        )
+      }
     ]);
   });
 
   it('should not filter lieux mediation numerique on conditions_access property when filter is empty', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
-      {} as LieuMediationNumeriqueListItemPresentation,
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
       {
         conditions_access: ['Gratuit', 'Gratuit sous condition']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         conditions_access: ['Gratuit']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         conditions_access: ['Gratuit sous condition']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         conditions_access: ['Payant']
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = { conditions_access: [] };
@@ -275,46 +294,42 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
-      { status: undefined } as LieuMediationNumeriqueListItemPresentation,
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {},
       {
-        conditions_access: ['Gratuit', 'Gratuit sous condition'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        conditions_access: ['Gratuit', 'Gratuit sous condition']
+      },
       {
-        conditions_access: ['Gratuit'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        conditions_access: ['Gratuit']
+      },
       {
-        conditions_access: ['Gratuit sous condition'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        conditions_access: ['Gratuit sous condition']
+      },
       {
-        conditions_access: ['Payant'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation
+        conditions_access: ['Payant']
+      }
     ]);
   });
 
   it('should filter lieux mediation numerique on conditions_access property', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
-      {} as LieuMediationNumeriqueListItemPresentation,
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
       {
         conditions_access: ['Gratuit', 'Gratuit sous condition']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         conditions_access: ['Gratuit']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         conditions_access: ['Gratuit sous condition']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         conditions_access: ['Payant']
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = {
@@ -329,41 +344,38 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
       {
-        conditions_access: ['Gratuit', 'Gratuit sous condition'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        conditions_access: ['Gratuit', 'Gratuit sous condition']
+      },
       {
-        conditions_access: ['Gratuit'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        conditions_access: ['Gratuit']
+      },
       {
-        conditions_access: ['Gratuit sous condition'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation
+        conditions_access: ['Gratuit sous condition']
+      }
     ]);
   });
 
   it('should not filter lieux mediation numerique on publics_accueillis property when filter is empty', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
-      {} as LieuMediationNumeriqueListItemPresentation,
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
       {
         publics_accueillis: ['Adultes', 'Surdité']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         publics_accueillis: ['Adultes']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         publics_accueillis: ['Surdité']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         publics_accueillis: ['Déficience visuelle']
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = { publics_accueillis: [] };
@@ -376,46 +388,42 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
-      { status: undefined } as LieuMediationNumeriqueListItemPresentation,
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {},
       {
-        publics_accueillis: ['Adultes', 'Surdité'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        publics_accueillis: ['Adultes', 'Surdité']
+      },
       {
-        publics_accueillis: ['Adultes'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        publics_accueillis: ['Adultes']
+      },
       {
-        publics_accueillis: ['Surdité'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        publics_accueillis: ['Surdité']
+      },
       {
-        publics_accueillis: ['Déficience visuelle'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation
+        publics_accueillis: ['Déficience visuelle']
+      }
     ]);
   });
 
   it('should filter lieux mediation numerique on publics_accueillis property', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
-      {} as LieuMediationNumeriqueListItemPresentation,
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
       {
         publics_accueillis: ['Adultes', 'Surdité']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         publics_accueillis: ['Adultes']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         publics_accueillis: ['Surdité']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         publics_accueillis: ['Déficience visuelle']
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = { publics_accueillis: ['Adultes', 'Surdité'] };
@@ -428,41 +436,38 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumerique).toStrictEqual([
       {
-        publics_accueillis: ['Adultes', 'Surdité'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        publics_accueillis: ['Adultes', 'Surdité']
+      },
       {
-        publics_accueillis: ['Adultes'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        publics_accueillis: ['Adultes']
+      },
       {
-        publics_accueillis: ['Surdité'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation
+        publics_accueillis: ['Surdité']
+      }
     ]);
   });
 
   it('should not filter lieux mediation numerique on modalites_accompagnement property when filter is empty', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
-      {} as LieuMediationNumeriqueListItemPresentation,
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
       {
         modalites_accompagnement: ['Seul', "Avec de l'aide"]
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         modalites_accompagnement: ['Seul']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         modalites_accompagnement: ["Avec de l'aide"]
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         modalites_accompagnement: ['Dans un atelier']
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = { modalites_accompagnement: [] };
@@ -475,46 +480,42 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
-      { status: undefined } as LieuMediationNumeriqueListItemPresentation,
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {},
       {
-        modalites_accompagnement: ['Seul', "Avec de l'aide"],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        modalites_accompagnement: ['Seul', "Avec de l'aide"]
+      },
       {
-        modalites_accompagnement: ['Seul'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        modalites_accompagnement: ['Seul']
+      },
       {
-        modalites_accompagnement: ["Avec de l'aide"],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        modalites_accompagnement: ["Avec de l'aide"]
+      },
       {
-        modalites_accompagnement: ['Dans un atelier'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation
+        modalites_accompagnement: ['Dans un atelier']
+      }
     ]);
   });
 
   it('should filter lieux mediation numerique on modalites_accompagnement property', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
-      {} as LieuMediationNumeriqueListItemPresentation,
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
       {
         modalites_accompagnement: ['Seul', "Avec de l'aide"]
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         modalites_accompagnement: ['Seul']
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         modalites_accompagnement: ["Avec de l'aide"]
-      } as LieuMediationNumeriqueListItemPresentation,
+      } as LieuMediationNumerique,
       {
         modalites_accompagnement: ['Dans un atelier']
-      } as LieuMediationNumeriqueListItemPresentation
+      } as LieuMediationNumerique
     ];
 
     const filter: FilterPresentation = { modalites_accompagnement: ['Seul', "Avec de l'aide"] };
@@ -527,50 +528,205 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
       {
-        modalites_accompagnement: ['Seul', "Avec de l'aide"],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        modalites_accompagnement: ['Seul', "Avec de l'aide"]
+      },
       {
-        modalites_accompagnement: ['Seul'],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        modalites_accompagnement: ['Seul']
+      },
       {
-        modalites_accompagnement: ["Avec de l'aide"],
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation
+        modalites_accompagnement: ["Avec de l'aide"]
+      }
     ]);
   });
 
-  it('should not filter lieux mediation numerique when filter is null', async (): Promise<void> => {
-    const expectedLieuMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [
+  it('should not filter lieux mediation numerique on date_ouverture property when filter is empty', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
       {
-        id: '43493312300029',
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation,
+        horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00'
+      } as LieuMediationNumerique,
       {
-        id: '78993312300029',
-        status: undefined
-      } as LieuMediationNumeriqueListItemPresentation
+        horaires: 'Mo-Th 09:00-12:00,14:00-18:30; Sa 08:30-12:00'
+      } as LieuMediationNumerique
     ];
 
+    const filter: FilterPresentation = { modalites_accompagnement: [] };
+
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
-      getAll$: (): Observable<LieuMediationNumerique[]> => of(expectedLieuMediationNumerique)
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
     } as LieuxMediationNumeriqueRepository;
 
     const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
       lieuxMediationNumeriqueRepository
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter),
+        new Date('2022-07-22T14:30:00.000Z')
+      )
+    );
+
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {},
+      {
+        horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        status: 'Ouvert'
+      },
+      {
+        horaires: 'Mo-Th 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        status: 'Fermé'
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on date_ouverture property', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
+      {
+        horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00'
+      } as LieuMediationNumerique,
+      {
+        horaires: 'Mo-Th 09:00-12:00,14:00-18:30; Sa 08:30-12:00'
+      } as LieuMediationNumerique
+    ];
+
+    const filter: FilterPresentation = { date_ouverture: '2022-07-22' };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter),
+        new Date('2022-07-22T14:30:00.000Z')
+      )
+    );
+
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        status: 'Ouvert'
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on date_ouverture property and omit wrong OSM formats', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
+      {
+        horaires: 'Mo-Fr 09:00,14:00-18:30; Sa 08:30-12:00'
+      } as LieuMediationNumerique,
+      {
+        horaires: 'Mo-Th 09:00-12:00,14:00-18:30; Sa 08:30-12:00'
+      } as LieuMediationNumerique
+    ];
+
+    const filter: FilterPresentation = { date_ouverture: '2022-07-22' };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter),
+        new Date('2022-07-22T09:55:00.000Z')
+      )
+    );
+
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([]);
+  });
+
+  it('should filter lieux mediation numerique on ouvert_actuellement property', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {} as LieuMediationNumerique,
+      {
+        horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00'
+      } as LieuMediationNumerique,
+      {
+        horaires: 'Mo-Fr 09:00-12:00; Sa 08:30-12:00'
+      } as LieuMediationNumerique,
+      {
+        horaires: 'Mo-Th 09:00-12:00,14:00-18:30; Sa 08:30-12:00'
+      } as LieuMediationNumerique
+    ];
+
+    const filter: FilterPresentation = {
+      date_ouverture: '2022-07-22',
+      ouvert_actuellement: 'true'
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter),
+        new Date('2022-07-22T14:30:00.000Z')
+      )
+    );
+
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        status: 'Ouvert'
+      }
+    ]);
+  });
+
+  it('should not filter lieux mediation numerique when filter is null', async (): Promise<void> => {
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> =>
+        of([
+          {
+            id: '43493312300029'
+          } as LieuMediationNumerique,
+          {
+            id: '78993312300029'
+          } as LieuMediationNumerique
+        ])
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(undefined))
     );
 
-    expect(lieuxMediationNumerique).toStrictEqual(expectedLieuMediationNumerique);
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: '43493312300029'
+      } as LieuMediationNumerique,
+      {
+        id: '78993312300029'
+      } as LieuMediationNumerique
+    ]);
   });
 });
