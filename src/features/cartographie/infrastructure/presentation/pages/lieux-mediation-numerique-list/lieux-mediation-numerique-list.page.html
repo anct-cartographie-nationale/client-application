@@ -1,6 +1,6 @@
 <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
-  <div class="h-100 overflow-auto d-flex flex-column">
-    <div class="list-group list-group-flush flex-grow-1">
+  <div class="h-100 d-flex flex-column">
+    <div class="list-group list-group-flush flex-grow-1 overflow-auto">
       <a
         queryParamsHandling="preserve"
         class="list-group-item list-group-item-action p-4"
@@ -12,14 +12,20 @@
           [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
       </a>
     </div>
-    <div class="bg-primary d-flex p-2">
-      <div class="ms-auto flex-grow-1">
+    <div class="bg-primary p-2 g-0 row">
+      <div class="col-auto">
+        <a class="btn btn-outline-light me-3" [routerLink]="['/', 'orientation']">
+          <i class="ri-equalizer-fill me-2 align-bottom"></i>
+          <span>Modifier les critères d'orientation</span>
+        </a>
         <button class="btn btn-outline-light" (click)="printPage()">
           <i class="ri-printer-line me-2 align-bottom"></i>
           <span>Imprimer les résultats</span>
         </button>
       </div>
-      <span class="d-flex align-items-center text-white me-auto">{{lieuxMediationNumerique?.length}} Structures</span>
+      <div class="col-auto ms-auto my-auto">
+        <span class="d-flex align-items-center text-white me-auto">{{lieuxMediationNumerique?.length}} Structures</span>
+      </div>
     </div>
   </div>
 </ng-container>
