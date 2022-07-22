@@ -32,3 +32,18 @@ export const parseHoraires = (horairesOSM: string): HorairesPresentation => {
   });
   return schedule;
 };
+
+export const gestionOuvertFerme = (horairesOSM: string): string => {
+  const now = new Date();
+  let currentStatus: string = '';
+  let openingHours = new opening_hours(horairesOSM);
+  var iterator = openingHours.getIterator(now);
+  var is_open = iterator.getState();
+  var futureDate = new Date(now.getTime() + 1 * 60 * 60 * 1000);
+  var next_change = openingHours.getNextChange(now, futureDate);
+  if (is_open && !next_change) currentStatus = 'Ouvert';
+  else if (is_open && next_change) currentStatus = 'Ferme bientôt';
+  else if (!is_open && !next_change) currentStatus = 'Fermé';
+  else currentStatus = 'Ouvre bientôt';
+  return currentStatus;
+};
