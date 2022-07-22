@@ -4,7 +4,54 @@
       <span class="text-primary">Quand</span>
       serez-vous disponible ?
     </h1>
-    <div class="text-center">
+    <form [formGroup]="orientationLayout.filterForm">
+      <div class="accordion" id="accordionDisponibilite">
+        <div class="accordion-item mb-3">
+          <h2 class="accordion-header" id="headingDatePrecise">
+            <button
+              type="button"
+              class="accordion-button p-3 collapsed"
+              aria-controls="collapseDatePrecise"
+              [class.collapsed]="collapseDatePrecise.isCollapsed"
+              [attr.aria-expanded]="collapseDatePrecise.isExpanded"
+              (click)="collapseDatePrecise.toggle()">
+              <i class="ri-calendar-check-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+              <b>Je cherche des structures ouvertes à une date précise</b>
+            </button>
+          </h2>
+          <app-collapse #collapseDatePrecise id="collapseDatePrecise" aria-labelledby="headingDatePrecise">
+            <div class="accordion-body">
+              <div class="row justify-content-center">
+                <div class="col-md-5">
+                  <div class="mb-3 text-center form-chip">
+                    <input
+                      type="checkbox"
+                      name="ouvertActuellement"
+                      id="ouvertActuellement"
+                      [formControl]="ouvertActuellementFormControl"
+                      class="form-check-input"
+                      (change)="setDateOuvertureToNow($any($event))" />
+                    <label for="ouvertActuellement" class="form-check-label bg-primary text-white">Ouvert actuellement</label>
+                  </div>
+                  <div class="mb-3">
+                    <label for="dateOuverture" class="form-label visually-hidden">Sélectionner la date d'ouverture</label>
+                    <input
+                      type="date"
+                      name="date_ouverture"
+                      formControlName="date_ouverture"
+                      class="form-control"
+                      id="dateOuverture"
+                      placeholder="Je choisis une date"
+                      (change)="selectDate($any($event))" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </app-collapse>
+        </div>
+      </div>
+    </form>
+    <div class="text-center my-5">
       <a class="btn btn-primary mx-3" [routerLink]="['cartographie']" queryParamsHandling="preserve">
         Afficher les résultats sur la cartographie
         <i class="ri-arrow-right-s-line align-bottom"></i>
