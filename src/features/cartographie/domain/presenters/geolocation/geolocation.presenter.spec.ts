@@ -1,6 +1,6 @@
 import { firstValueFrom } from 'rxjs';
 import { GeolocationPresenter } from './geolocation.presenter';
-import { Localisation, NO_LOCALISATION } from '../../../../../models/localisation/localisation';
+import { Localisation, NO_LOCALISATION } from '../../../../../models';
 
 describe('geolocation presenter', (): void => {
   it('should get user coordinates', async (): Promise<void> => {
