@@ -1,4 +1,3 @@
-import { Structure } from '@gouvfr-anct/mediation-numerique';
 import { LieuxMediationNumeriqueDetailsPresenter } from './lieux-mediation-numerique-details.presenter';
 import { firstValueFrom, of } from 'rxjs';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';

@@ -3,14 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { LieuxMediationNumeriqueListPresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../../domain';
-import { Localisation } from '../../../../../../models/localisation/localisation';
 import { LieuMediationNumeriqueListItemPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
 import {
   FilterPresentation,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../../../orientation/domain/presenters/filter/filter.presenter';
-import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
+import { LieuMediationNumerique, Localisation } from '../../../../../../models';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
