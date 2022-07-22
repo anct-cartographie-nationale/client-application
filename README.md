@@ -231,7 +231,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <head>
   <title>Page Title</title>
   <base href="/" />
-  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.2.0/styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/styles.css" rel="stylesheet" />
 </head>
 ...
 ```
@@ -244,7 +244,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
   <h1>My First Heading</h1>
   <p>My first paragraph.</p>
 
-  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.2.0/script.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/script.js" type="module"></script>
 </body>
 ...
 ```
@@ -256,7 +256,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <body>
   <fr-mediation-numerique></fr-mediation-numerique>
 
-  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.2.0/script.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/script.js" type="module"></script>
 </body>
 ...
 ```
@@ -269,12 +269,12 @@ La version finale devrait ressembler à celà :
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/styles.css" rel="stylesheet" />
   </head>
   <body>
     <fr-mediation-numerique></fr-mediation-numerique>
 
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.2.0/script.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/script.js" type="module"></script>
   </body>
 </html>
 ```
@@ -301,7 +301,7 @@ Exemple :
 
 ```html
 <fr-mediation-numerique
-  source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.2.0/assets/data/lieux-de-mediation-numerique.json"></fr-mediation-numerique>
+  source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/assets/data/lieux-de-mediation-numerique.json"></fr-mediation-numerique>
 ```
 
 #### Localisation initiale
@@ -359,20 +359,17 @@ Il est possible de changer certaines couleurs utilisées par la cartographie, po
     <style>
       @charset "UTF-8";:root{...
     </style>
-    <link
-      href="https://gist.githubusercontent.com/Kyappy/1e38c73048929c1df34d44749e3542e0/raw/5e4a06b49f3bb8431ca9cfc8f93631f4a36ba75d/styles.css"
-      rel="stylesheet" />
   </head>
   <body>
     <fr-mediation-numerique
       titre="Médiation numérique à Bessenay"
       logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
-      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.2.0/assets/data/lieux-de-mediation-numerique.json"
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/assets/data/lieux-de-mediation-numerique.json"
       latitude="45.77647396140311"
       longitude="4.55431157343317"
       zoom="12"></fr-mediation-numerique>
 
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.2.0/script.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/script.js" type="module"></script>
   </body>
 </html>
 ```
