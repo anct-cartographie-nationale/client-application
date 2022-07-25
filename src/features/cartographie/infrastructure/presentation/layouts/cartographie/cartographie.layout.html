@@ -14,7 +14,15 @@
         <app-leaflet-map-tooltip [content]="popupContent">
           <div #popupContent class="text-center p-3 border-muted border-bottom border-3">
             <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
-            <div class="text-muted">Horaires non-connues</div>
+            <p
+              *ngIf="lieuMediationNumerique.status"
+              [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'text-primary' : 'text-muted'">
+              {{ lieuMediationNumerique.status }}
+              <span
+                [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'bg-primary' : 'bg-muted'"
+                style="display: inline-block; width: 8px; height: 8px; border-radius: 50%"></span>
+            </p>
+            <div *ngIf="!lieuMediationNumerique.status" class="text-muted">Horaires non-connues</div>
           </div>
         </app-leaflet-map-tooltip>
       </app-leaflet-map-marker>

@@ -1,9 +1,9 @@
 import { DivIcon, Point as LeafletPoint } from 'leaflet';
 import { MarkerFactory, MarkerHighlight, MarkerProperties } from '../markers.configuration';
-import { LieuMediationNumerique } from '../../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
+import { LieuMediationNumeriqueListItemPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
 
 export type LieuMediationNumeriqueMarkerProperties = MarkerProperties<
-  LieuMediationNumerique & {
+  LieuMediationNumeriqueListItemPresentation & {
     highlight?: MarkerHighlight;
   }
 >;
