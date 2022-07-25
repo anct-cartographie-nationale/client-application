@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { FilterQueryParamsPresentation } from '../../../../../orientation/domain/presenters/filter/filter.presenter';
 
 @Component({
   selector: 'app-informations-generales',
@@ -9,10 +9,5 @@ export class InformationsGeneralesComponent {
   @Input() public nom: string = '';
   @Input() public typologie?: string;
   @Input() public date?: Date;
-
-  public constructor(private readonly router: Router) {}
-
-  public navigateList() {
-    this.router.navigate(['cartographie']);
-  }
+  @Input() public queryParams?: FilterQueryParamsPresentation;
 }

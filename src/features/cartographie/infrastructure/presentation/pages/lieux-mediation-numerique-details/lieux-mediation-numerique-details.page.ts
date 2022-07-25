@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LieuxMediationNumeriqueDetailsPresenter, LieuxMediationNumeriqueRepository } from '../../../../domain';
 import { LieuMediationNumeriqueDetailsPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-details/lieu-mediation-numerique-details.presentation';
 
@@ -21,7 +21,7 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   public constructor(
     private readonly lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
-    private readonly route: ActivatedRoute
+    public readonly route: ActivatedRoute
   ) {}
 
   public printPage() {

@@ -2,6 +2,7 @@
   <div class="h-100 overflow-auto d-flex flex-column">
     <div class="flex-grow-1">
       <app-informations-generales
+        [queryParams]="this.route.snapshot.queryParams"
         [nom]="lieuMediationNumerique.nom"
         [typologie]="lieuMediationNumerique.typologie"
         [date]="lieuMediationNumerique.date_maj"></app-informations-generales>
