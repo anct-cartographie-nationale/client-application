@@ -43,7 +43,7 @@
     </small>
     <div
       *ngIf="lieuMediationNumerique.status"
-      [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'text-primary' : 'text-muted'">
+      [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'text-muted' : 'text-primary'">
       {{ lieuMediationNumerique.status }}
       <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
     </div>

@@ -27,17 +27,21 @@
         markerFactoryKey="lieuMediationNumerique"
         (markerClick)="showDetailStructure($event)">
         <app-leaflet-map-tooltip [content]="popupContent">
-          <div #popupContent class="text-center p-3 border-muted border-bottom border-3">
+          <div
+            #popupContent
+            class="text-center p-3 border-bottom border-3"
+            [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'border-muted' : 'border-primary'">
             <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
-            <p
-              *ngIf="lieuMediationNumerique.status"
-              [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'text-primary' : 'text-muted'">
+            <br />
+            <span
+              *ngIf="lieuMediationNumerique.status; else:noOpeningHours"
+              [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'text-muted' : 'text-primary'">
               {{ lieuMediationNumerique.status }}
-              <span
-                [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'bg-primary' : 'bg-muted'"
-                style="display: inline-block; width: 8px; height: 8px; border-radius: 50%"></span>
-            </p>
-            <div *ngIf="!lieuMediationNumerique.status" class="text-muted">Horaires inconnus</div>
+              <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+            </span>
+            <ng-template #noOpeningHours>
+              <span class="text-muted">Horaires inconnus</span>
+            </ng-template>
           </div>
         </app-leaflet-map-tooltip>
       </app-leaflet-map-marker>

@@ -11,7 +11,7 @@
     <div class="flex-grow-1 text-end">
       <a class="btn-close opacity-100" aria-label="Close" queryParamsHandling="preserve" [routerLink]="['cartographie']"></a>
     </div>
-    <div *ngIf="status" [ngClass]="status === 'Ouvert' ? 'text-primary' : 'text-muted'">
+    <div *ngIf="status" [ngClass]="status === 'Fermé' ? 'text-muted' : 'text-primary'">
       {{ status }}
       <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
     </div>
