@@ -4,7 +4,7 @@
       <p class="text-info m-0" *ngIf="typologie">{{ typologie }}</p>
       <h1 class="h2">{{ nom }}</h1>
     </div>
-    <button type="button" class="btn-close" aria-label="Close" (click)="navigateList()"></button>
+    <a type="button" class="btn-close" aria-label="Close" queryParamsHandling="preserve" [routerLink]="['cartographie']"></a>
   </div>
   <p *ngIf="date" class="text-info mb-3" style="font-size: 11px">Mise à jour le {{ date | date: 'dd/MM/y' }}</p>
 </div>
