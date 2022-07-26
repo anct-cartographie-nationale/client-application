@@ -42,7 +42,9 @@
       Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
     </small>
 
-    <p [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'text-primary' : 'text-muted'">
+    <p
+      *ngIf="lieuMediationNumerique.status"
+      [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'text-primary' : 'text-muted'">
       {{ lieuMediationNumerique.status }}
       <span
         [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'bg-primary' : 'bg-muted'"
