@@ -21,7 +21,7 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   public constructor(
     private readonly lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
-    public readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute
   ) {}
 
   public printPage() {
