@@ -17,7 +17,7 @@ import { LieuMediationNumeriqueDetailsPresentation } from '@features/cartographi
 })
 export class LieuxMediationNumeriqueDetailsPage {
   public lieuMediationNumerique$: Observable<LieuMediationNumeriqueDetailsPresentation> =
-    this.lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(this.route.params);
+    this.lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(this.route.params, new Date());
 
   public constructor(
     private readonly lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,

@@ -13,7 +13,7 @@ import {
   modalitesAccompagnementFilterOperator,
   dateOuvertureFilterOperator
 } from './filter-operators';
-import { gestionOuvertFerme } from '../horaires/horaires.presenter';
+import { openingStatus } from '../horaires/horaires.presenter';
 import { ifAny } from '../../../infrastructure/utilities';
 
 const HALF_CIRCLE_DEGREE: number = 180;
@@ -52,21 +52,18 @@ const geographicDistance = (coordinatesA: Localisation, coordinatesB: Localisati
   return usingHaversineFormula(latitudeARadian, latitudeBRadian, deltaLatitudeRadian, deltaLongitudeRadian);
 };
 
+const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisation: Localisation): number | undefined =>
+  localisation === NO_LOCALISATION ? undefined : geographicDistance(lieuMediationNumerique.localisation, localisation);
+
 const toLieuxMediationNumeriqueMistItemPresentation = (
   lieuMediationNumerique: LieuMediationNumerique,
   localisation: Localisation,
   date: Date
-): LieuMediationNumeriqueListItemPresentation =>
-  localisation === NO_LOCALISATION
-    ? {
-        ...lieuMediationNumerique,
-        ...ifAny('status', gestionOuvertFerme(lieuMediationNumerique.horaires, date))
-      }
-    : {
-        ...lieuMediationNumerique,
-        distance: geographicDistance(lieuMediationNumerique.localisation, localisation),
-        ...ifAny('status', gestionOuvertFerme(lieuMediationNumerique.horaires, date))
-      };
+): LieuMediationNumeriqueListItemPresentation => ({
+  ...lieuMediationNumerique,
+  ...ifAny('distance', getDistance(lieuMediationNumerique, localisation)),
+  ...ifAny('status', openingStatus(date)(lieuMediationNumerique.horaires))
+});
 
 const byDistance = (
   LieuMediationNumeriqueA: LieuMediationNumeriqueListItemPresentation,
