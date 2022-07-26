@@ -22,7 +22,7 @@
                 [ngClass]="lieuMediationNumerique.status !== 'Fermé' ? 'bg-primary' : 'bg-muted'"
                 style="display: inline-block; width: 8px; height: 8px; border-radius: 50%"></span>
             </p>
-            <div *ngIf="!lieuMediationNumerique.status" class="text-muted">Horaires non-connues</div>
+            <div *ngIf="!lieuMediationNumerique.status" class="text-muted">Horaires inconnus</div>
           </div>
         </app-leaflet-map-tooltip>
       </app-leaflet-map-marker>
