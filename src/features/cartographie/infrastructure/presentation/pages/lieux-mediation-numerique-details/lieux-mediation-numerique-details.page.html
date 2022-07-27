@@ -41,7 +41,9 @@
     <app-modalites-accompagnement
       [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
   </div>
-  <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
+  <div class="mx-4 py-4 border-bottom">
+    <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
+  </div>
   <app-labellisations
     [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
     [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
