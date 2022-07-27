@@ -44,7 +44,9 @@
   <div class="mx-4 py-4 border-bottom">
     <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
   </div>
-  <app-labellisations
-    [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
-    [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
+  <div class="mx-4 py-4" *ngIf="lieuMediationNumerique.labels_nationaux || lieuMediationNumerique.labels_autres">
+    <app-labellisations
+      [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
+      [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
+  </div>
 </div>
