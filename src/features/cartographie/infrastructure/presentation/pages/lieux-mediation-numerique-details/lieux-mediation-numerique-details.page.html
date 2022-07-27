@@ -11,20 +11,29 @@
       [courriel]="lieuMediationNumerique.contact?.courriel"
       [siteWeb]="lieuMediationNumerique.contact?.site_web"></app-boutons-action>
   </div>
-  <app-informations-pratiques
-    [adresse]="lieuMediationNumerique.adresse"
-    [conditionAccess]="lieuMediationNumerique.conditions_access"
-    [accessibilite]="lieuMediationNumerique.accessibilite"
-    [courriel]="lieuMediationNumerique.contact?.courriel"
-    [telephone]="lieuMediationNumerique.contact?.telephone"></app-informations-pratiques>
-  <app-description
-    [detail]="lieuMediationNumerique.presentation?.detail"
-    [resumee]="lieuMediationNumerique.presentation?.resumee"></app-description>
-  <div class="container">
-    <div class="border-bottom p-3">
-      <div class="row">
-        <app-horaires class="col-lg-6" [horaires]="lieuMediationNumerique.horaires"></app-horaires>
-        <app-services class="col-lg-6" [services]="lieuMediationNumerique.services"></app-services>
+  <div class="mx-4 py-4 border-bottom">
+    <app-informations-pratiques
+      [adresse]="lieuMediationNumerique.adresse"
+      [conditionAccess]="lieuMediationNumerique.conditions_access"
+      [accessibilite]="lieuMediationNumerique.accessibilite"
+      [courriel]="lieuMediationNumerique.contact?.courriel"
+      [telephone]="lieuMediationNumerique.contact?.telephone"
+      [distance]="lieuMediationNumerique?.distance"></app-informations-pratiques>
+  </div>
+  <div
+    class="mx-4 py-4 border-bottom"
+    *ngIf="lieuMediationNumerique.presentation?.detail || lieuMediationNumerique.presentation?.resumee">
+    <app-description
+      [detail]="lieuMediationNumerique.presentation?.detail"
+      [resumee]="lieuMediationNumerique.presentation?.resumee"></app-description>
+  </div>
+  <div class="mx-4 py-4 border-bottom">
+    <div class="row">
+      <div class="col-lg-6">
+        <app-horaires [horaires]="lieuMediationNumerique.horaires"></app-horaires>
+      </div>
+      <div class="col-lg-6">
+        <app-services [services]="lieuMediationNumerique.services"></app-services>
       </div>
     </div>
   </div>
