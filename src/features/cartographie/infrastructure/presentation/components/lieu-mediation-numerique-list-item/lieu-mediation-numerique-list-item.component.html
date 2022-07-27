@@ -17,7 +17,7 @@
       <span class="text-muted" *ngIf="lieuMediationNumerique.conditions_access?.includes('Payant')">Payant</span>
     </div>
   </div>
-  <div class="col-auto text-end">
+  <div class="col-auto text-end" *ngIf="lieuMediationNumerique.contact?.courriel || lieuMediationNumerique.contact?.telephone">
     <a
       *ngIf="lieuMediationNumerique.contact?.courriel as courriel"
       href="mailto:{{ courriel }}"
@@ -28,7 +28,7 @@
     </a>
     <a
       *ngIf="lieuMediationNumerique.contact?.telephone as telephone"
-      href="tel://+33678049164"
+      href="tel://{{ telephone }}"
       class="text-decoration-none d-block mb-2"
       (click)="$event.stopPropagation()">
       <i class="ri-phone-line align-bottom"></i>
