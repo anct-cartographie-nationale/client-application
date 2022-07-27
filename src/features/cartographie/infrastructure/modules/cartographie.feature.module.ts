@@ -35,6 +35,7 @@ import {
 } from '../presentation/components';
 import { ServicesComponent } from '../presentation/components/services/services.component';
 import { ModalitesAccompagnementComponent } from '../presentation/components/modalites-accompagnement/modalites-accompagnement.component';
+import { CartographieLoaderComponent } from '../presentation/components/cartographie-loader/cartographie-loader.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ModalitesAccompagnementComponent } from '../presentation/components/mod
     LeafletMapPopupDirective,
     LeafletMapStateChangeDirective,
     LeafletMapTooltipDirective,
-    LeafletMapMarkerDirective
+    LeafletMapMarkerDirective,
+    CartographieLoaderComponent
   ],
   imports: [HttpClientModule, CartographieFeatureRoutingModule, CommonModule, DistanceModule]
 })

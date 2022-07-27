@@ -6,7 +6,7 @@ import {
   ZoomLevelConfiguration
 } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
-import { delay, Observable, of } from 'rxjs';
+import { BehaviorSubject, delay, Observable, of, tap } from 'rxjs';
 import { LieuxMediationNumeriqueListPresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../../domain';
 import {
   FilterPresentation,
@@ -43,7 +43,8 @@ export class CartographieLayout {
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation[]> =
     this._lieuxMediationNumeriqueListPresenter
       .lieuxMediationNumeriqueByDistance$(of(this._localisation), of(this._filterPresentation))
-      .pipe(delay(0));
+      .pipe(delay(3000))
+      .pipe(tap(() => this._loadingState$.next(false)));
 
   public readonly defaultCenterView: CenterView = {
     coordinates: Localisation({
@@ -52,6 +53,9 @@ export class CartographieLayout {
     }),
     zoomLevel: this._zoomLevel.regular
   };
+
+  private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,
