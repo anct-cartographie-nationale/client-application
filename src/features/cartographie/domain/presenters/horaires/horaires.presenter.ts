@@ -27,9 +27,11 @@ const appendTimeTableInterval = (
     .join(',')
 });
 
-const firstDayOfTheWeek = (date: Date): Date => new Date(date.setDate(date.getDate() - date.getDay() + 1));
+const dayOfTheWeek = (date: Date, weekDay: number): number => new Date().setDate(date.getDate() - date.getDay() + weekDay + 1);
 
-const lastDayOfTheWeek = (date: Date) => new Date(date.setDate(date.getDate() - date.getDay() + joursDeLaSemaine.length + 1));
+const firstDayOfTheWeek = (date: Date): Date => new Date(dayOfTheWeek(date, 0));
+
+const lastDayOfTheWeek = (date: Date) => new Date(dayOfTheWeek(date, joursDeLaSemaine.length));
 
 const initialTimeTableOpeningHours: HorairesPresentation = {
   Lundi: 'Fermé',

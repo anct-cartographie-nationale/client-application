@@ -9,7 +9,12 @@
   </div>
   <div class="d-flex flex-column">
     <div class="flex-grow-1 text-end">
-      <a class="btn-close opacity-100" aria-label="Close" queryParamsHandling="preserve" [routerLink]="['cartographie']"></a>
+      <button
+        type="button"
+        class="btn-close opacity-100"
+        aria-label="Close"
+        queryParamsHandling="preserve"
+        [routerLink]="['cartographie']"></button>
     </div>
     <div *ngIf="status" [ngClass]="status === 'Fermé' ? 'text-muted' : 'text-primary'">
       {{ status }}
