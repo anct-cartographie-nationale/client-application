@@ -8,11 +8,11 @@ describe('horaires presenter', (): void => {
     const timeTableOpeningHours = parseHoraires(date)(openingHours);
 
     expect(timeTableOpeningHours).toStrictEqual({
-      Lundi: '09h00-12h00,14h00-18h30',
-      Mardi: '09h00-12h00,14h00-18h30',
-      Mercredi: '09h00-12h00,14h00-18h30',
-      Jeudi: '09h00-12h00,14h00-18h30',
-      Vendredi: '09h00-12h00,14h00-18h30',
+      Lundi: '09h00 - 12h00\n14h00 - 18h30',
+      Mardi: '09h00 - 12h00\n14h00 - 18h30',
+      Mercredi: '09h00 - 12h00\n14h00 - 18h30',
+      Jeudi: '09h00 - 12h00\n14h00 - 18h30',
+      Vendredi: '09h00 - 12h00\n14h00 - 18h30',
       Samedi: 'Fermé',
       Dimanche: 'Fermé'
     });
@@ -43,24 +43,6 @@ describe('horaires presenter', (): void => {
     const status: string | undefined = openingStatus(date)(openingHours);
 
     expect(status).toStrictEqual('Fermé');
-  });
-
-  it('should get Ferme bientôt state', (): void => {
-    const openingHours: string = 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00';
-    const date: Date = new Date('2022-07-22T09:30:00.000Z');
-
-    const status: string | undefined = openingStatus(date)(openingHours);
-
-    expect(status).toStrictEqual('Ferme bientôt');
-  });
-
-  it('should get Ouvre bientôt state', (): void => {
-    const openingHours: string = 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00';
-    const date: Date = new Date('2022-07-22T11:30:00.000Z');
-
-    const status: string | undefined = openingStatus(date)(openingHours);
-
-    expect(status).toStrictEqual('Ouvre bientôt');
   });
 
   it('should get undefined state one opening hours parse error', (): void => {

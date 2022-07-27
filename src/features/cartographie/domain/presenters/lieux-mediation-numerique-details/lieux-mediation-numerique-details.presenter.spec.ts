@@ -63,12 +63,12 @@ describe('lieux médiation numérique details presenter', (): void => {
       nom: 'Anonymal',
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
       horaires: {
-        Lundi: '09h00-12h00,14h00-18h30',
-        Mardi: '09h00-12h00,14h00-18h30',
-        Mercredi: '09h00-12h00,14h00-18h30',
-        Jeudi: '09h00-12h00,14h00-18h30',
-        Vendredi: '09h00-12h00,14h00-18h30',
-        Samedi: '08h30-12h00',
+        Lundi: '09h00 - 12h00\n14h00 - 18h30',
+        Mardi: '09h00 - 12h00\n14h00 - 18h30',
+        Mercredi: '09h00 - 12h00\n14h00 - 18h30',
+        Jeudi: '09h00 - 12h00\n14h00 - 18h30',
+        Vendredi: '09h00 - 12h00\n14h00 - 18h30',
+        Samedi: '08h30 - 12h00',
         Dimanche: 'Fermé'
       },
       status: 'Ouvert',
@@ -175,12 +175,12 @@ describe('lieux médiation numérique details presenter', (): void => {
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
       services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
       horaires: {
-        Lundi: '09h00-12h00,14h00-18h30',
+        Lundi: '09h00 - 12h00\n14h00 - 18h30',
         Mardi: 'Fermé',
         Mercredi: 'Fermé',
         Jeudi: 'Fermé',
-        Vendredi: '09h00-12h00,14h00-18h30',
-        Samedi: '08h30-12h00',
+        Vendredi: '09h00 - 12h00\n14h00 - 18h30',
+        Samedi: '08h30 - 12h00',
         Dimanche: 'Fermé'
       },
       status: 'Ouvert'

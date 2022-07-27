@@ -22,9 +22,9 @@ const appendTimeTableInterval = (
   jour: Jour
 ) => ({
   ...timeTableOpeningHours,
-  [jour]: [timeTableOpeningHours[jour], `${toIntervalString(intervalStart)}-${toIntervalString(intervalEnd)}`]
+  [jour]: [timeTableOpeningHours[jour], `${toIntervalString(intervalStart)} - ${toIntervalString(intervalEnd)}`]
     .filter(invalidInterval)
-    .join(',')
+    .join('\n')
 });
 
 const dayOfTheWeek = (date: Date, weekDay: number): number => new Date().setDate(date.getDate() - date.getDay() + weekDay + 1);
