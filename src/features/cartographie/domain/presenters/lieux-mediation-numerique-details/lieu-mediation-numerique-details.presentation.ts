@@ -28,4 +28,5 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   labels_autres?: string[];
   modalites_accompagnement?: ModalitesAccompagnement[];
   accessibilite?: Url;
+  distance?: number;
 };
