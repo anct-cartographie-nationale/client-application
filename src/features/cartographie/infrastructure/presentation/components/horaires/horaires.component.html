@@ -1,5 +1,5 @@
-<ng-container *ngIf="horaires">
-  <div class="h5 text-muted mb-3">HORAIRES</div>
+<div class="h5 text-muted mb-3">HORAIRES</div>
+<ng-container *ngIf="horaires; else noOpeningHours">
   <table class="table table-borderless table-sm mb-0 text-prewrap">
     <tbody>
       <tr>
@@ -33,3 +33,4 @@
     </tbody>
   </table>
 </ng-container>
+<ng-template #noOpeningHours>Horaires d'ouverture inconnus</ng-template>

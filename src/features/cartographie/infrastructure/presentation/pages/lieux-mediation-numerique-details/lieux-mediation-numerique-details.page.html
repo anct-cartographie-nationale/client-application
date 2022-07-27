@@ -41,7 +41,7 @@
     <app-modalites-accompagnement
       [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
   </div>
-  <div class="mx-4 py-4 border-bottom">
+  <div class="mx-4 py-4 border-bottom" *ngIf="lieuMediationNumerique.publics_accueillis">
     <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
   </div>
   <div class="mx-4 py-4" *ngIf="lieuMediationNumerique.labels_nationaux || lieuMediationNumerique.labels_autres">

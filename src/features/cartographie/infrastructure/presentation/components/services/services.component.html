@@ -1,6 +1,7 @@
 <div *ngIf="services" class="bg-light p-4">
   <div class="h5 text-muted">SERVICES</div>
-  <ul class="ps-3 fw-bold">
+  <ul class="ps-3 fw-bold" *ngIf="services.length > 0; else noServices">
     <li *ngFor="let service of services">{{ service }}</li>
   </ul>
+  <ng-template #noServices>Services inconnus</ng-template>
 </div>
