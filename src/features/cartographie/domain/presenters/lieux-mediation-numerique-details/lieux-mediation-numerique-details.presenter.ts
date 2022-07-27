@@ -1,10 +1,11 @@
-import { combineLatest, filter, Observable } from 'rxjs';
+import { combineLatest, concatMap, filter, Observable, of, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
-import { LieuMediationNumerique } from '../../../../../models';
+import { LieuMediationNumerique, Localisation, NO_LOCALISATION } from '../../../../../models';
 import { LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
 import { openingStatus, parseHoraires } from '../horaires/horaires.presenter';
 import { ifAny } from '../../../infrastructure/utilities';
+import { geographicDistance } from '../distance/distance.presenter';
 
 const definedLieuMediationNumeriqueOnly = (
   LieuMediationNumerique: LieuMediationNumerique | undefined
@@ -16,17 +17,22 @@ const toLieuMediationNumeriqueMatchingRouteId = ([LieuMediationNumerique, params
 ]): LieuMediationNumerique | undefined =>
   LieuMediationNumerique.find((LieuMediationNumerique: LieuMediationNumerique) => LieuMediationNumerique.id === params['id']);
 
+const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisation: Localisation): number | undefined =>
+  localisation === NO_LOCALISATION ? undefined : geographicDistance(lieuMediationNumerique.localisation, localisation);
+
 export class LieuxMediationNumeriqueDetailsPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
   public lieuMediationNumeriqueFromParams$(
-    params: Observable<{ [key: string]: string }>,
-    date: Date
+    params$: Observable<{ [key: string]: string }>,
+    date: Date,
+    localisation$: Observable<Localisation>
   ): Observable<LieuMediationNumeriqueDetailsPresentation> {
-    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), params]).pipe(
+    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), params$]).pipe(
       map(toLieuMediationNumeriqueMatchingRouteId),
       filter(definedLieuMediationNumeriqueOnly),
-      map((lieu: LieuMediationNumerique): LieuMediationNumeriqueDetailsPresentation => {
+      withLatestFrom(localisation$),
+      map(([lieu, localisation]: [LieuMediationNumerique, Localisation]): LieuMediationNumeriqueDetailsPresentation => {
         return {
           id: lieu.id,
           nom: lieu.nom,
@@ -45,7 +51,8 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           ...ifAny('labels_nationaux', lieu.labels_nationaux),
           ...ifAny('labels_autres', lieu.labels_autres),
           ...ifAny('modalites_accompagnement', lieu.modalites_accompagnement),
-          ...ifAny('accessibilite', lieu.accessibilite)
+          ...ifAny('accessibilite', lieu.accessibilite),
+          ...ifAny('distance', getDistance(lieu, localisation))
         };
       })
     );

@@ -3,11 +3,13 @@ import { LieuxMediationNumeriqueDetailsPage } from './lieux-mediation-numerique-
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { LieuxMediationNumeriqueRepository } from '../../../../domain';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('LieuxMediationNumeriqueDetailsPage', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       declarations: [LieuxMediationNumeriqueDetailsPage],
+      imports: [RouterTestingModule],
       providers: [
         {
           provide: ActivatedRoute,

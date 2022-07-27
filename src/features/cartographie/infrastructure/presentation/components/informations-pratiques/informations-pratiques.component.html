@@ -3,7 +3,7 @@
     <address class="mb-1">{{ adresse }}</address>
     <div *ngIf="distance && conditionAccess" class="mb-2">
       <ng-container *ngIf="distance">{{ distance | distance }}</ng-container>
-      <ng-container *ngIf="distance && conditionAccess">-</ng-container>
+      <ng-container *ngIf="distance && conditionAccess">&nbsp;-&nbsp;</ng-container>
       <span *ngIf="conditionAccess" class="text-primary">{{ conditionAccess }}</span>
     </div>
     <a class="text-decoration-none" *ngIf="accessibilite" href="{{ accessibilite }}" target="_blank">

@@ -2,7 +2,7 @@ import { LieuxMediationNumeriqueDetailsPresenter } from './lieux-mediation-numer
 import { firstValueFrom, of } from 'rxjs';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import { LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
-import { Adresse, Contact, LieuMediationNumerique, Url } from '../../../../../models/';
+import { Adresse, Contact, LieuMediationNumerique, Localisation, NO_LOCALISATION, Url } from '../../../../../models/';
 
 describe('lieux médiation numérique details presenter', (): void => {
   it('should filter only lieu with id', async (): Promise<void> => {
@@ -53,7 +53,8 @@ describe('lieux médiation numérique details presenter', (): void => {
         of({
           id: '6001a35f16b08100062e415f'
         }),
-        new Date('2022-07-22T08:55:00.000Z')
+        new Date('2022-07-22T14:55:00.000Z'),
+        of(NO_LOCALISATION)
       )
     );
 
@@ -123,7 +124,8 @@ describe('lieux médiation numérique details presenter', (): void => {
         of({
           id: '6001a35f16b08100062e415f'
         }),
-        new Date('2022-07-22T09:55:00.000Z')
+        new Date('2022-07-22T14:55:00.000Z'),
+        of(NO_LOCALISATION)
       )
     );
 
@@ -162,7 +164,8 @@ describe('lieux médiation numérique details presenter', (): void => {
         of({
           id: '6001a35f16b08100062e415f'
         }),
-        new Date('2022-07-22T08:55:00.000Z')
+        new Date('2022-07-22T14:55:00.000Z'),
+        of(NO_LOCALISATION)
       )
     );
 
@@ -181,6 +184,47 @@ describe('lieux médiation numérique details presenter', (): void => {
         Dimanche: 'Fermé'
       },
       status: 'Ouvert'
+    } as LieuMediationNumeriqueDetailsPresentation);
+  });
+
+  it('should get the lieu with distance', async (): Promise<void> => {
+    const lieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: '6001a35f16b08100062e415f',
+        nom: 'Anonymal',
+        adresse: Adresse({
+          commune: 'Reims',
+          code_postal: '51100',
+          code_insee: '51454',
+          voie: '12 BIS RUE DE LECLERCQ',
+          complement_adresse: "Le patio du bois de l'Aulne"
+        }),
+        services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
+      new LieuxMediationNumeriqueDetailsPresenter({
+        getAll$: () => of(lieuxMediationNumerique)
+      } as LieuxMediationNumeriqueRepository);
+
+    const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
+      lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
+        of({
+          id: '6001a35f16b08100062e415f'
+        }),
+        new Date('2022-07-22T14:55:00.000Z'),
+        of(Localisation({ latitude: 45.7689958, longitude: 4.8343466 }))
+      )
+    );
+
+    expect(structure).toStrictEqual({
+      id: '6001a35f16b08100062e415f',
+      nom: 'Anonymal',
+      adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
+      services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+      distance: 0
     } as LieuMediationNumeriqueDetailsPresentation);
   });
 });
