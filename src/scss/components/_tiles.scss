@@ -32,6 +32,7 @@ $tile-button-focus-box-shadow: $btn-focus-box-shadow;
   &:hover {
     z-index: 2;
     background-color: var(--#{$prefix}tile-btn-hover-bg);
+    color: var(--#{$prefix}tile-btn-color);
   }
 
   &:focus {
