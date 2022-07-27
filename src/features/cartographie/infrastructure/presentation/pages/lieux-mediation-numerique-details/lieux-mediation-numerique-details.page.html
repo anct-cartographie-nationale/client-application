@@ -6,9 +6,11 @@
       [date]="lieuMediationNumerique.date_maj"
       [status]="lieuMediationNumerique.status"></app-informations-generales>
   </div>
-  <app-boutons-action
-    [courriel]="lieuMediationNumerique.contact?.courriel"
-    [siteWeb]="lieuMediationNumerique.contact?.site_web"></app-boutons-action>
+  <div class="bg-light">
+    <app-boutons-action
+      [courriel]="lieuMediationNumerique.contact?.courriel"
+      [siteWeb]="lieuMediationNumerique.contact?.site_web"></app-boutons-action>
+  </div>
   <app-informations-pratiques
     [adresse]="lieuMediationNumerique.adresse"
     [conditionAccess]="lieuMediationNumerique.conditions_access"

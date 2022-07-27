@@ -1,0 +1,43 @@
+$tile-color: var(--#{$prefix}body-color);
+$tile-transition: 0.2s;
+$tile-button-padding-x: 1.5rem;
+$tile-button-padding-y: 1.5rem;
+$tile-button-bg: transparent;
+$tile-button-hover-bg: $body-bg;
+$tile-button-color: $tile-color;
+$tile-button-focus-border-color: $input-focus-border-color;
+$tile-button-focus-box-shadow: $btn-focus-box-shadow;
+
+.tile-button {
+  --#{$prefix}tile-transition: #{$tile-transition};
+  --#{$prefix}tile-btn-padding-x: #{$tile-button-padding-x};
+  --#{$prefix}tile-btn-padding-y: #{$tile-button-padding-y};
+  --#{$prefix}tile-btn-hover-bg: #{$tile-button-hover-bg};
+  --#{$prefix}tile-btn-bg: #{$tile-button-bg};
+  --#{$prefix}tile-btn-color: #{$tile-button-color};
+  --#{$prefix}tile-btn-focus-border-color: #{$tile-button-focus-border-color};
+  --#{$prefix}tile-btn-focus-box-shadow: #{$tile-button-focus-box-shadow};
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: var(--#{$prefix}tile-btn-padding-y) var(--#{$prefix}tile-btn-padding-x);
+  background-color: var(--#{$prefix}tile-btn-bg);
+  border: 0;
+  color: var(--#{$prefix}tile-btn-color);
+  text-decoration: none;
+  @include transition(var(--#{$prefix}tile-transition));
+
+  &:hover {
+    z-index: 2;
+    background-color: var(--#{$prefix}tile-btn-hover-bg);
+  }
+
+  &:focus {
+    z-index: 1100;
+    border-color: var(--#{$prefix}tile-btn-focus-border-color);
+    outline: 0;
+    box-shadow: var(--#{$prefix}tile-btn-focus-box-shadow);
+  }
+}

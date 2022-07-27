@@ -1,20 +1,14 @@
-<div class="container border-bottom bg-light p-3">
-  <div class="d-flex justify-content-center align-items-center">
-    <button type="button" class="btn pt-5" (click)="printPage()">
-      <i class="ri-printer-line ri-xl bg-primary text-light rounded-circle p-3 me-auto"></i>
-      <p class="my-3 me-auto">Imprimer</p>
-    </button>
-    <button type="button" class="btn pt-5">
-      <i class="ri-home-5-line ri-xl bg-primary text-light rounded-circle p-3 me-auto"></i>
-      <p class="my-3 me-auto">Je travaille ici</p>
-    </button>
-    <a type="button" class="btn pt-5" *ngIf="courriel" href="mailto:{{ courriel }}">
-      <i class="ri-error-warning-line ri-xl bg-primary text-light rounded-circle p-3 me-auto"></i>
-      <p class="my-3 me-auto">Signaler erreur</p>
-    </a>
-    <a type="button" class="btn pt-5" *ngIf="siteWeb" href="{{ siteWeb[0] }}" target="_blank">
-      <i class="ri-computer-line ri-xl bg-primary text-light rounded-circle me-auto p-3"></i>
-      <p class="my-3 me-auto">Voir le site</p>
-    </a>
-  </div>
+<div class="d-flex justify-content-center">
+  <button type="button" class="tile-button" (click)="printPage()">
+    <i class="ri-printer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
+    <b class="mt-2">Imprimer</b>
+  </button>
+  <a type="button" class="tile-button" *ngIf="courriel" href="mailto:{{ courriel }}">
+    <i class="ri-error-warning-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
+    <b class="mt-2">Signaler erreur</b>
+  </a>
+  <a type="button" class="tile-button" *ngIf="siteWeb" href="{{ siteWeb[0] }}" target="_blank">
+    <i class="ri-computer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
+    <b class="mt-2">Voir le site</b>
+  </a>
 </div>
