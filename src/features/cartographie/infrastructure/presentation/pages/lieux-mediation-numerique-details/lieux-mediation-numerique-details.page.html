@@ -37,8 +37,10 @@
       </div>
     </div>
   </div>
-  <app-modalites-accompagnement
-    [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
+  <div class="mx-4 py-5 border-bottom" *ngIf="lieuMediationNumerique.modalites_accompagnement">
+    <app-modalites-accompagnement
+      [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
+  </div>
   <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
   <app-labellisations
     [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
