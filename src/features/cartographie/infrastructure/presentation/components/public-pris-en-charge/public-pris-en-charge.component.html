@@ -1,11 +1,6 @@
-<div class="container" *ngIf="publicsAccueillis">
-  <div class="border-bottom p-3">
-    <h1 class="h5 text-info">PUBLIC PRIS EN CHARGE</h1>
-    <div class="row p-1">
-      <div class="col-auto my-1 form-check form-check-inline form-chip p-0" *ngFor="let publicAccueilli of publicsAccueillis">
-        <input type="radio" name="publics_accueillis" class="form-check-input" [value]="publicAccueilli" />
-        <label class="form-check-label bg-primary text-white">{{ publicAccueilli }}</label>
-      </div>
-    </div>
-  </div>
-</div>
+<ng-container *ngIf="publicsAccueillis">
+  <div class="h5 text-muted text-uppercase mb-3">Propriété public</div>
+  <span class="badge rounded-pill text-bg-light p-2 me-2 mb-2 fs-6" *ngFor="let publicAccueilli of publicsAccueillis">
+    <span class="opacity-75">{{ publicAccueilli }}</span>
+  </span>
+</ng-container>

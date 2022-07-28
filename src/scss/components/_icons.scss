@@ -29,7 +29,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 }
 
 .ri-xxs {
-  font-size: 0.5em;
+  font-size: 0.55em;
 }
 
 .ri-xs {
@@ -212,4 +212,16 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-book-2-line::before {
   content: '\ead3';
+}
+
+.ri-checkbox-blank-circle-fill::before {
+  content: '\eb7c';
+}
+
+.ri-equalizer-fill::before {
+  content: '\ec9c';
+}
+
+.ri-account-pin-circle-fill::before {
+  content: '\ea0c';
 }

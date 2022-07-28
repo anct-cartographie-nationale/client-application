@@ -1,10 +1,24 @@
-<div class="border-bottom p-3 sticky-top bg-secondary">
-  <div class="d-flex">
-    <div class="flex-grow-1">
-      <p class="text-info m-0" *ngIf="typologie">{{ typologie }}</p>
-      <h1 class="h2">{{ nom }}</h1>
-    </div>
-    <a type="button" class="btn-close" aria-label="Close" queryParamsHandling="preserve" [routerLink]="['cartographie']"></a>
+<div class="d-flex">
+  <i class="ri-4x ri-account-pin-circle-fill text-primary my-auto me-2"></i>
+  <div class="flex-grow-1 align-self-center">
+    <small class="text-muted" *ngIf="typologie">{{ typologie }}</small>
+    <h1 class="h2 fw-bold mb-0">
+      {{ nom }}
+    </h1>
+    <small *ngIf="date" class="text-muted fst-italic">Mise à jour le {{ date | date: 'dd/MM/y' }}</small>
   </div>
-  <p *ngIf="date" class="text-info mb-3" style="font-size: 11px">Mise à jour le {{ date | date: 'dd/MM/y' }}</p>
+  <div class="d-flex flex-column">
+    <div class="flex-grow-1 text-end">
+      <button
+        type="button"
+        class="btn-close opacity-100"
+        aria-label="Close"
+        queryParamsHandling="preserve"
+        [routerLink]="['cartographie']"></button>
+    </div>
+    <div *ngIf="status" [ngClass]="status === 'Fermé' ? 'text-muted' : 'text-primary'">
+      {{ status }}
+      <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+    </div>
+  </div>
 </div>

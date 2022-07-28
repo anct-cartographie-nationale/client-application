@@ -1,6 +1,7 @@
 import { DivIcon, Point as LeafletPoint } from 'leaflet';
 import { MarkerFactory, MarkerHighlight, MarkerProperties } from '../markers.configuration';
 import { LieuMediationNumeriqueListItemPresentation } from '@features/cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
+import { OpeningStatus } from '../../../../../domain/presenters/horaires/horaires.presenter';
 
 export type LieuMediationNumeriqueMarkerProperties = MarkerProperties<
   LieuMediationNumeriqueListItemPresentation & {
@@ -31,15 +32,30 @@ const LIEU_MEDIATION_NUMERIQUE_MARKER_HIGHLIGHT_CLASSES_MAP: Record<MarkerHighli
   hint: 'lieu-mediation-numerique-marker-hint'
 };
 
-const lieuMediationNumeriqueMarkerClass = (highlight?: MarkerHighlight): string =>
+const LIEU_MEDIATION_NUMERIQUE_MARKER_OPENING_CLASSES_MAP: Record<OpeningStatus, string> = {
+  Fermé: '',
+  'Ferme bientôt': 'lieu-mediation-numerique-marker-open',
+  Ouvert: 'lieu-mediation-numerique-marker-open',
+  'Ouvre bientôt': ''
+};
+
+const lieuMediationNumeriqueMarkerHighlightClass = (highlight?: MarkerHighlight): string =>
   highlight == null ? '' : LIEU_MEDIATION_NUMERIQUE_MARKER_HIGHLIGHT_CLASSES_MAP[highlight];
+
+const lieuMediationNumeriqueMarkerOpeningClass = (status?: OpeningStatus): string =>
+  status == null ? '' : LIEU_MEDIATION_NUMERIQUE_MARKER_OPENING_CLASSES_MAP[status];
 
 export const lieuMediationNumeriqueMerkerFactory: DivIconMarkerFactory<LieuMediationNumeriqueMarkerProperties> = (
   properties: MarkerProperties<LieuMediationNumeriqueMarkerProperties>
 ): DivIcon =>
   new DivIcon({
     className: '',
-    html: lieuMediationNumeriqueMarkerHtmlTemplate(lieuMediationNumeriqueMarkerClass(properties.highlight)),
+    html: lieuMediationNumeriqueMarkerHtmlTemplate(
+      [
+        lieuMediationNumeriqueMarkerHighlightClass(properties.highlight),
+        lieuMediationNumeriqueMarkerOpeningClass(properties.status)
+      ].join(' ')
+    ),
     iconAnchor: new LeafletPoint(
       LIEU_MEDIATION_NUMERIQUE_MARKER_DIMENSIONS.x * HALF,
       LIEU_MEDIATION_NUMERIQUE_MARKER_DIMENSIONS.y

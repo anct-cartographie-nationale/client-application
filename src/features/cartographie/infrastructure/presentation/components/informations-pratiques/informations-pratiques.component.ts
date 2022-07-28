@@ -11,4 +11,5 @@ export class InformationsPratiquesComponent {
   @Input() public accessibilite?: Url;
   @Input() public courriel?: string;
   @Input() public telephone?: string;
+  @Input() public distance?: number;
 }

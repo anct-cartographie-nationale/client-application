@@ -81,7 +81,7 @@ const toDomain = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer
     ...ifAny('cle_ban', lieuMediationNumeriqueTransfer.cle_ban, CleBan),
     ...ifAny<Typologie[], string>('typologie', lieuMediationNumeriqueTransfer.typologie, toArray),
     ...ifAnyInObject('contact', ignoreInvalidPropertiesOf(contactPayload(lieuMediationNumeriqueTransfer), Contact)),
-    services: toArray(lieuMediationNumeriqueTransfer.services),
+    services: toArray(lieuMediationNumeriqueTransfer.services).filter((service: string) => service !== ''),
     ...ifAny<Date, string>('date_maj', lieuMediationNumeriqueTransfer.date_maj, (dateMaj: string) => new Date(dateMaj)),
     ...ifAny<LabelNational[], string>('labels_nationaux', lieuMediationNumeriqueTransfer.labels_nationaux, toArray),
     ...ifAny<ConditionAccess[], string>('conditions_access', lieuMediationNumeriqueTransfer.conditions_access, toArray),

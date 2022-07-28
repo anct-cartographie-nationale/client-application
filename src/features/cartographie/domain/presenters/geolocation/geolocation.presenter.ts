@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Localisation, NO_LOCALISATION } from '../../../../../models/localisation/localisation';
+import { Localisation, NO_LOCALISATION } from '../../../../../models';
 
 export class GeolocationPresenter {
   private _location$: BehaviorSubject<Localisation> = new BehaviorSubject<Localisation>(NO_LOCALISATION);

@@ -40,18 +40,18 @@ export type FilterFormPresentation = FilterPresentation & {
   ouvert_actuellement?: string;
 };
 
-export const toFilterFormPresentationFromQuery = (queryParams: FilterQueryParamsPresentation): FilterFormPresentation => ({
-  services: queryParams.services,
-  address: queryParams.address,
-  latitude: queryParams.latitude ? parseFloat(queryParams.latitude) : undefined,
-  longitude: queryParams.longitude ? parseFloat(queryParams.longitude) : undefined,
-  distance: queryParams.distance ? parseInt(queryParams.distance) : undefined,
-  accessibilite: queryParams.accessibilite === 'true' ? true : undefined,
-  conditions_access: queryParams.conditions_access,
-  publics_accueillis: queryParams.publics_accueillis,
-  modalites_accompagnement: queryParams.modalites_accompagnement,
-  date_ouverture: queryParams.date_ouverture,
-  ouvert_actuellement: queryParams.ouvert_actuellement
+export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParamsPresentation): FilterFormPresentation => ({
+  services: queryParams?.services,
+  address: queryParams?.address,
+  latitude: queryParams?.latitude ? parseFloat(queryParams.latitude) : undefined,
+  longitude: queryParams?.longitude ? parseFloat(queryParams.longitude) : undefined,
+  distance: queryParams?.distance ? parseInt(queryParams.distance) : undefined,
+  accessibilite: queryParams?.accessibilite === 'true' ? true : undefined,
+  conditions_access: queryParams?.conditions_access,
+  publics_accueillis: queryParams?.publics_accueillis,
+  modalites_accompagnement: queryParams?.modalites_accompagnement,
+  date_ouverture: queryParams?.date_ouverture,
+  ouvert_actuellement: queryParams?.ouvert_actuellement
 });
 
 export const toLocalisationFromFilterFormPresentation = (filter: FilterFormPresentation): Localisation =>
