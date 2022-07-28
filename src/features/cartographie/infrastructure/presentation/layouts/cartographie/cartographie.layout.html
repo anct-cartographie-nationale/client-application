@@ -1,3 +1,18 @@
+<div class="d-flex h-100" *ngIf="loadingState$ | async">
+  <div class="card border-0 shadow me-auto ms-auto my-5">
+    <div class="card-body">
+      <div class="d-flex flex-column text-center mt-5">
+        <p class="text-muted">Patientez quelques instants</p>
+        <h3 class="card-title text-primary">
+          Nous recherchons les structures
+          <br />
+          correspondant à votre recherche
+        </h3>
+      </div>
+      <app-cartographie-loader></app-cartographie-loader>
+    </div>
+  </div>
+</div>
 <div class="d-flex h-100">
   <div class="col-lg-6 col-md-6 col-12 border-end">
     <router-outlet></router-outlet>
