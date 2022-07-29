@@ -24,7 +24,6 @@
               <div class="row justify-content-center">
                 <div class="col-md-5 mb-3">
                   <app-address-field
-                    [addressFromCoordiantes]="(addressFromCoordinates$ | async) ?? ''"
                     [addressSuggestions]="(addressesFound$ | async) ?? []"
                     [addressNotFound]="(addressNotFound$ | async) ?? false"
                     [formGroup]="orientationLayout.filterForm"

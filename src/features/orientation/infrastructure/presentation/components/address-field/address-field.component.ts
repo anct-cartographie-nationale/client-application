@@ -9,7 +9,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AddressFieldComponent {
   @Input() public addressSuggestions: AddressFoundPresentation[] = [];
-  @Input() public addressFromCoordiantes?: String;
 
   @Output() public readonly selectAddress: EventEmitter<AddressFoundPresentation> =
     new EventEmitter<AddressFoundPresentation>();
