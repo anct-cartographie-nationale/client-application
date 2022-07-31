@@ -2,7 +2,7 @@
 
 ## À propos
 
-Ce client permet l'affichage de la [cartographie nationale de l’offre de médiation numérique](https://d2pzn8br7bs1l.cloudfront.net/) dans un navigateur web, il est construit à partir des éléments présents dans la bibliothèque pour la cartographie de l’offre de médiation numérique.
+Ce client permet l'affichage de la [cartographie nationale de l’offre de médiation numérique](https://cartographie.societenumerique.gouv.fr) dans un navigateur web, il est construit à partir des éléments présents dans la bibliothèque pour la cartographie de l’offre de médiation numérique.
 
 ## Table des matières
 
@@ -192,7 +192,7 @@ Il est possible d'automatiser ce processus en utilisant la commande `standard-ve
 - [AWS](https://aws.amazon.com/) est la plateforme de services Cloud proposée par Amazon.
   - Compte de déploiement : `cartographie-nationale.client.ci`
   - Groupe : `publisher.client`
-  - Environnement cible : https://d2pzn8br7bs1l.cloudfront.net/
+  - Environnement cible : https://cartographie.societenumerique.gouv.fr
 
 ##### Sur le registre npm
 
@@ -231,7 +231,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <head>
   <title>Page Title</title>
   <base href="/" />
-  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.4.0/styles.css" rel="stylesheet" />
 </head>
 ...
 ```
@@ -244,7 +244,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
   <h1>My First Heading</h1>
   <p>My first paragraph.</p>
 
-  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/script.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.4.0/script.js" type="module"></script>
 </body>
 ...
 ```
@@ -256,7 +256,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <body>
   <fr-mediation-numerique></fr-mediation-numerique>
 
-  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/script.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.4.0/script.js" type="module"></script>
 </body>
 ...
 ```
@@ -269,12 +269,12 @@ La version finale devrait ressembler à celà :
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.4.0/styles.css" rel="stylesheet" />
   </head>
   <body>
     <fr-mediation-numerique></fr-mediation-numerique>
 
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/script.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.4.0/script.js" type="module"></script>
   </body>
 </html>
 ```
@@ -301,7 +301,7 @@ Exemple :
 
 ```html
 <fr-mediation-numerique
-  source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/assets/data/lieux-de-mediation-numerique.json"></fr-mediation-numerique>
+  source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.4.0/assets/data/lieux-de-mediation-numerique.json"></fr-mediation-numerique>
 ```
 
 #### Localisation initiale
@@ -364,12 +364,12 @@ Il est possible de changer certaines couleurs utilisées par la cartographie, po
     <fr-mediation-numerique
       titre="Médiation numérique à Bessenay"
       logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
-      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/assets/data/lieux-de-mediation-numerique.json"
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.4.0/assets/data/lieux-de-mediation-numerique.json"
       latitude="45.77647396140311"
       longitude="4.55431157343317"
       zoom="12"></fr-mediation-numerique>
 
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.3.0/script.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.4.0/script.js" type="module"></script>
   </body>
 </html>
 ```
