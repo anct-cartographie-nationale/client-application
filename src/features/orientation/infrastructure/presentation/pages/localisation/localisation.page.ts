@@ -6,7 +6,7 @@ import { AddressPresenter } from '../../../../domain/presenters';
 import { AddressRepository } from '../../../../domain/repositories';
 import { AddressFoundPresentation } from '../../../../domain/presenters/address/address-found.presentation';
 import { OrientationLayout } from '../../layouts';
-import { Localisation } from 'projects/client-application/src/models';
+import { Localisation } from 'projects/client-application/src/models/localisation/localisation';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
