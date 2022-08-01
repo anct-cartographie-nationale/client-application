@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap } from 'rxjs';
+import { map, mergeWith } from 'rxjs/operators';
 import { AddressPresenter } from '../../../../domain/presenters';
 import { AddressRepository } from '../../../../domain/repositories';
 import { AddressFoundPresentation } from '../../../../domain/presenters/address/address-found.presentation';
 import { OrientationLayout } from '../../layouts';
+import { Localisation } from '../../../../../../models/localisation/localisation';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
@@ -35,7 +37,8 @@ export class LocalisationPage {
 
   public constructor(
     private readonly _addressPresenter: AddressPresenter,
-    public readonly orientationLayout: OrientationLayout
+    public readonly orientationLayout: OrientationLayout,
+    private http: HttpClient
   ) {}
 
   public onSelectAddress(address: AddressFoundPresentation): void {
@@ -44,12 +47,36 @@ export class LocalisationPage {
   }
 
   public onGeoLocate(): void {
+    this._loadingState$.next(true);
     window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
       this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
       this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
       this.orientationLayout.filterForm.get('address')?.setValue(null);
+      this._geoLocation$.next(
+        Localisation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        })
+      );
     });
   }
+
+  private _geoLocation$: Subject<Localisation> = new Subject<Localisation>();
+
+  private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public loadingState$: Observable<boolean> = this._loadingState$.pipe(
+    mergeWith(
+      this._geoLocation$.pipe(
+        switchMap(
+          (localisation: Localisation): Observable<AddressFoundPresentation[]> => this._addressPresenter.reverse$(localisation)
+        ),
+        map((address: AddressFoundPresentation[]) => {
+          this.orientationLayout.filterForm.get('address')?.setValue(address[0].label);
+          return false;
+        })
+      )
+    )
+  );
 
   public onSearchAddress(searchTerm: string): void {
     this._searchTerm$.next(searchTerm);

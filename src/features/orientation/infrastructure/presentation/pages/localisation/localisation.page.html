@@ -32,8 +32,14 @@
                 </div>
                 <div class="col-auto">
                   <button class="btn btn-secondary" (click)="onGeoLocate()">
-                    <i class="ri-map-pin-2-line align-bottom"></i>
-                    Me géolocaliser
+                    <div *ngIf="loadingState$ | async">
+                      <span class="spinner-border spinner-border-sm text-primary me-1" role="status" aria-hidden="true"></span>
+                      <span class="text-primary">Chargement...</span>
+                    </div>
+                    <span *ngIf="(loadingState$ | async) === false">
+                      <i class="ri-map-pin-2-line align-bottom"></i>
+                      Me géolocaliser
+                    </span>
                   </button>
                 </div>
               </div>

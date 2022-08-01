@@ -19,14 +19,45 @@ describe('address presenter', (): void => {
             })
           }
         ]);
+      },
+      reverse$: (): Observable<Address[]> => {
+        return of([
+          {
+            context: '80, Somme, Hauts-de-France',
+            label: '8 Boulevard du Port 80000 Amiens',
+            localisation: Localisation({
+              latitude: 4.8375548,
+              longitude: 45.7665478
+            })
+          }
+        ]);
       }
     };
     const addressPresenter: AddressPresenter = new AddressPresenter(addressRepository);
     const searchTerm: string = '33 Avenue des Lilas, 66210 Bolquère, France';
 
     const addressesFound: AddressFoundPresentation[] = await firstValueFrom(addressPresenter.search$(searchTerm));
+    const addressesFoundReverse: AddressFoundPresentation[] = await firstValueFrom(
+      addressPresenter.reverse$(
+        Localisation({
+          latitude: 4.8375548,
+          longitude: 45.7665478
+        })
+      )
+    );
 
     expect(addressesFound).toStrictEqual([
+      {
+        context: '80, Somme, Hauts-de-France',
+        label: '8 Boulevard du Port 80000 Amiens',
+        localisation: Localisation({
+          latitude: 4.8375548,
+          longitude: 45.7665478
+        })
+      }
+    ]);
+
+    expect(addressesFoundReverse).toStrictEqual([
       {
         context: '80, Somme, Hauts-de-France',
         label: '8 Boulevard du Port 80000 Amiens',

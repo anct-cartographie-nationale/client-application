@@ -7,11 +7,13 @@ import { AddressFieldStubComponent, CollapseStubComponent } from '../../test-dou
 import { LocalisationPage } from './localisation.page';
 import { OrientationLayout } from '../../layouts';
 import { FormGroup } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('LocalisationPage', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       declarations: [LocalisationPage, AddressFieldStubComponent, CollapseStubComponent],
+      imports: [HttpClientModule],
       providers: [
         {
           provide: AddressRepository,
