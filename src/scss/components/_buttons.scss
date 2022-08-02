@@ -17,3 +17,8 @@
     }
   }
 }
+
+.btn-secondary:hover {
+  color: $primary;
+  box-shadow: -0.5px 0.5px 0 1.5px $primary;
+}
