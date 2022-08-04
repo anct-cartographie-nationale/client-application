@@ -4,6 +4,15 @@ import { ROUTES } from '../common/mediation-numerique.routes';
 
 @NgModule({
   exports: [RouterModule],
-  imports: [RouterModule.forRoot([...ROUTES, { path: '**', pathMatch: 'full', redirectTo: 'cartographie' }])]
+  imports: [
+    RouterModule.forRoot([
+      ...ROUTES,
+      {
+        loadChildren: async () => (await import('@features/presentation')).PresentationFeatureModule,
+        path: 'presentation'
+      },
+      { path: '**', pathMatch: 'full', redirectTo: 'presentation' }
+    ])
+  ]
 })
 export class ApplicationRoutingModule {}

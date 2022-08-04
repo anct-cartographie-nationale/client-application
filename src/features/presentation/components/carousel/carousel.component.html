@@ -1,0 +1,115 @@
+<div class="my-5">
+  <h1 class="h4 fw-bold my-5 text-secondary text-center">Les avantages de cet outil :</h1>
+</div>
+<div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button
+      (click)="switchSlide(0)"
+      type="button"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="0"
+      [ngClass]="currentSlide === 0 ? 'active' : ''"
+      aria-current="true"
+      aria-label="Slide 1"></button>
+    <button
+      (click)="switchSlide(1)"
+      type="button"
+      [ngClass]="currentSlide === 1 ? 'active' : ''"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"></button>
+    <button
+      (click)="switchSlide(2)"
+      type="button"
+      [ngClass]="currentSlide === 2 ? 'active' : ''"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"></button>
+    <button
+      (click)="switchSlide(3)"
+      type="button"
+      [ngClass]="currentSlide === 3 ? 'active' : ''"
+      data-bs-target="#carouselExampleCaptions"
+      data-bs-slide-to="3"
+      aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner h-100" style="min-height: 650px">
+    <div *ngIf="currentSlide === 0">
+      <div class="slide d-flex flex-column align-items-center" @carouselAnimation>
+        <img
+          src="../../../../../../assets/img/presentation/svg-orientation.svg"
+          class="d-block me-auto ms-auto my-5"
+          alt="test43"
+          width="50%" />
+        <h5 class="text-center text-secondary fw-bold">L'orientation</h5>
+        <p class="text-center text-secondary" style="max-width: 50%">
+          En 4 étapes, vous pouvez afficher les structures correspondant exactement aux besoins d'un bénéficiaire, dans une zone
+          géographique limitée ouvertes lorsqu'il est disponible.
+        </p>
+      </div>
+    </div>
+    <div *ngIf="currentSlide === 1">
+      <div class="slide d-flex flex-column align-items-center" @carouselAnimation>
+        <img
+          src="../../../../../../assets/img/presentation/svg-visibilite.svg"
+          class="d-block me-auto ms-auto my-5"
+          alt="test43"
+          width="50%" />
+        <h5 class="text-center text-secondary fw-bold">La visibilité</h5>
+        <p class="text-center text-secondary" style="max-width: 50%">
+          L'idéologie ici est de proposer un outil à la fois national et local. La base de données est accessible à tous et
+          contributive : de la plus petite collectivité à un hub, chacun peut implémenter sur son site cet outil et afficher
+          l'offre de médiation de son territoire. En renseignant vos données sur la cartographie, ce n'est pas uniquement les
+          usagers du site national qui auront accès aux informations de votre structure, mais également tout les usagers des
+          sites web des collectivités qui auront intégré la plateforme !
+        </p>
+      </div>
+    </div>
+    <div *ngIf="currentSlide === 2">
+      <div class="slide d-flex flex-column align-items-center" @carouselAnimation>
+        <img
+          src="../../../../../../assets/img/presentation/svg-centralisation.svg"
+          class="d-block me-auto ms-auto my-5"
+          alt="test43"
+          width="50%" />
+        <h5 class="text-center text-secondary fw-bold">La centralisation</h5>
+        <p class="text-center text-secondary" style="max-width: 50%">
+          Travailler sur cette base de donnes commune permet d'avoir une gestion de la donnée centralisée, davantage actualisée
+          et permettra d'améliorer la visibilité et faire gagner du temps aux professionnels de la médiation numérique.
+        </p>
+      </div>
+    </div>
+    <div *ngIf="currentSlide === 3">
+      <div class="slide d-flex flex-column align-items-center" @carouselAnimation>
+        <img
+          src="../../../../../../assets/img/presentation/svg-centralisation.svg"
+          class="d-block me-auto ms-auto my-5"
+          alt="test43"
+          width="50%" />
+        <h5 class="text-center text-secondary fw-bold">L'actualisation</h5>
+        <p class="text-center text-secondary" style="max-width: 50%">
+          Notre proximité avec les structures de médiation numérique nous permet d'assurer des données actualisées il y a moins
+          de 3 mois et ainsi éviter aux bénéficiaires de se rendre dans une structure fermée.
+        </p>
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    (click)="onPreviousClick()"
+    type="button"
+    data-bs-target="#carouselExampleCaptions"
+    data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    (click)="onNextClick()"
+    type="button"
+    data-bs-target="#carouselExampleCaptions"
+    data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

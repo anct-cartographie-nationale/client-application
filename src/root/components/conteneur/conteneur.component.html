@@ -47,15 +47,21 @@
       </div>
     </nav>
   </div>
+<<<<<<< HEAD:src/root/components/conteneur/conteneur.component.html
   <div class="d-flex flex-row overflow-hidden h-100">
     <div class="col overflow-auto">
       <ng-content></ng-content>
+=======
+  <div class="d-flex flex-row flex-grow-1">
+    <div class="col" [ngClass]="this.router.url === '/presentation' ? '' : 'vh-100'">
+      <router-outlet></router-outlet>
+>>>>>>> feat: presentation page:src/root/layouts/main/main.layout.html
     </div>
   </div>
+  <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a [routerLink]="['/']" class="nav-link px-2 text-muted">Accueil</a></li>
+    </ul>
+    <p class="text-center text-muted">© 2022 Cartographie {{ brandConfiguration.name }}</p>
+  </footer>
 </div>
-<footer class="py-3 my-4">
-  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-    <li class="nav-item"><a [routerLink]="['/']" class="nav-link px-2 text-muted">Accueil</a></li>
-  </ul>
-  <p class="text-center text-muted">© 2022 Cartographie {{ brandConfiguration.name }}</p>
-</footer>

@@ -1,0 +1,51 @@
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 400" style="enable-background:new 0 0 400 400;" xml:space="preserve">
+<style type="text/css">
+	.svg-maisons0{fill:none;}
+	.svg-maisons1{fill:#2F4077;}
+	.svg-maisons2{fill:#2D3AE2;}
+	.svg-maisons3{fill:#90A4F8;}
+	.svg-maisons4{fill:#E5E5E5;}
+	.svg-maisons5{fill:none;stroke:#616CBC;stroke-width:7;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g>
+	<polygon class="svg-maisons0" points="342.2,169 342.4,168.9 342.2,168.7 	"/>
+	<polygon class="svg-maisons1" points="262.3,203.2 165,145.5 165,227.2 262.4,285 262.4,211.2 262.4,203.2 	"/>
+	<polygon class="svg-maisons2" points="262.4,203.2 262.4,203.1 165,145.3 165,145.5 262.3,203.2 	"/>
+	<polygon class="svg-maisons2" points="262.3,203.2 262.4,203.2 262.4,203.2 	"/>
+	<polygon class="svg-maisons2" points="350.4,173.6 350.3,173.5 350.3,173.5 	"/>
+	<polygon class="svg-maisons2" points="302.6,127.4 302.3,127.2 302.3,127.5 	"/>
+	<polygon class="svg-maisons3" points="302.6,127.4 302.3,127.5 302.3,127.2 197.5,65 157.4,140.9 165,145.5 165,145.3 262.4,203.1 
+		262.4,203.2 262.4,203.2 270,207.7 275.3,197.6 302.3,146.5 302.9,145.4 310.1,131.8 	"/>
+	<g>
+		<path class="svg-maisons4" d="M310.1,131.8l-7.2,13.6l-0.6,1.1l-27,51.1l-5.3,10.1l-7.6-4.5v8V285l19.2-8.3v-55.3l20.7-8.9v55.2l39.9-17.2
+			V177v-8v-0.2v-3.6L310.1,131.8z M334.4,222.2l-20.7,8.9v-23.1l20.7-8.9V222.2z"/>
+		<polygon class="svg-maisons4" points="281.5,276.7 302.3,267.8 302.3,267.8 281.5,276.7 		"/>
+	</g>
+	<polygon class="svg-maisons1" points="281.5,221.5 281.5,276.7 302.3,267.8 302.3,212.5 	"/>
+	<polygon class="svg-maisons1" points="334.4,222.2 334.4,199.2 313.6,208.1 313.6,231.2 	"/>
+	<polyline class="svg-maisons5" points="269.9,209.7 309.4,135.1 348.6,175.8 	"/>
+	<line class="svg-maisons5" x1="197.5" y1="65" x2="157.4" y2="140.9"/>
+	<polygon class="svg-maisons1" points="245.2,124.1 245.2,148.8 259.2,157.8 259.2,133.1 	"/>
+	<polygon class="svg-maisons1" points="273.4,124.6 259.2,157.8 259.2,133 	"/>
+	<polygon class="svg-maisons0" points="220.2,219 220.4,218.9 220.2,218.7 	"/>
+	<polygon class="svg-maisons1" points="140.3,253.2 43,195.5 43,277.2 140.4,335 140.4,261.2 140.4,253.2 	"/>
+	<polygon class="svg-maisons2" points="140.4,253.2 140.4,253.1 43,195.3 43,195.5 140.3,253.2 	"/>
+	<polygon class="svg-maisons2" points="140.3,253.2 140.4,253.2 140.4,253.2 	"/>
+	<polygon class="svg-maisons2" points="228.4,223.6 228.3,223.5 228.2,223.5 	"/>
+	<polygon class="svg-maisons2" points="180.6,177.4 180.3,177.2 180.3,177.5 	"/>
+	<polygon class="svg-maisons3" points="180.6,177.4 180.3,177.5 180.3,177.2 75.5,115 35.4,191 43,195.5 43,195.3 140.4,253.1 140.4,253.2 
+		140.4,253.2 147.9,257.7 153.3,247.7 180.3,196.5 180.9,195.4 188,181.8 	"/>
+	<g>
+		<path class="svg-maisons4" d="M188,181.8l-7.2,13.6l-0.6,1.1l-27,51.1l-5.3,10.1l-7.6-4.5v8V335l19.2-8.3v-55.3l20.7-8.9v55.2l39.9-17.2
+			V227v-8v-0.2v-3.6L188,181.8z M212.4,272.2l-20.7,8.9v-23.1l20.7-8.9V272.2z"/>
+		<polygon class="svg-maisons4" points="159.5,326.7 180.3,317.8 180.3,317.8 159.5,326.7 		"/>
+	</g>
+	<polygon class="svg-maisons1" points="159.5,271.5 159.5,326.7 180.3,317.8 180.3,262.5 	"/>
+	<polygon class="svg-maisons1" points="212.4,272.2 212.4,249.2 191.6,258.1 191.6,281.2 	"/>
+	<polyline class="svg-maisons5" points="147.9,259.7 187.4,185.2 226.6,225.8 	"/>
+	<line class="svg-maisons5" x1="75.5" y1="115" x2="35.4" y2="191"/>
+	<polygon class="svg-maisons1" points="123.2,174.2 123.2,198.9 137.2,207.8 137.2,183.1 	"/>
+	<polygon class="svg-maisons1" points="151.4,174.6 137.2,207.8 137.2,183 	"/>
+</g>
+</svg>

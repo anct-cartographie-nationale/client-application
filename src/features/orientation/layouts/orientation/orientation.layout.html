@@ -102,6 +102,7 @@
               </ng-container>
             </div>
             <div class="text-center mt-auto">
+<<<<<<< HEAD:src/features/orientation/layouts/orientation/orientation.layout.html
               <ng-container *ngIf="features.get('cartographie') as cartographie">
                 <a
                   *ngIf="cartographie.active"
@@ -122,6 +123,16 @@
                   <i class="ri-arrow-right-s-line align-bottom"></i>
                 </a>
               </ng-container>
+=======
+              <a
+                class="btn btn-secondary"
+                [class.disabled]="lieuxMediationNumerique.length === 0"
+                [routerLink]="['/', 'cartographie']"
+                queryParamsHandling="preserve">
+                Afficher les résultats sur la cartographie
+                <i class="ri-arrow-right-s-line align-bottom"></i>
+              </a>
+>>>>>>> feat: presentation page:src/features/orientation/infrastructure/presentation/layouts/orientation/orientation.layout.html
             </div>
           </div>
         </ng-container>
