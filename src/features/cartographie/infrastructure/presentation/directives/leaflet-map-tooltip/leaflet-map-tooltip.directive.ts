@@ -1,11 +1,9 @@
 /* eslint-disable @angular-eslint/directive-selector */
 
 import { Directive, Input, OnChanges, OnDestroy, Optional } from '@angular/core';
-import { Layer, Point, tooltip, Tooltip } from 'leaflet';
+import { Layer, tooltip, Tooltip } from 'leaflet';
 import { CanHaveTooltipDirective } from '../_abstract';
 import { LeafletMapComponent } from '../../components';
-
-const MARKER_HEIGHT: number = 48;
 
 @Directive({
   selector: 'app-leaflet-map-tooltip'
