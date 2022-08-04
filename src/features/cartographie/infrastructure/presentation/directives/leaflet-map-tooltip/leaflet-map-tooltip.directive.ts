@@ -25,9 +25,9 @@ export class LeafletMapTooltipDirective implements OnDestroy, OnChanges {
 
     this._tooltip = tooltip().setContent(this.content);
     this._canHaveTooltip?.tooltipHolder?.bindTooltip(this._tooltip, {
-      direction: 'top',
-      offset: new Point(0, -MARKER_HEIGHT),
+      direction: 'auto',
       opacity: 1,
+      sticky: true,
       className: 'leaflet-tooltip-own'
     });
   }
