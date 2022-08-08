@@ -57,7 +57,7 @@ export class CartographieLayout {
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
 
-  public fromOrientation?: Boolean = Object.keys(this._route.snapshot.queryParams).length > 0 ? true : false;
+  public fromOrientation?: boolean = Object.keys(this._route.snapshot.queryParams).length > 0 ? true : false;
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,
