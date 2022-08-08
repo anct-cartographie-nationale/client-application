@@ -12,6 +12,7 @@ export class LeafletMapTooltipDirective implements OnDestroy, OnChanges {
   private _tooltip?: Tooltip;
 
   @Input() public content: HTMLElement | string = '';
+  @Input() sticky: boolean = false;
 
   public constructor(
     private readonly _mapComponent: LeafletMapComponent,
@@ -25,7 +26,7 @@ export class LeafletMapTooltipDirective implements OnDestroy, OnChanges {
     this._canHaveTooltip?.tooltipHolder?.bindTooltip(this._tooltip, {
       direction: 'auto',
       opacity: 1,
-      sticky: true,
+      sticky: this.sticky,
       className: 'leaflet-tooltip-own'
     });
   }

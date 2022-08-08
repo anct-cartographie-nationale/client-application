@@ -38,7 +38,7 @@
         [properties]="lieuMediationNumerique"
         markerFactoryKey="lieuMediationNumerique"
         (markerClick)="showDetailStructure($event)">
-        <app-leaflet-map-tooltip [content]="popupContent">
+        <app-leaflet-map-tooltip [content]="popupContent" [sticky]="true">
           <div
             #popupContent
             class="text-center p-3 border-bottom border-3"
