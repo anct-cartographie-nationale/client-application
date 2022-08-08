@@ -1,5 +1,6 @@
 import { firstValueFrom } from 'rxjs';
-import { MarkersPresenter } from './markers.presenter';
+import { getBoundFromLocalisations, MarkersPresenter } from './markers.presenter';
+import { Localisation } from '../../../../../models';
 
 describe('markers presenter', (): void => {
   it('should highlight a marker by id', async (): Promise<void> => {
@@ -36,5 +37,23 @@ describe('markers presenter', (): void => {
 
     expect(highlightedMarkerId).toStrictEqual(markerId);
     expect(selectedMarkerId).toStrictEqual('');
+  });
+
+  it('should find localisation bounds from localisations list', (): void => {
+    const localisations: Localisation[] = [
+      Localisation({ latitude: 46.28, longitude: 4.46 }),
+      Localisation({ latitude: 47.24, longitude: 4.76 }),
+      Localisation({ latitude: 52.79, longitude: 1.05 }),
+      Localisation({ latitude: 46.09, longitude: -1.22 }),
+      Localisation({ latitude: 33.07, longitude: 4.86 }),
+      Localisation({ latitude: 41.28, longitude: 7.14 })
+    ];
+
+    const bounds: [Localisation, Localisation] = getBoundFromLocalisations(localisations);
+
+    expect(bounds).toStrictEqual([
+      Localisation({ latitude: 52.79, longitude: -1.22 }),
+      Localisation({ latitude: 33.07, longitude: 7.14 })
+    ]);
   });
 });
