@@ -48,7 +48,7 @@
           <router-outlet></router-outlet>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4">
+      <div class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4" *ngIf="this.router.url !== '/orientation'">
         <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
           <div class="d-flex flex-column h-100" *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
             <h1 class="h2 text-center text-secondary fw-bold">
