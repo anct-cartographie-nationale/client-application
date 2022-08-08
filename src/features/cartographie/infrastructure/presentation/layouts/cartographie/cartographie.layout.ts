@@ -6,8 +6,13 @@ import {
   ZoomLevelConfiguration
 } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, delay, Observable, of, tap } from 'rxjs';
-import { LieuxMediationNumeriqueListPresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../../domain';
+import { BehaviorSubject, delay, Observable, of, Subject, tap } from 'rxjs';
+import {
+  getBoundFromLocalisations,
+  LieuxMediationNumeriqueListPresenter,
+  LieuxMediationNumeriqueRepository,
+  MarkersPresenter
+} from '../../../../domain';
 import {
   FilterPresentation,
   toFilterFormPresentationFromQuery,
@@ -18,6 +23,7 @@ import { CenterView } from '../../components/leaflet-map/leaflet-map.presenter';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration/marker';
 import { LieuMediationNumeriqueListItemPresentation } from '../../../../domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
 import { MarkerEvent } from '../../directives';
+import { Bounds, Point } from 'leaflet';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,8 +49,24 @@ export class CartographieLayout {
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation[]> =
     this._lieuxMediationNumeriqueListPresenter
       .lieuxMediationNumeriqueByDistance$(of(this._localisation), of(this._filterPresentation))
-      .pipe(delay(3000))
-      .pipe(tap(() => this._loadingState$.next(false)));
+      .pipe(
+        tap(() => this._loadingState$.next(false)),
+        tap((lieux: LieuMediationNumeriqueListItemPresentation[]) => this.zoomOnLieuxDisplayedOnMap(lieux))
+      );
+
+  private zoomOnLieuxDisplayedOnMap(lieux: LieuMediationNumeriqueListItemPresentation[]) {
+    const localisations: Localisation[] = lieux.map((lieu: LieuMediationNumeriqueListItemPresentation) => lieu.localisation);
+    const [topLeftBound, bottomRightBound]: [Localisation, Localisation] = getBoundFromLocalisations(localisations);
+
+    if (!topLeftBound || !bottomRightBound) return;
+
+    this._mapViewBounds$.next(
+      new Bounds([
+        new Point(topLeftBound.latitude, topLeftBound.longitude),
+        new Point(bottomRightBound.latitude, bottomRightBound.longitude)
+      ])
+    );
+  }
 
   public readonly defaultCenterView: CenterView = {
     coordinates: Localisation({
@@ -57,7 +79,10 @@ export class CartographieLayout {
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
 
-  public fromOrientation?: boolean = Object.keys(this._route.snapshot.queryParams).length > 0 ? true : false;
+  private _mapViewBounds$: Subject<Bounds> = new Subject<Bounds>();
+  public mapViewBounds$: Observable<Bounds> = this._mapViewBounds$.asObservable();
+
+  public fromOrientation?: boolean = Object.keys(this._route.snapshot.queryParams).length > 0;
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter,

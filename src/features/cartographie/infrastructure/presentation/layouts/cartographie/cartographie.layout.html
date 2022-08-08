@@ -1,36 +1,46 @@
-<div class="d-flex h-100" *ngIf="loadingState$ | async">
-  <div class="card border-0 shadow me-auto ms-auto">
-    <div class="card-body">
-      <div class="d-flex flex-column text-center mt-5" *ngIf="fromOrientation">
-        <p class="text-muted">Patientez quelques instants</p>
-        <h3 class="card-title text-primary">
-          Nous recherchons les structures
-          <br />
-          correspondant à votre recherche
-        </h3>
+<div *ngIf="loadingState$ | async" class="position-absolute top-0 w-100 h-100 bg-light z-index-over">
+  <div class="container h-100">
+    <div class="row justify-content-center h-100">
+      <div class="col-lg-6 m-auto">
+        <div class="card border-0 shadow m-auto">
+          <div class="card-body">
+            <div class="d-flex flex-column text-center">
+              <ng-container *ngIf="fromOrientation; else: welcome">
+                <p class="text-muted">Patientez quelques instants</p>
+                <h3 class="card-title text-primary">
+                  Nous recherchons les structures
+                  <br />
+                  correspondant à votre recherche
+                </h3>
+              </ng-container>
+              <ng-template #welcome>
+                <h3 class="card-title text-primary">
+                  Bienvenue sur la cartographie
+                  <br />
+                  des lieux d'inclusion numérique !
+                </h3>
+                <p class="text-muted">
+                  La page est en cours de chargement,
+                  <br />
+                  veuillez patienter quelques instants.
+                </p>
+              </ng-template>
+            </div>
+            <app-cartographie-loader></app-cartographie-loader>
+          </div>
+        </div>
       </div>
-      <div class="d-flex flex-column text-center mt-5" *ngIf="!fromOrientation">
-        <h3 class="card-title text-primary">
-          Bienvenue sur la cartographie
-          <br />
-          des lieux d'inclusion numérique !
-        </h3>
-        <p class="text-muted">
-          La page est en cours de chargement,
-          <br />
-          veuillez patienter quelques instants.
-        </p>
-      </div>
-      <app-cartographie-loader></app-cartographie-loader>
     </div>
   </div>
 </div>
-<div [ngClass]="(loadingState$ | async) ? 'd-none' : 'd-flex h-100'">
+<div class="row g-0 h-100">
   <div class="col-lg-6 col-md-6 col-12 border-end">
     <router-outlet></router-outlet>
   </div>
   <div class="col overflow-auto">
-    <app-leaflet-map [centerView]="(markersPresenter.centerView$ | async) ?? defaultCenterView">
+    <app-leaflet-map
+      [centerView]="(markersPresenter.centerView$ | async) ?? defaultCenterView"
+      [fitBounds]="mapViewBounds$ | async">
       <app-leaflet-map-marker
         *ngFor="let lieuMediationNumerique of lieuxMediationNumerique$ | async"
         [latitude]="lieuMediationNumerique.localisation.latitude"

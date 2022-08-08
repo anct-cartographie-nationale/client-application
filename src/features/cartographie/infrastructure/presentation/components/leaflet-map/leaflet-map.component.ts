@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import L, { LeafletMouseEvent, Map as LeafletMap } from 'leaflet';
+import L, { Bounds, LeafletMouseEvent, Map as LeafletMap } from 'leaflet';
 import { CenterView, flyTo, initializeMap } from './leaflet-map.presenter';
-import { Localisation } from '../../../../../../models/localisation/localisation';
+import { Localisation } from '../../../../../../models';
 
 const DEFAULT_CENTER_LATITUDE: number = 0;
 
@@ -38,6 +38,15 @@ export class LeafletMapComponent implements OnInit {
   @Input() public set centerView(centerView: CenterView) {
     this._centerView = centerView;
     this._map && flyTo(this._map, centerView);
+  }
+
+  @Input() public set fitBounds(bounds: Bounds | null) {
+    this._map &&
+      bounds &&
+      this._map.fitBounds([
+        [bounds.getTopLeft().x, bounds.getTopLeft().y],
+        [bounds.getBottomRight().x, bounds.getBottomRight().y]
+      ]);
   }
 
   public ngOnInit(): void {
