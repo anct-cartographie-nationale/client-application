@@ -1,11 +1,9 @@
 /* eslint-disable @angular-eslint/directive-selector */
 
 import { Directive, Input, OnChanges, OnDestroy, Optional } from '@angular/core';
-import { Layer, Point, tooltip, Tooltip } from 'leaflet';
+import { Layer, tooltip, Tooltip } from 'leaflet';
 import { CanHaveTooltipDirective } from '../_abstract';
 import { LeafletMapComponent } from '../../components';
-
-const MARKER_HEIGHT: number = 48;
 
 @Directive({
   selector: 'app-leaflet-map-tooltip'
@@ -14,6 +12,7 @@ export class LeafletMapTooltipDirective implements OnDestroy, OnChanges {
   private _tooltip?: Tooltip;
 
   @Input() public content: HTMLElement | string = '';
+  @Input() sticky: boolean = false;
 
   public constructor(
     private readonly _mapComponent: LeafletMapComponent,
@@ -25,9 +24,9 @@ export class LeafletMapTooltipDirective implements OnDestroy, OnChanges {
 
     this._tooltip = tooltip().setContent(this.content);
     this._canHaveTooltip?.tooltipHolder?.bindTooltip(this._tooltip, {
-      direction: 'top',
-      offset: new Point(0, -MARKER_HEIGHT),
+      direction: 'auto',
       opacity: 1,
+      sticky: this.sticky,
       className: 'leaflet-tooltip-own'
     });
   }
