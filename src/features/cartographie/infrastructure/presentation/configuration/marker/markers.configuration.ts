@@ -1,9 +1,6 @@
 import { DivIcon, Icon } from 'leaflet';
 
-export enum MarkerHighlight {
-  Focus = 'focus',
-  Hint = 'hint'
-}
+export type MarkerHighlight = 'focus' | 'hint';
 
 export interface TypedMarker {
   markerType: string;

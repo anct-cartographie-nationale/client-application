@@ -23,6 +23,7 @@ export class LieuxMediationNumeriqueListPage {
 
   public select(lieuMediationNumerique: LieuMediationNumerique) {
     this.markersPresenter.focus(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
+    this.markersPresenter.select(lieuMediationNumerique.id);
   }
 
   public printPage() {

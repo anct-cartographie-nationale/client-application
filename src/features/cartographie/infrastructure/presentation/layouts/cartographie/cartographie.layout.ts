@@ -106,9 +106,10 @@ export class CartographieLayout {
     private readonly _initialPosition: InitialPositionConfiguration
   ) {}
 
-  public showDetailStructure(lieuxMediationNumerique: MarkerEvent<LieuMediationNumeriqueListItemPresentation>): void {
-    this.router.navigate(['cartographie', lieuxMediationNumerique.markerProperties.id]);
-    this.markersPresenter.focus(lieuxMediationNumerique.markerProperties.localisation, this._zoomLevel.userPosition);
+  public showDetailStructure(lieuMediationNumeriqueMarkerEvent: MarkerEvent<LieuMediationNumeriqueListItemPresentation>): void {
+    this.router.navigate(['cartographie', lieuMediationNumeriqueMarkerEvent.markerProperties.id]);
+    this.markersPresenter.focus(lieuMediationNumeriqueMarkerEvent.markerProperties.localisation, this._zoomLevel.userPosition);
+    this.markersPresenter.select(lieuMediationNumeriqueMarkerEvent.markerProperties.id);
   }
 
   public trackByLieuId(_: number, lieu: LieuMediationNumeriqueListItemPresentation) {
