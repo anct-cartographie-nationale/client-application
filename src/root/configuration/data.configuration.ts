@@ -9,6 +9,6 @@ export const DATA_TOKEN: InjectionToken<DataConfiguration> = new InjectionToken<
 
 export const DATA_CONFIGURATION: DataConfiguration = {
   lieuxDeMediationNumerique: environment.production
-    ? 'https://api.conseiller-numerique.gouv.fr/permanences'
+    ? 'https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.5.0/assets/data/lieux-cnfs-idf.json'
     : '/assets/data/lieux-de-mediation-numerique.json'
 };
