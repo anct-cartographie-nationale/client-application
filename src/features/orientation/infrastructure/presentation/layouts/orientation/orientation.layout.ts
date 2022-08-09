@@ -3,7 +3,7 @@ import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router'
 import { slideInAnimation } from '../../animation';
 import { LieuxMediationNumeriqueListPresenter, LieuxMediationNumeriqueRepository } from '../../../../../cartographie/domain';
 import { delay, Observable, startWith, tap } from 'rxjs';
-import { LieuMediationNumerique } from '../../../../../../models/lieu-mediation-numerique/lieu-mediation-numerique';
+import { LieuMediationNumerique, Localisation } from '../../../../../../models';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
   FilterFormPresentation,
@@ -12,7 +12,6 @@ import {
   toLocalisationFromFilterFormPresentation
 } from '../../../../domain/presenters/filter/filter.presenter';
 import { LieuMediationNumeriqueListItemPresentation } from '../../../../../cartographie/domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
-import { Localisation } from '../../../../../../models/localisation/localisation';
 import { map } from 'rxjs/operators';
 
 const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresentation): FormGroup =>
