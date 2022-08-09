@@ -6,8 +6,7 @@
         class="list-group-item list-group-item-action p-4"
         *ngFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
         [routerLink]="[lieuMediationNumerique.id]"
-        (click)="select(lieuMediationNumerique)"
-        (mouseenter)="markersPresenter.highlight(lieuMediationNumerique.id)">
+        (click)="select(lieuMediationNumerique)">
         <app-mediation-numerique-list-item
           [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
       </a>
@@ -24,7 +23,7 @@
         </button>
       </div>
       <div class="col-auto ms-auto my-auto">
-        <span class="d-flex align-items-center text-white me-auto">{{lieuxMediationNumerique?.length}} Structures</span>
+        <span class="d-flex align-items-center text-white me-auto">{{ lieuxMediationNumerique?.length }} Structures</span>
       </div>
     </div>
   </div>
