@@ -2,7 +2,7 @@
   <div class="container h-100">
     <div class="row g-0 h-100 shadow">
       <div class="col bg-white p-3 h-100 overflow-auto d-flex flex-column">
-        <ul class="nav nav-pills justify-content-center pb-3">
+        <ul *ngIf="this.router.url !== '/orientation'" class="nav nav-pills justify-content-center pb-3">
           <li class="nav-item">
             <a
               class="btn btn-secondary mx-2"
