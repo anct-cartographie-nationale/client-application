@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LieuxMediationNumeriqueListPage } from './lieux-mediation-numerique-list.page';
-import { of } from 'rxjs';
-import { GeolocationPresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../../domain';
+import { MarkersPresenter } from '../../../../domain';
 import { ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
+import { CartographieLayout } from '../../layouts';
 
 describe('LieuxMediationNumeriqueListPage', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -12,22 +12,16 @@ describe('LieuxMediationNumeriqueListPage', (): void => {
       imports: [RouterTestingModule],
       providers: [
         {
-          provide: MarkersPresenter,
-          useValue: {}
-        },
-        {
-          provide: GeolocationPresenter,
-          useValue: {}
-        },
-        {
           provide: ZOOM_LEVEL_TOKEN,
           useValue: {}
         },
         {
-          provide: LieuxMediationNumeriqueRepository,
-          useValue: {
-            getAll$: () => of([])
-          }
+          provide: MarkersPresenter,
+          useValue: {}
+        },
+        {
+          provide: CartographieLayout,
+          useValue: {}
         }
       ]
     })
