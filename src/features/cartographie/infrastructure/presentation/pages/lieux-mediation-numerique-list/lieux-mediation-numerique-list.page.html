@@ -4,7 +4,7 @@
       <a
         queryParamsHandling="preserve"
         class="list-group-item list-group-item-action p-4"
-        *ngFor="let lieuMediationNumerique of lieuxMediationNumerique"
+        *ngFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
         [routerLink]="[lieuMediationNumerique.id]"
         (click)="select(lieuMediationNumerique)"
         (mouseenter)="markersPresenter.highlight(lieuMediationNumerique.id)">

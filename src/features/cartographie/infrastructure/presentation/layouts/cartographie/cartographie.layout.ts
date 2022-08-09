@@ -6,7 +6,7 @@ import {
   ZoomLevelConfiguration
 } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, delay, Observable, of, Subject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, tap } from 'rxjs';
 import {
   getBoundFromLocalisations,
   LieuxMediationNumeriqueListPresenter,
@@ -18,11 +18,11 @@ import {
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../../../orientation/domain/presenters/filter/filter.presenter';
-import { Localisation } from '../../../../../../models';
+import { Localisation, NO_LOCALISATION } from '../../../../../../models';
 import { CenterView } from '../../components/leaflet-map/leaflet-map.presenter';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration/marker';
 import { LieuMediationNumeriqueListItemPresentation } from '../../../../domain/presenters/lieux-mediation-numerique-list/lieu-mediation-numerique-list-item.presentation';
-import { MarkerEvent } from '../../directives';
+import { MarkerEvent, ViewReset } from '../../directives';
 import { Bounds, Point } from 'leaflet';
 
 @Component({
@@ -42,19 +42,28 @@ import { Bounds, Point } from 'leaflet';
   ]
 })
 export class CartographieLayout {
+  private _hasZoomedOnLieuxDisplayedOnMap: boolean = false;
+
   private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this._route.snapshot.queryParams);
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
 
+  private _boundingBox$: BehaviorSubject<[Localisation, Localisation]> = new BehaviorSubject<[Localisation, Localisation]>([
+    NO_LOCALISATION,
+    NO_LOCALISATION
+  ]);
+
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation[]> =
     this._lieuxMediationNumeriqueListPresenter
-      .lieuxMediationNumeriqueByDistance$(of(this._localisation), of(this._filterPresentation))
+      .lieuxMediationNumeriqueByDistance$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
       .pipe(
         tap(() => this._loadingState$.next(false)),
         tap((lieux: LieuMediationNumeriqueListItemPresentation[]) => this.zoomOnLieuxDisplayedOnMap(lieux))
       );
 
-  private zoomOnLieuxDisplayedOnMap(lieux: LieuMediationNumeriqueListItemPresentation[]) {
+  private zoomOnLieuxDisplayedOnMap(lieux: LieuMediationNumeriqueListItemPresentation[]): void {
+    if (this._hasZoomedOnLieuxDisplayedOnMap) return;
+
     const localisations: Localisation[] = lieux.map((lieu: LieuMediationNumeriqueListItemPresentation) => lieu.localisation);
     const [topLeftBound, bottomRightBound]: [Localisation, Localisation] = getBoundFromLocalisations(localisations);
 
@@ -66,6 +75,8 @@ export class CartographieLayout {
         new Point(bottomRightBound.latitude, bottomRightBound.longitude)
       ])
     );
+
+    this._hasZoomedOnLieuxDisplayedOnMap = true;
   }
 
   public readonly defaultCenterView: CenterView = {
@@ -98,5 +109,22 @@ export class CartographieLayout {
   public showDetailStructure(lieuxMediationNumerique: MarkerEvent<LieuMediationNumeriqueListItemPresentation>): void {
     this.router.navigate(['cartographie', lieuxMediationNumerique.markerProperties.id]);
     this.markersPresenter.focus(lieuxMediationNumerique.markerProperties.localisation, this._zoomLevel.userPosition);
+  }
+
+  public trackByLieuId(_: number, lieu: LieuMediationNumeriqueListItemPresentation) {
+    return lieu.id;
+  }
+
+  public updateMapView({ viewport: [leftLongitude, bottomLatitude, rightLongitude, topLatitude] }: ViewReset) {
+    this._boundingBox$.next([
+      Localisation({
+        latitude: topLatitude,
+        longitude: leftLongitude
+      }),
+      Localisation({
+        latitude: bottomLatitude,
+        longitude: rightLongitude
+      })
+    ]);
   }
 }

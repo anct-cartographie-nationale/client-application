@@ -20,7 +20,7 @@ import { geographicDistance } from '../distance/distance.presenter';
 const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisation: Localisation): number | undefined =>
   localisation === NO_LOCALISATION ? undefined : geographicDistance(lieuMediationNumerique.localisation, localisation);
 
-const toLieuxMediationNumeriqueMistItemPresentation = (
+const toLieuxMediationNumeriqueListItemPresentation = (
   lieuMediationNumerique: LieuMediationNumerique,
   localisation: Localisation,
   date: Date
@@ -56,7 +56,7 @@ const applyFilter = (
   date: Date,
   filter: FilterPresentation = {},
   operator?: FilterOperator
-): boolean => (operator ? operator(lieuMediationNumerique, filter ?? {}, date) : true);
+): boolean => (operator ? operator(lieuMediationNumerique, filter, date) : true);
 
 const byOrientationFilter =
   (filter: FilterPresentation, date: Date) => (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
@@ -66,26 +66,42 @@ const byOrientationFilter =
       true
     );
 
+const isInBoundingBox = (localisation: Localisation, [topLeft, bottomRight]: [Localisation, Localisation]) =>
+  localisation.latitude <= topLeft.latitude &&
+  localisation.longitude >= topLeft.longitude &&
+  localisation.latitude >= bottomRight.latitude &&
+  localisation.longitude <= bottomRight.longitude;
+
+const isValidBoundingBox = ([topLeft, bottomRight]: [Localisation, Localisation]) =>
+  topLeft !== NO_LOCALISATION && bottomRight !== NO_LOCALISATION;
+
+const byBoundingBox =
+  (boundingBox: [Localisation, Localisation]) => (lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
+    !isValidBoundingBox(boundingBox) || isInBoundingBox(lieuMediationNumerique.localisation, boundingBox);
+
 export class LieuxMediationNumeriqueListPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
   public lieuxMediationNumeriqueByDistance$(
     localisation$: Observable<Localisation>,
-    filter$: Observable<FilterPresentation | undefined> = of(undefined),
-    date: Date = new Date()
+    filter$: Observable<FilterPresentation> = of({}),
+    date: Date = new Date(),
+    boundingBox$: Observable<[Localisation, Localisation]> = of([NO_LOCALISATION, NO_LOCALISATION])
   ): Observable<LieuMediationNumeriqueListItemPresentation[]> {
-    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), localisation$, filter$]).pipe(
+    return combineLatest([this.lieuxMediationNumeriqueRepository.getAll$(), localisation$, filter$, boundingBox$]).pipe(
       map(
-        ([lieuxMediationNumerique, localisation, filter]: [
+        ([lieuxMediationNumerique, localisation, filter, boundingBox]: [
           LieuMediationNumerique[],
           Localisation,
-          FilterPresentation?
+          FilterPresentation,
+          [Localisation, Localisation]
         ]): LieuMediationNumeriqueListItemPresentation[] =>
           lieuxMediationNumerique
             .map((lieuMediationNumerique: LieuMediationNumeriqueListItemPresentation) =>
-              toLieuxMediationNumeriqueMistItemPresentation(lieuMediationNumerique, localisation, date)
+              toLieuxMediationNumeriqueListItemPresentation(lieuMediationNumerique, localisation, date)
             )
-            .filter(byOrientationFilter(filter ?? {}, date))
+            .filter(byOrientationFilter(filter, date))
+            .filter(byBoundingBox(boundingBox))
             .sort(byDistance)
       )
     );
