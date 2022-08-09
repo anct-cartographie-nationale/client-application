@@ -1,4 +1,4 @@
-import { FeatureCollection, Geometry, Point } from 'geojson';
+import { FeatureCollection, Point } from 'geojson';
 
 export type AddressTransferProperties = {
   label: string;

@@ -717,7 +717,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     );
 
     const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(undefined))
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION))
     );
 
     expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
@@ -727,6 +727,58 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       {
         id: '78993312300029'
       } as LieuMediationNumerique
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on localisation according to bounding box localisations', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        localisation: Localisation({ latitude: 47.25, longitude: 4.38 })
+      } as LieuMediationNumerique,
+      {
+        localisation: Localisation({ latitude: 41.16, longitude: 4.22 })
+      } as LieuMediationNumerique,
+      {
+        localisation: Localisation({ latitude: 46.56, longitude: 3.19 })
+      } as LieuMediationNumerique,
+      {
+        localisation: Localisation({ latitude: 46.73, longitude: 5.61 })
+      } as LieuMediationNumerique,
+      {
+        localisation: Localisation({ latitude: 40.45, longitude: 3.62 })
+      } as LieuMediationNumerique,
+      {
+        localisation: Localisation({ latitude: 47.87, longitude: 5.96 })
+      } as LieuMediationNumerique,
+      {
+        localisation: Localisation({ latitude: 46.46, longitude: 4.78 })
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriqueListItemPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of({}),
+        undefined,
+        of([Localisation({ latitude: 47, longitude: 4 }), Localisation({ latitude: 46, longitude: 5 })])
+      )
+    );
+
+    expect<LieuMediationNumeriqueListItemPresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        localisation: {
+          latitude: 46.46,
+          longitude: 4.78
+        }
+      }
     ]);
   });
 });

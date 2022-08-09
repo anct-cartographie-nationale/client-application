@@ -40,9 +40,10 @@
   <div class="col overflow-auto">
     <app-leaflet-map
       [centerView]="(markersPresenter.centerView$ | async) ?? defaultCenterView"
-      [fitBounds]="mapViewBounds$ | async">
+      [fitBounds]="mapViewBounds$ | async"
+      (stateChange)="updateMapView($event)">
       <app-leaflet-map-marker
-        *ngFor="let lieuMediationNumerique of lieuxMediationNumerique$ | async"
+        *ngFor="let lieuMediationNumerique of lieuxMediationNumerique$ | async; trackBy: trackByLieuId"
         [latitude]="lieuMediationNumerique.localisation.latitude"
         [longitude]="lieuMediationNumerique.localisation.longitude"
         [properties]="lieuMediationNumerique"
