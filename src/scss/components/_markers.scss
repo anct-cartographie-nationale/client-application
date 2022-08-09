@@ -31,10 +31,7 @@
 
 .marker-status-unknown,
 .marker-status-closed {
-  .default-marker {
-    fill: $muted;
-  }
-
+  .default-marker,
   .cnfs-marker {
     fill: $muted;
   }
