@@ -52,7 +52,11 @@
       </div>
     </form>
     <div class="text-center my-5">
-      <a class="btn btn-primary mx-3" [routerLink]="['cartographie']" queryParamsHandling="preserve">
+      <a
+        class="btn btn-primary mx-3"
+        [class.disabled]="(orientationLayout.lieuxMediationNumerique$ | async)?.length === 0"
+        [routerLink]="['cartographie']"
+        queryParamsHandling="preserve">
         Afficher les résultats sur la cartographie
         <i class="ri-arrow-right-s-line align-bottom"></i>
       </a>
