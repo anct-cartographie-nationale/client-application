@@ -2,6 +2,7 @@ import {
   ConditionAccess,
   Contact,
   LabelNational,
+  Localisation,
   ModalitesAccompagnement,
   Presentation,
   PublicAccueilli,
@@ -28,5 +29,6 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   labels_autres?: string[];
   modalites_accompagnement?: ModalitesAccompagnement[];
   accessibilite?: Url;
+  localisation?: Localisation;
   distance?: number;
 };

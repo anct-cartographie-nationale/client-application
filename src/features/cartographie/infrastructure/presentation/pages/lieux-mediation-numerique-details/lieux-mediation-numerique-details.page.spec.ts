@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LieuxMediationNumeriqueDetailsPage } from './lieux-mediation-numerique-details.page';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { LieuxMediationNumeriqueRepository } from '../../../../domain';
+import { LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../../domain';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 
 describe('LieuxMediationNumeriqueDetailsPage', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -11,6 +12,14 @@ describe('LieuxMediationNumeriqueDetailsPage', (): void => {
       declarations: [LieuxMediationNumeriqueDetailsPage],
       imports: [RouterTestingModule],
       providers: [
+        {
+          provide: ZOOM_LEVEL_TOKEN,
+          useValue: {}
+        },
+        {
+          provide: MarkersPresenter,
+          useValue: {}
+        },
         {
           provide: ActivatedRoute,
           useValue: {
