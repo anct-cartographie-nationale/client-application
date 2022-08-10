@@ -50,14 +50,15 @@ export class LieuxMediationNumeriqueListPage {
   ) {}
 
   private focusOnLieu(lieu: LieuMediationNumeriqueListItemPresentation) {
-    this.markersPresenter.focus(lieu.localisation, this._zoomLevel.userPosition);
+    this.markersPresenter.focus(lieu.localisation, this._zoomLevel.regular);
+    this._cartographieLayout.resetZoom();
 
     setTimeout((): void => {
       document.getElementById(lieu.id)?.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest'
       });
-    });
+    }, 400);
   }
 
   public trackByLieuId(_: number, lieu: LieuMediationNumeriqueListItemPresentation) {

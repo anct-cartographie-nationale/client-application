@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { delay, Observable, of, tap } from 'rxjs';
 import {
@@ -14,7 +14,6 @@ import {
   toLocalisationFromFilterFormPresentation
 } from '../../../../../orientation/domain/presenters/filter/filter.presenter';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
-import { lieuMediationNumeriqueMerkerFactory } from '../../configuration/marker/marker-factories/lieu-mediation-numerique.marker-factory';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -127,4 +127,8 @@ export class CartographieLayout {
       })
     ]);
   }
+
+  resetZoom() {
+    this._initialZoom = false;
+  }
 }
