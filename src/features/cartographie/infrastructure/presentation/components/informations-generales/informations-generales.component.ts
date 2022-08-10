@@ -6,6 +6,7 @@ import { OpeningStatus } from '../../../../domain/presenters/horaires/horaires.p
   templateUrl: './informations-generales.component.html'
 })
 export class InformationsGeneralesComponent {
+  @Input() public id: string = '';
   @Input() public nom: string = '';
   @Input() public typologie?: string;
   @Input() public date?: Date;

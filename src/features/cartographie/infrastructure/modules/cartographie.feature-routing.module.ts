@@ -8,6 +8,10 @@ const ROUTES: Routes = [
     children: [
       {
         component: LieuxMediationNumeriqueDetailsPage,
+        path: ':id/details'
+      },
+      {
+        component: LieuxMediationNumeriqueListPage,
         path: ':id'
       },
       {
