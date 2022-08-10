@@ -28,15 +28,14 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   public lieuMediationNumerique$: Observable<LieuMediationNumeriqueDetailsPresentation> =
     this.lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
-      this.route.params,
+      this._route.params,
       new Date(),
       of(this._localisation)
     );
 
   public constructor(
     private readonly lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
-    private readonly _route: ActivatedRoute,
-    private readonly route: ActivatedRoute
+    private readonly _route: ActivatedRoute
   ) {}
 
   public printPage() {

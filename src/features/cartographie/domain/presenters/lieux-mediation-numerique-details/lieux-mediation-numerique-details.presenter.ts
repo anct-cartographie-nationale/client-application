@@ -1,4 +1,4 @@
-import { combineLatest, concatMap, filter, Observable, of, withLatestFrom } from 'rxjs';
+import { combineLatest, filter, Observable, of, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import { LieuMediationNumerique, Localisation, NO_LOCALISATION } from '../../../../../models';
