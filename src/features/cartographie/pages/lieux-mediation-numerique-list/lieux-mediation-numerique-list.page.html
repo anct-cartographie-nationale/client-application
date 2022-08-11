@@ -1,9 +1,10 @@
 <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
   <div class="h-100 d-flex flex-column">
-    <div class="list-group list-group-flush flex-grow-1 overflow-auto">
+    <div class="list-group list-group-flush flex-grow-1 overflow-auto" id="lieu-list">
       <a
         [attr.id]="lieuMediationNumerique.id"
         class="list-group-item list-group-item-action p-4"
+        [ngClass]="this.router.url.split('/').pop() === (lieuMediationNumerique.id) ? 'bg-light' : ''"
         *ngFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
         queryParamsHandling="preserve"
         [routerLink]="[lieuMediationNumerique.id, 'details']"

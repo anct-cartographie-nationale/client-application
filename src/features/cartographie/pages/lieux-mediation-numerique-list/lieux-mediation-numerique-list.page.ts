@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { combineLatest, Observable, tap } from 'rxjs';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import { LieuMediationNumerique, LieuMediationNumeriquePresentation } from '../../../core';
@@ -46,6 +47,7 @@ export class LieuxMediationNumeriqueListPage {
     private readonly _zoomLevel: ZoomLevelConfiguration,
     private readonly _cartographieLayout: CartographieLayout,
     public readonly route: ActivatedRoute,
+    public readonly router: Router,
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
@@ -54,10 +56,11 @@ export class LieuxMediationNumeriqueListPage {
     this._cartographieLayout.resetZoom();
 
     setTimeout((): void => {
-      document.getElementById(lieu.id)?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest'
-      });
+      let lieuElement = document.getElementById(lieu.id);
+      let lieuList = document.getElementById('lieu-list');
+      if (lieuList && lieuElement) {
+        lieuList.scrollTop = lieuElement.offsetTop - 50;
+      }
     }, 400);
   }
 
