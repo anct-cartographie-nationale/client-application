@@ -702,14 +702,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
   it('should not filter lieux mediation numerique when filter is null', async (): Promise<void> => {
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> =>
-        of([
-          {
-            id: '43493312300029'
-          } as LieuMediationNumerique,
-          {
-            id: '78993312300029'
-          } as LieuMediationNumerique
-        ])
+        of([{ id: '43493312300029' } as LieuMediationNumerique, { id: '78993312300029' } as LieuMediationNumerique])
     } as LieuxMediationNumeriqueRepository;
 
     const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriqueListPresenter = new LieuxMediationNumeriqueListPresenter(

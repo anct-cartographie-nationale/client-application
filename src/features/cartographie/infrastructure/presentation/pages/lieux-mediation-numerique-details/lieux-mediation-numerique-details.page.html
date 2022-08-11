@@ -1,6 +1,7 @@
 <div *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique" class="h-100 overflow-auto">
   <div class="border-bottom p-4 sticky-top bg-secondary">
     <app-informations-generales
+      [id]="lieuMediationNumerique.id"
       [nom]="lieuMediationNumerique.nom"
       [typologie]="lieuMediationNumerique.typologie"
       [date]="lieuMediationNumerique.date_maj"

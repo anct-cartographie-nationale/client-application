@@ -42,7 +42,7 @@ import { Bounds, Point } from 'leaflet';
   ]
 })
 export class CartographieLayout {
-  private _hasZoomedOnLieuxDisplayedOnMap: boolean = false;
+  private _initialZoom: boolean = false;
 
   private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this._route.snapshot.queryParams);
 
@@ -57,26 +57,25 @@ export class CartographieLayout {
     this._lieuxMediationNumeriqueListPresenter
       .lieuxMediationNumeriqueByDistance$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
       .pipe(
-        tap(() => this._loadingState$.next(false)),
-        tap((lieux: LieuMediationNumeriqueListItemPresentation[]) => this.zoomOnLieuxDisplayedOnMap(lieux))
+        tap((lieux: LieuMediationNumeriqueListItemPresentation[]) => {
+          this._loadingState$.next(false);
+          !this._initialZoom && this.zoomOnLieuxDisplayedOnMap(lieux);
+          this._initialZoom = true;
+        })
       );
 
   private zoomOnLieuxDisplayedOnMap(lieux: LieuMediationNumeriqueListItemPresentation[]): void {
-    if (this._hasZoomedOnLieuxDisplayedOnMap) return;
-
-    const localisations: Localisation[] = lieux.map((lieu: LieuMediationNumeriqueListItemPresentation) => lieu.localisation);
-    const [topLeftBound, bottomRightBound]: [Localisation, Localisation] = getBoundFromLocalisations(localisations);
-
-    if (!topLeftBound || !bottomRightBound) return;
-
-    this._mapViewBounds$.next(
-      new Bounds([
-        new Point(topLeftBound.latitude, topLeftBound.longitude),
-        new Point(bottomRightBound.latitude, bottomRightBound.longitude)
-      ])
+    const [topLeftBound, bottomRightBound]: [Localisation, Localisation] = getBoundFromLocalisations(
+      lieux.map((lieu: LieuMediationNumeriqueListItemPresentation) => lieu.localisation)
     );
 
-    this._hasZoomedOnLieuxDisplayedOnMap = true;
+    ![topLeftBound, bottomRightBound].includes(NO_LOCALISATION) &&
+      this._mapViewBounds$.next(
+        new Bounds([
+          new Point(topLeftBound.latitude, topLeftBound.longitude),
+          new Point(bottomRightBound.latitude, bottomRightBound.longitude)
+        ])
+      );
   }
 
   public readonly defaultCenterView: CenterView = {
@@ -106,9 +105,10 @@ export class CartographieLayout {
     private readonly _initialPosition: InitialPositionConfiguration
   ) {}
 
-  public showDetailStructure(lieuxMediationNumerique: MarkerEvent<LieuMediationNumeriqueListItemPresentation>): void {
-    this.router.navigate(['cartographie', lieuxMediationNumerique.markerProperties.id]);
-    this.markersPresenter.focus(lieuxMediationNumerique.markerProperties.localisation, this._zoomLevel.userPosition);
+  public showDetailStructure(lieuMediationNumeriqueMarkerEvent: MarkerEvent<LieuMediationNumeriqueListItemPresentation>): void {
+    this.router.navigate(['/', 'cartographie', lieuMediationNumeriqueMarkerEvent.markerProperties.id, 'details']);
+    this.markersPresenter.focus(lieuMediationNumeriqueMarkerEvent.markerProperties.localisation, this._zoomLevel.userPosition);
+    this.markersPresenter.select(lieuMediationNumeriqueMarkerEvent.markerProperties.id);
   }
 
   public trackByLieuId(_: number, lieu: LieuMediationNumeriqueListItemPresentation) {
@@ -126,5 +126,9 @@ export class CartographieLayout {
         longitude: rightLongitude
       })
     ]);
+  }
+
+  resetZoom() {
+    this._initialZoom = false;
   }
 }

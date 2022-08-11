@@ -1,7 +1,73 @@
-.lieu-mediation-numerique-marker {
-  fill: $muted;
+:root {
+  --blue-france-sun-113-625: #000091;
+  --red-marianne-main-472: #e1000f;
 }
 
-.lieu-mediation-numerique-marker-open {
-  fill: $primary;
+@keyframes cnfs-marker-in-focus {
+  from {
+    fill: var(--blue-france-sun-113-625);
+  }
+
+  to {
+    fill: var(--red-marianne-main-472);
+  }
+}
+
+@keyframes cnfs-marker-out-focus {
+  from {
+    fill: var(--red-marianne-main-472);
+  }
+
+  to {
+    fill: var(--blue-france-sun-113-625);
+  }
+}
+
+.default-marker {
+  .default-marker-shadow {
+    display: none;
+  }
+}
+
+.marker-status-unknown,
+.marker-status-closed {
+  .default-marker,
+  .cnfs-marker {
+    fill: $muted;
+  }
+}
+
+.marker-status-open {
+  .default-marker {
+    fill: $primary;
+  }
+
+  .cnfs-marker {
+    .cnfs-marker-in {
+      fill: var(--blue-france-sun-113-625);
+      transform-origin: center 34.3%;
+    }
+
+    .cnfs-marker-out {
+      fill: var(--red-marianne-main-472);
+    }
+  }
+}
+
+.marker-focus {
+  .default-marker {
+    .default-marker-shadow {
+      display: inherit;
+    }
+  }
+
+  .cnfs-marker {
+    .cnfs-marker-in {
+      animation: cnfs-marker-in-focus 0.5s linear 0s 1 normal forwards;
+    }
+
+    .cnfs-marker-out {
+      animation: cnfs-marker-out-focus 0.5s linear 0s 1 normal forwards;
+    }
+  }
 }

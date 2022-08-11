@@ -224,6 +224,7 @@ describe('lieux médiation numérique details presenter', (): void => {
       nom: 'Anonymal',
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
       services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+      localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 }),
       distance: 0
     } as LieuMediationNumeriqueDetailsPresentation);
   });
