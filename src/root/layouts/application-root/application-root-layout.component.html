@@ -1,0 +1,61 @@
+<div class="vh-100 d-flex flex-column">
+  <div class="shadow-sm z-index-over">
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container-fluid">
+        <a [routerLink]="['/', 'cartographie']" class="navbar-brand">
+          <img
+            *ngIf="brandConfiguration.logo; else brandName"
+            [src]="brandConfiguration.logo"
+            [alt]="'Accueil cartographie ' + brandConfiguration.name"
+            height="36" />
+          <ng-template #brandName>Cartographie {{ brandConfiguration.name }}</ng-template>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                [routerLink]="['/', 'orientation']"
+                queryParamsHandling="preserve"
+                class="nav-link"
+                ariaCurrentWhenActive="page"
+                routerLinkActive="active">
+                Orienter un bénéficiaire
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                [routerLink]="['/', 'cartographie']"
+                queryParamsHandling="preserve"
+                class="nav-link"
+                ariaCurrentWhenActive="page"
+                routerLinkActive="active">
+                Accéder à la cartographie
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="d-flex flex-row overflow-hidden h-100">
+    <div class="col overflow-auto">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<footer class="py-3 my-4">
+  <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+    <li class="nav-item"><a [routerLink]="['/']" class="nav-link px-2 text-muted">Accueil</a></li>
+  </ul>
+  <p class="text-center text-muted">© 2022 Cartographie {{ brandConfiguration.name }}</p>
+</footer>
