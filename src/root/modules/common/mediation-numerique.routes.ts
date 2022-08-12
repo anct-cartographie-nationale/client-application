@@ -8,6 +8,5 @@ export const ROUTES: Routes = [
   {
     loadChildren: async () => (await import('@features/orientation')).OrientationFeatureModule,
     path: 'orientation'
-  },
-  { path: '**', pathMatch: 'full', redirectTo: 'cartographie' }
+  }
 ];

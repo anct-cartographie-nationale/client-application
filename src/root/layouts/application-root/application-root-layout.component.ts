@@ -6,6 +6,4 @@ import { BRAND_TOKEN, BrandConfiguration } from '../../configuration';
   selector: 'app-root',
   templateUrl: './application-root-layout.component.html'
 })
-export class ApplicationRootLayout {
-  public constructor(@Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration) {}
-}
+export class ApplicationRootLayout {}
