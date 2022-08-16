@@ -1,12 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FEATURES_TOKEN } from '../../../../root';
 import { CartographieWebComponentLayout } from './cartographie-web-component.layout';
 
 describe('CartographieWebComponentLayout', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       declarations: [CartographieWebComponentLayout],
-      imports: [RouterTestingModule]
+      imports: [RouterTestingModule],
+      providers: [
+        {
+          provide: FEATURES_TOKEN,
+          useValue: new Map()
+        }
+      ]
     })
       .compileComponents()
       .catch((): void => {

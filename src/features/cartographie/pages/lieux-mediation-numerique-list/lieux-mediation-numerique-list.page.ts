@@ -1,8 +1,10 @@
+import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { combineLatest, Observable, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import { LieuMediationNumerique, LieuMediationNumeriquePresentation } from '../../../core';
 import { MarkersPresenter } from '../../presenters';
 import { CartographieLayout } from '../../layouts';
@@ -38,6 +40,8 @@ export class LieuxMediationNumeriqueListPage {
   ]).pipe(map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
 
   public constructor(
+    @Inject(FEATURES_TOKEN)
+    public readonly features: FeaturesConfiguration,
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
     private readonly _cartographieLayout: CartographieLayout,
@@ -68,5 +72,9 @@ export class LieuxMediationNumeriqueListPage {
 
   public printPage() {
     window.print();
+  }
+
+  public toQueryString(fromObject: {} = {}): string {
+    return new HttpParams({ fromObject }).toString();
   }
 }

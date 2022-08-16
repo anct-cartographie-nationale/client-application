@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LieuxMediationNumeriqueListPage } from './lieux-mediation-numerique-list.page';
 import { ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
+import { FEATURES_TOKEN } from '../../../../root';
 import { MarkersPresenter } from '../../presenters';
 import { CartographieLayout } from '../../layouts';
 
@@ -11,6 +12,10 @@ describe('LieuxMediationNumeriqueListPage', (): void => {
       declarations: [LieuxMediationNumeriqueListPage],
       imports: [RouterTestingModule],
       providers: [
+        {
+          provide: FEATURES_TOKEN,
+          useValue: new Map()
+        },
         {
           provide: ZOOM_LEVEL_TOKEN,
           useValue: {}
