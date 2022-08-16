@@ -188,8 +188,14 @@ jobs:
           yarn
           yarn add @gouvfr-anct/mediation-numerique
 
-      - name: Build
+      - name: Build client application
         run: yarn build client-application
+
+      - name: Build cartographie web component
+        run: yarn build cartographie
+
+      - name: Build orientation web component
+        run: yarn build orientation
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
