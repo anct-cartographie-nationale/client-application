@@ -15,9 +15,5 @@ export class ConteneurComponent {
     BRAND_CONFIGURATION.name = name;
   }
 
-  @Input() lienCartographie?: string;
-
-  @Input() lienOrientation?: string;
-
   public constructor(@Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration) {}
 }

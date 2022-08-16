@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FEATURES_TOKEN } from '../../../../root';
 import { OrientationLayout } from '../../layouts';
 import { CollapseStubComponent } from '../../test-doubles';
 import { DisponibilitePage } from './disponibilite.page';
@@ -8,12 +10,17 @@ describe('DisponibilitePage', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       declarations: [DisponibilitePage, CollapseStubComponent],
+      imports: [RouterTestingModule],
       providers: [
         {
           provide: OrientationLayout,
           useValue: {
             filterForm: new FormGroup({})
           }
+        },
+        {
+          provide: FEATURES_TOKEN,
+          useValue: new Map()
         }
       ]
     })

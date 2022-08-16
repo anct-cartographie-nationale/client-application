@@ -24,8 +24,7 @@
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a
-                *ngIf="lienOrientation !== undefined"
-                [routerLink]="['/', lienOrientation]"
+                [routerLink]="['/', 'orientation']"
                 queryParamsHandling="preserve"
                 class="nav-link"
                 ariaCurrentWhenActive="page"
@@ -35,8 +34,7 @@
             </li>
             <li class="nav-item">
               <a
-                *ngIf="lienCartographie !== undefined"
-                [routerLink]="['/', lienCartographie]"
+                [routerLink]="['/', 'cartographie']"
                 queryParamsHandling="preserve"
                 class="nav-link"
                 ariaCurrentWhenActive="page"

@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
 import { delay, Observable, startWith, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
   FilterFormPresentation,
   FilterPresentation,
@@ -53,11 +55,11 @@ const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresent
 })
 export class OrientationLayout {
   public filterForm: FormGroup = createFormGroupFromFilterPresentation(
-    toFilterFormPresentationFromQuery(this._route.snapshot.queryParams)
+    toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
 
   private _filterPresentation$: Observable<FilterPresentation> = this.filterForm.valueChanges.pipe(
-    startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this._route.snapshot.queryParams))
+    startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))
   );
 
   private _localisation$: Observable<Localisation> = this._filterPresentation$.pipe(
@@ -76,11 +78,17 @@ export class OrientationLayout {
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueTotal$();
 
   public constructor(
+    @Inject(FEATURES_TOKEN)
+    public readonly features: FeaturesConfiguration,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     private readonly _contexts: ChildrenOutletContexts,
-    private readonly _route: ActivatedRoute,
+    public readonly route: ActivatedRoute,
     public readonly router: Router
   ) {}
+
+  public toQueryString(fromObject: {} = {}): string {
+    return new HttpParams({ fromObject }).toString();
+  }
 
   public getRouteAnimationData(): string {
     return this._contexts.getContext('primary')?.route?.snapshot.data?.['animation'];

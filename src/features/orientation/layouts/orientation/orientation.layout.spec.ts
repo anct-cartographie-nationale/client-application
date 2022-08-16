@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { FEATURES_TOKEN } from '../../../../root';
 import { LieuxMediationNumeriqueRepository } from '../../../core';
 import { OrientationLayout } from './orientation.layout';
 
@@ -15,6 +16,10 @@ describe('OrientationLayout', (): void => {
           useValue: {
             getAll$: () => of([])
           }
+        },
+        {
+          provide: FEATURES_TOKEN,
+          useValue: new Map()
         }
       ]
     })

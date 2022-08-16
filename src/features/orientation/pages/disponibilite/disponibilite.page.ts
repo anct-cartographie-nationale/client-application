@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import { OrientationLayout } from '../../layouts';
 
 const currentDate = () => new Date().toISOString().substring(0, 10);
@@ -13,7 +15,12 @@ export class DisponibilitePage {
     this.orientationLayout.filterForm.get('ouvert_actuellement')?.value
   );
 
-  public constructor(public readonly orientationLayout: OrientationLayout) {}
+  public constructor(
+    @Inject(FEATURES_TOKEN)
+    public readonly features: FeaturesConfiguration,
+    public readonly route: ActivatedRoute,
+    public readonly orientationLayout: OrientationLayout
+  ) {}
 
   private clearDateOuverture(): void {
     this.orientationLayout.filterForm.get('date_ouverture')?.reset();

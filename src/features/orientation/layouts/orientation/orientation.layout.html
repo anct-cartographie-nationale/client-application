@@ -81,14 +81,26 @@
               </ng-container>
             </div>
             <div class="text-center mt-auto">
-              <a
-                class="btn btn-secondary"
-                [class.disabled]="lieuxMediationNumerique.length === 0"
-                [routerLink]="['cartographie']"
-                queryParamsHandling="preserve">
-                Afficher les résultats sur la cartographie
-                <i class="ri-arrow-right-s-line align-bottom"></i>
-              </a>
+              <ng-container *ngIf="features.get('cartographie') as cartographie">
+                <a
+                  *ngIf="cartographie.active"
+                  class="btn btn-secondary"
+                  [class.disabled]="lieuxMediationNumerique.length === 0"
+                  [routerLink]="['cartographie']"
+                  queryParamsHandling="preserve">
+                  Afficher les résultats sur la cartographie
+                  <i class="ri-arrow-right-s-line align-bottom"></i>
+                </a>
+                <a
+                  *ngIf="!cartographie.active && cartographie.url"
+                  class="btn btn-secondary"
+                  [class.disabled]="lieuxMediationNumerique.length === 0"
+                  [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
+                  rel="keep-params">
+                  Afficher les résultats sur la cartographie
+                  <i class="ri-arrow-right-s-line align-bottom"></i>
+                </a>
+              </ng-container>
             </div>
           </div>
         </ng-container>
