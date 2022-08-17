@@ -358,7 +358,7 @@ jobs:
           mv dist/client-application/styles.css dist/whitelist/styles.css
           mv dist/mediation-numerique/script.js dist/whitelist/mediation-numerique.js
           mv dist/cartographie/script.js dist/whitelist/cartographie.js
-          mv dist/orientation/script.js dist/whitelist/orientation.js$
+          mv dist/orientation/script.js dist/whitelist/orientation.js
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
