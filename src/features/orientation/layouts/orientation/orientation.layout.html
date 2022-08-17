@@ -1,0 +1,110 @@
+<div class="bg-light h-100 p-5">
+  <div class="container h-100">
+    <div class="row g-0 h-100 shadow">
+      <div class="col bg-white p-3 h-100 overflow-auto d-flex flex-column">
+        <ul *ngIf="this.router.url !== '/orientation'" class="nav nav-pills justify-content-center pb-3">
+          <li class="nav-item">
+            <a
+              class="btn btn-secondary mx-2"
+              [routerLink]="['besoin']"
+              queryParamsHandling="preserve"
+              routerLinkActive="active active-primary"
+              ariaCurrentWhenActive="page">
+              Besoin
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="btn btn-secondary mx-2"
+              [routerLink]="['localisation']"
+              queryParamsHandling="preserve"
+              routerLinkActive="active active-primary"
+              ariaCurrentWhenActive="page">
+              Localisation
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="btn btn-secondary mx-2"
+              [routerLink]="['accessibilite']"
+              queryParamsHandling="preserve"
+              routerLinkActive="active active-primary"
+              ariaCurrentWhenActive="page">
+              Accessibilité
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="btn btn-secondary mx-2"
+              [routerLink]="['disponibilite']"
+              queryParamsHandling="preserve"
+              routerLinkActive="active active-primary"
+              ariaCurrentWhenActive="page">
+              Disponibilité
+            </a>
+          </li>
+        </ul>
+        <div class="h-100" [@routeAnimations]="getRouteAnimationData()">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4" *ngIf="this.router.url !== '/orientation'">
+        <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+          <div class="d-flex flex-column h-100" *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
+            <h1 class="h2 text-center text-secondary fw-bold">
+              Structures
+              <br />
+              <span *ngIf="router.url === '/orientation'">sur le territoire</span>
+              <span *ngIf="router.url !== '/orientation'">correspondantes</span>
+            </h1>
+            <div class="text-center my-auto">
+              <div class="bg-image p-5" style="background-image: url('assets/logos/carteFrancePerspective.svg')">
+                <div class="d-flex p-2">
+                  <div class="border rounded-circle p-4 m-auto">
+                    <div
+                      [attr.aria-valuemax]="lieuxMediationNumeriqueTotal.length"
+                      [attr.aria-valuenow]="lieuxMediationNumerique.length"
+                      aria-valuemin="0"
+                      role="progressbar"
+                      style="--value-int: {{lieuxMediationNumerique.length}} ; --value-percentage: {{(lieuxMediationNumerique.length / lieuxMediationNumeriqueTotal.length) * 100}}"></div>
+                  </div>
+                </div>
+              </div>
+              <ng-container *ngIf="router.url !==  '/orientation'">
+                <b class="fs-5 text" [ngPlural]="lieuxMediationNumerique.length">
+                  <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
+                  <ng-template ngPluralCase="=1">Structure trouvée</ng-template>
+                  <ng-template ngPluralCase="other">Structures trouvées</ng-template>
+                </b>
+                <br />
+                <span class="opacity-50">/ {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire</span>
+              </ng-container>
+            </div>
+            <div class="text-center mt-auto">
+              <ng-container *ngIf="features.get('cartographie') as cartographie">
+                <a
+                  *ngIf="cartographie.active"
+                  class="btn btn-secondary"
+                  [class.disabled]="lieuxMediationNumerique.length === 0"
+                  [routerLink]="['cartographie']"
+                  queryParamsHandling="preserve">
+                  Afficher les résultats sur la cartographie
+                  <i class="ri-arrow-right-s-line align-bottom"></i>
+                </a>
+                <a
+                  *ngIf="!cartographie.active && cartographie.url"
+                  class="btn btn-secondary"
+                  [class.disabled]="lieuxMediationNumerique.length === 0"
+                  [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
+                  rel="keep-params">
+                  Afficher les résultats sur la cartographie
+                  <i class="ri-arrow-right-s-line align-bottom"></i>
+                </a>
+              </ng-container>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

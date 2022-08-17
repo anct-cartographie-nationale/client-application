@@ -1,0 +1,35 @@
+<div class="text-center d-flex flex-column h-100">
+  <div class="my-auto">
+    <img *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" class="mb-5" style="max-height: 250px" alt="" />
+    <ng-container *ngIf="((route.queryParamMap | async)?.keys?.length ?? 0) === 0; else: restart">
+      <h1 class="h2 mb-3">
+        Bienvenue sur la Cartographie
+        <span class="text-primary">{{ brandConfiguration.name }}</span>
+      </h1>
+      <p class="lead my-5">
+        Vous rencontrez un problème lié au numérique ?
+        <br />
+        Des structures sont à votre disposition sur le territoire pour répondre à votre besoin,
+        <br />
+        vous pourrez les localiser en quelques minutes grâce à notre outil d'orientation.
+      </p>
+      <a class="btn btn-primary my-4" [routerLink]="['besoin']" queryParamsHandling="preserve">Démarrer l'orientation</a>
+    </ng-container>
+    <ng-template #restart>
+      <h1 class="h2 text-center fw-bold mb-4">
+        Souhaitez-vous
+        <span class="text-primary">redémarrer l'orientation ?</span>
+      </h1>
+      <div class="my-5">
+        <a class="btn btn-primary me-3" [routerLink]="['besoin']" queryParamsHandling="preserve">
+          <i class="ri-arrow-left-s-line align-bottom"></i>
+          Reprendre l'orientation
+        </a>
+        <a class="btn btn-secondary" [routerLink]="['besoin']" (click)="orientationLayout.filterForm.reset()">
+          Nouvelle orientation
+          <i class="ri-arrow-right-s-line align-bottom"></i>
+        </a>
+      </div>
+    </ng-template>
+  </div>
+</div>

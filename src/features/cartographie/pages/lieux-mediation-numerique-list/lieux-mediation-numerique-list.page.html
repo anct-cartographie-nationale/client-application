@@ -1,0 +1,45 @@
+<ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+  <div class="h-100 d-flex flex-column">
+    <div class="list-group list-group-flush flex-grow-1 overflow-auto">
+      <a
+        [attr.id]="lieuMediationNumerique.id"
+        class="list-group-item list-group-item-action p-4"
+        *ngFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
+        queryParamsHandling="preserve"
+        [routerLink]="[lieuMediationNumerique.id, 'details']"
+        [relativeTo]="route.parent"
+        (click)="select(lieuMediationNumerique)">
+        <app-mediation-numerique-list-item
+          [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
+      </a>
+    </div>
+    <div class="bg-primary p-2 g-0 row">
+      <div class="col-auto">
+        <ng-container *ngIf="features.get('orientation') as orientation">
+          <a
+            *ngIf="orientation.active"
+            class="btn btn-outline-light me-3"
+            [routerLink]="['/', 'orientation']"
+            queryParamsHandling="preserve">
+            <i class="ri-equalizer-fill me-2 align-bottom"></i>
+            <span>Modifier les critères d'orientation</span>
+          </a>
+          <a
+            *ngIf="!orientation.active && orientation.url"
+            class="btn btn-outline-light me-3"
+            [href]="orientation.url + '?' + toQueryString($any(route.queryParams | async))">
+            <i class="ri-equalizer-fill me-2 align-bottom"></i>
+            <span>Modifier les critères d'orientation</span>
+          </a>
+        </ng-container>
+        <button class="btn btn-outline-light" (click)="printPage()">
+          <i class="ri-printer-line me-2 align-bottom"></i>
+          <span>Imprimer les résultats</span>
+        </button>
+      </div>
+      <div class="col-auto ms-auto my-auto">
+        <span class="d-flex align-items-center text-white me-auto">{{ lieuxMediationNumerique?.length }} Structures</span>
+      </div>
+    </div>
+  </div>
+</ng-container>

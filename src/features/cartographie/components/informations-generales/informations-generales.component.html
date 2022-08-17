@@ -1,0 +1,24 @@
+<div class="d-flex">
+  <i class="ri-4x ri-account-pin-circle-fill text-primary my-auto me-2"></i>
+  <div class="flex-grow-1 align-self-center">
+    <small class="text-muted" *ngIf="typologie">{{ typologie }}</small>
+    <h1 class="h2 fw-bold mb-0" style="max-width: 300px">
+      {{ nom }}
+    </h1>
+    <small *ngIf="date" class="text-muted fst-italic">Mise à jour le {{ date | date: 'dd/MM/y' }}</small>
+  </div>
+  <div class="d-flex flex-column">
+    <div class="flex-grow-1 text-end">
+      <button
+        type="button"
+        class="btn-close opacity-100"
+        aria-label="Close"
+        queryParamsHandling="preserve"
+        [routerLink]="['..']"></button>
+    </div>
+    <div class="d-flex align-items-center" *ngIf="status" [ngClass]="status === 'Fermé' ? 'text-muted' : 'text-primary'">
+      {{ status }}
+      <i class="ri-checkbox-blank-circle-fill ri-xxs ms-1 mt-1"></i>
+    </div>
+  </div>
+</div>

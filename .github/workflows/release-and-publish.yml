@@ -151,8 +151,8 @@ jobs:
       - name: Test
         run: yarn test client-application
 
-  build:
-    name: Build
+  build-client-application:
+    name: Build Client Application
     runs-on: ubuntu-latest
 
     steps:
@@ -199,6 +199,120 @@ jobs:
 
       - name: Merge all script files
         run: cat dist/client-application/*.js > dist/client-application/script.js
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
+  build-mediation-numerique-web-component:
+    name: Build Mediation Numerique Web Component
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn add @gouvfr-anct/mediation-numerique
+
+      - name: Build
+        run: yarn build mediation-numerique --named-chunks --output-hashing none
+
+      - name: Merge all script files
+        run: cat dist/mediation-numerique/*.js > dist/mediation-numerique/script.js
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
+  build-cartographie-web-component:
+    name: Build Cartographie Web Component
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn add @gouvfr-anct/mediation-numerique
+
+      - name: Build
+        run: yarn build cartographie --named-chunks --output-hashing none
+
+      - name: Merge all script files
+        run: cat dist/cartographie/*.js > dist/cartographie/script.js
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
+  build-orientation-web-component:
+    name: Build Orientation Web Component
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn add @gouvfr-anct/mediation-numerique
+
+      - name: Build
+        run: yarn build orientation --named-chunks --output-hashing none
+
+      - name: Merge all script files
+        run: cat dist/orientation/*.js > dist/orientation/script.js
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
