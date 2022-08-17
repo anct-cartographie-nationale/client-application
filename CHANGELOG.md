@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.4](https://github.com/anct-cartographie-nationale/client-application/compare/v3.0.0...v3.0.4) (2022-08-17)
+
+### Bug Fixes
+
+- add missing upload release white list build artifact ([5e19b01](https://github.com/anct-cartographie-nationale/client-application/commit/5e19b01f09465d681f12c2b440011ea6397242c7))
+- change repository link in package file ([27657dc](https://github.com/anct-cartographie-nationale/client-application/commit/27657dc41a422d6e11d767270b050553709dd298))
+- remove typo in cartographie script release name ([cb99fe0](https://github.com/anct-cartographie-nationale/client-application/commit/cb99fe093d162db4b4150c654eaa7b4524102345))
+- update last orientation exemple to remove unexpected catographie attributes ([3942c27](https://github.com/anct-cartographie-nationale/client-application/commit/3942c27efa3d1769b850cf68bb4216f9a8181ea1))
+- update release job to publish all required files ([050195b](https://github.com/anct-cartographie-nationale/client-application/commit/050195b6e87d5d9ad1db9c062e8e1dff33f71a64))
+
 ### [3.0.3](https://github.com/anct-cartographie-nationale/client-application/compare/v3.0.0...v3.0.3) (2022-08-17)
 
 ### Bug Fixes
