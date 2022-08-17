@@ -105,7 +105,7 @@ export class CartographieLayout {
     this.router.navigate([lieuMediationNumeriqueMarkerEvent.markerProperties.id, 'details'], {
       relativeTo: this._route.parent
     });
-    this.markersPresenter.focus(lieuMediationNumeriqueMarkerEvent.markerProperties.localisation, this._zoomLevel.userPosition);
+    this.markersPresenter.center(lieuMediationNumeriqueMarkerEvent.markerProperties.localisation, this._zoomLevel.userPosition);
     this.markersPresenter.select(lieuMediationNumeriqueMarkerEvent.markerProperties.id);
   }
 

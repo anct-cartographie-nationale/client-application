@@ -48,15 +48,21 @@ export const getBoundFromLocalisations = (localisations: Localisation[]): [Local
 export class MarkersPresenter {
   private readonly _centerView$: Subject<CenterView> = new Subject<CenterView>();
   private readonly _selected$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private readonly _focuced: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public readonly centerView$: Observable<CenterView> = this._centerView$.asObservable();
   public readonly selected$: Observable<string> = this._selected$.asObservable();
+  public readonly focuced$: Observable<string> = this._focuced.asObservable();
 
   public select(markerId: string) {
     this._selected$.next(markerId);
   }
 
-  public focus(coordinates: Localisation, zoomLevel: number) {
+  public focus(markerId: string) {
+    this._focuced.next(markerId);
+  }
+
+  public center(coordinates: Localisation, zoomLevel: number) {
     this._centerView$.next({ coordinates, zoomLevel });
   }
 }

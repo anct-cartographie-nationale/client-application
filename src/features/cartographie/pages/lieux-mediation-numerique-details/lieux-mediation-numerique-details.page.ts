@@ -53,7 +53,7 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) {
     lieuMediationNumerique.localisation &&
-      this._markersPresenter.focus(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
+      this._markersPresenter.center(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
     this._markersPresenter.select(lieuMediationNumerique.id);
   }
 }

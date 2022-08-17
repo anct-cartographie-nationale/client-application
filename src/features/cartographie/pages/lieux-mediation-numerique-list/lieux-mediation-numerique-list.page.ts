@@ -1,9 +1,8 @@
 import { HttpParams } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { combineLatest, Observable, tap } from 'rxjs';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import { LieuMediationNumerique, LieuMediationNumeriquePresentation } from '../../../core';
@@ -22,12 +21,21 @@ const toLieux = ([lieux]: [
   return lieux;
 };
 
+const itemById =
+  (id: string) =>
+  (item: ElementRef): boolean =>
+    item.nativeElement.id === id;
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'lieux-mediation-numerique-list.page.html'
 })
 export class LieuxMediationNumeriqueListPage {
   private _initialZoom: boolean = false;
+
+  @ViewChild('container') public container!: ElementRef;
+
+  @ViewChildren('item') public items!: QueryList<ElementRef>;
 
   private setInitialState = ([_, lieu]: [LieuMediationNumeriquePresentation[], LieuMediationNumeriquePresentation?]): void => {
     this.markersPresenter.select('');
@@ -47,20 +55,21 @@ export class LieuxMediationNumeriqueListPage {
     private readonly _zoomLevel: ZoomLevelConfiguration,
     private readonly _cartographieLayout: CartographieLayout,
     public readonly route: ActivatedRoute,
-    public readonly router: Router,
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
   private focusOnLieu(lieu: LieuMediationNumeriquePresentation) {
-    this.markersPresenter.focus(lieu.localisation, this._zoomLevel.regular);
+    this.markersPresenter.focus(lieu.id);
+    this.markersPresenter.center(lieu.localisation, this._zoomLevel.regular);
     this._cartographieLayout.resetZoom();
 
-    setTimeout((): void => {
-      let lieuElement = document.getElementById(lieu.id);
-      let lieuList = document.getElementById('lieu-list');
-      if (lieuList && lieuElement) {
-        lieuList.scrollTop = lieuElement.offsetTop - 50;
-      }
+    setTimeout(() => {
+      this.container.nativeElement.scrollTo({
+        top:
+          this.items.find(itemById(lieu.id))?.nativeElement.getBoundingClientRect().y -
+          this.container.nativeElement.getBoundingClientRect().y,
+        behavior: 'smooth'
+      });
     }, 400);
   }
 
@@ -69,7 +78,7 @@ export class LieuxMediationNumeriqueListPage {
   }
 
   public select(lieuMediationNumerique: LieuMediationNumerique) {
-    this.markersPresenter.focus(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
+    this.markersPresenter.center(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
     this.markersPresenter.select(lieuMediationNumerique.id);
   }
 
