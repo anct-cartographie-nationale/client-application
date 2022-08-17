@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.1](https://github.com/anct-cartographie-nationale/client-application/compare/v3.0.0...v3.0.1) (2022-08-17)
+
+### Bug Fixes
+
+- change repository link in package file ([27657dc](https://github.com/anct-cartographie-nationale/client-application/commit/27657dc41a422d6e11d767270b050553709dd298))
+- update release job to publish all required files ([050195b](https://github.com/anct-cartographie-nationale/client-application/commit/050195b6e87d5d9ad1db9c062e8e1dff33f71a64))
+
 ## [3.0.0](https://github.com/anct-cartographie-nationale/client-base/compare/v2.0.0...v3.0.0) (2022-08-17)
 
 ### ⚠ BREAKING CHANGES
