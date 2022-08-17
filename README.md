@@ -206,6 +206,7 @@ Il est possible d'automatiser ce processus en utilisant la commande `standard-ve
 
 - [Intégration dans une page HTML](#intégration-dans-une-page-HTML)
 - [Personnalisation](#personnalisation)
+- [Utilisation partielle](#utilisation-partielle)
 
 ### Intégration dans une page HTML
 
@@ -231,7 +232,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <head>
   <title>Page Title</title>
   <base href="/" />
-  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.5.0/styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
 </head>
 ...
 ```
@@ -244,19 +245,25 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
   <h1>My First Heading</h1>
   <p>My first paragraph.</p>
 
-  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.5.0/script.js" type="module"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/mediation-numerique.js"
+    type="module"></script>
 </body>
 ...
 ```
 
-4. Affichage avec l'élément `<fr-mediation-numerique>`
+4. Affichage avec les éléments `<fr-mediation-numerique-conteneur>` et `<fr-mediation-numerique>`
 
 ```html
 ...
 <body>
-  <fr-mediation-numerique></fr-mediation-numerique>
+  <fr-mediation-numerique-conteneur>
+    <fr-mediation-numerique></fr-mediation-numerique>
+  </fr-mediation-numerique-conteneur>
 
-  <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.5.0/script.js" type="module"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/mediation-numerique.js"
+    type="module"></script>
 </body>
 ...
 ```
@@ -269,12 +276,16 @@ La version finale devrait ressembler à celà :
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.5.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <fr-mediation-numerique></fr-mediation-numerique>
+    <fr-mediation-numerique-conteneur>
+      <fr-mediation-numerique></fr-mediation-numerique>
+    </fr-mediation-numerique-conteneur>
 
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.5.0/script.js" type="module"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/mediation-numerique.js"
+      type="module"></script>
   </body>
 </html>
 ```
@@ -288,9 +299,9 @@ Cliquez sur `Run >` pour voir la cartographie s'afficher.
 Exemple :
 
 ```html
-<fr-mediation-numerique
-  titre="Hub B"
-  logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"></fr-mediation-numerique>
+<fr-mediation-numerique-conteneur titre="Hub B" logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg">
+  <fr-mediation-numerique></fr-mediation-numerique>
+</fr-mediation-numerique-conteneur>
 ```
 
 #### Source de données
@@ -300,8 +311,10 @@ Par défaut la source de données affiche les CnFS, pour utiliser une autre sour
 Exemple :
 
 ```html
-<fr-mediation-numerique
-  source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.5.0/assets/data/lieux-de-mediation-numerique.json"></fr-mediation-numerique>
+<fr-mediation-numerique-conteneur>
+  <fr-mediation-numerique
+    source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/assets/data/lieux-de-mediation-numerique.json"></fr-mediation-numerique>
+</fr-mediation-numerique-conteneur>
 ```
 
 #### Localisation initiale
@@ -311,11 +324,14 @@ Par défaut la carte est centrée sur le milieu de la France avec un niveau de z
 Exemple :
 
 ```html
-<fr-mediation-numerique latitude="45.77647396140311" longitude="4.55431157343317" zoom="12"></fr-mediation-numerique>
+<fr-mediation-numerique-conteneur>
+  <fr-mediation-numerique latitude="45.77647396140311" longitude="4.55431157343317" zoom="12"></fr-mediation-numerique>
+</fr-mediation-numerique-conteneur>
 ```
 
-- Il est possible de récupérer la latitude et la longitude sur [openStreetMap](https://www.openstreetmap.org/node/3228260561) en recherchant une localité.
-- Le zoom doit être une valeur entière comprise entre 0 et 20.
+- Il est possible de récupérer la latitude et la longitude sur [openStreetMap](https://www.openstreetmap.org/node/3228260561) en recherchant une localité
+- Le zoom doit être une valeur entière comprise entre 0 et 20
+- Aussitôt affichée, la carte part de cette position initiale pour encadrer les marqueurs affichés issue de la source de donnée
 
 #### Couleur
 
@@ -361,18 +377,233 @@ Il est possible de changer certaines couleurs utilisées par la cartographie, po
     </style>
   </head>
   <body>
-    <fr-mediation-numerique
+    <fr-mediation-numerique-conteneur
       titre="Médiation numérique à Bessenay"
-      logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
-      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.5.0/assets/data/lieux-de-mediation-numerique.json"
-      latitude="45.77647396140311"
-      longitude="4.55431157343317"
-      zoom="12"></fr-mediation-numerique>
+      logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg">
+      <fr-mediation-numerique
+        source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/assets/data/lieux-de-mediation-numerique.json"
+        latitude="45.77647396140311"
+        longitude="4.55431157343317"
+        zoom="12"></fr-mediation-numerique>
+    </fr-mediation-numerique-conteneur>
 
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@2.5.0/script.js" type="module"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/mediation-numerique.js"
+      type="module"></script>
   </body>
 </html>
 ```
+
+### Utilisation partielle
+
+Il est également possible de n'utiliser que certains sous-ensembles : en enlevant la barre de navigation et le pied de page, en utilisant seulement la cartographie ou seulement l'orientation. Cela peut demander un effort technique supplémentaire, mais permet une meilleure intégration dans un environnement déjà existant.
+
+#### Enlever la barre de navigation et le pied de page
+
+L'élément `<fr-mediation-numerique-conteneur>` gère l'affichage de la barre de navigation et du pied de page, mais également l'affichage en plein écran. En enlevant cet élément la barre de navigation et le pied de page disparaissent, mais il faut compenser le plein écran en ajoutant `class="vh-100"` sur l'élément `<body>` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <fr-mediation-numerique
+      titre="Médiation numérique à Bessenay"
+      logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"></fr-mediation-numerique>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/mediation-numerique.js"
+      type="module"></script>
+  </body>
+</html>
+```
+
+En l'absence de l'élément `<fr-mediation-numerique-conteneur>`, les configurations `titre` et `logo` peuvent être reportées sur l'élément `<fr-mediation-numerique>` (ces informations apparaissent dans le parcours d'orientation) :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <fr-mediation-numerique></fr-mediation-numerique>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/mediation-numerique.js"
+      type="module"></script>
+  </body>
+</html>
+```
+
+#### Utiliser seulement la cartographie
+
+Pour n'importer que les sources strictement nécessaires à ce mode, il faut remplacer le script `mediation-numerique.js` par `cartographie.js` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/cartographie.js" type="module"></script>
+  </body>
+</html>
+```
+
+Il est alors possible d'utiliser l'élément `<fr-mediation-numerique-cartographie></fr-mediation-numerique-cartographie>` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <fr-mediation-numerique-cartographie></fr-mediation-numerique-cartographie>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/cartographie.js" type="module"></script>
+  </body>
+</html>
+```
+
+Les attributs de personnalisations suivants, présentés dans la section précédente sont disponibles : `zoom`, `latitude`, `longitude`, `source` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <fr-mediation-numerique-cartographie
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/assets/data/lieux-de-mediation-numerique.json"
+      latitude="45.77647396140311"
+      longitude="4.55431157343317"
+      zoom="12"></fr-mediation-numerique-cartographie>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/cartographie.js" type="module"></script>
+  </body>
+</html>
+```
+
+S'il existe une autre page dans laquelle un outil capable d'effectuer un parcours d'orientation est disponible, il est possible d'activer le bouton `Modifier les critères d'orientation` en fournissant un lien avec l'attribut `lien-orientation` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <fr-mediation-numerique-cartographie
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/assets/data/lieux-de-mediation-numerique.json"
+      latitude="45.77647396140311"
+      longitude="4.55431157343317"
+      zoom="12"
+      lien-orientation="https://cartographie.societenumerique.gouv.fr/orientation"></fr-mediation-numerique-cartographie>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/cartographie.js" type="module"></script>
+  </body>
+</html>
+```
+
+Les paramètres sélectionnés lors du parcours d'orientation sont fournis sous forme de paramètre d'url, par exemple `?date_ouverture=2022-08-17&ouvert_actuellement=true`.
+
+> Il n'est pas possible d'utiliser la barre de navigation dans ce mode
+
+#### Utiliser seulement l'orientation
+
+Pour n'importer que les sources strictement nécessaires à ce mode, il faut remplacer le script `mediation-numerique.js` par `orientation.js` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/orientation.js" type="module"></script>
+  </body>
+</html>
+```
+
+Il est alors possible d'utiliser l'élément `<fr-mediation-numerique-orientation></fr-mediation-numerique-orientation>` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <fr-mediation-numerique-orientation></fr-mediation-numerique-orientation>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/orientation.js" type="module"></script>
+  </body>
+</html>
+```
+
+Les attributs de personnalisations suivants, présentés dans la section précédente sont disponibles : `logo`, `titre`, `source` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <fr-mediation-numerique-orientation
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/assets/data/lieux-de-mediation-numerique.json"
+      titre="Médiation numérique à Bessenay"
+      logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"></fr-mediation-numerique-orientation>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/orientation.js" type="module"></script>
+  </body>
+</html>
+```
+
+S'il existe une autre page dans laquelle un outil capable d'effectuer un parcours d'orientation est disponible, il est possible d'activer le bouton `Afficher les résultats sur la cartographie` en fournissant un lien avec l'attribut `lien-cartographie` :
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <base href="/" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/styles.css" rel="stylesheet" />
+  </head>
+  <body class="vh-100">
+    <fr-mediation-numerique-orientation
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/assets/data/lieux-de-mediation-numerique.json"
+      latitude="45.77647396140311"
+      longitude="4.55431157343317"
+      zoom="12"
+      lien-orientation="https://cartographie.societenumerique.gouv.fr/cartographie"></fr-mediation-numerique-orientation>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@3.0.3/orientation.js" type="module"></script>
+  </body>
+</html>
+```
+
+Les paramètres sélectionnés lors du parcours d'orientation sont fournis sous forme de paramètre d'url, par exemple `?date_ouverture=2022-08-17&ouvert_actuellement=true`.
+
+> Il n'est pas possible d'utiliser la barre de navigation dans ce mode
 
 ## Gestion des versions
 
