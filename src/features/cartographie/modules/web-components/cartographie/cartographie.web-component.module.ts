@@ -10,7 +10,6 @@ import { CartographieWebComponentRoutingModule } from './cartographie.web-compon
 @NgModule({
   declarations: [CartographieWebComponentLayout],
   imports: [BrowserModule, CartographieCommonModule, CartographieWebComponentRoutingModule],
-  exports: [CartographieWebComponentRoutingModule],
   providers: [...cartographieProviders, ...mediationNumeriqueProviders]
 })
 export class CartographieWebComponentModule implements DoBootstrap {

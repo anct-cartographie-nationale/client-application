@@ -4,8 +4,6 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
     "paths": {
-      "@root/*": ["projects/client-application/src/root/*"],
-      "@features/*": ["projects/client-application/src/features/*"],
       "@gouvfr-anct/*": ["dist/@gouvfr-anct/*"]
     }
   },
