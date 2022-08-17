@@ -1,7 +1,7 @@
 import { DoBootstrap, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
-import { MediationNumeriqueWebComponentLayout } from '../../../layouts';
 import { ConteneurComponent } from '../../../components';
+import { MediationNumeriqueWebComponentLayout } from '../../../layouts/mediation-numerique-web-component/mediation-numerique-web-component.layout';
 import { MediationNumeriqueCommonModule } from '../../common/mediation-numerique.common.module';
 import { MediationNumeriqueWebComponentRoutingModule } from './mediation-numerique.web-component-routing.module';
 
