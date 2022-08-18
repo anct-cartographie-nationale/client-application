@@ -7,13 +7,15 @@ const invalidInterval = (interval: string | undefined) => interval != 'Fermé' &
 
 const dateWithoutTime = (date: Date) => date.toISOString().substring(0, 10);
 
-const toIntervalString = (intervalStart: Date) =>
-  intervalStart
+const toIntervalString = (intervalStart: Date | undefined) => {
+  if (!intervalStart) return;
+  return intervalStart
     .toLocaleTimeString('fr-FR', {
       hour: '2-digit',
       minute: '2-digit'
     })
     .replace(':', 'h');
+};
 
 const appendTimeTableInterval = (
   timeTableOpeningHours: HorairesPresentation,
@@ -84,25 +86,43 @@ export type OpeningStatus = OpenStatus | CloseStatus;
 
 const nextHour = (now: Date): Date => new Date(now.getTime() + HOUR_IN_MILLISECONDS);
 
-const openStatus = (willChange: boolean): OpenStatus => (willChange ? 'Ferme bientôt' : 'Ouvert');
+const endOfDay = (now: Date): Date => new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
 
-const closedStatus = (willChange: boolean): CloseStatus => (willChange ? 'Ouvre bientôt' : 'Fermé');
+const openStatus = (willChange: boolean): string => (willChange ? 'Ferme bientôt' : 'Ouvert');
+
+const closedStatus = (willChange: boolean): string => (willChange ? 'Ouvre bientôt' : 'Fermée');
 
 const willChangeNextHour = (openingHours: opening_hours, date: Date): boolean =>
   openingHours.getNextChange(date, nextHour(date)) !== undefined;
+
+const CloseReopenStatus = (willChange: boolean, nextDate: Date | undefined): string =>
+  willChange ? `Fermée, Ouvre à ${toIntervalString(nextDate)}` : 'Fermée';
+
+const OpenReopenStatus = (willChange: boolean, nextDate: Date | undefined): string =>
+  willChange ? `Ferme bientôt , réouverture à ${toIntervalString(nextDate)}` : 'Ouvert';
+
+const willChangeToday = (openingHours: opening_hours, date: Date): [boolean, Date | undefined] => [
+  openingHours.getNextChange(nextHour(date), endOfDay(date)) !== undefined,
+  openingHours.getNextChange(nextHour(date), endOfDay(date))
+];
 
 const openingHoursState = (openingHours: opening_hours, date: Date): boolean => openingHours.getIterator(date).getState();
 
 export const openingStatus =
   (date: Date) =>
-  (horairesOSM?: string): OpeningStatus | undefined => {
+  (horairesOSM?: string): string | undefined => {
     if (!horairesOSM) return;
 
     try {
       const openingHours = new opening_hours(horairesOSM);
+      let [nextStatus, nextDate] = willChangeToday(openingHours, date);
       return openingHoursState(openingHours, date)
-        ? openStatus(willChangeNextHour(openingHours, date))
-        : closedStatus(willChangeNextHour(openingHours, date));
+        ? willChangeNextHour(openingHours, date) && nextStatus
+          ? OpenReopenStatus(nextStatus, nextDate)
+          : openStatus(willChangeNextHour(openingHours, date))
+        : willChangeNextHour(openingHours, date)
+        ? closedStatus(willChangeNextHour(openingHours, date))
+        : CloseReopenStatus(nextStatus, nextDate);
     } catch {
       return;
     }
