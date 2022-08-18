@@ -1,12 +1,8 @@
 <div style="position: relative">
-  <img src="../../../../../../assets/img/presentation/fond-landing.svg" class="img-fluid" alt="image_fond_landing" />
+  <img src="/assets/img/presentation/fond-landing.svg" class="img-fluid" alt="" />
   <div class="d-flex row justify-content-center align-items-center my-5" style="position: absolute; top: 0">
     <div class="col-6 d-flex my-5 align-items-center justify-content-center">
-      <img
-        src="../../../../../../assets/img/presentation/personnages_sur_carte.svg"
-        class="img-fluid"
-        alt="image_personnages_sur_carte"
-        style="width: 80%" />
+      <img src="/assets/img/presentation/personnages_sur_carte.svg" class="img-fluid" alt="" style="width: 80%" />
     </div>
     <div class="col-6 d-flex flex-column justify-content-center">
       <h1 class="h1 fw-bold text-secondary mb-4" style="width: 95%">
@@ -18,33 +14,35 @@
         bénéficiaire et trouver les structures qui y répondent le mieux.
         <br />
       </p>
-      <div class="w-40">
-        <a [routerLink]="['orientation']" class="btn text-primary bg-blue-light" style="width: auto; border-radius: 0%">
+      <div>
+        <a [routerLink]="['orientation']" class="btn text-primary" style="border-radius: 0%; background-color: #8585f6">
           Découvrir la plateforme
         </a>
       </div>
     </div>
   </div>
 </div>
-<div class="container d-flex flex-column align-items-center justify-content-center my-2" style="width: 60%">
-  <h1 class="h2 fw-bold my-5 text-black text-center">
-    Vous êtes un acteur local souhaitant intégrer la cartographie sur votre site web ?
-  </h1>
-  <img src="../../../../../../assets/img/presentation/multipuces.svg" class="img-fluid" alt="image_multipuces" />
+<div class="container d-flex flex-column align-items-center justify-content-center my-2">
+  <h2 class="fw-bold my-5 text-black text-center">
+    Vous êtes un acteur local souhaitant intégrer
+    <br />
+    la cartographie sur votre site web ?
+  </h2>
+  <img src="/assets/img/presentation/multipuces.svg" class="img-fluid" alt="" />
   <div class="my-5 d-flex" *ngIf="!this.environment">
-    <button class="btn bg-secondary text-primary border-primary me-5 align-items-center d-flex" style="border-radius: 0%">
+    <button class="btn bg-secondary text-primary border-primary me-5 align-items-center d-flex rounded-0">
       <i class="ri-error-warning-line ri-xl me-1" style="transform: rotate(180deg)"></i>
       Plus d'info
     </button>
-    <button class="btn bg-primary text-secondary border-primary align-items-center d-flex" style="border-radius: 0%">
+    <button class="btn bg-primary text-secondary border-primary align-items-center d-flex rounded-0">
       <i class="ri-map-pin-2-line ri-xl me-1"></i>
       Intégrer la cartographie
     </button>
   </div>
 </div>
-<div class="bg-presentation-bg d-flex flex-column align-items-center justify-content-center">
+<div class="d-flex flex-column align-items-center justify-content-center" style="background-color: #e3e3fd">
   <div class="container mb-5" style="width: 60%">
-    <h1 class="h3 fw-bold my-5 text-black">Une nouvelle cartographie ? Pourquoi ?</h1>
+    <h3 class="fw-bold my-5 text-black">Une nouvelle cartographie ? Pourquoi ?</h3>
     <p>
       L’objectif de cette cartographie est de participer à l’amélioration de l'accompagnement proposé par les professionnels de
       la médiation numérique.
@@ -60,13 +58,13 @@
   </div>
 </div>
 <div class="container" *ngIf="!this.environment">
-  <h1 class="h3 fw-bold my-5 text-black text-center">De quel écosystème parle-t-on ?</h1>
+  <h3 class="fw-bold my-5 text-black text-center">De quel écosystème parle-t-on ?</h3>
   <div class="row d-flex justify-content-center">
     <div class="col-auto">
-      <div class="card" style="width: 18rem; border-radius: 0">
-        <img src="../../../../../../assets/img/presentation/svg-dora.svg" class="img-fluid" alt="image_dora" />
+      <div class="card rounded-0" style="width: 18rem">
+        <img src="/assets/img/presentation/svg-dora.svg" class="img-fluid" alt="" />
         <div class="card-body">
-          <h1 class="h5 fw-bold card-title">Dora</h1>
+          <h5 class="fw-bold card-title">Dora</h5>
           <p class="card-text">
             Vous travaillez dans une structure de médiation numérique ? Utilisez les formulaires Dora afin de renseigner vos
             données !
@@ -75,10 +73,10 @@
       </div>
     </div>
     <div class="col-auto">
-      <div class="card" style="width: 18rem; border-radius: 0">
-        <img src="../../../../../../assets/img/presentation/svg-rdv.svg" class="img-fluid" alt="image_rdv" />
+      <div class="card rounded-0" style="width: 18rem">
+        <img src="/assets/img/presentation/svg-rdv.svg" class="img-fluid" alt="" />
         <div class="card-body" style="min-height: 10rem">
-          <h1 class="h5 fw-bold card-title">RDV Solidarité</h1>
+          <h5 class="fw-bold card-title">RDV Solidarité</h5>
           <p class="card-text">La prise de Rendez-vous est désormais possible directement depuis la cartographie.</p>
         </div>
       </div>
@@ -86,10 +84,10 @@
   </div>
   <div class="row d-flex justify-content-center my-5">
     <div class="col-auto">
-      <div class="card" style="width: 18rem; border-radius: 0">
-        <img src="../../../../../../assets/img/presentation/svg-labase.svg" class="img-fluid" alt="image_labase" />
+      <div class="card rounded-0" style="width: 18rem">
+        <img src="/assets/img/presentation/svg-labase.svg" class="img-fluid" alt="" />
         <div class="card-body">
-          <h1 class="h5 fw-bold card-title">La Base</h1>
+          <h5 class="fw-bold card-title">La Base</h5>
           <p class="card-text">
             La Base regroupe les ressources des professionnels du numérique d’intérêt général dont l’inclusion et la médiation
             numériques.
@@ -98,10 +96,10 @@
       </div>
     </div>
     <div class="col-auto">
-      <div class="card" style="width: 18rem; border-radius: 0">
-        <img src="../../../../../../assets/img/presentation/svg-ifn.svg" class="img-fluid" alt="image_ifn" />
+      <div class="card rounded-0" style="width: 18rem">
+        <img src="/assets/img/presentation/svg-ifn.svg" class="img-fluid" alt="" />
         <div class="card-body">
-          <h1 class="h5 fw-bold card-title">IFN</h1>
+          <h5 class="h5 fw-bold card-title">IFN</h5>
           <p class="card-text">
             C'est l'indice de fragilité numérique : son rôle est de cibler le besoin de médiation numérique dans les
             territoires.
@@ -115,26 +113,26 @@
   <app-carousel></app-carousel>
 </div>
 <div class="d-flex align-items-center justify-content-center" style="background: #53918c; height: 150px">
-  <h1 class="h4 fw-bold text-center text-secondary">Customisez votre inferface !</h1>
+  <h4 class="fw-bold text-center text-secondary">Personnalisez votre inferface !</h4>
 </div>
 <div class="container" *ngIf="!this.environment">
-  <h1 class="h4 fw-bold text-center my-5">Les chiffres clefs de la cartographie</h1>
+  <h4 class="fw-bold text-center my-5">Les chiffres clefs de la cartographie</h4>
   <div class="row">
     <div class="col d-flex flex-column justify-content-center align-items-center text-center">
-      <img src="../../../../../../assets/img/presentation/svg-maisons.svg" class="img-fluid" alt="image_structures" />
-      <h1 class="h4 fw-bold text-center" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
+      <img src="/assets/img/presentation/svg-maisons.svg" class="img-fluid" alt="" />
+      <h4 class="fw-bold text-center" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
         {{lieuxMediationNumeriqueTotal.length}} structures référencées
-      </h1>
+      </h4>
       <p class="text-center">Sur l'ensemble du territoire.</p>
     </div>
     <div class="col d-flex flex-column justify-content-center align-items-center text-center">
-      <img src="../../../../../../assets/img/presentation/svg-boussole.svg" class="img-fluid" alt="image_orientations" />
-      <h1 class="h4 fw-bold text-center">X orientations réalisées</h1>
+      <img src="/assets/img/presentation/svg-boussole.svg" class="img-fluid" alt="" />
+      <h4 class="fw-bold text-center">X orientations réalisées</h4>
       <p class="text-center">A travers la cartographie.</p>
     </div>
     <div class="col d-flex flex-column justify-content-center align-items-center text-center">
-      <img src="../../../../../../assets/img/presentation/svg-carte.svg" class="img-fluid" alt="image_cartographie" />
-      <h1 class="h4 fw-bold text-center">X cartographie intégrées</h1>
+      <img src="/assets/img/presentation/svg-carte.svg" class="img-fluid" alt="" />
+      <h4 class="fw-bold text-center">X cartographie intégrées</h4>
       <p class="text-center">Par des collectivités, Hubs et Labels.</p>
     </div>
   </div>

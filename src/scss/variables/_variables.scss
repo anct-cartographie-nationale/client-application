@@ -9,8 +9,6 @@ $muted: #999;
 $dark: #212529;
 $black: #000 !default;
 $transparent: rgba(117 190 218 / 50%);
-$blue-light: #8585f6;
-$presentation-bg: #e3e3fd;
 $min-contrast-ratio: 2.7;
 $box-shadow-sm: 0 0.25rem 0.25rem rgba($black, 0.25);
 $theme-colors: (
@@ -22,9 +20,7 @@ $theme-colors: (
   'danger': $danger,
   'light': $light,
   'muted': $muted,
-  'dark': $dark,
-  'blue-light': $blue-light,
-  'presentation-bg': $presentation-bg
+  'dark': $dark
 ) !default;
 
 @import './accordion';

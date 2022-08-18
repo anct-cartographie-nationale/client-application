@@ -4,7 +4,6 @@ import { PresentationLayout } from '../layouts';
 
 const ROUTES: Routes = [
   {
-    children: [],
     component: PresentationLayout,
     path: ''
   }

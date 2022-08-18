@@ -1,1 +1,1 @@
-export * from './presentation/presentation.layout';
+export * from './presentation/presentation.page';

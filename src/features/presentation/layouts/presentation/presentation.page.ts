@@ -9,7 +9,7 @@ import {
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './presentation.layout.html',
+  templateUrl: './presentation.page.html',
   providers: [
     {
       deps: [LieuxMediationNumeriqueRepository],
