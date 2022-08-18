@@ -323,7 +323,18 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [prettier, eslint, stylelint, commitlint, test, build]
+    needs:
+      [
+        prettier,
+        eslint,
+        stylelint,
+        commitlint,
+        test,
+        build-client-application,
+        build-mediation-numerique-web-component,
+        build-cartographie-web-component,
+        build-orientation-web-component
+      ]
 
     steps:
       - name: Checkout client-application repository
@@ -337,12 +348,26 @@ jobs:
 
       - name: Add readme, license and package files
         run: |
-          mv README.md dist/client-application/
-          mv LICENSE.md dist/client-application/
-          mv package.json dist/client-application/
+          mkdir dist/whitelist
+          mkdir dist/whitelist/assets
+          mv README.md dist/whitelist/
+          mv LICENSE.md dist/whitelist/
+          mv package.json dist/whitelist/
+          mv dist/client-application/assets/data/ dist/whitelist/assets/data/
+          mv dist/client-application/assets/fonts/ dist/whitelist/assets/fonts/
+          mv dist/client-application/styles.css dist/whitelist/styles.css
+          mv dist/mediation-numerique/script.js dist/whitelist/mediation-numerique.js
+          mv dist/cartographie/script.js dist/whitelist/cartographie.js
+          mv dist/orientation/script.js dist/whitelist/orientation.js
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
 
       - name: Zip release
-        run: zip -r release.zip dist/client-application/
+        run: zip -r release.zip dist/whitelist/
 
       - name: Publish release
         uses: softprops/action-gh-release@v1
@@ -371,7 +396,7 @@ jobs:
 
       - name: Publish on npm
         run: |
-          cd release/client-application/
+          cd release/whitelist/
           yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
