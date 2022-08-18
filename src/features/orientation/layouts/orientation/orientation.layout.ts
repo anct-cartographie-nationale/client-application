@@ -58,7 +58,7 @@ export class OrientationLayout {
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
 
-  private _filterPresentation$: Observable<FilterPresentation> = this.filterForm.valueChanges.pipe(
+  public _filterPresentation$: Observable<FilterPresentation> = this.filterForm.valueChanges.pipe(
     startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))
   );
 
