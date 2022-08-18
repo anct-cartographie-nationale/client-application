@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { BRAND_CONFIGURATION, BRAND_TOKEN, BrandConfiguration } from '../../configuration';
 
 @Component({
@@ -15,5 +16,8 @@ export class ConteneurComponent {
     BRAND_CONFIGURATION.name = name;
   }
 
-  public constructor(@Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration) {}
+  public constructor(
+    @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration,
+    public readonly router: Router
+  ) {}
 }
