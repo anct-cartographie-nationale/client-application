@@ -58,15 +58,15 @@ export class OrientationLayout {
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
 
-  public _filterPresentation$: Observable<FilterPresentation> = this.filterForm.valueChanges.pipe(
+  public filterPresentation$: Observable<FilterPresentation> = this.filterForm.valueChanges.pipe(
     startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))
   );
 
-  private _localisation$: Observable<Localisation> = this._filterPresentation$.pipe(
+  private _localisation$: Observable<Localisation> = this.filterPresentation$.pipe(
     map(toLocalisationFromFilterFormPresentation)
   );
 
-  private _filter$: Observable<FilterPresentation> = this._filterPresentation$.pipe(
+  private _filter$: Observable<FilterPresentation> = this.filterPresentation$.pipe(
     delay(0),
     tap(this.setFilterToQueryString())
   );
