@@ -1,0 +1,9 @@
+<ng-container *ngIf="currentZoomLevel <= 10">
+  <app-leaflet-map-marker
+    *ngFor="let departement of departements; trackBy: trackByDepartementCode"
+    [latitude]="departement.localisation.latitude"
+    [longitude]="departement.localisation.longitude"
+    [properties]="departement"
+    markerFactoryKey="lieuMediationNumerique"
+    (markerClick)="showLieux.emit(departement.bounds)"></app-leaflet-map-marker>
+</ng-container>

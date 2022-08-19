@@ -23,11 +23,16 @@ import { LieuMediationNumeriqueListItemComponent } from './lieu-mediation-numeri
 import { ModalitesAccompagnementComponent } from './modalites-accompagnement/modalites-accompagnement.component';
 import { PublicPrisEnChargeComponent } from './public-pris-en-charge/public-pris-en-charge.component';
 import { ServicesComponent } from './services/services.component';
+import { DepartementsListComponent } from './departements-list/departements-list.component';
+import { LieuxMediationNumeriqueListComponent } from './lieux-mediation-numerique-list/lieux-mediation-numerique-list.component';
+import { LieuMediationNumeriqueMarkersComponent } from './markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
+import { DepartementMarkersComponent } from './markers/departements-markers/departement-markers.component';
 
 export * from './leaflet-map/leaflet-map.component';
 
 export const components = [
   LieuMediationNumeriqueListItemComponent,
+  LieuxMediationNumeriqueListComponent,
   InformationsGeneralesComponent,
   BoutonsActionComponent,
   InformationsPratiquesComponent,
@@ -49,5 +54,8 @@ export const components = [
   CnfsComponent,
   PointNumeriqueCafComponent,
   LeafletMapComponent,
-  CartographieLoaderComponent
+  CartographieLoaderComponent,
+  DepartementsListComponent,
+  LieuMediationNumeriqueMarkersComponent,
+  DepartementMarkersComponent
 ];

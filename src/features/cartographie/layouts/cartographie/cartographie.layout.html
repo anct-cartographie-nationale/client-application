@@ -39,36 +39,19 @@
   </div>
   <div class="col overflow-auto">
     <app-leaflet-map
+      *ngIf="(currentZoomLevel$ | async) as currentZoomLevel"
       [centerView]="(markersPresenter.centerView$ | async) ?? defaultCenterView"
       [fitBounds]="mapViewBounds$ | async"
-      (stateChange)="updateMapView($event)">
-      <app-leaflet-map-marker
-        *ngFor="let lieuMediationNumerique of lieuxMediationNumerique$ | async; trackBy: trackByLieuId"
-        [latitude]="lieuMediationNumerique.localisation.latitude"
-        [longitude]="lieuMediationNumerique.localisation.longitude"
-        [properties]="lieuMediationNumerique"
-        [highlight]="(markersPresenter.selected$ | async) === lieuMediationNumerique.id ? 'focus' : undefined"
-        markerFactoryKey="lieuMediationNumerique"
-        (markerClick)="showDetailStructure($event)">
-        <app-leaflet-map-tooltip [content]="popupContent" [sticky]="true">
-          <div
-            #popupContent
-            class="text-center p-3 border-bottom border-3"
-            [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'border-muted' : 'border-primary'">
-            <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
-            <br />
-            <span
-              *ngIf="lieuMediationNumerique.status; else:noOpeningHours"
-              [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'text-muted' : 'text-primary'">
-              {{ lieuMediationNumerique.status }}
-              <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
-            </span>
-            <ng-template #noOpeningHours>
-              <span class="text-muted">Horaires inconnus</span>
-            </ng-template>
-          </div>
-        </app-leaflet-map-tooltip>
-      </app-leaflet-map-marker>
+      (stateChange)="mapViewUpdated($event)">
+      <app-departement-markers
+        [departements]="(departements$ | async) ?? []"
+        [currentZoomLevel]="currentZoomLevel"
+        (showLieux)="zoomOnLieuxInDepartement($event.north, $event.south, $event.east, $event.west)"></app-departement-markers>
+      <app-lieu-mediation-numerique-markers
+        [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
+        [currentZoomLevel]="currentZoomLevel"
+        [selectedId]="(markersPresenter.selected$ | async) ?? ''"
+        (showDetails)="showLieuMediationNumeriqueDetails($event)"></app-lieu-mediation-numerique-markers>
     </app-leaflet-map>
   </div>
 </div>

@@ -1,7 +1,6 @@
-import { FilterPresentation } from '../../filter';
+import { FilterOperator, FilterPresentation } from '../../filter';
 import { isOpen } from '../../horaires';
 import { LieuMediationNumeriquePresentation } from '../lieu-mediation-numerique.presentation';
-import { FilterOperator } from '../lieux-mediation-numerique.presenter';
 
 const applyFilter = (date: Date, horaires?: string, ouvertActuellement?: boolean): boolean =>
   horaires == null ? false : isOpen(date)(horaires, ouvertActuellement === true);

@@ -6,6 +6,13 @@ import {
   PublicAccueilli,
   Service
 } from '../../models';
+import { LieuMediationNumeriquePresentation } from '../lieux-mediation-numerique';
+
+export type FilterOperator = (
+  lieuMediationNumerique: LieuMediationNumeriquePresentation,
+  filter: FilterPresentation,
+  date: Date
+) => boolean;
 
 export type FilterPresentation = {
   services?: Service;

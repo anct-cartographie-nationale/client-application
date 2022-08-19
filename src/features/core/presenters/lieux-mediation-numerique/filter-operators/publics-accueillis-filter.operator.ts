@@ -1,7 +1,6 @@
 import { PublicAccueilli } from '../../../models';
-import { FilterPresentation } from '../../filter';
+import { FilterOperator, FilterPresentation } from '../../filter';
 import { LieuMediationNumeriquePresentation } from '../lieu-mediation-numerique.presentation';
-import { FilterOperator } from '../lieux-mediation-numerique.presenter';
 
 const shouldFilter = (filter: FilterPresentation) => filter.publics_accueillis != null && filter.publics_accueillis.length > 0;
 
