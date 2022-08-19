@@ -1,3 +1,4 @@
+export * from './collectivite-territoriale';
 export * from './distance';
 export * from './filter';
 export * from './horaires';
