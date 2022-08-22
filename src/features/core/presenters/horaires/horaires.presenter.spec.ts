@@ -38,11 +38,11 @@ describe('horaires presenter', (): void => {
 
   it('should get Fermé state', (): void => {
     const openingHours: string = 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00';
-    const date: Date = new Date('2022-07-22T01:00:00.000Z');
+    const date: Date = new Date('2022-07-24T01:00:00.000Z');
 
     const status: string | undefined = openingStatus(date)(openingHours);
 
-    expect(status).toStrictEqual('Fermé');
+    expect(status).toStrictEqual('Fermée');
   });
 
   it('should get undefined state one opening hours parse error', (): void => {
