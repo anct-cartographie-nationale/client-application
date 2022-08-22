@@ -42,7 +42,7 @@ describe('horaires presenter', (): void => {
 
     const status: string | undefined = openingStatus(date)(openingHours);
 
-    expect(status).toStrictEqual('Fermée');
+    expect(status).toStrictEqual('Fermé');
   });
 
   it('should get undefined state one opening hours parse error', (): void => {

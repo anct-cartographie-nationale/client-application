@@ -583,7 +583,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       },
       {
         horaires: 'Mo-Th 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
-        status: 'Fermée'
+        status: 'Fermé'
       }
     ]);
   });

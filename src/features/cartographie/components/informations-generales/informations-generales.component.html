@@ -16,7 +16,7 @@
         queryParamsHandling="preserve"
         [routerLink]="['..']"></button>
     </div>
-    <div class="d-flex align-items-center" *ngIf="status" [ngClass]="status.includes('Fermée') ? 'text-muted' : 'text-primary'">
+    <div class="d-flex align-items-center" *ngIf="status" [ngClass]="status.includes('Fermé') ? 'text-muted' : 'text-primary'">
       {{ status }}
       <i class="ri-checkbox-blank-circle-fill ri-xxs ms-1 mt-1"></i>
     </div>
