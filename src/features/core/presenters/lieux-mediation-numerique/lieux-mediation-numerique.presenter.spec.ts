@@ -1,9 +1,10 @@
 import { firstValueFrom, Observable, of } from 'rxjs';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
-import { LieuMediationNumerique, Localisation, NO_LOCALISATION, Url } from '../../models';
+import { Adresse, LieuMediationNumerique, Localisation, NO_LOCALISATION, Url } from '../../models';
 import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
 import { LieuxMediationNumeriquePresenter } from './lieux-mediation-numerique.presenter';
+import { DepartementPresentation } from '../collectivite-territoriale';
 
 describe('lieux-mediation-numerique-list presenter', (): void => {
   it('should append the distance from some localisation to a lieu mediation numerique', async (): Promise<void> => {
@@ -770,6 +771,44 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         localisation: {
           latitude: 46.46,
           longitude: 4.78
+        }
+      }
+    ]);
+  });
+
+  it('should group lieux de mediation numerique by departement', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        adresse: Adresse({ code_postal: '69210' } as Adresse)
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const departementPresentations: DepartementPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDepartement$(of(NO_LOCALISATION), of({}), undefined)
+    );
+
+    expect<DepartementPresentation[]>(departementPresentations).toStrictEqual([
+      {
+        code: '69',
+        nom: 'Rhône',
+        lieuxCount: 1,
+        bounds: {
+          east: 5.1592030475156,
+          north: 46.303994122044,
+          south: 45.45503324486,
+          west: 4.243469905983
+        },
+        localisation: {
+          latitude: 45.871047330627775,
+          longitude: 4.640949259558913
         }
       }
     ]);

@@ -1,7 +1,6 @@
 import { ModalitesAccompagnement } from '../../../models';
-import { FilterPresentation } from '../../filter';
+import { FilterOperator, FilterPresentation } from '../../filter';
 import { LieuMediationNumeriquePresentation } from '../lieu-mediation-numerique.presentation';
-import { FilterOperator } from '../lieux-mediation-numerique.presenter';
 
 const shouldFilter = (filter: FilterPresentation) =>
   filter.modalites_accompagnement != null && filter.modalites_accompagnement.length > 0;

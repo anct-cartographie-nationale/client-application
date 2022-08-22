@@ -40,29 +40,30 @@ const getBottomRightBound = (localisations: Localisation[]) =>
     NO_LOCALISATION
   );
 
-export const getBoundFromLocalisations = (localisations: Localisation[]): [Localisation, Localisation] => [
+export const getBoundsFromLocalisations = (localisations: Localisation[]): [Localisation, Localisation] => [
   getTopLeftBound(localisations),
   getBottomRightBound(localisations)
 ];
 
 export class MarkersPresenter {
   private readonly _centerView$: Subject<CenterView> = new Subject<CenterView>();
-  private readonly _selected$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  private readonly _focuced: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
   public readonly centerView$: Observable<CenterView> = this._centerView$.asObservable();
+
+  private readonly _selected$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public readonly selected$: Observable<string> = this._selected$.asObservable();
+
+  private readonly _focuced: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public readonly focuced$: Observable<string> = this._focuced.asObservable();
 
-  public select(markerId: string) {
-    this._selected$.next(markerId);
+  public center(coordinates: Localisation, zoomLevel: number) {
+    this._centerView$.next({ coordinates, zoomLevel });
   }
 
   public focus(markerId: string) {
     this._focuced.next(markerId);
   }
 
-  public center(coordinates: Localisation, zoomLevel: number) {
-    this._centerView$.next({ coordinates, zoomLevel });
+  public select(markerId: string) {
+    this._selected$.next(markerId);
   }
 }

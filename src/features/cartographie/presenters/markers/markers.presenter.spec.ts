@@ -1,6 +1,6 @@
 import { firstValueFrom } from 'rxjs';
 import { Localisation } from '../../../core';
-import { getBoundFromLocalisations, MarkersPresenter } from './markers.presenter';
+import { getBoundsFromLocalisations, MarkersPresenter } from './markers.presenter';
 
 describe('markers presenter', (): void => {
   it('should select a marker by id', async (): Promise<void> => {
@@ -24,7 +24,7 @@ describe('markers presenter', (): void => {
       Localisation({ latitude: 41.28, longitude: 7.14 })
     ];
 
-    const bounds: [Localisation, Localisation] = getBoundFromLocalisations(localisations);
+    const bounds: [Localisation, Localisation] = getBoundsFromLocalisations(localisations);
 
     expect(bounds).toStrictEqual([
       Localisation({ latitude: 52.79, longitude: -1.22 }),

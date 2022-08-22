@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject, tap } from 'rxjs';
 import { Bounds, Point } from 'leaflet';
 import {
+  DepartementPresentation,
   FilterPresentation,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
@@ -19,8 +20,8 @@ import {
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration';
-import { CenterView, getBoundFromLocalisations, MarkersPresenter } from '../../presenters';
-import { MarkerEvent, ViewReset } from '../../directives';
+import { CenterView, getBoundsFromLocalisations, MarkersPresenter } from '../../presenters';
+import { ViewReset } from '../../directives';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,30 +56,38 @@ export class CartographieLayout {
     .pipe(
       tap((lieux: LieuMediationNumeriquePresentation[]) => {
         this._loadingState$.next(false);
-        !this._initialZoom && this.zoomOnLieuxDisplayedOnMap(lieux);
+        !this._initialZoom && this.zoomOnMarkersDisplayedOnMap(lieux);
         this._initialZoom = true;
       })
     );
 
-  private zoomOnLieuxDisplayedOnMap(lieux: LieuMediationNumeriquePresentation[]): void {
-    const [topLeftBound, bottomRightBound]: [Localisation, Localisation] = getBoundFromLocalisations(
-      lieux.map((lieu: LieuMediationNumeriquePresentation) => lieu.localisation)
+  public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueByDepartement$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
+    .pipe(
+      tap((departements: DepartementPresentation[]) => {
+        this._loadingState$.next(false);
+        !this._initialZoom && this.zoomOnMarkersDisplayedOnMap(departements);
+        this._initialZoom = true;
+      })
     );
 
-    ![topLeftBound, bottomRightBound].includes(NO_LOCALISATION) &&
+  private zoomOnMarkersDisplayedOnMap(localisations: { localisation: Localisation }[]): void {
+    const [northWest, southEast]: [Localisation, Localisation] = getBoundsFromLocalisations(
+      localisations.map(({ localisation }: { localisation: Localisation }) => localisation)
+    );
+
+    ![northWest, southEast].includes(NO_LOCALISATION) &&
       this._mapViewBounds$.next(
-        new Bounds([
-          new Point(topLeftBound.latitude, topLeftBound.longitude),
-          new Point(bottomRightBound.latitude, bottomRightBound.longitude)
-        ])
+        new Bounds([new Point(northWest.latitude, northWest.longitude), new Point(southEast.latitude, southEast.longitude)])
       );
   }
 
+  public zoomOnLieuxInDepartement(localisation: Localisation): void {
+    this.markersPresenter.center(localisation, 11);
+  }
+
   public readonly defaultCenterView: CenterView = {
-    coordinates: Localisation({
-      latitude: this._initialPosition.latitude,
-      longitude: this._initialPosition.longitude
-    }),
+    coordinates: Localisation(this._initialPosition),
     zoomLevel: this._zoomLevel.regular
   };
 
@@ -87,6 +96,9 @@ export class CartographieLayout {
 
   private _mapViewBounds$: Subject<Bounds> = new Subject<Bounds>();
   public mapViewBounds$: Observable<Bounds> = this._mapViewBounds$.asObservable();
+
+  private _currentZoomLevel$: BehaviorSubject<number> = new BehaviorSubject<number>(this._zoomLevel.regular);
+  public currentZoomLevel$: Observable<number> = this._currentZoomLevel$.asObservable();
 
   public fromOrientation?: boolean = Object.keys(this._route.snapshot.queryParams).length > 0;
 
@@ -101,32 +113,17 @@ export class CartographieLayout {
     private readonly _initialPosition: InitialPositionConfiguration
   ) {}
 
-  public showDetailStructure(lieuMediationNumeriqueMarkerEvent: MarkerEvent<LieuMediationNumeriquePresentation>): void {
-    this.router.navigate([lieuMediationNumeriqueMarkerEvent.markerProperties.id, 'details'], {
-      relativeTo: this._route.parent
-    });
-    this.markersPresenter.center(lieuMediationNumeriqueMarkerEvent.markerProperties.localisation, this._zoomLevel.userPosition);
-    this.markersPresenter.select(lieuMediationNumeriqueMarkerEvent.markerProperties.id);
+  public showLieuMediationNumeriqueDetails(lieu: LieuMediationNumeriquePresentation): void {
+    this.router.navigate([lieu.id, 'details'], { relativeTo: this._route.parent });
+    this.markersPresenter.center(lieu.localisation, this._zoomLevel.userPosition);
+    this.markersPresenter.select(lieu.id);
   }
 
-  public trackByLieuId(_: number, lieu: LieuMediationNumeriquePresentation) {
-    return lieu.id;
-  }
-
-  public updateMapView({ viewport: [leftLongitude, bottomLatitude, rightLongitude, topLatitude] }: ViewReset) {
+  public mapViewUpdated({ viewport: [leftLongitude, bottomLatitude, rightLongitude, topLatitude], zoomLevel }: ViewReset) {
+    this._currentZoomLevel$.next(zoomLevel);
     this._boundingBox$.next([
-      Localisation({
-        latitude: topLatitude,
-        longitude: leftLongitude
-      }),
-      Localisation({
-        latitude: bottomLatitude,
-        longitude: rightLongitude
-      })
+      Localisation({ latitude: topLatitude, longitude: leftLongitude }),
+      Localisation({ latitude: bottomLatitude, longitude: rightLongitude })
     ]);
-  }
-
-  resetZoom() {
-    this._initialZoom = false;
   }
 }
