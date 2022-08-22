@@ -3,18 +3,18 @@
 </div>
 <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <div *ngFor="let buttons of carouselButtons">
+    <div *ngFor="let slides of slidePresentations; index as i">
       <button
-        (click)="switchSlide(buttons.number)"
+        (click)="switchSlide(i)"
         type="button"
         data-bs-target="#carouselExampleCaptions"
-        [class.active]="currentSlide === buttons.number"
-        [attr.aria-current]="currentSlide === buttons.number"
-        aria-label="Slide (buttons.number + 1)"></button>
+        [class.active]="currentSlide === i"
+        [attr.aria-current]="currentSlide === i"
+        [attr.aria-label]="'Slide' + (i + 1)"></button>
     </div>
   </div>
-  <div class="carousel-inner h-100" *ngFor="let slides of slidePresentations">
-    <div *ngIf="currentSlide === slides.slideNumber" style="min-height: 750px">
+  <div class="carousel-inner h-100" *ngFor="let slides of slidePresentations; index as i">
+    <div *ngIf="currentSlide === i" style="min-height: 750px">
       <div class="slide d-flex flex-column align-items-center" @carouselAnimation>
         <img src="{{ slides.imageUrl }}" class="d-block me-auto ms-auto my-5" alt="" width="50%" />
         <h5 class="text-center text-secondary fw-bold">{{ slides.titre }}</h5>

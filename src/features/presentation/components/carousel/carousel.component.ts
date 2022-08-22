@@ -10,7 +10,6 @@ type SlidePresentations = {
   text: string;
   imageUrl: string;
   imageDescription: string;
-  slideNumber: number;
 };
 
 @Component({
@@ -33,8 +32,7 @@ export class CarouselComponent {
       text: `En 4 étapes, vous pouvez afficher les structures correspondant exactement aux besoins d'un bénéficiaire, dans une zone
     géographique limitée ouvertes lorsqu'il est disponible.`,
       imageUrl: '/assets/img/presentation/svg-orientation.svg',
-      imageDescription: '',
-      slideNumber: 0
+      imageDescription: ''
     },
     {
       titre: 'La visibilité',
@@ -44,28 +42,23 @@ export class CarouselComponent {
     usagers du site national qui auront accès aux informations de votre structure, mais également tout les usagers des
     sites web des collectivités qui auront intégré la plateforme !`,
       imageUrl: '/assets/img/presentation/svg-visibilite.svg',
-      imageDescription: '',
-      slideNumber: 1
+      imageDescription: ''
     },
     {
       titre: 'La centralisation',
       text: `Travailler sur cette base de donnes commune permet d'avoir une gestion de la donnée centralisée, davantage actualisée
     et permettra d'améliorer la visibilité et faire gagner du temps aux professionnels de la médiation numérique.`,
       imageUrl: '/assets/img/presentation/svg-centralisation.svg',
-      imageDescription: '',
-      slideNumber: 2
+      imageDescription: ''
     },
     {
       titre: "L'actualisation",
       text: `Notre proximité avec les structures de médiation numérique nous permet d'assurer des données actualisées il y a moins
     de 3 mois et ainsi éviter aux bénéficiaires de se rendre dans une structure fermée.`,
       imageUrl: '/assets/img/presentation/svg-actualisation.svg',
-      imageDescription: '',
-      slideNumber: 3
+      imageDescription: ''
     }
   ];
-
-  public carouselButtons: { number: number }[] = [{ number: 0 }, { number: 1 }, { number: 2 }, { number: 3 }];
 
   public switchSlide(value: number): void {
     this.currentSlide = value;
