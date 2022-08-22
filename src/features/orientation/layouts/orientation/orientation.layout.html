@@ -1,46 +1,67 @@
 <div class="bg-light h-100 p-5">
   <div class="container h-100">
     <div class="row g-0 h-100 shadow">
-      <div class="col bg-white p-3 h-100 overflow-auto d-flex flex-column">
+      <div class="col bg-white p-3 h-100 overflow-auto d-flex flex-column" *ngIf="(filterPresentation$ | async) as filter">
         <ul *ngIf="this.router.url !== '/orientation'" class="nav nav-pills justify-content-center pb-3">
           <li class="nav-item">
             <a
-              class="btn btn-secondary mx-2"
+              class="btn btn-secondary mx-2 position-relative"
               [routerLink]="['besoin']"
               queryParamsHandling="preserve"
               routerLinkActive="active active-primary"
               ariaCurrentWhenActive="page">
               Besoin
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle"
+                *ngIf="filter.services">
+                1
+              </span>
             </a>
           </li>
           <li class="nav-item">
             <a
-              class="btn btn-secondary mx-2"
+              class="btn btn-secondary mx-2 position-relative"
               [routerLink]="['localisation']"
               queryParamsHandling="preserve"
               routerLinkActive="active active-primary"
               ariaCurrentWhenActive="page">
               Localisation
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle"
+                *ngIf="filterForm.value.address && filterForm.value.latitude && filterForm.value.longitude">
+                {{(filter.distance && filter.distance !== null) ? 2 : 1}}
+              </span>
             </a>
           </li>
           <li class="nav-item">
             <a
-              class="btn btn-secondary mx-2"
+              class="btn btn-secondary mx-2 position-relative"
               [routerLink]="['accessibilite']"
               queryParamsHandling="preserve"
               routerLinkActive="active active-primary"
               ariaCurrentWhenActive="page">
               Accessibilité
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle"
+                *ngIf="(filter.conditions_access && filter.conditions_access.length > 0 ) || (filter.publics_accueillis && filter.publics_accueillis.length > 0) || (filter.modalites_accompagnement && filter.modalites_accompagnement.length > 0)">
+                {{(filter.conditions_access?.length || 0) + (filter.publics_accueillis?.length || 0) +
+                (filter.modalites_accompagnement?.length || 0)}}
+              </span>
             </a>
           </li>
           <li class="nav-item">
             <a
-              class="btn btn-secondary mx-2"
+              class="btn btn-secondary mx-2 position-relative"
               [routerLink]="['disponibilite']"
               queryParamsHandling="preserve"
               routerLinkActive="active active-primary"
               ariaCurrentWhenActive="page">
               Disponibilité
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle"
+                *ngIf="(filter.date_ouverture && filter.date_ouverture !== null) || (filter.ouvert_actuellement && filter.ouvert_actuellement !== null)">
+                {{filter.ouvert_actuellement ? 2 : 1}}
+              </span>
             </a>
           </li>
         </ul>

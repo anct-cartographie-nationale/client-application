@@ -36,8 +36,6 @@ export type FilterFormPresentation = FilterPresentation & {
   address?: string;
   latitude?: number;
   longitude?: number;
-  date_ouverture?: string;
-  ouvert_actuellement?: string;
 };
 
 export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParamsPresentation): FilterFormPresentation => ({
