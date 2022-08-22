@@ -10,6 +10,7 @@ export type Bounds = {
 export type DepartementPresentation = {
   code: string;
   nom: string;
+  lieuxCount?: number;
   bounds: Bounds;
   localisation: Localisation;
 };

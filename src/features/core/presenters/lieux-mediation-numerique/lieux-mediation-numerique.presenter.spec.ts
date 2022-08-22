@@ -799,6 +799,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       {
         code: '69',
         nom: 'Rhône',
+        lieuxCount: 1,
         bounds: {
           east: 5.1592030475156,
           north: 46.303994122044,

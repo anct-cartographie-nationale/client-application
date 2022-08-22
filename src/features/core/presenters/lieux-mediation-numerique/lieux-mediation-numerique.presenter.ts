@@ -2,11 +2,11 @@ import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuMediationNumerique, Localisation, NO_LOCALISATION } from '../../models';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
-import { DepartementPresentation, toCodeDepartement } from '../collectivite-territoriale';
+import { DepartementPresentation, toDepartement } from '../collectivite-territoriale';
 import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
 import { byBoundingBox } from './helpers/bounding-box';
-import { definedDepartements, toDepartement } from './helpers/departement';
+import { byLieuxCount, countLieuxInDepartements, definedDepartements } from './helpers/departement';
 import { byDistance, filteredLieuxMediationNumerique } from './helpers/filter';
 
 type LieuxMediationNumeriqueFilterParameters = [LieuMediationNumerique[], Localisation, FilterPresentation];
@@ -27,10 +27,12 @@ const toLieuxMediationNumeriqueByDepartement =
     [Localisation, Localisation],
     ...LieuxMediationNumeriqueFilterParameters
   ]): DepartementPresentation[] =>
-    [...new Set<string>(filteredLieuxMediationNumerique(...filterParameters, date).map(toCodeDepartement))]
+    filteredLieuxMediationNumerique(...filterParameters, date)
       .map(toDepartement)
       .filter(definedDepartements)
-      .filter(byBoundingBox(boundingBox));
+      .filter(byBoundingBox(boundingBox))
+      .reduce(countLieuxInDepartements, [])
+      .sort(byLieuxCount);
 
 export class LieuxMediationNumeriquePresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}

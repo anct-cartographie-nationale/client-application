@@ -1,4 +1,4 @@
-import { toCodeDepartement } from './collectivite-territoriale.presenter';
+import { toDepartement } from './collectivite-territoriale.presenter';
 import { Adresse, LieuMediationNumeriquePresentation } from '../../../core';
 
 describe('collectivite territoriale presenter', (): void => {
@@ -7,7 +7,7 @@ describe('collectivite territoriale presenter', (): void => {
       adresse: { code_postal: '69210' } as Adresse
     } as LieuMediationNumeriquePresentation;
 
-    const codeDepartement: string = toCodeDepartement(lieuDeMediationNumerique);
+    const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
 
     expect(codeDepartement).toStrictEqual('69');
   });
@@ -17,7 +17,7 @@ describe('collectivite territoriale presenter', (): void => {
       adresse: { code_postal: '42620' } as Adresse
     } as LieuMediationNumeriquePresentation;
 
-    const codeDepartement: string = toCodeDepartement(lieuDeMediationNumerique);
+    const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
 
     expect(codeDepartement).toStrictEqual('03');
   });
@@ -27,7 +27,7 @@ describe('collectivite territoriale presenter', (): void => {
       adresse: { code_postal: '20270' } as Adresse
     } as LieuMediationNumeriquePresentation;
 
-    const codeDepartement: string = toCodeDepartement(lieuDeMediationNumerique);
+    const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
 
     expect(codeDepartement).toStrictEqual('2B');
   });
@@ -37,7 +37,7 @@ describe('collectivite territoriale presenter', (): void => {
       adresse: { code_postal: '20142' } as Adresse
     } as LieuMediationNumeriquePresentation;
 
-    const codeDepartement: string = toCodeDepartement(lieuDeMediationNumerique);
+    const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
 
     expect(codeDepartement).toStrictEqual('2A');
   });
@@ -47,7 +47,7 @@ describe('collectivite territoriale presenter', (): void => {
       adresse: { code_postal: '1234', code_insee: '54321' } as Adresse
     } as LieuMediationNumeriquePresentation;
 
-    const codeDepartement: string = toCodeDepartement(lieuDeMediationNumerique);
+    const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
 
     expect(codeDepartement).toStrictEqual('54');
   });

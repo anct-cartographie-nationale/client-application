@@ -20,13 +20,13 @@ const LIEU_MEDIATION_NUMERIQUE_MARKER_DIMENSIONS: LeafletPoint = new LeafletPoin
   ROUND_FALSE
 );
 
-export type DivIconMarkerFactory<T> = MarkerFactory<T, DivIcon>;
-
 const lieuMediationIconMarkerSvg: string = `
-<svg class="marker default-marker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 52">
-  <ellipse class="default-marker-shadow" cx="24" cy="48" rx="12" ry="4"/>
-  <path d="m23.74 45.73.707.66.683-.683c2.038-2.04 4.04-3.864 5.934-5.588l.179-.163c6.32-5.755 11.624-10.585 11.624-18.493C42.867 11.267 34.61 3 24.423 3 14.235 3 5.978 11.267 5.978 21.463c0 4.152 1.08 7.233 3.179 10.152 2.04 2.84 5.05 5.523 8.833 8.899l.078.07a316.5 316.5 0 0 1 5.672 5.147Zm6.509-24.267a5.83 5.83 0 0 1-5.826 5.833 5.83 5.83 0 0 1-5.826-5.833 5.83 5.83 0 0 1 5.826-5.833 5.83 5.83 0 0 1 5.826 5.833Z" stroke="#fff" stroke-width="2"/>
-</svg>`;
+<svg class="marker default-marker" width="24" height="46" viewBox="0 0 24 46" xmlns="http://www.w3.org/2000/svg">
+  <ellipse class="default-marker-shadow" cx="12" cy="42" rx="12" ry="4"/>
+  <path d="M12 .8 0 7.491v13.38l11.36 18.93h1.28L24 20.87V7.491L12 .801Z"/>
+  <path fill="#fff" d="M17.487 17.24v-6.118L12 8.062l-5.487 3.06v6.118L12 20.3l5.487-3.06Z"/>
+</svg>
+`;
 
 const cnfsIconMarkerSvg: string = `
 <svg class="marker cnfs-marker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -56,7 +56,7 @@ const lieuMediationNumeriqueMarkerHighlightClass = (highlight?: MarkerHighlight)
 const lieuMediationNumeriqueMarkerOpeningClass = (status?: OpeningStatus): string =>
   status == null ? 'marker-status-unknown' : LIEU_MEDIATION_NUMERIQUE_MARKER_OPENING_CLASSES_MAP[status];
 
-export const lieuMediationNumeriqueMerkerFactory: DivIconMarkerFactory<LieuMediationNumeriqueMarkerProperties> = (
+export const lieuMediationNumeriqueMarkerFactory: MarkerFactory<LieuMediationNumeriqueMarkerProperties, DivIcon> = (
   properties: MarkerProperties<LieuMediationNumeriqueMarkerProperties>
 ): DivIcon =>
   new DivIcon({
