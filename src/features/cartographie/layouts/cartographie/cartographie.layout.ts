@@ -20,7 +20,7 @@ import {
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration';
-import { CenterView, getBoundFromLocalisations, MarkersPresenter } from '../../presenters';
+import { CenterView, getBoundsFromLocalisations, MarkersPresenter } from '../../presenters';
 import { ViewReset } from '../../directives';
 
 @Component({
@@ -72,7 +72,7 @@ export class CartographieLayout {
     );
 
   private zoomOnMarkersDisplayedOnMap(localisations: { localisation: Localisation }[]): void {
-    const [northWest, southEast]: [Localisation, Localisation] = getBoundFromLocalisations(
+    const [northWest, southEast]: [Localisation, Localisation] = getBoundsFromLocalisations(
       localisations.map(({ localisation }: { localisation: Localisation }) => localisation)
     );
 
@@ -82,8 +82,8 @@ export class CartographieLayout {
       );
   }
 
-  public zoomOnLieuxInDepartement(north: number, south: number, east: number, west: number): void {
-    this.markersPresenter.center(Localisation({ latitude: (north + south) * 0.5, longitude: (east + west) * 0.5 }), 11);
+  public zoomOnLieuxInDepartement(localisation: Localisation): void {
+    this.markersPresenter.center(localisation, 11);
   }
 
   public readonly defaultCenterView: CenterView = {
@@ -125,9 +125,5 @@ export class CartographieLayout {
       Localisation({ latitude: topLatitude, longitude: leftLongitude }),
       Localisation({ latitude: bottomLatitude, longitude: rightLongitude })
     ]);
-  }
-
-  resetZoom() {
-    this._initialZoom = false;
   }
 }

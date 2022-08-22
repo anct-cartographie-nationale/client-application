@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Bounds, DepartementPresentation } from '../../../core';
+import { Bounds, DepartementPresentation, Localisation } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,5 +9,5 @@ import { Bounds, DepartementPresentation } from '../../../core';
 export class DepartementsListComponent {
   @Input() departements: DepartementPresentation[] = [];
 
-  @Output() showLieux: EventEmitter<Bounds> = new EventEmitter<Bounds>();
+  @Output() showLieux: EventEmitter<Localisation> = new EventEmitter<Localisation>();
 }

@@ -5,5 +5,5 @@
     [longitude]="departement.localisation.longitude"
     [properties]="departement"
     markerFactoryKey="lieuMediationNumerique"
-    (markerClick)="showLieux.emit(departement.bounds)"></app-leaflet-map-marker>
+    (markerClick)="showLieux.emit(departement.localisation)"></app-leaflet-map-marker>
 </ng-container>

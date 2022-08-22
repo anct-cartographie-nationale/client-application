@@ -40,7 +40,7 @@ const getBottomRightBound = (localisations: Localisation[]) =>
     NO_LOCALISATION
   );
 
-export const getBoundFromLocalisations = (localisations: Localisation[]): [Localisation, Localisation] => [
+export const getBoundsFromLocalisations = (localisations: Localisation[]): [Localisation, Localisation] => [
   getTopLeftBound(localisations),
   getBottomRightBound(localisations)
 ];

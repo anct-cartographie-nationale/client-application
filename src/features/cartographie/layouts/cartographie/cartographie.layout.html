@@ -46,7 +46,7 @@
       <app-departement-markers
         [departements]="(departements$ | async) ?? []"
         [currentZoomLevel]="currentZoomLevel"
-        (showLieux)="zoomOnLieuxInDepartement($event.north, $event.south, $event.east, $event.west)"></app-departement-markers>
+        (showLieux)="zoomOnLieuxInDepartement($event)"></app-departement-markers>
       <app-lieu-mediation-numerique-markers
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
         [currentZoomLevel]="currentZoomLevel"

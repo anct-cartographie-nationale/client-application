@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Bounds, DepartementPresentation } from '../../../../core';
+import { Bounds, DepartementPresentation, Localisation } from '../../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -11,7 +11,7 @@ export class DepartementMarkersComponent {
 
   @Input() public departements: DepartementPresentation[] = [];
 
-  @Output() showLieux: EventEmitter<Bounds> = new EventEmitter<Bounds>();
+  @Output() showLieux: EventEmitter<Localisation> = new EventEmitter<Localisation>();
 
   public trackByDepartementCode(_: number, departement: DepartementPresentation) {
     return departement.code;

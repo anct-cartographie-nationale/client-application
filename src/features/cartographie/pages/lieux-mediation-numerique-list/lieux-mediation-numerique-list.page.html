@@ -7,5 +7,5 @@
   (selectLieu)="select($event)"></app-lieux-mediation-numerique-list>
 <app-departements-list
   *ngIf="((cartographieLayout.currentZoomLevel$ | async) ?? 0) <= 10"
-  [departements]="(cartographieLayout.departements$ | async) ?? []"
-  (showLieux)="cartographieLayout.zoomOnLieuxInDepartement($event.north, $event.south, $event.east, $event.west)"></app-departements-list>
+  [departements]="(departements$ | async) ?? []"
+  (showLieux)="cartographieLayout.zoomOnLieuxInDepartement($event)"></app-departements-list>
