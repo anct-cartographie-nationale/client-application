@@ -16,7 +16,8 @@ import {
       provide: LieuxMediationNumeriquePresenter,
       useClass: LieuxMediationNumeriquePresenter
     }
-  ]
+  ],
+  styleUrls: ['./presentation.page.scss']
 })
 export class PresentationLayout {
   public environment: Boolean = environment.production;

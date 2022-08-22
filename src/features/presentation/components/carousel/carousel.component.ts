@@ -65,6 +65,8 @@ export class CarouselComponent {
     }
   ];
 
+  public carouselButtons: { number: number }[] = [{ number: 0 }, { number: 1 }, { number: 2 }, { number: 3 }];
+
   public switchSlide(value: number): void {
     this.currentSlide = value;
   }

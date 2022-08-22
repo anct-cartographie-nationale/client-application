@@ -3,34 +3,15 @@
 </div>
 <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button
-      (click)="switchSlide(0)"
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      [class.active]="currentSlide === 0"
-      aria-current="currentSlide === 0"
-      aria-label="Slide 1"></button>
-    <button
-      (click)="switchSlide(1)"
-      type="button"
-      [class.active]="currentSlide === 1"
-      aria-current="currentSlide === 1"
-      data-bs-target="#carouselExampleCaptions"
-      aria-label="Slide 2"></button>
-    <button
-      (click)="switchSlide(2)"
-      type="button"
-      [class.active]="currentSlide === 2"
-      aria-current="currentSlide === 2"
-      data-bs-target="#carouselExampleCaptions"
-      aria-label="Slide 3"></button>
-    <button
-      (click)="switchSlide(3)"
-      type="button"
-      [class.active]="currentSlide === 3"
-      aria-current="currentSlide === 3"
-      data-bs-target="#carouselExampleCaptions"
-      aria-label="Slide 4"></button>
+    <div *ngFor="let buttons of carouselButtons">
+      <button
+        (click)="switchSlide(buttons.number)"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        [class.active]="currentSlide === buttons.number"
+        [attr.aria-current]="currentSlide === buttons.number"
+        aria-label="Slide (buttons.number + 1)"></button>
+    </div>
   </div>
   <div class="carousel-inner h-100" *ngFor="let slides of slidePresentations">
     <div *ngIf="currentSlide === slides.slideNumber" style="min-height: 750px">

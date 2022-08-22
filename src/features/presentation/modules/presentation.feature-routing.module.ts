@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PresentationLayout } from '../layouts';
+import { PresentationLayout } from '../pages';
 
 const ROUTES: Routes = [
   {
