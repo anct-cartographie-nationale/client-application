@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { BRAND_TOKEN } from '../../configuration';
 import { ConteneurComponent } from './conteneur.component';
 
@@ -6,6 +7,7 @@ describe('ConteneurComponent', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
       declarations: [ConteneurComponent],
+      imports: [RouterTestingModule],
       providers: [
         {
           provide: BRAND_TOKEN,

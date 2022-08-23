@@ -1,0 +1,30 @@
+@import '../../../../scss/mixins/mixins';
+@import '../../../../scss/functions/functions';
+@import '../../../../scss/variables/variables';
+
+.bg-welcome {
+  background-image: url('/assets/img/presentation/fond-landing.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-info {
+  background-color: #e3e3fd !important;
+}
+
+.bg-avantages {
+  background: linear-gradient(360deg, #000091 -0.08%, #0062cb 99.92%);
+}
+
+.bg-personnalisation {
+  background: #53918c;
+}
+
+.btn-discover {
+  color: $primary;
+  background-color: #8585f6;
+
+  &:hover {
+    background-color: #8585f6;
+  }
+}
