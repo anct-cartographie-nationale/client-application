@@ -3,6 +3,7 @@ import { DivIcon, Icon } from 'leaflet';
 import { MarkersConfiguration } from './markers.configuration';
 import { lieuMediationNumeriqueMarkerFactory } from './marker-factories/lieu-mediation-numerique.marker-factory';
 import { departementMarkerFactory } from './marker-factories/departement.marker-factory';
+import { regionMarkerFactory } from './marker-factories/region.marker-factory';
 
 export const MARKERS_TOKEN: InjectionToken<MarkersConfiguration<never, DivIcon | Icon>> = new InjectionToken<
   MarkersConfiguration<never, DivIcon | Icon>
@@ -10,10 +11,12 @@ export const MARKERS_TOKEN: InjectionToken<MarkersConfiguration<never, DivIcon |
 
 export enum MarkerKey {
   LieuMediationNumerique = 'lieuMediationNumerique',
-  Departement = 'departement'
+  Departement = 'departement',
+  Region = 'region'
 }
 
 export const MARKERS: MarkersConfiguration<never, DivIcon | Icon> = {
   [MarkerKey.LieuMediationNumerique]: lieuMediationNumeriqueMarkerFactory,
-  [MarkerKey.Departement]: departementMarkerFactory
+  [MarkerKey.Departement]: departementMarkerFactory,
+  [MarkerKey.Region]: regionMarkerFactory
 };
