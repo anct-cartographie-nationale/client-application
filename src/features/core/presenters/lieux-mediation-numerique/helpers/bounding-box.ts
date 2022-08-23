@@ -12,5 +12,5 @@ const isValidBoundingBox = ([topLeft, bottomRight]: [Localisation, Localisation]
 
 export const byBoundingBox =
   (boundingBox: [Localisation, Localisation]) =>
-  ({ localisation }: { localisation: Localisation }) =>
+  <T extends { localisation: Localisation }>({ localisation }: T) =>
     !isValidBoundingBox(boundingBox) || isInBoundingBox(localisation, boundingBox);
