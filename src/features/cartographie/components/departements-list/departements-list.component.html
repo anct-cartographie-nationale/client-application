@@ -4,7 +4,11 @@
       (click)="showLieux.emit(departement.localisation)"
       class="list-group-item list-group-item-action p-4"
       *ngFor="let departement of departements">
-      {{ departement.nom }}
+      <h5 class="mb-0">
+        ({{ departement.code }})
+        <b>{{ departement.nom }}</b>
+      </h5>
+      <div class="text-muted">{{ departement.lieuxCount }} résultats</div>
     </a>
   </div>
 </div>
