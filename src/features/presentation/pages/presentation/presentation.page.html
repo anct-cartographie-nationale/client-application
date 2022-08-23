@@ -108,8 +108,12 @@
     </div>
   </div>
 </div>
-<div *ngIf="!this.environment" class="py-2 bg-avantages">
-  <app-carousel></app-carousel>
+<div *ngIf="!this.environment" class="py-2" [ngClass]="setBackgroundForEachSlides()">
+  <app-carousel
+    [currentSlide]="currentSlide"
+    [switchSlide]="switchSlide"
+    [onPreviousClick]="onPreviousClick"
+    [onNextClick]="onNextClick"></app-carousel>
 </div>
 <div class="py-5 bg-personnalisation">
   <div class="container text-center">

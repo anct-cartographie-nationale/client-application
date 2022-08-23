@@ -1,35 +1,48 @@
-<div class="my-5">
-  <h1 class="h4 fw-bold my-5 text-secondary text-center">Les avantages de cet outil :</h1>
-</div>
+<h1 class="h4 mt-5 fw-bold text-secondary text-center">Les avantages de cet outil :</h1>
 <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <div *ngFor="let slides of slidePresentations; index as i">
-      <button
+      <a
         (click)="switchSlide(i)"
         type="button"
-        data-bs-target="#carouselExampleCaptions"
-        [class.active]="currentSlide === i"
-        [attr.aria-current]="currentSlide === i"
-        [attr.aria-label]="'Slide' + (i + 1)"></button>
+        class="me-2"
+        style="text-decoration: none"
+        [attr.aria-current]="this.currentSlide === i"
+        [attr.aria-label]="'Slide' + (i + 1)">
+        <i
+          *ngIf="this.currentSlide === i; else notActive"
+          class="ri-checkbox-blank-circle-fill ri-xl ri-fw ri-space text-light ms-auto me-auto"></i>
+        <ng-template #notActive>
+          <i class="ri-checkbox-blank-circle-line ri-xl ri-fw ri-space text-light ms-auto me-auto"></i>
+        </ng-template>
+      </a>
     </div>
   </div>
   <div class="carousel-inner h-100" *ngFor="let slides of slidePresentations; index as i">
-    <div *ngIf="currentSlide === i" style="min-height: 750px">
-      <div class="slide d-flex flex-column align-items-center" @carouselAnimation>
-        <img src="{{ slides.imageUrl }}" class="d-block me-auto ms-auto my-5" alt="" width="50%" />
-        <h5 class="text-center text-secondary fw-bold">{{ slides.titre }}</h5>
-        <p class="text-center text-secondary" style="max-width: 80%">
-          {{ slides.text }}
-        </p>
+    <div *ngIf="currentSlide === i">
+      <div class="container">
+        <div class="slide row" @carouselAnimation>
+          <div class="col-md-6 my-auto d-flex justify-content-end align-items-center p-5">
+            <img src="{{ slides.imageUrl }}" class="img-fluid" alt="" width="70%" />
+          </div>
+          <div class="col-md-6 my-auto">
+            <h5 class="text-secondary fw-bold">{{ slides.titre }}</h5>
+            <p class="text-secondary">
+              {{ slides.text }}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <button class="carousel-control-prev" (click)="onPreviousClick()" type="button">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <i class="ri-arrow-left-circle-fill ri-xl ri-fw ri-space text-light"></i>
+    <!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
     <span class="visually-hidden">Previous</span>
   </button>
   <button class="carousel-control-next" (click)="onNextClick()" type="button">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <i class="ri-arrow-right-circle-fill ri-xl ri-fw ri-space text-light ms-5"></i>
+    <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
     <span class="visually-hidden">Next</span>
   </button>
 </div>

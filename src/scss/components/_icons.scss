@@ -225,3 +225,11 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-account-pin-circle-fill::before {
   content: '\ea0c';
 }
+
+.ri-arrow-right-circle-fill::before {
+  content: '\ea67';
+}
+
+.ri-arrow-left-circle-fill::before {
+  content: '\ea5b';
+}
