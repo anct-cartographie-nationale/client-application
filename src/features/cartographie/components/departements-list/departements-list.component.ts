@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Bounds, DepartementPresentation, Localisation } from '../../../core';
+import { DepartementPresentation, Localisation } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
