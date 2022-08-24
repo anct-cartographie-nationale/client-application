@@ -7,8 +7,6 @@ import { LieuMediationNumeriquePresentation } from '../../../../core';
   templateUrl: './lieu-mediation-numerique-markers.component.html'
 })
 export class LieuMediationNumeriqueMarkersComponent {
-  @Input() public currentZoomLevel!: number;
-
   @Input() public lieuxMediationNumeriques: LieuMediationNumeriquePresentation[] = [];
 
   @Input() public selectedId: string = '';

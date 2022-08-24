@@ -15,7 +15,6 @@ import {
   LieuxMediationNumeriquePresenter,
   LieuxMediationNumeriqueRepository,
   Localisation,
-  NO_LOCALISATION,
   RegionPresentation,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
@@ -37,7 +36,11 @@ import { ViewReset } from '../../directives';
       provide: MARKERS_TOKEN,
       useValue: MARKERS
     },
-    MarkersPresenter
+    {
+      deps: [ZOOM_LEVEL_TOKEN],
+      provide: MarkersPresenter,
+      useClass: MarkersPresenter
+    }
   ]
 })
 export class CartographieLayout {
@@ -45,26 +48,32 @@ export class CartographieLayout {
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
 
-  private _boundingBox$: BehaviorSubject<[Localisation, Localisation]> = new BehaviorSubject<[Localisation, Localisation]>([
-    NO_LOCALISATION,
-    NO_LOCALISATION
-  ]);
-
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDistance$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
+    .lieuxMediationNumeriqueByDistance$(
+      of(this._localisation),
+      of(this._filterPresentation),
+      new Date(),
+      this.markersPresenter.boundingBox$
+    )
     .pipe(tap(() => this._loadingState$.next(false)));
 
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDepartement$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
+    .lieuxMediationNumeriqueByDepartement$(
+      of(this._localisation),
+      of(this._filterPresentation),
+      new Date(),
+      this.markersPresenter.boundingBox$
+    )
     .pipe(tap(() => this._loadingState$.next(false)));
 
   public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByRegion$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
+    .lieuxMediationNumeriqueByRegion$(
+      of(this._localisation),
+      of(this._filterPresentation),
+      new Date(),
+      this.markersPresenter.boundingBox$
+    )
     .pipe(tap(() => this._loadingState$.next(false)));
-
-  public onShowOnLieux(collectiviteTerritoriale: RegionPresentation | DepartementPresentation): void {
-    this.markersPresenter.center(collectiviteTerritoriale.localisation, collectiviteTerritoriale.zoom);
-  }
 
   public readonly defaultCenterView: CenterView = {
     coordinates: Localisation(this._initialPosition),
@@ -76,9 +85,6 @@ export class CartographieLayout {
 
   private _mapViewBounds$: Subject<Bounds> = new Subject<Bounds>();
   public mapViewBounds$: Observable<Bounds> = this._mapViewBounds$.asObservable();
-
-  private _currentZoomLevel$: BehaviorSubject<number> = new BehaviorSubject<number>(this._zoomLevel.regular);
-  public currentZoomLevel$: Observable<number> = this._currentZoomLevel$.asObservable();
 
   public fromOrientation?: boolean = Object.keys(this._route.snapshot.queryParams).length > 0;
 
@@ -100,8 +106,8 @@ export class CartographieLayout {
   }
 
   public mapViewUpdated({ viewport: [leftLongitude, bottomLatitude, rightLongitude, topLatitude], zoomLevel }: ViewReset) {
-    this._currentZoomLevel$.next(zoomLevel);
-    this._boundingBox$.next([
+    this.markersPresenter.zoomLevel(zoomLevel);
+    this.markersPresenter.boundingBox([
       Localisation({ latitude: topLatitude, longitude: leftLongitude }),
       Localisation({ latitude: bottomLatitude, longitude: rightLongitude })
     ]);

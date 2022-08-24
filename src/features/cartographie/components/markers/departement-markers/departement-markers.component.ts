@@ -7,8 +7,6 @@ import { DepartementPresentation } from '../../../../core';
   templateUrl: './departement-markers.component.html'
 })
 export class DepartementMarkersComponent {
-  @Input() public currentZoomLevel!: number;
-
   @Input() public departements: DepartementPresentation[] = [];
 
   @Output() showLieux: EventEmitter<DepartementPresentation> = new EventEmitter<DepartementPresentation>();

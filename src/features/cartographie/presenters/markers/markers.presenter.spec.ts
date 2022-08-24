@@ -4,7 +4,7 @@ import { getBoundsFromLocalisations, MarkersPresenter } from './markers.presente
 
 describe('markers presenter', (): void => {
   it('should select a marker by id', async (): Promise<void> => {
-    const markersPresenter: MarkersPresenter = new MarkersPresenter();
+    const markersPresenter: MarkersPresenter = new MarkersPresenter({ max: 0, min: 0, regular: 0, userPosition: 0 });
     const markerId: string = '18745';
 
     markersPresenter.select(markerId);

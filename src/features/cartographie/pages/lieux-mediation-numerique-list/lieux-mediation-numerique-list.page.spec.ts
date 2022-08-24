@@ -3,8 +3,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { LieuxMediationNumeriqueListPage } from './lieux-mediation-numerique-list.page';
 import { ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 import { FEATURES_TOKEN } from '../../../../root';
+import { LieuxMediationNumeriquePresenter } from '../../../core';
 import { MarkersPresenter } from '../../presenters';
 import { CartographieLayout } from '../../layouts';
+import { of } from 'rxjs';
 
 describe('LieuxMediationNumeriqueListPage', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -19,6 +21,14 @@ describe('LieuxMediationNumeriqueListPage', (): void => {
         {
           provide: ZOOM_LEVEL_TOKEN,
           useValue: {}
+        },
+        {
+          provide: LieuxMediationNumeriquePresenter,
+          useValue: {
+            lieuxMediationNumeriqueByDistance$: () => of([]),
+            lieuxMediationNumeriqueByDepartement$: () => of([]),
+            lieuxMediationNumeriqueByRegion$: () => of([])
+          }
         },
         {
           provide: MarkersPresenter,

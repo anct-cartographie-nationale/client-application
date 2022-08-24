@@ -7,8 +7,6 @@ import { RegionPresentation } from '../../../../core';
   templateUrl: './region-markers.component.html'
 })
 export class RegionMarkersComponent {
-  @Input() public currentZoomLevel!: number;
-
   @Input() public regions: RegionPresentation[] = [];
 
   @Output() showLieux: EventEmitter<RegionPresentation> = new EventEmitter<RegionPresentation>();

@@ -1,18 +1,22 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
-import { combineLatest, Observable, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
   byCollectiviteTerritorialeNom,
   DepartementPresentation,
+  FilterPresentation,
   LieuMediationNumerique,
   LieuMediationNumeriquePresentation,
-  RegionPresentation
+  LieuxMediationNumeriquePresenter,
+  Localisation,
+  RegionPresentation,
+  toFilterFormPresentationFromQuery,
+  toLocalisationFromFilterFormPresentation
 } from '../../../core';
 import { MarkersPresenter } from '../../presenters';
-import { CartographieLayout } from '../../layouts';
 
 const toLieuxWithLieuToFocus = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]): [
   LieuMediationNumeriquePresentation[],
@@ -31,6 +35,10 @@ const toLieux = ([lieux]: [
   templateUrl: 'lieux-mediation-numerique-list.page.html'
 })
 export class LieuxMediationNumeriqueListPage {
+  private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this._route.snapshot.queryParams);
+
+  private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
+
   private _initialZoom: boolean = false;
 
   private setInitialState = ([_, lieu]: [LieuMediationNumeriquePresentation[], LieuMediationNumeriquePresentation?]): void => {
@@ -45,17 +53,32 @@ export class LieuxMediationNumeriqueListPage {
   }
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = combineLatest([
-    this.cartographieLayout.lieuxMediationNumerique$,
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+      of(this._localisation),
+      of(this._filterPresentation),
+      new Date(),
+      this.markersPresenter.boundingBox$
+    ),
     this._route.paramMap
   ]).pipe(map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
 
   public departements$: Observable<DepartementPresentation[]> = combineLatest([
-    this.cartographieLayout.departements$,
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDepartement$(
+      of(this._localisation),
+      of(this._filterPresentation),
+      new Date(),
+      this.markersPresenter.boundingBox$
+    ),
     this._route.paramMap
   ]).pipe(map(([departements]: [DepartementPresentation[], ParamMap]) => departements.sort(byCollectiviteTerritorialeNom)));
 
   public regions$: Observable<RegionPresentation[]> = combineLatest([
-    this.cartographieLayout.regions$,
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByRegion$(
+      of(this._localisation),
+      of(this._filterPresentation),
+      new Date(),
+      this.markersPresenter.boundingBox$
+    ),
     this._route.paramMap
   ]).pipe(map(([regions]: [RegionPresentation[], ParamMap]) => regions.sort(byCollectiviteTerritorialeNom)));
 
@@ -64,8 +87,8 @@ export class LieuxMediationNumeriqueListPage {
     public readonly features: FeaturesConfiguration,
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
+    private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     private readonly _route: ActivatedRoute,
-    public readonly cartographieLayout: CartographieLayout,
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
