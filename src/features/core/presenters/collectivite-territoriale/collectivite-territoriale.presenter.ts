@@ -13,11 +13,20 @@ const getCorseCodeDepartement = (codePostal: string): string => (isInCorseDuSud(
 
 const isInCorse = (codePostal: string): boolean => codePostal.startsWith('20');
 
+const isInOutremer = (codePostal: string): boolean => codePostal.startsWith('97');
+
 const convertEdgeCasesToCodeInsee = (codePostal: string): string =>
   codePostalNotMatchingCodeDepartementMap.get(codePostal) ?? codePostal;
 
-const codeDepartementFromCodePostal = (codePostal: string) =>
-  isInCorse(codePostal) ? getCorseCodeDepartement(codePostal) : convertEdgeCasesToCodeInsee(codePostal).slice(0, 2);
+const codeDepartementFromCodePostal = (codePostal: string) => {
+  if (isInCorse(codePostal)) {
+    return getCorseCodeDepartement(codePostal);
+  } else if (isInOutremer(codePostal)) {
+    return codePostal.slice(0, 3);
+  }
+
+  return convertEdgeCasesToCodeInsee(codePostal).slice(0, 2);
+};
 
 const codeDepartementFromCodeInsee = (codeInsee: string) => codeInsee.slice(0, 2);
 

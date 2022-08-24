@@ -32,6 +32,16 @@ describe('collectivite territoriale presenter', (): void => {
     expect(codeDepartement).toStrictEqual('2B');
   });
 
+  it('should get département from code postal located in Martinique', (): void => {
+    const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
+      adresse: { code_postal: '97260' } as Adresse
+    } as LieuMediationNumeriquePresentation;
+
+    const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
+
+    expect(codeDepartement).toStrictEqual('972');
+  });
+
   it('should get département from code postal located in Corse-du-Sud', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
       adresse: { code_postal: '20142' } as Adresse
