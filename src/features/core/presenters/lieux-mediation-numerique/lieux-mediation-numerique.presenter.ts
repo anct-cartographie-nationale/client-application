@@ -1,4 +1,4 @@
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, distinctUntilChanged, Observable, of, share, shareReplay, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuMediationNumerique, Localisation, NO_LOCALISATION } from '../../models';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
@@ -64,7 +64,7 @@ export class LieuxMediationNumeriquePresenter {
     date: Date = new Date(),
     boundingBox$: Observable<[Localisation, Localisation]> = of([NO_LOCALISATION, NO_LOCALISATION])
   ): Observable<LieuMediationNumeriquePresentation[]> {
-    return combineLatest([boundingBox$, this.lieuxMediationNumeriqueRepository.getAll$(), localisation$, filter$]).pipe(
+    return combineLatest([boundingBox$, this.lieuxMediationNumeriqueTotal$, localisation$, filter$]).pipe(
       map(toLieuxMediationNumeriqueByDistance(date))
     );
   }
@@ -75,7 +75,7 @@ export class LieuxMediationNumeriquePresenter {
     date: Date = new Date(),
     boundingBox$: Observable<[Localisation, Localisation]> = of([NO_LOCALISATION, NO_LOCALISATION])
   ): Observable<DepartementPresentation[]> {
-    return combineLatest([boundingBox$, this.lieuxMediationNumeriqueRepository.getAll$(), localisation$, filter$]).pipe(
+    return combineLatest([boundingBox$, this.lieuxMediationNumeriqueTotal$, localisation$, filter$]).pipe(
       map(toLieuxMediationNumeriqueByDepartement(date))
     );
   }
@@ -86,12 +86,12 @@ export class LieuxMediationNumeriquePresenter {
     date: Date = new Date(),
     boundingBox$: Observable<[Localisation, Localisation]> = of([NO_LOCALISATION, NO_LOCALISATION])
   ): Observable<RegionPresentation[]> {
-    return combineLatest([boundingBox$, this.lieuxMediationNumeriqueRepository.getAll$(), localisation$, filter$]).pipe(
+    return combineLatest([boundingBox$, this.lieuxMediationNumeriqueTotal$, localisation$, filter$]).pipe(
       map(toLieuxMediationNumeriqueByRegion(date))
     );
   }
 
-  public lieuxMediationNumeriqueTotal$(): Observable<LieuMediationNumerique[]> {
-    return this.lieuxMediationNumeriqueRepository.getAll$();
-  }
+  public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> = this.lieuxMediationNumeriqueRepository
+    .getAll$()
+    .pipe(shareReplay());
 }
