@@ -3,11 +3,11 @@ import { DepartementPresentation } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-departements-list',
-  templateUrl: './departements-list.component.html'
+  selector: 'app-regions-list',
+  templateUrl: './regions-list.component.html'
 })
-export class DepartementsListComponent {
-  @Input() departements: DepartementPresentation[] = [];
+export class RegionsListComponent {
+  @Input() regions: DepartementPresentation[] = [];
 
   @Output() showLieux: EventEmitter<DepartementPresentation> = new EventEmitter<DepartementPresentation>();
 }

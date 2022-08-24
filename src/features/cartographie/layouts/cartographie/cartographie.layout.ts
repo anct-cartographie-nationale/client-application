@@ -7,7 +7,7 @@ import {
 } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject, tap } from 'rxjs';
-import { Bounds, Point } from 'leaflet';
+import { Bounds } from 'leaflet';
 import {
   DepartementPresentation,
   FilterPresentation,
@@ -16,11 +16,12 @@ import {
   LieuxMediationNumeriqueRepository,
   Localisation,
   NO_LOCALISATION,
+  RegionPresentation,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration';
-import { CenterView, getBoundsFromLocalisations, MarkersPresenter } from '../../presenters';
+import { CenterView, MarkersPresenter } from '../../presenters';
 import { ViewReset } from '../../directives';
 
 @Component({
@@ -40,8 +41,6 @@ import { ViewReset } from '../../directives';
   ]
 })
 export class CartographieLayout {
-  private _initialZoom: boolean = false;
-
   private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this._route.snapshot.queryParams);
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
@@ -53,37 +52,18 @@ export class CartographieLayout {
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDistance$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
-    .pipe(
-      tap((lieux: LieuMediationNumeriquePresentation[]) => {
-        this._loadingState$.next(false);
-        !this._initialZoom && this.zoomOnMarkersDisplayedOnMap(lieux);
-        this._initialZoom = true;
-      })
-    );
+    .pipe(tap(() => this._loadingState$.next(false)));
 
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
-    .pipe(
-      tap((departements: DepartementPresentation[]) => {
-        this._loadingState$.next(false);
-        !this._initialZoom && this.zoomOnMarkersDisplayedOnMap(departements);
-        this._initialZoom = true;
-      })
-    );
+    .pipe(tap(() => this._loadingState$.next(false)));
 
-  private zoomOnMarkersDisplayedOnMap(localisations: { localisation: Localisation }[]): void {
-    const [northWest, southEast]: [Localisation, Localisation] = getBoundsFromLocalisations(
-      localisations.map(({ localisation }: { localisation: Localisation }) => localisation)
-    );
+  public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueByRegion$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
+    .pipe(tap(() => this._loadingState$.next(false)));
 
-    ![northWest, southEast].includes(NO_LOCALISATION) &&
-      this._mapViewBounds$.next(
-        new Bounds([new Point(northWest.latitude, northWest.longitude), new Point(southEast.latitude, southEast.longitude)])
-      );
-  }
-
-  public zoomOnLieuxInDepartement(localisation: Localisation): void {
-    this.markersPresenter.center(localisation, 11);
+  public onShowOnLieux(collectiviteTerritoriale: RegionPresentation | DepartementPresentation): void {
+    this.markersPresenter.center(collectiviteTerritoriale.localisation, collectiviteTerritoriale.zoom);
   }
 
   public readonly defaultCenterView: CenterView = {
@@ -113,7 +93,7 @@ export class CartographieLayout {
     private readonly _initialPosition: InitialPositionConfiguration
   ) {}
 
-  public showLieuMediationNumeriqueDetails(lieu: LieuMediationNumeriquePresentation): void {
+  public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
     this.router.navigate([lieu.id, 'details'], { relativeTo: this._route.parent });
     this.markersPresenter.center(lieu.localisation, this._zoomLevel.userPosition);
     this.markersPresenter.select(lieu.id);

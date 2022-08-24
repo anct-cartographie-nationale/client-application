@@ -4,7 +4,13 @@ import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation
 import { combineLatest, Observable, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
-import { DepartementPresentation, LieuMediationNumerique, LieuMediationNumeriquePresentation } from '../../../core';
+import {
+  byCollectiviteTerritorialeNom,
+  DepartementPresentation,
+  LieuMediationNumerique,
+  LieuMediationNumeriquePresentation,
+  RegionPresentation
+} from '../../../core';
 import { MarkersPresenter } from '../../presenters';
 import { CartographieLayout } from '../../layouts';
 
@@ -46,12 +52,12 @@ export class LieuxMediationNumeriqueListPage {
   public departements$: Observable<DepartementPresentation[]> = combineLatest([
     this.cartographieLayout.departements$,
     this._route.paramMap
-  ]).pipe(
-    tap(([_, params]: [DepartementPresentation[], ParamMap]) => {
-      // todo: use params to switch on lieuxMediationNumerique$ if defined to focus on lieu identified in params
-    }),
-    map(([departements]: [DepartementPresentation[], ParamMap]) => departements)
-  );
+  ]).pipe(map(([departements]: [DepartementPresentation[], ParamMap]) => departements.sort(byCollectiviteTerritorialeNom)));
+
+  public regions$: Observable<RegionPresentation[]> = combineLatest([
+    this.cartographieLayout.regions$,
+    this._route.paramMap
+  ]).pipe(map(([regions]: [RegionPresentation[], ParamMap]) => regions.sort(byCollectiviteTerritorialeNom)));
 
   public constructor(
     @Inject(FEATURES_TOKEN)

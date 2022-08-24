@@ -1,0 +1,9 @@
+<ng-container *ngIf="currentZoomLevel <= 7">
+  <app-leaflet-map-marker
+    *ngFor="let region of regions; index as i; trackBy: trackByRegionCode"
+    [latitude]="region.localisation.latitude"
+    [longitude]="region.localisation.longitude"
+    [properties]="{ index: i, count: region.lieuxCount ?? 0 }"
+    markerFactoryKey="region"
+    (markerClick)="showLieux.emit(region)"></app-leaflet-map-marker>
+</ng-container>

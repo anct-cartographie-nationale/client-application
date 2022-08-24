@@ -43,15 +43,19 @@
       [centerView]="(markersPresenter.centerView$ | async) ?? defaultCenterView"
       [fitBounds]="mapViewBounds$ | async"
       (stateChange)="mapViewUpdated($event)">
+      <app-region-markers
+        [regions]="(regions$ | async) ?? []"
+        [currentZoomLevel]="currentZoomLevel"
+        (showLieux)="onShowOnLieux($event)"></app-region-markers>
       <app-departement-markers
         [departements]="(departements$ | async) ?? []"
         [currentZoomLevel]="currentZoomLevel"
-        (showLieux)="zoomOnLieuxInDepartement($event)"></app-departement-markers>
+        (showLieux)="onShowOnLieux($event)"></app-departement-markers>
       <app-lieu-mediation-numerique-markers
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
         [currentZoomLevel]="currentZoomLevel"
         [selectedId]="(markersPresenter.selected$ | async) ?? ''"
-        (showDetails)="showLieuMediationNumeriqueDetails($event)"></app-lieu-mediation-numerique-markers>
+        (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
     </app-leaflet-map>
   </div>
 </div>

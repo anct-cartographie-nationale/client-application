@@ -4,7 +4,7 @@ import { Adresse, LieuMediationNumerique, Localisation, NO_LOCALISATION, Url } f
 import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
 import { LieuxMediationNumeriquePresenter } from './lieux-mediation-numerique.presenter';
-import { DepartementPresentation } from '../collectivite-territoriale';
+import { DepartementPresentation, RegionPresentation } from '../collectivite-territoriale';
 
 describe('lieux-mediation-numerique-list presenter', (): void => {
   it('should append the distance from some localisation to a lieu mediation numerique', async (): Promise<void> => {
@@ -799,16 +799,45 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       {
         code: '69',
         nom: 'Rhône',
+        zoom: 11,
         lieuxCount: 1,
-        bounds: {
-          east: 5.1592030475156,
-          north: 46.303994122044,
-          south: 45.45503324486,
-          west: 4.243469905983
-        },
         localisation: {
           latitude: 45.871047330627775,
           longitude: 4.640949259558913
+        }
+      }
+    ]);
+  });
+
+  it('should group lieux de mediation numerique by region', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        adresse: Adresse({ code_postal: '69210' } as Adresse)
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const regionPresentations: RegionPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByRegion$(of(NO_LOCALISATION), of({}), undefined)
+    );
+
+    expect<RegionPresentation[]>(regionPresentations).toStrictEqual([
+      {
+        code: '84',
+        nom: 'Auvergne-Rhône-Alpes',
+        zoom: 9,
+        departements: ['01', '03', '07', '15', '26', '38', '42', '43', '63', '69', '73', '74'],
+        lieuxCount: 1,
+        localisation: {
+          latitude: 45.515833,
+          longitude: 4.538056
         }
       }
     ]);

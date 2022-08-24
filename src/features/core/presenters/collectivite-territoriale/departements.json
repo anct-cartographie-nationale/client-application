@@ -2,12 +2,7 @@
   {
     "code": "01",
     "nom": "Ain",
-    "bounds": {
-      "north": 46.517199374492,
-      "south": 45.611235124481,
-      "east": 6.1697363568789,
-      "west": 4.729097034294
-    },
+    "zoom": 11,
     "localisation": {
       "longitude": 5.348666025399395,
       "latitude": 46.099798450280282
@@ -16,12 +11,7 @@
   {
     "code": "02",
     "nom": "Aisne",
-    "bounds": {
-      "north": 50.069271974234,
-      "south": 48.837795469902,
-      "east": 4.2540638814402,
-      "west": 2.9624508927558
-    },
+    "zoom": 11,
     "localisation": {
       "longitude": 3.559228138131865,
       "latitude": 49.561047640550804
@@ -30,12 +20,7 @@
   {
     "code": "03",
     "nom": "Allier",
-    "bounds": {
-      "north": 46.803872076205,
-      "south": 45.930727869968,
-      "east": 4.0055701432229,
-      "west": 2.2804029533754
-    },
+    "zoom": 11,
     "localisation": {
       "longitude": 3.187565399965392,
       "latitude": 46.393663504602458
@@ -44,12 +29,7 @@
   {
     "code": "04",
     "nom": "Alpes-de-Haute-Provence",
-    "bounds": {
-      "north": 44.659501345682,
-      "south": 43.668282105491,
-      "east": 6.9668199032047,
-      "west": 5.4980104773442
-    },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.244559228032303,
       "latitude": 44.106225299144775
@@ -58,12 +38,7 @@
   {
     "code": "05",
     "nom": "Hautes-Alpes",
-    "bounds": {
-      "north": 45.12684420383,
-      "south": 44.186478874057,
-      "east": 7.0771048243018,
-      "west": 5.4185330627929
-    },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.264858477005842,
       "latitude": 44.663773434093478
@@ -72,7 +47,7 @@
   {
     "code": "06",
     "nom": "Alpes-Maritimes",
-    "bounds": { "north": 44.361051257141, "south": 43.480065494401, "east": 7.7169378581589, "west": 6.6363906079569 },
+    "zoom": 11,
     "localisation": {
       "longitude": 7.11620883820964,
       "latitude": 43.938236643815486
@@ -81,7 +56,7 @@
   {
     "code": "07",
     "nom": "Ardèche",
-    "bounds": { "north": 45.365674921417, "south": 44.264783733394, "east": 4.8865943991285, "west": 3.8615128126047 },
+    "zoom": 11,
     "localisation": {
       "longitude": 4.425531629330188,
       "latitude": 44.752642988235216
@@ -90,7 +65,7 @@
   {
     "code": "08",
     "nom": "Ardennes",
-    "bounds": { "north": 50.168317417174, "south": 49.228510768771, "east": 5.3935393812988, "west": 4.0252899216328 },
+    "zoom": 11,
     "localisation": {
       "longitude": 4.64062940465854,
       "latitude": 49.616057077754739
@@ -99,7 +74,7 @@
   {
     "code": "09",
     "nom": "Ariège",
-    "bounds": { "north": 43.315601482419, "south": 42.572397819345, "east": 2.1758766074869, "west": 0.82612266137771 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.503639287555638,
       "latitude": 42.920893264531422
@@ -108,7 +83,7 @@
   {
     "code": "10",
     "nom": "Aube",
-    "bounds": { "north": 48.716672523486, "south": 47.924112631788, "east": 4.863174195777, "west": 3.3883584814447 },
+    "zoom": 11,
     "localisation": {
       "longitude": 4.161601781275763,
       "latitude": 48.304602869892747
@@ -117,7 +92,7 @@
   {
     "code": "11",
     "nom": "Aude",
-    "bounds": { "north": 43.459927734352, "south": 42.64890098195, "east": 3.2405623482295, "west": 1.6884233932357 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.413675525924558,
       "latitude": 43.103265825583428
@@ -126,7 +101,7 @@
   {
     "code": "12",
     "nom": "Aveyron",
-    "bounds": { "north": 44.941219492647, "south": 43.692056102371, "east": 3.4507554815828, "west": 1.8396044963184 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.678475218844927,
       "latitude": 44.281160005638597
@@ -135,7 +110,7 @@
   {
     "code": "13",
     "nom": "Bouches-du-Rhône",
-    "bounds": { "north": 43.92406219253, "south": 43.162545513212, "east": 5.8132476569219, "west": 4.2302808850321 },
+    "zoom": 11,
     "localisation": {
       "longitude": 5.085361269441959,
       "latitude": 43.545813018177682
@@ -144,7 +119,7 @@
   {
     "code": "14",
     "nom": "Calvados",
-    "bounds": { "north": 49.429859840723, "south": 48.752223582274, "east": 0.44627431224134, "west": -1.1595014604014 },
+    "zoom": 11,
     "localisation": {
       "longitude": -0.361598715951831,
       "latitude": 49.099624864919718
@@ -153,7 +128,7 @@
   {
     "code": "15",
     "nom": "Cantal",
-    "bounds": { "north": 45.480702895801, "south": 44.61552895784, "east": 3.3699091459722, "west": 2.0629079799591 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.668915768733588,
       "latitude": 45.05130587390169
@@ -162,7 +137,7 @@
   {
     "code": "16",
     "nom": "Charente",
-    "bounds": { "north": 46.139591492141, "south": 45.191628193392, "east": 0.9456207917489, "west": -0.46177341555077 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.203242053316784,
       "latitude": 45.718687935826821
@@ -171,7 +146,7 @@
   {
     "code": "17",
     "nom": "Charente-Maritime",
-    "bounds": { "north": 46.371051399922, "south": 45.088810634907, "east": 0.005823224821197, "west": -1.5614800452621 },
+    "zoom": 11,
     "localisation": {
       "longitude": -0.678828180011893,
       "latitude": 45.775078115409869
@@ -180,7 +155,7 @@
   {
     "code": "18",
     "nom": "Cher",
-    "bounds": { "north": 47.628965936616, "south": 46.420403547753, "east": 3.0793324170792, "west": 1.7745852665449 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.491138526672551,
       "latitude": 47.065856066370308
@@ -189,7 +164,7 @@
   {
     "code": "19",
     "nom": "Corrèze",
-    "bounds": { "north": 45.763895555756, "south": 44.923721627249, "east": 2.5283596411119, "west": 1.2271245972559 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.877391973643968,
       "latitude": 45.357334333349371
@@ -198,7 +173,7 @@
   {
     "code": "21",
     "nom": "Côte-d'Or",
-    "bounds": { "north": 48.030241950581, "south": 46.900857518168, "east": 5.5185372800929, "west": 4.0660574486622 },
+    "zoom": 11,
     "localisation": {
       "longitude": 4.771734059306371,
       "latitude": 47.425504861404967
@@ -207,7 +182,7 @@
   {
     "code": "22",
     "nom": "Côtes-d'Armor",
-    "bounds": { "north": 48.867411825697, "south": 48.035478415172, "east": -1.9089921410274, "west": -3.663669588163 },
+    "zoom": 11,
     "localisation": {
       "longitude": -2.864464345576853,
       "latitude": 48.439991322292975
@@ -216,7 +191,7 @@
   {
     "code": "23",
     "nom": "Creuse",
-    "bounds": { "north": 46.45481310551, "south": 45.664008285608, "east": 2.6107853057918, "west": 1.3748978470741 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.018307483430017,
       "latitude": 46.09063234352147
@@ -225,7 +200,7 @@
   {
     "code": "24",
     "nom": "Dordogne",
-    "bounds": { "north": 45.714569962764, "south": 44.57129825478, "east": 1.4482602497483, "west": -0.041998525054412 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.741040317517638,
       "latitude": 45.104821514979115
@@ -234,7 +209,7 @@
   {
     "code": "25",
     "nom": "Doubs",
-    "bounds": { "north": 47.579897594928, "south": 46.553996454277, "east": 7.0622006908671, "west": 5.6987272452696 },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.362870425989155,
       "latitude": 47.16609513619715
@@ -243,7 +218,7 @@
   {
     "code": "26",
     "nom": "Drôme",
-    "bounds": { "north": 45.344042230781, "south": 44.115716677493, "east": 5.8294720463131, "west": 4.6477668446587 },
+    "zoom": 11,
     "localisation": {
       "longitude": 5.167325033858678,
       "latitude": 44.685347548910876
@@ -252,7 +227,7 @@
   {
     "code": "27",
     "nom": "Eure",
-    "bounds": { "north": 49.485111873749, "south": 48.666521479531, "east": 1.8026740663848, "west": 0.29722451460974 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.996354215855167,
       "latitude": 49.11382227521672
@@ -261,7 +236,7 @@
   {
     "code": "28",
     "nom": "Eure-et-Loir",
-    "bounds": { "north": 48.941051842112, "south": 47.953852019595, "east": 1.9940901445311, "west": 0.76023175104941 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.370033152305838,
       "latitude": 48.388033877010386
@@ -270,7 +245,7 @@
   {
     "code": "29",
     "nom": "Finistère",
-    "bounds": { "north": 48.75230874743, "south": 47.762638930067, "east": -3.3880788564101, "west": -5.138001239929 },
+    "zoom": 11,
     "localisation": {
       "longitude": -4.059095901665024,
       "latitude": 48.261386770195145
@@ -279,7 +254,7 @@
   {
     "code": "2A",
     "nom": "Corse-du-Sud",
-    "bounds": { "north": 42.381404942274, "south": 41.362164776515, "east": 9.4073217319481, "west": 8.5401025407511 },
+    "zoom": 11,
     "localisation": {
       "longitude": 8.988234351564222,
       "latitude": 41.86398928172553
@@ -288,7 +263,7 @@
   {
     "code": "2B",
     "nom": "Haute-Corse",
-    "bounds": { "north": 43.011724041684, "south": 41.832143660252, "east": 9.5592262719626, "west": 8.5734085639674 },
+    "zoom": 11,
     "localisation": {
       "longitude": 9.206436950725896,
       "latitude": 42.394659045485668
@@ -297,7 +272,7 @@
   {
     "code": "30",
     "nom": "Gard",
-    "bounds": { "north": 44.459798467391, "south": 43.460183661653, "east": 4.8455501032842, "west": 3.2628340569911 },
+    "zoom": 11,
     "localisation": {
       "longitude": 4.179823679654268,
       "latitude": 43.993762729920775
@@ -306,7 +281,7 @@
   {
     "code": "31",
     "nom": "Haute-Garonne",
-    "bounds": { "north": 43.920240096152, "south": 42.68989270234, "east": 2.0478554672695, "west": 0.44199364903152 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.175062784816758,
       "latitude": 43.358821316445614
@@ -315,7 +290,7 @@
   {
     "code": "32",
     "nom": "Gers",
-    "bounds": { "north": 44.078224550392, "south": 43.310884111508, "east": 1.2013345895525, "west": -0.28211623210758 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.452998281716819,
       "latitude": 43.692948200276071
@@ -324,7 +299,7 @@
   {
     "code": "33",
     "nom": "Gironde",
-    "bounds": { "north": 45.574691325999, "south": 44.193811119459, "east": 0.31506020240148, "west": -1.2617334302552 },
+    "zoom": 11,
     "localisation": {
       "longitude": -0.582543178713593,
       "latitude": 44.838973491313318
@@ -333,7 +308,7 @@
   {
     "code": "34",
     "nom": "Hérault",
-    "bounds": { "north": 43.969527164685, "south": 43.212804132866, "east": 4.1944474773799, "west": 2.5399656073586 },
+    "zoom": 11,
     "localisation": {
       "longitude": 3.368286888613917,
       "latitude": 43.579513462611636
@@ -342,7 +317,7 @@
   {
     "code": "35",
     "nom": "Ille-et-Vilaine",
-    "bounds": { "north": 48.704854504824, "south": 47.631356309182, "east": -1.0168893967587, "west": -2.289084836122 },
+    "zoom": 11,
     "localisation": {
       "longitude": -1.638013595292116,
       "latitude": 48.15481762958985
@@ -351,7 +326,7 @@
   {
     "code": "36",
     "nom": "Indre",
-    "bounds": { "north": 47.276819032313, "south": 46.347214822447, "east": 2.2043920861378, "west": 0.86746898682573 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.576027176470445,
       "latitude": 46.778336219085674
@@ -360,7 +335,7 @@
   {
     "code": "37",
     "nom": "Indre-et-Loire",
-    "bounds": { "north": 47.709346222795, "south": 46.737086924375, "east": 1.3653663291974, "west": 0.053277684947378 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.691158926417557,
       "latitude": 47.258521918199868
@@ -369,7 +344,7 @@
   {
     "code": "38",
     "nom": "Isère",
-    "bounds": { "north": 45.883269928025, "south": 44.696067584965, "east": 6.3588423781754, "west": 4.7441167394752 },
+    "zoom": 11,
     "localisation": {
       "longitude": 5.574236336789287,
       "latitude": 45.26395628867062
@@ -378,7 +353,7 @@
   {
     "code": "39",
     "nom": "Jura",
-    "bounds": { "north": 47.305475313171, "south": 46.260731935709, "east": 6.2033299339615, "west": 5.2548827302617 },
+    "zoom": 11,
     "localisation": {
       "longitude": 5.697495901417199,
       "latitude": 46.729342559560436
@@ -387,7 +362,7 @@
   {
     "code": "40",
     "nom": "Landes",
-    "bounds": { "north": 44.532195517275, "south": 43.487949116697, "east": 0.13672631290526, "west": -1.524870110434 },
+    "zoom": 11,
     "localisation": {
       "longitude": -0.783832347129465,
       "latitude": 43.965857084545583
@@ -396,7 +371,7 @@
   {
     "code": "41",
     "nom": "Loir-et-Cher",
-    "bounds": { "north": 48.132548568904, "south": 47.18622172903, "east": 2.2478931361182, "west": 0.58052041667909 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.427957892004081,
       "latitude": 47.616946597818789
@@ -405,7 +380,7 @@
   {
     "code": "42",
     "nom": "Loire",
-    "bounds": { "north": 46.275936357353, "south": 45.232177394436, "east": 4.7604638818845, "west": 3.6906909501902 },
+    "zoom": 11,
     "localisation": {
       "longitude": 4.164661841030067,
       "latitude": 45.727982046609476
@@ -414,7 +389,7 @@
   {
     "code": "43",
     "nom": "Haute-Loire",
-    "bounds": { "north": 45.427582294546, "south": 44.743866105932, "east": 4.489606977621, "west": 3.0822533822787 },
+    "zoom": 11,
     "localisation": {
       "longitude": 3.806461355062912,
       "latitude": 45.1281134930463
@@ -423,7 +398,7 @@
   {
     "code": "44",
     "nom": "Loire-Atlantique",
-    "bounds": { "north": 47.833557723029, "south": 46.860078088448, "east": -0.94643916329696, "west": -2.5589448655806 },
+    "zoom": 11,
     "localisation": {
       "longitude": -1.678857159055145,
       "latitude": 47.362998795358386
@@ -432,7 +407,7 @@
   {
     "code": "45",
     "nom": "Loiret",
-    "bounds": { "north": 48.344598562828, "south": 47.482968445146, "east": 3.1284487900515, "west": 1.5129691249084 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.344134676881679,
       "latitude": 47.911880260805567
@@ -441,7 +416,7 @@
   {
     "code": "46",
     "nom": "Lot",
-    "bounds": { "north": 45.046275852749, "south": 44.204018679795, "east": 2.2108934010391, "west": 0.98177646477517 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.605480739992476,
       "latitude": 44.624597695242649
@@ -450,7 +425,7 @@
   {
     "code": "47",
     "nom": "Lot-et-Garonne",
-    "bounds": { "north": 44.764390535693, "south": 43.973860568873, "east": 1.0779367166615, "west": -0.14068987994571 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.460858224921808,
       "latitude": 44.367995171221999
@@ -459,7 +434,7 @@
   {
     "code": "48",
     "nom": "Lozère",
-    "bounds": { "north": 44.971408091786, "south": 44.113818175271, "east": 3.9981617468281, "west": 2.981675726654 },
+    "zoom": 11,
     "localisation": {
       "longitude": 3.499605769166552,
       "latitude": 44.517589096965125
@@ -468,7 +443,7 @@
   {
     "code": "49",
     "nom": "Maine-et-Loire",
-    "bounds": { "north": 47.809992506553, "south": 46.969397597368, "east": 0.23453049018557, "west": -1.3541992398083 },
+    "zoom": 11,
     "localisation": {
       "longitude": -0.559433251626706,
       "latitude": 47.389915457052041
@@ -477,7 +452,7 @@
   {
     "code": "50",
     "nom": "Manche",
-    "bounds": { "north": 49.725557927402, "south": 48.458282754255, "east": -0.73732101904671, "west": -1.9472733176655 },
+    "zoom": 11,
     "localisation": {
       "longitude": -1.328844995724477,
       "latitude": 49.081142979030844
@@ -486,7 +461,7 @@
   {
     "code": "51",
     "nom": "Marne",
-    "bounds": { "north": 49.406179032892, "south": 48.516108006569, "east": 5.0379027924329, "west": 3.398657955437 },
+    "zoom": 11,
     "localisation": {
       "longitude": 4.238327480325601,
       "latitude": 48.949892341664636
@@ -495,7 +470,7 @@
   {
     "code": "52",
     "nom": "Haute-Marne",
-    "bounds": { "north": 48.688711618117, "south": 47.576950536437, "east": 5.8908642780035, "west": 4.6268310932286 },
+    "zoom": 11,
     "localisation": {
       "longitude": 5.225602822550032,
       "latitude": 48.110388495250781
@@ -504,7 +479,7 @@
   {
     "code": "53",
     "nom": "Mayenne",
-    "bounds": { "north": 48.567994064435, "south": 47.733379704738, "east": -0.049909790963035, "west": -1.238247803597 },
+    "zoom": 11,
     "localisation": {
       "longitude": -0.657456096802534,
       "latitude": 48.147227576298334
@@ -513,7 +488,7 @@
   {
     "code": "54",
     "nom": "Meurthe-et-Moselle",
-    "bounds": { "north": 49.562644003065, "south": 48.349889737943, "east": 7.1231636635608, "west": 5.429907860027 },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.161667632250049,
       "latitude": 48.789087980172184
@@ -522,7 +497,7 @@
   {
     "code": "55",
     "nom": "Meuse",
-    "bounds": { "north": 49.617086785829, "south": 48.410687855212, "east": 5.8541770017029, "west": 4.8885820531146 },
+    "zoom": 11,
     "localisation": {
       "longitude": 5.381434531505527,
       "latitude": 48.991021078899053
@@ -531,7 +506,7 @@
   {
     "code": "56",
     "nom": "Morbihan",
-    "bounds": { "north": 48.210884763611, "south": 47.283069445657, "east": -2.0357552590146, "west": -3.7321436369252 },
+    "zoom": 11,
     "localisation": {
       "longitude": -2.811052115380253,
       "latitude": 47.846704658327681
@@ -540,7 +515,7 @@
   {
     "code": "57",
     "nom": "Moselle",
-    "bounds": { "north": 49.510019040716, "south": 48.52694525177, "east": 7.6352815933424, "west": 5.8934039932125 },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.661624220306487,
       "latitude": 49.037366986159327
@@ -549,7 +524,7 @@
   {
     "code": "58",
     "nom": "Nièvre",
-    "bounds": { "north": 47.587958865747, "south": 46.651760006926, "east": 4.2306617272065, "west": 2.8451871650071 },
+    "zoom": 11,
     "localisation": {
       "longitude": 3.504223955098858,
       "latitude": 47.115778469521914
@@ -558,7 +533,7 @@
   {
     "code": "59",
     "nom": "Nord",
-    "bounds": { "north": 51.08854370897, "south": 49.969186662527, "east": 4.2279959931456, "west": 2.0677049871716 },
+    "zoom": 11,
     "localisation": {
       "longitude": 3.214201790735322,
       "latitude": 50.448154659235627
@@ -567,7 +542,7 @@
   {
     "code": "60",
     "nom": "Oise",
-    "bounds": { "north": 49.758309270134, "south": 49.060452516659, "east": 3.162641421643, "west": 1.6895744511517 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.424915986599554,
       "latitude": 49.409987385575796
@@ -576,7 +551,7 @@
   {
     "code": "61",
     "nom": "Orne",
-    "bounds": { "north": 48.972557592954, "south": 48.181599665308, "east": 0.9762713097259, "west": -0.86036021134895 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.127763902018232,
       "latitude": 48.623008345761932
@@ -585,7 +560,7 @@
   {
     "code": "62",
     "nom": "Pas-de-Calais",
-    "bounds": { "north": 51.006501514321, "south": 50.020975633738, "east": 3.1883563131291, "west": 1.5577948179294 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.28619300931138,
       "latitude": 50.493911696247558
@@ -594,7 +569,7 @@
   {
     "code": "63",
     "nom": "Puy-de-Dôme",
-    "bounds": { "north": 46.255486133208, "south": 45.287121578381, "east": 3.9844000097893, "west": 2.388014020679 },
+    "zoom": 11,
     "localisation": {
       "longitude": 3.140071103255325,
       "latitude": 45.72593841410395
@@ -603,7 +578,7 @@
   {
     "code": "64",
     "nom": "Pyrénées-Atlantiques",
-    "bounds": { "north": 43.596401195938, "south": 42.777515930774, "east": 0.02629551293813, "west": -1.7908870919282 },
+    "zoom": 11,
     "localisation": {
       "longitude": -0.760948286617372,
       "latitude": 43.256265325918591
@@ -612,7 +587,7 @@
   {
     "code": "65",
     "nom": "Hautes-Pyrénées",
-    "bounds": { "north": 43.609311711216, "south": 42.674921018438, "east": 0.64553925526757, "west": -0.3270823405503 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.163914749725104,
       "latitude": 43.053668363159161
@@ -621,7 +596,7 @@
   {
     "code": "66",
     "nom": "Pyrénées-Orientales",
-    "bounds": { "north": 42.918339638726, "south": 42.33364688988, "east": 3.1747892794105, "west": 1.7256472450279 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.522179940125737,
       "latitude": 42.599749769315281
@@ -630,7 +605,7 @@
   {
     "code": "67",
     "nom": "Bas-Rhin",
-    "bounds": { "north": 49.077884925649, "south": 48.120371112534, "east": 8.2303986615424, "west": 6.9403717864006 },
+    "zoom": 11,
     "localisation": {
       "longitude": 7.552055542392739,
       "latitude": 48.671309691931114
@@ -639,7 +614,7 @@
   {
     "code": "68",
     "nom": "Haut-Rhin",
-    "bounds": { "north": 48.310471263573, "south": 47.422198455938, "east": 7.6220859200517, "west": 6.8428287756472 },
+    "zoom": 11,
     "localisation": {
       "longitude": 7.273894031759741,
       "latitude": 47.859356136322752
@@ -648,7 +623,7 @@
   {
     "code": "69",
     "nom": "Rhône",
-    "bounds": { "north": 46.303994122044, "south": 45.45503324486, "east": 5.1592030475156, "west": 4.243469905983 },
+    "zoom": 11,
     "localisation": {
       "longitude": 4.640949259558913,
       "latitude": 45.871047330627775
@@ -657,7 +632,7 @@
   {
     "code": "70",
     "nom": "Haute-Saône",
-    "bounds": { "north": 48.023714993889, "south": 47.253139353829, "east": 6.8235333222471, "west": 5.3727580571009 },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.087280301174322,
       "latitude": 47.641294060104357
@@ -666,7 +641,7 @@
   {
     "code": "71",
     "nom": "Saône-et-Loire",
-    "bounds": { "north": 47.155410810959, "south": 46.156946471815, "east": 5.4622983197648, "west": 3.6225898833129 },
+    "zoom": 11,
     "localisation": {
       "longitude": 4.542948650171613,
       "latitude": 46.644818848710443
@@ -675,7 +650,7 @@
   {
     "code": "72",
     "nom": "Sarthe",
-    "bounds": { "north": 48.482954540393, "south": 47.569104805534, "east": 0.91379809767445, "west": -0.44786007819229 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.222581023795952,
       "latitude": 47.994975280982842
@@ -684,7 +659,7 @@
   {
     "code": "73",
     "nom": "Savoie",
-    "bounds": { "north": 45.93845768164, "south": 45.051837207667, "east": 7.1842712160815, "west": 5.6230208703548 },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.442849016866783,
       "latitude": 45.477583743140563
@@ -693,7 +668,7 @@
   {
     "code": "74",
     "nom": "Haute-Savoie",
-    "bounds": { "north": 46.408081546332, "south": 45.682198985672, "east": 7.0438913499404, "west": 5.8074048290847 },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.428318038499181,
       "latitude": 46.034630274945165
@@ -702,7 +677,7 @@
   {
     "code": "75",
     "nom": "Paris",
-    "bounds": { "north": 48.902007785215, "south": 48.816314210034, "east": 2.4675819883673, "west": 2.2242191058804 },
+    "zoom": 13,
     "localisation": {
       "longitude": 2.34208259060678,
       "latitude": 48.856648617634399
@@ -711,7 +686,7 @@
   {
     "code": "76",
     "nom": "Seine-Maritime",
-    "bounds": { "north": 50.070851596042, "south": 49.252262168305, "east": 1.79022549105, "west": 0.065609431053556 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.027901435386773,
       "latitude": 49.65478567738748
@@ -720,7 +695,7 @@
   {
     "code": "77",
     "nom": "Seine-et-Marne",
-    "bounds": { "north": 49.11755332218, "south": 48.122204261229, "east": 3.555613758785, "west": 2.3931765378081 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.934024012697684,
       "latitude": 48.627627035496232
@@ -729,7 +704,7 @@
   {
     "code": "78",
     "nom": "Yvelines",
-    "bounds": { "north": 49.08303659502, "south": 48.440146719021, "east": 2.2265538842831, "west": 1.4472851104304 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.841257365940418,
       "latitude": 48.815378470875281
@@ -738,7 +713,7 @@
   {
     "code": "79",
     "nom": "Deux-Sèvres",
-    "bounds": { "north": 47.108333434925, "south": 45.969661749473, "east": 0.22035828616308, "west": -0.89196408624284 },
+    "zoom": 11,
     "localisation": {
       "longitude": -0.317848757930099,
       "latitude": 46.557052807843341
@@ -747,7 +722,7 @@
   {
     "code": "80",
     "nom": "Somme",
-    "bounds": { "north": 50.366290636763, "south": 49.571762327, "east": 3.2030417908111, "west": 1.3796981484469 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.276502457217174,
       "latitude": 49.957904035948616
@@ -756,7 +731,7 @@
   {
     "code": "81",
     "nom": "Tarn",
-    "bounds": { "north": 44.200834436147, "south": 43.383508824887, "east": 2.93545676901, "west": 1.5439759556659 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.165745657411694,
       "latitude": 43.785581864754256
@@ -765,7 +740,7 @@
   {
     "code": "82",
     "nom": "Tarn-et-Garonne",
-    "bounds": { "north": 44.393331095059, "south": 43.770780304363, "east": 1.9963637896774, "west": 0.73810974125492 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.282400266932155,
       "latitude": 44.085633739531417
@@ -774,7 +749,7 @@
   {
     "code": "83",
     "nom": "Var",
-    "bounds": { "north": 43.806770970879, "south": 42.982043008785, "east": 6.9337211159516, "west": 5.6559638228901 },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.244632767004941,
       "latitude": 43.44210602357137
@@ -783,7 +758,7 @@
   {
     "code": "84",
     "nom": "Vaucluse",
-    "bounds": { "north": 44.431367227183, "south": 43.658685905188, "east": 5.7573377215236, "west": 4.649227423465 },
+    "zoom": 11,
     "localisation": {
       "longitude": 5.177322015176259,
       "latitude": 44.007242722634473
@@ -792,7 +767,7 @@
   {
     "code": "85",
     "nom": "Vendée",
-    "bounds": { "north": 47.083893903306, "south": 46.266566974958, "east": -0.53779518169029, "west": -2.3987614706025 },
+    "zoom": 11,
     "localisation": {
       "longitude": -1.298325800784565,
       "latitude": 46.674956357764763
@@ -801,7 +776,7 @@
   {
     "code": "86",
     "nom": "Vienne",
-    "bounds": { "north": 47.175754285742, "south": 46.049008552161, "east": 1.2126877519811, "west": -0.1021158452812 },
+    "zoom": 11,
     "localisation": {
       "longitude": 0.459451022802407,
       "latitude": 46.564943763503223
@@ -810,7 +785,7 @@
   {
     "code": "87",
     "nom": "Haute-Vienne",
-    "bounds": { "north": 46.401546863371, "south": 45.437356928582, "east": 1.9094484810021, "west": 0.62974117909144 },
+    "zoom": 11,
     "localisation": {
       "longitude": 1.234939771363161,
       "latitude": 45.892426145772646
@@ -819,7 +794,7 @@
   {
     "code": "88",
     "nom": "Vosges",
-    "bounds": { "north": 48.513587820739, "south": 47.813051201983, "east": 7.1982872111206, "west": 5.3944755711529 },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.380323394855568,
       "latitude": 48.196272829601938
@@ -828,7 +803,7 @@
   {
     "code": "89",
     "nom": "Yonne",
-    "bounds": { "north": 48.39970411104, "south": 47.312769315752, "east": 4.3403007872795, "west": 2.8487899744432 },
+    "zoom": 11,
     "localisation": {
       "longitude": 3.56319200926921,
       "latitude": 47.840617093082535
@@ -837,7 +812,7 @@
   {
     "code": "90",
     "nom": "Territoire de Belfort",
-    "bounds": { "north": 47.824784354742, "south": 47.433371743667, "east": 7.1398015507652, "west": 6.7576409592057 },
+    "zoom": 11,
     "localisation": {
       "longitude": 6.92853544042236,
       "latitude": 47.631867536887675
@@ -846,7 +821,7 @@
   {
     "code": "91",
     "nom": "Essonne",
-    "bounds": { "north": 48.776101996393, "south": 48.284688606385, "east": 2.5853737107586, "west": 1.9149199821626 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.243146979473284,
       "latitude": 48.522490704308538
@@ -855,7 +830,7 @@
   {
     "code": "92",
     "nom": "Hauts-de-Seine",
-    "bounds": { "north": 48.950965864655, "south": 48.72948996497, "east": 2.3363529889891, "west": 2.1458760215967 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.245630223738104,
       "latitude": 48.847576430009788
@@ -864,7 +839,7 @@
   {
     "code": "93",
     "nom": "Seine-Saint-Denis",
-    "bounds": { "north": 49.012397786393, "south": 48.807437551952, "east": 2.6025997962059, "west": 2.2882536989787 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.478276673716935,
       "latitude": 48.917833599986004
@@ -873,7 +848,7 @@
   {
     "code": "94",
     "nom": "Val-de-Marne",
-    "bounds": { "north": 48.861405371284, "south": 48.688326690701, "east": 2.6136517425679, "west": 2.3102224901101 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.46880070325782,
       "latitude": 48.77761519775882
@@ -882,7 +857,7 @@
   {
     "code": "95",
     "nom": "Val-d'Oise",
-    "bounds": { "north": 49.232197221792, "south": 48.908679329899, "east": 2.5905283926735, "west": 1.608798807603 },
+    "zoom": 11,
     "localisation": {
       "longitude": 2.130764649315437,
       "latitude": 49.0827385291132
@@ -891,12 +866,7 @@
   {
     "code": "971",
     "nom": "Guadeloupe",
-    "bounds": {
-      "north": 16.51452,
-      "south": 15.83201,
-      "east": -61.00037,
-      "west": -61.80976
-    },
+    "zoom": 11,
     "localisation": {
       "longitude": -61.539863970093414,
       "latitude": 16.197655628844164
@@ -905,12 +875,7 @@
   {
     "code": "972",
     "nom": "Martinique",
-    "bounds": {
-      "north": 14.87873,
-      "south": 14.39475,
-      "east": -60.8097,
-      "west": -61.22903
-    },
+    "zoom": 11,
     "localisation": {
       "longitude": -61.019611234323243,
       "latitude": 14.654897402310562
@@ -919,26 +884,16 @@
   {
     "code": "973",
     "nom": "Guyane",
-    "bounds": {
-      "north": 5.77695,
-      "south": 2.11094,
-      "east": -51.63461,
-      "west": -54.60269
-    },
+    "zoom": 11,
     "localisation": {
-      "longitude": -53.237712294069844,
-      "latitude": 3.922060670769425
+      "longitude": -52.5,
+      "latitude": 4.6
     }
   },
   {
     "code": "974",
     "nom": "La Réunion",
-    "bounds": {
-      "north": -20.87174,
-      "south": -21.38973,
-      "east": 55.83669,
-      "west": 55.21643
-    },
+    "zoom": 11,
     "localisation": {
       "longitude": 55.532518396183427,
       "latitude": -21.133216088566201
@@ -947,12 +902,7 @@
   {
     "code": "976",
     "nom": "Mayotte",
-    "bounds": {
-      "north": -12.63659,
-      "south": -13.02101,
-      "east": 45.30002,
-      "west": 45.01833
-    },
+    "zoom": 11,
     "localisation": {
       "longitude": 45.147364453253317,
       "latitude": -12.820655090736881

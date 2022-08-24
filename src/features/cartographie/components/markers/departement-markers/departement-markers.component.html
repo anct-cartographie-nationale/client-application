@@ -1,9 +1,9 @@
-<ng-container *ngIf="currentZoomLevel <= 10">
+<ng-container *ngIf="currentZoomLevel <= 10 && currentZoomLevel > 7">
   <app-leaflet-map-marker
     *ngFor="let departement of departements; index as i; trackBy: trackByDepartementCode"
     [latitude]="departement.localisation.latitude"
     [longitude]="departement.localisation.longitude"
     [properties]="{ index: i, count: departement.lieuxCount ?? 0 }"
     markerFactoryKey="departement"
-    (markerClick)="showLieux.emit(departement.localisation)"></app-leaflet-map-marker>
+    (markerClick)="showLieux.emit(departement)"></app-leaflet-map-marker>
 </ng-container>
