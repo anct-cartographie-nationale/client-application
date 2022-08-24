@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
-import { BehaviorSubject, combineLatest, Observable, of, tap } from 'rxjs';
+import { combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {

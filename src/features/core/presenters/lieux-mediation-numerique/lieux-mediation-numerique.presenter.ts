@@ -1,4 +1,4 @@
-import { combineLatest, distinctUntilChanged, Observable, of, share, shareReplay, tap } from 'rxjs';
+import { combineLatest, Observable, of, shareReplay } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuMediationNumerique, Localisation, NO_LOCALISATION } from '../../models';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
