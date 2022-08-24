@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import {
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
@@ -20,7 +20,8 @@ import {
   styleUrls: ['./presentation.page.scss']
 })
 export class PresentationLayout {
-  public currentSlide: number = 0;
+  private _currentSlide$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public currentSlide$: Observable<number> = this._currentSlide$.asObservable();
   public environment: Boolean = environment.production;
   public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumeriquePresentation[]> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueTotal$();
@@ -28,31 +29,17 @@ export class PresentationLayout {
   public constructor(private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter) {}
 
   // carousel navigator
-  switchSlide = (value: number): void => {
-    this.currentSlide = value;
+  onSwitchSlide = (value: number): void => {
+    this._currentSlide$.next(value);
   };
 
-  onPreviousClick = (): void => {
-    this.currentSlide = this.currentSlide - 1 < 0 ? 3 : this.currentSlide - 1;
+  onPreviousSlide = (): void => {
+    this._currentSlide$.next(this._currentSlide$.value - 1 < 0 ? 3 : this._currentSlide$.value - 1);
   };
 
-  onNextClick = (): void => {
-    this.currentSlide = this.currentSlide + 1 > 3 ? 0 : this.currentSlide + 1;
+  onNextSlide = (): void => {
+    this._currentSlide$.next(this._currentSlide$.value + 1 > 3 ? 0 : this._currentSlide$.value + 1);
   };
 
-  setBackgroundForEachSlides = (): string => {
-    let activeClass = '';
-    switch (this.currentSlide) {
-      case 0:
-        return (activeClass = 'bg-orientation');
-      case 1:
-        return (activeClass = 'bg-visibilite');
-      case 2:
-        return (activeClass = 'bg-centralisation');
-      case 3:
-        return (activeClass = 'bg-actualisation');
-      default:
-        return (activeClass = 'bg-orientation');
-    }
-  };
+  public slidesBackground: string[] = ['bg-orientation', 'bg-visibilite', 'bg-centralisation', 'bg-actualisation'];
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 import { animate, animation, style, transition, trigger, useAnimation } from '@angular/animations';
 
 const fadeIn = animation([style({ opacity: 0 }), animate('{{time}}', style({ opacity: 1 }))]);
@@ -25,9 +25,9 @@ type SlidePresentations = {
 })
 export class CarouselComponent {
   @Input() public currentSlide: number = 0;
-  @Input() switchSlide!: (value: number) => void;
-  @Input() onNextClick!: () => void;
-  @Input() onPreviousClick!: () => void;
+  @Output() switchSlide: EventEmitter<number> = new EventEmitter<number>();
+  @Output() nextSlide: EventEmitter<void> = new EventEmitter<void>();
+  @Output() previousSlide: EventEmitter<void> = new EventEmitter<void>();
 
   public slidePresentations: SlidePresentations[] = [
     {

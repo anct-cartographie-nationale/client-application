@@ -108,12 +108,12 @@
     </div>
   </div>
 </div>
-<div *ngIf="!this.environment" class="py-2" [ngClass]="setBackgroundForEachSlides()">
+<div *ngIf="!this.environment" class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
   <app-carousel
-    [currentSlide]="currentSlide"
-    [switchSlide]="switchSlide"
-    [onPreviousClick]="onPreviousClick"
-    [onNextClick]="onNextClick"></app-carousel>
+    [currentSlide]="(currentSlide$ | async) ?? 0"
+    (switchSlide)="onSwitchSlide($event)"
+    (nextSlide)="onNextSlide()"
+    (previousSlide)="onPreviousSlide()"></app-carousel>
 </div>
 <div class="py-5 bg-personnalisation">
   <div class="container text-center">
