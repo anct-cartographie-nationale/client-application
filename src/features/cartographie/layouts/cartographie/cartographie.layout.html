@@ -46,11 +46,11 @@
       <app-region-markers
         [regions]="(regions$ | async) ?? []"
         [currentZoomLevel]="currentZoomLevel"
-        (showLieux)="onShowOnLieux($event, 9)"></app-region-markers>
+        (showLieux)="onShowOnLieux($event)"></app-region-markers>
       <app-departement-markers
         [departements]="(departements$ | async) ?? []"
         [currentZoomLevel]="currentZoomLevel"
-        (showLieux)="onShowOnLieux($event, 11)"></app-departement-markers>
+        (showLieux)="onShowOnLieux($event)"></app-departement-markers>
       <app-lieu-mediation-numerique-markers
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
         [currentZoomLevel]="currentZoomLevel"

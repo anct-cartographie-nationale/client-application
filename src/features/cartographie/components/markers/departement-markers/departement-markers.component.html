@@ -5,5 +5,5 @@
     [longitude]="departement.localisation.longitude"
     [properties]="{ index: i, count: departement.lieuxCount ?? 0 }"
     markerFactoryKey="departement"
-    (markerClick)="showLieux.emit(departement.localisation)"></app-leaflet-map-marker>
+    (markerClick)="showLieux.emit(departement)"></app-leaflet-map-marker>
 </ng-container>

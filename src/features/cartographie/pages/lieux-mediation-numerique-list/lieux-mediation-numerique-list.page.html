@@ -9,9 +9,9 @@
   <app-departements-list
     *ngIf="currentZoomLevel <= 10 && currentZoomLevel > 7"
     [departements]="(departements$ | async) ?? []"
-    (showLieux)="cartographieLayout.onShowOnLieux($event, 11)"></app-departements-list>
+    (showLieux)="cartographieLayout.onShowOnLieux($event)"></app-departements-list>
   <app-regions-list
     *ngIf="currentZoomLevel <= 7"
     [regions]="(regions$ | async) ?? []"
-    (showLieux)="cartographieLayout.onShowOnLieux($event, 9)"></app-regions-list>
+    (showLieux)="cartographieLayout.onShowOnLieux($event)"></app-regions-list>
 </ng-container>

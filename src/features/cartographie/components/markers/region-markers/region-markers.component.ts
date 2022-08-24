@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Localisation, RegionPresentation } from '../../../../core';
+import { RegionPresentation } from '../../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -11,7 +11,7 @@ export class RegionMarkersComponent {
 
   @Input() public regions: RegionPresentation[] = [];
 
-  @Output() showLieux: EventEmitter<Localisation> = new EventEmitter<Localisation>();
+  @Output() showLieux: EventEmitter<RegionPresentation> = new EventEmitter<RegionPresentation>();
 
   public trackByRegionCode(_: number, region: RegionPresentation) {
     return region.code;

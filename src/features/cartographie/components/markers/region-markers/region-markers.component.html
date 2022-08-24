@@ -5,6 +5,5 @@
     [longitude]="region.localisation.longitude"
     [properties]="{ index: i, count: region.lieuxCount ?? 0 }"
     markerFactoryKey="region"
-    (markerClick)="showLieux.emit(region.localisation)"></app-leaflet-map-marker>
+    (markerClick)="showLieux.emit(region)"></app-leaflet-map-marker>
 </ng-container>
-lol

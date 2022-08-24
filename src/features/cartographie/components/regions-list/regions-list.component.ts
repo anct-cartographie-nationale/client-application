@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { DepartementPresentation, Localisation } from '../../../core';
+import { DepartementPresentation } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,5 +9,5 @@ import { DepartementPresentation, Localisation } from '../../../core';
 export class RegionsListComponent {
   @Input() regions: DepartementPresentation[] = [];
 
-  @Output() showLieux: EventEmitter<Localisation> = new EventEmitter<Localisation>();
+  @Output() showLieux: EventEmitter<DepartementPresentation> = new EventEmitter<DepartementPresentation>();
 }

@@ -7,7 +7,7 @@ import {
 } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject, tap } from 'rxjs';
-import { Bounds, Point } from 'leaflet';
+import { Bounds } from 'leaflet';
 import {
   DepartementPresentation,
   FilterPresentation,
@@ -62,8 +62,8 @@ export class CartographieLayout {
     .lieuxMediationNumeriqueByRegion$(of(this._localisation), of(this._filterPresentation), new Date(), this._boundingBox$)
     .pipe(tap(() => this._loadingState$.next(false)));
 
-  public onShowOnLieux(localisation: Localisation, zoomLevel: number): void {
-    this.markersPresenter.center(localisation, zoomLevel);
+  public onShowOnLieux(collectiviteTerritoriale: RegionPresentation | DepartementPresentation): void {
+    this.markersPresenter.center(collectiviteTerritoriale.localisation, collectiviteTerritoriale.zoom);
   }
 
   public readonly defaultCenterView: CenterView = {

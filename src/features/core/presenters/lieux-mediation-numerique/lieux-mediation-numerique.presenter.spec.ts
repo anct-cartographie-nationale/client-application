@@ -799,6 +799,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       {
         code: '69',
         nom: 'Rhône',
+        zoom: 11,
         lieuxCount: 1,
         localisation: {
           latitude: 45.871047330627775,
@@ -831,6 +832,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       {
         code: '84',
         nom: 'Auvergne-Rhône-Alpes',
+        zoom: 9,
         departements: ['01', '03', '07', '15', '26', '38', '42', '43', '63', '69', '73', '74'],
         lieuxCount: 1,
         localisation: {
