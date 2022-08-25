@@ -18,7 +18,7 @@ import {
 } from '../../../core';
 import { slideInAnimation } from '../../animations';
 
-const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresentation): FormGroup =>
+export const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresentation): FormGroup =>
   Object.entries(filterPresentation).reduce(
     (formGroup: FormGroup, [field, value]: [string, FilterPresentation[keyof FilterPresentation]]): FormGroup =>
       new FormGroup({

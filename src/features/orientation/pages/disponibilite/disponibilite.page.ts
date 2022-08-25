@@ -1,8 +1,18 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import {
+  FilterFormPresentation,
+  FilterPresentation,
+  LieuMediationNumeriquePresentation,
+  LieuxMediationNumeriquePresenter,
+  Localisation,
+  toFilterFormPresentationFromQuery,
+  toLocalisationFromFilterFormPresentation
+} from '@features/core';
+import { map, Observable, startWith, delay, tap } from 'rxjs';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
-import { OrientationLayout } from '../../layouts';
+import { createFormGroupFromFilterPresentation, OrientationLayout } from '../../layouts';
 
 const currentDate = () => new Date().toISOString().substring(0, 10);
 
@@ -15,11 +25,34 @@ export class DisponibilitePage {
     this.orientationLayout.filterForm.get('ouvert_actuellement')?.value
   );
 
+  public filterForm: FormGroup = createFormGroupFromFilterPresentation(
+    toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
+  );
+
+  public filterPresentation$: Observable<FilterPresentation> = this.filterForm.valueChanges.pipe(
+    startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))
+  );
+
+  public _localisation$: Observable<Localisation> = this.filterPresentation$.pipe(
+    map(toLocalisationFromFilterFormPresentation)
+  );
+
+  public _filter$: Observable<FilterPresentation> = this.filterPresentation$.pipe(delay(0), tap(this.setFilterToQueryString()));
+
+  public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> =
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(this._localisation$, this._filter$);
+
+  private setFilterToQueryString(): (queryParams: FilterPresentation) => Promise<boolean> {
+    return (queryParams: FilterPresentation) => this.router.navigate([], { queryParams });
+  }
+
   public constructor(
     @Inject(FEATURES_TOKEN)
     public readonly features: FeaturesConfiguration,
     public readonly route: ActivatedRoute,
-    public readonly orientationLayout: OrientationLayout
+    private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
+    public readonly orientationLayout: OrientationLayout,
+    public readonly router: Router
   ) {}
 
   private clearDateOuverture(): void {
