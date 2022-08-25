@@ -1,14 +1,7 @@
-import { HttpParams } from '@angular/common/http';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
-import {
-  INITIAL_POSITION_TOKEN,
-  InitialPositionConfiguration,
-  ZOOM_LEVEL_TOKEN,
-  ZoomLevelConfiguration
-} from '@gouvfr-anct/mediation-numerique';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, map, Observable, of, Subject, tap } from 'rxjs';
-import { Bounds } from 'leaflet';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import {
   DepartementPresentation,
   FilterPresentation,
@@ -21,9 +14,11 @@ import {
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration';
-import { CenterView, MarkersPresenter } from '../../presenters';
+import { MarkersPresenter } from '../../presenters';
 import { ViewReset } from '../../directives';
 import { FeaturesConfiguration, FEATURES_TOKEN } from '../../../../root';
+import { map } from 'rxjs/operators';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,7 +34,7 @@ import { FeaturesConfiguration, FEATURES_TOKEN } from '../../../../root';
       useValue: MARKERS
     },
     {
-      deps: [ZOOM_LEVEL_TOKEN],
+      deps: [ZOOM_LEVEL_TOKEN, INITIAL_POSITION_TOKEN],
       provide: MarkersPresenter,
       useClass: MarkersPresenter
     }
@@ -50,66 +45,51 @@ export class CartographieLayout {
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
 
+  private _lieuxMediationNumeriqueListPresenterArgs: [
+    Observable<Localisation>,
+    Observable<FilterPresentation>,
+    Date,
+    Observable<[Localisation, Localisation]>
+  ] = [
+    of(this._localisation),
+    this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
+    new Date(),
+    this.markersPresenter.boundingBox$
+  ];
+
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDistance$(
-      of(this._localisation),
-      this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
-      new Date(),
-      this.markersPresenter.boundingBox$
-    )
+    .lieuxMediationNumeriqueByDistance$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(tap(() => this._loadingState$.next(false)));
 
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDepartement$(
-      of(this._localisation),
-      this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
-      new Date(),
-      this.markersPresenter.boundingBox$
-    )
+    .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(tap(() => this._loadingState$.next(false)));
 
   public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByRegion$(
-      of(this._localisation),
-      this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
-      new Date(),
-      this.markersPresenter.boundingBox$
-    )
+    .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(tap(() => this._loadingState$.next(false)));
-
-  public readonly defaultCenterView: CenterView = {
-    coordinates: Localisation(this._initialPosition),
-    zoomLevel: this._zoomLevel.regular
-  };
 
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
 
-  private _mapViewBounds$: Subject<Bounds> = new Subject<Bounds>();
-  public mapViewBounds$: Observable<Bounds> = this._mapViewBounds$.asObservable();
-
-  public fromOrientation?: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
+  public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
   public constructor(
+    private readonly _router: Router,
+    private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     @Inject(FEATURES_TOKEN)
     public readonly features: FeaturesConfiguration,
-    private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly markersPresenter: MarkersPresenter,
-    public readonly route: ActivatedRoute,
-    private readonly router: Router,
-    @Inject(ZOOM_LEVEL_TOKEN)
-    private readonly _zoomLevel: ZoomLevelConfiguration,
-    @Inject(INITIAL_POSITION_TOKEN)
-    private readonly _initialPosition: InitialPositionConfiguration
+    public readonly route: ActivatedRoute
   ) {}
 
   public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
-    this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
-    this.markersPresenter.center(lieu.localisation, this._zoomLevel.userPosition);
+    this._router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
+    this.markersPresenter.center(lieu.localisation);
     this.markersPresenter.select(lieu.id);
   }
 
-  public mapViewUpdated({ viewport: [leftLongitude, bottomLatitude, rightLongitude, topLatitude], zoomLevel }: ViewReset) {
+  public onMapViewUpdated({ viewport: [leftLongitude, bottomLatitude, rightLongitude, topLatitude], zoomLevel }: ViewReset) {
     this.markersPresenter.zoomLevel(zoomLevel);
     this.markersPresenter.boundingBox([
       Localisation({ latitude: topLatitude, longitude: leftLongitude }),
@@ -122,7 +102,7 @@ export class CartographieLayout {
   }
 
   public resetFilters(): void {
-    this.router.navigate([], {
+    this._router.navigate([], {
       relativeTo: this.route.parent
     });
   }
