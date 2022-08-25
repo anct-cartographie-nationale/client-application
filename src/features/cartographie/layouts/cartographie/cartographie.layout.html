@@ -39,21 +39,21 @@
   </div>
   <div class="col overflow-auto">
     <app-leaflet-map
-      *ngIf="(currentZoomLevel$ | async) as currentZoomLevel"
+      *ngIf="(markersPresenter.currentZoomLevel$ | async) as currentZoomLevel"
       [centerView]="(markersPresenter.centerView$ | async) ?? defaultCenterView"
       [fitBounds]="mapViewBounds$ | async"
       (stateChange)="mapViewUpdated($event)">
       <app-region-markers
+        *ngIf="currentZoomLevel <= 7"
         [regions]="(regions$ | async) ?? []"
-        [currentZoomLevel]="currentZoomLevel"
-        (showLieux)="onShowOnLieux($event)"></app-region-markers>
+        (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-region-markers>
       <app-departement-markers
+        *ngIf="currentZoomLevel <= 10 && currentZoomLevel > 7"
         [departements]="(departements$ | async) ?? []"
-        [currentZoomLevel]="currentZoomLevel"
-        (showLieux)="onShowOnLieux($event)"></app-departement-markers>
+        (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-departement-markers>
       <app-lieu-mediation-numerique-markers
+        *ngIf="currentZoomLevel > 10"
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
-        [currentZoomLevel]="currentZoomLevel"
         [selectedId]="(markersPresenter.selected$ | async) ?? ''"
         (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
     </app-leaflet-map>

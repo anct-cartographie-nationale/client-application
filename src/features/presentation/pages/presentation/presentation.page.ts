@@ -24,7 +24,7 @@ export class PresentationLayout {
   public currentSlide$: Observable<number> = this._currentSlide$.asObservable();
   public environment: Boolean = environment.production;
   public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumeriquePresentation[]> =
-    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueTotal$();
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueTotal$;
 
   public constructor(private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter) {}
 

@@ -1,4 +1,4 @@
-<ng-container *ngIf="(cartographieLayout.currentZoomLevel$ | async) as currentZoomLevel">
+<ng-container *ngIf="(markersPresenter.currentZoomLevel$ | async) as currentZoomLevel">
   <app-lieux-mediation-numerique-list
     *ngIf="currentZoomLevel > 10"
     [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"
@@ -9,9 +9,9 @@
   <app-departements-list
     *ngIf="currentZoomLevel <= 10 && currentZoomLevel > 7"
     [departements]="(departements$ | async) ?? []"
-    (showLieux)="cartographieLayout.onShowOnLieux($event)"></app-departements-list>
+    (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-departements-list>
   <app-regions-list
     *ngIf="currentZoomLevel <= 7"
     [regions]="(regions$ | async) ?? []"
-    (showLieux)="cartographieLayout.onShowOnLieux($event)"></app-regions-list>
+    (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-regions-list>
 </ng-container>

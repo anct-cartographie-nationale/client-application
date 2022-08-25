@@ -75,7 +75,7 @@ export class OrientationLayout {
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(this._localisation$, this._filter$);
 
   public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> =
-    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueTotal$();
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueTotal$;
 
   public constructor(
     @Inject(FEATURES_TOKEN)
