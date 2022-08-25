@@ -56,7 +56,7 @@
         <a
           *ngIf="cartographie.active"
           class="btn btn-primary mx-3"
-          [class.disabled]="(lieuxMediationNumerique$ | async)?.length === 0"
+          [class.disabled]="(orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0 === 0"
           [routerLink]="['/','cartographie']"
           queryParamsHandling="preserve">
           Afficher les résultats sur la cartographie
@@ -65,7 +65,7 @@
         <a
           *ngIf="!cartographie.active && cartographie.url"
           class="btn btn-primary mx-3"
-          [class.disabled]="(lieuxMediationNumerique$ | async)?.length === 0"
+          [class.disabled]="(orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0 === 0"
           [href]="cartographie.url + '?' + orientationLayout.toQueryString($any(route.queryParams | async))"
           rel="keep-params">
           Afficher les résultats sur la cartographie
