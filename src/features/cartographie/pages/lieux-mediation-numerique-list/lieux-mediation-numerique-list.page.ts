@@ -30,6 +30,8 @@ const toLieux = ([lieux]: [
   return lieux;
 };
 
+const LIEUX_ZOOM_LEVEL = 11;
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'lieux-mediation-numerique-list.page.html'
@@ -38,6 +40,13 @@ export class LieuxMediationNumeriqueListPage {
   private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this._route.snapshot.queryParams);
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
+
+  private _lieuxMediationNumeriqueListPresenterArgs: [
+    Observable<Localisation>,
+    Observable<FilterPresentation>,
+    Date,
+    Observable<[Localisation, Localisation]>
+  ] = [of(this._localisation), of(this._filterPresentation), new Date(), this.markersPresenter.boundingBox$];
 
   private _initialZoom: boolean = false;
 
@@ -49,38 +58,30 @@ export class LieuxMediationNumeriqueListPage {
 
   private focusOnLieu(lieu: LieuMediationNumeriquePresentation) {
     this.markersPresenter.focus(lieu.id);
-    this.markersPresenter.center(lieu.localisation, 11);
+    this.markersPresenter.center(lieu.localisation, LIEUX_ZOOM_LEVEL);
   }
+
+  public currentZoomLevel$: Observable<number> = combineLatest([
+    this.markersPresenter.currentZoomLevel$,
+    this._route.paramMap
+  ]).pipe(
+    map(([currentZoomLevel, paramMap]: [number, ParamMap]) => (paramMap.get('id') ? LIEUX_ZOOM_LEVEL : currentZoomLevel))
+  );
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = combineLatest([
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
-      of(this._localisation),
-      of(this._filterPresentation),
-      new Date(),
-      this.markersPresenter.boundingBox$
+      ...this._lieuxMediationNumeriqueListPresenterArgs
     ),
     this._route.paramMap
   ]).pipe(map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
 
-  public departements$: Observable<DepartementPresentation[]> = combineLatest([
-    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDepartement$(
-      of(this._localisation),
-      of(this._filterPresentation),
-      new Date(),
-      this.markersPresenter.boundingBox$
-    ),
-    this._route.paramMap
-  ]).pipe(map(([departements]: [DepartementPresentation[], ParamMap]) => departements.sort(byCollectiviteTerritorialeNom)));
+  public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
+    .pipe(map((departements: DepartementPresentation[]) => departements.sort(byCollectiviteTerritorialeNom)));
 
-  public regions$: Observable<RegionPresentation[]> = combineLatest([
-    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByRegion$(
-      of(this._localisation),
-      of(this._filterPresentation),
-      new Date(),
-      this.markersPresenter.boundingBox$
-    ),
-    this._route.paramMap
-  ]).pipe(map(([regions]: [RegionPresentation[], ParamMap]) => regions.sort(byCollectiviteTerritorialeNom)));
+  public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
+    .pipe(map((regions: RegionPresentation[]) => regions.sort(byCollectiviteTerritorialeNom)));
 
   public constructor(
     @Inject(FEATURES_TOKEN)
