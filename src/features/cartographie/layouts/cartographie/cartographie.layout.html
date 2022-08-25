@@ -54,7 +54,7 @@
         <a
           *ngIf="!orientation.active && orientation.url"
           class="btn btn-secondary text-primary me-3"
-          [href]="orientation.url + '?' + toQueryString($any(_route.queryParams | async))">
+          [href]="orientation.url + '?' + toQueryString($any(route.queryParams | async))">
           Modifier mes filtres
         </a>
       </ng-container>

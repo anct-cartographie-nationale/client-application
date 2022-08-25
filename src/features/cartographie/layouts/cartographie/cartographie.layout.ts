@@ -47,13 +47,13 @@ import { FeaturesConfiguration, FEATURES_TOKEN } from '../../../../root';
 })
 export class CartographieLayout {
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(
-    toFilterFormPresentationFromQuery(this._route.snapshot.queryParams)
+    toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDistance$(
       of(this._localisation),
-      this._route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
+      this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
       new Date(),
       this.markersPresenter.boundingBox$
     )
@@ -62,7 +62,7 @@ export class CartographieLayout {
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(
       of(this._localisation),
-      this._route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
+      this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
       new Date(),
       this.markersPresenter.boundingBox$
     )
@@ -71,7 +71,7 @@ export class CartographieLayout {
   public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByRegion$(
       of(this._localisation),
-      this._route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
+      this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
       new Date(),
       this.markersPresenter.boundingBox$
     )
@@ -88,14 +88,14 @@ export class CartographieLayout {
   private _mapViewBounds$: Subject<Bounds> = new Subject<Bounds>();
   public mapViewBounds$: Observable<Bounds> = this._mapViewBounds$.asObservable();
 
-  public fromOrientation?: boolean = Object.keys(this._route.snapshot.queryParams).length > 0;
+  public fromOrientation?: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
   public constructor(
     @Inject(FEATURES_TOKEN)
     public readonly features: FeaturesConfiguration,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly markersPresenter: MarkersPresenter,
-    public readonly _route: ActivatedRoute,
+    public readonly route: ActivatedRoute,
     private readonly router: Router,
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
@@ -104,7 +104,7 @@ export class CartographieLayout {
   ) {}
 
   public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
-    this.router.navigate([lieu.id, 'details'], { relativeTo: this._route.parent });
+    this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
     this.markersPresenter.center(lieu.localisation, this._zoomLevel.userPosition);
     this.markersPresenter.select(lieu.id);
   }
@@ -123,7 +123,7 @@ export class CartographieLayout {
 
   public resetFilters(): void {
     this.router.navigate([], {
-      relativeTo: this._route.parent
+      relativeTo: this.route.parent
     });
   }
 }
