@@ -1,0 +1,32 @@
+<div class="h-100 d-flex flex-column">
+  <div
+    class="bg-primary text-light p-3"
+    *ngIf="getBreadcrumbItems((routerOutlet?.activatedRoute?.url | async) ?? []) as breadcrumbItems">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="Navigation par territoire">
+          <ol class="breadcrumb">
+            <ng-container *ngFor="let breadcrumbItem of breadcrumbItems">
+              <li *ngIf="breadcrumbItem.link; else: currentPage" class="breadcrumb-item">
+                <a [routerLink]="breadcrumbItem.link" class="link-light">{{ breadcrumbItem.label}}</a>
+              </li>
+              <ng-template #currentPage>
+                <li class="breadcrumb-item active" aria-current="page">{{ breadcrumbItem.label }}</li>
+              </ng-template>
+            </ng-container>
+          </ol>
+        </nav>
+      </div>
+      <ng-container *ngIf="breadcrumbItems.length > 1">
+        <div *ngIf="breadcrumbItems[breadcrumbItems.length - 2].link as link" class="col-auto">
+          <a [routerLink]="link" class="link-light text-decoration-none" aria-label="Retour">
+            <i class="ri-arrow-go-back-line"></i>
+          </a>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="overflow-hidden h-100">
+    <router-outlet></router-outlet>
+  </div>
+</div>
