@@ -1,4 +1,4 @@
-<ng-container *ngIf="(markersPresenter.currentZoomLevel$ | async) as currentZoomLevel">
+<ng-container *ngIf="(currentZoomLevel$ | async) as currentZoomLevel">
   <app-lieux-mediation-numerique-list
     *ngIf="currentZoomLevel > 10"
     [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"

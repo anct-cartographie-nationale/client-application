@@ -1,9 +1,12 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { LieuxMediationNumeriquePresenter, Localisation, NO_LOCALISATION } from '../../../core';
+import { Localisation, NO_LOCALISATION } from '../../../core';
 import { Inject } from '@angular/core';
-import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
-import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
-import { ActivatedRoute } from '@angular/router';
+import {
+  INITIAL_POSITION_TOKEN,
+  InitialPositionConfiguration,
+  ZOOM_LEVEL_TOKEN,
+  ZoomLevelConfiguration
+} from '@gouvfr-anct/mediation-numerique';
 
 export interface CenterView {
   coordinates: Localisation;
@@ -68,16 +71,23 @@ export class MarkersPresenter {
   private _currentZoomLevel$: BehaviorSubject<number> = new BehaviorSubject<number>(this._zoomLevel.regular);
   public currentZoomLevel$: Observable<number> = this._currentZoomLevel$.asObservable();
 
+  public readonly defaultCenterView: CenterView = {
+    coordinates: Localisation(this._initialPosition),
+    zoomLevel: this._zoomLevel.regular
+  };
+
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
-    private readonly _zoomLevel: ZoomLevelConfiguration
+    private readonly _zoomLevel: ZoomLevelConfiguration,
+    @Inject(INITIAL_POSITION_TOKEN)
+    private readonly _initialPosition: InitialPositionConfiguration
   ) {}
 
   public boundingBox(boundingBox: [Localisation, Localisation]) {
     this._boundingBox$.next(boundingBox);
   }
 
-  public center(coordinates: Localisation, zoomLevel: number) {
+  public center(coordinates: Localisation, zoomLevel: number = this._zoomLevel.userPosition) {
     this._centerView$.next({ coordinates, zoomLevel });
   }
 

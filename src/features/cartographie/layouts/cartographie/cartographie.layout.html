@@ -67,9 +67,8 @@
   <div class="col overflow-auto">
     <app-leaflet-map
       *ngIf="(markersPresenter.currentZoomLevel$ | async) as currentZoomLevel"
-      [centerView]="(markersPresenter.centerView$ | async) ?? defaultCenterView"
-      [fitBounds]="mapViewBounds$ | async"
-      (stateChange)="mapViewUpdated($event)">
+      [centerView]="(markersPresenter.centerView$ | async) ?? markersPresenter.defaultCenterView"
+      (stateChange)="onMapViewUpdated($event)">
       <app-region-markers
         *ngIf="currentZoomLevel <= 7"
         [regions]="(regions$ | async) ?? []"
