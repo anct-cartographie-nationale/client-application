@@ -72,11 +72,11 @@
       <app-region-markers
         *ngIf="currentZoomLevel <= 7"
         [regions]="(regions$ | async) ?? []"
-        (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-region-markers>
+        (showLieux)="onShowLieuxInRegion($event)"></app-region-markers>
       <app-departement-markers
         *ngIf="currentZoomLevel <= 10 && currentZoomLevel > 7"
         [departements]="(departements$ | async) ?? []"
-        (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-departement-markers>
+        (showLieux)="onShowLieuxInDepartement($event)"></app-departement-markers>
       <app-lieu-mediation-numerique-markers
         *ngIf="currentZoomLevel > 10"
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"

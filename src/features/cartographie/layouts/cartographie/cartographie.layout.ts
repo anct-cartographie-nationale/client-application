@@ -1,7 +1,10 @@
+import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, of, tap } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { FeaturesConfiguration, FEATURES_TOKEN } from '../../../../root';
 import {
   DepartementPresentation,
   FilterPresentation,
@@ -9,6 +12,7 @@ import {
   LieuxMediationNumeriquePresenter,
   LieuxMediationNumeriqueRepository,
   Localisation,
+  regionFromDepartement,
   RegionPresentation,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
@@ -16,9 +20,6 @@ import {
 import { MARKERS, MARKERS_TOKEN } from '../../configuration';
 import { MarkersPresenter } from '../../presenters';
 import { ViewReset } from '../../directives';
-import { FeaturesConfiguration, FEATURES_TOKEN } from '../../../../root';
-import { map } from 'rxjs/operators';
-import { HttpParams } from '@angular/common/http';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,9 +42,7 @@ import { HttpParams } from '@angular/common/http';
   ]
 })
 export class CartographieLayout {
-  private _localisation: Localisation = toLocalisationFromFilterFormPresentation(
-    toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
-  );
+  private _previousZoomLevel: number = 0;
 
   private _lieuxMediationNumeriqueListPresenterArgs: [
     Observable<Localisation>,
@@ -51,7 +50,7 @@ export class CartographieLayout {
     Date,
     Observable<[Localisation, Localisation]>
   ] = [
-    of(this._localisation),
+    of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))),
     this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
     new Date(),
     this.markersPresenter.boundingBox$
@@ -65,9 +64,22 @@ export class CartographieLayout {
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(tap(() => this._loadingState$.next(false)));
 
-  public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(tap(() => this._loadingState$.next(false)));
+  public regions$: Observable<RegionPresentation[]> = combineLatest([
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByRegion$(
+      ...this._lieuxMediationNumeriqueListPresenterArgs
+    ),
+    this.markersPresenter.currentZoomLevel$
+  ]).pipe(
+    tap(([_, zoomLevel]: [RegionPresentation[], number]): void => {
+      this._loadingState$.next(false);
+
+      if (zoomLevel <= 7 && this._previousZoomLevel > 7) {
+        this.router.navigate(['regions'], { relativeTo: this.route.parent });
+      }
+      this._previousZoomLevel = zoomLevel;
+    }),
+    map(([regions]: [RegionPresentation[], number]): RegionPresentation[] => regions)
+  );
 
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
@@ -75,16 +87,16 @@ export class CartographieLayout {
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
   public constructor(
-    private readonly _router: Router,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
+    public readonly router: Router,
+    public readonly route: ActivatedRoute,
     @Inject(FEATURES_TOKEN)
     public readonly features: FeaturesConfiguration,
-    public readonly markersPresenter: MarkersPresenter,
-    public readonly route: ActivatedRoute
+    public readonly markersPresenter: MarkersPresenter
   ) {}
 
   public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
-    this._router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
+    this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
     this.markersPresenter.center(lieu.localisation);
     this.markersPresenter.select(lieu.id);
   }
@@ -97,12 +109,24 @@ export class CartographieLayout {
     ]);
   }
 
+  public onShowLieuxInDepartement(departement: DepartementPresentation) {
+    this.markersPresenter.center(departement.localisation, departement.zoom);
+    this.router.navigate(['regions', regionFromDepartement(departement)?.nom, departement.nom], {
+      relativeTo: this.route.parent
+    });
+  }
+
+  public onShowLieuxInRegion(region: RegionPresentation) {
+    this.markersPresenter.center(region.localisation, region.zoom);
+    this.router.navigate(['regions', region.nom], { relativeTo: this.route.parent });
+  }
+
   public toQueryString(fromObject: {} = {}): string {
     return new HttpParams({ fromObject }).toString();
   }
 
   public resetFilters(): void {
-    this._router.navigate([], {
+    this.router.navigate([], {
       relativeTo: this.route.parent
     });
   }
