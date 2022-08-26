@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { DepartementPresentation } from '../../../core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,4 +11,6 @@ export class DepartementsListComponent {
   @Input() departements: DepartementPresentation[] = [];
 
   @Output() showLieux: EventEmitter<DepartementPresentation> = new EventEmitter<DepartementPresentation>();
+
+  public constructor(public readonly route: ActivatedRoute) {}
 }
