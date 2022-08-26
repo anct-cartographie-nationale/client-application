@@ -1,5 +1,11 @@
-import { toDepartement, toRegion } from './collectivite-territoriale.presenter';
-import { Adresse, LieuMediationNumeriquePresentation } from '../../../core';
+import { regionFromDepartement, toDepartement, toRegion } from './collectivite-territoriale.presenter';
+import {
+  Adresse,
+  DepartementPresentation,
+  LieuMediationNumeriquePresentation,
+  Localisation,
+  RegionPresentation
+} from '../../../core';
 
 describe('collectivite territoriale presenter', (): void => {
   it('should get département from code postal', (): void => {
@@ -80,5 +86,30 @@ describe('collectivite territoriale presenter', (): void => {
     const codeRegion: string | undefined = toRegion(lieuDeMediationNumerique)?.code;
 
     expect(codeRegion).toStrictEqual('44');
+  });
+
+  it('should get region from departement', (): void => {
+    const departement: DepartementPresentation = {
+      code: '30',
+      nom: 'Gard',
+      zoom: 11,
+      localisation: Localisation({
+        longitude: 4.179823679654268,
+        latitude: 43.993762729920775
+      })
+    };
+
+    const region: RegionPresentation | undefined = regionFromDepartement(departement);
+
+    expect(region).toStrictEqual<RegionPresentation>({
+      code: '76',
+      nom: 'Occitanie',
+      departements: ['09', '11', '12', '30', '31', '32', '34', '46', '48', '65', '66', '81', '82'],
+      zoom: 9,
+      localisation: Localisation({
+        longitude: 2.137222,
+        latitude: 43.702222
+      })
+    });
   });
 });
