@@ -5,14 +5,11 @@ import { combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
-  byCollectiviteTerritorialeNom,
-  DepartementPresentation,
   FilterPresentation,
   LieuMediationNumerique,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
   Localisation,
-  RegionPresentation,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
@@ -74,14 +71,6 @@ export class LieuxMediationNumeriqueListPage {
     ),
     this._route.paramMap
   ]).pipe(map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
-
-  public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(map((departements: DepartementPresentation[]) => departements.sort(byCollectiviteTerritorialeNom)));
-
-  public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(map((regions: RegionPresentation[]) => regions.sort(byCollectiviteTerritorialeNom)));
 
   public constructor(
     @Inject(FEATURES_TOKEN)
