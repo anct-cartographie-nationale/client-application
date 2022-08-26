@@ -10,6 +10,7 @@
 @import '~bootstrap/scss/nav';
 @import '~bootstrap/scss/navbar';
 @import '~bootstrap/scss/accordion';
+@import '~bootstrap/scss/breadcrumb';
 @import '~bootstrap/scss/badge';
 @import '~bootstrap/scss/transitions';
 @import '~bootstrap/scss/progress';
@@ -22,6 +23,7 @@
 @import '~bootstrap/scss/carousel';
 @import '~bootstrap/scss/images';
 
+@import './breadcrumb';
 @import './buttons';
 @import './fonts';
 @import './form-check';

@@ -1,0 +1,8 @@
+.breadcrumb-item {
+  // The separator between breadcrumbs (by default, a forward-slash: "/")
+  + .breadcrumb-item {
+    &::before {
+      font-family: remixicon, sans-serif !important;
+    }
+  }
+}
