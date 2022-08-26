@@ -233,3 +233,11 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-arrow-left-circle-fill::before {
   content: '\ea5b';
 }
+
+.ri-arrow-go-back-line::before {
+  content: '\ea58';
+}
+
+.ri-arrow-right-s-fill::before {
+  content: '\ea6d';
+}
