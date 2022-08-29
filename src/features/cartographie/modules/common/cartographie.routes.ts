@@ -17,16 +17,24 @@ export const ROUTES: Routes = [
       {
         children: [
           {
-            component: RegionsPage,
-            path: 'regions'
+            component: LieuxMediationNumeriqueListPage,
+            path: 'regions/:nomRegion/:nomDepartement'
           },
           {
             component: DepartementsPage,
             path: 'regions/:nomRegion'
           },
           {
+            component: RegionsPage,
+            path: 'regions'
+          },
+          {
             component: LieuxMediationNumeriqueListPage,
-            path: 'regions/:nomRegion/:nomDepartement'
+            path: 'departements/:nomDepartement'
+          },
+          {
+            component: DepartementsPage,
+            path: 'departements'
           },
           {
             component: LieuxMediationNumeriqueListPage,
