@@ -1,17 +1,7 @@
-<ng-container *ngIf="(currentZoomLevel$ | async) as currentZoomLevel">
-  <app-lieux-mediation-numerique-list
-    *ngIf="currentZoomLevel > 10"
-    [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"
-    [orientationFeature]="features.get('orientation')"
-    [focusId]="markersPresenter.focuced$ | async"
-    (print)="printPage()"
-    (selectLieu)="select($event)"></app-lieux-mediation-numerique-list>
-  <app-departements-list
-    *ngIf="currentZoomLevel <= 10 && currentZoomLevel > 7"
-    [departements]="(departements$ | async) ?? []"
-    (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-departements-list>
-  <app-regions-list
-    *ngIf="currentZoomLevel <= 7"
-    [regions]="(regions$ | async) ?? []"
-    (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-regions-list>
-</ng-container>
+<app-lieux-mediation-numerique-list
+  *ngIf="inLieuxZoomLevel((markersPresenter.currentZoomLevel$ | async) ?? 0)"
+  [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"
+  [orientationFeature]="features.get('orientation')"
+  [focusId]="markersPresenter.focuced$ | async"
+  (print)="printPage()"
+  (selectLieu)="select($event)"></app-lieux-mediation-numerique-list>

@@ -5,18 +5,15 @@ import { combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
-  byCollectiviteTerritorialeNom,
-  DepartementPresentation,
   FilterPresentation,
   LieuMediationNumerique,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
   Localisation,
-  RegionPresentation,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
-import { MarkersPresenter } from '../../presenters';
+import { MarkersPresenter, inLieuxZoomLevel } from '../../presenters';
 
 const toLieuxWithLieuToFocus = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]): [
   LieuMediationNumeriquePresentation[],
@@ -61,27 +58,12 @@ export class LieuxMediationNumeriqueListPage {
     this.markersPresenter.center(lieu.localisation, LIEUX_ZOOM_LEVEL);
   }
 
-  public currentZoomLevel$: Observable<number> = combineLatest([
-    this.markersPresenter.currentZoomLevel$,
-    this._route.paramMap
-  ]).pipe(
-    map(([currentZoomLevel, paramMap]: [number, ParamMap]) => (paramMap.get('id') ? LIEUX_ZOOM_LEVEL : currentZoomLevel))
-  );
-
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = combineLatest([
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       ...this._lieuxMediationNumeriqueListPresenterArgs
     ),
     this._route.paramMap
   ]).pipe(map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
-
-  public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(map((departements: DepartementPresentation[]) => departements.sort(byCollectiviteTerritorialeNom)));
-
-  public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(map((regions: RegionPresentation[]) => regions.sort(byCollectiviteTerritorialeNom)));
 
   public constructor(
     @Inject(FEATURES_TOKEN)
@@ -101,4 +83,6 @@ export class LieuxMediationNumeriqueListPage {
     this.markersPresenter.center(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
     this.markersPresenter.select(lieuMediationNumerique.id);
   }
+
+  public inLieuxZoomLevel = inLieuxZoomLevel;
 }

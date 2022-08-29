@@ -1,0 +1,3 @@
+<app-departements-list
+  [departements]="(departements$ | async) ?? []"
+  (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-departements-list>

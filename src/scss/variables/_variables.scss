@@ -33,5 +33,6 @@ $theme-colors: (
 @import './navbar';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/maps';
+@import './breadcrumb';
 @import './form-check';
 @import './tiles';

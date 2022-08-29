@@ -1,6 +1,11 @@
 import { Routes } from '@angular/router';
-import { LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } from '../../pages';
-import { CartographieLayout } from '../../layouts';
+import {
+  DepartementsPage,
+  LieuxMediationNumeriqueDetailsPage,
+  LieuxMediationNumeriqueListPage,
+  RegionsPage
+} from '../../pages';
+import { CartographieLayout, ListHeaderLayout } from '../../layouts';
 
 export const ROUTES: Routes = [
   {
@@ -10,11 +15,37 @@ export const ROUTES: Routes = [
         path: ':id/details'
       },
       {
-        component: LieuxMediationNumeriqueListPage,
-        path: ':id'
-      },
-      {
-        component: LieuxMediationNumeriqueListPage,
+        children: [
+          {
+            component: LieuxMediationNumeriqueListPage,
+            path: 'regions/:nomRegion/:nomDepartement'
+          },
+          {
+            component: DepartementsPage,
+            path: 'regions/:nomRegion'
+          },
+          {
+            component: RegionsPage,
+            path: 'regions'
+          },
+          {
+            component: LieuxMediationNumeriqueListPage,
+            path: 'departements/:nomDepartement'
+          },
+          {
+            component: DepartementsPage,
+            path: 'departements'
+          },
+          {
+            component: LieuxMediationNumeriqueListPage,
+            path: ':id'
+          },
+          {
+            component: LieuxMediationNumeriqueListPage,
+            path: ''
+          }
+        ],
+        component: ListHeaderLayout,
         path: ''
       }
     ],
