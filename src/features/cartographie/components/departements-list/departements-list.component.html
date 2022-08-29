@@ -3,6 +3,7 @@
     <a
       [routerLink]="['./', departement.nom]"
       (click)="showLieux.emit(departement)"
+      queryParamsHandling="preserve"
       class="list-group-item list-group-item-action p-4"
       *ngFor="let departement of departements">
       <h5 class="mb-0">

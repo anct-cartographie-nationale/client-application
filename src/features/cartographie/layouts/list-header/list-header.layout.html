@@ -8,7 +8,11 @@
           <ol class="breadcrumb">
             <ng-container *ngFor="let breadcrumbItem of breadcrumbItems">
               <li *ngIf="breadcrumbItem.link; else: currentPage" class="breadcrumb-item">
-                <a [routerLink]="breadcrumbItem.link" (click)="showLieux(breadcrumbItem.label)" class="link-light">
+                <a
+                  [routerLink]="breadcrumbItem.link"
+                  queryParamsHandling="preserve"
+                  (click)="showLieux(breadcrumbItem.label)"
+                  class="link-light">
                   {{ breadcrumbItem.label}}
                 </a>
               </li>
@@ -23,6 +27,7 @@
         <div *ngIf="breadcrumbItems[breadcrumbItems.length - 2] as breadcrumbItem" class="col-auto">
           <a
             [routerLink]="breadcrumbItem.link"
+            queryParamsHandling="preserve"
             (click)="showLieux(breadcrumbItem.label)"
             class="link-light text-decoration-none"
             aria-label="Retour">

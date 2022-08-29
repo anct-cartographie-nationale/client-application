@@ -3,6 +3,7 @@
     <a
       [routerLink]="['regions', region.nom]"
       [relativeTo]="route.parent"
+      queryParamsHandling="preserve"
       (click)="showLieux.emit(region)"
       class="list-group-item list-group-item-action p-4"
       *ngFor="let region of regions">
