@@ -13,7 +13,7 @@ import {
   RegionPresentation
 } from '../../../core';
 import { map } from 'rxjs/operators';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MarkersPresenter } from '../../presenters';
 
 const departementsFilteredByRegion = (departements: DepartementPresentation[], departementCodes: string[]) =>
@@ -52,7 +52,6 @@ export class DepartementsPage {
   );
 
   public constructor(
-    private readonly _router: Router,
     private readonly _route: ActivatedRoute,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly markersPresenter: MarkersPresenter
