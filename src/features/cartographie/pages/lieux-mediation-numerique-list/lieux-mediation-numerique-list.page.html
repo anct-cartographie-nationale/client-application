@@ -1,4 +1,5 @@
 <app-lieux-mediation-numerique-list
+  *ngIf="inLieuxZoomLevel((markersPresenter.currentZoomLevel$ | async) ?? 0)"
   [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"
   [orientationFeature]="features.get('orientation')"
   [focusId]="markersPresenter.focuced$ | async"

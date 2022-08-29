@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import {
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
-import { MarkersPresenter } from '../../presenters';
+import { MarkersPresenter, inLieuxZoomLevel } from '../../presenters';
 
 const toLieuxWithLieuToFocus = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]): [
   LieuMediationNumeriquePresentation[],
@@ -58,13 +58,6 @@ export class LieuxMediationNumeriqueListPage {
     this.markersPresenter.center(lieu.localisation, LIEUX_ZOOM_LEVEL);
   }
 
-  public currentZoomLevel$: Observable<number> = combineLatest([
-    this.markersPresenter.currentZoomLevel$,
-    this._route.paramMap
-  ]).pipe(
-    map(([currentZoomLevel, paramMap]: [number, ParamMap]) => (paramMap.get('id') ? LIEUX_ZOOM_LEVEL : currentZoomLevel))
-  );
-
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = combineLatest([
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       ...this._lieuxMediationNumeriqueListPresenterArgs
@@ -90,4 +83,6 @@ export class LieuxMediationNumeriqueListPage {
     this.markersPresenter.center(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
     this.markersPresenter.select(lieuMediationNumerique.id);
   }
+
+  public inLieuxZoomLevel = inLieuxZoomLevel;
 }
