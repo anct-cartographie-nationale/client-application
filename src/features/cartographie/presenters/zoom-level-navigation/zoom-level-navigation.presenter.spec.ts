@@ -1,54 +1,70 @@
-import { REGION_ZOOM_LEVEL, DEPARTEMENT_ZOOM_LEVEL, getNextRouteFromZoomLevel } from './zoom-level-navigation.presenter';
+import {
+  REGION_ZOOM_LEVEL,
+  DEPARTEMENT_ZOOM_LEVEL,
+  getNextRouteFromZoomLevel,
+  shouldNavigateToListPage
+} from './zoom-level-navigation.presenter';
 
 describe('zoom level navigation presenter', (): void => {
   it('should get regions when current zoom level is region and previous zoom level is different from region', (): void => {
-    const nextRoute: string = getNextRouteFromZoomLevel(REGION_ZOOM_LEVEL, DEPARTEMENT_ZOOM_LEVEL);
+    const nextRoute: string = getNextRouteFromZoomLevel(REGION_ZOOM_LEVEL);
 
     expect(nextRoute).toStrictEqual('regions');
   });
 
-  it('should get empty string when current zoom level is region and previous zoom level is region too', (): void => {
-    const previousZoomLevel: number = 5;
-    const nextRoute: string = getNextRouteFromZoomLevel(REGION_ZOOM_LEVEL, previousZoomLevel);
-
-    expect(nextRoute).toStrictEqual('');
-  });
-
-  it('should get departements when current zoom level is departement and previous zoom level is region zoom level', (): void => {
-    const nextRoute: string = getNextRouteFromZoomLevel(DEPARTEMENT_ZOOM_LEVEL, REGION_ZOOM_LEVEL);
-
-    expect(nextRoute).toStrictEqual('departements');
-  });
-
   it('should get departements when current zoom level is departement and previous zoom level is lieux zoom level', (): void => {
-    const previousZoomLevel: number = 14;
-
-    const nextRoute: string = getNextRouteFromZoomLevel(DEPARTEMENT_ZOOM_LEVEL, previousZoomLevel);
+    const nextRoute: string = getNextRouteFromZoomLevel(DEPARTEMENT_ZOOM_LEVEL);
 
     expect(nextRoute).toStrictEqual('departements');
-  });
-
-  it('should get empty string when current zoom level is departement and previous zoom level is departement too', (): void => {
-    const previousZoomLevel: number = 9;
-    const nextRoute: string = getNextRouteFromZoomLevel(DEPARTEMENT_ZOOM_LEVEL, previousZoomLevel);
-
-    expect(nextRoute).toStrictEqual('');
   });
 
   it('should get lieux when current zoom level is lieux and previous zoom level is different from lieux', (): void => {
     const currentZoomLevel: number = 11;
 
-    const nextRoute: string = getNextRouteFromZoomLevel(currentZoomLevel, DEPARTEMENT_ZOOM_LEVEL);
+    const nextRoute: string = getNextRouteFromZoomLevel(currentZoomLevel);
 
-    expect(nextRoute).toStrictEqual('..');
+    expect(nextRoute).toStrictEqual('.');
   });
 
-  it('should get empty string when current zoom level is lieux and previous zoom level lieux too', (): void => {
-    const currentZoomLevel: number = 11;
-    const previousZoomLevel: number = 14;
+  it('should not navigate when page name is undefined', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('regions');
 
-    const nextRoute: string = getNextRouteFromZoomLevel(currentZoomLevel, previousZoomLevel);
+    expect(shouldNavigate).toStrictEqual(false);
+  });
 
-    expect(nextRoute).toStrictEqual('');
+  it('should navigate to regions when page name is DepartementsPage', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('regions', 'DepartementsPage');
+
+    expect(shouldNavigate).toStrictEqual(true);
+  });
+
+  it('should not navigate to regions when page name is RegionsPage', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('regions', 'RegionsPage');
+
+    expect(shouldNavigate).toStrictEqual(false);
+  });
+
+  it('should navigate to departements when page name is LieuxMediationNumeriqueListPage', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('departements', 'LieuxMediationNumeriqueListPage');
+
+    expect(shouldNavigate).toStrictEqual(true);
+  });
+
+  it('should not navigate to departements when page name is DepartementsPage', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('departements', 'DepartementsPage');
+
+    expect(shouldNavigate).toStrictEqual(false);
+  });
+
+  it('should navigate to . when page name is RegionsPage', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('.', 'RegionsPage');
+
+    expect(shouldNavigate).toStrictEqual(true);
+  });
+
+  it('should not navigate to . when page name is LieuxMediationNumeriqueListPage', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('.', 'LieuxMediationNumeriqueListPage');
+
+    expect(shouldNavigate).toStrictEqual(false);
   });
 });

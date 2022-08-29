@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
@@ -18,8 +18,9 @@ import {
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration';
-import { MarkersPresenter } from '../../presenters';
+import { getNextRouteFromZoomLevel, MarkersPresenter, shouldNavigateToListPage } from '../../presenters';
 import { ViewReset } from '../../directives';
+import { BBox } from 'geojson';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,7 +42,7 @@ import { ViewReset } from '../../directives';
     }
   ]
 })
-export class CartographieLayout {
+export class CartographieLayout implements OnInit {
   private _lieuxMediationNumeriqueListPresenterArgs: [
     Observable<Localisation>,
     Observable<FilterPresentation>,
@@ -80,16 +81,22 @@ export class CartographieLayout {
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
+  public ngOnInit(): void {
+    this.navigateToPageMatchingZoomLevel(this.markersPresenter.defaultCenterView.zoomLevel);
+  }
+
   public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
     this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
     this.markersPresenter.center(lieu.localisation);
     this.markersPresenter.select(lieu.id);
   }
 
-  public onMapViewUpdated({
-    viewport: [leftLongitude, bottomLatitude, rightLongitude, topLatitude],
-    zoomLevel
-  }: ViewReset): void {
+  public onMapViewUpdated({ viewport, zoomLevel }: ViewReset): void {
+    this.updateMarkers(viewport, zoomLevel);
+    this.navigateToPageMatchingZoomLevel(zoomLevel);
+  }
+
+  private updateMarkers([leftLongitude, bottomLatitude, rightLongitude, topLatitude]: BBox, zoomLevel: number) {
     this.markersPresenter.zoomLevel(zoomLevel);
     this.markersPresenter.boundingBox([
       Localisation({ latitude: topLatitude, longitude: leftLongitude }),
@@ -97,16 +104,24 @@ export class CartographieLayout {
     ]);
   }
 
+  private navigateToPageMatchingZoomLevel(zoomLevel: number) {
+    const route: string = getNextRouteFromZoomLevel(zoomLevel);
+    const pageName: string | undefined = this.route.children[0].children[0].component?.name;
+    shouldNavigateToListPage(route, pageName) &&
+      this.router.navigate([route], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
+  }
+
   public onShowLieuxInDepartement(departement: DepartementPresentation) {
     this.markersPresenter.center(departement.localisation, departement.zoom);
     this.router.navigate(['regions', regionFromDepartement(departement)?.nom, departement.nom], {
-      relativeTo: this.route.parent
+      relativeTo: this.route.parent,
+      queryParamsHandling: 'preserve'
     });
   }
 
   public onShowLieuxInRegion(region: RegionPresentation) {
     this.markersPresenter.center(region.localisation, region.zoom);
-    this.router.navigate(['regions', region.nom], { relativeTo: this.route.parent });
+    this.router.navigate(['regions', region.nom], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
   public toQueryString(fromObject: {} = {}): string {
@@ -114,8 +129,6 @@ export class CartographieLayout {
   }
 
   public resetFilters(): void {
-    this.router.navigate([], {
-      relativeTo: this.route.parent
-    });
+    this.router.navigate([], { relativeTo: this.route.parent });
   }
 }
