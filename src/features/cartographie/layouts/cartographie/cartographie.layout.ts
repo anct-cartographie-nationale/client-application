@@ -107,8 +107,8 @@ export class CartographieLayout implements OnInit {
 
   private navigateToPageMatchingZoomLevel(zoomLevel: number) {
     const route: string = getNextRouteFromZoomLevel(zoomLevel);
-    const pageName: string | undefined = this.route.children[0].children[0].component?.name;
-    shouldNavigateToListPage(route, pageName) &&
+    const routeConfigPath: string | undefined = this.route.children[0].children[0].routeConfig?.path;
+    shouldNavigateToListPage(route, routeConfigPath) &&
       this._router.navigate([route], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 

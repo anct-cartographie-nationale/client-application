@@ -26,44 +26,50 @@ describe('zoom level navigation presenter', (): void => {
     expect(nextRoute).toStrictEqual('.');
   });
 
-  it('should not navigate when page name is undefined', (): void => {
+  it('should not navigate when route config is undefined', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage('regions');
 
     expect(shouldNavigate).toStrictEqual(false);
   });
 
-  it('should navigate to regions when page name is DepartementsPage', (): void => {
-    const shouldNavigate: boolean = shouldNavigateToListPage('regions', 'DepartementsPage');
+  it('should navigate to regions when route config is regions/:nomRegion', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('regions', 'regions/:nomRegion');
 
     expect(shouldNavigate).toStrictEqual(true);
   });
 
-  it('should not navigate to regions when page name is RegionsPage', (): void => {
-    const shouldNavigate: boolean = shouldNavigateToListPage('regions', 'RegionsPage');
+  it('should not navigate to regions when route config is regions', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('regions', 'regions');
 
     expect(shouldNavigate).toStrictEqual(false);
   });
 
-  it('should navigate to departements when page name is LieuxMediationNumeriqueListPage', (): void => {
-    const shouldNavigate: boolean = shouldNavigateToListPage('departements', 'LieuxMediationNumeriqueListPage');
+  it('should navigate to departements when route config is regions/:nomRegion/:nomDepartement', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('departements', 'regions/:nomRegion/:nomDepartement');
 
     expect(shouldNavigate).toStrictEqual(true);
   });
 
-  it('should not navigate to departements when page name is DepartementsPage', (): void => {
-    const shouldNavigate: boolean = shouldNavigateToListPage('departements', 'DepartementsPage');
+  it('should not navigate to departements when route config is regions/:nomRegion', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('departements', 'regions/:nomRegion');
 
     expect(shouldNavigate).toStrictEqual(false);
   });
 
-  it('should navigate to . when page name is RegionsPage', (): void => {
-    const shouldNavigate: boolean = shouldNavigateToListPage('.', 'RegionsPage');
+  it('should not navigate to departements when route config is departements', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('departements', 'departements');
+
+    expect(shouldNavigate).toStrictEqual(false);
+  });
+
+  it('should navigate to . when route config is regions', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('.', 'regions');
 
     expect(shouldNavigate).toStrictEqual(true);
   });
 
-  it('should not navigate to . when page name is LieuxMediationNumeriqueListPage', (): void => {
-    const shouldNavigate: boolean = shouldNavigateToListPage('.', 'LieuxMediationNumeriqueListPage');
+  it('should not navigate to . when route config is regions/:nomRegion/:nomDepartement', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('.', 'regions/:nomRegion/:nomDepartement');
 
     expect(shouldNavigate).toStrictEqual(false);
   });
