@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { RouterOutlet, UrlSegment } from '@angular/router';
-import { getBreadcrumbItems, BreadcrumbItem } from '../../presenters';
+import { getBreadcrumbItems, BreadcrumbItem, MarkersPresenter } from '../../presenters';
+import { RegionPresentation, regions } from '../../../core';
+
+const byNom = (label: string) => (region: RegionPresentation) => region.nom === label;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,4 +13,22 @@ export class ListHeaderLayout {
   @ViewChild(RouterOutlet) public routerOutlet!: RouterOutlet;
 
   public getBreadcrumbItems = (urlSegments: UrlSegment[]): BreadcrumbItem[] => getBreadcrumbItems(urlSegments);
+
+  public constructor(private _markersPresenter: MarkersPresenter) {}
+
+  public showLieux(label: string): void {
+    const regionMatchingLabel: RegionPresentation | undefined = regions.find(byNom(label));
+    regionMatchingLabel ? this.setToRegionView(regionMatchingLabel) : this.resetToDefaultView();
+  }
+
+  private setToRegionView(regionMatchingLabel: RegionPresentation): void {
+    this._markersPresenter.center(regionMatchingLabel.localisation, regionMatchingLabel.zoom);
+  }
+
+  private resetToDefaultView(): void {
+    this._markersPresenter.center(
+      this._markersPresenter.defaultCenterView.coordinates,
+      this._markersPresenter.defaultCenterView.zoomLevel
+    );
+  }
 }

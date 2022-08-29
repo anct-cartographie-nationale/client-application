@@ -9,7 +9,7 @@ import {
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { MarkersPresenter } from '../../presenters';

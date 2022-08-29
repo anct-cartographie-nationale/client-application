@@ -2,7 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FeaturesConfiguration, FEATURES_TOKEN } from '../../../../root';
 import {
@@ -42,8 +42,6 @@ import { ViewReset } from '../../directives';
   ]
 })
 export class CartographieLayout {
-  private _previousZoomLevel: number = 0;
-
   private _lieuxMediationNumeriqueListPresenterArgs: [
     Observable<Localisation>,
     Observable<FilterPresentation>,
@@ -64,22 +62,9 @@ export class CartographieLayout {
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(tap(() => this._loadingState$.next(false)));
 
-  public regions$: Observable<RegionPresentation[]> = combineLatest([
-    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByRegion$(
-      ...this._lieuxMediationNumeriqueListPresenterArgs
-    ),
-    this.markersPresenter.currentZoomLevel$
-  ]).pipe(
-    tap(([_, zoomLevel]: [RegionPresentation[], number]): void => {
-      this._loadingState$.next(false);
-
-      if (zoomLevel <= 7 && this._previousZoomLevel > 7) {
-        this.router.navigate(['regions'], { relativeTo: this.route.parent });
-      }
-      this._previousZoomLevel = zoomLevel;
-    }),
-    map(([regions]: [RegionPresentation[], number]): RegionPresentation[] => regions)
-  );
+  public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
+    .pipe(map((regions: RegionPresentation[]): RegionPresentation[] => regions));
 
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
@@ -101,7 +86,10 @@ export class CartographieLayout {
     this.markersPresenter.select(lieu.id);
   }
 
-  public onMapViewUpdated({ viewport: [leftLongitude, bottomLatitude, rightLongitude, topLatitude], zoomLevel }: ViewReset) {
+  public onMapViewUpdated({
+    viewport: [leftLongitude, bottomLatitude, rightLongitude, topLatitude],
+    zoomLevel
+  }: ViewReset): void {
     this.markersPresenter.zoomLevel(zoomLevel);
     this.markersPresenter.boundingBox([
       Localisation({ latitude: topLatitude, longitude: leftLongitude }),

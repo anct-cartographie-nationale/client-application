@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { combineLatest, Observable, of, tap } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import {
   byCollectiviteTerritorialeNom,
   DepartementPresentation,
