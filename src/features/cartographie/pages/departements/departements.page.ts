@@ -1,20 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import {
   byCollectiviteTerritorialeNom,
   DepartementPresentation,
-  FilterPresentation,
   LieuxMediationNumeriquePresenter,
-  Localisation,
-  NO_LOCALISATION,
-  toFilterFormPresentationFromQuery,
-  toLocalisationFromFilterFormPresentation,
   regions,
   RegionPresentation
 } from '../../../core';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { MarkersPresenter } from '../../presenters';
+import { CartographieLayout } from '../../layouts';
 
 const departementsFilteredByRegion = (departements: DepartementPresentation[], departementCodes: string[]) =>
   departements.filter(
@@ -29,21 +25,8 @@ const toRegion = (paramMap: ParamMap): RegionPresentation | undefined =>
   templateUrl: './departements.page.html'
 })
 export class DepartementsPage {
-  private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this._route.snapshot.queryParams);
-
-  private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
-
-  private _lieuxMediationNumeriqueListPresenterArgs: [
-    Observable<Localisation>,
-    Observable<FilterPresentation>,
-    Date,
-    Observable<[Localisation, Localisation]>
-  ] = [of(this._localisation), of(this._filterPresentation), new Date(), of([NO_LOCALISATION, NO_LOCALISATION])];
-
   public departements$: Observable<DepartementPresentation[]> = combineLatest([
-    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDepartement$(
-      ...this._lieuxMediationNumeriqueListPresenterArgs
-    ),
+    this._cartographieLayout.departements$,
     this._route.paramMap
   ]).pipe(
     map(([departements, paramMap]: [DepartementPresentation[], ParamMap]): DepartementPresentation[] =>
@@ -52,6 +35,7 @@ export class DepartementsPage {
   );
 
   public constructor(
+    private readonly _cartographieLayout: CartographieLayout,
     private readonly _route: ActivatedRoute,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly markersPresenter: MarkersPresenter

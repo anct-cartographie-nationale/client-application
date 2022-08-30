@@ -2,7 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, shareReplay, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FeaturesConfiguration, FEATURES_TOKEN } from '../../../../root';
 import {
@@ -43,29 +43,31 @@ import { BBox } from 'geojson';
   ]
 })
 export class CartographieLayout implements OnInit {
-  private _lieuxMediationNumeriqueListPresenterArgs: [
-    Observable<Localisation>,
-    Observable<FilterPresentation>,
-    Date,
-    Observable<[Localisation, Localisation]>
-  ] = [
+  private _lieuxMediationNumeriqueListPresenterArgs: [Observable<Localisation>, Observable<FilterPresentation>, Date] = [
     of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))),
     this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
-    new Date(),
-    this.markersPresenter.boundingBox$
+    new Date()
   ];
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDistance$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(tap(() => this._loadingState$.next(false)));
+    .lieuxMediationNumeriqueByDistance$(...this._lieuxMediationNumeriqueListPresenterArgs, this.markersPresenter.boundingBox$)
+    .pipe(
+      tap(() => this._loadingState$.next(false)),
+      shareReplay()
+    );
 
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(tap(() => this._loadingState$.next(false)));
+    .pipe(
+      tap(() => this._loadingState$.next(false)),
+      shareReplay()
+    );
 
-  public regions$: Observable<RegionPresentation[]> =
-    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByRegion$(
-      ...this._lieuxMediationNumeriqueListPresenterArgs
+  public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
+    .pipe(
+      tap(() => this._loadingState$.next(false)),
+      shareReplay()
     );
 
   public checkWhyListOfLieuxIsEmpty$: Observable<LieuMediationNumeriquePresentation[]> =
@@ -117,7 +119,7 @@ export class CartographieLayout implements OnInit {
 
   private navigateToPageMatchingZoomLevel(zoomLevel: number) {
     const route: string = getNextRouteFromZoomLevel(zoomLevel);
-    const routeConfigPath: string | undefined = this.route.children[0].children[0].routeConfig?.path;
+    const routeConfigPath: string | undefined = this.route.children[0]?.children[0]?.routeConfig?.path;
     shouldNavigateToListPage(route, routeConfigPath) &&
       this._router.navigate([route], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
