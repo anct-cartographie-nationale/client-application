@@ -11,7 +11,7 @@ import { ROUTES } from '../common/mediation-numerique.routes';
         loadChildren: async () => (await import('@features/presentation')).PresentationFeatureModule,
         path: 'presentation'
       },
-      { path: '**', pathMatch: 'full', redirectTo: 'presentation' }
+      { path: '**', pathMatch: 'full', redirectTo: 'orientation' }
     ])
   ]
 })
