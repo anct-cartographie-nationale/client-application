@@ -108,7 +108,7 @@
     </div>
   </div>
 </div>
-<div *ngIf="!this.environment" class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
+<div class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
   <app-carousel
     [currentSlide]="(currentSlide$ | async) ?? 0"
     (switchSlide)="onSwitchSlide($event)"
