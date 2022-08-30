@@ -4,6 +4,9 @@
       #item
       [attr.id]="lieuMediationNumerique.id"
       class="list-group-item list-group-item-action p-4"
+      [class.active]="highlightedId === lieuMediationNumerique.id"
+      (mouseover)="changeStyle($event, lieuMediationNumerique.id)"
+      (mouseout)="changeStyle($event, lieuMediationNumerique.id)"
       routerLinkActive="bg-light"
       *ngFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
       queryParamsHandling="preserve"
