@@ -5,9 +5,54 @@
     <title>Cartographie Nationale des lieux médiation numérique</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 30%;
+      }
+
+      .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        padding: 2px 16px;
+      }
+    </style>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
   </head>
   <body>
     <app-root></app-root>
+    <div
+      id="IE"
+      style="visibility: hidden"
+      class="d-flex justify-content-center mt-5 card ms-auto me-auto"
+      style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">
+      <div class="container">
+        <h4 class="mb-3"><b>Mise à jour du navigateur:</b></h4>
+        <p>
+          Pour utiliser les fonctionnalités et les avantages de la cartographie sur votre ordinateur, vous devez disposer de la
+          version la plus récente de votre navigateur Web. Pour une expérience optimale, mettez-le à jour ou passez à un autre
+          navigateur.
+        </p>
+        <h4 class="mt-5 mb-3" style="color: #000091"><b>Navigateurs compatibles :</b></h4>
+        <p>Pour savoir comment mettre à jour ou installer un navigateur, consultez les ressources d'aide de ce dernier :</p>
+        <ul>
+          <li><a href="https://www.google.com/chrome" target="_blank">Google Chrome</a></li>
+          <li><a href="https://www.mozilla.org/fr/firefox/new/" target="_blank">Firefox</a></li>
+          <li><a href="https://www.microsoft.com/en-us/windows/microsoft-edge" target="_blank">Microsoft Edge</a></li>
+          <li><a href="https://www.apple.com/safari/" target="_blank">Safari</a></li>
+          <li><a href="https://www.opera.com/fr" target="_blank">Opera</a></li>
+        </ul>
+      </div>
+    </div>
   </body>
+  <script>
+    var node;
+    if (navigator.userAgent.indexOf('MSIE') != -1 || !!document.documentMode == true) {
+      node = document.getElementById('IE');
+      node.style.visibility = 'visible';
+    }
+  </script>
 </html>
