@@ -36,7 +36,7 @@
 <div class="d-flex h-100">
   <div
     class="col-lg-6 col-md-6 col-12 container justify-content-center d-flex flex-column"
-    *ngIf="(lieuxMediationNumerique$ | async)?.length === 0">
+    *ngIf="(lieuxMediationNumerique$ | async)?.length === 0 && (checkWhyListOfLieuxIsEmpty$ | async)?.length !== 0">
     <h4 class="text-center fw-bold mb-3">Nous ne trouvons pas de résultats correspondant à votre recherche</h4>
     <p class="text-muted text-center">
       Aucune structure n'est disponible selon ces critères.
@@ -60,6 +60,14 @@
       </ng-container>
       <button class="btn bg-primary text-secondary" (click)="resetFilters()">Réinitialiser mes filtres</button>
     </div>
+  </div>
+  <div
+    class="col-lg-6 col-md-6 col-12 container justify-content-center d-flex flex-column"
+    *ngIf="(lieuxMediationNumerique$ | async)?.length === 0 && (checkWhyListOfLieuxIsEmpty$ | async)?.length === 0">
+    <h4 class="text-center fw-bold mb-3">Il n'y a pas encore de structure de médiation numérique ici.</h4>
+    <p class="text-muted text-center">
+      Continuez à naviguer sur la carte ou dézoomez pour trouver les structures aux alentours !
+    </p>
   </div>
   <div class="col-lg-6 col-md-6 col-12 border-end" *ngIf="(lieuxMediationNumerique$ | async)?.length !== 0">
     <router-outlet></router-outlet>

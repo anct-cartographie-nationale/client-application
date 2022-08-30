@@ -68,6 +68,16 @@ export class CartographieLayout implements OnInit {
       ...this._lieuxMediationNumeriqueListPresenterArgs
     );
 
+  public checkWhyListOfLieuxIsEmpty$: Observable<LieuMediationNumeriquePresentation[]> =
+    this._lieuxMediationNumeriqueListPresenter
+      .lieuxMediationNumeriqueByDistance$(
+        of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))),
+        undefined,
+        new Date(),
+        this.markersPresenter.boundingBox$
+      )
+      .pipe(tap(() => this._loadingState$.next(false)));
+
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
 
