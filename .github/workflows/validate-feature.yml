@@ -17,6 +17,9 @@ on:
       - 'test/*'
       - 'release/*'
 
+env:
+  application-name: 'cartographie-nationale'
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -301,3 +304,30 @@ jobs:
         with:
           name: build
           path: dist
+
+  dynamic-variables:
+    runs-on: ubuntu-latest
+    outputs:
+      application-name: ${{ steps.application-name.outputs.value }}
+
+    steps:
+      - name: Deployed application base name
+        id: application-name
+        run: |
+          APPLICATION_NAME=${{ env.application-name }}
+          BRANCH_SHORT_REF=$(echo ${{ github.event.ref }} | cut -d'/' -f 4)
+          echo "::set-output name=value::$APPLICATION_NAME-$BRANCH_SHORT_REF"
+
+  deploy:
+    name: Feature branch
+    needs:
+      - dynamic-variables
+      - build-client-application
+
+    uses: ./.github/workflows/_deploy-on-scalingo.yml
+    with:
+      application-full-name: ${{ needs.dynamic-variables.outputs.application-name }}
+      scalingo-remote-domain-url: 'git@ssh.osc-fr1.scalingo.com'
+      scalingo-ssh-host-domain: 'ssh.osc-fr1.scalingo.com'
+    secrets:
+      SCALINGO_API_TOKEN: ${{ secrets.SCALINGO_API_TOKEN }}
