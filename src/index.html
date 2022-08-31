@@ -6,45 +6,38 @@
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      .card {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      .ie-card {
         transition: 0.3s;
         width: 30%;
       }
 
-      .card:hover {
+      .ie-card:hover {
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      }
-
-      .container {
-        padding: 2px 16px;
       }
     </style>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
   </head>
   <body>
     <app-root></app-root>
-    <div
-      id="IE"
-      style="visibility: hidden"
-      class="d-flex justify-content-center mt-5 card ms-auto me-auto"
-      style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">
-      <div class="container">
-        <h4 class="mb-3"><b>Mise à jour du navigateur:</b></h4>
-        <p>
-          Pour utiliser les fonctionnalités et les avantages de la cartographie sur votre ordinateur, vous devez disposer de la
-          version la plus récente de votre navigateur Web. Pour une expérience optimale, mettez-le à jour ou passez à un autre
-          navigateur.
-        </p>
-        <h4 class="mt-5 mb-3" style="color: #000091"><b>Navigateurs compatibles :</b></h4>
-        <p>Pour savoir comment mettre à jour ou installer un navigateur, consultez les ressources d'aide de ce dernier :</p>
-        <ul>
-          <li><a href="https://www.google.com/chrome" target="_blank">Google Chrome</a></li>
-          <li><a href="https://www.mozilla.org/fr/firefox/new/" target="_blank">Firefox</a></li>
-          <li><a href="https://www.microsoft.com/en-us/windows/microsoft-edge" target="_blank">Microsoft Edge</a></li>
-          <li><a href="https://www.apple.com/safari/" target="_blank">Safari</a></li>
-          <li><a href="https://www.opera.com/fr" target="_blank">Opera</a></li>
-        </ul>
+    <div id="IE" style="visibility: hidden" class="row">
+      <div class="col-3 mt-5 ie-card mx-auto shadow">
+        <div class="px-3 py-4">
+          <h4 class="mb-3"><b>Mise à jour du navigateur:</b></h4>
+          <p>
+            Pour utiliser les fonctionnalités et les avantages de la cartographie sur votre ordinateur, vous devez disposer de
+            la version la plus récente de votre navigateur Web. Pour une expérience optimale, mettez-le à jour ou passez à un
+            autre navigateur.
+          </p>
+          <h4 class="mt-5 mb-3"><b>Navigateurs compatibles :</b></h4>
+          <p>Pour savoir comment mettre à jour ou installer un navigateur, consultez les ressources d'aide de ce dernier :</p>
+          <ul>
+            <li><a href="https://www.google.com/chrome" target="_blank">Google Chrome</a></li>
+            <li><a href="https://www.mozilla.org/fr/firefox/new/" target="_blank">Firefox</a></li>
+            <li><a href="https://www.microsoft.com/en-us/windows/microsoft-edge" target="_blank">Microsoft Edge</a></li>
+            <li><a href="https://www.apple.com/safari/" target="_blank">Safari</a></li>
+            <li><a href="https://www.opera.com/fr" target="_blank">Opera</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </body>
