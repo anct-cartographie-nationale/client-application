@@ -1,4 +1,4 @@
-import { regionFromDepartement, toDepartement, toRegion } from './collectivite-territoriale.presenter';
+import { byNomDepartement, regionFromDepartement, toDepartement, toRegion } from './collectivite-territoriale.presenter';
 import {
   Adresse,
   DepartementPresentation,
@@ -92,7 +92,7 @@ describe('collectivite territoriale presenter', (): void => {
     const departement: DepartementPresentation = {
       code: '30',
       nom: 'Gard',
-      zoom: 11,
+      zoom: 10,
       localisation: Localisation({
         longitude: 4.179823679654268,
         latitude: 43.993762729920775
@@ -105,11 +105,18 @@ describe('collectivite territoriale presenter', (): void => {
       code: '76',
       nom: 'Occitanie',
       departements: ['09', '11', '12', '30', '31', '32', '34', '46', '48', '65', '66', '81', '82'],
-      zoom: 9,
+      zoom: 8,
       localisation: Localisation({
         longitude: 2.137222,
         latitude: 43.702222
       })
     });
+  });
+
+  it('should find a departement by name', (): void => {
+    const departementName: string = 'Paris';
+    const departement: DepartementPresentation | undefined = byNomDepartement(departementName);
+
+    expect(departement?.code).toStrictEqual('75');
   });
 });

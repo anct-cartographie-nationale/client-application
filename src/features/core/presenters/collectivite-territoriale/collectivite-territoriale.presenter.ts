@@ -1,5 +1,5 @@
 import codePostalNotMatchingCodeDepartement from './code-postal-not-matching-code-departement.json';
-import { departements, LieuMediationNumeriquePresentation, Localisation, regions } from '../../../core';
+import { departements, LieuMediationNumeriquePresentation, regions } from '../../../core';
 import { DepartementPresentation } from './presentations/departement.presentation';
 import { RegionPresentation } from './presentations/region.presentation';
 
@@ -95,3 +95,7 @@ export const byCollectiviteTerritorialeNom = <T extends DepartementPresentation 
 
 export const regionFromDepartement = (departement: DepartementPresentation): RegionPresentation | undefined =>
   regions.find((region: RegionPresentation) => region.departements.includes(departement.code));
+
+export const byNomDepartement = (nomDepartement: string): DepartementPresentation | undefined => {
+  return departements.find((departement: DepartementPresentation) => departement.nom === nomDepartement);
+};

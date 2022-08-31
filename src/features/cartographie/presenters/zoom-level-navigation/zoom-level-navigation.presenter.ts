@@ -1,5 +1,6 @@
 export const REGION_ZOOM_LEVEL: number = 7;
-export const DEPARTEMENT_ZOOM_LEVEL: number = 10;
+export const DEPARTEMENT_ZOOM_LEVEL: number = 9;
+export const LIEUX_ZOOM_LEVEL: number = 10;
 
 const REGIONS_ROUTE: string = 'regions';
 const DEPARTEMENTS_ROUTE: string = 'departements';
