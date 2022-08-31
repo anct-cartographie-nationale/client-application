@@ -4,8 +4,9 @@ import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, shareReplay, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FeaturesConfiguration, FEATURES_TOKEN } from '../../../../root';
+import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
+  byNomDepartement,
   DepartementPresentation,
   FilterPresentation,
   LieuMediationNumeriquePresentation,
@@ -14,6 +15,7 @@ import {
   Localisation,
   regionFromDepartement,
   RegionPresentation,
+  toDepartement,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
@@ -21,6 +23,17 @@ import { MARKERS, MARKERS_TOKEN } from '../../configuration';
 import { getNextRouteFromZoomLevel, MarkersPresenter, shouldNavigateToListPage } from '../../presenters';
 import { ViewReset } from '../../directives';
 import { BBox } from 'geojson';
+
+const filteredByDepartementIfExist = (
+  departement: DepartementPresentation | undefined,
+  lieux: LieuMediationNumeriquePresentation[]
+): LieuMediationNumeriquePresentation[] =>
+  departement
+    ? lieux.filter((lieu: LieuMediationNumeriquePresentation) => toDepartement(lieu)?.code === departement.code)
+    : lieux;
+
+const toLieuxFilteredByDepartement = (lieux: LieuMediationNumeriquePresentation[], nomDepartement: string) =>
+  filteredByDepartementIfExist(byNomDepartement(nomDepartement), lieux);
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -53,6 +66,9 @@ export class CartographieLayout implements OnInit {
     .lieuxMediationNumeriqueByDistance$(...this._lieuxMediationNumeriqueListPresenterArgs, this.markersPresenter.boundingBox$)
     .pipe(
       tap(() => this._loadingState$.next(false)),
+      map((lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] =>
+        toLieuxFilteredByDepartement(lieux, this.route.children[0]?.children[0]?.snapshot?.paramMap.get('nomDepartement') ?? '')
+      ),
       shareReplay()
     );
 

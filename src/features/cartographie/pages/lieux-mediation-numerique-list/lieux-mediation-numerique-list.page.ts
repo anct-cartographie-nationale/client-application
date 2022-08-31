@@ -5,15 +5,19 @@ import { combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
+  byNomDepartement,
+  DepartementPresentation,
   FilterPresentation,
   LieuMediationNumerique,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
   Localisation,
+  NO_LOCALISATION,
+  toDepartement,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
-import { MarkersPresenter, inLieuxZoomLevel } from '../../presenters';
+import { MarkersPresenter, inLieuxZoomLevel, LIEUX_ZOOM_LEVEL } from '../../presenters';
 
 const toLieuxWithLieuToFocus = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]): [
   LieuMediationNumeriquePresentation[],
@@ -27,7 +31,17 @@ const toLieux = ([lieux]: [
   return lieux;
 };
 
-const LIEUX_ZOOM_LEVEL = 11;
+const filteredByDepartementIfExist = (
+  departement: DepartementPresentation | undefined,
+  lieux: LieuMediationNumeriquePresentation[],
+  paramMap: ParamMap
+): [LieuMediationNumeriquePresentation[], ParamMap] =>
+  departement
+    ? [lieux.filter((lieu: LieuMediationNumeriquePresentation) => toDepartement(lieu)?.code === departement.code), paramMap]
+    : [lieux, paramMap];
+
+const toLieuxFilteredByDepartement = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]) =>
+  filteredByDepartementIfExist(byNomDepartement(paramMap.get('nomDepartement') ?? ''), lieux, paramMap);
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,13 +51,6 @@ export class LieuxMediationNumeriqueListPage {
   private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this._route.snapshot.queryParams);
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
-
-  private _lieuxMediationNumeriqueListPresenterArgs: [
-    Observable<Localisation>,
-    Observable<FilterPresentation>,
-    Date,
-    Observable<[Localisation, Localisation]>
-  ] = [of(this._localisation), of(this._filterPresentation), new Date(), this.markersPresenter.boundingBox$];
 
   private _initialZoom: boolean = false;
 
@@ -58,12 +65,21 @@ export class LieuxMediationNumeriqueListPage {
     this.markersPresenter.center(lieu.localisation, LIEUX_ZOOM_LEVEL);
   }
 
+  private boundingBox$(): Observable<[Localisation, Localisation]> {
+    return this._route.snapshot.paramMap.get('nomDepartement')
+      ? of([NO_LOCALISATION, NO_LOCALISATION])
+      : this.markersPresenter.boundingBox$;
+  }
+
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = combineLatest([
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
-      ...this._lieuxMediationNumeriqueListPresenterArgs
+      of(this._localisation),
+      of(this._filterPresentation),
+      new Date(),
+      this.boundingBox$()
     ),
     this._route.paramMap
-  ]).pipe(map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
+  ]).pipe(map(toLieuxFilteredByDepartement), map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
 
   public constructor(
     @Inject(FEATURES_TOKEN)
