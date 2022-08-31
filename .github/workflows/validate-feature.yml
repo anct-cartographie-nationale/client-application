@@ -18,7 +18,7 @@ on:
       - 'release/*'
 
 env:
-  application-name: 'cartographie-nationale'
+  application-name: 'cn'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
