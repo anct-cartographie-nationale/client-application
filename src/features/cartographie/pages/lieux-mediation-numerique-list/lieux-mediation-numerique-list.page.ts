@@ -95,6 +95,10 @@ export class LieuxMediationNumeriqueListPage {
     window.print();
   }
 
+  public hover(highlightedId?: string) {
+    this.markersPresenter.hover(highlightedId ?? '');
+  }
+
   public select(lieuMediationNumerique: LieuMediationNumerique) {
     this.markersPresenter.center(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
     this.markersPresenter.select(lieuMediationNumerique.id);

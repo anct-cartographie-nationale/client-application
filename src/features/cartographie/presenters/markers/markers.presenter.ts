@@ -62,8 +62,8 @@ export class MarkersPresenter {
   private readonly _focuced: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public readonly focuced$: Observable<string> = this._focuced.asObservable();
 
-  private readonly _highlighted: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public readonly highlighted$: Observable<string> = this._highlighted.asObservable();
+  private readonly _hovered: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public readonly hovered$: Observable<string> = this._hovered.asObservable();
 
   private _boundingBox$: BehaviorSubject<[Localisation, Localisation]> = new BehaviorSubject<[Localisation, Localisation]>([
     NO_LOCALISATION,
@@ -103,7 +103,7 @@ export class MarkersPresenter {
   }
 
   public hover(markerId: string) {
-    this._highlighted.next(markerId);
+    this._hovered.next(markerId);
   }
 
   public setZoomLevel(zoomLevel: number) {

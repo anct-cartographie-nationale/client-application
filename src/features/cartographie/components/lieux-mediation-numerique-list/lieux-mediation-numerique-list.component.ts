@@ -33,7 +33,7 @@ export class LieuxMediationNumeriqueListComponent {
     focusId && this.scrollTo(focusId);
   }
 
-  @Input() public highlightedId?: string;
+  @Input() public hoverId: string | null = null;
 
   @Output() public print: EventEmitter<void> = new EventEmitter<void>();
 
@@ -44,14 +44,10 @@ export class LieuxMediationNumeriqueListComponent {
 
   @ViewChildren('item') public items!: QueryList<ElementRef>;
 
-  public constructor(public readonly route: ActivatedRoute) {
-    console.log('test', this.highlightedId);
-  }
+  public constructor(public readonly route: ActivatedRoute) {}
 
-  changeStyle($event: any, lieuMediationNumeriqueID: string) {
-    $event.type === 'mouseover' ? (this.highlightedId = lieuMediationNumeriqueID) : (this.highlightedId = '');
-    // this.items.find(itemById(lieuMediationNumeriqueID))?
-  }
+  @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
   public scrollTo(focusId: string) {
     setTimeout(() => {

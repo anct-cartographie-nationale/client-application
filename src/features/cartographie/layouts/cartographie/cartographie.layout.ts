@@ -107,6 +107,10 @@ export class CartographieLayout {
     this.markersPresenter.select(lieu.id);
   }
 
+  public hover(highlightedId?: string) {
+    this.markersPresenter.hover(highlightedId ?? '');
+  }
+
   public onMapViewUpdated({ viewport, zoomLevel, center }: ViewReset): void {
     this.updateMarkers(viewport, zoomLevel);
     this.navigateToPageMatchingZoomLevel(zoomLevel, Localisation({ latitude: center.lat, longitude: center.lng }));

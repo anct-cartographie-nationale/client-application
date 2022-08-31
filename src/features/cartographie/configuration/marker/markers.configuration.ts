@@ -1,6 +1,6 @@
 import { DivIcon, Icon } from 'leaflet';
 
-export type MarkerHighlight = 'focus' | 'hint';
+export type MarkerHighlight = 'focus' | 'hover';
 
 export interface TypedMarker {
   markerType: string;

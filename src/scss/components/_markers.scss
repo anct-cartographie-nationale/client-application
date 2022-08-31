@@ -72,6 +72,24 @@
   }
 }
 
+.marker-hover {
+  .marker-hover-active {
+    display: inherit;
+  }
+
+  .default-marker {
+    display: none;
+  }
+
+  .cnfs-marker {
+    display: none;
+  }
+}
+
+.marker-hover-active {
+  display: none;
+}
+
 .departement-marker {
   fill: $primary;
 }
