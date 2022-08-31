@@ -96,6 +96,5 @@ export const byCollectiviteTerritorialeNom = <T extends DepartementPresentation 
 export const regionFromDepartement = (departement: DepartementPresentation): RegionPresentation | undefined =>
   regions.find((region: RegionPresentation) => region.departements.includes(departement.code));
 
-export const byNomDepartement = (nomDepartement: string): DepartementPresentation | undefined => {
-  return departements.find((departement: DepartementPresentation) => departement.nom === nomDepartement);
-};
+export const byNomDepartement = (nomDepartement: string): DepartementPresentation | undefined =>
+  departements.find((departement: DepartementPresentation) => departement.nom === nomDepartement);
