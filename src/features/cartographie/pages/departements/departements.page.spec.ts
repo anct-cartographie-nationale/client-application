@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { LieuxMediationNumeriquePresenter } from '../../../core';
+import { CartographieLayout } from '../../layouts';
 import { MarkersPresenter } from '../../presenters';
 import { DepartementsListStubComponent } from '../../test-doubles';
 import { DepartementsPage } from './departements.page';
@@ -20,6 +21,10 @@ describe('DepartementsPage', (): void => {
         },
         {
           provide: MarkersPresenter,
+          useValue: {}
+        },
+        {
+          provide: CartographieLayout,
           useValue: {}
         }
       ]

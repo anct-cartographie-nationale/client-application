@@ -21,37 +21,27 @@ type LieuxMediationNumeriqueFilterParameters = [LieuMediationNumerique[], Locali
 
 const toLieuxMediationNumeriqueByDistance =
   (date: Date) =>
-  ([boundingBox, ...filterParameters]: [
+  ([boundingBox, lieux, localisation, filters]: [
     [Localisation, Localisation],
     ...LieuxMediationNumeriqueFilterParameters
   ]): LieuMediationNumeriquePresentation[] =>
-    filteredLieuxMediationNumerique(...filterParameters, date)
-      .filter(byBoundingBox(boundingBox))
-      .sort(byDistance);
+    filteredLieuxMediationNumerique(lieux.filter(byBoundingBox(boundingBox)), localisation, filters, date).sort(byDistance);
 
 const toLieuxMediationNumeriqueByDepartement =
   (date: Date) =>
-  ([boundingBox, ...filterParameters]: [
-    [Localisation, Localisation],
-    ...LieuxMediationNumeriqueFilterParameters
-  ]): DepartementPresentation[] =>
+  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): DepartementPresentation[] =>
     filteredLieuxMediationNumerique(...filterParameters, date)
       .map(toDepartement)
       .filter(definedDepartement)
-      .filter(byBoundingBox(boundingBox))
       .reduce(countLieuxInCollectiviteTerritoriale as () => DepartementPresentation[], [])
       .sort(byLieuxCount);
 
 const toLieuxMediationNumeriqueByRegion =
   (date: Date) =>
-  ([boundingBox, ...filterParameters]: [
-    [Localisation, Localisation],
-    ...LieuxMediationNumeriqueFilterParameters
-  ]): RegionPresentation[] =>
+  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): RegionPresentation[] =>
     filteredLieuxMediationNumerique(...filterParameters, date)
       .map(toRegion)
       .filter(definedRegion)
-      .filter(byBoundingBox(boundingBox))
       .reduce(countLieuxInCollectiviteTerritoriale as () => RegionPresentation[], [])
       .sort(byLieuxCount);
 
@@ -72,10 +62,9 @@ export class LieuxMediationNumeriquePresenter {
   public lieuxMediationNumeriqueByDepartement$(
     localisation$: Observable<Localisation>,
     filter$: Observable<FilterPresentation> = of({}),
-    date: Date = new Date(),
-    boundingBox$: Observable<[Localisation, Localisation]> = of([NO_LOCALISATION, NO_LOCALISATION])
+    date: Date = new Date()
   ): Observable<DepartementPresentation[]> {
-    return combineLatest([boundingBox$, this.lieuxMediationNumeriqueTotal$, localisation$, filter$]).pipe(
+    return combineLatest([this.lieuxMediationNumeriqueTotal$, localisation$, filter$]).pipe(
       map(toLieuxMediationNumeriqueByDepartement(date))
     );
   }
@@ -83,10 +72,9 @@ export class LieuxMediationNumeriquePresenter {
   public lieuxMediationNumeriqueByRegion$(
     localisation$: Observable<Localisation>,
     filter$: Observable<FilterPresentation> = of({}),
-    date: Date = new Date(),
-    boundingBox$: Observable<[Localisation, Localisation]> = of([NO_LOCALISATION, NO_LOCALISATION])
+    date: Date = new Date()
   ): Observable<RegionPresentation[]> {
-    return combineLatest([boundingBox$, this.lieuxMediationNumeriqueTotal$, localisation$, filter$]).pipe(
+    return combineLatest([this.lieuxMediationNumeriqueTotal$, localisation$, filter$]).pipe(
       map(toLieuxMediationNumeriqueByRegion(date))
     );
   }
