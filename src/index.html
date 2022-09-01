@@ -19,7 +19,7 @@
   </head>
   <body>
     <app-root></app-root>
-    <div id="IE" style="visibility: hidden" class="row">
+    <div id="IE" style="display: none" class="row">
       <div class="col-3 mt-5 ie-card mx-auto shadow">
         <div class="px-3 py-4">
           <h4 class="mb-3"><b>Mise à jour du navigateur:</b></h4>
@@ -45,7 +45,7 @@
     var node;
     if (navigator.userAgent.indexOf('MSIE') != -1 || !!document.documentMode == true) {
       node = document.getElementById('IE');
-      node.style.visibility = 'visible';
+      node.style.display = 'block';
     }
   </script>
 </html>
