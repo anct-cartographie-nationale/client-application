@@ -20,7 +20,12 @@ import {
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration';
-import { getNextRouteFromZoomLevel, MarkersPresenter, shouldNavigateToListPage } from '../../presenters';
+import {
+  getNextRouteFromZoomLevel,
+  LieuxMediationNumeriqueDetailsPresenter,
+  MarkersPresenter,
+  shouldNavigateToListPage
+} from '../../presenters';
 import { ViewReset } from '../../directives';
 import { BBox } from 'geojson';
 
@@ -45,6 +50,11 @@ const toLieuxFilteredByDepartement = (lieux: LieuMediationNumeriquePresentation[
       useClass: LieuxMediationNumeriquePresenter
     },
     {
+      deps: [LieuxMediationNumeriqueRepository],
+      provide: LieuxMediationNumeriqueDetailsPresenter,
+      useClass: LieuxMediationNumeriqueDetailsPresenter
+    },
+    {
       provide: MARKERS_TOKEN,
       useValue: MARKERS
     },
@@ -65,10 +75,10 @@ export class CartographieLayout implements OnInit {
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDistance$(...this._lieuxMediationNumeriqueListPresenterArgs, this.markersPresenter.boundingBox$)
     .pipe(
-      tap(() => this._loadingState$.next(false)),
       map((lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] =>
         toLieuxFilteredByDepartement(lieux, this.route.children[0]?.children[0]?.snapshot?.paramMap.get('nomDepartement') ?? '')
       ),
+      tap(() => this._loadingState$.next(false)),
       shareReplay()
     );
 

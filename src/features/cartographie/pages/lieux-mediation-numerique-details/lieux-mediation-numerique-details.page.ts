@@ -1,50 +1,37 @@
+import { Observable, of, shareReplay, tap } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { delay, Observable, of, tap } from 'rxjs';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
+import { toFilterFormPresentationFromQuery, toLocalisationFromFilterFormPresentation } from '../../../core';
 import {
-  FilterPresentation,
-  LieuxMediationNumeriqueRepository,
-  Localisation,
-  toFilterFormPresentationFromQuery,
-  toLocalisationFromFilterFormPresentation
-} from '../../../core';
-import {
-  LieuxMediationNumeriqueDetailsPresenter,
   LieuMediationNumeriqueDetailsPresentation,
+  LieuxMediationNumeriqueDetailsPresenter,
   MarkersPresenter
 } from '../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: 'lieux-mediation-numerique-details.page.html',
-  providers: [
-    {
-      deps: [LieuxMediationNumeriqueRepository],
-      provide: LieuxMediationNumeriqueDetailsPresenter,
-      useClass: LieuxMediationNumeriqueDetailsPresenter
-    }
-  ]
+  templateUrl: 'lieux-mediation-numerique-details.page.html'
 })
 export class LieuxMediationNumeriqueDetailsPage {
-  private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this._route.snapshot.queryParams);
-
-  private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
-
   public lieuMediationNumerique$: Observable<LieuMediationNumeriqueDetailsPresentation> =
-    this.lieuxMediationNumeriqueDetailsPresenter
-      .lieuMediationNumeriqueFromParams$(this._route.params, new Date(), of(this._localisation))
+    this._lieuxMediationNumeriqueDetailsPresenter
+      .lieuMediationNumeriqueFromParams$(
+        this._route.paramMap,
+        new Date(),
+        of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this._route.snapshot.queryParams)))
+      )
       .pipe(
-        delay(300),
-        tap((lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) => this.select(lieuMediationNumerique))
+        tap((lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) => this.select(lieuMediationNumerique)),
+        shareReplay()
       );
 
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
-    private readonly lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
-    private readonly _route: ActivatedRoute,
-    private readonly _markersPresenter: MarkersPresenter
+    private readonly _lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
+    private readonly _markersPresenter: MarkersPresenter,
+    private readonly _route: ActivatedRoute
   ) {}
 
   public printPage() {
