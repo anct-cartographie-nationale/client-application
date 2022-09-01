@@ -5,7 +5,7 @@ import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 import { LieuxMediationNumeriqueRepository } from '../../../core';
-import { MarkersPresenter } from '../../presenters';
+import { LieuxMediationNumeriqueDetailsPresenter, MarkersPresenter } from '../../presenters';
 
 describe('LieuxMediationNumeriqueDetailsPage', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -31,6 +31,12 @@ describe('LieuxMediationNumeriqueDetailsPage', (): void => {
           provide: LieuxMediationNumeriqueRepository,
           useValue: {
             getAll$: () => of([])
+          }
+        },
+        {
+          provide: LieuxMediationNumeriqueDetailsPresenter,
+          useValue: {
+            lieuMediationNumeriqueFromParams$: () => of({})
           }
         }
       ]

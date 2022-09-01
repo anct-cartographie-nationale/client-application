@@ -10,6 +10,7 @@ import {
 } from '../../../core';
 import { LieuxMediationNumeriqueDetailsPresenter } from './lieux-mediation-numerique-details.presenter';
 import { LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
+import { ParamMap } from '@angular/router';
 
 describe('lieux médiation numérique details presenter', (): void => {
   it('should filter only lieu with id', async (): Promise<void> => {
@@ -57,9 +58,7 @@ describe('lieux médiation numérique details presenter', (): void => {
 
     const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
       lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
-        of({
-          id: '6001a35f16b08100062e415f'
-        }),
+        of(new Map<string, string>([['id', '6001a35f16b08100062e415f']]) as unknown as ParamMap),
         new Date('2022-07-22T14:55:00.000Z'),
         of(NO_LOCALISATION)
       )
@@ -128,9 +127,8 @@ describe('lieux médiation numérique details presenter', (): void => {
 
     const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
       lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
-        of({
-          id: '6001a35f16b08100062e415f'
-        }),
+        of(new Map<string, string>([['id', '6001a35f16b08100062e415f']]) as unknown as ParamMap),
+
         new Date('2022-07-22T14:55:00.000Z'),
         of(NO_LOCALISATION)
       )
@@ -168,9 +166,7 @@ describe('lieux médiation numérique details presenter', (): void => {
 
     const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
       lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
-        of({
-          id: '6001a35f16b08100062e415f'
-        }),
+        of(new Map<string, string>([['id', '6001a35f16b08100062e415f']]) as unknown as ParamMap),
         new Date('2022-07-22T14:55:00.000Z'),
         of(NO_LOCALISATION)
       )
@@ -218,9 +214,7 @@ describe('lieux médiation numérique details presenter', (): void => {
 
     const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
       lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
-        of({
-          id: '6001a35f16b08100062e415f'
-        }),
+        of(new Map<string, string>([['id', '6001a35f16b08100062e415f']]) as unknown as ParamMap),
         new Date('2022-07-22T14:55:00.000Z'),
         of(Localisation({ latitude: 45.7689958, longitude: 4.8343466 }))
       )
