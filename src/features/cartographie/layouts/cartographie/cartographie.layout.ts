@@ -16,7 +16,8 @@ import {
   RegionPresentation,
   toDepartement,
   toFilterFormPresentationFromQuery,
-  toLocalisationFromFilterFormPresentation
+  toLocalisationFromFilterFormPresentation,
+  nearestRegion
 } from '../../../core';
 import { LIEUX_ZOOM_LEVEL, MarkersPresenter, getNextRouteFromZoomLevel, shouldNavigateToListPage } from '../../presenters';
 import { ViewReset } from '../../directives';
@@ -106,9 +107,9 @@ export class CartographieLayout {
     this.markersPresenter.select(lieu.id);
   }
 
-  public onMapViewUpdated({ viewport, zoomLevel }: ViewReset): void {
+  public onMapViewUpdated({ viewport, zoomLevel, center }: ViewReset): void {
     this.updateMarkers(viewport, zoomLevel);
-    this.navigateToPageMatchingZoomLevel(zoomLevel);
+    this.navigateToPageMatchingZoomLevel(zoomLevel, Localisation({ latitude: center.lat, longitude: center.lng }));
   }
 
   private updateMarkers([leftLongitude, bottomLatitude, rightLongitude, topLatitude]: BBox, zoomLevel: number) {
@@ -119,10 +120,10 @@ export class CartographieLayout {
     ]);
   }
 
-  private navigateToPageMatchingZoomLevel(zoomLevel: number) {
-    const route: string = getNextRouteFromZoomLevel(zoomLevel);
+  private navigateToPageMatchingZoomLevel(zoomLevel: number, localisation: Localisation) {
+    const route: string[] = getNextRouteFromZoomLevel(zoomLevel, nearestRegion(localisation).nom);
     shouldNavigateToListPage(route, this.route.children[0]?.children[0]?.routeConfig?.path) &&
-      this._router.navigate([route], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
+      this._router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
   public onShowLieuxInDepartement(departement: DepartementPresentation): void {
@@ -162,6 +163,9 @@ export class CartographieLayout {
     );
     if (lieuFound) return this.markersPresenter.center(lieuFound.localisation, LIEUX_ZOOM_LEVEL);
 
-    this.navigateToPageMatchingZoomLevel(this.markersPresenter.defaultCenterView.zoomLevel);
+    this.navigateToPageMatchingZoomLevel(
+      this.markersPresenter.defaultCenterView.zoomLevel,
+      this.markersPresenter.defaultCenterView.coordinates
+    );
   }
 }
