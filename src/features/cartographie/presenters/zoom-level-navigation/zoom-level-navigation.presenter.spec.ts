@@ -73,4 +73,10 @@ describe('zoom level navigation presenter', (): void => {
 
     expect(shouldNavigate).toStrictEqual(false);
   });
+
+  it('should not navigate to . when route config is :id', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage('.', ':id');
+
+    expect(shouldNavigate).toStrictEqual(false);
+  });
 });

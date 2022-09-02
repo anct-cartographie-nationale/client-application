@@ -5,7 +5,8 @@ import {
   DepartementPresentation,
   LieuxMediationNumeriquePresenter,
   regions,
-  RegionPresentation
+  RegionPresentation,
+  regionFromNom
 } from '../../../core';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -17,9 +18,6 @@ const departementsFilteredByRegion = (departements: DepartementPresentation[], d
     (departement: DepartementPresentation) => departementCodes.length === 0 || departementCodes.includes(departement.code)
   );
 
-const toRegion = (paramMap: ParamMap): RegionPresentation | undefined =>
-  regions.find((region: RegionPresentation) => region.nom === paramMap.get('nomRegion'));
-
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './departements.page.html'
@@ -30,7 +28,9 @@ export class DepartementsPage {
     this._route.paramMap
   ]).pipe(
     map(([departements, paramMap]: [DepartementPresentation[], ParamMap]): DepartementPresentation[] =>
-      departementsFilteredByRegion(departements, toRegion(paramMap)?.departements ?? []).sort(byCollectiviteTerritorialeNom)
+      departementsFilteredByRegion(departements, regionFromNom(paramMap.get('nomRegion') ?? '')?.departements ?? []).sort(
+        byCollectiviteTerritorialeNom
+      )
     )
   );
 

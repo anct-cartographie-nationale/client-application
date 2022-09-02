@@ -1,4 +1,10 @@
-import { byNomDepartement, regionFromDepartement, toDepartement, toRegion } from './collectivite-territoriale.presenter';
+import {
+  departementFromNom,
+  regionFromNom,
+  regionFromDepartement,
+  toDepartement,
+  toRegion
+} from './collectivite-territoriale.presenter';
 import {
   Adresse,
   DepartementPresentation,
@@ -114,9 +120,16 @@ describe('collectivite territoriale presenter', (): void => {
   });
 
   it('should find a departement by name', (): void => {
-    const departementName: string = 'Paris';
-    const departement: DepartementPresentation | undefined = byNomDepartement(departementName);
+    const nomDepartement: string = 'Paris';
+    const departement: DepartementPresentation | undefined = departementFromNom(nomDepartement);
 
     expect(departement?.code).toStrictEqual('75');
+  });
+
+  it('should find a region by name', (): void => {
+    const nomRegion: string = 'Île-de-France';
+    const region: RegionPresentation | undefined = regionFromNom(nomRegion);
+
+    expect(region?.code).toStrictEqual('11');
   });
 });

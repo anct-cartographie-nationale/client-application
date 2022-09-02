@@ -5,7 +5,7 @@ import { combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
-  byNomDepartement,
+  departementFromNom,
   DepartementPresentation,
   FilterPresentation,
   LieuMediationNumerique,
@@ -41,7 +41,7 @@ const filteredByDepartementIfExist = (
     : [lieux, paramMap];
 
 const toLieuxFilteredByDepartement = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]) =>
-  filteredByDepartementIfExist(byNomDepartement(paramMap.get('nomDepartement') ?? ''), lieux, paramMap);
+  filteredByDepartementIfExist(departementFromNom(paramMap.get('nomDepartement') ?? ''), lieux, paramMap);
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

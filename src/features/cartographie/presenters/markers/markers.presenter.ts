@@ -99,7 +99,7 @@ export class MarkersPresenter {
     this._focuced.next(markerId);
   }
 
-  public zoomLevel(zoomLevel: number) {
+  public setZoomLevel(zoomLevel: number) {
     this._currentZoomLevel$.next(zoomLevel);
   }
 }

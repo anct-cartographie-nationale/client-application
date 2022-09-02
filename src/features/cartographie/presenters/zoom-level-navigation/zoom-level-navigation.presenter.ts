@@ -22,7 +22,7 @@ const isDepartement = (route: string, routeConfigPath: string): boolean =>
   route === DEPARTEMENTS_ROUTE && !['regions/:nomRegion', 'departements'].includes(routeConfigPath);
 
 const isLieux = (route: string, routeConfigPath: string): boolean =>
-  route === LIEUX_ROUTE && routeConfigPath !== 'regions/:nomRegion/:nomDepartement';
+  route === LIEUX_ROUTE && !['regions/:nomRegion/:nomDepartement', ':id'].includes(routeConfigPath);
 
 export const shouldNavigateToListPage = (route: string, routeConfigPath?: string): boolean =>
   routeConfigPath != null &&
