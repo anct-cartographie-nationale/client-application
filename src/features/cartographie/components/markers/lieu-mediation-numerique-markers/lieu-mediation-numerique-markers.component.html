@@ -3,9 +3,11 @@
   [latitude]="lieuMediationNumerique.localisation.latitude"
   [longitude]="lieuMediationNumerique.localisation.longitude"
   [properties]="lieuMediationNumerique"
-  [highlight]="selectedId === lieuMediationNumerique.id ? 'focus' : undefined"
+  [highlight]="highlightState(lieuMediationNumerique.id)"
   markerFactoryKey="lieuMediationNumerique"
-  (markerClick)="showDetails.emit($event.markerProperties)">
+  (markerClick)="showDetails.emit($event.markerProperties)"
+  (markerEnter)="enableHover.emit(lieuMediationNumerique.id)"
+  (markerLeave)="disableHover.emit()">
   <app-leaflet-map-tooltip [content]="popupContent" [sticky]="true">
     <div
       #popupContent

@@ -3,5 +3,8 @@
   [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"
   [orientationFeature]="features.get('orientation')"
   [focusId]="markersPresenter.focuced$ | async"
+  [hoverId]="markersPresenter.hovered$ | async"
   (print)="printPage()"
-  (selectLieu)="select($event)"></app-lieux-mediation-numerique-list>
+  (selectLieu)="select($event)"
+  (enableHover)="hover($event)"
+  (disableHover)="hover()"></app-lieux-mediation-numerique-list>

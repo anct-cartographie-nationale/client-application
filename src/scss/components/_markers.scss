@@ -24,7 +24,7 @@
 }
 
 .default-marker {
-  .default-marker-shadow {
+  .marker-focus-active {
     display: none;
   }
 }
@@ -56,7 +56,7 @@
 
 .marker-focus {
   .default-marker {
-    .default-marker-shadow {
+    .marker-focus-active {
       display: inherit;
     }
   }
@@ -69,6 +69,16 @@
     .cnfs-marker-out {
       animation: cnfs-marker-out-focus 0.5s linear 0s 1 normal forwards;
     }
+  }
+}
+
+.marker-hover-active {
+  display: none;
+}
+
+.marker-hover {
+  .marker-hover-active {
+    display: inherit;
   }
 }
 

@@ -91,6 +91,9 @@
         *ngIf="currentZoomLevel > 9"
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
         [selectedId]="(markersPresenter.selected$ | async) ?? ''"
+        [hoverId]="(markersPresenter.hovered$ | async) ?? ''"
+        (enableHover)="hover($event)"
+        (disableHover)="hover()"
         (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
     </app-leaflet-map>
   </div>

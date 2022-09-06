@@ -33,6 +33,8 @@ export class LieuxMediationNumeriqueListComponent {
     focusId && this.scrollTo(focusId);
   }
 
+  @Input() public hoverId: string | null = null;
+
   @Output() public print: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() public selectLieu: EventEmitter<LieuMediationNumeriquePresentation> =
@@ -43,6 +45,9 @@ export class LieuxMediationNumeriqueListComponent {
   @ViewChildren('item') public items!: QueryList<ElementRef>;
 
   public constructor(public readonly route: ActivatedRoute) {}
+
+  @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
   public scrollTo(focusId: string) {
     setTimeout(() => {
