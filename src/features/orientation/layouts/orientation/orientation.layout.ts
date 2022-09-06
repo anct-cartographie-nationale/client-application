@@ -2,7 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
-import { delay, Observable, startWith, Subject, tap } from 'rxjs';
+import { BehaviorSubject, delay, Observable, startWith, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
@@ -54,7 +54,7 @@ const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresent
   ]
 })
 export class OrientationLayout {
-  private _lieuxMediationNumeriqueCount$: Subject<number> = new Subject<number>();
+  private _lieuxMediationNumeriqueCount$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public lieuxMediationNumeriqueCount$: Observable<number> = this._lieuxMediationNumeriqueCount$.asObservable();
 
   public filterForm: FormGroup = createFormGroupFromFilterPresentation(
