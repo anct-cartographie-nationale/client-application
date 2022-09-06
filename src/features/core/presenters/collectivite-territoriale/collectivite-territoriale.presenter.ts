@@ -1,5 +1,5 @@
 import codePostalNotMatchingCodeDepartement from './code-postal-not-matching-code-departement.json';
-import { departements, LieuMediationNumeriquePresentation, regions } from '../../../core';
+import { departements, geographicDistance, LieuMediationNumeriquePresentation, Localisation, regions } from '../../../core';
 import { DepartementPresentation } from './presentations/departement.presentation';
 import { RegionPresentation } from './presentations/region.presentation';
 
@@ -96,5 +96,28 @@ export const byCollectiviteTerritorialeNom = <T extends DepartementPresentation 
 export const regionFromDepartement = (departement: DepartementPresentation): RegionPresentation | undefined =>
   regions.find((region: RegionPresentation) => region.departements.includes(departement.code));
 
-export const byNomDepartement = (nomDepartement: string): DepartementPresentation | undefined =>
+export const departementFromNom = (nomDepartement: string): DepartementPresentation | undefined =>
   departements.find((departement: DepartementPresentation) => departement.nom === nomDepartement);
+
+export const regionFromNom = (nomRegion: string): RegionPresentation | undefined =>
+  regions.find((region: RegionPresentation) => region.nom === nomRegion);
+
+const regionWithDistance = (region: RegionPresentation, localisation: Localisation) => ({
+  ...region,
+  distance: geographicDistance(region.localisation, localisation)
+});
+
+const nearestBetween = <T>(
+  collectiviteTerritorialeA: T & { distance: number },
+  collectiviteTerritorialeB: T & { distance: number }
+) =>
+  collectiviteTerritorialeA.distance < collectiviteTerritorialeB.distance
+    ? collectiviteTerritorialeA
+    : collectiviteTerritorialeB;
+
+export const nearestRegion = (localisation: Localisation): RegionPresentation =>
+  regions.reduce(
+    (nearestRegion: RegionPresentation & { distance: number }, region: RegionPresentation) =>
+      nearestBetween(nearestRegion, regionWithDistance(region, localisation)),
+    regionWithDistance(regions[0], localisation)
+  );

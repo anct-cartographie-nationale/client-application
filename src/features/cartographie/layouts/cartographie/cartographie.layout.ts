@@ -1,33 +1,28 @@
 import { HttpParams } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, shareReplay, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
-  byNomDepartement,
+  departementFromNom,
+  regionFromNom,
   DepartementPresentation,
   FilterPresentation,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
-  LieuxMediationNumeriqueRepository,
   Localisation,
   regionFromDepartement,
   RegionPresentation,
   toDepartement,
   toFilterFormPresentationFromQuery,
-  toLocalisationFromFilterFormPresentation
+  toLocalisationFromFilterFormPresentation,
+  nearestRegion
 } from '../../../core';
-import { MARKERS, MARKERS_TOKEN } from '../../configuration';
-import {
-  getNextRouteFromZoomLevel,
-  LieuxMediationNumeriqueDetailsPresenter,
-  MarkersPresenter,
-  shouldNavigateToListPage
-} from '../../presenters';
+import { LIEUX_ZOOM_LEVEL, MarkersPresenter, getNextRouteFromZoomLevel, shouldNavigateToListPage } from '../../presenters';
 import { ViewReset } from '../../directives';
 import { BBox } from 'geojson';
+import { cartographieLayoutProviders } from './cartographie.layout.providers';
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
@@ -38,34 +33,16 @@ const filteredByDepartementIfExist = (
     : lieux;
 
 const toLieuxFilteredByDepartement = (lieux: LieuMediationNumeriquePresentation[], nomDepartement: string) =>
-  filteredByDepartementIfExist(byNomDepartement(nomDepartement), lieux);
+  filteredByDepartementIfExist(departementFromNom(nomDepartement), lieux);
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cartographie.layout.html',
-  providers: [
-    {
-      deps: [LieuxMediationNumeriqueRepository],
-      provide: LieuxMediationNumeriquePresenter,
-      useClass: LieuxMediationNumeriquePresenter
-    },
-    {
-      deps: [LieuxMediationNumeriqueRepository],
-      provide: LieuxMediationNumeriqueDetailsPresenter,
-      useClass: LieuxMediationNumeriqueDetailsPresenter
-    },
-    {
-      provide: MARKERS_TOKEN,
-      useValue: MARKERS
-    },
-    {
-      deps: [ZOOM_LEVEL_TOKEN, INITIAL_POSITION_TOKEN],
-      provide: MarkersPresenter,
-      useClass: MarkersPresenter
-    }
-  ]
+  providers: cartographieLayoutProviders
 })
-export class CartographieLayout implements OnInit {
+export class CartographieLayout {
+  private _initialZoom: boolean = false;
+
   private _lieuxMediationNumeriqueListPresenterArgs: [Observable<Localisation>, Observable<FilterPresentation>, Date] = [
     of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))),
     this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
@@ -76,9 +53,13 @@ export class CartographieLayout implements OnInit {
     .lieuxMediationNumeriqueByDistance$(...this._lieuxMediationNumeriqueListPresenterArgs, this.markersPresenter.boundingBox$)
     .pipe(
       map((lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] =>
-        toLieuxFilteredByDepartement(lieux, this.route.children[0]?.children[0]?.snapshot?.paramMap.get('nomDepartement') ?? '')
+        toLieuxFilteredByDepartement(lieux, this.getRouteParam('nomDepartement'))
       ),
-      tap(() => this._loadingState$.next(false)),
+      tap((lieux: LieuMediationNumeriquePresentation[]) => {
+        !this._initialZoom && this.setInitialZoom(lieux);
+        this._loadingState$.next(false);
+        this._initialZoom = true;
+      }),
       shareReplay()
     );
 
@@ -120,37 +101,32 @@ export class CartographieLayout implements OnInit {
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
-  public ngOnInit(): void {
-    this.navigateToPageMatchingZoomLevel(this.markersPresenter.defaultCenterView.zoomLevel);
-  }
-
   public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
     this._router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
     this.markersPresenter.center(lieu.localisation);
     this.markersPresenter.select(lieu.id);
   }
 
-  public onMapViewUpdated({ viewport, zoomLevel }: ViewReset): void {
+  public onMapViewUpdated({ viewport, zoomLevel, center }: ViewReset): void {
     this.updateMarkers(viewport, zoomLevel);
-    this.navigateToPageMatchingZoomLevel(zoomLevel);
+    this.navigateToPageMatchingZoomLevel(zoomLevel, Localisation({ latitude: center.lat, longitude: center.lng }));
   }
 
   private updateMarkers([leftLongitude, bottomLatitude, rightLongitude, topLatitude]: BBox, zoomLevel: number) {
-    this.markersPresenter.zoomLevel(zoomLevel);
+    this.markersPresenter.setZoomLevel(zoomLevel);
     this.markersPresenter.boundingBox([
       Localisation({ latitude: topLatitude, longitude: leftLongitude }),
       Localisation({ latitude: bottomLatitude, longitude: rightLongitude })
     ]);
   }
 
-  private navigateToPageMatchingZoomLevel(zoomLevel: number) {
-    const route: string = getNextRouteFromZoomLevel(zoomLevel);
-    const routeConfigPath: string | undefined = this.route.children[0]?.children[0]?.routeConfig?.path;
-    shouldNavigateToListPage(route, routeConfigPath) &&
-      this._router.navigate([route], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
+  private navigateToPageMatchingZoomLevel(zoomLevel: number, localisation: Localisation) {
+    const route: string[] = getNextRouteFromZoomLevel(zoomLevel, nearestRegion(localisation).nom);
+    shouldNavigateToListPage(route, this.route.children[0]?.children[0]?.routeConfig?.path) &&
+      this._router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
-  public onShowLieuxInDepartement(departement: DepartementPresentation) {
+  public onShowLieuxInDepartement(departement: DepartementPresentation): void {
     this.markersPresenter.center(departement.localisation, departement.zoom);
     this._router.navigate(['regions', regionFromDepartement(departement)?.nom, departement.nom], {
       relativeTo: this.route.parent,
@@ -158,7 +134,7 @@ export class CartographieLayout implements OnInit {
     });
   }
 
-  public onShowLieuxInRegion(region: RegionPresentation) {
+  public onShowLieuxInRegion(region: RegionPresentation): void {
     this.markersPresenter.center(region.localisation, region.zoom);
     this._router.navigate(['regions', region.nom], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
@@ -169,5 +145,27 @@ export class CartographieLayout implements OnInit {
 
   public resetFilters(): void {
     this._router.navigate([], { relativeTo: this.route.parent });
+  }
+
+  private getRouteParam(routeParam: string) {
+    return this.route.children[0]?.children[0]?.snapshot.paramMap.get(routeParam) ?? '';
+  }
+
+  private setInitialZoom(lieux: LieuMediationNumeriquePresentation[]) {
+    const departement: DepartementPresentation | undefined = departementFromNom(this.getRouteParam('nomDepartement'));
+    if (departement) return this.onShowLieuxInDepartement(departement);
+
+    const region: RegionPresentation | undefined = regionFromNom(this.getRouteParam('nomRegion'));
+    if (region) return this.onShowLieuxInRegion(region);
+
+    const lieuFound: LieuMediationNumeriquePresentation | undefined = lieux.find(
+      (lieu: LieuMediationNumeriquePresentation) => lieu.id === this.getRouteParam('id')
+    );
+    if (lieuFound) return this.markersPresenter.center(lieuFound.localisation, LIEUX_ZOOM_LEVEL);
+
+    this.navigateToPageMatchingZoomLevel(
+      this.markersPresenter.defaultCenterView.zoomLevel,
+      this.markersPresenter.defaultCenterView.coordinates
+    );
   }
 }

@@ -1,4 +1,11 @@
-import { byNomDepartement, regionFromDepartement, toDepartement, toRegion } from './collectivite-territoriale.presenter';
+import {
+  departementFromNom,
+  regionFromNom,
+  regionFromDepartement,
+  toDepartement,
+  toRegion,
+  nearestRegion
+} from './collectivite-territoriale.presenter';
 import {
   Adresse,
   DepartementPresentation,
@@ -6,6 +13,12 @@ import {
   Localisation,
   RegionPresentation
 } from '../../../core';
+import {
+  DEPARTEMENT_ZOOM_LEVEL,
+  inDepartementZoomLevel,
+  LIEUX_ZOOM_LEVEL,
+  REGION_ZOOM_LEVEL
+} from '../../../cartographie/presenters';
 
 describe('collectivite territoriale presenter', (): void => {
   it('should get département from code postal', (): void => {
@@ -114,9 +127,56 @@ describe('collectivite territoriale presenter', (): void => {
   });
 
   it('should find a departement by name', (): void => {
-    const departementName: string = 'Paris';
-    const departement: DepartementPresentation | undefined = byNomDepartement(departementName);
+    const nomDepartement: string = 'Paris';
+    const departement: DepartementPresentation | undefined = departementFromNom(nomDepartement);
 
     expect(departement?.code).toStrictEqual('75');
+  });
+
+  it('should find a region by name', (): void => {
+    const nomRegion: string = 'Île-de-France';
+    const region: RegionPresentation | undefined = regionFromNom(nomRegion);
+
+    expect(region?.code).toStrictEqual('11');
+  });
+
+  it('should get Île-de-France as nearest region', (): void => {
+    const localisation: Localisation = Localisation({
+      latitude: 48.709168,
+      longitude: 2.504723
+    });
+
+    const region: RegionPresentation | undefined = nearestRegion(localisation);
+
+    expect(region?.nom).toStrictEqual('Île-de-France');
+  });
+
+  it('should get Auvergne-Rhône-Alpes as nearest region', (): void => {
+    const localisation: Localisation = Localisation({
+      latitude: 45.515833,
+      longitude: 4.538056
+    });
+
+    const region: RegionPresentation | undefined = nearestRegion(localisation);
+
+    expect(region?.nom).toStrictEqual('Auvergne-Rhône-Alpes');
+  });
+
+  it('should check that zoom level is in deparement zoom level', (): void => {
+    const isDepartementZoomLevel: boolean = inDepartementZoomLevel(DEPARTEMENT_ZOOM_LEVEL);
+
+    expect(isDepartementZoomLevel).toStrictEqual(true);
+  });
+
+  it('should check that region zoom level is not in deparement zoom level', (): void => {
+    const isDepartementZoomLevel: boolean = inDepartementZoomLevel(REGION_ZOOM_LEVEL);
+
+    expect(isDepartementZoomLevel).toStrictEqual(false);
+  });
+
+  it('should check that lieux zoom level is not in deparement zoom level', (): void => {
+    const isDepartementZoomLevel: boolean = inDepartementZoomLevel(LIEUX_ZOOM_LEVEL);
+
+    expect(isDepartementZoomLevel).toStrictEqual(false);
   });
 });
