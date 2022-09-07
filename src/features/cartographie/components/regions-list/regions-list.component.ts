@@ -9,8 +9,11 @@ import { DepartementPresentation } from '../../../core';
 })
 export class RegionsListComponent {
   @Input() regions: DepartementPresentation[] = [];
+  @Input() public hoverId: string | null = null;
 
   @Output() showLieux: EventEmitter<DepartementPresentation> = new EventEmitter<DepartementPresentation>();
+  @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
   public constructor(public readonly route: ActivatedRoute) {}
 }
