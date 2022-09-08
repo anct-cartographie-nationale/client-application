@@ -22,3 +22,7 @@
   color: $primary;
   box-shadow: -0.5px 0.5px 0 1.5px $primary;
 }
+
+input[type='search']::-webkit-search-cancel-button {
+  display: none;
+}

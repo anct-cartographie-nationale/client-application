@@ -22,6 +22,7 @@ const SEARCH_DEBOUNCE_TIME: number = 300;
   templateUrl: './localisation.page.html'
 })
 export class LocalisationPage {
+  distance = '100000';
   private readonly _searchTerm$: Subject<string> = new Subject<string>();
 
   public addressesFound$: Observable<AddressFoundPresentation[]> = this._searchTerm$.pipe(
@@ -58,6 +59,7 @@ export class LocalisationPage {
         })
       );
     });
+    this.distance = '100000';
   }
 
   private _geoLocation$: Subject<Localisation> = new Subject<Localisation>();
