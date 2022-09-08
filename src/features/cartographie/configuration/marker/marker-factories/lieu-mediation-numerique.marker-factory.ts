@@ -86,7 +86,7 @@ const lieuMediationNumeriqueMarkerHighlightClass = (highlight?: MarkerHighlight)
   highlight == null ? '' : LIEU_MEDIATION_NUMERIQUE_MARKER_HIGHLIGHT_CLASSES_MAP[highlight];
 
 const lieuMediationNumeriqueMarkerOpeningClass = (status?: OpeningStatus): string => {
-  const uniformStatus = status?.includes('Fermé') ? 'Fermé' : status;
+  const uniformStatus = status?.includes('Fermé') ? 'Fermé' : status?.includes('Ferme bientôt') ? 'Ferme bientôt' : status;
   return uniformStatus == null ? 'marker-status-unknown' : LIEU_MEDIATION_NUMERIQUE_MARKER_OPENING_CLASSES_MAP[uniformStatus];
 };
 
