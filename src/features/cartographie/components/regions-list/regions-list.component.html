@@ -5,6 +5,9 @@
       [relativeTo]="route.parent"
       queryParamsHandling="preserve"
       (click)="showLieux.emit(region)"
+      [class.list-group-item-hover]="hoverId === region.nom"
+      (mouseover)="enableHover.emit(region.nom)"
+      (mouseout)="disableHover.emit()"
       class="list-group-item list-group-item-action p-4"
       *ngFor="let region of regions">
       <h5 class="fw-bold mb-0">{{ region.nom }}</h5>

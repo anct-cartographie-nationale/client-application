@@ -82,10 +82,16 @@
       <app-region-markers
         *ngIf="currentZoomLevel <= 7"
         [regions]="(regions$ | async) ?? []"
+        [hoverId]="(markersPresenter.hovered$ | async) ?? ''"
+        (enableHover)="hover($event)"
+        (disableHover)="hover()"
         (showLieux)="onShowLieuxInRegion($event)"></app-region-markers>
       <app-departement-markers
         *ngIf="currentZoomLevel <= 9 && currentZoomLevel > 7"
         [departements]="(departements$ | async) ?? []"
+        [hoverId]="(markersPresenter.hovered$ | async) ?? ''"
+        (enableHover)="hover($event)"
+        (disableHover)="hover()"
         (showLieux)="onShowLieuxInDepartement($event)"></app-departement-markers>
       <app-lieu-mediation-numerique-markers
         *ngIf="currentZoomLevel > 9"

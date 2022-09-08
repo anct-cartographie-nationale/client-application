@@ -15,6 +15,10 @@ export class RegionsPage {
     map((regions: RegionPresentation[]): RegionPresentation[] => [...regions].sort(byCollectiviteTerritorialeNom))
   );
 
+  public hover(highlightedId?: string) {
+    this.markersPresenter.hover(highlightedId ?? '');
+  }
+
   public constructor(
     private readonly _cartographieLayout: CartographieLayout,
     private readonly _route: ActivatedRoute,

@@ -3,5 +3,8 @@
   [latitude]="region.localisation.latitude"
   [longitude]="region.localisation.longitude"
   [properties]="{ index: i, count: region.lieuxCount ?? 0 }"
+  [highlight]="highlightState(region.nom)"
   markerFactoryKey="region"
-  (markerClick)="showLieux.emit(region)"></app-leaflet-map-marker>
+  (markerClick)="showLieux.emit(region)"
+  (markerEnter)="enableHover.emit(region.nom)"
+  (markerLeave)="disableHover.emit()"></app-leaflet-map-marker>

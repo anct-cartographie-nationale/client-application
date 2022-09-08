@@ -1,3 +1,6 @@
 <app-departements-list
   [departements]="(departements$ | async) ?? []"
+  [hoverId]="markersPresenter.hovered$ | async"
+  (enableHover)="hover($event)"
+  (disableHover)="hover()"
   (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-departements-list>

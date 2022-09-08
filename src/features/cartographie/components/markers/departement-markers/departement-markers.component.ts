@@ -8,10 +8,18 @@ import { DepartementPresentation } from '../../../../core';
 })
 export class DepartementMarkersComponent {
   @Input() public departements: DepartementPresentation[] = [];
+  @Input() public hoverId: string = '';
 
   @Output() showLieux: EventEmitter<DepartementPresentation> = new EventEmitter<DepartementPresentation>();
+  @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
   public trackByDepartementCode(_: number, departement: DepartementPresentation) {
     return departement.code;
+  }
+
+  public highlightState(departementId: string) {
+    if (departementId === this.hoverId) return 'hover';
+    return undefined;
   }
 }

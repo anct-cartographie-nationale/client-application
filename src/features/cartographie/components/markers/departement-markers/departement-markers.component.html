@@ -3,5 +3,8 @@
   [latitude]="departement.localisation.latitude"
   [longitude]="departement.localisation.longitude"
   [properties]="{ index: i, count: departement.lieuxCount ?? 0 }"
+  [highlight]="highlightState(departement.nom)"
   markerFactoryKey="departement"
-  (markerClick)="showLieux.emit(departement)"></app-leaflet-map-marker>
+  (markerClick)="showLieux.emit(departement)"
+  (markerEnter)="enableHover.emit(departement.nom)"
+  (markerLeave)="disableHover.emit()"></app-leaflet-map-marker>
