@@ -85,8 +85,10 @@ const LIEU_MEDIATION_NUMERIQUE_MARKER_OPENING_CLASSES_MAP: Record<OpeningStatus,
 const lieuMediationNumeriqueMarkerHighlightClass = (highlight?: MarkerHighlight): string =>
   highlight == null ? '' : LIEU_MEDIATION_NUMERIQUE_MARKER_HIGHLIGHT_CLASSES_MAP[highlight];
 
-const lieuMediationNumeriqueMarkerOpeningClass = (status?: OpeningStatus): string =>
-  status == null ? 'marker-status-unknown' : LIEU_MEDIATION_NUMERIQUE_MARKER_OPENING_CLASSES_MAP[status];
+const lieuMediationNumeriqueMarkerOpeningClass = (status?: OpeningStatus): string => {
+  const uniformStatus = status?.includes('Fermé') ? 'Fermé' : status;
+  return uniformStatus == null ? 'marker-status-unknown' : LIEU_MEDIATION_NUMERIQUE_MARKER_OPENING_CLASSES_MAP[uniformStatus];
+};
 
 export const lieuMediationNumeriqueMarkerFactory: MarkerFactory<LieuMediationNumeriqueMarkerProperties, DivIcon> = (
   properties: MarkerProperties<LieuMediationNumeriqueMarkerProperties>
