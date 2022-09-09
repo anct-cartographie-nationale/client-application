@@ -22,7 +22,7 @@
           <app-collapse #collapseLocalisation id="collapseLocalisation" aria-labelledby="headingLocalisation">
             <div class="accordion-body">
               <div class="row justify-content-center">
-                <div class="col-md-5 mb-3">
+                <div class="col-md-6 mb-3">
                   <app-address-field
                     [addressSuggestions]="(addressesFound$ | async) ?? []"
                     [addressNotFound]="(addressNotFound$ | async) ?? false"
@@ -48,25 +48,35 @@
                 *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value">
                 <div class="col-auto mb-3 form-check form-check-inline form-chip">
                   <input
+                    checked
                     type="radio"
-                    appUncheckableRadio
                     name="distance"
                     formControlName="distance"
-                    [value]="20000"
+                    value="100000"
                     class="form-check-input"
-                    id="distance-20km" />
-                  <label class="form-check-label bg-primary text-white" for="distance-20km">Moins de 20 km</label>
+                    id="distance-100km"
+                    [(ngModel)]="distance" />
+                  <label class="form-check-label" for="distance-100km">Moins de 100 km</label>
                 </div>
                 <div class="col-auto mb-3 form-check form-check-inline form-chip">
                   <input
                     type="radio"
-                    appUncheckableRadio
                     name="distance"
                     formControlName="distance"
-                    [value]="5000"
+                    value="20000"
+                    class="form-check-input"
+                    id="distance-20km" />
+                  <label class="form-check-label" for="distance-20km">Moins de 20 km</label>
+                </div>
+                <div class="col-auto mb-3 form-check form-check-inline form-chip">
+                  <input
+                    type="radio"
+                    name="distance"
+                    formControlName="distance"
+                    value="5000"
                     class="form-check-input"
                     id="distance-5km" />
-                  <label class="form-check-label bg-primary text-white" for="distance-5km">Moins de 5 km</label>
+                  <label class="form-check-label" for="distance-5km">Moins de 5 km</label>
                 </div>
               </div>
             </div>

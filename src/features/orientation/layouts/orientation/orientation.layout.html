@@ -28,8 +28,8 @@
               Localisation
               <span
                 class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle"
-                *ngIf="filterForm.value.address && filterForm.value.latitude && filterForm.value.longitude">
-                {{(filter.distance && filter.distance !== null) ? 2 : 1}}
+                *ngIf="filter.distance && filter.distance !== null">
+                1
               </span>
             </a>
           </li>

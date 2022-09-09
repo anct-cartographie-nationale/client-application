@@ -20,6 +20,11 @@
       background-color: $form-chip-padding-background-color !important;
     }
 
+    &:checked + .form-check-label {
+      color: $light;
+      background-color: $primary;
+    }
+
     &:focus + .form-check-label {
       outline: 0;
       box-shadow: $input-focus-box-shadow;
