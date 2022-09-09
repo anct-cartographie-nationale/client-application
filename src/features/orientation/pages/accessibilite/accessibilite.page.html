@@ -1,29 +1,40 @@
 <div class="h-100 d-flex flex-column">
   <div class="my-auto">
     <h1 class="h2 text-center fw-bold mb-4">
-      <span class="text-primary">Quelle structure</span>
-      cherchez-vous ?
+      <span class="text-primary">Comment</span>
+      et
+      <span class="text-primary">à qui</span>
+      l'accompagnement sera accessible ?
     </h1>
     <form [formGroup]="orientationLayout.filterForm">
       <div class="accordion" id="accordionAccessibilite">
         <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingFraisACharge">
+          <h2 class="accordion-header" id="headingConditionFinancieres">
             <button
               type="button"
               class="accordion-button p-3 collapsed"
-              aria-controls="collapseFraisACharge"
-              [class.collapsed]="collapseFraisACharge.isCollapsed"
-              [attr.aria-expanded]="collapseFraisACharge.isExpanded"
-              (click)="collapseFraisACharge.toggle()">
+              aria-controls="collapseConditionFinancieres"
+              [class.collapsed]="collapseConditionFinancieres.isCollapsed"
+              [attr.aria-expanded]="collapseConditionFinancieres.isExpanded"
+              (click)="collapseConditionFinancieres.toggle()">
               <i class="ri-price-tag-3-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <b>Frais à charge</b>
+              <div>
+                <b>Conditions financières</b>
+                <br />
+                <i class="text-muted">
+                  <small>Coût d'accès au lieu et/ou à ses services</small>
+                </i>
+              </div>
             </button>
           </h2>
-          <app-collapse #collapseFraisACharge id="collapseFraisACharge" aria-labelledby="headingFraisACharge">
+          <app-collapse
+            #collapseConditionFinancieres
+            id="collapseConditionFinancieres"
+            aria-labelledby="headingConditionFinancieres">
             <div class="accordion-body text-center">
               <div
                 class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let fraisAChargeOption of fraisAChargeOptions; index as i">
+                *ngFor="let conditionFinancieresOption of conditionFinancieresOptions; index as i">
                 <input
                   #conditionsAccess
                   type="checkbox"
@@ -31,36 +42,45 @@
                   appCheckboxArray
                   formControlName="conditions_access"
                   class="form-check-input"
-                  [value]="fraisAChargeOption.value"
-                  [attr.id]="'fraisAChargeLabelChip' + i" />
-                <label class="form-check-label bg-primary text-white" [attr.for]="'fraisAChargeLabelChip' + i">
+                  [value]="conditionFinancieresOption.value"
+                  [attr.id]="'conditionFinancieresLabelChip' + i" />
+                <label class="form-check-label bg-primary text-white" [attr.for]="'conditionFinancieresLabelChip' + i">
                   <i
                     class="align-bottom"
                     [class]="conditionsAccess.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
-                  {{ fraisAChargeOption.label }}
+                  {{ conditionFinancieresOption.label }}
                 </label>
               </div>
             </div>
           </app-collapse>
         </div>
         <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingAccompagnement">
+          <h2 class="accordion-header" id="headingTypeAccompagnements">
             <button
               type="button"
               class="accordion-button p-3 collapsed"
-              aria-controls="collapseAccompagnement"
-              [class.collapsed]="collapseAccompagnement.isCollapsed"
-              [attr.aria-expanded]="collapseAccompagnement.isExpanded"
-              (click)="collapseAccompagnement.toggle()">
+              aria-controls="collapseTypeAccompagnements"
+              [class.collapsed]="collapseTypeAccompagnements.isCollapsed"
+              [attr.aria-expanded]="collapseTypeAccompagnements.isExpanded"
+              (click)="collapseTypeAccompagnements.toggle()">
               <i class="ri-group-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <b>Accompagnement</b>
+              <div>
+                <b>Type d'accompagnement</b>
+                <br />
+                <i class="text-muted">
+                  <small>Modalités d’accompagnement proposées par le lieu</small>
+                </i>
+              </div>
             </button>
           </h2>
-          <app-collapse #collapseAccompagnement id="collapseAccompagnement" aria-labelledby="headingAccompagnement">
+          <app-collapse
+            #collapseTypeAccompagnements
+            id="collapseTypeAccompagnements"
+            aria-labelledby="headingTypeAccompagnements">
             <div class="accordion-body text-center">
               <div
                 class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let accompagnementsOption of accompagnementsOptions; index as i">
+                *ngFor="let typeAccompagnementsOption of typeAccompagnementsOptions; index as i">
                 <input
                   #typesAccompagnement
                   type="checkbox"
@@ -68,13 +88,56 @@
                   appCheckboxArray
                   formControlName="modalites_accompagnement"
                   class="form-check-input"
-                  [value]="accompagnementsOption.value"
-                  [attr.id]="'accompagnementLabelChip' + i" />
-                <label class="form-check-label bg-primary text-white" [attr.for]="'accompagnementLabelChip' + i">
+                  [value]="typeAccompagnementsOption.value"
+                  [attr.id]="'typeAccompagnementsLabelChip' + i" />
+                <label class="form-check-label bg-primary text-white" [attr.for]="'typeAccompagnementsLabelChip' + i">
                   <i
                     class="align-bottom"
                     [class]="typesAccompagnement.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
-                  {{ accompagnementsOption.label }}
+                  {{ typeAccompagnementsOption.label }}
+                </label>
+              </div>
+            </div>
+          </app-collapse>
+        </div>
+        <div class="accordion-item mb-3">
+          <h2 class="accordion-header" id="headingTypePublic">
+            <button
+              type="button"
+              class="accordion-button p-3 collapsed"
+              aria-controls="collapseTypePublic"
+              [class.collapsed]="collapseTypePublic.isCollapsed"
+              [attr.aria-expanded]="collapseTypePublic.isExpanded"
+              (click)="collapseTypePublic.toggle()">
+              <i class="ri-parent-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+              <div>
+                <b>Type de public</b>
+                <br />
+                <i class="text-muted">
+                  <small>Différents publics que le lieu est en mesure d’accueillir</small>
+                </i>
+              </div>
+            </button>
+          </h2>
+          <app-collapse #collapseTypePublic id="collapseTypePublic" aria-labelledby="headingTypePublic">
+            <div class="accordion-body text-center">
+              <div
+                class="form-check form-check-inline form-chip mb-3"
+                *ngFor="let typePublicOption of typePublicOptions; index as i">
+                <input
+                  #publicsAccueillis
+                  type="checkbox"
+                  name="publics_accueillis"
+                  appCheckboxArray
+                  formControlName="publics_accueillis"
+                  class="form-check-input"
+                  [value]="typePublicOption.value"
+                  [attr.id]="'typePublicLabelChip' + i" />
+                <label class="form-check-label bg-primary text-white" [attr.for]="'typePublicLabelChip' + i">
+                  <i
+                    class="align-bottom"
+                    [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+                  {{ typePublicOption.label }}
                 </label>
               </div>
             </div>
@@ -90,7 +153,13 @@
               [attr.aria-expanded]="collapseAccueilSpecifique.isExpanded"
               (click)="collapseAccueilSpecifique.toggle()">
               <i class="ri-wheelchair-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <b>Accueil spécifique</b>
+              <div>
+                <b>Accueil spécifique</b>
+                <br />
+                <i class="text-muted">
+                  <small>Différents publics spécifiques que le lieu est en mesure d’accueillir</small>
+                </i>
+              </div>
             </button>
           </h2>
           <app-collapse #collapseAccueilSpecifique id="collapseAccueilSpecifique" aria-labelledby="headingAccueilSpecifique">
@@ -112,43 +181,6 @@
                     class="align-bottom"
                     [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
                   {{ accueilSpecifiqueOption.label }}
-                </label>
-              </div>
-            </div>
-          </app-collapse>
-        </div>
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingPublicPrecis">
-            <button
-              type="button"
-              class="accordion-button p-3 collapsed"
-              aria-controls="collapsePublicPrecis"
-              [class.collapsed]="collapsePublicPrecis.isCollapsed"
-              [attr.aria-expanded]="collapsePublicPrecis.isExpanded"
-              (click)="collapsePublicPrecis.toggle()">
-              <i class="ri-parent-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <b>Je cherche une structure adaptée à un public précis</b>
-            </button>
-          </h2>
-          <app-collapse #collapsePublicPrecis id="collapsePublicPrecis" aria-labelledby="headingPublicPrecis">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let publicPrecisOption of publicPrecisOptions; index as i">
-                <input
-                  #publicsAccueillis
-                  type="checkbox"
-                  name="publics_accueillis"
-                  appCheckboxArray
-                  formControlName="publics_accueillis"
-                  class="form-check-input"
-                  [value]="publicPrecisOption.value"
-                  [attr.id]="'publicPrecisLabelChip' + i" />
-                <label class="form-check-label bg-primary text-white" [attr.for]="'publicPrecisLabelChip' + i">
-                  <i
-                    class="align-bottom"
-                    [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
-                  {{ publicPrecisOption.label }}
                 </label>
               </div>
             </div>

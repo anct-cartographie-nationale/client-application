@@ -1,14 +1,10 @@
 [
   {
-    "label": "Femmes uniquement",
-    "value": "Uniquement femmes"
-  },
-  {
     "label": "Adultes",
     "value": "Adultes"
   },
   {
-    "label": "Seniors",
+    "label": "Seniors (+65 ans)",
     "value": "Seniors (+ 65 ans)"
   },
   {
@@ -18,5 +14,9 @@
   {
     "label": "Familles/enfants",
     "value": "Familles/enfants"
+  },
+  {
+    "label": "Femmes uniquement",
+    "value": "Uniquement femmes"
   }
 ]

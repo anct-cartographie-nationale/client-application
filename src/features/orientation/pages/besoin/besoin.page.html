@@ -7,6 +7,48 @@
     <form [formGroup]="orientationLayout.filterForm">
       <div class="accordion" id="accordionBesoin">
         <div class="accordion-item mb-3">
+          <h2 class="accordion-header" id="headingApprentissageDeBase">
+            <button
+              type="button"
+              class="accordion-button p-3 collapsed"
+              aria-controls="collapseApprentissageDeBase"
+              [class.collapsed]="collapseApprentissageDeBase.isCollapsed"
+              [attr.aria-expanded]="collapseApprentissageDeBase.isExpanded"
+              (click)="collapseApprentissageDeBase.toggle()">
+              <i class="ri-compasses-2-fill ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+              <div>
+                <b>Apprentissage de base</b>
+                <br />
+                <i class="text-muted">
+                  <small>J'ai besoin de connaître les bases du numérique</small>
+                </i>
+              </div>
+            </button>
+          </h2>
+          <app-collapse
+            #collapseApprentissageDeBase
+            id="collapseApprentissageDeBase"
+            aria-labelledby="headingApprentissageDeBase">
+            <div class="accordion-body text-center">
+              <div
+                class="form-check form-check-inline form-chip mb-3"
+                *ngFor="let apprentissageDeBaseItem of apprentissageDeBaseOrientationItems; index as i">
+                <input
+                  type="radio"
+                  appUncheckableRadio
+                  name="services"
+                  formControlName="services"
+                  class="form-check-input"
+                  [value]="apprentissageDeBaseItem.value"
+                  [attr.id]="'apprentissageDeBaseLabelChip' + i" />
+                <label class="form-check-label bg-primary text-white fw-bold" [attr.for]="'apprentissageDeBaseLabelChip' + i">
+                  {{ apprentissageDeBaseItem.label }}
+                </label>
+              </div>
+            </div>
+          </app-collapse>
+        </div>
+        <div class="accordion-item mb-3">
           <h2 class="accordion-header" id="headingDemarches">
             <button
               type="button"
@@ -43,45 +85,7 @@
             </div>
           </app-collapse>
         </div>
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingMiseANiveau">
-            <button
-              type="button"
-              class="accordion-button p-3 collapsed"
-              aria-controls="collapseMiseANiveau"
-              [class.collapsed]="collapseMiseANiveau.isCollapsed"
-              [attr.aria-expanded]="collapseMiseANiveau.isExpanded"
-              (click)="collapseMiseANiveau.toggle()">
-              <i class="ri-compasses-2-fill ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <div>
-                <b>Mise à niveau</b>
-                <br />
-                <i class="text-muted">
-                  <small>J’ai besoin d’apprendre à utiliser des outils numériques pour mes usages quotidien</small>
-                </i>
-              </div>
-            </button>
-          </h2>
-          <app-collapse #collapseMiseANiveau id="collapseMiseANiveau" aria-labelledby="headingMiseANiveau">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let miseANiveauItem of miseANiveauOrientationItems; index as i">
-                <input
-                  type="radio"
-                  appUncheckableRadio
-                  name="services"
-                  formControlName="services"
-                  class="form-check-input"
-                  [value]="miseANiveauItem.value"
-                  [attr.id]="'miseANiveauLabelChip' + i" />
-                <label class="form-check-label bg-primary text-white fw-bold" [attr.for]="'miseANiveauLabelChip' + i">
-                  {{ miseANiveauItem.label }}
-                </label>
-              </div>
-            </div>
-          </app-collapse>
-        </div>
+
         <div class="accordion-item mb-3">
           <h2 class="accordion-header" id="headingCultureNumerique">
             <button
@@ -134,7 +138,7 @@
               <div>
                 <b>Manque de matériel</b>
                 <br />
-                <i class="text-muted"><small>Je cherche du matériel ou simplement une connexion internet</small></i>
+                <i class="text-muted"><small>J'ai besoin de matériel ou d'une connexion internet</small></i>
               </div>
             </button>
           </h2>

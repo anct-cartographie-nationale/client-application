@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { OrientationLayout } from '../../layouts';
 import { OrientationItemPresentation } from '../../presenters';
-import fraisACharge from './frais-a-charge.json';
-import accompagnements from './accompagnements.json';
+import conditionFinancieres from './conditions-financieres.json';
+import typeAccompagnements from './type-accompagnements.json';
 import accueilSpecifique from './accueil-specifique.json';
-import publicPrecis from './public-precis.json';
+import typePublic from './type-de-public.json';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './accessibilite.page.html'
 })
 export class AccessibilitePage {
-  public fraisAChargeOptions: OrientationItemPresentation<string>[] = fraisACharge;
-  public accompagnementsOptions: OrientationItemPresentation<string>[] = accompagnements;
+  public conditionFinancieresOptions: OrientationItemPresentation<string>[] = conditionFinancieres;
+  public typeAccompagnementsOptions: OrientationItemPresentation<string>[] = typeAccompagnements;
   public accueilSpecifiqueOptions: OrientationItemPresentation<string>[] = accueilSpecifique;
-  public publicPrecisOptions: OrientationItemPresentation<string>[] = publicPrecis;
+  public typePublicOptions: OrientationItemPresentation<string>[] = typePublic;
 
   public constructor(public readonly orientationLayout: OrientationLayout) {}
 }
