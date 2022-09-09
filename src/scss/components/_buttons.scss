@@ -18,11 +18,17 @@
   }
 }
 
-.btn-secondary:hover {
+.btn-primary:hover {
   color: $primary;
   box-shadow: -0.5px 0.5px 0 1.5px $primary;
 }
 
 input[type='search']::-webkit-search-cancel-button {
   display: none;
+}
+
+.btn-secondary:hover {
+  color: $black;
+  background-color: $secondary;
+  box-shadow: -0.5px 0.5px 0 1.5px $primary;
 }
