@@ -5,7 +5,7 @@ import conditionFinancieres from './conditions-financieres.json';
 import typeAccompagnements from './type-accompagnements.json';
 import accueilSpecifique from './accueil-specifique.json';
 import typePublic from './type-de-public.json';
-import { PublicAccueilli } from '@features/core';
+import { PublicAccueilli } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
