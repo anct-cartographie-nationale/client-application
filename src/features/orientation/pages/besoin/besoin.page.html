@@ -1,4 +1,4 @@
-<div class="h-100 d-flex flex-column">
+<div class="h-100 d-flex flex-column" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
   <div class="my-auto">
     <h1 class="h2 text-center fw-bold mb-4">
       Quel est
@@ -16,6 +16,13 @@
               [attr.aria-expanded]="collapseApprentissageDeBase.isExpanded"
               (click)="collapseApprentissageDeBase.toggle()">
               <i class="ri-compasses-2-fill ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+              <div *ngFor="let apprentissageDeBaseItem of apprentissageDeBaseOrientationItems">
+                <span
+                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                  *ngIf="apprentissageDeBaseItem.value === filter.services">
+                  1
+                </span>
+              </div>
               <div>
                 <b>Apprentissage de base</b>
                 <br />
@@ -58,6 +65,13 @@
               [attr.aria-expanded]="collapseDemarches.isExpanded"
               (click)="collapseDemarches.toggle()">
               <i class="ri-file-list-3-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+              <div *ngFor="let demarchesOrientationItem of demarchesOrientationItems">
+                <span
+                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                  *ngIf="demarchesOrientationItem.value === filter.services">
+                  1
+                </span>
+              </div>
               <div>
                 <b>Démarches</b>
                 <br />
@@ -96,6 +110,13 @@
               [attr.aria-expanded]="collapseCultureNumerique.isExpanded"
               (click)="collapseCultureNumerique.toggle()">
               <i class="ri-book-2-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+              <div *ngFor="let cultureNumeriqueItem of cultureNumeriqueOrientationItems">
+                <span
+                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                  *ngIf="cultureNumeriqueItem.value === filter.services">
+                  1
+                </span>
+              </div>
               <div>
                 <b>Culture numérique</b>
                 <br />
@@ -135,6 +156,13 @@
               [attr.aria-expanded]="collapseManqueDeMateriel.isExpanded"
               (click)="collapseManqueDeMateriel.toggle()">
               <i class="ri-wifi-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+              <div *ngFor="let manqueDeMaterielItem of manqueDeMaterielOrientationItems">
+                <span
+                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                  *ngIf="manqueDeMaterielItem.value === filter.services">
+                  1
+                </span>
+              </div>
               <div>
                 <b>Manque de matériel</b>
                 <br />
