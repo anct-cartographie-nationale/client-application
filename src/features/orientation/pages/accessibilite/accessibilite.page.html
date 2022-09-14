@@ -19,9 +19,8 @@
               (click)="collapseConditionFinancieres.toggle()">
               <i class="ri-price-tag-3-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <span
-                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
-                *ngIf="filter.conditions_access && filter.conditions_access.length > 0">
-                {{filter.conditions_access.length}}
+                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle">
+                {{orientationLayout.conditionsAccess$ | async}}
               </span>
               <div>
                 <b>Conditions financières</b>

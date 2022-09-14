@@ -57,12 +57,19 @@ export class OrientationLayout {
   private _lieuxMediationNumeriqueCount$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public lieuxMediationNumeriqueCount$: Observable<number> = this._lieuxMediationNumeriqueCount$.asObservable();
 
+  private _conditionsAccess$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public conditionsAccess$: Observable<number> = this._conditionsAccess$.asObservable();
+
   public filterForm: FormGroup = createFormGroupFromFilterPresentation(
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
 
   public filterPresentation$: Observable<FilterFormPresentation> = this.filterForm.valueChanges.pipe(
-    startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))
+    startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)),
+    tap((value: FilterFormPresentation) => {
+      value !== undefined && this._conditionsAccess$.next(value.conditions_access?.length ?? 0);
+      console.log('value', value.conditions_access);
+    })
   );
 
   private _localisation$: Observable<Localisation> = this.filterPresentation$.pipe(
