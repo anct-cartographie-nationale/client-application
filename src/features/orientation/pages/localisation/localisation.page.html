@@ -48,14 +48,12 @@
                 *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value">
                 <div class="col-auto mb-3 form-check form-check-inline form-chip">
                   <input
-                    checked
                     type="radio"
                     name="distance"
                     formControlName="distance"
                     value="100000"
                     class="form-check-input"
-                    id="distance-100km"
-                    [(ngModel)]="distance" />
+                    id="distance-100km" />
                   <label class="form-check-label" for="distance-100km">Moins de 100 km</label>
                 </div>
                 <div class="col-auto mb-3 form-check form-check-inline form-chip">
