@@ -48,9 +48,12 @@
                   class="form-check-input"
                   [value]="conditionFinancieresOption.value"
                   [attr.id]="'conditionFinancieresLabelChip' + i" />
-                <label class="form-check-label bg-primary text-white" [attr.for]="'conditionFinancieresLabelChip' + i">
-                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
-                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
+                <label
+                  class="form-check-label bg-primary text-white fw-bold chip-pointer"
+                  [attr.for]="'conditionFinancieresLabelChip' + i">
+                  <i
+                    class="align-bottom"
+                    [class]="conditionsAccess.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
                   {{ conditionFinancieresOption.label }}
                 </label>
               </div>
@@ -97,9 +100,12 @@
                   class="form-check-input"
                   [value]="typeAccompagnementsOption.value"
                   [attr.id]="'typeAccompagnementsLabelChip' + i" />
-                <label class="form-check-label bg-primary text-white" [attr.for]="'typeAccompagnementsLabelChip' + i">
-                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
-                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
+                <label
+                  class="form-check-label bg-primary text-white fw-bold chip-pointer"
+                  [attr.for]="'typeAccompagnementsLabelChip' + i">
+                  <i
+                    class="align-bottom"
+                    [class]="typesAccompagnement.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
                   {{ typeAccompagnementsOption.label }}
                 </label>
               </div>
@@ -143,9 +149,12 @@
                   class="form-check-input"
                   [value]="typePublicOption.value"
                   [attr.id]="'typePublicLabelChip' + i" />
-                <label class="form-check-label bg-primary text-white" [attr.for]="'typePublicLabelChip' + i">
-                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
-                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
+                <label
+                  class="form-check-label bg-primary text-white fw-bold chip-pointer"
+                  [attr.for]="'typePublicLabelChip' + i">
+                  <i
+                    class="align-bottom"
+                    [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
                   {{ typePublicOption.label }}
                 </label>
               </div>
@@ -189,9 +198,12 @@
                   class="form-check-input"
                   [value]="accueilSpecifiqueOption.value"
                   [attr.id]="'accueilSpecifiqueLabelChip' + i" />
-                <label class="form-check-label bg-primary text-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
-                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
-                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
+                <label
+                  class="form-check-label bg-primary text-white fw-bold chip-pointer"
+                  [attr.for]="'accueilSpecifiqueLabelChip' + i">
+                  <i
+                    class="align-bottom"
+                    [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
                   {{ accueilSpecifiqueOption.label }}
                 </label>
               </div>
