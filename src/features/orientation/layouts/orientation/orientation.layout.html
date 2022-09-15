@@ -69,7 +69,9 @@
           <router-outlet></router-outlet>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4" *ngIf="this.router.url !== '/orientation'">
+      <div
+        class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4 overflow-auto"
+        *ngIf="this.router.url !== '/orientation'">
         <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
           <div class="d-flex flex-column h-100" *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
             <h1 class="h2 text-center text-secondary fw-bold">
@@ -101,70 +103,55 @@
                 <span class="opacity-50">/ {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire</span>
               </ng-container>
             </div>
-
-            <!-- here -->
             <form [formGroup]="filterForm">
               <ng-container *ngIf="(filterPresentation$ | async) as filter">
                 <div
                   class="form-check form-check-inline form-chip mb-3"
                   *ngFor="let publicAccueilli of filter.publics_accueillis">
-                  <button (click)="resetForm()">{{ publicAccueilli }}</button>
+                  <button
+                    class="chip-button"
+                    (click)="resetForm(publicAccueilli, 'publics_accueillis')"
+                    style="flex-wrap: wrap">
+                    {{ publicAccueilli }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div
+                  class="form-check form-check-inline form-chip mb-3"
+                  *ngFor="let conditionAccess of filter.conditions_access">
+                  <button class="chip-button" (click)="resetForm(conditionAccess, 'conditions_access')">
+                    {{ conditionAccess }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div
+                  class="form-check form-check-inline form-chip mb-3"
+                  *ngFor="let modaliteAccompagnement of filter.modalites_accompagnement">
+                  <button class="chip-button" (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
+                    {{ modaliteAccompagnement }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.services">
+                  <button class="chip-button" (click)="resetForm(filter.services, 'services')">
+                    {{ filter.services }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.address">
+                  <button class="chip-button" (click)="resetForm(filter.address, 'address')">
+                    {{ filter.address }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.distance">
+                  <button class="chip-button" (click)="resetForm(filter.distance, 'distance')">
+                    {{ formatDistance(filter.distance) }}
+                    <span class="ms-1">&times;</span>
+                  </button>
                 </div>
               </ng-container>
             </form>
-            <!--            <form [formGroup]="filterForm">-->
-            <!--              <div *ngIf="(filterPresentation$ | async) as filter" class="text-center">-->
-            <!--                <div-->
-            <!--                  class="form-check form-check-inline form-chip mb-1"-->
-            <!--                  *ngFor="let public of filter.publics_accueillis; index as i">-->
-            <!--                  <input-->
-            <!--                    #publicsAccueillis-->
-            <!--                    type="checkbox"-->
-            <!--                    name="publics_accueillis"-->
-            <!--                    appCheckboxArray-->
-            <!--                    formControlName="publics_accueillis"-->
-            <!--                    class="form-check-input"-->
-            <!--                    [value]="public"-->
-            <!--                    [attr.id]="'test' + i" />-->
-            <!--                  <label class="form-check-label bg-secondary text-primary" [attr.for]="'test' + i">-->
-            <!--                    <i-->
-            <!--                      class="align-bottom"-->
-            <!--                      [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>-->
-            <!--                    {{ public }}-->
-            <!--                  </label>-->
-            <!--                </div>-->
-            <!-- <div
-                    class="form-check form-check-inline form-chip mb-1"
-                    *ngFor="let condition of filter.conditions_access; let i = index;">
-                    <input class="form-check-input" appCheckboxArray #conditionsAccess type="checkbox" [value]="condition" />
-                    <label class="form-check-label bg-primary text-white">
-                      <i
-                        class="align-bottom"
-                        [class]="conditionsAccess.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
-                      {{ condition }}
-                    </label>
-                  </div>
-                  <div
-                    class="form-check form-check-inline form-chip mb-1"
-                    *ngFor="let modalite of filter.modalites_accompagnement; let i = index;">
-                    <input class="form-check-input" appCheckboxArray #typesAccompagnement type="checkbox" [value]="modalite" />
-                    <label class="form-check-label bg-primary text-white">
-                      <i
-                        class="align-bottom"
-                        [class]="typesAccompagnement.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
-                      {{ modalite }}
-                    </label>
-                  </div>
-                  <div
-                    class="form-check form-check-inline form-chip mb-1"
-                    *ngIf="filter.services && filter.services.length > 0">
-                    <input class="form-check-input" appUncheckableRadio type="radio" [value]="filter.services" />
-                    <label class="form-check-label bg-primary text-white">{{ filter.services }}</label>
-                  </div>
-                </div> -->
-            <!--              </div>-->
-            <!--            </form>-->
-            <!-- until here -->
             <div class="text-center mt-auto">
               <ng-container *ngIf="features.get('cartographie') as cartographie">
                 <a

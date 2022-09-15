@@ -61,7 +61,7 @@ export class OrientationLayout {
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
 
-  public filterPresentation$: Observable<FilterPresentation> = this.filterForm.valueChanges.pipe(
+  public filterPresentation$: Observable<FilterFormPresentation> = this.filterForm.valueChanges.pipe(
     startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))
   );
 
@@ -106,7 +106,26 @@ export class OrientationLayout {
     return (queryParams: FilterPresentation) => this.router.navigate([], { queryParams });
   }
 
-  public resetForm() {
-    this.filterForm.get('publics_accueillis')?.setValue([]);
+  public resetForm(value: string | number, key: string) {
+    if (key === 'services') this.filterForm.get('services')?.setValue('');
+    else if (key === 'distance') {
+      this.filterForm.get('distance')?.setValue('');
+    } else if (key === 'address') {
+      this.filterForm.get('address')?.setValue('');
+      this.filterForm.get('distance')?.setValue('');
+      this.filterForm.get('latitude')?.setValue('');
+      this.filterForm.get('longitude')?.setValue('');
+    } else {
+      let keyArrayCoppy = [...this.filterForm.value[key]];
+      const indexOfValue = keyArrayCoppy.indexOf(value);
+      indexOfValue > -1 && keyArrayCoppy.splice(indexOfValue, 1);
+      this.filterForm.get(key)?.setValue([...keyArrayCoppy]);
+    }
+  }
+
+  public formatDistance(distance: string | number): string {
+    if (distance === 100000 || distance === '100000') return 'Moins de 100 km';
+    else if (distance === 20000 || distance === '20000') return 'Moins de 20 km';
+    else return 'Moins de 5 km';
   }
 }
