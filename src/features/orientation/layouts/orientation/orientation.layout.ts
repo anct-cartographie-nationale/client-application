@@ -105,4 +105,8 @@ export class OrientationLayout {
   private setFilterToQueryString(): (queryParams: FilterPresentation) => Promise<boolean> {
     return (queryParams: FilterPresentation) => this.router.navigate([], { queryParams });
   }
+
+  public resetForm() {
+    this.filterForm.get('publics_accueillis')?.setValue([]);
+  }
 }
