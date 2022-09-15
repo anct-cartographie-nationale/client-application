@@ -116,7 +116,7 @@ export class OrientationLayout {
       this.filterForm.get('latitude')?.setValue('');
       this.filterForm.get('longitude')?.setValue('');
     } else {
-      let keyArrayCoppy = [...this.filterForm.value[key]];
+      const keyArrayCoppy = [...this.filterForm.value[key]];
       const indexOfValue = keyArrayCoppy.indexOf(value);
       indexOfValue > -1 && keyArrayCoppy.splice(indexOfValue, 1);
       this.filterForm.get(key)?.setValue([...keyArrayCoppy]);
