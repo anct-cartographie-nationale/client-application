@@ -31,3 +31,21 @@
     }
   }
 }
+
+input[type='checkbox'] {
+  & ~ label > .d-checked-inherit {
+    display: none;
+  }
+
+  & ~ label > .d-checked-none {
+    display: inherit;
+  }
+
+  &:checked ~ label > .d-checked-inherit {
+    display: inherit;
+  }
+
+  &:checked ~ label > .d-checked-none {
+    display: none;
+  }
+}

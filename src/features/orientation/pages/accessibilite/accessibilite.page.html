@@ -36,7 +36,6 @@
                 class="form-check form-check-inline form-chip mb-3"
                 *ngFor="let conditionFinancieresOption of conditionFinancieresOptions; index as i">
                 <input
-                  #conditionsAccess
                   type="checkbox"
                   name="conditions_access"
                   appCheckboxArray
@@ -45,9 +44,8 @@
                   [value]="conditionFinancieresOption.value"
                   [attr.id]="'conditionFinancieresLabelChip' + i" />
                 <label class="form-check-label bg-primary text-white" [attr.for]="'conditionFinancieresLabelChip' + i">
-                  <i
-                    class="align-bottom"
-                    [class]="conditionsAccess.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
+                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
                   {{ conditionFinancieresOption.label }}
                 </label>
               </div>
@@ -82,7 +80,6 @@
                 class="form-check form-check-inline form-chip mb-3"
                 *ngFor="let typeAccompagnementsOption of typeAccompagnementsOptions; index as i">
                 <input
-                  #typesAccompagnement
                   type="checkbox"
                   name="modalites_accompagnement"
                   appCheckboxArray
@@ -91,9 +88,8 @@
                   [value]="typeAccompagnementsOption.value"
                   [attr.id]="'typeAccompagnementsLabelChip' + i" />
                 <label class="form-check-label bg-primary text-white" [attr.for]="'typeAccompagnementsLabelChip' + i">
-                  <i
-                    class="align-bottom"
-                    [class]="typesAccompagnement.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
+                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
                   {{ typeAccompagnementsOption.label }}
                 </label>
               </div>
@@ -125,7 +121,6 @@
                 class="form-check form-check-inline form-chip mb-3"
                 *ngFor="let typePublicOption of typePublicOptions; index as i">
                 <input
-                  #publicsAccueillis
                   type="checkbox"
                   name="publics_accueillis"
                   appCheckboxArray
@@ -134,9 +129,8 @@
                   [value]="typePublicOption.value"
                   [attr.id]="'typePublicLabelChip' + i" />
                 <label class="form-check-label bg-primary text-white" [attr.for]="'typePublicLabelChip' + i">
-                  <i
-                    class="align-bottom"
-                    [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
+                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
                   {{ typePublicOption.label }}
                 </label>
               </div>
@@ -168,7 +162,6 @@
                 class="form-check form-check-inline form-chip mb-3"
                 *ngFor="let accueilSpecifiqueOption of accueilSpecifiqueOptions; index as i">
                 <input
-                  #publicsAccueillis
                   type="checkbox"
                   name="publics_accueillis"
                   appCheckboxArray
@@ -177,9 +170,8 @@
                   [value]="accueilSpecifiqueOption.value"
                   [attr.id]="'accueilSpecifiqueLabelChip' + i" />
                 <label class="form-check-label bg-primary text-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
-                  <i
-                    class="align-bottom"
-                    [class]="publicsAccueillis.checked ? 'ri-radio-button-line' : 'ri-checkbox-blank-circle-line'"></i>
+                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
+                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
                   {{ accueilSpecifiqueOption.label }}
                 </label>
               </div>
