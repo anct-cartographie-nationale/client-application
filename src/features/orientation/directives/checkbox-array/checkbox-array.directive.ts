@@ -11,9 +11,9 @@ import { ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angu
     }
   ]
 })
-export class CheckboxArrayDirective<T> implements ControlValueAccessor, OnInit {
+export class CheckboxArrayDirective<T> implements ControlValueAccessor {
   @HostListener('change', ['$event.target']) public onChange(event: HTMLInputElement) {
-    this.writeValue(event.checked);
+    this._onChange(event.checked ? this.appendValue() : this.removeValue());
   }
 
   @Input() public value!: T;
@@ -30,20 +30,16 @@ export class CheckboxArrayDirective<T> implements ControlValueAccessor, OnInit {
     private readonly _elementRef: ElementRef
   ) {}
 
+  private previousValue(): T[] {
+    return this._controlContainer.control?.get(this.formControlName)?.value ?? [];
+  }
+
   private removeValue(): T[] {
     return [...this.previousValue().filter((previousValue: T) => previousValue !== this.value)];
   }
 
   private appendValue(): T[] {
     return [...this.previousValue(), this.value];
-  }
-
-  private previousValue(): T[] {
-    return this._controlContainer.control?.get(this.formControlName)?.value ?? [];
-  }
-
-  public ngOnInit(): void {
-    this.previousValue().includes(this.value) && this._renderer.setProperty(this._elementRef.nativeElement, 'checked', true);
   }
 
   public registerOnChange(fn: (rating: (T | undefined)[]) => void): void {
@@ -54,7 +50,8 @@ export class CheckboxArrayDirective<T> implements ControlValueAccessor, OnInit {
     this._onTouched = fn;
   }
 
-  public writeValue(shouldWrite: boolean): void {
-    this._onChange(shouldWrite ? this.appendValue() : this.removeValue());
+  public writeValue(valueToWrite: T[]): void {
+    valueToWrite != null &&
+      this._renderer.setProperty(this._elementRef.nativeElement, 'checked', valueToWrite.includes(this.value));
   }
 }
