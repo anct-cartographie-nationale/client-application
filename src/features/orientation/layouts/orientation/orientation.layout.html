@@ -81,19 +81,27 @@
               <span *ngIf="router.url !== '/orientation'">correspondantes</span>
             </h1>
             <div class="text-center my-auto">
-              <div class="bg-image p-5" style="background-image: url('assets/logos/carteFrancePerspective.svg')">
-                <div class="d-flex p-2">
-                  <div class="border rounded-circle p-4 m-auto">
-                    <div
-                      [attr.aria-valuemax]="lieuxMediationNumeriqueTotal.length"
-                      [attr.aria-valuenow]="lieuxMediationNumerique.length"
-                      aria-valuemin="0"
-                      role="progressbar"
-                      style="--value-int: {{lieuxMediationNumerique.length}} ; --value-percentage: {{(lieuxMediationNumerique.length / lieuxMediationNumeriqueTotal.length) * 100}}"></div>
-                  </div>
-                </div>
+              <div class="position-relative p-xl-6 p-md-0 p-5">
+                <div
+                  class="bg-image position-absolute h-100 w-100 start-0 top-0"
+                  style="background-image: url('assets/img/orientation/france.svg')"></div>
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="-50" cy="50" stroke="#fff" stroke-width=".5" r="48" transform="rotate(-90)" />
+                  <path
+                    opacity=".3"
+                    d="M49.734 17.287c18.243 0 32.979 14.675 32.979 32.713S67.977 82.713 49.734 82.713c-18.242 0-32.979-14.675-32.979-32.713s14.737-32.713 32.979-32.713z"
+                    stroke="#fff"
+                    stroke-width="8" />
+                  <path
+                    d="M49.734 17.287c18.243 0 32.979 14.675 32.979 32.713S67.977 82.713 49.734 82.713c-18.242 0-32.979-14.675-32.979-32.713s14.737-32.713 32.979-32.713z"
+                    stroke="#fff"
+                    stroke-width="8"
+                    style="transition: all 0.2s ease"
+                    [attr.stroke-dasharray]="(208 * (lieuxMediationNumerique.length / lieuxMediationNumeriqueTotal.length)) + ',' + (208 * (1 - (lieuxMediationNumerique.length / lieuxMediationNumeriqueTotal.length)))" />
+                </svg>
+                <div class="position-absolute translate-middle top-50 start-50 fs-1">{{ lieuxMediationNumerique.length }}</div>
               </div>
-              <ng-container *ngIf="router.url !==  '/orientation'">
+              <div class="pt-4" *ngIf="router.url !==  '/orientation'">
                 <b class="fs-5 text" [ngPlural]="lieuxMediationNumerique.length">
                   <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
                   <ng-template ngPluralCase="=1">Structure trouvée</ng-template>
@@ -101,7 +109,7 @@
                 </b>
                 <br />
                 <span class="opacity-50">/ {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire</span>
-              </ng-container>
+              </div>
             </div>
             <form [formGroup]="filterForm">
               <ng-container *ngIf="(filterPresentation$ | async) as filter">
