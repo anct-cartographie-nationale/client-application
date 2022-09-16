@@ -22,7 +22,6 @@ const SEARCH_DEBOUNCE_TIME: number = 300;
   templateUrl: './localisation.page.html'
 })
 export class LocalisationPage {
-  distance = '100000';
   private readonly _searchTerm$: Subject<string> = new Subject<string>();
 
   public addressesFound$: Observable<AddressFoundPresentation[]> = this._searchTerm$.pipe(
@@ -44,6 +43,7 @@ export class LocalisationPage {
   public onSelectAddress(address: AddressFoundPresentation): void {
     this.orientationLayout.filterForm.get('latitude')?.setValue(address.localisation.latitude);
     this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);
+    this.orientationLayout.filterForm.get('distance')?.setValue('100000');
   }
 
   public onGeoLocate(): void {
@@ -51,6 +51,7 @@ export class LocalisationPage {
     window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
       this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
       this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
+      this.orientationLayout.filterForm.get('distance')?.setValue('100000');
       this.orientationLayout.filterForm.get('address')?.setValue(null);
       this._geoLocation$.next(
         Localisation({
@@ -59,7 +60,6 @@ export class LocalisationPage {
         })
       );
     });
-    this.distance = '100000';
   }
 
   private _geoLocation$: Subject<Localisation> = new Subject<Localisation>();
