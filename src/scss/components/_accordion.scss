@@ -1,10 +1,26 @@
-.accordion-button-label {
-  opacity: 0.7;
-  transition: opacity 0.3s;
-}
+.accordion-button {
+  &:hover {
+    .accordion-button-label {
+      opacity: 1;
+    }
+  }
 
-.accordion-button:hover {
+  &:focus {
+    z-index: 3;
+    border-color: transparent;
+    outline: 0;
+    box-shadow: none;
+  }
+
+  &:focus-visible {
+    z-index: 3;
+    border-color: var(--#{$prefix}accordion-btn-focus-border-color);
+    outline: 0;
+    box-shadow: var(--#{$prefix}accordion-btn-focus-box-shadow);
+  }
+
   .accordion-button-label {
-    opacity: 1;
+    opacity: 0.7;
+    transition: opacity 0.3s;
   }
 }
