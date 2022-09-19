@@ -69,7 +69,9 @@
           <router-outlet></router-outlet>
         </div>
       </div>
-      <div class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4" *ngIf="this.router.url !== '/orientation'">
+      <div
+        class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4 overflow-auto"
+        *ngIf="this.router.url !== '/orientation'">
         <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
           <div class="d-flex flex-column h-100" *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
             <h1 class="h2 text-center text-secondary fw-bold">
@@ -101,6 +103,55 @@
                 <span class="opacity-50">/ {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire</span>
               </ng-container>
             </div>
+            <form [formGroup]="filterForm">
+              <ng-container *ngIf="(filterPresentation$ | async) as filter">
+                <div
+                  class="form-check form-check-inline form-chip mb-3"
+                  *ngFor="let publicAccueilli of filter.publics_accueillis">
+                  <button
+                    class="chip-button"
+                    (click)="resetForm(publicAccueilli, 'publics_accueillis')"
+                    style="flex-wrap: wrap">
+                    {{ publicAccueilli }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div
+                  class="form-check form-check-inline form-chip mb-3"
+                  *ngFor="let conditionAccess of filter.conditions_access">
+                  <button class="chip-button" (click)="resetForm(conditionAccess, 'conditions_access')">
+                    {{ conditionAccess }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div
+                  class="form-check form-check-inline form-chip mb-3"
+                  *ngFor="let modaliteAccompagnement of filter.modalites_accompagnement">
+                  <button class="chip-button" (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
+                    {{ modaliteAccompagnement }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.services">
+                  <button class="chip-button" (click)="resetForm(filter.services, 'services')">
+                    {{ filter.services }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.address">
+                  <button class="chip-button" (click)="resetForm(filter.address, 'address')">
+                    {{ filter.address }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+                <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.distance">
+                  <button class="chip-button" (click)="resetForm(filter.distance, 'distance')">
+                    {{ formatDistance(filter.distance) }}
+                    <span class="ms-1">&times;</span>
+                  </button>
+                </div>
+              </ng-container>
+            </form>
             <div class="text-center mt-auto">
               <ng-container *ngIf="features.get('cartographie') as cartographie">
                 <a

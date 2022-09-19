@@ -45,6 +45,10 @@ export type FilterFormPresentation = FilterPresentation & {
   longitude?: number;
 };
 
+const wrapInArray = <T>(params: T[] | T) => (Array.isArray(params) ? params : [params]);
+
+const toArray = <T>(params?: T | T[]): T[] => (!params ? [] : wrapInArray(params));
+
 export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParamsPresentation): FilterFormPresentation => ({
   services: queryParams?.services,
   address: queryParams?.address,
@@ -52,9 +56,9 @@ export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParam
   longitude: queryParams?.longitude ? parseFloat(queryParams.longitude) : undefined,
   distance: queryParams?.distance ? parseInt(queryParams.distance) : undefined,
   accessibilite: queryParams?.accessibilite === 'true' ? true : undefined,
-  conditions_access: queryParams?.conditions_access,
-  publics_accueillis: queryParams?.publics_accueillis,
-  modalites_accompagnement: queryParams?.modalites_accompagnement,
+  conditions_access: toArray(queryParams?.conditions_access),
+  publics_accueillis: toArray(queryParams?.publics_accueillis),
+  modalites_accompagnement: toArray(queryParams?.modalites_accompagnement),
   date_ouverture: queryParams?.date_ouverture,
   ouvert_actuellement: queryParams?.ouvert_actuellement
 });
