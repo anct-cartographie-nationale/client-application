@@ -94,7 +94,7 @@ export class CartographieLayout {
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
-    private readonly _router: Router,
+    public readonly router: Router,
     public readonly route: ActivatedRoute,
     @Inject(FEATURES_TOKEN)
     public readonly features: FeaturesConfiguration,
@@ -102,7 +102,7 @@ export class CartographieLayout {
   ) {}
 
   public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
-    this._router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
+    this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
     this.markersPresenter.center(lieu.localisation);
     this.markersPresenter.select(lieu.id);
   }
@@ -127,12 +127,12 @@ export class CartographieLayout {
   private navigateToPageMatchingZoomLevel(zoomLevel: number, localisation: Localisation) {
     const route: string[] = getNextRouteFromZoomLevel(zoomLevel, nearestRegion(localisation).nom);
     shouldNavigateToListPage(route, this.route.children[0]?.children[0]?.routeConfig?.path) &&
-      this._router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
+      this.router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
   public onShowLieuxInDepartement(departement: DepartementPresentation): void {
     this.markersPresenter.center(departement.localisation, departement.zoom);
-    this._router.navigate(['regions', regionFromDepartement(departement)?.nom, departement.nom], {
+    this.router.navigate(['regions', regionFromDepartement(departement)?.nom, departement.nom], {
       relativeTo: this.route.parent,
       queryParamsHandling: 'preserve'
     });
@@ -140,7 +140,7 @@ export class CartographieLayout {
 
   public onShowLieuxInRegion(region: RegionPresentation): void {
     this.markersPresenter.center(region.localisation, region.zoom);
-    this._router.navigate(['regions', region.nom], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
+    this.router.navigate(['regions', region.nom], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
   public toQueryString(fromObject: {} = {}): string {
@@ -148,7 +148,7 @@ export class CartographieLayout {
   }
 
   public resetFilters(): void {
-    this._router.navigate([], { relativeTo: this.route.parent });
+    this.router.navigate([], { relativeTo: this.route.parent });
   }
 
   private getRouteParam(routeParam: string) {
