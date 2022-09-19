@@ -31,7 +31,9 @@
                       [formControl]="ouvertActuellementFormControl"
                       class="form-check-input"
                       (change)="setDateOuvertureToNow($any($event))" />
-                    <label for="ouvertActuellement" class="form-check-label bg-primary text-white">Ouvert actuellement</label>
+                    <label for="ouvertActuellement" class="form-check-label bg-primary text-white chip-pointer">
+                      Ouvert actuellement
+                    </label>
                   </div>
                   <div class="mb-3">
                     <label for="dateOuverture" class="form-label visually-hidden">Sélectionner la date d'ouverture</label>
