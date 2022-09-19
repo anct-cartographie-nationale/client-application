@@ -16,7 +16,7 @@
               [attr.aria-expanded]="collapseLocalisation.isExpanded"
               (click)="collapseLocalisation.toggle()">
               <i class="ri-map-pin-2-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <b>Localisation</b>
+              <b class="accordion-button-label">Localisation</b>
             </button>
           </h2>
           <app-collapse #collapseLocalisation id="collapseLocalisation" aria-labelledby="headingLocalisation">
