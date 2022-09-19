@@ -55,9 +55,53 @@
     </div>
   </div>
 </div>
-<footer class="py-3 my-4" *ngIf="this.router.url === '/orientation' || this.router.url === '/cartographie'">
+<!-- <footer class="py-3 my-4" *ngIf="this.router.url === '/orientation' || this.router.url === '/cartographie'">
   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
     <li class="nav-item"><a [routerLink]="['/']" class="nav-link px-2 text-muted">Accueil</a></li>
   </ul>
   <p class="text-center text-muted">© 2022 Cartographie {{ brandConfiguration.name }}</p>
+</footer> -->
+<footer class="py-5 overflow-hidden" style="background-color: rgba(22, 22, 22, 1)">
+  <div class="container-fluid row">
+    <div class="flex-grow-1 col-auto">
+      <img src="/assets/img/footer-mark.svg" class="img-fluid" alt="" />
+    </div>
+    <div class="col-5">
+      <p class="text-secondary">
+        Le projet de Cartographie Nationale est dispositif de cartographie implémentable piloté par Sonum et l’ANCT
+      </p>
+      <div class="d-flex">
+        <span class="d-flex me-3">
+          <a class="nav-link me-1 text-muted">Intégrer la cartographie</a>
+          <i class="ri-external-link-line align-bottom text-muted"></i>
+        </span>
+        <span class="d-flex">
+          <a class="nav-link me-1 text-muted">En savoir plus</a>
+          <i class="ri-external-link-line align-bottom text-muted"></i>
+        </span>
+      </div>
+    </div>
+    <div>
+      <hr class="mt-5 mb-2 text-secondary" />
+    </div>
+  </div>
+  <div>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link text-muted" aria-current="page" href="#">Mentions légales</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-muted" href="#">CGU</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-muted" href="#">Données personnelles</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-muted">Gestion des cookies</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-muted">Accessibilité : non-conforme</a>
+      </li>
+    </ul>
+  </div>
 </footer>
