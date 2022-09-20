@@ -1,14 +1,30 @@
 <div class="bg-light h-100 p-lg-5 pt-3 overflow-auto">
-  <div class="container h-100">
+  <div class="container h-100 pb-lg-0 pb-3">
     <div class="row g-0 h-100 shadow">
       <div class="col bg-white pt-3 h-100 overflow-auto d-flex flex-column" *ngIf="(filterPresentation$ | async) as filter">
         <app-nav *ngIf="this.router.url !== '/orientation'" [filter]="filter"></app-nav>
-        <div [@routeAnimations]="getRouteAnimationData()">
+        <div class="h-100 d-lg-block d-flex flex-column" [@routeAnimations]="getRouteAnimationData()">
           <router-outlet></router-outlet>
+          <div class="bg-primary text-white text-center p-4 mt-auto d-lg-none d-block">
+            <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+              <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
+                <app-filter-result-count
+                  class="d-block mb-3"
+                  [total]="lieuxMediationNumeriqueTotal.length"
+                  [found]="lieuxMediationNumerique.length"
+                  size="sm"></app-filter-result-count>
+                <app-display-on-map-link
+                  class="text-center d-block"
+                  [cartographieFeature]="features.get('cartographie')"
+                  [lieuxMediationNumeriqueCount]="(lieuxMediationNumerique$ | async)?.length ?? 0"
+                  [queryParams]="route.queryParams"></app-display-on-map-link>
+              </ng-container>
+            </ng-container>
+          </div>
         </div>
       </div>
       <div
-        class="col-lg-4 col-12 bg-primary text-white p-4 overflow-auto d-lg-flex d-none"
+        class="col-lg-4 col-12 bg-primary text-white h-100 p-4 overflow-auto d-lg-flex d-none"
         *ngIf="this.router.url !== '/orientation'">
         <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
           <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
