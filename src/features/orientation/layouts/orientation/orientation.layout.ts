@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
@@ -95,38 +94,11 @@ export class OrientationLayout {
     public readonly router: Router
   ) {}
 
-  public toQueryString(fromObject: {} = {}): string {
-    return new HttpParams({ fromObject }).toString();
-  }
-
   public getRouteAnimationData(): string {
     return this._contexts.getContext('primary')?.route?.snapshot.data?.['animation'];
   }
 
   private setFilterToQueryString(): (queryParams: FilterPresentation) => Promise<boolean> {
     return (queryParams: FilterPresentation) => this.router.navigate([], { queryParams });
-  }
-
-  public resetForm(value: string | number, key: string) {
-    if (key === 'services') this.filterForm.get('services')?.setValue('');
-    else if (key === 'distance') {
-      this.filterForm.get('distance')?.setValue('');
-    } else if (key === 'address') {
-      this.filterForm.get('address')?.setValue('');
-      this.filterForm.get('distance')?.setValue('');
-      this.filterForm.get('latitude')?.setValue('');
-      this.filterForm.get('longitude')?.setValue('');
-    } else {
-      const keyArrayCoppy = [...this.filterForm.value[key]];
-      const indexOfValue = keyArrayCoppy.indexOf(value);
-      indexOfValue > -1 && keyArrayCoppy.splice(indexOfValue, 1);
-      this.filterForm.get(key)?.setValue([...keyArrayCoppy]);
-    }
-  }
-
-  public formatDistance(distance: string | number): string {
-    if (distance === 100000 || distance === '100000') return 'Moins de 100 km';
-    else if (distance === 20000 || distance === '20000') return 'Moins de 20 km';
-    else return 'Moins de 5 km';
   }
 }

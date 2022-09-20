@@ -1,0 +1,26 @@
+<ul *ngIf="filter" class="nav nav-pills justify-content-center pb-3">
+  <li class="nav-item">
+    <app-nav-link [link]="['besoin']" [filtersCount]="filter.services ? 1 : 0">Besoin</app-nav-link>
+  </li>
+  <li class="nav-item">
+    <app-nav-link [link]="['localisation']" [filtersCount]="filter.distance ? 1 : 0">Localisation</app-nav-link>
+  </li>
+  <li class="nav-item">
+    <app-nav-link
+      [link]="['accessibilite']"
+      [filtersCount]="
+        (filter.conditions_access?.length ?? 0) +
+        (filter.publics_accueillis?.length ?? 0) +
+        (filter.modalites_accompagnement?.length ?? 0)
+      ">
+      Accessibilité
+    </app-nav-link>
+  </li>
+  <li class="nav-item">
+    <app-nav-link
+      [link]="['disponibilite']"
+      [filtersCount]="(filter.date_ouverture ? 1 : 0) + (filter.ouvert_actuellement ? 1 : 0)">
+      Disponibilité
+    </app-nav-link>
+  </li>
+</ul>
