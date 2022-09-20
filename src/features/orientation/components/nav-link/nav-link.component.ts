@@ -9,4 +9,6 @@ export class NavLinkComponent {
   @Input() filtersCount: number = 0;
 
   @Input() link: string[] = [];
+
+  @Input() size: 'sm' | 'auto' = 'auto';
 }

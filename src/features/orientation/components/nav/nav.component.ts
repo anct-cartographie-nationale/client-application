@@ -8,4 +8,6 @@ import { FilterPresentation } from '../../../core';
 })
 export class NavComponent {
   @Input() filter?: FilterPresentation;
+
+  @Input() size: 'sm' | 'auto' = 'auto';
 }

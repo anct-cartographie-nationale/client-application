@@ -19,7 +19,7 @@
               (click)="collapseConditionFinancieres.toggle()">
               <i class="ri-price-tag-3-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <span
-                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
                 *ngIf="filter.conditions_access && filter.conditions_access.length > 0">
                 {{filter.conditions_access.length}}
               </span>
@@ -70,7 +70,7 @@
               (click)="collapseTypeAccompagnements.toggle()">
               <i class="ri-group-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <span
-                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
                 *ngIf="filter.modalites_accompagnement && filter.modalites_accompagnement.length > 0">
                 {{filter.modalites_accompagnement.length}}
               </span>
@@ -122,7 +122,7 @@
               <i class="ri-parent-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <span
                 *ngIf="filter.publics_accueillis && filter.publics_accueillis.length > 0 && publicsAccueillisCompteur(filter.publics_accueillis,typePublicOptions) > 0 "
-                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle">
+                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle">
                 {{publicsAccueillisCompteur(filter.publics_accueillis,typePublicOptions)}}
               </span>
               <div>
@@ -170,7 +170,7 @@
               <i class="ri-wheelchair-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <span
                 *ngIf="filter.publics_accueillis && filter.publics_accueillis.length > 0 && publicsAccueillisCompteur(filter.publics_accueillis,accueilSpecifiqueOptions) > 0 "
-                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle">
+                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle">
                 {{publicsAccueillisCompteur(filter.publics_accueillis,accueilSpecifiqueOptions)}}
               </span>
               <div>

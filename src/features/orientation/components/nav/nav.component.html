@@ -1,12 +1,13 @@
-<ul *ngIf="filter" class="nav nav-pills justify-content-center pb-3">
+<ul *ngIf="filter" class="nav justify-content-center pb-3">
   <li class="nav-item">
-    <app-nav-link [link]="['besoin']" [filtersCount]="filter.services ? 1 : 0">Besoin</app-nav-link>
+    <app-nav-link [size]="size" [link]="['besoin']" [filtersCount]="filter.services ? 1 : 0">Besoin</app-nav-link>
   </li>
   <li class="nav-item">
-    <app-nav-link [link]="['localisation']" [filtersCount]="filter.distance ? 1 : 0">Localisation</app-nav-link>
+    <app-nav-link [size]="size" [link]="['localisation']" [filtersCount]="filter.distance ? 1 : 0">Localisation</app-nav-link>
   </li>
   <li class="nav-item">
     <app-nav-link
+      [size]="size"
       [link]="['accessibilite']"
       [filtersCount]="
         (filter.conditions_access?.length ?? 0) +
@@ -18,6 +19,7 @@
   </li>
   <li class="nav-item">
     <app-nav-link
+      [size]="size"
       [link]="['disponibilite']"
       [filtersCount]="(filter.date_ouverture ? 1 : 0) + (filter.ouvert_actuellement ? 1 : 0)">
       Disponibilité
