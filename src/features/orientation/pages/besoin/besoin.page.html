@@ -1,9 +1,13 @@
 <div class="h-lg-100 d-flex flex-column px-3" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
   <div class="my-auto">
-    <h1 class="h2 text-center fw-bold mb-4">
+    <h1 class="h2 text-center fw-bold my-3">
       Quel est
       <span class="text-primary">votre besoin&nbsp;?</span>
     </h1>
+    <h5 class="text-center fw-bold mb-4 text-muted">
+      Ouvrez les différentes sections, sélectionnez le besoin qui correspond le mieux à votre demande et cliquez sur suivant
+      pour continuer l'orientation
+    </h5>
     <form [formGroup]="orientationLayout.filterForm">
       <div class="accordion" id="accordionBesoin">
         <div class="accordion-item mb-3">
