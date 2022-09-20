@@ -16,8 +16,12 @@
     }
 
     &:not(:checked) + .form-check-label {
-      color: $body-color !important;
+      color: $form-chip-color !important;
       background-color: $form-chip-padding-background-color !important;
+
+      &:hover {
+        color: $form-chip-hover-color !important;
+      }
     }
 
     &:checked + .form-check-label {
@@ -25,7 +29,7 @@
       background-color: $primary;
     }
 
-    &:focus + .form-check-label {
+    &:focus-visible + .form-check-label {
       outline: 0;
       box-shadow: $input-focus-box-shadow;
     }

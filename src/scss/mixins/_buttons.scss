@@ -51,19 +51,18 @@
 
   box-shadow: 0 0 0 1px $hover-color;
 
-  &:hover {
-    color: $hover-color;
-    box-shadow: -0.5px 0.5px 0 1.5px $hover-color;
-  }
-
   &.active.active-primary {
     color: $primary;
-    box-shadow: none;
-    border-color: $primary;
+    box-shadow: 0 0 0 1px $primary;
 
     &:focus-visible {
       border-color: var(--bs-btn-hover-border-color);
       box-shadow: var(--bs-btn-focus-box-shadow);
     }
+  }
+
+  &:hover {
+    color: $hover-color;
+    box-shadow: -0.5px 0.5px 0 1.5px $hover-color;
   }
 }
