@@ -1,8 +1,8 @@
-<div class="h-100 d-flex flex-column" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
+<div class="h-lg-100 d-flex flex-column p-3" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
   <div class="my-auto">
     <h1 class="h2 text-center fw-bold mb-4">
       Quel est
-      <span class="text-primary">votre besoin ?</span>
+      <span class="text-primary">votre besoin&nbsp;?</span>
     </h1>
     <form [formGroup]="orientationLayout.filterForm">
       <div class="accordion" id="accordionBesoin">

@@ -1,16 +1,18 @@
-<div class="bg-light h-100 p-lg-5 pt-3">
-  <div class="container h-lg-100">
+<div class="bg-light h-100 p-lg-5 pt-3 overflow-auto">
+  <div class="container h-100">
     <div class="row g-0 h-100 shadow">
-      <div class="col bg-white p-3 h-100 overflow-auto d-flex flex-column" *ngIf="(filterPresentation$ | async) as filter">
+      <div class="col bg-white pt-3 h-100 overflow-auto d-flex flex-column" *ngIf="(filterPresentation$ | async) as filter">
         <app-nav *ngIf="this.router.url !== '/orientation'" [filter]="filter"></app-nav>
-        <div class="h-100" [@routeAnimations]="getRouteAnimationData()">
+        <div [@routeAnimations]="getRouteAnimationData()">
           <router-outlet></router-outlet>
         </div>
       </div>
-      <div class="col-lg-4 col-12 bg-primary text-white h-100 p-4 overflow-auto" *ngIf="this.router.url !== '/orientation'">
+      <div
+        class="col-lg-4 col-12 bg-primary text-white p-4 overflow-auto d-lg-flex d-none"
+        *ngIf="this.router.url !== '/orientation'">
         <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
           <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
-            <div class="flex-column h-100 d-lg-flex d-none">
+            <div class="flex-column d-flex">
               <h2 class="text-center text-secondary fw-bold">
                 Structures
                 <br />

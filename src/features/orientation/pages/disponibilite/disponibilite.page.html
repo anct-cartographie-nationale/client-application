@@ -1,4 +1,4 @@
-<div class="h-100 d-flex flex-column">
+<div class="h-lg-100 d-flex flex-column p-3">
   <div class="my-auto">
     <h1 class="h2 text-center fw-bold mb-4">
       <span class="text-primary">Quand</span>
@@ -68,7 +68,7 @@
           *ngIf="!cartographie.active && cartographie.url"
           class="btn btn-primary mx-3"
           [class.disabled]="((orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0) === 0"
-          [href]="cartographie.url + '?' + orientationLayout.toQueryString($any(route.queryParams | async))"
+          [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
           rel="keep-params">
           Afficher les résultats sur la cartographie
           <i class="ri-arrow-right-s-line align-bottom"></i>

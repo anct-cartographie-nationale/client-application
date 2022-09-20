@@ -1,10 +1,10 @@
-<div class="h-100 d-flex flex-column" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
+<div class="h-lg-100 d-flex flex-column p-3" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
   <div class="my-auto">
     <h1 class="h2 text-center fw-bold mb-4">
       <span class="text-primary">Comment</span>
       et
       <span class="text-primary">à qui</span>
-      l'accompagnement sera accessible ?
+      l'accompagnement sera accessible&nbsp;?
     </h1>
     <form [formGroup]="orientationLayout.filterForm">
       <div class="accordion" id="accordionAccessibilite">
