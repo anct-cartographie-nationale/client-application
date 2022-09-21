@@ -1,12 +1,12 @@
 <div class="text-center d-flex flex-column h-100">
-  <div class="my-auto">
+  <div class="my-auto px-3">
     <img *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" class="mb-5" style="max-height: 250px" alt="" />
     <ng-container *ngIf="((route.queryParamMap | async)?.keys?.length ?? 0) === 0; else: restart">
-      <h1 class="h2 mb-3">
+      <h1 class="h2 fw-bold">
         Bienvenue sur la Cartographie
         <span class="text-primary">{{ brandConfiguration.name }}</span>
       </h1>
-      <p class="lead my-5">
+      <p class="lead mt-4 mb-5">
         Vous rencontrez un problème lié au numérique ?
         <br />
         Des structures sont à votre disposition sur le territoire pour répondre à votre besoin,

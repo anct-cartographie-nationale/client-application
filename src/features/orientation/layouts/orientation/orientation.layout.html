@@ -7,7 +7,7 @@
           <app-nav class="d-lg-block d-none" *ngIf="this.router.url !== '/orientation'" [filter]="filter"></app-nav>
           <div class="h-100 d-lg-block d-flex flex-column" [@routeAnimations]="getRouteAnimationData()">
             <router-outlet></router-outlet>
-            <div class="bg-primary text-white text-center mt-auto d-lg-none d-block">
+            <div *ngIf="this.router.url !== '/orientation'" class="bg-primary text-white text-center mt-auto d-lg-none d-block">
               <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
                 <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
                   <app-filter-result-count
@@ -19,7 +19,6 @@
                     [filterForm]="filterForm"
                     [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
                   <app-display-on-map-link
-                    *ngIf="this.router.url !== '/orientation'"
                     class="text-center d-block mb-3"
                     [cartographieFeature]="features.get('cartographie')"
                     [lieuxMediationNumeriqueCount]="(lieuxMediationNumerique$ | async)?.length ?? 0"
@@ -29,13 +28,11 @@
             </div>
           </div>
         </div>
-        <div
-          class="col-lg-4 col-12 bg-primary text-white h-100 p-4 overflow-auto d-lg-flex d-none"
-          *ngIf="this.router.url !== '/orientation'">
+        <div class="col-lg-4 col-12 bg-primary text-white h-100 p-4 overflow-auto d-lg-flex d-none">
           <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
             <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
               <div class="flex-column d-flex">
-                <h2 class="text-center text-secondary fw-bold">
+                <h2 class="text-center text-secondary fw-bold" *ngIf="this.router.url !== '/orientation'">
                   Structures
                   <br />
                   {{ router.url === '/orientation' ? 'sur le territoire' : 'correspondantes'}}
@@ -43,15 +40,18 @@
                 <app-filter-result-count
                   class="my-auto"
                   [total]="lieuxMediationNumeriqueTotal.length"
-                  [found]="lieuxMediationNumerique.length"></app-filter-result-count>
-                <app-selected-filters
-                  [filterForm]="filterForm"
-                  [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
-                <app-display-on-map-link
-                  class="text-center d-block"
-                  [cartographieFeature]="features.get('cartographie')"
-                  [lieuxMediationNumeriqueCount]="(lieuxMediationNumerique$ | async)?.length ?? 0"
-                  [queryParams]="route.queryParams"></app-display-on-map-link>
+                  [found]="lieuxMediationNumerique.length"
+                  [empty]="router.url === '/orientation'"></app-filter-result-count>
+                <ng-container *ngIf="this.router.url !== '/orientation'">
+                  <app-selected-filters
+                    [filterForm]="filterForm"
+                    [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
+                  <app-display-on-map-link
+                    class="text-center d-block"
+                    [cartographieFeature]="features.get('cartographie')"
+                    [lieuxMediationNumeriqueCount]="(lieuxMediationNumerique$ | async)?.length ?? 0"
+                    [queryParams]="route.queryParams"></app-display-on-map-link>
+                </ng-container>
               </div>
             </ng-container>
           </ng-container>

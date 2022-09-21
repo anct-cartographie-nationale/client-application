@@ -3,7 +3,7 @@
     <div
       class="bg-image position-absolute h-100 w-100 start-0 top-0"
       style="background-image: url('assets/img/orientation/france.svg')"></div>
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" [class.invisible]="empty">
       <circle cx="-50" cy="50" stroke="#fff" stroke-width=".5" r="48" transform="rotate(-90)" />
       <path
         opacity=".3"
@@ -17,9 +17,9 @@
         style="transition: all 0.2s ease"
         [attr.stroke-dasharray]="208 * (found / total) + ',' + 208 * (1 - found / total)" />
     </svg>
-    <div class="position-absolute translate-middle top-50 start-50 fs-1">{{ found }}</div>
+    <div class="position-absolute translate-middle top-50 start-50 fs-1" *ngIf="!empty">{{ found }}</div>
   </div>
-  <div class="pt-4 text-center" *ngIf="displayResultText">
+  <div class="pt-4 text-center" *ngIf="!empty">
     <b class="fs-5" [ngPlural]="found">
       <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
       <ng-template ngPluralCase="=1">Structure trouvée</ng-template>
@@ -29,7 +29,7 @@
     <span class="opacity-50">/ {{ total }} structures sur le territoire</span>
   </div>
 </ng-container>
-<ng-container *ngIf="size === 'sm'">
+<ng-container *ngIf="size === 'sm' && !empty">
   <b [ngPlural]="found">
     <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
     <ng-template ngPluralCase="=1">Structure trouvée</ng-template>

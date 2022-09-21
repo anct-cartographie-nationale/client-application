@@ -10,7 +10,7 @@ export class FilterResultCountComponent {
 
   @Input() public found: number = 0;
 
-  @Input() public displayResultText: boolean = true;
+  @Input() public empty: boolean = false;
 
   @Input() public size: 'sm' | 'auto' = 'auto';
 }
