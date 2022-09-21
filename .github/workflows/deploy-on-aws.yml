@@ -1,0 +1,11 @@
+name: Deploy on AWS WIP
+
+on:
+  workflow_call:
+
+jobs:
+  create-app-and-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Empty
+        run: echo 'Do nothing'
