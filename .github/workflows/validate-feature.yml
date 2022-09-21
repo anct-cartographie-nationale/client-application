@@ -337,3 +337,5 @@ jobs:
       - dynamic-variables
       - build-client-application
     uses: ./.github/workflows/deploy-on-aws.yml
+    secrets:
+      TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
