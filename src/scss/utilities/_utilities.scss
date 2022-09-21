@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '~bootstrap/scss/utilities';
+@import 'bootstrap/scss/utilities';
 
 $utilities: map.merge(
   $utilities,

@@ -41,8 +41,8 @@ $spacers: (
 @import './inputs';
 @import './tables';
 @import './navbar';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/maps';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
 @import './breadcrumb';
 @import './form-check';
 @import './square';
