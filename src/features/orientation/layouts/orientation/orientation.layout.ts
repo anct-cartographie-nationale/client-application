@@ -16,7 +16,6 @@ import {
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
 import { slideInAnimation } from '../../animations';
-import { formatDistance, resetForm } from './orientation.layout.presenter';
 
 const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresentation): FormGroup =>
   Object.entries(filterPresentation).reduce(
@@ -102,7 +101,4 @@ export class OrientationLayout {
   private setFilterToQueryString(): (queryParams: FilterPresentation) => Promise<boolean> {
     return (queryParams: FilterPresentation) => this.router.navigate([], { queryParams });
   }
-
-  public resetForm = resetForm;
-  public formatDistance = formatDistance;
 }
