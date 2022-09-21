@@ -13,13 +13,14 @@ export class SelectedFiltersComponent {
 
   public resetForm(value: string | number, key: string) {
     if (key === 'services') this.filterForm.get('services')?.setValue('');
-    else if (key === 'distance') {
-      this.filterForm.get('distance')?.setValue('');
-    } else if (key === 'address') {
+    else if (key === 'address' || key === 'distance') {
       this.filterForm.get('address')?.setValue('');
       this.filterForm.get('distance')?.setValue('');
       this.filterForm.get('latitude')?.setValue('');
       this.filterForm.get('longitude')?.setValue('');
+    } else if (key === 'ouvert_actuellement') {
+      this.filterForm.get('ouvert_actuellement')?.setValue(null);
+      this.filterForm.get('date_ouverture')?.setValue(null);
     } else {
       const keyArrayCoppy = [...this.filterForm.value[key]];
       const indexOfValue = keyArrayCoppy.indexOf(value);
