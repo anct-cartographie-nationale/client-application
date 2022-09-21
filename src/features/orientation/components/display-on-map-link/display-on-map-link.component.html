@@ -1,0 +1,20 @@
+<ng-container *ngIf="cartographieFeature">
+  <a
+    *ngIf="cartographieFeature.active"
+    class="btn btn-secondary"
+    [class.disabled]="lieuxMediationNumeriqueCount === 0"
+    [routerLink]="['/', 'cartographie']"
+    queryParamsHandling="preserve">
+    Afficher les résultats sur la cartographie
+    <i class="ri-arrow-right-s-line align-bottom"></i>
+  </a>
+  <a
+    *ngIf="!cartographieFeature.active && cartographieFeature.url"
+    class="btn btn-secondary"
+    [class.disabled]="lieuxMediationNumeriqueCount === 0"
+    [href]="cartographieFeature.url + '?' + toQueryString(queryParams)"
+    rel="keep-params">
+    Afficher les résultats sur la cartographie
+    <i class="ri-arrow-right-s-line align-bottom"></i>
+  </a>
+</ng-container>

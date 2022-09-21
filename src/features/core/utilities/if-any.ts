@@ -7,5 +7,5 @@ const processData = <TData, TParam>(data: TParam | TData, field: string, callbac
 export const ifAny = <TData, TParam = null>(field: string, data?: TParam | TData, callback?: (data: TParam) => TData) =>
   data != null ? processData(data, field, callback) : {};
 
-export const ifAnyInObject = <TContainer>(field: string, container: TContainer) =>
+export const ifAnyInObject = <TContainer extends {}>(field: string, container: TContainer) =>
   Object.keys(container).length > 0 ? { [field]: container } : {};

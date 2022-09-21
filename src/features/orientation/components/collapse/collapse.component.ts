@@ -10,7 +10,7 @@ type CollapseState = 'expanded' | 'collapsed';
   templateUrl: './collapse.component.html',
   animations: [
     trigger('collapse', [
-      state('collapsed', style({ height: '0px', overflow: 'hidden' })),
+      state('collapsed', style({ height: '0px', overflow: 'hidden', visibility: 'hidden' })),
       state('expanded', style({ height: '*' })),
       transition('collapsed <=> expanded', animate('.2s ease-in'))
     ])

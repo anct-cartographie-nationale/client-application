@@ -1,0 +1,40 @@
+<ng-container *ngIf="filterPresentation as filter">
+  <div class="form-check form-check-inline form-chip mb-3" *ngFor="let publicAccueilli of filter.publics_accueillis">
+    <button class="chip-button flex-wrap" (click)="resetForm(publicAccueilli, 'publics_accueillis')">
+      {{ publicAccueilli }}
+      <span class="ms-1">&times;</span>
+    </button>
+  </div>
+  <div class="form-check form-check-inline form-chip mb-3" *ngFor="let conditionAccess of filter.conditions_access">
+    <button class="chip-button" (click)="resetForm(conditionAccess, 'conditions_access')">
+      {{ conditionAccess }}
+      <span class="ms-1">&times;</span>
+    </button>
+  </div>
+  <div
+    class="form-check form-check-inline form-chip mb-3"
+    *ngFor="let modaliteAccompagnement of filter.modalites_accompagnement">
+    <button class="chip-button" (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
+      {{ modaliteAccompagnement }}
+      <span class="ms-1">&times;</span>
+    </button>
+  </div>
+  <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.services">
+    <button class="chip-button" (click)="resetForm(filter.services, 'services')">
+      {{ filter.services }}
+      <span class="ms-1">&times;</span>
+    </button>
+  </div>
+  <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.address">
+    <button class="chip-button" (click)="resetForm(filter.address, 'address')">
+      {{ filter.address }}
+      <span class="ms-1">&times;</span>
+    </button>
+  </div>
+  <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.distance">
+    <button class="chip-button" (click)="resetForm(filter.distance, 'distance')">
+      {{ formatDistance(filter.distance) }}
+      <span class="ms-1">&times;</span>
+    </button>
+  </div>
+</ng-container>

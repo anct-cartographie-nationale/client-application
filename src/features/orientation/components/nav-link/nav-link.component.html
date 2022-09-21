@@ -1,0 +1,15 @@
+<a
+  class="mx-lg-2 mx-3 px-lg-3 px-0 py-lg-1 py-0 position-relative"
+  [ngClass]="size === 'sm' ? 'nav-link' : 'btn btn-secondary'"
+  [routerLink]="link"
+  queryParamsHandling="preserve"
+  routerLinkActive="active active-primary"
+  ariaCurrentWhenActive="page">
+  <ng-content></ng-content>
+  <span
+    class="position-absolute top-0 start-100 translate-middle bg-primary rounded-circle square-sm text-white text-center small"
+    [class.ms-2]="size === 'sm'"
+    *ngIf="filtersCount">
+    {{ filtersCount }}
+  </span>
+</a>

@@ -1,8 +1,8 @@
-<div class="h-100 d-flex flex-column" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
+<div class="h-lg-100 d-flex flex-column px-3" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
   <div class="my-auto">
     <h1 class="h2 text-center fw-bold mb-4">
       Quel est
-      <span class="text-primary">votre besoin ?</span>
+      <span class="text-primary">votre besoin&nbsp;?</span>
     </h1>
     <form [formGroup]="orientationLayout.filterForm">
       <div class="accordion" id="accordionBesoin">
@@ -18,13 +18,13 @@
               <i class="ri-compasses-2-fill ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <div *ngFor="let apprentissageDeBaseItem of apprentissageDeBaseOrientationItems">
                 <span
-                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
                   *ngIf="apprentissageDeBaseItem.value === filter.services">
                   1
                 </span>
               </div>
               <div>
-                <b>Apprentissage de base</b>
+                <b class="accordion-button-label">Apprentissage de base</b>
                 <br />
                 <i class="text-muted">
                   <small>J'ai besoin de connaître les bases du numérique</small>
@@ -69,13 +69,13 @@
               <i class="ri-file-list-3-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <div *ngFor="let demarchesOrientationItem of demarchesOrientationItems">
                 <span
-                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
                   *ngIf="demarchesOrientationItem.value === filter.services">
                   1
                 </span>
               </div>
               <div>
-                <b>Démarches</b>
+                <b class="accordion-button-label">Démarches</b>
                 <br />
                 <i class="text-muted"><small>J’ai besoin d’apprendre ou de réaliser certaines démarches du quotidien</small></i>
               </div>
@@ -116,13 +116,13 @@
               <i class="ri-book-2-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <div *ngFor="let cultureNumeriqueItem of cultureNumeriqueOrientationItems">
                 <span
-                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
                   *ngIf="cultureNumeriqueItem.value === filter.services">
                   1
                 </span>
               </div>
               <div>
-                <b>Culture numérique</b>
+                <b class="accordion-button-label">Culture numérique</b>
                 <br />
                 <i class="text-muted">
                   <small>J’ai besoin d’en savoir plus sur des points spécifiques liés au numérique</small>
@@ -164,13 +164,13 @@
               <i class="ri-wifi-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <div *ngFor="let manqueDeMaterielItem of manqueDeMaterielOrientationItems">
                 <span
-                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle badge bg-secondary text-primary border border-primary rounded-circle"
+                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
                   *ngIf="manqueDeMaterielItem.value === filter.services">
                   1
                 </span>
               </div>
               <div>
-                <b>Manque de matériel</b>
+                <b class="accordion-button-label">Manque de matériel</b>
                 <br />
                 <i class="text-muted"><small>J'ai besoin de matériel ou d'une connexion internet</small></i>
               </div>

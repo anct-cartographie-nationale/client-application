@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import { OrientationLayout } from '../../layouts';
+import { HttpParams } from '@angular/common/http';
 
 const currentDate = () => new Date().toISOString().substring(0, 10);
 
@@ -48,5 +49,9 @@ export class DisponibilitePage {
   public selectDate(event: Event & { target: HTMLInputElement }) {
     this.clearOuvertActuellement();
     event.target.value === '' ? this.clearDateOuverture() : this.setDateOuverture(event.target.value);
+  }
+
+  public toQueryString(fromObject: {} = {}): string {
+    return new HttpParams({ fromObject }).toString();
   }
 }

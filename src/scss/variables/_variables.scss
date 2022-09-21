@@ -22,6 +22,16 @@ $theme-colors: (
   'muted': $muted,
   'dark': $dark
 ) !default;
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 4.5
+) !default;
 
 @import './accordion';
 @import './buttons';
@@ -31,8 +41,9 @@ $theme-colors: (
 @import './inputs';
 @import './tables';
 @import './navbar';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/maps';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/maps';
 @import './breadcrumb';
 @import './form-check';
+@import './square';
 @import './tiles';

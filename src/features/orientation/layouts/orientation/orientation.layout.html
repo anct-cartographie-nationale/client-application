@@ -1,182 +1,62 @@
-<div class="bg-light h-100 p-5">
-  <div class="container h-100">
-    <div class="row g-0 h-100 shadow">
-      <div class="col bg-white p-3 h-100 overflow-auto d-flex flex-column" *ngIf="(filterPresentation$ | async) as filter">
-        <ul *ngIf="this.router.url !== '/orientation'" class="nav nav-pills justify-content-center pb-3">
-          <li class="nav-item">
-            <a
-              class="btn btn-secondary mx-2 position-relative"
-              [routerLink]="['besoin']"
-              queryParamsHandling="preserve"
-              routerLinkActive="active active-primary"
-              ariaCurrentWhenActive="page">
-              Besoin
-              <span
-                class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle"
-                *ngIf="filter.services">
-                1
-              </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="btn btn-secondary mx-2 position-relative"
-              [routerLink]="['localisation']"
-              queryParamsHandling="preserve"
-              routerLinkActive="active active-primary"
-              ariaCurrentWhenActive="page">
-              Localisation
-              <span
-                class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle"
-                *ngIf="filter.distance && filter.distance !== null">
-                1
-              </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="btn btn-secondary mx-2 position-relative"
-              [routerLink]="['accessibilite']"
-              queryParamsHandling="preserve"
-              routerLinkActive="active active-primary"
-              ariaCurrentWhenActive="page">
-              Accessibilité
-              <span
-                class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle"
-                *ngIf="(filter.conditions_access && filter.conditions_access.length > 0 ) || (filter.publics_accueillis && filter.publics_accueillis.length > 0) || (filter.modalites_accompagnement && filter.modalites_accompagnement.length > 0)">
-                {{(filter.conditions_access?.length || 0) + (filter.publics_accueillis?.length || 0) +
-                (filter.modalites_accompagnement?.length || 0)}}
-              </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="btn btn-secondary mx-2 position-relative"
-              [routerLink]="['disponibilite']"
-              queryParamsHandling="preserve"
-              routerLinkActive="active active-primary"
-              ariaCurrentWhenActive="page">
-              Disponibilité
-              <span
-                class="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle"
-                *ngIf="(filter.date_ouverture && filter.date_ouverture !== null) || (filter.ouvert_actuellement && filter.ouvert_actuellement !== null)">
-                {{filter.ouvert_actuellement ? 2 : 1}}
-              </span>
-            </a>
-          </li>
-        </ul>
-        <div class="h-100" [@routeAnimations]="getRouteAnimationData()">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
-      <div
-        class="col-lg-4 col-md-6 col-12 bg-primary text-white h-100 p-4 overflow-auto"
-        *ngIf="this.router.url !== '/orientation'">
-        <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
-          <div class="d-flex flex-column h-100" *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
-            <h1 class="h2 text-center text-secondary fw-bold">
-              Structures
-              <br />
-              <span *ngIf="router.url === '/orientation'">sur le territoire</span>
-              <span *ngIf="router.url !== '/orientation'">correspondantes</span>
-            </h1>
-            <div class="text-center my-auto">
-              <div class="bg-image p-5" style="background-image: url('assets/logos/carteFrancePerspective.svg')">
-                <div class="d-flex p-2">
-                  <div class="border rounded-circle p-4 m-auto">
-                    <div
-                      [attr.aria-valuemax]="lieuxMediationNumeriqueTotal.length"
-                      [attr.aria-valuenow]="lieuxMediationNumerique.length"
-                      aria-valuemin="0"
-                      role="progressbar"
-                      style="--value-int: {{lieuxMediationNumerique.length}} ; --value-percentage: {{(lieuxMediationNumerique.length / lieuxMediationNumeriqueTotal.length) * 100}}"></div>
-                  </div>
-                </div>
-              </div>
-              <ng-container *ngIf="router.url !==  '/orientation'">
-                <b class="fs-5 text" [ngPlural]="lieuxMediationNumerique.length">
-                  <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
-                  <ng-template ngPluralCase="=1">Structure trouvée</ng-template>
-                  <ng-template ngPluralCase="other">Structures trouvées</ng-template>
-                </b>
-                <br />
-                <span class="opacity-50">/ {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire</span>
-              </ng-container>
-            </div>
-            <form [formGroup]="filterForm">
-              <ng-container *ngIf="(filterPresentation$ | async) as filter">
-                <div
-                  class="form-check form-check-inline form-chip mb-3"
-                  *ngFor="let publicAccueilli of filter.publics_accueillis">
-                  <button
-                    class="chip-button"
-                    (click)="resetForm(publicAccueilli, 'publics_accueillis')"
-                    style="flex-wrap: wrap">
-                    {{ publicAccueilli }}
-                    <span class="ms-1">&times;</span>
-                  </button>
-                </div>
-                <div
-                  class="form-check form-check-inline form-chip mb-3"
-                  *ngFor="let conditionAccess of filter.conditions_access">
-                  <button class="chip-button" (click)="resetForm(conditionAccess, 'conditions_access')">
-                    {{ conditionAccess }}
-                    <span class="ms-1">&times;</span>
-                  </button>
-                </div>
-                <div
-                  class="form-check form-check-inline form-chip mb-3"
-                  *ngFor="let modaliteAccompagnement of filter.modalites_accompagnement">
-                  <button class="chip-button" (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
-                    {{ modaliteAccompagnement }}
-                    <span class="ms-1">&times;</span>
-                  </button>
-                </div>
-                <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.services">
-                  <button class="chip-button" (click)="resetForm(filter.services, 'services')">
-                    {{ filter.services }}
-                    <span class="ms-1">&times;</span>
-                  </button>
-                </div>
-                <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.address">
-                  <button class="chip-button" (click)="resetForm(filter.address, 'address')">
-                    {{ filter.address }}
-                    <span class="ms-1">&times;</span>
-                  </button>
-                </div>
-                <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.distance">
-                  <button class="chip-button" (click)="resetForm(filter.distance, 'distance')">
-                    {{ formatDistance(filter.distance) }}
-                    <span class="ms-1">&times;</span>
-                  </button>
-                </div>
-              </ng-container>
-            </form>
-            <div class="text-center mt-auto">
-              <ng-container *ngIf="features.get('cartographie') as cartographie">
-                <a
-                  *ngIf="cartographie.active"
-                  class="btn btn-secondary"
-                  [class.disabled]="lieuxMediationNumerique.length === 0"
-                  [routerLink]="['/','cartographie']"
-                  queryParamsHandling="preserve">
-                  Afficher les résultats sur la cartographie
-                  <i class="ri-arrow-right-s-line align-bottom"></i>
-                </a>
-                <a
-                  *ngIf="!cartographie.active && cartographie.url"
-                  class="btn btn-secondary"
-                  [class.disabled]="lieuxMediationNumerique.length === 0"
-                  [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
-                  rel="keep-params">
-                  Afficher les résultats sur la cartographie
-                  <i class="ri-arrow-right-s-line align-bottom"></i>
-                </a>
+<div class="bg-light h-100 p-lg-5 pt-3 overflow-auto">
+  <div class="container h-100 pb-lg-0 pb-3">
+    <ng-container *ngIf="(filterPresentation$ | async) as filter">
+      <app-nav class="d-lg-none block d-block" *ngIf="this.router.url !== '/orientation'" [filter]="filter" size="sm"></app-nav>
+      <div class="row g-0 h-100 shadow">
+        <div class="col bg-white pt-3 h-100 overflow-auto d-flex flex-column">
+          <app-nav class="d-lg-block d-none" *ngIf="this.router.url !== '/orientation'" [filter]="filter"></app-nav>
+          <div class="h-100 d-lg-block d-flex flex-column" [@routeAnimations]="getRouteAnimationData()">
+            <router-outlet></router-outlet>
+            <div *ngIf="this.router.url !== '/orientation'" class="bg-primary text-white text-center mt-auto d-lg-none d-block">
+              <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+                <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
+                  <app-filter-result-count
+                    class="d-block m-3"
+                    [total]="lieuxMediationNumeriqueTotal.length"
+                    [found]="lieuxMediationNumerique.length"
+                    size="sm"></app-filter-result-count>
+                  <app-selected-filters
+                    [filterForm]="filterForm"
+                    [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
+                  <app-display-on-map-link
+                    class="text-center d-block mb-3"
+                    [cartographieFeature]="features.get('cartographie')"
+                    [lieuxMediationNumeriqueCount]="(lieuxMediationNumerique$ | async)?.length ?? 0"
+                    [queryParams]="route.queryParams"></app-display-on-map-link>
+                </ng-container>
               </ng-container>
             </div>
           </div>
-        </ng-container>
+        </div>
+        <div class="col-lg-4 col-12 bg-primary text-white h-100 p-4 overflow-auto d-lg-flex d-none">
+          <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+            <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
+              <div class="flex-column d-flex">
+                <h2 class="text-center text-secondary fw-bold" *ngIf="this.router.url !== '/orientation'">
+                  Structures
+                  <br />
+                  {{ router.url === '/orientation' ? 'sur le territoire' : 'correspondantes'}}
+                </h2>
+                <app-filter-result-count
+                  class="my-auto"
+                  [total]="lieuxMediationNumeriqueTotal.length"
+                  [found]="lieuxMediationNumerique.length"
+                  [empty]="router.url === '/orientation'"></app-filter-result-count>
+                <ng-container *ngIf="this.router.url !== '/orientation'">
+                  <app-selected-filters
+                    [filterForm]="filterForm"
+                    [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
+                  <app-display-on-map-link
+                    class="text-center d-block"
+                    [cartographieFeature]="features.get('cartographie')"
+                    [lieuxMediationNumeriqueCount]="(lieuxMediationNumerique$ | async)?.length ?? 0"
+                    [queryParams]="route.queryParams"></app-display-on-map-link>
+                </ng-container>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 </div>
