@@ -18,7 +18,7 @@
       [conditionAccess]="lieuMediationNumerique.conditions_access"
       [accessibilite]="lieuMediationNumerique.accessibilite"
       [courriel]="lieuMediationNumerique.contact?.courriel"
-      [telephone]="lieuMediationNumerique.contact?.telephone"
+      [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
       [distance]="lieuMediationNumerique?.distance"></app-informations-pratiques>
   </div>
   <div
