@@ -3,7 +3,7 @@
     <div class="row justify-content-center h-100">
       <div class="col-lg-6 m-auto">
         <div class="card border-0 shadow m-auto">
-          <div class="card-body">
+          <div class="card-body p-5">
             <div class="d-flex flex-column text-center">
               <ng-container *ngIf="fromOrientation; else: welcome">
                 <p class="text-muted">Patientez quelques instants</p>
@@ -14,16 +14,10 @@
                 </h3>
               </ng-container>
               <ng-template #welcome>
-                <h3 class="card-title text-primary">
-                  Bienvenue sur la cartographie
-                  <br />
-                  des lieux d'inclusion numérique !
-                </h3>
-                <p class="text-muted">
-                  La page est en cours de chargement,
-                  <br />
-                  veuillez patienter quelques instants.
-                </p>
+                <div class="fw-bold">
+                  <div class="text-muted mb-2">Patientez quelques instants</div>
+                  <div class="text-primary fs-4">Nous chargeons les structures correspondantes</div>
+                </div>
               </ng-template>
             </div>
             <app-cartographie-loader></app-cartographie-loader>
