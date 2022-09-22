@@ -1,46 +1,54 @@
 <ng-container *ngIf="filterPresentation as filter">
-  <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.services">
-    <button class="chip-button" (click)="resetForm(filter.services, 'services')">
-      {{ filter.services }}
-      <span class="ms-1">&times;</span>
+  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.services">
+    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(filter.services, 'services')">
+      <div class="chip-button-trim">{{ filter.services }}</div>
+      <div class="ms-1">&times;</div>
     </button>
   </div>
-  <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.address">
-    <button class="chip-button" (click)="resetForm(filter.address, 'address')">
-      {{ filter.address }}
-      <span class="ms-1">&times;</span>
+  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.address">
+    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(filter.address, 'address')">
+      <div class="chip-button-trim">{{ filter.address }}</div>
+      <div class="ms-1">&times;</div>
     </button>
   </div>
-  <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.distance">
-    <button class="chip-button" (click)="resetForm(filter.distance, 'distance')">
-      {{ formatDistance(filter.distance) }}
-      <span class="ms-1">&times;</span>
+  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.distance">
+    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(filter.distance, 'distance')">
+      <div class="chip-button-trim">{{ formatDistance(filter.distance) }}</div>
+      <div class="ms-1">&times;</div>
     </button>
   </div>
-  <div class="form-check form-check-inline form-chip mb-3" *ngFor="let publicAccueilli of filter.publics_accueillis">
-    <button class="chip-button flex-wrap" (click)="resetForm(publicAccueilli, 'publics_accueillis')">
-      {{ publicAccueilli }}
-      <span class="ms-1">&times;</span>
+  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngFor="let publicAccueilli of filter.publics_accueillis">
+    <button
+      class="chip-button py-1 fw-bold d-flex align-items-center"
+      (click)="resetForm(publicAccueilli, 'publics_accueillis')">
+      <div class="chip-button-trim">{{ publicAccueilli }}</div>
+      <div class="ms-1">&times;</div>
     </button>
   </div>
-  <div class="form-check form-check-inline form-chip mb-3" *ngFor="let conditionAccess of filter.conditions_access">
-    <button class="chip-button" (click)="resetForm(conditionAccess, 'conditions_access')">
-      {{ conditionAccess }}
-      <span class="ms-1">&times;</span>
+  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngFor="let conditionAccess of filter.conditions_access">
+    <button
+      class="chip-button py-1 fw-bold d-flex align-items-center"
+      (click)="resetForm(conditionAccess, 'conditions_access')">
+      <div class="chip-button-trim">{{ conditionAccess }}</div>
+      <div class="ms-1">&times;</div>
     </button>
   </div>
   <div
-    class="form-check form-check-inline form-chip mb-3"
+    class="form-check form-check-inline form-chip mb-1 me-1 ms-0"
     *ngFor="let modaliteAccompagnement of filter.modalites_accompagnement">
-    <button class="chip-button" (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
-      {{ modaliteAccompagnement }}
-      <span class="ms-1">&times;</span>
+    <button
+      class="chip-button py-1 fw-bold d-flex align-items-center"
+      (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
+      <div class="chip-button-trim">{{ modaliteAccompagnement }}</div>
+      <div class="ms-1">&times;</div>
     </button>
   </div>
-  <div class="form-check form-check-inline form-chip mb-3" *ngIf="filter.ouvert_actuellement">
-    <button class="chip-button" (click)="resetForm(filter.ouvert_actuellement, 'ouvert_actuellement')">
-      {{ filter.ouvert_actuellement && "Ouvert aujourd'hui" }}
-      <span class="ms-1">&times;</span>
+  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.ouvert_actuellement">
+    <button
+      class="chip-button py-1 fw-bold d-flex align-items-center"
+      (click)="resetForm(filter.ouvert_actuellement, 'ouvert_actuellement')">
+      <div class="chip-button-trim">{{ filter.ouvert_actuellement && "Ouvert aujourd'hui" }}</div>
+      <div class="ms-1">&times;</div>
     </button>
   </div>
 </ng-container>

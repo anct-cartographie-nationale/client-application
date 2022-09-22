@@ -44,6 +44,7 @@
                   [empty]="router.url === '/orientation'"></app-filter-result-count>
                 <ng-container *ngIf="this.router.url !== '/orientation'">
                   <app-selected-filters
+                    class="my-auto"
                     [filterForm]="filterForm"
                     [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
                   <app-display-on-map-link

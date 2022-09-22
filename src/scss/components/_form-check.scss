@@ -59,12 +59,20 @@ input[type='checkbox'] {
 }
 
 .chip-button {
+  border: none;
   display: inline;
-  padding: 0 25px;
+  padding: 0 15px;
   height: 25px;
-  font-size: 15px;
-  line-height: 20px;
+  font-size: 13px;
+  line-height: 15px;
   border-radius: 25px;
   background-color: $light;
   opacity: 0.6;
+
+  .chip-button-trim {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
