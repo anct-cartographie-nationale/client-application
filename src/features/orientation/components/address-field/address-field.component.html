@@ -18,7 +18,7 @@
       (focus)="addressInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
       (keyup.escape)="dropdownPane.reduce()" />
     <span class="input-group-text" *ngIf="addressInput.value">
-      <button class="btn btn-outlined btn-sm d-block" type="reset">
+      <button class="btn btn-outlined btn-sm d-block" (click)="resetAddress(formGroup)">
         <i class="ri-close-line"></i>
       </button>
     </span>

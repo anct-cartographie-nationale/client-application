@@ -32,4 +32,11 @@ export class AddressFieldComponent {
   public trackByAddressName(_: number, address: AddressFoundPresentation): string {
     return `${address.label}-${address.context}`;
   }
+
+  public resetAddress(filter: FormGroup) {
+    filter.get('address')?.setValue('');
+    filter.get('distance')?.setValue('');
+    filter.get('latitude')?.setValue('');
+    filter.get('longitude')?.setValue('');
+  }
 }
