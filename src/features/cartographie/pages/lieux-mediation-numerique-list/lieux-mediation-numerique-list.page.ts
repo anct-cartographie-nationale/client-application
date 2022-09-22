@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -48,7 +49,7 @@ const toLieuxFilteredByDepartement = ([lieux, paramMap]: [LieuMediationNumerique
   templateUrl: 'lieux-mediation-numerique-list.page.html'
 })
 export class LieuxMediationNumeriqueListPage {
-  private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this._route.snapshot.queryParams);
+  private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this.route.snapshot.queryParams);
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
 
@@ -66,7 +67,7 @@ export class LieuxMediationNumeriqueListPage {
   }
 
   private boundingBox$(): Observable<[Localisation, Localisation]> {
-    return this._route.snapshot.paramMap.get('nomDepartement')
+    return this.route.snapshot.paramMap.get('nomDepartement')
       ? of([NO_LOCALISATION, NO_LOCALISATION])
       : this.markersPresenter.boundingBox$;
   }
@@ -78,8 +79,16 @@ export class LieuxMediationNumeriqueListPage {
       new Date(),
       this.boundingBox$()
     ),
-    this._route.paramMap
+    this.route.paramMap
   ]).pipe(map(toLieuxFilteredByDepartement), map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
+
+  public listOfLieuxWithoutFilters$: Observable<LieuMediationNumeriquePresentation[]> =
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+      of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))),
+      undefined,
+      new Date(),
+      this.markersPresenter.boundingBox$
+    );
 
   public constructor(
     @Inject(FEATURES_TOKEN)
@@ -87,7 +96,8 @@ export class LieuxMediationNumeriqueListPage {
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
-    private readonly _route: ActivatedRoute,
+    public readonly route: ActivatedRoute,
+    private readonly _router: Router,
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
@@ -105,4 +115,12 @@ export class LieuxMediationNumeriqueListPage {
   }
 
   public inLieuxZoomLevel = inLieuxZoomLevel;
+
+  public resetFilters(): void {
+    this._router.navigate([], { relativeTo: this.route.parent });
+  }
+
+  public toQueryString(fromObject: {} = {}): string {
+    return new HttpParams({ fromObject }).toString();
+  }
 }

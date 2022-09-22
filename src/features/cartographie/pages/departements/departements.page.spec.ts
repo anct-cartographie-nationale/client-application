@@ -6,6 +6,7 @@ import { CartographieLayout } from '../../layouts';
 import { MarkersPresenter } from '../../presenters';
 import { DepartementsListStubComponent } from '../../test-doubles';
 import { DepartementsPage } from './departements.page';
+import { FEATURES_TOKEN } from '../../../../root';
 
 describe('DepartementsPage', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -16,12 +17,17 @@ describe('DepartementsPage', (): void => {
         {
           provide: LieuxMediationNumeriquePresenter,
           useValue: {
-            lieuxMediationNumeriqueByDepartement$: () => of([])
+            lieuxMediationNumeriqueByDepartement$: () => of([]),
+            lieuxMediationNumeriqueByDistance$: () => of([])
           }
         },
         {
           provide: MarkersPresenter,
           useValue: {}
+        },
+        {
+          provide: FEATURES_TOKEN,
+          useValue: new Map()
         },
         {
           provide: CartographieLayout,

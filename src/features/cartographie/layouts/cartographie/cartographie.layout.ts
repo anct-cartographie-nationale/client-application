@@ -1,9 +1,8 @@
 import { HttpParams } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, shareReplay, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
   departementFromNom,
   regionFromNom,
@@ -77,16 +76,6 @@ export class CartographieLayout {
       shareReplay()
     );
 
-  public checkWhyListOfLieuxIsEmpty$: Observable<LieuMediationNumeriquePresentation[]> =
-    this._lieuxMediationNumeriqueListPresenter
-      .lieuxMediationNumeriqueByDistance$(
-        of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))),
-        undefined,
-        new Date(),
-        this.markersPresenter.boundingBox$
-      )
-      .pipe(tap(() => this._loadingState$.next(false)));
-
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
 
@@ -96,8 +85,6 @@ export class CartographieLayout {
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly router: Router,
     public readonly route: ActivatedRoute,
-    @Inject(FEATURES_TOKEN)
-    public readonly features: FeaturesConfiguration,
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
@@ -145,10 +132,6 @@ export class CartographieLayout {
 
   public toQueryString(fromObject: {} = {}): string {
     return new HttpParams({ fromObject }).toString();
-  }
-
-  public resetFilters(): void {
-    this.router.navigate([], { relativeTo: this.route.parent });
   }
 
   private getRouteParam(routeParam: string) {

@@ -1,3 +1,11 @@
+<div class="d-flex h-100 w-100" *ngIf="(lieuxMediationNumerique$ | async)?.length === 0">
+  <app-no-lieux-found
+    class="my-auto mx-4"
+    (resetFilters)="resetFilters()"
+    [hasFilters]="(listOfLieuxWithoutFilters$ | async)?.length !== 0"
+    [queryParams]="toQueryString(route.queryParams)"
+    [orientationFeature]="features.get('orientation')"></app-no-lieux-found>
+</div>
 <app-lieux-mediation-numerique-list
   *ngIf="inLieuxZoomLevel((markersPresenter.currentZoomLevel$ | async) ?? 0)"
   [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"

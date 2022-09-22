@@ -29,6 +29,7 @@ import { LieuxMediationNumeriqueListComponent } from './lieux-mediation-numeriqu
 import { LieuMediationNumeriqueMarkersComponent } from './markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
 import { DepartementMarkersComponent } from './markers/departement-markers/departement-markers.component';
 import { RegionMarkersComponent } from './markers/region-markers/region-markers.component';
+import { NoLieuxFoundComponent } from './no-lieux-found/no-lieux-found.component';
 
 export * from './leaflet-map/leaflet-map.component';
 
@@ -61,5 +62,6 @@ export const components = [
   RegionsListComponent,
   LieuMediationNumeriqueMarkersComponent,
   DepartementMarkersComponent,
-  RegionMarkersComponent
+  RegionMarkersComponent,
+  NoLieuxFoundComponent
 ];

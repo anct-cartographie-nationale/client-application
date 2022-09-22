@@ -34,47 +34,10 @@
   </div>
 </div>
 <div class="d-flex h-100">
-  <ng-template #noLieuxFound>
-    <div
-      class="col-lg-6 col-md-6 col-12 container justify-content-center d-flex flex-column"
-      *ngIf="(checkWhyListOfLieuxIsEmpty$ | async)?.length !== 0; else: lostInMap">
-      <h4 class="text-center fw-bold mb-3">Nous ne trouvons pas de résultats correspondant à votre recherche</h4>
-      <p class="text-muted text-center">
-        Aucune structure n'est disponible selon ces critères.
-        <br />
-        Modifiez ou supprimez certains de vos filtres précédemment sélectionnés
-      </p>
-      <div class="d-flex justify-content-center my-3">
-        <ng-container *ngIf="features.get('orientation') as orientation">
-          <a
-            class="btn btn-secondary bg-secondary text-primary me-3"
-            [routerLink]="['/','orientation', 'besoin']"
-            *ngIf="orientation.active">
-            Modifier mes filtres
-          </a>
-          <a
-            *ngIf="!orientation.active && orientation.url"
-            class="btn btn-secondary text-primary me-3"
-            [href]="orientation.url + '?' + toQueryString($any(route.queryParams | async))">
-            Modifier mes filtres
-          </a>
-        </ng-container>
-        <button class="btn bg-primary text-secondary" (click)="resetFilters()">Réinitialiser mes filtres</button>
-      </div>
-    </div>
-    <ng-template #lostInMap>
-      <div class="col-xl-4 col-lg-5 col-md-6 col-12 container justify-content-center d-flex flex-column">
-        <h4 class="text-center fw-bold mb-3">Il n'y a pas encore de lieu de médiation numérique ici.</h4>
-        <p class="text-muted text-center">
-          Continuez à naviguer sur la carte ou dézoomez pour trouver les lieux aux alentours !
-        </p>
-      </div>
-    </ng-template>
-  </ng-template>
   <div
+    *ngIf="lieuxMediationNumerique$ | async"
     class="border-end"
-    [ngClass]="router.url.endsWith('/details') ? 'col-xl-5 col-lg-6 col-12' : 'col-xl-4 col-lg-5 col-md-6 col-12'"
-    *ngIf="(lieuxMediationNumerique$ | async)?.length !== 0; else: noLieuxFound">
+    [ngClass]="router.url.endsWith('/details') ? 'col-xl-5 col-lg-6 col-12' : 'col-xl-4 col-lg-5 col-md-6 col-12'">
     <router-outlet></router-outlet>
   </div>
   <div class="col overflow-auto">
