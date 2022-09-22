@@ -102,7 +102,7 @@ export class CartographieLayout {
   ) {}
 
   public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
-    this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent });
+    this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
     this.markersPresenter.center(lieu.localisation);
     this.markersPresenter.select(lieu.id);
   }
