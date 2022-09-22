@@ -4,6 +4,7 @@
 
 .active {
   border-bottom: 1px solid $primary;
+  width: var(--width);
 }
 
 .navbar-brand {
