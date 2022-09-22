@@ -31,7 +31,7 @@
         <div class="col-lg-4 col-12 bg-primary text-white h-100 p-4 overflow-auto d-lg-flex d-none">
           <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
             <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
-              <div class="flex-column d-flex">
+              <div class="flex-column d-flex w-100">
                 <h2 class="text-center text-secondary fw-bold" *ngIf="this.router.url !== '/orientation'">
                   Structures
                   <br />
