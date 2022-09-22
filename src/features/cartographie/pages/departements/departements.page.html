@@ -1,6 +1,6 @@
-<div class="d-flex h-100 w-100" *ngIf="(departements$ | async)?.length === 0">
+<div class="d-flex h-100" *ngIf="(departements$ | async)?.length === 0">
   <app-no-lieux-found
-    class="my-auto mx-4"
+    class="w-100 my-auto mx-4"
     (resetFilters)="resetFilters()"
     [hasFilters]="(listOfLieuxWithoutFilters$ | async)?.length !== 0"
     [queryParams]="toQueryString(route.queryParams)"

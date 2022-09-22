@@ -20,7 +20,7 @@ describe('lieux médiation numérique details presenter', (): void => {
         id: '6001a35f16b08100062e415f',
         nom: 'Anonymal',
         adresse: Adresse({
-          commune: 'Reims',
+          commune: 'reims',
           code_postal: '51100',
           code_insee: '51454',
           voie: '12 BIS RUE DE LECLERCQ',
@@ -109,7 +109,7 @@ describe('lieux médiation numérique details presenter', (): void => {
         id: '6001a35f16b08100062e415f',
         nom: 'Anonymal',
         adresse: Adresse({
-          commune: 'Reims',
+          commune: 'reims',
           code_postal: '51100',
           code_insee: '51454',
           voie: '12 BIS RUE DE LECLERCQ',
@@ -148,7 +148,7 @@ describe('lieux médiation numérique details presenter', (): void => {
         id: '6001a35f16b08100062e415f',
         nom: 'Anonymal',
         adresse: Adresse({
-          commune: 'Reims',
+          commune: 'reims',
           code_postal: '51100',
           code_insee: '51454',
           voie: '12 BIS RUE DE LECLERCQ',
@@ -196,7 +196,7 @@ describe('lieux médiation numérique details presenter', (): void => {
         id: '6001a35f16b08100062e415f',
         nom: 'Anonymal',
         adresse: Adresse({
-          commune: 'Reims',
+          commune: 'reims',
           code_postal: '51100',
           code_insee: '51454',
           voie: '12 BIS RUE DE LECLERCQ',

@@ -1,13 +1,10 @@
 <div class="row">
-  <div class="col ms-2">
-    <h5 class="fw-bold mb-0">{{ lieuMediationNumerique.nom }}</h5>
+  <div class="col">
+    <h5 class="fw-bold mb-0 text-first-letter-uppercase">{{ lieuMediationNumerique.nom }}</h5>
     <div class="text-muted">
-      {{ lieuMediationNumerique.adresse.voie.toLowerCase() }}
+      <span class="text-lowercase">{{ lieuMediationNumerique.adresse.voie }}</span>
       {{ lieuMediationNumerique.adresse.code_postal }}
-      {{
-        lieuMediationNumerique.adresse.commune.charAt(0).toUpperCase() +
-          lieuMediationNumerique.adresse.commune.substring(1).toLowerCase()
-      }}
+      <div class="text-first-letter-uppercase d-inline-block">{{ lieuMediationNumerique.adresse.commune }}</div>
     </div>
     <div class="mt-1" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.conditions_access">
       <span *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</span>

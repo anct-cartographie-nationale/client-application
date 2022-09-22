@@ -2,7 +2,7 @@
   <i class="ri-4x ri-account-pin-circle-fill text-primary my-auto me-2"></i>
   <div class="flex-grow-1 align-self-center">
     <small class="text-muted" *ngIf="typologie">{{ typologie }}</small>
-    <h1 class="h2 fw-bold mb-0" style="max-width: 300px">
+    <h1 class="h2 fw-bold mb-0 text-first-letter-uppercase">
       {{ nom }}
     </h1>
     <small *ngIf="date" class="text-muted fst-italic">Mise à jour le {{ date | date: 'dd/MM/y' }}</small>
