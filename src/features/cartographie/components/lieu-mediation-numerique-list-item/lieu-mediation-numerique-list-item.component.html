@@ -29,7 +29,7 @@
     <a
       *ngIf="lieuMediationNumerique.contact?.telephone as telephone"
       href="tel://{{ telephone }}"
-      class="text-decoration-none d-block mb-2"
+      class="text-decoration-none link-dark d-block mb-2"
       (click)="$event.stopPropagation()">
       <i class="ri-phone-line align-bottom"></i>
       {{ telephone }}
