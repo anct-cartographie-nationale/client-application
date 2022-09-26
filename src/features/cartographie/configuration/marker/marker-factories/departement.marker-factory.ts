@@ -50,6 +50,39 @@ const DEPARTEMENT_FIRST_RESULT_DIV_ICON = (count: number, highlight: MarkerHighl
     popupAnchor: [0, -DEPARTEMENT_FIRST_RESULT_MARKER_DIMENSIONS.y]
   });
 
+const DEPARTEMENT_SECOND_RESULT_MARKER_WIDTH: number = 60;
+const DEPARTEMENT_SECOND_RESULT_MARKER_HEIGHT: number = 65;
+const DEPARTEMENT_SECOND_RESULT_MARKER_DIMENSIONS: LeafletPoint = new LeafletPoint(
+  DEPARTEMENT_SECOND_RESULT_MARKER_WIDTH,
+  DEPARTEMENT_SECOND_RESULT_MARKER_HEIGHT,
+  ROUND_FALSE
+);
+
+const DEPARTEMENT_SECOND_RESULT_ICON_ANCHOR: LeafletPoint = new LeafletPoint(
+  DEPARTEMENT_FIRST_RESULT_MARKER_DIMENSIONS.x * HALF,
+  DEPARTEMENT_FIRST_RESULT_MARKER_DIMENSIONS.y * HALF
+);
+
+const departementSecondResultIconMarkerSvg = (count: number): string => `
+<div class="position-absolute top-50 start-50 translate-middle">
+  <b class="text-primary">${count}</b>
+</div>
+<svg class="marker departement-marker" xmlns="http://www.w3.org/2000/svg" width="60" height="70" viewBox="0 0 45 48.462">
+  <path d="M9.05 23.532v-5.258l-4.524-2.628L0 18.274v5.257l4.524 2.629 4.524-2.63m35.24-17.384V.89l-4.525-2.63L35.24.89v5.256l4.524 2.63zM45 40.595v-4.193l-3.609-2.096-3.608 2.096v4.193l3.608 2.096zM15.712 5.613v-4.19L12.103-.675 8.494 1.422v4.193l3.61 2.096 3.607-2.096"/>
+  <path d="M41.767 33.13V12.105L23.67 1.592 5.572 12.107V33.13l18.096 10.518L41.765 33.13" style="filter: drop-shadow(1px 3px 3px rgb(0,0,0,0.4));" class="marker-hover-active" fill="#fff"/>
+  <path d="M40.35 32.586V13.21L23.67 3.52 6.99 13.21v19.376l16.678 9.694 16.68-9.694"/>
+  <path d="M35.238 29.617V16.18L23.67 9.46l-11.567 6.72v13.438L23.67 36.34l11.568-6.722z" fill="#fff"/>
+</svg>`;
+
+const DEPARTEMENT_SECOND_RESULT_DIV_ICON = (count: number, highlight: MarkerHighlight): DivIcon =>
+  new DivIcon({
+    className: departementMarkerHighlightClass(highlight),
+    html: departementSecondResultIconMarkerSvg(count),
+    iconAnchor: DEPARTEMENT_SECOND_RESULT_ICON_ANCHOR,
+    iconSize: DEPARTEMENT_SECOND_RESULT_MARKER_DIMENSIONS,
+    popupAnchor: [0, -DEPARTEMENT_SECOND_RESULT_MARKER_DIMENSIONS.y]
+  });
+
 const DEPARTEMENT_MARKER_WIDTH: number = 59;
 const DEPARTEMENT_MARKER_HEIGHT: number = 60;
 const DEPARTEMENT_MARKER_DIMENSIONS: LeafletPoint = new LeafletPoint(
@@ -92,7 +125,13 @@ const departementMarkerHighlightClass = (highlight?: MarkerHighlight): string =>
 
 export const departementMarkerFactory: MarkerFactory<DepartementMarkerProperties, DivIcon> = (
   properties: MarkerProperties<DepartementMarkerProperties>
-): DivIcon =>
-  properties.index === 0
-    ? DEPARTEMENT_FIRST_RESULT_DIV_ICON(properties.count, properties.highlight)
-    : DEPARTEMENT_DIV_ICON(properties.count, properties.highlight);
+): DivIcon => {
+  switch (properties.index) {
+    case 0:
+      return DEPARTEMENT_FIRST_RESULT_DIV_ICON(properties.count, properties.highlight);
+    case 1:
+      return DEPARTEMENT_SECOND_RESULT_DIV_ICON(properties.count, properties.highlight);
+    default:
+      return DEPARTEMENT_DIV_ICON(properties.count, properties.highlight);
+  }
+};

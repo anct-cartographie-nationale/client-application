@@ -45,9 +45,12 @@ export class LieuxMediationNumeriqueDetailsPresenter {
         ([lieu, localisation]: [LieuMediationNumerique, Localisation]): LieuMediationNumeriqueDetailsPresentation => ({
           id: lieu.id,
           nom: lieu.nom,
-          adresse: [lieu.adresse.voie, lieu.adresse.complement_adresse, lieu.adresse.code_postal, lieu.adresse.commune].join(
-            ' '
-          ),
+          adresse: [
+            lieu.adresse.voie,
+            lieu.adresse.complement_adresse,
+            lieu.adresse.code_postal,
+            `${lieu.adresse.commune.charAt(0).toUpperCase()}${lieu.adresse.commune.substring(1).toLowerCase()}`
+          ].join(' '),
           services: lieu.services,
           ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
           ...ifAny('status', openingStatus(date)(lieu.horaires)),
