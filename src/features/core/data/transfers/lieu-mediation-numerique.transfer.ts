@@ -65,7 +65,20 @@ const adressePayload = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTr
 const contactPayload = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) => ({
   ...ifAny('courriel', lieuMediationNumeriqueTransfer.courriel),
   ...ifAny('telephone', lieuMediationNumeriqueTransfer.telephone),
-  ...ifAny<Url[], string>('site_web', lieuMediationNumeriqueTransfer.site_web, (siteWeb: string) => toArray(siteWeb).map(Url))
+  ...ifAny<Url[], string>(
+    'site_web',
+    lieuMediationNumeriqueTransfer.site_web,
+    (siteWeb: string) =>
+      toArray(siteWeb)
+        .map((siteWebUrl: string) => {
+          try {
+            return Url(siteWebUrl);
+          } catch {
+            return null;
+          }
+        })
+        .filter((url: Url | null) => url !== null) as Url[]
+  )
 });
 
 const allRequiredFieldsAreValid = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
