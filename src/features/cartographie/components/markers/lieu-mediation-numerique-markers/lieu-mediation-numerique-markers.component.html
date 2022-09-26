@@ -11,7 +11,8 @@
   <app-leaflet-map-tooltip [content]="popupContent" [sticky]="true">
     <div
       #popupContent
-      class="text-center p-3 border-bottom border-3"
+      class="text-center p-3 border-bottom border-3 text-wrap"
+      style="min-width: 300px"
       [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'border-muted' : 'border-primary'">
       <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
       <br />
