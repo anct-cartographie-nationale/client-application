@@ -33,7 +33,8 @@
 .marker-status-closed {
   .default-marker,
   .cnfs-marker {
-    fill: $muted;
+    // todo: replace $primary with $muted
+    fill: $primary;
   }
 }
 
