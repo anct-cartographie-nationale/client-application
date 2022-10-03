@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { OrientationItemPresentation } from '@features/orientation/presenters';
+import { OrientationItemPresentation } from '../../presenters';
 import { FilterFormPresentation } from '../../../core';
 import typeAccompagnements from '../../pages/accessibilite/type-accompagnements.json';
 
