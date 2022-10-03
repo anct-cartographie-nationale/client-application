@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { OrientationItemPresentation } from '../../presenters';
 import { FilterFormPresentation } from '../../../core';
 import typeAccompagnements from '../../pages/accessibilite/type-accompagnements.json';
+import publicAccueilli from '../../pages/accessibilite/accueil-specifique.json';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,11 +39,18 @@ export class SelectedFiltersComponent {
     else return 'Moins de 5 km';
   }
 
-  public getLabelOfAccess(value: string): string {
-    let labelOfAccess: string = '';
-    typeAccompagnements.forEach((field: { value: string; label: string }) => {
-      if (field.value === value) labelOfAccess = field.label;
-    });
-    return labelOfAccess;
+  public getLabelFromValue(value: string, category: string): string {
+    let labelFromValue: string = '';
+    if (category === 'modalites_accompagnement') {
+      typeAccompagnements.forEach((field: { value: string; label: string }) => {
+        if (field.value === value) labelFromValue = field.label;
+      });
+    }
+    if (category === 'publics_accueillis') {
+      publicAccueilli.forEach((field: { value: string; label: string }) => {
+        if (field.value === value) labelFromValue = field.label;
+      });
+    }
+    return labelFromValue;
   }
 }
