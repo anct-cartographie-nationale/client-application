@@ -1,6 +1,6 @@
 {
   "name": "@gouvfr-anct/cartographie-nationale",
-  "version": "3.0.4",
+  "version": "4.0.1",
   "description": "💻 Client pour l'affichage de la cartographie nationale de l’offre de médiation numérique dans un navigateur web.",
   "keywords": [
     "angular",
@@ -12,16 +12,25 @@
     "médiation numérique"
   ],
   "homepage": "https://npmjs.com/package/@gouvfr-anct/cartographie-nationale",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anct-cartographie-nationale/client-application.git"
+  },
   "contributors": [
+    {
+      "name": "Arthur Belkhayat",
+      "email": "arthur.belkhayat@beta.gouv.fr",
+      "url": "https://www.linkedin.com/in/arthur-belkhayat/"
+    },
     {
       "name": "Marc Gavanier",
       "email": "marc.gavanier@gmail.com",
       "url": "https://www.linkedin.com/in/marc-gavanier/"
     }
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/anct-cartographie-nationale/client-application.git"
+  "license": "SEE LICENSE IN LICENSE.md",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

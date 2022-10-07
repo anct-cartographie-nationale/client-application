@@ -14,7 +14,6 @@ on:
       - 'revert/*'
       - 'style/*'
       - 'test/*'
-      - 'release/*'
   workflow_dispatch:
 
 env:
