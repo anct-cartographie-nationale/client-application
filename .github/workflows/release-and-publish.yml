@@ -5,6 +5,9 @@ on:
   push:
     tags:
       - 'v*.*.*'
+    branches:
+      - 'release'
+      - 'release/*'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -366,27 +369,21 @@ jobs:
           name: build
           path: dist
 
-      - name: Zip release
-        run: zip -r release.zip dist/whitelist/
-
-      - name: Publish release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: release.zip
-
   publish:
     name: Publish
     runs-on: ubuntu-latest
     needs: [release]
 
     steps:
+      - name: Checkout timetable-to-osm-opening-hours repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          always-auth: true
-          node-version: '16.x'
-          registry-url: https://registry.npmjs.org
-          scope: '@gouvfr-anct'
+          node-version: 'lts/*'
 
       - name: Download build artifact
         uses: actions/download-artifact@v3
@@ -394,9 +391,12 @@ jobs:
           name: build
           path: release
 
-      - name: Publish on npm
-        run: |
-          cd release/whitelist/
-          yarn publish --access public
+      # Using a symbolic link because there is no base option to have a config path with semantic-release as of 2022-08-31
+      - name: Link the semantic release config and release
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+        run: |
+          ln -s .tooling/.semantic-release/.semantic-release.config.cjs release.config.cjs
+          ln -s .tooling/.semantic-release/.npmignore .npmignore
+          npx semantic-release
