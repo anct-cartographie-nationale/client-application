@@ -15,7 +15,6 @@ on:
       - 'revert/*'
       - 'style/*'
       - 'test/*'
-      - 'release/*'
 
 env:
   application-name: 'cn'
