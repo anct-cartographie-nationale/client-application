@@ -4,7 +4,7 @@ name: Release and publish
 on:
   push:
     branches:
-      - 'release/*'
+      - 'release'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -386,16 +386,13 @@ jobs:
           name: build
           path: release
 
-      - name: Switch to whitelist folder
-        run: |
-          cd release/whitelist/
-
       # Using a symbolic link because there is no base option to have a config path with semantic-release as of 2022-08-31
       - name: Link the semantic release config and release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
         run: |
+          cd release/whitelist/
           ln -s .tooling/.semantic-release/.semantic-release.config.cjs release.config.cjs
           ln -s .tooling/.semantic-release/.npmignore .npmignore
           npx semantic-release
