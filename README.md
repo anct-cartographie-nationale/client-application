@@ -145,8 +145,8 @@ Ce processus est automatisé par l'utilitaire `semantic-release` exécuté par l
 
 - Récupérer la version à publier depuis la branche `main`
 - Récupérer ou créer la branche `publish`
-- Faire un rebase de `publish` sur `main`, qui devrait se traduire par un simple `fast-forward` étant donné qu'aucun commit ne devrait être fait sur la branche `publish`
-- Pousser la branche `publish` `git push origin publish -f` conduit à l'éxecution du workflow `release-and-publish` et donc à la publication d'une nouvelle version via l'utilitaire `semantic-release`
+- Faire un merge de `main` dans `publish` : ceci permet de mettre à jour la branche `publish` tout en concervant les tags qui ont été produits sur la branche `publish` lors du processus de publication.
+- Pousser la branche `publish` `git push origin publish` conduit à l'exécution du workflow `release-and-publish` et donc à la publication d'une nouvelle version via l'utilitaire `semantic-release`
 
 ## Construit avec
 
