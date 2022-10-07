@@ -99,7 +99,7 @@ Exécuter `yarn prettier` pour mettre à niveau la syntaxe de l'ensemble des fic
 
 - Avant de créer une nouvelle branche de travail, récupérer les dernières modifications disponibles sur la branche `main`
 - La nouvelle branche de travail doit ête préfixée par `build/`, `chore/`, `ci/`, `docs/`, `feat/`, `fix/`, `perf/`, `refactor/`, `revert/`, `style/` ou `test/` en fonction du type de modification prévu, pour plus de détails à ce sujet, consulter [Conventional Commits cheat sheet](https://kapeli.com/cheat_sheets/Conventional_Commits.docset/Contents/Resources/Documents/index)
-- La branche portant la version à publier est `release` aucun commit ne doit être fait sur cette branche, simplement un rebase par rapport à la branche `main` contenant la version à publier.
+- La branche portant la version à publier est `publish` aucun commit ne doit être fait sur cette branche.
 
 ### Commits
 
@@ -144,9 +144,9 @@ Pour publier une nouvelle version sur le registre npm, il faut que le numéro de
 Ce processus est automatisé par l'utilitaire `semantic-release` exécuté par le workflow `release-and-publish`, pour le déclencher avec la bonne version à publier, il faut :
 
 - Récupérer la version à publier depuis la branche `main`
-- Récupérer ou créer la branche `release`
-- Faire un rebase de `release` sur `main`, qui devrait se traduire par un simple `fast-forward` étant donné qu'aucun commit ne devrait être fait sur la branche `release`
-- Pousser la branche release `git push origin release` conduit à l'éxecution du workflow `release-and-publish` et donc à la publication d'une nouvelle version via l'utilitaire `semantic-release`
+- Récupérer ou créer la branche `publish`
+- Faire un rebase de `publish` sur `main`, qui devrait se traduire par un simple `fast-forward` étant donné qu'aucun commit ne devrait être fait sur la branche `publish`
+- Pousser la branche `publish` `git push origin publish -f` conduit à l'éxecution du workflow `release-and-publish` et donc à la publication d'une nouvelle version via l'utilitaire `semantic-release`
 
 ## Construit avec
 
