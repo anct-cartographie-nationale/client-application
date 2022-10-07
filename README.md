@@ -99,7 +99,7 @@ Exécuter `yarn prettier` pour mettre à niveau la syntaxe de l'ensemble des fic
 
 - Avant de créer une nouvelle branche de travail, récupérer les dernières modifications disponibles sur la branche `main`
 - La nouvelle branche de travail doit ête préfixée par `build/`, `chore/`, `ci/`, `docs/`, `feat/`, `fix/`, `perf/`, `refactor/`, `revert/`, `style/` ou `test/` en fonction du type de modification prévu, pour plus de détails à ce sujet, consulter [Conventional Commits cheat sheet](https://kapeli.com/cheat_sheets/Conventional_Commits.docset/Contents/Resources/Documents/index)
-- Une branche portant une version à publier doit être de la forme `release/X.Y` avec `X.Y` égal au numéro de majeur et de mineur de la release, cela signifie donc que tous les patches sont à appliquer sur la même branche pour chaque version mineure. Cette organisation permet de gérer plusieurs versions de la bibliothèque en parallèle sans mettre en péril la rétrocompatibilité.
+- La branche portant la version à publier est `release` aucun commit ne doit être fait sur cette branche, simplement un rebase par rapport à la branche `main` contenant la version à publier.
 
 ### Commits
 
@@ -139,20 +139,14 @@ Lorsqu'une branche est fusionnée avec `main`, cela déclenche automatiquement l
 
 #### Sur le registre npm
 
-Pour publier une nouvelle version sur le registre npm, il faut que le numéro de version cible soit mis à jour dans le fichier `package.json`, que le fichier `CHANGELOG.md` soit mis à jour et que le commit de la version à publier porte un tag de la forme `vX.Y.Z` correspondant au numéro de version présent dans `package.json`.
+Pour publier une nouvelle version sur le registre npm, il faut que le numéro de version cible soit mis à jour dans le fichier `package.json`, que le commit de la version à publier porte un tag de la forme `vX.Y.Z` correspondant au numéro de version présent dans `package.json`, et que le changlog soit publier dans une release associé au tag de la version avant de procéder à la publication sur le registre [@gouvfr-anct/cartographie-nationale](https://www.npmjs.com/package/@gouvfr-anct/cartographie-nationale).
 
-Il est possible d'automatiser ce processus en utilisant la commande `standard-version` :
+Ce processus est automatisé par l'utilitaire `semantic-release` exécuté par le workflow `release-and-publish`, pour le déclencher avec la bonne version à publier, il faut :
 
 - Récupérer la version à publier depuis la branche `main`
-- Vérifier la valeur du prochain tag avec la commande `standard-version --dry-run`
-- Récupérer ou créer la branche `release/X.Y` correspondant à la majeure et la mineure indiquée par la commande précédente
-- Lancer la commande `standard-version` qui
-  - met à jour la version dans le fichier `package.json`
-  - met à jour le fichier `CHANGELOG.md`
-  - créé un nouveau commit
-  - ajoute le tag correspondant à la version dans le fichier `package.json`
-- Pousser la branche avec le tag `git push origin release/X.Y --tags` conduit à la publication d'une nouvelle version
-- Si le numéro de version est le plus grand au sens de la [priorité définie par la spécification de la gestion sémantique de version (11)](https://semver.org/lang/fr/), alors il faut créer une [pull request](https://github.com/anct-cartographie-nationale/client-application/pulls) vers la branche `main`, il ne faut pas le faire si ce n'est pas le cas.
+- Récupérer ou créer la branche `release`
+- Faire un rebase de `release` sur `main`, qui devrait se traduire par un simple `fast-forward` étant donné qu'aucun commit ne devrait être fait sur la branche `release`
+- Pousser la branche release `git push origin release` conduit à l'éxecution du workflow `release-and-publish` et donc à la publication d'une nouvelle version via l'utilitaire `semantic-release`
 
 ## Construit avec
 
@@ -232,7 +226,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 <head>
   <title>Page Title</title>
   <base href="/" />
-  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
 </head>
 ...
 ```
@@ -246,7 +240,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
   <p>My first paragraph.</p>
 
   <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/mediation-numerique.js"
+    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/mediation-numerique.js"
     type="module"></script>
 </body>
 ...
@@ -262,7 +256,7 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
   </fr-mediation-numerique-conteneur>
 
   <script
-    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/mediation-numerique.js"
+    src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/mediation-numerique.js"
     type="module"></script>
 </body>
 ...
@@ -276,7 +270,7 @@ La version finale devrait ressembler à celà :
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body>
     <fr-mediation-numerique-conteneur>
@@ -284,7 +278,7 @@ La version finale devrait ressembler à celà :
     </fr-mediation-numerique-conteneur>
 
     <script
-      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/mediation-numerique.js"
+      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/mediation-numerique.js"
       type="module"></script>
   </body>
 </html>
@@ -313,7 +307,7 @@ Exemple :
 ```html
 <fr-mediation-numerique-conteneur>
   <fr-mediation-numerique
-    source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/assets/data/lieux-de-mediation-numerique.json"></fr-mediation-numerique>
+    source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/assets/data/lieux-de-mediation-numerique.json"></fr-mediation-numerique>
 </fr-mediation-numerique-conteneur>
 ```
 
@@ -381,14 +375,14 @@ Il est possible de changer certaines couleurs utilisées par la cartographie, po
       titre="Médiation numérique à Bessenay"
       logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg">
       <fr-mediation-numerique
-        source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/assets/data/lieux-de-mediation-numerique.json"
+        source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/assets/data/lieux-de-mediation-numerique.json"
         latitude="45.77647396140311"
         longitude="4.55431157343317"
         zoom="12"></fr-mediation-numerique>
     </fr-mediation-numerique-conteneur>
 
     <script
-      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/mediation-numerique.js"
+      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/mediation-numerique.js"
       type="module"></script>
   </body>
 </html>
@@ -408,7 +402,7 @@ L'élément `<fr-mediation-numerique-conteneur>` gère l'affichage de la barre d
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
     <fr-mediation-numerique
@@ -416,7 +410,7 @@ L'élément `<fr-mediation-numerique-conteneur>` gère l'affichage de la barre d
       logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"></fr-mediation-numerique>
 
     <script
-      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/mediation-numerique.js"
+      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/mediation-numerique.js"
       type="module"></script>
   </body>
 </html>
@@ -430,13 +424,13 @@ En l'absence de l'élément `<fr-mediation-numerique-conteneur>`, les configurat
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
     <fr-mediation-numerique></fr-mediation-numerique>
 
     <script
-      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/mediation-numerique.js"
+      src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/mediation-numerique.js"
       type="module"></script>
   </body>
 </html>
@@ -452,10 +446,10 @@ Pour n'importer que les sources strictement nécessaires à ce mode, il faut rem
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/cartographie.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/cartographie.js" type="module"></script>
   </body>
 </html>
 ```
@@ -468,11 +462,11 @@ Il est alors possible d'utiliser l'élément `<fr-mediation-numerique-cartograph
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
     <fr-mediation-numerique-cartographie></fr-mediation-numerique-cartographie>
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/cartographie.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/cartographie.js" type="module"></script>
   </body>
 </html>
 ```
@@ -485,15 +479,15 @@ Les attributs de personnalisations suivants, présentés dans la section précé
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
     <fr-mediation-numerique-cartographie
-      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/assets/data/lieux-de-mediation-numerique.json"
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/assets/data/lieux-de-mediation-numerique.json"
       latitude="45.77647396140311"
       longitude="4.55431157343317"
       zoom="12"></fr-mediation-numerique-cartographie>
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/cartographie.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/cartographie.js" type="module"></script>
   </body>
 </html>
 ```
@@ -506,16 +500,16 @@ S'il existe une autre page dans laquelle un outil capable d'effectuer un parcour
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
     <fr-mediation-numerique-cartographie
-      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/assets/data/lieux-de-mediation-numerique.json"
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/assets/data/lieux-de-mediation-numerique.json"
       latitude="45.77647396140311"
       longitude="4.55431157343317"
       zoom="12"
       lien-orientation="https://cartographie.societenumerique.gouv.fr/orientation"></fr-mediation-numerique-cartographie>
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/cartographie.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/cartographie.js" type="module"></script>
   </body>
 </html>
 ```
@@ -534,10 +528,10 @@ Pour n'importer que les sources strictement nécessaires à ce mode, il faut rem
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/orientation.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/orientation.js" type="module"></script>
   </body>
 </html>
 ```
@@ -550,11 +544,11 @@ Il est alors possible d'utiliser l'élément `<fr-mediation-numerique-orientatio
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
     <fr-mediation-numerique-orientation></fr-mediation-numerique-orientation>
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/orientation.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/orientation.js" type="module"></script>
   </body>
 </html>
 ```
@@ -567,14 +561,14 @@ Les attributs de personnalisations suivants, présentés dans la section précé
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
     <fr-mediation-numerique-orientation
-      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/assets/data/lieux-de-mediation-numerique.json"
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/assets/data/lieux-de-mediation-numerique.json"
       titre="Médiation numérique à Bessenay"
       logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"></fr-mediation-numerique-orientation>
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/orientation.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/orientation.js" type="module"></script>
   </body>
 </html>
 ```
@@ -587,15 +581,15 @@ S'il existe une autre page dans laquelle un outil capable d'effectuer un parcour
   <head>
     <title>Page Title</title>
     <base href="/" />
-    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/styles.css" rel="stylesheet" />
   </head>
   <body class="vh-100">
     <fr-mediation-numerique-orientation
-      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/assets/data/lieux-de-mediation-numerique.json"
+      source="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/assets/data/lieux-de-mediation-numerique.json"
       titre="Médiation numérique à Bessenay"
       logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
       lien-cartographie="https://cartographie.societenumerique.gouv.fr/cartographie"></fr-mediation-numerique-orientation>
-    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.0/orientation.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.2.1/orientation.js" type="module"></script>
   </body>
 </html>
 ```
