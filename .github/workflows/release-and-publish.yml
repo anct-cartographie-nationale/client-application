@@ -4,7 +4,7 @@ name: Release and publish
 on:
   push:
     branches:
-      - 'release'
+      - 'publish'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -393,6 +393,6 @@ jobs:
           NPM_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
         run: |
           cd release/whitelist/
-          ln -s .tooling/.semantic-release/.semantic-release.config.cjs release.config.cjs
-          ln -s .tooling/.semantic-release/.npmignore .npmignore
+          ln -s ../../.tooling/.semantic-release/.semantic-release.config.cjs release.config.cjs
+          ln -s ../../.tooling/.semantic-release/.npmignore .npmignore
           npx semantic-release
