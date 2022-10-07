@@ -1,3 +1,3 @@
 module.exports = {
-  branches: ['+([0-9])?(.{+([0-9]),x}).x', 'release/*', 'next']
+  branches: ['+([0-9])?(.{+([0-9]),x}).x', 'release']
 };
