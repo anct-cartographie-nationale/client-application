@@ -3,10 +3,7 @@ name: Release and publish
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
     branches:
-      - 'release'
       - 'release/*'
 
 concurrency:
@@ -375,10 +372,8 @@ jobs:
     needs: [release]
 
     steps:
-      - name: Checkout timetable-to-osm-opening-hours repository
+      - name: Checkout client-application repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -390,6 +385,10 @@ jobs:
         with:
           name: build
           path: release
+
+      - name: Switch to whitelist folder
+        run: |
+          cd release/whitelist/
 
       # Using a symbolic link because there is no base option to have a config path with semantic-release as of 2022-08-31
       - name: Link the semantic release config and release
