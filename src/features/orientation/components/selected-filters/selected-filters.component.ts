@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { OrientationItemPresentation } from '../../presenters';
 import { FilterFormPresentation } from '../../../core';
+import typeAccompagnements from '../../pages/accessibilite/type-accompagnements.json';
+import publicAccueilli from '../../pages/accessibilite/accueil-specifique.json';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,5 +36,20 @@ export class SelectedFiltersComponent {
     if (distance === 100000 || distance === '100000') return 'Moins de 100 km';
     else if (distance === 20000 || distance === '20000') return 'Moins de 20 km';
     else return 'Moins de 5 km';
+  }
+
+  public getLabelFromValue(value: string, category: string): string {
+    let labelFromValue: string = '';
+    if (category === 'modalites_accompagnement') {
+      typeAccompagnements.forEach((field: { value: string; label: string }) => {
+        if (field.value === value) labelFromValue = field.label;
+      });
+    }
+    if (category === 'publics_accueillis') {
+      publicAccueilli.forEach((field: { value: string; label: string }) => {
+        if (field.value === value) labelFromValue = field.label;
+      });
+    }
+    return labelFromValue;
   }
 }

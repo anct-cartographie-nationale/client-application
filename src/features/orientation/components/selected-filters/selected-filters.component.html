@@ -21,7 +21,7 @@
     <button
       class="chip-button py-1 fw-bold d-flex align-items-center"
       (click)="resetForm(publicAccueilli, 'publics_accueillis')">
-      <div class="chip-button-trim">{{ publicAccueilli }}</div>
+      <div class="chip-button-trim">{{ getLabelFromValue(publicAccueilli, 'publics_accueillis') }}</div>
       <div class="ms-1">&times;</div>
     </button>
   </div>
@@ -39,7 +39,7 @@
     <button
       class="chip-button py-1 fw-bold d-flex align-items-center"
       (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
-      <div class="chip-button-trim">{{ modaliteAccompagnement }}</div>
+      <div class="chip-button-trim">{{ getLabelFromValue(modaliteAccompagnement, 'modalites_accompagnement') }}</div>
       <div class="ms-1">&times;</div>
     </button>
   </div>
