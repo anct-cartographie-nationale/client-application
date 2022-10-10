@@ -13,7 +13,6 @@ import publicAccueilli from '../../pages/accessibilite/accueil-specifique.json';
 export class SelectedFiltersComponent {
   @Input() public filterPresentation: FilterFormPresentation | null = null;
   @Input() public filterForm!: FormGroup;
-  public typeAccompagnementsOptions: OrientationItemPresentation<string>[] = typeAccompagnements;
 
   public resetForm(value: string | number, key: string) {
     if (key === 'services') this.filterForm.get('services')?.setValue('');
