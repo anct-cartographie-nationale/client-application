@@ -38,14 +38,18 @@
       </div>
     </div>
   </div>
-  <div class="mx-4 py-5 border-bottom" *ngIf="lieuMediationNumerique.modalites_accompagnement">
+  <div
+    class="mx-4 py-5 border-bottom"
+    *ngIf="lieuMediationNumerique.modalites_accompagnement && lieuMediationNumerique.modalites_accompagnement.length > 1">
     <app-modalites-accompagnement
       [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
   </div>
   <div class="mx-4 py-4 border-bottom" *ngIf="lieuMediationNumerique.publics_accueillis">
     <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
   </div>
-  <div class="mx-4 py-4" *ngIf="lieuMediationNumerique.labels_nationaux || lieuMediationNumerique.labels_autres">
+  <div
+    class="mx-4 py-4"
+    *ngIf="(lieuMediationNumerique.labels_nationaux && lieuMediationNumerique.labels_nationaux.length > 1)  || lieuMediationNumerique.labels_autres">
     <app-labellisations
       [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
       [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
