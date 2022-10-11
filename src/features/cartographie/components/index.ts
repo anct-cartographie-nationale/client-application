@@ -5,7 +5,6 @@ import { HorairesComponent } from './horaires/horaires.component';
 import { InformationsGeneralesComponent } from './informations-generales/informations-generales.component';
 import { InformationsPratiquesComponent } from './informations-pratiques/informations-pratiques.component';
 import { LabellisationsComponent } from './labellisations/labellisations.component';
-import { AidantsComponent } from './aidants/aidants.component';
 import {
   AidantsConnectComponent,
   ApticComponent,
@@ -45,7 +44,6 @@ export const components = [
   HorairesComponent,
   ModalitesAccompagnementComponent,
   PublicPrisEnChargeComponent,
-  AidantsComponent,
   LabellisationsComponent,
   MaisonFranceServiceComponent,
   AidantsConnectComponent,

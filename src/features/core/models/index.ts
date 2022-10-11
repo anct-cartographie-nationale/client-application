@@ -15,4 +15,3 @@ export * from './public-accueilli';
 export * from './service';
 export * from './modalites-accompagnement';
 export * from './typologie';
-export * from './aidants';

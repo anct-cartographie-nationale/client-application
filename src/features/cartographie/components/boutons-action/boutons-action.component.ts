@@ -9,6 +9,7 @@ import { Url } from '../../../core';
 export class BoutonsActionComponent {
   @Input() public courriel?: string;
   @Input() public siteWeb?: Url[];
+  @Input() public priseRdv?: string;
 
   public printPage() {
     window.print();

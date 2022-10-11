@@ -10,7 +10,8 @@
   <div class="bg-light">
     <app-boutons-action
       [courriel]="lieuMediationNumerique.contact?.courriel"
-      [siteWeb]="lieuMediationNumerique.contact?.site_web"></app-boutons-action>
+      [siteWeb]="lieuMediationNumerique.contact?.site_web"
+      [priseRdv]="lieuMediationNumerique.prise_rdv"></app-boutons-action>
   </div>
   <div class="mx-4 py-4 border-bottom">
     <app-informations-pratiques
@@ -38,19 +39,18 @@
       </div>
     </div>
   </div>
-  <div class="mx-4 py-4 border-bottom" *ngIf="lieuMediationNumerique.aidants">
-    <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>
-  </div>
   <div class="mx-4 py-5 border-bottom" *ngIf="lieuMediationNumerique.modalites_accompagnement">
-    <app-modalites-accompagnement
-      [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
-  </div>
-  <div class="mx-4 py-4 border-bottom" *ngIf="lieuMediationNumerique.publics_accueillis">
-    <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
-  </div>
-  <div class="mx-4 py-4" *ngIf="lieuMediationNumerique.labels_nationaux || lieuMediationNumerique.labels_autres">
-    <app-labellisations
-      [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
-      [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
+    <div class="mx-4 py-5 border-bottom">
+      <app-modalites-accompagnement
+        [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
+    </div>
+    <div class="mx-4 py-4 border-bottom" *ngIf="lieuMediationNumerique.publics_accueillis">
+      <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
+    </div>
+    <div class="mx-4 py-4" *ngIf="lieuMediationNumerique.labels_nationaux || lieuMediationNumerique.labels_autres">
+      <app-labellisations
+        [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
+        [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
+    </div>
   </div>
 </div>
