@@ -25,10 +25,36 @@
           <div class="col-md-6 my-auto d-flex justify-content-end align-items-center p-5">
             <img src="{{ slides.imageUrl }}" class="img-fluid" alt="" width="70%" />
           </div>
-          <div class="col-md-6 my-auto">
+          <div class="col-md-6 my-auto" *ngIf="slides.titre !== 'Standardisation'">
             <h5 class="text-secondary fw-bold">{{ slides.titre }}</h5>
             <p class="text-secondary">
               {{ slides.text }}
+            </p>
+            <img
+              class="my-3"
+              width="auto"
+              height="auto"
+              *ngIf="slides.titre === 'La mise à jour'"
+              src="/assets/img/presentation/dora-logo.svg"
+              alt="" />
+          </div>
+          <div class="col-md-6 my-auto" *ngIf="slides.titre === 'Standardisation'">
+            <h5 class="text-secondary fw-bold">{{ slides.titre }}</h5>
+            <p class="text-secondary">
+              Nous référençons les structures de médiation numérique qui ont renseigné leurs données au format du
+              <a
+                class="text-decoration-none"
+                href="https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique-2/"
+                target="_blank">
+                -standard de données des lieux de médiation numérique-
+              </a>
+              établi par la
+              <a class="text-decoration-none" href="https://lamednum.coop/" target="_blank">-Mednum-</a>
+              ,
+              <a class="text-decoration-none" href="https://datactivist.coop/fr/" target="_blank">-Datactivist-</a>
+              et
+              <a class="text-decoration-none" href="https://agence-cohesion-territoires.gouv.fr/" target="_blank">-l'ANCT-</a>
+              .
             </p>
           </div>
         </div>

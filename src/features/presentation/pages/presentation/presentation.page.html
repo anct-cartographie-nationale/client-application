@@ -19,6 +19,13 @@
     </div>
   </div>
 </div>
+<div class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
+  <app-carousel
+    [currentSlide]="(currentSlide$ | async) ?? 0"
+    (switchSlide)="onSwitchSlide($event)"
+    (nextSlide)="onNextSlide()"
+    (previousSlide)="onPreviousSlide()"></app-carousel>
+</div>
 <div class="container text-center">
   <h2 class="fw-bold my-5 text-black text-center">
     Vous êtes un acteur local souhaitant intégrer
@@ -86,13 +93,6 @@
       </div>
     </div>
   </div>
-</div>
-<div class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
-  <app-carousel
-    [currentSlide]="(currentSlide$ | async) ?? 0"
-    (switchSlide)="onSwitchSlide($event)"
-    (nextSlide)="onNextSlide()"
-    (previousSlide)="onPreviousSlide()"></app-carousel>
 </div>
 <div class="container text-center" *ngIf="!this.environment">
   <h4 class="fw-bold my-5">Les chiffres clefs de la cartographie</h4>
