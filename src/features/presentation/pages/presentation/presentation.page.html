@@ -37,27 +37,6 @@
     </a>
   </div>
 </div>
-<div class="py-5 bg-info">
-  <div class="container">
-    <div class="row justify-content-lg-center">
-      <div class="col-lg-8">
-        <h3 class="fw-bold text-black mb-4">Une nouvelle cartographie&nbsp;? Pourquoi&nbsp;?</h3>
-        <p>
-          L’objectif de cette cartographie est de participer à l’amélioration de l'accompagnement proposé par les professionnels
-          de la médiation numérique.
-          <br />
-        </p>
-        <p>
-          L'idéologie de celle-ci est de proposer un outil à la fois national et local. La base de données est open-source et
-          contributive, de la plus petite collectivité à un hub, peut implémenter sur son site cet outil et afficher l'offre de
-          médiation de son territoire. Travailler sur cette base de donnes commune permet d'avoir une gestion de la donnée
-          centralisée, davantage actualisée et permettra d'améliorer la visibilité et le travail de ces structures de médiation
-          numérique.
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="container mb-5" *ngIf="!this.environment">
   <h3 class="fw-bold my-5 text-black text-center">De quel écosystème parle-t-on ?</h3>
   <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -114,11 +93,6 @@
     (switchSlide)="onSwitchSlide($event)"
     (nextSlide)="onNextSlide()"
     (previousSlide)="onPreviousSlide()"></app-carousel>
-</div>
-<div class="py-5 bg-personnalisation">
-  <div class="container text-center">
-    <h4 class="fw-bold text-secondary">Personnalisez votre inferface !</h4>
-  </div>
 </div>
 <div class="container text-center" *ngIf="!this.environment">
   <h4 class="fw-bold my-5">Les chiffres clefs de la cartographie</h4>
