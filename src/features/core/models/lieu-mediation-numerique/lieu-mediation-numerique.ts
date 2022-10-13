@@ -11,6 +11,7 @@ import { Url } from '../url/url';
 import { LabelNational } from '../labels-nationaux';
 import { Pivot } from '../pivot/pivot';
 import { CleBan } from '../cle-ban/cle-ban';
+import { Aidant } from '../aidants';
 
 export interface LieuMediationNumerique {
   id: string;
@@ -33,5 +34,5 @@ export interface LieuMediationNumerique {
   labels_autres?: string[];
   modalites_accompagnement?: ModalitesAccompagnement[];
   accessibilite?: Url;
-  prise_rdv?: Url;
+  aidants?: Aidant[];
 }

@@ -29,9 +29,9 @@ const courrielRegexp: RegExp =
 const telephoneRegexp: RegExp =
   /^(?:(?:\+|00)(?:33|59\d)[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/;
 
-const isValidCourriel = (courriel: string): boolean => courrielRegexp.test(courriel);
+export const isValidCourriel = (courriel: string): boolean => courrielRegexp.test(courriel);
 
-const isValidTelephone = (telephone: string): boolean => telephoneRegexp.test(telephone);
+export const isValidTelephone = (telephone: string): boolean => telephoneRegexp.test(telephone);
 
 const isValidContact = (contact: Omit<Contact, 'isContact'>): contact is Contact =>
   (contact.courriel == null || isValidCourriel(contact.courriel)) &&
