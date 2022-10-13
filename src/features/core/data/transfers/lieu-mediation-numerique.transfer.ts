@@ -50,6 +50,7 @@ export interface LieuMediationNumeriqueTransfer {
   labels_autres?: string;
   modalites_accompagnement?: string;
   accessibilite?: string;
+  prise_rdv?: string;
   aidants?: AidantTransfer[];
 }
 
@@ -125,6 +126,7 @@ const toDomain = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer
       toArray
     ),
     ...ifAny<Url, string>('accessibilite', lieuMediationNumeriqueTransfer.accessibilite, Url),
+    ...ifAny<Url, string>('prise_rdv', lieuMediationNumeriqueTransfer.prise_rdv, Url),
     ...ifAny<Aidant[], AidantTransfer[]>('aidants', lieuMediationNumeriqueTransfer.aidants, toAidants)
   } as LieuMediationNumerique);
 

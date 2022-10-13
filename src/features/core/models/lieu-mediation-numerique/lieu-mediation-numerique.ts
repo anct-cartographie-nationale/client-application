@@ -34,5 +34,6 @@ export interface LieuMediationNumerique {
   labels_autres?: string[];
   modalites_accompagnement?: ModalitesAccompagnement[];
   accessibilite?: Url;
+  prise_rdv?: Url;
   aidants?: Aidant[];
 }

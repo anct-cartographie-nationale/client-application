@@ -97,6 +97,7 @@
     "labels_nationaux": "France Services,APTIC,Point relais CAF",
     "labels_autres": "SudLabs,Nièvre médiation numérique",
     "modalites_accompagnement": "Seul,Avec de l'aide,Dans un atelier,A ma place",
-    "accessibilite": "https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/"
+    "accessibilite": "https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/",
+    "prise_rdv": "https://www.rdv-solidarites.fr/"
   }
 ]
