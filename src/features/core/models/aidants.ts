@@ -4,7 +4,7 @@ import { Model } from './model';
 export type Aidant = Model<
   'Aidant',
   {
-    nom?: string;
+    nom: string;
     telephone?: string;
     courriel?: string;
   }
