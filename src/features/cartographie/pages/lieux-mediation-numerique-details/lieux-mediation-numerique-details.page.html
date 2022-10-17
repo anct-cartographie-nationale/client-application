@@ -38,6 +38,9 @@
       </div>
     </div>
   </div>
+  <div class="mx-4 py-4 border-bottom" *ngIf="lieuMediationNumerique.aidants">
+    <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>
+  </div>
   <div class="mx-4 py-5 border-bottom" *ngIf="lieuMediationNumerique.modalites_accompagnement">
     <app-modalites-accompagnement
       [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>

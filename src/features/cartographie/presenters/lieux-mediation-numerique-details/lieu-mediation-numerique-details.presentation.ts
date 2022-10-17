@@ -1,4 +1,5 @@
 import {
+  Aidant,
   ConditionAccess,
   Contact,
   HorairesPresentation,
@@ -31,4 +32,5 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   accessibilite?: Url;
   localisation?: Localisation;
   distance?: number;
+  aidants?: Aidant[];
 };

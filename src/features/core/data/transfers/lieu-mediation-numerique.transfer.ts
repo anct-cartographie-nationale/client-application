@@ -17,7 +17,8 @@ import {
   ifAny,
   ifAnyInObject,
   ignoreInvalidPropertiesOf,
-  ignoreInvalidValueOf
+  ignoreInvalidValueOf,
+  Aidant
 } from '../../../core';
 
 export interface LieuMediationNumeriqueTransfer {
@@ -50,6 +51,13 @@ export interface LieuMediationNumeriqueTransfer {
   modalites_accompagnement?: string;
   accessibilite?: string;
   prise_rdv?: string;
+  aidants?: AidantTransfer[];
+}
+
+export interface AidantTransfer {
+  nom: string;
+  courriel?: string;
+  telephone?: string;
 }
 
 const toArray = <T extends string>(stringArray: string) => stringArray.split(/,\s*/) as T[];
@@ -80,6 +88,8 @@ const contactPayload = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTr
         .filter((url: Url | null) => url !== null) as Url[]
   )
 });
+
+const toAidants = (aidants: AidantTransfer[]): Aidant[] => aidants.map((aidant: AidantTransfer) => Aidant(aidant));
 
 const allRequiredFieldsAreValid = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) =>
   isValidLocalisation(lieuMediationNumeriqueTransfer) && isValidAddress(adressePayload(lieuMediationNumeriqueTransfer));
@@ -116,7 +126,8 @@ const toDomain = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer
       toArray
     ),
     ...ifAny<Url, string>('accessibilite', lieuMediationNumeriqueTransfer.accessibilite, Url),
-    ...ifAny<Url, string>('prise_rdv', lieuMediationNumeriqueTransfer.prise_rdv, Url)
+    ...ifAny<Url, string>('prise_rdv', lieuMediationNumeriqueTransfer.prise_rdv, Url),
+    ...ifAny<Aidant[], AidantTransfer[]>('aidants', lieuMediationNumeriqueTransfer.aidants, toAidants)
   } as LieuMediationNumerique);
 
 export const toLieuxMediationNumerique = (

@@ -65,7 +65,8 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           ...ifAny('modalites_accompagnement', lieu.modalites_accompagnement),
           ...ifAny('accessibilite', lieu.accessibilite),
           ...ifAny('localisation', lieu.localisation),
-          ...ifAny('distance', getDistance(lieu, localisation))
+          ...ifAny('distance', getDistance(lieu, localisation)),
+          ...ifAny('aidants', lieu.aidants)
         })
       )
     );
