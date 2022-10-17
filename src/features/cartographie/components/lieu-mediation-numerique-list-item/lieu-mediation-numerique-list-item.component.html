@@ -28,9 +28,13 @@
       href="tel://{{ telephone }}"
       class="text-decoration-none link-dark d-block mb-2"
       (click)="$event.stopPropagation()">
-      <i class="ri-phone-line align-bottom"></i>
       {{ telephone | phone }}
+      <i class="ri-phone-line align-bottom"></i>
     </a>
+    <div class="d-flex" *ngIf="lieuMediationNumerique.prise_rdv">
+      <p class="text-muted">Prise de Rendez-vous disponible</p>
+      <i class="ri-calendar-check-line align-bottom ms-1"></i>
+    </div>
   </div>
 </div>
 <div class="d-flex flex-row">
