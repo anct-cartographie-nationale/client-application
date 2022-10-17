@@ -5,10 +5,14 @@
   </button>
   <a type="button" class="tile-button" *ngIf="courriel" href="mailto:{{ courriel }}">
     <i class="ri-error-warning-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
-    <b class="mt-2">Signaler erreur</b>
+    <b class="mt-2 text-center">Signaler erreur</b>
   </a>
   <a type="button" class="tile-button" *ngIf="siteWeb" href="{{ siteWeb[0] }}" target="_blank">
     <i class="ri-computer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
     <b class="mt-2">Voir le site</b>
+  </a>
+  <a type="button" class="tile-button" target="_blank" href="{{ priseRdv }}" *ngIf="priseRdv">
+    <i class="ri-computer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
+    <b class="mt-2">Prise de RDV</b>
   </a>
 </div>
