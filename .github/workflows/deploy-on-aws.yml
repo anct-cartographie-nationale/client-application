@@ -32,23 +32,10 @@ jobs:
       - name: Terraform Init
         id: init
         run: |
-          echo ${{ steps.terraform-workspace-name.outputs.value }}
-        #          terraform init
+          sed -i "s|prefix = \"client-\"|name = \"${{ steps.terraform-workspace-name.outputs.value }}\"|g" main.tf
+           terraform init
         env:
           TF_WORKSPACE: ${{ steps.terraform-workspace-name.outputs.value }}
-#        #   echo >> {
-#        #   "data": {
-#        #     "id":"ws-DgsiZWtRctCdPZpi",
-#        #     "attributes": {
-#        #       "key":"AWS_SECRET_ACCESS_KEY",
-#        #       "value":"fsdhgjkghjmlhgd",
-#        #       "category":"env",
-#        #       "hcl": false,
-#        #       "sensitive": true
-#        #     },
-#        #     "type":"vars"
-#        #   }
-#        # }
 #      - name: Set AWS credentials
 #        env:
 #          TERRAFORM_BEARER_TOKEN: ${{ secrets.TF_API_TOKEN }}
