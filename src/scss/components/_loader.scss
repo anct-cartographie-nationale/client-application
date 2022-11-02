@@ -394,7 +394,7 @@
 
 /* degrade de fond */
 .fond-degrade {
-  background: conic-gradient(from 0deg at 50% 50%, white, white, white, white, white, #000091);
+  background: conic-gradient(from 0deg at 50% 50%, white, white, white, white, white, $primary);
   width: 100%;
   height: 100%;
   animation: 1.6s ease infinite degrade-animate;
