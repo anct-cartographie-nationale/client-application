@@ -33,7 +33,7 @@ jobs:
         id: init
         run: |
           echo ${{ steps.terraform-workspace-name.outputs.value }}
-          terraform init
+        #          terraform init
         env:
           TF_WORKSPACE: ${{ steps.terraform-workspace-name.outputs.value }}
 #        #   echo >> {
