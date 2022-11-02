@@ -31,79 +31,80 @@ jobs:
       # cut -d'/' -f 4 || cut 4 because the github ref format is ref/head/feat/branch-name
       - name: Terraform Init
         id: init
-        run: terraform init
-        env:
-          TF_WORKSPACE: ${{ steps.terraform-workspace-name.outputs.value }}
-
-        #   echo >> {
-        #   "data": {
-        #     "id":"ws-DgsiZWtRctCdPZpi",
-        #     "attributes": {
-        #       "key":"AWS_SECRET_ACCESS_KEY",
-        #       "value":"fsdhgjkghjmlhgd",
-        #       "category":"env",
-        #       "hcl": false,
-        #       "sensitive": true
-        #     },
-        #     "type":"vars"
-        #   }
-        # }
-      - name: Set AWS credentials
-        env:
-          TERRAFORM_BEARER_TOKEN: ${{ secrets.TF_API_TOKEN }}
         run: |
-          touch payload.json
-          jq '{ data: { id: "ws-DgsiZWtRctCdPZpi", attributes: { key: "AWS_SECRET_ACCESS_KEY", value:"fsdhgjkghjmlhgd" }, type: "vars" } }' > payload.json
-          curl \
-          --header "Authorization: Bearer $TERRAFORM_BEARER_TOKEN" \
-          --header "Content-Type: application/vnd.api+json" \
-          --request POST \
-          --data @payload.json \
-          https://app.terraform.io/api/v2/vars
-
-      - name: Terraform Plan
-        id: plan
-        #if: github.event_name == 'pull_request'
-        run: terraform plan -no-color -input=false
-        continue-on-error: true
+          echo ${{ steps.terraform-workspace-name.outputs.value }}
+          terraform init
         env:
           TF_WORKSPACE: ${{ steps.terraform-workspace-name.outputs.value }}
-
-      - name: Update Pull Request
-        uses: actions/github-script@v6.0.0
-        #if: github.event_name == 'pull_request'
-        env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-
-            <details><summary>Show Plan</summary>
-
-            \`\`\`\n
-            ${process.env.PLAN}
-            \`\`\`
-
-            </details>
-
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
-
-#      - name: Terraform Plan Status
-#        if: steps.plan.outcome == 'failure'
-#        run: exit 1
-#      - name: Terraform Apply
-#        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-#        run: terraform apply -auto-approve -input=false
+#        #   echo >> {
+#        #   "data": {
+#        #     "id":"ws-DgsiZWtRctCdPZpi",
+#        #     "attributes": {
+#        #       "key":"AWS_SECRET_ACCESS_KEY",
+#        #       "value":"fsdhgjkghjmlhgd",
+#        #       "category":"env",
+#        #       "hcl": false,
+#        #       "sensitive": true
+#        #     },
+#        #     "type":"vars"
+#        #   }
+#        # }
+#      - name: Set AWS credentials
 #        env:
-#          TF_WORKSPACE: production
+#          TERRAFORM_BEARER_TOKEN: ${{ secrets.TF_API_TOKEN }}
+#        run: |
+#          touch payload.json
+#          jq '{ data: { id: "ws-DgsiZWtRctCdPZpi", attributes: { key: "AWS_SECRET_ACCESS_KEY", value:"fsdhgjkghjmlhgd" }, type: "vars" } }' > payload.json
+#          curl \
+#          --header "Authorization: Bearer $TERRAFORM_BEARER_TOKEN" \
+#          --header "Content-Type: application/vnd.api+json" \
+#          --request POST \
+#          --data @payload.json \
+#          https://app.terraform.io/api/v2/vars
+#
+#      - name: Terraform Plan
+#        id: plan
+#        #if: github.event_name == 'pull_request'
+#        run: terraform plan -no-color -input=false
+#        continue-on-error: true
+#        env:
+#          TF_WORKSPACE: ${{ steps.terraform-workspace-name.outputs.value }}
+#
+#      - name: Update Pull Request
+#        uses: actions/github-script@v6.0.0
+#        #if: github.event_name == 'pull_request'
+#        env:
+#          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          script: |
+#            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+#            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+#            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+#            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+#
+#            <details><summary>Show Plan</summary>
+#
+#            \`\`\`\n
+#            ${process.env.PLAN}
+#            \`\`\`
+#
+#            </details>
+#
+#            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+#
+#            github.rest.issues.createComment({
+#              issue_number: context.issue.number,
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              body: output
+#            })
+#
+##      - name: Terraform Plan Status
+##        if: steps.plan.outcome == 'failure'
+##        run: exit 1
+##      - name: Terraform Apply
+##        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+##        run: terraform apply -auto-approve -input=false
+##        env:
+##          TF_WORKSPACE: production
