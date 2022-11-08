@@ -9,5 +9,5 @@ export const DATA_TOKEN: InjectionToken<DataConfiguration> = new InjectionToken<
 
 export const DATA_CONFIGURATION: DataConfiguration = {
   lieuxDeMediationNumerique:
-    'https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.4.0/assets/data/data-normalize-hauts-de-france.json'
+    'https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@4.4.1/assets/data/data-normalize-hauts-de-france.json'
 };
