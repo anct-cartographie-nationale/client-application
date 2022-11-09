@@ -356,6 +356,9 @@ jobs:
           mv dist/client-application/assets/data/ dist/whitelist/assets/data/
           mv dist/client-application/assets/fonts/ dist/whitelist/assets/fonts/
           mv dist/client-application/styles.css dist/whitelist/styles.css
+          mv dist/client-application/layers.png dist/whitelist/layers.png
+          mv dist/client-application/layers-2x.png dist/whitelist/layers-2x.png
+          mv dist/client-application/marker-icon.png dist/whitelist/marker-icon.png
           mv dist/mediation-numerique/script.js dist/whitelist/mediation-numerique.js
           mv dist/cartographie/script.js dist/whitelist/cartographie.js
           mv dist/orientation/script.js dist/whitelist/orientation.js
