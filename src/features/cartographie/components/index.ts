@@ -30,6 +30,7 @@ import { LieuMediationNumeriqueMarkersComponent } from './markers/lieu-mediation
 import { DepartementMarkersComponent } from './markers/departement-markers/departement-markers.component';
 import { RegionMarkersComponent } from './markers/region-markers/region-markers.component';
 import { NoLieuxFoundComponent } from './no-lieux-found/no-lieux-found.component';
+import { AidantsComponent } from './aidants/aidants.component';
 
 export * from './leaflet-map/leaflet-map.component';
 
@@ -44,6 +45,7 @@ export const components = [
   HorairesComponent,
   ModalitesAccompagnementComponent,
   PublicPrisEnChargeComponent,
+  AidantsComponent,
   LabellisationsComponent,
   MaisonFranceServiceComponent,
   AidantsConnectComponent,
