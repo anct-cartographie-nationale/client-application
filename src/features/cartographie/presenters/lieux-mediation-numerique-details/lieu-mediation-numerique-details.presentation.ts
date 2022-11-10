@@ -1,4 +1,5 @@
 import {
+  Aidant,
   ConditionAccess,
   Contact,
   HorairesPresentation,
@@ -32,4 +33,5 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   localisation?: Localisation;
   distance?: number;
   prise_rdv?: string;
+  aidants?: Aidant[];
 };
