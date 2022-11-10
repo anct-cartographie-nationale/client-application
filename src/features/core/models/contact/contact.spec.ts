@@ -46,6 +46,17 @@ describe('contact model', (): void => {
     expect(contact).toStrictEqual({ ...contactData } as Contact);
   });
 
+  it('should create a valid contact with a phone from La Réunion', (): void => {
+    const contactData = {
+      telephone: '+262788744970',
+      courriel: 'numerique@ccpll.fr'
+    };
+
+    const contact = Contact(contactData);
+
+    expect(contact).toStrictEqual({ ...contactData } as Contact);
+  });
+
   it('should throw CourrielError when courriel is invalid', (): void => {
     const contactData = {
       courriel: 'error'
