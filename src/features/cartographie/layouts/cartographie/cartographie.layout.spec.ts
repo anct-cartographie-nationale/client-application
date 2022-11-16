@@ -6,6 +6,7 @@ import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation
 import { LieuxMediationNumeriqueRepository } from '../../../core';
 import { LeafletMapStubComponent } from '../../test-doubles';
 import { CartographieLayout } from './cartographie.layout';
+import { AddressRepository } from '../../../adresse';
 
 describe('CartographieLayout', (): void => {
   beforeEach(async (): Promise<void> => {
@@ -18,6 +19,10 @@ describe('CartographieLayout', (): void => {
           useValue: {
             getAll$: () => of([])
           }
+        },
+        {
+          provide: AddressRepository,
+          useValue: {}
         },
         {
           provide: ZOOM_LEVEL_TOKEN,

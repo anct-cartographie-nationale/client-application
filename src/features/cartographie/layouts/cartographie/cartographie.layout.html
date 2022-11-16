@@ -35,6 +35,9 @@
     <router-outlet></router-outlet>
   </div>
   <div class="col overflow-auto">
+    <div class="p-3 position-absolute end-0 z-index-over d-md-block d-none" *ngIf="!(loadingState$ | async)">
+      <app-user-location></app-user-location>
+    </div>
     <app-leaflet-map
       *ngIf="(markersPresenter.currentZoomLevel$ | async) as currentZoomLevel"
       [centerView]="(markersPresenter.centerView$ | async) ?? markersPresenter.defaultCenterView"
