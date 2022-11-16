@@ -41,8 +41,8 @@
   <div class="flex-grow-1 mt-auto">
     <div class="d-flex flex-row align-items-center" *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
       <div *ngFor="let label of labelsNationaux" class="d-flex flex-row align-items-start">
-        <app-maison-france-service class="mt-3 me-3" *ngIf="label === 'France Services'"></app-maison-france-service>
-        <app-cnfs *ngIf="label === 'CNFS'"></app-cnfs>
+        <app-maison-france-service class="me-2" *ngIf="label === 'France Services'"></app-maison-france-service>
+        <app-cnfs class="me-2" *ngIf="label === 'CNFS'"></app-cnfs>
       </div>
     </div>
   </div>
