@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { BRAND_CONFIGURATION, BRAND_TOKEN } from '../../../../root';
-import { AddressRepository } from '../../repositories';
-import { AddressHttp } from '../../data/http';
+import { AddressHttp, AddressRepository } from '../../../adresse';
 
 export const orientationProviders = [
   {

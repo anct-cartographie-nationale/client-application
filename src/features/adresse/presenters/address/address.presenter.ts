@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Localisation } from '../../../core';
-import { AddressRepository } from '../../repositories';
+import { AddressRepository } from '../../../adresse';
 import { AddressFoundPresentation } from './address-found.presentation';
 
 export class AddressPresenter {

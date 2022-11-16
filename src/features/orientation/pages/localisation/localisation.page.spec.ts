@@ -2,9 +2,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { of } from 'rxjs';
-import { AddressFieldStubComponent, CollapseStubComponent } from '../../test-doubles';
-import { AddressRepository } from '../../repositories';
-import { AddressPresenter } from '../../presenters';
+import { AddressPresenter, AddressRepository } from '../../../adresse';
+import { AddressFieldStubComponent } from '../../../adresse/test-doubles';
+import { CollapseStubComponent } from '../../test-doubles';
 import { OrientationLayout } from '../../layouts';
 import { LocalisationPage } from './localisation.page';
 
