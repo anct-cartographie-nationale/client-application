@@ -1,17 +1,24 @@
-<div class="h6 text-muted mb-3">{{ aidants.length }} Aidants dans cette structure</div>
+<div class="h6 text-muted mb-3">
+  <span [ngPlural]="aidants.length">
+    <ng-template ngPluralCase="0">aucun conseiller</ng-template>
+    <ng-template ngPluralCase="1">1 conseiller</ng-template>
+    <ng-template ngPluralCase="other">{{ aidants.length }} conseillers</ng-template>
+  </span>
+  numérique dans cette structure
+</div>
 <div class="row g-4">
   <div class="col-6" *ngFor="let aidant of aidants">
-    <div class="card border-0 rounded-0 bg-light" style="border-radius: 0">
+    <div class="card h-100 border-0 rounded-0 bg-light" style="border-radius: 0">
       <div class="card-body">
         <div class="d-flex align-items-center mb-2">
           <i class="ri-user-3-line ri-fw ri-space bg-primary text-light rounded-circle"></i>
           <h6 class="card-title mt-2 fw-bold ms-3">{{ aidant.nom }}</h6>
         </div>
-        <div class="d-flex align-items-center">
+        <div *ngIf="aidant.telephone" class="d-flex align-items-center">
           <i class="ri-phone-line ri-fw ri-space"></i>
-          <p class="card-text ms-2">{{ aidant.telephone }}</p>
+          <p class="card-text ms-2">{{ aidant.telephone | phone }}</p>
         </div>
-        <div class="d-flex">
+        <div *ngIf="aidant.courriel" class="d-flex">
           <i class="ri-mail-line ri-fw ri-space"></i>
           <p class="card-text ms-2" style="margin-top: 0.1rem">{{ aidant.courriel }}</p>
         </div>
