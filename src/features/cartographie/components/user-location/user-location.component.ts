@@ -22,6 +22,14 @@ export class UserLocationComponent {
 
   public addressNotFound$: Observable<boolean> = of(false);
 
+  public addressesFound$: Observable<AddressFoundPresentation[]> = this._searchTerm$.pipe(
+    map((searchTerm: string): string => searchTerm.trim()),
+    filter((searchTerm: string): boolean => searchTerm.length >= MIN_SEARCH_TERM_LENGTH),
+    debounceTime(SEARCH_DEBOUNCE_TIME),
+    distinctUntilChanged(),
+    switchMap((searchTerm: string): Observable<AddressFoundPresentation[]> => this._addressPresenter.search$(searchTerm))
+  );
+
   public constructor(
     private readonly _addressPresenter: AddressPresenter,
     public readonly markersPresenter: MarkersPresenter
@@ -30,14 +38,6 @@ export class UserLocationComponent {
   public onSearchAddress(searchTerm: string): void {
     this._searchTerm$.next(searchTerm);
   }
-
-  public addressesFound$: Observable<AddressFoundPresentation[]> = this._searchTerm$.pipe(
-    map((searchTerm: string): string => searchTerm.trim()),
-    filter((searchTerm: string): boolean => searchTerm.length >= MIN_SEARCH_TERM_LENGTH),
-    debounceTime(SEARCH_DEBOUNCE_TIME),
-    distinctUntilChanged(),
-    switchMap((searchTerm: string): Observable<AddressFoundPresentation[]> => this._addressPresenter.search$(searchTerm))
-  );
 
   public onSelectAddress(address: AddressFoundPresentation): void {
     this.markersPresenter.center(address.localisation);
