@@ -1,0 +1,14 @@
+@include media-breakpoint-up(lg) {
+  .lieux-mediation-numerique-list {
+    flex: 0 0 auto;
+    width: 50%;
+    max-width: 660px;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .lieux-mediation-numerique-details {
+    flex: 0 0 auto;
+    width: 760px;
+  }
+}
