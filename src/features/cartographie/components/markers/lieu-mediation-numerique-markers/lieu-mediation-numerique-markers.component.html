@@ -13,12 +13,16 @@
       #popupContent
       class="text-center p-3 border-bottom border-3 text-wrap"
       style="min-width: 300px"
-      [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'border-muted' : 'border-primary'">
+      [ngClass]="
+        lieuMediationNumerique.status === 'Fermé' || lieuMediationNumerique.status === undefined
+          ? 'border-muted'
+          : 'border-success'
+      ">
       <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
       <br />
       <span
         *ngIf="lieuMediationNumerique.status; else noOpeningHours"
-        [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'text-muted' : 'text-primary'">
+        [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'text-muted' : 'text-success'">
         {{ lieuMediationNumerique.status }}
         <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
       </span>
