@@ -82,10 +82,8 @@
   }
 }
 
-.departement-marker {
-  fill: $primary;
-}
-
-.region-marker {
+.departement-marker,
+.region-marker,
+.user-marker {
   fill: $primary;
 }
