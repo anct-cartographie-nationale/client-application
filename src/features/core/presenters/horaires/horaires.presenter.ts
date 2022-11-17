@@ -94,11 +94,8 @@ const closedStatus = (willChange: boolean): string => (willChange ? 'Ouvre bient
 const willChangeNextHour = (openingHours: opening_hours, date: Date): boolean =>
   openingHours.getNextChange(date, nextHour(date)) !== undefined;
 
-const CloseReopenStatus = (willChange: boolean, nextDate?: Date): string =>
+const closeReopenStatus = (willChange: boolean, nextDate?: Date): string =>
   willChange ? `Fermé, Ouvre à ${toIntervalString(nextDate)}` : 'Fermé';
-
-const OpenReopenStatus = (willChange: boolean, nextDate?: Date): string =>
-  willChange ? `Ferme bientôt , réouverture à ${toIntervalString(nextDate)}` : 'Ouvert';
 
 const willChangeToday = (openingHours: opening_hours, date: Date): [boolean, Date | undefined] => [
   openingHours.getNextChange(nextHour(date), endOfDay(date)) !== undefined,
@@ -107,15 +104,10 @@ const willChangeToday = (openingHours: opening_hours, date: Date): [boolean, Dat
 
 const openingHoursState = (openingHours: opening_hours, date: Date): boolean => openingHours.getIterator(date).getState();
 
-const openStatusOrReOpenStatus = (openingHours: opening_hours, nextStatus: boolean, date: Date, nextDate?: Date): string =>
-  willChangeNextHour(openingHours, date) && nextStatus
-    ? OpenReopenStatus(nextStatus, nextDate)
-    : openStatus(willChangeNextHour(openingHours, date));
-
 const closeStatusOrWillOpenStatus = (openingHours: opening_hours, nextStatus: boolean, date: Date, nextDate?: Date): string =>
   willChangeNextHour(openingHours, date)
     ? closedStatus(willChangeNextHour(openingHours, date))
-    : CloseReopenStatus(nextStatus, nextDate);
+    : closeReopenStatus(nextStatus, nextDate);
 
 export const openingStatus =
   (date: Date) =>
@@ -126,7 +118,7 @@ export const openingStatus =
       const openingHours = new opening_hours(horairesOSM);
       const [nextStatus, nextDate] = willChangeToday(openingHours, date);
       return openingHoursState(openingHours, date)
-        ? openStatusOrReOpenStatus(openingHours, nextStatus, date, nextDate)
+        ? openStatus(willChangeNextHour(openingHours, date))
         : closeStatusOrWillOpenStatus(openingHours, nextStatus, date, nextDate);
     } catch {
       return;
