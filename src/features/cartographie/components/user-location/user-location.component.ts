@@ -16,9 +16,13 @@ const SEARCH_DEBOUNCE_TIME: number = 300;
 export class UserLocationComponent {
   private readonly _searchTerm$: Subject<string> = new Subject<string>();
 
+  private readonly _displayGeolocation$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
   private readonly _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly loadingState$: Observable<boolean> = this._loadingState$.asObservable();
+
+  public readonly displayGeolocation$: Observable<boolean> = this._displayGeolocation$.asObservable();
 
   public addressNotFound$: Observable<boolean> = of(false);
 
@@ -44,6 +48,7 @@ export class UserLocationComponent {
   public onSelectAddress(address: AddressFoundPresentation): void {
     this.markersPresenter.center(address.localisation);
     this.location.emit(address.localisation);
+    this._displayGeolocation$.next(true);
   }
 
   public onGeoLocate(): void {
@@ -58,6 +63,7 @@ export class UserLocationComponent {
       this.location.emit(localisation);
 
       this._loadingState$.next(false);
+      this._displayGeolocation$.next(false);
     });
   }
 }
