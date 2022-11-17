@@ -36,12 +36,17 @@
   </div>
   <div class="col overflow-auto">
     <div class="p-3 position-absolute end-0 z-index-over d-md-block d-none" *ngIf="(loadingState$ | async) === false">
-      <app-user-location></app-user-location>
+      <app-user-location (location)="userLocalisation = $event"></app-user-location>
     </div>
     <app-leaflet-map
       *ngIf="(markersPresenter.currentZoomLevel$ | async) as currentZoomLevel"
       [centerView]="(markersPresenter.centerView$ | async) ?? markersPresenter.defaultCenterView"
       (stateChange)="onMapViewUpdated($event)">
+      <app-leaflet-map-marker
+        *ngIf="userLocalisation"
+        [latitude]="userLocalisation.latitude"
+        [longitude]="userLocalisation.longitude"
+        markerFactoryKey="user"></app-leaflet-map-marker>
       <app-region-markers
         *ngIf="currentZoomLevel <= 7"
         [regions]="(regions$ | async) ?? []"

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '../../../core';
@@ -30,6 +30,8 @@ export class UserLocationComponent {
     switchMap((searchTerm: string): Observable<AddressFoundPresentation[]> => this._addressPresenter.search$(searchTerm))
   );
 
+  @Output() public location: EventEmitter<Localisation> = new EventEmitter<Localisation>();
+
   public constructor(
     private readonly _addressPresenter: AddressPresenter,
     public readonly markersPresenter: MarkersPresenter
@@ -41,17 +43,20 @@ export class UserLocationComponent {
 
   public onSelectAddress(address: AddressFoundPresentation): void {
     this.markersPresenter.center(address.localisation);
+    this.location.emit(address.localisation);
   }
 
   public onGeoLocate(): void {
     this._loadingState$.next(true);
     window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
-      this.markersPresenter.center(
-        Localisation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        })
-      );
+      const localisation: Localisation = Localisation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      });
+
+      this.markersPresenter.center(localisation);
+      this.location.emit(localisation);
+
       this._loadingState$.next(false);
     });
   }
