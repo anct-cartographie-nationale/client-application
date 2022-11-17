@@ -12,51 +12,49 @@
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
       [priseRdv]="lieuMediationNumerique.prise_rdv"></app-boutons-action>
   </div>
-  <div class="mx-4">
-    <ul class="list-group list-group-lg list-group-flush">
-      <li class="list-group-item">
-        <app-informations-pratiques
-          [adresse]="lieuMediationNumerique.adresse"
-          [conditionAccess]="lieuMediationNumerique.conditions_access"
-          [accessibilite]="lieuMediationNumerique.accessibilite"
-          [courriel]="lieuMediationNumerique.contact?.courriel"
-          [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
-          [distance]="lieuMediationNumerique?.distance"></app-informations-pratiques>
-      </li>
-      <li
-        class="list-group-item"
-        *ngIf="lieuMediationNumerique.presentation?.detail || lieuMediationNumerique.presentation?.resumee">
-        <app-description
-          [detail]="lieuMediationNumerique.presentation?.detail"
-          [resumee]="lieuMediationNumerique.presentation?.resumee"></app-description>
-      </li>
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-md-4 mt-4">
-            <app-horaires [horaires]="lieuMediationNumerique.horaires"></app-horaires>
-          </div>
-          <div class="col-md-8 mt-md-0 mt-4">
-            <app-services [services]="lieuMediationNumerique.services"></app-services>
-          </div>
+  <ul class="list-group list-group-lg list-group-flush list-group-flush-at-edge mx-4">
+    <li class="list-group-item">
+      <app-informations-pratiques
+        [adresse]="lieuMediationNumerique.adresse"
+        [conditionAccess]="lieuMediationNumerique.conditions_access"
+        [accessibilite]="lieuMediationNumerique.accessibilite"
+        [courriel]="lieuMediationNumerique.contact?.courriel"
+        [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
+        [distance]="lieuMediationNumerique?.distance"></app-informations-pratiques>
+    </li>
+    <li
+      class="list-group-item"
+      *ngIf="lieuMediationNumerique.presentation?.detail || lieuMediationNumerique.presentation?.resumee">
+      <app-description
+        [detail]="lieuMediationNumerique.presentation?.detail"
+        [resumee]="lieuMediationNumerique.presentation?.resumee"></app-description>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-4 mt-4">
+          <app-horaires [horaires]="lieuMediationNumerique.horaires"></app-horaires>
         </div>
-      </li>
-      <li class="list-group-item" *ngIf="lieuMediationNumerique.aidants">
-        <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>
-      </li>
-      <li class="list-group-item" *ngIf="lieuMediationNumerique.modalites_accompagnement?.length">
-        <app-modalites-accompagnement
-          [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
-      </li>
-      <li class="list-group-item" *ngIf="lieuMediationNumerique.publics_accueillis?.length">
-        <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
-      </li>
-      <li
-        class="list-group-item"
-        *ngIf="lieuMediationNumerique.labels_nationaux?.length || lieuMediationNumerique.labels_autres?.length">
-        <app-labellisations
-          [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
-          [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
-      </li>
-    </ul>
-  </div>
+        <div class="col-md-8 mt-md-0 mt-4">
+          <app-services [services]="lieuMediationNumerique.services"></app-services>
+        </div>
+      </div>
+    </li>
+    <li class="list-group-item" *ngIf="lieuMediationNumerique.aidants">
+      <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>
+    </li>
+    <li class="list-group-item" *ngIf="lieuMediationNumerique.modalites_accompagnement?.length">
+      <app-modalites-accompagnement
+        [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
+    </li>
+    <li class="list-group-item" *ngIf="lieuMediationNumerique.publics_accueillis?.length">
+      <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
+    </li>
+    <li
+      class="list-group-item"
+      *ngIf="lieuMediationNumerique.labels_nationaux?.length || lieuMediationNumerique.labels_autres?.length">
+      <app-labellisations
+        [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
+        [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
+    </li>
+  </ul>
 </div>
