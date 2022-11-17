@@ -34,11 +34,19 @@
     [ngClass]="router.url.endsWith('/details') ? 'col-xl-5 col-lg-6 col-12' : 'col-xl-4 col-lg-5 col-md-6 col-12'">
     <router-outlet></router-outlet>
   </div>
-  <div class="col overflow-auto">
+  <div class="col overflow-auto position-relative">
+    <div class="p-3 position-absolute start-0 z-index-over d-md-block d-none" *ngIf="(loadingState$ | async) === false">
+      <app-user-location (location)="userLocalisation = $event"></app-user-location>
+    </div>
     <app-leaflet-map
       *ngIf="(markersPresenter.currentZoomLevel$ | async) as currentZoomLevel"
       [centerView]="(markersPresenter.centerView$ | async) ?? markersPresenter.defaultCenterView"
       (stateChange)="onMapViewUpdated($event)">
+      <app-leaflet-map-marker
+        *ngIf="userLocalisation"
+        [latitude]="userLocalisation.latitude"
+        [longitude]="userLocalisation.longitude"
+        markerFactoryKey="user"></app-leaflet-map-marker>
       <app-region-markers
         *ngIf="currentZoomLevel <= 7"
         [regions]="(regions$ | async) ?? []"

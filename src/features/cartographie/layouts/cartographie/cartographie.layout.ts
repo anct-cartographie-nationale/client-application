@@ -81,6 +81,8 @@ export class CartographieLayout {
 
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
+  public userLocalisation?: Localisation;
+
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly router: Router,

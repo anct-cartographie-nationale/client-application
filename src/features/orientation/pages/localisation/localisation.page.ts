@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap } from 'rxjs';
 import { map, mergeWith } from 'rxjs/operators';
+import { AddressFoundPresentation, AddressPresenter, AddressRepository } from '../../../adresse';
 import { Localisation } from '../../../core';
 import { OrientationLayout } from '../../layouts';
-import { AddressFoundPresentation, AddressPresenter } from '../../presenters';
-import { AddressRepository } from '../../repositories';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
@@ -36,8 +34,7 @@ export class LocalisationPage {
 
   public constructor(
     private readonly _addressPresenter: AddressPresenter,
-    public readonly orientationLayout: OrientationLayout,
-    private http: HttpClient
+    public readonly orientationLayout: OrientationLayout
   ) {}
 
   public onSelectAddress(address: AddressFoundPresentation): void {
