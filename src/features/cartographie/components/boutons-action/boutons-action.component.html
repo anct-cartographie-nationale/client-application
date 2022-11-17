@@ -3,7 +3,7 @@
     <i class="ri-printer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
     <b class="mt-2">Imprimer</b>
   </button>
-  <a type="button" class="btn btn-tile" [class.disabled]="courriel == null" href="mailto:{{ courriel }}">
+  <a type="button" class="btn btn-tile" [class.disabled]="courriel === undefined" href="mailto:{{ courriel }}">
     <i class="ri-error-warning-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
     <b class="mt-2 text-center">Signaler erreur</b>
   </a>
@@ -21,7 +21,7 @@
   <a
     type="button"
     class="btn btn-tile"
-    [class.disabled]="priseRdv == null"
+    [class.disabled]="priseRdv === undefined"
     target="_blank"
     rel="noopener noreferrer"
     href="{{ priseRdv }}">
