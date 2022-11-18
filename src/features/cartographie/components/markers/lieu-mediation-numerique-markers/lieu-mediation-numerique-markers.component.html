@@ -14,7 +14,7 @@
       class="text-center p-3 border-bottom border-3 text-wrap"
       style="min-width: 300px"
       [ngClass]="
-        lieuMediationNumerique.status === 'Fermé' || lieuMediationNumerique.status === undefined
+        lieuMediationNumerique.status?.includes('Fermé') || lieuMediationNumerique.status === undefined
           ? 'border-muted'
           : 'border-success'
       ">
@@ -22,7 +22,7 @@
       <br />
       <span
         *ngIf="lieuMediationNumerique.status; else noOpeningHours"
-        [ngClass]="lieuMediationNumerique.status === 'Fermé' ? 'text-muted' : 'text-success'">
+        [ngClass]="lieuMediationNumerique.status.includes('Fermé') ? 'text-muted' : 'text-success'">
         {{ lieuMediationNumerique.status }}
         <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
       </span>
