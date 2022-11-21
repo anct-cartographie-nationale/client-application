@@ -50,11 +50,11 @@
     <div
       class="d-flex justify-content-end align-items-center"
       *ngIf="lieuMediationNumerique.status"
-      [ngClass]="lieuMediationNumerique.status.includes('Fermé') ? 'text-muted' : 'text-primary'">
+      [ngClass]="lieuMediationNumerique.status.includes('Fermé') ? 'text-muted' : 'text-success'">
       {{ lieuMediationNumerique.status }}
       <i class="ri-checkbox-blank-circle-fill ri-xxs ms-1"></i>
     </div>
-    <small *ngIf="lieuMediationNumerique.date_maj" class="text-muted fst-italic">
+    <small *ngIf="lieuMediationNumerique.date_maj" class="text-muted text-end fst-italic">
       Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
     </small>
   </div>

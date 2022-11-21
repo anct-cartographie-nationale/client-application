@@ -1,17 +1,30 @@
 <div class="d-flex justify-content-center">
-  <button type="button" class="tile-button" (click)="printPage()">
+  <button type="button" class="btn btn-tile" (click)="printPage()">
     <i class="ri-printer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
     <b class="mt-2">Imprimer</b>
   </button>
-  <a type="button" class="tile-button" *ngIf="courriel" href="mailto:{{ courriel }}">
+  <a type="button" class="btn btn-tile" [class.disabled]="courriel === undefined" href="mailto:{{ courriel }}">
     <i class="ri-error-warning-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
     <b class="mt-2 text-center">Signaler erreur</b>
   </a>
-  <a type="button" class="tile-button" *ngIf="siteWeb" href="{{ siteWeb[0] }}" target="_blank">
+  <a
+    type="button"
+    class="btn btn-tile"
+    [class.disabled]="siteWeb?.length === 0"
+    disabled
+    href="{{ siteWeb?.[0] }}"
+    target="_blank"
+    rel="noopener noreferrer">
     <i class="ri-computer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
     <b class="mt-2">Voir le site</b>
   </a>
-  <a type="button" class="tile-button" target="_blank" href="{{ priseRdv }}" *ngIf="priseRdv">
+  <a
+    type="button"
+    class="btn btn-tile"
+    [class.disabled]="priseRdv === undefined"
+    target="_blank"
+    rel="noopener noreferrer"
+    href="{{ priseRdv }}">
     <i class="ri-computer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
     <b class="mt-2">Prise de RDV</b>
   </a>

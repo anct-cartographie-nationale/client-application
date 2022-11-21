@@ -1,59 +1,60 @@
 <div *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique" class="h-100 overflow-auto">
-  <div class="border-bottom p-4 sticky-top bg-secondary">
-    <app-informations-generales
-      [id]="lieuMediationNumerique.id"
-      [nom]="lieuMediationNumerique.nom"
-      [typologie]="lieuMediationNumerique.typologie"
-      [date]="lieuMediationNumerique.date_maj"
-      [status]="lieuMediationNumerique.status"></app-informations-generales>
-  </div>
+  <app-informations-generales
+    class="p-4 sticky-top bg-primary text-white d-block"
+    [id]="lieuMediationNumerique.id"
+    [nom]="lieuMediationNumerique.nom"
+    [typologie]="lieuMediationNumerique.typologie"
+    [date]="lieuMediationNumerique.date_maj"
+    [status]="lieuMediationNumerique.status"></app-informations-generales>
   <div class="bg-light">
     <app-boutons-action
       [courriel]="lieuMediationNumerique.contact?.courriel"
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
       [priseRdv]="lieuMediationNumerique.prise_rdv"></app-boutons-action>
   </div>
-  <div class="mx-4 py-4 border-bottom">
-    <app-informations-pratiques
-      [adresse]="lieuMediationNumerique.adresse"
-      [conditionAccess]="lieuMediationNumerique.conditions_access"
-      [accessibilite]="lieuMediationNumerique.accessibilite"
-      [courriel]="lieuMediationNumerique.contact?.courriel"
-      [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
-      [distance]="lieuMediationNumerique?.distance"></app-informations-pratiques>
-  </div>
-  <div
-    class="mx-4 py-4 border-bottom"
-    *ngIf="lieuMediationNumerique.presentation?.detail || lieuMediationNumerique.presentation?.resumee">
-    <app-description
-      [detail]="lieuMediationNumerique.presentation?.detail"
-      [resumee]="lieuMediationNumerique.presentation?.resumee"></app-description>
-  </div>
-  <div class="mx-4 py-4 border-bottom">
-    <div class="row">
-      <div class="col-lg-4 mt-4">
-        <app-horaires [horaires]="lieuMediationNumerique.horaires"></app-horaires>
+  <ul class="list-group list-group-lg list-group-flush list-group-flush-at-edge mx-4">
+    <li class="list-group-item">
+      <app-informations-pratiques
+        [adresse]="lieuMediationNumerique.adresse"
+        [conditionAccess]="lieuMediationNumerique.conditions_access"
+        [accessibilite]="lieuMediationNumerique.accessibilite"
+        [courriel]="lieuMediationNumerique.contact?.courriel"
+        [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
+        [distance]="lieuMediationNumerique?.distance"></app-informations-pratiques>
+    </li>
+    <li
+      class="list-group-item"
+      *ngIf="lieuMediationNumerique.presentation?.detail || lieuMediationNumerique.presentation?.resumee">
+      <app-description
+        [detail]="lieuMediationNumerique.presentation?.detail"
+        [resumee]="lieuMediationNumerique.presentation?.resumee"></app-description>
+    </li>
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-4 mt-4">
+          <app-horaires [horaires]="lieuMediationNumerique.horaires"></app-horaires>
+        </div>
+        <div class="col-md-8 mt-md-0 mt-4">
+          <app-services [services]="lieuMediationNumerique.services"></app-services>
+        </div>
       </div>
-      <div class="col-lg-8">
-        <app-services [services]="lieuMediationNumerique.services"></app-services>
-      </div>
-    </div>
-  </div>
-  <div class="mx-4 py-4 border-bottom" *ngIf="lieuMediationNumerique.aidants">
-    <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>
-  </div>
-  <div class="mx-4 py-5 border-bottom" *ngIf="lieuMediationNumerique.modalites_accompagnement">
-    <div class="mx-4 py-5 border-bottom">
+    </li>
+    <li class="list-group-item" *ngIf="lieuMediationNumerique.aidants">
+      <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>
+    </li>
+    <li class="list-group-item" *ngIf="lieuMediationNumerique.modalites_accompagnement?.length">
       <app-modalites-accompagnement
         [modalitesAccompagnementList]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
-    </div>
-    <div class="mx-4 py-4 border-bottom" *ngIf="lieuMediationNumerique.publics_accueillis">
+    </li>
+    <li class="list-group-item" *ngIf="lieuMediationNumerique.publics_accueillis?.length">
       <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
-    </div>
-    <div class="mx-4 py-4" *ngIf="lieuMediationNumerique.labels_nationaux || lieuMediationNumerique.labels_autres">
+    </li>
+    <li
+      class="list-group-item"
+      *ngIf="lieuMediationNumerique.labels_nationaux?.length || lieuMediationNumerique.labels_autres?.length">
       <app-labellisations
         [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
         [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
-    </div>
-  </div>
+    </li>
+  </ul>
 </div>

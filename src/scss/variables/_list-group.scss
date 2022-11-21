@@ -1,0 +1,4 @@
+@use 'sass:map';
+
+$list-group-lg-item-padding-top: map.get($spacers, 4);
+$list-group-lg-item-padding-bottom: map.get($spacers, 4);

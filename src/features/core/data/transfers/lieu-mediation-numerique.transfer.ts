@@ -60,7 +60,9 @@ export interface AidantTransfer {
   telephone?: string;
 }
 
-const toArray = <T extends string>(stringArray: string) => stringArray.split(/,\s*/) as T[];
+const onlyNonEmptyValues = (item: string): boolean => item != '';
+
+const toArray = <T extends string>(stringArray: string) => stringArray.split(/,\s*/).filter(onlyNonEmptyValues) as T[];
 
 const adressePayload = (lieuMediationNumeriqueTransfer: LieuMediationNumeriqueTransfer) => ({
   commune: lieuMediationNumeriqueTransfer.commune,

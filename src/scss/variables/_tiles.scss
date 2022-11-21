@@ -1,9 +1,4 @@
-$tile-color: var(--#{$prefix}body-color);
-$tile-transition: 0.2s;
-$tile-button-padding-x: 1.5rem;
-$tile-button-padding-y: 1.5rem;
-$tile-button-bg: transparent;
-$tile-button-hover-bg: $body-bg;
-$tile-button-color: $tile-color;
-$tile-button-focus-border-color: $input-focus-border-color;
-$tile-button-focus-box-shadow: $btn-focus-box-shadow;
+$btn-tile-transition: 0.2s;
+$btn-tile-padding-x: 1.5rem;
+$btn-tile-padding-y: 1.5rem;
+$btn-tile-hover-bg: $body-bg;

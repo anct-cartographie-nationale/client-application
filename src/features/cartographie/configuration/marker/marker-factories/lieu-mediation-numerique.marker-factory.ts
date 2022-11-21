@@ -13,7 +13,7 @@ const HALF: number = 0.5;
 const ROUND_FALSE: boolean = false;
 
 const LIEU_MEDIATION_NUMERIQUE_MARKER_WIDTH_IN_PIXEL: number = 48;
-const LIEU_MEDIATION_NUMERIQUE_MARKER_HEIGHT_IN_PIXEL: number = 48;
+const LIEU_MEDIATION_NUMERIQUE_MARKER_HEIGHT_IN_PIXEL: number = 54;
 const LIEU_MEDIATION_NUMERIQUE_MARKER_DIMENSIONS: LeafletPoint = new LeafletPoint(
   LIEU_MEDIATION_NUMERIQUE_MARKER_WIDTH_IN_PIXEL,
   LIEU_MEDIATION_NUMERIQUE_MARKER_HEIGHT_IN_PIXEL,
@@ -21,16 +21,15 @@ const LIEU_MEDIATION_NUMERIQUE_MARKER_DIMENSIONS: LeafletPoint = new LeafletPoin
 );
 
 const lieuMediationIconMarkerSvg: string = `
-<svg class="marker default-marker" width="34" height="54" viewBox="0 0 34 54" xmlns="http://www.w3.org/2000/svg">
-  <ellipse class="marker-focus-active" cx="17" cy="47.5" rx="8" ry="4"/>
-  <path d="M17 2 5 8.691v13.38l11.36 18.93h1.28L29 22.07V8.691l-12-6.69Z"/>
+<svg class="marker default-marker" xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 48 54">
+  <ellipse class="marker-focus-active" cx="14" cy="54" rx="9" ry="3"/>
+  <path d="M14.26 0 0 8.23V24.7L13.5 48h1.52l13.5-23.3V8.23z" stroke="#fff" stroke-width="1"/>
   <g class="marker-hover-active" filter="url(#hover)">
-    <path d="M17 2 5 8.691v13.38l11.36 18.93h1.28L29 22.07V8.691l-12-6.69Z"/>
+    <path d="M14.26 0 0 8.23V24.7L13.5 48h1.52l13.5-23.3V8.23z"/>
   </g>
-  <path d="M17.244 1.564 17 1.428l-.244.136-12 6.69-.256.143V22.21l.071.118 11.36 18.93.146.242h1.846l.146-.242 11.36-18.93.071-.118V8.397l-.256-.143-12-6.69Z" stroke="#fff"/>
-  <path d="M22.487 18.44v-6.118L17 9.262l-5.487 3.06v6.118L17 21.5l5.487-3.06Z" fill="#fff"/>
+  <path fill="#fff" d="M20.946 20.321v-7.719l-6.686-3.85-6.686 3.85v7.72l6.686 3.867Z"/>
   <defs>
-    <filter id="hover" x="0" y=".855" width="34" height="54" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <filter id="hover" x="0" y=".855" width="48" height="54" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feFlood flood-opacity="0" result="BackgroundImageFix"/>
       <feColorMatrix class="marker-hover-active" in="SourceAlpha" result="hardAlpha"/>
       <feOffset dy="4"/>
@@ -41,12 +40,13 @@ const lieuMediationIconMarkerSvg: string = `
       <feBlend in="SourceGraphic" in2="effect1_dropShadow_1785_8086" result="shape"/>
     </filter>
   </defs>
+  <circle class="marker-opening-status" cx="21" cy="39" r="5" stroke="#fff" stroke-width="2"/>
 </svg>
 `;
 
 const cnfsIconMarkerSvg: string = `
-<svg class="marker cnfs-marker" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 54">
-  <path class="cnfs-marker-out" d="M14.26 0 0 8.23V24.7L13.5 48h1.52l13.5-23.3V8.23z"/>
+<svg class="marker cnfs-marker" xmlns="http://www.w3.org/2000/svg" width="48" height="54" viewBox="0 0 48 54">
+  <path class="cnfs-marker-out" d="M14.26 0 0 8.23V24.7L13.5 48h1.52l13.5-23.3V8.23z" stroke="#fff" stroke-width="1"/>
   <g class="marker-hover-active" filter="url(#hover)">
     <path class="cnfs-marker-out" d="M14.26 0 0 8.23V24.7L13.5 48h1.52l13.5-23.3V8.23z"/>
   </g>
@@ -64,6 +64,7 @@ const cnfsIconMarkerSvg: string = `
       <feBlend in="SourceGraphic" in2="effect1_dropShadow_1785_8086" result="shape"/>
     </filter>
   </defs>
+  <circle class="marker-opening-status" cx="21" cy="39" r="5" stroke="#fff" stroke-width="2"/>
 </svg>
 `;
 

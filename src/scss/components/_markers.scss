@@ -24,33 +24,39 @@
 }
 
 .default-marker {
+  fill: var(--red-marianne-main-472);
+
   .marker-focus-active {
     display: none;
   }
 }
 
-.marker-status-unknown,
+.cnfs-marker {
+  .cnfs-marker-in {
+    fill: var(--blue-france-sun-113-625);
+    transform-origin: center 34.3%;
+  }
+
+  .cnfs-marker-out {
+    fill: var(--red-marianne-main-472);
+  }
+}
+
 .marker-status-closed {
-  .default-marker,
-  .cnfs-marker {
+  .marker-opening-status {
     fill: $muted;
   }
 }
 
 .marker-status-open {
-  .default-marker {
-    fill: $primary;
+  .marker-opening-status {
+    fill: $success;
   }
+}
 
-  .cnfs-marker {
-    .cnfs-marker-in {
-      fill: var(--blue-france-sun-113-625);
-      transform-origin: center 34.3%;
-    }
-
-    .cnfs-marker-out {
-      fill: var(--red-marianne-main-472);
-    }
+.marker-status-unknown {
+  .marker-opening-status {
+    display: none;
   }
 }
 
