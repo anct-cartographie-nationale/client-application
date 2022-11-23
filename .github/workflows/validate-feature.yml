@@ -304,18 +304,18 @@ jobs:
   #          name: build
   #          path: dist
 
-  dynamic-variables:
-    runs-on: ubuntu-latest
-    outputs:
-      application-name: ${{ steps.application-name.outputs.value }}
-
-    steps:
-      - name: Deployed application base name
-        id: application-name
-        run: |
-          APPLICATION_NAME=${{ env.application-name }}
-          BRANCH_SHORT_REF=$(echo ${{ github.event.ref }} | cut -d'/' -f 4)
-          echo "::set-output name=value::$APPLICATION_NAME-$BRANCH_SHORT_REF"
+  #  dynamic-variables:
+  #    runs-on: ubuntu-latest
+  #    outputs:
+  #      application-name: ${{ steps.application-name.outputs.value }}
+  #
+  #    steps:
+  #      - name: Deployed application base name
+  #        id: application-name
+  #        run: |
+  #          APPLICATION_NAME=${{ env.application-name }}
+  #          BRANCH_SHORT_REF=$(echo ${{ github.event.ref }} | cut -d'/' -f 3)
+  #          echo "::set-output name=value::$APPLICATION_NAME-$BRANCH_SHORT_REF"
 
   #  deploy:
   #    name: Feature branch
@@ -333,9 +333,15 @@ jobs:
 
   deploy-aws:
     name: Feature branch
-    needs:
-      - dynamic-variables
-      - build-client-application
-    uses: ./.github/workflows/deploy-on-aws.yml
+    #    needs:
+    #      - dynamic-variables
+    #      - build-client-application
+    uses: codingones/github-actions-workflows/.github/workflows/create-terraform-cloud-workspace-for-aws-ephemeral-environment.terraform.yml@main
+    with:
+      product: 'cartographie-nationale'
+      service: 'client'
+      branch: $(echo ${{ github.event.ref }} | cut -d'/' -f 3)
     secrets:
       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
