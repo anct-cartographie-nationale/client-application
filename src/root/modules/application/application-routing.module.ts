@@ -19,6 +19,10 @@ import { ROUTES } from '../common/mediation-numerique.routes';
         loadChildren: async () => (await import('@features/accessibilite')).AccessibiliteFeatureModule,
         path: 'accessibilite'
       },
+      {
+        loadChildren: async () => (await import('@features/gestion-des-cookies')).GestionDesCookiesFeatureModule,
+        path: 'gestion-des-cookies'
+      },
       { path: '**', pathMatch: 'full', redirectTo: 'orientation' }
     ])
   ]
