@@ -23,6 +23,10 @@ import { ROUTES } from '../common/mediation-numerique.routes';
         loadChildren: async () => (await import('@features/gestion-des-cookies')).GestionDesCookiesFeatureModule,
         path: 'gestion-des-cookies'
       },
+      {
+        loadChildren: async () => (await import('@features/donnees-personnelles')).DonneesPersonnellesFeatureModule,
+        path: 'donnees-personnelles'
+      },
       { path: '**', pathMatch: 'full', redirectTo: 'orientation' }
     ])
   ]
