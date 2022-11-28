@@ -15,6 +15,10 @@ import { ROUTES } from '../common/mediation-numerique.routes';
         loadChildren: async () => (await import('@features/mentions-legales')).MentionsLegalesFeatureModule,
         path: 'mentions-legales'
       },
+      {
+        loadChildren: async () => (await import('@features/accessibilite')).AccessibiliteFeatureModule,
+        path: 'accessibilite'
+      },
       { path: '**', pathMatch: 'full', redirectTo: 'orientation' }
     ])
   ]
