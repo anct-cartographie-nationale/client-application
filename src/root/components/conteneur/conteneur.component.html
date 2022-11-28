@@ -47,15 +47,10 @@
       </div>
     </nav>
   </div>
-  <div
-    class="d-flex flex-row flex-grow-1"
-    [ngClass]="
-      this.router.url === '/' || this.router.url === '/mentions-legales' || this.router.url === '/presentation'
-        ? ''
-        : 'overflow-hidden h-100'
-    ">
+  <div class="d-flex flex-row flex-grow-1" [ngClass]="'overflow-hidden h-100'">
     <div class="col overflow-auto">
       <ng-content></ng-content>
+      <ng-content select="[slot=footer]"></ng-content>
     </div>
   </div>
 </div>
