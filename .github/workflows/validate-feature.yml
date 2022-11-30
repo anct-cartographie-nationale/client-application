@@ -331,8 +331,8 @@ jobs:
   #    secrets:
   #      SCALINGO_API_TOKEN: ${{ secrets.SCALINGO_API_TOKEN }}
 
-  deploy-aws:
-    name: Feature branch
+  create-feature-branch-workspace:
+    name: Create feature branch workspace
     #    needs:
     #      - dynamic-variables
     #      - build-client-application
@@ -340,8 +340,35 @@ jobs:
     with:
       product: 'cartographie-nationale'
       service: 'client'
-      branch: $(echo ${{ github.event.ref }} | cut -d'/' -f 3)
+      branch: ${{ github.event.ref }}
     secrets:
       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  prepare-terraform-variables-file-content:
+    name: Prepare terraform variables file content
+    runs-on: ubuntu-latest
+    needs:
+      - create-feature-branch-workspace
+    outputs:
+      tf-vars: ${{ steps.tf-vars.outputs.content }}
+    steps:
+      - name: Set terraform variables file content in TF_VARS environment variable
+        id: tf-vars
+        run: |
+          BASE_64_CONTENT=$(echo -en '{"product": "cartographie-nationale", "service": "client-feature-aws-feature-branch"}' | base64 | tr -d \\n)
+          echo content=$BASE_64_CONTENT>>$GITHUB_OUTPUT
+
+  deploy-feature-branch-environment:
+    name: Deploy feature branch environment
+    needs:
+      - create-feature-branch-workspace
+      - prepare-terraform-variables-file-content
+    uses: codingones/github-actions-workflows/.github/workflows/apply.terraform.yml@main
+    with:
+      infrastructure-repository: 'anct-cartographie-nationale/client-infrastructure'
+      workspace-name: ${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}
+      json-base-64-tf-vars: ${{ needs.prepare-terraform-variables-file-content.outputs.tf-vars }}
+    secrets:
+      TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
