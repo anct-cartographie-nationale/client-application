@@ -10,7 +10,6 @@ import { LieuxMediationNumeriquePresenter, LieuxMediationNumeriqueRepository } f
       provide: LieuxMediationNumeriquePresenter,
       useClass: LieuxMediationNumeriquePresenter
     }
-  ],
-  styleUrls: ['./mentions-legales.page.scss']
+  ]
 })
 export class MentionsLegalesLayout {}
