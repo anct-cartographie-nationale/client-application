@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccessibiliteLayout } from '../pages';
+import { AccessibilitePage } from '../pages';
 
 const ROUTES: Routes = [
   {
-    component: AccessibiliteLayout,
+    component: AccessibilitePage,
     path: ''
   }
 ];

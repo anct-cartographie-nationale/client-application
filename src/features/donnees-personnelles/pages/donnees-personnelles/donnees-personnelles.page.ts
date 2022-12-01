@@ -1,15 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LieuxMediationNumeriquePresenter, LieuxMediationNumeriqueRepository } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './donnees-personnelles.page.html',
-  providers: [
-    {
-      deps: [LieuxMediationNumeriqueRepository],
-      provide: LieuxMediationNumeriquePresenter,
-      useClass: LieuxMediationNumeriquePresenter
-    }
-  ]
+  templateUrl: './donnees-personnelles.page.html'
 })
-export class DonneesPersonnellesLayout {}
+export class DonneesPersonnellesPage {}

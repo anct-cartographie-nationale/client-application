@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DonneesPersonnellesLayout } from '../pages';
+import { DonneesPersonnellesPage } from '../pages';
 
 const ROUTES: Routes = [
   {
-    component: DonneesPersonnellesLayout,
+    component: DonneesPersonnellesPage,
     path: ''
   }
 ];

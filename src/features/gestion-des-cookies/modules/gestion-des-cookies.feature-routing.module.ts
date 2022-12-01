@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GestionDesCookiesLayout } from '../pages';
+import { GestionDesCookiesPage } from '../pages';
 
 const ROUTES: Routes = [
   {
-    component: GestionDesCookiesLayout,
+    component: GestionDesCookiesPage,
     path: ''
   }
 ];

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DonneesPersonnellesLayout } from '../pages';
 import { DonneesPersonnellesFeatureRoutingModule } from './donnees-personnelles.feature-routing.module';
+import { DonneesPersonnellesPage } from '../pages';
 
 @NgModule({
-  declarations: [DonneesPersonnellesLayout],
+  declarations: [DonneesPersonnellesPage],
   imports: [DonneesPersonnellesFeatureRoutingModule, CommonModule]
 })
 export class DonneesPersonnellesFeatureModule {}

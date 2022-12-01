@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MentionsLegalesLayout } from '../pages';
+import { MentionsLegalesPage } from '../pages';
 
 const ROUTES: Routes = [
   {
-    component: MentionsLegalesLayout,
+    component: MentionsLegalesPage,
     path: ''
   }
 ];

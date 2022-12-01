@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AccessibiliteLayout } from '../pages';
+import { AccessibilitePage } from '../pages';
 import { AccessibiliteFeatureRoutingModule } from './accessibilite.feature-routing.module';
 
 @NgModule({
-  declarations: [AccessibiliteLayout],
+  declarations: [AccessibilitePage],
   imports: [AccessibiliteFeatureRoutingModule, CommonModule]
 })
 export class AccessibiliteFeatureModule {}
