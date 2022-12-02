@@ -1,6 +1,6 @@
 <app-conteneur>
   <router-outlet></router-outlet>
-  <footer slot="footer" class="pt-5 pb-2 overflow-hidden" style="background-color: rgba(22, 22, 22, 1)">
+  <footer slot="footer" class="pt-5 pb-2" style="background-color: rgba(22, 22, 22, 1)">
     <div class="container-fluid row">
       <div class="flex-grow-1 col-auto">
         <img src="/assets/img/footer-mark.svg" class="img-fluid" alt="" />
@@ -10,7 +10,13 @@
           La Cartographie nationale des lieux de médiation numérique est un service fourni par l'Agence nationale de la cohésion
           des territoires
           <span class="d-flex me-3">
-            <a class="nav-link me-1 text-muted" href="https://agence-cohesion-territoires.gouv.fr/" target="_blank">ANCT</a>
+            <a
+              class="nav-link me-1 text-muted"
+              href="https://agence-cohesion-territoires.gouv.fr/"
+              target="_blank"
+              rel="noopener noreferrer">
+              ANCT
+            </a>
             <i class="ri-external-link-line align-bottom text-muted"></i>
           </span>
         </p>
@@ -21,7 +27,8 @@
             <a
               class="nav-link me-1 text-muted"
               href="https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique-2/"
-              target="_blank">
+              target="_blank"
+              rel="noopener noreferrer">
               Schéma de données des lieux de médiation numérique
             </a>
             <i class="ri-external-link-line align-bottom text-muted"></i>
@@ -35,16 +42,44 @@
     <div>
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link text-muted" aria-current="page">Mentions légales</a>
+          <a
+            class="nav-link text-muted"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="['mentions-legales']"
+            aria-current="page">
+            Mentions légales
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-muted">Données personnelles</a>
+          <a
+            class="nav-link text-muted"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="['donnees-personnelles']"
+            aria-current="page">
+            Données personnelles
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-muted">Gestion des cookies</a>
+          <a
+            class="nav-link text-muted"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="['gestion-des-cookies']"
+            aria-current="page">
+            Gestion des cookies
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-muted">Accessibilité</a>
+          <a
+            class="nav-link text-muted"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="['accessibilite']"
+            aria-current="page">
+            Accessibilité
+          </a>
         </li>
       </ul>
     </div>
