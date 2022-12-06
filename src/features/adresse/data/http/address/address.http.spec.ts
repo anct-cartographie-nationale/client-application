@@ -1,9 +1,9 @@
-import { AddressHttp } from './address.http';
-import { firstValueFrom, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Localisation } from '../../../../core';
+import { firstValueFrom, Observable, of } from 'rxjs';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { Address } from '../../../models';
 import { AddressTransfer } from '../../transfers/address.transfer';
+import { AddressHttp } from './address.http';
 
 describe('address http', (): void => {
   it('should get addresses from addresses transfer', async (): Promise<void> => {

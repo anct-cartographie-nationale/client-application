@@ -1,18 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable, shareReplay } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { fromSchemaLieuDeMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { DataConfiguration } from '../../../../../root';
-import { LieuMediationNumerique, LieuxMediationNumeriqueRepository } from '../../../../core';
-import { LieuMediationNumeriqueTransfer, toLieuxMediationNumerique } from '../../transfers/lieu-mediation-numerique.transfer';
+import { LieuxMediationNumeriqueRepository } from '../../../repositories';
+import { Aidants, LieuMediationNumeriqueWithAidants } from '../../../models';
+import { AidantTransfer, LieuMediationNumeriqueWithAidantsTransfer } from '../../../transfer';
+
+const aidantsIfAny = (aidants?: AidantTransfer[]): { aidants?: Aidants } =>
+  aidants == null ? {} : { aidants: Aidants(aidants) };
+
+const toLieuMediationNumeriqueWithAidants = (
+  lieuMediationNumeriqueWithAidantsTransfer: LieuMediationNumeriqueWithAidantsTransfer
+): LieuMediationNumeriqueWithAidants => ({
+  ...fromSchemaLieuDeMediationNumerique(lieuMediationNumeriqueWithAidantsTransfer),
+  ...aidantsIfAny(lieuMediationNumeriqueWithAidantsTransfer.aidants)
+});
+
+const toLieuxMediationNumeriqueWithAidants = (
+  lieuxMediationNumeriqueWithAidantsTransfer: LieuMediationNumeriqueWithAidantsTransfer[]
+): LieuMediationNumeriqueWithAidants[] => lieuxMediationNumeriqueWithAidantsTransfer.map(toLieuMediationNumeriqueWithAidants);
 
 export class LieuxMediationNumeriqueHttp extends LieuxMediationNumeriqueRepository {
   public constructor(private readonly dataConfiguration: DataConfiguration, private readonly httpClient: HttpClient) {
     super();
   }
 
-  public getAll$(): Observable<LieuMediationNumerique[]> {
+  public getAll$(): Observable<LieuMediationNumeriqueWithAidants[]> {
     return this.httpClient
-      .get<LieuMediationNumeriqueTransfer[]>(this.dataConfiguration.lieuxDeMediationNumerique)
-      .pipe(map(toLieuxMediationNumerique), shareReplay());
+      .get<LieuMediationNumeriqueWithAidantsTransfer[]>(this.dataConfiguration.lieuxDeMediationNumerique)
+      .pipe(map(toLieuxMediationNumeriqueWithAidants), shareReplay());
   }
 }

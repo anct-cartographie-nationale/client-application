@@ -5,4 +5,4 @@ export const serviceFilterOperator: FilterOperator = (
   lieuMediationNumerique: LieuMediationNumeriquePresentation,
   filter: FilterPresentation
 ): boolean =>
-  lieuMediationNumerique.services && filter.services ? lieuMediationNumerique.services.includes(filter.services) : true;
+  lieuMediationNumerique.services && filter.service ? lieuMediationNumerique.services.includes(filter.service) : true;

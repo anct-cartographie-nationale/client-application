@@ -21,8 +21,8 @@
               <i class="ri-price-tag-3-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <span
                 class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                *ngIf="filter.conditions_access && filter.conditions_access.length > 0">
-                {{filter.conditions_access.length}}
+                *ngIf="filter.conditions_acces && filter.conditions_acces.length > 0">
+                {{filter.conditions_acces.length}}
               </span>
               <div>
                 <b class="accordion-button-label">Conditions financières</b>
@@ -40,12 +40,12 @@
             <div class="accordion-body text-center">
               <div
                 class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let conditionFinancieresOption of conditionFinancieresOptions; index as i">
+                *ngFor="let conditionFinancieresOption of conditionAccesOptions; index as i">
                 <input
                   type="checkbox"
-                  name="conditions_access"
+                  name="conditions_acces"
                   appCheckboxArray
-                  formControlName="conditions_access"
+                  formControlName="conditions_acces"
                   class="form-check-input"
                   [value]="conditionFinancieresOption.value"
                   [attr.id]="'conditionFinancieresLabelChip' + i" />
@@ -91,7 +91,7 @@
             <div class="accordion-body text-center">
               <div
                 class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let typeAccompagnementsOption of typeAccompagnementsOptions; index as i">
+                *ngFor="let typeAccompagnementsOption of modaliteAccompagnementsOptions; index as i">
                 <input
                   type="checkbox"
                   name="modalites_accompagnement"
@@ -122,9 +122,9 @@
               (click)="collapseTypePublic.toggle()">
               <i class="ri-parent-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <span
-                *ngIf="filter.publics_accueillis && filter.publics_accueillis.length > 0 && publicsAccueillisCompteur(filter.publics_accueillis,typePublicOptions) > 0 "
+                *ngIf="filter.publics_accueillis && filter.publics_accueillis.length > 0 && publicsAccueillisCompteur(filter.publics_accueillis, publicAccueilliOptions) > 0 "
                 class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle">
-                {{publicsAccueillisCompteur(filter.publics_accueillis,typePublicOptions)}}
+                {{publicsAccueillisCompteur(filter.publics_accueillis, publicAccueilliOptions)}}
               </span>
               <div>
                 <b class="accordion-button-label">Type de public</b>
@@ -139,7 +139,7 @@
             <div class="accordion-body text-center">
               <div
                 class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let typePublicOption of typePublicOptions; index as i">
+                *ngFor="let typePublicOption of publicAccueilliOptions; index as i">
                 <input
                   type="checkbox"
                   name="publics_accueillis"
@@ -168,9 +168,9 @@
               (click)="collapseAccueilSpecifique.toggle()">
               <i class="ri-wheelchair-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <span
-                *ngIf="filter.publics_accueillis && filter.publics_accueillis.length > 0 && publicsAccueillisCompteur(filter.publics_accueillis,accueilSpecifiqueOptions) > 0 "
+                *ngIf="filter.publics_accueillis && filter.publics_accueillis.length > 0 && publicsAccueillisCompteur(filter.publics_accueillis, publicSpecifiqueAcceuilliOptions) > 0 "
                 class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle">
-                {{publicsAccueillisCompteur(filter.publics_accueillis,accueilSpecifiqueOptions)}}
+                {{publicsAccueillisCompteur(filter.publics_accueillis, publicSpecifiqueAcceuilliOptions)}}
               </span>
               <div>
                 <b class="accordion-button-label">Accueil spécifique</b>
@@ -185,7 +185,7 @@
             <div class="accordion-body text-center">
               <div
                 class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let accueilSpecifiqueOption of accueilSpecifiqueOptions; index as i">
+                *ngFor="let accueilSpecifiqueOption of publicSpecifiqueAcceuilliOptions; index as i">
                 <input
                   type="checkbox"
                   name="publics_accueillis"

@@ -1,19 +1,22 @@
-import { ModalitesAccompagnement } from '../../../models';
+import { ModaliteAccompagnement } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FilterOperator, FilterPresentation } from '../../filter';
 import { LieuMediationNumeriquePresentation } from '../lieu-mediation-numerique.presentation';
 
-const shouldFilter = (filter: FilterPresentation) =>
-  filter.modalites_accompagnement != null && filter.modalites_accompagnement.length > 0;
+const shouldApply = (modaliteAccompagnement?: ModaliteAccompagnement[]): modaliteAccompagnement is ModaliteAccompagnement[] =>
+  modaliteAccompagnement != null && modaliteAccompagnement.length > 0;
 
 const hasAtLeastOneOfTheFilterProperties =
-  (filter: FilterPresentation) =>
-  (hasOneOfTheFilteredModalitesAccompagnement: boolean, modaliteAccompagnement: ModalitesAccompagnement) =>
-    hasOneOfTheFilteredModalitesAccompagnement || (filter.modalites_accompagnement ?? []).includes(modaliteAccompagnement);
+  (modalitesAccompagnement: ModaliteAccompagnement[]) =>
+  (hasOneOfTheFilteredModalitesAccompagnement: boolean, modaliteAccompagnement: ModaliteAccompagnement) =>
+    hasOneOfTheFilteredModalitesAccompagnement || modalitesAccompagnement.includes(modaliteAccompagnement);
 
 export const modalitesAccompagnementFilterOperator: FilterOperator = (
   lieuMediationNumerique: LieuMediationNumeriquePresentation,
   filter: FilterPresentation
 ): boolean =>
-  shouldFilter(filter)
-    ? lieuMediationNumerique.modalites_accompagnement?.reduce(hasAtLeastOneOfTheFilterProperties(filter), false) ?? false
+  shouldApply(filter.modalites_accompagnement)
+    ? lieuMediationNumerique.modalites_accompagnement?.reduce(
+        hasAtLeastOneOfTheFilterProperties(filter.modalites_accompagnement),
+        false
+      ) ?? false
     : true;

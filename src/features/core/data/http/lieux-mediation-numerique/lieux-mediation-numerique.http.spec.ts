@@ -1,15 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, Observable, of } from 'rxjs';
+import {
+  Adresse,
+  CleBan,
+  ConditionAcces,
+  ConditionsAcces,
+  Contact,
+  Id,
+  LabelNational,
+  LabelsNationaux,
+  LieuMediationNumerique,
+  Localisation,
+  ModaliteAccompagnement,
+  ModalitesAccompagnement,
+  Nom,
+  Pivot,
+  PublicAccueilli,
+  PublicsAccueillis,
+  SchemaLieuMediationNumerique,
+  Service,
+  Services,
+  Typologie,
+  Typologies,
+  Url
+} from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { DataConfiguration } from '../../../../../root';
-import { Adresse, Localisation, Contact, Url, LieuMediationNumerique, Pivot, CleBan } from '../../../models';
-import { LieuMediationNumeriqueTransfer } from '../../transfers/lieu-mediation-numerique.transfer';
 import { LieuxMediationNumeriqueHttp } from './lieux-mediation-numerique.http';
+import { Aidants, LieuMediationNumeriqueWithAidants } from '../../../models';
 
 describe('lieux mediation numérique http', (): void => {
   it('should get all', async (): Promise<void> => {
     const dataConfiguration: DataConfiguration = {} as DataConfiguration;
     const httpClient: HttpClient = {
-      get: (): Observable<LieuMediationNumeriqueTransfer[]> => {
+      get: (): Observable<SchemaLieuMediationNumerique[]> => {
         return of([
           {
             id: 'structure-1',
@@ -23,25 +46,38 @@ describe('lieux mediation numérique http', (): void => {
             latitude: 43.52609,
             longitude: 5.41423,
             cle_ban: '13001_3079_00001',
-            typologie: 'TIERS_LIEUX,ASSO',
+            typologie: [Typologie.TIERS_LIEUX, Typologie.ASSO].join(';'),
             telephone: '+33180059880',
             courriel: 'contact@laquincaillerie.tl',
-            site_web: 'https://www.laquincaillerie.tl/,https://m.facebook.com/laquincaillerienumerique/',
+            site_web: ['https://www.laquincaillerie.tl/', 'https://m.facebook.com/laquincaillerienumerique/'].join(';'),
             horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
-            presentation_resumee:
+            presentation_resume:
               'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
             presentation_detail:
               "Notre parcours d'initiation permet l'acquisition de compétences numériques de base. Nous proposons également un accompagnement à destination des personnes déjà initiées qui souhaiteraient approfondir leurs connaissances. Du matériel informatique est en libre accès pour nos adhérents tous les après-midis. En plus de d'accueillir les personnes dans notre lieu en semaine (sur rendez-vous), nous assurons une permanence le samedi matin dans la médiathèque XX.",
             source: 'Hubik',
             structure_parente: 'Pôle emploi',
             date_maj: '2022-06-02',
-            publics_accueillis: 'Familles/enfants,Adultes,Déficience visuelle',
-            services:
-              'Devenir autonome dans les démarches administratives,Réaliser des démarches administratives avec un accompagnement,Prendre en main un smartphone ou une tablette,Prendre en main un ordinateur,Utiliser le numérique au quotidien,Approfondir ma culture numérique,Favoriser mon insertion professionnelle,Accéder à une connexion internet,Accéder à du matériel',
-            conditions_access: 'Gratuit,Payant',
-            labels_nationaux: 'France Services,APTIC,Point relais CAF',
-            labels_autres: 'SudLabs,Nièvre médiation numérique',
-            modalites_accompagnement: "Seul,Avec de l'aide",
+            publics_accueillis: [
+              PublicAccueilli.FamillesEnfants,
+              PublicAccueilli.Adultes,
+              PublicAccueilli.DeficienceVisuelle
+            ].join(';'),
+            services: [
+              Service.DevenirAutonomeDansLesDemarchesAdministratives,
+              Service.RealiserDesDemarchesAdministratives,
+              Service.PrendreEnMainUnSmartphoneOuUneTablette,
+              Service.PrendreEnMainUnOrdinateur,
+              Service.UtiliserLeNumerique,
+              Service.ApprofondirMaCultureNumerique,
+              Service.FavoriserMonInsertionProfessionnelle,
+              Service.AccederAUneConnexionInternet,
+              Service.AccederADuMateriel
+            ].join(';'),
+            conditions_acces: [ConditionAcces.Gratuit, ConditionAcces.Payant].join(';'),
+            labels_nationaux: [LabelNational.FranceServices, LabelNational.APTIC, LabelNational.PointRelaisCAF].join(';'),
+            labels_autres: ['SudLabs', 'Nièvre médiation numérique'].join(';'),
+            modalites_accompagnement: [ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide].join(';'),
             accessibilite:
               'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/',
             prise_rdv: 'https://www.rdv-solidarites.fr/'
@@ -59,9 +95,9 @@ describe('lieux mediation numérique http', (): void => {
 
     expect(lieuxMediationNumerique).toStrictEqual<LieuMediationNumerique[]>([
       {
-        id: 'structure-1',
+        id: Id('structure-1'),
         pivot: Pivot('43493312300029'),
-        nom: 'Anonymal',
+        nom: Nom('Anonymal'),
         adresse: Adresse({
           commune: 'Reims',
           code_postal: '51100',
@@ -74,7 +110,7 @@ describe('lieux mediation numérique http', (): void => {
           longitude: 5.41423
         }),
         cle_ban: CleBan('13001_3079_00001'),
-        typologie: ['TIERS_LIEUX', 'ASSO'],
+        typologies: Typologies([Typologie.TIERS_LIEUX, Typologie.ASSO]),
         contact: Contact({
           telephone: '+33180059880',
           courriel: 'contact@laquincaillerie.tl',
@@ -82,29 +118,33 @@ describe('lieux mediation numérique http', (): void => {
         }),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         presentation: {
-          resumee: 'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
+          resume: 'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
           detail:
             "Notre parcours d'initiation permet l'acquisition de compétences numériques de base. Nous proposons également un accompagnement à destination des personnes déjà initiées qui souhaiteraient approfondir leurs connaissances. Du matériel informatique est en libre accès pour nos adhérents tous les après-midis. En plus de d'accueillir les personnes dans notre lieu en semaine (sur rendez-vous), nous assurons une permanence le samedi matin dans la médiathèque XX."
         },
         source: 'Hubik',
         structure_parente: 'Pôle emploi',
         date_maj: new Date('2022-06-02'),
-        publics_accueillis: ['Familles/enfants', 'Adultes', 'Déficience visuelle'],
-        services: [
-          'Devenir autonome dans les démarches administratives',
-          'Réaliser des démarches administratives avec un accompagnement',
-          'Prendre en main un smartphone ou une tablette',
-          'Prendre en main un ordinateur',
-          'Utiliser le numérique au quotidien',
-          'Approfondir ma culture numérique',
-          'Favoriser mon insertion professionnelle',
-          'Accéder à une connexion internet',
-          'Accéder à du matériel'
-        ],
-        labels_nationaux: ['France Services', 'APTIC', 'Point relais CAF'],
-        conditions_access: ['Gratuit', 'Payant'],
+        publics_accueillis: PublicsAccueillis([
+          PublicAccueilli.FamillesEnfants,
+          PublicAccueilli.Adultes,
+          PublicAccueilli.DeficienceVisuelle
+        ]),
+        services: Services([
+          Service.DevenirAutonomeDansLesDemarchesAdministratives,
+          Service.RealiserDesDemarchesAdministratives,
+          Service.PrendreEnMainUnSmartphoneOuUneTablette,
+          Service.PrendreEnMainUnOrdinateur,
+          Service.UtiliserLeNumerique,
+          Service.ApprofondirMaCultureNumerique,
+          Service.FavoriserMonInsertionProfessionnelle,
+          Service.AccederAUneConnexionInternet,
+          Service.AccederADuMateriel
+        ]),
+        labels_nationaux: LabelsNationaux([LabelNational.FranceServices, LabelNational.APTIC, LabelNational.PointRelaisCAF]),
+        conditions_acces: ConditionsAcces([ConditionAcces.Gratuit, ConditionAcces.Payant]),
         labels_autres: ['SudLabs', 'Nièvre médiation numérique'],
-        modalites_accompagnement: ['Seul', "Avec de l'aide"],
+        modalites_accompagnement: ModalitesAccompagnement([ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide]),
         accessibilite: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
         ),
@@ -116,7 +156,7 @@ describe('lieux mediation numérique http', (): void => {
   it('should get all with only required fields', async (): Promise<void> => {
     const dataConfiguration: DataConfiguration = {} as DataConfiguration;
     const httpClient: HttpClient = {
-      get: (): Observable<LieuMediationNumeriqueTransfer[]> => {
+      get: (): Observable<SchemaLieuMediationNumerique[]> => {
         return of([
           {
             id: 'cf52c480-2461-4011-b299-10353b64e323',
@@ -124,10 +164,16 @@ describe('lieux mediation numérique http', (): void => {
             commune: 'MARSEILLE',
             code_postal: '13211',
             adresse: '4 AV DE SAINT MENET',
-            services:
-              'Prendre en main un smartphone ou une tablette, Prendre en main un ordinateur, Utiliser le numérique au quotidien, Approfondir ma culture numérique',
+            services: [
+              Service.PrendreEnMainUnSmartphoneOuUneTablette,
+              Service.PrendreEnMainUnOrdinateur,
+              Service.UtiliserLeNumerique,
+              Service.ApprofondirMaCultureNumerique
+            ].join(';'),
             latitude: 4.8375548,
-            longitude: 45.7665478
+            longitude: 45.7665478,
+            date_maj: '2022-12-05',
+            pivot: '91224046510114'
           }
         ]);
       }
@@ -140,10 +186,11 @@ describe('lieux mediation numérique http', (): void => {
 
     const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(lieuxMediationNumeriqueHttp.getAll$());
 
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect(lieuxMediationNumerique).toStrictEqual<LieuMediationNumerique[]>([
       {
-        id: 'cf52c480-2461-4011-b299-10353b64e323',
-        nom: "Association l'espoir (Groupe SOS)",
+        id: Id('cf52c480-2461-4011-b299-10353b64e323'),
+        nom: Nom("Association l'espoir (Groupe SOS)"),
+        pivot: Pivot('91224046510114'),
         adresse: Adresse({
           commune: 'MARSEILLE',
           code_postal: '13211',
@@ -153,20 +200,21 @@ describe('lieux mediation numérique http', (): void => {
           latitude: 4.8375548,
           longitude: 45.7665478
         }),
-        services: [
-          'Prendre en main un smartphone ou une tablette',
-          'Prendre en main un ordinateur',
-          'Utiliser le numérique au quotidien',
-          'Approfondir ma culture numérique'
-        ]
+        services: Services([
+          Service.PrendreEnMainUnSmartphoneOuUneTablette,
+          Service.PrendreEnMainUnOrdinateur,
+          Service.UtiliserLeNumerique,
+          Service.ApprofondirMaCultureNumerique
+        ]),
+        date_maj: new Date('2022-12-05T00:00:00.000Z')
       }
     ]);
   });
 
-  it('should get all with defined coordinates', async (): Promise<void> => {
+  it('should get all without coordinates', async (): Promise<void> => {
     const dataConfiguration: DataConfiguration = {} as DataConfiguration;
     const httpClient: HttpClient = {
-      get: (): Observable<LieuMediationNumeriqueTransfer[]> => {
+      get: (): Observable<SchemaLieuMediationNumerique[]> => {
         return of([
           {
             id: 'cf52c480-2461-4011-b299-10353b64e323',
@@ -175,8 +223,14 @@ describe('lieux mediation numérique http', (): void => {
             code_postal: '13211',
             code_insee: '13055',
             adresse: '4 AV DE SAINT MENET',
-            services:
-              'Prendre en main un smartphone ou une tablette, Prendre en main un ordinateur, Utiliser le numérique au quotidien, Approfondir ma culture numérique'
+            services: [
+              Service.PrendreEnMainUnSmartphoneOuUneTablette,
+              Service.PrendreEnMainUnOrdinateur,
+              Service.UtiliserLeNumerique,
+              Service.ApprofondirMaCultureNumerique
+            ].join(';'),
+            date_maj: '2022-12-05',
+            pivot: '91224046510114'
           }
         ]);
       }
@@ -189,76 +243,55 @@ describe('lieux mediation numérique http', (): void => {
 
     const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(lieuxMediationNumeriqueHttp.getAll$());
 
-    expect(lieuxMediationNumerique).toStrictEqual([]);
-  });
-
-  it('should get lieu mediation numerique without contact email error', async (): Promise<void> => {
-    const dataConfiguration: DataConfiguration = {} as DataConfiguration;
-    const httpClient: HttpClient = {
-      get: (): Observable<LieuMediationNumeriqueTransfer[]> => {
-        return of([
-          {
-            id: 'cf52c480-2461-4011-b299-10353b64e323',
-            nom: "Association l'espoir (Groupe SOS)",
-            commune: 'MARSEILLE',
-            code_postal: '13211',
-            adresse: '4 AV DE SAINT MENET',
-            services:
-              'Prendre en main un smartphone ou une tablette, Prendre en main un ordinateur, Utiliser le numérique au quotidien, Approfondir ma culture numérique',
-            latitude: 4.8375548,
-            longitude: 45.7665478,
-            courriel: 'contactlaquincaillerie.tl'
-          }
-        ]);
-      }
-    } as unknown as HttpClient;
-
-    const lieuxMediationNumeriqueHttp: LieuxMediationNumeriqueHttp = new LieuxMediationNumeriqueHttp(
-      dataConfiguration,
-      httpClient
-    );
-
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(lieuxMediationNumeriqueHttp.getAll$());
-
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect(lieuxMediationNumerique).toStrictEqual<LieuMediationNumerique[]>([
       {
-        id: 'cf52c480-2461-4011-b299-10353b64e323',
-        nom: "Association l'espoir (Groupe SOS)",
+        id: Id('cf52c480-2461-4011-b299-10353b64e323'),
+        nom: Nom("Association l'espoir (Groupe SOS)"),
+        pivot: Pivot('91224046510114'),
         adresse: Adresse({
           commune: 'MARSEILLE',
           code_postal: '13211',
+          code_insee: '13055',
           voie: '4 AV DE SAINT MENET'
         }),
-        localisation: Localisation({
-          latitude: 4.8375548,
-          longitude: 45.7665478
-        }),
-        services: [
-          'Prendre en main un smartphone ou une tablette',
-          'Prendre en main un ordinateur',
-          'Utiliser le numérique au quotidien',
-          'Approfondir ma culture numérique'
-        ]
+        services: Services([
+          Service.PrendreEnMainUnSmartphoneOuUneTablette,
+          Service.PrendreEnMainUnOrdinateur,
+          Service.UtiliserLeNumerique,
+          Service.ApprofondirMaCultureNumerique
+        ]),
+        date_maj: new Date('2022-12-05T00:00:00.000Z')
       }
     ]);
   });
 
-  it('should get lieu mediation numerique without pivot error', async (): Promise<void> => {
+  it('should get all with aidants', async (): Promise<void> => {
     const dataConfiguration: DataConfiguration = {} as DataConfiguration;
     const httpClient: HttpClient = {
-      get: (): Observable<LieuMediationNumeriqueTransfer[]> => {
+      get: (): Observable<SchemaLieuMediationNumerique[]> => {
         return of([
           {
             id: 'cf52c480-2461-4011-b299-10353b64e323',
-            pivot: '123456',
             nom: "Association l'espoir (Groupe SOS)",
             commune: 'MARSEILLE',
             code_postal: '13211',
+            code_insee: '13055',
             adresse: '4 AV DE SAINT MENET',
-            services:
-              'Prendre en main un smartphone ou une tablette, Prendre en main un ordinateur, Utiliser le numérique au quotidien, Approfondir ma culture numérique',
-            latitude: 4.8375548,
-            longitude: 45.7665478
+            services: [
+              Service.PrendreEnMainUnSmartphoneOuUneTablette,
+              Service.PrendreEnMainUnOrdinateur,
+              Service.UtiliserLeNumerique,
+              Service.ApprofondirMaCultureNumerique
+            ].join(';'),
+            date_maj: '2022-12-05',
+            pivot: '91224046510114',
+            aidants: [
+              {
+                nom: 'John Doe',
+                telephone: '+33156987423',
+                courriel: 'john.doe@conseiller-numerique.fr'
+              }
+            ]
           }
         ]);
       }
@@ -269,27 +302,35 @@ describe('lieux mediation numérique http', (): void => {
       httpClient
     );
 
-    const lieuxMediationNumerique: LieuMediationNumerique[] = await firstValueFrom(lieuxMediationNumeriqueHttp.getAll$());
+    const lieuxMediationNumerique: LieuMediationNumeriqueWithAidants[] = await firstValueFrom(
+      lieuxMediationNumeriqueHttp.getAll$()
+    );
 
-    expect(lieuxMediationNumerique).toStrictEqual([
+    expect(lieuxMediationNumerique).toStrictEqual<LieuMediationNumeriqueWithAidants[]>([
       {
-        id: 'cf52c480-2461-4011-b299-10353b64e323',
-        nom: "Association l'espoir (Groupe SOS)",
+        id: Id('cf52c480-2461-4011-b299-10353b64e323'),
+        nom: Nom("Association l'espoir (Groupe SOS)"),
+        pivot: Pivot('91224046510114'),
         adresse: Adresse({
           commune: 'MARSEILLE',
           code_postal: '13211',
+          code_insee: '13055',
           voie: '4 AV DE SAINT MENET'
         }),
-        localisation: Localisation({
-          latitude: 4.8375548,
-          longitude: 45.7665478
-        }),
-        services: [
-          'Prendre en main un smartphone ou une tablette',
-          'Prendre en main un ordinateur',
-          'Utiliser le numérique au quotidien',
-          'Approfondir ma culture numérique'
-        ]
+        services: Services([
+          Service.PrendreEnMainUnSmartphoneOuUneTablette,
+          Service.PrendreEnMainUnOrdinateur,
+          Service.UtiliserLeNumerique,
+          Service.ApprofondirMaCultureNumerique
+        ]),
+        date_maj: new Date('2022-12-05T00:00:00.000Z'),
+        aidants: Aidants([
+          {
+            nom: 'John Doe',
+            telephone: '+33156987423',
+            courriel: 'john.doe@conseiller-numerique.fr'
+          }
+        ])
       }
     ]);
   });

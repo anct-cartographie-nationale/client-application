@@ -1,6 +1,5 @@
 import { combineLatest, Observable, of, shareReplay } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LieuMediationNumerique, Localisation, NO_LOCALISATION } from '../../models';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import {
   byLieuxCount,
@@ -16,6 +15,8 @@ import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
 import { byBoundingBox } from './helpers/bounding-box';
 import { byDistance, filteredLieuxMediationNumerique } from './helpers/filter';
+import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { NO_LOCALISATION } from '../../models';
 
 type LieuxMediationNumeriqueFilterParameters = [LieuMediationNumerique[], Localisation, FilterPresentation];
 

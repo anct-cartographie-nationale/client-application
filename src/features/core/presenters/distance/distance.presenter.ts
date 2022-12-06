@@ -1,4 +1,4 @@
-import { Localisation } from '../../models';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 const HALF_CIRCLE_DEGREE: number = 180;
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { LabelNational } from '../../../core';
+import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

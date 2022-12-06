@@ -1,5 +1,5 @@
 import { firstValueFrom } from 'rxjs';
-import { Localisation } from '../../../core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { getBoundsFromLocalisations, MarkersPresenter } from './markers.presenter';
 
 describe('markers presenter', (): void => {

@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, shareReplay, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
   departementFromNom,
   regionFromNom,
@@ -10,7 +11,6 @@ import {
   FilterPresentation,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
-  Localisation,
   regionFromDepartement,
   RegionPresentation,
   toDepartement,
@@ -92,7 +92,9 @@ export class CartographieLayout {
 
   public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
     this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
-    this.markersPresenter.center(lieu.localisation);
+    lieu.latitude &&
+      lieu.longitude &&
+      this.markersPresenter.center(Localisation({ latitude: lieu.latitude, longitude: lieu.longitude }));
     this.markersPresenter.select(lieu.id);
   }
 
@@ -150,7 +152,11 @@ export class CartographieLayout {
     const lieuFound: LieuMediationNumeriquePresentation | undefined = lieux.find(
       (lieu: LieuMediationNumeriquePresentation) => lieu.id === this.getRouteParam('id')
     );
-    if (lieuFound) return this.markersPresenter.center(lieuFound.localisation, LIEUX_ZOOM_LEVEL);
+    if (lieuFound?.longitude && lieuFound?.latitude)
+      return this.markersPresenter.center(
+        Localisation({ latitude: lieuFound.latitude, longitude: lieuFound.longitude }),
+        LIEUX_ZOOM_LEVEL
+      );
 
     this.navigateToPageMatchingZoomLevel(
       this.markersPresenter.defaultCenterView.zoomLevel,

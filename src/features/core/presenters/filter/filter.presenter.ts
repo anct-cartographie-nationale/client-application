@@ -1,12 +1,12 @@
 import {
-  ConditionAccess,
+  ConditionAcces,
   Localisation,
-  ModalitesAccompagnement,
-  NO_LOCALISATION,
+  ModaliteAccompagnement,
   PublicAccueilli,
   Service
-} from '../../models';
+} from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriquePresentation } from '../lieux-mediation-numerique';
+import { NO_LOCALISATION } from '../../models';
 
 export type FilterOperator = (
   lieuMediationNumerique: LieuMediationNumeriquePresentation,
@@ -15,26 +15,26 @@ export type FilterOperator = (
 ) => boolean;
 
 export type FilterPresentation = {
-  services?: Service;
+  service?: Service;
   distance?: number;
   accessibilite?: boolean;
-  conditions_access?: ConditionAccess[];
+  conditions_acces?: ConditionAcces[];
   publics_accueillis?: PublicAccueilli[];
-  modalites_accompagnement?: ModalitesAccompagnement[];
+  modalites_accompagnement?: ModaliteAccompagnement[];
   date_ouverture?: string;
   ouvert_actuellement?: string;
 };
 
 export type FilterQueryParamsPresentation = {
-  services?: Service;
+  service?: Service;
   address?: string;
   latitude?: `${number}`;
   longitude?: `${number}`;
   distance?: '5000' | '20000';
   accessibilite?: 'true' | 'false';
-  conditions_access?: ConditionAccess[];
-  publics_accueillis?: PublicAccueilli[];
-  modalites_accompagnement?: ModalitesAccompagnement[];
+  conditions_acces?: string;
+  publics_accueillis?: string;
+  modalites_accompagnement?: string;
   date_ouverture?: string;
   ouvert_actuellement?: string;
 };
@@ -45,18 +45,18 @@ export type FilterFormPresentation = FilterPresentation & {
   longitude?: number;
 };
 
-const wrapInArray = <T>(params: T[] | T) => (Array.isArray(params) ? params : [params]);
+const wrapInArray = <T>(params: string | string[]): T[] => (Array.isArray(params) ? params : [params]) as unknown as T[];
 
-const toArray = <T>(params?: T | T[]): T[] => (!params ? [] : wrapInArray(params));
+const toArray = <T>(params?: string | string[]): T[] => (!params ? [] : wrapInArray(params));
 
 export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParamsPresentation): FilterFormPresentation => ({
-  services: queryParams?.services,
+  service: queryParams?.service,
   address: queryParams?.address,
   latitude: queryParams?.latitude ? parseFloat(queryParams.latitude) : undefined,
   longitude: queryParams?.longitude ? parseFloat(queryParams.longitude) : undefined,
   distance: queryParams?.distance ? parseInt(queryParams.distance) : undefined,
   accessibilite: queryParams?.accessibilite === 'true' ? true : undefined,
-  conditions_access: toArray(queryParams?.conditions_access),
+  conditions_acces: toArray(queryParams?.conditions_acces),
   publics_accueillis: toArray(queryParams?.publics_accueillis),
   modalites_accompagnement: toArray(queryParams?.modalites_accompagnement),
   date_ouverture: queryParams?.date_ouverture,

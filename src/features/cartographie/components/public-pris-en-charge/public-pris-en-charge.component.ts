@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { PublicAccueilli } from '../../../core';
+import { PublicAccueilli } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

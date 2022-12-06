@@ -1,6 +1,6 @@
 <ul *ngIf="filter" class="nav justify-content-center pb-3">
   <li class="nav-item">
-    <app-nav-link [size]="size" [link]="['besoin']" [filtersCount]="filter.services ? 1 : 0">Besoin</app-nav-link>
+    <app-nav-link [size]="size" [link]="['besoin']" [filtersCount]="filter.service ? 1 : 0">Besoin</app-nav-link>
   </li>
   <li class="nav-item">
     <app-nav-link [size]="size" [link]="['localisation']" [filtersCount]="filter.distance ? 1 : 0">Localisation</app-nav-link>
@@ -10,7 +10,7 @@
       [size]="size"
       [link]="['accessibilite']"
       [filtersCount]="
-        (filter.conditions_access?.length ?? 0) +
+        (filter.conditions_acces?.length ?? 0) +
         (filter.publics_accueillis?.length ?? 0) +
         (filter.modalites_accompagnement?.length ?? 0)
       ">

@@ -1,22 +1,71 @@
-import { LieuMediationNumerique, Localisation, NO_LOCALISATION } from '../../models';
+import {
+  ConditionAcces,
+  LabelNational,
+  LieuMediationNumerique,
+  Localisation,
+  ModaliteAccompagnement,
+  PublicAccueilli,
+  Service
+} from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { openingStatus, OpeningStatus } from '../horaires';
 import { ifAny } from '../../utilities';
 import { geographicDistance } from '../distance';
+import { NO_LOCALISATION } from '../../models';
 
-export type LieuMediationNumeriquePresentation = LieuMediationNumerique & {
+export type LieuMediationNumeriquePresentation = {
+  id: string;
+  nom: string;
+  voie: string;
+  code_postal: string;
+  code_insee?: string;
+  commune: string;
+  date_maj: Date;
+  services: Service[];
+  latitude?: number;
+  longitude?: number;
+  telephone?: string;
+  courriel?: string;
+  prise_rdv?: string;
+  labels_nationaux?: LabelNational[];
+  accessibilite?: string;
+  modalites_accompagnement?: ModaliteAccompagnement[];
+  publics_accueillis?: PublicAccueilli[];
+  conditions_acces?: ConditionAcces[];
+  horaires?: string;
+
   distance?: number;
   status?: OpeningStatus;
 };
 
 const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisation: Localisation): number | undefined =>
-  localisation === NO_LOCALISATION ? undefined : geographicDistance(lieuMediationNumerique.localisation, localisation);
+  lieuMediationNumerique.localisation == null || localisation === NO_LOCALISATION
+    ? undefined
+    : geographicDistance(lieuMediationNumerique.localisation, localisation);
 
 export const toLieuxMediationNumeriquePresentation = (
   lieuMediationNumerique: LieuMediationNumerique,
   localisation: Localisation,
   date: Date
 ): LieuMediationNumeriquePresentation => ({
-  ...lieuMediationNumerique,
+  id: lieuMediationNumerique.id,
+  nom: lieuMediationNumerique.nom,
+  voie: lieuMediationNumerique.adresse.voie,
+  code_postal: lieuMediationNumerique.adresse.code_postal,
+  ...ifAny('code_insee', lieuMediationNumerique.adresse?.code_insee),
+  commune: lieuMediationNumerique.adresse.commune,
+  date_maj: lieuMediationNumerique.date_maj,
+  services: lieuMediationNumerique.services,
+  ...ifAny('latitude', lieuMediationNumerique.localisation?.latitude),
+  ...ifAny('longitude', lieuMediationNumerique.localisation?.longitude),
+  ...ifAny('telephone', lieuMediationNumerique.contact?.telephone),
+  ...ifAny('courriel', lieuMediationNumerique.contact?.courriel),
+  ...ifAny('prise_rdv', lieuMediationNumerique.prise_rdv),
+  ...ifAny('labels_nationaux', lieuMediationNumerique.labels_nationaux),
+  ...ifAny('accessibilite', lieuMediationNumerique.accessibilite),
+  ...ifAny('modalites_accompagnement', lieuMediationNumerique.modalites_accompagnement),
+  ...ifAny('publics_accueillis', lieuMediationNumerique.publics_accueillis),
+  ...ifAny('conditions_acces', lieuMediationNumerique.conditions_acces),
+  ...ifAny('horaires', lieuMediationNumerique.horaires),
   ...ifAny('distance', getDistance(lieuMediationNumerique, localisation)),
   ...ifAny('status', openingStatus(date)(lieuMediationNumerique.horaires))
 });

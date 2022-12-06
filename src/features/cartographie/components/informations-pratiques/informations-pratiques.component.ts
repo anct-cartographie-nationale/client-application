@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ConditionAccess, Url } from '../../../core';
+import { Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,7 +8,7 @@ import { ConditionAccess, Url } from '../../../core';
 })
 export class InformationsPratiquesComponent {
   @Input() public adresse!: string;
-  @Input() public conditionAccess?: ConditionAccess[];
+  @Input() public conditionsAcces?: string;
   @Input() public accessibilite?: Url;
   @Input() public courriel?: string;
   @Input() public telephone?: string;

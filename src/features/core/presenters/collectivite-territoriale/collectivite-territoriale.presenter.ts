@@ -1,5 +1,6 @@
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { departements, geographicDistance, LieuMediationNumeriquePresentation, regions } from '../../../core';
 import codePostalNotMatchingCodeDepartement from './code-postal-not-matching-code-departement.json';
-import { departements, geographicDistance, LieuMediationNumeriquePresentation, Localisation, regions } from '../../../core';
 import { DepartementPresentation } from './presentations/departement.presentation';
 import { RegionPresentation } from './presentations/region.presentation';
 
@@ -31,9 +32,9 @@ const codeDepartementFromCodePostal = (codePostal: string) => {
 const codeDepartementFromCodeInsee = (codeInsee: string) => codeInsee.slice(0, 2);
 
 const toCodeDepartement = (lieuDeMediationNumerique: LieuMediationNumeriquePresentation): string => {
-  return lieuDeMediationNumerique.adresse.code_insee
-    ? codeDepartementFromCodeInsee(lieuDeMediationNumerique.adresse.code_insee)
-    : codeDepartementFromCodePostal(lieuDeMediationNumerique.adresse.code_postal);
+  return lieuDeMediationNumerique.code_insee
+    ? codeDepartementFromCodeInsee(lieuDeMediationNumerique.code_insee)
+    : codeDepartementFromCodePostal(lieuDeMediationNumerique.code_postal);
 };
 
 export const toDepartement = (

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Localisation } from '../../../core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { AddressFoundPresentation, AddressPresenter } from '../../../adresse';
 import { MarkersPresenter } from '../../presenters';
 

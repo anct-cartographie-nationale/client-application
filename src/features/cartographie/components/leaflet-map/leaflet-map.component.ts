@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import L, { Bounds, LeafletMouseEvent, Map as LeafletMap } from 'leaflet';
-import { Localisation } from '../../../core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { CenterView } from '../../presenters';
 import { flyTo, initializeMap } from './leaflet-map.presenter';
 

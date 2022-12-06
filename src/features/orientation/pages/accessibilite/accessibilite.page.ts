@@ -1,21 +1,21 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { PublicAccueilli } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { OrientationLayout } from '../../layouts';
 import { OrientationItemPresentation } from '../../presenters';
-import conditionFinancieres from './conditions-financieres.json';
-import typeAccompagnements from './type-accompagnements.json';
-import accueilSpecifique from './accueil-specifique.json';
-import typePublic from './type-de-public.json';
-import { PublicAccueilli } from '../../../core';
+import conditionAcces from './condition-acces.json';
+import modaliteAccompagnements from './modalite-accompagnements.json';
+import publicSpecifiqueAcceuilli from './public-specifique-accueilli.json';
+import publicAccueilli from './public-accueilli.json';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './accessibilite.page.html'
 })
 export class AccessibilitePage {
-  public conditionFinancieresOptions: OrientationItemPresentation<string>[] = conditionFinancieres;
-  public typeAccompagnementsOptions: OrientationItemPresentation<string>[] = typeAccompagnements;
-  public accueilSpecifiqueOptions: OrientationItemPresentation<string>[] = accueilSpecifique;
-  public typePublicOptions: OrientationItemPresentation<string>[] = typePublic;
+  public conditionAccesOptions: OrientationItemPresentation<string>[] = conditionAcces;
+  public modaliteAccompagnementsOptions: OrientationItemPresentation<string>[] = modaliteAccompagnements;
+  public publicSpecifiqueAcceuilliOptions: OrientationItemPresentation<string>[] = publicSpecifiqueAcceuilli;
+  public publicAccueilliOptions: OrientationItemPresentation<string>[] = publicAccueilli;
 
   public publicsAccueillisCompteur = (filter: PublicAccueilli[], target: OrientationItemPresentation<string>[]): number => {
     const publicsAcceuillisCount = target.filter((item: { label: string; value: string }) =>

@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Déficience visuelle",
+    "value": "Déficience visuelle"
+  },
+  {
+    "label": "Handicaps psychiques",
+    "value": "Handicaps psychiques : troubles psychiatriques donnant lieu à des atteintes comportementales"
+  },
+  {
+    "label": "Handicaps mentaux",
+    "value": "Handicaps mentaux : déficiences limitant les activités d'une personne"
+  },
+  {
+    "label": "Personne en situation d'illettrisme",
+    "value": "Personnes en situation d'illettrisme"
+  },
+  {
+    "label": "Surdité",
+    "value": "Surdité"
+  },
+  {
+    "label": "Langues étrangères",
+    "value": "Public langues étrangères"
+  }
+]

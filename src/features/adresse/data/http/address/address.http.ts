@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Feature, Point } from 'geojson';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Localisation } from '../../../../core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { Address } from '../../../models';
 import { AddressRepository } from '../../../repositories';
 import { AddressTransfer, AddressTransferProperties } from '../../transfers/address.transfer';
