@@ -31,7 +31,7 @@
   <div
     *ngIf="lieuxMediationNumerique$ | async"
     class="border-end"
-    [ngClass]="router.url.endsWith('/details') ? 'lieux-mediation-numerique-details col-12' : 'lieux-mediation-numerique-list col-12'">
+    [ngClass]="router.url.includes('/details') ? 'lieux-mediation-numerique-details col-12' : 'lieux-mediation-numerique-list col-12'">
     <router-outlet></router-outlet>
   </div>
   <div class="col overflow-auto position-relative">
