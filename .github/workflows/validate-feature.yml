@@ -2,6 +2,7 @@
 name: Validate feature
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'build/*'

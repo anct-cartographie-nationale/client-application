@@ -46,11 +46,7 @@ jobs:
       - name: Set the generate ssh private key as an output, key value will masked in logs, handling the set-output truncate multiline string behaviours (ref:https://github.community/t/set-output-truncates-multiline-strings/16852)
         id: deployer-private-ssh-key
         run: |
-          PRIVATE_KEY_AS_MULTILINE=$(cat /home/.ssh/id_rsa)
-          PRIVATE_KEY_AS_SINGLELINE="${PRIVATE_KEY_AS_MULTILINE//'%'/'%25'}"
-          PRIVATE_KEY_AS_SINGLELINE="${PRIVATE_KEY_AS_SINGLELINE//$'\n'/'%0A'}"
-          PRIVATE_KEY_AS_SINGLELINE="${PRIVATE_KEY_AS_SINGLELINE//$'\r'/'%0D'}"
-          echo "::set-output name=private-key::$PRIVATE_KEY_AS_SINGLELINE"
+          echo "::set-output name=private-key::$(cat /home/.ssh/id_rsa)"
 
   deploy-to-target-environment:
     runs-on: ubuntu-latest
