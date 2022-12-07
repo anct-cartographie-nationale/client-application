@@ -317,19 +317,19 @@ jobs:
           BRANCH_SHORT_REF=$(echo ${{ github.event.ref }} | cut -d'/' -f 4)
           echo "::set-output name=value::$APPLICATION_NAME-$BRANCH_SHORT_REF"
 
-  deploy:
-    name: Feature branch
-    needs:
-      - dynamic-variables
-      - build-client-application
-
-    uses: ./.github/workflows/_deploy-on-scalingo.yml
-    with:
-      application-full-name: ${{ needs.dynamic-variables.outputs.application-name }}
-      scalingo-remote-domain-url: 'git@ssh.osc-fr1.scalingo.com'
-      scalingo-ssh-host-domain: 'ssh.osc-fr1.scalingo.com'
-    secrets:
-      SCALINGO_API_TOKEN: ${{ secrets.SCALINGO_API_TOKEN }}
+  #  deploy:
+  #    name: Feature branch
+  #    needs:
+  #      - dynamic-variables
+  #      - build-client-application
+  #
+  #    uses: ./.github/workflows/_deploy-on-scalingo.yml
+  #    with:
+  #      application-full-name: ${{ needs.dynamic-variables.outputs.application-name }}
+  #      scalingo-remote-domain-url: 'git@ssh.osc-fr1.scalingo.com'
+  #      scalingo-ssh-host-domain: 'ssh.osc-fr1.scalingo.com'
+  #    secrets:
+  #      SCALINGO_API_TOKEN: ${{ secrets.SCALINGO_API_TOKEN }}
 
   deploy-aws:
     name: Feature branch
