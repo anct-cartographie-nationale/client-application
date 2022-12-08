@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Url } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,7 +7,7 @@ import { Url } from '../../../core';
 })
 export class BoutonsActionComponent {
   @Input() public courriel?: string;
-  @Input() public siteWeb?: Url[];
+  @Input() public siteWeb?: string[];
   @Input() public priseRdv?: string;
 
   public printPage() {

@@ -4,15 +4,14 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
   departementFromNom,
   DepartementPresentation,
   FilterPresentation,
-  LieuMediationNumerique,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
-  Localisation,
   NO_LOCALISATION,
   toDepartement,
   toFilterFormPresentationFromQuery,
@@ -44,6 +43,9 @@ const filteredByDepartementIfExist = (
 const toLieuxFilteredByDepartement = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]) =>
   filteredByDepartementIfExist(departementFromNom(paramMap.get('nomDepartement') ?? ''), lieux, paramMap);
 
+const toLocalisationOf = ({ latitude, longitude }: { latitude?: number; longitude?: number }): Localisation =>
+  latitude == null || longitude == null ? NO_LOCALISATION : Localisation({ latitude, longitude });
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'lieux-mediation-numerique-list.page.html'
@@ -63,7 +65,7 @@ export class LieuxMediationNumeriqueListPage {
 
   private focusOnLieu(lieu: LieuMediationNumeriquePresentation) {
     this.markersPresenter.focus(lieu.id);
-    this.markersPresenter.center(lieu.localisation, LIEUX_ZOOM_LEVEL);
+    this.markersPresenter.center(toLocalisationOf(lieu), LIEUX_ZOOM_LEVEL);
   }
 
   private boundingBox$(): Observable<[Localisation, Localisation]> {
@@ -109,9 +111,9 @@ export class LieuxMediationNumeriqueListPage {
     this.markersPresenter.hover(highlightedId ?? '');
   }
 
-  public select(lieuMediationNumerique: LieuMediationNumerique) {
-    this.markersPresenter.center(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
-    this.markersPresenter.select(lieuMediationNumerique.id);
+  public select(lieu: LieuMediationNumeriquePresentation) {
+    this.markersPresenter.center(toLocalisationOf(lieu), this._zoomLevel.userPosition);
+    this.markersPresenter.select(lieu.id);
   }
 
   public inLieuxZoomLevel = inLieuxZoomLevel;

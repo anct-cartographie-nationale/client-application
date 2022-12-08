@@ -23,7 +23,7 @@
               <div *ngFor="let apprentissageDeBaseItem of apprentissageDeBaseOrientationItems">
                 <span
                   class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                  *ngIf="apprentissageDeBaseItem.value === filter.services">
+                  *ngIf="apprentissageDeBaseItem.value === filter.service">
                   1
                 </span>
               </div>
@@ -47,8 +47,8 @@
                 <input
                   type="radio"
                   appUncheckableRadio
-                  name="services"
-                  formControlName="services"
+                  name="service"
+                  formControlName="service"
                   class="form-check-input"
                   [value]="apprentissageDeBaseItem.value"
                   [attr.id]="'apprentissageDeBaseLabelChip' + i" />
@@ -74,7 +74,7 @@
               <div *ngFor="let demarchesOrientationItem of demarchesOrientationItems">
                 <span
                   class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                  *ngIf="demarchesOrientationItem.value === filter.services">
+                  *ngIf="demarchesOrientationItem.value === filter.service">
                   1
                 </span>
               </div>
@@ -93,8 +93,8 @@
                 <input
                   type="radio"
                   appUncheckableRadio
-                  name="services"
-                  formControlName="services"
+                  name="service"
+                  formControlName="service"
                   class="form-check-input"
                   [value]="demarchesOrientationItem.value"
                   [attr.id]="'demarchesLabelChip' + i" />
@@ -121,7 +121,7 @@
               <div *ngFor="let cultureNumeriqueItem of cultureNumeriqueOrientationItems">
                 <span
                   class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                  *ngIf="cultureNumeriqueItem.value === filter.services">
+                  *ngIf="cultureNumeriqueItem.value === filter.service">
                   1
                 </span>
               </div>
@@ -142,8 +142,8 @@
                 <input
                   type="radio"
                   appUncheckableRadio
-                  name="services"
-                  formControlName="services"
+                  name="service"
+                  formControlName="service"
                   class="form-check-input"
                   [value]="cultureNumeriqueItem.value"
                   [attr.id]="'cultureNumeriqueLabelChip' + i" />
@@ -169,7 +169,7 @@
               <div *ngFor="let manqueDeMaterielItem of manqueDeMaterielOrientationItems">
                 <span
                   class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                  *ngIf="manqueDeMaterielItem.value === filter.services">
+                  *ngIf="manqueDeMaterielItem.value === filter.service">
                   1
                 </span>
               </div>
@@ -188,8 +188,8 @@
                 <input
                   type="radio"
                   appUncheckableRadio
-                  name="services"
-                  formControlName="services"
+                  name="service"
+                  formControlName="service"
                   class="form-check-input"
                   [value]="manqueDeMaterielItem.value"
                   [attr.id]="'manqueDeMaterielLabelChip' + i" />

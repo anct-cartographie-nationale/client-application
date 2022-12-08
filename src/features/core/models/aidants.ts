@@ -1,5 +1,11 @@
-import { CourrielError, isValidCourriel, isValidTelephone, TelephoneError } from './contact/contact';
-import { Model } from './model';
+import {
+  Model,
+  CourrielError,
+  TelephoneError,
+  LieuMediationNumerique,
+  isValidCourriel,
+  isValidTelephone
+} from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 export type Aidant = Model<
   'Aidant',
@@ -9,6 +15,12 @@ export type Aidant = Model<
     courriel?: string;
   }
 >;
+
+export type Aidants = Aidant[];
+
+export type LieuMediationNumeriqueWithAidants = LieuMediationNumerique & {
+  aidants?: Aidants;
+};
 
 const throwAidantError = (aidant: Omit<Aidant, 'isAidant'>): Aidant => {
   if (aidant.courriel && !isValidCourriel(aidant.courriel)) {
@@ -29,3 +41,5 @@ const isValidAidant = (aidant: Omit<Aidant, 'isAidant'>): aidant is Aidant =>
 export const Aidant = (aidant: Omit<Aidant, 'isAidant'>): Aidant => {
   return isValidAidant(aidant) ? aidant : throwAidantError(aidant);
 };
+
+export const Aidants = (aidants: Omit<Aidant, 'isAidant'>[]): Aidants => aidants.map(Aidant);

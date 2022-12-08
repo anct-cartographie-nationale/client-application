@@ -1,5 +1,6 @@
 import { DivIcon, Point as LeafletPoint } from 'leaflet';
-import { LabelNational, LieuMediationNumeriquePresentation, OpeningStatus } from '../../../../core';
+import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LieuMediationNumeriquePresentation, OpeningStatus } from '../../../../core';
 import { MarkerFactory, MarkerHighlight, MarkerProperties } from '../markers.configuration';
 
 export type LieuMediationNumeriqueMarkerProperties = MarkerProperties<
@@ -69,7 +70,7 @@ const cnfsIconMarkerSvg: string = `
 `;
 
 const lieuMediationNumeriqueMarkerHtmlTemplate = (labels_nationaux: LabelNational[]): string =>
-  labels_nationaux?.includes('CNFS') ? cnfsIconMarkerSvg : lieuMediationIconMarkerSvg;
+  labels_nationaux?.includes(LabelNational.CNFS) ? cnfsIconMarkerSvg : lieuMediationIconMarkerSvg;
 
 const LIEU_MEDIATION_NUMERIQUE_MARKER_HIGHLIGHT_CLASSES_MAP: Record<MarkerHighlight, string> = {
   focus: 'marker-focus',

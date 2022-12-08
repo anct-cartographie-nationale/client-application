@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Localisation } from '../../core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { Address } from '../models';
 
 export abstract class AddressRepository {

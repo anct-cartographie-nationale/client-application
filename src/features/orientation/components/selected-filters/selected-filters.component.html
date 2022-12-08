@@ -1,7 +1,7 @@
 <ng-container *ngIf="filterPresentation as filter">
-  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.services">
-    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(filter.services, 'services')">
-      <div class="chip-button-trim">{{ filter.services }}</div>
+  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.service">
+    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(filter.service, 'service')">
+      <div class="chip-button-trim">{{ filter.service }}</div>
       <div class="ms-1">&times;</div>
     </button>
   </div>
@@ -21,15 +21,13 @@
     <button
       class="chip-button py-1 fw-bold d-flex align-items-center"
       (click)="resetForm(publicAccueilli, 'publics_accueillis')">
-      <div class="chip-button-trim">{{ getLabelFromValue(publicAccueilli, 'publics_accueillis') }}</div>
+      <div class="chip-button-trim">{{ getLabelFromValue(publicAccueilli) }}</div>
       <div class="ms-1">&times;</div>
     </button>
   </div>
-  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngFor="let conditionAccess of filter.conditions_access">
-    <button
-      class="chip-button py-1 fw-bold d-flex align-items-center"
-      (click)="resetForm(conditionAccess, 'conditions_access')">
-      <div class="chip-button-trim">{{ conditionAccess }}</div>
+  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngFor="let conditionAcces of filter.conditions_acces">
+    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(conditionAcces, 'conditions_acces')">
+      <div class="chip-button-trim">{{ getLabelFromValue(conditionAcces) }}</div>
       <div class="ms-1">&times;</div>
     </button>
   </div>
@@ -39,7 +37,7 @@
     <button
       class="chip-button py-1 fw-bold d-flex align-items-center"
       (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
-      <div class="chip-button-trim">{{ getLabelFromValue(modaliteAccompagnement, 'modalites_accompagnement') }}</div>
+      <div class="chip-button-trim">{{ getLabelFromValue(modaliteAccompagnement) }}</div>
       <div class="ms-1">&times;</div>
     </button>
   </div>

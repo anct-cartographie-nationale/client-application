@@ -1,17 +1,15 @@
 import {
-  Aidant,
-  ConditionAccess,
+  ConditionAcces,
   Contact,
-  HorairesPresentation,
   LabelNational,
   Localisation,
-  ModalitesAccompagnement,
-  OpeningStatus,
+  ModaliteAccompagnement,
   Presentation,
   PublicAccueilli,
   Service,
   Url
-} from '../../../core';
+} from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { Aidant, HorairesPresentation, OpeningStatus } from '../../../core';
 
 export type LieuMediationNumeriqueDetailsPresentation = {
   id: string;
@@ -20,18 +18,20 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   services: Service[];
   horaires?: HorairesPresentation;
   status?: OpeningStatus;
-  typologie?: string;
+  typologies?: string;
   contact?: Contact;
   presentation?: Presentation;
   date_maj?: Date;
   publics_accueillis?: PublicAccueilli[];
-  conditions_access?: ConditionAccess[];
+  conditions_acces?: string;
   labels_nationaux?: LabelNational[];
   labels_autres?: string[];
-  modalites_accompagnement?: ModalitesAccompagnement[];
+  modalites_accompagnement?: ModaliteAccompagnementPresentation[];
   accessibilite?: Url;
   localisation?: Localisation;
   distance?: number;
   prise_rdv?: string;
   aidants?: Aidant[];
 };
+
+export type ModaliteAccompagnementPresentation = { label: string; icon: string; description: string };

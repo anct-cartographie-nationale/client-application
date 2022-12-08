@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { environment } from '../../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {
-  LieuMediationNumeriquePresentation,
-  LieuxMediationNumeriquePresenter,
-  LieuxMediationNumeriqueRepository
-} from '../../../core';
+import { LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { environment } from '../../../../environments/environment';
+import { LieuxMediationNumeriquePresenter, LieuxMediationNumeriqueRepository } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +20,7 @@ export class PresentationLayout {
   private _currentSlide$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public currentSlide$: Observable<number> = this._currentSlide$.asObservable();
   public environment: Boolean = environment.production;
-  public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumeriquePresentation[]> =
+  public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueTotal$;
 
   public constructor(private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter) {}

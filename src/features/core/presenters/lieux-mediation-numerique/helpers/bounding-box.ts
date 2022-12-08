@@ -1,5 +1,5 @@
-import { Localisation, NO_LOCALISATION } from '../../../models';
-import { LieuMediationNumeriquePresentation } from '../lieu-mediation-numerique.presentation';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { NO_LOCALISATION } from '../../../models';
 
 const isInBoundingBox = (localisation: Localisation, [topLeft, bottomRight]: [Localisation, Localisation]) =>
   localisation.latitude <= topLeft.latitude &&
@@ -8,9 +8,9 @@ const isInBoundingBox = (localisation: Localisation, [topLeft, bottomRight]: [Lo
   localisation.longitude <= bottomRight.longitude;
 
 const isValidBoundingBox = ([topLeft, bottomRight]: [Localisation, Localisation]) =>
-  topLeft !== NO_LOCALISATION && bottomRight !== NO_LOCALISATION;
+  topLeft != NO_LOCALISATION && bottomRight != NO_LOCALISATION;
 
 export const byBoundingBox =
   (boundingBox: [Localisation, Localisation]) =>
-  <T extends { localisation: Localisation }>({ localisation }: T) =>
-    !isValidBoundingBox(boundingBox) || isInBoundingBox(localisation, boundingBox);
+  <T extends { localisation?: Localisation }>({ localisation }: T) =>
+    !isValidBoundingBox(boundingBox) || (localisation != null && isInBoundingBox(localisation, boundingBox));

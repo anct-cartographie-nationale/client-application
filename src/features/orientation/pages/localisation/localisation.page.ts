@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap } from 'rxjs';
 import { map, mergeWith } from 'rxjs/operators';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { AddressFoundPresentation, AddressPresenter, AddressRepository } from '../../../adresse';
-import { Localisation } from '../../../core';
 import { OrientationLayout } from '../../layouts';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;

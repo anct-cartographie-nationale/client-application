@@ -1,6 +1,6 @@
 import { AddressPresenter } from './address.presenter';
 import { firstValueFrom, Observable, of } from 'rxjs';
-import { Localisation } from '../../../core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { AddressRepository } from '../../repositories';
 import { Address } from '../../models';
 import { AddressFoundPresentation } from './address-found.presentation';

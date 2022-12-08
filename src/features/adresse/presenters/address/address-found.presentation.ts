@@ -1,4 +1,4 @@
-import { Localisation } from '../../../core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 export interface AddressFoundPresentation {
   context: string;

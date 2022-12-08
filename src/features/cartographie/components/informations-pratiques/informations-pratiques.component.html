@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col">
     <address class="mb-1">{{ adresse }}</address>
-    <div *ngIf="distance && conditionAccess" class="mb-2">
+    <div *ngIf="distance && conditionsAcces" class="mb-2">
       <ng-container *ngIf="distance">{{ distance | distance }}</ng-container>
-      <ng-container *ngIf="distance && conditionAccess">&nbsp;-&nbsp;</ng-container>
-      <span *ngIf="conditionAccess" class="text-primary">{{ conditionAccess }}</span>
+      <ng-container *ngIf="distance && conditionsAcces">&nbsp;-&nbsp;</ng-container>
+      <span *ngIf="conditionsAcces" class="text-primary">{{ conditionsAcces }}</span>
     </div>
     <a class="text-decoration-none" *ngIf="accessibilite" href="{{ accessibilite }}" target="_blank">
       <i class="ri-wheelchair-line ri-xl p-1 align-middle text-primary"></i>

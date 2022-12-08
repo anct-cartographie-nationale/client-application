@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Localisation } from '../../../core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { AddressRepository } from '../../../adresse';
 import { AddressFoundPresentation } from './address-found.presentation';
 

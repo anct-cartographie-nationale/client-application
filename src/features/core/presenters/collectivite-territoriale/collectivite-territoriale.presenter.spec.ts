@@ -1,3 +1,11 @@
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DepartementPresentation, LieuMediationNumeriquePresentation, RegionPresentation } from '../../../core';
+import {
+  DEPARTEMENT_ZOOM_LEVEL,
+  inDepartementZoomLevel,
+  LIEUX_ZOOM_LEVEL,
+  REGION_ZOOM_LEVEL
+} from '../../../cartographie/presenters';
 import {
   departementFromNom,
   regionFromNom,
@@ -6,24 +14,11 @@ import {
   toRegion,
   nearestRegion
 } from './collectivite-territoriale.presenter';
-import {
-  Adresse,
-  DepartementPresentation,
-  LieuMediationNumeriquePresentation,
-  Localisation,
-  RegionPresentation
-} from '../../../core';
-import {
-  DEPARTEMENT_ZOOM_LEVEL,
-  inDepartementZoomLevel,
-  LIEUX_ZOOM_LEVEL,
-  REGION_ZOOM_LEVEL
-} from '../../../cartographie/presenters';
 
 describe('collectivite territoriale presenter', (): void => {
   it('should get département from code postal', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      adresse: { code_postal: '69210' } as Adresse
+      code_postal: '69210'
     } as LieuMediationNumeriquePresentation;
 
     const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
@@ -33,7 +28,7 @@ describe('collectivite territoriale presenter', (): void => {
 
   it('should get département from code postal, prefix do not match code departement', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      adresse: { code_postal: '42620' } as Adresse
+      code_postal: '42620'
     } as LieuMediationNumeriquePresentation;
 
     const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
@@ -43,7 +38,7 @@ describe('collectivite territoriale presenter', (): void => {
 
   it('should get département from code postal located in Haute-Corse', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      adresse: { code_postal: '20270' } as Adresse
+      code_postal: '20270'
     } as LieuMediationNumeriquePresentation;
 
     const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
@@ -53,7 +48,7 @@ describe('collectivite territoriale presenter', (): void => {
 
   it('should get département from code postal located in Martinique', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      adresse: { code_postal: '97260' } as Adresse
+      code_postal: '97260'
     } as LieuMediationNumeriquePresentation;
 
     const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
@@ -63,7 +58,7 @@ describe('collectivite territoriale presenter', (): void => {
 
   it('should get département from code postal located in Corse-du-Sud', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      adresse: { code_postal: '20142' } as Adresse
+      code_postal: '20142'
     } as LieuMediationNumeriquePresentation;
 
     const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
@@ -73,7 +68,8 @@ describe('collectivite territoriale presenter', (): void => {
 
   it('should get département from code INSEE', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      adresse: { code_postal: '1234', code_insee: '54321' } as Adresse
+      code_postal: '1234',
+      code_insee: '54321'
     } as LieuMediationNumeriquePresentation;
 
     const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
@@ -83,7 +79,7 @@ describe('collectivite territoriale presenter', (): void => {
 
   it('should get region from code postal', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      adresse: { code_postal: '69210' } as Adresse
+      code_postal: '69210'
     } as LieuMediationNumeriquePresentation;
 
     const codeRegion: string | undefined = toRegion(lieuDeMediationNumerique)?.code;
@@ -93,7 +89,8 @@ describe('collectivite territoriale presenter', (): void => {
 
   it('should get region from code INSEE', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      adresse: { code_postal: '1234', code_insee: '54321' } as Adresse
+      code_postal: '1234',
+      code_insee: '54321'
     } as LieuMediationNumeriquePresentation;
 
     const codeRegion: string | undefined = toRegion(lieuDeMediationNumerique)?.code;

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { LieuMediationNumerique } from '../models';
+import { LieuMediationNumeriqueWithAidants } from '../models';
 
 export abstract class LieuxMediationNumeriqueRepository {
-  public abstract getAll$(): Observable<LieuMediationNumerique[]>;
+  public abstract getAll$(): Observable<LieuMediationNumeriqueWithAidants[]>;
 }

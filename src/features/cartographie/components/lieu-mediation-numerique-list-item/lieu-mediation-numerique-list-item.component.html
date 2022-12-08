@@ -2,21 +2,21 @@
   <div class="col">
     <h5 class="fw-bold mb-0 text-first-letter-uppercase">{{ lieuMediationNumerique.nom }}</h5>
     <div class="text-muted">
-      <span class="text-lowercase">{{ lieuMediationNumerique.adresse.voie }}</span>
-      {{ lieuMediationNumerique.adresse.code_postal }}
-      <div class="text-first-letter-uppercase d-inline-block">{{ lieuMediationNumerique.adresse.commune }}</div>
+      <span class="text-lowercase">{{ lieuMediationNumerique.voie }}</span>
+      {{ lieuMediationNumerique.code_postal }}
+      <div class="text-first-letter-uppercase d-inline-block">{{ lieuMediationNumerique.commune }}</div>
     </div>
-    <div class="mt-1" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.conditions_access">
+    <div class="mt-1" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.conditions_acces">
       <span *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</span>
-      <ng-container *ngIf="lieuMediationNumerique.distance && lieuMediationNumerique.conditions_access?.includes('Payant')">
+      <ng-container *ngIf="lieuMediationNumerique.distance && lieuMediationNumerique.conditions_acces?.includes(payant)">
         -
       </ng-container>
-      <span class="text-muted" *ngIf="lieuMediationNumerique.conditions_access?.includes('Payant')">Payant</span>
+      <span class="text-muted" *ngIf="lieuMediationNumerique.conditions_acces?.includes(payant)">Payant</span>
     </div>
   </div>
-  <div class="col-auto text-end" *ngIf="lieuMediationNumerique.contact?.courriel || lieuMediationNumerique.contact?.telephone">
+  <div class="col-auto text-end" *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone">
     <a
-      *ngIf="lieuMediationNumerique.contact?.courriel as courriel"
+      *ngIf="lieuMediationNumerique.courriel as courriel"
       href="mailto:{{ courriel }}"
       class="btn btn-sm btn-secondary d-block mb-2"
       (click)="$event.stopPropagation()">
@@ -24,7 +24,7 @@
       <span>Contacter par mail</span>
     </a>
     <a
-      *ngIf="lieuMediationNumerique.contact?.telephone as telephone"
+      *ngIf="lieuMediationNumerique.telephone as telephone"
       href="tel://{{ telephone }}"
       class="text-decoration-none link-dark d-block mb-2"
       (click)="$event.stopPropagation()">

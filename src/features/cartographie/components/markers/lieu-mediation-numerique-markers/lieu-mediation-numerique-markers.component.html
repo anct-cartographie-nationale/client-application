@@ -1,34 +1,36 @@
-<app-leaflet-map-marker
-  *ngFor="let lieuMediationNumerique of lieuxMediationNumeriques; trackBy: trackByLieuId"
-  [latitude]="lieuMediationNumerique.localisation.latitude"
-  [longitude]="lieuMediationNumerique.localisation.longitude"
-  [properties]="lieuMediationNumerique"
-  [highlight]="highlightState(lieuMediationNumerique.id)"
-  markerFactoryKey="lieuMediationNumerique"
-  (markerClick)="showDetails.emit($event.markerProperties)"
-  (markerEnter)="enableHover.emit(lieuMediationNumerique.id)"
-  (markerLeave)="disableHover.emit()">
-  <app-leaflet-map-tooltip [content]="popupContent" [sticky]="true">
-    <div
-      #popupContent
-      class="text-center p-3 border-bottom border-3 text-wrap"
-      style="min-width: 300px"
-      [ngClass]="
-        lieuMediationNumerique.status?.includes('Fermé') || lieuMediationNumerique.status === undefined
-          ? 'border-muted'
-          : 'border-success'
-      ">
-      <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
-      <br />
-      <span
-        *ngIf="lieuMediationNumerique.status; else noOpeningHours"
-        [ngClass]="lieuMediationNumerique.status.includes('Fermé') ? 'text-muted' : 'text-success'">
-        {{ lieuMediationNumerique.status }}
-        <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
-      </span>
-      <ng-template #noOpeningHours>
-        <span class="text-muted">Horaires inconnus</span>
-      </ng-template>
-    </div>
-  </app-leaflet-map-tooltip>
-</app-leaflet-map-marker>
+<ng-container *ngFor="let lieuMediationNumerique of lieuxMediationNumeriques; trackBy: trackByLieuId">
+  <app-leaflet-map-marker
+    *ngIf="lieuMediationNumerique.latitude && lieuMediationNumerique.longitude"
+    [latitude]="lieuMediationNumerique.latitude"
+    [longitude]="lieuMediationNumerique.longitude"
+    [properties]="lieuMediationNumerique"
+    [highlight]="highlightState(lieuMediationNumerique.id)"
+    markerFactoryKey="lieuMediationNumerique"
+    (markerClick)="showDetails.emit($event.markerProperties)"
+    (markerEnter)="enableHover.emit(lieuMediationNumerique.id)"
+    (markerLeave)="disableHover.emit()">
+    <app-leaflet-map-tooltip [content]="popupContent" [sticky]="true">
+      <div
+        #popupContent
+        class="text-center p-3 border-bottom border-3 text-wrap"
+        style="min-width: 300px"
+        [ngClass]="
+          lieuMediationNumerique.status?.includes('Fermé') || lieuMediationNumerique.status === undefined
+            ? 'border-muted'
+            : 'border-success'
+        ">
+        <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
+        <br />
+        <span
+          *ngIf="lieuMediationNumerique.status; else noOpeningHours"
+          [ngClass]="lieuMediationNumerique.status.includes('Fermé') ? 'text-muted' : 'text-success'">
+          {{ lieuMediationNumerique.status }}
+          <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+        </span>
+        <ng-template #noOpeningHours>
+          <span class="text-muted">Horaires inconnus</span>
+        </ng-template>
+      </div>
+    </app-leaflet-map-tooltip>
+  </app-leaflet-map-marker>
+</ng-container>

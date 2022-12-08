@@ -1,13 +1,26 @@
 import { firstValueFrom, of } from 'rxjs';
 import {
   Adresse,
+  ConditionAcces,
+  ConditionsAcces,
   Contact,
+  Id,
+  LabelNational,
+  LabelsNationaux,
   LieuMediationNumerique,
-  LieuxMediationNumeriqueRepository,
   Localisation,
-  NO_LOCALISATION,
+  ModaliteAccompagnement,
+  ModalitesAccompagnement,
+  Nom,
+  PublicAccueilli,
+  PublicsAccueillis,
+  Service,
+  Services,
+  Typologie,
+  Typologies,
   Url
-} from '../../../core';
+} from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LieuxMediationNumeriqueRepository, NO_LOCALISATION } from '../../../core';
 import { LieuxMediationNumeriqueDetailsPresenter } from './lieux-mediation-numerique-details.presenter';
 import { LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
 import { ParamMap } from '@angular/router';
@@ -17,8 +30,8 @@ describe('lieux médiation numérique details presenter', (): void => {
     const lieuxMediationNumerique: LieuMediationNumerique[] = [
       {} as LieuMediationNumerique,
       {
-        id: '6001a35f16b08100062e415f',
-        nom: 'Anonymal',
+        id: Id('6001a35f16b08100062e415f'),
+        nom: Nom('Anonymal'),
         adresse: Adresse({
           commune: 'reims',
           code_postal: '51100',
@@ -27,24 +40,24 @@ describe('lieux médiation numérique details presenter', (): void => {
           complement_adresse: "Le patio du bois de l'Aulne"
         }),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
-        typologie: ['CHRS', 'CHU'],
+        typologies: Typologies([Typologie.CHRS, Typologie.CHU]),
         contact: Contact({
           telephone: '+33180059880',
           courriel: 'contact@laquincaillerie.tl',
           site_web: [Url('https://www.laquincaillerie.tl/'), Url('https://m.facebook.com/laquincaillerienumerique/')]
         }),
-        services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+        services: Services([Service.PrendreEnMainUnOrdinateur, Service.AccederADuMateriel]),
         presentation: {
-          resumee: 'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
+          resume: 'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
           detail:
             "Notre parcours d'initiation permet l'acquisition de compétences numériques de base. Nous proposons également un accompagnement à destination des personnes déjà initiées qui souhaiteraient approfondir leurs connaissances. Du matériel informatique est en libre accès pour nos adhérents tous les après-midis. En plus de d'accueillir les personnes dans notre lieu en semaine (sur rendez-vous), nous assurons une permanence le samedi matin dans la médiathèque XX."
         },
         date_maj: new Date('2022-06-02'),
-        publics_accueillis: ['Adultes', 'Déficience visuelle'],
-        conditions_access: ['Gratuit', 'Payant'],
-        labels_nationaux: ['France Services', 'APTIC', 'Point relais CAF'],
+        publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes, PublicAccueilli.DeficienceVisuelle]),
+        conditions_acces: ConditionsAcces([ConditionAcces.Gratuit, ConditionAcces.Payant]),
+        labels_nationaux: LabelsNationaux([LabelNational.FranceServices, LabelNational.APTIC, LabelNational.PointRelaisCAF]),
         labels_autres: ['SudLabs', 'Nièvre médiation numérique'],
-        modalites_accompagnement: ['Seul', "Avec de l'aide"],
+        modalites_accompagnement: ModalitesAccompagnement([ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide]),
         accessibilite: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
         )
@@ -64,7 +77,7 @@ describe('lieux médiation numérique details presenter', (): void => {
       )
     );
 
-    expect(structure).toStrictEqual({
+    expect(structure).toStrictEqual<LieuMediationNumeriqueDetailsPresentation>({
       id: '6001a35f16b08100062e415f',
       nom: 'Anonymal',
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
@@ -78,24 +91,27 @@ describe('lieux médiation numérique details presenter', (): void => {
         Dimanche: 'Fermé'
       },
       status: 'Ouvert',
-      typologie: 'CHRS, CHU',
+      typologies: 'CHRS, CHU',
       contact: Contact({
         telephone: '+33180059880',
         courriel: 'contact@laquincaillerie.tl',
         site_web: [Url('https://www.laquincaillerie.tl/'), Url('https://m.facebook.com/laquincaillerienumerique/')]
       }),
-      services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+      services: [Service.PrendreEnMainUnOrdinateur, Service.AccederADuMateriel],
       presentation: {
-        resumee: 'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
+        resume: 'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
         detail:
           "Notre parcours d'initiation permet l'acquisition de compétences numériques de base. Nous proposons également un accompagnement à destination des personnes déjà initiées qui souhaiteraient approfondir leurs connaissances. Du matériel informatique est en libre accès pour nos adhérents tous les après-midis. En plus de d'accueillir les personnes dans notre lieu en semaine (sur rendez-vous), nous assurons une permanence le samedi matin dans la médiathèque XX."
       },
       date_maj: new Date('2022-06-02'),
       publics_accueillis: ['Adultes', 'Déficience visuelle'],
-      conditions_access: ['Gratuit', 'Payant'],
-      labels_nationaux: ['France Services', 'APTIC', 'Point relais CAF'],
+      conditions_acces: 'Gratuit, Payant',
+      labels_nationaux: [LabelNational.FranceServices, LabelNational.APTIC, LabelNational.PointRelaisCAF],
       labels_autres: ['SudLabs', 'Nièvre médiation numérique'],
-      modalites_accompagnement: ['Seul', "Avec de l'aide"],
+      modalites_accompagnement: [
+        { label: 'Seul', icon: 'ri-user-3-line', description: "j'ai accès à du materiel et une connexion" },
+        { label: "Avec de l'aide", icon: 'ri-group-line', description: "je suis accompagné dans l'usage du numérique" }
+      ],
       accessibilite: Url(
         'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
       )

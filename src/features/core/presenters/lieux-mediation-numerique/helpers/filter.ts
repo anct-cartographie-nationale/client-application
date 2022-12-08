@@ -1,3 +1,4 @@
+import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
   LieuMediationNumeriquePresentation,
   toLieuxMediationNumeriquePresentation
@@ -5,20 +6,19 @@ import {
 import { FilterOperator, FilterPresentation } from '../../filter';
 import {
   accessibiliteFilterOperator,
-  conditionsAccessFilterOperator,
+  conditionsAccesFilterOperator,
   dateOuvertureFilterOperator,
   distanceFilterOperator,
   modalitesAccompagnementFilterOperator,
   publicsAccueillisFilterOperator,
   serviceFilterOperator
 } from '../filter-operators';
-import { Localisation } from '../../../models';
 
 const filterOperatorsMap: Map<string, FilterOperator> = new Map([
   ['distance', distanceFilterOperator],
-  ['services', serviceFilterOperator],
+  ['service', serviceFilterOperator],
   ['accessibilite', accessibiliteFilterOperator],
-  ['conditions_access', conditionsAccessFilterOperator],
+  ['conditions_acces', conditionsAccesFilterOperator],
   ['publics_accueillis', publicsAccueillisFilterOperator],
   ['modalites_accompagnement', modalitesAccompagnementFilterOperator],
   ['date_ouverture', dateOuvertureFilterOperator]
@@ -40,14 +40,15 @@ const byOrientationFilter =
     );
 
 export const filteredLieuxMediationNumerique = (
-  lieuxMediationNumerique: LieuMediationNumeriquePresentation[],
+  lieuxMediationNumerique: LieuMediationNumerique[],
   localisation: Localisation,
   filter: FilterPresentation,
   date: Date
 ) =>
   lieuxMediationNumerique
-    .map((lieuMediationNumerique: LieuMediationNumeriquePresentation) =>
-      toLieuxMediationNumeriquePresentation(lieuMediationNumerique, localisation, date)
+    .map(
+      (lieuMediationNumerique: LieuMediationNumerique): LieuMediationNumeriquePresentation =>
+        toLieuxMediationNumeriquePresentation(lieuMediationNumerique, localisation, date)
     )
     .filter(byOrientationFilter(filter, date));
 
