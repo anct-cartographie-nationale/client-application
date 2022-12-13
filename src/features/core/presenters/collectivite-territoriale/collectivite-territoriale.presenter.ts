@@ -16,8 +16,10 @@ const isInCorse = (codePostal: string): boolean => codePostal.startsWith('20');
 
 const isInOutremer = (codePostal: string): boolean => codePostal.startsWith('97');
 
-const isSaintMartin = (codePostal: string, commune: string): boolean =>
-  codePostal.startsWith('97') && commune?.toLocaleLowerCase().includes('saint martin');
+const isSaintMartin = (codePostal: string, commune: string): boolean => {
+  if (!commune) return false;
+  return codePostal.startsWith('97') && commune.toLocaleLowerCase().includes('saint martin');
+};
 
 const convertEdgeCasesToCodeInsee = (codePostal: string): string =>
   codePostalNotMatchingCodeDepartementMap.get(codePostal) ?? codePostal;
