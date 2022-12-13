@@ -179,7 +179,8 @@ describe('collectivite territoriale presenter', (): void => {
 
   it('should get département from code postal located in Saint Martin', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      code_postal: '97150'
+      code_postal: '97150',
+      commune: 'Saint Martin'
     } as LieuMediationNumeriquePresentation;
 
     const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
