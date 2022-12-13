@@ -907,5 +907,14 @@
       "longitude": 45.147364453253317,
       "latitude": -12.820655090736881
     }
+  },
+  {
+    "code": "978",
+    "nom": "Saint Martin",
+    "zoom": 11,
+    "localisation": {
+      "longitude": -63.0667,
+      "latitude": 18.0667
+    }
   }
 ]

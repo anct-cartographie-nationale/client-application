@@ -178,5 +178,15 @@
       "longitude": 45.166244,
       "latitude": -12.8275
     }
+  },
+  {
+    "code": "00",
+    "nom": "Saint Martin",
+    "departements": ["978"],
+    "zoom": 11,
+    "localisation": {
+      "longitude": -63.0667,
+      "latitude": 18.0667
+    }
   }
 ]
