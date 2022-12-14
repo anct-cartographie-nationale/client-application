@@ -1,9 +1,7 @@
 import {
-  ConditionAcces,
   Contact,
   LabelNational,
   Localisation,
-  ModaliteAccompagnement,
   Presentation,
   PublicAccueilli,
   Service,
@@ -32,6 +30,7 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   distance?: number;
   prise_rdv?: string;
   aidants?: Aidant[];
+  source?: string;
 };
 
 export type ModaliteAccompagnementPresentation = { label: string; icon: string; description: string };
