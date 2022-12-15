@@ -175,6 +175,7 @@ Ce processus est automatisé par l'utilitaire `semantic-release` exécuté par l
   - `AWS_S3_BUCKET` : Identifiant de l'espace sur AWS S3 dans lequel est publié le build du projet pour un accès public
   - `AWS_CLOUDFRONT_DISTRIBUTION_ID` : Identifiant de la distribution CloudFront qui est le CDN par lequel le site est exposé sur internet
   - `NODE_AUTH_TOKEN` : Clé d'accès NPM pour publier sur l'organisation [@gouvfr-anct](https://www.npmjs.com/org/gouvfr-anct)
+  - `TF_API_TOKEN` : Clé d'accès Terraform (Team API Token) pour publier les environments éphémères gérés par Terraform
 
 #### Déploiement
 
