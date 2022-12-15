@@ -15,9 +15,7 @@ on:
       - 'revert/*'
       - 'style/*'
       - 'test/*'
-
-env:
-  application-name: 'cn'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -372,3 +370,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_S3_BUCKET: cartographie-nationale-client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}
           SOURCE_DIR: 'client-application'
+
+      - name: Available
+        run: |
+          echo http://cartographie-nationale-client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}.s3-website.eu-west-3.amazonaws.com
