@@ -326,8 +326,16 @@ jobs:
     steps:
       - name: Set terraform variables file content in TF_VARS environment variable
         id: tf-vars
-        run: |
-          BASE_64_CONTENT=$(echo -en '{"product": "cartographie-nationale", "service": "client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}"}' | base64 | tr -d \\n)
+        run: >-
+          BASE_64_CONTENT=$(echo -en
+          '{
+            "product": "cartographie-nationale",
+            "service": "client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}",
+            "enable_bucket_website": true
+          }'
+          | base64
+          | tr -d \\n)
+
           echo content=$BASE_64_CONTENT>>$GITHUB_OUTPUT
 
   deploy-feature-branch-environment:
