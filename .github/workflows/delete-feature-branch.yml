@@ -39,3 +39,18 @@ jobs:
       workspace-name: ${{ needs.feature-branch-workspace.outputs.tf-workspace }}
     secrets:
       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+
+  remove-terraform-workspace:
+    name: Remove Terraform Workspace
+    needs:
+      - feature-branch-workspace
+      - destroy-feature-branch-environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Safe-delete Terraform API call
+        run: >-
+          curl
+          --header "Authorization: Bearer ${{ secrets.TF_API_TOKEN }}"
+          --header "Content-Type: application/vnd.api+json"
+          --request DELETE
+          https://app.terraform.io/api/v2/organizations/cartographie-nationale/workspaces/client-${{ needs.feature-branch-workspace.outputs.tf-workspace }}
