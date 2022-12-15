@@ -24,318 +24,288 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  #  prettier:
-  #    name: Prettier
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - name: Checkout project workspace repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: anct-cartographie-nationale/client-base
-  #
-  #      - name: Checkout client-application repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          path: projects/client-application
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: '16.x'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: yarn
-  #
-  #      - name: Prettier
-  #        run: yarn prettier --check .
-  #
-  #  eslint:
-  #    name: ESLint
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - name: Checkout project workspace repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: anct-cartographie-nationale/client-base
-  #
-  #      - name: Checkout client-application repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          path: projects/client-application
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: '16.x'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: yarn
-  #
-  #      - name: Lint
-  #        run: yarn lint client-application
-  #
-  #  stylelint:
-  #    name: Stylelint
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - name: Checkout project workspace repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: anct-cartographie-nationale/client-base
-  #
-  #      - name: Checkout client-application repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          path: projects/client-application
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: '16.x'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: yarn
-  #
-  #      - name: Lint
-  #        run: yarn stylelint "projects/client-application/**/*.scss"
-  #
-  #  commitlint:
-  #    name: CommitLint
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - name: Checkout project workspace repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: anct-cartographie-nationale/client-base
-  #
-  #      - name: Checkout client-application repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          fetch-depth: 0
-  #          path: projects/client-application
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: '16.x'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: yarn
-  #
-  #      - name: commitlint
-  #        run: |
-  #          cd projects/client-application
-  #          npx commitlint --from origin/main
-  #
-  #  test:
-  #    name: Test
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - name: Checkout project workspace repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: anct-cartographie-nationale/client-base
-  #
-  #      - name: Checkout client-application repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          path: projects/client-application
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: '16.x'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: |
-  #          yarn
-  #          yarn add @gouvfr-anct/mediation-numerique
-  #
-  #      - name: Test
-  #        run: yarn test client-application
-  #
-  #  build-client-application:
-  #    name: Build Client Application
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - name: Checkout project workspace repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: anct-cartographie-nationale/client-base
-  #
-  #      - name: Checkout client-application repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          path: projects/client-application
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: '16.x'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: |
-  #          yarn
-  #          yarn add @gouvfr-anct/mediation-numerique
-  #
-  #      - name: Build
-  #        run: yarn build client-application
-  #
-  #      - name: Upload build artifact
-  #        uses: actions/upload-artifact@v3
-  #        with:
-  #          name: build
-  #          path: dist
-  #
-  #  build-mediation-numerique-web-component:
-  #    name: Build Mediation Numerique Web Component
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - name: Checkout project workspace repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: anct-cartographie-nationale/client-base
-  #
-  #      - name: Checkout client-application repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          path: projects/client-application
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: '16.x'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: |
-  #          yarn
-  #          yarn add @gouvfr-anct/mediation-numerique
-  #
-  #      - name: Build
-  #        run: yarn build mediation-numerique
-  #
-  #      - name: Upload build artifact
-  #        uses: actions/upload-artifact@v3
-  #        with:
-  #          name: build
-  #          path: dist
-  #
-  #  build-cartographie-web-component:
-  #    name: Build Cartographie Web Component
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - name: Checkout project workspace repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: anct-cartographie-nationale/client-base
-  #
-  #      - name: Checkout client-application repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          path: projects/client-application
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: '16.x'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: |
-  #          yarn
-  #          yarn add @gouvfr-anct/mediation-numerique
-  #
-  #      - name: Build
-  #        run: yarn build cartographie
-  #
-  #      - name: Upload build artifact
-  #        uses: actions/upload-artifact@v3
-  #        with:
-  #          name: build
-  #          path: dist
-  #
-  #  build-orientation-web-component:
-  #    name: Build Orientation Web Component
-  #    runs-on: ubuntu-latest
-  #
-  #    steps:
-  #      - name: Checkout project workspace repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: anct-cartographie-nationale/client-base
-  #
-  #      - name: Checkout client-application repository
-  #        uses: actions/checkout@v3
-  #        with:
-  #          path: projects/client-application
-  #
-  #      - name: Set up Node.js
-  #        uses: actions/setup-node@v3
-  #        with:
-  #          node-version: '16.x'
-  #          cache: 'yarn'
-  #
-  #      - name: Install dependencies
-  #        run: |
-  #          yarn
-  #          yarn add @gouvfr-anct/mediation-numerique
-  #
-  #      - name: Build
-  #        run: yarn build orientation
-  #
-  #      - name: Upload build artifact
-  #        uses: actions/upload-artifact@v3
-  #        with:
-  #          name: build
-  #          path: dist
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
 
-  #  dynamic-variables:
-  #    runs-on: ubuntu-latest
-  #    outputs:
-  #      application-name: ${{ steps.application-name.outputs.value }}
-  #
-  #    steps:
-  #      - name: Deployed application base name
-  #        id: application-name
-  #        run: |
-  #          APPLICATION_NAME=${{ env.application-name }}
-  #          BRANCH_SHORT_REF=$(echo ${{ github.event.ref }} | cut -d'/' -f 3)
-  #          echo "::set-output name=value::$APPLICATION_NAME-$BRANCH_SHORT_REF"
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
 
-  #  deploy:
-  #    name: Feature branch
-  #    needs:
-  #      - dynamic-variables
-  #      - build-client-application
-  #
-  #    uses: ./.github/workflows/_deploy-on-scalingo.yml
-  #    with:
-  #      application-full-name: ${{ needs.dynamic-variables.outputs.application-name }}
-  #      scalingo-remote-domain-url: 'git@ssh.osc-fr1.scalingo.com'
-  #      scalingo-ssh-host-domain: 'ssh.osc-fr1.scalingo.com'
-  #    secrets:
-  #      SCALINGO_API_TOKEN: ${{ secrets.SCALINGO_API_TOKEN }}
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Prettier
+        run: yarn prettier --check .
+
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Lint
+        run: yarn lint client-application
+
+  stylelint:
+    name: Stylelint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Lint
+        run: yarn stylelint "projects/client-application/**/*.scss"
+
+  commitlint:
+    name: CommitLint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: commitlint
+        run: |
+          cd projects/client-application
+          npx commitlint --from origin/main
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn add @gouvfr-anct/mediation-numerique
+
+      - name: Test
+        run: yarn test client-application
+
+  build-client-application:
+    name: Build Client Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn add @gouvfr-anct/mediation-numerique
+
+      - name: Build
+        run: yarn build client-application
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
+  build-mediation-numerique-web-component:
+    name: Build Mediation Numerique Web Component
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn add @gouvfr-anct/mediation-numerique
+
+      - name: Build
+        run: yarn build mediation-numerique
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
+  build-cartographie-web-component:
+    name: Build Cartographie Web Component
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn add @gouvfr-anct/mediation-numerique
+
+      - name: Build
+        run: yarn build cartographie
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
+  build-orientation-web-component:
+    name: Build Orientation Web Component
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn add @gouvfr-anct/mediation-numerique
+
+      - name: Build
+        run: yarn build orientation
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
 
   create-feature-branch-workspace:
     name: Create feature branch workspace
-    #    needs:
-    #      - dynamic-variables
-    #      - build-client-application
     uses: codingones/github-actions-workflows/.github/workflows/create-terraform-cloud-workspace-for-aws-ephemeral-environment.terraform.yml@main
     with:
       product: 'cartographie-nationale'
@@ -357,7 +327,7 @@ jobs:
       - name: Set terraform variables file content in TF_VARS environment variable
         id: tf-vars
         run: |
-          BASE_64_CONTENT=$(echo -en '{"product": "cartographie-nationale", "service": "client-feature-aws-feature-branch"}' | base64 | tr -d \\n)
+          BASE_64_CONTENT=$(echo -en '{"product": "cartographie-nationale", "service": "client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}"}' | base64 | tr -d \\n)
           echo content=$BASE_64_CONTENT>>$GITHUB_OUTPUT
 
   deploy-feature-branch-environment:
