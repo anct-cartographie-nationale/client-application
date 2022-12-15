@@ -342,3 +342,25 @@ jobs:
       json-base-64-tf-vars: ${{ needs.prepare-terraform-variables-file-content.outputs.tf-vars }}
     secrets:
       TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+
+  publish-build-files:
+    runs-on: ubuntu-latest
+    needs:
+      - build-client-application
+      - create-feature-branch-workspace
+      - deploy-feature-branch-environment
+    steps:
+      - name: Download build
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+
+      - name: Publish
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --delete
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET: cartographie-nationale-client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}
+          SOURCE_DIR: 'client-application'
