@@ -46,6 +46,7 @@ export const filteredLieuxMediationNumerique = (
   date: Date
 ) =>
   lieuxMediationNumerique
+    .filter((lieuMediationNumerique: LieuMediationNumerique) => lieuMediationNumerique.localisation)
     .map(
       (lieuMediationNumerique: LieuMediationNumerique): LieuMediationNumeriquePresentation =>
         toLieuxMediationNumeriquePresentation(lieuMediationNumerique, localisation, date)
