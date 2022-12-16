@@ -47,7 +47,7 @@ jobs:
       - destroy-feature-branch-environment
     runs-on: ubuntu-latest
     steps:
-      - name: Safe-delete Terraform API call
+      - name: Delete Terraform API call
         run: >-
           curl
           --header "Authorization: Bearer ${{ secrets.TF_API_TOKEN }}"
