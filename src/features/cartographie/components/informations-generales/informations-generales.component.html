@@ -9,12 +9,11 @@
   </div>
   <div class="d-flex flex-column">
     <div class="flex-grow-1 text-end">
-      <button
-        type="button"
-        class="btn-close btn-close-white opacity-100"
+      <a
+        class="btn btn-close btn-close-white opacity-100"
         aria-label="Close"
         queryParamsHandling="preserve"
-        (click)="back()"></button>
+        [routerLink]="['/', 'cartographie', id]"></a>
     </div>
   </div>
 </div>
