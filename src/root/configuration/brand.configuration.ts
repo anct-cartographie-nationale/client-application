@@ -8,6 +8,6 @@ export type BrandConfiguration = {
 export const BRAND_TOKEN: InjectionToken<BrandConfiguration> = new InjectionToken<BrandConfiguration>('brand.configuration');
 
 export const BRAND_CONFIGURATION: BrandConfiguration = {
-  name: 'Nationale',
-  logo: ''
+  name: 'Les Assembleurs',
+  logo: 'https://assembleurs.co/static/Icone_logo_Assembleurs-c72c4e056eb34a846a713939501dad85.png'
 };
