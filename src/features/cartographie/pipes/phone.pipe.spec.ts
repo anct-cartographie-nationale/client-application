@@ -10,4 +10,9 @@ describe('phone pipe', (): void => {
     const phonePipe: PhonePipe = new PhonePipe();
     expect(phonePipe.transform('+594194020905')).toBe('+594 1 94 02 09 05');
   });
+
+  it('should format international french phone numbers from La Réunion', (): void => {
+    const phonePipe: PhonePipe = new PhonePipe();
+    expect(phonePipe.transform('+262262334565')).toBe('+262 2 62 33 45 65');
+  });
 });
