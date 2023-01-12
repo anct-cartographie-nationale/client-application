@@ -1,31 +1,27 @@
 <app-conteneur>
   <router-outlet></router-outlet>
-  <footer slot="footer" class="pt-5 pb-2" style="background-color: rgba(22, 22, 22, 1)">
-    <div class="container-fluid row">
-      <div class="flex-grow-1 col-auto align-items-start d-flex">
-        <div class="row">
-          <div class="col-9">
-            <p class="text-secondary">Avec le soutien de :</p>
-            <hr class="mt-1 mb-3 text-secondary" />
-          </div>
-          <div class="col-auto">
-            <img src="/assets/img/footer/footer-mark.svg" class="img-fluid me-5" alt="" />
-            <img src="/assets/img/footer/footer-anct-logo.svg" class="img-fluid" alt="" />
-          </div>
-        </div>
+  <footer slot="footer" class="container-fluid py-3 px-4 bg-dark">
+    <div class="text-secondary">Avec le soutien de :</div>
+    <div class="row justify-content-between">
+      <div class="col-lg-auto">
+        <hr class="text-secondary" />
+        <img src="/assets/img/footer/footer-mark.svg" class="img-fluid me-4" alt="" />
+        <img src="/assets/img/footer/footer-anct-logo.svg" class="img-fluid" alt="" />
       </div>
-      <div class="col-5 mt-5">
-        <p class="text-secondary lh-lg">
+      <div class="col-xl-6 col-lg mt-lg-0 mt-4 text-secondary">
+        <p class="my-2">
           La Cartographie nationale des lieux de médiation numérique peut être
           <a href="https://labase.anct.gouv.fr/ressource/993" style="color: inherit" target="_blank" rel="noopener noreferrer">
-            intégrée sur votre site web
+            intégrée facilement sur votre site web
           </a>
-          en personnalisant les données affichées, les couleurs, le logo, etc. Vous souhaitez apparaître sur la cartographie ?
-          il vous suffit de renseigner vos données sur
+          Vous souhaitez apparaître sur la cartographie ? il vous suffit de renseigner vos données sur
           <a href="https://labase.anct.gouv.fr/ressource/975" style="color: inherit" target="_blank" rel="noopener noreferrer">
             DORA
           </a>
-          .Toutes les données des structures affichées ici respectent
+          .
+        </p>
+        <p>
+          Toutes les données des structures affichées ici respectent
           <a
             href="https://schema.data.gouv.fr/LaMednum/standard-mediation-num/0.1.0/documentation.html"
             style="color: inherit"
