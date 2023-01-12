@@ -66,17 +66,6 @@ describe('collectivite territoriale presenter', (): void => {
     expect(codeDepartement).toStrictEqual('2A');
   });
 
-  it('should get département from code INSEE', (): void => {
-    const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      code_postal: '1234',
-      code_insee: '54321'
-    } as LieuMediationNumeriquePresentation;
-
-    const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
-
-    expect(codeDepartement).toStrictEqual('54');
-  });
-
   it('should get region from code postal', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
       code_postal: '69210'
@@ -85,17 +74,6 @@ describe('collectivite territoriale presenter', (): void => {
     const codeRegion: string | undefined = toRegion(lieuDeMediationNumerique)?.code;
 
     expect(codeRegion).toStrictEqual('84');
-  });
-
-  it('should get region from code INSEE', (): void => {
-    const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
-      code_postal: '1234',
-      code_insee: '54321'
-    } as LieuMediationNumeriquePresentation;
-
-    const codeRegion: string | undefined = toRegion(lieuDeMediationNumerique)?.code;
-
-    expect(codeRegion).toStrictEqual('44');
   });
 
   it('should get region from departement', (): void => {

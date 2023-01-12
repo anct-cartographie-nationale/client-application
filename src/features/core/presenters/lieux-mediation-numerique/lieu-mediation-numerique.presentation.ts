@@ -21,8 +21,8 @@ export type LieuMediationNumeriquePresentation = {
   commune: string;
   date_maj: Date;
   services: Service[];
-  latitude?: number;
-  longitude?: number;
+  latitude: number;
+  longitude: number;
   telephone?: string;
   courriel?: string;
   prise_rdv?: string;
@@ -32,7 +32,6 @@ export type LieuMediationNumeriquePresentation = {
   publics_accueillis?: PublicAccueilli[];
   conditions_acces?: ConditionAcces[];
   horaires?: string;
-
   distance?: number;
   status?: OpeningStatus;
 };
@@ -43,7 +42,7 @@ const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisatio
     : geographicDistance(lieuMediationNumerique.localisation, localisation);
 
 export const toLieuxMediationNumeriquePresentation = (
-  lieuMediationNumerique: LieuMediationNumerique,
+  lieuMediationNumerique: LieuMediationNumerique & { localisation: Localisation },
   localisation: Localisation,
   date: Date
 ): LieuMediationNumeriquePresentation => ({
@@ -55,8 +54,8 @@ export const toLieuxMediationNumeriquePresentation = (
   commune: lieuMediationNumerique.adresse.commune,
   date_maj: lieuMediationNumerique.date_maj,
   services: lieuMediationNumerique.services,
-  latitude: lieuMediationNumerique.localisation?.latitude,
-  longitude: lieuMediationNumerique.localisation?.longitude,
+  latitude: lieuMediationNumerique.localisation.latitude,
+  longitude: lieuMediationNumerique.localisation.longitude,
   ...ifAny('telephone', lieuMediationNumerique.contact?.telephone),
   ...ifAny('courriel', lieuMediationNumerique.contact?.courriel),
   ...ifAny('prise_rdv', lieuMediationNumerique.prise_rdv),

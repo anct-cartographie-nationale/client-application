@@ -39,6 +39,11 @@ const byOrientationFilter =
       true
     );
 
+const onlyWithLocalisation = (
+  lieuMediationNumerique: LieuMediationNumerique
+): lieuMediationNumerique is LieuMediationNumerique & { localisation: Localisation } =>
+  lieuMediationNumerique.localisation?.latitude != null && lieuMediationNumerique.localisation?.longitude != null;
+
 export const filteredLieuxMediationNumerique = (
   lieuxMediationNumerique: LieuMediationNumerique[],
   localisation: Localisation,
@@ -46,9 +51,9 @@ export const filteredLieuxMediationNumerique = (
   date: Date
 ) =>
   lieuxMediationNumerique
-    .filter((lieuMediationNumerique: LieuMediationNumerique) => lieuMediationNumerique.localisation)
+    .filter(onlyWithLocalisation)
     .map(
-      (lieuMediationNumerique: LieuMediationNumerique): LieuMediationNumeriquePresentation =>
+      (lieuMediationNumerique: LieuMediationNumerique & { localisation: Localisation }): LieuMediationNumeriquePresentation =>
         toLieuxMediationNumeriquePresentation(lieuMediationNumerique, localisation, date)
     )
     .filter(byOrientationFilter(filter, date));
