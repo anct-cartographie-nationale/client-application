@@ -176,4 +176,15 @@ describe('collectivite territoriale presenter', (): void => {
 
     expect(isDepartementZoomLevel).toStrictEqual(false);
   });
+
+  it('should get département from code postal located in Saint Martin', (): void => {
+    const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
+      code_postal: '97150',
+      commune: 'Saint Martin'
+    } as LieuMediationNumeriquePresentation;
+
+    const codeDepartement: string | undefined = toDepartement(lieuDeMediationNumerique)?.code;
+
+    expect(codeDepartement).toStrictEqual('978');
+  });
 });

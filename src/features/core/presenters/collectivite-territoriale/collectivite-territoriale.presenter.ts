@@ -16,12 +16,19 @@ const isInCorse = (codePostal: string): boolean => codePostal.startsWith('20');
 
 const isInOutremer = (codePostal: string): boolean => codePostal.startsWith('97');
 
+const isSaintMartin = (codePostal: string, commune: string): boolean => {
+  if (!commune) return false;
+  return codePostal.startsWith('97') && commune.toLocaleLowerCase().includes('saint martin');
+};
+
 const convertEdgeCasesToCodeInsee = (codePostal: string): string =>
   codePostalNotMatchingCodeDepartementMap.get(codePostal) ?? codePostal;
 
-const codeDepartementFromCodePostal = (codePostal: string) => {
+const codeDepartementFromCodePostal = (codePostal: string, commune: string) => {
   if (isInCorse(codePostal)) {
     return getCorseCodeDepartement(codePostal);
+  } else if (isSaintMartin(codePostal, commune)) {
+    return convertEdgeCasesToCodeInsee(codePostal).slice(0, 3);
   } else if (isInOutremer(codePostal)) {
     return codePostal.slice(0, 3);
   }
@@ -34,7 +41,7 @@ const codeDepartementFromCodeInsee = (codeInsee: string) => codeInsee.slice(0, 2
 const toCodeDepartement = (lieuDeMediationNumerique: LieuMediationNumeriquePresentation): string => {
   return lieuDeMediationNumerique.code_insee
     ? codeDepartementFromCodeInsee(lieuDeMediationNumerique.code_insee)
-    : codeDepartementFromCodePostal(lieuDeMediationNumerique.code_postal);
+    : codeDepartementFromCodePostal(lieuDeMediationNumerique.code_postal, lieuDeMediationNumerique.commune);
 };
 
 export const toDepartement = (
