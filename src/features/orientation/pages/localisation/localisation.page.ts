@@ -38,9 +38,17 @@ export class LocalisationPage {
   ) {}
 
   public onSelectAddress(address: AddressFoundPresentation): void {
+    this.orientationLayout.filterForm.get('address')?.setValue(address.label);
     this.orientationLayout.filterForm.get('latitude')?.setValue(address.localisation.latitude);
     this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);
-    this.orientationLayout.filterForm.get('distance')?.setValue('100000');
+    this.orientationLayout.filterForm.get('distance')?.setValue(100000);
+  }
+
+  public onResetAddress(): void {
+    this.orientationLayout.filterForm.get('address')?.reset();
+    this.orientationLayout.filterForm.get('latitude')?.reset();
+    this.orientationLayout.filterForm.get('longitude')?.reset();
+    this.orientationLayout.filterForm.get('distance')?.reset();
   }
 
   public onGeoLocate(): void {
@@ -48,7 +56,7 @@ export class LocalisationPage {
     window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
       this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
       this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
-      this.orientationLayout.filterForm.get('distance')?.setValue('100000');
+      this.orientationLayout.filterForm.get('distance')?.setValue(100000);
       this.orientationLayout.filterForm.get('address')?.setValue(null);
       this._geoLocation$.next(
         Localisation({
