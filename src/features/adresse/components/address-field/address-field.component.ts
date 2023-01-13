@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AddressFoundPresentation } from '../../../adresse';
 
@@ -7,19 +7,27 @@ import { AddressFoundPresentation } from '../../../adresse';
   selector: 'app-address-field',
   templateUrl: './address-field.component.html'
 })
-export class AddressFieldComponent {
+export class AddressFieldComponent implements OnInit {
   @Input() public addressSuggestions: AddressFoundPresentation[] = [];
 
   @Output() public readonly selectAddress: EventEmitter<AddressFoundPresentation> =
     new EventEmitter<AddressFoundPresentation>();
 
+  @Output() public readonly resetAddress: EventEmitter<void> = new EventEmitter<void>();
+
   @Output() public readonly searchAddress: EventEmitter<string> = new EventEmitter<string>();
 
   @Input() public addressNotFound: boolean = false;
 
-  @Input() public formGroup: FormGroup = new FormGroup({ address: new FormControl() });
-
   @Input() public displayReset: boolean = false;
+
+  @Input() public defaultValue?: string;
+
+  formGroup: FormGroup = new FormGroup({ address: new FormControl() });
+
+  public ngOnInit(): void {
+    this.formGroup.get('address')?.setValue(this.defaultValue ?? '');
+  }
 
   public search(addressInput: string): void {
     this.searchAddress.next(addressInput);
@@ -35,10 +43,8 @@ export class AddressFieldComponent {
     return `${address.label}-${address.context}`;
   }
 
-  public resetAddress(filter: FormGroup) {
-    filter.get('address')?.setValue('');
-    filter.get('distance')?.setValue('');
-    filter.get('latitude')?.setValue('');
-    filter.get('longitude')?.setValue('');
+  public clear() {
+    this.formGroup.get('address')?.reset();
+    this.resetAddress.emit();
   }
 }

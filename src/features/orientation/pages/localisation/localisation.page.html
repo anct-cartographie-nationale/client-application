@@ -30,8 +30,9 @@
                     [displayReset]="true"
                     [addressSuggestions]="(addressesFound$ | async) ?? []"
                     [addressNotFound]="(addressNotFound$ | async) ?? false"
-                    [formGroup]="orientationLayout.filterForm"
+                    [defaultValue]="orientationLayout.filterForm.get('address')?.value"
                     (selectAddress)="onSelectAddress($event)"
+                    (resetAddress)="onResetAddress()"
                     (searchAddress)="onSearchAddress($event)"></app-address-field>
                 </div>
                 <div class="col-auto">
@@ -55,7 +56,7 @@
                     type="radio"
                     name="distance"
                     formControlName="distance"
-                    value="100000"
+                    [value]="100000"
                     class="form-check-input"
                     id="distance-100km" />
                   <label class="form-check-label chip-pointer" for="distance-100km">Moins de 100 km</label>
@@ -65,7 +66,7 @@
                     type="radio"
                     name="distance"
                     formControlName="distance"
-                    value="20000"
+                    [value]="20000"
                     class="form-check-input"
                     id="distance-20km" />
                   <label class="form-check-label chip-pointer" for="distance-20km">Moins de 20 km</label>
@@ -75,7 +76,7 @@
                     type="radio"
                     name="distance"
                     formControlName="distance"
-                    value="5000"
+                    [value]="5000"
                     class="form-check-input"
                     id="distance-5km" />
                   <label class="form-check-label chip-pointer" for="distance-5km">Moins de 5 km</label>
