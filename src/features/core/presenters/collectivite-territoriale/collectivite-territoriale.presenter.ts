@@ -36,13 +36,8 @@ const codeDepartementFromCodePostal = (codePostal: string, commune: string) => {
   return convertEdgeCasesToCodeInsee(codePostal).slice(0, 2);
 };
 
-const codeDepartementFromCodeInsee = (codeInsee: string) => codeInsee.slice(0, 2);
-
-const toCodeDepartement = (lieuDeMediationNumerique: LieuMediationNumeriquePresentation): string => {
-  return lieuDeMediationNumerique.code_insee
-    ? codeDepartementFromCodeInsee(lieuDeMediationNumerique.code_insee)
-    : codeDepartementFromCodePostal(lieuDeMediationNumerique.code_postal, lieuDeMediationNumerique.commune);
-};
+const toCodeDepartement = (lieuDeMediationNumerique: LieuMediationNumeriquePresentation): string =>
+  codeDepartementFromCodePostal(lieuDeMediationNumerique.code_postal, lieuDeMediationNumerique.commune);
 
 export const toDepartement = (
   lieuDeMediationNumerique: LieuMediationNumeriquePresentation
