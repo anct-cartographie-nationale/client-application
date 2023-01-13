@@ -18,7 +18,13 @@ import {
   toLocalisationFromFilterFormPresentation,
   nearestRegion
 } from '../../../core';
-import { LIEUX_ZOOM_LEVEL, MarkersPresenter, getNextRouteFromZoomLevel, shouldNavigateToListPage } from '../../presenters';
+import {
+  LIEUX_ZOOM_LEVEL,
+  MarkersPresenter,
+  getNextRouteFromZoomLevel,
+  shouldNavigateToListPage,
+  zoomLevelFromAreaDistance
+} from '../../presenters';
 import { ViewReset } from '../../directives';
 import { BBox } from 'geojson';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
@@ -142,6 +148,10 @@ export class CartographieLayout {
     return this.route.children[0]?.children[0]?.snapshot.paramMap.get(routeParam) ?? '';
   }
 
+  private getQueryParam(queryParam: string) {
+    return this.route.children[0]?.children[0]?.snapshot.queryParamMap.get(queryParam) ?? '';
+  }
+
   private setInitialZoom(lieux: LieuMediationNumeriquePresentation[]) {
     const departement: DepartementPresentation | undefined = departementFromNom(this.getRouteParam('nomDepartement'));
     if (departement) return this.onShowLieuxInDepartement(departement);
@@ -157,6 +167,13 @@ export class CartographieLayout {
         Localisation({ latitude: lieuFound.latitude, longitude: lieuFound.longitude }),
         LIEUX_ZOOM_LEVEL
       );
+
+    if (this.getQueryParam('latitude') && this.getQueryParam('longitude')) {
+      return this.markersPresenter.center(
+        Localisation({ latitude: +this.getQueryParam('latitude'), longitude: +this.getQueryParam('longitude') }),
+        zoomLevelFromAreaDistance(+this.getQueryParam('distance'))
+      );
+    }
 
     this.navigateToPageMatchingZoomLevel(
       this.markersPresenter.defaultCenterView.zoomLevel,

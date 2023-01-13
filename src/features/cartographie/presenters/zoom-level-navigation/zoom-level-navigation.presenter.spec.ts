@@ -2,7 +2,11 @@ import {
   REGION_ZOOM_LEVEL,
   DEPARTEMENT_ZOOM_LEVEL,
   getNextRouteFromZoomLevel,
-  shouldNavigateToListPage
+  shouldNavigateToListPage,
+  LIEUX_ZOOM_LEVEL,
+  zoomLevelFromAreaDistance,
+  NEAR_ZOOM_LEVEL,
+  FAR_ZOOM_LEVEL
 } from './zoom-level-navigation.presenter';
 
 describe('zoom level navigation presenter', (): void => {
@@ -81,5 +85,29 @@ describe('zoom level navigation presenter', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage(['.'], ':id');
 
     expect(shouldNavigate).toStrictEqual(false);
+  });
+
+  it('should get zoom level from area distance of 100km', function () {
+    const zoomLevel: number = zoomLevelFromAreaDistance(100000);
+
+    expect(zoomLevel).toBe(LIEUX_ZOOM_LEVEL);
+  });
+
+  it('should get zoom level from area distance of 20km', function () {
+    const zoomLevel: number = zoomLevelFromAreaDistance(20000);
+
+    expect(zoomLevel).toBe(FAR_ZOOM_LEVEL);
+  });
+
+  it('should get zoom level from area distance of 5km', function () {
+    const zoomLevel: number = zoomLevelFromAreaDistance(5000);
+
+    expect(zoomLevel).toBe(NEAR_ZOOM_LEVEL);
+  });
+
+  it('should get zoom level from area distance of 0', function () {
+    const zoomLevel: number = zoomLevelFromAreaDistance(0);
+
+    expect(zoomLevel).toBe(LIEUX_ZOOM_LEVEL);
   });
 });
