@@ -1,6 +1,8 @@
 export const REGION_ZOOM_LEVEL: number = 7;
 export const DEPARTEMENT_ZOOM_LEVEL: number = 9;
 export const LIEUX_ZOOM_LEVEL: number = 10;
+export const FAR_ZOOM_LEVEL: number = 11;
+export const NEAR_ZOOM_LEVEL: number = 13;
 
 const REGIONS_ROUTE: string = 'regions';
 const LIEUX_ROUTE: string = '.';
@@ -28,3 +30,10 @@ const isLieux = (route: string[], routeConfigPath: string): boolean =>
 export const shouldNavigateToListPage = (route: string[], routeConfigPath?: string): boolean =>
   routeConfigPath != null &&
   (isRegion(route, routeConfigPath) || isDepartement(route, routeConfigPath) || isLieux(route, routeConfigPath));
+
+export const zoomLevelFromAreaDistance = (distance: number): number => {
+  if (distance === 0) return LIEUX_ZOOM_LEVEL;
+  if (distance <= 5000) return NEAR_ZOOM_LEVEL;
+  if (distance <= 20000) return FAR_ZOOM_LEVEL;
+  return LIEUX_ZOOM_LEVEL;
+};
