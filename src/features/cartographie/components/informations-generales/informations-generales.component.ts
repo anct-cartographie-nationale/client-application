@@ -12,4 +12,5 @@ export class InformationsGeneralesComponent {
   @Input() public typologie?: string;
   @Input() public date?: Date;
   @Input() public status?: OpeningStatus;
+  @Input() public source?: string = '';
 }

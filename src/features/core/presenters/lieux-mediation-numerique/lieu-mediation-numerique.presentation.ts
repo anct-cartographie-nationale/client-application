@@ -32,6 +32,7 @@ export type LieuMediationNumeriquePresentation = {
   publics_accueillis?: PublicAccueilli[];
   conditions_acces?: ConditionAcces[];
   horaires?: string;
+  source?: string;
   distance?: number;
   status?: OpeningStatus;
 };
@@ -66,5 +67,6 @@ export const toLieuxMediationNumeriquePresentation = (
   ...ifAny('conditions_acces', lieuMediationNumerique.conditions_acces),
   ...ifAny('horaires', lieuMediationNumerique.horaires),
   ...ifAny('distance', getDistance(lieuMediationNumerique, localisation)),
-  ...ifAny('status', openingStatus(date)(lieuMediationNumerique.horaires))
+  ...ifAny('status', openingStatus(date)(lieuMediationNumerique.horaires)),
+  ...ifAny('source', lieuMediationNumerique.source)
 });

@@ -5,7 +5,10 @@
     <h1 class="h2 fw-bold mb-0 text-first-letter-uppercase">
       {{ nom }}
     </h1>
-    <small *ngIf="date" class="fst-italic">Mise à jour le {{ date | date: 'dd/MM/y' }}</small>
+    <div class="fst-italic">
+      <small *ngIf="date">Mise à jour le {{ date | date: 'dd/MM/y' }}</small>
+      <u *ngIf="source" class="ms-2 opacity-75">source : {{ source }}</u>
+    </div>
   </div>
   <div class="d-flex flex-column">
     <div class="flex-grow-1 text-end">
