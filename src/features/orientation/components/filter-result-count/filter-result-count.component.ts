@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { BrandConfiguration, BRAND_TOKEN } from 'projects/client-application/src/root';
+import { BrandConfiguration, BRAND_TOKEN } from '../../../../root';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
