@@ -5,9 +5,58 @@
     <h1 class="h2 fw-bold mb-0 text-first-letter-uppercase">
       {{ nom }}
     </h1>
-    <div class="fst-italic">
-      <small *ngIf="date">Mise à jour le {{ date | date: 'dd/MM/y' }}</small>
-      <u *ngIf="source" class="ms-2 opacity-75">source : {{ source }}</u>
+    <div class="fst-italic d-flex align-items-center">
+      <small *ngIf="date" class="mt-1">Mise à jour le {{ date | date: 'dd/MM/y' }}</small>
+      <div *ngIf="source" [ngSwitch]="source">
+        <div *ngSwitchCase="'conseiller-numerique'" class="ms-2 opacity-75">
+          source :
+          <a href="https://www.conseiller-numerique.gouv.fr" target="_blank" rel="noopener noreferrer" class="text-secondary">
+            {{ source }}
+          </a>
+        </div>
+        <div *ngSwitchCase="'dora'" class="ms-2 opacity-75">
+          source :
+          <a href="https://dora.fabrique.social.gouv.fr" target="_blank" rel="noopener noreferrer" class="text-secondary">
+            {{ source }}
+          </a>
+        </div>
+        <div *ngSwitchCase="'hinaura'" class="ms-2 opacity-75">
+          source :
+          <a href="https://www.hinaura.fr" target="_blank" rel="noopener noreferrer" class="text-secondary">
+            {{ source }}
+          </a>
+        </div>
+        <div *ngSwitchCase="'maine-et-loire'" class="ms-2 opacity-75">
+          source :
+          <a
+            href="https://data.maine-et-loire.fr/explore/dataset/224900019_lieux-de-mediation-numerique-en-maine-et-loire/table/https://data.maine-et-loire.fr/explore/dataset/224900019_lieux-de-mediation-numerique-en-maine-et-loire/table/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-secondary">
+            {{ source }}
+          </a>
+        </div>
+        <div *ngSwitchCase="'Les Assembleurs'" class="ms-2 opacity-75">
+          source :
+          <a
+            href="https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-hauts-de-france-fournis-par-le-hub-les-assembleurs/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-secondary">
+            {{ source }}
+          </a>
+        </div>
+        <div *ngSwitchCase="'france-services'" class="ms-2 opacity-75">
+          source :
+          <a
+            href="https://www.data.gouv.fr/fr/datasets/liste-des-structures-labellisees-france-services/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-secondary">
+            {{ source }}
+          </a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="d-flex flex-column">
