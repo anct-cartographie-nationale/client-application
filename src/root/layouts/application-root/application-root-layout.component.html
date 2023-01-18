@@ -1,39 +1,58 @@
 <app-conteneur>
   <router-outlet></router-outlet>
-  <footer slot="footer" class="pt-5 pb-2" style="background-color: rgba(22, 22, 22, 1)">
-    <div class="container-fluid row">
-      <div class="flex-grow-1 col-auto">
-        <img src="/assets/img/footer-mark.svg" class="img-fluid" alt="" />
+  <footer slot="footer" class="container-fluid py-3 px-4 bg-dark">
+    <div class="text-secondary">Avec le soutien de :</div>
+    <div class="row justify-content-between">
+      <div class="col-lg-auto">
+        <hr class="text-secondary" />
+        <img src="/assets/img/footer/footer-mark.svg" class="img-fluid me-4" alt="" />
+        <img src="/assets/img/footer/footer-anct-logo.svg" class="img-fluid" alt="" />
       </div>
-      <div class="col-5">
-        <p class="text-secondary">
-          La Cartographie nationale des lieux de médiation numérique est un service fourni par l'Agence nationale de la cohésion
-          des territoires
+      <div class="col-xl-6 col-lg mt-lg-0 mt-4 text-secondary">
+        <p class="my-2">
+          La Cartographie nationale des lieux de médiation numérique peut être
+          <a href="https://labase.anct.gouv.fr/ressource/993" style="color: inherit" target="_blank" rel="noopener noreferrer">
+            intégrée facilement sur votre site web
+          </a>
+          . Vous souhaitez apparaître sur la cartographie ? il vous suffit de renseigner vos données sur
+          <a href="https://labase.anct.gouv.fr/ressource/975" style="color: inherit" target="_blank" rel="noopener noreferrer">
+            DORA
+          </a>
+          .
+        </p>
+        <p>
+          Toutes les données des structures affichées ici respectent
+          <a
+            href="https://schema.data.gouv.fr/LaMednum/standard-mediation-num/0.1.0/documentation.html"
+            style="color: inherit"
+            target="_blank"
+            rel="noopener noreferrer">
+            le schéma de données des lieux d'inclusion numérique
+          </a>
+          développé par la Mednum et Datactivist.
+        </p>
+        <div class="d-flex mt-5">
           <span class="d-flex me-3">
             <a
               class="nav-link me-1 text-muted"
-              href="https://agence-cohesion-territoires.gouv.fr/"
+              href="https://labase.anct.gouv.fr/base/356"
               target="_blank"
               rel="noopener noreferrer">
-              ANCT
+              Documentation
             </a>
             <i class="ri-external-link-line align-bottom text-muted"></i>
           </span>
-        </p>
-        <p class="text-secondary">
-          Cette cartographie est dépendante du schéma de données des lieux de médiation numérique propulsé par la Mednum et
-          Datactivist
-          <span class="d-flex">
+          <span class="d-flex me-3">
             <a
               class="nav-link me-1 text-muted"
-              href="https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique-2/"
+              href="mailto:cartographie.sonum@anct.gouv.fr"
               target="_blank"
               rel="noopener noreferrer">
-              Schéma de données des lieux de médiation numérique
+              Nous contacter
             </a>
             <i class="ri-external-link-line align-bottom text-muted"></i>
           </span>
-        </p>
+        </div>
       </div>
       <div>
         <hr class="mt-5 mb-2 text-secondary" />
