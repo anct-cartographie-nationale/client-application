@@ -19,6 +19,10 @@ export class MediationNumeriqueWebComponentLayout implements OnInit {
     BRAND_CONFIGURATION.logo = logo;
   }
 
+  @Input() set illustration(illustration: string) {
+    BRAND_CONFIGURATION.illustration = `svg-${illustration}.svg`;
+  }
+
   @Input() set titre(name: string) {
     BRAND_CONFIGURATION.name = name;
   }
