@@ -299,6 +299,39 @@ Exemple :
 </fr-mediation-numerique-conteneur>
 ```
 
+#### Illustration svg orientation
+
+Il est possible d'afficher l'illustration correspondante à sa région.
+
+Les valeurs disponibles sont :
+
+- antille-guyane
+- auvergne-rhone-alpe
+- bourgogne-franche-conte
+- bretagne
+- centre-val-de-loire
+- corse
+- france-et-outremer
+- grand-ouest
+- hauts-de-france
+- ile-de-france
+- normandie
+- nouvelle-aquitaine
+- occitanie
+- paca
+- pays-de-la-loire
+- st-martin-guadeloupe-martinique
+
+La valeur par défaut est `france-et-outremer`.
+
+Exemple:
+
+```html
+<fr-mediation-numerique-conteneur>
+  <fr-mediation-numerique illustration="france-et-outremer"></fr-mediation-numerique>
+</fr-mediation-numerique-conteneur>
+```
+
 #### Source de données
 
 Pour utiliser une autre source il faut préciser une url qui fournit les données conformes au [schéma de données des lieux de médiation numérique](https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique)
@@ -553,7 +586,7 @@ Il est alors possible d'utiliser l'élément `<fr-mediation-numerique-orientatio
 </html>
 ```
 
-Les attributs de personnalisations suivants, présentés dans la section précédente sont disponibles : `logo`, `titre`, `source` :
+Les attributs de personnalisations suivants, présentés dans la section précédente sont disponibles : `logo`, `titre`, `source`, `illustration` :
 
 ```html
 <!DOCTYPE html>
@@ -567,7 +600,8 @@ Les attributs de personnalisations suivants, présentés dans la section précé
     <fr-mediation-numerique-orientation
       source="https://api.conseiller-numerique.gouv.fr/permanences"
       titre="Médiation numérique à Bessenay"
-      logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"></fr-mediation-numerique-orientation>
+      logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
+      illustration="grand-ouest"></fr-mediation-numerique-orientation>
     <script src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@5.0.0/orientation.js" type="module"></script>
   </body>
 </html>
