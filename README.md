@@ -327,7 +327,7 @@ La valeur par défaut est `france-et-outremer`.
 Exemple:
 
 ```html
-<fr-mediation-numerique-conteneur titre="Hub B" logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg">
+<fr-mediation-numerique-conteneur>
   <fr-mediation-numerique illustration="france-et-outremer"></fr-mediation-numerique>
 </fr-mediation-numerique-conteneur>
 ```
