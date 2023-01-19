@@ -24,11 +24,15 @@ const toLieuxWithLieuToFocus = ([lieux, paramMap]: [LieuMediationNumeriquePresen
   LieuMediationNumeriquePresentation?
 ] => [lieux, lieux.find((lieu: LieuMediationNumeriquePresentation) => lieu.id === paramMap.get('id'))];
 
-const toLieux = ([lieux]: [
-  LieuMediationNumeriquePresentation[],
-  LieuMediationNumeriquePresentation?
-]): LieuMediationNumeriquePresentation[] => {
-  return lieux;
+const toLieux = (
+  localisation: Localisation,
+  [lieux]: [LieuMediationNumeriquePresentation[], LieuMediationNumeriquePresentation?]
+): LieuMediationNumeriquePresentation[] => {
+  return localisation
+    ? lieux
+    : lieux.sort((a, b) =>
+        a.code_postal !== b.code_postal ? (a.code_postal < b.code_postal ? -1 : 1) : a.nom < b.nom ? -1 : 1
+      );
 };
 
 const filteredByDepartementIfExist = (
@@ -82,7 +86,12 @@ export class LieuxMediationNumeriqueListPage {
       this.boundingBox$()
     ),
     this.route.paramMap
-  ]).pipe(map(toLieuxFilteredByDepartement), map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
+  ]).pipe(
+    map(toLieuxFilteredByDepartement),
+    map(toLieuxWithLieuToFocus),
+    tap(this.setInitialState),
+    map((lieux) => toLieux(this._localisation, lieux))
+  );
 
   public listOfLieuxWithoutFilters$: Observable<LieuMediationNumeriquePresentation[]> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
