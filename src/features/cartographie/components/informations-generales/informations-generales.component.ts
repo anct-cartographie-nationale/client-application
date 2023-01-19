@@ -22,19 +22,19 @@ export class InformationsGeneralesComponent {
   public sourceRedirectionLink: sourcePresentation[] = [
     {
       nom: 'conseiller-numerique',
-      link: 'https://www.conseiller-numerique.gouv.fr'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique/'
     },
     {
       nom: 'dora',
-      link: 'https://dora.fabrique.social.gouv.fr'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numeriques-en-france-disponibles-dans-le-referentiel-de-loffre-dinsertion-publie-par-data-inclusion/'
     },
     {
       nom: 'hinaura',
-      link: 'https://www.hinaura.fr'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-auvergne-rhone-alpes-fournis-par-le-hub-hinaura-1/'
     },
     {
       nom: 'maine-et-loire',
-      link: 'https://data.maine-et-loire.fr/explore/dataset/224900019_lieux-de-mediation-numerique-en-maine-et-loire/table/https://data.maine-et-loire.fr/explore/dataset/224900019_lieux-de-mediation-numerique-en-maine-et-loire/table/'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-le-departement-du-maine-et-loire/'
     },
     {
       nom: 'Les Assembleurs',
@@ -42,7 +42,7 @@ export class InformationsGeneralesComponent {
     },
     {
       nom: 'france-services',
-      link: 'https://www.data.gouv.fr/fr/datasets/liste-des-structures-labellisees-france-services/'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-le-label-france-services/'
     }
   ];
 }
