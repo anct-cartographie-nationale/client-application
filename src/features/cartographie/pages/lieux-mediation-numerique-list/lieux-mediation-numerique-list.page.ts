@@ -24,12 +24,29 @@ const toLieuxWithLieuToFocus = ([lieux, paramMap]: [LieuMediationNumeriquePresen
   LieuMediationNumeriquePresentation?
 ] => [lieux, lieux.find((lieu: LieuMediationNumeriquePresentation) => lieu.id === paramMap.get('id'))];
 
-const toLieux = ([lieux]: [
-  LieuMediationNumeriquePresentation[],
-  LieuMediationNumeriquePresentation?
-]): LieuMediationNumeriquePresentation[] => {
-  return lieux;
-};
+const shouldSortOnCodePostal = (
+  lieuA: LieuMediationNumeriquePresentation,
+  lieuB: LieuMediationNumeriquePresentation
+): boolean => lieuA.code_postal !== lieuB.code_postal;
+
+const sortOnCodePostal = (lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediationNumeriquePresentation): number =>
+  lieuA.code_postal < lieuB.code_postal ? -1 : 1;
+
+const sortOnNom = (lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediationNumeriquePresentation): number =>
+  lieuA.nom < lieuB.nom ? -1 : 1;
+
+const toLieux =
+  (localisation: Localisation) =>
+  ([lieux]: [
+    LieuMediationNumeriquePresentation[],
+    LieuMediationNumeriquePresentation?
+  ]): LieuMediationNumeriquePresentation[] => {
+    return localisation
+      ? lieux
+      : lieux.sort((lieuA, lieuB) =>
+          shouldSortOnCodePostal(lieuA, lieuB) ? sortOnCodePostal(lieuA, lieuB) : sortOnNom(lieuA, lieuB)
+        );
+  };
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
@@ -82,7 +99,12 @@ export class LieuxMediationNumeriqueListPage {
       this.boundingBox$()
     ),
     this.route.paramMap
-  ]).pipe(map(toLieuxFilteredByDepartement), map(toLieuxWithLieuToFocus), tap(this.setInitialState), map(toLieux));
+  ]).pipe(
+    map(toLieuxFilteredByDepartement),
+    map(toLieuxWithLieuToFocus),
+    tap(this.setInitialState),
+    map(toLieux(this._localisation))
+  );
 
   public listOfLieuxWithoutFilters$: Observable<LieuMediationNumeriquePresentation[]> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
