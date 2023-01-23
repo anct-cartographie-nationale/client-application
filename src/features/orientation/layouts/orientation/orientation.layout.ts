@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
 import { BehaviorSubject, delay, Observable, shareReplay, startWith, tap } from 'rxjs';
@@ -99,5 +99,18 @@ export class OrientationLayout {
 
   private setFilterToQueryString(): (queryParams: FilterPresentation) => Promise<boolean> {
     return (queryParams: FilterPresentation) => this.router.navigate([], { queryParams });
+  }
+
+  @ViewChild('scrollable') scrollable!: ElementRef;
+  @ViewChild('arrowClass') arrowClass!: ElementRef;
+
+  @HostListener('mousemove')
+  onMouseMove() {
+    const target = this.scrollable.nativeElement;
+    if (target.scrollTop + target.offsetHeight >= target.scrollHeight) {
+      this.arrowClass.nativeElement.style.visibility = 'hidden';
+    } else {
+      this.arrowClass.nativeElement.style.visibility = 'visible';
+    }
   }
 }

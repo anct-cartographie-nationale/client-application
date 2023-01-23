@@ -2,3 +2,12 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.scrollable {
+  position: relative;
+  overflow-y: scroll;
+}
+
+.arrow-class {
+  visibility: hidden;
+}

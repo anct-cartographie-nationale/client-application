@@ -5,7 +5,11 @@
       <div class="row g-0 h-100 shadow">
         <div class="col bg-white pt-3 h-100 overflow-auto d-flex flex-column">
           <app-nav class="d-lg-block d-none" *ngIf="this.router.url !== '/orientation'" [filter]="filter"></app-nav>
-          <div class="h-100 d-lg-block d-flex flex-column" [@routeAnimations]="getRouteAnimationData()">
+          <div
+            #scrollable
+            (mousemove)="onMouseMove()"
+            class="scrollable h-100 d-lg-block d-flex flex-column"
+            [@routeAnimations]="getRouteAnimationData()">
             <router-outlet></router-outlet>
             <div *ngIf="this.router.url !== '/orientation'" class="bg-primary text-white text-center mt-auto d-lg-none d-block">
               <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
@@ -26,6 +30,9 @@
                 </ng-container>
               </ng-container>
             </div>
+          </div>
+          <div #arrowClass class="arrow-class d-flex justify-content-center">
+            <i class="ri-arrow-right-s-line ri-xl ri-fw ri-space text-primary" style="transform: rotate(90deg)"></i>
           </div>
         </div>
         <div class="col-lg-4 col-12 bg-primary text-white h-100 p-4 overflow-auto d-lg-flex d-none align-items-center">
