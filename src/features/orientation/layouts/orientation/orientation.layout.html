@@ -6,9 +6,9 @@
         <div class="col bg-white pt-3 h-100 overflow-auto d-flex flex-column">
           <app-nav class="d-lg-block d-none" *ngIf="this.router.url !== '/orientation'" [filter]="filter"></app-nav>
           <div
-            #scrollable
-            (mousemove)="onMouseMove()"
-            class="scrollable h-100 d-lg-block d-flex flex-column"
+            appScroll
+            (reachEnd)="hideArrow = $event"
+            class="overflow-scroll h-100 d-lg-block d-flex flex-column"
             [@routeAnimations]="getRouteAnimationData()">
             <router-outlet></router-outlet>
             <div *ngIf="this.router.url !== '/orientation'" class="bg-primary text-white text-center mt-auto d-lg-none d-block">
@@ -31,7 +31,7 @@
               </ng-container>
             </div>
           </div>
-          <div #arrowClass class="arrow-class d-flex justify-content-center">
+          <div class="d-flex justify-content-center" [class.invisible]="hideArrow">
             <i class="ri-arrow-right-s-line ri-xl ri-fw ri-space text-primary" style="transform: rotate(90deg)"></i>
           </div>
         </div>
