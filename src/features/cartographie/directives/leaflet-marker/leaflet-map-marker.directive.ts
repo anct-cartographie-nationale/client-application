@@ -1,6 +1,6 @@
 /* eslint-disable @angular-eslint/directive-selector */
 
-import { Directive, EventEmitter, Inject, Input, OnChanges, OnDestroy, Output } from '@angular/core';
+import { Directive, EventEmitter, Inject, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { DivIcon, Icon, LeafletEvent, marker, Marker, MarkerOptions, Popup, Tooltip } from 'leaflet';
 import { LeafletMapComponent } from '../../components';
 import { MarkerHighlight, MarkerProperties, MARKERS_TOKEN, MarkersConfiguration } from '../../configuration';
@@ -20,6 +20,10 @@ export interface MarkerEvent<T> {
   };
 }
 
+const highlight = (changes: SimpleChanges): boolean => changes['highlight']?.isFirstChange() === false;
+
+const leafletClasses: string[] = ['leaflet-marker-icon', 'leaflet-zoom-animated', 'leaflet-interactive'];
+
 @Directive({
   providers: [
     { provide: CanHavePopupDirective, useExisting: LeafletMapMarkerDirective },
@@ -38,6 +42,8 @@ export class LeafletMapMarkerDirective<TProperty, TIcon extends DivIcon | Icon>
 
   @Input() public longitude!: number;
 
+  @Input() public properties!: TProperty;
+
   @Output() public readonly markerClick: EventEmitter<MarkerEvent<TProperty>> = new EventEmitter<MarkerEvent<TProperty>>();
 
   @Output() public readonly markerEnter: EventEmitter<MarkerEvent<TProperty>> = new EventEmitter<MarkerEvent<TProperty>>();
@@ -45,8 +51,6 @@ export class LeafletMapMarkerDirective<TProperty, TIcon extends DivIcon | Icon>
   @Input() public markerFactoryKey: string = '';
 
   @Output() public readonly markerLeave: EventEmitter<MarkerEvent<TProperty>> = new EventEmitter<MarkerEvent<TProperty>>();
-
-  @Input() public properties!: TProperty;
 
   public get popupHolder(): Marker | undefined {
     return this._marker;
@@ -151,8 +155,18 @@ export class LeafletMapMarkerDirective<TProperty, TIcon extends DivIcon | Icon>
     this._marker?.off('mouseover');
   }
 
-  public ngOnChanges(): void {
+  private markerOptionsClasses(): string[] {
+    return this.markerOptions().icon?.options.className?.split(' ') ?? [];
+  }
+
+  private resetMarkerClasses(): void {
+    this._marker?.getElement()?.setAttribute('class', '');
+    this._marker?.getElement()?.classList.add(...leafletClasses, ...this.markerOptionsClasses());
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
     if (this._mapComponent.map == null) return;
+    if (highlight(changes)) return this.resetMarkerClasses();
 
     const previousMarkerOverlay: MarkerOverlay = this.getMarkerOverlay();
     this._marker?.removeFrom(this._mapComponent.map);
