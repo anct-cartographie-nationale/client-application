@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { OpeningStatus } from '../../../core';
+import { OpeningStatus } from '../../../../core';
 
 type sourcePresentation = {
   nom: string;

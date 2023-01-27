@@ -23,7 +23,8 @@ import {
   MarkersPresenter,
   getNextRouteFromZoomLevel,
   shouldNavigateToListPage,
-  zoomLevelFromAreaDistance
+  zoomLevelFromAreaDistance,
+  LieuMediationNumeriqueOnMapPresentation
 } from '../../presenters';
 import { ViewReset } from '../../directives';
 import { BBox } from 'geojson';
@@ -96,7 +97,7 @@ export class CartographieLayout {
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
-  public onShowDetails(lieu: LieuMediationNumeriquePresentation): void {
+  public onShowDetails(lieu: LieuMediationNumeriqueOnMapPresentation): void {
     this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
     lieu.latitude &&
       lieu.longitude &&

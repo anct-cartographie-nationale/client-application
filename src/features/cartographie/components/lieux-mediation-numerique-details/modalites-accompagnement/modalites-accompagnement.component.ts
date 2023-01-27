@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ModaliteAccompagnementPresentation } from '../../presenters';
+import { ModaliteAccompagnementPresentation } from '../../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

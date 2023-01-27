@@ -58,10 +58,10 @@ const updateOnResize = (leafletMap: LeafletMap, mapContainerElement: HTMLElement
   new ResizeObserver((): LeafletMap => leafletMap.invalidateSize()).observe(mapContainerElement);
 };
 
-export const initializeMap = (mapContainerElement: HTMLElement, centerView: CenterView): LeafletMap => {
+export const initializeMap = (mapContainerElement: HTMLElement, centerView: CenterView, zoomControl: boolean): LeafletMap => {
   const leafletMap: LeafletMap = setMapInContainer(mapContainerElement, centerView);
   setTileLayer(leafletMap);
-  control.zoom(ZOOM_OPTIONS).addTo(leafletMap);
+  zoomControl && control.zoom(ZOOM_OPTIONS).addTo(leafletMap);
   updateOnResize(leafletMap, mapContainerElement);
   return leafletMap;
 };

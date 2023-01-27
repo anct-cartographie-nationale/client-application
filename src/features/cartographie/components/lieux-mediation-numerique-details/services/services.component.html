@@ -1,0 +1,16 @@
+<div *ngIf="services" class="bg-light p-4 d-print-none">
+  <div class="h5 text-muted">SERVICES</div>
+  <ul class="ps-3 fw-bold" *ngIf="services.length > 0; else noServices">
+    <li *ngFor="let service of services">{{ service }}</li>
+  </ul>
+  <ng-template #noServices>Services inconnus</ng-template>
+</div>
+
+<div *ngIf="services" class="d-none d-print-block">
+  <small class="fw-bold text-muted">Services</small>
+  <br />
+  <div *ngIf="services.length > 0; else noServices">
+    <span class="badge rounded-pill text-bg-light py-1 fw-normal" *ngFor="let service of services">{{ service }}</span>
+  </div>
+  <ng-template #noServices>Services inconnus</ng-template>
+</div>

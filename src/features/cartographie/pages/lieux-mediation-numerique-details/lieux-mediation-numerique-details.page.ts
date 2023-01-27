@@ -34,10 +34,6 @@ export class LieuxMediationNumeriqueDetailsPage {
     private readonly _route: ActivatedRoute
   ) {}
 
-  public printPage() {
-    window.print();
-  }
-
   private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) {
     lieuMediationNumerique.localisation &&
       this._markersPresenter.center(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);

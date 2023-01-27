@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row d-print-none">
   <div class="text-center col" *ngFor="let modaliteAccompagnement of modalitesAccompagnement">
     <span class="d-flex justify-content-center">
       <i class="{{ modaliteAccompagnement.icon }} ri-xl ri-space bg-light rounded-circle"></i>
@@ -10,4 +10,9 @@
       <small class="text-muted fst-italic">{{ modaliteAccompagnement.description }}</small>
     </div>
   </div>
+</div>
+<div class="d-none d-print-block">
+  <span class="badge rounded-pill text-bg-light py-1 fw-normal" *ngFor="let modaliteAccompagnement of modalitesAccompagnement">
+    {{ modaliteAccompagnement.label }}
+  </span>
 </div>

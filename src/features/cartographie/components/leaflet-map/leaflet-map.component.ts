@@ -36,6 +36,8 @@ export class LeafletMapComponent implements OnInit {
     return this._map;
   }
 
+  @Input() public zoomControl: boolean = true;
+
   @Input() public set centerView(centerView: CenterView) {
     this._centerView = centerView;
     this._map && flyTo(this._map, centerView);
@@ -51,7 +53,7 @@ export class LeafletMapComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this._map = initializeMap(this.mapContainer.nativeElement, this._centerView);
+    this._map = initializeMap(this.mapContainer.nativeElement, this._centerView, this.zoomControl);
     this._map.on('click', (leafletMouseEvent: LeafletMouseEvent): void => this.mapClick.next(leafletMouseEvent));
   }
 }

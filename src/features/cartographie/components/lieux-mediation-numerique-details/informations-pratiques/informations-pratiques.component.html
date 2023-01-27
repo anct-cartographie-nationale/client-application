@@ -11,7 +11,7 @@
       <b>Consulter les informations d'accessibilité</b>
     </a>
   </div>
-  <div class="col-auto text-end" *ngIf="courriel || telephone">
+  <div class="col-auto text-end d-print-none" *ngIf="courriel || telephone">
     <a
       *ngIf="courriel"
       href="mailto:{{ courriel }}"

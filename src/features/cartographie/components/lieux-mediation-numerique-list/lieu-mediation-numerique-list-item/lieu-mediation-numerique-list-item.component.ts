@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { LieuMediationNumeriquePresentation } from '../../../core';
 import { ConditionAcces } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LieuMediationNumeriquePresentation } from '../../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

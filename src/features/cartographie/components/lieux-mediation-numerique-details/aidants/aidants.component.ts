@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Aidant } from '@features/core';
+import { Aidant } from '../../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
