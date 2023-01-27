@@ -53,7 +53,10 @@ const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresent
 })
 export class OrientationLayout {
   private _lieuxMediationNumeriqueCount$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
   public lieuxMediationNumeriqueCount$: Observable<number> = this._lieuxMediationNumeriqueCount$.asObservable();
+
+  public hideArrow: boolean = false;
 
   public filterForm: FormGroup = createFormGroupFromFilterPresentation(
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
