@@ -115,25 +115,15 @@
     </div>
   </div>
 </div>
-<div class="container text-center" *ngIf="!this.environment">
+<div class="container text-center">
   <h4 class="fw-bold my-5">Les chiffres clefs de la cartographie</h4>
-  <div class="row">
-    <div class="col">
+  <div class="row justify-content-lg-center">
+    <div class="col-4">
       <img src="/assets/img/presentation/svg-maisons.svg" class="img-fluid" alt="" />
       <h4 class="fw-bold" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
         {{lieuxMediationNumeriqueTotal.length}} structures référencées
       </h4>
       <p>Sur l'ensemble du territoire.</p>
-    </div>
-    <div class="col">
-      <img src="/assets/img/presentation/svg-boussole.svg" class="img-fluid" alt="" />
-      <h4 class="fw-bold">X orientations réalisées</h4>
-      <p>A travers la cartographie.</p>
-    </div>
-    <div class="col">
-      <img src="/assets/img/presentation/svg-carte.svg" class="img-fluid" alt="" />
-      <h4 class="fw-bold">X cartographie intégrées</h4>
-      <p>Par des collectivités, Hubs et Labels.</p>
     </div>
   </div>
 </div>
