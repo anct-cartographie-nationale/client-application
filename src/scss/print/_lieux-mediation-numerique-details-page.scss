@@ -4,6 +4,10 @@
   height: 0;
 }
 
+.presentation-resume {
+  font-weight: bold;
+}
+
 @media print {
   .lieux-mediation-numerique-details {
     border: none !important;
@@ -34,5 +38,9 @@
     .day {
       font-weight: bold;
     }
+  }
+
+  .presentation-resume {
+    font-weight: normal !important;
   }
 }
