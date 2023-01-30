@@ -9,24 +9,32 @@
   fill: $primary;
 }
 
-.marker-body {
-  transform: translateY(11px);
-  transition: 0.35s cubic-bezier(0.3, 0.8, 0.55, 1.9);
+.marker-default,
+.marker-cnfs {
+  .marker-body {
+    transform: translateY(11px);
+    transition: 0.35s cubic-bezier(0.3, 0.8, 0.55, 1.9);
 
-  .marker-shape {
-    stroke: $white;
-    stroke-width: 2px;
+    .marker-shape {
+      stroke: $white;
+      stroke-width: 2px;
+    }
+
+    .marker-shadow {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .marker-opening-status {
+      stroke: $white;
+      stroke-width: 3;
+    }
   }
 
-  .marker-shadow {
+  .marker-base {
     opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+    transition: 0.5s;
   }
-}
-
-.marker-base {
-  opacity: 0;
-  transition: 0.5s;
 }
 
 .marker-default {
@@ -51,20 +59,37 @@
   }
 }
 
-.marker-focus,
-.marker-hover {
-  .marker-base {
-    opacity: 1;
-  }
-
-  .marker-body {
-    transform: translateY(0);
+.departement-marker,
+.region-marker {
+  .marker-shadow {
+    opacity: 0;
+    transition: 0.35s;
+    fill: #fff;
+    filter: drop-shadow(1px 3px 3px rgb(0 0 0 / 40%));
   }
 }
 
-.marker-opening-status {
-  stroke: $white;
-  stroke-width: 3;
+.marker-focus,
+.marker-hover {
+  z-index: $zindex-sticky !important;
+
+  .marker-default,
+  .marker-cnfs {
+    .marker-base {
+      opacity: 1;
+    }
+
+    .marker-body {
+      transform: translateY(0);
+    }
+  }
+
+  .departement-marker,
+  .region-marker {
+    .marker-shadow {
+      opacity: 1;
+    }
+  }
 }
 
 .marker-status-closed {
