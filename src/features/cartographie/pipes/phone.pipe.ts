@@ -14,7 +14,7 @@ export class PhonePipe implements PipeTransform {
   transform(phoneNumber: string): string {
     const [_, phoneEnd] = phoneNumber.split(/^\+(?:33|59\d|26\d)\d/);
 
-    if (!phoneEnd) return '';
+    if (!phoneEnd) return phoneNumber;
 
     return [internationalDialingCode(phoneNumber), firstNumber(phoneNumber), ...groupByTwoDigits(phoneEnd)].join(' ');
   }

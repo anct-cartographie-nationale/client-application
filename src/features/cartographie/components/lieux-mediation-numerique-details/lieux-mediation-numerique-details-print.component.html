@@ -1,0 +1,84 @@
+<div class="lieux-mediation-numerique-details-print d-flex flex-column border-3 overflow-hidden">
+  <h2 class="h3 mb-3 d-none d-print-block">
+    <i class="ri-external-link-line ri-file-text-line align-bottom me-2"></i>
+    Fiche structure
+  </h2>
+  <div class="map-container">
+    <div class="border-top" style="height: 250px">
+      <app-leaflet-map
+        *ngIf="lieuMediationNumerique.localisation"
+        [zoomControl]="false"
+        [centerView]="{ coordinates: lieuMediationNumerique.localisation, zoomLevel: 17 }">
+        <app-lieu-mediation-numerique-markers
+          *ngIf="lieuMediationNumerique.localisation"
+          [lieuxMediationNumeriques]="[
+            {
+              id: lieuMediationNumerique.id,
+              nom: lieuMediationNumerique.nom,
+              labels_nationaux: lieuMediationNumerique.labels_nationaux,
+              latitude: lieuMediationNumerique.localisation.latitude,
+              longitude: lieuMediationNumerique.localisation.longitude
+            }
+          ]"></app-lieu-mediation-numerique-markers>
+      </app-leaflet-map>
+    </div>
+  </div>
+  <div class="d-none d-print-flex flex-grow-1 row mt-3 border-bottom pb-3">
+    <div class="col-5 bg-light">
+      <div class="h-100 d-flex flex-column justify-content-between p-3">
+        <div>
+          <small class="text-muted fw-bold">Structure accueillante</small>
+          <br />
+          <h1 class="d-none d-print-block h4 fw-bold">{{ lieuMediationNumerique.nom }}</h1>
+          <small class="text-muted fw-bold">{{ lieuMediationNumerique.adresse }}</small>
+        </div>
+        <app-horaires [horaires]="lieuMediationNumerique.horaires"></app-horaires>
+        <div class="lh-1 text-muted border-2">
+          <div class="mt-3 d-flex align-items-center" *ngIf="lieuMediationNumerique.contact?.telephone">
+            <i class="ri ri-lg ri-phone-line border-end pe-2 me-2"></i>
+            <small>
+              Téléphone
+              <br />
+              <b class="text-body">{{ lieuMediationNumerique.contact?.telephone ?? '' | phone }}</b>
+            </small>
+          </div>
+          <div class="mt-3 d-flex align-items-center" *ngIf="lieuMediationNumerique.contact?.courriel">
+            <i class="ri ri-lg ri-mail-line border-end pe-2 me-2"></i>
+            <small>
+              Mail
+              <br />
+              <b class="text-body">{{ lieuMediationNumerique.contact?.courriel }}</b>
+            </small>
+          </div>
+          <div class="mt-3 d-flex align-items-center" *ngIf="lieuMediationNumerique.contact?.site_web">
+            <i class="ri ri-link ri-lg ri-link-line border-end pe-2 me-2"></i>
+            <small>
+              Site
+              <br />
+              <b class="text-body">{{ lieuMediationNumerique.contact?.site_web }}</b>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-7 my-auto">
+      <div
+        class="mb-3 small"
+        *ngIf="lieuMediationNumerique.presentation?.detail || lieuMediationNumerique.presentation?.resume">
+        <div class="fw-bold text-muted mb-2">Description du lieu</div>
+        <app-description
+          [detail]="lieuMediationNumerique.presentation?.detail"
+          [resume]="lieuMediationNumerique.presentation?.resume"></app-description>
+      </div>
+      <div class="mb-3">
+        <app-services [services]="lieuMediationNumerique.services"></app-services>
+      </div>
+      <div *ngIf="lieuMediationNumerique.modalites_accompagnement || lieuMediationNumerique.publics_accueillis">
+        <div class="small fw-bold text-muted mb-2">Caractéristiques du lieu</div>
+        <app-modalites-accompagnement
+          [modalitesAccompagnement]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
+        <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
+      </div>
+    </div>
+  </div>
+</div>

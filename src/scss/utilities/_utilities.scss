@@ -30,6 +30,7 @@ $utilities: map.merge(
       property: z-index,
       class: z-index,
       values: (
+        base: 0,
         over: 1100
       )
     )

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { LieuMediationNumeriquePresentation } from '../../../../core';
+import { LieuMediationNumeriqueOnMapPresentation } from '../../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -7,18 +7,18 @@ import { LieuMediationNumeriquePresentation } from '../../../../core';
   templateUrl: './lieu-mediation-numerique-markers.component.html'
 })
 export class LieuMediationNumeriqueMarkersComponent {
-  @Input() public lieuxMediationNumeriques: LieuMediationNumeriquePresentation[] = [];
+  @Input() public lieuxMediationNumeriques: LieuMediationNumeriqueOnMapPresentation[] = [];
 
   @Input() public selectedId: string = '';
   @Input() public hoverId: string = '';
 
-  @Output() public showDetails: EventEmitter<LieuMediationNumeriquePresentation> =
-    new EventEmitter<LieuMediationNumeriquePresentation>();
+  @Output() public showDetails: EventEmitter<LieuMediationNumeriqueOnMapPresentation> =
+    new EventEmitter<LieuMediationNumeriqueOnMapPresentation>();
 
   @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
-  public trackByLieuId(_: number, lieu: LieuMediationNumeriquePresentation) {
+  public trackByLieuId(_: number, lieu: LieuMediationNumeriqueOnMapPresentation) {
     return lieu.id;
   }
 

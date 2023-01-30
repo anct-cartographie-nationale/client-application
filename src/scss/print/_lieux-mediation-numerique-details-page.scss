@@ -1,0 +1,46 @@
+.map-container {
+  position: relative;
+  z-index: 0;
+  height: 0;
+}
+
+.presentation-resume {
+  font-weight: bold;
+}
+
+@media print {
+  .lieux-mediation-numerique-details {
+    border: none !important;
+  }
+
+  .lieux-mediation-numerique-details-print {
+    height: 100%;
+  }
+
+  .map-container {
+    height: auto;
+  }
+
+  .table-horaires {
+    & table {
+      font-size: $font-size-sm;
+    }
+
+    & td {
+      padding: 0.25rem 0;
+      border-top: solid $gray-300 2px !important;
+    }
+
+    & tbody:last-child {
+      border-bottom: solid $gray-300 2px !important;
+    }
+
+    .day {
+      font-weight: bold;
+    }
+  }
+
+  .presentation-resume {
+    font-weight: normal !important;
+  }
+}

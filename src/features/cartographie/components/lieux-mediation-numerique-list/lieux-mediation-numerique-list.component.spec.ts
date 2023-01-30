@@ -18,7 +18,7 @@ describe('LieuxMediationNumeriqueListComponent', (): void => {
     const fixture: ComponentFixture<LieuxMediationNumeriqueListComponent> = TestBed.createComponent(
       LieuxMediationNumeriqueListComponent
     );
-    const dieuxMediationNumeriqueListComponent: LieuxMediationNumeriqueListComponent = fixture.componentInstance;
-    expect(dieuxMediationNumeriqueListComponent).toBeTruthy();
+    const lieuxMediationNumeriqueListComponent: LieuxMediationNumeriqueListComponent = fixture.componentInstance;
+    expect(lieuxMediationNumeriqueListComponent).toBeTruthy();
   });
 });
