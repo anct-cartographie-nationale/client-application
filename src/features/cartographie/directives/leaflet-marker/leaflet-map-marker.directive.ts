@@ -156,7 +156,11 @@ export class LeafletMapMarkerDirective<TProperty, TIcon extends DivIcon | Icon>
   }
 
   private markerOptionsClasses(): string[] {
-    return this.markerOptions().icon?.options.className?.split(' ') ?? [];
+    return (
+      this.markerOptions()
+        .icon?.options.className?.split(' ')
+        .filter((classNames) => classNames != '') ?? []
+    );
   }
 
   private resetMarkerClasses(): void {
