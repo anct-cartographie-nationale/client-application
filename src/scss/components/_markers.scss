@@ -3,42 +3,92 @@
   --red-marianne-main-472: #e1000f;
 }
 
-@keyframes cnfs-marker-in-focus {
-  from {
-    fill: var(--blue-france-sun-113-625);
+.departement-marker,
+.region-marker,
+.user-marker {
+  fill: $primary;
+}
+
+.marker-default,
+.marker-cnfs {
+  .marker-body {
+    transform: translateY(11px);
+    transition: 0.35s cubic-bezier(0.3, 0.8, 0.55, 1.9);
+
+    .marker-shape {
+      stroke: $white;
+      stroke-width: 2px;
+    }
+
+    .marker-shadow {
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .marker-opening-status {
+      stroke: $white;
+      stroke-width: 3;
+    }
   }
 
-  to {
-    fill: var(--red-marianne-main-472);
+  .marker-base {
+    opacity: 0;
+    transition: 0.5s;
   }
 }
 
-@keyframes cnfs-marker-out-focus {
-  from {
-    fill: var(--red-marianne-main-472);
-  }
-
-  to {
-    fill: var(--blue-france-sun-113-625);
+.marker-default {
+  .marker-shape,
+  .marker-base {
+    fill: $primary;
   }
 }
 
-.default-marker {
-  fill: var(--red-marianne-main-472);
+.marker-cnfs {
+  .marker-shape,
+  .marker-base {
+    fill: var(--red-marianne-main-472);
+  }
 
-  .marker-focus-active {
-    display: none;
+  .marker-shape-in {
+    fill: var(--blue-france-sun-113-625);
+  }
+
+  .marker-shape-out {
+    fill: $white;
   }
 }
 
-.cnfs-marker {
-  .cnfs-marker-in {
-    fill: var(--blue-france-sun-113-625);
-    transform-origin: center 34.3%;
+.departement-marker,
+.region-marker {
+  .marker-shadow {
+    opacity: 0;
+    transition: 0.35s;
+    fill: #fff;
+    filter: drop-shadow(1px 3px 3px rgb(0 0 0 / 40%));
+  }
+}
+
+.marker-focus,
+.marker-hover {
+  z-index: $zindex-sticky !important;
+
+  .marker-default,
+  .marker-cnfs {
+    .marker-base {
+      opacity: 1;
+    }
+
+    .marker-body {
+      transform: translateY(0);
+    }
   }
 
-  .cnfs-marker-out {
-    fill: var(--red-marianne-main-472);
+  .departement-marker,
+  .region-marker {
+    .marker-shadow {
+      opacity: 1;
+    }
   }
 }
 
@@ -58,38 +108,4 @@
   .marker-opening-status {
     display: none;
   }
-}
-
-.marker-focus {
-  .default-marker {
-    .marker-focus-active {
-      display: inherit;
-    }
-  }
-
-  .cnfs-marker {
-    .cnfs-marker-in {
-      animation: cnfs-marker-in-focus 0.5s linear 0s 1 normal forwards;
-    }
-
-    .cnfs-marker-out {
-      animation: cnfs-marker-out-focus 0.5s linear 0s 1 normal forwards;
-    }
-  }
-}
-
-.marker-hover-active {
-  display: none;
-}
-
-.marker-hover {
-  .marker-hover-active {
-    display: inherit;
-  }
-}
-
-.departement-marker,
-.region-marker,
-.user-marker {
-  fill: $primary;
 }

@@ -22,50 +22,25 @@ const LIEU_MEDIATION_NUMERIQUE_MARKER_DIMENSIONS: LeafletPoint = new LeafletPoin
 );
 
 const lieuMediationIconMarkerSvg: string = `
-<svg class="marker default-marker" xmlns="http://www.w3.org/2000/svg" width="48" height="60" viewBox="0 0 48 54">
-  <ellipse class="marker-focus-active" cx="14" cy="54" rx="9" ry="3"/>
-  <path d="M14.26 0 0 8.23V24.7L13.5 48h1.52l13.5-23.3V8.23z" stroke="#fff" stroke-width="1"/>
-  <g class="marker-hover-active" filter="url(#hover)">
-    <path d="M14.26 0 0 8.23V24.7L13.5 48h1.52l13.5-23.3V8.23z"/>
+<svg class="marker-default" width="40" height="65" viewBox="0 0 40 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g class="marker-body">
+    <path class="marker-shadow" d="M20 6C11.2 6 4 13.2 4 22s16 32 16 32 16-23.2 16-32S28.8 6 20 6zm0 21c-2.9 0-5.3-2.4-5.3-5.3s2.4-5.3 5.3-5.3 5.3 2.4 5.3 5.3S22.9 27 20 27z"/>
+    <path class="marker-shape" d="M20 6C11.2 6 4 13.2 4 22s16 32 16 32 16-23.2 16-32S28.8 6 20 6zm0 21c-2.9 0-5.3-2.4-5.3-5.3s2.4-5.3 5.3-5.3 5.3 2.4 5.3 5.3S22.9 27 20 27z"/>
+    <circle class="marker-opening-status" cx="27.2" cy="42.5" r="6.6"/>
   </g>
-  <path fill="#fff" d="M20.946 20.321v-7.719l-6.686-3.85-6.686 3.85v7.72l6.686 3.867Z"/>
-  <defs>
-    <filter id="hover" x="0" y=".855" width="48" height="54" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix class="marker-hover-active" in="SourceAlpha" result="hardAlpha"/>
-      <feOffset dy="4"/>
-      <feGaussianBlur stdDeviation="2"/>
-      <feComposite in2="hardAlpha" operator="out"/>
-      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0"/>
-      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1785_8086"/>
-      <feBlend in="SourceGraphic" in2="effect1_dropShadow_1785_8086" result="shape"/>
-    </filter>
-  </defs>
-  <circle class="marker-opening-status" cx="21" cy="39" r="5" stroke="#fff" stroke-width="2"/>
-</svg>
-`;
+  <ellipse class="marker-base" cx="20" cy="61.5" rx="10" ry="2.5"/>
+</svg>`;
 
 const cnfsIconMarkerSvg: string = `
-<svg class="marker cnfs-marker" xmlns="http://www.w3.org/2000/svg" width="48" height="54" viewBox="0 0 48 54">
-  <path class="cnfs-marker-out" d="M14.26 0 0 8.23V24.7L13.5 48h1.52l13.5-23.3V8.23z" stroke="#fff" stroke-width="1"/>
-  <g class="marker-hover-active" filter="url(#hover)">
-    <path class="cnfs-marker-out" d="M14.26 0 0 8.23V24.7L13.5 48h1.52l13.5-23.3V8.23z"/>
+<svg class="marker-cnfs" width="40" height="65" viewBox="0 0 40 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g class="marker-body">
+    <path class="marker-shadow" d="m20.8 54.1 13.6-23.6V13.8L20 5.5 5.6 13.8v16.7l13.6 23.6z"/>
+    <path class="marker-shape" d="m20.8 54.1 13.6-23.6V13.8L20 5.5 5.6 13.8v16.7l13.6 23.6z"/>
+    <path class="marker-shape-out" d="M29.6 16.6 20 11.1l-9.6 5.5v11.1l9.6 5.5 9.6-5.5v-3.2h-5.5v-4.7h5.5z"/>
+    <path class="marker-shape-in" d="M15.9 19.8v4.7l4.1 2.4 4.1-2.4v-4.7L20 17.4z"/>
+    <circle class="marker-opening-status" cx="27.2" cy="42.5" r="6.6"/>
   </g>
-  <path class="cnfs-marker-in" d="M18.34 18.82v-4.71l-4.08-2.35-4.08 2.35v4.71l4.08 2.36z"/>
-  <path d="M18.34 14.11h5.41v-3.12l-9.49-5.47-9.48 5.47v10.95l9.48 5.48 9.49-5.48v-3.12h-5.41l-4.08 2.36-4.08-2.36v-4.71l4.08-2.35z" fill="#fff"/>
-  <defs>
-    <filter id="hover" x="0" y=".855" width="48" height="54" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix class="marker-hover-active" in="SourceAlpha" result="hardAlpha"/>
-      <feOffset dy="4"/>
-      <feGaussianBlur stdDeviation="2"/>
-      <feComposite in2="hardAlpha" operator="out"/>
-      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0"/>
-      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_1785_8086"/>
-      <feBlend in="SourceGraphic" in2="effect1_dropShadow_1785_8086" result="shape"/>
-    </filter>
-  </defs>
-  <circle class="marker-opening-status" cx="21" cy="39" r="5" stroke="#fff" stroke-width="2"/>
+  <ellipse class="marker-base" cx="20" cy="61.5" rx="10" ry="2.5"/>
 </svg>
 `;
 
@@ -99,7 +74,9 @@ export const lieuMediationNumeriqueMarkerFactory: MarkerFactory<LieuMediationNum
     className: [
       lieuMediationNumeriqueMarkerHighlightClass(properties.highlight),
       lieuMediationNumeriqueMarkerOpeningClass(properties.status)
-    ].join(' '),
+    ]
+      .filter((className: string) => className)
+      .join(' '),
     html: lieuMediationNumeriqueMarkerHtmlTemplate(properties.labels_nationaux),
     iconAnchor: new LeafletPoint(
       LIEU_MEDIATION_NUMERIQUE_MARKER_DIMENSIONS.x * HALF,
