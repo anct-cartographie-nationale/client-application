@@ -1,5 +1,4 @@
 import { InjectionToken } from '@angular/core';
-import { BrandConfiguration } from './brand.configuration';
 
 export type AvailableFeatures = 'cartographie' | 'orientation';
 
