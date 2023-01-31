@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PresentationFeatureRoutingModule } from './presentation.feature-routing.module';
-import { CarouselComponent } from '../components/carousel/carousel.component';
+import { CarouselComponent } from '../components';
 import { PresentationLayout } from '../pages';
 
 @NgModule({
