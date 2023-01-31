@@ -17,7 +17,13 @@ import {
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
-import { MarkersPresenter, inLieuxZoomLevel, LIEUX_ZOOM_LEVEL } from '../../presenters';
+import {
+  MarkersPresenter,
+  inLieuxZoomLevel,
+  LIEUX_ZOOM_LEVEL,
+  LieuMediationNumeriqueListItemPresentation,
+  toLieuxMediationNumeriqueListItemsPresentation
+} from '../../presenters';
 
 const toLieuxWithLieuToFocus = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]): [
   LieuMediationNumeriquePresentation[],
@@ -91,7 +97,7 @@ export class LieuxMediationNumeriqueListPage {
       : this.markersPresenter.boundingBox$;
   }
 
-  public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = combineLatest([
+  public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation[]> = combineLatest([
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       of(this._localisation),
       of(this._filterPresentation),
@@ -103,7 +109,8 @@ export class LieuxMediationNumeriqueListPage {
     map(toLieuxFilteredByDepartement),
     map(toLieuxWithLieuToFocus),
     tap(this.setInitialState),
-    map(toLieux(this._localisation))
+    map(toLieux(this._localisation)),
+    map(toLieuxMediationNumeriqueListItemsPresentation)
   );
 
   public listOfLieuxWithoutFilters$: Observable<LieuMediationNumeriquePresentation[]> =
@@ -133,7 +140,7 @@ export class LieuxMediationNumeriqueListPage {
     this.markersPresenter.hover(highlightedId ?? '');
   }
 
-  public select(lieu: LieuMediationNumeriquePresentation) {
+  public select(lieu: LieuMediationNumeriqueListItemPresentation) {
     this.markersPresenter.center(toLocalisationOf(lieu), this._zoomLevel.userPosition);
     this.markersPresenter.select(lieu.id);
   }

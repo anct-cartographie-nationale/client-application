@@ -16,6 +16,7 @@ export type LieuMediationNumeriquePresentation = {
   id: string;
   nom: string;
   voie: string;
+  complement_adresse?: string;
   code_postal: string;
   code_insee?: string;
   commune: string;
@@ -50,6 +51,7 @@ export const toLieuxMediationNumeriquePresentation = (
   id: lieuMediationNumerique.id,
   nom: lieuMediationNumerique.nom,
   voie: lieuMediationNumerique.adresse.voie,
+  ...ifAny('complement_adresse', lieuMediationNumerique.adresse?.complement_adresse),
   code_postal: lieuMediationNumerique.adresse.code_postal,
   ...ifAny('code_insee', lieuMediationNumerique.adresse?.code_insee),
   commune: lieuMediationNumerique.adresse.commune,
