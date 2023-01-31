@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { OpeningStatus } from '../../../../core';
+import { OpeningState } from '../../../../core';
 
 type sourcePresentation = {
   nom: string;
@@ -16,7 +16,7 @@ export class InformationsGeneralesComponent {
   @Input() public nom: string = '';
   @Input() public typologie?: string;
   @Input() public date?: Date;
-  @Input() public status?: OpeningStatus;
+  @Input() public status?: OpeningState;
   @Input() public source?: string = '';
 
   public sourceRedirectionLink: sourcePresentation[] = [

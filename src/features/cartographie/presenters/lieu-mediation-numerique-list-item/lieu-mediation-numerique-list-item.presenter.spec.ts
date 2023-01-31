@@ -52,7 +52,10 @@ describe('lieux médiation numérique list item presenter', (): void => {
         labels_nationaux: [LabelNational.CNFS, LabelNational.FrenchTech, LabelNational.FranceServices],
         conditions_acces: [ConditionAcces.Gratuit, ConditionAcces.GratuitSousCondition],
         distance: 3200,
-        status: 'Ouvert'
+        status: {
+          label: 'Ouvert',
+          limite: 'Ouvre mardi à 09h00'
+        }
       }
     ];
 
@@ -75,7 +78,10 @@ describe('lieux médiation numérique list item presenter', (): void => {
           label: 'Gratuit'
         },
         distance: 3200,
-        status: 'Ouvert'
+        status: {
+          label: 'Ouvert',
+          limite: 'Ouvre mardi à 09h00'
+        }
       }
     ]);
   });

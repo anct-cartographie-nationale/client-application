@@ -14,21 +14,18 @@
         #popupContent
         class="text-center p-3 border-bottom border-3 text-wrap"
         style="min-width: 300px"
-        [ngClass]="
-          lieuMediationNumerique.status?.includes('Fermé') || lieuMediationNumerique.status === undefined
-            ? 'border-muted'
-            : 'border-success'
-        ">
+        [ngClass]="lieuMediationNumerique.status?.label === 'Ouvert' ? 'border-success' : 'border-muted'">
         <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
-        <br />
-        <span
-          *ngIf="lieuMediationNumerique.status; else noOpeningHours"
-          [ngClass]="lieuMediationNumerique.status.includes('Fermé') ? 'text-muted' : 'text-success'">
-          {{ lieuMediationNumerique.status }}
-          <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
-        </span>
+        <div *ngIf="lieuMediationNumerique.status; else noOpeningHours" class="text-muted">
+          <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
+            <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+            {{ lieuMediationNumerique.status.label }}
+          </span>
+          ·
+          <small>{{ lieuMediationNumerique.status.limite }}</small>
+        </div>
         <ng-template #noOpeningHours>
-          <span class="text-muted">Horaires inconnus</span>
+          <div class="text-muted">Horaires inconnus</div>
         </ng-template>
       </div>
     </app-leaflet-map-tooltip>

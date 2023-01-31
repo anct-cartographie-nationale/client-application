@@ -1,5 +1,5 @@
 import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { OpeningStatus } from '../../../core';
+import { OpeningState } from '../../../core';
 
 export type LieuMediationNumeriqueListItemPresentationConditionsAccesLabel =
   | 'Gratuit'
@@ -24,7 +24,7 @@ export type LieuMediationNumeriqueListItemPresentation = {
   telephone?: string;
   latitude: number;
   longitude: number;
-  status?: OpeningStatus;
+  status?: OpeningState;
   conditions_acces?: LieuMediationNumeriqueListItemPresentationConditionsAcces;
   labels_nationaux?: LieuMediationNumeriqueListItemPresentationLabelNational[];
   distance?: number;

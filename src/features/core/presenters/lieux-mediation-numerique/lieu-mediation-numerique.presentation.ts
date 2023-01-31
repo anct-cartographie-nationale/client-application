@@ -7,7 +7,7 @@ import {
   PublicAccueilli,
   Service
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { openingStatus, OpeningStatus } from '../horaires';
+import { openingState, OpeningState } from '../horaires';
 import { ifAny } from '../../utilities';
 import { geographicDistance } from '../distance';
 import { NO_LOCALISATION } from '../../models';
@@ -35,7 +35,7 @@ export type LieuMediationNumeriquePresentation = {
   horaires?: string;
   source?: string;
   distance?: number;
-  status?: OpeningStatus;
+  status?: OpeningState;
 };
 
 const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisation: Localisation): number | undefined =>
@@ -69,6 +69,6 @@ export const toLieuxMediationNumeriquePresentation = (
   ...ifAny('conditions_acces', lieuMediationNumerique.conditions_acces),
   ...ifAny('horaires', lieuMediationNumerique.horaires),
   ...ifAny('distance', getDistance(lieuMediationNumerique, localisation)),
-  ...ifAny('status', openingStatus(date)(lieuMediationNumerique.horaires)),
+  ...ifAny('status', openingState(date)(lieuMediationNumerique.horaires)),
   ...ifAny('source', lieuMediationNumerique.source)
 });

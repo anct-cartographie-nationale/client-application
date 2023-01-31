@@ -15,7 +15,7 @@ import {
   LieuMediationNumeriqueWithAidants,
   LieuxMediationNumeriqueRepository,
   NO_LOCALISATION,
-  openingStatus,
+  openingState,
   parseHoraires
 } from '../../../core';
 import {
@@ -135,7 +135,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           ].join(' '),
           services: lieu.services,
           ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
-          ...ifAny('status', openingStatus(date)(lieu.horaires)),
+          ...ifAny('status', openingState(date)(lieu.horaires)),
           ...ifAny('typologies', lieu.typologies?.join(', ')),
           ...ifAny('contact', lieu.contact),
           ...ifAny('presentation', lieu.presentation),

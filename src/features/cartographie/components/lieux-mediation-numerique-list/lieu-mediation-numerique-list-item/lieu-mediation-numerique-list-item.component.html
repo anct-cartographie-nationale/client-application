@@ -3,11 +3,13 @@
     <h5 class="fw-bold mb-0 text-first-letter-uppercase">{{ lieuMediationNumerique.nom }}</h5>
     <div class="text-muted">{{ lieuMediationNumerique.adresse }}</div>
     <div class="mt-1" *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</div>
-    <div
-      *ngIf="lieuMediationNumerique.status"
-      [ngClass]="lieuMediationNumerique.status.includes('Fermé') ? 'text-muted' : 'text-primary'">
-      <i class="ri-checkbox-blank-circle-fill ri-xxs ms-1"></i>
-      {{ lieuMediationNumerique.status }}
+    <div *ngIf="lieuMediationNumerique.status" class="text-muted">
+      <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
+        <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+        {{ lieuMediationNumerique.status.label }}
+      </span>
+      ·
+      <small>{{ lieuMediationNumerique.status.limite }}</small>
     </div>
   </div>
   <div class="col-auto text-end" *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone">

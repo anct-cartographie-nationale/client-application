@@ -1,13 +1,13 @@
 import { HorairesPresentation, Jour } from './horaires.presentation';
 import opening_hours from 'opening_hours';
 
-const joursDeLaSemaine: Jour[] = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+const joursDeLaSemaine: Jour[] = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 
 const invalidInterval = (interval: string | undefined) => interval != 'Fermé' && interval != null;
 
 const dateWithoutTime = (date: Date) => date.toISOString().substring(0, 10);
 
-const toIntervalString = (intervalStart?: Date) =>
+const formatTime = (intervalStart?: Date) =>
   intervalStart &&
   intervalStart
     .toLocaleTimeString('fr-FR', {
@@ -23,7 +23,7 @@ const appendTimeTableInterval = (
   jour: Jour
 ) => ({
   ...timeTableOpeningHours,
-  [jour]: [timeTableOpeningHours[jour], `${toIntervalString(intervalStart)} - ${toIntervalString(intervalEnd)}`]
+  [jour]: [timeTableOpeningHours[jour], `${formatTime(intervalStart)} - ${formatTime(intervalEnd)}`]
     .filter(invalidInterval)
     .join('\n')
 });
@@ -62,7 +62,7 @@ export const parseHoraires =
                   timeTableOpeningHours,
                   intervalStart,
                   intervalEnd,
-                  joursDeLaSemaine[intervalStart.getDay() - 1]
+                  joursDeLaSemaine[intervalStart.getDay()]
                 ),
               initialTimeTableOpeningHours
             )
@@ -72,54 +72,37 @@ export const parseHoraires =
     }
   };
 
-const MINUTES_IN_HOURS: number = 60;
-const SECONDS_IN_MINUTE: number = 60;
-const MILLISECONDS: number = 1000;
-const HOUR_IN_MILLISECONDS = MINUTES_IN_HOURS * SECONDS_IN_MINUTE * MILLISECONDS;
-
-type OpenStatus = 'Ouvert' | 'Ferme bientôt';
-
-type CloseStatus = 'Fermé' | 'Ouvre bientôt';
-
-export type OpeningStatus = OpenStatus | CloseStatus;
-
-const nextHour = (now: Date): Date => new Date(now.getTime() + HOUR_IN_MILLISECONDS);
-
-const endOfDay = (now: Date): Date => new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
-
-const openStatus = (willChange: boolean): string => (willChange ? 'Ferme bientôt' : 'Ouvert');
-
-const closedStatus = (willChange: boolean): string => (willChange ? 'Ouvre bientôt' : 'Fermé');
-
-const willChangeNextHour = (openingHours: opening_hours, date: Date): boolean =>
-  openingHours.getNextChange(date, nextHour(date)) !== undefined;
-
-const closeReopenStatus = (willChange: boolean, nextDate?: Date): string =>
-  willChange ? `Fermé, Ouvre à ${toIntervalString(nextDate)}` : 'Fermé';
-
-const willChangeToday = (openingHours: opening_hours, date: Date): [boolean, Date | undefined] => [
-  openingHours.getNextChange(nextHour(date), endOfDay(date)) !== undefined,
-  openingHours.getNextChange(nextHour(date), endOfDay(date))
-];
+export type OpeningState = {
+  label: 'Ouvert' | 'Fermé';
+  limite: string;
+};
 
 const openingHoursState = (openingHours: opening_hours, date: Date): boolean => openingHours.getIterator(date).getState();
 
-const closeStatusOrWillOpenStatus = (openingHours: opening_hours, nextStatus: boolean, date: Date, nextDate?: Date): string =>
-  willChangeNextHour(openingHours, date)
-    ? closedStatus(willChangeNextHour(openingHours, date))
-    : closeReopenStatus(nextStatus, nextDate);
+const nextOpeningDay = (openingHours: opening_hours, date: Date) =>
+  ((nextChange?: Date): string =>
+    date.toDateString() === nextChange?.toDateString()
+      ? "aujourd'hui"
+      : joursDeLaSemaine[nextChange?.getDay() ?? 0].toLowerCase())(openingHours.getNextChange(date));
 
-export const openingStatus =
+const closeState = (openingHours: opening_hours, date: Date): OpeningState => ({
+  label: 'Fermé',
+  limite: `Ouvre ${nextOpeningDay(openingHours, date)} à ${formatTime(openingHours.getNextChange(date))}`
+});
+
+const openState = (openingHours: any, date: Date): OpeningState => ({
+  label: 'Ouvert',
+  limite: `Ferme à ${formatTime(openingHours.getNextChange(date))}`
+});
+
+export const openingState =
   (date: Date) =>
-  (horairesOSM?: string): string | undefined => {
+  (horairesOSM?: string): OpeningState | undefined => {
     if (!horairesOSM) return;
 
     try {
       const openingHours = new opening_hours(horairesOSM);
-      const [nextStatus, nextDate] = willChangeToday(openingHours, date);
-      return openingHoursState(openingHours, date)
-        ? openStatus(willChangeNextHour(openingHours, date))
-        : closeStatusOrWillOpenStatus(openingHours, nextStatus, date, nextDate);
+      return openingHoursState(openingHours, date) ? openState(openingHours, date) : closeState(openingHours, date);
     } catch {
       return;
     }
