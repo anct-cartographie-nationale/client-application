@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { LieuxMediationNumeriqueRepository } from '../../../features/core';
 import { LieuxMediationNumeriqueHttp } from '../../../features/core/data';
 import {
@@ -9,6 +9,7 @@ import {
   FEATURES_CONFIGURATION,
   FEATURES_TOKEN
 } from '../../configuration';
+import { CacheInterceptor } from '../../interceptors';
 
 export const mediationNumeriqueProviders = [
   {
@@ -27,5 +28,10 @@ export const mediationNumeriqueProviders = [
     deps: [DATA_TOKEN, HttpClient],
     provide: LieuxMediationNumeriqueRepository,
     useClass: LieuxMediationNumeriqueHttp
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: CacheInterceptor,
+    multi: true
   }
 ];
