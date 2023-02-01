@@ -3,7 +3,7 @@ import { firstValueFrom, Observable, of } from 'rxjs';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { Address } from '../../../models';
 import { AddressTransfer } from '../../transfers/address.transfer';
-import { AddressHttp } from './address.http';
+import { AddressHttp, formatAdresseQuery } from './address.http';
 
 describe('address http', (): void => {
   it('should get addresses from addresses transfer', async (): Promise<void> => {
@@ -39,5 +39,17 @@ describe('address http', (): void => {
         })
       }
     ]);
+  });
+
+  it('should format adresse query with full address', function () {
+    const adresseQuery: string = formatAdresseQuery('8 Boulevard du Port 80000 Amiens');
+
+    expect(adresseQuery).toStrictEqual('autocomplete=0&q=8 Boulevard du Port 80000 Amiens');
+  });
+
+  it('should format adresse query with postcode', function () {
+    const adresseQuery: string = formatAdresseQuery('80000');
+
+    expect(adresseQuery).toStrictEqual('q=rue&postcode=80000');
   });
 });

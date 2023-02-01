@@ -1,6 +1,6 @@
 import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { BehaviorSubject, Observable, of, shareReplay, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -82,6 +82,10 @@ export class CartographieLayout {
       tap(() => this._loadingState$.next(false)),
       shareReplay()
     );
+
+  public defaultAddress$: Observable<string | null> = this.route.queryParamMap.pipe(
+    map((paramMap: ParamMap) => paramMap.get('address'))
+  );
 
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();

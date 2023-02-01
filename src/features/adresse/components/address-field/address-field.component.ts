@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AddressFoundPresentation } from '../../../adresse';
 
@@ -7,7 +7,7 @@ import { AddressFoundPresentation } from '../../../adresse';
   selector: 'app-address-field',
   templateUrl: './address-field.component.html'
 })
-export class AddressFieldComponent implements OnInit {
+export class AddressFieldComponent implements OnChanges {
   @Input() public addressSuggestions: AddressFoundPresentation[] = [];
 
   @Output() public readonly selectAddress: EventEmitter<AddressFoundPresentation> =
@@ -25,8 +25,8 @@ export class AddressFieldComponent implements OnInit {
 
   formGroup: FormGroup = new FormGroup({ address: new FormControl() });
 
-  public ngOnInit(): void {
-    this.formGroup.get('address')?.setValue(this.defaultValue ?? '');
+  public ngOnChanges(simpleChanges: SimpleChanges): void {
+    simpleChanges['defaultValue'] && this.formGroup.get('address')?.setValue(this.defaultValue ?? '');
   }
 
   public search(addressInput: string): void {

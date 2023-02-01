@@ -7,6 +7,11 @@ import { Address } from '../../../models';
 import { AddressRepository } from '../../../repositories';
 import { AddressTransfer, AddressTransferProperties } from '../../transfers/address.transfer';
 
+const CODE_POSTAL_REG_EXP: RegExp = /^\d{5}$/u;
+
+export const formatAdresseQuery = (searchTerm: string) =>
+  CODE_POSTAL_REG_EXP.test(searchTerm) ? `q=rue&postcode=${searchTerm}` : `autocomplete=0&q=${searchTerm}`;
+
 export class AddressHttp extends AddressRepository {
   public constructor(private readonly _httpClient: HttpClient) {
     super();
@@ -14,7 +19,7 @@ export class AddressHttp extends AddressRepository {
 
   public search$(searchTerm: string): Observable<Address[]> {
     return this._httpClient
-      .get<AddressTransfer>(`https://api-adresse.data.gouv.fr/search/?autocomplete=0&q=${searchTerm}`)
+      .get<AddressTransfer>(`https://api-adresse.data.gouv.fr/search/?${formatAdresseQuery(searchTerm)}`)
       .pipe(
         map((addressTransfer: AddressTransfer): Address[] =>
           addressTransfer.features.map(
