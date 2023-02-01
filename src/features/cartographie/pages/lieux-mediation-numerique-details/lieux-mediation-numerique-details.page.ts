@@ -2,6 +2,7 @@ import { Observable, of, shareReplay, tap } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
+import { BRAND_TOKEN, BrandConfiguration } from '../../../../root';
 import { toFilterFormPresentationFromQuery, toLocalisationFromFilterFormPresentation } from '../../../core';
 import {
   LieuMediationNumeriqueDetailsPresentation,
@@ -29,6 +30,7 @@ export class LieuxMediationNumeriqueDetailsPage {
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
+    @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration,
     private readonly _lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
     private readonly _markersPresenter: MarkersPresenter,
     private readonly _route: ActivatedRoute

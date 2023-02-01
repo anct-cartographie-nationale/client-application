@@ -1,6 +1,38 @@
-<div *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique" class="h-100 overflow-auto">
+<div *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique; else lieuNotFound" class="h-100 overflow-auto">
   <app-lieux-mediation-numerique-details-print
     [lieuMediationNumerique]="lieuMediationNumerique"></app-lieux-mediation-numerique-details-print>
   <app-lieux-mediation-numerique-details
     [lieuMediationNumerique]="lieuMediationNumerique"></app-lieux-mediation-numerique-details>
 </div>
+<ng-template #lieuNotFound>
+  <div class="d-flex flex-column justify-content-between h-100">
+    <h2 class="bg-primary text-bg-dark p-3">Structure introuvable</h2>
+    <div class="text-center p-3">
+      <img *ngIf="brandConfiguration.logo" class="mb-4 w-50" [src]="brandConfiguration.logo" alt="" />
+      <h3 class="mb-5">
+        Cette structure
+        <br />
+        <span class="text-primary">n’est plus disponible</span>
+      </h3>
+      <div>
+        <p>
+          Nous sommes désolés, mais nous n’avons plus accès
+          <br />
+          aux informations sur cette structure.
+        </p>
+        <p>
+          Vous pouvez chercher d’autres structures sur la carte,
+          <br />
+          ou revenir à l’outil d’orientation.
+        </p>
+      </div>
+    </div>
+    <div class="bg-light text-center py-5">
+      <a class="btn btn-secondary me-4" routerLink="/orientation" queryParamsHandling="preserve">Nouvelle orientation</a>
+      <a class="btn btn-primary" routerLink="/cartographie/regions" queryParamsHandling="preserve">
+        Afficher les résultats
+        <i class="ri-arrow-right-s-line align-bottom"></i>
+      </a>
+    </div>
+  </div>
+</ng-template>
