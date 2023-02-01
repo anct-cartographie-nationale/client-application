@@ -90,7 +90,10 @@ describe('lieux médiation numérique details presenter', (): void => {
         Samedi: '08h30 - 12h00',
         Dimanche: 'Fermé'
       },
-      status: 'Ouvert',
+      status: {
+        label: 'Ouvert',
+        limite: 'Ferme à 18h30'
+      },
       typologies: 'CHRS, CHU',
       contact: Contact({
         telephone: '+33180059880',
@@ -202,7 +205,10 @@ describe('lieux médiation numérique details presenter', (): void => {
         Samedi: '08h30 - 12h00',
         Dimanche: 'Fermé'
       },
-      status: 'Ouvert'
+      status: {
+        label: 'Ouvert',
+        limite: 'Ferme à 18h30'
+      }
     } as LieuMediationNumeriqueDetailsPresentation);
   });
 

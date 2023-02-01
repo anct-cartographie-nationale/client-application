@@ -7,7 +7,7 @@ import {
   Service,
   Url
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { Aidant, HorairesPresentation, OpeningStatus } from '../../../core';
+import { Aidant, HorairesPresentation, OpeningState } from '../../../core';
 
 export type LieuMediationNumeriqueDetailsPresentation = {
   id: string;
@@ -15,7 +15,7 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   adresse: string;
   services: Service[];
   horaires?: HorairesPresentation;
-  status?: OpeningStatus;
+  status?: OpeningState;
   typologies?: string;
   contact?: Contact;
   presentation?: Presentation;

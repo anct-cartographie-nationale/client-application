@@ -13,6 +13,7 @@ import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { FeatureConfiguration } from '../../../../root';
 import { LieuMediationNumeriquePresentation } from '../../../core';
+import { LieuMediationNumeriqueListItemPresentation } from '../../presenters';
 
 const itemById =
   (id: string) =>
@@ -25,7 +26,7 @@ const itemById =
   templateUrl: './lieux-mediation-numerique-list.component.html'
 })
 export class LieuxMediationNumeriqueListComponent {
-  @Input() public lieuxMediationNumerique: LieuMediationNumeriquePresentation[] = [];
+  @Input() public lieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [];
 
   @Input() public orientationFeature?: FeatureConfiguration;
 
@@ -37,8 +38,8 @@ export class LieuxMediationNumeriqueListComponent {
 
   @Output() public print: EventEmitter<void> = new EventEmitter<void>();
 
-  @Output() public selectLieu: EventEmitter<LieuMediationNumeriquePresentation> =
-    new EventEmitter<LieuMediationNumeriquePresentation>();
+  @Output() public selectLieu: EventEmitter<LieuMediationNumeriqueListItemPresentation> =
+    new EventEmitter<LieuMediationNumeriqueListItemPresentation>();
 
   @ViewChild('container') public container!: ElementRef;
 
@@ -60,7 +61,7 @@ export class LieuxMediationNumeriqueListComponent {
     }, 400);
   }
 
-  public trackByLieuId(_: number, lieu: LieuMediationNumeriquePresentation) {
+  public trackByLieuId(_: number, lieu: LieuMediationNumeriqueListItemPresentation) {
     return lieu.id;
   }
 

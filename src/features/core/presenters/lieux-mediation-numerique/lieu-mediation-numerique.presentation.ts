@@ -7,7 +7,7 @@ import {
   PublicAccueilli,
   Service
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { openingStatus, OpeningStatus } from '../horaires';
+import { openingState, OpeningState } from '../horaires';
 import { ifAny } from '../../utilities';
 import { geographicDistance } from '../distance';
 import { NO_LOCALISATION } from '../../models';
@@ -16,6 +16,7 @@ export type LieuMediationNumeriquePresentation = {
   id: string;
   nom: string;
   voie: string;
+  complement_adresse?: string;
   code_postal: string;
   code_insee?: string;
   commune: string;
@@ -34,7 +35,7 @@ export type LieuMediationNumeriquePresentation = {
   horaires?: string;
   source?: string;
   distance?: number;
-  status?: OpeningStatus;
+  status?: OpeningState;
 };
 
 const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisation: Localisation): number | undefined =>
@@ -50,6 +51,7 @@ export const toLieuxMediationNumeriquePresentation = (
   id: lieuMediationNumerique.id,
   nom: lieuMediationNumerique.nom,
   voie: lieuMediationNumerique.adresse.voie,
+  ...ifAny('complement_adresse', lieuMediationNumerique.adresse?.complement_adresse),
   code_postal: lieuMediationNumerique.adresse.code_postal,
   ...ifAny('code_insee', lieuMediationNumerique.adresse?.code_insee),
   commune: lieuMediationNumerique.adresse.commune,
@@ -67,6 +69,6 @@ export const toLieuxMediationNumeriquePresentation = (
   ...ifAny('conditions_acces', lieuMediationNumerique.conditions_acces),
   ...ifAny('horaires', lieuMediationNumerique.horaires),
   ...ifAny('distance', getDistance(lieuMediationNumerique, localisation)),
-  ...ifAny('status', openingStatus(date)(lieuMediationNumerique.horaires)),
+  ...ifAny('status', openingState(date)(lieuMediationNumerique.horaires)),
   ...ifAny('source', lieuMediationNumerique.source)
 });

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { OpeningStatus } from '../../../core';
+import { OpeningState } from '../../../core';
 
 @Component({
   selector: 'app-informations-generales',
@@ -10,6 +10,6 @@ export class InformationsGeneralesStubComponent {
   @Input() public nom: string = '';
   @Input() public typologie?: string;
   @Input() public date?: Date;
-  @Input() public status?: OpeningStatus;
+  @Input() public status?: OpeningState;
   @Input() public source?: string = '';
 }

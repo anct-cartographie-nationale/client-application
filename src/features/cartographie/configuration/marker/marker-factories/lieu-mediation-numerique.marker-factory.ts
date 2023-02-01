@@ -1,6 +1,6 @@
 import { DivIcon, Point as LeafletPoint } from 'leaflet';
 import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { LieuMediationNumeriquePresentation, OpeningStatus } from '../../../../core';
+import { LieuMediationNumeriquePresentation, OpeningState } from '../../../../core';
 import { MarkerFactory, MarkerHighlight, MarkerProperties } from '../markers.configuration';
 
 export type LieuMediationNumeriqueMarkerProperties = MarkerProperties<
@@ -52,19 +52,18 @@ const LIEU_MEDIATION_NUMERIQUE_MARKER_HIGHLIGHT_CLASSES_MAP: Record<MarkerHighli
   hover: 'marker-hover'
 };
 
-const LIEU_MEDIATION_NUMERIQUE_MARKER_OPENING_CLASSES_MAP: Record<OpeningStatus, string> = {
-  Fermé: 'marker-status-closed',
-  'Ferme bientôt': 'marker-status-open',
-  Ouvert: 'marker-status-open',
-  'Ouvre bientôt': 'marker-status-closed'
-};
-
 const lieuMediationNumeriqueMarkerHighlightClass = (highlight?: MarkerHighlight): string =>
   highlight == null ? '' : LIEU_MEDIATION_NUMERIQUE_MARKER_HIGHLIGHT_CLASSES_MAP[highlight];
 
-const lieuMediationNumeriqueMarkerOpeningClass = (status?: OpeningStatus): string => {
-  const uniformStatus = status?.includes('Fermé') ? 'Fermé' : status?.includes('Ferme bientôt') ? 'Ferme bientôt' : status;
-  return uniformStatus == null ? 'marker-status-unknown' : LIEU_MEDIATION_NUMERIQUE_MARKER_OPENING_CLASSES_MAP[uniformStatus];
+const lieuMediationNumeriqueMarkerOpeningClass = (status?: OpeningState): string => {
+  switch (status?.label) {
+    case 'Ouvert':
+      return 'marker-status-open';
+    case 'Fermé':
+      return 'marker-status-closed';
+    default:
+      return 'marker-status-unknown';
+  }
 };
 
 export const lieuMediationNumeriqueMarkerFactory: MarkerFactory<LieuMediationNumeriqueMarkerProperties, DivIcon> = (

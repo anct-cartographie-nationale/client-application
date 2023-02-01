@@ -1,17 +1,15 @@
 <div class="row">
   <div class="col">
     <h5 class="fw-bold mb-0 text-first-letter-uppercase">{{ lieuMediationNumerique.nom }}</h5>
-    <div class="text-muted">
-      <span class="text-lowercase">{{ lieuMediationNumerique.voie }}</span>
-      {{ lieuMediationNumerique.code_postal }}
-      <div class="text-first-letter-uppercase d-inline-block">{{ lieuMediationNumerique.commune }}</div>
-    </div>
-    <div class="mt-1" *ngIf="lieuMediationNumerique.distance || lieuMediationNumerique.conditions_acces">
-      <span *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</span>
-      <ng-container *ngIf="lieuMediationNumerique.distance && lieuMediationNumerique.conditions_acces?.includes(payant)">
-        -
-      </ng-container>
-      <span class="text-muted" *ngIf="lieuMediationNumerique.conditions_acces?.includes(payant)">Payant</span>
+    <div class="text-muted">{{ lieuMediationNumerique.adresse }}</div>
+    <div class="mt-1" *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</div>
+    <div *ngIf="lieuMediationNumerique.status" class="text-muted">
+      <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
+        <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+        {{ lieuMediationNumerique.status.label }}
+      </span>
+      ·
+      <small>{{ lieuMediationNumerique.status.limite }}</small>
     </div>
   </div>
   <div class="col-auto text-end" *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone">
@@ -46,15 +44,15 @@
       </div>
     </div>
   </div>
-  <div class="mt-4 d-flex flex-column" *ngIf="lieuMediationNumerique.date_maj || lieuMediationNumerique.status">
+  <div
+    class="mt-4 d-flex flex-column text-end"
+    *ngIf="lieuMediationNumerique.conditions_acces || lieuMediationNumerique.date_maj">
     <div
-      class="d-flex justify-content-end align-items-center"
-      *ngIf="lieuMediationNumerique.status"
-      [ngClass]="lieuMediationNumerique.status.includes('Fermé') ? 'text-muted' : 'text-success'">
-      {{ lieuMediationNumerique.status }}
-      <i class="ri-checkbox-blank-circle-fill ri-xxs ms-1"></i>
+      [ngClass]="lieuMediationNumerique.conditions_acces.isFree ? 'text-primary' : 'text-muted'"
+      *ngIf="lieuMediationNumerique.conditions_acces">
+      {{ lieuMediationNumerique.conditions_acces.label }}
     </div>
-    <small *ngIf="lieuMediationNumerique.date_maj" class="text-muted text-end fst-italic">
+    <small *ngIf="lieuMediationNumerique.date_maj" class="text-muted fst-italic">
       Mise à jour le {{ lieuMediationNumerique.date_maj | date: 'dd/MM/y' }}
     </small>
   </div>
