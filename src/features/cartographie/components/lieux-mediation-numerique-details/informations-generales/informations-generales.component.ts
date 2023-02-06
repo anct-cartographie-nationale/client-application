@@ -22,7 +22,7 @@ export class InformationsGeneralesComponent {
   public sourceRedirectionLink: sourcePresentation[] = [
     {
       nom: 'conseiller-numerique',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique/'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique-1/'
     },
     {
       nom: 'dora',
@@ -30,19 +30,19 @@ export class InformationsGeneralesComponent {
     },
     {
       nom: 'hinaura',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-auvergne-rhone-alpes-fournis-par-le-hub-hinaura-1/'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-auvergne-rhone-alpes-fournis-par-hinaura/'
     },
     {
       nom: 'maine-et-loire',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-le-departement-du-maine-et-loire/'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-departement-du-maine-et-loire/'
     },
     {
       nom: 'Les Assembleurs',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-hauts-de-france-fournis-par-le-hub-les-assembleurs/'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-hauts-de-france-fournis-par-les-assembleurs/'
     },
     {
       nom: 'france-services',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-le-label-france-services/'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services/'
     }
   ];
 }
