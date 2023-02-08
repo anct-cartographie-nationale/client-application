@@ -8,7 +8,10 @@ import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-n
 const capitalize = (stringToCapitalize: string): string =>
   `${stringToCapitalize[0].toUpperCase()}${stringToCapitalize.toLowerCase().substring(1)}`;
 
-const capitalizeWords = (phraseToCapitalize: string): string => phraseToCapitalize.split(' ').map(capitalize).join(' ');
+const onlyWithLetters = (word: string): boolean => word.length > 0;
+
+const capitalizeWords = (phraseToCapitalize: string): string =>
+  phraseToCapitalize.split(' ').filter(onlyWithLetters).map(capitalize).join(' ');
 
 const complementAdresseIfAny = (complementAdresse?: string): string =>
   complementAdresse ? capitalize(complementAdresse) + ', ' : '';
