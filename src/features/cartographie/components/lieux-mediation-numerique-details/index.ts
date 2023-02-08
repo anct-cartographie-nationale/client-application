@@ -4,6 +4,7 @@ export * from './horaires/horaires.component';
 export * from './informations-generales/informations-generales.component';
 export * from './informations-pratiques/informations-pratiques.component';
 export * from './modalites-accompagnement/modalites-accompagnement.component';
+export * from './orientation-sheet-modal/orientation-sheet-modal.component';
 export * from './public-pris-en-charge/public-pris-en-charge.component';
 export * from './services/services.component';
 export * from './aidants/aidants.component';

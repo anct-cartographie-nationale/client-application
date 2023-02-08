@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,7 +10,6 @@ export class BoutonsActionComponent {
   @Input() public siteWeb?: string[];
   @Input() public priseRdv?: string;
 
-  public printPage() {
-    window.print();
-  }
+  @Output() public orientationSheet: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public print: EventEmitter<void> = new EventEmitter<void>();
 }

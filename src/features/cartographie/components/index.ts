@@ -35,6 +35,7 @@ import {
   LieuxMediationNumeriqueDetailsComponent,
   LieuxMediationNumeriqueDetailsPrintComponent,
   ModalitesAccompagnementComponent,
+  OrientationSheetModalComponent,
   PublicPrisEnChargeComponent,
   ServicesComponent
 } from './lieux-mediation-numerique-details';
@@ -53,6 +54,7 @@ export const components = [
   ServicesComponent,
   HorairesComponent,
   ModalitesAccompagnementComponent,
+  OrientationSheetModalComponent,
   PublicPrisEnChargeComponent,
   AidantsComponent,
   LabellisationsComponent,

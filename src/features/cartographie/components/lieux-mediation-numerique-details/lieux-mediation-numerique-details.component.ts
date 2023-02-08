@@ -8,4 +8,8 @@ import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 })
 export class LieuxMediationNumeriqueDetailsComponent {
   @Input() public lieuMediationNumerique!: LieuMediationNumeriqueDetailsPresentation;
+
+  public printDetails() {
+    window.print();
+  }
 }

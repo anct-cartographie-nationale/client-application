@@ -1,0 +1,154 @@
+<div
+  *ngIf="activateOrientationSheetModal$ | async"
+  [class.show]="animateOrientationSheetModal$ | async"
+  class="modal d-block fade"
+  tabindex="-1"
+  aria-labelledby="ficheOrientationModal"
+  spellcheck="false"
+  aria-modal="true"
+  role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content overflow-hidden">
+      <div class="modal-header bg-primary text-bg-dark">
+        <h2 class="modal-title h3" id="ficheOrientationModal">
+          <i class="ri-xl ri-treasure-map-line align-text-top me-2"></i>
+          Fiche d'orientation
+        </h2>
+        <button type="button" class="btn-close btn-close-white opacity-100 mb-0" aria-label="Close" (click)="close()"></button>
+      </div>
+      <div>
+        <div @slideLeft *ngIf="!isReadyToPrint">
+          <div class="modal-body col-lg-7 col-12 m-auto">
+            <form
+              class="my-4"
+              id="orientationSheetForm"
+              [formGroup]="orientationSheetForm"
+              (ngSubmit)="onSubmitOrientationSheetForm()">
+              <p class="fw-bold">Qui est bénéficiaire ?</p>
+              <div class="mb-3">
+                <label for="firstname" class="form-label visually-hidden">Prénom du bénéficiaire</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [class.is-invalid]="
+                    orientationSheetForm.get('firstname')?.touched && orientationSheetForm.get('firstname')?.invalid
+                  "
+                  id="firstname"
+                  placeholder="Prénom"
+                  aria-describedby="firstnameHelp"
+                  formControlName="firstname" />
+                <div
+                  id="firstnameHelp"
+                  [ngClass]="
+                    orientationSheetForm.get('firstname')?.touched && orientationSheetForm.get('firstname')?.invalid
+                      ? 'invalid-feedback'
+                      : 'form-text'
+                  ">
+                  * Champ obligatoire
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="lastname" class="form-label visually-hidden">Nom du bénéficiaire</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [class.is-invalid]="
+                    orientationSheetForm.get('lastname')?.touched && orientationSheetForm.get('lastname')?.invalid
+                  "
+                  id="lastname"
+                  placeholder="Nom"
+                  aria-describedby="lastnameHelp"
+                  formControlName="lastname" />
+                <div
+                  id="lastnameHelp"
+                  [ngClass]="
+                    orientationSheetForm.get('lastname')?.touched && orientationSheetForm.get('lastname')?.invalid
+                      ? 'invalid-feedback'
+                      : 'form-text'
+                  ">
+                  * Champ obligatoire
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="details" class="form-label fw-bold">Avez-vous des précisions à apporter ?</label>
+                <textarea class="form-control" id="details" rows="3" formControlName="details"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="submit" form="orientationSheetForm" class="btn btn-primary">
+              Suivant
+              <i class="ri-arrow-right-s-line align-bottom"></i>
+            </button>
+          </div>
+        </div>
+        <div @slideRight *ngIf="isReadyToPrint">
+          <div class="modal-body row bg-white">
+            <div class="col bg-light px-0">
+              <div class="p-3">
+                <b>{{ nom }}</b>
+                <br />
+                {{ adresse }}
+              </div>
+              <div style="height: 200px">
+                <app-leaflet-map
+                  *ngIf="localisation"
+                  [zoomControl]="false"
+                  [centerView]="{ coordinates: localisation, zoomLevel: 17 }">
+                  <app-lieu-mediation-numerique-markers
+                    *ngIf="localisation"
+                    [lieuxMediationNumeriques]="[
+                      {
+                        id: id,
+                        nom: nom,
+                        labels_nationaux: labels_nationaux,
+                        latitude: localisation.latitude,
+                        longitude: localisation.longitude
+                      }
+                    ]"></app-lieu-mediation-numerique-markers>
+                </app-leaflet-map>
+              </div>
+              <div *ngIf="telephone || courriel || siteWeb?.length" class="p-3 text-muted">
+                <div *ngIf="telephone">
+                  <i class="ri-phone-line align-bottom"></i>
+                  {{ telephone }}
+                </div>
+                <div *ngIf="courriel">
+                  <i class="ri-mail-line align-bottom"></i>
+                  {{ courriel }}
+                </div>
+                <div *ngIf="siteWeb">
+                  <i class="ri-link align-bottom"></i>
+                  {{ siteWeb[0] }}
+                </div>
+              </div>
+            </div>
+            <div class="col" *ngIf="usager">
+              <div class="mb-5">
+                <b>{{ usager.firstname }} {{ usager.lastname }}</b>
+                <div class="text-muted" *ngIf="usager.details">{{ usager.details }}</div>
+              </div>
+              <div class="mb-5">
+                <b>Objet du rendez-vous :</b>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-center bg-light">
+            <button type="button" class="btn btn-secondary me-3" (click)="displayOrientationSheetForm()">
+              <i class="ri-arrow-left-s-line align-bottom"></i>
+              Modifier
+            </button>
+            <button type="button" class="btn btn-primary">
+              <i class="ri-printer-line align-bottom me-1"></i>
+              Imprimer fiche d'orientation
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  *ngIf="activateOrientationSheetModal$ | async"
+  class="modal-backdrop fade"
+  [class.show]="animateOrientationSheetModal$ | async"></div>
