@@ -60,16 +60,6 @@
         [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
     </li>
   </ul>
-  <app-orientation-sheet-modal
-    #orientationSheetModal
-    [id]="lieuMediationNumerique.id"
-    [nom]="lieuMediationNumerique.nom"
-    [labels_nationaux]="lieuMediationNumerique.labels_nationaux"
-    [adresse]="lieuMediationNumerique.adresse"
-    [courriel]="lieuMediationNumerique.contact?.courriel"
-    [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
-    [siteWeb]="lieuMediationNumerique.contact?.site_web"
-    [localisation]="lieuMediationNumerique.localisation"></app-orientation-sheet-modal>
   <div *ngIf="lieuMediationNumerique.contact?.courriel != null" class="bg-light p-4 text-end">
     <a href="mailto:{{ lieuMediationNumerique.contact?.courriel }}" class="btn btn-secondary btn-sm">
       Signaler une erreur
@@ -77,3 +67,14 @@
     </a>
   </div>
 </div>
+<app-orientation-sheet-modal
+  class="d-print-none"
+  #orientationSheetModal
+  [id]="lieuMediationNumerique.id"
+  [nom]="lieuMediationNumerique.nom"
+  [labels_nationaux]="lieuMediationNumerique.labels_nationaux"
+  [adresse]="lieuMediationNumerique.adresse"
+  [courriel]="lieuMediationNumerique.contact?.courriel"
+  [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
+  [siteWeb]="lieuMediationNumerique.contact?.site_web"
+  [localisation]="lieuMediationNumerique.localisation"></app-orientation-sheet-modal>
