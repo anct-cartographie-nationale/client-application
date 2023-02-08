@@ -6,7 +6,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   templateUrl: './boutons-action.component.html'
 })
 export class BoutonsActionComponent {
-  @Input() public courriel?: string;
   @Input() public siteWeb?: string[];
   @Input() public priseRdv?: string;
 

@@ -9,7 +9,6 @@
     [source]="lieuMediationNumerique.source"></app-informations-generales>
   <div class="bg-light position-relative">
     <app-boutons-action
-      [courriel]="lieuMediationNumerique.contact?.courriel"
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
       [priseRdv]="lieuMediationNumerique.prise_rdv"
       (print)="printDetails()"
