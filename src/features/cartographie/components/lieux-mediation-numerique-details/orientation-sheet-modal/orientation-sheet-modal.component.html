@@ -128,8 +128,25 @@
                 <b>{{ usager.firstname }} {{ usager.lastname }}</b>
                 <div class="text-muted" *ngIf="usager.details">{{ usager.details }}</div>
               </div>
-              <div class="mb-5">
+              <div
+                class="mb-5"
+                *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
                 <b>Objet du rendez-vous :</b>
+                <div>
+                  <span class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start" *ngIf="filters?.service">
+                    {{ filters?.service }}
+                  </span>
+                  <span
+                    class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start"
+                    *ngFor="let public_accueilli of filters?.publics_accueillis ?? []">
+                    {{ public_accueilli }}
+                  </span>
+                  <span
+                    class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start"
+                    *ngFor="let modaliteAccompagnement of filters?.modalites_accompagnement ?? []">
+                    {{ modaliteAccompagnement }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -138,7 +155,7 @@
               <i class="ri-arrow-left-s-line align-bottom"></i>
               Modifier
             </button>
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" (click)="print.emit(orientationSheetForm.getRawValue())">
               <i class="ri-printer-line align-bottom me-1"></i>
               Imprimer fiche d'orientation
             </button>

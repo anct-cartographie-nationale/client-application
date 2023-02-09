@@ -1,14 +1,16 @@
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of, Subject, tap } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { BRAND_TOKEN, BrandConfiguration } from '../../../../root';
-import { toFilterFormPresentationFromQuery, toLocalisationFromFilterFormPresentation } from '../../../core';
+import { FilterPresentation, toFilterFormPresentationFromQuery, toLocalisationFromFilterFormPresentation } from '../../../core';
 import {
   LieuMediationNumeriqueDetailsPresentation,
   LieuxMediationNumeriqueDetailsPresenter,
   MarkersPresenter
 } from '../../presenters';
+import { OrientationSheetForm } from '../../forms';
+import { map } from 'rxjs/operators';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +26,13 @@ export class LieuxMediationNumeriqueDetailsPage {
       )
       .pipe(tap((lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) => this.select(lieuMediationNumerique)));
 
+  private readonly _orientationSheetForm$: Subject<OrientationSheetForm | undefined> = new Subject<
+    OrientationSheetForm | undefined
+  >();
+  public orientationSheetForm$: Observable<OrientationSheetForm | undefined> = this._orientationSheetForm$.asObservable();
+
+  public filters$: Observable<FilterPresentation> = this._route.queryParams.pipe(map(toFilterFormPresentationFromQuery));
+
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
@@ -32,6 +41,11 @@ export class LieuxMediationNumeriqueDetailsPage {
     private readonly _markersPresenter: MarkersPresenter,
     private readonly _route: ActivatedRoute
   ) {}
+
+  public printDetails(orientationSheetValues?: OrientationSheetForm) {
+    this._orientationSheetForm$.next(orientationSheetValues);
+    setTimeout(() => window.print());
+  }
 
   private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) {
     lieuMediationNumerique.localisation &&

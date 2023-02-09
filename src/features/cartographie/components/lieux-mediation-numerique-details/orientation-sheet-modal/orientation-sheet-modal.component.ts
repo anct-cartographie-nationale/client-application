@@ -1,14 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { animate, style, transition, trigger } from '@angular/animations';
 import { LabelNational, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-
-type OrientationSheetForm = {
-  firstname: string;
-  lastname: string;
-  details?: string;
-};
+import { FilterPresentation } from '../../../../core';
+import { OrientationSheetForm } from '../../../forms';
 
 @Component({
   animations: [
@@ -56,6 +52,9 @@ export class OrientationSheetModalComponent {
   @Input() public siteWeb?: string[] = [];
   @Input() public labels_nationaux?: LabelNational[] = [];
   @Input() public localisation?: Localisation;
+  @Input() public filters?: FilterPresentation;
+
+  @Output() public print: EventEmitter<OrientationSheetForm> = new EventEmitter<OrientationSheetForm>();
 
   private showOrientationSheetModal() {
     this._activateOrientationSheetModal$.next(true);
@@ -80,7 +79,6 @@ export class OrientationSheetModalComponent {
 
     this.isReadyToPrint = true;
     this.usager = this.orientationSheetForm.getRawValue();
-    console.log('onSubmitOrientationSheetForm');
   }
 
   public displayOrientationSheetForm() {

@@ -1,8 +1,12 @@
 <div *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique; else lieuNotFound" class="h-100 overflow-auto">
   <app-lieux-mediation-numerique-details-print
-    [lieuMediationNumerique]="lieuMediationNumerique"></app-lieux-mediation-numerique-details-print>
+    [lieuMediationNumerique]="lieuMediationNumerique"
+    [filters]="(filters$ | async) ?? undefined"
+    [orientationSheetForm]="(orientationSheetForm$ | async) ?? undefined"></app-lieux-mediation-numerique-details-print>
   <app-lieux-mediation-numerique-details
-    [lieuMediationNumerique]="lieuMediationNumerique"></app-lieux-mediation-numerique-details>
+    (print)="printDetails($event)"
+    [lieuMediationNumerique]="lieuMediationNumerique"
+    [filters]="(filters$ | async) ?? undefined"></app-lieux-mediation-numerique-details>
 </div>
 <ng-template #lieuNotFound>
   <div class="d-flex flex-column justify-content-between h-100">

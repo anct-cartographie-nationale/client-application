@@ -11,7 +11,7 @@
     <app-boutons-action
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
       [priseRdv]="lieuMediationNumerique.prise_rdv"
-      (print)="printDetails()"
+      (print)="print.emit()"
       (orientationSheet)="orientationSheetModal.toggleOrientationSheetModal()"></app-boutons-action>
   </div>
   <ul class="list-group list-group-lg list-group-flush list-group-flush-at-edge flex-grow-1 mx-4">
@@ -76,4 +76,6 @@
   [courriel]="lieuMediationNumerique.contact?.courriel"
   [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
   [siteWeb]="lieuMediationNumerique.contact?.site_web"
-  [localisation]="lieuMediationNumerique.localisation"></app-orientation-sheet-modal>
+  [localisation]="lieuMediationNumerique.localisation"
+  [filters]="filters"
+  (print)="print.emit($event)"></app-orientation-sheet-modal>
