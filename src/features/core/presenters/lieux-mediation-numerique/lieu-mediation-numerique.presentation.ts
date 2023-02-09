@@ -35,7 +35,6 @@ export type LieuMediationNumeriquePresentation = {
   horaires?: string;
   source?: string;
   distance?: number;
-  status?: OpeningState;
 };
 
 const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisation: Localisation): number | undefined =>
@@ -45,8 +44,7 @@ const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisatio
 
 export const toLieuxMediationNumeriquePresentation = (
   lieuMediationNumerique: LieuMediationNumerique & { localisation: Localisation },
-  localisation: Localisation,
-  date: Date
+  localisation: Localisation
 ): LieuMediationNumeriquePresentation => ({
   id: lieuMediationNumerique.id,
   nom: lieuMediationNumerique.nom,
@@ -69,6 +67,5 @@ export const toLieuxMediationNumeriquePresentation = (
   ...ifAny('conditions_acces', lieuMediationNumerique.conditions_acces),
   ...ifAny('horaires', lieuMediationNumerique.horaires),
   ...ifAny('distance', getDistance(lieuMediationNumerique, localisation)),
-  ...ifAny('status', openingState(date)(lieuMediationNumerique.horaires)),
   ...ifAny('source', lieuMediationNumerique.source)
 });

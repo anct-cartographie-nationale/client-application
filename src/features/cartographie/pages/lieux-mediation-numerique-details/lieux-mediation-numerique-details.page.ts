@@ -1,4 +1,4 @@
-import { Observable, of, shareReplay, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
@@ -22,10 +22,7 @@ export class LieuxMediationNumeriqueDetailsPage {
         new Date(),
         of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this._route.snapshot.queryParams)))
       )
-      .pipe(
-        tap((lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) => this.select(lieuMediationNumerique)),
-        shareReplay()
-      );
+      .pipe(tap((lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) => this.select(lieuMediationNumerique)));
 
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)

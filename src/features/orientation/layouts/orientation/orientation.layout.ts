@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
-import { BehaviorSubject, delay, Observable, shareReplay, startWith, tap } from 'rxjs';
+import { BehaviorSubject, delay, Observable, startWith, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
@@ -63,8 +63,7 @@ export class OrientationLayout {
   );
 
   public filterPresentation$: Observable<FilterFormPresentation> = this.filterForm.valueChanges.pipe(
-    startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)),
-    shareReplay()
+    startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))
   );
 
   private _localisation$: Observable<Localisation> = this.filterPresentation$.pipe(

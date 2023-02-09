@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
@@ -16,7 +16,9 @@ import {
   toDepartement,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation,
-  nearestRegion
+  nearestRegion,
+  ifAny,
+  openingState
 } from '../../../core';
 import {
   LIEUX_ZOOM_LEVEL,
@@ -24,7 +26,8 @@ import {
   getNextRouteFromZoomLevel,
   shouldNavigateToListPage,
   zoomLevelFromAreaDistance,
-  LieuMediationNumeriqueOnMapPresentation
+  LieuMediationNumeriqueOnMapPresentation,
+  DEPARTEMENT_ZOOM_LEVEL
 } from '../../presenters';
 import { ViewReset } from '../../directives';
 import { BBox } from 'geojson';
@@ -40,6 +43,21 @@ const filteredByDepartementIfExist = (
 
 const toLieuxFilteredByDepartement = (lieux: LieuMediationNumeriquePresentation[], nomDepartement: string) =>
   filteredByDepartementIfExist(departementFromNom(nomDepartement), lieux);
+
+const toLieuxWithOpeningState =
+  (date: Date) =>
+  ([lieuxMediationNumerique, zoomLevel]: [
+    LieuMediationNumeriquePresentation[],
+    number
+  ]): LieuMediationNumeriquePresentation[] =>
+    zoomLevel > DEPARTEMENT_ZOOM_LEVEL
+      ? lieuxMediationNumerique.map(
+          (lieuMediationNumerique: LieuMediationNumeriquePresentation): LieuMediationNumeriquePresentation => ({
+            ...lieuMediationNumerique,
+            ...ifAny('status', openingState(date)(lieuMediationNumerique.horaires))
+          })
+        )
+      : lieuxMediationNumerique;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -61,27 +79,22 @@ export class CartographieLayout {
       map((lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] =>
         toLieuxFilteredByDepartement(lieux, this.getRouteParam('nomDepartement'))
       ),
+      withLatestFrom(this.markersPresenter.currentZoomLevel$),
+      map(toLieuxWithOpeningState(new Date())),
       tap((lieux: LieuMediationNumeriquePresentation[]) => {
         !this._initialZoom && this.setInitialZoom(lieux);
         this._loadingState$.next(false);
         this._initialZoom = true;
-      }),
-      shareReplay()
+      })
     );
 
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(
-      tap(() => this._loadingState$.next(false)),
-      shareReplay()
-    );
+    .pipe(tap(() => this._loadingState$.next(false)));
 
   public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(
-      tap(() => this._loadingState$.next(false)),
-      shareReplay()
-    );
+    .pipe(tap(() => this._loadingState$.next(false)));
 
   public defaultAddress$: Observable<string | null> = this.route.queryParamMap.pipe(
     map((paramMap: ParamMap) => paramMap.get('address'))

@@ -945,10 +945,6 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         services: [Service.AccederADuMateriel],
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
-        status: {
-          label: 'Ouvert',
-          limite: 'Ferme à 18h30'
-        },
         latitude: 45.7689958,
         longitude: 4.8343466
       }
@@ -1014,10 +1010,6 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         services: [Service.AccederADuMateriel],
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
-        status: {
-          label: 'Ouvert',
-          limite: 'Ferme à 18h30'
-        },
         latitude: 45.7689958,
         longitude: 4.8343466
       }
@@ -1139,10 +1131,6 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         services: [Service.AccederADuMateriel],
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
-        status: {
-          label: 'Ouvert',
-          limite: 'Ferme à 18h30'
-        },
         latitude: 45.7689958,
         longitude: 4.8343466
       }
