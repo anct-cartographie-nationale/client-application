@@ -15,7 +15,7 @@ export const BRAND_CONFIGURATION: BrandConfiguration = {
 };
 
 export const BRAND_APPLICATION_CONFIGURATION: BrandConfiguration = {
-  name: 'Nationale',
-  logo: './assets/img/logo/cartographie-nationale-brand.png',
-  illustration: 'svg-france-et-outremer.svg'
+  name: 'La Mednum Hub Antilles',
+  logo: './assets/img/logo/logo-mednum-antilles.png',
+  illustration: 'svg-antille-guyane.svg'
 };
