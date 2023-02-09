@@ -17,9 +17,14 @@ const toLieuMediationNumeriqueWithAidants = (
   ...aidantsIfAny(lieuMediationNumeriqueWithAidantsTransfer.aidants)
 });
 
-const toLieuxMediationNumeriqueWithAidants = (
+const onlyInAntilles = (lieuxMediationNumeriqueWithAidantsTransfer: LieuMediationNumeriqueWithAidantsTransfer): boolean =>
+  lieuxMediationNumeriqueWithAidantsTransfer.code_postal.startsWith('971') ||
+  lieuxMediationNumeriqueWithAidantsTransfer.code_postal.startsWith('972');
+
+const toLieuxMediationNumeriqueWithAidantsInAntilles = (
   lieuxMediationNumeriqueWithAidantsTransfer: LieuMediationNumeriqueWithAidantsTransfer[]
-): LieuMediationNumeriqueWithAidants[] => lieuxMediationNumeriqueWithAidantsTransfer.map(toLieuMediationNumeriqueWithAidants);
+): LieuMediationNumeriqueWithAidants[] =>
+  lieuxMediationNumeriqueWithAidantsTransfer.filter(onlyInAntilles).map(toLieuMediationNumeriqueWithAidants);
 
 export class LieuxMediationNumeriqueHttp extends LieuxMediationNumeriqueRepository {
   public constructor(private readonly dataConfiguration: DataConfiguration, private readonly httpClient: HttpClient) {
@@ -29,6 +34,6 @@ export class LieuxMediationNumeriqueHttp extends LieuxMediationNumeriqueReposito
   public getAll$(): Observable<LieuMediationNumeriqueWithAidants[]> {
     return this.httpClient
       .get<LieuMediationNumeriqueWithAidantsTransfer[]>(this.dataConfiguration.lieuxDeMediationNumerique)
-      .pipe(map(toLieuxMediationNumeriqueWithAidants));
+      .pipe(map(toLieuxMediationNumeriqueWithAidantsInAntilles));
   }
 }
