@@ -54,7 +54,7 @@ export const filteredLieuxMediationNumerique = (
     .filter(onlyWithLocalisation)
     .map(
       (lieuMediationNumerique: LieuMediationNumerique & { localisation: Localisation }): LieuMediationNumeriquePresentation =>
-        toLieuxMediationNumeriquePresentation(lieuMediationNumerique, localisation, date)
+        toLieuxMediationNumeriquePresentation(lieuMediationNumerique, localisation)
     )
     .filter(byOrientationFilter(filter, date));
 

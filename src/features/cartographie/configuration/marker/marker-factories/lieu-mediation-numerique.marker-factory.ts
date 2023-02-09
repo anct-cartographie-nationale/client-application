@@ -5,6 +5,7 @@ import { MarkerFactory, MarkerHighlight, MarkerProperties } from '../markers.con
 
 export type LieuMediationNumeriqueMarkerProperties = MarkerProperties<
   LieuMediationNumeriquePresentation & {
+    status?: OpeningState;
     highlight?: MarkerHighlight;
     labels_nationaux: LabelNational[];
   }

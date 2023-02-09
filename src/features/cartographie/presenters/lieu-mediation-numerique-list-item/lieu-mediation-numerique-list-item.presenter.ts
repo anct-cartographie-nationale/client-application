@@ -1,9 +1,9 @@
+import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { ifAny, LieuMediationNumeriquePresentation, openingState } from '../../../core';
 import {
   LieuMediationNumeriqueListItemPresentation,
   LieuMediationNumeriqueListItemPresentationConditionsAcces
 } from './lieu-mediation-numerique-list-item.presentation';
-import { ifAny, LieuMediationNumeriquePresentation } from '../../../core';
-import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 const capitalize = (stringToCapitalize: string): string =>
   `${stringToCapitalize[0].toUpperCase()}${stringToCapitalize.toLowerCase().substring(1)}`;
@@ -45,20 +45,20 @@ const toListItemConditionsAcces = (
     }
   })?.[0];
 
-export const toLieuxMediationNumeriqueListItemsPresentation = (
-  lieuxMediationNumerique: LieuMediationNumeriquePresentation[]
-): LieuMediationNumeriqueListItemPresentation[] =>
-  lieuxMediationNumerique.map((lieuMediationNumerique: LieuMediationNumeriquePresentation) => ({
-    id: lieuMediationNumerique.id,
-    nom: lieuMediationNumerique.nom,
-    adresse: formatAdresse(lieuMediationNumerique),
-    latitude: lieuMediationNumerique.latitude,
-    longitude: lieuMediationNumerique.longitude,
-    date_maj: lieuMediationNumerique.date_maj,
-    ...ifAny('telephone', lieuMediationNumerique.telephone),
-    ...ifAny('courriel', lieuMediationNumerique.courriel),
-    ...ifAny('labels_nationaux', toListItemLabelsNationaux(lieuMediationNumerique.labels_nationaux)),
-    ...ifAny('conditions_acces', toListItemConditionsAcces(lieuMediationNumerique.conditions_acces)),
-    ...ifAny('distance', lieuMediationNumerique.distance),
-    ...ifAny('status', lieuMediationNumerique.status)
-  }));
+export const toLieuxMediationNumeriqueListItemsPresentation =
+  (date: Date) =>
+  (lieuxMediationNumerique: LieuMediationNumeriquePresentation[]): LieuMediationNumeriqueListItemPresentation[] =>
+    lieuxMediationNumerique.map((lieuMediationNumerique: LieuMediationNumeriquePresentation) => ({
+      id: lieuMediationNumerique.id,
+      nom: lieuMediationNumerique.nom,
+      adresse: formatAdresse(lieuMediationNumerique),
+      latitude: lieuMediationNumerique.latitude,
+      longitude: lieuMediationNumerique.longitude,
+      date_maj: lieuMediationNumerique.date_maj,
+      ...ifAny('telephone', lieuMediationNumerique.telephone),
+      ...ifAny('courriel', lieuMediationNumerique.courriel),
+      ...ifAny('labels_nationaux', toListItemLabelsNationaux(lieuMediationNumerique.labels_nationaux)),
+      ...ifAny('conditions_acces', toListItemConditionsAcces(lieuMediationNumerique.conditions_acces)),
+      ...ifAny('distance', lieuMediationNumerique.distance),
+      ...ifAny('status', openingState(date)(lieuMediationNumerique.horaires))
+    }));

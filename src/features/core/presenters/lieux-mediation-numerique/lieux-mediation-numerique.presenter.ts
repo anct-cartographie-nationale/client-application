@@ -1,4 +1,4 @@
-import { combineLatest, Observable, of, shareReplay } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import {
@@ -80,7 +80,5 @@ export class LieuxMediationNumeriquePresenter {
     );
   }
 
-  public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> = this.lieuxMediationNumeriqueRepository
-    .getAll$()
-    .pipe(shareReplay());
+  public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> = this.lieuxMediationNumeriqueRepository.getAll$();
 }

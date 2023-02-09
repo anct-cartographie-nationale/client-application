@@ -20,7 +20,7 @@ describe('lieux médiation numérique list item presenter', (): void => {
     ];
 
     const lieuMediationNumeriqueListItemPresenter: LieuMediationNumeriqueListItemPresentation[] =
-      toLieuxMediationNumeriqueListItemsPresentation(lieuxMediationNumerique);
+      toLieuxMediationNumeriqueListItemsPresentation(new Date('2023-02-09'))(lieuxMediationNumerique);
 
     expect(lieuMediationNumeriqueListItemPresenter).toStrictEqual<LieuMediationNumeriqueListItemPresentation[]>([
       {
@@ -52,15 +52,12 @@ describe('lieux médiation numérique list item presenter', (): void => {
         labels_nationaux: [LabelNational.CNFS, LabelNational.FrenchTech, LabelNational.FranceServices],
         conditions_acces: [ConditionAcces.Gratuit, ConditionAcces.GratuitSousCondition],
         distance: 3200,
-        status: {
-          label: 'Ouvert',
-          limite: 'Ouvre mardi à 09h00'
-        }
+        horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00'
       }
     ];
 
     const lieuMediationNumeriqueListItemPresenter: LieuMediationNumeriqueListItemPresentation[] =
-      toLieuxMediationNumeriqueListItemsPresentation(lieuxMediationNumerique);
+      toLieuxMediationNumeriqueListItemsPresentation(new Date('2023-02-09'))(lieuxMediationNumerique);
 
     expect(lieuMediationNumeriqueListItemPresenter).toStrictEqual<LieuMediationNumeriqueListItemPresentation[]>([
       {
@@ -79,8 +76,8 @@ describe('lieux médiation numérique list item presenter', (): void => {
         },
         distance: 3200,
         status: {
-          label: 'Ouvert',
-          limite: 'Ouvre mardi à 09h00'
+          label: 'Fermé',
+          limite: "Ouvre aujourd'hui à 09h00"
         }
       }
     ]);

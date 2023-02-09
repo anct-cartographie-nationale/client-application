@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable, shareReplay } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { fromSchemaLieuDeMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { DataConfiguration } from '../../../../../root';
@@ -29,6 +29,6 @@ export class LieuxMediationNumeriqueHttp extends LieuxMediationNumeriqueReposito
   public getAll$(): Observable<LieuMediationNumeriqueWithAidants[]> {
     return this.httpClient
       .get<LieuMediationNumeriqueWithAidantsTransfer[]>(this.dataConfiguration.lieuxDeMediationNumerique)
-      .pipe(map(toLieuxMediationNumeriqueWithAidants), shareReplay());
+      .pipe(map(toLieuxMediationNumeriqueWithAidants));
   }
 }

@@ -110,7 +110,7 @@ export class LieuxMediationNumeriqueListPage {
     map(toLieuxWithLieuToFocus),
     tap(this.setInitialState),
     map(toLieux(this._localisation)),
-    map(toLieuxMediationNumeriqueListItemsPresentation)
+    map(toLieuxMediationNumeriqueListItemsPresentation(new Date()))
   );
 
   public listOfLieuxWithoutFilters$: Observable<LieuMediationNumeriquePresentation[]> =
