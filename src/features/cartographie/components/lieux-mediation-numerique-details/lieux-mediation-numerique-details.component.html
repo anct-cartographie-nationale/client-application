@@ -59,7 +59,7 @@
         [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
     </li>
   </ul>
-  <div *ngIf="lieuMediationNumerique.contact?.courriel != null" class="bg-light p-4 text-end">
+  <div *ngIf="lieuMediationNumerique.contact?.courriel" class="bg-light p-4 text-end">
     <a href="mailto:{{ lieuMediationNumerique.contact?.courriel }}" class="btn btn-secondary btn-sm">
       Signaler une erreur
       <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
