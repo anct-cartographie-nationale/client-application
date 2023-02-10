@@ -81,7 +81,7 @@ export class CartographieLayout {
       ),
       withLatestFrom(this.markersPresenter.currentZoomLevel$),
       map(toLieuxWithOpeningState(new Date())),
-      delay(0),
+      delay(600),
       tap((lieux: LieuMediationNumeriquePresentation[]) => {
         !this._initialZoom && this.setInitialZoom(lieux);
         this._loadingState$.next(false);
@@ -92,14 +92,14 @@ export class CartographieLayout {
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
-      delay(0),
+      delay(600),
       tap(() => this._loadingState$.next(false))
     );
 
   public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
-      delay(0),
+      delay(600),
       tap(() => this._loadingState$.next(false))
     );
 
