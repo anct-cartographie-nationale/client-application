@@ -1,4 +1,4 @@
-<div *ngIf="loadingState$ | async" class="position-absolute top-0 w-100 h-100 bg-light z-index-over">
+<div *ngIf="loadingState$ | async" class="position-absolute top-0 w-100 h-100 bg-light z-index-over-all">
   <div class="container h-100">
     <div class="row justify-content-center h-100">
       <div class="col-lg-6 m-auto">
@@ -35,7 +35,7 @@
     <router-outlet></router-outlet>
   </div>
   <div class="col overflow-auto position-relative">
-    <div class="p-3 position-absolute start-0 z-index-over d-md-block d-none" *ngIf="(loadingState$ | async) === false">
+    <div class="p-3 position-absolute start-0 z-index-over-base d-md-block d-none" *ngIf="(loadingState$ | async) === false">
       <app-user-location [adresse]="(defaultAddress$ | async) ?? ''" (location)="userLocalisation = $event"></app-user-location>
     </div>
     <app-leaflet-map

@@ -1,4 +1,4 @@
-<div class="d-print-none">
+<div class="d-print-none h-100 d-flex flex-column">
   <app-informations-generales
     class="p-4 sticky-top bg-primary text-white d-block"
     [id]="lieuMediationNumerique.id"
@@ -9,11 +9,12 @@
     [source]="lieuMediationNumerique.source"></app-informations-generales>
   <div class="bg-light position-relative">
     <app-boutons-action
-      [courriel]="lieuMediationNumerique.contact?.courriel"
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
-      [priseRdv]="lieuMediationNumerique.prise_rdv"></app-boutons-action>
+      [priseRdv]="lieuMediationNumerique.prise_rdv"
+      (print)="print.emit()"
+      (orientationSheet)="orientationSheetModal.toggleOrientationSheetModal()"></app-boutons-action>
   </div>
-  <ul class="list-group list-group-lg list-group-flush list-group-flush-at-edge mx-4">
+  <ul class="list-group list-group-lg list-group-flush list-group-flush-at-edge flex-grow-1 mx-4">
     <li class="list-group-item">
       <app-informations-pratiques
         [adresse]="lieuMediationNumerique.adresse"
@@ -58,4 +59,23 @@
         [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
     </li>
   </ul>
+  <div *ngIf="lieuMediationNumerique.contact?.courriel" class="bg-light p-4 text-end">
+    <a href="mailto:{{ lieuMediationNumerique.contact?.courriel }}" class="btn btn-secondary btn-sm">
+      Signaler une erreur
+      <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
+    </a>
+  </div>
 </div>
+<app-orientation-sheet-modal
+  class="d-print-none"
+  #orientationSheetModal
+  [id]="lieuMediationNumerique.id"
+  [nom]="lieuMediationNumerique.nom"
+  [labels_nationaux]="lieuMediationNumerique.labels_nationaux"
+  [adresse]="lieuMediationNumerique.adresse"
+  [courriel]="lieuMediationNumerique.contact?.courriel"
+  [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
+  [siteWeb]="lieuMediationNumerique.contact?.site_web"
+  [localisation]="lieuMediationNumerique.localisation"
+  [filters]="filters"
+  (print)="print.emit($event)"></app-orientation-sheet-modal>

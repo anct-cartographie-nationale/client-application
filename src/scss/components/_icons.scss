@@ -253,3 +253,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-link::before {
   content: '\eeb2';
 }
+
+.ri-treasure-map-line::before {
+  content: '\f22b';
+}

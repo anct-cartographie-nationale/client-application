@@ -8,9 +8,9 @@ import { LieuMediationNumeriqueOnMapPresentation } from '../../../presenters';
 })
 export class LieuMediationNumeriqueMarkersComponent {
   @Input() public lieuxMediationNumeriques: LieuMediationNumeriqueOnMapPresentation[] = [];
-
   @Input() public selectedId: string = '';
   @Input() public hoverId: string = '';
+  @Input() public displayTooltip: boolean = true;
 
   @Output() public showDetails: EventEmitter<LieuMediationNumeriqueOnMapPresentation> =
     new EventEmitter<LieuMediationNumeriqueOnMapPresentation>();

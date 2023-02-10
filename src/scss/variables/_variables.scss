@@ -32,6 +32,12 @@ $spacers: (
   5: $spacer * 3,
   6: $spacer * 4.5
 ) !default;
+$modal-content-bg: $light;
+$modal-content-border-radius: 0;
+$modal-backdrop-bg: white;
+$modal-header-border-color: transparent;
+$modal-footer-bg: white;
+$modal-inner-padding: $spacer * 2;
 
 @import './accordion';
 @import './buttons';

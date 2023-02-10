@@ -1,11 +1,19 @@
 <div class="d-flex justify-content-center">
-  <button type="button" class="btn btn-tile" (click)="printPage()">
-    <i class="ri-printer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
-    <b class="mt-2">Imprimer</b>
+  <button type="button" class="btn btn-tile" (click)="orientationSheet.emit()">
+    <i class="ri-treasure-map-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
+    <b class="mt-2">Fiche d'orientation</b>
   </button>
-  <a type="button" class="btn btn-tile" [class.disabled]="!courriel" href="mailto:{{ courriel }}">
-    <i class="ri-error-warning-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
-    <b class="mt-2 text-center">Signaler erreur</b>
+  <a
+    type="button"
+    class="btn btn-tile"
+    [class.disabled]="!priseRdv"
+    target="_blank"
+    rel="noopener noreferrer"
+    href="{{ priseRdv }}">
+    <i
+      class="ri-calendar-check-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"
+      [ngClass]="priseRdv ? 'bg-primary' : 'bg-muted'"></i>
+    <b class="mt-2">RDV en ligne</b>
   </a>
   <a
     type="button"
@@ -14,17 +22,13 @@
     href="{{ siteWeb?.[0] }}"
     target="_blank"
     rel="noopener noreferrer">
-    <i class="ri-computer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
+    <i
+      class="ri-computer-line ri-xl ri-fw ri-space text-light rounded-circle"
+      [ngClass]="siteWeb?.[0] ? 'bg-primary' : 'bg-muted'"></i>
     <b class="mt-2">Voir le site</b>
   </a>
-  <a
-    type="button"
-    class="btn btn-tile"
-    [class.disabled]="!priseRdv"
-    target="_blank"
-    rel="noopener noreferrer"
-    href="{{ priseRdv }}">
-    <i class="ri-computer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
-    <b class="mt-2">Prise de RDV</b>
-  </a>
+  <button type="button" class="btn btn-tile" (click)="print.emit()">
+    <i class="ri-printer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
+    <b class="mt-2">Imprimer</b>
+  </button>
 </div>

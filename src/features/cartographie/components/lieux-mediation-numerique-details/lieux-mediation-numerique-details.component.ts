@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
+import { OrientationSheetForm } from '../../forms';
+import { FilterPresentation } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,4 +10,7 @@ import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 })
 export class LieuxMediationNumeriqueDetailsComponent {
   @Input() public lieuMediationNumerique!: LieuMediationNumeriqueDetailsPresentation;
+  @Input() public filters?: FilterPresentation;
+
+  @Output() public print: EventEmitter<OrientationSheetForm> = new EventEmitter<OrientationSheetForm>();
 }
