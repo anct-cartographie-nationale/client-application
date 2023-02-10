@@ -44,7 +44,10 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   public printDetails(orientationSheetValues?: OrientationSheetForm) {
     this._orientationSheetForm$.next(orientationSheetValues);
-    setTimeout(() => window.print());
+    setTimeout(() => {
+      window.print();
+      this._orientationSheetForm$.next(void 0);
+    });
   }
 
   private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) {
