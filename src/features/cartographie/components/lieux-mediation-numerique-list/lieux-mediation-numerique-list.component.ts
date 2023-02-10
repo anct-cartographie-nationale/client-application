@@ -12,7 +12,6 @@ import {
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { FeatureConfiguration } from '../../../../root';
-import { LieuMediationNumeriquePresentation } from '../../../core';
 import { LieuMediationNumeriqueListItemPresentation } from '../../presenters';
 
 const itemById =

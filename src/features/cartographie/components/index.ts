@@ -18,7 +18,8 @@ import { DepartementsListComponent } from './departements-list/departements-list
 import { RegionsListComponent } from './regions-list/regions-list.component';
 import {
   LieuxMediationNumeriqueListComponent,
-  LieuMediationNumeriqueListItemComponent
+  LieuMediationNumeriqueListItemComponent,
+  LieuxMediationNumeriqueListPrintComponent
 } from './lieux-mediation-numerique-list';
 import { LieuMediationNumeriqueMarkersComponent } from './markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
 import { DepartementMarkersComponent } from './markers/departement-markers/departement-markers.component';
@@ -47,6 +48,7 @@ export const components = [
   LieuxMediationNumeriqueDetailsComponent,
   LieuMediationNumeriqueListItemComponent,
   LieuxMediationNumeriqueListComponent,
+  LieuxMediationNumeriqueListPrintComponent,
   InformationsGeneralesComponent,
   BoutonsActionComponent,
   InformationsPratiquesComponent,

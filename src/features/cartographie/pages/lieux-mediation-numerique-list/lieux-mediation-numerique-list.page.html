@@ -6,13 +6,18 @@
     [queryParams]="toQueryString(route.queryParams)"
     [orientationFeature]="features.get('orientation')"></app-no-lieux-found>
 </div>
-<app-lieux-mediation-numerique-list
-  *ngIf="inLieuxZoomLevel((markersPresenter.currentZoomLevel$ | async) ?? 0)"
-  [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"
-  [orientationFeature]="features.get('orientation')"
-  [focusId]="markersPresenter.focuced$ | async"
-  [hoverId]="markersPresenter.hovered$ | async"
-  (print)="printPage()"
-  (selectLieu)="select($event)"
-  (enableHover)="hover($event)"
-  (disableHover)="hover()"></app-lieux-mediation-numerique-list>
+<ng-container *ngIf="inLieuxZoomLevel((markersPresenter.currentZoomLevel$ | async) ?? 0)">
+  <app-lieux-mediation-numerique-list
+    class="d-print-none"
+    [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"
+    [orientationFeature]="features.get('orientation')"
+    [focusId]="markersPresenter.focuced$ | async"
+    [hoverId]="markersPresenter.hovered$ | async"
+    (print)="printPage()"
+    (selectLieu)="select($event)"
+    (enableHover)="hover($event)"
+    (disableHover)="hover()"></app-lieux-mediation-numerique-list>
+  <app-lieux-mediation-numerique-list-print
+    class="d-none d-print-block"
+    [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"></app-lieux-mediation-numerique-list-print>
+</ng-container>
