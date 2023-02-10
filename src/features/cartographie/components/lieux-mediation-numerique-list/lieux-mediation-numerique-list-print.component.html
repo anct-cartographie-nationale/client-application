@@ -1,1 +1,43 @@
-Print
+<div class="lieux-mediation-numerique-details-print d-flex flex-column border-3 overflow-hidden">
+  <h2 class="h3 mb-3 d-none d-print-block">
+    <i class="ri ri-list-check align-bottom me-2"></i>
+    Liste des structures
+  </h2>
+  <div class="row border-top pt-2 mb-auto">
+    <div
+      class="bg-light my-3 px-4 py-3"
+      *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
+      <small class="fw-bold text-muted">Détails de la recherche</small>
+      <div>FILTRES ACTIVÉS</div>
+      <div>
+        <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.address">
+          {{ filters?.address }}
+        </span>
+        <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.distance">
+          0-{{ (filters?.distance ?? 0) / 1000 }}km
+        </span>
+        <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.service">
+          {{ filters?.service }}
+        </span>
+        <span
+          class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"
+          *ngFor="let public_accueilli of filters?.publics_accueillis ?? []">
+          {{ public_accueilli }}
+        </span>
+        <span
+          class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"
+          *ngFor="let modaliteAccompagnement of filters?.modalites_accompagnement ?? []">
+          {{ modaliteAccompagnement }}
+        </span>
+      </div>
+    </div>
+    <div class="col-6" *ngFor="let lieuMediationNumerique of lieuxMediationNumerique">
+      <app-mediation-numerique-list-item
+        class="d-block border-bottom h-100 py-1"
+        [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
+    </div>
+  </div>
+  <div class="border-top pt-2" *ngIf="brandConfiguration.logo">
+    <img class="w-25 d-none d-print-block" [src]="brandConfiguration.logo" alt="" />
+  </div>
+</div>

@@ -19,5 +19,6 @@
     (disableHover)="hover()"></app-lieux-mediation-numerique-list>
   <app-lieux-mediation-numerique-list-print
     class="d-none d-print-block"
+    [filters]="(filters$ | async) ?? undefined"
     [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"></app-lieux-mediation-numerique-list-print>
 </ng-container>

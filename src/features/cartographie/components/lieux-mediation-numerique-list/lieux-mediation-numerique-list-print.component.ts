@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { BRAND_TOKEN, BrandConfiguration } from '../../../../root';
+import { FilterPresentation } from '../../../core';
 import { LieuMediationNumeriqueListItemPresentation } from '../../presenters';
 
 @Component({
@@ -8,4 +10,7 @@ import { LieuMediationNumeriqueListItemPresentation } from '../../presenters';
 })
 export class LieuxMediationNumeriqueListPrintComponent {
   @Input() public lieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [];
+  @Input() public filters?: FilterPresentation;
+
+  public constructor(@Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration) {}
 }

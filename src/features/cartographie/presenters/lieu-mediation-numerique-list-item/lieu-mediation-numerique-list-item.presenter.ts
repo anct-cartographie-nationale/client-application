@@ -57,6 +57,7 @@ export const toLieuxMediationNumeriqueListItemsPresentation =
       date_maj: lieuMediationNumerique.date_maj,
       ...ifAny('telephone', lieuMediationNumerique.telephone),
       ...ifAny('courriel', lieuMediationNumerique.courriel),
+      ...ifAny('site_web', lieuMediationNumerique.site_web),
       ...ifAny('labels_nationaux', toListItemLabelsNationaux(lieuMediationNumerique.labels_nationaux)),
       ...ifAny('conditions_acces', toListItemConditionsAcces(lieuMediationNumerique.conditions_acces)),
       ...ifAny('distance', lieuMediationNumerique.distance),
