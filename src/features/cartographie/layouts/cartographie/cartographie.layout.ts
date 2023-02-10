@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, delay, Observable, of, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
@@ -81,6 +81,7 @@ export class CartographieLayout {
       ),
       withLatestFrom(this.markersPresenter.currentZoomLevel$),
       map(toLieuxWithOpeningState(new Date())),
+      delay(600),
       tap((lieux: LieuMediationNumeriquePresentation[]) => {
         !this._initialZoom && this.setInitialZoom(lieux);
         this._loadingState$.next(false);
@@ -90,11 +91,17 @@ export class CartographieLayout {
 
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(tap(() => this._loadingState$.next(false)));
+    .pipe(
+      delay(600),
+      tap(() => this._loadingState$.next(false))
+    );
 
   public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(tap(() => this._loadingState$.next(false)));
+    .pipe(
+      delay(600),
+      tap(() => this._loadingState$.next(false))
+    );
 
   public defaultAddress$: Observable<string | null> = this.route.queryParamMap.pipe(
     map((paramMap: ParamMap) => paramMap.get('address'))
