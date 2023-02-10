@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, On
 import L, { Bounds, LeafletMouseEvent, Map as LeafletMap } from 'leaflet';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { CenterView } from '../../presenters';
-import { flyTo, initializeMap } from './leaflet-map.presenter';
+import { flyTo, freezeMap, initializeMap } from './leaflet-map.presenter';
 
 const DEFAULT_CENTER_LATITUDE: number = 0;
 
@@ -37,6 +37,7 @@ export class LeafletMapComponent implements OnInit {
   }
 
   @Input() public zoomControl: boolean = true;
+  @Input() public freeze: boolean = false;
 
   @Input() public set centerView(centerView: CenterView) {
     this._centerView = centerView;
@@ -54,6 +55,7 @@ export class LeafletMapComponent implements OnInit {
 
   public ngOnInit(): void {
     this._map = initializeMap(this.mapContainer.nativeElement, this._centerView, this.zoomControl);
+    this.freeze && freezeMap(this._map);
     this._map.on('click', (leafletMouseEvent: LeafletMouseEvent): void => this.mapClick.next(leafletMouseEvent));
   }
 }

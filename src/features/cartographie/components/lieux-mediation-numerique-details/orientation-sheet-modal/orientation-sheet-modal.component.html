@@ -96,9 +96,11 @@
                 <app-leaflet-map
                   *ngIf="localisation"
                   [zoomControl]="false"
+                  [freeze]="true"
                   [centerView]="{ coordinates: localisation, zoomLevel: 17 }">
                   <app-lieu-mediation-numerique-markers
                     *ngIf="localisation"
+                    [displayTooltip]="false"
                     [lieuxMediationNumeriques]="[
                       {
                         id: id,

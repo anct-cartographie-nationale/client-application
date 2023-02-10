@@ -65,3 +65,9 @@ export const initializeMap = (mapContainerElement: HTMLElement, centerView: Cent
   updateOnResize(leafletMap, mapContainerElement);
   return leafletMap;
 };
+
+export const freezeMap = (map: LeafletMap): void => {
+  map.dragging.disable();
+  map.scrollWheelZoom.disable();
+  map.doubleClickZoom.disable();
+};

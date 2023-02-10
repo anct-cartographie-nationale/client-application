@@ -9,7 +9,7 @@
     (markerClick)="showDetails.emit($event.markerProperties)"
     (markerEnter)="enableHover.emit(lieuMediationNumerique.id)"
     (markerLeave)="disableHover.emit()">
-    <app-leaflet-map-tooltip [content]="popupContent" [sticky]="true">
+    <app-leaflet-map-tooltip *ngIf="displayTooltip" [content]="popupContent" [sticky]="true">
       <div
         #popupContent
         class="text-center p-3 border-bottom border-3 text-wrap"
