@@ -53,7 +53,7 @@
             <small>
               Mail
               <br />
-              <b class="text-body">{{ lieuMediationNumerique.contact?.courriel }}</b>
+              <b class="text-body text-break">{{ lieuMediationNumerique.contact?.courriel }}</b>
             </small>
           </div>
           <div class="mt-3 d-flex align-items-center" *ngIf="lieuMediationNumerique.contact?.site_web">
@@ -61,7 +61,7 @@
             <small>
               Site
               <br />
-              <b class="text-body">{{ lieuMediationNumerique.contact?.site_web }}</b>
+              <b class="text-body text-break">{{ lieuMediationNumerique.contact?.site_web }}</b>
             </small>
           </div>
         </div>
@@ -70,8 +70,8 @@
     <div class="col-7 my-auto">
       <div *ngIf="orientationSheetForm; else noOrientationSheetForm">
         <small class="fw-bold text-muted">Informations sur le bénéficiaire</small>
-        <div class="h4 fw-bold">{{ orientationSheetForm.firstname }} {{ orientationSheetForm.lastname }}</div>
-        <div class="small mb-4" *ngIf="orientationSheetForm.details">{{ orientationSheetForm.details }}</div>
+        <div class="h4 fw-bold text-break">{{ orientationSheetForm.firstname }} {{ orientationSheetForm.lastname }}</div>
+        <div class="small text-break mb-4" *ngIf="orientationSheetForm.details">{{ orientationSheetForm.details }}</div>
         <div *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
           <small class="fw-bold text-muted">Objet du rendez-vous</small>
           <div>

@@ -29,6 +29,7 @@
                 <label for="firstname" class="form-label visually-hidden">Prénom du bénéficiaire</label>
                 <input
                   type="text"
+                  maxlength="40"
                   class="form-control"
                   [class.is-invalid]="
                     orientationSheetForm.get('firstname')?.touched && orientationSheetForm.get('firstname')?.invalid
@@ -51,6 +52,7 @@
                 <label for="lastname" class="form-label visually-hidden">Nom du bénéficiaire</label>
                 <input
                   type="text"
+                  maxlength="40"
                   class="form-control"
                   [class.is-invalid]="
                     orientationSheetForm.get('lastname')?.touched && orientationSheetForm.get('lastname')?.invalid
@@ -71,7 +73,7 @@
               </div>
               <div class="mb-3">
                 <label for="details" class="form-label fw-bold">Avez-vous des précisions à apporter ?</label>
-                <textarea class="form-control" id="details" rows="3" formControlName="details"></textarea>
+                <textarea class="form-control" id="details" rows="3" maxlength="800" formControlName="details"></textarea>
               </div>
             </form>
           </div>
@@ -115,18 +117,18 @@
                 </div>
                 <div *ngIf="courriel">
                   <i class="ri-mail-line align-bottom"></i>
-                  {{ courriel }}
+                  <span class="text-break">{{ courriel }}</span>
                 </div>
                 <div *ngIf="siteWeb">
                   <i class="ri-link align-bottom"></i>
-                  {{ siteWeb[0] }}
+                  <span class="text-break">{{ siteWeb[0] }}</span>
                 </div>
               </div>
             </div>
             <div class="col" *ngIf="usager">
               <div class="mb-5">
-                <b>{{ usager.firstname }} {{ usager.lastname }}</b>
-                <div class="text-muted" *ngIf="usager.details">{{ usager.details }}</div>
+                <b class="text-break">{{ usager.firstname }} {{ usager.lastname }}</b>
+                <div class="text-muted text-break" *ngIf="usager.details">{{ usager.details }}</div>
               </div>
               <div
                 class="mb-5"
