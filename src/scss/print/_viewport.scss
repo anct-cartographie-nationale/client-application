@@ -1,4 +1,33 @@
+$print-header-height: 0;
+$print-footer-height: 150px;
+
+.page-header,
+.page-header-space {
+  height: $print-header-height;
+}
+
+.page-footer,
+.page-footer-space {
+  height: $print-footer-height;
+}
+
+.page {
+  page-break-after: always;
+}
+
+@page {
+  margin: 8mm;
+}
+
 @media print {
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+
   .vh-100 {
     height: auto !important;
   }
