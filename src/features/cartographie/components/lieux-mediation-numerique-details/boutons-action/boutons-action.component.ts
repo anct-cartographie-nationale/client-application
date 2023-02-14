@@ -9,6 +9,6 @@ export class BoutonsActionComponent {
   @Input() public siteWeb?: string[];
   @Input() public priseRdv?: string;
 
-  @Output() public orientationSheet: EventEmitter<void> = new EventEmitter<void>();
   @Output() public print: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public sendByEmail: EventEmitter<void> = new EventEmitter<void>();
 }

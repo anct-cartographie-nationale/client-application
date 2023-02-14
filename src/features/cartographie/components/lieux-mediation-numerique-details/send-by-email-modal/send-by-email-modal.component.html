@@ -1,0 +1,57 @@
+<div
+  *ngIf="activateModal$ | async"
+  [class.show]="animate$ | async"
+  class="modal d-block fade"
+  tabindex="-1"
+  aria-labelledby="ficheOrientationModal"
+  spellcheck="false"
+  aria-modal="true"
+  role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content overflow-hidden">
+      <div class="modal-header bg-primary text-bg-dark">
+        <h2 class="modal-title h3" id="ficheOrientationModal">
+          <i class="ri-xl ri-mail-send-line align-text-top me-2"></i>
+          Envoyer par mail
+        </h2>
+        <button type="button" class="btn-close btn-close-white opacity-100 mb-0" aria-label="Close" (click)="close()"></button>
+      </div>
+      <div>
+        <div class="modal-body col-lg-7 col-12 m-auto">
+          <form class="my-4" id="sendByEmailForm" [formGroup]="sendByEmailForm" (ngSubmit)="onSubmitSendByEmailForm()">
+            <p class="fw-bold">Qui est bénéficiaire ?</p>
+            <div class="mb-3">
+              <label for="email" class="form-label visually-hidden">À qui souhaitez-vous envoyer la fiche ?</label>
+              <input
+                type="text"
+                maxlength="40"
+                class="form-control"
+                [class.is-invalid]="sendByEmailForm.controls.email.touched && sendByEmailForm.controls.email.invalid"
+                id="email"
+                placeholder="Adresse e-mail du bénéficiaire"
+                aria-describedby="emailHelp"
+                formControlName="email" />
+              <div
+                id="emailHelp"
+                [ngClass]="
+                  sendByEmailForm.controls.email.touched && sendByEmailForm.controls.email.invalid
+                    ? 'invalid-feedback'
+                    : 'form-text'
+                ">
+                * Champ obligatoire
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary me-3" (click)="close()">Annuler</button>
+          <button type="submit" form="sendByEmailForm" class="btn btn-primary">
+            <i class="ri-mail-send-line align-bottom"></i>
+            Envoyer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="activateModal$ | async" class="modal-backdrop fade" [class.show]="animate$ | async"></div>

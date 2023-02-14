@@ -4,7 +4,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LabelNational, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FilterPresentation } from '../../../../core';
-import { OrientationSheetForm } from '../../../forms';
+import { OrientationSheetForm } from '../../../models';
 
 @Component({
   animations: [
@@ -22,17 +22,13 @@ import { OrientationSheetForm } from '../../../forms';
   templateUrl: './orientation-sheet-modal.component.html'
 })
 export class OrientationSheetModalComponent {
-  private _isOrientationSheetModalShown: boolean = false;
+  private _isShown: boolean = false;
 
-  private _activateOrientationSheetModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    this._isOrientationSheetModalShown
-  );
-  public activateOrientationSheetModal$: Observable<boolean> = this._activateOrientationSheetModal$.asObservable();
+  private _activateModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._isShown);
+  public activateModal$: Observable<boolean> = this._activateModal$.asObservable();
 
-  private _animateOrientationSheetModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    this._isOrientationSheetModalShown
-  );
-  public animateOrientationSheetModal$: Observable<boolean> = this._animateOrientationSheetModal$;
+  private _animate$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._isShown);
+  public animate$: Observable<boolean> = this._animate$;
 
   public isReadyToPrint: boolean = false;
 
@@ -56,19 +52,19 @@ export class OrientationSheetModalComponent {
 
   @Output() public print: EventEmitter<OrientationSheetForm> = new EventEmitter<OrientationSheetForm>();
 
-  private showOrientationSheetModal() {
-    this._activateOrientationSheetModal$.next(true);
-    setTimeout(() => this._animateOrientationSheetModal$.next(true), 100);
+  private show() {
+    this._activateModal$.next(true);
+    setTimeout(() => this._animate$.next(true), 100);
   }
 
-  private hideOrientationSheetModal() {
-    this._animateOrientationSheetModal$.next(false);
-    setTimeout(() => this._activateOrientationSheetModal$.next(false), 300);
+  private hide() {
+    this._animate$.next(false);
+    setTimeout(() => this._activateModal$.next(false), 300);
   }
 
-  public toggleOrientationSheetModal() {
-    this._isOrientationSheetModalShown ? this.hideOrientationSheetModal() : this.showOrientationSheetModal();
-    this._isOrientationSheetModalShown = !this._isOrientationSheetModalShown;
+  public toggle() {
+    this._isShown ? this.hide() : this.show();
+    this._isShown = !this._isShown;
   }
 
   public onSubmitOrientationSheetForm() {
@@ -86,7 +82,7 @@ export class OrientationSheetModalComponent {
   }
 
   public close(): void {
-    this.toggleOrientationSheetModal();
+    this.toggle();
     this.orientationSheetForm.reset();
     this.isReadyToPrint = false;
   }

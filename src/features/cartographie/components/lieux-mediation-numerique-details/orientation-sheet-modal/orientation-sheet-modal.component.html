@@ -1,6 +1,6 @@
 <div
-  *ngIf="activateOrientationSheetModal$ | async"
-  [class.show]="animateOrientationSheetModal$ | async"
+  *ngIf="activateModal$ | async"
+  [class.show]="animate$ | async"
   class="modal d-block fade"
   tabindex="-1"
   aria-labelledby="ficheOrientationModal"
@@ -11,8 +11,8 @@
     <div class="modal-content overflow-hidden">
       <div class="modal-header bg-primary text-bg-dark">
         <h2 class="modal-title h3" id="ficheOrientationModal">
-          <i class="ri-xl ri-treasure-map-line align-text-top me-2"></i>
-          Fiche d'orientation
+          <i class="ri-xl ri-printer-line align-text-top me-2"></i>
+          Imprimer la fiche
         </h2>
         <button type="button" class="btn-close btn-close-white opacity-100 mb-0" aria-label="Close" (click)="close()"></button>
       </div>
@@ -78,6 +78,10 @@
             </form>
           </div>
           <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-secondary me-3" (click)="print.emit(); close()">
+              <i class="ri-skip-forward-line align-bottom"></i>
+              Passer cette étape
+            </button>
             <button type="submit" form="orientationSheetForm" class="btn btn-primary">
               Suivant
               <i class="ri-arrow-right-s-line align-bottom"></i>
@@ -161,7 +165,7 @@
             </button>
             <button type="button" class="btn btn-primary" (click)="print.emit(orientationSheetForm.getRawValue())">
               <i class="ri-printer-line align-bottom me-1"></i>
-              Imprimer fiche d'orientation
+              Imprimer la fiche
             </button>
           </div>
         </div>
@@ -169,7 +173,4 @@
     </div>
   </div>
 </div>
-<div
-  *ngIf="activateOrientationSheetModal$ | async"
-  class="modal-backdrop fade"
-  [class.show]="animateOrientationSheetModal$ | async"></div>
+<div *ngIf="activateModal$ | async" class="modal-backdrop fade" [class.show]="animate$ | async"></div>

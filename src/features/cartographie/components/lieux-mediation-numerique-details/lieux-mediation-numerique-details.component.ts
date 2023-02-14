@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
-import { OrientationSheetForm } from '../../forms';
+import { OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { FilterPresentation } from '../../../core';
 
 @Component({
@@ -13,4 +13,5 @@ export class LieuxMediationNumeriqueDetailsComponent {
   @Input() public filters?: FilterPresentation;
 
   @Output() public print: EventEmitter<OrientationSheetForm> = new EventEmitter<OrientationSheetForm>();
+  @Output() public sendEmailTo: EventEmitter<SendLieuByEmail> = new EventEmitter<SendLieuByEmail>();
 }

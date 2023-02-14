@@ -2,6 +2,7 @@ import { Observable, of, Subject, tap } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
+import { map } from 'rxjs/operators';
 import { BRAND_TOKEN, BrandConfiguration } from '../../../../root';
 import { FilterPresentation, toFilterFormPresentationFromQuery, toLocalisationFromFilterFormPresentation } from '../../../core';
 import {
@@ -9,8 +10,8 @@ import {
   LieuxMediationNumeriqueDetailsPresenter,
   MarkersPresenter
 } from '../../presenters';
-import { OrientationSheetForm } from '../../forms';
-import { map } from 'rxjs/operators';
+import { OrientationSheetForm, SendLieuByEmail } from '../../models';
+import { emailMessage } from './lieux-mediation-numerique-details.presentation';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,12 +43,18 @@ export class LieuxMediationNumeriqueDetailsPage {
     private readonly _route: ActivatedRoute
   ) {}
 
-  public printDetails(orientationSheetValues?: OrientationSheetForm) {
+  public onPrint(orientationSheetValues?: OrientationSheetForm) {
     this._orientationSheetForm$.next(orientationSheetValues);
     setTimeout(() => {
       window.print();
       this._orientationSheetForm$.next(void 0);
     });
+  }
+
+  public onSendEmailTo(sendLieuByEmail: SendLieuByEmail) {
+    document.location.href = `mailto:${sendLieuByEmail.email}?subject=[Médiation numérique] Fiche structure - ${
+      sendLieuByEmail.lieu.nom
+    }&body=${emailMessage(sendLieuByEmail.lieu, location.href)}`;
   }
 
   private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) {
