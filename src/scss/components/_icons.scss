@@ -254,10 +254,14 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\eeb2';
 }
 
-.ri-treasure-map-line::before {
-  content: '\f22b';
-}
-
 .ri-list-check::before {
   content: '\eeba';
+}
+
+.ri-mail-send-line::before {
+  content: '\eefc';
+}
+
+.ri-skip-forward-line::before {
+  content: '\f144';
 }
