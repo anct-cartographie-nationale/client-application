@@ -6,6 +6,7 @@ $warning: #ffc107;
 $danger: #dc3545;
 $light: #f4f4f4;
 $muted: #999;
+$muted-dark: #888;
 $dark: #161616;
 $black: #000 !default;
 $transparent: rgba(117 190 218 / 50%);
@@ -20,6 +21,7 @@ $theme-colors: (
   'danger': $danger,
   'light': $light,
   'muted': $muted,
+  'muted-dark': $muted-dark,
   'dark': $dark
 ) !default;
 $spacer: 1rem !default;

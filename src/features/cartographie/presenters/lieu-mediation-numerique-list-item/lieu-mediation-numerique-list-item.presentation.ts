@@ -22,6 +22,7 @@ export type LieuMediationNumeriqueListItemPresentation = {
   date_maj: Date;
   courriel?: string;
   telephone?: string;
+  site_web?: string;
   latitude: number;
   longitude: number;
   status?: OpeningState;

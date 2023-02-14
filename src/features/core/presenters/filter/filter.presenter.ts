@@ -16,6 +16,7 @@ export type FilterOperator = (
 
 export type FilterPresentation = {
   service?: Service;
+  address?: string;
   distance?: number;
   accessibilite?: boolean;
   conditions_acces?: ConditionAcces[];

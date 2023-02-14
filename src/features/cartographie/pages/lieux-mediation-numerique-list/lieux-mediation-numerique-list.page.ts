@@ -121,6 +121,8 @@ export class LieuxMediationNumeriqueListPage {
       this.markersPresenter.boundingBox$
     );
 
+  public filters$: Observable<FilterPresentation> = this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery));
+
   public constructor(
     @Inject(FEATURES_TOKEN)
     public readonly features: FeaturesConfiguration,
