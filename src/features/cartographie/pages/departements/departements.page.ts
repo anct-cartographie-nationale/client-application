@@ -1,22 +1,20 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { combineLatest, Observable, of, tap } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { combineLatest, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 import {
   byCollectiviteTerritorialeNom,
   DepartementPresentation,
   LieuxMediationNumeriquePresenter,
-  regions,
-  RegionPresentation,
   regionFromNom,
   LieuMediationNumeriquePresentation,
   toLocalisationFromFilterFormPresentation,
   toFilterFormPresentationFromQuery
 } from '../../../core';
-import { map } from 'rxjs/operators';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MarkersPresenter } from '../../presenters';
 import { CartographieLayout } from '../../layouts';
-import { HttpParams } from '@angular/common/http';
-import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
 
 const departementsFilteredByRegion = (departements: DepartementPresentation[], departementCodes: string[]) =>
   departements.filter(

@@ -6,7 +6,8 @@
     [typologie]="lieuMediationNumerique.typologies"
     [date]="lieuMediationNumerique.date_maj"
     [status]="lieuMediationNumerique.status"
-    [source]="lieuMediationNumerique.source"></app-informations-generales>
+    [source]="lieuMediationNumerique.source"
+    (closeDetails)="closeDetails.emit(lieuMediationNumerique)"></app-informations-generales>
   <div class="bg-light position-relative">
     <app-boutons-action
       [siteWeb]="lieuMediationNumerique.contact?.site_web"

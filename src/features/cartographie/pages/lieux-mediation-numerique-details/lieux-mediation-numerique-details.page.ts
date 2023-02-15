@@ -1,10 +1,16 @@
 import { Observable, of, Subject, tap } from 'rxjs';
 import { ChangeDetectionStrategy, Component, HostListener, Inject, Optional } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { MatomoTracker } from 'ngx-matomo';
 import { BRAND_TOKEN, BrandConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
-import { FilterPresentation, toFilterFormPresentationFromQuery, toLocalisationFromFilterFormPresentation } from '../../../core';
+import {
+  FilterPresentation,
+  toDepartement,
+  toFilterFormPresentationFromQuery,
+  toLocalisationFromFilterFormPresentation,
+  toRegion
+} from '../../../core';
 import {
   LieuMediationNumeriqueDetailsPresentation,
   LieuxMediationNumeriqueDetailsPresenter,
@@ -41,15 +47,16 @@ export class LieuxMediationNumeriqueDetailsPage {
     private readonly _lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
     private readonly _markersPresenter: MarkersPresenter,
     private readonly _route: ActivatedRoute,
+    private readonly _router: Router,
     @Optional() private readonly _matomoTracker?: MatomoTracker
   ) {}
 
-  @HostListener('window:keydown.control.p', ['$event']) onCtrlP(event: KeyboardEvent) {
+  @HostListener('window:keydown.control.p', ['$event']) onCtrlP(event: KeyboardEvent): void {
     event.preventDefault();
     this.onPrint();
   }
 
-  public onPrint(orientationSheetValues?: OrientationSheetForm) {
+  public onPrint(orientationSheetValues?: OrientationSheetForm): void {
     this._matomoTracker?.trackEvent(
       "parcours d'orientation",
       'fin',
@@ -62,14 +69,21 @@ export class LieuxMediationNumeriqueDetailsPage {
     });
   }
 
-  public onSendEmailTo(sendLieuByEmail: SendLieuByEmail) {
+  public onSendEmailTo(sendLieuByEmail: SendLieuByEmail): void {
     this._matomoTracker?.trackEvent("parcours d'orientation", 'fin', 'envoi par email');
     document.location.href = `mailto:${sendLieuByEmail.email}?subject=[Médiation numérique] Fiche structure - ${
       sendLieuByEmail.lieu.nom
     }&body=${emailMessage(sendLieuByEmail.lieu, location.href)}`;
   }
 
-  private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) {
+  public onCloseDetails(lieu: LieuMediationNumeriqueDetailsPresentation): void {
+    this._router.navigate([`../../regions/${toRegion(lieu)?.nom}/${toDepartement(lieu)?.nom}`], {
+      relativeTo: this._route,
+      queryParamsHandling: 'preserve'
+    });
+  }
+
+  private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation): void {
     lieuMediationNumerique.localisation &&
       this._markersPresenter.center(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
     this._markersPresenter.select(lieuMediationNumerique.id);

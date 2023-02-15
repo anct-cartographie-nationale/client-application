@@ -6,6 +6,7 @@
   <app-lieux-mediation-numerique-details
     (print)="onPrint($event)"
     (sendEmailTo)="onSendEmailTo($event)"
+    (closeDetails)="onCloseDetails($event)"
     [lieuMediationNumerique]="lieuMediationNumerique"
     [filters]="(filters$ | async) ?? undefined"></app-lieux-mediation-numerique-details>
 </div>

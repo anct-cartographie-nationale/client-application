@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { OpeningState } from '../../../../core';
 
 type sourcePresentation = {
@@ -18,6 +18,8 @@ export class InformationsGeneralesComponent {
   @Input() public date?: Date;
   @Input() public status?: OpeningState;
   @Input() public source?: string = '';
+
+  @Output() public closeDetails: EventEmitter<void> = new EventEmitter<void>();
 
   public sourceRedirectionLink: sourcePresentation[] = [
     {

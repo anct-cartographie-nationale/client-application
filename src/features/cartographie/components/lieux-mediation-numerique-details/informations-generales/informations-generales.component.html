@@ -21,11 +21,11 @@
   </div>
   <div class="d-flex flex-column">
     <div class="flex-grow-1 text-end">
-      <a
+      <button
+        type="button"
         class="btn btn-close btn-close-white opacity-100"
         aria-label="Close"
-        queryParamsHandling="preserve"
-        [routerLink]="['..']"></a>
+        (click)="closeDetails.emit()"></button>
     </div>
   </div>
 </div>

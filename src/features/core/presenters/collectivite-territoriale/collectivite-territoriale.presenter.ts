@@ -36,16 +36,14 @@ const codeDepartementFromCodePostal = (codePostal: string, commune: string) => {
   return convertEdgeCasesToCodeInsee(codePostal).slice(0, 2);
 };
 
-const toCodeDepartement = (lieuDeMediationNumerique: LieuMediationNumeriquePresentation): string =>
-  codeDepartementFromCodePostal(lieuDeMediationNumerique.code_postal, lieuDeMediationNumerique.commune);
+const toCodeDepartement = (lieu: { code_postal: string; commune: string }): string =>
+  codeDepartementFromCodePostal(lieu.code_postal, lieu.commune);
 
-export const toDepartement = (
-  lieuDeMediationNumerique: LieuMediationNumeriquePresentation
-): DepartementPresentation | undefined =>
-  departements.find((departement: DepartementPresentation) => departement.code === toCodeDepartement(lieuDeMediationNumerique));
+export const toDepartement = (lieu: { code_postal: string; commune: string }): DepartementPresentation | undefined =>
+  departements.find((departement: DepartementPresentation) => departement.code === toCodeDepartement(lieu));
 
-export const toRegion = (lieuDeMediationNumerique: LieuMediationNumeriquePresentation): RegionPresentation | undefined =>
-  regions.find((region: RegionPresentation) => region.departements.includes(toCodeDepartement(lieuDeMediationNumerique)));
+export const toRegion = (lieu: { code_postal: string; commune: string }): RegionPresentation | undefined =>
+  regions.find((region: RegionPresentation) => region.departements.includes(toCodeDepartement(lieu)));
 
 export const definedDepartement = (
   collectiviteTerritoriale?: DepartementPresentation

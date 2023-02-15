@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { FilterPresentation } from '../../../core';
@@ -14,4 +15,6 @@ export class LieuxMediationNumeriqueDetailsComponent {
 
   @Output() public print: EventEmitter<OrientationSheetForm> = new EventEmitter<OrientationSheetForm>();
   @Output() public sendEmailTo: EventEmitter<SendLieuByEmail> = new EventEmitter<SendLieuByEmail>();
+  @Output() public closeDetails: EventEmitter<LieuMediationNumeriqueDetailsPresentation> =
+    new EventEmitter<LieuMediationNumeriqueDetailsPresentation>();
 }
