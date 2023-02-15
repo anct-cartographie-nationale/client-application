@@ -1,4 +1,4 @@
-import { LieuMediationNumeriqueDetailsPresentation, ModaliteAccompagnementPresentation } from '../../presenters';
+import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { emailMessage } from './lieux-mediation-numerique-details.presentation';
 import { Contact, Service, Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
@@ -6,6 +6,8 @@ describe('lieux mediation numerique details presentation', (): void => {
   it('should get message with only required text', (): void => {
     const lieu: LieuMediationNumeriqueDetailsPresentation = {
       adresse: '78 rue Lauriston 75016 Paris',
+      code_postal: '51100',
+      commune: 'reims',
       id: '6303493719ed1006e01aa243',
       nom: 'Club Lauriston',
       services: [
@@ -31,6 +33,8 @@ describe('lieux mediation numerique details presentation', (): void => {
       id: '638622e80830e306f21ecc64',
       nom: 'Cité des métiers / Universcience',
       adresse: 'AV FRANKLIN D ROOSEVELT 75008 Paris 8',
+      code_postal: '51100',
+      commune: 'reims',
       services: [
         Service.PrendreEnMainUnSmartphoneOuUneTablette,
         Service.PrendreEnMainUnOrdinateur,

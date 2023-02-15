@@ -1,6 +1,11 @@
 <div class="text-center d-flex flex-column h-100">
   <div class="my-auto px-3">
-    <img *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" class="mb-5" style="max-height: 250px" alt="" />
+    <img
+      *ngIf="brandConfiguration.logo"
+      [src]="brandConfiguration.logo"
+      class="mb-5"
+      style="max-width: 100%; max-height: 250px"
+      alt="" />
     <ng-container *ngIf="((route.queryParamMap | async)?.keys?.length ?? 0) === 0; else: restart">
       <h1 class="h2 fw-bold">
         Bienvenue sur la Cartographie
