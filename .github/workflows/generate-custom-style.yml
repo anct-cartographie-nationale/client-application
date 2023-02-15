@@ -34,11 +34,6 @@ jobs:
           node-version: '16.x'
           cache: 'yarn'
 
-      - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
-
       - name: Main theme color change
         run: |
           cd projects/client-application

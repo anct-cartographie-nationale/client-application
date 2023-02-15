@@ -1,9 +1,9 @@
 import { Observable, of, Subject, tap } from 'rxjs';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Inject, Optional } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { map } from 'rxjs/operators';
-import { BRAND_TOKEN, BrandConfiguration } from '../../../../root';
+import { MatomoTracker } from 'ngx-matomo';
+import { BRAND_TOKEN, BrandConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import { FilterPresentation, toFilterFormPresentationFromQuery, toLocalisationFromFilterFormPresentation } from '../../../core';
 import {
   LieuMediationNumeriqueDetailsPresentation,
@@ -40,10 +40,21 @@ export class LieuxMediationNumeriqueDetailsPage {
     @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration,
     private readonly _lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
     private readonly _markersPresenter: MarkersPresenter,
-    private readonly _route: ActivatedRoute
+    private readonly _route: ActivatedRoute,
+    @Optional() private readonly _matomoTracker?: MatomoTracker
   ) {}
 
+  @HostListener('window:keydown.control.p', ['$event']) onCtrlP(event: KeyboardEvent) {
+    event.preventDefault();
+    this.onPrint();
+  }
+
   public onPrint(orientationSheetValues?: OrientationSheetForm) {
+    this._matomoTracker?.trackEvent(
+      "parcours d'orientation",
+      'fin',
+      `impression fiche ${orientationSheetValues ? "d'orientation" : 'structure'}`
+    );
     this._orientationSheetForm$.next(orientationSheetValues);
     setTimeout(() => {
       window.print();
@@ -52,6 +63,7 @@ export class LieuxMediationNumeriqueDetailsPage {
   }
 
   public onSendEmailTo(sendLieuByEmail: SendLieuByEmail) {
+    this._matomoTracker?.trackEvent("parcours d'orientation", 'fin', 'envoi par email');
     document.location.href = `mailto:${sendLieuByEmail.email}?subject=[Médiation numérique] Fiche structure - ${
       sendLieuByEmail.lieu.nom
     }&body=${emailMessage(sendLieuByEmail.lieu, location.href)}`;

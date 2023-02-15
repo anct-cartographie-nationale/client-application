@@ -143,11 +143,6 @@ jobs:
           node-version: '16.x'
           cache: 'yarn'
 
-      - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
-
       - name: Test
         run: yarn test client-application
 
@@ -171,11 +166,6 @@ jobs:
         with:
           node-version: '16.x'
           cache: 'yarn'
-
-      - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
 
       - name: Set fonts paths
         run: |
@@ -227,11 +217,6 @@ jobs:
           node-version: '16.x'
           cache: 'yarn'
 
-      - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
-
       - name: Build
         run: yarn build mediation-numerique --named-chunks --output-hashing none
 
@@ -265,11 +250,6 @@ jobs:
           node-version: '16.x'
           cache: 'yarn'
 
-      - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
-
       - name: Build
         run: yarn build cartographie --named-chunks --output-hashing none
 
@@ -302,11 +282,6 @@ jobs:
         with:
           node-version: '16.x'
           cache: 'yarn'
-
-      - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
 
       - name: Build
         run: yarn build orientation --named-chunks --output-hashing none

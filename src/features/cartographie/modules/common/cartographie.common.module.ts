@@ -3,7 +3,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { DistanceModule } from '@gouvfr-anct/mediation-numerique/shared';
 import { AdresseModule } from '../../../adresse';
 import { pages } from '../../pages';
 import { CartographieLayout, ListHeaderLayout } from '../../layouts';
@@ -14,6 +13,6 @@ import { pipes } from '../../pipes';
 @NgModule({
   declarations: [CartographieLayout, ListHeaderLayout, ...pages, ...components, ...directives, ...pipes],
   exports: [CartographieLayout, ...pages, ...components, ...directives],
-  imports: [CommonModule, HttpClientModule, RouterModule, ReactiveFormsModule, DistanceModule, AdresseModule]
+  imports: [CommonModule, HttpClientModule, RouterModule, ReactiveFormsModule, AdresseModule]
 })
 export class CartographieCommonModule {}

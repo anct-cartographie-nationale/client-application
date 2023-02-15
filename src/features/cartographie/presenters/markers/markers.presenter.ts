@@ -1,13 +1,13 @@
 import { Inject } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { NO_LOCALISATION } from '../../../core';
 import {
   INITIAL_POSITION_TOKEN,
   InitialPositionConfiguration,
   ZOOM_LEVEL_TOKEN,
   ZoomLevelConfiguration
-} from '@gouvfr-anct/mediation-numerique';
-import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { NO_LOCALISATION } from '../../../core';
+} from '../../../../root';
 
 export interface CenterView {
   coordinates: Localisation;
