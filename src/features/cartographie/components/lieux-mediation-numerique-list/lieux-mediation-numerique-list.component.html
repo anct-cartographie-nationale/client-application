@@ -41,7 +41,11 @@
       </button>
     </div>
     <div class="col-auto ms-auto my-auto">
-      <span class="d-flex align-items-center text-white me-auto">{{ lieuxMediationNumerique.length }} Structures</span>
+      <span class="d-flex align-items-center text-white me-auto" [ngPlural]="lieuxMediationNumerique.length">
+        <ng-template ngPluralCase="=0">Aucune structure trouvée</ng-template>
+        <ng-template ngPluralCase="=1">1 Structure trouvée</ng-template>
+        <ng-template ngPluralCase="other">{{ lieuxMediationNumerique.length }} Structures trouvées</ng-template>
+      </span>
     </div>
   </div>
 </div>
