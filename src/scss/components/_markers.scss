@@ -3,12 +3,6 @@
   --red-marianne-main-472: #e1000f;
 }
 
-.departement-marker,
-.region-marker,
-.user-marker {
-  fill: $primary;
-}
-
 .marker-default,
 .marker-cnfs {
   .marker-body {
@@ -59,16 +53,6 @@
   }
 }
 
-.departement-marker,
-.region-marker {
-  .marker-shadow {
-    opacity: 0;
-    transition: 0.35s;
-    fill: #fff;
-    filter: drop-shadow(1px 3px 3px rgb(0 0 0 / 40%));
-  }
-}
-
 .marker-focus,
 .marker-hover {
   z-index: $zindex-sticky !important;
@@ -81,13 +65,6 @@
 
     .marker-body {
       transform: translateY(0);
-    }
-  }
-
-  .departement-marker,
-  .region-marker {
-    .marker-shadow {
-      opacity: 1;
     }
   }
 }
@@ -107,5 +84,36 @@
 .marker-status-unknown {
   .marker-opening-status {
     display: none;
+  }
+}
+
+.marker-group {
+  .marker-group-bg,
+  .marker-group-fg {
+    @include marker-dimensions($marker-group-size);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: 500ms cubic-bezier(0.32, 2.4, 0.55, 0.56);
+  }
+
+  .shadow-sm {
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+}
+
+.marker-hover {
+  .marker-group .shadow-sm {
+    opacity: 1;
+  }
+
+  .marker-group-bg {
+    @include marker-dimensions($marker-group-size-bg-hover);
+  }
+
+  .marker-group-fg {
+    @include marker-dimensions($marker-group-size-fg-hover);
   }
 }

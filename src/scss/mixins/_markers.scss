@@ -1,0 +1,6 @@
+@mixin marker-dimensions($size) {
+  width: $size;
+  height: $size;
+  margin-left: -$size / 2;
+  margin-top: -$size / 2;
+}
