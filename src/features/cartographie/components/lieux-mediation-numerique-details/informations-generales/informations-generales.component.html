@@ -6,7 +6,7 @@
       {{ nom }}
     </h1>
     <div class="fst-italic d-flex align-items-center">
-      <small *ngIf="date" class="mt-1">Mise à jour le {{ date | date: 'dd/MM/y' }}</small>
+      <small *ngIf="date" class="mt-1">Mise à jour le {{ date | date : 'dd/MM/y' }}</small>
       <div *ngFor="let sourceRedirection of sourceRedirectionLink; index as i">
         <div *ngIf="sourceRedirection.nom === source">
           <div class="ms-2 opacity-75">
@@ -21,11 +21,11 @@
   </div>
   <div class="d-flex flex-column">
     <div class="flex-grow-1 text-end">
-      <a
+      <button
+        type="button"
         class="btn btn-close btn-close-white opacity-100"
         aria-label="Close"
-        queryParamsHandling="preserve"
-        [routerLink]="['..']"></a>
+        (click)="closeDetails.emit()"></button>
     </div>
   </div>
 </div>

@@ -4,7 +4,9 @@
     [filters]="(filters$ | async) ?? undefined"
     [orientationSheetForm]="(orientationSheetForm$ | async) ?? undefined"></app-lieux-mediation-numerique-details-print>
   <app-lieux-mediation-numerique-details
-    (print)="printDetails($event)"
+    (print)="onPrint($event)"
+    (sendEmailTo)="onSendEmailTo($event)"
+    (closeDetails)="onCloseDetails($event)"
     [lieuMediationNumerique]="lieuMediationNumerique"
     [filters]="(filters$ | async) ?? undefined"></app-lieux-mediation-numerique-details>
 </div>

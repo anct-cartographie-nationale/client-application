@@ -1,5 +1,4 @@
 import { InjectionToken } from '@angular/core';
-import { environment } from '../../environments/environment';
 
 export type DataConfiguration = {
   lieuxDeMediationNumerique: string;

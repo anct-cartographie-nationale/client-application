@@ -81,6 +81,8 @@ describe('lieux médiation numérique details presenter', (): void => {
       id: '6001a35f16b08100062e415f',
       nom: 'Anonymal',
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
+      code_postal: '51100',
+      commune: 'reims',
       horaires: {
         Lundi: '09h00 - 12h00\n14h00 - 18h30',
         Mardi: '09h00 - 12h00\n14h00 - 18h30',
@@ -157,6 +159,8 @@ describe('lieux médiation numérique details presenter', (): void => {
       id: '6001a35f16b08100062e415f',
       nom: 'Anonymal',
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
+      code_postal: '51100',
+      commune: 'reims',
       services: ['Prendre en main un ordinateur', 'Accéder à du matériel']
     } as LieuMediationNumeriqueDetailsPresentation);
   });
@@ -195,6 +199,8 @@ describe('lieux médiation numérique details presenter', (): void => {
       id: '6001a35f16b08100062e415f',
       nom: 'Anonymal',
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
+      code_postal: '51100',
+      commune: 'reims',
       services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
       horaires: {
         Lundi: '09h00 - 12h00\n14h00 - 18h30',
@@ -246,6 +252,8 @@ describe('lieux médiation numérique details presenter', (): void => {
       id: '6001a35f16b08100062e415f',
       nom: 'Anonymal',
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
+      code_postal: '51100',
+      commune: 'reims',
       services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
       localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 }),
       distance: 0

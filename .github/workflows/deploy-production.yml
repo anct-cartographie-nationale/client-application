@@ -28,11 +28,6 @@ jobs:
           node-version: '16.x'
           cache: 'yarn'
 
-      - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
-
       - name: Set mednum custom style
         run: |
           cp -r projects/client-application/src/scss.mednum/* projects/client-application/src/scss

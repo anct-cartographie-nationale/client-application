@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '@gouvfr-anct/mediation-numerique';
 import { combineLatest, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
+import { FEATURES_TOKEN, FeaturesConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import {
   departementFromNom,
   DepartementPresentation,

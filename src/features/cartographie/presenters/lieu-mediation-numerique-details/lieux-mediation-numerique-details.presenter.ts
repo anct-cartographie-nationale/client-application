@@ -133,6 +133,8 @@ export class LieuxMediationNumeriqueDetailsPresenter {
             lieu.adresse.code_postal,
             `${lieu.adresse.commune.charAt(0).toUpperCase()}${lieu.adresse.commune.substring(1).toLowerCase()}`
           ].join(' '),
+          commune: lieu.adresse.commune,
+          code_postal: lieu.adresse.code_postal,
           services: lieu.services,
           ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
           ...ifAny('status', openingState(date)(lieu.horaires)),

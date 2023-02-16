@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core
 import { BRAND_TOKEN, BrandConfiguration } from '../../../../root';
 import { FilterPresentation } from '../../../core';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
-import { OrientationSheetForm } from '../../forms';
+import { OrientationSheetForm } from '../../models';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

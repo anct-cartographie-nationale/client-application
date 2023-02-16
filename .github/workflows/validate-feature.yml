@@ -155,9 +155,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
+        run: yarn
 
       - name: Test
         run: yarn test client-application
@@ -184,9 +182,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
+        run: yarn
 
       - name: Build
         run: yarn build client-application
@@ -219,9 +215,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
+        run: yarn
 
       - name: Build
         run: yarn build mediation-numerique
@@ -254,9 +248,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
+        run: yarn
 
       - name: Build
         run: yarn build cartographie
@@ -289,9 +281,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: |
-          yarn
-          yarn add @gouvfr-anct/mediation-numerique
+        run: yarn
 
       - name: Build
         run: yarn build orientation

@@ -6,13 +6,14 @@
     [typologie]="lieuMediationNumerique.typologies"
     [date]="lieuMediationNumerique.date_maj"
     [status]="lieuMediationNumerique.status"
-    [source]="lieuMediationNumerique.source"></app-informations-generales>
+    [source]="lieuMediationNumerique.source"
+    (closeDetails)="closeDetails.emit(lieuMediationNumerique)"></app-informations-generales>
   <div class="bg-light position-relative">
     <app-boutons-action
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
       [priseRdv]="lieuMediationNumerique.prise_rdv"
-      (print)="print.emit()"
-      (orientationSheet)="orientationSheetModal.toggleOrientationSheetModal()"></app-boutons-action>
+      (print)="printSheetModal.toggle()"
+      (sendByEmail)="sendByEmailModal.toggle()"></app-boutons-action>
   </div>
   <ul class="list-group list-group-lg list-group-flush list-group-flush-at-edge flex-grow-1 mx-4">
     <li class="list-group-item">
@@ -68,7 +69,7 @@
 </div>
 <app-orientation-sheet-modal
   class="d-print-none"
-  #orientationSheetModal
+  #printSheetModal
   [id]="lieuMediationNumerique.id"
   [nom]="lieuMediationNumerique.nom"
   [labels_nationaux]="lieuMediationNumerique.labels_nationaux"
@@ -79,3 +80,7 @@
   [localisation]="lieuMediationNumerique.localisation"
   [filters]="filters"
   (print)="print.emit($event)"></app-orientation-sheet-modal>
+<app-send-by-email-modal
+  #sendByEmailModal
+  class="d-print-none"
+  (sendEmailTo)="sendEmailTo.emit({ email: $event, lieu: lieuMediationNumerique })"></app-send-by-email-modal>

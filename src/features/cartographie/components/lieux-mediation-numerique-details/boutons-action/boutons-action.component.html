@@ -1,8 +1,4 @@
 <div class="d-flex justify-content-center">
-  <button type="button" class="btn btn-tile" (click)="orientationSheet.emit()">
-    <i class="ri-treasure-map-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
-    <b class="mt-2">Fiche d'orientation</b>
-  </button>
   <a
     type="button"
     class="btn btn-tile"
@@ -30,5 +26,9 @@
   <button type="button" class="btn btn-tile" (click)="print.emit()">
     <i class="ri-printer-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
     <b class="mt-2">Imprimer</b>
+  </button>
+  <button type="button" class="btn btn-tile" (click)="sendByEmail.emit()">
+    <i class="ri-mail-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"></i>
+    <b class="mt-2">Envoyer par mail</b>
   </button>
 </div>

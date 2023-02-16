@@ -1,8 +1,8 @@
-import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '@gouvfr-anct/mediation-numerique';
 import { LieuxMediationNumeriquePresenter, LieuxMediationNumeriqueRepository } from '../../../core';
 import { AddressPresenter, AddressRepository } from '../../../adresse';
 import { LieuxMediationNumeriqueDetailsPresenter, MarkersPresenter } from '../../presenters';
 import { MARKERS, MARKERS_TOKEN } from '../../configuration';
+import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '../../../../root';
 
 export const cartographieLayoutProviders = [
   {
