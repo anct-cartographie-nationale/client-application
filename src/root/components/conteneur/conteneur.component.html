@@ -12,7 +12,7 @@
         </a>
         <button
           class="navbar-toggler"
-          [class.collapsed]="!(expanded$ | async)"
+          [class.collapsed]="(expanded$ | async) === false"
           type="button"
           aria-controls="navbar"
           [attr.aria-expanded]="expanded$ | async"
@@ -21,15 +21,11 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div
-          style="
-             {
-              height: (height$ | async) + px;
-            }
-          "
+          style=""
           class="navbar-collapse"
-          [class.collapse]="!(collapsing$ | async)"
+          [class.collapse]="(collapsing$ | async) === false"
           [class.collapsing]="collapsing$ | async"
-          [class.show]="!(collapsing$ | async) && (expanded$ | async)"
+          [class.show]="(collapsing$ | async) === false && (expanded$ | async)"
           id="navbar">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
