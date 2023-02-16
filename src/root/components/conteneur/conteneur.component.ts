@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { BRAND_CONFIGURATION, BRAND_TOKEN, BrandConfiguration } from '../../configuration';
 import { Observable, Subject } from 'rxjs';
 
+const ANIMATION_DURATION = 300 as const;
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-conteneur',
@@ -17,11 +19,11 @@ export class ConteneurComponent {
     BRAND_CONFIGURATION.name = name;
   }
 
-  private _height$: Subject<number> = new Subject<number>();
-  public height$: Observable<number> = this._height$.asObservable();
+  private _showing$: Subject<boolean> = new Subject<boolean>();
+  public showing$: Observable<boolean> = this._showing$.asObservable();
 
-  private _collapsing$: Subject<boolean> = new Subject<boolean>();
-  public collapsing$: Observable<boolean> = this._collapsing$.asObservable();
+  private _hiding$: Subject<boolean> = new Subject<boolean>();
+  public hiding$: Observable<boolean> = this._hiding$.asObservable();
 
   private _isExpanded: boolean = false;
 
@@ -33,13 +35,14 @@ export class ConteneurComponent {
     public readonly router: Router
   ) {}
 
-  public toggle() {
+  public toggle(): void {
+    this._isExpanded ? this._hiding$.next(true) : this._showing$.next(true);
     this._isExpanded = !this._isExpanded;
     this._expanded$.next(this._isExpanded);
-    this._height$.next(this._isExpanded ? 196 : 0);
-    this._collapsing$.next(true);
+
     setTimeout(() => {
-      this._collapsing$.next(false);
-    }, 0);
+      this._showing$.next(false);
+      this._hiding$.next(false);
+    }, ANIMATION_DURATION);
   }
 }
