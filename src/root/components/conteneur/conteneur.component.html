@@ -12,15 +12,21 @@
         </a>
         <button
           class="navbar-toggler"
+          [class.collapsed]="(expanded$ | async) === false"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-controls="navbar"
+          [attr.aria-expanded]="expanded$ | async"
+          aria-label="Toggle navigation"
+          (click)="toggle()">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          style=""
+          class="navbar-collapse"
+          [class.collapse]="(collapsing$ | async) === false"
+          [class.collapsing]="collapsing$ | async"
+          [class.show]="(collapsing$ | async) === false && (expanded$ | async)"
+          id="navbar">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a
