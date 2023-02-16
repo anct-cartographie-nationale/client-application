@@ -1,6 +1,6 @@
-import { Observable, of, Subject, tap } from 'rxjs';
 import { ChangeDetectionStrategy, Component, HostListener, Inject, Optional } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of, Subject, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatomoTracker } from 'ngx-matomo';
 import { BRAND_TOKEN, BrandConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
@@ -40,6 +40,8 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   public filters$: Observable<FilterPresentation> = this._route.queryParams.pipe(map(toFilterFormPresentationFromQuery));
 
+  private readonly _hasDepartementFilter: boolean = true;
+
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
@@ -49,7 +51,10 @@ export class LieuxMediationNumeriqueDetailsPage {
     private readonly _route: ActivatedRoute,
     private readonly _router: Router,
     @Optional() private readonly _matomoTracker?: MatomoTracker
-  ) {}
+  ) {
+    this._hasDepartementFilter =
+      this._router.getCurrentNavigation()?.previousNavigation?.finalUrl?.toString().includes('/regions/') ?? true;
+  }
 
   @HostListener('window:keydown.control.p', ['$event']) onCtrlP(event: KeyboardEvent): void {
     event.preventDefault();
@@ -77,10 +82,13 @@ export class LieuxMediationNumeriqueDetailsPage {
   }
 
   public onCloseDetails(lieu: LieuMediationNumeriqueDetailsPresentation): void {
-    this._router.navigate([`../../regions/${toRegion(lieu)?.nom}/${toDepartement(lieu)?.nom}`], {
-      relativeTo: this._route,
-      queryParamsHandling: 'preserve'
-    });
+    this._router.navigate(
+      [this._hasDepartementFilter ? `../../regions/${toRegion(lieu)?.nom}/${toDepartement(lieu)?.nom}` : '..'],
+      {
+        relativeTo: this._route,
+        queryParamsHandling: 'preserve'
+      }
+    );
   }
 
   private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation): void {
