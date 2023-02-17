@@ -20,8 +20,75 @@ import {
 } from '../../../core';
 import {
   LieuMediationNumeriqueDetailsPresentation,
-  ModaliteAccompagnementPresentation
+  ModaliteAccompagnementPresentation,
+  SourcePresentation
 } from './lieu-mediation-numerique-details.presentation';
+
+const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
+  [
+    'conseiller-numerique',
+    {
+      label: 'Conseillers numérique France Services',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique-1/'
+    }
+  ],
+  [
+    'dora',
+    {
+      label: 'Dora',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numeriques-en-france-disponibles-dans-le-referentiel-de-loffre-dinsertion-publie-par-data-inclusion/'
+    }
+  ],
+  [
+    'france-tiers-lieux',
+    {
+      label: 'France Tiers-Lieux',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-tiers-lieux/'
+    }
+  ],
+  [
+    'hinaura',
+    {
+      label: 'Hinaura',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-auvergne-rhone-alpes-fournis-par-hinaura/'
+    }
+  ],
+  [
+    'france-services',
+    {
+      label: 'France Services',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services'
+    }
+  ],
+  [
+    'angers',
+    {
+      label: "Ville d'Angers",
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-angers/'
+    }
+  ],
+  [
+    'assembleurs',
+    {
+      label: 'Les Assembleurs',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-hauts-de-france-fournis-par-les-assembleurs/'
+    }
+  ],
+  [
+    'maine-et-loire',
+    {
+      label: 'Département du Maine-et-Loire',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-departement-du-maine-et-loire/'
+    }
+  ],
+  [
+    'francilin',
+    {
+      label: "Francil'IN",
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services/'
+    }
+  ]
+]);
 
 const conditionsAccesMap: Map<ConditionAcces, string> = new Map<ConditionAcces, string>([
   [ConditionAcces.Gratuit, 'Gratuit'],
@@ -152,7 +219,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           ...ifAny('distance', getDistance(lieu, localisation)),
           ...ifAny('prise_rdv', lieu.prise_rdv),
           ...ifAny('aidants', lieu.aidants),
-          ...ifAny('source', lieu.source)
+          ...ifAny('source', availableSourcesMap.get(lieu.source ?? '') ?? undefined)
         })
       )
     );
