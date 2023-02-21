@@ -24,6 +24,10 @@ import {
   SourcePresentation
 } from './lieu-mediation-numerique-details.presentation';
 
+//
+// cd72
+// odspep
+
 const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
   [
     'conseiller-numerique',
@@ -75,7 +79,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'maine-et-loire',
+    'cd49',
     {
       label: 'Département du Maine-et-Loire',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-departement-du-maine-et-loire/'
@@ -86,6 +90,27 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     {
       label: "Francil'IN",
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services/'
+    }
+  ],
+  [
+    'cd35',
+    {
+      label: "Département d'Ille-et-Vilaine",
+      link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/'
+    }
+  ],
+  [
+    'cd35',
+    {
+      label: 'Département de la Sarthe',
+      link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/'
+    }
+  ],
+  [
+    'odspep',
+    {
+      label: 'ODSPEP',
+      link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/'
     }
   ]
 ]);
