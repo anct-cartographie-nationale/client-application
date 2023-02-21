@@ -7,7 +7,6 @@ import {
   PublicAccueilli,
   Service
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { openingState, OpeningState } from '../horaires';
 import { ifAny } from '../../utilities';
 import { geographicDistance } from '../distance';
 import { NO_LOCALISATION } from '../../models';

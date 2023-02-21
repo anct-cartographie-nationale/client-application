@@ -1,5 +1,5 @@
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { DepartementPresentation, LieuMediationNumeriquePresentation, RegionPresentation } from '../../../core';
+import { DepartementPresentation, LieuMediationNumeriquePresentation, RegionPresentation, toFrance } from '../../../core';
 import {
   DEPARTEMENT_ZOOM_LEVEL,
   inDepartementZoomLevel,
@@ -74,6 +74,26 @@ describe('collectivite territoriale presenter', (): void => {
     const codeRegion: string | undefined = toRegion(lieuDeMediationNumerique)?.code;
 
     expect(codeRegion).toStrictEqual('84');
+  });
+
+  it('should get world area from code postal in indian ocean', (): void => {
+    const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
+      code_postal: '97413'
+    } as LieuMediationNumeriquePresentation;
+
+    const codeRegion: string | undefined = toFrance(lieuDeMediationNumerique)?.code;
+
+    expect(codeRegion).toStrictEqual('ocean-indien');
+  });
+
+  it('should get world area from code postal in atlantic ocean', (): void => {
+    const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
+      code_postal: '97116'
+    } as LieuMediationNumeriquePresentation;
+
+    const codeRegion: string | undefined = toFrance(lieuDeMediationNumerique)?.code;
+
+    expect(codeRegion).toStrictEqual('ocean-atlantique');
   });
 
   it('should get region from departement', (): void => {

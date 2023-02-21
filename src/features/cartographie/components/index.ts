@@ -24,6 +24,7 @@ import {
 import { LieuMediationNumeriqueMarkersComponent } from './markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
 import { DepartementMarkersComponent } from './markers/departement-markers/departement-markers.component';
 import { RegionMarkersComponent } from './markers/region-markers/region-markers.component';
+import { FranceMarkersComponent } from './markers/france-markers/france-markers.component';
 import { NoLieuxFoundComponent } from './no-lieux-found/no-lieux-found.component';
 import { UserLocationComponent } from './user-location/user-location.component';
 import {
@@ -80,6 +81,7 @@ export const components = [
   LieuMediationNumeriqueMarkersComponent,
   DepartementMarkersComponent,
   RegionMarkersComponent,
+  FranceMarkersComponent,
   NoLieuxFoundComponent,
   UserLocationComponent
 ];

@@ -47,8 +47,12 @@
         [latitude]="userLocalisation.latitude"
         [longitude]="userLocalisation.longitude"
         markerFactoryKey="user"></app-leaflet-map-marker>
+      <app-france-markers
+        *ngIf="currentZoomLevel <= 4"
+        [zones]="(france$ | async) ?? []"
+        (showLieux)="onShowLieuxInZone($event)"></app-france-markers>
       <app-region-markers
-        *ngIf="currentZoomLevel <= 7"
+        *ngIf="currentZoomLevel <= 7 && currentZoomLevel > 4"
         [regions]="(regions$ | async) ?? []"
         [hoverId]="(markersPresenter.hovered$ | async) ?? ''"
         (enableHover)="hover($event)"

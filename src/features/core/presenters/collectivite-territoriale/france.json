@@ -1,0 +1,29 @@
+[
+  {
+    "code": "metropole",
+    "regions": ["84", "32", "93", "44", "76", "28", "75", "24", "27", "53", "94", "52", "11"],
+    "zoom": 6,
+    "localisation": {
+      "longitude": 2.4326,
+      "latitude": 46.7684
+    }
+  },
+  {
+    "code": "ocean-atlantique",
+    "regions": ["00", "01", "02", "03"],
+    "zoom": 6,
+    "localisation": {
+      "longitude": -58.389223,
+      "latitude": 11.90753
+    }
+  },
+  {
+    "code": "ocean-indien",
+    "regions": ["04", "06"],
+    "zoom": 6,
+    "localisation": {
+      "longitude": 49.695159,
+      "latitude": -15.679019
+    }
+  }
+]

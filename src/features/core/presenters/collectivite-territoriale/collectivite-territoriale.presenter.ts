@@ -1,5 +1,5 @@
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { departements, geographicDistance, LieuMediationNumeriquePresentation, regions } from '../../../core';
+import { departements, geographicDistance, FrancePresentation, regions, france } from '../../../core';
 import codePostalNotMatchingCodeDepartement from './code-postal-not-matching-code-departement.json';
 import { DepartementPresentation } from './presentations/departement.presentation';
 import { RegionPresentation } from './presentations/region.presentation';
@@ -45,11 +45,10 @@ export const toDepartement = (lieu: { code_postal: string; commune: string }): D
 export const toRegion = (lieu: { code_postal: string; commune: string }): RegionPresentation | undefined =>
   regions.find((region: RegionPresentation) => region.departements.includes(toCodeDepartement(lieu)));
 
-export const definedDepartement = (
-  collectiviteTerritoriale?: DepartementPresentation
-): collectiviteTerritoriale is DepartementPresentation => collectiviteTerritoriale != undefined;
+export const toFrance = (lieu: { code_postal: string; commune: string }): FrancePresentation | undefined =>
+  france.find((zone: FrancePresentation) => zone.regions.includes(toRegion(lieu)?.code ?? ''));
 
-export const definedRegion = (collectiviteTerritoriale?: RegionPresentation): collectiviteTerritoriale is RegionPresentation =>
+export const onlyDefined = <T>(collectiviteTerritoriale?: T): collectiviteTerritoriale is T =>
   collectiviteTerritoriale != undefined;
 
 const matchingCollectiviteTerritorialeCode =

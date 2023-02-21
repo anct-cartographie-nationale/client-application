@@ -18,7 +18,8 @@ import {
   toLocalisationFromFilterFormPresentation,
   nearestRegion,
   ifAny,
-  openingState
+  openingState,
+  FrancePresentation
 } from '../../../core';
 import {
   LIEUX_ZOOM_LEVEL,
@@ -81,7 +82,7 @@ export class CartographieLayout {
       ),
       withLatestFrom(this.markersPresenter.currentZoomLevel$),
       map(toLieuxWithOpeningState(new Date())),
-      delay(600),
+      delay(0),
       tap((lieux: LieuMediationNumeriquePresentation[]) => {
         !this._initialZoom && this.setInitialZoom(lieux);
         this._loadingState$.next(false);
@@ -92,14 +93,21 @@ export class CartographieLayout {
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
-      delay(600),
+      delay(0),
       tap(() => this._loadingState$.next(false))
     );
 
   public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
-      delay(600),
+      delay(0),
+      tap(() => this._loadingState$.next(false))
+    );
+
+  public france$: Observable<FrancePresentation[]> = this._lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueFrance$(...this._lieuxMediationNumeriqueListPresenterArgs)
+    .pipe(
+      delay(0),
       tap(() => this._loadingState$.next(false))
     );
 
@@ -163,6 +171,10 @@ export class CartographieLayout {
   public onShowLieuxInRegion(region: RegionPresentation): void {
     this.markersPresenter.center(region.localisation, region.zoom);
     this.router.navigate(['regions', region.nom], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
+  }
+
+  public onShowLieuxInZone(zone: FrancePresentation): void {
+    this.markersPresenter.center(zone.localisation, zone.zoom);
   }
 
   public toQueryString(fromObject: {} = {}): string {
