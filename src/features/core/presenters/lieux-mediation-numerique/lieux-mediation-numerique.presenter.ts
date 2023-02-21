@@ -4,11 +4,12 @@ import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import {
   byLieuxCount,
   countLieuxInCollectiviteTerritoriale,
-  definedDepartement,
-  definedRegion,
+  onlyDefined,
   DepartementPresentation,
+  FrancePresentation,
   RegionPresentation,
   toDepartement,
+  toFrance,
   toRegion
 } from '../collectivite-territoriale';
 import { FilterPresentation } from '../filter';
@@ -33,7 +34,7 @@ const toLieuxMediationNumeriqueByDepartement =
   ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): DepartementPresentation[] =>
     filteredLieuxMediationNumerique(...filterParameters, date)
       .map(toDepartement)
-      .filter(definedDepartement)
+      .filter(onlyDefined)
       .reduce(countLieuxInCollectiviteTerritoriale as () => DepartementPresentation[], [])
       .sort(byLieuxCount);
 
@@ -42,9 +43,17 @@ const toLieuxMediationNumeriqueByRegion =
   ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): RegionPresentation[] =>
     filteredLieuxMediationNumerique(...filterParameters, date)
       .map(toRegion)
-      .filter(definedRegion)
+      .filter(onlyDefined)
       .reduce(countLieuxInCollectiviteTerritoriale as () => RegionPresentation[], [])
       .sort(byLieuxCount);
+
+const toLieuxMediationNumeriqueFrance =
+  (date: Date) =>
+  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): FrancePresentation[] =>
+    filteredLieuxMediationNumerique(...filterParameters, date)
+      .map(toFrance)
+      .filter(onlyDefined)
+      .reduce(countLieuxInCollectiviteTerritoriale as () => FrancePresentation[], []);
 
 export class LieuxMediationNumeriquePresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
@@ -77,6 +86,16 @@ export class LieuxMediationNumeriquePresenter {
   ): Observable<RegionPresentation[]> {
     return combineLatest([this.lieuxMediationNumeriqueTotal$, localisation$, filter$]).pipe(
       map(toLieuxMediationNumeriqueByRegion(date))
+    );
+  }
+
+  public lieuxMediationNumeriqueFrance$(
+    localisation$: Observable<Localisation>,
+    filter$: Observable<FilterPresentation> = of({}),
+    date: Date = new Date()
+  ): Observable<FrancePresentation[]> {
+    return combineLatest([this.lieuxMediationNumeriqueTotal$, localisation$, filter$]).pipe(
+      map(toLieuxMediationNumeriqueFrance(date))
     );
   }
 
