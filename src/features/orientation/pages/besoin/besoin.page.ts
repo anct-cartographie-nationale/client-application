@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { OrientationItemPresentation } from '../../presenters';
+import { filterNotFoundEmailBody, OrientationItemPresentation } from '../../presenters';
 import { OrientationLayout } from '../../layouts';
 import demarches from './demarches.json';
 import apprentissageDeBase from './apprentissage-de-base.json';
@@ -20,4 +20,8 @@ export class BesoinPage {
   public manqueDeMaterielOrientationItems: OrientationItemPresentation<string>[] = manqueDeMateriel;
 
   public constructor(public readonly orientationLayout: OrientationLayout) {}
+
+  public onFilterNotFound(): void {
+    document.location.href = `mailto:cartographie.sonum@anct.gouv.fr?subject=[Orientation] Je ne trouve pas mon besoin&body=${filterNotFoundEmailBody()}`;
+  }
 }
