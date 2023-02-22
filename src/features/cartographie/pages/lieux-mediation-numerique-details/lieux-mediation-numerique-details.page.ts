@@ -17,7 +17,7 @@ import {
   MarkersPresenter
 } from '../../presenters';
 import { OrientationSheetForm, SendLieuByEmail } from '../../models';
-import { emailMessage } from './lieux-mediation-numerique-details.presentation';
+import { emailMessage, reportErrorEmailMessage } from './lieux-mediation-numerique-details.presentation';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -79,6 +79,14 @@ export class LieuxMediationNumeriqueDetailsPage {
     document.location.href = `mailto:${sendLieuByEmail.email}?subject=[Médiation numérique] Fiche structure - ${
       sendLieuByEmail.lieu.nom
     }&body=${emailMessage(sendLieuByEmail.lieu, location.href)}`;
+  }
+
+  public onReportAnError(lieu: LieuMediationNumeriqueDetailsPresentation): void {
+    document.location.href = `mailto:${
+      lieu.contact?.courriel
+    }?cc=cartographie.sonum@anct.gouv.fr&subject=Erreur sur la fiche structure : ${lieu.nom}&body=${reportErrorEmailMessage(
+      location.href
+    )}`;
   }
 
   public onCloseDetails(lieu: LieuMediationNumeriqueDetailsPresentation): void {

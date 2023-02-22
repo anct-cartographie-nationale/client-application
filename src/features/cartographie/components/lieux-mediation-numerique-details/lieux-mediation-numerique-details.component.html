@@ -61,10 +61,10 @@
     </li>
   </ul>
   <div *ngIf="lieuMediationNumerique.contact?.courriel" class="bg-light p-4 text-end">
-    <a href="mailto:{{ lieuMediationNumerique.contact?.courriel }}" class="btn btn-secondary btn-sm">
+    <button (click)="reportAnError.emit()" class="btn btn-secondary btn-sm">
       Signaler une erreur
       <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
-    </a>
+    </button>
   </div>
 </div>
 <app-orientation-sheet-modal

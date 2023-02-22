@@ -14,6 +14,7 @@ export class LieuxMediationNumeriqueDetailsComponent {
 
   @Output() public print: EventEmitter<OrientationSheetForm> = new EventEmitter<OrientationSheetForm>();
   @Output() public sendEmailTo: EventEmitter<SendLieuByEmail> = new EventEmitter<SendLieuByEmail>();
+  @Output() public reportAnError: EventEmitter<void> = new EventEmitter<void>();
   @Output() public closeDetails: EventEmitter<LieuMediationNumeriqueDetailsPresentation> =
     new EventEmitter<LieuMediationNumeriqueDetailsPresentation>();
 }
