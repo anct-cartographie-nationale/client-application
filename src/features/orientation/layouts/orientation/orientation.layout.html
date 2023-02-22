@@ -26,7 +26,8 @@
                     class="text-center d-block mb-3"
                     [cartographieFeature]="features.get('cartographie')"
                     [lieuxMediationNumeriqueCount]="(lieuxMediationNumerique$ | async)?.length ?? 0"
-                    [queryParams]="route.queryParams"></app-display-on-map-link>
+                    [queryParams]="route.queryParams"
+                    (resetFilters)="noLieuxFoundModal.toggle()"></app-display-on-map-link>
                 </ng-container>
               </ng-container>
             </div>
@@ -51,14 +52,16 @@
                   [empty]="router.url === '/orientation'"></app-filter-result-count>
                 <ng-container *ngIf="this.router.url !== '/orientation'">
                   <app-selected-filters
-                    class="my-auto"
+                    class="my-3"
                     [filterForm]="filterForm"
                     [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
                   <app-display-on-map-link
-                    class="text-center d-block"
+                    class="mx-auto"
+                    btnType="secondary"
                     [cartographieFeature]="features.get('cartographie')"
                     [lieuxMediationNumeriqueCount]="(lieuxMediationNumerique$ | async)?.length ?? 0"
-                    [queryParams]="route.queryParams"></app-display-on-map-link>
+                    [queryParams]="route.queryParams"
+                    (resetFilters)="noLieuxFoundModal.toggle()"></app-display-on-map-link>
                 </ng-container>
               </div>
             </ng-container>
@@ -67,4 +70,5 @@
       </div>
     </ng-container>
   </div>
+  <app-no-lieux-found-modal [cartographieFeature]="features.get('cartographie')" #noLieuxFoundModal></app-no-lieux-found-modal>
 </div>

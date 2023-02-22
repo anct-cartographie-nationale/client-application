@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedFeatureConfiguration } from '../../../../root';
 import { HttpParams } from '@angular/common/http';
 
@@ -13,6 +13,10 @@ export class DisplayOnMapLinkComponent {
   @Input() public lieuxMediationNumeriqueCount: number = 0;
 
   @Input() public queryParams: {} = {};
+
+  @Input() public btnType: 'primary' | 'secondary' = 'primary';
+
+  @Output() public resetFilters: EventEmitter<void> = new EventEmitter<void>();
 
   public toQueryString(fromObject: {} = {}): string {
     return new HttpParams({ fromObject }).toString();

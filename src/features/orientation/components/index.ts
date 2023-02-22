@@ -4,6 +4,7 @@ import { SelectedFiltersComponent } from './selected-filters/selected-filters.co
 import { DisplayOnMapLinkComponent } from './display-on-map-link/display-on-map-link.component';
 import { FilterResultCountComponent } from './filter-result-count/filter-result-count.component';
 import { NavComponent } from './nav/nav.component';
+import { NoLieuxFoundModalComponent } from './no-lieux-found-modal/no-lieux-found-modal.component';
 
 export const components = [
   CollapseComponent,
@@ -11,5 +12,6 @@ export const components = [
   NavComponent,
   SelectedFiltersComponent,
   DisplayOnMapLinkComponent,
-  FilterResultCountComponent
+  FilterResultCountComponent,
+  NoLieuxFoundModalComponent
 ];
