@@ -7,16 +7,12 @@
     </h1>
     <div class="fst-italic d-flex align-items-center">
       <small *ngIf="date" class="mt-1">Mise à jour le {{ date | date : 'dd/MM/y' }}</small>
-      <div *ngFor="let sourceRedirection of sourceRedirectionLink; index as i">
-        <div *ngIf="sourceRedirection.nom === source">
-          <div class="ms-2 opacity-75">
-            source :
-            <a href="{{ sourceRedirection.link }}" target="_blank" rel="noopener noreferrer" class="text-secondary">
-              {{ source }}
-            </a>
-          </div>
-        </div>
-      </div>
+      <span *ngIf="source" class="ms-2 opacity-75">
+        source :
+        <a href="{{ source.link }}" target="_blank" rel="noopener noreferrer" class="text-secondary">
+          {{ source.label }}
+        </a>
+      </span>
     </div>
   </div>
   <div class="d-flex flex-column">

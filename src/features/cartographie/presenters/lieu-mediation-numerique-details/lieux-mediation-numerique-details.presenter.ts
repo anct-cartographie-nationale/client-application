@@ -20,8 +20,100 @@ import {
 } from '../../../core';
 import {
   LieuMediationNumeriqueDetailsPresentation,
-  ModaliteAccompagnementPresentation
+  ModaliteAccompagnementPresentation,
+  SourcePresentation
 } from './lieu-mediation-numerique-details.presentation';
+
+//
+// cd72
+// odspep
+
+const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
+  [
+    'conseiller-numerique',
+    {
+      label: 'Conseillers numérique France Services',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique-1/'
+    }
+  ],
+  [
+    'dora',
+    {
+      label: 'Dora',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numeriques-en-france-disponibles-dans-le-referentiel-de-loffre-dinsertion-publie-par-data-inclusion/'
+    }
+  ],
+  [
+    'france-tiers-lieux',
+    {
+      label: 'France Tiers-Lieux',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-tiers-lieux/'
+    }
+  ],
+  [
+    'hinaura',
+    {
+      label: 'Hinaura',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-auvergne-rhone-alpes-fournis-par-hinaura/'
+    }
+  ],
+  [
+    'france-services',
+    {
+      label: 'France Services',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services'
+    }
+  ],
+  [
+    'angers',
+    {
+      label: "Ville d'Angers",
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-angers/'
+    }
+  ],
+  [
+    'assembleurs',
+    {
+      label: 'Les Assembleurs',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-hauts-de-france-fournis-par-les-assembleurs/'
+    }
+  ],
+  [
+    'cd49',
+    {
+      label: 'Département du Maine-et-Loire',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-departement-du-maine-et-loire/'
+    }
+  ],
+  [
+    'francilin',
+    {
+      label: "Francil'IN",
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services/'
+    }
+  ],
+  [
+    'cd35',
+    {
+      label: "Département d'Ille-et-Vilaine",
+      link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/'
+    }
+  ],
+  [
+    'cd35',
+    {
+      label: 'Département de la Sarthe',
+      link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/'
+    }
+  ],
+  [
+    'odspep',
+    {
+      label: 'ODSPEP',
+      link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/'
+    }
+  ]
+]);
 
 const conditionsAccesMap: Map<ConditionAcces, string> = new Map<ConditionAcces, string>([
   [ConditionAcces.Gratuit, 'Gratuit'],
@@ -152,7 +244,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           ...ifAny('distance', getDistance(lieu, localisation)),
           ...ifAny('prise_rdv', lieu.prise_rdv),
           ...ifAny('aidants', lieu.aidants),
-          ...ifAny('source', lieu.source)
+          ...ifAny('source', availableSourcesMap.get(lieu.source ?? '') ?? undefined)
         })
       )
     );

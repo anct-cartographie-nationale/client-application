@@ -9,6 +9,11 @@ import {
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { Aidant, HorairesPresentation, OpeningState } from '../../../core';
 
+export type SourcePresentation = {
+  label: string;
+  link: string;
+};
+
 export type LieuMediationNumeriqueDetailsPresentation = {
   id: string;
   nom: string;
@@ -32,7 +37,7 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   distance?: number;
   prise_rdv?: string;
   aidants?: Aidant[];
-  source?: string;
+  source?: SourcePresentation;
 };
 
 export type ModaliteAccompagnementPresentation = { label: string; icon: string; description: string };
