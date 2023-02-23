@@ -83,7 +83,7 @@ describe('collectivite territoriale presenter', (): void => {
 
     const codeRegion: string | undefined = toFrance(lieuDeMediationNumerique)?.code;
 
-    expect(codeRegion).toStrictEqual('ocean-indien');
+    expect(codeRegion).toStrictEqual('014');
   });
 
   it('should get world area from code postal in atlantic ocean', (): void => {
@@ -93,7 +93,7 @@ describe('collectivite territoriale presenter', (): void => {
 
     const codeRegion: string | undefined = toFrance(lieuDeMediationNumerique)?.code;
 
-    expect(codeRegion).toStrictEqual('ocean-atlantique');
+    expect(codeRegion).toStrictEqual('3');
   });
 
   it('should get region from departement', (): void => {

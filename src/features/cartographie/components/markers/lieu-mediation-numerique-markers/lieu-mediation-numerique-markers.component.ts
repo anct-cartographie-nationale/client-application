@@ -15,16 +15,11 @@ export class LieuMediationNumeriqueMarkersComponent {
   @Output() public showDetails: EventEmitter<LieuMediationNumeriqueOnMapPresentation> =
     new EventEmitter<LieuMediationNumeriqueOnMapPresentation>();
 
-  @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
-  @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public highlight: EventEmitter<LieuMediationNumeriqueOnMapPresentation | undefined> = new EventEmitter<
+    LieuMediationNumeriqueOnMapPresentation | undefined
+  >();
 
   public trackByLieuId(_: number, lieu: LieuMediationNumeriqueOnMapPresentation) {
     return lieu.id;
-  }
-
-  public highlightState(lieuMediationNumeriqueId: string) {
-    if (lieuMediationNumeriqueId === this.selectedId) return 'focus';
-    if (lieuMediationNumeriqueId === this.hoverId) return 'hover';
-    return undefined;
   }
 }

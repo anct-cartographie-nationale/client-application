@@ -1,7 +1,0 @@
-<app-leaflet-map-marker
-  *ngFor="let zone of zones; index as i; trackBy: trackByZoneCode"
-  [latitude]="zone.localisation.latitude"
-  [longitude]="zone.localisation.longitude"
-  [properties]="{ index: i, count: zone.lieuxCount ?? 0 }"
-  markerFactoryKey="territoire"
-  (markerClick)="showLieux.emit(zone)"></app-leaflet-map-marker>

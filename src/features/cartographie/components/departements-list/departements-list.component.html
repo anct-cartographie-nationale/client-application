@@ -5,8 +5,8 @@
       (click)="showLieux.emit(departement)"
       queryParamsHandling="preserve"
       class="list-group-item list-group-item-action p-4"
-      [class.list-group-item-hover]="hoverId === departement.nom"
-      (mouseover)="enableHover.emit(departement.nom)"
+      [class.list-group-item-hover]="hoverId === departement.code"
+      (mouseover)="enableHover.emit(departement.code)"
       (mouseout)="disableHover.emit()"
       *ngFor="let departement of departements">
       <h5 class="mb-0">

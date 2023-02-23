@@ -1,0 +1,16 @@
+.maplibregl-marker {
+  position: absolute;
+  top: 0;
+}
+
+.maplibregl-popup-tip {
+  display: none;
+}
+
+.maplibregl-popup {
+  max-width: 300px !important;
+}
+
+.maplibregl-popup-content {
+  padding: 0 !important;
+}

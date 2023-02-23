@@ -11,10 +11,13 @@
   </h2>
   <div class="map-container">
     <div class="border-top" style="height: 250px">
-      <app-leaflet-map
+      <mgl-map
         *ngIf="lieuMediationNumerique.localisation"
-        [zoomControl]="false"
-        [centerView]="{ coordinates: lieuMediationNumerique.localisation, zoomLevel: 17 }">
+        class="h-100 w-100 overflow-hidden"
+        [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"
+        [interactive]="false"
+        [zoom]="[17]"
+        [center]="[lieuMediationNumerique.localisation.longitude, lieuMediationNumerique.localisation.latitude]">
         <app-lieu-mediation-numerique-markers
           *ngIf="lieuMediationNumerique.localisation"
           [lieuxMediationNumeriques]="[
@@ -26,7 +29,7 @@
               longitude: lieuMediationNumerique.localisation.longitude
             }
           ]"></app-lieu-mediation-numerique-markers>
-      </app-leaflet-map>
+      </mgl-map>
     </div>
   </div>
   <div class="d-none d-print-flex flex-grow-1 row mt-3 border-bottom pb-3">

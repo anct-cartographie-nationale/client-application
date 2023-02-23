@@ -97,11 +97,13 @@
                 {{ adresse }}
               </div>
               <div style="height: 200px">
-                <app-leaflet-map
+                <mgl-map
                   *ngIf="localisation"
-                  [zoomControl]="false"
-                  [freeze]="true"
-                  [centerView]="{ coordinates: localisation, zoomLevel: 17 }">
+                  class="h-100 w-100 overflow-hidden"
+                  [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"
+                  [interactive]="false"
+                  [zoom]="[17]"
+                  [center]="[localisation.longitude, localisation.latitude]">
                   <app-lieu-mediation-numerique-markers
                     *ngIf="localisation"
                     [displayTooltip]="false"
@@ -114,7 +116,7 @@
                         longitude: localisation.longitude
                       }
                     ]"></app-lieu-mediation-numerique-markers>
-                </app-leaflet-map>
+                </mgl-map>
               </div>
               <div *ngIf="telephone || courriel || siteWeb?.length" class="p-3 text-muted">
                 <div *ngIf="telephone">

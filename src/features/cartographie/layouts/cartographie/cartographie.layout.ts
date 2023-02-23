@@ -1,5 +1,5 @@
 import { HttpParams } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { BehaviorSubject, delay, Observable, of, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -19,7 +19,8 @@ import {
   nearestRegion,
   ifAny,
   openingState,
-  FrancePresentation
+  FrancePresentation,
+  TerritoirePresentation
 } from '../../../core';
 import {
   LIEUX_ZOOM_LEVEL,
@@ -28,11 +29,17 @@ import {
   shouldNavigateToListPage,
   zoomLevelFromAreaDistance,
   LieuMediationNumeriqueOnMapPresentation,
-  DEPARTEMENT_ZOOM_LEVEL
+  DEPARTEMENT_ZOOM_LEVEL,
+  CenterView
 } from '../../presenters';
-import { ViewReset } from '../../directives';
-import { BBox } from 'geojson';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
+import {
+  INITIAL_POSITION_TOKEN,
+  InitialPositionConfiguration,
+  ZOOM_LEVEL_TOKEN,
+  ZoomLevelConfiguration
+} from '../../../../root';
+import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
@@ -47,11 +54,11 @@ const toLieuxFilteredByDepartement = (lieux: LieuMediationNumeriquePresentation[
 
 const toLieuxWithOpeningState =
   (date: Date) =>
-  ([lieuxMediationNumerique, zoomLevel]: [
+  ([lieuxMediationNumerique, centerView]: [
     LieuMediationNumeriquePresentation[],
-    number
+    CenterView
   ]): LieuMediationNumeriquePresentation[] =>
-    zoomLevel > DEPARTEMENT_ZOOM_LEVEL
+    centerView.zoomLevel > DEPARTEMENT_ZOOM_LEVEL
       ? lieuxMediationNumerique.map(
           (lieuMediationNumerique: LieuMediationNumeriquePresentation): LieuMediationNumeriquePresentation => ({
             ...lieuMediationNumerique,
@@ -74,21 +81,22 @@ export class CartographieLayout {
     new Date()
   ];
 
-  public lieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDistance$(...this._lieuxMediationNumeriqueListPresenterArgs, this.markersPresenter.boundingBox$)
-    .pipe(
-      map((lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] =>
-        toLieuxFilteredByDepartement(lieux, this.getRouteParam('nomDepartement'))
-      ),
-      withLatestFrom(this.markersPresenter.currentZoomLevel$),
-      map(toLieuxWithOpeningState(new Date())),
-      delay(0),
-      tap((lieux: LieuMediationNumeriquePresentation[]) => {
-        !this._initialZoom && this.setInitialZoom(lieux);
-        this._loadingState$.next(false);
-        this._initialZoom = true;
-      })
-    );
+  public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueOnMapPresentation[]> =
+    this._lieuxMediationNumeriqueListPresenter
+      .lieuxMediationNumeriqueByDistance$(...this._lieuxMediationNumeriqueListPresenterArgs, this.markersPresenter.boundingBox$)
+      .pipe(
+        map((lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] =>
+          toLieuxFilteredByDepartement(lieux, this.getRouteParam('nomDepartement'))
+        ),
+        withLatestFrom(this.markersPresenter.centerView$),
+        map(toLieuxWithOpeningState(new Date())),
+        delay(0),
+        tap((lieux: LieuMediationNumeriquePresentation[]) => {
+          !this._initialZoom && this.setInitialZoom(lieux);
+          this._loadingState$.next(false);
+          this._initialZoom = true;
+        })
+      );
 
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
@@ -126,7 +134,11 @@ export class CartographieLayout {
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly router: Router,
     public readonly route: ActivatedRoute,
-    public readonly markersPresenter: MarkersPresenter
+    public readonly markersPresenter: MarkersPresenter,
+    @Inject(ZOOM_LEVEL_TOKEN)
+    private readonly _zoomLevel: ZoomLevelConfiguration,
+    @Inject(INITIAL_POSITION_TOKEN)
+    private readonly _initialPosition: InitialPositionConfiguration
   ) {}
 
   public onShowDetails(lieu: LieuMediationNumeriqueOnMapPresentation): void {
@@ -137,20 +149,24 @@ export class CartographieLayout {
     this.markersPresenter.select(lieu.id);
   }
 
-  public hover(highlightedId?: string) {
+  public onHighlight(highlightedId?: string) {
     this.markersPresenter.hover(highlightedId ?? '');
   }
 
-  public onMapViewUpdated({ viewport, zoomLevel, center }: ViewReset): void {
-    this.updateMarkers(viewport, zoomLevel);
-    this.navigateToPageMatchingZoomLevel(zoomLevel, Localisation({ latitude: center.lat, longitude: center.lng }));
+  public onMapViewUpdated(value: MapLibreEvent<any>): void {
+    const localisation: Localisation = Localisation({
+      latitude: value.target.getCenter().lat,
+      longitude: value.target.getCenter().lng
+    });
+    this.updateMarkers(value.target.getBounds(), value.target.getZoom(), localisation);
+    this.navigateToPageMatchingZoomLevel(value.target.getZoom(), localisation);
   }
 
-  private updateMarkers([leftLongitude, bottomLatitude, rightLongitude, topLatitude]: BBox, zoomLevel: number) {
-    this.markersPresenter.setZoomLevel(zoomLevel);
+  private updateMarkers(bounds: LngLatBounds, zoomLevel: number, localisation: Localisation) {
+    this.markersPresenter.center(localisation, zoomLevel);
     this.markersPresenter.boundingBox([
-      Localisation({ latitude: topLatitude, longitude: leftLongitude }),
-      Localisation({ latitude: bottomLatitude, longitude: rightLongitude })
+      Localisation({ latitude: bounds.getNorthWest().lat, longitude: bounds.getNorthWest().lng }),
+      Localisation({ latitude: bounds.getSouthEast().lat, longitude: bounds.getSouthEast().lng })
     ]);
   }
 
@@ -160,7 +176,7 @@ export class CartographieLayout {
       this.router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
-  public onShowLieuxInDepartement(departement: DepartementPresentation): void {
+  public onShowLieuxInDepartement(departement: TerritoirePresentation): void {
     this.markersPresenter.center(departement.localisation, departement.zoom);
     this.router.navigate(['regions', regionFromDepartement(departement)?.nom, departement.nom], {
       relativeTo: this.route.parent,
@@ -168,12 +184,12 @@ export class CartographieLayout {
     });
   }
 
-  public onShowLieuxInRegion(region: RegionPresentation): void {
+  public onShowLieuxInRegion(region: TerritoirePresentation): void {
     this.markersPresenter.center(region.localisation, region.zoom);
     this.router.navigate(['regions', region.nom], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
-  public onShowLieuxInZone(zone: FrancePresentation): void {
+  public onShowLieuxInZone(zone: TerritoirePresentation): void {
     this.markersPresenter.center(zone.localisation, zone.zoom);
   }
 
@@ -212,9 +228,6 @@ export class CartographieLayout {
       );
     }
 
-    this.navigateToPageMatchingZoomLevel(
-      this.markersPresenter.defaultCenterView.zoomLevel,
-      this.markersPresenter.defaultCenterView.coordinates
-    );
+    this.navigateToPageMatchingZoomLevel(this._zoomLevel.regular, Localisation(this._initialPosition));
   }
 }

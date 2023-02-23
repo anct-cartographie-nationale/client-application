@@ -13,7 +13,6 @@ import {
   PointRelaisCafComponent,
   RelaisPoleEmploiComponent
 } from './labellisations';
-import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
 import { DepartementsListComponent } from './departements-list/departements-list.component';
 import { RegionsListComponent } from './regions-list/regions-list.component';
 import {
@@ -22,9 +21,7 @@ import {
   LieuxMediationNumeriqueListPrintComponent
 } from './lieux-mediation-numerique-list';
 import { LieuMediationNumeriqueMarkersComponent } from './markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
-import { DepartementMarkersComponent } from './markers/departement-markers/departement-markers.component';
-import { RegionMarkersComponent } from './markers/region-markers/region-markers.component';
-import { FranceMarkersComponent } from './markers/france-markers/france-markers.component';
+import { TerritoireMarkersComponent } from './markers/territoire-markers/territoire-markers.component';
 import { NoLieuxFoundComponent } from './no-lieux-found/no-lieux-found.component';
 import { UserLocationComponent } from './user-location/user-location.component';
 import {
@@ -42,8 +39,6 @@ import {
   PublicPrisEnChargeComponent,
   ServicesComponent
 } from './lieux-mediation-numerique-details';
-
-export * from './leaflet-map/leaflet-map.component';
 
 export const components = [
   LieuxMediationNumeriqueDetailsPrintComponent,
@@ -74,14 +69,11 @@ export const components = [
   RelaisPoleEmploiComponent,
   CnfsComponent,
   PointNumeriqueCafComponent,
-  LeafletMapComponent,
   CartographieLoaderComponent,
   DepartementsListComponent,
   RegionsListComponent,
   LieuMediationNumeriqueMarkersComponent,
-  DepartementMarkersComponent,
-  RegionMarkersComponent,
-  FranceMarkersComponent,
+  TerritoireMarkersComponent,
   NoLieuxFoundComponent,
   UserLocationComponent
 ];

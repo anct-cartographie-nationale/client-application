@@ -1,13 +1,13 @@
 import { Inject } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { NO_LOCALISATION } from '../../../core';
 import {
   INITIAL_POSITION_TOKEN,
   InitialPositionConfiguration,
   ZOOM_LEVEL_TOKEN,
   ZoomLevelConfiguration
 } from '../../../../root';
+import { NO_LOCALISATION } from '../../../core';
 
 export interface CenterView {
   coordinates: Localisation;
@@ -54,7 +54,10 @@ export const getBoundsFromLocalisations = (localisations: Localisation[]): [Loca
 ];
 
 export class MarkersPresenter {
-  private readonly _centerView$: Subject<CenterView> = new Subject<CenterView>();
+  private readonly _centerView$: BehaviorSubject<CenterView> = new BehaviorSubject<CenterView>({
+    coordinates: Localisation(this._initialPosition),
+    zoomLevel: this._zoomLevel.regular
+  });
   public readonly centerView$: Observable<CenterView> = this._centerView$.asObservable();
 
   private readonly _selected$: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -72,14 +75,6 @@ export class MarkersPresenter {
   ]);
   public boundingBox$: Observable<[Localisation, Localisation]> = this._boundingBox$.asObservable();
 
-  private _currentZoomLevel$: BehaviorSubject<number> = new BehaviorSubject<number>(this._zoomLevel.regular);
-  public currentZoomLevel$: Observable<number> = this._currentZoomLevel$.asObservable();
-
-  public readonly defaultCenterView: CenterView = {
-    coordinates: Localisation(this._initialPosition),
-    zoomLevel: this._zoomLevel.regular
-  };
-
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
@@ -91,8 +86,8 @@ export class MarkersPresenter {
     this._boundingBox$.next(boundingBox);
   }
 
-  public center(coordinates: Localisation, zoomLevel: number = this._zoomLevel.userPosition) {
-    this._centerView$.next({ coordinates, zoomLevel });
+  public center(localisation: Localisation, zoomLevel: number = this._zoomLevel.userPosition) {
+    this._centerView$.next({ coordinates: localisation, zoomLevel });
   }
 
   public select(markerId: string) {
@@ -107,7 +102,10 @@ export class MarkersPresenter {
     this._hovered.next(markerId);
   }
 
-  public setZoomLevel(zoomLevel: number) {
-    this._currentZoomLevel$.next(zoomLevel);
+  public reset(): void {
+    this._centerView$.next({
+      coordinates: Localisation(this._initialPosition),
+      zoomLevel: this._zoomLevel.regular
+    });
   }
 }
