@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { combineLatest, Observable, of, tap } from 'rxjs';
@@ -72,7 +72,7 @@ const toLocalisationOf = ({ latitude, longitude }: { latitude?: number; longitud
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'lieux-mediation-numerique-list.page.html'
 })
-export class LieuxMediationNumeriqueListPage {
+export class LieuxMediationNumeriqueListPage implements OnInit {
   private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this.route.snapshot.queryParams);
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
@@ -133,12 +133,19 @@ export class LieuxMediationNumeriqueListPage {
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
+  public ngOnInit(): void {
+    const departement: DepartementPresentation | undefined = departementFromNom(
+      this.route.snapshot.paramMap.get('nomDepartement') ?? ''
+    );
+    departement && this.markersPresenter.center(departement.localisation, departement.zoom);
+  }
+
   public printPage() {
     window.print();
   }
 
   public hover(highlightedId?: string) {
-    this.markersPresenter.hover(highlightedId ?? '');
+    this.markersPresenter.highlight(highlightedId ?? '');
   }
 
   public select(lieu: LieuMediationNumeriqueListItemPresentation) {

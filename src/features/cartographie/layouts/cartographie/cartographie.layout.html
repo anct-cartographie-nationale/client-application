@@ -58,20 +58,20 @@
       <app-territoire-markers
         *ngIf="centerView.zoomLevel <= 7 && centerView.zoomLevel > 4"
         [territoires]="(regions$ | async) ?? []"
-        [hoverId]="(markersPresenter.hovered$ | async) ?? ''"
+        [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
         (highlight)="onHighlight($event?.code)"
         (showLieux)="onShowLieuxInRegion($event)"></app-territoire-markers>
       <app-territoire-markers
         *ngIf="centerView.zoomLevel <= 9 && centerView.zoomLevel > 7"
         [territoires]="(departements$ | async) ?? []"
-        [hoverId]="(markersPresenter.hovered$ | async) ?? ''"
+        [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
         (highlight)="onHighlight($event?.code)"
         (showLieux)="onShowLieuxInDepartement($event)"></app-territoire-markers>
       <app-lieu-mediation-numerique-markers
         *ngIf="centerView.zoomLevel > 9"
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
         [selectedId]="(markersPresenter.selected$ | async) ?? ''"
-        [hoverId]="(markersPresenter.hovered$ | async) ?? ''"
+        [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
         (highlight)="onHighlight($event?.id)"
         (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
     </mgl-map>

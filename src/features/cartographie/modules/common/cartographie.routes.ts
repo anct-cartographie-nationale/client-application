@@ -41,7 +41,7 @@ export const ROUTES: Routes = [
             path: ':id'
           },
           {
-            component: LieuxMediationNumeriqueListPage,
+            component: RegionsPage,
             path: ''
           }
         ],

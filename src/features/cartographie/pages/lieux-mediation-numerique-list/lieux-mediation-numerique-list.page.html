@@ -12,7 +12,7 @@
     [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"
     [orientationFeature]="features.get('orientation')"
     [focusId]="markersPresenter.focuced$ | async"
-    [hoverId]="markersPresenter.hovered$ | async"
+    [hoverId]="markersPresenter.highlighted$ | async"
     (print)="printPage()"
     (selectLieu)="select($event)"
     (enableHover)="hover($event)"

@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { byCollectiviteTerritorialeNom, RegionPresentation, LieuxMediationNumeriquePresenter } from '../../../core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { byCollectiviteTerritorialeNom, RegionPresentation } from '../../../core';
 import { MarkersPresenter } from '../../presenters';
 import { CartographieLayout } from '../../layouts';
 
@@ -16,13 +15,11 @@ export class RegionsPage {
   );
 
   public hover(highlightedId?: string) {
-    this.markersPresenter.hover(highlightedId ?? '');
+    this.markersPresenter.highlight(highlightedId ?? '');
   }
 
   public constructor(
     private readonly _cartographieLayout: CartographieLayout,
-    private readonly _route: ActivatedRoute,
-    private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly markersPresenter: MarkersPresenter
   ) {}
 }
