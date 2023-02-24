@@ -38,12 +38,14 @@
       <app-user-location [adresse]="(defaultAddress$ | async) ?? ''" (location)="userLocalisation = $event"></app-user-location>
     </div>
     <mgl-map
-      *ngIf="(markersPresenter.centerView$ | async) as centerView"
+      [movingMethod]="'easeTo'"
+      *ngIf="(markersPresenter.localisation$ | async) as localisation"
       class="h-100 w-100 overflow-hidden"
       [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"
-      [zoom]="[centerView.zoomLevel]"
-      [center]="[centerView.coordinates.longitude, centerView.coordinates.latitude]"
+      [zoom]="[(markersPresenter.zoom$ | async) ?? 0]"
+      [center]="[localisation.longitude, localisation.latitude]"
       (zoomEnd)="onMapViewUpdated($event)"
+      (zoomEvt)="zooming($event)"
       (mapDragEnd)="onMapViewUpdated($event)">
       <mgl-marker *ngIf="userLocalisation" [lngLat]="[userLocalisation.longitude, userLocalisation.latitude]">
         <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
@@ -52,23 +54,23 @@
         </svg>
       </mgl-marker>
       <app-territoire-markers
-        *ngIf="centerView.zoomLevel <= 4"
+        *ngIf="((curentZoom$ | async) ?? 0) <= 4"
         [territoires]="(france$ | async) ?? []"
         (showLieux)="onShowLieuxInZone($event)"></app-territoire-markers>
       <app-territoire-markers
-        *ngIf="centerView.zoomLevel <= 7 && centerView.zoomLevel > 4"
+        *ngIf="((curentZoom$ | async) ?? 0) <= 7 && ((curentZoom$ | async) ?? 0) > 4"
         [territoires]="(regions$ | async) ?? []"
         [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
         (highlight)="onHighlight($event?.code)"
         (showLieux)="onShowLieuxInRegion($event)"></app-territoire-markers>
       <app-territoire-markers
-        *ngIf="centerView.zoomLevel <= 9 && centerView.zoomLevel > 7"
+        *ngIf="((curentZoom$ | async) ?? 0) <= 9 && ((curentZoom$ | async) ?? 0) > 7"
         [territoires]="(departements$ | async) ?? []"
         [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
         (highlight)="onHighlight($event?.code)"
         (showLieux)="onShowLieuxInDepartement($event)"></app-territoire-markers>
       <app-lieu-mediation-numerique-markers
-        *ngIf="centerView.zoomLevel > 9"
+        *ngIf="((curentZoom$ | async) ?? 0) > 9"
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
         [selectedId]="(markersPresenter.selected$ | async) ?? ''"
         [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"

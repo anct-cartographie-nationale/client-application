@@ -29,10 +29,6 @@ export class LieuxMediationNumeriqueListComponent {
 
   @Input() public orientationFeature?: FeatureConfiguration;
 
-  @Input() public set focusId(focusId: string | null) {
-    focusId && this.scrollTo(focusId);
-  }
-
   @Input() public hoverId: string | null = null;
 
   @Output() public print: EventEmitter<void> = new EventEmitter<void>();
