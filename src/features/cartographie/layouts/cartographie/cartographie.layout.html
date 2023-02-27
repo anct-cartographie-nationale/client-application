@@ -54,23 +54,23 @@
         </svg>
       </mgl-marker>
       <app-territoire-markers
-        *ngIf="((curentZoom$ | async) ?? 0) <= 4"
+        *ngIf="((currentZoom$ | async) ?? 0) <= 4"
         [territoires]="(france$ | async) ?? []"
         (showLieux)="onShowLieuxInZone($event)"></app-territoire-markers>
       <app-territoire-markers
-        *ngIf="((curentZoom$ | async) ?? 0) <= 7 && ((curentZoom$ | async) ?? 0) > 4"
+        *ngIf="((currentZoom$ | async) ?? 0) <= 7 && ((currentZoom$ | async) ?? 0) > 4"
         [territoires]="(regions$ | async) ?? []"
         [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
         (highlight)="onHighlight($event?.code)"
         (showLieux)="onShowLieuxInRegion($event)"></app-territoire-markers>
       <app-territoire-markers
-        *ngIf="((curentZoom$ | async) ?? 0) <= 9 && ((curentZoom$ | async) ?? 0) > 7"
+        *ngIf="((currentZoom$ | async) ?? 0) <= 9 && ((currentZoom$ | async) ?? 0) > 7"
         [territoires]="(departements$ | async) ?? []"
         [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
         (highlight)="onHighlight($event?.code)"
         (showLieux)="onShowLieuxInDepartement($event)"></app-territoire-markers>
       <app-lieu-mediation-numerique-markers
-        *ngIf="((curentZoom$ | async) ?? 0) > 9"
+        *ngIf="((currentZoom$ | async) ?? 0) > 9"
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
         [selectedId]="(markersPresenter.selected$ | async) ?? ''"
         [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"

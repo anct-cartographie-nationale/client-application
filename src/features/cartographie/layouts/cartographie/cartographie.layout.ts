@@ -65,8 +65,8 @@ const toLieuxWithOpeningState =
   providers: cartographieLayoutProviders
 })
 export class CartographieLayout {
-  private _curentZoom$: BehaviorSubject<number> = new BehaviorSubject(this._zoomLevel.regular);
-  public curentZoom$: Observable<number> = this._curentZoom$.asObservable();
+  private _currentZoom$: BehaviorSubject<number> = new BehaviorSubject(this._zoomLevel.regular);
+  public currentZoom$: Observable<number> = this._currentZoom$.asObservable();
 
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
@@ -103,13 +103,13 @@ export class CartographieLayout {
       .lieuxMediationNumeriqueByDistance$(
         ...this._lieuxMediationNumeriqueListPresenterArgs,
         this.markersPresenter.boundingBox$,
-        this.curentZoom$
+        this.currentZoom$
       )
       .pipe(
         map((lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] =>
           toLieuxFilteredByDepartement(lieux, this.getRouteParam('nomDepartement'))
         ),
-        withLatestFrom(this._curentZoom$),
+        withLatestFrom(this._currentZoom$),
         map(toLieuxWithOpeningState(new Date())),
         delay(0),
         tap(() => this._loadingState$.next(false))
@@ -162,7 +162,7 @@ export class CartographieLayout {
   }
 
   public zooming(value: MapLibreEvent<MouseEvent | TouchEvent | WheelEvent | undefined>) {
-    this._curentZoom$.next(value.target.getZoom());
+    this._currentZoom$.next(value.target.getZoom());
     this.updateMarkers(value.target.getBounds());
   }
 
