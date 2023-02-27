@@ -7,7 +7,7 @@ export const NEAR_ZOOM_LEVEL: number = 13;
 const REGIONS_ROUTE: string = 'regions';
 const LIEUX_ROUTE: string = '.';
 
-const inRegionZoomLevel = (zoomLevel: number) => zoomLevel <= REGION_ZOOM_LEVEL;
+export const inRegionZoomLevel = (zoomLevel: number) => zoomLevel <= REGION_ZOOM_LEVEL;
 export const inLieuxZoomLevel = (zoomLevel: number) => zoomLevel > DEPARTEMENT_ZOOM_LEVEL;
 export const inDepartementZoomLevel = (zoomLevel: number) => !inRegionZoomLevel(zoomLevel) && !inLieuxZoomLevel(zoomLevel);
 

@@ -69,6 +69,8 @@ export class MarkersPresenter {
   ]);
   public boundingBox$: Observable<[Localisation, Localisation]> = this._boundingBox$.asObservable();
 
+  private _currentZoom: number = this._zoomLevel.regular;
+
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
@@ -80,9 +82,10 @@ export class MarkersPresenter {
     this._boundingBox$.next(boundingBox);
   }
 
-  public center(localisation: Localisation, zoom: number = this._zoomLevel.userPosition) {
+  public center(localisation: Localisation, zoom: number = this._currentZoom) {
     this._localisation$.next(localisation);
     this._zoom$.next(zoom);
+    this._currentZoom = zoom;
   }
 
   public select(markerId: string) {
@@ -96,5 +99,10 @@ export class MarkersPresenter {
   public reset(): void {
     this._localisation$.next(Localisation(this._initialPosition));
     this._zoom$.next(this._zoomLevel.regular);
+    this._currentZoom = this._zoomLevel.regular;
+  }
+
+  public getZoom(): number {
+    return this._currentZoom;
   }
 }

@@ -23,7 +23,8 @@ import {
   MarkersPresenter,
   inLieuxZoomLevel,
   LieuMediationNumeriqueListItemPresentation,
-  toLieuxMediationNumeriqueListItemsPresentation
+  toLieuxMediationNumeriqueListItemsPresentation,
+  inRegionZoomLevel
 } from '../../presenters';
 
 const findLieuToFocus =
@@ -138,7 +139,9 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     const departement: DepartementPresentation | undefined = departementFromNom(
       this.route.snapshot.paramMap.get('nomDepartement') ?? ''
     );
-    departement && this.markersPresenter.center(departement.localisation, departement.zoom);
+    departement &&
+      inRegionZoomLevel(this.markersPresenter.getZoom()) &&
+      this.markersPresenter.center(departement.localisation, departement.zoom);
   }
 
   public printPage() {
@@ -150,7 +153,8 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
   }
 
   public select(id: string, latitude: number, longitude: number) {
-    this.markersPresenter.center(Localisation({ latitude, longitude }), this._zoomLevel.userPosition);
+    !inLieuxZoomLevel(this.markersPresenter.getZoom()) &&
+      this.markersPresenter.center(Localisation({ latitude, longitude }), this._zoomLevel.userPosition);
     this.markersPresenter.select(id);
   }
 
