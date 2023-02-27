@@ -108,7 +108,7 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     );
 
   public zoom$: Observable<number> = combineLatest([this.markersPresenter.zoom$, this._lieuSelected$]).pipe(
-    delay(1000),
+    delay(0),
     map(([zoom, lieu]: [number, LieuMediationNumerique | undefined]) => {
       lieu && lieu.localisation && this.select(lieu.id, lieu.localisation.latitude, lieu.localisation.longitude);
       return zoom;

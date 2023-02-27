@@ -1,4 +1,4 @@
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, debounceTime, Observable, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import {
@@ -22,6 +22,7 @@ import { NO_LOCALISATION } from '../../models';
 type LieuxMediationNumeriqueFilterParameters = [LieuMediationNumerique[], Localisation, FilterPresentation];
 
 const LIEUX_ZOOM_LEVEL: number = 9;
+const MAP_INTERACTION_DEBOUNCE_TIME: number = 300;
 
 const toLieuxMediationNumeriqueByDistance =
   (date: Date) =>
@@ -71,6 +72,7 @@ export class LieuxMediationNumeriquePresenter {
     zoomLevel$: Observable<number> = of(LIEUX_ZOOM_LEVEL)
   ): Observable<LieuMediationNumeriquePresentation[]> {
     return combineLatest([boundingBox$, this.lieuxMediationNumerique$, localisation$, filter$, zoomLevel$]).pipe(
+      debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
       map(toLieuxMediationNumeriqueByDistance(date))
     );
   }
@@ -81,6 +83,7 @@ export class LieuxMediationNumeriquePresenter {
     date: Date = new Date()
   ): Observable<DepartementPresentation[]> {
     return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
+      debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
       map(toLieuxMediationNumeriqueByDepartement(date))
     );
   }
@@ -91,6 +94,7 @@ export class LieuxMediationNumeriquePresenter {
     date: Date = new Date()
   ): Observable<RegionPresentation[]> {
     return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
+      debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
       map(toLieuxMediationNumeriqueByRegion(date))
     );
   }
@@ -101,6 +105,7 @@ export class LieuxMediationNumeriquePresenter {
     date: Date = new Date()
   ): Observable<FrancePresentation[]> {
     return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
+      debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
       map(toLieuxMediationNumeriqueFrance(date))
     );
   }
