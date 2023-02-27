@@ -1,4 +1,4 @@
-<ng-template *ngIf="displayTooltip">
+<ng-container *ngIf="displayTooltip">
   <mgl-popup
     *ngIf="highlight | async as lieuMediationNumerique"
     [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]"
@@ -21,7 +21,7 @@
       </ng-template>
     </div>
   </mgl-popup>
-</ng-template>
+</ng-container>
 <ng-container *ngFor="let lieuMediationNumerique of lieuxMediationNumeriques; index as i; trackBy: trackByLieuId">
   <mgl-marker [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]">
     <div
