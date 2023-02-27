@@ -110,12 +110,12 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
 
   public filters$: Observable<FilterPresentation> = this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery));
 
-  private _lieuSelected$: Observable<LieuMediationNumerique | undefined> =
+  public lieuSelected$: Observable<LieuMediationNumerique | undefined> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$.pipe(
       map(findLieuToFocus(this.route.snapshot.paramMap))
     );
 
-  public zoom$: Observable<number> = combineLatest([this.markersPresenter.zoom$, this._lieuSelected$]).pipe(
+  public zoom$: Observable<number> = combineLatest([this.markersPresenter.zoom$, this.lieuSelected$]).pipe(
     delay(0),
     map(([zoom, lieu]: [number, LieuMediationNumerique | undefined]) => {
       lieu && lieu.localisation && this.select(lieu.id, lieu.localisation.latitude, lieu.localisation.longitude);

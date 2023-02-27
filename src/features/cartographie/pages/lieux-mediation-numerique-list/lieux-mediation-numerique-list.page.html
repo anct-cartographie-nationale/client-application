@@ -12,6 +12,7 @@
       class="d-print-none"
       [lieuxMediationNumerique]="lieuxMediationNumerique"
       [orientationFeature]="features.get('orientation')"
+      [focusId]="(lieuSelected$ | async)?.id"
       [hoverId]="markersPresenter.highlighted$ | async"
       (print)="printPage()"
       (selectLieu)="select($event.id, $event.latitude, $event.longitude)"
