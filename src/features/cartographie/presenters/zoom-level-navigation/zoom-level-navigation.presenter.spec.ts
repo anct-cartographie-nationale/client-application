@@ -39,19 +39,19 @@ describe('zoom level navigation presenter', (): void => {
   it('should not navigate when route config is undefined', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage(['regions']);
 
-    expect(shouldNavigate).toStrictEqual(false);
+    expect(shouldNavigate).toBe(false);
   });
 
   it('should navigate to regions when route config is regions/:nomRegion', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage(['regions'], 'regions/:nomRegion');
 
-    expect(shouldNavigate).toStrictEqual(true);
+    expect(shouldNavigate).toBe(true);
   });
 
   it('should not navigate to regions when route config is regions', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage(['regions'], 'regions');
 
-    expect(shouldNavigate).toStrictEqual(false);
+    expect(shouldNavigate).toBe(false);
   });
 
   it('should navigate to regions/Île-de-France when route config is regions/:nomRegion/:nomDepartement', (): void => {
@@ -60,31 +60,40 @@ describe('zoom level navigation presenter', (): void => {
       'regions/:nomRegion/:nomDepartement'
     );
 
-    expect(shouldNavigate).toStrictEqual(true);
+    expect(shouldNavigate).toBe(true);
+  });
+
+  it('should navigate to regions/Île-de-France/6305e54574996606f375c411 when route config is regions/:nomRegion/:nomDepartement/:id', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage(
+      ['regions', 'Île-de-France', '6305e54574996606f375c411'],
+      'regions/:nomRegion/:nomDepartement/:id'
+    );
+
+    expect(shouldNavigate).toBe(false);
   });
 
   it('should navigate to regions/Île-de-France when route config is regions', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage(['regions', 'Île-de-France'], 'regions');
 
-    expect(shouldNavigate).toStrictEqual(true);
+    expect(shouldNavigate).toBe(true);
   });
 
   it('should navigate to . when route config is regions', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage(['.'], 'regions');
 
-    expect(shouldNavigate).toStrictEqual(true);
+    expect(shouldNavigate).toBe(true);
   });
 
   it('should not navigate to . when route config is regions/:nomRegion/:nomDepartement', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage(['.'], 'regions/:nomRegion/:nomDepartement');
 
-    expect(shouldNavigate).toStrictEqual(false);
+    expect(shouldNavigate).toBe(false);
   });
 
   it('should not navigate to . when route config is :id', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage(['.'], ':id');
 
-    expect(shouldNavigate).toStrictEqual(false);
+    expect(shouldNavigate).toBe(false);
   });
 
   it('should get zoom level from area distance of 100km', function () {
