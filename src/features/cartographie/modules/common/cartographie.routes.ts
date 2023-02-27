@@ -1,10 +1,5 @@
 import { Routes } from '@angular/router';
-import {
-  DepartementsPage,
-  LieuxMediationNumeriqueDetailsPage,
-  LieuxMediationNumeriqueListPage,
-  RegionsPage
-} from '../../pages';
+import { DepartementsPage, LieuxMediationNumeriqueDetailsPage, LieuxMediationNumeriqueListPage } from '../../pages';
 import { CartographieLayout, ListHeaderLayout } from '../../layouts';
 
 export const ROUTES: Routes = [
@@ -25,7 +20,7 @@ export const ROUTES: Routes = [
             path: 'regions/:nomRegion'
           },
           {
-            component: RegionsPage,
+            component: LieuxMediationNumeriqueListPage,
             path: 'regions'
           },
           {
@@ -41,7 +36,7 @@ export const ROUTES: Routes = [
             path: ':id'
           },
           {
-            component: RegionsPage,
+            component: LieuxMediationNumeriqueListPage,
             path: ''
           }
         ],

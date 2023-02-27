@@ -1,4 +1,4 @@
-<ng-container *ngIf="inLieuxZoomLevel((zoom$ | async) ?? 0)">
+<ng-container *ngIf="inLieuxZoomLevel((zoom$ | async) ?? 0); else : regions">
   <ng-container *ngIf="lieuxMediationNumerique$ | async as lieuxMediationNumerique">
     <div class="d-flex h-100" *ngIf="lieuxMediationNumerique?.length === 0">
       <app-no-lieux-found
@@ -23,3 +23,11 @@
       [lieuxMediationNumerique]="lieuxMediationNumerique ?? []"></app-lieux-mediation-numerique-list-print>
   </ng-container>
 </ng-container>
+<ng-template #regions>
+  <app-regions-list
+    [regions]="(regions$ | async) ?? []"
+    [hoverId]="markersPresenter.highlighted$ | async"
+    (enableHover)="hover($event)"
+    (disableHover)="hover()"
+    (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-regions-list>
+</ng-template>

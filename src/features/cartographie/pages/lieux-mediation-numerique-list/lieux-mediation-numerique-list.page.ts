@@ -6,16 +6,19 @@ import { map } from 'rxjs/operators';
 import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FEATURES_TOKEN, FeaturesConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import {
+  byCollectiviteTerritorialeNom,
   departementFromNom,
   DepartementPresentation,
   FilterPresentation,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
   NO_LOCALISATION,
+  RegionPresentation,
   toDepartement,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
+import { CartographieLayout } from '../../layouts';
 import {
   MarkersPresenter,
   inLieuxZoomLevel,
@@ -92,6 +95,10 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     map(toLieuxMediationNumeriqueListItemsPresentation(new Date()))
   );
 
+  public regions$: Observable<RegionPresentation[]> = this._cartographieLayout.regions$.pipe(
+    map((regions: RegionPresentation[]): RegionPresentation[] => [...regions].sort(byCollectiviteTerritorialeNom))
+  );
+
   public listOfLieuxWithoutFilters$: Observable<LieuMediationNumeriquePresentation[]> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))),
@@ -123,6 +130,7 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly route: ActivatedRoute,
     private readonly _router: Router,
+    private readonly _cartographieLayout: CartographieLayout,
     public readonly markersPresenter: MarkersPresenter
   ) {}
 
