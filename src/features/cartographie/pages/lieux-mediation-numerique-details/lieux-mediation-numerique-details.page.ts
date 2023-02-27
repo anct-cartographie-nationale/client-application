@@ -92,7 +92,7 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   public onCloseDetails(lieu: LieuMediationNumeriqueDetailsPresentation): void {
     this._router.navigate(
-      [this._hasDepartementFilter ? `../../regions/${toRegion(lieu)?.nom}/${toDepartement(lieu)?.nom}` : '..'],
+      [this._hasDepartementFilter ? `../../regions/${toRegion(lieu)?.nom}/${toDepartement(lieu)?.nom}/${lieu.id}` : '..'],
       {
         relativeTo: this._route,
         queryParamsHandling: 'preserve'

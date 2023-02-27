@@ -16,6 +16,10 @@ export const ROUTES: Routes = [
             path: 'regions/:nomRegion/:nomDepartement'
           },
           {
+            component: LieuxMediationNumeriqueListPage,
+            path: 'regions/:nomRegion/:nomDepartement/:id'
+          },
+          {
             component: DepartementsPage,
             path: 'regions/:nomRegion'
           },

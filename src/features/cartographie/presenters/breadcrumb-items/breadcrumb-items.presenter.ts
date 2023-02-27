@@ -57,4 +57,6 @@ const getBreadcrumbItemsFromUrlSegments = (urlSegments: UrlSegment[]) =>
       ];
 
 export const getBreadcrumbItems = (urlSegments: UrlSegment[]): BreadcrumbItem[] =>
-  isUnhandledUrlSegments(urlSegments) ? breadcrumbItemsForUnhandledPaths : getBreadcrumbItemsFromUrlSegments(urlSegments);
+  isUnhandledUrlSegments(urlSegments)
+    ? breadcrumbItemsForUnhandledPaths
+    : getBreadcrumbItemsFromUrlSegments(urlSegments.slice(0, 3));
