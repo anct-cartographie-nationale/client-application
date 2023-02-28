@@ -13,7 +13,7 @@
     "code": "32",
     "departements": ["02", "59", "60", "62", "80"],
     "nom": "Hauts-de-France",
-    "zoom": 9,
+    "zoom": 8,
     "localisation": {
       "longitude": 2.775278,
       "latitude": 49.966111
@@ -23,7 +23,7 @@
     "code": "93",
     "departements": ["04", "05", "06", "13", "83", "84"],
     "nom": "Provence-Alpes-Côte d'Azur",
-    "zoom": 9,
+    "zoom": 8.5,
     "localisation": {
       "longitude": 6.053333,
       "latitude": 43.955
@@ -53,7 +53,7 @@
     "code": "28",
     "nom": "Normandie",
     "departements": ["14", "27", "50", "61", "76"],
-    "zoom": 9,
+    "zoom": 8.2,
     "localisation": {
       "longitude": 0.106667,
       "latitude": 49.121111
@@ -63,7 +63,7 @@
     "code": "75",
     "nom": "Nouvelle-Aquitaine",
     "departements": ["16", "17", "19", "23", "24", "33", "40", "47", "64", "79", "86", "87"],
-    "zoom": 8,
+    "zoom": 7.1,
     "localisation": {
       "longitude": 0.197778,
       "latitude": 45.192222
@@ -73,7 +73,7 @@
     "code": "24",
     "nom": "Centre-Val de Loire",
     "departements": ["18", "28", "36", "37", "41", "45"],
-    "zoom": 9,
+    "zoom": 8,
     "localisation": {
       "longitude": 1.685278,
       "latitude": 47.480556
@@ -93,7 +93,7 @@
     "code": "53",
     "nom": "Bretagne",
     "departements": ["22", "29", "35", "56"],
-    "zoom": 9,
+    "zoom": 8,
     "localisation": {
       "longitude": -2.838611,
       "latitude": 48.179722
@@ -103,7 +103,7 @@
     "code": "94",
     "nom": "Corse",
     "departements": ["2A", "2B"],
-    "zoom": 9,
+    "zoom": 8,
     "localisation": {
       "longitude": 9.105278,
       "latitude": 42.149722
@@ -113,7 +113,7 @@
     "code": "52",
     "nom": "Pays de la Loire",
     "departements": ["44", "49", "53", "72", "85"],
-    "zoom": 9,
+    "zoom": 8.2,
     "localisation": {
       "longitude": -0.823888,
       "latitude": 47.474722
@@ -133,7 +133,7 @@
     "code": "00",
     "nom": "Saint Martin",
     "departements": ["978"],
-    "zoom": 11,
+    "zoom": 9,
     "localisation": {
       "longitude": -63.0667,
       "latitude": 18.0667
@@ -143,17 +143,17 @@
     "code": "01",
     "nom": "Guadeloupe",
     "departements": ["971"],
-    "zoom": 11,
+    "zoom": 9,
     "localisation": {
       "longitude": -61.551,
-      "latitude": 16.265
+      "latitude": 16.2
     }
   },
   {
     "code": "02",
     "nom": "Martinique",
     "departements": ["972"],
-    "zoom": 11,
+    "zoom": 9,
     "localisation": {
       "longitude": -61.024174,
       "latitude": 14.641528
@@ -163,17 +163,17 @@
     "code": "03",
     "nom": "Guyane",
     "departements": ["973"],
-    "zoom": 10,
+    "zoom": 7.5,
     "localisation": {
       "longitude": -52.5,
-      "latitude": 4.6
+      "latitude": 4
     }
   },
   {
     "code": "04",
     "nom": "La Réunion",
     "departements": ["974"],
-    "zoom": 11,
+    "zoom": 9,
     "localisation": {
       "longitude": 55.536384,
       "latitude": -21.115141
@@ -183,7 +183,7 @@
     "code": "06",
     "nom": "Mayotte",
     "departements": ["976"],
-    "zoom": 11,
+    "zoom": 9,
     "localisation": {
       "longitude": 45.166244,
       "latitude": -12.8275
