@@ -76,6 +76,8 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
 
+  private _isInitialZoomDone: boolean = false;
+
   private boundingBox$(): Observable<[Localisation, Localisation]> {
     return this.route.snapshot.paramMap.get('nomDepartement')
       ? of([NO_LOCALISATION, NO_LOCALISATION])
@@ -118,7 +120,11 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
   public zoom$: Observable<number> = combineLatest([this.markersPresenter.zoom$, this.lieuSelected$]).pipe(
     delay(0),
     map(([zoom, lieu]: [number, LieuMediationNumerique | undefined]) => {
-      lieu && lieu.localisation && this.select(lieu.id, lieu.localisation.latitude, lieu.localisation.longitude);
+      lieu &&
+        lieu.localisation &&
+        !this._isInitialZoomDone &&
+        this.select(lieu.id, lieu.localisation.latitude, lieu.localisation.longitude);
+      this._isInitialZoomDone = true;
       return zoom;
     })
   );
