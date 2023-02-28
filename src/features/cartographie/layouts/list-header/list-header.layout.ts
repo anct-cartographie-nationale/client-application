@@ -24,9 +24,6 @@ export class ListHeaderLayout {
   }
 
   private resetToDefaultView(): void {
-    this._markersPresenter.center(
-      this._markersPresenter.defaultCenterView.coordinates,
-      this._markersPresenter.defaultCenterView.zoomLevel
-    );
+    this._markersPresenter.reset();
   }
 }

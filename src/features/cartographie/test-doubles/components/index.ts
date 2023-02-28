@@ -6,7 +6,6 @@ export * from './description.component.stub';
 export * from './horaires.component.stub';
 export * from './informations-generales.component.stub';
 export * from './informations-pratiques.component.stub';
-export * from './leaflet-map.component.stub';
 export * from './lieux-mediation-numerique-list.component.stub';
 export * from './modalites-accompagnement.component.stub';
 export * from './public-pris-en-charge.component.stub';

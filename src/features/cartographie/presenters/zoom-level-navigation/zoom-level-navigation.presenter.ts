@@ -7,7 +7,7 @@ export const NEAR_ZOOM_LEVEL: number = 13;
 const REGIONS_ROUTE: string = 'regions';
 const LIEUX_ROUTE: string = '.';
 
-const inRegionZoomLevel = (zoomLevel: number) => zoomLevel <= REGION_ZOOM_LEVEL;
+export const inRegionZoomLevel = (zoomLevel: number) => zoomLevel <= REGION_ZOOM_LEVEL;
 export const inLieuxZoomLevel = (zoomLevel: number) => zoomLevel > DEPARTEMENT_ZOOM_LEVEL;
 export const inDepartementZoomLevel = (zoomLevel: number) => !inRegionZoomLevel(zoomLevel) && !inLieuxZoomLevel(zoomLevel);
 
@@ -27,8 +27,11 @@ const isDepartement = (route: string[], routeConfigPath: string): boolean =>
 const isLieux = (route: string[], routeConfigPath: string): boolean =>
   route[0] === LIEUX_ROUTE && !['regions/:nomRegion/:nomDepartement', ':id'].includes(routeConfigPath);
 
+const hasDepartementAndLieuId = (routeConfigPath: string): boolean => routeConfigPath.endsWith(':nomDepartement/:id');
+
 export const shouldNavigateToListPage = (route: string[], routeConfigPath?: string): boolean =>
   routeConfigPath != null &&
+  !hasDepartementAndLieuId(routeConfigPath) &&
   (isRegion(route, routeConfigPath) || isDepartement(route, routeConfigPath) || isLieux(route, routeConfigPath));
 
 export const zoomLevelFromAreaDistance = (distance: number): number => {

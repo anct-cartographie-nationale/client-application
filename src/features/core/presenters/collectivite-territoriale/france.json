@@ -1,6 +1,7 @@
 [
   {
-    "code": "metropole",
+    "code": "250",
+    "nom": "France métropolitaine",
     "regions": ["84", "32", "93", "44", "76", "28", "75", "24", "27", "53", "94", "52", "11"],
     "zoom": 6,
     "localisation": {
@@ -9,7 +10,8 @@
     }
   },
   {
-    "code": "ocean-atlantique",
+    "code": "3",
+    "nom": "Amérique",
     "regions": ["00", "01", "02", "03"],
     "zoom": 6,
     "localisation": {
@@ -18,7 +20,8 @@
     }
   },
   {
-    "code": "ocean-indien",
+    "code": "014",
+    "nom": "Départements d'outre-mer d'Afrique de l'Est",
     "regions": ["04", "06"],
     "zoom": 6,
     "localisation": {

@@ -12,6 +12,7 @@ import {
   toRegion
 } from '../../../core';
 import {
+  inLieuxZoomLevel,
   LieuMediationNumeriqueDetailsPresentation,
   LieuxMediationNumeriqueDetailsPresenter,
   MarkersPresenter
@@ -91,7 +92,7 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   public onCloseDetails(lieu: LieuMediationNumeriqueDetailsPresentation): void {
     this._router.navigate(
-      [this._hasDepartementFilter ? `../../regions/${toRegion(lieu)?.nom}/${toDepartement(lieu)?.nom}` : '..'],
+      [this._hasDepartementFilter ? `../../regions/${toRegion(lieu)?.nom}/${toDepartement(lieu)?.nom}/${lieu.id}` : '..'],
       {
         relativeTo: this._route,
         queryParamsHandling: 'preserve'
@@ -101,7 +102,10 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation): void {
     lieuMediationNumerique.localisation &&
-      this._markersPresenter.center(lieuMediationNumerique.localisation, this._zoomLevel.userPosition);
+      this._markersPresenter.center(
+        lieuMediationNumerique.localisation,
+        inLieuxZoomLevel(this._markersPresenter.getZoom()) ? undefined : this._zoomLevel.userPosition
+      );
     this._markersPresenter.select(lieuMediationNumerique.id);
   }
 }

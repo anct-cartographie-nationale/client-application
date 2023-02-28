@@ -1,0 +1,18 @@
+<mgl-marker
+  *ngFor="let territoire of territoires; index as i; trackBy: trackByTerritoireCode"
+  [lngLat]="[territoire.localisation.longitude, territoire.localisation.latitude]">
+  <div
+    role="button"
+    tabindex="-1"
+    class="marker-group"
+    [class.marker-hover]="hoverId === territoire.code"
+    (mouseenter)="highlight.emit(territoire)"
+    (mouseleave)="highlight.emit()"
+    (click)="showLieux.emit(territoire)">
+    <div class="marker-group-bg rounded-circle shadow-sm"></div>
+    <div class="marker-group-bg rounded-circle bg-white"></div>
+    <div class="marker-group-fg rounded-circle d-flex bg-primary">
+      <span class="m-auto text-white fw-bold fs-6">{{ territoire.lieuxCount ?? 0 }}</span>
+    </div>
+  </div>
+</mgl-marker>

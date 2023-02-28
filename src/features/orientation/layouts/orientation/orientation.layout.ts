@@ -84,7 +84,7 @@ export class OrientationLayout {
     );
 
   public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> =
-    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueTotal$;
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$;
 
   public constructor(
     @Inject(FEATURES_TOKEN)

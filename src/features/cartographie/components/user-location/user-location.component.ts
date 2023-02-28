@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import { AddressFoundPresentation, AddressPresenter } from '../../../adresse';
 import { MarkersPresenter } from '../../presenters';
 
@@ -51,6 +52,8 @@ export class UserLocationComponent implements OnInit {
   @Output() public location: EventEmitter<Localisation> = new EventEmitter<Localisation>();
 
   public constructor(
+    @Inject(ZOOM_LEVEL_TOKEN)
+    private readonly _zoomLevel: ZoomLevelConfiguration,
     private readonly _addressPresenter: AddressPresenter,
     public readonly markersPresenter: MarkersPresenter
   ) {}
@@ -64,7 +67,7 @@ export class UserLocationComponent implements OnInit {
   }
 
   public onSelectAddress(address: AddressFoundPresentation): void {
-    this.markersPresenter.center(address.localisation);
+    this.markersPresenter.center(address.localisation, this._zoomLevel.userPosition);
     this.location.emit(address.localisation);
     this._displayGeolocation$.next(true);
   }
@@ -77,7 +80,7 @@ export class UserLocationComponent implements OnInit {
         longitude: position.coords.longitude
       });
 
-      this.markersPresenter.center(localisation);
+      this.markersPresenter.center(localisation, this._zoomLevel.userPosition);
       this.location.emit(localisation);
 
       this._loadingState$.next(false);

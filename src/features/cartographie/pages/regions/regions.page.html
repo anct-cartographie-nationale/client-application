@@ -1,6 +1,0 @@
-<app-regions-list
-  [regions]="(regions$ | async) ?? []"
-  [hoverId]="markersPresenter.hovered$ | async"
-  (enableHover)="hover($event)"
-  (disableHover)="hover()"
-  (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-regions-list>

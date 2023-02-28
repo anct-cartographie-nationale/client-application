@@ -1,33 +1,65 @@
-<ng-container *ngFor="let lieuMediationNumerique of lieuxMediationNumeriques; trackBy: trackByLieuId">
-  <app-leaflet-map-marker
-    *ngIf="lieuMediationNumerique.latitude && lieuMediationNumerique.longitude"
-    [latitude]="lieuMediationNumerique.latitude"
-    [longitude]="lieuMediationNumerique.longitude"
-    [properties]="lieuMediationNumerique"
-    [highlight]="highlightState(lieuMediationNumerique.id)"
-    markerFactoryKey="lieuMediationNumerique"
-    (markerClick)="showDetails.emit($event.markerProperties)"
-    (markerEnter)="enableHover.emit(lieuMediationNumerique.id)"
-    (markerLeave)="disableHover.emit()">
-    <app-leaflet-map-tooltip *ngIf="displayTooltip" [content]="popupContent" [sticky]="true">
-      <div
-        #popupContent
-        class="text-center p-3 border-bottom border-3 text-wrap"
-        style="min-width: 300px"
-        [ngClass]="lieuMediationNumerique.status?.label === 'Ouvert' ? 'border-success' : 'border-muted'">
-        <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
-        <div *ngIf="lieuMediationNumerique.status; else noOpeningHours" class="text-muted">
-          <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
-            <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
-            {{ lieuMediationNumerique.status.label }}
-          </span>
-          ·
-          <small>{{ lieuMediationNumerique.status.limite }}</small>
-        </div>
-        <ng-template #noOpeningHours>
-          <div class="text-muted">Horaires inconnus</div>
-        </ng-template>
+<ng-container *ngIf="displayTooltip">
+  <mgl-popup
+    *ngIf="highlight | async as lieuMediationNumerique"
+    anchor="bottom"
+    [offset]="[0, -30]"
+    [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]"
+    [closeButton]="false">
+    <div
+      class="text-center p-3 border-bottom border-3 text-wrap"
+      [ngClass]="lieuMediationNumerique.status?.label === 'Ouvert' ? 'border-success' : 'border-muted'">
+      <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
+      <div *ngIf="lieuMediationNumerique.status; else noOpeningHours" class="text-muted">
+        <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
+          <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+          {{ lieuMediationNumerique.status.label }}
+        </span>
+        ·
+        <small>{{ lieuMediationNumerique.status.limite }}</small>
       </div>
-    </app-leaflet-map-tooltip>
-  </app-leaflet-map-marker>
+      <ng-template #noOpeningHours>
+        <div class="text-muted">Horaires inconnus</div>
+      </ng-template>
+    </div>
+  </mgl-popup>
+</ng-container>
+<ng-container *ngFor="let lieuMediationNumerique of lieuxMediationNumeriques; index as i; trackBy: trackByLieuId">
+  <mgl-marker [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]">
+    <div
+      role="button"
+      tabindex="-1"
+      [class.marker-hover]="hoverId === lieuMediationNumerique.id || selectedId === lieuMediationNumerique.id"
+      (click)="showDetails.emit(lieuMediationNumerique)"
+      (mouseenter)="highlight.emit(lieuMediationNumerique)"
+      (mouseleave)="highlight.emit()">
+      <svg
+        [ngClass]="lieuMediationNumerique.labels_nationaux?.includes($any('CNFS')) ? 'marker-cnfs' : 'marker-default'"
+        [class.marker-status-open]="lieuMediationNumerique.status?.label === 'Ouvert'"
+        [class.marker-status-closed]="lieuMediationNumerique.status?.label === 'Fermé'"
+        [class.marker-status-unknown]="
+          lieuMediationNumerique.status?.label !== 'Fermé' && lieuMediationNumerique.status?.label !== 'Ouvert'
+        "
+        width="45"
+        height="70"
+        viewBox="0 0 40 65"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <g *ngIf="lieuMediationNumerique.labels_nationaux?.includes($any('CNFS')); else defaultMarker" class="marker-body">
+          <path class="marker-shape" d="m20.8 54.1 13.6-23.6V13.8L20 5.5 5.6 13.8v16.7l13.6 23.6z" />
+          <path class="marker-shape-out" d="M29.6 16.6 20 11.1l-9.6 5.5v11.1l9.6 5.5 9.6-5.5v-3.2h-5.5v-4.7h5.5z" />
+          <path class="marker-shape-in" d="M15.9 19.8v4.7l4.1 2.4 4.1-2.4v-4.7L20 17.4z" />
+          <circle class="marker-opening-status" cx="27.2" cy="42.5" r="6.6" />
+        </g>
+        <ng-template #defaultMarker>
+          <g class="marker-body">
+            <path
+              class="marker-shape"
+              d="M20 6C11.2 6 4 13.2 4 22s16 32 16 32 16-23.2 16-32S28.8 6 20 6zm0 21c-2.9 0-5.3-2.4-5.3-5.3s2.4-5.3 5.3-5.3 5.3 2.4 5.3 5.3S22.9 27 20 27z" />
+            <circle class="marker-opening-status" cx="27.2" cy="42.5" r="6.6" />
+          </g>
+        </ng-template>
+        <ellipse class="marker-base" cx="20" cy="61.5" rx="10" ry="2.5" />
+      </svg>
+    </div>
+  </mgl-marker>
 </ng-container>

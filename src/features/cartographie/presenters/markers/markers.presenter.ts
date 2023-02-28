@@ -1,18 +1,13 @@
 import { Inject } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { NO_LOCALISATION } from '../../../core';
 import {
   INITIAL_POSITION_TOKEN,
   InitialPositionConfiguration,
   ZOOM_LEVEL_TOKEN,
   ZoomLevelConfiguration
 } from '../../../../root';
-
-export interface CenterView {
-  coordinates: Localisation;
-  zoomLevel: number;
-}
+import { NO_LOCALISATION } from '../../../core';
 
 const isDefinedLocalisation = (topLeftBound: Localisation): boolean => topLeftBound !== NO_LOCALISATION;
 
@@ -54,17 +49,19 @@ export const getBoundsFromLocalisations = (localisations: Localisation[]): [Loca
 ];
 
 export class MarkersPresenter {
-  private readonly _centerView$: Subject<CenterView> = new Subject<CenterView>();
-  public readonly centerView$: Observable<CenterView> = this._centerView$.asObservable();
+  private readonly _localisation$: BehaviorSubject<Localisation> = new BehaviorSubject<Localisation>(
+    Localisation(this._initialPosition)
+  );
+  public readonly localisation$: Observable<Localisation> = this._localisation$.asObservable();
+
+  private readonly _zoom$: BehaviorSubject<number> = new BehaviorSubject<number>(this._zoomLevel.regular);
+  public readonly zoom$: Observable<number> = this._zoom$.asObservable();
 
   private readonly _selected$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public readonly selected$: Observable<string> = this._selected$.asObservable();
 
-  private readonly _focuced: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public readonly focuced$: Observable<string> = this._focuced.asObservable();
-
-  private readonly _hovered: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  public readonly hovered$: Observable<string> = this._hovered.asObservable();
+  private readonly _highlighted$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public readonly highlighted$: Observable<string> = this._highlighted$.asObservable();
 
   private _boundingBox$: BehaviorSubject<[Localisation, Localisation]> = new BehaviorSubject<[Localisation, Localisation]>([
     NO_LOCALISATION,
@@ -72,13 +69,7 @@ export class MarkersPresenter {
   ]);
   public boundingBox$: Observable<[Localisation, Localisation]> = this._boundingBox$.asObservable();
 
-  private _currentZoomLevel$: BehaviorSubject<number> = new BehaviorSubject<number>(this._zoomLevel.regular);
-  public currentZoomLevel$: Observable<number> = this._currentZoomLevel$.asObservable();
-
-  public readonly defaultCenterView: CenterView = {
-    coordinates: Localisation(this._initialPosition),
-    zoomLevel: this._zoomLevel.regular
-  };
+  private _currentZoom: number = this._zoomLevel.regular;
 
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
@@ -91,23 +82,27 @@ export class MarkersPresenter {
     this._boundingBox$.next(boundingBox);
   }
 
-  public center(coordinates: Localisation, zoomLevel: number = this._zoomLevel.userPosition) {
-    this._centerView$.next({ coordinates, zoomLevel });
+  public center(localisation: Localisation, zoom: number = this._currentZoom) {
+    this._localisation$.next(localisation);
+    this._zoom$.next(zoom);
+    this._currentZoom = zoom;
   }
 
   public select(markerId: string) {
     this._selected$.next(markerId);
   }
 
-  public focus(markerId: string) {
-    this._focuced.next(markerId);
+  public highlight(markerId: string) {
+    this._highlighted$.next(markerId);
   }
 
-  public hover(markerId: string) {
-    this._hovered.next(markerId);
+  public reset(): void {
+    this._localisation$.next(Localisation(this._initialPosition));
+    this._zoom$.next(this._zoomLevel.regular);
+    this._currentZoom = this._zoomLevel.regular;
   }
 
-  public setZoomLevel(zoomLevel: number) {
-    this._currentZoomLevel$.next(zoomLevel);
+  public getZoom(): number {
+    return this._currentZoom;
   }
 }

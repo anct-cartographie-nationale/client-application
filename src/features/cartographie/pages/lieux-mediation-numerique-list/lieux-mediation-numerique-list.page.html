@@ -1,24 +1,34 @@
-<div class="d-flex h-100" *ngIf="(lieuxMediationNumerique$ | async)?.length === 0">
-  <app-no-lieux-found
-    class="w-100 my-auto mx-4"
-    (resetFilters)="resetFilters()"
-    [hasFilters]="(listOfLieuxWithoutFilters$ | async)?.length !== 0"
-    [queryParams]="toQueryString(route.queryParams)"
-    [orientationFeature]="features.get('orientation')"></app-no-lieux-found>
-</div>
-<ng-container *ngIf="inLieuxZoomLevel((markersPresenter.currentZoomLevel$ | async) ?? 0)">
-  <app-lieux-mediation-numerique-list
-    class="d-print-none"
-    [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"
-    [orientationFeature]="features.get('orientation')"
-    [focusId]="markersPresenter.focuced$ | async"
-    [hoverId]="markersPresenter.hovered$ | async"
-    (print)="printPage()"
-    (selectLieu)="select($event)"
-    (enableHover)="hover($event)"
-    (disableHover)="hover()"></app-lieux-mediation-numerique-list>
-  <app-lieux-mediation-numerique-list-print
-    class="d-none d-print-block"
-    [filters]="(filters$ | async) ?? undefined"
-    [lieuxMediationNumerique]="(lieuxMediationNumerique$ | async) ?? []"></app-lieux-mediation-numerique-list-print>
+<ng-container *ngIf="inLieuxZoomLevel((zoom$ | async) ?? 0); else : regions">
+  <ng-container *ngIf="lieuxMediationNumerique$ | async as lieuxMediationNumerique">
+    <div class="d-flex h-100" *ngIf="lieuxMediationNumerique?.length === 0">
+      <app-no-lieux-found
+        class="w-100 my-auto mx-4"
+        (resetFilters)="resetFilters()"
+        [hasFilters]="(listOfLieuxWithoutFilters$ | async)?.length !== 0"
+        [queryParams]="toQueryString(route.queryParams)"
+        [orientationFeature]="features.get('orientation')"></app-no-lieux-found>
+    </div>
+    <app-lieux-mediation-numerique-list
+      class="d-print-none"
+      [lieuxMediationNumerique]="lieuxMediationNumerique"
+      [orientationFeature]="features.get('orientation')"
+      [focusId]="(lieuSelected$ | async)?.id"
+      [hoverId]="markersPresenter.highlighted$ | async"
+      (print)="printPage()"
+      (selectLieu)="select($event.id, $event.latitude, $event.longitude)"
+      (enableHover)="hover($event)"
+      (disableHover)="hover()"></app-lieux-mediation-numerique-list>
+    <app-lieux-mediation-numerique-list-print
+      class="d-none d-print-block"
+      [filters]="(filters$ | async) ?? undefined"
+      [lieuxMediationNumerique]="lieuxMediationNumerique ?? []"></app-lieux-mediation-numerique-list-print>
+  </ng-container>
 </ng-container>
+<ng-template #regions>
+  <app-regions-list
+    [regions]="(regions$ | async) ?? []"
+    [hoverId]="markersPresenter.highlighted$ | async"
+    (enableHover)="hover($event)"
+    (disableHover)="hover()"
+    (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-regions-list>
+</ng-template>

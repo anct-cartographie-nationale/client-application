@@ -1,0 +1,21 @@
+.maplibregl-marker {
+  position: absolute;
+  top: 0;
+
+  &:hover {
+    z-index: $zindex-sticky;
+  }
+}
+
+.maplibregl-popup-tip {
+  display: none;
+}
+
+.maplibregl-popup {
+  z-index: $zindex-popover;
+  max-width: 300px !important;
+}
+
+.maplibregl-popup-content {
+  padding: 0 !important;
+}

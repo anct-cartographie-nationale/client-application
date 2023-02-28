@@ -1,33 +1,36 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { combineLatest, Observable, of, tap } from 'rxjs';
+import { combineLatest, delay, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FEATURES_TOKEN, FeaturesConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import {
+  byCollectiviteTerritorialeNom,
   departementFromNom,
   DepartementPresentation,
   FilterPresentation,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
   NO_LOCALISATION,
+  RegionPresentation,
   toDepartement,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
+import { CartographieLayout } from '../../layouts';
 import {
   MarkersPresenter,
   inLieuxZoomLevel,
-  LIEUX_ZOOM_LEVEL,
   LieuMediationNumeriqueListItemPresentation,
-  toLieuxMediationNumeriqueListItemsPresentation
+  toLieuxMediationNumeriqueListItemsPresentation,
+  inRegionZoomLevel
 } from '../../presenters';
 
-const toLieuxWithLieuToFocus = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]): [
-  LieuMediationNumeriquePresentation[],
-  LieuMediationNumeriquePresentation?
-] => [lieux, lieux.find((lieu: LieuMediationNumeriquePresentation) => lieu.id === paramMap.get('id'))];
+const findLieuToFocus =
+  (paramMap: ParamMap) =>
+  (lieux: LieuMediationNumerique[]): LieuMediationNumerique | undefined =>
+    lieux.find((lieu: LieuMediationNumerique) => lieu.id === paramMap.get('id'));
 
 const shouldSortOnCodePostal = (
   lieuA: LieuMediationNumeriquePresentation,
@@ -42,10 +45,7 @@ const sortOnNom = (lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediati
 
 const toLieux =
   (localisation: Localisation) =>
-  ([lieux]: [
-    LieuMediationNumeriquePresentation[],
-    LieuMediationNumeriquePresentation?
-  ]): LieuMediationNumeriquePresentation[] => {
+  (lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] => {
     return localisation
       ? lieux
       : lieux.sort((lieuA, lieuB) =>
@@ -55,40 +55,28 @@ const toLieux =
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
-  lieux: LieuMediationNumeriquePresentation[],
-  paramMap: ParamMap
-): [LieuMediationNumeriquePresentation[], ParamMap] =>
+  lieux: LieuMediationNumeriquePresentation[]
+): LieuMediationNumeriquePresentation[] =>
   departement
-    ? [lieux.filter((lieu: LieuMediationNumeriquePresentation) => toDepartement(lieu)?.code === departement.code), paramMap]
-    : [lieux, paramMap];
+    ? lieux.filter((lieu: LieuMediationNumeriquePresentation) => toDepartement(lieu)?.code === departement.code)
+    : lieux;
 
-const toLieuxFilteredByDepartement = ([lieux, paramMap]: [LieuMediationNumeriquePresentation[], ParamMap]) =>
-  filteredByDepartementIfExist(departementFromNom(paramMap.get('nomDepartement') ?? ''), lieux, paramMap);
-
-const toLocalisationOf = ({ latitude, longitude }: { latitude?: number; longitude?: number }): Localisation =>
-  latitude == null || longitude == null ? NO_LOCALISATION : Localisation({ latitude, longitude });
+const toLieuxFilteredByDepartement = ([lieux, paramMap]: [
+  LieuMediationNumeriquePresentation[],
+  ParamMap
+]): LieuMediationNumeriquePresentation[] =>
+  filteredByDepartementIfExist(departementFromNom(paramMap.get('nomDepartement') ?? ''), lieux);
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'lieux-mediation-numerique-list.page.html'
 })
-export class LieuxMediationNumeriqueListPage {
+export class LieuxMediationNumeriqueListPage implements OnInit {
   private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this.route.snapshot.queryParams);
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
 
-  private _initialZoom: boolean = false;
-
-  private setInitialState = ([_, lieu]: [LieuMediationNumeriquePresentation[], LieuMediationNumeriquePresentation?]): void => {
-    this.markersPresenter.select('');
-    lieu && !this._initialZoom && this.focusOnLieu(lieu);
-    this._initialZoom = true;
-  };
-
-  private focusOnLieu(lieu: LieuMediationNumeriquePresentation) {
-    this.markersPresenter.focus(lieu.id);
-    this.markersPresenter.center(toLocalisationOf(lieu), LIEUX_ZOOM_LEVEL);
-  }
+  private _isInitialZoomDone: boolean = false;
 
   private boundingBox$(): Observable<[Localisation, Localisation]> {
     return this.route.snapshot.paramMap.get('nomDepartement')
@@ -106,10 +94,12 @@ export class LieuxMediationNumeriqueListPage {
     this.route.paramMap
   ]).pipe(
     map(toLieuxFilteredByDepartement),
-    map(toLieuxWithLieuToFocus),
-    tap(this.setInitialState),
     map(toLieux(this._localisation)),
     map(toLieuxMediationNumeriqueListItemsPresentation(new Date()))
+  );
+
+  public regions$: Observable<RegionPresentation[]> = this._cartographieLayout.regions$.pipe(
+    map((regions: RegionPresentation[]): RegionPresentation[] => [...regions].sort(byCollectiviteTerritorialeNom))
   );
 
   public listOfLieuxWithoutFilters$: Observable<LieuMediationNumeriquePresentation[]> =
@@ -122,6 +112,23 @@ export class LieuxMediationNumeriqueListPage {
 
   public filters$: Observable<FilterPresentation> = this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery));
 
+  public lieuSelected$: Observable<LieuMediationNumerique | undefined> =
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$.pipe(
+      map(findLieuToFocus(this.route.snapshot.paramMap))
+    );
+
+  public zoom$: Observable<number> = combineLatest([this.markersPresenter.zoom$, this.lieuSelected$]).pipe(
+    delay(0),
+    map(([zoom, lieu]: [number, LieuMediationNumerique | undefined]) => {
+      lieu &&
+        lieu.localisation &&
+        !this._isInitialZoomDone &&
+        this.select(lieu.id, lieu.localisation.latitude, lieu.localisation.longitude);
+      this._isInitialZoomDone = true;
+      return zoom;
+    })
+  );
+
   public constructor(
     @Inject(FEATURES_TOKEN)
     public readonly features: FeaturesConfiguration,
@@ -130,20 +137,31 @@ export class LieuxMediationNumeriqueListPage {
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly route: ActivatedRoute,
     private readonly _router: Router,
+    private readonly _cartographieLayout: CartographieLayout,
     public readonly markersPresenter: MarkersPresenter
   ) {}
+
+  public ngOnInit(): void {
+    const departement: DepartementPresentation | undefined = departementFromNom(
+      this.route.snapshot.paramMap.get('nomDepartement') ?? ''
+    );
+    departement &&
+      inRegionZoomLevel(this.markersPresenter.getZoom()) &&
+      this.markersPresenter.center(departement.localisation, departement.zoom);
+  }
 
   public printPage() {
     window.print();
   }
 
   public hover(highlightedId?: string) {
-    this.markersPresenter.hover(highlightedId ?? '');
+    this.markersPresenter.highlight(highlightedId ?? '');
   }
 
-  public select(lieu: LieuMediationNumeriqueListItemPresentation) {
-    this.markersPresenter.center(toLocalisationOf(lieu), this._zoomLevel.userPosition);
-    this.markersPresenter.select(lieu.id);
+  public select(id: string, latitude: number, longitude: number) {
+    !inLieuxZoomLevel(this.markersPresenter.getZoom()) &&
+      this.markersPresenter.center(Localisation({ latitude, longitude }), this._zoomLevel.userPosition);
+    this.markersPresenter.select(id);
   }
 
   public inLieuxZoomLevel = inLieuxZoomLevel;

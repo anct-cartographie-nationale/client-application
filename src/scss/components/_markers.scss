@@ -7,16 +7,12 @@
 .marker-cnfs {
   .marker-body {
     transform: translateY(11px);
-    transition: 0.35s cubic-bezier(0.3, 0.8, 0.55, 1.9);
+    filter: drop-shadow(0 0 0 rgb(0 0 0 / 0%));
+    transition: transform 0.35s cubic-bezier(0.3, 0.8, 0.55, 1.9), filter 0.4s ease-in-out;
 
     .marker-shape {
       stroke: $white;
       stroke-width: 2px;
-    }
-
-    .marker-shadow {
-      opacity: 0;
-      transition: opacity 0.4s ease-in-out;
     }
 
     .marker-opening-status {
@@ -55,7 +51,7 @@
 
 .marker-focus,
 .marker-hover {
-  z-index: $zindex-sticky !important;
+  z-index: $zindex-sticky;
 
   .marker-default,
   .marker-cnfs {
@@ -65,6 +61,7 @@
 
     .marker-body {
       transform: translateY(0);
+      filter: drop-shadow(0 2px 2px rgb(0 0 0 / 60%));
     }
   }
 }
@@ -101,18 +98,9 @@
     left: 50%;
     transition: 500ms cubic-bezier(0.32, 2.4, 0.55, 0.56);
   }
-
-  .shadow-sm {
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
-  }
 }
 
 .marker-hover {
-  .marker-group .shadow-sm {
-    opacity: 1;
-  }
-
   .marker-group-bg {
     @include marker-dimensions($marker-group-size-bg-hover);
   }

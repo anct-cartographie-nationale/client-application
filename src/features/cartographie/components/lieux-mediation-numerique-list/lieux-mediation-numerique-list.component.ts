@@ -29,7 +29,7 @@ export class LieuxMediationNumeriqueListComponent {
 
   @Input() public orientationFeature?: FeatureConfiguration;
 
-  @Input() public set focusId(focusId: string | null) {
+  @Input() public set focusId(focusId: string | undefined) {
     focusId && this.scrollTo(focusId);
   }
 

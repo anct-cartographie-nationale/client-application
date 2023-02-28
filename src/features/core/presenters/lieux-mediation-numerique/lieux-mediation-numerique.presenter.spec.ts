@@ -1350,6 +1350,57 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
+  it('should filter all lieux mediation numerique when zoom level is too low', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 47.25, longitude: 4.38 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 41.16, longitude: 4.22 })
+      }
+    ];
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of({}),
+        undefined,
+        of([Localisation({ latitude: 47, longitude: 4 }), Localisation({ latitude: 46, longitude: 5 })]),
+        of(5)
+      )
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([]);
+  });
+
   it('should group lieux de mediation numerique by departement', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
@@ -1374,7 +1425,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       {
         code: '69',
         nom: 'Rhône',
-        zoom: 10,
+        zoom: 9.3,
         lieuxCount: 1,
         localisation: {
           latitude: 45.871047330627775,
