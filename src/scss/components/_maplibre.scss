@@ -1,6 +1,10 @@
 .maplibregl-marker {
   position: absolute;
   top: 0;
+
+  &:hover {
+    z-index: $zindex-sticky;
+  }
 }
 
 .maplibregl-popup-tip {
@@ -8,6 +12,7 @@
 }
 
 .maplibregl-popup {
+  z-index: $zindex-popover;
   max-width: 300px !important;
 }
 
