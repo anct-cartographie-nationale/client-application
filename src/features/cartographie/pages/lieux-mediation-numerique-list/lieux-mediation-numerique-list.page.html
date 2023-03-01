@@ -30,5 +30,7 @@
     [hoverId]="markersPresenter.highlighted$ | async"
     (enableHover)="hover($event)"
     (disableHover)="hover()"
+    (showHub)="onShowHub($event); hubModal.toggle()"
     (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-regions-list>
+  <app-hub-modal [hub]="hubToDisplay$ | async" #hubModal></app-hub-modal>
 </ng-template>

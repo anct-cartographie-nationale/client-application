@@ -7,6 +7,11 @@
     "localisation": {
       "longitude": 4.538056,
       "latitude": 45.515833
+    },
+    "hub": {
+      "nom": "Hinaura",
+      "source": "hinaura",
+      "url": "https://www.hinaura.fr/"
     }
   },
   {
@@ -17,6 +22,11 @@
     "localisation": {
       "longitude": 2.775278,
       "latitude": 49.966111
+    },
+    "hub": {
+      "nom": "Les Assembleurs",
+      "source": "assembleurs",
+      "url": "https://assembleurs.co/"
     }
   },
   {
@@ -27,6 +37,10 @@
     "localisation": {
       "longitude": 6.053333,
       "latitude": 43.955
+    },
+    "hub": {
+      "nom": "Hub du Sud",
+      "url": "https://www.hubdusud.fr/"
     }
   },
   {
@@ -37,6 +51,10 @@
     "localisation": {
       "longitude": 5.619444,
       "latitude": 48.689167
+    },
+    "hub": {
+      "nom": "Hub Est",
+      "url": "https://hubest.fr/"
     }
   },
   {
@@ -47,6 +65,10 @@
     "localisation": {
       "longitude": 2.137222,
       "latitude": 43.702222
+    },
+    "hub": {
+      "nom": "RhinOcc",
+      "url": "https://rhinocc.fr/"
     }
   },
   {
@@ -57,6 +79,10 @@
     "localisation": {
       "longitude": 0.106667,
       "latitude": 49.121111
+    },
+    "hub": {
+      "nom": "Numi",
+      "url": "https://www.hub-numi-normandie.fr/"
     }
   },
   {
@@ -67,6 +93,10 @@
     "localisation": {
       "longitude": 0.197778,
       "latitude": 45.192222
+    },
+    "hub": {
+      "nom": "Hubikoop",
+      "url": "https://hubikoop.fr/"
     }
   },
   {
@@ -77,6 +107,10 @@
     "localisation": {
       "longitude": 1.685278,
       "latitude": 47.480556
+    },
+    "hub": {
+      "nom": "Hub-Lo",
+      "url": "https://hub-lo.fr/"
     }
   },
   {
@@ -87,6 +121,10 @@
     "localisation": {
       "longitude": 4.809167,
       "latitude": 47.235278
+    },
+    "hub": {
+      "nom": "MedNum BFC",
+      "url": "https://www.mednum-bfc.fr/"
     }
   },
   {
@@ -97,6 +135,10 @@
     "localisation": {
       "longitude": -2.838611,
       "latitude": 48.179722
+    },
+    "hub": {
+      "nom": "Hub Bretagne",
+      "url": "https://hub-bretagne.net/"
     }
   },
   {
@@ -107,6 +149,9 @@
     "localisation": {
       "longitude": 9.105278,
       "latitude": 42.149722
+    },
+    "hub": {
+      "nom": "Hub Corsica"
     }
   },
   {
@@ -117,6 +162,10 @@
     "localisation": {
       "longitude": -0.823888,
       "latitude": 47.474722
+    },
+    "hub": {
+      "nom": "Conumm",
+      "url": "https://conumm.fr/"
     }
   },
   {
@@ -127,6 +176,11 @@
     "localisation": {
       "longitude": 2.504722,
       "latitude": 48.709167
+    },
+    "hub": {
+      "nom": "Francil'IN",
+      "source": "francilin",
+      "url": "https://francilin.fr/"
     }
   },
   {
@@ -137,6 +191,10 @@
     "localisation": {
       "longitude": -63.0667,
       "latitude": 18.0667
+    },
+    "hub": {
+      "nom": "Hub Antille",
+      "url": "https://mediation-numerique.mq/"
     }
   },
   {
@@ -147,6 +205,10 @@
     "localisation": {
       "longitude": -61.551,
       "latitude": 16.2
+    },
+    "hub": {
+      "nom": "Hub Antille",
+      "url": "https://mediation-numerique.mq/"
     }
   },
   {
@@ -157,6 +219,10 @@
     "localisation": {
       "longitude": -61.024174,
       "latitude": 14.641528
+    },
+    "hub": {
+      "nom": "Hub Antille",
+      "url": "https://mediation-numerique.mq/"
     }
   },
   {
@@ -177,6 +243,10 @@
     "localisation": {
       "longitude": 55.536384,
       "latitude": -21.115141
+    },
+    "hub": {
+      "nom": "Ultra Numérique",
+      "url": "https://hub.ultranumerique.fr/"
     }
   },
   {
@@ -187,6 +257,10 @@
     "localisation": {
       "longitude": 45.166244,
       "latitude": -12.8275
+    },
+    "hub": {
+      "nom": "Ultra Numérique",
+      "url": "https://hub.ultranumerique.fr/"
     }
   }
 ]

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { BRAND_TOKEN, BrandConfiguration } from '../../../../root';
-import { FilterPresentation } from '../../../core';
-import { LieuMediationNumeriqueListItemPresentation } from '../../presenters';
+import { BRAND_TOKEN, BrandConfiguration } from '../../../../../root';
+import { FilterPresentation } from '../../../../core';
+import { LieuMediationNumeriqueListItemPresentation } from '../../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

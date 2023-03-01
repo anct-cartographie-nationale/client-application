@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { FeatureConfiguration } from '../../../../root';
-import { LieuMediationNumeriqueListItemPresentation } from '../../presenters';
+import { FeatureConfiguration } from '../../../../../root';
+import { LieuMediationNumeriqueListItemPresentation } from '../../../presenters';
 
 const itemById =
   (id: string) =>

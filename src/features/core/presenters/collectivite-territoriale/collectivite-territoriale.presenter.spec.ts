@@ -117,7 +117,11 @@ describe('collectivite territoriale presenter', (): void => {
       localisation: Localisation({
         longitude: 2.137222,
         latitude: 43.702222
-      })
+      }),
+      hub: {
+        nom: 'RhinOcc',
+        url: 'https://rhinocc.fr/'
+      }
     });
   });
 

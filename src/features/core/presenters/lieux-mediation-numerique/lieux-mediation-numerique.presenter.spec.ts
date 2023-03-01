@@ -1465,6 +1465,11 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         localisation: {
           latitude: 45.515833,
           longitude: 4.538056
+        },
+        hub: {
+          nom: 'Hinaura',
+          source: 'hinaura',
+          url: 'https://www.hinaura.fr/'
         }
       }
     ]);
