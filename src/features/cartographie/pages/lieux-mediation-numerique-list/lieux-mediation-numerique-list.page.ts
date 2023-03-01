@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { combineLatest, delay, Observable, of } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest, combineLatestWith, delay, Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FEATURES_TOKEN, FeaturesConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
@@ -14,7 +14,6 @@ import {
   LieuxMediationNumeriquePresenter,
   NO_LOCALISATION,
   RegionPresentation,
-  toDepartement,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
@@ -24,54 +23,25 @@ import {
   inLieuxZoomLevel,
   LieuMediationNumeriqueListItemPresentation,
   toLieuxMediationNumeriqueListItemsPresentation,
-  inRegionZoomLevel
+  inRegionZoomLevel,
+  HubPresentation
 } from '../../presenters';
-
-const findLieuToFocus =
-  (paramMap: ParamMap) =>
-  (lieux: LieuMediationNumerique[]): LieuMediationNumerique | undefined =>
-    lieux.find((lieu: LieuMediationNumerique) => lieu.id === paramMap.get('id'));
-
-const shouldSortOnCodePostal = (
-  lieuA: LieuMediationNumeriquePresentation,
-  lieuB: LieuMediationNumeriquePresentation
-): boolean => lieuA.code_postal !== lieuB.code_postal;
-
-const sortOnCodePostal = (lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediationNumeriquePresentation): number =>
-  lieuA.code_postal < lieuB.code_postal ? -1 : 1;
-
-const sortOnNom = (lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediationNumeriquePresentation): number =>
-  lieuA.nom < lieuB.nom ? -1 : 1;
-
-const toLieux =
-  (localisation: Localisation) =>
-  (lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] => {
-    return localisation
-      ? lieux
-      : lieux.sort((lieuA, lieuB) =>
-          shouldSortOnCodePostal(lieuA, lieuB) ? sortOnCodePostal(lieuA, lieuB) : sortOnNom(lieuA, lieuB)
-        );
-  };
-
-const filteredByDepartementIfExist = (
-  departement: DepartementPresentation | undefined,
-  lieux: LieuMediationNumeriquePresentation[]
-): LieuMediationNumeriquePresentation[] =>
-  departement
-    ? lieux.filter((lieu: LieuMediationNumeriquePresentation) => toDepartement(lieu)?.code === departement.code)
-    : lieux;
-
-const toLieuxFilteredByDepartement = ([lieux, paramMap]: [
-  LieuMediationNumeriquePresentation[],
-  ParamMap
-]): LieuMediationNumeriquePresentation[] =>
-  filteredByDepartementIfExist(departementFromNom(paramMap.get('nomDepartement') ?? ''), lieux);
+import { findLieuToFocus, toHub, toLieux, toLieuxFilteredByDepartement } from './lieux-mediation-numerique-list.presentation';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: 'lieux-mediation-numerique-list.page.html'
 })
 export class LieuxMediationNumeriqueListPage implements OnInit {
+  private _hubToDisplay$: Subject<HubPresentation> = new Subject<HubPresentation>();
+  public hubToDisplay$: Observable<HubPresentation> = this._hubToDisplay$.asObservable().pipe(
+    combineLatestWith(this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$),
+    map(([hub, lieux]: [HubPresentation, LieuMediationNumerique[]]) => ({
+      ...hub,
+      lieuxCount: lieux.filter((lieu: LieuMediationNumerique) => lieu.source === hub.source).length
+    }))
+  );
+
   private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this.route.snapshot.queryParams);
 
   private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
@@ -172,5 +142,9 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
 
   public toQueryString(fromObject: {} = {}): string {
     return new HttpParams({ fromObject }).toString();
+  }
+
+  public onShowHub(region: RegionPresentation) {
+    this._hubToDisplay$.next(toHub(region));
   }
 }

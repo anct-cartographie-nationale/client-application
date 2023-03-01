@@ -1,17 +1,24 @@
 <div class="h-100 d-flex flex-column" *ngIf="regions">
   <div class="list-group list-group-flush flex-grow-1 overflow-auto">
-    <a
-      [routerLink]="['regions', region.nom]"
-      [relativeTo]="route.parent"
-      queryParamsHandling="preserve"
-      (click)="showLieux.emit(region)"
-      [class.list-group-item-hover]="hoverId === region.code"
-      (mouseover)="enableHover.emit(region.code)"
-      (mouseout)="disableHover.emit()"
-      class="list-group-item list-group-item-action p-4"
-      *ngFor="let region of regions">
-      <h5 class="fw-bold mb-0">{{ region.nom }}</h5>
-      <div class="text-muted">{{ region.lieuxCount }} résultats</div>
-    </a>
+    <div *ngFor="let region of regions" class="list-group-item d-flex" [class.list-group-item-hover]="hoverId === region.code">
+      <a
+        class="list-group-item-action text-decoration-none flex-grow-1 py-3"
+        [routerLink]="['regions', region.nom]"
+        [relativeTo]="route.parent"
+        queryParamsHandling="preserve"
+        (click)="showLieux.emit(region)"
+        (mouseover)="enableHover.emit(region.code)"
+        (mouseout)="disableHover.emit()">
+        <h5 class="fw-bold mb-0">{{ region.nom }}</h5>
+        <div class="text-muted">{{ region.lieuxCount }} résultats</div>
+      </a>
+      <button *ngIf="region.hub" class="btn btn-link" (click)="showHub.emit(region)">
+        <img
+          [src]="'/assets/img/logo/hubs/48/' + region.hub.nom + '.png'"
+          [alt]="region.hub.nom"
+          [title]="region.hub.nom"
+          style="max-width: 120px" />
+      </button>
+    </div>
   </div>
 </div>

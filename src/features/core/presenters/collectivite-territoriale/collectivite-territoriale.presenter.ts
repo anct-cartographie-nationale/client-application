@@ -99,6 +99,9 @@ export const regionFromDepartement = (departement: DepartementPresentation): Reg
 export const departementFromNom = (nomDepartement: string): DepartementPresentation | undefined =>
   departements.find((departement: DepartementPresentation) => departement.nom === nomDepartement);
 
+export const departementFromCode = (codeDepartement: string): DepartementPresentation | undefined =>
+  departements.find((departement: DepartementPresentation) => departement.code === codeDepartement);
+
 export const regionFromNom = (nomRegion: string): RegionPresentation | undefined =>
   regions.find((region: RegionPresentation) => region.nom === nomRegion);
 

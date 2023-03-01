@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DepartementPresentation } from '../../../core';
+import { RegionPresentation } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,10 +8,11 @@ import { DepartementPresentation } from '../../../core';
   templateUrl: './regions-list.component.html'
 })
 export class RegionsListComponent {
-  @Input() regions: DepartementPresentation[] = [];
+  @Input() regions: RegionPresentation[] = [];
   @Input() public hoverId: string | null = null;
 
-  @Output() showLieux: EventEmitter<DepartementPresentation> = new EventEmitter<DepartementPresentation>();
+  @Output() showHub: EventEmitter<RegionPresentation> = new EventEmitter<RegionPresentation>();
+  @Output() showLieux: EventEmitter<RegionPresentation> = new EventEmitter<RegionPresentation>();
   @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
