@@ -60,8 +60,19 @@
         [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
     </li>
   </ul>
-  <div *ngIf="lieuMediationNumerique.contact?.courriel" class="bg-light p-4 text-end">
-    <button (click)="reportAnError.emit()" class="btn btn-secondary btn-sm">
+  <div class="bg-light px-4 text-end">
+    <a
+      href="https://dora.fabrique.social.gouv.fr/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-secondary btn-sm update-with-dora my-4 me-3">
+      Mettre à jour sur DORA
+      <i class="ri ri-settings-4-line ms-1 align-bottom"></i>
+    </a>
+    <button
+      *ngIf="lieuMediationNumerique.contact?.courriel"
+      (click)="reportAnError.emit()"
+      class="btn btn-secondary btn-sm my-4">
       Signaler une erreur
       <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
     </button>
