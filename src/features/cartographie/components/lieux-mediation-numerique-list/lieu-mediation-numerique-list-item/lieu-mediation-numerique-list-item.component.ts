@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ConditionAcces } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
 import { LieuMediationNumeriqueListItemPresentation } from '../../../presenters';
 
 @Component({
@@ -10,5 +12,14 @@ import { LieuMediationNumeriqueListItemPresentation } from '../../../presenters'
 export class LieuMediationNumeriqueListItemComponent {
   @Input() public lieuMediationNumerique!: LieuMediationNumeriqueListItemPresentation;
 
+  @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+  @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
+
   public readonly payant: ConditionAcces.Payant = ConditionAcces.Payant;
+
+  public constructor(
+    @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
+    public readonly route: ActivatedRoute
+  ) {}
 }

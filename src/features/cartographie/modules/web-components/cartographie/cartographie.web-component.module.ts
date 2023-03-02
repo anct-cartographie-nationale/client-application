@@ -1,7 +1,7 @@
 import { DoBootstrap, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { BrowserModule } from '@angular/platform-browser';
-import { mediationNumeriqueProviders } from '../../../../../root';
+import { ASSETS_CONFIGURATION, ASSETS_TOKEN, mediationNumeriqueProviders } from '../../../../../root';
 import { CartographieWebComponentLayout } from '../../../layouts';
 import { cartographieProviders } from '../../common';
 import { CartographieCommonModule } from '../../common/cartographie.common.module';
@@ -10,7 +10,14 @@ import { CartographieWebComponentRoutingModule } from './cartographie.web-compon
 @NgModule({
   declarations: [CartographieWebComponentLayout],
   imports: [BrowserModule, CartographieCommonModule, CartographieWebComponentRoutingModule],
-  providers: [...cartographieProviders, ...mediationNumeriqueProviders]
+  providers: [
+    ...cartographieProviders,
+    ...mediationNumeriqueProviders,
+    {
+      provide: ASSETS_TOKEN,
+      useValue: ASSETS_CONFIGURATION
+    }
+  ]
 })
 export class CartographieWebComponentModule implements DoBootstrap {
   public constructor(private injector: Injector) {

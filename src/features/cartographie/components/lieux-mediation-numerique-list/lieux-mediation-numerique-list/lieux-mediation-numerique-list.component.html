@@ -1,20 +1,17 @@
 <div class="h-100 d-flex flex-column">
-  <div #container class="list-group list-group-flush flex-grow-1 overflow-auto">
-    <a
+  <div #container class="list-group list-group-flush flex-grow-1 overflow-auto" tabindex="-1">
+    <div
       #item
-      [attr.id]="lieuMediationNumerique.id"
-      class="list-group-item list-group-item-action p-4"
-      [class.list-group-item-hover]="hoverId === lieuMediationNumerique.id"
-      (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
-      (mouseout)="disableHover.emit()"
-      routerLinkActive="bg-light"
       *ngFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
-      queryParamsHandling="preserve"
-      [routerLink]="[lieuMediationNumerique.id, 'details']"
-      [relativeTo]="route.parent"
-      (click)="selectLieu.emit(lieuMediationNumerique)">
-      <app-mediation-numerique-list-item [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
-    </a>
+      [attr.id]="lieuMediationNumerique.id"
+      [class.list-group-item-hover]="hoverId === lieuMediationNumerique.id"
+      class="list-group-item p-4">
+      <app-mediation-numerique-list-item
+        [lieuMediationNumerique]="lieuMediationNumerique"
+        (showLabel)="showLabel.emit($event)"
+        (enableHover)="enableHover.emit($event)"
+        (disableHover)="disableHover.emit()"></app-mediation-numerique-list-item>
+    </div>
   </div>
   <div class="bg-primary py-3 px-4 g-0 row">
     <div class="col-auto">

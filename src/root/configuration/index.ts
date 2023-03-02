@@ -1,3 +1,4 @@
+export * from './assets.configuration';
 export * from './brand.configuration';
 export * from './data.configuration';
 export * from './features.configuration';

@@ -1,6 +1,6 @@
+import { Contact, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { emailMessage, reportErrorEmailMessage } from './lieux-mediation-numerique-details.presentation';
-import { Contact, Service, Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 describe('lieux mediation numerique details presentation', (): void => {
   it('should get message with only required text', (): void => {

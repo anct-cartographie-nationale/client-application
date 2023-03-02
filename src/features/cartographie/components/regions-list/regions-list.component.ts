@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 import { RegionPresentation } from '../../../core';
 
 @Component({
@@ -16,5 +17,8 @@ export class RegionsListComponent {
   @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
-  public constructor(public readonly route: ActivatedRoute) {}
+  public constructor(
+    @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
+    public readonly route: ActivatedRoute
+  ) {}
 }

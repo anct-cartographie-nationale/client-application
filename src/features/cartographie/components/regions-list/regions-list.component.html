@@ -1,5 +1,5 @@
 <div class="h-100 d-flex flex-column" *ngIf="regions">
-  <div class="list-group list-group-flush flex-grow-1 overflow-auto">
+  <div tabindex="-1" class="list-group list-group-flush flex-grow-1 overflow-auto">
     <div *ngFor="let region of regions" class="list-group-item d-flex" [class.list-group-item-hover]="hoverId === region.code">
       <a
         class="list-group-item-action text-decoration-none flex-grow-1 py-3"
@@ -14,7 +14,7 @@
       </a>
       <button *ngIf="region.hub" class="btn btn-link" (click)="showHub.emit(region)">
         <img
-          [src]="'/assets/img/logo/hubs/48/' + region.hub.nom + '.png'"
+          [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + region.hub.nom + '.png'"
           [alt]="region.hub.nom"
           [title]="region.hub.nom"
           style="max-width: 120px" />

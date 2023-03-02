@@ -19,7 +19,10 @@
       <div class="bg-white">
         <div class="modal-body col-lg-7 col-12 m-auto">
           <div *ngIf="hub as hub" class="text-center">
-            <img class="mb-4" [src]="'/assets/img/logo/hubs/48/' + hub.nom + '.png'" [alt]="'Logo' + hub.nom" />
+            <img
+              class="mb-4"
+              [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + hub.nom + '.png'"
+              [alt]="'Logo' + hub.nom" />
             <h4 class="fw-bold">
               HUB d'inclusion numérique
               <br />
@@ -32,10 +35,15 @@
                 <ng-container *ngIf="!isLast">&ensp;-&ensp;</ng-container>
               </ng-container>
             </div>
-            <span *ngIf="hub.lieuxCount as lieuxCount" class="rounded-5 bg-light py-1 px-3">
+            <span *ngIf="hub.lieuxCount as lieuxCount" class="rounded-5 bg-light py-1 px-3" [ngPlural]="lieuxCount">
               <i class="ri-map-pin-5-line align-bottom"></i>
               Ce hub a référencé
-              <b>{{ lieuxCount }} lieux</b>
+              <ng-template ngPluralCase="=1">
+                <b>1 lieu</b>
+              </ng-template>
+              <ng-template ngPluralCase="other">
+                <b>{{ lieuxCount }} lieux</b>
+              </ng-template>
             </span>
           </div>
         </div>

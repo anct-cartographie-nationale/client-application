@@ -1,0 +1,59 @@
+<div
+  *ngIf="activateModal$ | async"
+  [class.show]="animate$ | async"
+  class="modal d-block fade"
+  tabindex="-1"
+  aria-labelledby="labelModal"
+  spellcheck="false"
+  aria-modal="true"
+  role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content overflow-hidden">
+      <div class="modal-header bg-primary text-bg-dark">
+        <h2 class="modal-title h3" id="labelModal">
+          <i class="ri-xl ri-error-warning-line align-text-top me-2" style="transform: rotate(180deg)"></i>
+          Informations label
+        </h2>
+        <button type="button" class="btn-close btn-close-white opacity-100 mb-0" aria-label="Close" (click)="close()"></button>
+      </div>
+      <div class="bg-white">
+        <div class="modal-body text-center" *ngIf="label as label">
+          <img
+            [src]="assetsConfiguration.path + '/img/logo/labels/' + label.ref + '.svg'"
+            [alt]="'Logo ' + label.nom"
+            class="mb-3"
+            style="width: 180px; max-height: 120px" />
+          <h4 class="fw-bold text-primary">{{ label.nom }}</h4>
+          <p class="mb-0 mt-3">{{ label.description }}</p>
+          <a [href]="label.url" target="_blank" rel="noopener noreferrer" class="text-muted text-decoration-none">
+            En savoir plus
+            <i class="ri-external-link-line"></i>
+          </a>
+          <div class="my-3">
+            <i *ngFor="let carracteristique of label.carracteristiques" class="badge rounded-pill text-bg-light fw-normal me-2">
+              {{ carracteristique }}
+            </i>
+          </div>
+          <span *ngIf="label.lieuxCount as lieuxCount" [ngPlural]="lieuxCount" class="rounded-5 bg-light py-1 px-3">
+            <i class="ri-map-pin-5-line align-bottom me-2"></i>
+            <ng-template ngPluralCase="=1">
+              <b>1 lieu</b>
+              utilise ce label
+            </ng-template>
+            <ng-template ngPluralCase="other">
+              <b>{{ lieuxCount }} lieux</b>
+              utilisent ce label
+            </ng-template>
+          </span>
+        </div>
+        <div class="modal-footer justify-content-center bg-light">
+          <button type="button" class="btn btn-secondary me-3" (click)="close()">
+            <i class="ri-arrow-go-back-line align-bottom"></i>
+            Retour à la carte
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="activateModal$ | async" class="modal-backdrop fade" [class.show]="animate$ | async"></div>

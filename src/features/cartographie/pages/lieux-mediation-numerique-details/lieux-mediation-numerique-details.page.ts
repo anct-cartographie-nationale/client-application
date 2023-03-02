@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostListener, Inject, Optional } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, Subject, tap } from 'rxjs';
+import { combineLatestWith, Observable, of, Subject, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatomoTracker } from 'ngx-matomo';
+import { LabelNational, LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { BRAND_TOKEN, BrandConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import {
   FilterPresentation,
@@ -13,6 +14,8 @@ import {
 } from '../../../core';
 import {
   inLieuxZoomLevel,
+  LabelPresentation,
+  labelToDisplayMap,
   LieuMediationNumeriqueDetailsPresentation,
   LieuxMediationNumeriqueDetailsPresenter,
   MarkersPresenter
@@ -42,6 +45,15 @@ export class LieuxMediationNumeriqueDetailsPage {
   public filters$: Observable<FilterPresentation> = this._route.queryParams.pipe(map(toFilterFormPresentationFromQuery));
 
   private readonly _hasDepartementFilter: boolean = true;
+
+  private _labelToDisplay$: Subject<LabelPresentation> = new Subject<LabelPresentation>();
+  public labelToDisplay$: Observable<LabelPresentation> = this._labelToDisplay$.asObservable().pipe(
+    combineLatestWith(this._lieuxMediationNumeriqueDetailsPresenter.getAll$),
+    map(([label, lieux]: [LabelPresentation, LieuMediationNumerique[]]) => ({
+      ...label,
+      lieuxCount: lieux.filter((lieu: LieuMediationNumerique) => lieu.labels_nationaux?.includes(label.ref)).length
+    }))
+  );
 
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
@@ -98,6 +110,11 @@ export class LieuxMediationNumeriqueDetailsPage {
         queryParamsHandling: 'preserve'
       }
     );
+  }
+
+  public onShowLabel(label: LabelNational) {
+    const labelPresentation: LabelPresentation | undefined = labelToDisplayMap.get(label);
+    labelPresentation && this._labelToDisplay$.next(labelPresentation);
   }
 
   private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation): void {

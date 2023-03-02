@@ -17,4 +17,9 @@
     background-color: var(--#{$prefix}tile-btn-hover-bg) !important;
     color: var(--#{$prefix}tile-btn-color) !important;
   }
+
+  &:focus {
+    background-color: var(--#{$prefix}tile-btn-hover-bg) !important;
+    color: var(--#{$prefix}tile-btn-color) !important;
+  }
 }

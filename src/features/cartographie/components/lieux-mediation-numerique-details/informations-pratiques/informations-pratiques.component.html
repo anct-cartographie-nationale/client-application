@@ -26,7 +26,8 @@
       class="text-decoration-none d-block mb-2"
       (click)="$event.stopPropagation()">
       <i class="ri-phone-line align-bottom"></i>
-      {{ telephone }}
+      <span aria-hidden="true">{{ telephone | phone }}</span>
+      <span class="visually-hidden">Contacter par téléphone</span>
     </a>
   </div>
 </div>

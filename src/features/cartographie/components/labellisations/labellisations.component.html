@@ -1,21 +1,9 @@
 <div class="h5 text-muted text-uppercase">Labellisations</div>
-<div *ngIf="labelsNationaux">
-  <ng-container *ngFor="let label of labelsNationaux">
-    <app-maison-france-service class="me-3" *ngIf="label === 'France Services'"></app-maison-france-service>
-    <app-aptic class="me-3" *ngIf="label === 'APTIC'"></app-aptic>
-    <app-aidants-connect class="me-3" *ngIf="label === 'Aidants Connect'"></app-aidants-connect>
-    <app-fabriques-de-territoire class="me-3" *ngIf="label === 'Fabriques de Territoire'"></app-fabriques-de-territoire>
-    <app-grandes-ecoles-du-numerique
-      class="me-3"
-      *ngIf="label === 'Grandes écoles du numérique'"></app-grandes-ecoles-du-numerique>
-    <app-point-relais-caf class="me-3" *ngIf="label === 'Point relais CAF'"></app-point-relais-caf>
-    <app-point-numerique-caf class="me-3" *ngIf="label === 'Point numérique CAF'"></app-point-numerique-caf>
-    <app-relais-pole-emploi class="me-3" *ngIf="label === 'Relais pôle emploi'"></app-relais-pole-emploi>
-    <app-french-tech class="me-3" *ngIf="label === 'French Tech'"></app-french-tech>
-    <app-cnfs class="me-3" *ngIf="label === 'CNFS'"></app-cnfs>
-    <app-campus-connecte class="me-3" *ngIf="label === 'Campus connecté'"></app-campus-connecte>
-  </ng-container>
-</div>
+<ng-container *ngIf="labelsNationaux">
+  <button *ngFor="let label of labelsNationaux" (click)="showLabel.emit(label)" class="btn btn-link p-0 me-3">
+    <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + label" />
+  </button>
+</ng-container>
 <div class="mt-3" *ngIf="labelsAutres">
   <span class="badge rounded-pill text-bg-light p-2 me-3 mb-2 fs-6" *ngFor="let labelAutres of labelsAutres">
     <span class="opacity-75">{{ labelAutres }}</span>
