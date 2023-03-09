@@ -14,6 +14,17 @@ export type FilterOperator = (
   date: Date
 ) => boolean;
 
+type Digit = `${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}`;
+
+export type Time = `${0 | 1 | 2}${Digit}:${0 | 1 | 2 | 3 | 4 | 5}${Digit}`;
+
+export type OpeningHours = {
+  day: '' | 'now' | 'all' | 'mo' | 'tu' | 'we' | 'th' | 'fr' | 'sa' | 'su';
+  period?: '' | 'all' | 'hours';
+  start?: '' | Time;
+  end?: '' | Time;
+};
+
 export type FilterPresentation = {
   service?: Service;
   address?: string;
@@ -22,8 +33,7 @@ export type FilterPresentation = {
   conditions_acces?: ConditionAcces[];
   publics_accueillis?: PublicAccueilli[];
   modalites_accompagnement?: ModaliteAccompagnement[];
-  date_ouverture?: string;
-  ouvert_actuellement?: string;
+  horaires_ouverture?: OpeningHours[];
 };
 
 export type FilterQueryParamsPresentation = {
@@ -36,8 +46,7 @@ export type FilterQueryParamsPresentation = {
   conditions_acces?: string;
   publics_accueillis?: string;
   modalites_accompagnement?: string;
-  date_ouverture?: string;
-  ouvert_actuellement?: string;
+  horaires_ouverture?: string;
 };
 
 export type FilterFormPresentation = FilterPresentation & {
@@ -60,8 +69,7 @@ export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParam
   conditions_acces: toArray(queryParams?.conditions_acces),
   publics_accueillis: toArray(queryParams?.publics_accueillis),
   modalites_accompagnement: toArray(queryParams?.modalites_accompagnement),
-  date_ouverture: queryParams?.date_ouverture,
-  ouvert_actuellement: queryParams?.ouvert_actuellement
+  horaires_ouverture: queryParams?.horaires_ouverture ? JSON.parse(queryParams?.horaires_ouverture) : undefined
 });
 
 export const toLocalisationFromFilterFormPresentation = (filter: FilterFormPresentation): Localisation =>

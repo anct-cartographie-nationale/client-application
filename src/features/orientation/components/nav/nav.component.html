@@ -18,10 +18,7 @@
     </app-nav-link>
   </li>
   <li class="nav-item">
-    <app-nav-link
-      [size]="size"
-      [link]="['disponibilite']"
-      [filtersCount]="(filter.date_ouverture ? 1 : 0) + (filter.ouvert_actuellement ? 1 : 0)">
+    <app-nav-link [size]="size" [link]="['disponibilite']" [filtersCount]="filter.horaires_ouverture?.length ?? 0">
       Disponibilité
     </app-nav-link>
   </li>

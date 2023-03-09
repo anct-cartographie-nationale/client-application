@@ -100,6 +100,12 @@ export class OrientationLayout {
   }
 
   private setFilterToQueryString(): (queryParams: FilterPresentation) => Promise<boolean> {
-    return (queryParams: FilterPresentation) => this.router.navigate([], { queryParams });
+    return (queryParams: FilterPresentation) =>
+      this.router.navigate([], {
+        queryParams: {
+          ...queryParams,
+          horaires_ouverture: JSON.stringify(queryParams.horaires_ouverture)
+        }
+      });
   }
 }

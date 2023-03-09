@@ -41,11 +41,15 @@
       <div class="ms-1">&times;</div>
     </button>
   </div>
-  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.ouvert_actuellement">
+  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.horaires_ouverture">
     <button
       class="chip-button py-1 fw-bold d-flex align-items-center"
-      (click)="resetForm(filter.ouvert_actuellement, 'ouvert_actuellement')">
-      <div class="chip-button-trim">{{ filter.ouvert_actuellement && "Ouvert aujourd'hui" }}</div>
+      (click)="resetForm(filter.horaires_ouverture, 'horaires_ouverture')">
+      <div class="chip-button-trim" [ngPlural]="filter.horaires_ouverture.length">
+        {{ filter.horaires_ouverture.length }}
+        <ng-template ngPluralCase="1">horaire d'ouverture</ng-template>
+        <ng-template ngPluralCase="other">horaires d'ouverture</ng-template>
+      </div>
       <div class="ms-1">&times;</div>
     </button>
   </div>

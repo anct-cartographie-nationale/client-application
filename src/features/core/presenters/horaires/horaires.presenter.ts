@@ -1,11 +1,34 @@
-import { HorairesPresentation, Jour } from './horaires.presentation';
+import { WeekDay } from '@angular/common';
 import opening_hours from 'opening_hours';
+import { Time } from '../filter';
+import { HorairesPresentation, Jour } from './horaires.presentation';
 
 const joursDeLaSemaine: Jour[] = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
 
-const invalidInterval = (interval: string | undefined) => interval != 'Fermé' && interval != null;
+const MINUTE_TO_MILLISECONDS: number = 60 * 1000;
+const HOUR_TO_MILLISECONDS: number = 60 * MINUTE_TO_MILLISECONDS;
+const DAY_TO_MILLISECONDS: number = 24 * HOUR_TO_MILLISECONDS;
 
-const dateWithoutTime = (date: Date) => date.toISOString().substring(0, 10);
+export const dayOfTheWeek = (date: Date, weekDay: WeekDay): Date =>
+  new Date(date.getTime() + ((weekDay === 0 ? 7 : weekDay) - date.getDay()) * DAY_TO_MILLISECONDS);
+
+const timeToMilliseconds = (time: Time): number => {
+  const [hours, minutes]: number[] = time.split(':').map(Number);
+  return hours * HOUR_TO_MILLISECONDS + minutes * MINUTE_TO_MILLISECONDS;
+};
+
+const dateWithoutTime = (date: Date): Date => {
+  const dateWithoutTime = new Date(date);
+  dateWithoutTime.setHours(0, 0, 0, 0);
+  return dateWithoutTime;
+};
+
+export const dateTimeFor =
+  (date: Date) =>
+  (weekDay: WeekDay, time: Time): Date =>
+    new Date(dayOfTheWeek(dateWithoutTime(date), weekDay).getTime() + timeToMilliseconds(time));
+
+const invalidInterval = (interval?: string) => interval != 'Fermé' && interval != null;
 
 const formatTime = (intervalStart?: Date) =>
   intervalStart &&
@@ -28,11 +51,9 @@ const appendTimeTableInterval = (
     .join('\n')
 });
 
-const dayOfTheWeek = (date: Date, weekDay: number): number => new Date().setDate(date.getDate() - date.getDay() + weekDay + 1);
+export const firstDayOfTheWeek = (date: Date): Date => dayOfTheWeek(date, WeekDay.Monday);
 
-const firstDayOfTheWeek = (date: Date): Date => new Date(dayOfTheWeek(date, 0));
-
-const lastDayOfTheWeek = (date: Date) => new Date(dayOfTheWeek(date, joursDeLaSemaine.length));
+export const lastDayOfTheWeek = (date: Date): Date => dayOfTheWeek(date, WeekDay.Sunday);
 
 const initialTimeTableOpeningHours: HorairesPresentation = {
   Lundi: 'Fermé',
@@ -49,10 +70,7 @@ export const parseHoraires =
     try {
       return horairesOSM
         ? new opening_hours(horairesOSM)
-            .getOpenIntervals(
-              new Date(dateWithoutTime(firstDayOfTheWeek(date))),
-              new Date(dateWithoutTime(lastDayOfTheWeek(date)))
-            )
+            .getOpenIntervals(dateWithoutTime(firstDayOfTheWeek(date)), dateWithoutTime(lastDayOfTheWeek(date)))
             .reduce(
               (
                 timeTableOpeningHours: HorairesPresentation,
@@ -108,20 +126,24 @@ export const openingState =
     }
   };
 
-const dayOpenIntervals = (horairesOSM: string, dateWithoutTime: string) =>
-  new opening_hours(horairesOSM).getOpenIntervals(
-    new Date(`${dateWithoutTime}T00:00:00.000Z`),
-    new Date(`${dateWithoutTime}T23:59:00.000Z`)
-  );
-
-export const isOpen =
+export const isOpenNow =
   (date: Date) =>
-  (horairesOSM: string, useTime: boolean): boolean => {
+  (horairesOSM: string): boolean => {
     try {
-      return useTime
-        ? new opening_hours(horairesOSM).getState(date)
-        : dayOpenIntervals(horairesOSM, dateWithoutTime(date)).length > 0;
+      return new opening_hours(horairesOSM).getState(date);
     } catch {
+      return false;
+    }
+  };
+
+export const isOpenOn =
+  (date: Date) =>
+  (horairesOSM: string, day: WeekDay, start: Time = '00:00', end: Time = '23:59'): boolean => {
+    try {
+      return (
+        new opening_hours(horairesOSM).getOpenIntervals(dateTimeFor(date)(day, start), dateTimeFor(date)(day, end)).length > 0
+      );
+    } catch (e) {
       return false;
     }
   };

@@ -5,6 +5,8 @@ import { SelectedFiltersComponent } from './selected-filters/selected-filters.co
 import { DisplayOnMapLinkComponent } from './display-on-map-link/display-on-map-link.component';
 import { FilterResultCountComponent } from './filter-result-count/filter-result-count.component';
 import { NavComponent } from './nav/nav.component';
+import { TextSeparatorComponent } from './text-separator/text-separator.component';
+import { OpeningHoursFormComponent } from './opening-hours-form';
 
 export const components = [
   BesoinLinkComponent,
@@ -13,5 +15,7 @@ export const components = [
   NavComponent,
   SelectedFiltersComponent,
   DisplayOnMapLinkComponent,
-  FilterResultCountComponent
+  FilterResultCountComponent,
+  TextSeparatorComponent,
+  OpeningHoursFormComponent
 ];

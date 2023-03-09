@@ -15,16 +15,15 @@ export class SelectedFiltersComponent {
   @Input() public filterPresentation: FilterFormPresentation | null = null;
   @Input() public filterForm!: FormGroup;
 
-  public resetForm(value: string | number, key: string) {
+  public resetForm(value: unknown, key: string) {
     if (key === 'service') this.filterForm.get('service')?.setValue('');
     else if (key === 'address' || key === 'distance') {
       this.filterForm.get('address')?.setValue('');
       this.filterForm.get('distance')?.setValue('');
       this.filterForm.get('latitude')?.setValue('');
       this.filterForm.get('longitude')?.setValue('');
-    } else if (key === 'ouvert_actuellement') {
-      this.filterForm.get('ouvert_actuellement')?.setValue(null);
-      this.filterForm.get('date_ouverture')?.setValue(null);
+    } else if (key === 'horaires_ouverture') {
+      this.filterForm.get('horaires_ouverture')?.setValue(undefined);
     } else {
       const keyArrayCoppy = [...this.filterForm.value[key]];
       const indexOfValue = keyArrayCoppy.indexOf(value);
