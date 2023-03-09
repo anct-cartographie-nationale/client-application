@@ -1,21 +1,21 @@
 <div class="d-flex justify-content-center">
   <a
-    type="button"
     class="btn btn-tile"
     [class.disabled]="!priseRdv"
     target="_blank"
     rel="noopener noreferrer"
-    href="{{ priseRdv }}">
+    [href]="priseRdv ?? null"
+    [tabIndex]="priseRdv ? 0 : -1">
     <i
       class="ri-calendar-check-line ri-xl ri-fw ri-space bg-primary text-light rounded-circle"
       [ngClass]="priseRdv ? 'bg-primary' : 'bg-muted'"></i>
     <b class="mt-2">RDV en ligne</b>
   </a>
   <a
-    type="button"
     class="btn btn-tile"
     [class.disabled]="!siteWeb?.[0]"
-    href="{{ siteWeb?.[0] }}"
+    [href]="siteWeb?.[0] ?? null"
+    [tabIndex]="siteWeb?.[0] ? 0 : -1"
     target="_blank"
     rel="noopener noreferrer">
     <i

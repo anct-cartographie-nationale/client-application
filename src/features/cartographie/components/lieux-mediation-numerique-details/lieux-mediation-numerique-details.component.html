@@ -57,7 +57,8 @@
       *ngIf="lieuMediationNumerique.labels_nationaux?.length || lieuMediationNumerique.labels_autres?.length">
       <app-labellisations
         [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
-        [labelsAutres]="lieuMediationNumerique.labels_autres"></app-labellisations>
+        [labelsAutres]="lieuMediationNumerique.labels_autres"
+        (showLabel)="showLabel.emit($event)"></app-labellisations>
     </li>
   </ul>
   <div class="bg-light px-4 text-end">

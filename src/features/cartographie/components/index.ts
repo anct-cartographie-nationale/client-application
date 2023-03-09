@@ -1,18 +1,5 @@
 import { CartographieLoaderComponent } from './cartographie-loader/cartographie-loader.component';
 import { LabellisationsComponent } from './labellisations/labellisations.component';
-import {
-  AidantsConnectComponent,
-  ApticComponent,
-  CampusConnecteComponent,
-  CnfsComponent,
-  FabriqueDeTerritoireComponent,
-  FrenchTechComponent,
-  GrandesEcolesDuNumeriqueComponent,
-  MaisonFranceServiceComponent,
-  PointNumeriqueCafComponent,
-  PointRelaisCafComponent,
-  RelaisPoleEmploiComponent
-} from './labellisations';
 import { DepartementsListComponent } from './departements-list/departements-list.component';
 import { RegionsListComponent } from './regions-list/regions-list.component';
 import {
@@ -40,6 +27,7 @@ import {
   PublicPrisEnChargeComponent,
   ServicesComponent
 } from './lieux-mediation-numerique-details';
+import { LabelModalComponent } from './label-modal/label-modal.component';
 
 export const components = [
   LieuxMediationNumeriqueDetailsPrintComponent,
@@ -59,17 +47,6 @@ export const components = [
   PublicPrisEnChargeComponent,
   AidantsComponent,
   LabellisationsComponent,
-  MaisonFranceServiceComponent,
-  AidantsConnectComponent,
-  ApticComponent,
-  CampusConnecteComponent,
-  FabriqueDeTerritoireComponent,
-  FrenchTechComponent,
-  GrandesEcolesDuNumeriqueComponent,
-  PointRelaisCafComponent,
-  RelaisPoleEmploiComponent,
-  CnfsComponent,
-  PointNumeriqueCafComponent,
   CartographieLoaderComponent,
   DepartementsListComponent,
   RegionsListComponent,
@@ -77,5 +54,6 @@ export const components = [
   TerritoireMarkersComponent,
   NoLieuxFoundComponent,
   UserLocationComponent,
-  HubModalComponent
+  HubModalComponent,
+  LabelModalComponent
 ];

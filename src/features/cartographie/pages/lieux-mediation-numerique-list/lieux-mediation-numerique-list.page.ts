@@ -3,7 +3,7 @@ import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, combineLatestWith, delay, Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LabelNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FEATURES_TOKEN, FeaturesConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import {
   byCollectiviteTerritorialeNom,
@@ -24,7 +24,9 @@ import {
   LieuMediationNumeriqueListItemPresentation,
   toLieuxMediationNumeriqueListItemsPresentation,
   inRegionZoomLevel,
-  HubPresentation
+  HubPresentation,
+  LabelPresentation,
+  labelToDisplayMap
 } from '../../presenters';
 import { findLieuToFocus, toHub, toLieux, toLieuxFilteredByDepartement } from './lieux-mediation-numerique-list.presentation';
 
@@ -39,6 +41,15 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     map(([hub, lieux]: [HubPresentation, LieuMediationNumerique[]]) => ({
       ...hub,
       lieuxCount: lieux.filter((lieu: LieuMediationNumerique) => lieu.source === hub.source).length
+    }))
+  );
+
+  private _labelToDisplay$: Subject<LabelPresentation> = new Subject<LabelPresentation>();
+  public labelToDisplay$: Observable<LabelPresentation> = this._labelToDisplay$.asObservable().pipe(
+    combineLatestWith(this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$),
+    map(([label, lieux]: [LabelPresentation, LieuMediationNumerique[]]) => ({
+      ...label,
+      lieuxCount: lieux.filter((lieu: LieuMediationNumerique) => lieu.labels_nationaux?.includes(label.ref)).length
     }))
   );
 
@@ -146,5 +157,10 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
 
   public onShowHub(region: RegionPresentation) {
     this._hubToDisplay$.next(toHub(region));
+  }
+
+  public onShowLabel(label: LabelNational) {
+    const labelPresentation: LabelPresentation | undefined = labelToDisplayMap.get(label);
+    labelPresentation && this._labelToDisplay$.next(labelPresentation);
   }
 }

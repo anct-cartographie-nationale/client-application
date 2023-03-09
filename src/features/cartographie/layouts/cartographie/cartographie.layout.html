@@ -39,6 +39,7 @@
     </div>
     <mgl-map
       [movingMethod]="'flyTo'"
+      [movingOptions]="{speed: 2}"
       *ngIf="(markersPresenter.localisation$ | async) as localisation"
       class="h-100 w-100 overflow-hidden"
       [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"

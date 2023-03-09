@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { FilterPresentation } from '../../../core';
@@ -17,4 +18,5 @@ export class LieuxMediationNumeriqueDetailsComponent {
   @Output() public reportAnError: EventEmitter<void> = new EventEmitter<void>();
   @Output() public closeDetails: EventEmitter<LieuMediationNumeriqueDetailsPresentation> =
     new EventEmitter<LieuMediationNumeriqueDetailsPresentation>();
+  @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
 }

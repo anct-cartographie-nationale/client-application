@@ -1,4 +1,7 @@
-<div *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique; else lieuNotFound" class="h-100 overflow-auto">
+<div
+  *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique; else lieuNotFound"
+  tabindex="-1"
+  class="h-100 overflow-auto">
   <app-lieux-mediation-numerique-details-print
     [lieuMediationNumerique]="lieuMediationNumerique"
     [filters]="(filters$ | async) ?? undefined"
@@ -8,6 +11,7 @@
     (sendEmailTo)="onSendEmailTo($event)"
     (reportAnError)="onReportAnError(lieuMediationNumerique)"
     (closeDetails)="onCloseDetails($event)"
+    (showLabel)="onShowLabel($event); labelModal.toggle()"
     [lieuMediationNumerique]="lieuMediationNumerique"
     [filters]="(filters$ | async) ?? undefined"></app-lieux-mediation-numerique-details>
 </div>
@@ -43,3 +47,4 @@
     </div>
   </div>
 </ng-template>
+<app-label-modal #labelModal [label]="labelToDisplay$ | async"></app-label-modal>

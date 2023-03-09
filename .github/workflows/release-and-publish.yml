@@ -345,6 +345,7 @@ jobs:
           mv package.json dist/whitelist/
           mv dist/client-application/assets/data/ dist/whitelist/assets/data/
           mv dist/client-application/assets/fonts/ dist/whitelist/assets/fonts/
+          mv dist/client-application/assets/img/ dist/whitelist/assets/img/
           mv dist/client-application/styles.css dist/whitelist/styles.css
           mv dist/client-application/layers.png dist/whitelist/layers.png
           mv dist/client-application/layers-2x.png dist/whitelist/layers-2x.png
