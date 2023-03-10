@@ -11,13 +11,13 @@
           <h2 class="accordion-header" id="headingDatePrecise">
             <button
               type="button"
-              class="accordion-button p-3 collapsed"
+              class="accordion-button orientation-btn p-3 collapsed"
               aria-controls="collapseDatePrecise"
               [class.collapsed]="collapseDatePrecise.isCollapsed"
               [attr.aria-expanded]="collapseDatePrecise.isExpanded"
               (click)="collapseDatePrecise.toggle()">
               <i class="ri-calendar-check-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <b class="accordion-button-label">Je cherche des structures ouvertes à une date précise</b>
+              <b class="orientation-btn-label">Je cherche des structures ouvertes à une date précise</b>
             </button>
           </h2>
           <app-collapse #collapseDatePrecise id="collapseDatePrecise" aria-labelledby="headingDatePrecise">

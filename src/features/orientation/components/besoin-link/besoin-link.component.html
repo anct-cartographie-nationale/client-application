@@ -1,0 +1,21 @@
+<a
+  *ngFor="let serviceItem of serviceItems"
+  routerLink="../localisation"
+  queryParamsHandling="preserve"
+  class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative"
+  (click)="selectServiceValue.emit(serviceItem.value)">
+  <span
+    class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
+    *ngIf="serviceItem.value === selectedServiceItem">
+    <i class="ri-check-line"></i>
+  </span>
+  <div class="me-3">
+    <i [ngClass]="serviceItem.icon" class="ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle d-block"></i>
+  </div>
+  <span class="text-start">
+    <b class="orientation-btn-label">{{ serviceItem.label }}</b>
+    <br />
+    <i class="small text-muted">{{ serviceItem.description }}</i>
+  </span>
+  <i class="ri-arrow-right-s-line ri-2x text-muted ms-auto my-auto"></i>
+</a>

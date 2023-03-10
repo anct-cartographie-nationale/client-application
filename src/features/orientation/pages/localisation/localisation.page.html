@@ -13,13 +13,13 @@
           <h2 class="accordion-header" id="headingLocalisation">
             <button
               type="button"
-              class="accordion-button p-3 collapsed"
+              class="accordion-button orientation-btn p-3 collapsed"
               aria-controls="collapseLocalisation"
               [class.collapsed]="collapseLocalisation.isCollapsed"
               [attr.aria-expanded]="collapseLocalisation.isExpanded"
               (click)="collapseLocalisation.toggle()">
               <i class="ri-map-pin-2-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <b class="accordion-button-label">Localisation</b>
+              <b class="orientation-btn-label">Localisation</b>
             </button>
           </h2>
           <app-collapse #collapseLocalisation id="collapseLocalisation" aria-labelledby="headingLocalisation">

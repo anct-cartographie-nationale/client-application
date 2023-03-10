@@ -1,219 +1,32 @@
 <div class="h-lg-100 d-flex flex-column px-3" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
-  <div class="my-auto">
+  <div class="my-auto" *ngIf="serviceControl as serviceControl">
     <h1 class="h2 text-center fw-bold my-3">
       Quel est
       <span class="text-primary">votre besoin&nbsp;?</span>
     </h1>
-    <h5 class="text-center fw-bold mb-4 text-muted">
-      Ouvrez les différentes sections, sélectionnez le besoin qui correspond le mieux à votre demande et cliquez sur suivant
-      pour continuer l'orientation
-    </h5>
-    <form [formGroup]="orientationLayout.filterForm">
-      <div class="accordion" id="accordionBesoin">
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingApprentissageDeBase">
-            <button
-              type="button"
-              class="accordion-button p-3 collapsed"
-              aria-controls="collapseApprentissageDeBase"
-              [class.collapsed]="collapseApprentissageDeBase.isCollapsed"
-              [attr.aria-expanded]="collapseApprentissageDeBase.isExpanded"
-              (click)="collapseApprentissageDeBase.toggle()">
-              <i class="ri-compasses-2-fill ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <div *ngFor="let apprentissageDeBaseItem of apprentissageDeBaseOrientationItems">
-                <span
-                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                  *ngIf="apprentissageDeBaseItem.value === filter.service">
-                  1
-                </span>
-              </div>
-              <div>
-                <b class="accordion-button-label">Apprentissage de base</b>
-                <br />
-                <i class="text-muted">
-                  <small>J'ai besoin de connaître les bases du numérique</small>
-                </i>
-              </div>
-            </button>
-          </h2>
-          <app-collapse
-            #collapseApprentissageDeBase
-            id="collapseApprentissageDeBase"
-            aria-labelledby="headingApprentissageDeBase">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let apprentissageDeBaseItem of apprentissageDeBaseOrientationItems; index as i">
-                <input
-                  type="radio"
-                  appUncheckableRadio
-                  name="service"
-                  formControlName="service"
-                  class="form-check-input"
-                  [value]="apprentissageDeBaseItem.value"
-                  [attr.id]="'apprentissageDeBaseLabelChip' + i" />
-                <label
-                  class="form-check-label bg-primary text-white fw-bold chip-pointer"
-                  [attr.for]="'apprentissageDeBaseLabelChip' + i">
-                  {{ apprentissageDeBaseItem.label }}
-                </label>
-              </div>
-            </div>
-          </app-collapse>
-        </div>
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingDemarches">
-            <button
-              type="button"
-              class="accordion-button p-3 collapsed"
-              aria-controls="collapseDemarches"
-              [class.collapsed]="collapseDemarches.isCollapsed"
-              [attr.aria-expanded]="collapseDemarches.isExpanded"
-              (click)="collapseDemarches.toggle()">
-              <i class="ri-file-list-3-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <div *ngFor="let demarchesOrientationItem of demarchesOrientationItems">
-                <span
-                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                  *ngIf="demarchesOrientationItem.value === filter.service">
-                  1
-                </span>
-              </div>
-              <div>
-                <b class="accordion-button-label">Démarches</b>
-                <br />
-                <i class="text-muted"><small>J’ai besoin d’apprendre ou de réaliser certaines démarches du quotidien</small></i>
-              </div>
-            </button>
-          </h2>
-          <app-collapse #collapseDemarches id="collapseDemarches" aria-labelledby="headingDemarches">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let demarchesOrientationItem of demarchesOrientationItems; index as i">
-                <input
-                  type="radio"
-                  appUncheckableRadio
-                  name="service"
-                  formControlName="service"
-                  class="form-check-input"
-                  [value]="demarchesOrientationItem.value"
-                  [attr.id]="'demarchesLabelChip' + i" />
-                <label
-                  class="form-check-label bg-primary text-white fw-bold chip-pointer"
-                  [attr.for]="'demarchesLabelChip' + i">
-                  {{ demarchesOrientationItem.label }}
-                </label>
-              </div>
-            </div>
-          </app-collapse>
-        </div>
-
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingCultureNumerique">
-            <button
-              type="button"
-              class="accordion-button p-3 collapsed"
-              aria-controls="collapseCultureNumerique"
-              [class.collapsed]="collapseCultureNumerique.isCollapsed"
-              [attr.aria-expanded]="collapseCultureNumerique.isExpanded"
-              (click)="collapseCultureNumerique.toggle()">
-              <i class="ri-book-2-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <div *ngFor="let cultureNumeriqueItem of cultureNumeriqueOrientationItems">
-                <span
-                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                  *ngIf="cultureNumeriqueItem.value === filter.service">
-                  1
-                </span>
-              </div>
-              <div>
-                <b class="accordion-button-label">Culture numérique</b>
-                <br />
-                <i class="text-muted">
-                  <small>J’ai besoin d’en savoir plus sur des points spécifiques liés au numérique</small>
-                </i>
-              </div>
-            </button>
-          </h2>
-          <app-collapse #collapseCultureNumerique id="collapseCultureNumerique" aria-labelledby="headingCultureNumerique">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let cultureNumeriqueItem of cultureNumeriqueOrientationItems; index as i">
-                <input
-                  type="radio"
-                  appUncheckableRadio
-                  name="service"
-                  formControlName="service"
-                  class="form-check-input"
-                  [value]="cultureNumeriqueItem.value"
-                  [attr.id]="'cultureNumeriqueLabelChip' + i" />
-                <label
-                  class="form-check-label bg-primary text-white fw-bold chip-pointer"
-                  [attr.for]="'cultureNumeriqueLabelChip' + i">
-                  {{ cultureNumeriqueItem.label }}
-                </label>
-              </div>
-            </div>
-          </app-collapse>
-        </div>
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingManqueDeMateriel">
-            <button
-              type="button"
-              class="accordion-button p-3 collapsed"
-              aria-controls="collapseManqueDeMateriel"
-              [class.collapsed]="collapseManqueDeMateriel.isCollapsed"
-              [attr.aria-expanded]="collapseManqueDeMateriel.isExpanded"
-              (click)="collapseManqueDeMateriel.toggle()">
-              <i class="ri-wifi-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <div *ngFor="let manqueDeMaterielItem of manqueDeMaterielOrientationItems">
-                <span
-                  class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                  *ngIf="manqueDeMaterielItem.value === filter.service">
-                  1
-                </span>
-              </div>
-              <div>
-                <b class="accordion-button-label">Manque de matériel</b>
-                <br />
-                <i class="text-muted"><small>J'ai besoin de matériel ou d'une connexion internet</small></i>
-              </div>
-            </button>
-          </h2>
-          <app-collapse #collapseManqueDeMateriel id="collapseManqueDeMateriel" aria-labelledby="headingManqueDeMateriel">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let manqueDeMaterielItem of manqueDeMaterielOrientationItems; index as i">
-                <input
-                  type="radio"
-                  appUncheckableRadio
-                  name="service"
-                  formControlName="service"
-                  class="form-check-input"
-                  [value]="manqueDeMaterielItem.value"
-                  [attr.id]="'manqueDeMaterielLabelChip' + i" />
-                <label
-                  class="form-check-label bg-primary text-white fw-bold chip-pointer"
-                  [attr.for]="'manqueDeMaterielLabelChip' + i">
-                  {{ manqueDeMaterielItem.label }}
-                </label>
-              </div>
-            </div>
-          </app-collapse>
-        </div>
-      </div>
-    </form>
-    <ul class="nav nav-pills justify-content-center my-5">
-      <li class="nav-item">
-        <a class="btn btn-primary mx-3" [routerLink]="['..', 'localisation']" queryParamsHandling="preserve">
-          Suivant
-          <i class="ri-arrow-right-s-line align-bottom"></i>
-        </a>
-      </li>
-    </ul>
-    <span class="d-flex justify-content-center my-2">Vous ne trouvez pas votre besoin ?</span>
-    <div class="text-center">
+    <div class="h5 text-center fw-bold mb-5 text-muted">Sélectionnez votre besoin parmi les 15 proposés</div>
+    <h2 class="text-muted h6 fw-bold mb-3 mt-4">APPRENTISSAGE DE BASE</h2>
+    <app-besoin-link
+      [serviceItems]="apprentissageDeBaseOrientationItems"
+      [selectedServiceItem]="serviceControl.value"
+      (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+    <h2 class="text-muted h6 fw-bold mb-3 mt-4">DÉMARCHES</h2>
+    <app-besoin-link
+      [serviceItems]="demarchesOrientationItems"
+      [selectedServiceItem]="serviceControl.value"
+      (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+    <h2 class="text-muted h6 fw-bold mb-3 mt-4">CULTURE NUMÉRIQUE</h2>
+    <app-besoin-link
+      [serviceItems]="cultureNumeriqueOrientationItems"
+      [selectedServiceItem]="serviceControl.value"
+      (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+    <h2 class="text-muted h6 fw-bold mb-3 mt-4">MANQUE DE MATERIEL</h2>
+    <app-besoin-link
+      [serviceItems]="manqueDeMaterielOrientationItems"
+      [selectedServiceItem]="serviceControl.value"
+      (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+    <div class="text-center mt-5">
+      <div class="text-muted mb-2">Vous ne trouvez pas votre besoin ?</div>
       <button class="btn btn-sm btn-secondary d-inline-block mb-2" (click)="onFilterNotFound()">
         <i class="ri-mail-line me-2 align-bottom text-right"></i>
         <b>Contactez-nous !</b>

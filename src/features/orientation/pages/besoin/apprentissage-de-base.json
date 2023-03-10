@@ -1,14 +1,20 @@
 [
   {
     "label": "Prendre en main un smartphone ou une tablette",
+    "description": "Utilisation du tactile, installation d’applications…",
+    "icon": "ri-smartphone-line",
     "value": "Prendre en main un smartphone ou une tablette"
   },
   {
     "label": "Prendre en main un ordinateur",
+    "description": "Utilisation du clavier, de la souris…",
+    "icon": "ri-mouse-line",
     "value": "Prendre en main un ordinateur"
   },
   {
     "label": "Utiliser le numérique au quotidien",
+    "description": "Mails, réseaux sociaux, achats et prise de rdv en ligne…",
+    "icon": "ri-calendar-check-line",
     "value": "Utiliser le numérique au quotidien"
   }
 ]

@@ -13,7 +13,7 @@
           <h2 class="accordion-header" id="headingConditionFinancieres">
             <button
               type="button"
-              class="accordion-button p-3 collapsed"
+              class="accordion-button orientation-btn p-3 collapsed"
               aria-controls="collapseConditionFinancieres"
               [class.collapsed]="collapseConditionFinancieres.isCollapsed"
               [attr.aria-expanded]="collapseConditionFinancieres.isExpanded"
@@ -25,7 +25,7 @@
                 {{filter.conditions_acces.length}}
               </span>
               <div>
-                <b class="accordion-button-label">Conditions financières</b>
+                <b class="orientation-btn-label">Conditions financières</b>
                 <br />
                 <i class="text-muted">
                   <small>Coût d'accès au lieu et/ou à ses services</small>
@@ -64,7 +64,7 @@
           <h2 class="accordion-header" id="headingTypeAccompagnements">
             <button
               type="button"
-              class="accordion-button p-3 collapsed"
+              class="accordion-button orientation-btn p-3 collapsed"
               aria-controls="collapseTypeAccompagnements"
               [class.collapsed]="collapseTypeAccompagnements.isCollapsed"
               [attr.aria-expanded]="collapseTypeAccompagnements.isExpanded"
@@ -76,7 +76,7 @@
                 {{filter.modalites_accompagnement.length}}
               </span>
               <div>
-                <b class="accordion-button-label">Type d'accompagnement</b>
+                <b class="orientation-btn-label">Type d'accompagnement</b>
                 <br />
                 <i class="text-muted">
                   <small>Modalités d’accompagnement proposées par le lieu</small>
@@ -115,7 +115,7 @@
           <h2 class="accordion-header" id="headingTypePublic">
             <button
               type="button"
-              class="accordion-button p-3 collapsed"
+              class="accordion-button orientation-btn p-3 collapsed"
               aria-controls="collapseTypePublic"
               [class.collapsed]="collapseTypePublic.isCollapsed"
               [attr.aria-expanded]="collapseTypePublic.isExpanded"
@@ -127,7 +127,7 @@
                 {{publicsAccueillisCompteur(filter.publics_accueillis, publicAccueilliOptions)}}
               </span>
               <div>
-                <b class="accordion-button-label">Type de public</b>
+                <b class="orientation-btn-label">Type de public</b>
                 <br />
                 <i class="text-muted">
                   <small>Différents publics que le lieu est en mesure d’accueillir</small>
@@ -161,7 +161,7 @@
           <h2 class="accordion-header" id="headingAccueilSpecifique">
             <button
               type="button"
-              class="accordion-button p-3 collapsed"
+              class="accordion-button orientation-btn p-3 collapsed"
               aria-controls="collapseAccueilSpecifique"
               [class.collapsed]="collapseAccueilSpecifique.isCollapsed"
               [attr.aria-expanded]="collapseAccueilSpecifique.isExpanded"
@@ -173,7 +173,7 @@
                 {{publicsAccueillisCompteur(filter.publics_accueillis, publicSpecifiqueAcceuilliOptions)}}
               </span>
               <div>
-                <b class="accordion-button-label">Accueil spécifique</b>
+                <b class="orientation-btn-label">Accueil spécifique</b>
                 <br />
                 <i class="text-muted">
                   <small>Différents publics spécifiques que le lieu est en mesure d’accueillir</small>

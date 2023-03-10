@@ -6,6 +6,7 @@
         <div class="col bg-white pt-3 h-100 overflow-auto d-flex flex-column">
           <app-nav class="d-lg-block d-none" *ngIf="this.router.url !== '/orientation'" [filter]="filter"></app-nav>
           <div
+            tabindex="-1"
             appScroll
             (reachEnd)="hideArrow = $event"
             class="overflow-scroll h-100 d-lg-block d-flex flex-column"
@@ -31,7 +32,7 @@
               </ng-container>
             </div>
           </div>
-          <div class="d-flex justify-content-center" [class.invisible]="hideArrow">
+          <div class="d-flex justify-content-center shadow-white-top z-index-over-base" [class.invisible]="hideArrow">
             <i class="ri-arrow-right-s-line ri-xl ri-fw ri-space text-primary" style="transform: rotate(90deg)"></i>
           </div>
         </div>
