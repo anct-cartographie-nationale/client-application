@@ -1,7 +1,7 @@
 [
   {
-    "label": "Déficience visuelle",
-    "value": "Déficience visuelle"
+    "label": "Illettrisme",
+    "value": "Personnes en situation d'illettrisme"
   },
   {
     "label": "Handicaps psychiques",
@@ -12,15 +12,15 @@
     "value": "Handicaps mentaux : déficiences limitant les activités d'une personne"
   },
   {
-    "label": "Personne en situation d'illettrisme",
-    "value": "Personnes en situation d'illettrisme"
+    "label": "Non-Francophone",
+    "value": "Public langues étrangères"
+  },
+  {
+    "label": "Déficience visuelle",
+    "value": "Déficience visuelle"
   },
   {
     "label": "Surdité",
     "value": "Surdité"
-  },
-  {
-    "label": "Langues étrangères",
-    "value": "Public langues étrangères"
   }
 ]

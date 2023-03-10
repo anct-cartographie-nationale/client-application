@@ -1,10 +1,10 @@
 <div class="h-lg-100 d-flex flex-column px-3" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
   <div class="my-auto" *ngIf="serviceControl as serviceControl">
-    <h1 class="h2 text-center fw-bold my-3">
+    <h1 class="h2 text-center fw-bold mt-3">
       Quel est
       <span class="text-primary">votre besoin&nbsp;?</span>
     </h1>
-    <div class="h5 text-center fw-bold mb-5 text-muted">Sélectionnez votre besoin parmi les 15 proposés</div>
+    <div class="text-center fw-bold mb-5 text-muted">Sélectionnez votre besoin parmi les 15 proposés</div>
     <h2 class="text-muted h6 fw-bold mb-3 mt-4">APPRENTISSAGE DE BASE</h2>
     <app-besoin-link
       [serviceItems]="apprentissageDeBaseOrientationItems"

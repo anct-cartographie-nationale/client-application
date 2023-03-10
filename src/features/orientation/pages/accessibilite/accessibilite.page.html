@@ -1,232 +1,89 @@
 <div class="h-lg-100 d-flex flex-column px-3" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
   <div class="my-auto">
-    <h1 class="h2 text-center fw-bold mb-4">
-      <span class="text-primary">Comment</span>
-      et
-      <span class="text-primary">à qui</span>
-      l'accompagnement sera accessible&nbsp;?
+    <h1 class="h2 text-center fw-bold mt-3">
+      <span class="text-primary">Quelle structure</span>
+      cherchez-vous&nbsp;?
     </h1>
-    <h5 class="text-center fw-bold mb-4 text-muted">Affinez votre recherche en sélectionnant des critères spécifiques</h5>
+    <div class="text-center fw-bold mb-5 text-muted">Affinez votre recherche en sélectionnant des critères spécifiques</div>
     <form [formGroup]="orientationLayout.filterForm">
-      <div class="accordion" id="accordionAccessibilite">
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingConditionFinancieres">
-            <button
-              type="button"
-              class="accordion-button orientation-btn p-3 collapsed"
-              aria-controls="collapseConditionFinancieres"
-              [class.collapsed]="collapseConditionFinancieres.isCollapsed"
-              [attr.aria-expanded]="collapseConditionFinancieres.isExpanded"
-              (click)="collapseConditionFinancieres.toggle()">
-              <i class="ri-price-tag-3-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <span
-                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                *ngIf="filter.conditions_acces && filter.conditions_acces.length > 0">
-                {{filter.conditions_acces.length}}
-              </span>
-              <div>
-                <b class="orientation-btn-label">Conditions financières</b>
-                <br />
-                <i class="text-muted">
-                  <small>Coût d'accès au lieu et/ou à ses services</small>
-                </i>
-              </div>
-            </button>
-          </h2>
-          <app-collapse
-            #collapseConditionFinancieres
-            id="collapseConditionFinancieres"
-            aria-labelledby="headingConditionFinancieres">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let conditionFinancieresOption of conditionAccesOptions; index as i">
-                <input
-                  type="checkbox"
-                  name="conditions_acces"
-                  appCheckboxArray
-                  formControlName="conditions_acces"
-                  class="form-check-input"
-                  [value]="conditionFinancieresOption.value"
-                  [attr.id]="'conditionFinancieresLabelChip' + i" />
-                <label
-                  class="form-check-label bg-primary text-white chip-pointer"
-                  [attr.for]="'conditionFinancieresLabelChip' + i">
-                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
-                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
-                  <b class="ms-1">{{ conditionFinancieresOption.label }}</b>
-                </label>
-              </div>
-            </div>
-          </app-collapse>
+      <h2 class="text-muted h6 fw-bold mb-3 mt-4">PROFIL</h2>
+      <div class="bg-light px-3 py-2">
+        <div
+          class="form-check form-check-inline form-chip my-2"
+          *ngFor="let typePublicOption of publicAccueilliOptions; index as i">
+          <input
+            type="checkbox"
+            name="publics_accueillis"
+            appCheckboxArray
+            formControlName="publics_accueillis"
+            class="form-check-input"
+            [value]="typePublicOption.value"
+            [attr.id]="'typePublicLabelChip' + i" />
+          <label class="form-check-label bg-white" [attr.for]="'typePublicLabelChip' + i">
+            <b class="ms-1">{{ typePublicOption.label }}</b>
+          </label>
         </div>
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingTypeAccompagnements">
-            <button
-              type="button"
-              class="accordion-button orientation-btn p-3 collapsed"
-              aria-controls="collapseTypeAccompagnements"
-              [class.collapsed]="collapseTypeAccompagnements.isCollapsed"
-              [attr.aria-expanded]="collapseTypeAccompagnements.isExpanded"
-              (click)="collapseTypeAccompagnements.toggle()">
-              <i class="ri-group-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <span
-                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
-                *ngIf="filter.modalites_accompagnement && filter.modalites_accompagnement.length > 0">
-                {{filter.modalites_accompagnement.length}}
-              </span>
-              <div>
-                <b class="orientation-btn-label">Type d'accompagnement</b>
-                <br />
-                <i class="text-muted">
-                  <small>Modalités d’accompagnement proposées par le lieu</small>
-                </i>
-              </div>
-            </button>
-          </h2>
-          <app-collapse
-            #collapseTypeAccompagnements
-            id="collapseTypeAccompagnements"
-            aria-labelledby="headingTypeAccompagnements">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let typeAccompagnementsOption of modaliteAccompagnementsOptions; index as i">
-                <input
-                  type="checkbox"
-                  name="modalites_accompagnement"
-                  appCheckboxArray
-                  formControlName="modalites_accompagnement"
-                  class="form-check-input"
-                  [value]="typeAccompagnementsOption.value"
-                  [attr.id]="'typeAccompagnementsLabelChip' + i" />
-                <label
-                  class="form-check-label bg-primary text-white chip-pointer"
-                  [attr.for]="'typeAccompagnementsLabelChip' + i">
-                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
-                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
-                  <b class="ms-1">{{ typeAccompagnementsOption.label }}</b>
-                </label>
-              </div>
-            </div>
-          </app-collapse>
+      </div>
+      <h2 class="text-muted h6 fw-bold mb-3 mt-4">PARTICIPATION</h2>
+      <div class="bg-light px-3 py-2">
+        <div
+          class="form-check form-check-inline form-chip my-2"
+          *ngFor="let conditionFinancieresOption of conditionAccesOptions; index as i">
+          <input
+            type="checkbox"
+            name="conditions_acces"
+            appCheckboxArray
+            formControlName="conditions_acces"
+            class="form-check-input"
+            [value]="conditionFinancieresOption.value"
+            [attr.id]="'conditionFinancieresLabelChip' + i" />
+          <label class="form-check-label bg-white" [attr.for]="'conditionFinancieresLabelChip' + i">
+            <b class="ms-1">{{ conditionFinancieresOption.label }}</b>
+          </label>
         </div>
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingTypePublic">
-            <button
-              type="button"
-              class="accordion-button orientation-btn p-3 collapsed"
-              aria-controls="collapseTypePublic"
-              [class.collapsed]="collapseTypePublic.isCollapsed"
-              [attr.aria-expanded]="collapseTypePublic.isExpanded"
-              (click)="collapseTypePublic.toggle()">
-              <i class="ri-parent-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <span
-                *ngIf="filter.publics_accueillis && filter.publics_accueillis.length > 0 && publicsAccueillisCompteur(filter.publics_accueillis, publicAccueilliOptions) > 0 "
-                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle">
-                {{publicsAccueillisCompteur(filter.publics_accueillis, publicAccueilliOptions)}}
-              </span>
-              <div>
-                <b class="orientation-btn-label">Type de public</b>
-                <br />
-                <i class="text-muted">
-                  <small>Différents publics que le lieu est en mesure d’accueillir</small>
-                </i>
-              </div>
-            </button>
-          </h2>
-          <app-collapse #collapseTypePublic id="collapseTypePublic" aria-labelledby="headingTypePublic">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let typePublicOption of publicAccueilliOptions; index as i">
-                <input
-                  type="checkbox"
-                  name="publics_accueillis"
-                  appCheckboxArray
-                  formControlName="publics_accueillis"
-                  class="form-check-input"
-                  [value]="typePublicOption.value"
-                  [attr.id]="'typePublicLabelChip' + i" />
-                <label class="form-check-label bg-primary text-white chip-pointer" [attr.for]="'typePublicLabelChip' + i">
-                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
-                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
-                  <b class="ms-1">{{ typePublicOption.label }}</b>
-                </label>
-              </div>
-            </div>
-          </app-collapse>
+      </div>
+      <h2 class="text-muted h6 fw-bold mb-3 mt-4">ACCOMPAGNEMENT</h2>
+      <div class="bg-light px-3 py-2">
+        <div
+          class="form-check form-check-inline form-chip my-2"
+          *ngFor="let typeAccompagnementsOption of modaliteAccompagnementsOptions; index as i">
+          <input
+            type="checkbox"
+            name="modalites_accompagnement"
+            appCheckboxArray
+            formControlName="modalites_accompagnement"
+            class="form-check-input"
+            [value]="typeAccompagnementsOption.value"
+            [attr.id]="'typeAccompagnementsLabelChip' + i" />
+          <label class="form-check-label bg-white" [attr.for]="'typeAccompagnementsLabelChip' + i">
+            <b class="ms-1">{{ typeAccompagnementsOption.label }}</b>
+          </label>
         </div>
-        <div class="accordion-item mb-3">
-          <h2 class="accordion-header" id="headingAccueilSpecifique">
-            <button
-              type="button"
-              class="accordion-button orientation-btn p-3 collapsed"
-              aria-controls="collapseAccueilSpecifique"
-              [class.collapsed]="collapseAccueilSpecifique.isCollapsed"
-              [attr.aria-expanded]="collapseAccueilSpecifique.isExpanded"
-              (click)="collapseAccueilSpecifique.toggle()">
-              <i class="ri-wheelchair-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <span
-                *ngIf="filter.publics_accueillis && filter.publics_accueillis.length > 0 && publicsAccueillisCompteur(filter.publics_accueillis, publicSpecifiqueAcceuilliOptions) > 0 "
-                class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle">
-                {{publicsAccueillisCompteur(filter.publics_accueillis, publicSpecifiqueAcceuilliOptions)}}
-              </span>
-              <div>
-                <b class="orientation-btn-label">Accueil spécifique</b>
-                <br />
-                <i class="text-muted">
-                  <small>Différents publics spécifiques que le lieu est en mesure d’accueillir</small>
-                </i>
-              </div>
-            </button>
-          </h2>
-          <app-collapse #collapseAccueilSpecifique id="collapseAccueilSpecifique" aria-labelledby="headingAccueilSpecifique">
-            <div class="accordion-body text-center">
-              <div
-                class="form-check form-check-inline form-chip mb-3"
-                *ngFor="let accueilSpecifiqueOption of publicSpecifiqueAcceuilliOptions; index as i">
-                <input
-                  type="checkbox"
-                  name="publics_accueillis"
-                  appCheckboxArray
-                  formControlName="publics_accueillis"
-                  class="form-check-input"
-                  [value]="accueilSpecifiqueOption.value"
-                  [attr.id]="'accueilSpecifiqueLabelChip' + i" />
-                <label
-                  class="form-check-label bg-primary text-white chip-pointer"
-                  [attr.for]="'accueilSpecifiqueLabelChip' + i">
-                  <i class="align-bottom ri-radio-button-line d-checked-inherit"></i>
-                  <i class="align-bottom ri-checkbox-blank-circle-line d-checked-none"></i>
-                  <b class="ms-1">{{ accueilSpecifiqueOption.label }}</b>
-                </label>
-              </div>
-            </div>
-          </app-collapse>
+      </div>
+      <h2 class="text-muted h6 fw-bold mb-3 mt-4">ACCUEIL ADAPTÉ</h2>
+      <div class="bg-light px-3 py-2">
+        <div
+          class="form-check form-check-inline form-chip my-2"
+          *ngFor="let accueilSpecifiqueOption of publicSpecifiqueAcceuilliOptions; index as i">
+          <input
+            type="checkbox"
+            name="publics_accueillis"
+            appCheckboxArray
+            formControlName="publics_accueillis"
+            class="form-check-input"
+            [value]="accueilSpecifiqueOption.value"
+            [attr.id]="'accueilSpecifiqueLabelChip' + i" />
+          <label class="form-check-label bg-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
+            <b class="ms-1">{{ accueilSpecifiqueOption.label }}</b>
+          </label>
         </div>
       </div>
     </form>
-    <ul class="nav nav-pills justify-content-center my-5">
-      <li class="nav-item">
-        <a class="btn btn-secondary mx-3" [routerLink]="['..', 'localisation']" queryParamsHandling="preserve">
-          <i class="ri-arrow-left-s-line align-bottom"></i>
-          Précédent
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="btn btn-primary mx-3" [routerLink]="['..', 'disponibilite']" queryParamsHandling="preserve">
-          Suivant
-          <i class="ri-arrow-right-s-line align-bottom"></i>
-        </a>
-      </li>
-    </ul>
-    <span class="d-flex justify-content-center my-2">Vous ne trouvez pas votre besoin ?</span>
-    <div class="text-center">
-      <button class="btn btn-sm btn-secondary d-inline-block mb-2" (click)="onFilterNotFound()">
-        <i class="ri-mail-line me-2 align-bottom text-right"></i>
-        <b>Contactez-nous !</b>
-      </button>
+    <div class="text-center mt-5">
+      <a class="btn btn-primary mx-3" [routerLink]="['..', 'disponibilite']" queryParamsHandling="preserve">
+        Valider
+        <i class="ri-arrow-right-s-line align-bottom"></i>
+      </a>
     </div>
   </div>
 </div>

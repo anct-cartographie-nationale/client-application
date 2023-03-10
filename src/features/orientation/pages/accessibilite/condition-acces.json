@@ -12,11 +12,7 @@
     "value": "Adhésion : L'accès au lieu et/ou à ses services nécessite d'y adhérer"
   },
   {
-    "label": "Accepte le Pass numérique",
+    "label": "Pass Numérique",
     "value": "Accepte le Pass numérique : Il est possible d'utiliser un Pass numérique pour accéder au lieu"
-  },
-  {
-    "label": "Gratuit sous condition (situation, convention avec un organisme, etc.)",
-    "value": "Gratuit sous condition : La gratuité est conditionnée à des critères (situation familiale, convention avec un organisme social...)"
   }
 ]
