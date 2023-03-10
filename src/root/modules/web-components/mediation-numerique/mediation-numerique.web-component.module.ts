@@ -4,10 +4,17 @@ import { ConteneurComponent } from '../../../components';
 import { MediationNumeriqueWebComponentLayout } from '../../../layouts/mediation-numerique-web-component/mediation-numerique-web-component.layout';
 import { MediationNumeriqueCommonModule } from '../../common/mediation-numerique.common.module';
 import { MediationNumeriqueWebComponentRoutingModule } from './mediation-numerique.web-component-routing.module';
+import { ASSETS_CONFIGURATION, ASSETS_TOKEN } from '../../../configuration';
 
 @NgModule({
   declarations: [MediationNumeriqueWebComponentLayout],
-  imports: [MediationNumeriqueWebComponentRoutingModule, MediationNumeriqueCommonModule]
+  imports: [MediationNumeriqueWebComponentRoutingModule, MediationNumeriqueCommonModule],
+  providers: [
+    {
+      provide: ASSETS_TOKEN,
+      useValue: ASSETS_CONFIGURATION
+    }
+  ]
 })
 export class MediationNumeriqueWebComponentModule implements DoBootstrap {
   public constructor(private injector: Injector) {

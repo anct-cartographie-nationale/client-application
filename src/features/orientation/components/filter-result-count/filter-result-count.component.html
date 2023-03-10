@@ -2,7 +2,9 @@
   <div class="position-relative p-xl-6 p-md-0 p-5">
     <div
       class="bg-image position-absolute h-100 w-100 start-0 top-0"
-      style="background-image: url('assets/img/orientation/{{ brandConfiguration.illustration }}')"></div>
+      style="background-image: url('{{ assetsConfiguration.path }}/img/orientation/{{
+        brandConfiguration.illustration
+      }}')"></div>
     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" [class.invisible]="empty">
       <circle cx="-50" cy="50" stroke="#fff" stroke-width=".5" r="48" transform="rotate(-90)" />
       <path

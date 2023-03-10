@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { BrandConfiguration, BRAND_TOKEN } from '../../../../root';
+import { BrandConfiguration, BRAND_TOKEN, ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,5 +15,8 @@ export class FilterResultCountComponent {
 
   @Input() public size: 'sm' | 'auto' = 'auto';
 
-  public constructor(@Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration) {}
+  public constructor(
+    @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
+    @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration
+  ) {}
 }
