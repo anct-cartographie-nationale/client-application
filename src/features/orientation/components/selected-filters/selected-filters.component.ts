@@ -33,12 +33,6 @@ export class SelectedFiltersComponent {
     }
   }
 
-  public formatDistance(distance: string | number): string {
-    if (distance === 100000 || distance === '100000') return 'Moins de 100 km';
-    else if (distance === 20000 || distance === '20000') return 'Moins de 20 km';
-    else return 'Moins de 5 km';
-  }
-
   public getLabelFromValue(value: string): string {
     return (
       [...conditionAcces, ...modaliteAccompagnements, ...publicAccueilli, ...publicSpecifiqueAcceuilli].find(

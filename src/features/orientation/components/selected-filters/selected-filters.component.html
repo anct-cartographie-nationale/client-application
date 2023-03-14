@@ -13,7 +13,7 @@
   </div>
   <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.distance">
     <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(filter.distance, 'distance')">
-      <div class="chip-button-trim">{{ formatDistance(filter.distance) }}</div>
+      <div class="chip-button-trim">Moins de {{ filter.distance / 1000 }} km</div>
       <div class="ms-1">&times;</div>
     </button>
   </div>

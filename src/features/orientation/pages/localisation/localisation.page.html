@@ -1,105 +1,101 @@
 <div class="h-lg-100 d-flex flex-column px-3">
   <div class="my-auto">
-    <h1 class="h2 text-center fw-bold mb-4">
+    <h1 class="h2 text-center fw-bold mt-3">
       <span class="text-primary">Où</span>
-      souhaitez-vous bénéficier d’un accompagnement&nbsp;?
+      vous trouvez-vous&nbsp;?
     </h1>
-    <h5 class="text-center fw-bold mb-4 text-muted">
-      Renseignez votre adresse ou géolocalisez-vous afin d'afficher sur la cartographie uniquement les structures aux alentours
-    </h5>
-    <form [formGroup]="orientationLayout.filterForm">
-      <div class="accordion" id="accordionLocalisation">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingLocalisation">
-            <button
-              type="button"
-              class="accordion-button orientation-btn p-3 collapsed"
-              aria-controls="collapseLocalisation"
-              [class.collapsed]="collapseLocalisation.isCollapsed"
-              [attr.aria-expanded]="collapseLocalisation.isExpanded"
-              (click)="collapseLocalisation.toggle()">
-              <i class="ri-map-pin-2-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <b class="orientation-btn-label">Localisation</b>
+    <div class="text-center fw-bold mb-5 text-muted">
+      Définissez la zone géographique dans laquelle vous souhaitez chercher un lieu d'accompagnement
+    </div>
+    <form class="bg-light py-5" [formGroup]="orientationLayout.filterForm">
+      <div class="row gx-0 justify-content-center">
+        <div class="col-9 d-flex">
+          <div class="flex-grow-1 me-3">
+            <app-address-field
+              [displayReset]="true"
+              [addressSuggestions]="(addressesFound$ | async) ?? []"
+              [addressNotFound]="(addressNotFound$ | async) ?? false"
+              [defaultValue]="orientationLayout.filterForm.get('address')?.value"
+              (selectAddress)="onSelectAddress($event)"
+              (resetAddress)="onResetAddress()"
+              (searchAddress)="onSearchAddress($event)"></app-address-field>
+          </div>
+          <div class="my-auto">
+            <button class="btn btn-secondary mt-md-0 mt-3" (click)="onGeoLocate()">
+              <div *ngIf="loadingState$ | async">
+                <span class="spinner-border spinner-border-sm text-primary me-1" role="status" aria-hidden="true"></span>
+                <span class="text-primary">Chargement...</span>
+              </div>
+              <span *ngIf="(loadingState$ | async) === false">
+                Se géolocaliser
+                <i class="ri-map-pin-4-line align-bottom"></i>
+              </span>
             </button>
-          </h2>
-          <app-collapse #collapseLocalisation id="collapseLocalisation" aria-labelledby="headingLocalisation">
-            <div class="accordion-body">
-              <div class="row justify-content-center">
-                <div class="col-md-6 mb-3">
-                  <app-address-field
-                    [displayReset]="true"
-                    [addressSuggestions]="(addressesFound$ | async) ?? []"
-                    [addressNotFound]="(addressNotFound$ | async) ?? false"
-                    [defaultValue]="orientationLayout.filterForm.get('address')?.value"
-                    (selectAddress)="onSelectAddress($event)"
-                    (resetAddress)="onResetAddress()"
-                    (searchAddress)="onSearchAddress($event)"></app-address-field>
-                </div>
-                <div class="col-auto">
-                  <button class="btn btn-secondary" (click)="onGeoLocate()">
-                    <div *ngIf="loadingState$ | async">
-                      <span class="spinner-border spinner-border-sm text-primary me-1" role="status" aria-hidden="true"></span>
-                      <span class="text-primary">Chargement...</span>
-                    </div>
-                    <span *ngIf="(loadingState$ | async) === false">
-                      <i class="ri-map-pin-2-line align-bottom"></i>
-                      Me géolocaliser
-                    </span>
-                  </button>
-                </div>
-              </div>
-              <div
-                class="row justify-content-center"
-                *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value">
-                <div class="col-auto mb-3 form-check form-check-inline form-chip">
-                  <input
-                    type="radio"
-                    name="distance"
-                    formControlName="distance"
-                    [value]="100000"
-                    class="form-check-input"
-                    id="distance-100km" />
-                  <label class="form-check-label" for="distance-100km">Moins de 100 km</label>
-                </div>
-                <div class="col-auto mb-3 form-check form-check-inline form-chip">
-                  <input
-                    type="radio"
-                    name="distance"
-                    formControlName="distance"
-                    [value]="20000"
-                    class="form-check-input"
-                    id="distance-20km" />
-                  <label class="form-check-label" for="distance-20km">Moins de 20 km</label>
-                </div>
-                <div class="col-auto mb-3 form-check form-check-inline form-chip">
-                  <input
-                    type="radio"
-                    name="distance"
-                    formControlName="distance"
-                    [value]="5000"
-                    class="form-check-input"
-                    id="distance-5km" />
-                  <label class="form-check-label" for="distance-5km">Moins de 5 km</label>
-                </div>
-              </div>
-            </div>
-          </app-collapse>
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value"
+        class="row justify-content-center">
+        <div
+          class="col-9 mt-4"
+          *ngIf="lieuxMediationNumeriqueByDistanceRange$ | async as lieuxMediationNumeriqueByDistanceRange">
+          <div class="d-flex justify-content-between mx-auto px-2">
+            <button
+              *ngFor="let lieuMediationNumeriqueByDistanceRange of lieuxMediationNumeriqueByDistanceRange; index as i"
+              [ngStyle]="{height: (lieuMediationNumeriqueByDistanceRange.height) + 'px'}"
+              [ngClass]="lieuMediationNumeriqueByDistanceRange.distance && (lieuMediationNumeriqueByDistanceRange.distance <= orientationLayout.filterForm.get('distance')?.value) ? 'bg-primary' : 'bg-muted'"
+              (click)="orientationLayout.filterForm.get('distance')?.setValue(lieuMediationNumeriqueByDistanceRange.distance)"
+              style="width: 15px"
+              class="btn btn-primary mt-auto p-0 rounded-0 border-0"
+              tabindex="-1"></button>
+          </div>
+          <label class="visually-hidden">Filtre par distance en mètres</label>
+          <div class="position-relative mx-3">
+            <span
+              style="margin-top: -2px"
+              class="position-absolute translate-middle bg-white rounded-circle square text-muted d-flex align-items-center">
+              <small class="w-100 text-center fst-italic">5</small>
+            </span>
+            <span
+              style="margin-top: -2px"
+              class="position-absolute start-100 translate-middle bg-white rounded-circle square text-muted d-flex align-items-center">
+              <small class="w-100 text-center fst-italic">100</small>
+            </span>
+          </div>
+          <div class="position-relative mx-3 z-index-over-base">
+            <span
+              [ngStyle]="{marginLeft: ((orientationLayout.filterForm.get('distance')?.value - 5000) * 100) / (100000 - 5000) + '%'}"
+              style="margin-top: -2px"
+              class="position-absolute translate-middle text-white d-flex align-items-center pe-none">
+              <small class="w-100 text-center fst-italic">
+                {{ orientationLayout.filterForm.get('distance')?.value / 1000 }}
+              </small>
+            </span>
+          </div>
+          <input
+            type="range"
+            id="distance-range"
+            name="distance"
+            class="form-range distance-range position-relative"
+            min="5000"
+            max="100000"
+            step="5000"
+            formControlName="distance" />
+          <div class="d-flex mt-4">
+            <input
+              disabled
+              class="fs-5 mx-auto text-center"
+              [value]="orientationLayout.filterForm.get('distance')?.value / 1000 + ' km'" />
+          </div>
         </div>
       </div>
     </form>
-    <ul class="nav nav-pills justify-content-center my-5">
-      <li class="nav-item">
-        <a class="btn btn-secondary mx-3" [routerLink]="['..', 'besoin']" queryParamsHandling="preserve">
-          <i class="ri-arrow-left-s-line align-bottom"></i>
-          Précédent
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="btn btn-primary mx-3" [routerLink]="['..', 'accessibilite']" queryParamsHandling="preserve">
-          Suivant
-          <i class="ri-arrow-right-s-line align-bottom"></i>
-        </a>
-      </li>
-    </ul>
+    <div class="text-center mt-5">
+      <a class="btn btn-primary mx-3" [routerLink]="['..', 'accessibilite']" queryParamsHandling="preserve">
+        Valider
+        <i class="ri-arrow-right-s-line align-bottom"></i>
+      </a>
+    </div>
   </div>
 </div>
