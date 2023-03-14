@@ -14,6 +14,8 @@ export class DisplayOnMapLinkComponent {
 
   @Input() public queryParams: {} = {};
 
+  @Input() public buttonStyle: 'primary' | 'secondary' = 'secondary';
+
   public toQueryString(fromObject: {} = {}): string {
     return new HttpParams({ fromObject }).toString();
   }
