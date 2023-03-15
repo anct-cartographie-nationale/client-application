@@ -80,7 +80,7 @@ export class LocalisationPage {
     this.orientationLayout.filterForm.get('address')?.setValue(address.label);
     this.orientationLayout.filterForm.get('latitude')?.setValue(address.localisation.latitude);
     this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);
-    this.orientationLayout.filterForm.get('distance')?.setValue(100000);
+    this.orientationLayout.filterForm.get('distance')?.setValue(30000);
     this._localisation$.next(address.localisation);
   }
 
@@ -96,7 +96,7 @@ export class LocalisationPage {
     window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
       this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
       this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
-      this.orientationLayout.filterForm.get('distance')?.setValue(100000);
+      this.orientationLayout.filterForm.get('distance')?.setValue(30000);
       this.orientationLayout.filterForm.get('address')?.setValue(null);
       this._geoLocation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
       this._localisation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
