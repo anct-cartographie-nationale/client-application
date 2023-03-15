@@ -334,13 +334,14 @@ Exemple:
 
 #### Source de données
 
-Pour utiliser une autre source il faut préciser une url qui fournit les données conformes au [schéma de données des lieux de médiation numérique](https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique)
+Pour utiliser une autre source il faut préciser une url qui fournit les données conformes au [schéma de données des lieux de médiation numérique](https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique), nous publions régulièrement des données compatibles sur [data.gouv, dans l'organisation _Cartographie Nationale des lieux de médiation numérique_](https://www.data.gouv.fr/fr/organizations/cartographie-nationale-des-lieux-de-mediation-numerique/). N'hésitez pas à nous contacter pour faire apparaître vos données dans cette liste.
 
-Exemple :
+Exemple avec les données du hub Hinaura :
 
 ```html
 <fr-mediation-numerique-conteneur>
-  <fr-mediation-numerique source="https://api.conseiller-numerique.gouv.fr/permanences"></fr-mediation-numerique>
+  <fr-mediation-numerique
+    source="https://www.data.gouv.fr/fr/datasets/r/55eea24c-be8c-47f9-9c4a-77399d346fbd"></fr-mediation-numerique>
 </fr-mediation-numerique-conteneur>
 ```
 
@@ -352,7 +353,7 @@ Exemple :
 
 ```html
 <fr-mediation-numerique-conteneur>
-  <fr-mediation-numerique latitude="45.77647396140311" longitude="4.55431157343317" zoom="12"></fr-mediation-numerique>
+  <fr-mediation-numerique latitude="45.515833" longitude="4.538056" zoom="8"></fr-mediation-numerique>
 </fr-mediation-numerique-conteneur>
 ```
 
