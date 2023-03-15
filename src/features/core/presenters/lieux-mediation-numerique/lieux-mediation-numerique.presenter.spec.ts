@@ -875,7 +875,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
-  it('should not filter lieux mediation numerique on date_ouverture property when filter is empty', async (): Promise<void> => {
+  it('should not filter lieux mediation numerique on horaires_ouverture property when filter is empty', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -951,7 +951,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
-  it('should filter lieux mediation numerique on date_ouverture property', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on horaires_ouverture property opens on monday between 10:00 and 10:30', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -982,7 +982,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       }
     ];
 
-    const filter: FilterPresentation = { date_ouverture: '2022-07-22' };
+    const filter: FilterPresentation = {
+      horaires_ouverture: [
+        {
+          day: 'mo',
+          period: 'hours',
+          start: '10:00',
+          end: '10:30'
+        }
+      ]
+    };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -1016,7 +1025,55 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
-  it('should filter lieux mediation numerique on date_ouverture property and omit wrong OSM formats', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on horaires_ouverture property opens on sunday between 12:00 and 13:00', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = {
+      horaires_ouverture: [
+        {
+          day: 'su',
+          period: 'hours',
+          start: '12:00',
+          end: '13:00'
+        }
+      ]
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter),
+        new Date('2022-07-22T14:30:00.000Z')
+      )
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([]);
+  });
+
+  it('should filter lieux mediation numerique on horaires_ouverture property opens any day between 10:00 and 10:30', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -1042,12 +1099,21 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         }),
         services: Services([Service.AccederADuMateriel]),
         date_maj: new Date('2022-10-10'),
-        horaires: 'Mo-Fr 09:00,14:00-18:30; Sa 08:30-12:00',
+        horaires: 'Tu-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
-    const filter: FilterPresentation = { date_ouverture: '2022-07-22' };
+    const filter: FilterPresentation = {
+      horaires_ouverture: [
+        {
+          day: 'all',
+          period: 'hours',
+          start: '10:00',
+          end: '10:30'
+        }
+      ]
+    };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -1061,14 +1127,99 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
         of(NO_LOCALISATION),
         of(filter),
-        new Date('2022-07-22T09:55:00.000Z')
+        new Date('2022-07-22T14:30:00.000Z')
       )
     );
 
-    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([]);
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccederADuMateriel],
+        date_maj: new Date('2022-10-10'),
+        horaires: 'Tu-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
   });
 
-  it('should filter lieux mediation numerique on ouvert_actuellement property', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on horaires_ouverture property opens any day any time', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        horaires: 'Tu-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = {
+      horaires_ouverture: [
+        {
+          day: 'all',
+          period: 'all'
+        }
+      ]
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter),
+        new Date('2022-07-22T14:30:00.000Z')
+      )
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccederADuMateriel],
+        date_maj: new Date('2022-10-10'),
+        horaires: 'Tu-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on horaires_ouverture property set to open now', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -1100,10 +1251,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       }
     ];
 
-    const filter: FilterPresentation = {
-      date_ouverture: '2022-07-22',
-      ouvert_actuellement: 'true'
-    };
+    const filter: FilterPresentation = { horaires_ouverture: [{ day: 'now' }] };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -1131,6 +1279,82 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         services: [Service.AccederADuMateriel],
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on horaires_ouverture property and omit wrong OSM formats', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        horaires: 'Mo-Fr 09:00,14:00-18:30; Sa 08:30-12:00',
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = { horaires_ouverture: [] };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter),
+        new Date('2022-07-22T09:55:00.000Z')
+      )
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        code_postal: '51100',
+        commune: 'Reims',
+        voie: '12 BIS RUE DE LECLERCQ',
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        latitude: 46.2814605,
+        longitude: 4.468874
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        horaires: 'Mo-Fr 09:00,14:00-18:30; Sa 08:30-12:00',
         latitude: 45.7689958,
         longitude: 4.8343466
       }

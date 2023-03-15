@@ -4,7 +4,10 @@
       <span class="text-primary">Quand</span>
       serez-vous disponible&nbsp;?
     </h1>
-    <h5 class="text-center fw-bold mb-4 text-muted">Veuillez indiquer quand vous pourrez vous rendre à la structure</h5>
+    <h5 class="text-center mb-4 mx-5 text-muted">
+      Vous pouvez renseigner des créneaux en cherchant des structures ouverte à un horaire précis, ou simplement regarder les
+      structures ouvertes actuellement pour les contacter par téléphone
+    </h5>
     <form [formGroup]="orientationLayout.filterForm">
       <div class="accordion" id="accordionDisponibilite">
         <div class="accordion-item mb-3">
@@ -16,65 +19,64 @@
               [class.collapsed]="collapseDatePrecise.isCollapsed"
               [attr.aria-expanded]="collapseDatePrecise.isExpanded"
               (click)="collapseDatePrecise.toggle()">
-              <i class="ri-calendar-check-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+              <i class="ri-calendar-todo-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <b class="orientation-btn-label">Je cherche des structures ouvertes à une date précise</b>
             </button>
           </h2>
-          <app-collapse #collapseDatePrecise id="collapseDatePrecise" aria-labelledby="headingDatePrecise">
-            <div class="accordion-body">
-              <div class="row justify-content-center">
-                <div class="col-md-5">
-                  <div class="mb-3 text-center form-chip">
-                    <input
-                      type="checkbox"
-                      name="ouvertActuellement"
-                      id="ouvertActuellement"
-                      formControlName="ouvert_actuellement"
-                      class="form-check-input"
-                      (change)="setDateOuvertureToNow($any($event))" />
-                    <label for="ouvertActuellement" class="form-check-label bg-primary text-white fw-bold">
-                      Ouvert actuellement
-                    </label>
-                  </div>
-                  <div class="mb-3">
-                    <label for="dateOuverture" class="form-label visually-hidden">Sélectionner la date d'ouverture</label>
-                    <input
-                      type="date"
-                      name="date_ouverture"
-                      formControlName="date_ouverture"
-                      class="form-control"
-                      id="dateOuverture"
-                      placeholder="Je choisis une date"
-                      (change)="selectDate($any($event))" />
-                  </div>
-                </div>
+          <app-collapse
+            #collapseDatePrecise
+            id="collapseDatePrecise"
+            [state]="orientationLayout.filterForm.controls['horaires_ouverture'].value?.length ? 'expanded' : 'collapsed'"
+            aria-labelledby="headingDatePrecise">
+            <div class="accordion-body bg-light px-5 py-4">
+              <app-opening-hours-form
+                #openingHoursForm
+                (selectOpeningHours)="onSelectOpeningHours($event)"
+                [openingHours]="orientationLayout.filterForm.controls['horaires_ouverture'].value"></app-opening-hours-form>
+              <div class="text-center mt-4">
+                <button type="button" class="btn btn-secondary me-3" (click)="openingHoursForm.onResetOpeningHoursForm()">
+                  Annuler
+                  <i class="ri-close-line align-bottom"></i>
+                </button>
+                <app-display-on-map-link
+                  buttonStyle="primary"
+                  [cartographieFeature]="features.get('cartographie')"
+                  [lieuxMediationNumeriqueCount]="(orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0"
+                  [queryParams]="route.queryParams">
+                  Afficher les résultats
+                </app-display-on-map-link>
               </div>
             </div>
           </app-collapse>
         </div>
       </div>
     </form>
-    <div class="text-center my-5">
-      <ng-container *ngIf="features.get('cartographie') as cartographie">
-        <a
-          *ngIf="cartographie.active"
-          class="btn btn-primary mx-3"
-          [class.disabled]="((orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0) === 0"
-          [routerLink]="['/','cartographie']"
-          queryParamsHandling="preserve">
-          Afficher les résultats sur la cartographie
-          <i class="ri-arrow-right-s-line align-bottom"></i>
-        </a>
-        <a
-          *ngIf="!cartographie.active && cartographie.url"
-          class="btn btn-primary mx-3"
-          [class.disabled]="((orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0) === 0"
-          [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
-          rel="keep-params">
-          Afficher les résultats sur la cartographie
-          <i class="ri-arrow-right-s-line align-bottom"></i>
-        </a>
-      </ng-container>
-    </div>
+    <ng-container *ngIf="collapseDatePrecise.isCollapsed">
+      <app-text-separator class="px-3 my-5">OU</app-text-separator>
+      <div class="text-center">
+        <ng-container *ngIf="features.get('cartographie') as cartographie">
+          <a
+            *ngIf="cartographie.active"
+            class="accordion-button p-3 bg-light text-decoration-none"
+            [class.disabled]="((orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0) === 0"
+            [routerLink]="['/','cartographie']"
+            queryParamsHandling="preserve">
+            <i class="ri-road-map-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+            <b class="accordion-button-label">J’affiche toutes les structures correspondant à ma recherche</b>
+            <i class="ri-arrow-right-s-line ri-2x text-muted ms-auto position-absolute me-3 end-0"></i>
+          </a>
+          <a
+            *ngIf="!cartographie.active && cartographie.url"
+            class="accordion-button p-3 bg-light text-decoration-none"
+            [class.disabled]="((orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0) === 0"
+            [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
+            rel="keep-params">
+            <i class="ri-road-map-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
+            <b class="accordion-button-label">J’affiche toutes les structures correspondant à ma recherche</b>
+            <i class="ri-arrow-right-s-line ri-xl ri-fw ri-space float-end"></i>
+          </a>
+        </ng-container>
+      </div>
+    </ng-container>
   </div>
 </div>

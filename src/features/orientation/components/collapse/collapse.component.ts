@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -17,6 +17,10 @@ type CollapseState = 'expanded' | 'collapsed';
   ]
 })
 export class CollapseComponent {
+  @Input() public set state(state: CollapseState) {
+    this._state$.next(state);
+  }
+
   private readonly _state$: BehaviorSubject<CollapseState> = new BehaviorSubject<CollapseState>('collapsed');
 
   public readonly state$: Observable<CollapseState> = this._state$.asObservable();

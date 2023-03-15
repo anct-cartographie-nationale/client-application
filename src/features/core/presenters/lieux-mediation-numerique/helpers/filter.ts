@@ -7,7 +7,7 @@ import { FilterOperator, FilterPresentation } from '../../filter';
 import {
   accessibiliteFilterOperator,
   conditionsAccesFilterOperator,
-  dateOuvertureFilterOperator,
+  horairesOuvertureFilterOperator,
   distanceFilterOperator,
   modalitesAccompagnementFilterOperator,
   publicsAccueillisFilterOperator,
@@ -21,7 +21,7 @@ const filterOperatorsMap: Map<string, FilterOperator> = new Map([
   ['conditions_acces', conditionsAccesFilterOperator],
   ['publics_accueillis', publicsAccueillisFilterOperator],
   ['modalites_accompagnement', modalitesAccompagnementFilterOperator],
-  ['date_ouverture', dateOuvertureFilterOperator]
+  ['horaires_ouverture', horairesOuvertureFilterOperator]
 ]);
 
 const applyFilter = (
