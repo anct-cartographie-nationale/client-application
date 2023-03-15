@@ -1025,6 +1025,54 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
+  it('should filter lieux mediation numerique on horaires_ouverture property opens on sunday between 12:00 and 13:00', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = {
+      horaires_ouverture: [
+        {
+          day: 'su',
+          period: 'hours',
+          start: '12:00',
+          end: '13:00'
+        }
+      ]
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter),
+        new Date('2022-07-22T14:30:00.000Z')
+      )
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([]);
+  });
+
   it('should filter lieux mediation numerique on horaires_ouverture property opens any day between 10:00 and 10:30', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {

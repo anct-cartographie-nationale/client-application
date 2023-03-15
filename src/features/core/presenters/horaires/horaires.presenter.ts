@@ -17,16 +17,22 @@ const timeToMilliseconds = (time: Time): number => {
   return hours * HOUR_TO_MILLISECONDS + minutes * MINUTE_TO_MILLISECONDS;
 };
 
-const dateWithoutTime = (date: Date): Date => {
+const firstTimeOfTheDay = (date: Date): Date => {
   const dateWithoutTime = new Date(date);
   dateWithoutTime.setHours(0, 0, 0, 0);
+  return dateWithoutTime;
+};
+
+const lastTimeOfTheDay = (date: Date): Date => {
+  const dateWithoutTime = new Date(date);
+  dateWithoutTime.setHours(23, 59, 59, 999);
   return dateWithoutTime;
 };
 
 export const dateTimeFor =
   (date: Date) =>
   (weekDay: WeekDay, time: Time): Date =>
-    new Date(dayOfTheWeek(dateWithoutTime(date), weekDay).getTime() + timeToMilliseconds(time));
+    new Date(dayOfTheWeek(firstTimeOfTheDay(date), weekDay).getTime() + timeToMilliseconds(time));
 
 const invalidInterval = (interval?: string) => interval != 'Fermé' && interval != null;
 
@@ -70,7 +76,7 @@ export const parseHoraires =
     try {
       return horairesOSM
         ? new opening_hours(horairesOSM)
-            .getOpenIntervals(dateWithoutTime(firstDayOfTheWeek(date)), dateWithoutTime(lastDayOfTheWeek(date)))
+            .getOpenIntervals(firstTimeOfTheDay(firstDayOfTheWeek(date)), lastTimeOfTheDay(lastDayOfTheWeek(date)))
             .reduce(
               (
                 timeTableOpeningHours: HorairesPresentation,

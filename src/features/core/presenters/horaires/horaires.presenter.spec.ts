@@ -30,6 +30,23 @@ describe('horaires presenter', (): void => {
     });
   });
 
+  it('should get time table opening hours from osm opening hours, open every day', (): void => {
+    const openingHours: string = 'Mo-Su 09:00-12:00,14:00-18:30';
+    const date: Date = new Date('2022-07-22T09:00:00.000Z');
+
+    const timeTableOpeningHours = parseHoraires(date)(openingHours);
+
+    expect(timeTableOpeningHours).toStrictEqual({
+      Lundi: '09h00 - 12h00\n14h00 - 18h30',
+      Mardi: '09h00 - 12h00\n14h00 - 18h30',
+      Mercredi: '09h00 - 12h00\n14h00 - 18h30',
+      Jeudi: '09h00 - 12h00\n14h00 - 18h30',
+      Vendredi: '09h00 - 12h00\n14h00 - 18h30',
+      Samedi: '09h00 - 12h00\n14h00 - 18h30',
+      Dimanche: '09h00 - 12h00\n14h00 - 18h30'
+    });
+  });
+
   it('should not get time table opening hours from osm opening hours when osm opening hours is not formatted properly', (): void => {
     const openingHours: string = 'Mo-AM 09:00-12:00,14:00-18:30';
     const date: Date = new Date('2022-07-22T09:00:00.000Z');

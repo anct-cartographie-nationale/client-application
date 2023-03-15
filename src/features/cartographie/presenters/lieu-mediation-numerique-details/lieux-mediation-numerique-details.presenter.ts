@@ -24,10 +24,6 @@ import {
   SourcePresentation
 } from './lieu-mediation-numerique-details.presentation';
 
-//
-// cd72
-// odspep
-
 const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
   [
     'conseiller-numerique',

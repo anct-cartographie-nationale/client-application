@@ -46,11 +46,20 @@ const toIsOpenOn =
     );
   };
 
+const hasNowOpen = (allOpeningHours: OpeningHours[]): boolean =>
+  allOpeningHours.some((openingHours: OpeningHours) => openingHours.day === 'now');
+
+const initialOpeningState = (date: Date, openingHours: OpeningHours[], horaires: string): boolean =>
+  hasNowOpen(openingHours) ? isOpenNow(date)(horaires) : false;
+
 const applyFilter = (date: Date, openingHours: OpeningHours[], horaires?: string): boolean => {
   if (!isOsmOpeningHoursValid(horaires)) return false;
   if (isAnyDayAnyTime(openingHours)) return true;
 
-  return openingHours.map(toAllDaysIfAny).flat().reduce(toIsOpenOn(date, horaires), isOpenNow(date)(horaires));
+  return openingHours
+    .map(toAllDaysIfAny)
+    .flat()
+    .reduce(toIsOpenOn(date, horaires), initialOpeningState(date, openingHours, horaires));
 };
 
 const shouldApply = (horaires_ouverture?: OpeningHours[]): horaires_ouverture is OpeningHours[] =>
