@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { filterNotFoundEmailBody, OrientationItemPresentation } from '../../presenters';
 import { OrientationLayout } from '../../layouts';
 import demarches from './demarches.json';
@@ -20,6 +21,8 @@ export class BesoinPage {
   public manqueDeMaterielOrientationItems: OrientationItemPresentation<string>[] = manqueDeMateriel;
 
   public constructor(public readonly orientationLayout: OrientationLayout) {}
+
+  public serviceControl: AbstractControl | null = this.orientationLayout.filterForm.get('service');
 
   public onFilterNotFound(): void {
     document.location.href = `mailto:cartographie.sonum@anct.gouv.fr?subject=[Orientation] Je ne trouve pas mon besoin&body=${filterNotFoundEmailBody()}`;

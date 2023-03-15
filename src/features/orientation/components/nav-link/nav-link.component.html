@@ -9,7 +9,8 @@
   <span
     class="position-absolute top-0 start-100 translate-middle bg-primary rounded-circle square-sm text-white text-center small"
     [class.ms-2]="size === 'sm'"
-    *ngIf="filtersCount">
-    {{ filtersCount }}
+    *ngIf="filtersCount || filtersCheck">
+    <ng-container *ngIf="filtersCount">{{ filtersCount }}</ng-container>
+    <i *ngIf="filtersCheck" class="ri-check-line"></i>
   </span>
 </a>

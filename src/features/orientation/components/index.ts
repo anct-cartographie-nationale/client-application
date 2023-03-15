@@ -1,3 +1,4 @@
+import { BesoinLinkComponent } from './besoin-link/besoin-link.component';
 import { CollapseComponent } from './collapse/collapse.component';
 import { NavLinkComponent } from './nav-link/nav-link.component';
 import { SelectedFiltersComponent } from './selected-filters/selected-filters.component';
@@ -6,6 +7,7 @@ import { FilterResultCountComponent } from './filter-result-count/filter-result-
 import { NavComponent } from './nav/nav.component';
 
 export const components = [
+  BesoinLinkComponent,
   CollapseComponent,
   NavLinkComponent,
   NavComponent,

@@ -1,0 +1,23 @@
+.distance-range {
+  margin-top: -2rem;
+  height: add($distance-range-thumb-height, $form-range-thumb-focus-box-shadow-width * 2);
+
+  &::-webkit-slider-thumb {
+    width: $distance-range-thumb-width;
+    height: $distance-range-thumb-height;
+    margin-top: ($distance-range-track-height - $distance-range-thumb-height) * 0.5; // Webkit specific
+  }
+
+  &::-webkit-slider-runnable-track {
+    height: $distance-range-track-height;
+  }
+
+  &::-moz-range-thumb {
+    width: $distance-range-thumb-width;
+    height: $distance-range-thumb-height;
+  }
+
+  &::-moz-range-track {
+    height: $distance-range-track-height;
+  }
+}

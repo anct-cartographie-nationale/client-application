@@ -1,19 +1,19 @@
 [
   {
+    "label": "Familles/Enfants",
+    "value": "Familles/enfants"
+  },
+  {
+    "label": "Jeunes",
+    "value": "Jeunes (16-26 ans)"
+  },
+  {
     "label": "Adultes",
     "value": "Adultes"
   },
   {
-    "label": "Seniors (+65 ans)",
+    "label": "Seniors",
     "value": "Seniors (+ 65 ans)"
-  },
-  {
-    "label": "Jeunes (16-26 ans)",
-    "value": "Jeunes (16-26 ans)"
-  },
-  {
-    "label": "Familles/enfants",
-    "value": "Familles/enfants"
   },
   {
     "label": "Femmes uniquement",

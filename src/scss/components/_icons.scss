@@ -146,20 +146,12 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\eef6';
 }
 
-.ri-compasses-2-fill::before {
-  content: '\ebc5';
-}
-
 .ri-arrow-right-s-line::before {
   content: '\ea6e';
 }
 
 .ri-arrow-left-s-line::before {
   content: '\ea64';
-}
-
-.ri-file-list-3-line::before {
-  content: '\ecef';
 }
 
 .ri-notification-3-line::before {
@@ -208,10 +200,6 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-service-line::before {
   content: '\f0e2';
-}
-
-.ri-book-2-line::before {
-  content: '\ead3';
 }
 
 .ri-checkbox-blank-circle-fill::before {
@@ -272,4 +260,64 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-settings-4-line::before {
   content: '\f0e8';
+}
+
+.ri-calendar-todo-line::before {
+  content: '\eb29';
+}
+
+.ri-road-map-line::before {
+  content: '\f08e';
+}
+
+.ri-subtract-line::before {
+  content: '\f1af';
+}
+
+.ri-smartphone-line::before {
+  content: '\f15a';
+}
+
+.ri-user-line::before {
+  content: '\f264';
+}
+
+.ri-user-star-line::before {
+  content: '\f276';
+}
+
+.ri-slideshow-line::before {
+  content: '\f158';
+}
+
+.ri-stethoscope-line::before {
+  content: '\f197';
+}
+
+.ri-shopping-cart-line::before {
+  content: '\f120';
+}
+
+.ri-settings-5-line::before {
+  content: '\f0ea';
+}
+
+.ri-contacts-line::before {
+  content: '\ebd2';
+}
+
+.ri-medal-line::before {
+  content: '\ef28';
+}
+
+.ri-image-2-line::before {
+  content: '\ee45';
+}
+
+.ri-pen-nib-line::before {
+  content: '\efde';
+}
+
+.ri-map-pin-4-line::before {
+  content: '\ef0e';
 }

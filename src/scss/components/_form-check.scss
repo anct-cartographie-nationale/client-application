@@ -16,27 +16,23 @@
     }
 
     &:not(:checked) + .form-check-label {
-      color: $form-chip-color !important;
-      background-color: $form-chip-padding-background-color !important;
+      color: $form-chip-color;
+      background-color: $form-chip-background-color;
 
       &:hover {
-        color: $form-chip-hover-color !important;
+        color: $form-chip-hover-color;
       }
     }
 
     &:checked + .form-check-label {
-      color: $light;
-      background-color: $primary;
+      color: $light !important;
+      background-color: $primary !important;
     }
 
     &:focus-visible + .form-check-label {
       outline: 0;
       box-shadow: $input-focus-box-shadow;
     }
-  }
-
-  .chip-pointer {
-    cursor: pointer;
   }
 }
 

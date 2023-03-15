@@ -1,12 +1,20 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap } from 'rxjs';
 import { map, mergeWith } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { AddressFoundPresentation, AddressPresenter, AddressRepository } from '../../../adresse';
+import { FilterPresentation, LieuxMediationNumeriquePresenter, toFilterFormPresentationFromQuery } from '../../../core';
 import { OrientationLayout } from '../../layouts';
+import { countByDistance, DistanceRange, localisationFromStrings } from './localisation.presenter';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
+
+const toFiltersWithoutDistance = (filterPresentation: FilterPresentation): FilterPresentation => {
+  const { distance, ...newFilters } = filterPresentation;
+  return newFilters;
+};
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,40 +40,17 @@ export class LocalisationPage {
 
   public addressNotFound$: Observable<boolean> = of(false);
 
-  public constructor(
-    private readonly _addressPresenter: AddressPresenter,
-    public readonly orientationLayout: OrientationLayout
-  ) {}
+  private _localisation$: BehaviorSubject<Localisation> = new BehaviorSubject<Localisation>(
+    localisationFromStrings(this._route.snapshot.queryParams['latitude'], this._route.snapshot.queryParams['longitude'])
+  );
 
-  public onSelectAddress(address: AddressFoundPresentation): void {
-    this.orientationLayout.filterForm.get('address')?.setValue(address.label);
-    this.orientationLayout.filterForm.get('latitude')?.setValue(address.localisation.latitude);
-    this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);
-    this.orientationLayout.filterForm.get('distance')?.setValue(100000);
-  }
+  private _filters$: Observable<FilterPresentation> = of(
+    toFilterFormPresentationFromQuery(this._route.snapshot.queryParams)
+  ).pipe(mergeWith(this.orientationLayout.filterForm.valueChanges), map(toFiltersWithoutDistance));
 
-  public onResetAddress(): void {
-    this.orientationLayout.filterForm.get('address')?.reset();
-    this.orientationLayout.filterForm.get('latitude')?.reset();
-    this.orientationLayout.filterForm.get('longitude')?.reset();
-    this.orientationLayout.filterForm.get('distance')?.reset();
-  }
-
-  public onGeoLocate(): void {
-    this._loadingState$.next(true);
-    window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
-      this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
-      this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
-      this.orientationLayout.filterForm.get('distance')?.setValue(100000);
-      this.orientationLayout.filterForm.get('address')?.setValue(null);
-      this._geoLocation$.next(
-        Localisation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        })
-      );
-    });
-  }
+  public lieuxMediationNumeriqueByDistanceRange$: Observable<DistanceRange[]> = this._lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueByDistance$(this._localisation$, this._filters$)
+    .pipe(map(countByDistance));
 
   private _geoLocation$: Subject<Localisation> = new Subject<Localisation>();
 
@@ -83,6 +68,40 @@ export class LocalisationPage {
       )
     )
   );
+
+  public constructor(
+    private readonly _addressPresenter: AddressPresenter,
+    private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
+    public readonly _route: ActivatedRoute,
+    public readonly orientationLayout: OrientationLayout
+  ) {}
+
+  public onSelectAddress(address: AddressFoundPresentation): void {
+    this.orientationLayout.filterForm.get('address')?.setValue(address.label);
+    this.orientationLayout.filterForm.get('latitude')?.setValue(address.localisation.latitude);
+    this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);
+    this.orientationLayout.filterForm.get('distance')?.setValue(30000);
+    this._localisation$.next(address.localisation);
+  }
+
+  public onResetAddress(): void {
+    this.orientationLayout.filterForm.get('address')?.reset();
+    this.orientationLayout.filterForm.get('latitude')?.reset();
+    this.orientationLayout.filterForm.get('longitude')?.reset();
+    this.orientationLayout.filterForm.get('distance')?.reset();
+  }
+
+  public onGeoLocate(): void {
+    this._loadingState$.next(true);
+    window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
+      this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
+      this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
+      this.orientationLayout.filterForm.get('distance')?.setValue(30000);
+      this.orientationLayout.filterForm.get('address')?.setValue(null);
+      this._geoLocation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
+      this._localisation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
+    });
+  }
 
   public onSearchAddress(searchTerm: string): void {
     this._searchTerm$.next(searchTerm);

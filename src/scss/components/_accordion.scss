@@ -1,6 +1,8 @@
-.accordion-button {
+.orientation-btn {
+  border: none;
+
   &:hover {
-    .accordion-button-label {
+    .orientation-btn-label {
       opacity: 1;
     }
   }
@@ -19,7 +21,7 @@
     box-shadow: var(--#{$prefix}accordion-btn-focus-box-shadow);
   }
 
-  .accordion-button-label {
+  .orientation-btn-label {
     opacity: 0.7;
     transition: opacity 0.3s;
   }
