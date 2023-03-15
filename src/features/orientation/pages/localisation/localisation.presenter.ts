@@ -1,4 +1,5 @@
-import { LieuMediationNumeriquePresentation } from '../../../core';
+import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LieuMediationNumeriquePresentation, NO_LOCALISATION } from '../../../core';
 
 export type DistanceRange = {
   distance: number;
@@ -93,3 +94,11 @@ const setHeight = (distanceRanges: DistanceRange[]): DistanceRange[] =>
 
 export const countByDistance = (lieux: LieuMediationNumeriquePresentation[]): DistanceRange[] =>
   setHeight(lieux.filter(inRange).reduce(groupLieuxByDistance, DEFAULT_DISTANCE_RANGES).sort(byDistance));
+
+export const localisationFromStrings = (latitude?: string, longitude?: string): Localisation =>
+  latitude == null || longitude == null
+    ? NO_LOCALISATION
+    : Localisation({
+        latitude: +latitude,
+        longitude: +longitude
+      });

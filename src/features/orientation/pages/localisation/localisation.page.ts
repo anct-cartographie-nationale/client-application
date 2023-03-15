@@ -1,14 +1,20 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap } from 'rxjs';
 import { map, mergeWith } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { AddressFoundPresentation, AddressPresenter, AddressRepository } from '../../../adresse';
+import { FilterPresentation, LieuxMediationNumeriquePresenter } from '../../../core';
 import { OrientationLayout } from '../../layouts';
-import { LieuxMediationNumeriquePresenter, toLocalisationFromFilterFormPresentation } from '../../../core';
-import { countByDistance, DistanceRange } from './localisation.presenter';
+import { countByDistance, DistanceRange, localisationFromStrings } from './localisation.presenter';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
+
+const toFiltersWithoutDistance = (filterPresentation: FilterPresentation): FilterPresentation => {
+  const { distance, ...newFilters } = filterPresentation;
+  return newFilters;
+};
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,12 +40,15 @@ export class LocalisationPage {
 
   public addressNotFound$: Observable<boolean> = of(false);
 
-  private _localisation$: Observable<Localisation> = this.orientationLayout.filterPresentation$.pipe(
-    map(toLocalisationFromFilterFormPresentation)
+  private localisation$: BehaviorSubject<Localisation> = new BehaviorSubject<Localisation>(
+    localisationFromStrings(this._route.snapshot.queryParams['latitude'], this._route.snapshot.queryParams['longitude'])
   );
 
   public lieuxMediationNumeriqueByDistanceRange$: Observable<DistanceRange[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDistance$(this._localisation$)
+    .lieuxMediationNumeriqueByDistance$(
+      this.localisation$,
+      this.orientationLayout.filterPresentation$.pipe(map(toFiltersWithoutDistance))
+    )
     .pipe(map(countByDistance));
 
   private _geoLocation$: Subject<Localisation> = new Subject<Localisation>();
@@ -62,6 +71,7 @@ export class LocalisationPage {
   public constructor(
     private readonly _addressPresenter: AddressPresenter,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
+    public readonly _route: ActivatedRoute,
     public readonly orientationLayout: OrientationLayout
   ) {}
 
@@ -70,6 +80,7 @@ export class LocalisationPage {
     this.orientationLayout.filterForm.get('latitude')?.setValue(address.localisation.latitude);
     this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);
     this.orientationLayout.filterForm.get('distance')?.setValue(100000);
+    this.localisation$.next(address.localisation);
   }
 
   public onResetAddress(): void {
@@ -86,12 +97,8 @@ export class LocalisationPage {
       this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
       this.orientationLayout.filterForm.get('distance')?.setValue(100000);
       this.orientationLayout.filterForm.get('address')?.setValue(null);
-      this._geoLocation$.next(
-        Localisation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        })
-      );
+      this._geoLocation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
+      this.localisation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
     });
   }
 
