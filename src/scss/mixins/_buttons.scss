@@ -63,6 +63,7 @@
 
   &:hover {
     color: $hover-color;
-    box-shadow: -0.5px 0.5px 0 1.5px $hover-color;
+    background-color: $background;
+    box-shadow: -0.5px 0.5px 0 1.5px $black;
   }
 }

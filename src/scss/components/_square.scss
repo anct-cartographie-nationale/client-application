@@ -1,9 +1,23 @@
 .square-sm {
   width: $square-sm;
   height: $square-sm;
+
+  * {
+    margin-top: -2px;
+  }
 }
 
 .square {
   width: $square;
   height: $square;
+
+  * {
+    margin-top: -1px;
+    font-size: $small-font-size;
+  }
+}
+
+.square-lg {
+  width: $square-lg;
+  height: $square-lg;
 }

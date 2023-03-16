@@ -1,4 +1,9 @@
 $input-border-color: #999;
 $input-placeholder-color: #999;
 $input-padding-x: 0.5rem;
-$input-border-radius: 0.7rem;
+$input-border-width: 2px;
+$input-border-radius: 3px;
+$form-select-border-radius: 3px;
+$input-focus-border-color: $component-active-bg;
+$form-select-focus-border-color: $component-active-bg;
+$form-select-focus-color: $form-select-color;

@@ -10,11 +10,15 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content overflow-hidden">
       <div class="modal-header bg-primary text-bg-dark">
-        <h2 class="modal-title h3" id="ficheOrientationModal">
-          <i class="ri-xl ri-printer-line align-text-top me-2"></i>
+        <h2 class="modal-title fw-bold d-flex align-items-center" id="ficheOrientationModal">
+          <i class="ri-xl ri-printer-line me-3"></i>
           Imprimer la fiche
         </h2>
-        <button type="button" class="btn-close btn-close-white opacity-100 mb-0" aria-label="Close" (click)="close()"></button>
+        <button
+          type="button"
+          class="btn-close btn-close-white opacity-100 small mb-0"
+          aria-label="Close"
+          (click)="close()"></button>
       </div>
       <div>
         <div @slideLeft *ngIf="!isReadyToPrint">

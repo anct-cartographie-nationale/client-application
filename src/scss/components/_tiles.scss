@@ -3,6 +3,7 @@
   --#{$prefix}tile-btn-padding-x: #{$btn-tile-padding-x};
   --#{$prefix}tile-btn-padding-y: #{$btn-tile-padding-y};
   --#{$prefix}tile-btn-hover-bg: #{$btn-tile-hover-bg};
+  --#{$prefix}tile-btn-hover-color: #{$btn-tile-btn-hover-color};
 
   display: flex;
   flex-direction: column;
@@ -15,11 +16,11 @@
 
   &:hover {
     background-color: var(--#{$prefix}tile-btn-hover-bg) !important;
-    color: var(--#{$prefix}tile-btn-color) !important;
+    color: var(--#{$prefix}tile-btn-hover-color) !important;
   }
 
   &:focus {
     background-color: var(--#{$prefix}tile-btn-hover-bg) !important;
-    color: var(--#{$prefix}tile-btn-color) !important;
+    color: var(--#{$prefix}tile-btn-hover-color) !important;
   }
 }

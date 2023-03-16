@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, BehaviorSubject, delay } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 type CollapseState = 'expanded' | 'collapsed';
 
@@ -23,15 +24,11 @@ export class CollapseComponent {
 
   private readonly _state$: BehaviorSubject<CollapseState> = new BehaviorSubject<CollapseState>('collapsed');
 
-  public readonly state$: Observable<CollapseState> = this._state$.asObservable();
+  public readonly state$: Observable<CollapseState> = this._state$.asObservable().pipe(delay(0));
 
-  public get isCollapsed(): boolean {
-    return this._state$.value === 'collapsed';
-  }
+  public isCollapsed$: Observable<boolean> = this.state$.pipe(map((state: CollapseState) => state === 'collapsed'));
 
-  public get isExpanded(): boolean {
-    return this._state$.value === 'expanded';
-  }
+  public isExpanded$: Observable<boolean> = this.state$.pipe(map((state: CollapseState) => state === 'expanded'));
 
   public toggle(): void {
     this._state$.next(this._state$.value === 'expanded' ? 'collapsed' : 'expanded');
