@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
+import { MarkersPresenter } from '../../../cartographie/presenters';
 import { CoordinateursListItemPresentation } from './coordinateurs-list.presentation';
 import { CoordinateursListPresenter } from './coordinateurs-list.presenter';
 import { coordinateursListProviders } from './coordinateurs-list.providers';
@@ -15,6 +16,7 @@ export class CoordinateursListPage {
 
   public constructor(
     @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
+    public readonly markersPresenter: MarkersPresenter,
     private readonly _coordinateursListPresenter: CoordinateursListPresenter
   ) {}
 

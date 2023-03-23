@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { coordinateursLayoutProviders } from './coordinateurs.layout.providers';
-import { MarkersPresenter } from '../../../cartographie/presenters';
 import { Observable } from 'rxjs';
+import { MarkersPresenter } from '../../../cartographie/presenters';
+import { coordinateursLayoutProviders } from './coordinateurs.layout.providers';
 import { CoordinateurOnMapPresentation } from './coordinateur-on-map.presentation';
 import { CoordinateursOnMapPresenter } from './coordinateurs-on-map.presenter';
 
