@@ -1,0 +1,93 @@
+<mgl-popup
+  *ngIf="highlight | async as coordinateur"
+  anchor="bottom"
+  [offset]="[0, -35]"
+  [lngLat]="[coordinateur.longitude, coordinateur.latitude]"
+  [closeButton]="false">
+  <div class="text-center p-3 border-bottom border-3 text-wrap border-primary lh-sm">
+    <b class="fs-4">{{ coordinateur.nom }}</b>
+    <br />
+    <span
+      class="fs-6"
+      [class.text-primary]="coordinateur.perimetre === 'Départemental' || coordinateur.perimetre === 'Régional'"
+      [class.fw-bold]="coordinateur.perimetre === 'Régional'">
+      Coordinateur
+      <span class="text-lowercase">{{ coordinateur.perimetre }}</span>
+    </span>
+    <br />
+    <i class="text-muted">{{ coordinateur.nombreDePersonnesCoordonnees }} {{ coordinateur.dispositif }}</i>
+  </div>
+</mgl-popup>
+<ng-container *ngFor="let coordinateur of coordinateurs; index as i; trackBy: trackByCoordinateurId">
+  <mgl-marker [lngLat]="[coordinateur.longitude, coordinateur.latitude]">
+    <div
+      role="button"
+      tabindex="-1"
+      [class.marker-hover]="hoverId === coordinateur.id || selectedId === coordinateur.id"
+      (mouseenter)="highlight.emit(coordinateur)"
+      (mouseleave)="highlight.emit()"
+      (click)="showDetails.emit(coordinateur)">
+      <svg
+        *ngIf="coordinateur.perimetre === 'Régional'"
+        class="marker-default"
+        width="38"
+        height="65"
+        viewBox="0 0 38 65"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <ellipse class="marker-base" cx="19" cy="45" rx="12" ry="3" />
+        <g class="marker-body">
+          <path
+            d="M36.775 32.105v-20.21l-17.77-10.11-17.78 10.11v20.21l17.78 10.11 17.77-10.11Z"
+            fill="#000091"
+            stroke="#fff"
+            stroke-width="1.42"
+            stroke-miterlimit="10" />
+          <path d="M30.855 28.735v-13.48l-11.85-6.73-11.85 6.73v13.48l11.85-6.74 11.85 6.74Z" fill="#fff" />
+          <path d="M24.065 24.875v-5.75l-5.06-2.88-5.06 2.88v5.75l5.06 2.88 5.06-2.88Z" fill="#E1000F" />
+        </g>
+      </svg>
+      <svg
+        *ngIf="coordinateur.perimetre === 'Départemental'"
+        class="marker-default"
+        width="25"
+        height="55"
+        viewBox="0 0 25 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <ellipse class="marker-base" cx="12" cy="42" rx="10" ry="2.5" />
+        <g class="marker-body">
+          <path
+            d="m24.537 20.96-.174-13.48L12.506.748.65 7.481V20.96l11.347 17.933h1.085z"
+            fill="#000091"
+            stroke="#fff"
+            stroke-width="1.3"
+            stroke-miterlimit="10" />
+          <path d="M20.499 18.72V9.734L12.6 5.242 4.687 9.735v8.986l7.913-4.493z" fill="#fff" />
+          <path d="M15.966 16.145v-3.837L12.6 10.391l-3.38 1.918v3.837l3.38 1.917z" fill="#e1000f" />
+        </g>
+      </svg>
+
+      <svg
+        *ngIf="coordinateur.perimetre === 'Bassin de vie'"
+        class="marker-default"
+        width="20"
+        height="50"
+        viewBox="0 0 20 31"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <ellipse class="marker-base" cx="10" cy="34" rx="8" ry="2" />
+        <g class="marker-body">
+          <path
+            d="m19.135 16.104-.138-10.268L9.75.564.49 5.836v10.268l8.86 14.242h.842z"
+            fill="#000091"
+            stroke="#fff"
+            stroke-width=".98"
+            stroke-miterlimit="10" />
+          <path d="m18.942 16.283.055-10.447L9.75.564.49 5.836v10.516l9.33-5.258z" fill="#fff" />
+          <path d="M12.455 12.584V9.59L9.82 8.1 7.183 9.59v2.994L9.82 14.09z" fill="#e1000f" />
+        </g>
+      </svg>
+    </div>
+  </mgl-marker>
+</ng-container>

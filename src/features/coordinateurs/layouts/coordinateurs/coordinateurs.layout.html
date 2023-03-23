@@ -1,0 +1,25 @@
+<div class="d-flex h-100">
+  <div class="border-end col-12 map-list">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="col overflow-auto position-relative">
+    <mgl-map
+      *ngIf="(markersPresenter.localisation$ | async) as localisation"
+      [movingMethod]="'flyTo'"
+      [movingOptions]="{speed: 2}"
+      class="h-100 w-100 overflow-hidden"
+      [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"
+      [zoom]="[(markersPresenter.zoom$ | async) ?? 0]"
+      [center]="[localisation.longitude, localisation.latitude]">
+      <!--            (zoomEvt)="zooming($event)"-->
+      <!--            (zoomEnd)="onMapViewUpdated($event)"-->
+      <!--            (mapDragEnd)="onMapViewUpdated($event)"-->
+      <app-coordinateurs-markers
+        [coordinateurs]="(coordinateurs$ | async) ?? []"
+        [selectedId]="(markersPresenter.selected$ | async) ?? ''"
+        [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
+        (highlight)="onHighlight($event?.id)"></app-coordinateurs-markers>
+      <!--      (showDetails)="onShowDetails($event)"-->
+    </mgl-map>
+  </div>
+</div>
