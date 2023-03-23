@@ -1,8 +1,9 @@
 <div class="h-100 d-flex flex-column">
   <div class="list-group list-group-flush flex-grow-1 overflow-auto" tabindex="-1">
     <a
-      [routerLink]="['./']"
       *ngFor="let coordinateur of coordinateurs$ | async; trackBy: trackByCoordinateurId"
+      [routerLink]="[coordinateur.id, 'details']"
+      [relativeTo]="route.parent"
       [attr.id]="coordinateur.id"
       [class.list-group-item-hover]="(markersPresenter.highlighted$ | async) === coordinateur.id"
       (mouseover)="markersPresenter.highlight(coordinateur.id)"

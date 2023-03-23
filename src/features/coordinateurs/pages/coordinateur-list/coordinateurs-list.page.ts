@@ -5,6 +5,7 @@ import { MarkersPresenter } from '../../../cartographie/presenters';
 import { CoordinateursListItemPresentation } from './coordinateurs-list.presentation';
 import { CoordinateursListPresenter } from './coordinateurs-list.presenter';
 import { coordinateursListProviders } from './coordinateurs-list.providers';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +18,7 @@ export class CoordinateursListPage {
   public constructor(
     @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
     public readonly markersPresenter: MarkersPresenter,
+    public readonly route: ActivatedRoute,
     private readonly _coordinateursListPresenter: CoordinateursListPresenter
   ) {}
 

@@ -18,8 +18,8 @@
         [coordinateurs]="(coordinateurs$ | async) ?? []"
         [selectedId]="(markersPresenter.selected$ | async) ?? ''"
         [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
-        (highlight)="onHighlight($event?.id)"></app-coordinateurs-markers>
-      <!--      (showDetails)="onShowDetails($event)"-->
+        (highlight)="onHighlight($event?.id)"
+        (showDetails)="onShowDetails($event)"></app-coordinateurs-markers>
     </mgl-map>
   </div>
 </div>
