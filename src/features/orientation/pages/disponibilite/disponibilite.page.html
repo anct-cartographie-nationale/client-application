@@ -1,6 +1,6 @@
-<div class="h-lg-100 d-flex flex-column px-3">
-  <div class="my-auto">
-    <h1 class="h2 text-center fw-bold mb-4">
+<div class="h-100 d-flex pt-5">
+  <div class="w-100 my-auto">
+    <h1 class="h2 text-center fw-bold mt-5">
       <span class="text-primary">Quand</span>
       serez-vous disponible&nbsp;?
     </h1>
@@ -16,8 +16,8 @@
               type="button"
               class="accordion-button orientation-btn p-3 collapsed"
               aria-controls="collapseDatePrecise"
-              [class.collapsed]="collapseDatePrecise.isCollapsed"
-              [attr.aria-expanded]="collapseDatePrecise.isExpanded"
+              [class.collapsed]="collapseDatePrecise.isCollapsed$ | async"
+              [attr.aria-expanded]="collapseDatePrecise.isExpanded$ | async"
               (click)="collapseDatePrecise.toggle()">
               <i class="ri-calendar-todo-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <b class="orientation-btn-label">Je cherche des structures ouvertes à une date précise</b>
@@ -26,7 +26,7 @@
           <app-collapse
             #collapseDatePrecise
             id="collapseDatePrecise"
-            [state]="orientationLayout.filterForm.controls['horaires_ouverture'].value?.length ? 'expanded' : 'collapsed'"
+            [state]="hasOpeningsHours ? 'expanded' : 'collapsed'"
             aria-labelledby="headingDatePrecise">
             <div class="accordion-body bg-light px-5 py-4">
               <app-opening-hours-form
@@ -34,7 +34,10 @@
                 (selectOpeningHours)="onSelectOpeningHours($event)"
                 [openingHours]="orientationLayout.filterForm.controls['horaires_ouverture'].value"></app-opening-hours-form>
               <div class="text-center mt-4">
-                <button type="button" class="btn btn-secondary me-3" (click)="openingHoursForm.onResetOpeningHoursForm()">
+                <button
+                  type="button"
+                  class="btn btn-secondary m-3"
+                  (click)="openingHoursForm.onResetOpeningHoursForm(); collapseDatePrecise.toggle()">
                   Annuler
                   <i class="ri-close-line align-bottom"></i>
                 </button>
@@ -51,7 +54,7 @@
         </div>
       </div>
     </form>
-    <ng-container *ngIf="collapseDatePrecise.isCollapsed">
+    <ng-container *ngIf="collapseDatePrecise.isCollapsed$ | async">
       <app-text-separator class="px-3 my-5">OU</app-text-separator>
       <div class="text-center">
         <ng-container *ngIf="features.get('cartographie') as cartographie">

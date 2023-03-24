@@ -1,30 +1,32 @@
-<div class="h-lg-100 d-flex flex-column px-3" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
-  <div class="my-auto" *ngIf="serviceControl as serviceControl">
-    <h1 class="h2 text-center fw-bold mt-3">
+<div class="h-100 d-flex pt-5">
+  <div class="w-100 my-auto">
+    <h1 class="h2 text-center fw-bold mt-5">
       Quel est
       <span class="text-primary">votre besoin&nbsp;?</span>
     </h1>
-    <div class="text-center fw-bold mb-5 text-muted">Sélectionnez votre besoin parmi les 15 proposés</div>
+    <h5 class="text-center fw-bold mb-5 text-muted">Sélectionnez votre besoin parmi les 15 proposés</h5>
     <h2 class="text-muted h6 fw-bold mb-3 mt-4">APPRENTISSAGE DE BASE</h2>
-    <app-besoin-link
-      [serviceItems]="apprentissageDeBaseOrientationItems"
-      [selectedServiceItem]="serviceControl.value"
-      (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
-    <h2 class="text-muted h6 fw-bold mb-3 mt-4">DÉMARCHES</h2>
-    <app-besoin-link
-      [serviceItems]="demarchesOrientationItems"
-      [selectedServiceItem]="serviceControl.value"
-      (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
-    <h2 class="text-muted h6 fw-bold mb-3 mt-4">CULTURE NUMÉRIQUE</h2>
-    <app-besoin-link
-      [serviceItems]="cultureNumeriqueOrientationItems"
-      [selectedServiceItem]="serviceControl.value"
-      (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
-    <h2 class="text-muted h6 fw-bold mb-3 mt-4">MANQUE DE MATERIEL</h2>
-    <app-besoin-link
-      [serviceItems]="manqueDeMaterielOrientationItems"
-      [selectedServiceItem]="serviceControl.value"
-      (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+    <ng-container *ngIf="serviceControl as serviceControl">
+      <app-besoin-link
+        [serviceItems]="apprentissageDeBaseOrientationItems"
+        [selectedServiceItem]="serviceControl.value"
+        (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+      <h2 class="text-muted h6 fw-bold mb-3 mt-4">DÉMARCHES</h2>
+      <app-besoin-link
+        [serviceItems]="demarchesOrientationItems"
+        [selectedServiceItem]="serviceControl.value"
+        (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+      <h2 class="text-muted h6 fw-bold mb-3 mt-4">CULTURE NUMÉRIQUE</h2>
+      <app-besoin-link
+        [serviceItems]="cultureNumeriqueOrientationItems"
+        [selectedServiceItem]="serviceControl.value"
+        (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+      <h2 class="text-muted h6 fw-bold mb-3 mt-4">MANQUE DE MATERIEL</h2>
+      <app-besoin-link
+        [serviceItems]="manqueDeMaterielOrientationItems"
+        [selectedServiceItem]="serviceControl.value"
+        (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+    </ng-container>
     <div class="text-center mt-5">
       <div class="text-muted mb-2">Vous ne trouvez pas votre besoin ?</div>
       <button class="btn btn-sm btn-secondary d-inline-block mb-2" (click)="onFilterNotFound()">

@@ -10,11 +10,15 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content overflow-hidden">
       <div class="modal-header bg-primary text-bg-dark">
-        <h2 class="modal-title h3" id="hubModal">
-          <i class="ri-xl ri-error-warning-line align-text-top me-2" style="transform: rotate(180deg)"></i>
-          Informations Hub
+        <h2 class="modal-title d-flex align-items-center" id="hubModal">
+          <i class="ri-xl ri-error-warning-line me-3" style="transform: rotate(180deg)"></i>
+          <b>Informations Hub</b>
         </h2>
-        <button type="button" class="btn-close btn-close-white opacity-100 mb-0" aria-label="Close" (click)="close()"></button>
+        <button
+          type="button"
+          class="btn-close btn-close-white opacity-100 small mb-0"
+          aria-label="Close"
+          (click)="close()"></button>
       </div>
       <div class="bg-white">
         <div class="modal-body col-lg-7 col-12 m-auto">
@@ -29,11 +33,11 @@
               <span class="text-primary">{{ hub.region }}</span>
             </h4>
             <div class="mt-5 mb-4">
-              <ng-container *ngFor="let departement of hub.departements; last as isLast">
+              <span *ngFor="let departement of hub.departements; last as isLast" class="d-inline-block">
                 <b>{{ departement.nom }}</b>
                 <i>&ensp;({{ departement.numero }})</i>
                 <ng-container *ngIf="!isLast">&ensp;-&ensp;</ng-container>
-              </ng-container>
+              </span>
             </div>
             <span *ngIf="hub.lieuxCount as lieuxCount" class="rounded-5 bg-light py-1 px-3" [ngPlural]="lieuxCount">
               <i class="ri-map-pin-5-line align-bottom"></i>
@@ -59,7 +63,7 @@
             rel="noopener noreferrer"
             class="btn btn-primary"
             (click)="close()">
-            En savoir plus
+            Accéder au site
             <i class="ri-external-link-line align-bottom"></i>
           </a>
         </div>

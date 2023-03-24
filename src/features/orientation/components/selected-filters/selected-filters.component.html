@@ -1,56 +1,49 @@
 <ng-container *ngIf="filterPresentation as filter">
-  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.service">
-    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(filter.service, 'service')">
-      <div class="chip-button-trim">{{ filter.service }}</div>
-      <div class="ms-1">&times;</div>
-    </button>
-  </div>
-  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.address">
-    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(filter.address, 'address')">
-      <div class="chip-button-trim">{{ filter.address }}</div>
-      <div class="ms-1">&times;</div>
-    </button>
-  </div>
-  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.distance">
-    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(filter.distance, 'distance')">
-      <div class="chip-button-trim">Moins de {{ filter.distance / 1000 }} km</div>
-      <div class="ms-1">&times;</div>
-    </button>
-  </div>
-  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngFor="let publicAccueilli of filter.publics_accueillis">
-    <button
-      class="chip-button py-1 fw-bold d-flex align-items-center"
-      (click)="resetForm(publicAccueilli, 'publics_accueillis')">
-      <div class="chip-button-trim">{{ getLabelFromValue(publicAccueilli) }}</div>
-      <div class="ms-1">&times;</div>
-    </button>
-  </div>
-  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngFor="let conditionAcces of filter.conditions_acces">
-    <button class="chip-button py-1 fw-bold d-flex align-items-center" (click)="resetForm(conditionAcces, 'conditions_acces')">
-      <div class="chip-button-trim">{{ getLabelFromValue(conditionAcces) }}</div>
-      <div class="ms-1">&times;</div>
-    </button>
-  </div>
-  <div
-    class="form-check form-check-inline form-chip mb-1 me-1 ms-0"
-    *ngFor="let modaliteAccompagnement of filter.modalites_accompagnement">
-    <button
-      class="chip-button py-1 fw-bold d-flex align-items-center"
-      (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
-      <div class="chip-button-trim">{{ getLabelFromValue(modaliteAccompagnement) }}</div>
-      <div class="ms-1">&times;</div>
-    </button>
-  </div>
-  <div class="form-check form-check-inline form-chip mb-1 me-1 ms-0" *ngIf="filter.horaires_ouverture">
-    <button
-      class="chip-button py-1 fw-bold d-flex align-items-center"
-      (click)="resetForm(filter.horaires_ouverture, 'horaires_ouverture')">
-      <div class="chip-button-trim" [ngPlural]="filter.horaires_ouverture.length">
-        {{ filter.horaires_ouverture.length }}
-        <ng-template ngPluralCase="1">horaire d'ouverture</ng-template>
-        <ng-template ngPluralCase="other">horaires d'ouverture</ng-template>
-      </div>
-      <div class="ms-1">&times;</div>
-    </button>
-  </div>
+  <button
+    *ngIf="filter.service"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(filter.service, 'service')">
+    &times; {{ filter.service }}
+  </button>
+  <button
+    *ngIf="filter.address"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(filter.address, 'address')">
+    &times; {{ filter.address }}
+  </button>
+  <button
+    *ngIf="filter.distance"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(filter.distance, 'distance')">
+    &times; Moins de {{ filter.distance / 1000 }} km
+  </button>
+  <button
+    *ngFor="let publicAccueilli of filter.publics_accueillis"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(publicAccueilli, 'publics_accueillis')">
+    &times; {{ getLabelFromValue(publicAccueilli) }}
+  </button>
+  <button
+    *ngFor="let conditionAcces of filter.conditions_acces"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(conditionAcces, 'conditions_acces')">
+    &times; {{ getLabelFromValue(conditionAcces) }}
+  </button>
+  <button
+    *ngFor="let modaliteAccompagnement of filter.modalites_accompagnement"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">
+    &times; {{ getLabelFromValue(modaliteAccompagnement) }}
+  </button>
+  <button
+    *ngIf="filter.horaires_ouverture"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(filter.horaires_ouverture, 'horaires_ouverture')">
+    &times;
+    <ng-container [ngPlural]="filter.horaires_ouverture.length">
+      {{ filter.horaires_ouverture.length }}
+      <ng-template ngPluralCase="1">horaire d'ouverture</ng-template>
+      <ng-template ngPluralCase="other">horaires d'ouverture</ng-template>
+    </ng-container>
+  </button>
 </ng-container>

@@ -1,6 +1,6 @@
-<div class="h-lg-100 d-flex flex-column px-3" *ngIf="(orientationLayout.filterPresentation$ | async) as filter">
-  <div class="my-auto">
-    <h1 class="h2 text-center fw-bold mt-3">
+<div class="h-100 d-flex pt-5">
+  <div class="w-100 my-auto">
+    <h1 class="h2 text-center fw-bold mt-5">
       <span class="text-primary">Quelle structure</span>
       cherchez-vous&nbsp;?
     </h1>
@@ -20,7 +20,7 @@
             [value]="typePublicOption.value"
             [attr.id]="'typePublicLabelChip' + i" />
           <label class="form-check-label bg-white" [attr.for]="'typePublicLabelChip' + i">
-            <b class="ms-1">{{ typePublicOption.label }}</b>
+            <b>{{ typePublicOption.label }}</b>
           </label>
         </div>
       </div>
@@ -38,7 +38,7 @@
             [value]="conditionFinancieresOption.value"
             [attr.id]="'conditionFinancieresLabelChip' + i" />
           <label class="form-check-label bg-white" [attr.for]="'conditionFinancieresLabelChip' + i">
-            <b class="ms-1">{{ conditionFinancieresOption.label }}</b>
+            <b>{{ conditionFinancieresOption.label }}</b>
           </label>
         </div>
       </div>
@@ -56,7 +56,7 @@
             [value]="typeAccompagnementsOption.value"
             [attr.id]="'typeAccompagnementsLabelChip' + i" />
           <label class="form-check-label bg-white" [attr.for]="'typeAccompagnementsLabelChip' + i">
-            <b class="ms-1">{{ typeAccompagnementsOption.label }}</b>
+            <b>{{ typeAccompagnementsOption.label }}</b>
           </label>
         </div>
       </div>
@@ -74,7 +74,7 @@
             [value]="accueilSpecifiqueOption.value"
             [attr.id]="'accueilSpecifiqueLabelChip' + i" />
           <label class="form-check-label bg-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
-            <b class="ms-1">{{ accueilSpecifiqueOption.label }}</b>
+            <b>{{ accueilSpecifiqueOption.label }}</b>
           </label>
         </div>
       </div>

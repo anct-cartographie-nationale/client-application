@@ -10,11 +10,15 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content overflow-hidden">
       <div class="modal-header bg-primary text-bg-dark">
-        <h2 class="modal-title h3" id="labelModal">
-          <i class="ri-xl ri-error-warning-line align-text-top me-2" style="transform: rotate(180deg)"></i>
-          Informations label
+        <h2 class="modal-title d-flex align-items-center" id="labelModal">
+          <i class="ri-xl ri-error-warning-line me-3" style="transform: rotate(180deg)"></i>
+          <b>Informations label</b>
         </h2>
-        <button type="button" class="btn-close btn-close-white opacity-100 mb-0" aria-label="Close" (click)="close()"></button>
+        <button
+          type="button"
+          class="btn-close btn-close-white opacity-100 small mb-0"
+          aria-label="Close"
+          (click)="close()"></button>
       </div>
       <div class="bg-white">
         <div class="modal-body text-center" *ngIf="label as label">
@@ -25,10 +29,6 @@
             style="width: 180px; max-height: 120px" />
           <h4 class="fw-bold text-primary">{{ label.nom }}</h4>
           <p class="mb-0 mt-3">{{ label.description }}</p>
-          <a [href]="label.url" target="_blank" rel="noopener noreferrer" class="text-muted text-decoration-none">
-            En savoir plus
-            <i class="ri-external-link-line"></i>
-          </a>
           <div class="my-3">
             <i *ngFor="let carracteristique of label.carracteristiques" class="badge rounded-pill text-bg-light fw-normal me-2">
               {{ carracteristique }}
@@ -51,6 +51,16 @@
             <i class="ri-arrow-go-back-line align-bottom"></i>
             Retour à la carte
           </button>
+          <a
+            *ngIf="label?.url as href"
+            [href]="href"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+            (click)="close()">
+            Accéder au site
+            <i class="ri-external-link-line align-bottom"></i>
+          </a>
         </div>
       </div>
     </div>

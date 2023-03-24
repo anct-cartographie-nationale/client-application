@@ -1,60 +1,84 @@
-<div class="bg-light h-100 p-lg-5 pt-3 overflow-auto">
-  <div class="container h-100 pb-lg-0 pb-3">
-    <ng-container *ngIf="(filterPresentation$ | async) as filter">
-      <app-nav class="d-lg-none block d-block" *ngIf="this.router.url !== '/orientation'" [filter]="filter" size="sm"></app-nav>
-      <div class="row g-0 h-100 shadow mb-5">
-        <div class="col-lg col-12 bg-white pt-3 h-lg-100 overflow-auto d-flex flex-column flex-grow-1">
-          <app-nav class="d-lg-block d-none" *ngIf="this.router.url !== '/orientation'" [filter]="filter"></app-nav>
-          <div
-            tabindex="-1"
-            appScroll
-            (reachEnd)="hideArrow = $event"
-            class="overflow-scroll h-100 d-lg-block d-flex flex-column"
-            [@routeAnimations]="getRouteAnimationData()">
-            <router-outlet></router-outlet>
+<div class="bg-light h-100 py-lg-5 p-3">
+  <div class="container-lg p-0 h-100 shadow bg-white">
+    <div class="row gx-0 h-100 overflow-auto flex-lg-row flex-column flex-nowrap">
+      <div
+        tabindex="-1"
+        class="col-lg col-12 d-flex flex-column flex-grow-1 overflow-auto"
+        appScroll
+        (reachEnd)="hideArrow = $event">
+        <ng-container *ngIf="this.router.url !== '/orientation'">
+          <div *ngIf="(filterPresentation$ | async) as filter" style="height: 0" class="sticky-lg-top">
+            <app-nav class="d-lg-block d-none pt-3 bg-white" [filter]="filter"></app-nav>
+            <app-nav class="d-lg-none pt-3 d-block" [filter]="filter" size="sm"></app-nav>
           </div>
-          <div class="d-flex justify-content-center shadow-white-top z-index-over-base" [class.invisible]="hideArrow">
-            <i class="ri-arrow-right-s-line ri-xl ri-fw ri-space text-primary" style="transform: rotate(90deg)"></i>
-          </div>
+        </ng-container>
+        <div class="px-3 flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
+          <router-outlet></router-outlet>
         </div>
-        <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
-          <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
-            <div class="d-lg-flex col-lg-4 col-12 bg-primary text-white h-lg-100 p-4 overflow-auto align-items-center">
-              <div class="flex-column d-flex w-100 text-center">
-                <div class="d-lg-none">
+        <div
+          class="d-flex justify-content-center shadow-white-top z-index-over-base bg-white sticky-bottom"
+          [class.invisible]="hideArrow">
+          <i class="ri-arrow-right-s-line ri-xl pt-2 pb-3 text-primary" style="transform: rotate(90deg)"></i>
+        </div>
+      </div>
+      <div class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block">
+        <div class="d-flex flex-column px-4 h-100 overflow-auto">
+          <div class="d-lg-block d-none flex-grow-1" *ngIf="this.router.url !== '/orientation'">
+            <h2 class="text-center text-secondary fw-bold my-5">
+              Structures
+              <br />
+              {{ router.url === '/orientation' ? 'sur le territoire' : 'correspondantes'}}
+            </h2>
+          </div>
+          <div class="w-100 m-auto position-relative">
+            <img
+              [src]="assetsConfiguration.path + '/img/orientation/' + brandConfiguration.illustration"
+              alt=""
+              class="d-lg-block d-none" />
+            <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+              <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
+                <div class="d-lg-none mt-4">
                   <b>{{ lieuxMediationNumerique.length}} / {{ lieuxMediationNumeriqueTotal.length }}</b>
                   <div class="opacity-75">Structures trouvées sur le territoire</div>
                 </div>
-                <div class="d-lg-block d-none">
-                  <h2 class="text-center text-secondary fw-bold mb-5" *ngIf="this.router.url !== '/orientation'">
-                    Structures
-                    <br />
-                    {{ router.url === '/orientation' ? 'sur le territoire' : 'correspondantes'}}
-                  </h2>
-                  <app-filter-result-count
-                    class="my-auto"
-                    [total]="lieuxMediationNumeriqueTotal.length"
-                    [found]="lieuxMediationNumerique.length"
-                    [empty]="router.url === '/orientation'"></app-filter-result-count>
+                <div
+                  [class.d-lg-none]="this.router.url === '/orientation'"
+                  class="d-lg-block d-none position-absolute w-100"
+                  style="top: 17%">
+                  <div>
+                    <app-filter-result-count
+                      class="my-auto"
+                      [total]="lieuxMediationNumeriqueTotal.length"
+                      [found]="lieuxMediationNumerique.length"></app-filter-result-count>
+                    <div class="mt-4">
+                      <b class="fs-5" [ngPlural]="lieuxMediationNumerique.length">
+                        <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
+                        <ng-template ngPluralCase="=1">Structure trouvée</ng-template>
+                        <ng-template ngPluralCase="other">Structures trouvées</ng-template>
+                      </b>
+                      <br />
+                      / {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire
+                    </div>
+                  </div>
                 </div>
-                <ng-container *ngIf="this.router.url !== '/orientation'">
-                  <app-selected-filters
-                    class="my-auto"
-                    [filterForm]="filterForm"
-                    [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
-                  <app-display-on-map-link
-                    class="text-center d-block my-3"
-                    [cartographieFeature]="features.get('cartographie')"
-                    [lieuxMediationNumeriqueCount]="lieuxMediationNumerique.length"
-                    [queryParams]="route.queryParams">
-                    Accéder à la cartographie
-                  </app-display-on-map-link>
-                </ng-container>
-              </div>
-            </div>
-          </ng-container>
-        </ng-container>
+              </ng-container>
+            </ng-container>
+          </div>
+          <app-selected-filters
+            *ngIf="router.url !== '/orientation'"
+            class="flex-grow-1 my-lg-5 my-3"
+            [filterForm]="filterForm"
+            [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
+          <app-display-on-map-link
+            *ngIf="router.url !== '/orientation'"
+            class="d-block mb-4"
+            [cartographieFeature]="features.get('cartographie')"
+            [lieuxMediationNumeriqueCount]="1"
+            [queryParams]="route.queryParams">
+            Afficher la carte
+          </app-display-on-map-link>
+        </div>
       </div>
-    </ng-container>
+    </div>
   </div>
 </div>

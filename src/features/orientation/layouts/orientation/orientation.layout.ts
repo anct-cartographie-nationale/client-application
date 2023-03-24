@@ -4,7 +4,14 @@ import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router'
 import { BehaviorSubject, delay, Observable, startWith, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
+import {
+  ASSETS_TOKEN,
+  AssetsConfiguration,
+  BRAND_TOKEN,
+  BrandConfiguration,
+  FEATURES_TOKEN,
+  FeaturesConfiguration
+} from '../../../../root';
 import {
   FilterFormPresentation,
   FilterPresentation,
@@ -89,6 +96,8 @@ export class OrientationLayout {
   public constructor(
     @Inject(FEATURES_TOKEN)
     public readonly features: FeaturesConfiguration,
+    @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
+    @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     private readonly _contexts: ChildrenOutletContexts,
     public readonly route: ActivatedRoute,

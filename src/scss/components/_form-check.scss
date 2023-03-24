@@ -10,7 +10,7 @@
       cursor: pointer;
       transition: all 250ms ease;
       @include transition($form-chip-transition);
-      @include border-radius($form-chip-border-radius);
+      @include border-radius($form-border-radius);
 
       padding: $form-chip-padding-y $form-chip-padding-x;
       border: 1px solid transparent;
@@ -55,18 +55,20 @@ input[type='checkbox'] {
   }
 }
 
-.chip-button {
-  border: none;
-  display: inline;
-  padding: 0 15px;
-  height: 25px;
-  font-size: 13px;
-  line-height: 15px;
-  border-radius: 25px;
-  background-color: $light;
-  opacity: 0.6;
+.btn-chip {
+  padding: 0 $btn-padding-x-sm;
+  border-radius: $form-border-radius;
+  box-shadow: none;
+  font-weight: normal;
 
-  .chip-button-trim {
+  &:hover {
+    box-shadow: none;
+    background-color: white;
+    color: $primary;
+  }
+
+  &.btn-chip-trim {
+    display: inline-block;
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;

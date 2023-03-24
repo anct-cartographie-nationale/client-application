@@ -4,7 +4,10 @@
 @import 'bootstrap/scss/containers';
 @import 'bootstrap/scss/grid';
 @import 'bootstrap/scss/tables';
-@import 'bootstrap/scss/forms';
+@import 'bootstrap/scss/forms/labels';
+@import 'bootstrap/scss/forms/form-check';
+@import 'bootstrap/scss/forms/form-range';
+@import 'bootstrap/scss/forms/validation';
 @import 'bootstrap/scss/buttons';
 @import 'bootstrap/scss/dropdown';
 @import 'bootstrap/scss/nav';
@@ -30,7 +33,10 @@
 @import './cartography';
 @import './fonts';
 @import './form-check';
+@import './form-control';
+@import './form-select';
 @import './icons';
+@import './input-group';
 @import './loader';
 @import './maplibre';
 @import './markers';

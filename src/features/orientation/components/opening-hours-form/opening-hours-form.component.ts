@@ -62,6 +62,9 @@ export class OpeningHoursFormComponent {
 
   private isLastOpeningHoursGroup = (index: number): boolean => index === this.openingHoursForm.length - 1;
 
+  private appendOpeningHoursFieldFor = (index: number): boolean =>
+    this.isLastOpeningHoursGroup(index) && this.isValidOpeningHoursGroupAt(index);
+
   private updateFilters = () =>
     this.selectOpeningHours.emit(this.openingHoursForm.controls.filter(onlyValidControl).map(fromControlToOpeningHoursFields));
 
@@ -75,7 +78,7 @@ export class OpeningHoursFormComponent {
   }
 
   public onAddOpeningHourGroup(index: number): void {
-    this.isLastOpeningHoursGroup(index) && this.openingHoursForm.controls.push(openingHoursFormControl());
+    this.appendOpeningHoursFieldFor(index) && this.openingHoursForm.controls.push(openingHoursFormControl());
     this.isValidOpeningHoursGroupAt(index) && this.updateFilters();
   }
 

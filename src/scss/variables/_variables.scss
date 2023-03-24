@@ -1,5 +1,8 @@
+@use 'sass:color';
+
 $primary: #000091;
 $secondary: #fff;
+$tertiary: color.adjust($primary, $lightness: 60%);
 $success: #4caf50;
 $info: #adb5bd;
 $warning: #ffc107;
@@ -15,6 +18,7 @@ $box-shadow-sm: 0 0.25rem 0.25rem rgba($black, 0.25);
 $theme-colors: (
   'primary': $primary,
   'secondary': $secondary,
+  'tertiary': $tertiary,
   'success': $success,
   'info': $info,
   'warning': $warning,
@@ -40,19 +44,20 @@ $modal-backdrop-bg: white;
 $modal-header-border-color: transparent;
 $modal-footer-bg: white;
 $modal-inner-padding: $spacer * 2;
+$btn-font-weight: bold;
 
 @import './accordion';
 @import './buttons';
 @import './dropdown';
 @import './fonts';
 @import './icons';
-@import './inputs';
 @import './list-group';
 @import './markers';
 @import './tables';
 @import './navbar';
 @import 'bootstrap/scss/variables';
 @import 'bootstrap/scss/maps';
+@import './inputs';
 @import './breadcrumb';
 @import './form-check';
 @import './orientation';

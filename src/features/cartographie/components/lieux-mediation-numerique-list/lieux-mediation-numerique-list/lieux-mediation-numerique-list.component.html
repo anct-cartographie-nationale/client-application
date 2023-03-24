@@ -34,14 +34,14 @@
       </ng-container>
       <button class="btn btn-outline-light" (click)="print.emit()">
         <i class="ri-printer-line me-2 align-bottom"></i>
-        <span>Imprimer les résultats</span>
+        <span>Imprimer la liste</span>
       </button>
     </div>
     <div class="col-auto ms-auto my-auto">
       <span class="d-flex align-items-center text-white me-auto" [ngPlural]="lieuxMediationNumerique.length">
-        <ng-template ngPluralCase="=0">Aucune structure trouvée</ng-template>
-        <ng-template ngPluralCase="=1">1 Structure trouvée</ng-template>
-        <ng-template ngPluralCase="other">{{ lieuxMediationNumerique.length }} Structures trouvées</ng-template>
+        <ng-template ngPluralCase="=0">Aucun résultat</ng-template>
+        <ng-template ngPluralCase="=1">1 résultat</ng-template>
+        <ng-template ngPluralCase="other">{{ lieuxMediationNumerique.length }} résultats</ng-template>
       </span>
     </div>
   </div>

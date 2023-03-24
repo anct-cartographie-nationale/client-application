@@ -5,15 +5,17 @@
   class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative"
   (click)="selectServiceValue.emit(serviceItem.value)">
   <span
-    class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square-sm text-center small bg-secondary text-primary border border-primary rounded-circle"
+    class="position-absolute top-0 start-0 mt-4 ms-4 translate-middle square text-center small bg-secondary text-primary border border-primary rounded-circle"
     *ngIf="serviceItem.value === selectedServiceItem">
     <i class="ri-check-line"></i>
   </span>
-  <div class="me-3">
-    <i [ngClass]="serviceItem.icon" class="ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle d-block"></i>
-  </div>
+  <span>
+    <i
+      [ngClass]="serviceItem.icon"
+      class="ri-xl ri-fw ri-space fw-normal me-3 bg-primary text-light rounded-circle d-block"></i>
+  </span>
   <span class="text-start">
-    <b class="orientation-btn-label">{{ serviceItem.label }}</b>
+    <span class="orientation-btn-label">{{ serviceItem.label }}</span>
     <br />
     <i class="small text-muted">{{ serviceItem.description }}</i>
   </span>

@@ -1,10 +1,10 @@
-<div class="text-center d-flex flex-column h-100">
-  <div class="my-auto px-3">
+<div class="h-100 d-flex pt-5">
+  <div class="w-100 my-auto text-center">
     <img
       *ngIf="brandConfiguration.logo"
       [src]="brandConfiguration.logo"
-      class="mb-5"
-      style="max-width: 100%; max-height: 250px"
+      class="my-5"
+      style="max-width: 100%; max-height: 100px"
       alt="" />
     <ng-container *ngIf="((route.queryParamMap | async)?.keys?.length ?? 0) === 0; else: restart">
       <h1 class="h2 fw-bold">
@@ -18,7 +18,16 @@
         <br />
         vous pourrez les localiser en quelques minutes grâce à notre outil d'orientation.
       </p>
-      <a class="btn btn-primary my-4" [routerLink]="['besoin']" queryParamsHandling="preserve">Démarrer l'orientation</a>
+      <div class="my-4">
+        <a class="btn btn-secondary m-2" [routerLink]="['/', 'cartographie']" queryParamsHandling="preserve">
+          <i class="ri-map-2-line fw-normal align-bottom"></i>
+          Voir la carte
+        </a>
+        <a class="btn btn-primary m-2" [routerLink]="['besoin']" queryParamsHandling="preserve">
+          Démarrer l'orientation
+          <i class="ri-arrow-right-s-line align-bottom"></i>
+        </a>
+      </div>
     </ng-container>
     <ng-template #restart>
       <h1 class="h2 text-center fw-bold mb-4">
@@ -26,11 +35,11 @@
         <span class="text-primary">redémarrer l'orientation ?</span>
       </h1>
       <div class="my-5">
-        <a class="btn btn-primary me-3" [routerLink]="['besoin']" queryParamsHandling="preserve">
+        <a class="btn btn-primary m-2" [routerLink]="['besoin']" queryParamsHandling="preserve">
           <i class="ri-arrow-left-s-line align-bottom"></i>
           Reprendre l'orientation
         </a>
-        <a class="btn btn-secondary" [routerLink]="['besoin']" (click)="orientationLayout.filterForm.reset()">
+        <a class="btn btn-secondary m-2" [routerLink]="['besoin']" (click)="orientationLayout.filterForm.reset()">
           Nouvelle orientation
           <i class="ri-arrow-right-s-line align-bottom"></i>
         </a>

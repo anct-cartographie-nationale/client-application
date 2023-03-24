@@ -7,10 +7,12 @@
   ariaCurrentWhenActive="page">
   <ng-content></ng-content>
   <span
-    class="position-absolute top-0 start-100 translate-middle bg-primary rounded-circle square-sm text-white text-center small"
-    [class.ms-2]="size === 'sm'"
+    class="position-absolute top-0 start-100 translate-middle bg-primary rounded-circle text-white text-center"
+    [class.ms-1]="size === 'sm'"
+    [class.square-sm]="size === 'sm'"
+    [class.square]="size === 'auto'"
     *ngIf="filtersCount || filtersCheck">
-    <ng-container *ngIf="filtersCount">{{ filtersCount }}</ng-container>
-    <i *ngIf="filtersCheck" class="ri-check-line"></i>
+    <small class="d-block" *ngIf="filtersCount">{{ filtersCount }}</small>
+    <i *ngIf="filtersCheck" class="d-block ri-check-line"></i>
   </span>
 </a>

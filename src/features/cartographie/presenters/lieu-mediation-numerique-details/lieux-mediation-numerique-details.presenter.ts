@@ -98,7 +98,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
   [
     'cd35',
     {
-      label: 'Département de la Sarthe',
+      label: "Département de l'Ille-et-Vilaine",
       link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/'
     }
   ],

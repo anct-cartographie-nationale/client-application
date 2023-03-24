@@ -17,6 +17,8 @@ export class DisponibilitePage {
     public readonly orientationLayout: OrientationLayout
   ) {}
 
+  public hasOpeningsHours: boolean = this.orientationLayout.filterForm.controls['horaires_ouverture'].value?.length > 0;
+
   public onSelectOpeningHours(openingHours: OpeningHours[]): void {
     this.orientationLayout.filterForm.get('horaires_ouverture')?.setValue(openingHours);
   }

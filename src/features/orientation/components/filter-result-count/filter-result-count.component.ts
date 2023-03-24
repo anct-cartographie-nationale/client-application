@@ -10,13 +10,4 @@ export class FilterResultCountComponent {
   @Input() public total: number = 0;
 
   @Input() public found: number = 0;
-
-  @Input() public empty: boolean = false;
-
-  @Input() public size: 'sm' | 'auto' = 'auto';
-
-  public constructor(
-    @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
-    @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration
-  ) {}
 }
