@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import coordinateurs from './coordinateurs.json';
+import coordinateurs from '../../data/coordinateurs.json';
 import { CoordinateurOnMapPresentation } from './coordinateur-on-map.presentation';
 
 export class CoordinateursOnMapPresenter {

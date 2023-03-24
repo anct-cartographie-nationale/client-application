@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MapService, NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
+import { PhonePipeModule } from '../../../core';
 import { COMPONENTS } from '../../components';
 import { LAYOUTS } from '../../layouts';
 import { PAGES } from '../../pages';
@@ -11,6 +12,6 @@ import { PAGES } from '../../pages';
   declarations: [...LAYOUTS, ...PAGES, ...COMPONENTS],
   exports: [...LAYOUTS, ...PAGES],
   providers: [MapService],
-  imports: [CommonModule, HttpClientModule, RouterModule, NgxMapLibreGLModule]
+  imports: [CommonModule, HttpClientModule, RouterModule, NgxMapLibreGLModule, PhonePipeModule]
 })
 export class CoordinateursCommonModule {}

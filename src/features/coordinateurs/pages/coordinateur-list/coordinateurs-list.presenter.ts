@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import coordinateurs from './coordinateurs.json';
+import coordinateurs from '../../data/coordinateurs.json';
 import { CoordinateursListItemPresentation } from './coordinateurs-list.presentation';
 
 export class CoordinateursListPresenter {
