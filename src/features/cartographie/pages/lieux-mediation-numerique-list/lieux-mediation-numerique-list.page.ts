@@ -14,12 +14,12 @@ import {
   LieuxMediationNumeriquePresenter,
   NO_LOCALISATION,
   RegionPresentation,
+  MarkersPresenter,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
 } from '../../../core';
 import { CartographieLayout } from '../../layouts';
 import {
-  MarkersPresenter,
   inLieuxZoomLevel,
   LieuMediationNumeriqueListItemPresentation,
   toLieuxMediationNumeriqueListItemsPresentation,

@@ -1,6 +1,6 @@
-import { LieuxMediationNumeriquePresenter, LieuxMediationNumeriqueRepository } from '../../../core';
+import { LieuxMediationNumeriquePresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../core';
 import { AddressPresenter, AddressRepository } from '../../../adresse';
-import { LieuxMediationNumeriqueDetailsPresenter, MarkersPresenter } from '../../presenters';
+import { LieuxMediationNumeriqueDetailsPresenter } from '../../presenters';
 import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '../../../../root';
 
 export const cartographieLayoutProviders = [

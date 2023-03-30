@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MapService, NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
-import { PhonePipeModule } from '../../../core';
+import { CheckboxArrayModule, PhonePipeModule } from '../../../core';
+import { UserLocationModule } from '../../../adresse';
 import { COMPONENTS } from '../../components';
 import { LAYOUTS } from '../../layouts';
 import { PAGES } from '../../pages';
@@ -12,6 +14,15 @@ import { PAGES } from '../../pages';
   declarations: [...LAYOUTS, ...PAGES, ...COMPONENTS],
   exports: [...LAYOUTS, ...PAGES],
   providers: [MapService],
-  imports: [CommonModule, HttpClientModule, RouterModule, NgxMapLibreGLModule, PhonePipeModule]
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    ReactiveFormsModule,
+    NgxMapLibreGLModule,
+    PhonePipeModule,
+    UserLocationModule,
+    CheckboxArrayModule
+  ]
 })
 export class CoordinateursCommonModule {}

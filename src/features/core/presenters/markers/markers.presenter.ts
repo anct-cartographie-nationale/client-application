@@ -7,7 +7,7 @@ import {
   ZOOM_LEVEL_TOKEN,
   ZoomLevelConfiguration
 } from '../../../../root';
-import { NO_LOCALISATION } from '../../../core';
+import { NO_LOCALISATION } from '../../models';
 
 const isDefinedLocalisation = (topLeftBound: Localisation): boolean => topLeftBound !== NO_LOCALISATION;
 

@@ -3,8 +3,8 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
-import { AddressFoundPresentation, AddressPresenter } from '../../../adresse';
-import { MarkersPresenter } from '../../presenters';
+import { MarkersPresenter } from '../../../core';
+import { AddressFoundPresentation, AddressPresenter } from '../../presenters';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;

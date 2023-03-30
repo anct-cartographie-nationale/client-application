@@ -1,68 +1,66 @@
 <div class="vh-100 d-flex flex-column flex-grow-1">
-  <div class="shadow-sm z-index-over-base">
-    <nav class="navbar navbar-expand-lg bg-white d-print-none">
-      <div class="container-fluid">
-        <a [routerLink]="['/']" class="navbar-brand">
-          <img
-            class="ms-5"
-            *ngIf="brandConfiguration.logo; else brandName"
-            [src]="brandConfiguration.logo"
-            [alt]="'Accueil cartographie ' + brandConfiguration.name"
-            height="48" />
-          <ng-template #brandName>Cartographie {{ brandConfiguration.name }}</ng-template>
-        </a>
-        <button
-          class="navbar-toggler"
-          [class.collapsed]="(expanded$ | async) === false"
-          type="button"
-          aria-controls="navbar"
-          [attr.aria-expanded]="expanded$ | async"
-          aria-label="Toggle navigation"
-          (click)="toggle()">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="offcanvas offcanvas-end"
-          [class.showing]="showing$ | async"
-          [class.show]="((expanded$ | async) || (hiding$ | async)) && (showing$ | async) === false"
-          [class.hiding]="hiding$ | async"
-          tabindex="-1"
-          id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel"
-          [attr.aria-modal]="(expanded$ | async) ? 'true' : null"
-          [attr.role]="(expanded$ | async) ? 'dialog' : null">
-          <div class="offcanvas-header">
-            <h5 class="visually-hidden" id="offcanvasNavbarLabel">Menu</h5>
-            <button type="button" class="ms-auto btn-close" aria-label="Close" (click)="toggle()"></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/', 'orientation']"
-                  queryParamsHandling="preserve"
-                  class="nav-link me-4 pb-0 px-0"
-                  ariaCurrentWhenActive="page"
-                  routerLinkActive="active">
-                  Orienter un bénéficiaire
-                </a>
-              </li>
-              <li class="nav-item">
-                <a
-                  [routerLink]="['/', 'cartographie']"
-                  queryParamsHandling="preserve"
-                  class="nav-link me-5 pb-0 px-0"
-                  ariaCurrentWhenActive="page"
-                  routerLinkActive="active">
-                  Afficher la carte
-                </a>
-              </li>
-            </ul>
-          </div>
+  <nav class="navbar navbar-expand-lg bg-white d-print-none border-bottom shadow-sm z-index-over-base">
+    <div class="container-fluid">
+      <a [routerLink]="['/']" class="navbar-brand">
+        <img
+          class="ms-5"
+          *ngIf="brandConfiguration.logo; else brandName"
+          [src]="brandConfiguration.logo"
+          [alt]="'Accueil cartographie ' + brandConfiguration.name"
+          height="48" />
+        <ng-template #brandName>Cartographie {{ brandConfiguration.name }}</ng-template>
+      </a>
+      <button
+        class="navbar-toggler"
+        [class.collapsed]="(expanded$ | async) === false"
+        type="button"
+        aria-controls="navbar"
+        [attr.aria-expanded]="expanded$ | async"
+        aria-label="Toggle navigation"
+        (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="offcanvas offcanvas-end"
+        [class.showing]="showing$ | async"
+        [class.show]="((expanded$ | async) || (hiding$ | async)) && (showing$ | async) === false"
+        [class.hiding]="hiding$ | async"
+        tabindex="-1"
+        id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel"
+        [attr.aria-modal]="(expanded$ | async) ? 'true' : null"
+        [attr.role]="(expanded$ | async) ? 'dialog' : null">
+        <div class="offcanvas-header">
+          <h5 class="visually-hidden" id="offcanvasNavbarLabel">Menu</h5>
+          <button type="button" class="ms-auto btn-close" aria-label="Close" (click)="toggle()"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                [routerLink]="['/', 'orientation']"
+                queryParamsHandling="preserve"
+                class="nav-link me-4 pb-0 px-0"
+                ariaCurrentWhenActive="page"
+                routerLinkActive="active">
+                Orienter un bénéficiaire
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                [routerLink]="['/', 'cartographie']"
+                queryParamsHandling="preserve"
+                class="nav-link me-5 pb-0 px-0"
+                ariaCurrentWhenActive="page"
+                routerLinkActive="active">
+                Afficher la carte
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-    </nav>
-  </div>
+    </div>
+  </nav>
   <div class="d-flex flex-row flex-grow-1 overflow-hidden h-100">
     <div class="col overflow-auto" tabindex="-1">
       <ng-content></ng-content>

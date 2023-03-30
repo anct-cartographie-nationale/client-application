@@ -1,0 +1,19 @@
+<div class="d-flex">
+  <app-address-field
+    [defaultValue]="(initialSearch$ | async) ?? ''"
+    [addressSuggestions]="(addressesFound$ | async) ?? []"
+    [addressNotFound]="(addressNotFound$ | async) ?? false"
+    (selectAddress)="onSelectAddress($event)"
+    (searchAddress)="onSearchAddress($event)">
+    <button class="btn btn-sm d-block" (click)="onGeoLocate()" *ngIf="(displayGeolocation$ | async) === true">
+      <span
+        *ngIf="loadingState$ | async; else geolocationIcon"
+        class="spinner-border spinner-border-sm text-primary me-1"
+        role="status"
+        aria-hidden="true"></span>
+      <ng-template #geolocationIcon>
+        <i class="ri-focus-3-line"></i>
+      </ng-template>
+    </button>
+  </app-address-field>
+</div>

@@ -6,7 +6,7 @@ export type CoordinateurDetailsPresentation = {
   courriel?: string;
   telephone?: string;
   ifn: number;
-  perimetre: 'Régional' | 'Départemental' | 'Bassin de vie';
+  perimetre: 'Départemental' | 'Bassin de vie';
   nombreDePersonnesCoordonnees: number;
   nombreDeStructuresAvecDesPersonnesCoordonnees: number;
   dispositif: string;

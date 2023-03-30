@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MapService, NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
-import { AdresseModule } from '../../../adresse';
+import { PhonePipeModule } from '../../../core';
+import { AdresseModule, UserLocationModule } from '../../../adresse';
 import { pages } from '../../pages';
 import { CartographieLayout, ListHeaderLayout } from '../../layouts';
 import { components } from '../../components';
 import { PIPES } from '../../pipes';
-import { PhonePipeModule } from '../../../core';
 
 @NgModule({
   declarations: [CartographieLayout, ListHeaderLayout, ...pages, ...components, ...PIPES],
@@ -22,7 +22,8 @@ import { PhonePipeModule } from '../../../core';
     ReactiveFormsModule,
     NgxMapLibreGLModule,
     AdresseModule,
-    PhonePipeModule
+    PhonePipeModule,
+    UserLocationModule
   ]
 })
 export class CartographieCommonModule {}

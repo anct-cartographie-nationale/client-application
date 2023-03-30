@@ -10,15 +10,15 @@ import {
   toDepartement,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation,
-  toRegion
+  toRegion,
+  MarkersPresenter
 } from '../../../core';
 import {
   inLieuxZoomLevel,
   LabelPresentation,
   labelToDisplayMap,
   LieuMediationNumeriqueDetailsPresentation,
-  LieuxMediationNumeriqueDetailsPresenter,
-  MarkersPresenter
+  LieuxMediationNumeriqueDetailsPresenter
 } from '../../presenters';
 import { OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { emailMessage, reportErrorEmailMessage } from './lieux-mediation-numerique-details.presentation';

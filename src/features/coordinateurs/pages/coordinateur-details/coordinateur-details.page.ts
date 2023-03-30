@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 import { coordinateurDetailsProviders } from './coordinateur-details.providers';
-import { Observable } from 'rxjs';
 import { CoordinateurDetailsPresentation } from './coordinateur-details.presentation';
 import { CoordinateurDetailsPresenter } from './coordinateur-details.presenter';
 

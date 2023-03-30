@@ -17,8 +17,9 @@
       (input)="search(addressInput.value); addressInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
       (focus)="addressInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
       (keyup.escape)="dropdownPane.reduce()" />
-    <span class="input-group-text" *ngIf="addressInput.value && displayReset">
-      <button class="btn btn-outlined btn-sm d-block" (click)="clear()">
+    <span class="input-group-text">
+      <ng-content></ng-content>
+      <button *ngIf="addressInput.value && displayReset" class="btn btn-sm d-block" (click)="clear()">
         <i class="ri-close-line"></i>
       </button>
     </span>

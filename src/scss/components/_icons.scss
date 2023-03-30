@@ -122,20 +122,8 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\eb99';
 }
 
-.ri-radio-button-line::before {
-  content: '\f050';
-}
-
 .ri-checkbox-blank-circle-line::before {
   content: '\eb7d';
-}
-
-.ri-search-line::before {
-  content: '\f0d1';
-}
-
-.ri-home-5-line::before {
-  content: '\ee1f';
 }
 
 .ri-calendar-check-line::before {
@@ -154,16 +142,8 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\ea64';
 }
 
-.ri-notification-3-line::before {
-  content: '\ef94';
-}
-
 .ri-mouse-line::before {
   content: '\ef7d';
-}
-
-.ri-price-tag-3-line::before {
-  content: '\f023';
 }
 
 .ri-group-line::before {
@@ -176,14 +156,6 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-parent-line::before {
   content: '\efca';
-}
-
-.ri-calendar-event-line::before {
-  content: '\eb25';
-}
-
-.ri-translate-2::before {
-  content: '\f226';
 }
 
 .ri-user-3-line::before {
@@ -224,10 +196,6 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-arrow-go-back-line::before {
   content: '\ea58';
-}
-
-.ri-arrow-right-s-fill::before {
-  content: '\ea6d';
 }
 
 .ri-external-link-line::before {
@@ -318,10 +286,14 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\efde';
 }
 
-.ri-map-pin-4-line::before {
-  content: '\ef0e';
-}
-
 .ri-map-2-line::before {
   content: '\ef06';
+}
+
+.ri-focus-3-line::before {
+  content: '\ed4c';
+}
+
+.ri-sound-module-line::before {
+  content: '\f162';
 }
