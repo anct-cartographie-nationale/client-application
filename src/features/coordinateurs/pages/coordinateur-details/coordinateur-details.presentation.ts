@@ -1,8 +1,8 @@
 export type CoordinateurDetailsPresentation = {
   id: string;
   nom: string;
-  commune: string;
   adresse: string;
+  commune: string;
   courriel?: string;
   telephone?: string;
   ifn: number;
@@ -10,4 +10,6 @@ export type CoordinateurDetailsPresentation = {
   nombreDePersonnesCoordonnees: number;
   nombreDeStructuresAvecDesPersonnesCoordonnees: number;
   dispositif: string;
+  latitude: number;
+  longitude: number;
 };

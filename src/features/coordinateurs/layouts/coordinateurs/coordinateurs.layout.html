@@ -21,6 +21,7 @@
           class="z-index-over-base bg-white col-xl-5 offset-xl-7 col-lg-12 h-100 position-absolute border-start">
           <app-filter
             #filter
+            [filter]="coordinateursFilter$ | async"
             [nombreCoordinateursDepartementaux]="(nombreCoordinateursDepartementaux$ | async) ?? 0"
             [nombreCoordinateursBassinDeVie]="(nombreCoordinateursBassinDeVie$ | async) ?? 0"
             (filterChange)="onFilterChange($event)"></app-filter>

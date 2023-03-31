@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output
 import { FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
-import { CoordinateursFilterPresentation, PerimetrePresentation } from '../../presenters';
+import { CoordinateursFilterPresentation, DEFAULT_FILTER, PerimetrePresentation } from '../../presenters';
 import { invertPerimetreSelection } from './filter.presenter';
 
 type PerimetreControl = PerimetrePresentation[] | null;
@@ -18,12 +18,16 @@ type CoordinateursFilterForm = {
 })
 export class FilterComponent {
   public filterForm: FormGroup<CoordinateursFilterForm> = new FormGroup<CoordinateursFilterForm>({
-    perimetre: new FormControl<PerimetreControl>(['Départemental', 'Bassin de vie'])
+    perimetre: new FormControl<PerimetreControl>(DEFAULT_FILTER.perimetre)
   });
 
   @Input() public nombreCoordinateursDepartementaux: number = 0;
 
   @Input() public nombreCoordinateursBassinDeVie: number = 0;
+
+  @Input() public set filter(filter: CoordinateursFilterPresentation | null) {
+    filter && this.filterForm.controls.perimetre.setValue(invertPerimetreSelection(filter.perimetre));
+  }
 
   @Output() public filterChange: EventEmitter<CoordinateursFilterPresentation> =
     new EventEmitter<CoordinateursFilterPresentation>();
@@ -35,23 +39,23 @@ export class FilterComponent {
 
   public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
 
-  private show(): void {
+  private show = (): void => {
     this._isDisplayed = true;
     this._display$.next(this._isDisplayed);
-  }
+  };
 
-  private hide(): void {
+  private hide = (): void => {
     this._isDisplayed = false;
     this._display$.next(this._isDisplayed);
-  }
+  };
 
-  public toggle(): void {
+  public toggle = (): void => {
     this._isDisplayed ? this.hide() : this.show();
-  }
+  };
 
-  public onPerimetreChange(): void {
+  public onPerimetreChange = (): void => {
     this.filterChange.emit({
       perimetre: invertPerimetreSelection(this.filterForm.value.perimetre ?? [])
     });
-  }
+  };
 }

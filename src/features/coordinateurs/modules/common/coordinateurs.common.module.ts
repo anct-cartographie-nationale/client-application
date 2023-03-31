@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MapService, NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
-import { CheckboxArrayModule, PhonePipeModule } from '../../../core';
+import { CheckboxArrayModule, CollapseModule, PhonePipeModule } from '../../../core';
 import { UserLocationModule } from '../../../adresse';
 import { COMPONENTS } from '../../components';
 import { LAYOUTS } from '../../layouts';
@@ -22,7 +22,8 @@ import { PAGES } from '../../pages';
     NgxMapLibreGLModule,
     PhonePipeModule,
     UserLocationModule,
-    CheckboxArrayModule
+    CheckboxArrayModule,
+    CollapseModule
   ]
 })
 export class CoordinateursCommonModule {}

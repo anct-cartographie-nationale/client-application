@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, startWith } from 'rxjs';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 import { MarkersPresenter } from '../../../core';
@@ -11,7 +11,7 @@ import {
   countCoordinateursBassinDeVie,
   countCoordinateursDepartementaux
 } from './coordinateurs-on-map.presenter';
-import { CoordinateursFilterPresentation } from '../../presenters';
+import { CoordinateursFilterPresentation, DEFAULT_FILTER } from '../../presenters';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -27,9 +27,7 @@ export class CoordinateursLayout {
     .coordinateurs$()
     .pipe(map(countCoordinateursBassinDeVie));
   private _coordinateursFilter$: BehaviorSubject<CoordinateursFilterPresentation> =
-    new BehaviorSubject<CoordinateursFilterPresentation>({
-      perimetre: []
-    });
+    new BehaviorSubject<CoordinateursFilterPresentation>(DEFAULT_FILTER);
   public coordinateursFilter$: Observable<CoordinateursFilterPresentation> = this._coordinateursFilter$.asObservable();
 
   public coordinateurs$: Observable<CoordinateurOnMapPresentation[]> = this._coordinateursOnMapPresenter.coordinateurs$(
@@ -54,5 +52,9 @@ export class CoordinateursLayout {
 
   public onFilterChange = (filter: CoordinateursFilterPresentation): void => {
     this._coordinateursFilter$.next(filter);
+  };
+
+  public resetFilters = (): void => {
+    this._coordinateursFilter$.next(DEFAULT_FILTER);
   };
 }

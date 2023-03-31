@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 import { MarkersPresenter } from '../../../core';
 import { CoordinateursLayout } from '../../layouts';
 import { CoordinateursListItemPresentation } from './coordinateurs-list.presentation';
 import { CoordinateursListPresenter } from './coordinateurs-list.presenter';
 import { coordinateursListProviders } from './coordinateurs-list.providers';
+import { CoordinateursSortPresentation, DEFAULT_SORT } from '../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,8 +15,12 @@ import { coordinateursListProviders } from './coordinateurs-list.providers';
   providers: coordinateursListProviders
 })
 export class CoordinateursListPage {
+  private _coordinateursSort$: BehaviorSubject<CoordinateursSortPresentation> =
+    new BehaviorSubject<CoordinateursSortPresentation>(DEFAULT_SORT);
+
   public coordinateurs$: Observable<CoordinateursListItemPresentation[]> = this._coordinateursListPresenter.coordinateurs$(
-    this._coordinateursLayout.coordinateursFilter$
+    this._coordinateursLayout.coordinateursFilter$,
+    this._coordinateursSort$.asObservable()
   );
 
   public constructor(
@@ -27,4 +32,12 @@ export class CoordinateursListPage {
   ) {}
 
   public trackByCoordinateurId = (_: number, coordinateur: CoordinateursListItemPresentation) => coordinateur.id;
+
+  public onRestFilters = (): void => {
+    this._coordinateursLayout.resetFilters();
+  };
+
+  public onSortChange = (sort: CoordinateursSortPresentation): void => {
+    this._coordinateursSort$.next(sort);
+  };
 }
