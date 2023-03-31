@@ -2,8 +2,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { byCollectiviteTerritorialeNom, DepartementPresentation, regionFromNom, RegionPresentation } from '../../../core';
-import { MarkersPresenter } from '../../presenters';
+import {
+  byCollectiviteTerritorialeNom,
+  DepartementPresentation,
+  regionFromNom,
+  RegionPresentation,
+  MarkersPresenter
+} from '../../../core';
 import { CartographieLayout } from '../../layouts';
 
 const departementsFilteredByRegion = (departements: DepartementPresentation[], departementCodes: string[]) =>

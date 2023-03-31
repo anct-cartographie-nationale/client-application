@@ -11,7 +11,6 @@ import {
 import { LieuMediationNumeriqueMarkersComponent } from './markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
 import { TerritoireMarkersComponent } from './markers/territoire-markers/territoire-markers.component';
 import { NoLieuxFoundComponent } from './no-lieux-found/no-lieux-found.component';
-import { UserLocationComponent } from './user-location/user-location.component';
 import {
   AidantsComponent,
   BoutonsActionComponent,
@@ -53,7 +52,6 @@ export const components = [
   LieuMediationNumeriqueMarkersComponent,
   TerritoireMarkersComponent,
   NoLieuxFoundComponent,
-  UserLocationComponent,
   HubModalComponent,
   LabelModalComponent
 ];

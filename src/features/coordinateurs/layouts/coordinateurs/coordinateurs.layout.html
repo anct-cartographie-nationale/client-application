@@ -1,0 +1,53 @@
+<div class="h-100 d-flex flex-column">
+  <nav class="navbar navbar-expand-lg bg-light shadow-sm z-index-over-base sticky-top">
+    <div class="container-fluid">
+      <div class="navbar-collapse" id="navbarSupportedContent">
+        <app-user-location (location)="userLocalisation = $event"></app-user-location>
+        <div class="nav nav-navbar-btn ms-auto" id="nav-tab" role="tablist">
+          <button class="nav-link" type="button" [class.active]="filter.display$ | async" (click)="filter.toggle()">
+            <i class="ri-sound-module-line align-bottom me-1"></i>
+            Affiner ma recherche
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="flex-grow-1 overflow-auto">
+    <div class="d-flex h-100">
+      <div class="border-end col-12 map-list h-100"><router-outlet></router-outlet></div>
+      <div class="col overflow-auto position-relative">
+        <div
+          [class.d-none]="(filter.display$ | async) === false"
+          class="z-index-over-base bg-white col-xl-5 offset-xl-7 col-lg-12 h-100 position-absolute border-start">
+          <app-filter
+            #filter
+            [filter]="coordinateursFilter$ | async"
+            [nombreCoordinateursDepartementaux]="(nombreCoordinateursDepartementaux$ | async) ?? 0"
+            [nombreCoordinateursBassinDeVie]="(nombreCoordinateursBassinDeVie$ | async) ?? 0"
+            (filterChange)="onFilterChange($event)"></app-filter>
+        </div>
+        <mgl-map
+          *ngIf="(markersPresenter.localisation$ | async) as localisation"
+          [movingMethod]="'flyTo'"
+          [movingOptions]="{speed: 2}"
+          class="h-100 w-100 overflow-hidden"
+          [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"
+          [zoom]="[(markersPresenter.zoom$ | async) ?? 0]"
+          [center]="[localisation.longitude, localisation.latitude]">
+          <mgl-marker *ngIf="userLocalisation" [lngLat]="[userLocalisation.longitude, userLocalisation.latitude]">
+            <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="14" r="14" fill-opacity=".3" />
+              <circle class="user-marker" cx="14" cy="14" r="9" fill-opacity=".65" />
+            </svg>
+          </mgl-marker>
+          <app-coordinateurs-markers
+            [coordinateurs]="(coordinateurs$ | async) ?? []"
+            [selectedId]="(markersPresenter.selected$ | async) ?? ''"
+            [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
+            (highlight)="onHighlight($event?.id)"
+            (showDetails)="onShowDetails($event)"></app-coordinateurs-markers>
+        </mgl-map>
+      </div>
+    </div>
+  </div>
+</div>

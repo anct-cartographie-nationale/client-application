@@ -18,10 +18,10 @@ import {
   ifAny,
   openingState,
   FrancePresentation,
-  TerritoirePresentation
+  TerritoirePresentation,
+  MarkersPresenter
 } from '../../../core';
 import {
-  MarkersPresenter,
   getNextRouteFromZoomLevel,
   shouldNavigateToListPage,
   LieuMediationNumeriqueOnMapPresentation,

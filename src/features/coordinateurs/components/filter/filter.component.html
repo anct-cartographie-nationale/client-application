@@ -1,0 +1,62 @@
+<div class="h-100 d-flex flex-column">
+  <div class="flex-grow-1">
+    <h2 class="text-muted h6 fw-bold mb-3 mt-4 mx-3">FILTRER LES COORDINATEURS</h2>
+    <form [formGroup]="filterForm">
+      <table class="table border-top">
+        <tbody>
+          <tr>
+            <td class="text-center align-middle border-end">
+              <img [src]="assetsConfiguration.path + '/img/coordinateurs/Départemental.svg'" alt="" />
+            </td>
+            <td class="d-flex">
+              <div>
+                <label class="fw-bold" for="departemental">Coordinateurs départementaux</label>
+                <br />
+                <small class="fst-italic">{{ nombreCoordinateursDepartementaux }}</small>
+              </div>
+              <div class="form-check form-switch ms-auto my-auto">
+                <input
+                  type="checkbox"
+                  role="switch"
+                  name="departemental"
+                  id="departemental"
+                  class="form-check-input"
+                  value="Départemental"
+                  appCheckboxArray
+                  formControlName="perimetre"
+                  (change)="onPerimetreChange()" />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center align-middle border-end">
+              <img [src]="assetsConfiguration.path + '/img/coordinateurs/Bassin de vie.svg'" alt="" />
+            </td>
+            <td class="d-flex">
+              <div>
+                <label class="fw-bold" for="bassin-de-vie">Coordinateurs bassin de vie</label>
+                <br />
+                <small class="fst-italic">{{ nombreCoordinateursBassinDeVie }}</small>
+              </div>
+              <div class="form-check form-switch ms-auto my-auto">
+                <input
+                  type="checkbox"
+                  role="switch"
+                  name="bassin-de-vie"
+                  id="bassin-de-vie"
+                  class="form-check-input"
+                  value="Bassin de vie"
+                  appCheckboxArray
+                  formControlName="perimetre"
+                  (change)="onPerimetreChange()" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+  <div class="bg-light p-3 text-center">
+    <button class="btn btn-primary" (click)="toggle()">Terminer</button>
+  </div>
+</div>

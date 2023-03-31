@@ -1,0 +1,90 @@
+<form [formGroup]="sortForm" class="accordion-item border-bottom" [class.bg-light]="collapseSort.isExpanded$ | async">
+  <div class="accordion-header d-flex" id="sortHeading">
+    <input
+      type="checkbox"
+      class="btn-check"
+      id="btn-check"
+      autocomplete="off"
+      formControlName="direction"
+      (change)="onSortUpdated()" />
+    <label class="btn border-0 rounded-0 border-end text-primary px-3 pt-4 pb-2 fw-normal d-flex flex-column" for="btn-check">
+      <i class="ri-arrow-left-right-line ri-lg pb-1"></i>
+      <i class="text-xxs">
+        <ng-container *ngIf="sortForm.controls.direction.value; else asc">A-Z</ng-container>
+        <ng-template #asc>Z-A</ng-template>
+      </i>
+    </label>
+    <button
+      type="button"
+      class="accordion-button collapsed d-flex px-3 pt-1"
+      aria-controls="collapseSort"
+      [class.collapsed]="collapseSort.isCollapsed$ | async"
+      [attr.aria-expanded]="collapseSort.isExpanded$ | async"
+      (click)="collapseSort.toggle()">
+      <span class="fw-bold flex-grow-1" [ngSwitch]="sortForm.controls.by.value">
+        <ng-container *ngSwitchCase="'nom'">Trier par nom</ng-container>
+        <ng-container *ngSwitchCase="'codePostal'">Trier par code postal</ng-container>
+        <ng-container *ngSwitchCase="'nombreCnfs'">Trier par nombre de CnFS</ng-container>
+      </span>
+      <i class="ri-lg" [ngClass]="(collapseSort.isCollapsed$ | async) ? 'ri-arrow-down-s-line' : 'ri-close-line'"></i>
+    </button>
+  </div>
+  <app-collapse #collapseSort id="collapseSort" aria-labelledby="sortHeading">
+    <ul class="list-group list-group-flush accordion-body border-top ps-1">
+      <li class="list-group-item bg-transparent">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            id="byNom"
+            name="by"
+            formControlName="by"
+            value="nom"
+            (change)="onSortUpdated()" />
+          <label
+            for="byNom"
+            class="form-check-label fw-bold ms-2 w-100"
+            [class.text-muted]="sortForm.controls.by.value !== 'nom'">
+            Trier par nom
+          </label>
+        </div>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            id="byCodePostal"
+            name="by"
+            formControlName="by"
+            value="codePostal"
+            (change)="onSortUpdated()" />
+          <label
+            for="byCodePostal"
+            class="form-check-label fw-bold ms-2 w-100"
+            [class.text-muted]="sortForm.controls.by.value !== 'codePostal'">
+            Trier par code postal
+          </label>
+        </div>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            id="byNombreCnfs"
+            name="by"
+            formControlName="by"
+            value="nombreCnfs"
+            (change)="onSortUpdated()" />
+          <label
+            for="byNombreCnfs"
+            class="form-check-label fw-bold ms-2 w-100"
+            [class.text-muted]="sortForm.controls.by.value !== 'nombreCnfs'">
+            Trier par nombre de CnFS
+          </label>
+        </div>
+      </li>
+    </ul>
+  </app-collapse>
+</form>

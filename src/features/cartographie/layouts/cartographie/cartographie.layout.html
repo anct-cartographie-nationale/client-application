@@ -28,9 +28,7 @@
   </div>
 </div>
 <div class="d-flex h-100">
-  <div
-    class="border-end"
-    [ngClass]="router.url.includes('/details') ? 'lieux-mediation-numerique-details col-12' : 'lieux-mediation-numerique-list col-12'">
+  <div class="border-end col-12" [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">
     <router-outlet></router-outlet>
   </div>
   <div class="col overflow-auto position-relative">

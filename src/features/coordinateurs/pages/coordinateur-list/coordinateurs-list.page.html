@@ -1,0 +1,44 @@
+<div class="h-100 d-flex flex-column">
+  <app-sort (sortChange)="onSortChange($event)"></app-sort>
+  <ng-container *ngIf="coordinateurs$ | async as coordinateurs">
+    <div
+      *ngIf="coordinateurs.length; else: noCoordinateurs"
+      class="list-group list-group-flush flex-grow-1 overflow-auto"
+      tabindex="-1">
+      <a
+        *ngFor="let coordinateur of coordinateurs; trackBy: trackByCoordinateurId"
+        [routerLink]="[coordinateur.id, 'details']"
+        [relativeTo]="route.parent"
+        [attr.id]="coordinateur.id"
+        [class.list-group-item-hover]="(markersPresenter.highlighted$ | async) === coordinateur.id"
+        (mouseover)="markersPresenter.highlight(coordinateur.id)"
+        (mouseout)="markersPresenter.highlight('')"
+        class="list-group-item link-dark p-4">
+        <div class="row">
+          <div style="width: 38px" class="col-auto p-0 m-auto text-center">
+            <img [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.perimetre + '.svg'" alt="" />
+          </div>
+          <div class="col">
+            <h5 class="mb-0 fw-bold">{{ coordinateur.prenom }} {{ coordinateur.nom }}</h5>
+            <small>{{ coordinateur.commune }} ({{ coordinateur.codePostal }})</small>
+          </div>
+          <div class="col-auto text-end">
+            <b class="text-primary">{{ coordinateur.perimetre }}</b>
+            <br />
+            <small class="text-muted">({{ coordinateur.nombreDePersonnesCoordonnees }} {{ coordinateur.dispositif }})</small>
+          </div>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+
+  <ng-template #noCoordinateurs>
+    <div class="p-5 text-center">
+      <span class="fw-bold fs-4">Nous ne trouvons pas de résultats correspondant à votre recherche</span>
+      <p class="text-muted my-4">
+        Aucun coordinateur n'a été trouvé. Modifiez ou supprimez certains de vos filtres ou ajustez votre zone de recherche.
+      </p>
+      <button class="btn btn-primary" (click)="onRestFilters()">Réactiver les filtres</button>
+    </div>
+  </ng-template>
+</div>

@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CheckboxArrayModule, CollapseModule } from '../../../core';
 import { AdresseModule } from '../../../adresse';
 import { pages } from '../../pages';
 import { OrientationLayout } from '../../layouts';
@@ -12,6 +13,14 @@ import { directives } from '../../directives';
 @NgModule({
   declarations: [OrientationLayout, ...pages, ...components, ...directives],
   exports: [OrientationLayout, ...pages, ...components, ...directives],
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule, RouterModule, AdresseModule]
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule,
+    AdresseModule,
+    CheckboxArrayModule,
+    CollapseModule
+  ]
 })
 export class OrientationCommonModule {}
