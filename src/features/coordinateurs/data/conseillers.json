@@ -1,0 +1,1162 @@
+[
+  {
+    "id": "62ab2c598255a806e299ca57",
+    "coordinateurId": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
+    "nom": "Mélina Bouchard",
+    "latitude": 48.117266,
+    "longitude": -1.677792,
+    "email": "melina.bouchard@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Rennes",
+      "adresse": "Place de la Mairie, 35000 Rennes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Bibliothèque municipale",
+      "adresse": "15 Rue de la Fontaine, 35000 Rennes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café des Sports",
+        "commune": "Rennes",
+        "codePostal": "35000"
+      },
+      {
+        "nom": "Théâtre National de Bretagne",
+        "commune": "Rennes",
+        "codePostal": "35000"
+      }
+    ]
+  },
+  {
+    "id": "51bf06e2f39d0c7db9d19e1f",
+    "coordinateurId": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
+    "nom": "Emilie Lefèvre",
+    "latitude": 48.11038,
+    "longitude": -1.680245,
+    "email": "emilie.lefevre@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Centre Social Carrefour 18",
+      "adresse": "7 Rue d'Espagne, 35200 Rennes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque de Beauregard",
+      "adresse": "18 Rue de Brest, 35000 Rennes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Maison de Quartier Villejean",
+        "commune": "Rennes",
+        "codePostal": "35000"
+      }
+    ]
+  },
+  {
+    "id": "ea8a21f92d08c61cbf58b764",
+    "coordinateurId": "3c1ca57a25b8aa237d317178",
+    "nom": "Pierre-Yves Dupont",
+    "latitude": 48.105127,
+    "longitude": -1.69076,
+    "email": "pierre-yves.dupont@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Pacé",
+      "adresse": "1 Rue de la Mairie, 35740 Pacé"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque de Pacé",
+      "adresse": "Rue des Écoles, 35740 Pacé"
+    },
+    "lieuActivite": []
+  },
+  {
+    "id": "88928bcb3b3dc50e0c52c09e",
+    "nom": "Lucie Martin",
+    "latitude": 48.105856,
+    "longitude": -1.680022,
+    "email": "lucie.martin@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Maison des Associations",
+      "adresse": "6 Cours des Alliés, 35000 Rennes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque de Maurepas",
+      "adresse": "Rue Jean-Jaurès, 35700 Rennes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Espace Social de Maurepas",
+        "commune": "Rennes",
+        "codePostal": "35700"
+      }
+    ]
+  },
+  {
+    "id": "79d2ee655a08d977af4817e1",
+    "coordinateurId": "f98381e79cfc9aebfc0ec8e6",
+    "nom": "Pierre Dupont",
+    "latitude": 49.108163,
+    "longitude": 6.183728,
+    "email": "pierre.dupont@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Metz",
+      "adresse": "1 Place d'Armes, 57000 Metz"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque de la ville",
+      "adresse": "2 Rue des Trinitaires, 57000 Metz"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Centre Pompidou-Metz",
+        "commune": "Metz",
+        "codePostal": "57000"
+      }
+    ]
+  },
+  {
+    "id": "e2c57336f91b2c6e3d6b7119",
+    "coordinateurId": "f98381e79cfc9aebfc0ec8e6",
+    "nom": "Marie Martin",
+    "latitude": 48.85464,
+    "longitude": 2.34768,
+    "email": "marie.martin@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Mairie de Paris",
+      "adresse": "Place de l'Hôtel de Ville, 75004 Paris"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Bibliothèque municipale",
+      "adresse": "25 Rue du Renard, 75004 Paris"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Musée du Louvre",
+        "commune": "Paris",
+        "codePostal": "75001"
+      },
+      {
+        "nom": "Centre Georges Pompidou",
+        "commune": "Paris",
+        "codePostal": "75004"
+      }
+    ]
+  },
+  {
+    "id": "beaeccca5cb5d5a5dbbb60c8",
+    "coordinateurId": "b38f29c8f582ff48e2d17c3a",
+    "nom": "Claire Dupont",
+    "latitude": 48.884547,
+    "longitude": 2.340601,
+    "email": "claire.dupont@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Paris",
+      "adresse": "Place de l'Hôtel de Ville, 75004 Paris"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Centre social Simone de Beauvoir",
+      "adresse": "21 Rue du Moulin, 75013 Paris"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Médiathèque Marguerite Duras",
+        "commune": "Paris",
+        "codePostal": "75020"
+      },
+      {
+        "nom": "Maison des associations",
+        "commune": "Paris",
+        "codePostal": "75013"
+      }
+    ]
+  },
+  {
+    "id": "4e9cdd70c9211a421d9543d3",
+    "coordinateurId": "a861be9c7199bf8451c767a2",
+    "nom": "Lucie Martin",
+    "latitude": 47.214269,
+    "longitude": -1.552587,
+    "email": "lucie.martin@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Mairie de Nantes",
+      "adresse": "2 Rue de l'Hôtel de Ville, 44000 Nantes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Maison de quartier Bellevue",
+      "adresse": "29 Rue de l'Anjou, 44100 Nantes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café le Roi Léon",
+        "commune": "Nantes",
+        "codePostal": "44000"
+      },
+      {
+        "nom": "Médiathèque Jacques Demy",
+        "commune": "Nantes",
+        "codePostal": "44100"
+      }
+    ]
+  },
+  {
+    "id": "84bebbfaa9319f112c9e8a19",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Camille Rousseau",
+    "latitude": 47.216667,
+    "longitude": -1.55,
+    "email": "camille.rousseau@example.com",
+    "phone": "06 01 23 45 67",
+    "structurePorteuse": {
+      "nom": "Mairie de Nantes",
+      "adresse": "2 Rue de l'Hôtel de ville, 44000 Nantes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Jacques Demy",
+      "adresse": "24 Quai de la Fosse, 44000 Nantes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café Leffe",
+        "commune": "Nantes",
+        "codePostal": "44000"
+      }
+    ]
+  },
+  {
+    "id": "b3e9e5113a8d193c88f1cbef",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Léo Mercier",
+    "latitude": 45.764043,
+    "longitude": 4.835659,
+    "email": "leo.mercier@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Lyon",
+      "adresse": "Place de la Comédie, 69001 Lyon"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Bibliothèque de la Part-Dieu",
+      "adresse": "30 Boulevard Vivier Merle, 69003 Lyon"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café Comptoir Abel",
+        "commune": "Lyon",
+        "codePostal": "69003"
+      },
+      {
+        "nom": "Mairie du 3ème arrondissement",
+        "commune": "Lyon",
+        "codePostal": "69003"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca57",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Amélie Dupont",
+    "latitude": 43.296482,
+    "longitude": 5.369779,
+    "email": "amelie.dupont@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Marseille",
+      "adresse": "Place Villeneuve-Bargemon, 13002 Marseille"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Maison de quartier",
+      "adresse": "21 Rue Bernard, 13003 Marseille"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Bibliothèque municipale",
+        "commune": "Marseille",
+        "codePostal": "13003"
+      }
+    ]
+  },
+  {
+    "id": "0f341d56e6ecf0690c78c523",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Lucas Martin",
+    "latitude": 50.631557,
+    "longitude": 3.05885,
+    "email": "lucas.martin@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Mairie de Lille",
+      "adresse": "Place Augustin Laurent, 59000 Lille"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Centre social",
+      "adresse": "5 Rue de Lomme, 59000 Lille"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Médiathèque",
+        "commune": "Lille",
+        "codePostal": "59000"
+      }
+    ]
+  },
+  {
+    "id": "b40d7caed107929c4a7be4d3",
+    "coordinateurId": "2d8d49670e2ea2dd7c542361",
+    "nom": "Lucie Guérin",
+    "latitude": 49.439899,
+    "longitude": 1.099971,
+    "email": "lucie.guerin@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Mairie de Rouen",
+      "adresse": "Place du Général de Gaulle, 76000 Rouen"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Bibliothèque Simone de Beauvoir",
+      "adresse": "Esplanade Marcel Duchamp, 76100 Rouen"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Le Bistrot du Palais",
+        "commune": "Rouen",
+        "codePostal": "76000"
+      },
+      {
+        "nom": "Musée des Beaux-Arts de Rouen",
+        "commune": "Rouen",
+        "codePostal": "76000"
+      }
+    ]
+  },
+  {
+    "id": "5c6d5d6c85e6ee2a6e123d6e",
+    "coordinateurId": "2d8d49670e2ea2dd7c542361",
+    "nom": "Antoine Mercier",
+    "latitude": 43.604652,
+    "longitude": 1.444209,
+    "email": "antoine.mercier@example.com",
+    "phone": "06 34 56 78 90",
+    "structurePorteuse": {
+      "nom": "Mairie de Toulouse",
+      "adresse": "1 Place du Capitole, 31000 Toulouse"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque José Cabanis",
+      "adresse": "1 Allée Jacques Chaban-Delmas, 31500 Toulouse"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Le Jardin des Plantes",
+        "commune": "Toulouse",
+        "codePostal": "31000"
+      },
+      {
+        "nom": "Musée des Augustins",
+        "commune": "Toulouse",
+        "codePostal": "31000"
+      }
+    ]
+  },
+  {
+    "id": "e27f3a6a7c6a2f6b7a0b85db",
+    "coordinateurId": "ff8f87632125918179bcf1a6",
+    "nom": "Jérôme Morel",
+    "latitude": 46.158128,
+    "longitude": -1.152964,
+    "email": "jerome.morel@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Centre Social La Rochelle",
+      "adresse": "18 Rue de la République, 17000 La Rochelle"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Michel Crépeau",
+      "adresse": "Place Françoise Dolto, 17000 La Rochelle"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Maison de quartier Jean Moulin",
+        "commune": "La Rochelle",
+        "codePostal": "17000"
+      }
+    ]
+  },
+  {
+    "id": "2c712c83b8f1d831327207e5",
+    "coordinateurId": "b08d56772c7ab6449f5c5f5a",
+    "nom": "Emilie Lemaire",
+    "latitude": 50.359397,
+    "longitude": 3.523787,
+    "email": "emilie.lemaire@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Valenciennes",
+      "adresse": "Place d'Armes, 59300 Valenciennes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Bibliothèque Municipale de Valenciennes",
+      "adresse": "36 Rue Ferrand Delannoy, 59300 Valenciennes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Centre Social de l'Escaut",
+        "commune": "Valenciennes",
+        "codePostal": "59300"
+      },
+      {
+        "nom": "Médiathèque Simone de Beauvoir",
+        "commune": "Valenciennes",
+        "codePostal": "59300"
+      }
+    ]
+  },
+  {
+    "id": "6c5bf3430d16c50933b34f9d",
+    "coordinateurId": "a1e3f3eb3717200c2d2e98c1",
+    "nom": "Thomas Le Goff",
+    "latitude": 48.393253,
+    "longitude": -4.490008,
+    "email": "thomas.legoff@example.com",
+    "phone": "06 78 56 34 12",
+    "structurePorteuse": {
+      "nom": "Mairie de Brest",
+      "adresse": "Place de la Liberté, 29200 Brest"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque François Mitterrand",
+      "adresse": "3 Rue du 19 Mars 1962, 29200 Brest"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Le Vauban",
+        "commune": "Brest",
+        "codePostal": "29200"
+      },
+      {
+        "nom": "La Carène",
+        "commune": "Brest",
+        "codePostal": "29200"
+      }
+    ]
+  },
+  {
+    "id": "7c2dc56d361f7c422bbfae8c",
+    "coordinateurId": "a1e3f3eb3717200c2d2e98c1",
+    "nom": "Emilie Giraud",
+    "latitude": 45.648817,
+    "longitude": 0.157931,
+    "email": "emilie.giraud@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Mairie d'Angoulême",
+      "adresse": "Place de l'Hôtel de Ville, 16000 Angoulême"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque L'Alpha",
+      "adresse": "1 Rue Coulomb, 16000 Angoulême"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Le Bistrot du Progrès",
+        "commune": "Angoulême",
+        "codePostal": "16000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca58",
+    "coordinateurId": "35d8416e38471c4e783e7eb5",
+    "nom": "Lucie Martinez",
+    "latitude": 44.932242,
+    "longitude": 4.891565,
+    "email": "lucie.martinez@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Valence",
+      "adresse": "11 Place de la République, 26000 Valence"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque La passerelle",
+      "adresse": "13 Rue du Puits, 26000 Valence"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Centre Social du Plan",
+        "commune": "Valence",
+        "codePostal": "26000"
+      },
+      {
+        "nom": "Maison de quartier Fontbarlettes",
+        "commune": "Valence",
+        "codePostal": "26000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca59",
+    "coordinateurId": "35d8416e38471c4e783e7eb6",
+    "nom": "Pauline Dupont",
+    "latitude": 49.899854,
+    "longitude": 2.29343,
+    "email": "pauline.dupont@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie d'Amiens",
+      "adresse": "Place de l'Hôtel de ville, 80000 Amiens"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Saint-Leu",
+      "adresse": "9 Rue Frédéric Petit, 80000 Amiens"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Maison de Quartier Etouvie",
+        "commune": "Amiens",
+        "codePostal": "80000"
+      },
+      {
+        "nom": "Centre Culturel Léo Lagrange",
+        "commune": "Amiens",
+        "codePostal": "80000"
+      }
+    ]
+  },
+  {
+    "id": "615a6e3a9dcd4b50deca4eb4",
+    "coordinateurId": "17f1d2c5838f20e2dfac7677",
+    "nom": "Lucie Dubois",
+    "latitude": 43.837425,
+    "longitude": 4.358938,
+    "email": "lucie.dubois@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Association pour l'Inclusion Numérique",
+      "adresse": "12 Rue de la République, 30000 Nîmes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Carré d'Art",
+      "adresse": "Place de la Maison Carrée, 30000 Nîmes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Maison pour tous de Nîmes-Ouest",
+        "commune": "Nîmes",
+        "codePostal": "30000"
+      },
+      {
+        "nom": "Centre social La Passerelle",
+        "commune": "Nîmes",
+        "codePostal": "30000"
+      }
+    ]
+  },
+  {
+    "id": "615a6e3a9dcd4b50deca4eb5",
+    "coordinateurId": "17f1d2c5838f20e2dfac7677",
+    "nom": "Maxime Blanchard",
+    "latitude": 45.568766,
+    "longitude": 5.933791,
+    "email": "maxime.blanchard@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Centre social et culturel",
+      "adresse": "5 Rue François Mugnier, 73000 Chambéry"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Jean-Jacques Rousseau",
+      "adresse": "Carré Curial, 73000 Chambéry"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Centre social du Biollay",
+        "commune": "Chambéry",
+        "codePostal": "73000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca56",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Lucie Durand",
+    "latitude": 45.190711,
+    "longitude": 5.722859,
+    "email": "lucie.durand@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Mairie de Grenoble",
+      "adresse": "11 Boulevard Jean Pain, 38000 Grenoble"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque de Grenoble",
+      "adresse": "9 Rue de la République, 38000 Grenoble"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café du Parc",
+        "commune": "Grenoble",
+        "codePostal": "38000"
+      },
+      {
+        "nom": "Théâtre municipal de Grenoble",
+        "commune": "Grenoble",
+        "codePostal": "38000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca57",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Pierre Dubois",
+    "latitude": 45.83513,
+    "longitude": 1.262514,
+    "email": "pierre.dubois@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Limoges",
+      "adresse": "9 Rue François Chénieux, 87031 Limoges Cedex 1"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Bibliothèque municipale de Limoges",
+      "adresse": "2 Place Aimé Césaire, 87100 Limoges"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café du Palais",
+        "commune": "Limoges",
+        "codePostal": "87000"
+      },
+      {
+        "nom": "Opéra de Limoges",
+        "commune": "Limoges",
+        "codePostal": "87000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca58",
+    "coordinateurId": "35d8416e38471c4e783e7eb5",
+    "nom": "Sylvie Chevalier",
+    "latitude": 47.901278,
+    "longitude": 1.903569,
+    "email": "sylvie.chevalier@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Communauté urbaine Orléans Métropole",
+      "adresse": "2 place du 6 juin 1944, 45000 Orléans"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Maison de la citoyenneté",
+      "adresse": "19 Rue des Carmes, 45000 Orléans"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Médiathèque La Colombe",
+        "commune": "Saint-Jean-de-Braye",
+        "codePostal": "45800"
+      },
+      {
+        "nom": "Médiathèque de la Source",
+        "commune": "Orléans",
+        "codePostal": "45100"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca59",
+    "coordinateurId": "35d8416e38471c4e783e7eb5",
+    "nom": "Alexandre Mercier",
+    "latitude": 47.327726,
+    "longitude": 5.039047,
+    "email": "alexandre.mercier@example.com",
+    "phone": "06 34 56 78 90",
+    "structurePorteuse": {
+      "nom": "Conseil départemental de la Côte-d'Or",
+      "adresse": "53 bis Rue de la Préfecture, 21000 Dijon"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Champollion",
+      "adresse": "27 Rue de Longvic, 21000 Dijon"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Maison des Associations",
+        "commune": "Dijon",
+        "codePostal": "21000"
+      },
+      {
+        "nom": "Médiathèque de la Fontaine d'Ouche",
+        "commune": "Dijon",
+        "codePostal": "21000"
+      }
+    ]
+  },
+  {
+    "id": "dd4289a417c0d44a1fbd2312",
+    "coordinateurId": "21e6d766594073ef1b9a9c9d",
+    "nom": "Lucie Dupont",
+    "latitude": 46.990184,
+    "longitude": 3.157643,
+    "email": "lucie.dupont@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Nevers",
+      "adresse": "1 Place de l'Hôtel de Ville, 58000 Nevers"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Jean Jaurès",
+      "adresse": "10 Rue Jean Jaurès, 58000 Nevers"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café des Arts",
+        "commune": "Nevers",
+        "codePostal": "58000"
+      },
+      {
+        "nom": "Piscine municipale",
+        "commune": "Nevers",
+        "codePostal": "58000"
+      }
+    ]
+  },
+  {
+    "id": "10ce6a5e17cf184d1a29c93d",
+    "coordinateurId": "21e6d766594073ef1b9a9c9d",
+    "nom": "Antoine Dubois",
+    "latitude": 45.777221,
+    "longitude": 3.082516,
+    "email": "antoine.dubois@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Clermont-Ferrand",
+      "adresse": "Place de l'Hôtel de Ville, 63000 Clermont-Ferrand"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Bibliothèque municipale",
+      "adresse": "4 Rue Gaillard, 63000 Clermont-Ferrand"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Le Petit Zinc",
+        "commune": "Clermont-Ferrand",
+        "codePostal": "63000"
+      },
+      {
+        "nom": "Stade Marcel-Michelin",
+        "commune": "Clermont-Ferrand",
+        "codePostal": "63000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca5b",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Julie Lambert",
+    "latitude": 47.389312,
+    "longitude": 0.694406,
+    "email": "julie.lambert@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Tours",
+      "adresse": "1 à 3 Rue des Minimes, 37926 Tours"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque François Mitterrand",
+      "adresse": "Esplanade François Mitterrand, 37100 Tours"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café de la Place",
+        "commune": "Tours",
+        "codePostal": "37000"
+      },
+      {
+        "nom": "Centre d'animation de la Croix-Blanche",
+        "commune": "Tours",
+        "codePostal": "37000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca5c",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Lucie Dubois",
+    "latitude": 49.255633,
+    "longitude": 4.033832,
+    "email": "lucie.dubois@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Reims",
+      "adresse": "9 Place de l'Hôtel de Ville, 51100 Reims"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Jean Falala",
+      "adresse": "2 Rue des Fuseliers, 51100 Reims"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Bar l'Univers",
+        "commune": "Reims",
+        "codePostal": "51100"
+      },
+      {
+        "nom": "Maison de quartier Laon Zola",
+        "commune": "Reims",
+        "codePostal": "51100"
+      }
+    ]
+  },
+  {
+    "id": "e7ba674cd6e63ab7e2609370",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Lucas Lefebvre",
+    "latitude": 49.182863,
+    "longitude": -0.370679,
+    "email": "lucas.lefebvre@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mission locale",
+      "adresse": "13 Rue de la Girafe, 14000 Caen"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Centre social La Pierre Heuzé",
+      "adresse": "17 Rue Jacques Prévert, 14000 Caen"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Bibliothèque du Calvaire Saint-Pierre",
+        "commune": "Caen",
+        "codePostal": "14000"
+      },
+      {
+        "nom": "Café Mancel",
+        "commune": "Caen",
+        "codePostal": "14000"
+      }
+    ]
+  },
+  {
+    "id": "f2b2dc746c9fbce6a14d2856",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Laure Durand",
+    "latitude": 47.800499,
+    "longitude": 3.571585,
+    "email": "laure.durand@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie d'Auxerre",
+      "adresse": "Place de l'Hôtel de ville, 89000 Auxerre"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Espace solidarité",
+      "adresse": "12 Rue Joubert, 89000 Auxerre"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Maison de quartier Sainte-Geneviève",
+        "commune": "Auxerre",
+        "codePostal": "89000"
+      },
+      {
+        "nom": "Café Le Paris",
+        "commune": "Auxerre",
+        "codePostal": "89000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca59",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Lucie Dupont",
+    "latitude": 44.350407,
+    "longitude": 2.568875,
+    "email": "lucie.dupont@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Rodez",
+      "adresse": "Place Eugène Raynaldy, 12000 Rodez"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque municipale",
+      "adresse": "15 Rue des Cocotiers, 12000 Rodez"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café de la Place",
+        "commune": "Rodez",
+        "codePostal": "12000"
+      },
+      {
+        "nom": "Théâtre municipal",
+        "commune": "Rodez",
+        "codePostal": "12000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca60",
+    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "nom": "Thierry Bernard",
+    "latitude": 46.170735,
+    "longitude": 1.870754,
+    "email": "thierry.bernard@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Guéret",
+      "adresse": "Place Bonnyaud, 23000 Guéret"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Bibliothèque municipale",
+      "adresse": "10 Rue de l'Hôtel de Ville, 23000 Guéret"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café du Marché",
+        "commune": "Guéret",
+        "codePostal": "23000"
+      },
+      {
+        "nom": "Musée d'art contemporain",
+        "commune": "Guéret",
+        "codePostal": "23000"
+      }
+    ]
+  },
+  {
+    "id": "8e249eea74d9d05e2c4b4fa3",
+    "coordinateurId": "ccf3c3f8fa3b9a9cdd51a9aa",
+    "nom": "Emmanuel Richard",
+    "latitude": 45.903168,
+    "longitude": 6.131255,
+    "email": "emmanuel.richard@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Maison de quartier des Fins",
+      "adresse": "1 Rue Albert Premier, 74000 Annecy"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Bonlieu",
+      "adresse": "1 Rue Jean Jaurès, 74000 Annecy"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Bar Les Paquis",
+        "commune": "Annecy",
+        "codePostal": "74000"
+      },
+      {
+        "nom": "Centre culturel Les Passerelles",
+        "commune": "Cran-Gevrier",
+        "codePostal": "74960"
+      }
+    ]
+  },
+  {
+    "id": "f0527dbfc37a8d48da0dc33a",
+    "coordinateurId": "8f38cecfdd2a58e98a3b3e34",
+    "nom": "Amélie Durand",
+    "latitude": 46.214643,
+    "longitude": 5.240602,
+    "email": "amelie.durand@example.com",
+    "phone": "06 34 56 78 90",
+    "structurePorteuse": {
+      "nom": "Centre social Les Glaisins",
+      "adresse": "4 Allée des Glaisins, 74940 Annecy-le-Vieux"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Mairie d'Annecy-le-Vieux",
+      "adresse": "3 Place de la Mairie, 74940 Annecy-le-Vieux"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Bibliothèque municipale",
+        "commune": "Annecy-le-Vieux",
+        "codePostal": "74940"
+      },
+      {
+        "nom": "Café des Arts",
+        "commune": "Annecy",
+        "codePostal": "74000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca59",
+    "coordinateurId": "35d8416e38471c4e783e7eb6",
+    "nom": "Lucas Dubois",
+    "latitude": 46.162315,
+    "longitude": -1.159782,
+    "email": "lucas.dubois@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Conseil Général de Charente-Maritime",
+      "adresse": "85 Boulevard de la République, 17076 La Rochelle"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Centre Social et Culturel des 4 Quartiers",
+      "adresse": "14 Rue Henri Poincaré, 17000 La Rochelle"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café de la Paix",
+        "commune": "La Rochelle",
+        "codePostal": "17000"
+      },
+      {
+        "nom": "Théâtre Verdière",
+        "commune": "La Rochelle",
+        "codePostal": "17000"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca60",
+    "coordinateurId": "35d8416e38471c4e783e7eb9",
+    "nom": "Aurélie Martin",
+    "latitude": 50.411086,
+    "longitude": 3.509733,
+    "email": "aurelie.martin@example.com",
+    "phone": "06 34 56 78 90",
+    "structurePorteuse": {
+      "nom": "Conseil Général de l'Aisne",
+      "adresse": "53 Rue Paul Doumer, 02013 Laon"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Centre Social de la Croix Rouge",
+      "adresse": "7 Rue du Maréchal Foch, 02100 Saint-Quentin"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café des Sports",
+        "commune": "Saint-Quentin",
+        "codePostal": "02100"
+      },
+      {
+        "nom": "Maison de Quartier de Rouvroy",
+        "commune": "Saint-Quentin",
+        "codePostal": "02100"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca60",
+    "coordinateurId": "35d8416e38471c4e783e7e78",
+    "nom": "Lucie Roussel",
+    "latitude": 47.246308,
+    "longitude": -1.560046,
+    "email": "lucie.roussel@example.com",
+    "phone": "06 23 45 67 89",
+    "structurePorteuse": {
+      "nom": "Association d'aide aux devoirs",
+      "adresse": "5 Rue des Fossés, 44000 Nantes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Maison de quartier",
+      "adresse": "10 Rue de la Madeleine, 44000 Nantes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Médiathèque",
+        "commune": "Rezé",
+        "codePostal": "44400"
+      },
+      {
+        "nom": "Centre social",
+        "commune": "Vertou",
+        "codePostal": "44120"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca61",
+    "coordinateurId": "35d8416e38471c4e783e7e79",
+    "nom": "Pierre Lefebvre",
+    "latitude": 46.443314,
+    "longitude": 1.266977,
+    "email": "pierre.lefebvre@example.com",
+    "phone": "06 34 56 78 90",
+    "structurePorteuse": {
+      "nom": "Association pour l'emploi",
+      "adresse": "10 Rue du 11 Novembre, 63000 Clermont-Ferrand"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Maison de l'emploi",
+      "adresse": "1 Rue de la Treille, 63000 Clermont-Ferrand"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Bibliothèque",
+        "commune": "Aubière",
+        "codePostal": "63170"
+      },
+      {
+        "nom": "Maison des associations",
+        "commune": "Cournon-d'Auvergne",
+        "codePostal": "63800"
+      }
+    ]
+  },
+  {
+    "id": "62ab2c598255a806e299ca57",
+    "nom": "Mélina Bouchard",
+    "latitude": 48.117266,
+    "longitude": -1.677792,
+    "email": "melina.bouchard@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Rennes",
+      "adresse": "Place de la Mairie, 35000 Rennes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Bibliothèque municipale",
+      "adresse": "15 Rue de la Fontaine, 35000 Rennes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Café des Sports",
+        "commune": "Rennes",
+        "codePostal": "35000"
+      },
+      {
+        "nom": "Théâtre National de Bretagne",
+        "commune": "Rennes",
+        "codePostal": "35000"
+      }
+    ]
+  },
+  {
+    "id": "12ab2c598255a806e299ca64",
+    "coordinateurId": "25d8416e38471c4e783e7eb3",
+    "nom": "Étienne Guillaume",
+    "latitude": 47.21725,
+    "longitude": -1.553365,
+    "email": "etienne.guillaume@example.com",
+    "phone": "06 12 34 56 79",
+    "structurePorteuse": {
+      "nom": "Mairie de Nantes",
+      "adresse": "Hôtel de Ville, 44000 Nantes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque Jacques Demy",
+      "adresse": "24 Quai de la Fosse, 44000 Nantes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Le Nid",
+        "commune": "Nantes",
+        "codePostal": "44000"
+      },
+      {
+        "nom": "La Cigale",
+        "commune": "Nantes",
+        "codePostal": "44000"
+      }
+    ]
+  }
+]

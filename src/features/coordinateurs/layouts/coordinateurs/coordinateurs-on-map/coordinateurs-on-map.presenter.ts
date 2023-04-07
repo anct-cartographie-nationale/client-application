@@ -1,14 +1,14 @@
 import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import coordinateursData from '../../data/coordinateurs.json';
+import coordinateursData from '../../../data/coordinateurs.json';
 import {
+  CoordinateurOnMapPresentation,
   CoordinateursFilterPresentation,
   DEFAULT_FILTER,
   onlyBassinDeVie,
   onlyDepartemental,
   toFilteredCoordinateurs
-} from '../../presenters';
-import { CoordinateurOnMapPresentation } from './coordinateur-on-map.presentation';
+} from '../../../presenters';
 
 export const countCoordinateursDepartementaux = (coordinateurs: CoordinateurOnMapPresentation[]) =>
   coordinateurs.filter(onlyDepartemental).length;

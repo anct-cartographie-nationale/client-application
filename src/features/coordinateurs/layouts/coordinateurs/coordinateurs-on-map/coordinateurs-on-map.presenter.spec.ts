@@ -1,11 +1,10 @@
-import { CoordinateurOnMapPresentation } from './coordinateur-on-map.presentation';
 import { firstValueFrom, Observable, of } from 'rxjs';
-import { CoordinateursFilterPresentation } from '../../presenters';
 import {
   CoordinateursOnMapPresenter,
   countCoordinateursBassinDeVie,
   countCoordinateursDepartementaux
 } from './coordinateurs-on-map.presenter';
+import { CoordinateurOnMapPresentation, CoordinateursFilterPresentation } from '../../../presenters';
 
 describe('coordinateurs on map presenter', (): void => {
   it('should not filter coordinateurs', async (): Promise<void> => {

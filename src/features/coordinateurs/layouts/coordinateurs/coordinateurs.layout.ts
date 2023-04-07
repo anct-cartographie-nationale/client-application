@@ -1,18 +1,23 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, startWith } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 import { MarkersPresenter } from '../../../core';
-import { coordinateursLayoutProviders } from './coordinateurs.layout.providers';
-import { CoordinateurOnMapPresentation } from './coordinateur-on-map.presentation';
+import {
+  ConseillerOnMapPresentation,
+  CoordinateurOnMapPresentation,
+  CoordinateursFilterPresentation,
+  DEFAULT_FILTER
+} from '../../presenters';
 import {
   CoordinateursOnMapPresenter,
   countCoordinateursBassinDeVie,
   countCoordinateursDepartementaux
-} from './coordinateurs-on-map.presenter';
-import { CoordinateursFilterPresentation, DEFAULT_FILTER } from '../../presenters';
-import { map } from 'rxjs/operators';
+} from './coordinateurs-on-map';
+import { ConseillersOnMapPresenter } from './conseillers-on-map';
+import { coordinateursLayoutProviders } from './coordinateurs.layout.providers';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,6 +39,8 @@ export class CoordinateursLayout {
     this._coordinateursFilter$
   );
 
+  public conseillers$: Observable<ConseillerOnMapPresentation[]> = this._conseillersOnMapPresenter.conseillers$();
+
   public userLocalisation?: Localisation;
 
   public constructor(
@@ -41,7 +48,8 @@ export class CoordinateursLayout {
     public readonly markersPresenter: MarkersPresenter,
     public readonly router: Router,
     public readonly route: ActivatedRoute,
-    private readonly _coordinateursOnMapPresenter: CoordinateursOnMapPresenter
+    private readonly _coordinateursOnMapPresenter: CoordinateursOnMapPresenter,
+    private readonly _conseillersOnMapPresenter: ConseillersOnMapPresenter
   ) {}
 
   public onHighlight = (highlightedId?: string): void => this.markersPresenter.highlight(highlightedId ?? '');
