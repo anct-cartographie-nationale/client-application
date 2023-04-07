@@ -1,14 +1,7 @@
 import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import coordinateursData from '../../data/coordinateurs.json';
-import {
-  CoordinateursFilterPresentation,
-  CoordinateursSortPresentation,
-  DEFAULT_FILTER,
-  toFilteredCoordinateurs,
-  DEFAULT_SORT,
-  By
-} from '../../presenters';
+import { CoordinateursSortPresentation, DEFAULT_SORT, By } from '../../presenters';
 import { CoordinateursListItemPresentation } from './coordinateurs-list.presentation';
 
 const SORT_BY_FIELD: Record<
@@ -30,23 +23,16 @@ const bySelectedField =
   (coordinateurA: CoordinateursListItemPresentation, coordinateurB: CoordinateursListItemPresentation): number =>
     SORT_BY_FIELD[sort.by](coordinateurA, coordinateurB) * applySortDirection(sort);
 
-const toOrderedCoordinateurs = ([coordinateurs, filter, sort]: [
+const toOrderedCoordinateurs = ([coordinateurs, sort]: [
   CoordinateursListItemPresentation[],
-  CoordinateursFilterPresentation,
   CoordinateursSortPresentation
-]): [CoordinateursListItemPresentation[], CoordinateursFilterPresentation] => [
-  coordinateurs.sort(bySelectedField(sort)),
-  filter
-];
+]): CoordinateursListItemPresentation[] => coordinateurs.sort(bySelectedField(sort));
 
 export class CoordinateursListPresenter {
   public coordinateurs$ = (
-    coordinateursFilter$: Observable<CoordinateursFilterPresentation> = of(DEFAULT_FILTER),
     coordinateursSort$: Observable<CoordinateursSortPresentation> = of(DEFAULT_SORT)
   ): Observable<CoordinateursListItemPresentation[]> =>
-    combineLatest([
-      of(coordinateursData as CoordinateursListItemPresentation[]),
-      coordinateursFilter$,
-      coordinateursSort$
-    ]).pipe(map(toOrderedCoordinateurs), map(toFilteredCoordinateurs));
+    combineLatest([of(coordinateursData as CoordinateursListItemPresentation[]), coordinateursSort$]).pipe(
+      map(toOrderedCoordinateurs)
+    );
 }

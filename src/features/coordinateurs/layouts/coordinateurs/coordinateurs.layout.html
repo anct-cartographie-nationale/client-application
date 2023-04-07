@@ -3,12 +3,6 @@
     <div class="container-fluid">
       <div class="navbar-collapse" id="navbarSupportedContent">
         <app-user-location (location)="userLocalisation = $event"></app-user-location>
-        <div class="nav nav-navbar-btn ms-auto" id="nav-tab" role="tablist">
-          <button class="nav-link" type="button" [class.active]="filter.display$ | async" (click)="filter.toggle()">
-            <i class="ri-sound-module-line align-bottom me-1"></i>
-            Affiner ma recherche
-          </button>
-        </div>
       </div>
     </div>
   </nav>
@@ -16,16 +10,6 @@
     <div class="d-flex h-100">
       <div class="border-end col-12 map-list h-100"><router-outlet></router-outlet></div>
       <div class="col overflow-auto position-relative">
-        <div
-          [class.d-none]="(filter.display$ | async) === false"
-          class="z-index-over-base bg-white col-xl-5 offset-xl-7 col-lg-12 h-100 position-absolute border-start">
-          <app-filter
-            #filter
-            [filter]="coordinateursFilter$ | async"
-            [nombreCoordinateursDepartementaux]="(nombreCoordinateursDepartementaux$ | async) ?? 0"
-            [nombreCoordinateursBassinDeVie]="(nombreCoordinateursBassinDeVie$ | async) ?? 0"
-            (filterChange)="onFilterChange($event)"></app-filter>
-        </div>
         <mgl-map
           *ngIf="(markersPresenter.localisation$ | async) as localisation"
           [movingMethod]="'flyTo'"
