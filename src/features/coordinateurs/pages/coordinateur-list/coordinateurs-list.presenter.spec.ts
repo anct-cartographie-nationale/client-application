@@ -1,5 +1,5 @@
 import { firstValueFrom, Observable, of } from 'rxjs';
-import { CoordinateursFilterPresentation, CoordinateursSortPresentation } from '../../presenters';
+import { CoordinateursSortPresentation } from '../../presenters';
 import { CoordinateursListPresenter } from './coordinateurs-list.presenter';
 import { CoordinateursListItemPresentation } from './coordinateurs-list.presentation';
 
@@ -12,17 +12,6 @@ describe('coordinateur list presenter', (): void => {
     expect(count).toBe(29);
   });
 
-  it('should filter coordinateurs Départemental and Bassin de vie', async (): Promise<void> => {
-    const coordinateursFilter$: Observable<CoordinateursFilterPresentation> = of({
-      perimetre: ['Départemental', 'Bassin de vie']
-    });
-    const coordinateursListPresenter: CoordinateursListPresenter = new CoordinateursListPresenter();
-
-    const count: number = (await firstValueFrom(coordinateursListPresenter.coordinateurs$(coordinateursFilter$))).length;
-
-    expect(count).toBe(0);
-  });
-
   it('should sort coordinateurs by nom asc', async (): Promise<void> => {
     const coordinateursSort$: Observable<CoordinateursSortPresentation> = of({
       by: 'nom',
@@ -30,9 +19,7 @@ describe('coordinateur list presenter', (): void => {
     });
     const coordinateursListPresenter: CoordinateursListPresenter = new CoordinateursListPresenter();
 
-    const coordinateurs: string[] = (
-      await firstValueFrom(coordinateursListPresenter.coordinateurs$(undefined, coordinateursSort$))
-    )
+    const coordinateurs: string[] = (await firstValueFrom(coordinateursListPresenter.coordinateurs$(coordinateursSort$)))
       .slice(0, 3)
       .map((coordinateur: CoordinateursListItemPresentation) => coordinateur.nom);
 
@@ -46,9 +33,7 @@ describe('coordinateur list presenter', (): void => {
     });
     const coordinateursListPresenter: CoordinateursListPresenter = new CoordinateursListPresenter();
 
-    const coordinateurs: string[] = (
-      await firstValueFrom(coordinateursListPresenter.coordinateurs$(undefined, coordinateursSort$))
-    )
+    const coordinateurs: string[] = (await firstValueFrom(coordinateursListPresenter.coordinateurs$(coordinateursSort$)))
       .slice(0, 3)
       .map((coordinateur: CoordinateursListItemPresentation) => coordinateur.nom);
 
@@ -62,9 +47,7 @@ describe('coordinateur list presenter', (): void => {
     });
     const coordinateursListPresenter: CoordinateursListPresenter = new CoordinateursListPresenter();
 
-    const coordinateurs: string[] = (
-      await firstValueFrom(coordinateursListPresenter.coordinateurs$(undefined, coordinateursSort$))
-    )
+    const coordinateurs: string[] = (await firstValueFrom(coordinateursListPresenter.coordinateurs$(coordinateursSort$)))
       .slice(0, 3)
       .map((coordinateur: CoordinateursListItemPresentation) => coordinateur.codePostal);
 
@@ -78,9 +61,7 @@ describe('coordinateur list presenter', (): void => {
     });
     const coordinateursListPresenter: CoordinateursListPresenter = new CoordinateursListPresenter();
 
-    const coordinateurs: string[] = (
-      await firstValueFrom(coordinateursListPresenter.coordinateurs$(undefined, coordinateursSort$))
-    )
+    const coordinateurs: string[] = (await firstValueFrom(coordinateursListPresenter.coordinateurs$(coordinateursSort$)))
       .slice(0, 3)
       .map((coordinateur: CoordinateursListItemPresentation) => coordinateur.codePostal);
 
@@ -94,9 +75,7 @@ describe('coordinateur list presenter', (): void => {
     });
     const coordinateursListPresenter: CoordinateursListPresenter = new CoordinateursListPresenter();
 
-    const coordinateurs: number[] = (
-      await firstValueFrom(coordinateursListPresenter.coordinateurs$(undefined, coordinateursSort$))
-    )
+    const coordinateurs: number[] = (await firstValueFrom(coordinateursListPresenter.coordinateurs$(coordinateursSort$)))
       .slice(0, 3)
       .map((coordinateur: CoordinateursListItemPresentation) => coordinateur.nombreDePersonnesCoordonnees);
 

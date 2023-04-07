@@ -19,7 +19,6 @@ export class CoordinateursListPage {
     new BehaviorSubject<CoordinateursSortPresentation>(DEFAULT_SORT);
 
   public coordinateurs$: Observable<CoordinateursListItemPresentation[]> = this._coordinateursListPresenter.coordinateurs$(
-    this._coordinateursLayout.coordinateursFilter$,
     this._coordinateursSort$.asObservable()
   );
 
@@ -32,10 +31,6 @@ export class CoordinateursListPage {
   ) {}
 
   public trackByCoordinateurId = (_: number, coordinateur: CoordinateursListItemPresentation) => coordinateur.id;
-
-  public onRestFilters = (): void => {
-    this._coordinateursLayout.resetFilters();
-  };
 
   public onSortChange = (sort: CoordinateursSortPresentation): void => {
     this._coordinateursSort$.next(sort);

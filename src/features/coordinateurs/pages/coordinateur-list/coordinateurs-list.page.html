@@ -1,10 +1,7 @@
 <div class="h-100 d-flex flex-column">
   <app-sort (sortChange)="onSortChange($event)"></app-sort>
   <ng-container *ngIf="coordinateurs$ | async as coordinateurs">
-    <div
-      *ngIf="coordinateurs.length; else: noCoordinateurs"
-      class="list-group list-group-flush flex-grow-1 overflow-auto"
-      tabindex="-1">
+    <div *ngIf="coordinateurs.length" class="list-group list-group-flush flex-grow-1 overflow-auto" tabindex="-1">
       <a
         *ngFor="let coordinateur of coordinateurs; trackBy: trackByCoordinateurId"
         [routerLink]="[coordinateur.id, 'details']"
@@ -31,14 +28,4 @@
       </a>
     </div>
   </ng-container>
-
-  <ng-template #noCoordinateurs>
-    <div class="p-5 text-center">
-      <span class="fw-bold fs-4">Nous ne trouvons pas de résultats correspondant à votre recherche</span>
-      <p class="text-muted my-4">
-        Aucun coordinateur n'a été trouvé. Modifiez ou supprimez certains de vos filtres ou ajustez votre zone de recherche.
-      </p>
-      <button class="btn btn-primary" (click)="onRestFilters()">Réactiver les filtres</button>
-    </div>
-  </ng-template>
 </div>
