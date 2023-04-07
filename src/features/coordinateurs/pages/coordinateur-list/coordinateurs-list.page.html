@@ -16,13 +16,16 @@
             <img [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.perimetre + '.svg'" alt="" />
           </div>
           <div class="col">
+            <b class="text-primary">
+              Coordinateur
+              <span class="text-lowercase">{{ coordinateur.perimetre}}</span>
+            </b>
             <h5 class="mb-0 fw-bold">{{ coordinateur.prenom }} {{ coordinateur.nom }}</h5>
-            <small>{{ coordinateur.commune }} ({{ coordinateur.codePostal }})</small>
           </div>
-          <div class="col-auto text-end">
-            <b class="text-primary">{{ coordinateur.perimetre }}</b>
+          <div class="col-auto text-end fst-italic">
+            <small>{{ coordinateur.nombreDePersonnesCoordonnees }} {{ coordinateur.dispositif }}</small>
             <br />
-            <small class="text-muted">({{ coordinateur.nombreDePersonnesCoordonnees }} {{ coordinateur.dispositif }})</small>
+            <small>{{ coordinateur.commune }} ({{ coordinateur.codePostal }})</small>
           </div>
         </div>
       </a>

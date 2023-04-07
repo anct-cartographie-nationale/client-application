@@ -9,4 +9,20 @@ describe('conseillers on map presenter', (): void => {
 
     expect(count).toBe(42);
   });
+
+  it('should get conseillers coordonnés count', async (): Promise<void> => {
+    const conseillersOnMapPresenter: ConseillersOnMapPresenter = new ConseillersOnMapPresenter();
+
+    const count: number = await firstValueFrom(conseillersOnMapPresenter.nombreConseillersCoordonnes$);
+
+    expect(count).toBe(40);
+  });
+
+  it('should get conseillers non-coordonnés count', async (): Promise<void> => {
+    const conseillersOnMapPresenter: ConseillersOnMapPresenter = new ConseillersOnMapPresenter();
+
+    const count: number = await firstValueFrom(conseillersOnMapPresenter.nombreConseillersNonCoordonnes$);
+
+    expect(count).toBe(2);
+  });
 });

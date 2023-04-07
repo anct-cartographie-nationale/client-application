@@ -10,6 +10,30 @@
     <div class="d-flex h-100">
       <div class="border-end col-12 map-list h-100"><router-outlet></router-outlet></div>
       <div class="col overflow-auto position-relative">
+        <div class="position-absolute bottom-0 end-0 z-index-over-all mb-4 me-2 bg-white shadow-sm">
+          <table class="table m-0">
+            <tbody>
+              <tr>
+                <td class="px-3">
+                  <svg class="marker-conseiller" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="5" cy="5" r="5" />
+                  </svg>
+                </td>
+                <th>CnFS non-coordonnés</th>
+                <td class="small fst-italic align-bottom">{{ nombreConseillersNonCoordonnes$ | async }}</td>
+              </tr>
+              <tr>
+                <td class="px-3">
+                  <svg class="marker-conseiller" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="marker-conseiller--coordonne" cx="5" cy="5" r="5" />
+                  </svg>
+                </td>
+                <th>CnFS coordonnés</th>
+                <td class="small fst-italic align-bottom">{{ nombreConseillersCoordonnes$ | async }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <mgl-map
           *ngIf="(markersPresenter.localisation$ | async) as localisation"
           [movingMethod]="'flyTo'"
