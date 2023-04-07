@@ -7,7 +7,10 @@
   <div class="text-center p-3 border-bottom border-3 text-wrap border-primary lh-sm">
     <b class="fs-4">{{ coordinateur.prenom }} {{ coordinateur.nom }}</b>
     <br />
-    <span class="fs-6" [class.text-primary]="coordinateur.perimetre === 'Départemental'">
+    <span
+      class="fs-6"
+      [class.text-primary]="coordinateur.perimetre === 'Départemental' || coordinateur.perimetre === 'Régional'"
+      [class.fw-bold]="coordinateur.perimetre === 'Régional'">
       Coordinateur
       <span class="text-lowercase">{{ coordinateur.perimetre }}</span>
     </span>
@@ -24,6 +27,26 @@
       (mouseenter)="highlight.emit(coordinateur)"
       (mouseleave)="highlight.emit()"
       (click)="showDetails.emit(coordinateur)">
+      <svg
+        *ngIf="coordinateur.perimetre === 'Régional'"
+        class="marker-default"
+        width="38"
+        height="65"
+        viewBox="0 0 38 65"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <ellipse class="marker-base" cx="19" cy="45" rx="12" ry="3" />
+        <g class="marker-body">
+          <path
+            d="M36.775 32.105v-20.21l-17.77-10.11-17.78 10.11v20.21l17.78 10.11 17.77-10.11Z"
+            fill="#000091"
+            stroke="#fff"
+            stroke-width="1.42"
+            stroke-miterlimit="10" />
+          <path d="M30.855 28.735v-13.48l-11.85-6.73-11.85 6.73v13.48l11.85-6.74 11.85 6.74Z" fill="#fff" />
+          <path d="M24.065 24.875v-5.75l-5.06-2.88-5.06 2.88v5.75l5.06 2.88 5.06-2.88Z" fill="#E1000F" />
+        </g>
+      </svg>
       <svg
         *ngIf="coordinateur.perimetre === 'Départemental'"
         class="marker-default"
@@ -44,7 +67,6 @@
           <path d="M15.966 16.145v-3.837L12.6 10.391l-3.38 1.918v3.837l3.38 1.917z" fill="#e1000f" />
         </g>
       </svg>
-
       <svg
         *ngIf="coordinateur.perimetre === 'Bassin de vie'"
         class="marker-default"
