@@ -5,7 +5,7 @@
   [lngLat]="[coordinateur.longitude, coordinateur.latitude]"
   [closeButton]="false">
   <div class="text-center p-3 border-bottom border-3 text-wrap border-primary lh-sm">
-    <b class="fs-4">{{ coordinateur.nom }}</b>
+    <b class="fs-4">{{ coordinateur.prenom }} {{ coordinateur.nom }}</b>
     <br />
     <span class="fs-6" [class.text-primary]="coordinateur.perimetre === 'Départemental'">
       Coordinateur
