@@ -5,11 +5,19 @@ export type CoordinateurDetailsPresentation = {
   commune: string;
   courriel?: string;
   telephone?: string;
-  ifn: number;
-  perimetre: 'Départemental' | 'Bassin de vie';
+  perimetre: 'Régional' | 'Départemental' | 'Bassin de vie';
   nombreDePersonnesCoordonnees: number;
   nombreDeStructuresAvecDesPersonnesCoordonnees: number;
   dispositif: string;
   latitude: number;
   longitude: number;
+};
+
+export type ConseillerDetailsPresentation = {
+  id: string;
+  coordinateurId?: string;
+  nom: string;
+  latitude: number;
+  longitude: number;
+  distance: number;
 };

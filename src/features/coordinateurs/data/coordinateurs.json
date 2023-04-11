@@ -13,8 +13,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 53,
     "dispositif": "CnFS",
     "latitude": 49.10819284,
-    "longitude": 6.195988106,
-    "ifn": 3.5
+    "longitude": 6.195988106
   },
   {
     "id": "22b8d7ba-3de9-4c12-8a33-8b0a785d764c",
@@ -30,8 +29,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 9,
     "dispositif": "CnFS",
     "latitude": 48.86471611,
-    "longitude": 2.376019843,
-    "ifn": 4.2
+    "longitude": 2.376019843
   },
   {
     "id": "f1e28f5d-62dd-44f3-a26c-996da348e7d3",
@@ -47,8 +45,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 8,
     "dispositif": "CnFS",
     "latitude": 47.2186371,
-    "longitude": -1.5541362,
-    "ifn": 3.7
+    "longitude": -1.5541362
   },
   {
     "id": "8c5b741e-ae5c-4d56-a1c2-9d9744c4b20e",
@@ -64,8 +61,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 7,
     "dispositif": "CnFS",
     "latitude": 45.747905,
-    "longitude": 4.849468,
-    "ifn": 3.9
+    "longitude": 4.849468
   },
   {
     "id": "f9879d62-2832-42bb-b45d-92a5e8dcf7c1",
@@ -81,8 +77,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 28,
     "dispositif": "CnFS",
     "latitude": 44.838621,
-    "longitude": -0.580211,
-    "ifn": 2.8
+    "longitude": -0.580211
   },
   {
     "id": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
@@ -98,8 +93,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 65,
     "dispositif": "CnFS",
     "latitude": 48.1134758,
-    "longitude": -1.6811292,
-    "ifn": 2.7
+    "longitude": -1.6811292
   },
   {
     "id": "3fb1aa5f-384e-4f0a-96ed-5d5d5c406ddf",
@@ -115,8 +109,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 5,
     "dispositif": "CnFS",
     "latitude": 43.2676815,
-    "longitude": 5.3820048,
-    "ifn": 2.5
+    "longitude": 5.3820048
   },
   {
     "id": "06df4b4a-bf8e-4ed5-bdd3-02c7382e0b24",
@@ -132,8 +125,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 41,
     "dispositif": "CnFS",
     "latitude": 50.62925,
-    "longitude": 3.057256,
-    "ifn": 2.8
+    "longitude": 3.057256
   },
   {
     "id": "cf123dc2-ea0f-4e43-88dd-09a6631b1c01",
@@ -149,8 +141,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 3,
     "dispositif": "CnFS",
     "latitude": 49.443231,
-    "longitude": 1.098102,
-    "ifn": 4.2
+    "longitude": 1.098102
   },
   {
     "id": "a15b01e9-03c7-4a8f-bc95-52005c794e1b",
@@ -166,8 +157,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 2,
     "dispositif": "CnFS",
     "latitude": 43.602273,
-    "longitude": 1.441667,
-    "ifn": 2.3
+    "longitude": 1.441667
   },
   {
     "id": "b346e7f1-208d-4b1c-872c-3a3e2dc8f054",
@@ -183,8 +173,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 2,
     "dispositif": "CnFS",
     "latitude": 46.1591141,
-    "longitude": -1.152043,
-    "ifn": 2.3
+    "longitude": -1.152043
   },
   {
     "id": "d5f94e5f-1835-4ec7-92c1-5640ca210edf",
@@ -200,8 +189,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 5,
     "dispositif": "CnFS",
     "latitude": 50.353059,
-    "longitude": 3.523663,
-    "ifn": 2.0
+    "longitude": 3.523663
   },
   {
     "id": "d880f42b-ecc2-4d98-9329-82a6a968b6f0",
@@ -217,8 +205,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 31,
     "dispositif": "CnFS",
     "latitude": 48.390394,
-    "longitude": -4.486076,
-    "ifn": 4.2
+    "longitude": -4.486076
   },
   {
     "id": "d6018b91-23c2-4675-a0e2-8f5a20f33b17",
@@ -234,8 +221,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 6,
     "dispositif": "CnFS",
     "latitude": 45.648548,
-    "longitude": 0.156219,
-    "ifn": 2.5
+    "longitude": 0.156219
   },
   {
     "id": "04dbcc85-1415-42b5-837d-00e2c40135bc",
@@ -251,8 +237,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 16,
     "dispositif": "CnFS",
     "latitude": 44.932413,
-    "longitude": 4.891838,
-    "ifn": 2.8
+    "longitude": 4.891838
   },
   {
     "id": "7c17e2df-0d6b-4f61-a7bb-120d8e4bb6b2",
@@ -268,8 +253,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 5,
     "dispositif": "CnFS",
     "latitude": 49.89417,
-    "longitude": 2.295695,
-    "ifn": 3.1
+    "longitude": 2.295695
   },
   {
     "id": "2ae991c5-5cf5-4b5d-ae5c-c71c22dfac9e",
@@ -285,8 +269,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 22,
     "dispositif": "CnFS",
     "latitude": 43.836699,
-    "longitude": 4.360054,
-    "ifn": 3.5
+    "longitude": 4.360054
   },
   {
     "id": "dd947b5d-bd2e-4256-af60-e32d9a9c8e2f",
@@ -302,8 +285,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 9,
     "dispositif": "CnFS",
     "latitude": 45.568092,
-    "longitude": 5.919198,
-    "ifn": 3.1
+    "longitude": 5.919198
   },
   {
     "id": "3b00e738-4f4e-4ebc-b34b-aa1e70d68c85",
@@ -319,8 +301,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 27,
     "dispositif": "CnFS",
     "latitude": 45.184823,
-    "longitude": 5.727232,
-    "ifn": 3.2
+    "longitude": 5.727232
   },
   {
     "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
@@ -336,8 +317,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 8,
     "dispositif": "CnFS",
     "latitude": 45.834234,
-    "longitude": 1.263239,
-    "ifn": 3.1
+    "longitude": 1.263239
   },
   {
     "id": "f6a06e6a-65c1-4f2e-9d7f-85dc596f9c56",
@@ -353,8 +333,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 12,
     "dispositif": "CnFS",
     "latitude": 47.902964,
-    "longitude": 1.909251,
-    "ifn": 2.3
+    "longitude": 1.909251
   },
   {
     "id": "6a3144ca-4f4c-4ec0-a8e4-1f9f33cf3c36",
@@ -370,8 +349,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 23,
     "dispositif": "CnFS",
     "latitude": 47.323414,
-    "longitude": 5.041721,
-    "ifn": 3.2
+    "longitude": 5.041721
   },
   {
     "id": "d8c0a6a2-ff2b-4db8-a75c-4eb4fb4f9947",
@@ -387,8 +365,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 10,
     "dispositif": "CnFS",
     "latitude": 46.989333,
-    "longitude": 3.157339,
-    "ifn": 2.6
+    "longitude": 3.157339
   },
   {
     "id": "92d63031-6d23-4397-b5c5-46b7a8d3359d",
@@ -404,8 +381,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 18,
     "dispositif": "CnFS",
     "latitude": 45.783006,
-    "longitude": 3.087466,
-    "ifn": 2.9
+    "longitude": 3.087466
   },
   {
     "id": "f2e99b9a-48f8-42f6-b0c6-0e102d77537f",
@@ -421,8 +397,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 21,
     "dispositif": "CnFS",
     "latitude": 47.387947,
-    "longitude": 0.700111,
-    "ifn": 2.6
+    "longitude": 0.700111
   },
   {
     "id": "b7d09baa-6d0f-491c-8b27-6d666c6df9d6",
@@ -438,8 +413,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 22,
     "dispositif": "CnFS",
     "latitude": 49.258329,
-    "longitude": 4.031696,
-    "ifn": 2.4
+    "longitude": 4.031696
   },
   {
     "id": "9a9a78b4-8d6e-4c21-ae6a-9286e72d6a61",
@@ -455,8 +429,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 12,
     "dispositif": "CnFS",
     "latitude": 49.182759,
-    "longitude": -0.369336,
-    "ifn": 2.6
+    "longitude": -0.369336
   },
   {
     "id": "e3a3a4c4-4271-456c-9d3b-3e9d5a47f557",
@@ -472,8 +445,7 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 2,
     "dispositif": "CnFS",
     "latitude": 47.79529,
-    "longitude": 3.56608,
-    "ifn": 2.5
+    "longitude": 3.56608
   },
   {
     "id": "f6d12d1c-0eb3-4e13-8996-4e16b42f1c4b",
@@ -489,7 +461,6 @@
     "nombreDeStructuresAvecDesPersonnesCoordonnees": 4,
     "dispositif": "CnFS",
     "latitude": 44.350082,
-    "longitude": 2.575164,
-    "ifn": 2.6
+    "longitude": 2.575164
   }
 ]
