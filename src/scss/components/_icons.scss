@@ -305,3 +305,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-arrow-down-s-line::before {
   content: '\ea4e';
 }
+
+.ri-account-circle-fill::before {
+  content: '\ea08';
+}

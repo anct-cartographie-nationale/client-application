@@ -7,7 +7,7 @@ describe('conseillers on map presenter', (): void => {
 
     const count: number = (await firstValueFrom(conseillersOnMapPresenter.conseillers$())).length;
 
-    expect(count).toBe(42);
+    expect(count).toBe(41);
   });
 
   it('should get conseillers coordonnés count', async (): Promise<void> => {
@@ -15,7 +15,7 @@ describe('conseillers on map presenter', (): void => {
 
     const count: number = await firstValueFrom(conseillersOnMapPresenter.nombreConseillersCoordonnes$);
 
-    expect(count).toBe(40);
+    expect(count).toBe(39);
   });
 
   it('should get conseillers non-coordonnés count', async (): Promise<void> => {

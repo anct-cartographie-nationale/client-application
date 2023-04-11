@@ -7,14 +7,15 @@
         style="height: 56px"
         class="me-3 my-auto" />
       <div class="flex-grow-1 align-self-center">
-        <small>
-          Coordinateur
-          <span class="text-lowercase">{{ coordinateur.perimetre}}</span>
+        <h1 class="h2 fw-bold mb-0">{{ coordinateur.nom }}</h1>
+        <small class="d-flex align-items-center">
+          <b>
+            Coordinateur
+            <span class="text-lowercase">{{ coordinateur.perimetre}}</span>
+          </b>
+          &nbsp;-&nbsp;
+          <i>{{ coordinateur.commune }}</i>
         </small>
-        <h1 class="h2 fw-bold mb-0 text-first-letter-uppercase">{{ coordinateur.nom }}</h1>
-        <div class="fst-italic d-flex align-items-center">
-          <small class="mt-1">{{ coordinateur.commune }}</small>
-        </div>
       </div>
       <div class="d-flex flex-column">
         <div class="flex-grow-1 text-end">
@@ -37,13 +38,12 @@
           style="height: 24px"
           class="me-1" />
         Coordonne
-        <b class="text-decoration-underline">{{ coordinateur.nombreDePersonnesCoordonnees}} {{ coordinateur.dispositif }}</b>
+        <b>{{ coordinateur.nombreDePersonnesCoordonnees}} {{ coordinateur.dispositif }}</b>
         répartis sur
-        <b class="text-decoration-underline">{{ coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees}} structures</b>
+        <b>{{ coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees}} structures</b>
       </div>
       {{ coordinateur.adresse }}
       <br />
-      <span class="text-muted">IFN {{ coordinateur.ifn }}/5</span>
     </div>
     <div class="col-auto">
       <a
@@ -66,6 +66,26 @@
     </div>
   </div>
   <div class="p-4">
-    <span class="text-muted">LISTE DES LIEUX COORDONNÉES</span>
+    <span class="text-muted">CNFS À PROXIMITÉ</span>
+    <div class="row g-3 mt-2">
+      <div *ngFor="let conseiller of conseillers$ | async" class="col-6">
+        <div class="bg-light p-3 h-100">
+          <div class="mb-1">
+            <i class="ri-account-circle-fill ri-lg text-primary" [class.text-muted]="!conseiller.coordinateurId"></i>
+            {{ conseiller.nom }}
+          </div>
+          <small *ngIf="conseiller.coordinateurId; else: nonCoordonne">
+            <b class="text-primary me-1">Coordonné par {{ coordinateur.nom }}</b>
+            <i>({{ conseiller.distance | distance }})</i>
+          </small>
+
+          <ng-template #nonCoordonne>
+            <b>Non coordonné</b>
+            <br />
+            <i class="small">à {{ conseiller.distance | distance }} de {{ coordinateur.nom }}</i>
+          </ng-template>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-container>

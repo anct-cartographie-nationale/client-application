@@ -1,5 +1,69 @@
 [
   {
+    "id": "51bf06e2f39d0c7db9d19e1f",
+    "nom": "Emilie Lefèvre",
+    "latitude": 48.11038,
+    "longitude": -1.680245,
+    "email": "emilie.lefevre@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Centre Social Carrefour 18",
+      "adresse": "7 Rue d'Espagne, 35200 Rennes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque de Beauregard",
+      "adresse": "18 Rue de Brest, 35000 Rennes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Maison de Quartier Villejean",
+        "commune": "Rennes",
+        "codePostal": "35000"
+      }
+    ]
+  },
+  {
+    "id": "88928bcb3b3dc50e0c52c09e",
+    "nom": "Lucie Martin",
+    "latitude": 48.105856,
+    "longitude": -1.680022,
+    "email": "lucie.martin@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Maison des Associations",
+      "adresse": "6 Cours des Alliés, 35000 Rennes"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque de Maurepas",
+      "adresse": "Rue Jean-Jaurès, 35700 Rennes"
+    },
+    "lieuActivite": [
+      {
+        "nom": "Espace Social de Maurepas",
+        "commune": "Rennes",
+        "codePostal": "35700"
+      }
+    ]
+  },
+  {
+    "id": "ea8a21f92d08c61cbf58b764",
+    "coordinateurId": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
+    "nom": "Pierre-Yves Dupont",
+    "latitude": 48.105127,
+    "longitude": -1.69076,
+    "email": "pierre-yves.dupont@example.com",
+    "phone": "06 12 34 56 78",
+    "structurePorteuse": {
+      "nom": "Mairie de Pacé",
+      "adresse": "1 Rue de la Mairie, 35740 Pacé"
+    },
+    "lieuActivitePrincipal": {
+      "nom": "Médiathèque de Pacé",
+      "adresse": "Rue des Écoles, 35740 Pacé"
+    },
+    "lieuActivite": []
+  },
+  {
     "id": "62ab2c598255a806e299ca57",
     "coordinateurId": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
     "nom": "Mélina Bouchard",
@@ -25,71 +89,6 @@
         "nom": "Théâtre National de Bretagne",
         "commune": "Rennes",
         "codePostal": "35000"
-      }
-    ]
-  },
-  {
-    "id": "51bf06e2f39d0c7db9d19e1f",
-    "coordinateurId": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
-    "nom": "Emilie Lefèvre",
-    "latitude": 48.11038,
-    "longitude": -1.680245,
-    "email": "emilie.lefevre@example.com",
-    "phone": "06 12 34 56 78",
-    "structurePorteuse": {
-      "nom": "Centre Social Carrefour 18",
-      "adresse": "7 Rue d'Espagne, 35200 Rennes"
-    },
-    "lieuActivitePrincipal": {
-      "nom": "Médiathèque de Beauregard",
-      "adresse": "18 Rue de Brest, 35000 Rennes"
-    },
-    "lieuActivite": [
-      {
-        "nom": "Maison de Quartier Villejean",
-        "commune": "Rennes",
-        "codePostal": "35000"
-      }
-    ]
-  },
-  {
-    "id": "ea8a21f92d08c61cbf58b764",
-    "coordinateurId": "3c1ca57a25b8aa237d317178",
-    "nom": "Pierre-Yves Dupont",
-    "latitude": 48.105127,
-    "longitude": -1.69076,
-    "email": "pierre-yves.dupont@example.com",
-    "phone": "06 12 34 56 78",
-    "structurePorteuse": {
-      "nom": "Mairie de Pacé",
-      "adresse": "1 Rue de la Mairie, 35740 Pacé"
-    },
-    "lieuActivitePrincipal": {
-      "nom": "Médiathèque de Pacé",
-      "adresse": "Rue des Écoles, 35740 Pacé"
-    },
-    "lieuActivite": []
-  },
-  {
-    "id": "88928bcb3b3dc50e0c52c09e",
-    "nom": "Lucie Martin",
-    "latitude": 48.105856,
-    "longitude": -1.680022,
-    "email": "lucie.martin@example.com",
-    "phone": "06 12 34 56 78",
-    "structurePorteuse": {
-      "nom": "Maison des Associations",
-      "adresse": "6 Cours des Alliés, 35000 Rennes"
-    },
-    "lieuActivitePrincipal": {
-      "nom": "Médiathèque de Maurepas",
-      "adresse": "Rue Jean-Jaurès, 35700 Rennes"
-    },
-    "lieuActivite": [
-      {
-        "nom": "Espace Social de Maurepas",
-        "commune": "Rennes",
-        "codePostal": "35700"
       }
     ]
   },
@@ -1099,34 +1098,6 @@
         "nom": "Maison des associations",
         "commune": "Cournon-d'Auvergne",
         "codePostal": "63800"
-      }
-    ]
-  },
-  {
-    "id": "62ab2c598255a806e299ca57",
-    "nom": "Mélina Bouchard",
-    "latitude": 48.117266,
-    "longitude": -1.677792,
-    "email": "melina.bouchard@example.com",
-    "phone": "06 12 34 56 78",
-    "structurePorteuse": {
-      "nom": "Mairie de Rennes",
-      "adresse": "Place de la Mairie, 35000 Rennes"
-    },
-    "lieuActivitePrincipal": {
-      "nom": "Bibliothèque municipale",
-      "adresse": "15 Rue de la Fontaine, 35000 Rennes"
-    },
-    "lieuActivite": [
-      {
-        "nom": "Café des Sports",
-        "commune": "Rennes",
-        "codePostal": "35000"
-      },
-      {
-        "nom": "Théâtre National de Bretagne",
-        "commune": "Rennes",
-        "codePostal": "35000"
       }
     ]
   },
