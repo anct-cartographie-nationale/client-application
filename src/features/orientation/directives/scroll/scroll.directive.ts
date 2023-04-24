@@ -1,6 +1,7 @@
 import { Directive, DoCheck, ElementRef, EventEmitter, Output } from '@angular/core';
 
-const hasReachedScrollEnd = (element: HTMLElement): boolean => element.scrollTop + element.offsetHeight >= element.scrollHeight;
+const hasReachedScrollEnd = (element: HTMLElement): boolean =>
+  element.scrollTop + element.offsetHeight >= element.scrollHeight - 1;
 
 @Directive({
   selector: '[appScroll]'
