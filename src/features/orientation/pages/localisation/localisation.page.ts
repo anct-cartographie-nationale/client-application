@@ -92,8 +92,10 @@ export class LocalisationPage {
   }
 
   public onGeoLocate(): void {
+    console.log('onGeoLocate');
     this._loadingState$.next(true);
-    window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
+    navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
+      console.log(position);
       this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
       this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
       this.orientationLayout.filterForm.get('distance')?.setValue(30000);
