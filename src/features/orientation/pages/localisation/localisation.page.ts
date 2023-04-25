@@ -94,15 +94,20 @@ export class LocalisationPage {
   public onGeoLocate(): void {
     console.log('onGeoLocate');
     this._loadingState$.next(true);
-    navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
-      console.log(position);
-      this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
-      this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
-      this.orientationLayout.filterForm.get('distance')?.setValue(30000);
-      this.orientationLayout.filterForm.get('address')?.setValue(null);
-      this._geoLocation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
-      this._localisation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
-    });
+    navigator.geolocation.getCurrentPosition(
+      (position: GeolocationPosition): void => {
+        console.log(position);
+        this.orientationLayout.filterForm.get('latitude')?.setValue(position.coords.latitude);
+        this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
+        this.orientationLayout.filterForm.get('distance')?.setValue(30000);
+        this.orientationLayout.filterForm.get('address')?.setValue(null);
+        this._geoLocation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
+        this._localisation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
+      },
+      (error: GeolocationPositionError): void => {
+        console.log(error);
+      }
+    );
   }
 
   public onSearchAddress(searchTerm: string): void {
