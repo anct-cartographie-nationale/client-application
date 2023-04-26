@@ -19,7 +19,8 @@ import {
   LieuxMediationNumeriquePresenter,
   LieuxMediationNumeriqueRepository,
   toFilterFormPresentationFromQuery,
-  toLocalisationFromFilterFormPresentation
+  toLocalisationFromFilterFormPresentation,
+  onlyWithLocalisation
 } from '../../../core';
 import { slideInAnimation } from '../../animations';
 
@@ -32,6 +33,8 @@ const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresent
       }),
     new FormGroup({})
   );
+
+const toLieuxWithLocalisation = (lieux: LieuMediationNumerique[]) => lieux.filter(onlyWithLocalisation);
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -91,7 +94,7 @@ export class OrientationLayout {
     );
 
   public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> =
-    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$;
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$.pipe(map(toLieuxWithLocalisation));
 
   public constructor(
     @Inject(FEATURES_TOKEN)
