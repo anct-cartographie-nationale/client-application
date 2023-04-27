@@ -1,6 +1,8 @@
 import { Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
-export type OrientationInformationTypes = Service | 'apprentissage' | 'démarches' | 'culture-numérique' | 'matériel';
+export type BesoinOrientationInformationTypes = Service | 'apprentissage' | 'démarches' | 'culture-numérique' | 'matériel';
+
+export type AccessibiliteOrientationInformationTypes = 'participation' | 'accueil-specifique';
 
 export type OrientationInformationContent = {
   titre: string;

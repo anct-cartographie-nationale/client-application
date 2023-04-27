@@ -1,7 +1,7 @@
 import { Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { OrientationInformationContent, OrientationInformationTypes } from '../../presenters';
+import { OrientationInformationContent, BesoinOrientationInformationTypes } from '../../presenters';
 
-export const BESOIN_INFORMATION_MODAL_TEXTS: Record<OrientationInformationTypes, OrientationInformationContent> = {
+export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformationTypes, OrientationInformationContent> = {
   apprentissage: {
     titre: 'Apprentissages de base',
     description:

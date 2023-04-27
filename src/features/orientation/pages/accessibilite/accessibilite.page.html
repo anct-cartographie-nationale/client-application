@@ -6,25 +6,15 @@
     </h1>
     <div class="text-center fw-bold mb-5 text-muted">Affinez votre recherche en sélectionnant des critères spécifiques</div>
     <form [formGroup]="orientationLayout.filterForm">
-      <h2 class="text-muted h6 fw-bold mb-3 mt-4">PROFIL</h2>
-      <div class="bg-light px-3 py-2">
-        <div
-          class="form-check form-check-inline form-chip my-2"
-          *ngFor="let typePublicOption of publicAccueilliOptions; index as i">
-          <input
-            type="checkbox"
-            name="publics_accueillis"
-            appCheckboxArray
-            formControlName="publics_accueillis"
-            class="form-check-input"
-            [value]="typePublicOption.value"
-            [attr.id]="'typePublicLabelChip' + i" />
-          <label class="form-check-label bg-white" [attr.for]="'typePublicLabelChip' + i">
-            <b>{{ typePublicOption.label }}</b>
-          </label>
-        </div>
+      <div class="d-flex flex-row mb-3 mt-4">
+        <h2 class="text-muted h6 fw-bold mb-0">PARTICIPATION</h2>
+        <button
+          type="button"
+          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+          (click)="selectedOrientationInformation = orientationInformations['participation']; informationOrientationModal.toggle()">
+          plus d'infos
+        </button>
       </div>
-      <h2 class="text-muted h6 fw-bold mb-3 mt-4">PARTICIPATION</h2>
       <div class="bg-light px-3 py-2">
         <div
           class="form-check form-check-inline form-chip my-2"
@@ -42,25 +32,15 @@
           </label>
         </div>
       </div>
-      <h2 class="text-muted h6 fw-bold mb-3 mt-4">ACCOMPAGNEMENT</h2>
-      <div class="bg-light px-3 py-2">
-        <div
-          class="form-check form-check-inline form-chip my-2"
-          *ngFor="let typeAccompagnementsOption of modaliteAccompagnementsOptions; index as i">
-          <input
-            type="checkbox"
-            name="modalites_accompagnement"
-            appCheckboxArray
-            formControlName="modalites_accompagnement"
-            class="form-check-input"
-            [value]="typeAccompagnementsOption.value"
-            [attr.id]="'typeAccompagnementsLabelChip' + i" />
-          <label class="form-check-label bg-white" [attr.for]="'typeAccompagnementsLabelChip' + i">
-            <b>{{ typeAccompagnementsOption.label }}</b>
-          </label>
-        </div>
+      <div class="d-flex flex-row mb-3 mt-4">
+        <h2 class="text-muted h6 fw-bold mb-0">ACCUEIL ADAPTÉ</h2>
+        <button
+          type="button"
+          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+          (click)="selectedOrientationInformation = orientationInformations['accueil-specifique']; informationOrientationModal.toggle()">
+          plus d'infos
+        </button>
       </div>
-      <h2 class="text-muted h6 fw-bold mb-3 mt-4">ACCUEIL ADAPTÉ</h2>
       <div class="bg-light px-3 py-2">
         <div
           class="form-check form-check-inline form-chip my-2"
@@ -87,3 +67,7 @@
     </div>
   </div>
 </div>
+<app-information-orientation-modal
+  #informationOrientationModal
+  [orientationInformation]="selectedOrientationInformation"
+  (hideChange)="selectedOrientationInformationType = null"></app-information-orientation-modal>

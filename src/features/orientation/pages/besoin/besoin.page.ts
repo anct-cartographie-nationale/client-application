@@ -3,7 +3,7 @@ import { AbstractControl } from '@angular/forms';
 import {
   filterNotFoundEmailBody,
   OrientationInformationContent,
-  OrientationInformationTypes,
+  BesoinOrientationInformationTypes,
   OrientationItemPresentation
 } from '../../presenters';
 import { OrientationLayout } from '../../layouts';
@@ -19,7 +19,7 @@ import { Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
   templateUrl: './besoin.page.html'
 })
 export class BesoinPage {
-  public readonly orientationInformations: Record<OrientationInformationTypes, OrientationInformationContent> =
+  public readonly orientationInformations: Record<BesoinOrientationInformationTypes, OrientationInformationContent> =
     BESOIN_INFORMATION_MODAL_TEXTS;
 
   public demarchesOrientationItems: OrientationItemPresentation<string>[] = demarches;
