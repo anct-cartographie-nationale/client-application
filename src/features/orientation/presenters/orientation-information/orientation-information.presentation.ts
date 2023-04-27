@@ -5,6 +5,6 @@ export type OrientationInformationTypes = Service | 'apprentissage' | 'démarche
 export type OrientationInformationContent = {
   titre: string;
   description: string;
-  elements: string[];
-  label: string;
+  elements?: string[];
+  label?: string;
 };

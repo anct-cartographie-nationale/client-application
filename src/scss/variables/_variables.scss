@@ -45,6 +45,10 @@ $modal-header-border-color: transparent;
 $modal-footer-bg: white;
 $modal-inner-padding: $spacer * 2;
 $btn-font-weight: bold;
+$form-range-track-height: 0.2rem;
+$form-range-track-bg: #bbb;
+$form-range-track-border-radius: 0;
+$form-range-thumb-width: 1.5rem;
 
 @import './accordion';
 @import './buttons';
@@ -60,6 +64,5 @@ $btn-font-weight: bold;
 @import './inputs';
 @import './breadcrumb';
 @import './form-check';
-@import './orientation';
 @import './square';
 @import './tiles';

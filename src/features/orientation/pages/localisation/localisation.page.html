@@ -37,56 +37,27 @@
       <div
         *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value"
         class="row justify-content-center">
-        <div
-          class="col-9 mt-4"
-          *ngIf="lieuxMediationNumeriqueByDistanceRange$ | async as lieuxMediationNumeriqueByDistanceRange">
-          <div class="d-flex justify-content-between mx-auto px-2">
-            <button
-              *ngFor="let lieuMediationNumeriqueByDistanceRange of lieuxMediationNumeriqueByDistanceRange; index as i"
-              [ngStyle]="{height: (lieuMediationNumeriqueByDistanceRange.height) + 'px'}"
-              [ngClass]="lieuMediationNumeriqueByDistanceRange.distance && (lieuMediationNumeriqueByDistanceRange.distance <= orientationLayout.filterForm.get('distance')?.value) ? 'bg-primary' : 'bg-muted'"
-              (click)="orientationLayout.filterForm.get('distance')?.setValue(lieuMediationNumeriqueByDistanceRange.distance)"
-              style="width: 15px"
-              class="btn btn-primary mt-auto p-0 rounded-0 border-0"
-              tabindex="-1"></button>
-          </div>
-          <label class="visually-hidden">Filtre par distance en mètres</label>
-          <div class="position-relative mx-3">
-            <span
-              style="margin-top: -2px"
-              class="position-absolute translate-middle bg-white rounded-circle square-lg text-muted d-flex align-items-center">
-              <small class="w-100 text-center fst-italic">5</small>
-            </span>
-            <span
-              style="margin-top: -2px"
-              class="position-absolute start-100 translate-middle bg-white rounded-circle square-lg text-muted d-flex align-items-center">
-              <small class="w-100 text-center fst-italic">100</small>
-            </span>
-          </div>
-          <div class="position-relative mx-3 z-index-over-base">
-            <span
-              [ngStyle]="{marginLeft: ((orientationLayout.filterForm.get('distance')?.value - 5000) * 100) / (100000 - 5000) + '%'}"
-              style="margin-top: -2px"
-              class="position-absolute translate-middle text-white d-flex align-items-center pe-none">
-              <small class="w-100 text-center fst-italic">
-                {{ orientationLayout.filterForm.get('distance')?.value / 1000 }}
-              </small>
-            </span>
-          </div>
+        <div class="col-9 my-5">
           <input
             type="range"
             id="distance-range"
             name="distance"
-            class="form-range distance-range position-relative"
+            class="form-range distance-range"
             min="5000"
             max="100000"
             step="5000"
             formControlName="distance" />
           <div class="d-flex mt-4">
-            <input
-              disabled
-              class="fs-5 mx-auto text-center"
-              [value]="orientationLayout.filterForm.get('distance')?.value / 1000 + ' km'" />
+            <div class="mx-auto d-flex align-items-end">
+              <div class="bg-white py-1 px-5 border-bottom border-2 rounded-top">
+                Rayon :
+                <b class="text-primary">{{ orientationLayout.filterForm.get('distance')?.value / 1000 + ' km' }}</b>
+              </div>
+              <i
+                class="ri-information-line ms-2 fw-normal text-muted ri-2x"
+                role="button"
+                (click)="informationOrientationModal.toggle()"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -99,3 +70,9 @@
     </div>
   </div>
 </div>
+<app-information-orientation-modal
+  #informationOrientationModal
+  [orientationInformation]="{
+    titre: 'Rayon maximum',
+    description: 'Vous pouvez modifier le rayon de votre recherche grâce au petit cercle déplaçable sous le champ adresse. Plus votre rayons sera petit, plus l’outil vous proposera des structures proches de chez vous'
+  }"></app-information-orientation-modal>
