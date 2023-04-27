@@ -36,15 +36,7 @@
             <i class="ri-arrow-go-back-line"></i>
             Retour à l'orientation
           </button>
-          <a
-            *ngIf="validationValue"
-            routerLink="../localisation"
-            queryParamsHandling="preserve"
-            class="btn btn-primary"
-            (click)="validateChange.emit(validationValue)">
-            Choisie cette option
-            <i class="ri-arrow-right-s-line"></i>
-          </a>
+          <ng-content></ng-content>
         </div>
       </div>
     </div>

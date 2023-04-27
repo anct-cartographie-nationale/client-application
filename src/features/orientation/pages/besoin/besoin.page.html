@@ -74,7 +74,15 @@
 </div>
 <app-information-orientation-modal
   #informationOrientationModal
-  [validationValue]="selectedOrientationInformationType"
   [orientationInformation]="selectedOrientationInformation"
-  (validateChange)="serviceControl?.setValue($event); informationOrientationModal.close()"
-  (hideChange)="selectedOrientationInformationType = null"></app-information-orientation-modal>
+  (hideChange)="selectedOrientationInformationType = null">
+  <a
+    *ngIf="selectedOrientationInformationType"
+    routerLink="../localisation"
+    queryParamsHandling="preserve"
+    class="btn btn-primary"
+    (click)="serviceControl?.setValue(selectedOrientationInformationType); informationOrientationModal.close()">
+    Choisir cette option
+    <i class="ri-arrow-right-s-line"></i>
+  </a>
+</app-information-orientation-modal>

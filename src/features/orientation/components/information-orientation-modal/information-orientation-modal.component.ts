@@ -9,11 +9,7 @@ import { OrientationInformationContent } from '../../presenters';
   templateUrl: './information-orientation-modal.component.html'
 })
 export class InformationOrientationModalComponent {
-  @Input() public validationValue: Service | null = null;
-
   @Input() public orientationInformation: OrientationInformationContent | null = null;
-
-  @Output() public validateChange: EventEmitter<Service> = new EventEmitter<Service>();
 
   @Output() public hideChange: EventEmitter<void> = new EventEmitter<void>();
 

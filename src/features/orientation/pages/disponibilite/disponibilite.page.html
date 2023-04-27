@@ -21,6 +21,10 @@
               (click)="collapseDatePrecise.toggle()">
               <i class="ri-calendar-todo-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
               <b class="orientation-btn-label">Je cherche des structures ouvertes à une date précise</b>
+              <i
+                class="ri-information-line me-2 fw-normal text-muted ri-2x position-absolute end-0 me-5 mb-2"
+                role="button"
+                (click)="selectOrientationInformation(false); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()"></i>
             </button>
           </h2>
           <app-collapse
@@ -66,7 +70,13 @@
             queryParamsHandling="preserve">
             <i class="ri-road-map-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
             <b class="accordion-button-label">J’affiche toutes les structures correspondant à ma recherche</b>
-            <i class="ri-arrow-right-s-line ri-2x text-muted ms-auto position-absolute me-3 end-0"></i>
+            <span class="ri-2x text-muted ms-auto position-absolute me-3 end-0">
+              <i
+                class="ri-information-line me-2 fw-normal"
+                role="button"
+                (click)="selectOrientationInformation(true); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()"></i>
+              <i class="ri-arrow-right-s-line"></i>
+            </span>
           </a>
           <a
             *ngIf="!cartographie.active && cartographie.url"
@@ -76,10 +86,40 @@
             rel="keep-params">
             <i class="ri-road-map-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
             <b class="accordion-button-label">J’affiche toutes les structures correspondant à ma recherche</b>
-            <i class="ri-arrow-right-s-line ri-xl ri-fw ri-space float-end"></i>
+            <span class="ri-2x text-muted ms-auto position-absolute me-3 end-0">
+              <i
+                class="ri-information-line me-2 fw-normal"
+                role="button"
+                (click)="selectOrientationInformation(true); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()"></i>
+              <i class="ri-arrow-right-s-line"></i>
+            </span>
           </a>
         </ng-container>
       </div>
     </ng-container>
   </div>
 </div>
+<app-information-orientation-modal
+  #informationOrientationModal
+  [orientationInformation]="selectedOrientationInformation"
+  (hideChange)="displayCartographieLink = false">
+  <ng-container *ngIf="features.get('cartographie') as cartographie">
+    <a
+      *ngIf="cartographie.active && displayCartographieLink"
+      [routerLink]="['/','cartographie']"
+      queryParamsHandling="preserve"
+      class="btn btn-primary"
+      (click)="informationOrientationModal.close()">
+      Afficher les résultats
+      <i class="ri-arrow-right-s-line"></i>
+    </a>
+    <a
+      *ngIf="!cartographie.active && displayCartographieLink"
+      [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
+      class="btn btn-primary"
+      (click)="informationOrientationModal.close()">
+      Afficher les résultats
+      <i class="ri-arrow-right-s-line"></i>
+    </a>
+  </ng-container>
+</app-information-orientation-modal>
