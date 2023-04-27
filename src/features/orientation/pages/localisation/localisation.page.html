@@ -27,7 +27,7 @@
                 <span class="text-primary">Chargement...</span>
               </div>
               <span *ngIf="(loadingState$ | async) === false">
-                <i class="ri-map-pin-2-line align-bottom"></i>
+                <i class="ri-map-pin-2-line"></i>
                 Me géolocaliser
               </span>
             </button>
@@ -94,7 +94,7 @@
     <div class="text-center mt-5">
       <a class="btn btn-primary mx-3" [routerLink]="['..', 'accessibilite']" queryParamsHandling="preserve">
         Valider
-        <i class="ri-arrow-right-s-line align-bottom"></i>
+        <i class="ri-arrow-right-s-line"></i>
       </a>
     </div>
   </div>

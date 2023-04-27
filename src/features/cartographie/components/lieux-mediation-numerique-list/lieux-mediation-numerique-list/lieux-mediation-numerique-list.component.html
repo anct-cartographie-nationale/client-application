@@ -21,19 +21,19 @@
           class="btn btn-outline-light me-3"
           [routerLink]="['/', 'orientation']"
           queryParamsHandling="preserve">
-          <i class="ri-equalizer-fill me-2 align-bottom"></i>
+          <i class="ri-equalizer-fill me-2"></i>
           <span>Modifier les critères d'orientation</span>
         </a>
         <a
           *ngIf="!orientationFeature.active && orientationFeature.url"
           class="btn btn-outline-light me-3"
           [href]="orientationFeature.url + '?' + toQueryString($any(route.queryParams | async))">
-          <i class="ri-equalizer-fill me-2 align-bottom"></i>
+          <i class="ri-equalizer-fill me-2"></i>
           <span>Modifier les critères d'orientation</span>
         </a>
       </ng-container>
       <button class="btn btn-outline-light" (click)="print.emit()">
-        <i class="ri-printer-line me-2 align-bottom"></i>
+        <i class="ri-printer-line me-2"></i>
         <span>Imprimer la liste</span>
       </button>
     </div>

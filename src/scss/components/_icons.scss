@@ -29,7 +29,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 }
 
 .ri-xxs {
-  font-size: 0.55em;
+  font-size: 0.5em;
 }
 
 .ri-xs {
@@ -80,14 +80,14 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   font-size: 10em;
 }
 
-.ri-space {
-  min-width: 2em;
-  line-height: 2em;
-}
-
 .ri-fw {
   text-align: center;
   width: 1.25em;
+}
+
+.ri-space {
+  min-width: 2em;
+  line-height: 2em;
 }
 
 .ri-wifi-line::before {
@@ -112,6 +112,10 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-add-line::before {
   content: '\ea13';
+}
+
+.ri-arrow-right-s-fill::before {
+  content: '\ea6d';
 }
 
 .ri-check-line::before {
@@ -308,4 +312,8 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-account-circle-fill::before {
   content: '\ea08';
+}
+
+.ri-information-line::before {
+  content: '\ee59';
 }

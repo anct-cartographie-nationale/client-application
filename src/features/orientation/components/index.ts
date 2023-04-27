@@ -2,6 +2,7 @@ import { BesoinLinkComponent } from './besoin-link/besoin-link.component';
 import { NavLinkComponent } from './nav-link/nav-link.component';
 import { SelectedFiltersComponent } from './selected-filters/selected-filters.component';
 import { DisplayOnMapLinkComponent } from './display-on-map-link/display-on-map-link.component';
+import { InformationOrientationModalComponent } from './information-orientation-modal/information-orientation-modal.component';
 import { FilterResultCountComponent } from './filter-result-count/filter-result-count.component';
 import { NavComponent } from './nav/nav.component';
 import { TextSeparatorComponent } from './text-separator/text-separator.component';
@@ -13,6 +14,7 @@ export const components = [
   NavComponent,
   SelectedFiltersComponent,
   DisplayOnMapLinkComponent,
+  InformationOrientationModalComponent,
   FilterResultCountComponent,
   TextSeparatorComponent,
   OpeningHoursFormComponent

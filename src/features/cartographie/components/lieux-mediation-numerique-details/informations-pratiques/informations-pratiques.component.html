@@ -17,7 +17,7 @@
       href="mailto:{{ courriel }}"
       class="btn btn-sm btn-secondary d-block mb-2"
       (click)="$event.stopPropagation()">
-      <i class="ri-mail-line me-2 align-bottom text-right"></i>
+      <i class="ri-mail-line me-2 text-right"></i>
       <span>Contacter par mail</span>
     </a>
     <a
@@ -25,7 +25,7 @@
       href="tel://{{ telephone }}"
       class="text-decoration-none d-block mb-2"
       (click)="$event.stopPropagation()">
-      <i class="me-2 ri-phone-line align-bottom"></i>
+      <i class="me-2 ri-phone-line"></i>
       <span aria-hidden="true">{{ telephone | phone }}</span>
       <span class="visually-hidden">Contacter par téléphone</span>
     </a>
