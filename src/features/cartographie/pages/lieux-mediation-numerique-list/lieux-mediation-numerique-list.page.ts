@@ -151,6 +151,10 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     this._router.navigate([], { relativeTo: this.route.parent });
   }
 
+  public getDistance(): string {
+    return this.route.snapshot.queryParams['distance'];
+  }
+
   public toQueryString(fromObject: {} = {}): string {
     return new HttpParams({ fromObject }).toString();
   }

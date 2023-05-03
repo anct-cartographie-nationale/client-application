@@ -119,6 +119,10 @@ export class CartographieLayout {
     map((paramMap: ParamMap) => paramMap.get('address'))
   );
 
+  public getDistance$: Observable<string | null> = this.route.queryParamMap.pipe(
+    map((paramMap: ParamMap) => paramMap.get('distance'))
+  );
+
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
   public userLocalisation?: Localisation;
@@ -184,7 +188,11 @@ export class CartographieLayout {
   }
 
   private navigateToPageMatchingZoomLevel(zoomLevel: number, localisation: Localisation) {
-    const route: string[] = getNextRouteFromZoomLevel(zoomLevel, nearestRegion(localisation).nom);
+    const route: string[] = getNextRouteFromZoomLevel(
+      zoomLevel,
+      nearestRegion(localisation).nom,
+      this.route.snapshot.queryParams['distance']
+    );
     shouldNavigateToListPage(route, this.route.children[0]?.children[0]?.routeConfig?.path) &&
       this.router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }

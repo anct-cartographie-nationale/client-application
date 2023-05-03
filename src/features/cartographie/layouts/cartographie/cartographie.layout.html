@@ -63,13 +63,13 @@
         (highlight)="onHighlight($event?.code)"
         (showLieux)="onShowLieuxInRegion($event)"></app-territoire-markers>
       <app-territoire-markers
-        *ngIf="((currentZoom$ | async) ?? 0) <= 9 && ((currentZoom$ | async) ?? 0) > 7"
+        *ngIf="((currentZoom$ | async) ?? 0) <= 8 && ((currentZoom$ | async) ?? 0) > 7"
         [territoires]="(departements$ | async) ?? []"
         [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
         (highlight)="onHighlight($event?.code)"
         (showLieux)="onShowLieuxInDepartement($event)"></app-territoire-markers>
       <app-lieu-mediation-numerique-markers
-        *ngIf="((currentZoom$ | async) ?? 0) > 9"
+        *ngIf="((currentZoom$ | async) ?? 0) > 8"
         [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
         [selectedId]="(markersPresenter.selected$ | async) ?? ''"
         [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
@@ -77,4 +77,5 @@
         (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
     </mgl-map>
   </div>
+  {{((currentZoom$ | async) ?? 0)}}
 </div>
