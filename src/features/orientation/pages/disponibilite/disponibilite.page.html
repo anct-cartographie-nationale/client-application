@@ -28,7 +28,7 @@
             id="collapseDatePrecise"
             [state]="hasOpeningsHours ? 'expanded' : 'collapsed'"
             aria-labelledby="headingDatePrecise">
-            <div class="accordion-body bg-light px-5 py-4">
+            <div class="accordion-body bg-light py-4">
               <app-opening-hours-form
                 #openingHoursForm
                 (selectOpeningHours)="onSelectOpeningHours($event)"
