@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -55,7 +56,8 @@ export class UserLocationComponent implements OnInit {
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
     private readonly _addressPresenter: AddressPresenter,
-    public readonly markersPresenter: MarkersPresenter
+    public readonly markersPresenter: MarkersPresenter,
+    public readonly route: ActivatedRoute
   ) {}
 
   public ngOnInit(): void {
@@ -67,7 +69,9 @@ export class UserLocationComponent implements OnInit {
   }
 
   public onSelectAddress(address: AddressFoundPresentation): void {
-    this.markersPresenter.center(address.localisation, this._zoomLevel.userPosition);
+    const adjustZoomWhenDistance: number =
+      this.route.snapshot.queryParams['distance'] === '100000' ? 8 : this._zoomLevel.userPosition;
+    this.markersPresenter.center(address.localisation, adjustZoomWhenDistance);
     this.location.emit(address.localisation);
     this._displayGeolocation$.next(true);
   }

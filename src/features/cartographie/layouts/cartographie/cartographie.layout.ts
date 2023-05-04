@@ -119,10 +119,6 @@ export class CartographieLayout {
     map((paramMap: ParamMap) => paramMap.get('address'))
   );
 
-  public getDistance$: Observable<string | null> = this.route.queryParamMap.pipe(
-    map((paramMap: ParamMap) => paramMap.get('distance'))
-  );
-
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
   public userLocalisation?: Localisation;
