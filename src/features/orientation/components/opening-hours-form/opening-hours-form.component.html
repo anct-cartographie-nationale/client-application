@@ -1,8 +1,8 @@
 <ng-container *ngFor="let openingHourGroup of openingHoursForm.controls ?? []; index as i; first as isFirst">
   <app-text-separator *ngIf="!isFirst" class="my-4" background="light">OU</app-text-separator>
-  <div class="d-flex pe-5">
+  <div class="d-flex pe-3">
     <i class="text-primary py-1 me-2 ri-check-line" [class.invisible]="openingHourGroup.invalid" aria-hidden="true"></i>
-    <div class="col-4">
+    <div class="col-md-4 col-sm-12">
       <select
         class="form-select"
         [formControl]="openingHourGroup.controls.day"
@@ -20,7 +20,9 @@
         <option value="su">Dimanche</option>
       </select>
     </div>
-    <div class="col-4 ms-2" *ngIf="openingHourGroup.controls.day.value && openingHourGroup.controls.day.value !== 'now'">
+    <div
+      class="col-md-4 col-sm-12 ms-2"
+      *ngIf="openingHourGroup.controls.day.value && openingHourGroup.controls.day.value !== 'now'">
       <select
         *ngIf="openingHourGroup.controls.period.value !== 'hours'"
         class="form-select"
