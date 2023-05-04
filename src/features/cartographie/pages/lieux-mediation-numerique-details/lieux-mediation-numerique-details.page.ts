@@ -95,11 +95,11 @@ export class LieuxMediationNumeriqueDetailsPage {
   }
 
   public onReportAnError(lieu: LieuMediationNumeriqueDetailsPresentation): void {
-    document.location.href = `mailto:${
-      lieu.contact?.courriel
-    }?cc=cartographie.sonum@anct.gouv.fr&subject=Erreur sur la fiche structure : ${lieu.nom}&body=${reportErrorEmailMessage(
-      location.href
-    )}`;
+    const mailTo: string = lieu.contact?.courriel ?? `cartographie.sonum@anct.gouv.fr`;
+    const carbonCopy: string = lieu.contact?.courriel ? `cartographie.sonum@anct.gouv.fr` : '';
+    document.location.href = `mailto:${mailTo}?cc=${carbonCopy}&subject=Erreur sur la fiche structure : ${
+      lieu.nom
+    }&body=${reportErrorEmailMessage(location.href)}`;
   }
 
   public onCloseDetails(lieu: LieuMediationNumeriqueDetailsPresentation): void {
