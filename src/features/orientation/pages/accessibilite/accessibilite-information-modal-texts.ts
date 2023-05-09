@@ -11,14 +11,20 @@ export const ACCESSIBILITE_INFORMATION_MODAL_TEXTS: Record<
   participation: {
     titre: 'Participation',
     description:
-      'La participation est la tarifaction qui peut être demandé au bénéficiaire. Si vous cochez une participation vous restreindrez votre recherche à des modes de participation spécifiques',
-    elements: ['Gratuit', 'Payant', 'Adhésion, ou gratuit sous conditions spécifiques', 'Accepte le Pass Numérique'],
-    label: 'Liste des profils'
+      "La participation est le tarif pouvant conditionner l'accès à une structure ou un service de médiation numérique. Les usagers doivent, dans certains cas, s'acquitter d'une participation pour bénéficier d'un service ou d'un accompagnement. Si vous sélectionnez certaines de ces options, vous restreindrez votre recherche aux structures demandant ces participations.",
+    elements: [
+      'Gratuit : Accès gratuit au lieu et à ses services',
+      'Gratuit sous condition : La gratuité est conditionnée à certains critères (situation familiale, convention avec un organisme social…)',
+      'Payant : L’accès au lieu et/ou à ses services est payant',
+      'Adhésion : L’accès au lieu et/ou à ses services nécessite d’y adhérer',
+      'Pass numérique : Il est possible d’utiliser un Pass numérique pour accéder au lieu'
+    ],
+    label: 'Détails des différentes options'
   },
   'accueil-specifique': {
     titre: 'Accueil adapté',
     description:
-      'Si vous cochez certains de ces mots, vous restreindrez votre recherche a des structures adaptées à certaines pathologie. Pour tout besoin spécifique, on peut accéder aux critères d’accessibilité précis des structures ayant rempli leurs informations sur “accèslibre”',
+      "Si vous sélectionnez certaines de ces options, vous restreindrez votre recherche aux structures en capacité d'accueillir certains types de publics. Pour toute information concernant les déplacements des personnes en situation de handicap, rendez-vous sur https://acceslibre.beta.gouv.fr/.",
     elements: [
       'Handicaps psychiques : troubles psychiatriques donnant lieu à des atteintes comportementales',
       'Handicaps mentaux : déficiences limitant les activités d’une personne',
@@ -28,6 +34,6 @@ export const ACCESSIBILITE_INFORMATION_MODAL_TEXTS: Record<
       'Déficience visuelle',
       'Surdité'
     ],
-    label: 'Liste des profils'
+    label: 'Détails de certaines options'
   }
 };

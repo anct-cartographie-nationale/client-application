@@ -2,10 +2,10 @@
   <div class="w-100 my-auto">
     <h1 class="h2 text-center fw-bold mt-5">
       <span class="text-primary">Où</span>
-      vous trouvez-vous&nbsp;?
+      résidez-vous &nbsp;?
     </h1>
     <div class="text-center fw-bold mb-5 text-muted">
-      Définissez la zone géographique dans laquelle vous souhaitez chercher un lieu d'accompagnement
+      Renseignez votre adresse puis définissez la distance maximale jusqu'à laquelle vous pouvez vous déplacer
     </div>
     <form class="bg-light py-5" [formGroup]="orientationLayout.filterForm">
       <div class="row gx-0 justify-content-center">
@@ -73,6 +73,6 @@
 <app-information-orientation-modal
   #informationOrientationModal
   [orientationInformation]="{
-    titre: 'Rayon maximum',
-    description: 'Vous pouvez modifier le rayon de votre recherche grâce au petit cercle déplaçable sous le champ adresse. Plus votre rayons sera petit, plus l’outil vous proposera des structures proches de chez vous'
+    titre: 'Rayon Maximum',
+    description: 'Vous pouvez modifier le rayon de votre recherche grâce au petit cercle déplaçable sous le champ adresse. Plus votre rayon sera petit, plus l’outil vous proposera des structures proches du lieu renseigné'
   }"></app-information-orientation-modal>

@@ -7,15 +7,14 @@ import { OrientationLayout } from '../../layouts';
 import { OrientationInformationContent } from '../../presenters';
 
 const DISPLAY_CARTOGRAPHIE_MODAL_CONTENT: OrientationInformationContent = {
-  titre: 'J’affiche les résultats',
+  titre: 'Afficher tous les résultats',
   description:
-    'En accédant aux résultats, vous quiterez l’outil d’orientation et accèderez à la carte, filtré selon tous les critères séléctionnés'
+    'En affichant les résultats, vous terminez le parcours d’orientation et accédez à la carte, filtrée selon tous les critères précédemment sélectionnés.'
 };
 
 const OPENING_HOURS_MODAL_CONTENT: OrientationInformationContent = {
-  titre: 'Rechercher à des horaires précis',
-  description:
-    'Vous pouvez choisir plusieurs plage horaire dans cet onglet interagissant avec les menus déroulants. L’outil ne sélectionnera que des structures disponibles à l’une ou l’autre des plages horaires que vous avez renseigné'
+  titre: 'Recherche de structures ouvertes à des horaires précis',
+  description: "Vous pouvez ici choisir de filtrer la cartographie selon les jours et horaires d'ouverture des structures."
 };
 
 @Component({

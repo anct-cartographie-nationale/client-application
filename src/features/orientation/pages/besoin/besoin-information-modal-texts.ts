@@ -5,7 +5,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   apprentissage: {
     titre: 'Apprentissages de base',
     description:
-      "Les apprentissages de bases se passent souvent sous la forme d'ateliers pour un public ne sachant pas se servir de leur materiel numérique",
+      "Les apprentissages de bases sont souvent dispensés / proposés sous formes d'ateliers collectifs et destinés aux personnes souhaitant s'initier à l'utilisation d'un appareil numérique.",
     elements: [
       'Prendre en main un smartphone ou une tablette',
       'Prendre en main un ordinateur',
@@ -16,7 +16,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.PrendreEnMainUnSmartphoneOuUneTablette]: {
     titre: 'Prendre en main un smartphone ou une tablette',
     description:
-      "Vous ne savez pas vous servir de votre smartphone ou votre tablette ? Vous venez de l'acheter ? Certaines structures vous accompagne dans la prise en main de vos outils",
+      'Un accompagnement collectif ou individuel pour initier les usagers à la prise en main de smartphones ou tablettes.',
     elements: [
       "Apprendre à me servir d'un écran tactile",
       'Utiliser mon smartphone pour la première fois',
@@ -28,7 +28,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.PrendreEnMainUnOrdinateur]: {
     titre: 'Prendre en main un ordinateur',
     description:
-      "Vous ne savez pas vous servir de votre ordinateur ? Vous venez de l'acheter ? Certaines structures vous accompagne dans la prise en main de vos outils",
+      "Un accompagnement collectif ou individuel pour initier les usagers à la prise en main d'un ordinateur fixe ou portable.",
     elements: [
       "Apprendre à me servir d'un clavier et d'une souris",
       'Utiliser mon ordinateur pour la première fois',
@@ -40,44 +40,44 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.UtiliserLeNumerique]: {
     titre: 'Utiliser le numérique au quotidien',
     description:
-      "Vous disposez d'outil informatique mais vous n'avez pas le réflexe et ne savez pas vraiment comment celui ci peut répondre à mes besoins",
+      'Faire découvrir aux usagers les fonctionnalités propres aux appareils numériques et les opportunités de la navigation web.',
     elements: [
-      'Apprendre a utiliser la suite office',
-      'Utiliser les outils google',
-      'Utiliser un tableur',
-      "Les outils open sources pouvant m'aider au jour le jour"
+      'Utiliser des périphériques',
+      'Utiliser les outils de Google',
+      'Utiliser un tableur, un traitement de texte, etc.'
     ],
     label: 'Exemples non exhaustifs'
   },
   démarches: {
-    titre: 'Démarches',
+    titre: 'Aide aux démarches',
     description:
-      "L'aide aux démarches va permettre aux bénéficiaires d'être accompagné dans la réalisation des démarches du quotidien",
+      'Un accompagnement individuel pour aider les usagers à  réaliser leurs démarches du quotidien (administratives, juridiques, sociales, scolaires, etc.)',
     elements: [
-      'Être aidé ponctuellement pour réaliser une démarche en ligne',
-      'Être formé aux démarches administratives en ligne',
-      'Créer et développer mon entreprise',
-      'Être accompagné dans mes démarches de santé',
-      'Favoriser mon insertion professionnelle'
+      'Être aidé(e) ponctuellement pour réaliser une démarche en ligne',
+      'Être formé(e) aux démarches administratives en ligne',
+      'Créer et développer son entreprise',
+      'Être accompagné(e) dans mes démarches de santé',
+      'Favoriser son insertion professionnelle'
     ],
     label: 'Liste des apprentissages de base'
   },
   [Service.RealiserDesDemarchesAdministratives]: {
-    titre: 'Être aidé ponctuellement pour réaliser une démarche en ligne',
-    description: 'Des spécialistes sont disponibles pour vous aider, voir faire à votre place certaines démarches en ligne',
-    elements: ['CAF', 'CPAM', 'Pole emploi', 'Impôts', 'Juridique'],
+    titre: 'Être aidé(e) ponctuellement pour réaliser mes démarches en ligne',
+    description:
+      'Pour certaines démarches, des professionnels sont disponibles pour aider les usagers à réaliser certaines démarches en ligne, voire à les faire à leur place.',
+    elements: ['CAF', 'CPAM', 'Pôle emploi', 'Impôts', 'Juridique'],
     label: 'Exemples non exhaustifs'
   },
   [Service.DevenirAutonomeDansLesDemarchesAdministratives]: {
-    titre: 'Être formé aux démarches administratives en ligne',
+    titre: 'Être formé(e) pour réaliser mes démarches en ligne',
     description:
-      "Certaines structures proposent des ateliers permettant aux bénéficiaire d'apprendre à remplir eux même des démarches en ligne",
+      'Certaines structures proposent des ateliers permettant aux usagers d’apprendre à réaliser des démarches administratives en ligne en toute autonomie.',
     elements: ['CAF', 'CPAM', 'Pole emploi', 'Impôts', 'Juridique'],
     label: 'Exemples non exhaustifs'
   },
   [Service.CreerEtDevelopperMonEntreprise]: {
-    titre: 'Créer et développer mon entreprise',
-    description: "Certaines structures proposent de l'aide pour aider dans les démarches d'entreprise",
+    titre: 'Créer et développer son entreprise',
+    description: "Des structures spécialisées pour accompagner les usagers dans leurs démarches de création d'entreprise.",
     elements: [
       'Créer mon auto-entreprise',
       'Connaître les sites internet permettant de gérer mon entreprise',
@@ -86,28 +86,38 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
     label: 'Exemples non exhaustifs'
   },
   [Service.AccompagnerLesDemarchesDeSante]: {
-    titre: 'Être accompagné dans mes démarches de santé',
+    titre: 'Etre aidé(e) dans ses démarches  de santé',
     description:
-      'Vos démarches de santé son nombreuses, vous pouvez trouver des structures adaptées pour vous accompagner dans celles-ci',
-    elements: ['Utiliser améli.fr', 'Trouver un médecin traitant', 'Apprendre à utiliser Qare ou Doctolib'],
+      'Vos démarches de santé son nombreuses, vous pouvez trouver des structures adaptées pour vous accompagner dans celles-ci.',
+    elements: [
+      'Utiliser ameli.fr',
+      'Trouver un médecin traitant',
+      'Trouver un rendez-vous chez une spécialiste',
+      'Apprendre à utiliser Doctolib ou Qare',
+      'Dossier Affection de longue durée',
+      'Arrêt maladie - accident de travail - RQTH'
+    ],
     label: 'Exemples non exhaustifs'
   },
   [Service.FavoriserMonInsertionProfessionnelle]: {
-    titre: 'Favoriser mon insertion professionnelle',
+    titre: 'Favoriser son insertion professionnelle',
     description:
-      'Pour vous accompagner pour toute démarches favorisant votre insertion professionnelle, des aidants sont la pour vous épauler',
+      "Des aidants professionnels disponibles pour accompagner les usagers dans leur parcours d'insertion professionnelle.",
     elements: [
-      'Utiliser le site de pole emploi',
-      'Comment faire un CV',
+      'Utiliser le site de Pôle emploi',
+      'Comment faire un CV ?',
       "Utiliser les outils de recherche d'emploi",
-      'Utiliser Linkedin'
+      'Utiliser Linkedin',
+      'Postuler en ligne',
+      'Formation et reconversion professionnelle',
+      'CPF : gérer son compte et trouver sa formation'
     ],
     label: 'Exemples non exhaustifs'
   },
   'culture-numérique': {
     titre: 'Culture numérique',
     description:
-      "Souvent pour des utilisateurs sachant déjà se servir de leurs outils, l'approfondissement de la culture numérique permettra d'en savoir plus sur des utilisations précises de l'outil informatique",
+      'Permettre aux utilisateurs confirmés d’approfondir leur culture numérique ou de maîtriser des techniques numériques spécifiques.',
     elements: [
       'Approfondir ma culture numérique',
       'Promouvoir la citoyenneté numérique',
@@ -119,35 +129,50 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.ApprofondirMaCultureNumerique]: {
     titre: 'Approfondir ma culture numérique',
     description:
-      'Pour des apprentissages précis certaines structures propose des ateliers et des apprentissages sur des sujets avancés',
-    elements: ['Utiliser mon matériel de manière sécurisée', 'Repérer les fake news', 'Comment gérer mes données'],
+      'Des structures proposent des ateliers de perfectionnement ou des formations avancées sur des thématiques spécifiques.',
+    elements: [
+      'Utiliser mon matériel de manière sécurisée',
+      'Repérer les fake news',
+      'Comment gérer mes données',
+      'Comprendre et gérer ses réseaux sociaux'
+    ],
     label: 'Exemples non exhaustifs'
   },
   [Service.PromouvoirLaCitoyenneteNumerique]: {
     titre: 'Promouvoir la citoyenneté numérique',
     description:
-      'Certaines structures aident les bénéficiaire à utiliser leurs outils numérique de manière saine, responsable et non-dangereuse',
-    elements: ['Les droits et les interdits sur internet', 'Naviguer de manière responsable', 'Les comportements a risque'],
+      'Certaines structures aident les usagers à utiliser leurs outils numériques de manière saine, responsable et sécurisée.',
+    elements: ['Les droits et les interdits sur internet', 'Naviguer de manière responsable', 'Les comportements à risque'],
     label: 'Exemples non exhaustifs'
   },
   [Service.CreerAvecLeNumerique]: {
     titre: 'Créer avec le numérique',
     description:
-      'Des structures peuvent vous aider sur vos projet numérique, et vous donner accès à des outils de création spécifique',
-    elements: ['Faire de la retouche photo', 'Faire du montage vidéo', 'Fablabs et imprimantes 3D'],
+      'Des structures accompagnent les usagers à la réalisation de leurs projets numériques et leurs donnent accès à des outils de création spécifiques.',
+    elements: [
+      'Créer un site vitrine ou marchand',
+      'Faire de la retouche photo',
+      'Faire du montage vidéo',
+      'Fablabs et imprimantes 3D'
+    ],
     label: 'Exemples non exhaustifs'
   },
   [Service.SoutenirLaParentalite]: {
     titre: "Soutenir la parentalité et l'éducation numérique",
     description:
-      'Les parents qui se questionnant sur les démarches et usages numériques de leurs enfants peuvent consulter un médiateurs spécialisé sur ces sujets',
-    elements: ['Les dangers pour mon enfant', 'Le harcèlement sur les réseaux sociaux', 'ParcourSup'],
+      'Des structures dédiées conseillent les parents et leurs enfants sur les outils et techniques pour utiliser le numérique en toute sécurité.',
+    elements: [
+      'Les dangers pour mon enfant',
+      'Le harcèlement sur les réseaux sociaux',
+      'ParcourSup',
+      'Jeux en ligne : jeux vidéo, paris sportifs, etc.',
+      'Sites et logiciels éducatifs'
+    ],
     label: 'Exemples non exhaustifs'
   },
   matériel: {
-    titre: 'Manque de matériel',
-    description:
-      "Certaines structures vont vous permettre d'accéder simplement à du matériel, voir d'en louer ou d'en acheter à des tarifs solidaire",
+    titre: 'Équipement numérique',
+    description: "Certaines structures proposent du matériel en accès libre, en location ou à l'achat à des tarifs solidaires.",
     elements: [
       'Accéder à une connexion internet',
       'Accéder à du matériel numérique en libre service',
@@ -157,8 +182,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   },
   [Service.AccederAUneConnexionInternet]: {
     titre: 'Accéder à une connexion internet',
-    description:
-      "Vous avez besoin d'utiliser internet mais n'y avez pas accès, certaines structures peuvent vous aider avec ou sans conditions",
+    description: "Certaines structures proposent gratuitement ou sous conditions l'accès à une connexion internet.",
     elements: [
       'Accéder à du wifi en libre service',
       'Accéder à du wifi pour mes démarches administratives',
@@ -169,15 +193,19 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.AccederADuMateriel]: {
     titre: 'Accéder à du matériel en libre service',
     description:
-      "Vous avez un besoin matériel ? Certaines structures vous proposent d'accéder gratuitement ou sous condition à des outils pour vous aider",
-    elements: ['Imprimer', 'Accéder à un ordinateur'],
+      "Certaines structures proposent gratuitement ou sous conditions l'accès à du matériel numérique en libre service.",
+    elements: ['Imprimer gratuitement ou à bas prix', 'Accéder à un ordinateur'],
     label: 'Exemples non exhaustifs'
   },
   [Service.EquiperEnMaterielInformatique]: {
-    titre: 'Acheter du matériel numérique à tarif solidaire',
-    description:
-      "Vous avez un besoin matériel ? Certaines structures vous proposent d'acheter du matériel a des gratuitement ou a tarifs réduits",
-    elements: ['Don de matériel', 'Louer/se faire prêter', 'Acheter à tarif solidaire'],
+    titre: 'Acheter ou louer du matériel à tarif solidaire',
+    description: "Certaines structures proposent en location ou à l'achat du matériel  à tarif solidaire.",
+    elements: [
+      'Don de matériel',
+      'Louer/se faire prêter',
+      'Acheter ou louer à bas prix',
+      'Avoir un ordinateur, une connexion internet ou encore une imprimante à la maison'
+    ],
     label: 'Exemples non exhaustifs'
   }
 };
