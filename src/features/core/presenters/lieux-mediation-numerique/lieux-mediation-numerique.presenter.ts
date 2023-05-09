@@ -31,7 +31,7 @@ const toLieuxMediationNumeriqueByDistance =
     ...LieuxMediationNumeriqueFilterParameters,
     number
   ]): LieuMediationNumeriquePresentation[] =>
-    zoomLevel < (filters.distance === 100000 ? LIEUX_ZOOM_LEVEL - 1 : LIEUX_ZOOM_LEVEL)
+    zoomLevel < (filters.distance ? LIEUX_ZOOM_LEVEL - 1 : LIEUX_ZOOM_LEVEL)
       ? []
       : filteredLieuxMediationNumerique(lieux.filter(byBoundingBox(boundingBox)), localisation, filters, date).sort(byDistance);
 

@@ -69,9 +69,7 @@ export class UserLocationComponent implements OnInit {
   }
 
   public onSelectAddress(address: AddressFoundPresentation): void {
-    const adjustZoomWhenDistance: number =
-      this.route.snapshot.queryParams['distance'] === '100000' ? 8 : this._zoomLevel.userPosition;
-    this.markersPresenter.center(address.localisation, adjustZoomWhenDistance);
+    this.markersPresenter.center(address.localisation, this._zoomLevel.userPosition);
     this.location.emit(address.localisation);
     this._displayGeolocation$.next(true);
   }
