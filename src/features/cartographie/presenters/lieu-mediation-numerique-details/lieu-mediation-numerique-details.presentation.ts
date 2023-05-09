@@ -12,6 +12,8 @@ import { Aidant, HorairesPresentation, OpeningState } from '../../../core';
 export type SourcePresentation = {
   label: string;
   link: string;
+  detail?: string;
+  update_link?: string;
 };
 
 export type LieuMediationNumeriqueDetailsPresentation = {

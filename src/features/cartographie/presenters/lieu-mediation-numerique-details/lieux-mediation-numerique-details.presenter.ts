@@ -26,17 +26,21 @@ import {
 
 const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
   [
-    'conseiller-numerique',
+    'mediation-numerique-conseiller-numerique',
     {
       label: 'Conseillers numérique France Services',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique-1/'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique-1/',
+      detail: "Ces données sont intégrées via l'espace Coop CNFS",
+      update_link: 'https://coop.conseiller-numerique.gouv.fr/mes-lieux-activite'
     }
   ],
   [
     'dora',
     {
       label: 'Dora',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numeriques-en-france-disponibles-dans-le-referentiel-de-loffre-dinsertion-publie-par-data-inclusion/'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numeriques-en-france-disponibles-dans-le-referentiel-de-loffre-dinsertion-publie-par-data-inclusion/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F'
     }
   ],
   [
@@ -57,7 +61,9 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     'france-services',
     {
       label: 'France Services',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services'
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services',
+      detail:
+        'Les horaires et coordonnées de votre France services doivent être actualisés directement depuis l’onglet « Ma structure » de la Plateforme France services. Pour tout autre changement, veuillez-vous rapprocher de votre référent départemental.'
     }
   ],
   [

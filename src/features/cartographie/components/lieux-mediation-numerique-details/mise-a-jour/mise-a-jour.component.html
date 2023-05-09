@@ -1,0 +1,10 @@
+<div class="d-flex">
+  <!-- <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + label" /> -->
+  <div class="flex-grow-1 d-flex flex-column align-items-start justify-content-center">
+    <p class="fw-bold mb-0 text-first-letter-uppercase">Mettre à jour la fiche</p>
+    <span *ngIf="source?.detail" class="opacity-75">{{ source?.detail }}</span>
+  </div>
+  <div>
+    <button type="button" class="btn opacity-100" tabindex="0" aria-label="Close">test</button>
+  </div>
+</div>
