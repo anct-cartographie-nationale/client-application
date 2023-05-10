@@ -16,14 +16,14 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.PrendreEnMainUnSmartphoneOuUneTablette]: {
     titre: 'Prendre en main un smartphone ou une tablette',
     description:
-      'Un accompagnement collectif ou individuel pour initier les usagers à la prise en main de smartphones ou tablettes.',
+      'Un accompagnement collectif ou individuel pour initier les usagers à la prise en main de smartphones ou de tablettes.',
     elements: [
       "Apprendre à me servir d'un écran tactile",
       'Utiliser mon smartphone pour la première fois',
       'Configurer mon smartphone',
       'Connaître les outils de base présents sur mon smartphone'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.PrendreEnMainUnOrdinateur]: {
     titre: 'Prendre en main un ordinateur',
@@ -35,7 +35,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
       'Configurer mon ordinateur',
       'Connaître les outils de base présents sur mon ordinateur'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.UtiliserLeNumerique]: {
     titre: 'Utiliser le numérique au quotidien',
@@ -46,17 +46,17 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
       'Utiliser les outils de Google',
       'Utiliser un tableur, un traitement de texte, etc.'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   démarches: {
     titre: 'Aide aux démarches',
     description:
       'Un accompagnement individuel pour aider les usagers à  réaliser leurs démarches du quotidien (administratives, juridiques, sociales, scolaires, etc.)',
     elements: [
-      'Être aidé(e) ponctuellement pour réaliser une démarche en ligne',
-      'Être formé(e) aux démarches administratives en ligne',
+      'Être aidé(e) ponctuellement pour réaliser mes démarches en ligne',
+      'Être formé(e) pour réaliser mes démarches en ligne',
       'Créer et développer son entreprise',
-      'Être accompagné(e) dans mes démarches de santé',
+      'Etre aidé(e) dans ses démarches de santé',
       'Favoriser son insertion professionnelle'
     ],
     label: 'Liste des apprentissages de base'
@@ -66,29 +66,30 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
     description:
       'Pour certaines démarches, des professionnels sont disponibles pour aider les usagers à réaliser certaines démarches en ligne, voire à les faire à leur place.',
     elements: ['CAF', 'CPAM', 'Pôle emploi', 'Impôts', 'Juridique'],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.DevenirAutonomeDansLesDemarchesAdministratives]: {
     titre: 'Être formé(e) pour réaliser mes démarches en ligne',
     description:
       'Certaines structures proposent des ateliers permettant aux usagers d’apprendre à réaliser des démarches administratives en ligne en toute autonomie.',
     elements: ['CAF', 'CPAM', 'Pole emploi', 'Impôts', 'Juridique'],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.CreerEtDevelopperMonEntreprise]: {
     titre: 'Créer et développer son entreprise',
-    description: "Des structures spécialisées pour accompagner les usagers dans leurs démarches de création d'entreprise.",
+    description:
+      "Certaines structures spécialisées pour accompagner les usagers dans leurs démarches de création d'entreprise.",
     elements: [
       'Créer mon auto-entreprise',
       'Connaître les sites internet permettant de gérer mon entreprise',
       'Fermer mon entreprise'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.AccompagnerLesDemarchesDeSante]: {
-    titre: 'Etre aidé(e) dans ses démarches  de santé',
+    titre: 'Etre aidé(e) dans ses démarches de santé',
     description:
-      'Vos démarches de santé son nombreuses, vous pouvez trouver des structures adaptées pour vous accompagner dans celles-ci.',
+      'Vos démarches de santé son nombreuses, vous pouvez trouver certaines structures adaptées pour vous accompagner dans celles-ci.',
     elements: [
       'Utiliser ameli.fr',
       'Trouver un médecin traitant',
@@ -97,7 +98,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
       'Dossier Affection de longue durée',
       'Arrêt maladie - accident de travail - RQTH'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.FavoriserMonInsertionProfessionnelle]: {
     titre: 'Favoriser son insertion professionnelle',
@@ -112,14 +113,14 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
       'Formation et reconversion professionnelle',
       'CPF : gérer son compte et trouver sa formation'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   'culture-numérique': {
     titre: 'Culture numérique',
     description:
       'Permettre aux utilisateurs confirmés d’approfondir leur culture numérique ou de maîtriser des techniques numériques spécifiques.',
     elements: [
-      'Approfondir ma culture numérique',
+      'Approfondir sa culture numérique',
       'Promouvoir la citoyenneté numérique',
       'Créer avec le numérique',
       "Soutenir la parentalité et l'éducation avec le numérique"
@@ -127,40 +128,40 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
     label: 'Liste des apprentissages de base'
   },
   [Service.ApprofondirMaCultureNumerique]: {
-    titre: 'Approfondir ma culture numérique',
+    titre: 'Approfondir sa culture numérique',
     description:
-      'Des structures proposent des ateliers de perfectionnement ou des formations avancées sur des thématiques spécifiques.',
+      'Certaines structures proposent des ateliers de perfectionnement ou des formations avancées sur des thématiques spécifiques.',
     elements: [
       'Utiliser mon matériel de manière sécurisée',
       'Repérer les fake news',
       'Comment gérer mes données',
       'Comprendre et gérer ses réseaux sociaux'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.PromouvoirLaCitoyenneteNumerique]: {
     titre: 'Promouvoir la citoyenneté numérique',
     description:
       'Certaines structures aident les usagers à utiliser leurs outils numériques de manière saine, responsable et sécurisée.',
     elements: ['Les droits et les interdits sur internet', 'Naviguer de manière responsable', 'Les comportements à risque'],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.CreerAvecLeNumerique]: {
     titre: 'Créer avec le numérique',
     description:
-      'Des structures accompagnent les usagers à la réalisation de leurs projets numériques et leurs donnent accès à des outils de création spécifiques.',
+      'Certaines structures accompagnent les usagers à la réalisation de leurs projets numériques et leurs donnent accès à des outils de création spécifiques.',
     elements: [
       'Créer un site vitrine ou marchand',
       'Faire de la retouche photo',
       'Faire du montage vidéo',
       'Fablabs et imprimantes 3D'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.SoutenirLaParentalite]: {
     titre: "Soutenir la parentalité et l'éducation numérique",
     description:
-      'Des structures dédiées conseillent les parents et leurs enfants sur les outils et techniques pour utiliser le numérique en toute sécurité.',
+      'Certaines structures conseillent les parents et leurs enfants sur les outils et techniques pour utiliser le numérique en toute sécurité.',
     elements: [
       'Les dangers pour mon enfant',
       'Le harcèlement sur les réseaux sociaux',
@@ -168,7 +169,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
       'Jeux en ligne : jeux vidéo, paris sportifs, etc.',
       'Sites et logiciels éducatifs'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   matériel: {
     titre: 'Équipement numérique',
@@ -188,14 +189,14 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
       'Accéder à du wifi pour mes démarches administratives',
       'Obtenir une clé 4G'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.AccederADuMateriel]: {
     titre: 'Accéder à du matériel en libre service',
     description:
       "Certaines structures proposent gratuitement ou sous conditions l'accès à du matériel numérique en libre service.",
     elements: ['Imprimer gratuitement ou à bas prix', 'Accéder à un ordinateur'],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   },
   [Service.EquiperEnMaterielInformatique]: {
     titre: 'Acheter ou louer du matériel à tarif solidaire',
@@ -206,6 +207,6 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
       'Acheter ou louer à bas prix',
       'Avoir un ordinateur, une connexion internet ou encore une imprimante à la maison'
     ],
-    label: 'Exemples non exhaustifs'
+    label: 'Exemples'
   }
 };
