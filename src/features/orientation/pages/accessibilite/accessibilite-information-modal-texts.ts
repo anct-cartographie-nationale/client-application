@@ -27,7 +27,6 @@ export const ACCESSIBILITE_INFORMATION_MODAL_TEXTS: Record<
     elements: [
       'Handicaps psychique : troubles psychiatriques donnant lieu à des atteintes comportementales',
       'Handicaps mental : déficiences limitant les activités d’une personne'
-      // 'Critères d’accessibilité remplis sur Accèslibre',
     ],
     label: 'Détails de certaines options'
   }
