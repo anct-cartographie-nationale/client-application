@@ -60,6 +60,15 @@
         [labelsAutres]="lieuMediationNumerique.labels_autres"
         (showLabel)="showLabel.emit($event)"></app-labellisations>
     </li>
+    <li class="list-group-item">
+      <button
+        *ngIf="lieuMediationNumerique.contact?.courriel"
+        (click)="reportAnError.emit()"
+        class="btn btn-secondary btn-sm my-4">
+        Signaler une erreur
+        <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
+      </button>
+    </li>
   </ul>
   <div class="bg-light px-4 text-end">
     <!-- <a
@@ -71,13 +80,6 @@
       <i class="ri ri-settings-4-line ms-1 align-bottom"></i>
     </a> -->
     <app-mise-a-jour [source]="lieuMediationNumerique.source"></app-mise-a-jour>
-    <button
-      *ngIf="lieuMediationNumerique.contact?.courriel"
-      (click)="reportAnError.emit()"
-      class="btn btn-secondary btn-sm my-4">
-      Signaler une erreur
-      <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
-    </button>
   </div>
 </div>
 <app-orientation-sheet-modal

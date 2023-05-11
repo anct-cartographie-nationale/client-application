@@ -14,6 +14,7 @@ export type SourcePresentation = {
   link: string;
   detail?: string;
   update_link?: string;
+  logo?: string;
 };
 
 export type LieuMediationNumeriqueDetailsPresentation = {

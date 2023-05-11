@@ -1,10 +1,20 @@
-<div class="d-flex">
-  <!-- <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + label" /> -->
-  <div class="flex-grow-1 d-flex flex-column align-items-start justify-content-center">
-    <p class="fw-bold mb-0 text-first-letter-uppercase">Mettre à jour la fiche</p>
-    <span *ngIf="source?.detail" class="opacity-75">{{ source?.detail }}</span>
+<div class="d-flex py-3">
+  <div
+    *ngIf="source?.logo"
+    class="d-flex justify-content-center align-items-center bg-white rounded-circle"
+    style="min-width: 50px; min-height: 50px; max-width: 50px; max-height: 50px">
+    <img
+      class="img-fluid"
+      [src]="assetsConfiguration.path + '/img/logo/source-update/' + source?.logo + '.svg'"
+      [alt]="'Label ' + source?.logo" />
   </div>
-  <div>
-    <button type="button" class="btn opacity-100" tabindex="0" aria-label="Close">test</button>
+  <div class="d-flex flex-grow-1 flex-column px-2">
+    <p class="fw-bold mb-0 text-start opacity-75">Mettre à jour la fiche</p>
+    <i *ngIf="source?.detail" class="opacity-75 text-start text-muted">{{ source?.detail }}</i>
+  </div>
+  <div *ngIf="source?.update_link">
+    <a style="text-decoration: none" href="{{ source?.update_link }}" target="_blank" rel="noopener noreferrer">
+      <i class="ri-2x ri-external-link-line my-auto me-2 opacity-75 text-muted"></i>
+    </a>
   </div>
 </div>
