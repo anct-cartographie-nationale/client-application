@@ -10,6 +10,9 @@ import { AddressFoundPresentation, AddressPresenter } from '../../presenters';
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
 
+const setZoomUserPosition = (defaultUserPosition: number, distance?: string): number =>
+  distance ? (distance === '50000' || distance === '100000' ? 8 : 9.5) : defaultUserPosition;
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-user-location',
@@ -69,16 +72,15 @@ export class UserLocationComponent implements OnInit {
   }
 
   public onSelectAddress(address: AddressFoundPresentation): void {
-    const stayInLieuxZoom: boolean =
-      this.route.snapshot.queryParams['distance'] === '50000' || this.route.snapshot.queryParams['distance'] === '100000';
-    this.markersPresenter.center(address.localisation, stayInLieuxZoom ? 8 : this._zoomLevel.userPosition);
+    this.markersPresenter.center(
+      address.localisation,
+      setZoomUserPosition(this._zoomLevel.userPosition, this.route.snapshot.queryParams['distance'])
+    );
     this.location.emit(address.localisation);
     this._displayGeolocation$.next(true);
   }
 
   public onGeoLocate(): void {
-    const stayInLieuxZoom: boolean =
-      this.route.snapshot.queryParams['distance'] === '50000' || this.route.snapshot.queryParams['distance'] === '100000';
     this._loadingState$.next(true);
     window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
       const localisation: Localisation = Localisation({
@@ -86,7 +88,10 @@ export class UserLocationComponent implements OnInit {
         longitude: position.coords.longitude
       });
 
-      this.markersPresenter.center(localisation, stayInLieuxZoom ? 8 : this._zoomLevel.userPosition);
+      this.markersPresenter.center(
+        localisation,
+        setZoomUserPosition(this._zoomLevel.userPosition, this.route.snapshot.queryParams['distance'])
+      );
       this.location.emit(localisation);
 
       this._loadingState$.next(false);
