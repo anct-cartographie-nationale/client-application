@@ -14,6 +14,6 @@ export const ZOOM_LEVEL_TOKEN: InjectionToken<ZoomLevelConfiguration> = new Inje
 export const ZOOM_LEVEL_CONFIGURATION: ZoomLevelConfiguration = {
   min: 3,
   regular: 5.5,
-  userPosition: 8,
+  userPosition: 13,
   max: 19
 };

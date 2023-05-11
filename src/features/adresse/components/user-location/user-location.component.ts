@@ -69,12 +69,16 @@ export class UserLocationComponent implements OnInit {
   }
 
   public onSelectAddress(address: AddressFoundPresentation): void {
-    this.markersPresenter.center(address.localisation, this._zoomLevel.userPosition);
+    const stayInLieuxZoom: boolean =
+      this.route.snapshot.queryParams['distance'] === '50000' || this.route.snapshot.queryParams['distance'] === '100000';
+    this.markersPresenter.center(address.localisation, stayInLieuxZoom ? 8 : this._zoomLevel.userPosition);
     this.location.emit(address.localisation);
     this._displayGeolocation$.next(true);
   }
 
   public onGeoLocate(): void {
+    const stayInLieuxZoom: boolean =
+      this.route.snapshot.queryParams['distance'] === '50000' || this.route.snapshot.queryParams['distance'] === '100000';
     this._loadingState$.next(true);
     window.navigator.geolocation.getCurrentPosition((position: GeolocationPosition): void => {
       const localisation: Localisation = Localisation({
@@ -82,7 +86,7 @@ export class UserLocationComponent implements OnInit {
         longitude: position.coords.longitude
       });
 
-      this.markersPresenter.center(localisation, this._zoomLevel.userPosition);
+      this.markersPresenter.center(localisation, stayInLieuxZoom ? 8 : this._zoomLevel.userPosition);
       this.location.emit(localisation);
 
       this._loadingState$.next(false);
