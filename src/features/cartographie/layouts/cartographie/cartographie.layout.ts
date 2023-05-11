@@ -183,8 +183,10 @@ export class CartographieLayout {
     ]);
   }
 
-  public setDepartementZoom(): number {
-    return this.route.snapshot.queryParams['distance'] ? 8 : 9;
+  public departementZoomForDistance(): number {
+    const stayInLieuxZoom: boolean =
+      this.route.snapshot.queryParams['distance'] === '50000' || this.route.snapshot.queryParams['distance'] === '100000';
+    return stayInLieuxZoom ? 8 : 9;
   }
 
   private navigateToPageMatchingZoomLevel(zoomLevel: number, localisation: Localisation) {

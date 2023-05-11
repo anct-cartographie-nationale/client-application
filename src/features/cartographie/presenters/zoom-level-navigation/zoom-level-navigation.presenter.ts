@@ -8,8 +8,10 @@ const REGIONS_ROUTE: string = 'regions';
 const LIEUX_ROUTE: string = '.';
 
 export const inRegionZoomLevel = (zoomLevel: number) => zoomLevel <= REGION_ZOOM_LEVEL;
-export const inLieuxZoomLevel = (zoomLevel: number, distance?: string) =>
-  zoomLevel > (distance ? DEPARTEMENT_ZOOM_LEVEL - 1 : DEPARTEMENT_ZOOM_LEVEL);
+export const inLieuxZoomLevel = (zoomLevel: number, distance?: string) => {
+  const stayInLieuxZoom: boolean = distance === '50000' || distance === '100000';
+  return zoomLevel > (stayInLieuxZoom ? DEPARTEMENT_ZOOM_LEVEL - 1 : DEPARTEMENT_ZOOM_LEVEL);
+};
 
 export const inDepartementZoomLevel = (zoomLevel: number) => !inRegionZoomLevel(zoomLevel) && !inLieuxZoomLevel(zoomLevel);
 
