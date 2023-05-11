@@ -19,4 +19,8 @@ export class LieuxMediationNumeriqueDetailsComponent {
   @Output() public closeDetails: EventEmitter<LieuMediationNumeriqueDetailsPresentation> =
     new EventEmitter<LieuMediationNumeriqueDetailsPresentation>();
   @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+
+  public lieuIsFranceServices(): boolean {
+    return this.lieuMediationNumerique.labels_nationaux?.includes(LabelNational.FranceServices) ?? false;
+  }
 }
