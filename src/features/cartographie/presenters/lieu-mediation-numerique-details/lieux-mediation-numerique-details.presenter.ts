@@ -51,16 +51,18 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
       label: 'France Tiers-Lieux',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-tiers-lieux/',
       detail: 'Cartographie des tiers-lieux',
-      update_link: 'https://cartographie.francetierslieux.fr/'
+      update_link: 'https://cartographie.francetierslieux.fr/',
+      logo: 'france-tiers-lieux'
     }
   ],
   [
-    'conseiller-numerique',
+    'hinaura',
     {
       label: 'Hinaura',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-auvergne-rhone-alpes-fournis-par-hinaura/',
       detail: 'Formulaire Hinaura',
-      update_link: 'https://carto.hinaura.fr/?CommentModif'
+      update_link: 'https://carto.hinaura.fr/?CommentModif',
+      logo: 'hinaura'
     }
   ],
   [
@@ -89,7 +91,8 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
       label: 'Les Assembleurs',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-hauts-de-france-fournis-par-les-assembleurs/',
       detail: 'Formulaire des Assembleurs',
-      update_link: 'https://solen1.enquetes.social.gouv.fr/cgi-9/HE/SF?P=76z14z2z-1z-1z2747C6FAAF'
+      update_link: 'https://solen1.enquetes.social.gouv.fr/cgi-9/HE/SF?P=76z14z2z-1z-1z2747C6FAAF',
+      logo: 'assembleurs'
     }
   ],
   [
@@ -106,9 +109,10 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     'francilin',
     {
       label: "Francil'IN",
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services/',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-ile-de-france-fournis-par-francil-in/',
       detail: "Formulaire Francil'In",
-      update_link: 'https://equipe752106.typeform.com/to/qTKCmDOf?typeform-source=carto.francilin.fr'
+      update_link: 'https://equipe752106.typeform.com/to/qTKCmDOf?typeform-source=carto.francilin.fr',
+      logo: 'francilin'
     }
   ],
   [
@@ -139,6 +143,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
       detail: "Ces données sont intégrées via l'outil DORA",
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora'
+    }
+  ],
+  [
+    'rhinocc',
+    {
+      label: 'RhinOcc',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-occitanie-fournis-par-rhinocc/',
+      detail: 'Formulaire RhinOcc',
+      update_link: 'https://rhinocc.fr/recensement/',
+      logo: 'rhinocc'
     }
   ]
 ]);
