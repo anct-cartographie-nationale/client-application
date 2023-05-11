@@ -61,10 +61,7 @@
         (showLabel)="showLabel.emit($event)"></app-labellisations>
     </li>
     <li class="list-group-item">
-      <button
-        *ngIf="lieuMediationNumerique.contact?.courriel"
-        (click)="reportAnError.emit()"
-        class="btn btn-secondary btn-sm my-4">
+      <button *ngIf="!lieuIsFranceServices()" (click)="reportAnError.emit()" class="btn btn-secondary btn-sm my-4">
         Signaler une erreur
         <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
       </button>
