@@ -60,20 +60,15 @@
         [labelsAutres]="lieuMediationNumerique.labels_autres"
         (showLabel)="showLabel.emit($event)"></app-labellisations>
     </li>
+    <li class="list-group-item">
+      <button *ngIf="!lieuIsFranceServices()" (click)="reportAnError.emit()" class="btn btn-secondary btn-sm my-4">
+        Signaler une erreur
+        <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
+      </button>
+    </li>
   </ul>
   <div class="bg-light px-4 text-end">
-    <a
-      href="https://dora.fabrique.social.gouv.fr/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="btn btn-secondary btn-sm update-with-dora my-4 me-3">
-      Mettre à jour sur DORA
-      <i class="ri ri-settings-4-line ms-1 align-bottom"></i>
-    </a>
-    <button *ngIf="!lieuIsFranceServices()" (click)="reportAnError.emit()" class="btn btn-secondary btn-sm my-4">
-      Signaler une erreur
-      <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
-    </button>
+    <app-mise-a-jour [source]="lieuMediationNumerique.source"></app-mise-a-jour>
   </div>
 </div>
 <app-orientation-sheet-modal

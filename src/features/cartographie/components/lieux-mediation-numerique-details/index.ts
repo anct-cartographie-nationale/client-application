@@ -11,3 +11,4 @@ export * from './services/services.component';
 export * from './aidants/aidants.component';
 export * from './lieux-mediation-numerique-details.component';
 export * from './lieux-mediation-numerique-details-print.component';
+export * from './mise-a-jour/mise-a-jour.component';
