@@ -42,7 +42,10 @@ const byOrientationFilter =
 const onlyWithLocalisation = (
   lieuMediationNumerique: LieuMediationNumerique
 ): lieuMediationNumerique is LieuMediationNumerique & { localisation: Localisation } =>
-  lieuMediationNumerique.localisation?.latitude != null && lieuMediationNumerique.localisation?.longitude != null;
+  lieuMediationNumerique.localisation?.latitude != null &&
+  lieuMediationNumerique.localisation?.longitude != null &&
+  lieuMediationNumerique.localisation?.latitude !== 0 &&
+  lieuMediationNumerique.localisation?.longitude !== 0;
 
 export const filteredLieuxMediationNumerique = (
   lieuxMediationNumerique: LieuMediationNumerique[],
