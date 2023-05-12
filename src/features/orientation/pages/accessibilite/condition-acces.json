@@ -4,6 +4,10 @@
     "value": "Gratuit : Je peux accéder gratuitement au lieu et à ses services"
   },
   {
+    "label": "Gratuit sous condition",
+    "value": "Gratuit sous condition : La gratuité est conditionnée à des critères (situation familiale, convention avec un organisme social...)"
+  },
+  {
     "label": "Payant",
     "value": "Payant : L'accès au lieu et/ou à ses services est payant"
   },

@@ -19,5 +19,11 @@
     <br />
     <i class="small text-muted">{{ serviceItem.description }}</i>
   </span>
-  <i class="ri-arrow-right-s-line ri-2x text-muted ms-auto my-auto"></i>
+  <span class="ms-auto text-muted ri-2x">
+    <i
+      class="ri-information-line me-2 fw-normal"
+      role="button"
+      (click)="displayInformations.emit($any(serviceItem.value)); $event.stopPropagation(); $event.preventDefault()"></i>
+    <i class="ri-arrow-right-s-line"></i>
+  </span>
 </a>

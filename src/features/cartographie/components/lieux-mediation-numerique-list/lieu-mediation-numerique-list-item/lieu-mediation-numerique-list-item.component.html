@@ -28,7 +28,7 @@
         href="mailto:{{ courriel }}"
         class="btn btn-sm btn-secondary d-block mb-2"
         (click)="$event.stopPropagation()">
-        <i class="ri-mail-line me-2 align-bottom text-right"></i>
+        <i class="ri-mail-line me-2 text-right"></i>
         <span>Contacter par mail</span>
       </a>
       <a
@@ -39,11 +39,11 @@
         (click)="$event.stopPropagation()">
         <span aria-hidden="true">{{ telephone | phone }}</span>
         <span class="visually-hidden">Contacter par téléphone</span>
-        <i class="ms-2 ri-phone-line align-bottom"></i>
+        <i class="ms-2 ri-phone-line"></i>
       </a>
       <div class="d-flex" *ngIf="lieuMediationNumerique.prise_rdv">
         <p class="text-muted">Prise de Rendez-vous disponible</p>
-        <i class="ri-calendar-check-line align-bottom ms-1"></i>
+        <i class="ri-calendar-check-line ms-1"></i>
       </div>
     </div>
   </div>
@@ -78,15 +78,15 @@
   <div>{{ lieuMediationNumerique.adresse }}</div>
   <div class="text-muted my-1">
     <div *ngIf="lieuMediationNumerique.telephone">
-      <i class="ri ri-phone-line align-bottom"></i>
+      <i class="ri ri-phone-line"></i>
       {{ lieuMediationNumerique.telephone }}
     </div>
     <div *ngIf="lieuMediationNumerique.courriel">
-      <i class="ri ri-mail-line align-bottom"></i>
+      <i class="ri ri-mail-line"></i>
       {{ lieuMediationNumerique.courriel }}
     </div>
     <div *ngIf="lieuMediationNumerique.site_web">
-      <i class="ri ri-link align-bottom"></i>
+      <i class="ri ri-link"></i>
       {{ lieuMediationNumerique.site_web }}
     </div>
   </div>

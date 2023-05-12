@@ -39,7 +39,7 @@ const byOrientationFilter =
       true
     );
 
-const onlyWithLocalisation = (
+export const onlyWithLocalisation = (
   lieuMediationNumerique: LieuMediationNumerique
 ): lieuMediationNumerique is LieuMediationNumerique & { localisation: Localisation } =>
   lieuMediationNumerique.localisation?.latitude != null &&

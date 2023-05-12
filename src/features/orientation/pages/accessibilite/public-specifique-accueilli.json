@@ -4,16 +4,16 @@
     "value": "Personnes en situation d'illettrisme"
   },
   {
-    "label": "Handicaps psychiques",
+    "label": "Non francophone",
+    "value": "Public langues étrangères"
+  },
+  {
+    "label": "Handicap psychique",
     "value": "Handicaps psychiques : troubles psychiatriques donnant lieu à des atteintes comportementales"
   },
   {
-    "label": "Handicaps mentaux",
+    "label": "Handicap mental",
     "value": "Handicaps mentaux : déficiences limitant les activités d'une personne"
-  },
-  {
-    "label": "Non-Francophone",
-    "value": "Public langues étrangères"
   },
   {
     "label": "Déficience visuelle",

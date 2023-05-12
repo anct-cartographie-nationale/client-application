@@ -83,12 +83,12 @@
           </div>
           <div class="modal-footer justify-content-center">
             <button type="button" class="btn btn-secondary me-3" (click)="print.emit(); close()">
-              <i class="ri-skip-forward-line align-bottom"></i>
+              <i class="ri-skip-forward-line"></i>
               Passer cette étape
             </button>
             <button type="submit" form="orientationSheetForm" class="btn btn-primary">
               Suivant
-              <i class="ri-arrow-right-s-line align-bottom"></i>
+              <i class="ri-arrow-right-s-line"></i>
             </button>
           </div>
         </div>
@@ -125,15 +125,15 @@
               </div>
               <div *ngIf="telephone || courriel || siteWeb?.length" class="p-3 text-muted">
                 <div *ngIf="telephone">
-                  <i class="ri-phone-line align-bottom"></i>
+                  <i class="ri-phone-line"></i>
                   {{ telephone }}
                 </div>
                 <div *ngIf="courriel">
-                  <i class="ri-mail-line align-bottom"></i>
+                  <i class="ri-mail-line"></i>
                   <span class="text-break">{{ courriel }}</span>
                 </div>
                 <div *ngIf="siteWeb">
-                  <i class="ri-link align-bottom"></i>
+                  <i class="ri-link"></i>
                   <span class="text-break">{{ siteWeb[0] }}</span>
                 </div>
               </div>
@@ -167,11 +167,11 @@
           </div>
           <div class="modal-footer justify-content-center bg-light">
             <button type="button" class="btn btn-secondary me-3" (click)="displayOrientationSheetForm()">
-              <i class="ri-arrow-left-s-line align-bottom"></i>
+              <i class="ri-arrow-left-s-line"></i>
               Modifier
             </button>
             <button type="button" class="btn btn-primary" (click)="print.emit(orientationSheetForm.getRawValue())">
-              <i class="ri-printer-line align-bottom me-1"></i>
+              <i class="ri-printer-line me-1"></i>
               Imprimer la fiche
             </button>
           </div>

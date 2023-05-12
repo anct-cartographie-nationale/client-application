@@ -4,35 +4,85 @@
       Quel est
       <span class="text-primary">votre besoin&nbsp;?</span>
     </h1>
-    <h5 class="text-center fw-bold mb-5 text-muted">Sélectionnez votre besoin parmi les 15 proposés</h5>
-    <h2 class="text-muted h6 fw-bold mb-3 mt-4">APPRENTISSAGE DE BASE</h2>
+    <h5 class="text-center fw-bold mb-5 text-muted">Sélectionnez une thématique parmi la liste ci-dessous</h5>
+    <div class="d-flex flex-row mb-3 mt-4">
+      <h2 class="text-muted h6 fw-bold mb-0">APPRENTISSAGE DE BASE</h2>
+      <button
+        type="button"
+        class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+        (click)="selectedOrientationInformation = orientationInformations['apprentissage']; informationOrientationModal.toggle()">
+        plus d'infos
+      </button>
+    </div>
     <ng-container *ngIf="serviceControl as serviceControl">
       <app-besoin-link
         [serviceItems]="apprentissageDeBaseOrientationItems"
         [selectedServiceItem]="serviceControl.value"
-        (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
-      <h2 class="text-muted h6 fw-bold mb-3 mt-4">DÉMARCHES</h2>
+        (selectServiceValue)="serviceControl.setValue($event)"
+        (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+      <div class="d-flex flex-row mb-3 mt-4">
+        <h2 class="text-muted h6 fw-bold mb-0">DÉMARCHES</h2>
+        <button
+          type="button"
+          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+          (click)="selectedOrientationInformation = orientationInformations['démarches']; informationOrientationModal.toggle()">
+          plus d'infos
+        </button>
+      </div>
       <app-besoin-link
         [serviceItems]="demarchesOrientationItems"
         [selectedServiceItem]="serviceControl.value"
-        (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
-      <h2 class="text-muted h6 fw-bold mb-3 mt-4">CULTURE NUMÉRIQUE</h2>
+        (selectServiceValue)="serviceControl.setValue($event)"
+        (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+      <div class="d-flex flex-row mb-3 mt-4">
+        <h2 class="text-muted h6 fw-bold mb-0">CULTURE NUMÉRIQUE</h2>
+        <button
+          type="button"
+          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+          (click)="selectedOrientationInformation = orientationInformations['culture-numérique']; informationOrientationModal.toggle()">
+          plus d'infos
+        </button>
+      </div>
       <app-besoin-link
         [serviceItems]="cultureNumeriqueOrientationItems"
         [selectedServiceItem]="serviceControl.value"
-        (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
-      <h2 class="text-muted h6 fw-bold mb-3 mt-4">MANQUE DE MATERIEL</h2>
+        (selectServiceValue)="serviceControl.setValue($event)"
+        (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+      <div class="d-flex flex-row mb-3 mt-4">
+        <h2 class="text-muted h6 fw-bold mb-0">MANQUE DE MATERIEL</h2>
+        <button
+          type="button"
+          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+          (click)="selectedOrientationInformation = orientationInformations['matériel']; informationOrientationModal.toggle()">
+          plus d'infos
+        </button>
+      </div>
       <app-besoin-link
         [serviceItems]="manqueDeMaterielOrientationItems"
         [selectedServiceItem]="serviceControl.value"
-        (selectServiceValue)="serviceControl.setValue($event)"></app-besoin-link>
+        (selectServiceValue)="serviceControl.setValue($event)"
+        (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
     </ng-container>
     <div class="text-center mt-5">
       <div class="text-muted mb-2">Vous ne trouvez pas votre besoin ?</div>
       <button class="btn btn-sm btn-secondary d-inline-block mb-2" (click)="onFilterNotFound()">
-        <i class="ri-mail-line me-2 align-bottom text-right"></i>
+        <i class="ri-mail-line me-2 text-right"></i>
         <b>Contactez-nous !</b>
       </button>
     </div>
   </div>
 </div>
+<app-information-orientation-modal
+  #informationOrientationModal
+  [orientationInformation]="selectedOrientationInformation"
+  (hideChange)="selectedOrientationInformationType = null">
+  <a
+    *ngIf="selectedOrientationInformationType"
+    routerLink="../localisation"
+    queryParamsHandling="preserve"
+    class="btn btn-primary"
+    (click)="serviceControl?.setValue(selectedOrientationInformationType); informationOrientationModal.close()">
+    Choisir cette option
+    <i class="ri-arrow-right-s-line"></i>
+  </a>
+</app-information-orientation-modal>

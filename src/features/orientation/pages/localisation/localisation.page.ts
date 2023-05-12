@@ -4,17 +4,12 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable
 import { map, mergeWith } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { AddressFoundPresentation, AddressPresenter, AddressRepository } from '../../../adresse';
-import { FilterPresentation, LieuxMediationNumeriquePresenter, toFilterFormPresentationFromQuery } from '../../../core';
+import { LieuxMediationNumeriquePresenter } from '../../../core';
 import { OrientationLayout } from '../../layouts';
-import { countByDistance, DistanceRange, localisationFromStrings } from './localisation.presenter';
+import { localisationFromStrings } from './localisation.presenter';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
-
-const toFiltersWithoutDistance = (filterPresentation: FilterPresentation): FilterPresentation => {
-  const { distance, ...newFilters } = filterPresentation;
-  return newFilters;
-};
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,14 +38,6 @@ export class LocalisationPage {
   private _localisation$: BehaviorSubject<Localisation> = new BehaviorSubject<Localisation>(
     localisationFromStrings(this._route.snapshot.queryParams['latitude'], this._route.snapshot.queryParams['longitude'])
   );
-
-  private _filters$: Observable<FilterPresentation> = of(
-    toFilterFormPresentationFromQuery(this._route.snapshot.queryParams)
-  ).pipe(mergeWith(this.orientationLayout.filterForm.valueChanges), map(toFiltersWithoutDistance));
-
-  public lieuxMediationNumeriqueByDistanceRange$: Observable<DistanceRange[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByDistance$(this._localisation$, this._filters$)
-    .pipe(map(countByDistance));
 
   private _geoLocation$: Subject<Localisation> = new Subject<Localisation>();
 
@@ -106,4 +93,6 @@ export class LocalisationPage {
   public onSearchAddress(searchTerm: string): void {
     this._searchTerm$.next(searchTerm);
   }
+
+  protected readonly customElements = customElements;
 }
