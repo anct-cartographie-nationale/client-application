@@ -16,20 +16,20 @@
               <tr>
                 <td class="px-3">
                   <svg class="marker-conseiller" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="5" cy="5" r="5" />
-                  </svg>
-                </td>
-                <th>CnFS non-coordonnés</th>
-                <td class="small fst-italic">{{ nombreConseillersNonCoordonnes$ | async }}</td>
-              </tr>
-              <tr>
-                <td class="px-3">
-                  <svg class="marker-conseiller" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
                     <circle class="marker-conseiller--coordonne" cx="5" cy="5" r="5" />
                   </svg>
                 </td>
                 <th>CnFS coordonnés</th>
                 <td class="small fst-italic">{{ nombreConseillersCoordonnes$ | async }}</td>
+              </tr>
+              <tr>
+                <td class="px-3">
+                  <svg class="marker-conseiller" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="5" cy="5" r="5" />
+                  </svg>
+                </td>
+                <th>CnFS non-coordonnés</th>
+                <td class="small fst-italic">{{ nombreConseillersNonCoordonnes$ | async }}</td>
               </tr>
             </tbody>
           </table>

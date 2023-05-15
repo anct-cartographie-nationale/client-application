@@ -5,7 +5,7 @@
     "latitude": 48.11038,
     "longitude": -1.680245,
     "email": "emilie.lefevre@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Centre Social Carrefour 18",
       "adresse": "7 Rue d'Espagne, 35200 Rennes"
@@ -28,7 +28,7 @@
     "latitude": 48.105856,
     "longitude": -1.680022,
     "email": "lucie.martin@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Maison des Associations",
       "adresse": "6 Cours des Alliés, 35000 Rennes"
@@ -47,12 +47,17 @@
   },
   {
     "id": "ea8a21f92d08c61cbf58b764",
-    "coordinateurId": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
+    "coordinateurs": [
+      {
+        "id": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
+        "nom": "Inès Clamey"
+      }
+    ],
     "nom": "Pierre-Yves Dupont",
     "latitude": 48.105127,
     "longitude": -1.69076,
     "email": "pierre-yves.dupont@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Pacé",
       "adresse": "1 Rue de la Mairie, 35740 Pacé"
@@ -65,12 +70,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca57",
-    "coordinateurId": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
+    "coordinateurs": [
+      {
+        "id": "85d7a78b-26c7-4f62-b0c9-0d019d08e1db",
+        "nom": "Inès Clamey"
+      }
+    ],
     "nom": "Mélina Bouchard",
     "latitude": 48.117266,
     "longitude": -1.677792,
     "email": "melina.bouchard@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Rennes",
       "adresse": "Place de la Mairie, 35000 Rennes"
@@ -94,12 +104,17 @@
   },
   {
     "id": "79d2ee655a08d977af4817e1",
-    "coordinateurId": "f98381e79cfc9aebfc0ec8e6",
+    "coordinateurs": [
+      {
+        "id": "adac8faf-7ace-4b18-ab31-3cb276f4b6c4",
+        "nom": "Anton Delsky"
+      }
+    ],
     "nom": "Pierre Dupont",
     "latitude": 49.108163,
     "longitude": 6.183728,
     "email": "pierre.dupont@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Metz",
       "adresse": "1 Place d'Armes, 57000 Metz"
@@ -118,12 +133,17 @@
   },
   {
     "id": "e2c57336f91b2c6e3d6b7119",
-    "coordinateurId": "f98381e79cfc9aebfc0ec8e6",
+    "coordinateurs": [
+      {
+        "id": "adac8faf-7ace-4b18-ab31-3cb276f4b6c4",
+        "nom": "Anton Delsky"
+      }
+    ],
     "nom": "Marie Martin",
     "latitude": 48.85464,
     "longitude": 2.34768,
     "email": "marie.martin@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Mairie de Paris",
       "adresse": "Place de l'Hôtel de Ville, 75004 Paris"
@@ -147,12 +167,17 @@
   },
   {
     "id": "beaeccca5cb5d5a5dbbb60c8",
-    "coordinateurId": "b38f29c8f582ff48e2d17c3a",
+    "coordinateurs": [
+      {
+        "id": "22b8d7ba-3de9-4c12-8a33-8b0a785d764c",
+        "nom": "Lucie Petit"
+      }
+    ],
     "nom": "Claire Dupont",
     "latitude": 48.884547,
     "longitude": 2.340601,
     "email": "claire.dupont@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Paris",
       "adresse": "Place de l'Hôtel de Ville, 75004 Paris"
@@ -176,12 +201,17 @@
   },
   {
     "id": "4e9cdd70c9211a421d9543d3",
-    "coordinateurId": "a861be9c7199bf8451c767a2",
+    "coordinateurs": [
+      {
+        "id": "f1e28f5d-62dd-44f3-a26c-996da348e7d3",
+        "nom": "Marie Durand"
+      }
+    ],
     "nom": "Lucie Martin",
     "latitude": 47.214269,
     "longitude": -1.552587,
     "email": "lucie.martin@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Mairie de Nantes",
       "adresse": "2 Rue de l'Hôtel de Ville, 44000 Nantes"
@@ -205,12 +235,17 @@
   },
   {
     "id": "84bebbfaa9319f112c9e8a19",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Camille Rousseau",
     "latitude": 47.216667,
     "longitude": -1.55,
     "email": "camille.rousseau@example.com",
-    "phone": "06 01 23 45 67",
+    "telephone": "06 01 23 45 67",
     "structurePorteuse": {
       "nom": "Mairie de Nantes",
       "adresse": "2 Rue de l'Hôtel de ville, 44000 Nantes"
@@ -229,12 +264,17 @@
   },
   {
     "id": "b3e9e5113a8d193c88f1cbef",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Léo Mercier",
     "latitude": 45.764043,
     "longitude": 4.835659,
     "email": "leo.mercier@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Lyon",
       "adresse": "Place de la Comédie, 69001 Lyon"
@@ -258,12 +298,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca57",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Amélie Dupont",
     "latitude": 43.296482,
     "longitude": 5.369779,
     "email": "amelie.dupont@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Marseille",
       "adresse": "Place Villeneuve-Bargemon, 13002 Marseille"
@@ -282,12 +327,17 @@
   },
   {
     "id": "0f341d56e6ecf0690c78c523",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Lucas Martin",
     "latitude": 50.631557,
     "longitude": 3.05885,
     "email": "lucas.martin@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Mairie de Lille",
       "adresse": "Place Augustin Laurent, 59000 Lille"
@@ -306,12 +356,17 @@
   },
   {
     "id": "b40d7caed107929c4a7be4d3",
-    "coordinateurId": "2d8d49670e2ea2dd7c542361",
+    "coordinateurs": [
+      {
+        "id": "cf123dc2-ea0f-4e43-88dd-09a6631b1c01",
+        "nom": "Marcelin Dargoi"
+      }
+    ],
     "nom": "Lucie Guérin",
     "latitude": 49.439899,
     "longitude": 1.099971,
     "email": "lucie.guerin@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Mairie de Rouen",
       "adresse": "Place du Général de Gaulle, 76000 Rouen"
@@ -335,12 +390,17 @@
   },
   {
     "id": "5c6d5d6c85e6ee2a6e123d6e",
-    "coordinateurId": "2d8d49670e2ea2dd7c542361",
+    "coordinateurs": [
+      {
+        "id": "a15b01e9-03c7-4a8f-bc95-52005c794e1b",
+        "nom": "Bernard Lavoisier"
+      }
+    ],
     "nom": "Antoine Mercier",
     "latitude": 43.604652,
     "longitude": 1.444209,
     "email": "antoine.mercier@example.com",
-    "phone": "06 34 56 78 90",
+    "telephone": "06 34 56 78 90",
     "structurePorteuse": {
       "nom": "Mairie de Toulouse",
       "adresse": "1 Place du Capitole, 31000 Toulouse"
@@ -364,12 +424,17 @@
   },
   {
     "id": "e27f3a6a7c6a2f6b7a0b85db",
-    "coordinateurId": "ff8f87632125918179bcf1a6",
+    "coordinateurs": [
+      {
+        "id": "b346e7f1-208d-4b1c-872c-3a3e2dc8f054",
+        "nom": "Thierry Morel"
+      }
+    ],
     "nom": "Jérôme Morel",
     "latitude": 46.158128,
     "longitude": -1.152964,
     "email": "jerome.morel@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Centre Social La Rochelle",
       "adresse": "18 Rue de la République, 17000 La Rochelle"
@@ -388,12 +453,17 @@
   },
   {
     "id": "2c712c83b8f1d831327207e5",
-    "coordinateurId": "b08d56772c7ab6449f5c5f5a",
+    "coordinateurs": [
+      {
+        "id": "d5f94e5f-1835-4ec7-92c1-5640ca210edf",
+        "nom": "Nicolas Roulens"
+      }
+    ],
     "nom": "Emilie Lemaire",
     "latitude": 50.359397,
     "longitude": 3.523787,
     "email": "emilie.lemaire@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Valenciennes",
       "adresse": "Place d'Armes, 59300 Valenciennes"
@@ -417,12 +487,17 @@
   },
   {
     "id": "6c5bf3430d16c50933b34f9d",
-    "coordinateurId": "a1e3f3eb3717200c2d2e98c1",
+    "coordinateurs": [
+      {
+        "id": "d6018b91-23c2-4675-a0e2-8f5a20f33b17",
+        "nom": "Lucien Dabert"
+      }
+    ],
     "nom": "Thomas Le Goff",
     "latitude": 48.393253,
     "longitude": -4.490008,
     "email": "thomas.legoff@example.com",
-    "phone": "06 78 56 34 12",
+    "telephone": "06 78 56 34 12",
     "structurePorteuse": {
       "nom": "Mairie de Brest",
       "adresse": "Place de la Liberté, 29200 Brest"
@@ -446,12 +521,17 @@
   },
   {
     "id": "7c2dc56d361f7c422bbfae8c",
-    "coordinateurId": "a1e3f3eb3717200c2d2e98c1",
+    "coordinateurs": [
+      {
+        "id": "d6018b91-23c2-4675-a0e2-8f5a20f33b17",
+        "nom": "Lucien Dabert"
+      }
+    ],
     "nom": "Emilie Giraud",
     "latitude": 45.648817,
     "longitude": 0.157931,
     "email": "emilie.giraud@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Mairie d'Angoulême",
       "adresse": "Place de l'Hôtel de Ville, 16000 Angoulême"
@@ -470,12 +550,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca58",
-    "coordinateurId": "35d8416e38471c4e783e7eb5",
+    "coordinateurs": [
+      {
+        "id": "f6a06e6a-65c1-4f2e-9d7f-85dc596f9c56",
+        "nom": "Rémi Duraclo"
+      }
+    ],
     "nom": "Lucie Martinez",
     "latitude": 44.932242,
     "longitude": 4.891565,
     "email": "lucie.martinez@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Valence",
       "adresse": "11 Place de la République, 26000 Valence"
@@ -499,12 +584,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca59",
-    "coordinateurId": "35d8416e38471c4e783e7eb6",
+    "coordinateurs": [
+      {
+        "id": "f6a06e6a-65c1-4f2e-9d7f-85dc596f9c56",
+        "nom": "Patricio Gallelio"
+      }
+    ],
     "nom": "Pauline Dupont",
     "latitude": 49.899854,
     "longitude": 2.29343,
     "email": "pauline.dupont@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie d'Amiens",
       "adresse": "Place de l'Hôtel de ville, 80000 Amiens"
@@ -528,12 +618,17 @@
   },
   {
     "id": "615a6e3a9dcd4b50deca4eb4",
-    "coordinateurId": "17f1d2c5838f20e2dfac7677",
+    "coordinateurs": [
+      {
+        "id": "2ae991c5-5cf5-4b5d-ae5c-c71c22dfac9e",
+        "nom": "Maxime Lacroix"
+      }
+    ],
     "nom": "Lucie Dubois",
     "latitude": 43.837425,
     "longitude": 4.358938,
     "email": "lucie.dubois@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Association pour l'Inclusion Numérique",
       "adresse": "12 Rue de la République, 30000 Nîmes"
@@ -557,12 +652,17 @@
   },
   {
     "id": "615a6e3a9dcd4b50deca4eb5",
-    "coordinateurId": "17f1d2c5838f20e2dfac7677",
+    "coordinateurs": [
+      {
+        "id": "dd947b5d-bd2e-4256-af60-e32d9a9c8e2f",
+        "nom": "Antoine Gautier"
+      }
+    ],
     "nom": "Maxime Blanchard",
     "latitude": 45.568766,
     "longitude": 5.933791,
     "email": "maxime.blanchard@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Centre social et culturel",
       "adresse": "5 Rue François Mugnier, 73000 Chambéry"
@@ -581,12 +681,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca56",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Lucie Durand",
     "latitude": 45.190711,
     "longitude": 5.722859,
     "email": "lucie.durand@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Mairie de Grenoble",
       "adresse": "11 Boulevard Jean Pain, 38000 Grenoble"
@@ -610,12 +715,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca57",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Pierre Dubois",
     "latitude": 45.83513,
     "longitude": 1.262514,
     "email": "pierre.dubois@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Limoges",
       "adresse": "9 Rue François Chénieux, 87031 Limoges Cedex 1"
@@ -639,12 +749,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca58",
-    "coordinateurId": "35d8416e38471c4e783e7eb5",
+    "coordinateurs": [
+      {
+        "id": "f6a06e6a-65c1-4f2e-9d7f-85dc596f9c56",
+        "nom": "Rémi Duraclo"
+      }
+    ],
     "nom": "Sylvie Chevalier",
     "latitude": 47.901278,
     "longitude": 1.903569,
     "email": "sylvie.chevalier@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Communauté urbaine Orléans Métropole",
       "adresse": "2 place du 6 juin 1944, 45000 Orléans"
@@ -668,12 +783,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca59",
-    "coordinateurId": "35d8416e38471c4e783e7eb5",
+    "coordinateurs": [
+      {
+        "id": "f6a06e6a-65c1-4f2e-9d7f-85dc596f9c56",
+        "nom": "Rémi Duraclo"
+      }
+    ],
     "nom": "Alexandre Mercier",
     "latitude": 47.327726,
     "longitude": 5.039047,
     "email": "alexandre.mercier@example.com",
-    "phone": "06 34 56 78 90",
+    "telephone": "06 34 56 78 90",
     "structurePorteuse": {
       "nom": "Conseil départemental de la Côte-d'Or",
       "adresse": "53 bis Rue de la Préfecture, 21000 Dijon"
@@ -697,12 +817,17 @@
   },
   {
     "id": "dd4289a417c0d44a1fbd2312",
-    "coordinateurId": "21e6d766594073ef1b9a9c9d",
+    "coordinateurs": [
+      {
+        "id": "d8c0a6a2-ff2b-4db8-a75c-4eb4fb4f9947",
+        "nom": "Laure Poirier"
+      }
+    ],
     "nom": "Lucie Dupont",
     "latitude": 46.990184,
     "longitude": 3.157643,
     "email": "lucie.dupont@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Nevers",
       "adresse": "1 Place de l'Hôtel de Ville, 58000 Nevers"
@@ -726,12 +851,17 @@
   },
   {
     "id": "10ce6a5e17cf184d1a29c93d",
-    "coordinateurId": "21e6d766594073ef1b9a9c9d",
+    "coordinateurs": [
+      {
+        "id": "92d63031-6d23-4397-b5c5-46b7a8d3359d",
+        "nom": "Mathieu Wong"
+      }
+    ],
     "nom": "Antoine Dubois",
     "latitude": 45.777221,
     "longitude": 3.082516,
     "email": "antoine.dubois@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Clermont-Ferrand",
       "adresse": "Place de l'Hôtel de Ville, 63000 Clermont-Ferrand"
@@ -755,12 +885,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca5b",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Julie Lambert",
     "latitude": 47.389312,
     "longitude": 0.694406,
     "email": "julie.lambert@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Tours",
       "adresse": "1 à 3 Rue des Minimes, 37926 Tours"
@@ -784,12 +919,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca5c",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Lucie Dubois",
     "latitude": 49.255633,
     "longitude": 4.033832,
     "email": "lucie.dubois@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Reims",
       "adresse": "9 Place de l'Hôtel de Ville, 51100 Reims"
@@ -813,12 +953,17 @@
   },
   {
     "id": "e7ba674cd6e63ab7e2609370",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Lucas Lefebvre",
     "latitude": 49.182863,
     "longitude": -0.370679,
     "email": "lucas.lefebvre@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mission locale",
       "adresse": "13 Rue de la Girafe, 14000 Caen"
@@ -842,12 +987,17 @@
   },
   {
     "id": "f2b2dc746c9fbce6a14d2856",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Laure Durand",
     "latitude": 47.800499,
     "longitude": 3.571585,
     "email": "laure.durand@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie d'Auxerre",
       "adresse": "Place de l'Hôtel de ville, 89000 Auxerre"
@@ -871,12 +1021,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca59",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Lucie Dupont",
     "latitude": 44.350407,
     "longitude": 2.568875,
     "email": "lucie.dupont@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Rodez",
       "adresse": "Place Eugène Raynaldy, 12000 Rodez"
@@ -900,12 +1055,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca60",
-    "coordinateurId": "35d8416e38471c4e783e7eb4",
+    "coordinateurs": [
+      {
+        "id": "b44a2cd7-950b-4c94-8f62-712bb3e0edbc",
+        "nom": "Émilie Valloria"
+      }
+    ],
     "nom": "Thierry Bernard",
     "latitude": 46.170735,
     "longitude": 1.870754,
     "email": "thierry.bernard@example.com",
-    "phone": "06 12 34 56 78",
+    "telephone": "06 12 34 56 78",
     "structurePorteuse": {
       "nom": "Mairie de Guéret",
       "adresse": "Place Bonnyaud, 23000 Guéret"
@@ -929,25 +1089,30 @@
   },
   {
     "id": "8e249eea74d9d05e2c4b4fa3",
-    "coordinateurId": "ccf3c3f8fa3b9a9cdd51a9aa",
+    "coordinateurs": [
+      {
+        "id": "3b00e738-4f4e-4ebc-b34b-aa1e70d68c85",
+        "nom": "Zoé Krevin"
+      }
+    ],
     "nom": "Emmanuel Richard",
-    "latitude": 45.903168,
-    "longitude": 6.131255,
+    "latitude": 45.179168,
+    "longitude": 5.730255,
     "email": "emmanuel.richard@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Maison de quartier des Fins",
-      "adresse": "1 Rue Albert Premier, 74000 Annecy"
+      "adresse": "1 Rue Albert Premier, 38000 Grenoble"
     },
     "lieuActivitePrincipal": {
       "nom": "Médiathèque Bonlieu",
-      "adresse": "1 Rue Jean Jaurès, 74000 Annecy"
+      "adresse": "1 Rue Jean Jaurès, 38000 Grenoble"
     },
     "lieuActivite": [
       {
         "nom": "Bar Les Paquis",
-        "commune": "Annecy",
-        "codePostal": "74000"
+        "commune": "Grenoble",
+        "codePostal": "38000"
       },
       {
         "nom": "Centre culturel Les Passerelles",
@@ -958,41 +1123,51 @@
   },
   {
     "id": "f0527dbfc37a8d48da0dc33a",
-    "coordinateurId": "8f38cecfdd2a58e98a3b3e34",
+    "coordinateurs": [
+      {
+        "id": "3b00e738-4f4e-4ebc-b34b-aa1e70d68c85",
+        "nom": "Zoé Krevin"
+      }
+    ],
     "nom": "Amélie Durand",
-    "latitude": 46.214643,
-    "longitude": 5.240602,
+    "latitude": 45.184643,
+    "longitude": 5.724602,
     "email": "amelie.durand@example.com",
-    "phone": "06 34 56 78 90",
+    "telephone": "06 34 56 78 90",
     "structurePorteuse": {
       "nom": "Centre social Les Glaisins",
-      "adresse": "4 Allée des Glaisins, 74940 Annecy-le-Vieux"
+      "adresse": "4 Allée des Glaisins, 38000 Grenoble"
     },
     "lieuActivitePrincipal": {
       "nom": "Mairie d'Annecy-le-Vieux",
-      "adresse": "3 Place de la Mairie, 74940 Annecy-le-Vieux"
+      "adresse": "3 Place de la Mairie, 38000 Grenoble"
     },
     "lieuActivite": [
       {
         "nom": "Bibliothèque municipale",
-        "commune": "Annecy-le-Vieux",
-        "codePostal": "74940"
+        "commune": "Grenoble",
+        "codePostal": "7493800040"
       },
       {
         "nom": "Café des Arts",
-        "commune": "Annecy",
-        "codePostal": "74000"
+        "commune": "Grenoble",
+        "codePostal": "38000"
       }
     ]
   },
   {
     "id": "62ab2c598255a806e299ca59",
-    "coordinateurId": "35d8416e38471c4e783e7eb6",
+    "coordinateurs": [
+      {
+        "id": "f6a06e6a-65c1-4f2e-9d7f-85dc596f9c56",
+        "nom": "Patricio Gallelio"
+      }
+    ],
     "nom": "Lucas Dubois",
     "latitude": 46.162315,
     "longitude": -1.159782,
     "email": "lucas.dubois@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Conseil Général de Charente-Maritime",
       "adresse": "85 Boulevard de la République, 17076 La Rochelle"
@@ -1016,12 +1191,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca60",
-    "coordinateurId": "35d8416e38471c4e783e7eb9",
+    "coordinateurs": [
+      {
+        "id": "d5f94e5f-1835-4ec7-92c1-5640ca210edf",
+        "nom": "Nicolas Roulens"
+      }
+    ],
     "nom": "Aurélie Martin",
     "latitude": 50.411086,
     "longitude": 3.509733,
     "email": "aurelie.martin@example.com",
-    "phone": "06 34 56 78 90",
+    "telephone": "06 34 56 78 90",
     "structurePorteuse": {
       "nom": "Conseil Général de l'Aisne",
       "adresse": "53 Rue Paul Doumer, 02013 Laon"
@@ -1045,12 +1225,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca60",
-    "coordinateurId": "35d8416e38471c4e783e7e78",
+    "coordinateurs": [
+      {
+        "id": "f1e28f5d-62dd-44f3-a26c-996da348e7d3",
+        "nom": "Marie Durand"
+      }
+    ],
     "nom": "Lucie Roussel",
     "latitude": 47.246308,
     "longitude": -1.560046,
     "email": "lucie.roussel@example.com",
-    "phone": "06 23 45 67 89",
+    "telephone": "06 23 45 67 89",
     "structurePorteuse": {
       "nom": "Association d'aide aux devoirs",
       "adresse": "5 Rue des Fossés, 44000 Nantes"
@@ -1074,12 +1259,17 @@
   },
   {
     "id": "62ab2c598255a806e299ca61",
-    "coordinateurId": "35d8416e38471c4e783e7e79",
+    "coordinateurs": [
+      {
+        "id": "92d63031-6d23-4397-b5c5-46b7a8d3359d",
+        "nom": "Mathieu Wong"
+      }
+    ],
     "nom": "Pierre Lefebvre",
     "latitude": 46.443314,
     "longitude": 1.266977,
     "email": "pierre.lefebvre@example.com",
-    "phone": "06 34 56 78 90",
+    "telephone": "06 34 56 78 90",
     "structurePorteuse": {
       "nom": "Association pour l'emploi",
       "adresse": "10 Rue du 11 Novembre, 63000 Clermont-Ferrand"
@@ -1103,12 +1293,17 @@
   },
   {
     "id": "12ab2c598255a806e299ca64",
-    "coordinateurId": "25d8416e38471c4e783e7eb3",
+    "coordinateurs": [
+      {
+        "id": "f1e28f5d-62dd-44f3-a26c-996da348e7d3",
+        "nom": "Marie Durand"
+      }
+    ],
     "nom": "Étienne Guillaume",
     "latitude": 47.21725,
     "longitude": -1.553365,
     "email": "etienne.guillaume@example.com",
-    "phone": "06 12 34 56 79",
+    "telephone": "06 12 34 56 79",
     "structurePorteuse": {
       "nom": "Mairie de Nantes",
       "adresse": "Hôtel de Ville, 44000 Nantes"

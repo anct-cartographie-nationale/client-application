@@ -1,6 +1,9 @@
 export type ConseillerOnMapPresentation = {
   id: string;
-  coordinateurId?: string;
+  coordinateurs?: {
+    id: string;
+    nom: string;
+  }[];
   latitude: number;
   longitude: number;
 };

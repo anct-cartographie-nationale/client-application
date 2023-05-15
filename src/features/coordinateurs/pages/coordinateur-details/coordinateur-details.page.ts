@@ -11,12 +11,17 @@ import { map } from 'rxjs/operators';
 
 const COORDINATEUR_ZOOM_LEVEL = 7 as const;
 
+const byDistance = (conseillerA: ConseillerDetailsPresentation, conseillerB: ConseillerDetailsPresentation): number =>
+  conseillerA.distance - conseillerB.distance;
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './coordinateur-details.page.html',
   providers: coordinateurDetailsProviders
 })
 export class CoordinateurDetailsPage {
+  public conseillerSelected?: ConseillerDetailsPresentation;
+
   public coordinateur$: Observable<CoordinateurDetailsPresentation | undefined> = this._route.paramMap.pipe(
     delay(0),
     switchMap((paramMap: ParamMap) => this._coordinateurDetailsPresenter.coordinateur$(paramMap.get('id') ?? '')),
@@ -42,13 +47,7 @@ export class CoordinateurDetailsPage {
               ([conseillersCoordonnes, autresConseillers]: [
                 ConseillerDetailsPresentation[],
                 ConseillerDetailsPresentation[]
-              ]) =>
-                conseillersCoordonnes
-                  .concat(autresConseillers)
-                  .sort(
-                    (conseillerA: ConseillerDetailsPresentation, conseillerB: ConseillerDetailsPresentation) =>
-                      conseillerA.distance - conseillerB.distance
-                  )
+              ]) => conseillersCoordonnes.concat(autresConseillers).sort(byDistance)
             )
           )
         : []

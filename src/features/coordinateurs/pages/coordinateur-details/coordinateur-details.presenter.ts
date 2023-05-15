@@ -24,7 +24,7 @@ const toCoordinateurDetailsPresentation = (coordinateur: any): CoordinateurDetai
 const onlyCoordonneBy =
   (coordinateur: CoordinateurDetailsPresentation) =>
   (conseiller: Omit<ConseillerDetailsPresentation, 'distance'>): boolean =>
-    conseiller.coordinateurId === coordinateur.id;
+    conseiller.coordinateurs?.some(({ id }: { id: string }): boolean => coordinateur.id === id) ?? false;
 
 const toDistanceFrom =
   (coordinateur: CoordinateurDetailsPresentation) =>
@@ -49,6 +49,15 @@ const toConseillerCoordonnesPar =
 const byFarthestDistance = (conseillerA: ConseillerDetailsPresentation, conseillerB: ConseillerDetailsPresentation): number =>
   conseillerB.distance - conseillerA.distance;
 
+const COORDINATEUR_PERIMETER: 1000 = 1000 as const;
+
+const onlyInPerimeter = (toConseillersWithDistance: ConseillerDetailsPresentation): boolean =>
+  toConseillersWithDistance.distance < COORDINATEUR_PERIMETER;
+
+const onlyOtherConseillers =
+  (coordinateur: CoordinateurDetailsPresentation) => (conseiller: Omit<ConseillerDetailsPresentation, 'distance'>) =>
+    conseiller.coordinateurs?.every(({ id }: { id: string }): boolean => coordinateur.id !== id) ?? true;
+
 export class CoordinateurDetailsPresenter {
   public coordinateur$ = (id: string): Observable<CoordinateurDetailsPresentation | undefined> =>
     of(
@@ -64,18 +73,15 @@ export class CoordinateurDetailsPresenter {
       map((conseillers: ConseillerDetailsPresentation[]): number => conseillers.sort(byFarthestDistance)[0].distance)
     );
 
-  public allConseillersInPerimeterOf$(
+  public allConseillersInPerimeterOf$ = (
     coordinateur: CoordinateurDetailsPresentation
-  ): Observable<ConseillerDetailsPresentation[]> {
-    return of(conseillersData).pipe(
+  ): Observable<ConseillerDetailsPresentation[]> =>
+    of(conseillersData).pipe(
       map((conseillers: Omit<ConseillerDetailsPresentation, 'distance'>[]): ConseillerDetailsPresentation[] =>
         conseillers
+          .filter(onlyOtherConseillers(coordinateur))
           .map(toConseillersWithDistance(coordinateur))
-          .filter(
-            (toConseillersWithDistance: ConseillerDetailsPresentation): boolean =>
-              toConseillersWithDistance.distance < 1000 && toConseillersWithDistance.coordinateurId == null
-          )
+          .filter(onlyInPerimeter)
       )
     );
-  }
 }

@@ -2,7 +2,7 @@
   <mgl-marker [lngLat]="[conseiller.longitude, conseiller.latitude]">
     <div tabindex="-1">
       <svg class="marker-conseiller" width="7" height="7" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-        <circle [class.marker-conseiller--coordonne]="conseiller.coordinateurId" cx="5" cy="5" r="5" />
+        <circle [class.marker-conseiller--coordonne]="(conseiller.coordinateurs?.length ?? 0) > 0" cx="5" cy="5" r="5" />
       </svg>
     </div>
   </mgl-marker>
