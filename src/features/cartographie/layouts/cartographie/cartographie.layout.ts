@@ -185,7 +185,8 @@ export class CartographieLayout {
 
   public departementZoomForDistance(): number {
     const stayInLieuxZoom: boolean =
-      this.route.snapshot.queryParams['distance'] === '50000' || this.route.snapshot.queryParams['distance'] === '100000';
+      parseInt(this.route.snapshot.queryParams['distance']) >= 50000 &&
+      parseInt(this.route.snapshot.queryParams['distance']) <= 100000;
     return stayInLieuxZoom ? 8 : 9;
   }
 

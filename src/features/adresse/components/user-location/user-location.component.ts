@@ -10,8 +10,8 @@ import { AddressFoundPresentation, AddressPresenter } from '../../presenters';
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
 
-const setZoomUserPosition = (defaultUserPosition: number, distance?: string): number =>
-  distance ? (distance === '50000' || distance === '100000' ? 8 : 9.5) : defaultUserPosition;
+const setZoomUserPosition = (defaultUserPosition: number, distance?: number): number =>
+  distance ? (distance >= 50000 && distance <= 100000 ? 8 : 9.5) : defaultUserPosition;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -74,7 +74,7 @@ export class UserLocationComponent implements OnInit {
   public onSelectAddress(address: AddressFoundPresentation): void {
     this.markersPresenter.center(
       address.localisation,
-      setZoomUserPosition(this._zoomLevel.userPosition, this.route.snapshot.queryParams['distance'])
+      setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
     );
     this.location.emit(address.localisation);
     this._displayGeolocation$.next(true);
@@ -90,7 +90,7 @@ export class UserLocationComponent implements OnInit {
 
       this.markersPresenter.center(
         localisation,
-        setZoomUserPosition(this._zoomLevel.userPosition, this.route.snapshot.queryParams['distance'])
+        setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
       );
       this.location.emit(localisation);
 
