@@ -1,4 +1,4 @@
-<ng-container *ngIf="inLieuxZoomLevel((zoom$ | async) ?? 0); else : regions">
+<ng-container *ngIf="inLieuxZoomLevel((zoom$ | async) ?? 0, getDistance()); else : regions">
   <ng-container *ngIf="lieuxMediationNumerique$ | async as lieuxMediationNumerique">
     <div class="d-flex h-100" *ngIf="lieuxMediationNumerique?.length === 0">
       <app-no-lieux-found

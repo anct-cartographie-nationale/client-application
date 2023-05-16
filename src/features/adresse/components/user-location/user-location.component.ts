@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -8,6 +9,9 @@ import { AddressFoundPresentation, AddressPresenter } from '../../presenters';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
+
+const setZoomUserPosition = (defaultUserPosition: number, distance?: number): number =>
+  distance ? (distance >= 50000 && distance <= 100000 ? 8 : 10) : defaultUserPosition;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,7 +59,8 @@ export class UserLocationComponent implements OnInit {
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
     private readonly _addressPresenter: AddressPresenter,
-    public readonly markersPresenter: MarkersPresenter
+    public readonly markersPresenter: MarkersPresenter,
+    public readonly route: ActivatedRoute
   ) {}
 
   public ngOnInit(): void {
@@ -67,7 +72,10 @@ export class UserLocationComponent implements OnInit {
   }
 
   public onSelectAddress(address: AddressFoundPresentation): void {
-    this.markersPresenter.center(address.localisation, this._zoomLevel.userPosition);
+    this.markersPresenter.center(
+      address.localisation,
+      setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
+    );
     this.location.emit(address.localisation);
     this._displayGeolocation$.next(true);
   }
@@ -80,7 +88,10 @@ export class UserLocationComponent implements OnInit {
         longitude: position.coords.longitude
       });
 
-      this.markersPresenter.center(localisation, this._zoomLevel.userPosition);
+      this.markersPresenter.center(
+        localisation,
+        setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
+      );
       this.location.emit(localisation);
 
       this._loadingState$.next(false);

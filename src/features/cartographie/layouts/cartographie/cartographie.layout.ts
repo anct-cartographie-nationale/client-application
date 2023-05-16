@@ -183,8 +183,19 @@ export class CartographieLayout {
     ]);
   }
 
+  public departementZoomForDistance(): number {
+    const stayInLieuxZoom: boolean =
+      parseInt(this.route.snapshot.queryParams['distance']) >= 50000 &&
+      parseInt(this.route.snapshot.queryParams['distance']) <= 100000;
+    return stayInLieuxZoom ? 8 : 9;
+  }
+
   private navigateToPageMatchingZoomLevel(zoomLevel: number, localisation: Localisation) {
-    const route: string[] = getNextRouteFromZoomLevel(zoomLevel, nearestRegion(localisation).nom);
+    const route: string[] = getNextRouteFromZoomLevel(
+      zoomLevel,
+      nearestRegion(localisation).nom,
+      this.route.snapshot.queryParams['distance']
+    );
     shouldNavigateToListPage(route, this.route.children[0]?.children[0]?.routeConfig?.path) &&
       this.router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
