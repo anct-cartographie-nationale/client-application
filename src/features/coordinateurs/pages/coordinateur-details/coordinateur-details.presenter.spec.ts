@@ -91,11 +91,13 @@ describe('coordinateur details presenter', (): void => {
         },
         lieuActivite: [
           {
+            id: '62aaf26b8255a806e299c561',
             nom: 'Café des Sports',
             commune: 'Rennes',
             codePostal: '35000'
           },
           {
+            id: '62b33257dd51e705b1808676',
             nom: 'Théâtre National de Bretagne',
             commune: 'Rennes',
             codePostal: '35000'
@@ -163,6 +165,7 @@ describe('coordinateur details presenter', (): void => {
         },
         lieuActivite: [
           {
+            id: '62aaee848255a806e299c4cf',
             nom: 'Maison de Quartier Villejean',
             commune: 'Rennes',
             codePostal: '35000'
@@ -187,6 +190,7 @@ describe('coordinateur details presenter', (): void => {
         },
         lieuActivite: [
           {
+            id: '62b33174dd51e705b1808668',
             nom: 'Espace Social de Maurepas',
             commune: 'Rennes',
             codePostal: '35700'

@@ -22,7 +22,7 @@ type StructurePorteuse = { nom: string; adresse: string };
 
 type LieuActivitePrincipal = { nom: string; adresse: string };
 
-type LieuActiviteSecondaire = { nom: string; commune: string; codePostal: string };
+type LieuActiviteSecondaire = { id: string; nom: string; commune: string; codePostal: string };
 
 export type ConseillerDetailsPresentation = {
   id: string;

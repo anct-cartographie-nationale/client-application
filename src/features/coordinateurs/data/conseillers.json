@@ -16,6 +16,7 @@
     },
     "lieuActivite": [
       {
+        "id": "62aaee848255a806e299c4cf",
         "nom": "Maison de Quartier Villejean",
         "commune": "Rennes",
         "codePostal": "35000"
@@ -39,6 +40,7 @@
     },
     "lieuActivite": [
       {
+        "id": "62b33174dd51e705b1808668",
         "nom": "Espace Social de Maurepas",
         "commune": "Rennes",
         "codePostal": "35700"
@@ -91,11 +93,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62aaf26b8255a806e299c561",
         "nom": "Café des Sports",
         "commune": "Rennes",
         "codePostal": "35000"
       },
       {
+        "id": "62b33257dd51e705b1808676",
         "nom": "Théâtre National de Bretagne",
         "commune": "Rennes",
         "codePostal": "35000"
@@ -125,6 +129,7 @@
     },
     "lieuActivite": [
       {
+        "id": "62aaec9f8255a806e299c49a",
         "nom": "Centre Pompidou-Metz",
         "commune": "Metz",
         "codePostal": "57000"
@@ -154,14 +159,16 @@
     },
     "lieuActivite": [
       {
-        "nom": "Musée du Louvre",
+        "id": "628215d8e42c5106ec5cb5ff",
+        "nom": "DTS - Elogie Siemp",
         "commune": "Paris",
         "codePostal": "75001"
       },
       {
-        "nom": "Centre Georges Pompidou",
+        "id": "63034a6d19ed1006e01aa25f",
+        "nom": "KAWAA",
         "commune": "Paris",
-        "codePostal": "75004"
+        "codePostal": "75012"
       }
     ]
   },
@@ -188,11 +195,13 @@
     },
     "lieuActivite": [
       {
-        "nom": "Médiathèque Marguerite Duras",
+        "id": "62b1e26bdd51e705b18079c8",
+        "nom": "Huda des Pyrénés (GROUPE SOS",
         "commune": "Paris",
         "codePostal": "75020"
       },
       {
+        "id": "638ddf5a0830e306f21f17cb",
         "nom": "Maison des associations",
         "commune": "Paris",
         "codePostal": "75013"
@@ -222,11 +231,13 @@
     },
     "lieuActivite": [
       {
+        "id": "641ad188456999069aa321c3",
         "nom": "Café le Roi Léon",
         "commune": "Nantes",
         "codePostal": "44000"
       },
       {
+        "id": "62c404b6c9ce0606dcdcf3a4",
         "nom": "Médiathèque Jacques Demy",
         "commune": "Nantes",
         "codePostal": "44100"
@@ -256,6 +267,7 @@
     },
     "lieuActivite": [
       {
+        "id": "6380ebc3044a3d06f4e74855",
         "nom": "Café Leffe",
         "commune": "Nantes",
         "codePostal": "44000"
@@ -285,11 +297,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62b026798255a806e299dfc7",
         "nom": "Café Comptoir Abel",
         "commune": "Lyon",
         "codePostal": "69003"
       },
       {
+        "id": "62c5341fc9ce0606dcdcfd83",
         "nom": "Mairie du 3ème arrondissement",
         "commune": "Lyon",
         "codePostal": "69003"
@@ -319,6 +333,7 @@
     },
     "lieuActivite": [
       {
+        "id": "62ab61d78255a806e299cef3",
         "nom": "Bibliothèque municipale",
         "commune": "Marseille",
         "codePostal": "13003"
@@ -348,6 +363,7 @@
     },
     "lieuActivite": [
       {
+        "id": "62da7254f98ccf06dc217393",
         "nom": "Médiathèque",
         "commune": "Lille",
         "codePostal": "59000"
@@ -377,11 +393,13 @@
     },
     "lieuActivite": [
       {
+        "id": "63ecb8c5561e1c06f3af09b5",
         "nom": "Le Bistrot du Palais",
         "commune": "Rouen",
         "codePostal": "76000"
       },
       {
+        "id": "63904f6a3dc00406ef7a8af2",
         "nom": "Musée des Beaux-Arts de Rouen",
         "commune": "Rouen",
         "codePostal": "76000"
@@ -411,11 +429,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62dfaa7f631e9606e0351561",
         "nom": "Le Jardin des Plantes",
         "commune": "Toulouse",
         "codePostal": "31000"
       },
       {
+        "id": "63d93b0ee6d6a806f2568e89",
         "nom": "Musée des Augustins",
         "commune": "Toulouse",
         "codePostal": "31000"
@@ -445,6 +465,7 @@
     },
     "lieuActivite": [
       {
+        "id": "6336b541ac7aea06f2fa1e10",
         "nom": "Maison de quartier Jean Moulin",
         "commune": "La Rochelle",
         "codePostal": "17000"
@@ -474,11 +495,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62b42934dd51e705b1808a47",
         "nom": "Centre Social de l'Escaut",
         "commune": "Valenciennes",
         "codePostal": "59300"
       },
       {
+        "id": "63ff0c3910b821069e94968e",
         "nom": "Médiathèque Simone de Beauvoir",
         "commune": "Valenciennes",
         "codePostal": "59300"
@@ -508,11 +531,13 @@
     },
     "lieuActivite": [
       {
+        "id": "63b2b40bb9422006f05305b8",
         "nom": "Le Vauban",
         "commune": "Brest",
         "codePostal": "29200"
       },
       {
+        "id": "63db87366201ed06f1919147",
         "nom": "La Carène",
         "commune": "Brest",
         "codePostal": "29200"
@@ -542,6 +567,7 @@
     },
     "lieuActivite": [
       {
+        "id": "63c5181eb76ddc06f2a6733d",
         "nom": "Le Bistrot du Progrès",
         "commune": "Angoulême",
         "codePostal": "16000"
@@ -571,11 +597,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62ab2cf98255a806e299ca67",
         "nom": "Centre Social du Plan",
         "commune": "Valence",
         "codePostal": "26000"
       },
       {
+        "id": "62ab34e78255a806e299cb8a",
         "nom": "Maison de quartier Fontbarlettes",
         "commune": "Valence",
         "codePostal": "26000"
@@ -605,11 +633,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62b026128255a806e299dfb3",
         "nom": "Maison de Quartier Etouvie",
         "commune": "Amiens",
         "codePostal": "80000"
       },
       {
+        "id": "63f77aa910b821069e94321d",
         "nom": "Centre Culturel Léo Lagrange",
         "commune": "Amiens",
         "codePostal": "80000"
@@ -639,11 +669,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62ac3f5d8255a806e299d2d5",
         "nom": "Maison pour tous de Nîmes-Ouest",
         "commune": "Nîmes",
         "codePostal": "30000"
       },
       {
+        "id": "63dcd1d96201ed06f191a602",
         "nom": "Centre social La Passerelle",
         "commune": "Nîmes",
         "codePostal": "30000"
@@ -673,6 +705,7 @@
     },
     "lieuActivite": [
       {
+        "id": "645212e01e6805069c229971",
         "nom": "Centre social du Biollay",
         "commune": "Chambéry",
         "codePostal": "73000"
@@ -702,11 +735,13 @@
     },
     "lieuActivite": [
       {
+        "id": "642e935ab825de069b144f49",
         "nom": "Café du Parc",
         "commune": "Grenoble",
         "codePostal": "38000"
       },
       {
+        "id": "63b6afeeb9422006f0532e7d",
         "nom": "Théâtre municipal de Grenoble",
         "commune": "Grenoble",
         "codePostal": "38000"
@@ -736,11 +771,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62a74677fb528f06e3b3e647",
         "nom": "Café du Palais",
         "commune": "Limoges",
         "codePostal": "87000"
       },
       {
+        "id": "6345406b95633e06f1df1f3e",
         "nom": "Opéra de Limoges",
         "commune": "Limoges",
         "codePostal": "87000"
@@ -770,11 +807,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62b32545dd51e705b18084d2",
         "nom": "Médiathèque La Colombe",
         "commune": "Saint-Jean-de-Braye",
         "codePostal": "45800"
       },
       {
+        "id": "62beff9b3e465606de19bc57",
         "nom": "Médiathèque de la Source",
         "commune": "Orléans",
         "codePostal": "45100"
@@ -804,11 +843,13 @@
     },
     "lieuActivite": [
       {
+        "id": "630f3310305d4f06f16421ee",
         "nom": "Maison des Associations",
         "commune": "Dijon",
         "codePostal": "21000"
       },
       {
+        "id": "63c036a4b76ddc06f2a65947",
         "nom": "Médiathèque de la Fontaine d'Ouche",
         "commune": "Dijon",
         "codePostal": "21000"
@@ -838,12 +879,14 @@
     },
     "lieuActivite": [
       {
+        "id": "62c2ddd73e465606de19c6b6",
         "nom": "Café des Arts",
         "commune": "Nevers",
         "codePostal": "58000"
       },
       {
-        "nom": "Piscine municipale",
+        "id": "6357f8673bebfa06f22cebda",
+        "nom": "Bibliothèque municipale",
         "commune": "Nevers",
         "codePostal": "58000"
       }
@@ -872,11 +915,13 @@
     },
     "lieuActivite": [
       {
+        "id": "637ce43a650be106f36854d2",
         "nom": "Le Petit Zinc",
         "commune": "Clermont-Ferrand",
         "codePostal": "63000"
       },
       {
+        "id": "6294b5fce1b0b206ecbd965f",
         "nom": "Stade Marcel-Michelin",
         "commune": "Clermont-Ferrand",
         "codePostal": "63000"
@@ -906,11 +951,13 @@
     },
     "lieuActivite": [
       {
+        "id": "63750bdc132c1206f3b193fb",
         "nom": "Café de la Place",
         "commune": "Tours",
         "codePostal": "37000"
       },
       {
+        "id": "62cd872a4f82c306de28750a",
         "nom": "Centre d'animation de la Croix-Blanche",
         "commune": "Tours",
         "codePostal": "37000"
@@ -940,11 +987,13 @@
     },
     "lieuActivite": [
       {
+        "id": "",
         "nom": "Bar l'Univers",
         "commune": "Reims",
         "codePostal": "51100"
       },
       {
+        "id": "6384c233f7aaa606f264134c",
         "nom": "Maison de quartier Laon Zola",
         "commune": "Reims",
         "codePostal": "51100"
@@ -974,11 +1023,13 @@
     },
     "lieuActivite": [
       {
+        "id": "63fcafe010b821069e946a2c",
         "nom": "Bibliothèque du Calvaire Saint-Pierre",
         "commune": "Caen",
         "codePostal": "14000"
       },
       {
+        "id": "637ddf49650be106f3685bec",
         "nom": "Café Mancel",
         "commune": "Caen",
         "codePostal": "14000"
@@ -1008,11 +1059,13 @@
     },
     "lieuActivite": [
       {
+        "id": "627baacdad1bdb06edc49847",
         "nom": "Maison de quartier Sainte-Geneviève",
         "commune": "Auxerre",
         "codePostal": "89000"
       },
       {
+        "id": "62ab18ee8255a806e299c8bc",
         "nom": "Café Le Paris",
         "commune": "Auxerre",
         "codePostal": "89000"
@@ -1042,11 +1095,13 @@
     },
     "lieuActivite": [
       {
+        "id": "643d15764cf21e069a319332",
         "nom": "Café de la Place",
         "commune": "Rodez",
         "codePostal": "12000"
       },
       {
+        "id": "62ab31bc8255a806e299cb14",
         "nom": "Théâtre municipal",
         "commune": "Rodez",
         "codePostal": "12000"
@@ -1076,11 +1131,13 @@
     },
     "lieuActivite": [
       {
+        "id": "63b83f5ab9422006f053451d",
         "nom": "Café du Marché",
         "commune": "Guéret",
         "codePostal": "23000"
       },
       {
+        "id": "6385d7890830e306f21ec1e9",
         "nom": "Musée d'art contemporain",
         "commune": "Guéret",
         "codePostal": "23000"
@@ -1110,14 +1167,16 @@
     },
     "lieuActivite": [
       {
+        "id": "63f4a2038f479d06f1122b95",
         "nom": "Bar Les Paquis",
         "commune": "Grenoble",
         "codePostal": "38000"
       },
       {
-        "nom": "Centre culturel Les Passerelles",
-        "commune": "Cran-Gevrier",
-        "codePostal": "74960"
+        "id": "62b56bf8dd51e705b18096e6",
+        "nom": "MDH Anne Franck",
+        "commune": "Échirolles",
+        "codePostal": "38130"
       }
     ]
   },
@@ -1144,11 +1203,13 @@
     },
     "lieuActivite": [
       {
+        "id": "63dd0d2f6201ed06f191aeba",
         "nom": "Bibliothèque municipale",
         "commune": "Grenoble",
         "codePostal": "7493800040"
       },
       {
+        "id": "63b6afeeb9422006f0532e7d",
         "nom": "Café des Arts",
         "commune": "Grenoble",
         "codePostal": "38000"
@@ -1178,11 +1239,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62bc64ba8dd70306dc40c115",
         "nom": "Café de la Paix",
         "commune": "La Rochelle",
         "codePostal": "17000"
       },
       {
+        "id": "62bacc39dd51e705b180b372",
         "nom": "Théâtre Verdière",
         "commune": "La Rochelle",
         "codePostal": "17000"
@@ -1212,11 +1275,13 @@
     },
     "lieuActivite": [
       {
+        "id": "63bfc1c1b76ddc06f2a648f0",
         "nom": "Café des Sports",
         "commune": "Saint-Quentin",
         "codePostal": "02100"
       },
       {
+        "id": "62ac73cf8255a806e299d78a",
         "nom": "Maison de Quartier de Rouvroy",
         "commune": "Saint-Quentin",
         "codePostal": "02100"
@@ -1246,11 +1311,13 @@
     },
     "lieuActivite": [
       {
+        "id": "638224fef7aaa606f264042c",
         "nom": "Médiathèque",
         "commune": "Rezé",
         "codePostal": "44400"
       },
       {
+        "id": "62fb972aa97f6105b212faf6",
         "nom": "Centre social",
         "commune": "Vertou",
         "codePostal": "44120"
@@ -1280,11 +1347,13 @@
     },
     "lieuActivite": [
       {
+        "id": "6294b4a3e1b0b206ecbd9647",
         "nom": "Bibliothèque",
         "commune": "Aubière",
         "codePostal": "63170"
       },
       {
+        "id": "637ce212650be106f3685489",
         "nom": "Maison des associations",
         "commune": "Cournon-d'Auvergne",
         "codePostal": "63800"
@@ -1314,11 +1383,13 @@
     },
     "lieuActivite": [
       {
+        "id": "62b31775dd51e705b1808339",
         "nom": "Le Nid",
         "commune": "Nantes",
         "codePostal": "44000"
       },
       {
+        "id": "641ad188456999069aa321c3",
         "nom": "La Cigale",
         "commune": "Nantes",
         "codePostal": "44000"

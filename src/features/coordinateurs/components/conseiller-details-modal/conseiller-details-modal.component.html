@@ -91,9 +91,18 @@
                   <ng-template ngPluralCase="other">{{ lieuxCount }} AUTRES LIEUX</ng-template>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item small px-0" *ngFor="let lieuActivite of conseiller.lieuActivite">
-                    <b>{{ lieuActivite.nom }}</b>
-                    ({{ lieuActivite.codePostal }} - {{ lieuActivite.commune }})
+                  <li class="list-group-item small px-0 d-flex" *ngFor="let lieuActivite of conseiller.lieuActivite">
+                    <span class="flex-grow-1">
+                      <b>{{ lieuActivite.nom }}</b>
+                      ({{ lieuActivite.codePostal }} - {{ lieuActivite.commune }})
+                    </span>
+                    <a
+                      [href]="'https://www.conseiller-numerique.gouv.fr/' + lieuActivite.id + '/details'"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="fw-bold ms-auto link-muted-dark">
+                      Voir la fiche
+                    </a>
                   </li>
                 </ul>
               </div>
