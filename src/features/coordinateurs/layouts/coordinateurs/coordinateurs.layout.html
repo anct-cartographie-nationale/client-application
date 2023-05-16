@@ -48,7 +48,9 @@
               <circle class="user-marker" cx="14" cy="14" r="9" fill-opacity=".65" />
             </svg>
           </mgl-marker>
-          <app-conseillers-markers [conseillers]="(conseillers$ | async) ?? []"></app-conseillers-markers>
+          <app-conseillers-markers
+            [conseillers]="(conseillers$ | async) ?? []"
+            (showDetails)="onShowDetails($event)"></app-conseillers-markers>
           <app-coordinateurs-markers
             [coordinateurs]="(coordinateurs$ | async) ?? []"
             [selectedId]="(markersPresenter.selected$ | async) ?? ''"

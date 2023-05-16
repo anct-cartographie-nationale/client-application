@@ -1,6 +1,41 @@
+<mgl-popup
+  *ngIf="highlight | async as conseiller"
+  anchor="bottom"
+  [offset]="[0, -10]"
+  [lngLat]="[conseiller.longitude, conseiller.latitude]"
+  [closeButton]="false">
+  <div class="text-center p-2 border-bottom border-3 text-wrap border-primary lh-sm fs-6">
+    <div class="bg-light p-2 h-100 d-flex flex-column">
+      <div class="mb-1">
+        <i
+          class="ri-account-circle-fill ri-lg text-primary"
+          [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"></i>
+        {{ conseiller.nom }}
+      </div>
+      <div class="flex-grow-1">
+        <b class="text-primary me-1" *ngIf="(conseiller.coordinateurs?.length ?? 0) > 0; else nonCoordonne">
+          Coordonné par
+          <ng-container *ngFor="let coordinateur of conseiller.coordinateurs; first as isFirst; last as isLast">
+            <ng-container *ngIf="isFirst">{{ coordinateur.nom }}</ng-container>
+            <ng-container *ngIf="!isFirst && !isLast">, {{ coordinateur.nom }}</ng-container>
+            <ng-container *ngIf="!isFirst && isLast">&#32;et{{ coordinateur.nom }}</ng-container>
+          </ng-container>
+        </b>
+        <ng-template #nonCoordonne>
+          <b>Non coordonné</b>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</mgl-popup>
 <ng-container *ngFor="let conseiller of conseillers; index as i; trackBy: trackByConseillerId">
   <mgl-marker [lngLat]="[conseiller.longitude, conseiller.latitude]">
-    <div tabindex="-1">
+    <div
+      tabindex="-1"
+      role="button"
+      (mouseenter)="highlight.emit(conseiller)"
+      (mouseleave)="highlight.emit()"
+      (click)="showDetails.emit(conseiller.coordinateurs?.[0]?.id ?? '')">
       <svg class="marker-conseiller" width="7" height="7" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
         <circle [class.marker-conseiller--coordonne]="(conseiller.coordinateurs?.length ?? 0) > 0" cx="5" cy="5" r="5" />
       </svg>

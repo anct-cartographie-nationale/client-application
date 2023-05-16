@@ -6,4 +6,5 @@ export type ConseillerOnMapPresentation = {
   }[];
   latitude: number;
   longitude: number;
+  nom: string;
 };

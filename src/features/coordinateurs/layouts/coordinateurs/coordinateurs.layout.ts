@@ -36,7 +36,7 @@ export class CoordinateursLayout {
 
   public onHighlight = (highlightedId?: string): void => this.markersPresenter.highlight(highlightedId ?? '');
 
-  public onShowDetails = (coordinateur: CoordinateurOnMapPresentation): void => {
-    this.router.navigate([coordinateur.id, 'details'], { relativeTo: this.route.parent });
+  public onShowDetails = (id: string): void => {
+    id != '' && this.router.navigate([id, 'details'], { relativeTo: this.route.parent });
   };
 }
