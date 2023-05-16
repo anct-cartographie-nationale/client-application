@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ConseillerOnMapPresentation } from '../../presenters';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ConseillerOnMapPresentation, CoordinateurOnMapPresentation } from '../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,6 +8,12 @@ import { ConseillerOnMapPresentation } from '../../presenters';
 })
 export class ConseillersMarkersComponent {
   @Input() public conseillers: ConseillerOnMapPresentation[] = [];
+
+  @Output() public highlight: EventEmitter<ConseillerOnMapPresentation | undefined> = new EventEmitter<
+    ConseillerOnMapPresentation | undefined
+  >();
+
+  @Output() public showDetails: EventEmitter<string> = new EventEmitter<string>();
 
   public trackByConseillerId = (_: number, conseiller: ConseillerOnMapPresentation) => conseiller.id;
 }

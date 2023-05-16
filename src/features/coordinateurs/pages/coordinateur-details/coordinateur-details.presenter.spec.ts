@@ -45,13 +45,18 @@ describe('coordinateur details presenter', (): void => {
     expect(conseillers).toStrictEqual([
       {
         id: 'ea8a21f92d08c61cbf58b764',
-        coordinateurId: '85d7a78b-26c7-4f62-b0c9-0d019d08e1db',
+        coordinateurs: [
+          {
+            id: '85d7a78b-26c7-4f62-b0c9-0d019d08e1db',
+            nom: 'Inès Clamey'
+          }
+        ],
         distance: 1171.8017216531223,
         nom: 'Pierre-Yves Dupont',
         latitude: 48.105127,
         longitude: -1.69076,
         email: 'pierre-yves.dupont@example.com',
-        phone: '06 12 34 56 78',
+        telephone: '06 12 34 56 78',
         structurePorteuse: {
           nom: 'Mairie de Pacé',
           adresse: '1 Rue de la Mairie, 35740 Pacé'
@@ -64,13 +69,18 @@ describe('coordinateur details presenter', (): void => {
       },
       {
         id: '62ab2c598255a806e299ca57',
-        coordinateurId: '85d7a78b-26c7-4f62-b0c9-0d019d08e1db',
+        coordinateurs: [
+          {
+            id: '85d7a78b-26c7-4f62-b0c9-0d019d08e1db',
+            nom: 'Inès Clamey'
+          }
+        ],
         distance: 488.8747716872108,
         nom: 'Mélina Bouchard',
         latitude: 48.117266,
         longitude: -1.677792,
         email: 'melina.bouchard@example.com',
-        phone: '06 12 34 56 78',
+        telephone: '06 12 34 56 78',
         structurePorteuse: {
           nom: 'Mairie de Rennes',
           adresse: 'Place de la Mairie, 35000 Rennes'
@@ -81,11 +91,13 @@ describe('coordinateur details presenter', (): void => {
         },
         lieuActivite: [
           {
+            id: '62aaf26b8255a806e299c561',
             nom: 'Café des Sports',
             commune: 'Rennes',
             codePostal: '35000'
           },
           {
+            id: '62b33257dd51e705b1808676',
             nom: 'Théâtre National de Bretagne',
             commune: 'Rennes',
             codePostal: '35000'
@@ -141,7 +153,7 @@ describe('coordinateur details presenter', (): void => {
         latitude: 48.11038,
         longitude: -1.680245,
         email: 'emilie.lefevre@example.com',
-        phone: '06 12 34 56 78',
+        telephone: '06 12 34 56 78',
         distance: 350.4405260445954,
         structurePorteuse: {
           nom: 'Centre Social Carrefour 18',
@@ -153,6 +165,7 @@ describe('coordinateur details presenter', (): void => {
         },
         lieuActivite: [
           {
+            id: '62aaee848255a806e299c4cf',
             nom: 'Maison de Quartier Villejean',
             commune: 'Rennes',
             codePostal: '35000'
@@ -165,7 +178,7 @@ describe('coordinateur details presenter', (): void => {
         latitude: 48.105856,
         longitude: -1.680022,
         email: 'lucie.martin@example.com',
-        phone: '06 12 34 56 78',
+        telephone: '06 12 34 56 78',
         distance: 851.2615777816636,
         structurePorteuse: {
           nom: 'Maison des Associations',
@@ -177,6 +190,7 @@ describe('coordinateur details presenter', (): void => {
         },
         lieuActivite: [
           {
+            id: '62b33174dd51e705b1808668',
             nom: 'Espace Social de Maurepas',
             commune: 'Rennes',
             codePostal: '35700'

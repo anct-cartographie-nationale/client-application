@@ -13,7 +13,7 @@ export class CoordinateursMarkersComponent {
 
   @Input() public hoverId: string = '';
 
-  @Output() public showDetails: EventEmitter<CoordinateurOnMapPresentation> = new EventEmitter<CoordinateurOnMapPresentation>();
+  @Output() public showDetails: EventEmitter<string> = new EventEmitter<string>();
 
   @Output() public highlight: EventEmitter<CoordinateurOnMapPresentation | undefined> = new EventEmitter<
     CoordinateurOnMapPresentation | undefined

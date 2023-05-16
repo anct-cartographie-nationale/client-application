@@ -68,24 +68,54 @@
   <div class="p-4">
     <span class="text-muted">CNFS À PROXIMITÉ</span>
     <div class="row g-3 mt-2">
-      <div *ngFor="let conseiller of conseillers$ | async" class="col-6">
-        <div class="bg-light p-3 h-100">
+      <div *ngFor="let conseiller of conseillers$ | async" class="position-relative col-6">
+        <div class="bg-light p-3 h-100 d-flex flex-column">
           <div class="mb-1">
-            <i class="ri-account-circle-fill ri-lg text-primary" [class.text-muted]="!conseiller.coordinateurId"></i>
+            <i
+              class="ri-account-circle-fill ri-lg text-primary"
+              [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"></i>
             {{ conseiller.nom }}
           </div>
-          <small *ngIf="conseiller.coordinateurId; else: nonCoordonne">
-            <b class="text-primary me-1">Coordonné par {{ coordinateur.nom }}</b>
-            <i>({{ conseiller.distance | distance }})</i>
-          </small>
-
-          <ng-template #nonCoordonne>
-            <b>Non coordonné</b>
-            <br />
-            <i class="small">à {{ conseiller.distance | distance }} de {{ coordinateur.nom }}</i>
-          </ng-template>
+          <div class="flex-grow-1">
+            <small *ngIf="(conseiller.coordinateurs?.length ?? 0) > 0; else: nonCoordonne">
+              <b class="text-primary me-1">
+                Coordonné par
+                <ng-container *ngFor="let coordinateur of conseiller.coordinateurs; first as isFirst; last as isLast ">
+                  <ng-container *ngIf="isFirst">
+                    <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+                  </ng-container>
+                  <ng-container *ngIf="!isFirst && !isLast">
+                    ,
+                    <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+                  </ng-container>
+                  <ng-container *ngIf="!isFirst && isLast">
+                    &#32;et
+                    <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+                  </ng-container>
+                </ng-container>
+              </b>
+              <i>({{ conseiller.distance | distance }})</i>
+            </small>
+            <ng-template #nonCoordonne>
+              <b>Non coordonné</b>
+              <br />
+              <i class="small">à {{ conseiller.distance | distance }} de {{ coordinateur.nom }}</i>
+            </ng-template>
+          </div>
+          <div>
+            <button
+              type="button"
+              class="btn btn-link link-muted-dark p-0 fw-bold stretched-link"
+              (click)="conseillerDetailsModal.toggle(); conseillerSelected = conseiller">
+              En savoir plus...
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <app-conseiller-details-modal
+    [coordinateur]="coordinateur"
+    [conseiller]="conseillerSelected"
+    #conseillerDetailsModal></app-conseiller-details-modal>
 </ng-container>
