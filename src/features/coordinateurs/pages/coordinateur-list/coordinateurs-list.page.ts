@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 import { MarkersPresenter } from '../../../core';
 import { CoordinateursLayout } from '../../layouts';

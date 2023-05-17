@@ -5,7 +5,7 @@ export type CoordinateurDetailsPresentation = {
   commune: string;
   courriel?: string;
   telephone?: string;
-  perimetre: 'Régional' | 'Départemental' | 'Bassin de vie';
+  perimetre: string;
   nombreDePersonnesCoordonnees: number;
   nombreDeStructuresAvecDesPersonnesCoordonnees: number;
   dispositif: string;
@@ -34,5 +34,5 @@ export type ConseillerDetailsPresentation = {
   distance: number;
   structurePorteuse: StructurePorteuse;
   lieuActivitePrincipal: LieuActivitePrincipal;
-  lieuActivite: LieuActiviteSecondaire[];
+  lieuActivite?: LieuActiviteSecondaire[];
 };

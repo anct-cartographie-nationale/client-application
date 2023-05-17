@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { delay, Observable, switchMap, tap, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 import { MarkersPresenter } from '../../../core';
 import { coordinateurDetailsProviders } from './coordinateur-details.providers';
 import { ConseillerDetailsPresentation, CoordinateurDetailsPresentation } from './coordinateur-details.presentation';
 import { CoordinateurDetailsPresenter } from './coordinateur-details.presenter';
-import { map } from 'rxjs/operators';
 
 const COORDINATEUR_ZOOM_LEVEL = 7 as const;
 

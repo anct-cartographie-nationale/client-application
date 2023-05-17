@@ -1,7 +1,7 @@
-import { Observable, of } from 'rxjs';
-import conseillersData from '../../../data/conseillers.json';
-import { ConseillerOnMapPresentation } from '../../../presenters';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ConseillerOnMapPresentation } from '../../../presenters';
+import { ConseillersRepository } from '../../../reporitories';
 
 const onlyConseillerCoordonne = (conseiller: ConseillerOnMapPresentation): boolean =>
   (conseiller.coordinateurs?.length ?? 0) > 0;
@@ -10,7 +10,9 @@ const onlyConseillerNonCoordonne = (conseiller: ConseillerOnMapPresentation): bo
   (conseiller.coordinateurs?.length ?? 0) === 0;
 
 export class ConseillersOnMapPresenter {
-  public conseillers$ = (): Observable<ConseillerOnMapPresentation[]> => of(conseillersData as ConseillerOnMapPresentation[]);
+  public constructor(private readonly _conseillersRepository: ConseillersRepository) {}
+
+  public conseillers$ = (): Observable<ConseillerOnMapPresentation[]> => this._conseillersRepository.getAll$();
 
   public nombreConseillersNonCoordonnes$: Observable<number> = this.conseillers$().pipe(
     map((conseillers: ConseillerOnMapPresentation[]) => conseillers.filter(onlyConseillerNonCoordonne).length)

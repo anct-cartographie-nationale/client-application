@@ -1,11 +1,20 @@
+import { firstValueFrom, Observable, of } from 'rxjs';
+import conseillersData from '../../data/conseillers.json';
+import coordinateursData from '../../data/coordinateurs.json';
+import { Conseiller, Coordinateur } from '../../models';
+import { ConseillersRepository, CoordinateursRepository } from '../../reporitories';
 import { CoordinateurDetailsPresenter } from './coordinateur-details.presenter';
 import { ConseillerDetailsPresentation, CoordinateurDetailsPresentation } from './coordinateur-details.presentation';
-import { firstValueFrom } from 'rxjs';
+
+const conseillersRepository: ConseillersRepository = { getAll$: (): Observable<Conseiller[]> => of(conseillersData) };
+const coordinateursRepository: CoordinateursRepository = { getAll$: (): Observable<Coordinateur[]> => of(coordinateursData) };
 
 describe('coordinateur details presenter', (): void => {
   it('should get coordinateur matching given id', async (): Promise<void> => {
     const coordinateur: CoordinateurDetailsPresentation | undefined = await firstValueFrom(
-      new CoordinateurDetailsPresenter().coordinateur$('22b8d7ba-3de9-4c12-8a33-8b0a785d764c')
+      new CoordinateurDetailsPresenter(conseillersRepository, coordinateursRepository).coordinateur$(
+        '22b8d7ba-3de9-4c12-8a33-8b0a785d764c'
+      )
     );
 
     expect(coordinateur).toStrictEqual({
@@ -26,7 +35,7 @@ describe('coordinateur details presenter', (): void => {
 
   it('should get conseillers coordonnés by coordinateur', async (): Promise<void> => {
     const conseillers: ConseillerDetailsPresentation[] = await firstValueFrom(
-      new CoordinateurDetailsPresenter().conseillersCoordonnesPar$({
+      new CoordinateurDetailsPresenter(conseillersRepository, coordinateursRepository).conseillersCoordonnesPar$({
         id: '85d7a78b-26c7-4f62-b0c9-0d019d08e1db',
         nom: 'Lucie Petit',
         commune: 'Rennes',
@@ -109,7 +118,7 @@ describe('coordinateur details presenter', (): void => {
 
   it('should get distance between coordinateur and farthest conseiller coordonné', async (): Promise<void> => {
     const distance: number = await firstValueFrom(
-      new CoordinateurDetailsPresenter().farthestConseillerDistance$({
+      new CoordinateurDetailsPresenter(conseillersRepository, coordinateursRepository).farthestConseillerDistance$({
         id: '85d7a78b-26c7-4f62-b0c9-0d019d08e1db',
         nom: 'Lucie Petit',
         commune: 'Rennes',
@@ -130,7 +139,7 @@ describe('coordinateur details presenter', (): void => {
 
   it('should get all conseillers in coordinateur perimeter', async (): Promise<void> => {
     const conseillers: ConseillerDetailsPresentation[] = await firstValueFrom(
-      new CoordinateurDetailsPresenter().allConseillersInPerimeterOf$({
+      new CoordinateurDetailsPresenter(conseillersRepository, coordinateursRepository).allConseillersInPerimeterOf$({
         id: '85d7a78b-26c7-4f62-b0c9-0d019d08e1db',
         nom: 'Lucie Petit',
         commune: 'Rennes',

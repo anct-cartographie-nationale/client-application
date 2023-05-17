@@ -1,9 +1,14 @@
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable, of } from 'rxjs';
+import conseillersData from '../../../data/conseillers.json';
+import { ConseillersRepository } from '../../../reporitories';
+import { Conseiller } from '../../../models';
 import { ConseillersOnMapPresenter } from './conseillers-on-map.presenter';
+
+const conseillersRepository: ConseillersRepository = { getAll$: (): Observable<Conseiller[]> => of(conseillersData) };
 
 describe('conseillers on map presenter', (): void => {
   it('should get all conseillers on map', async (): Promise<void> => {
-    const conseillersOnMapPresenter: ConseillersOnMapPresenter = new ConseillersOnMapPresenter();
+    const conseillersOnMapPresenter: ConseillersOnMapPresenter = new ConseillersOnMapPresenter(conseillersRepository);
 
     const count: number = (await firstValueFrom(conseillersOnMapPresenter.conseillers$())).length;
 
@@ -11,7 +16,7 @@ describe('conseillers on map presenter', (): void => {
   });
 
   it('should get conseillers coordonnés count', async (): Promise<void> => {
-    const conseillersOnMapPresenter: ConseillersOnMapPresenter = new ConseillersOnMapPresenter();
+    const conseillersOnMapPresenter: ConseillersOnMapPresenter = new ConseillersOnMapPresenter(conseillersRepository);
 
     const count: number = await firstValueFrom(conseillersOnMapPresenter.nombreConseillersCoordonnes$);
 
@@ -19,7 +24,7 @@ describe('conseillers on map presenter', (): void => {
   });
 
   it('should get conseillers non-coordonnés count', async (): Promise<void> => {
-    const conseillersOnMapPresenter: ConseillersOnMapPresenter = new ConseillersOnMapPresenter();
+    const conseillersOnMapPresenter: ConseillersOnMapPresenter = new ConseillersOnMapPresenter(conseillersRepository);
 
     const count: number = await firstValueFrom(conseillersOnMapPresenter.nombreConseillersNonCoordonnes$);
 
