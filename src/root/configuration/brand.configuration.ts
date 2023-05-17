@@ -15,7 +15,7 @@ export const BRAND_CONFIGURATION: BrandConfiguration = {
 };
 
 export const BRAND_APPLICATION_CONFIGURATION: BrandConfiguration = {
-  name: 'Nationale',
-  logo: './assets/img/logo/cartographie-nationale-brand.png',
-  illustration: 'svg-france-et-outremer.svg'
+  name: 'du Hub du Sud',
+  logo: './assets/img/logo/hubs/100/Hub du Sud.png',
+  illustration: 'svg-paca.svg'
 };
