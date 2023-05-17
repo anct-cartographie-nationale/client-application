@@ -22,7 +22,7 @@ const byDistance = (conseillerA: ConseillerDetailsPresentation, conseillerB: Con
 export class CoordinateurDetailsPage {
   public conseillerSelected?: ConseillerDetailsPresentation;
 
-  public coordinateur$: Observable<CoordinateurDetailsPresentation | undefined> = this._route.paramMap.pipe(
+  public coordinateur$: Observable<CoordinateurDetailsPresentation | undefined> = this.route.paramMap.pipe(
     delay(0),
     switchMap((paramMap: ParamMap) => this._coordinateurDetailsPresenter.coordinateur$(paramMap.get('id') ?? '')),
     tap((coordinateur: CoordinateurDetailsPresentation | undefined): void => {
@@ -35,7 +35,7 @@ export class CoordinateurDetailsPage {
     })
   );
 
-  public conseillers$: Observable<ConseillerDetailsPresentation[]> = this._route.paramMap.pipe(
+  public conseillers$: Observable<ConseillerDetailsPresentation[]> = this.route.paramMap.pipe(
     switchMap((paramMap: ParamMap) => this._coordinateurDetailsPresenter.coordinateur$(paramMap.get('id') ?? '')),
     switchMap((coordinateur: CoordinateurDetailsPresentation | undefined) =>
       coordinateur
@@ -56,15 +56,15 @@ export class CoordinateurDetailsPage {
 
   public constructor(
     @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
+    public readonly route: ActivatedRoute,
     private readonly _coordinateurDetailsPresenter: CoordinateurDetailsPresenter,
     private readonly _markersPresenter: MarkersPresenter,
-    private readonly _route: ActivatedRoute,
     private readonly _router: Router
   ) {}
 
   public closeDetails(): void {
     this._router.navigate(['..'], {
-      relativeTo: this._route,
+      relativeTo: this.route,
       queryParamsHandling: 'preserve'
     });
     this._markersPresenter.reset();

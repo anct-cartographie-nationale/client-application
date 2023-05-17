@@ -35,10 +35,24 @@
 }
 
 .marker-conseiller {
-  fill: $muted;
+  .marker-conseiller-bg,
+  .marker-conseiller-fg {
+    @include marker-dimensions($marker-conseiller-size);
 
-  &--coordonne {
-    fill: $primary;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: 500ms cubic-bezier(0.32, 2.4, 0.55, 0.56);
+  }
+
+  &:hover {
+    .marker-conseiller-bg {
+      @include marker-dimensions($marker-conseiller-size-bg-hover);
+    }
+
+    .marker-conseiller-fg {
+      @include marker-dimensions($marker-conseiller-size-fg-hover);
+    }
   }
 }
 
@@ -99,7 +113,7 @@
 .marker-group {
   .marker-group-bg,
   .marker-group-fg {
-    @include marker-dimensions($marker-group-size);
+    @include marker-dimensions($marker-territoire-size);
 
     position: absolute;
     top: 50%;
@@ -110,10 +124,10 @@
 
 .marker-hover {
   .marker-group-bg {
-    @include marker-dimensions($marker-group-size-bg-hover);
+    @include marker-dimensions($marker-territoire-size-bg-hover);
   }
 
   .marker-group-fg {
-    @include marker-dimensions($marker-group-size-fg-hover);
+    @include marker-dimensions($marker-territoire-size-fg-hover);
   }
 }

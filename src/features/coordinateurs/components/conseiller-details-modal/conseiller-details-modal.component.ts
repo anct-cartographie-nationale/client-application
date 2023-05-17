@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import {
-  ConseillerDetailsPresentation,
-  CoordinateurDetailsPresentation
-} from '../../pages/coordinateur-details/coordinateur-details.presentation';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
+import { Conseiller } from '../../models';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,8 +10,10 @@ import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
   templateUrl: './conseiller-details-modal.component.html'
 })
 export class ConseillerDetailsModalComponent {
-  @Input() coordinateur?: CoordinateurDetailsPresentation;
-  @Input() conseiller?: ConseillerDetailsPresentation;
+  @Input() coordinateur?: { id: string; nom: string };
+  @Input() conseiller?: Conseiller & { distance?: number };
+  @Input() distance?: number;
+  @Input() route: ActivatedRoute | null = null;
 
   private _isShown: boolean = false;
 

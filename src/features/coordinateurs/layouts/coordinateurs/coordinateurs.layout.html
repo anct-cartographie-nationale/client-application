@@ -14,19 +14,15 @@
           <table class="table m-0">
             <tbody>
               <tr>
-                <td class="px-3">
-                  <svg class="marker-conseiller" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-                    <circle class="marker-conseiller--coordonne" cx="5" cy="5" r="5" />
-                  </svg>
+                <td class="px-3 align-middle">
+                  <div class="bg-primary rounded-circle square-xs"></div>
                 </td>
                 <th>CnFS coordonnés</th>
                 <td class="small fst-italic">{{ nombreConseillersCoordonnes$ | async }}</td>
               </tr>
               <tr>
-                <td class="px-3">
-                  <svg class="marker-conseiller" width="10" height="10" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="5" cy="5" r="5" />
-                  </svg>
+                <td class="px-3 align-middle">
+                  <div class="bg-muted rounded-circle square-xs"></div>
                 </td>
                 <th>CnFS non-coordonnés</th>
                 <td class="small fst-italic">{{ nombreConseillersNonCoordonnes$ | async }}</td>
@@ -41,6 +37,7 @@
           class="h-100 w-100 overflow-hidden"
           [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"
           [zoom]="[(markersPresenter.zoom$ | async) ?? 0]"
+          (zoomEnd)="currentZoom = $event.target.getZoom()"
           [center]="[localisation.longitude, localisation.latitude]">
           <mgl-marker *ngIf="userLocalisation" [lngLat]="[userLocalisation.longitude, userLocalisation.latitude]">
             <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
@@ -49,8 +46,9 @@
             </svg>
           </mgl-marker>
           <app-conseillers-markers
+            [zoom]="currentZoom"
             [conseillers]="(conseillers$ | async) ?? []"
-            (showDetails)="onShowDetails($event)"></app-conseillers-markers>
+            (showDetails)="conseillerDetailsModal.toggle(); conseillerSelected = $event"></app-conseillers-markers>
           <app-coordinateurs-markers
             [coordinateurs]="(coordinateurs$ | async) ?? []"
             [selectedId]="(markersPresenter.selected$ | async) ?? ''"
@@ -62,3 +60,7 @@
     </div>
   </div>
 </div>
+<app-conseiller-details-modal
+  [conseiller]="$any(conseillerSelected)"
+  [route]="route"
+  #conseillerDetailsModal></app-conseiller-details-modal>

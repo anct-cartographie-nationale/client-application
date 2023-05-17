@@ -9,11 +9,13 @@ import { ConseillerOnMapPresentation, CoordinateurOnMapPresentation } from '../.
 export class ConseillersMarkersComponent {
   @Input() public conseillers: ConseillerOnMapPresentation[] = [];
 
+  @Input() public zoom: number = 0;
+
   @Output() public highlight: EventEmitter<ConseillerOnMapPresentation | undefined> = new EventEmitter<
     ConseillerOnMapPresentation | undefined
   >();
 
-  @Output() public showDetails: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public showDetails: EventEmitter<ConseillerOnMapPresentation> = new EventEmitter<ConseillerOnMapPresentation>();
 
   public trackByConseillerId = (_: number, conseiller: ConseillerOnMapPresentation) => conseiller.id;
 }
