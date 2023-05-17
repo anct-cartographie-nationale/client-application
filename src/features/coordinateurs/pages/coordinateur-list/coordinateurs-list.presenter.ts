@@ -1,6 +1,6 @@
 import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import coordinateursData from '../../data/coordinateurs.json';
+import { CoordinateursRepository } from '../../reporitories';
 import { CoordinateursSortPresentation, DEFAULT_SORT, By } from '../../presenters';
 import { CoordinateursListItemPresentation } from './coordinateurs-list.presentation';
 
@@ -29,10 +29,10 @@ const toOrderedCoordinateurs = ([coordinateurs, sort]: [
 ]): CoordinateursListItemPresentation[] => coordinateurs.sort(bySelectedField(sort));
 
 export class CoordinateursListPresenter {
+  public constructor(private readonly _coordinateurs: CoordinateursRepository) {}
+
   public coordinateurs$ = (
     coordinateursSort$: Observable<CoordinateursSortPresentation> = of(DEFAULT_SORT)
   ): Observable<CoordinateursListItemPresentation[]> =>
-    combineLatest([of(coordinateursData as CoordinateursListItemPresentation[]), coordinateursSort$]).pipe(
-      map(toOrderedCoordinateurs)
-    );
+    combineLatest([this._coordinateurs.getAll$(), coordinateursSort$]).pipe(map(toOrderedCoordinateurs));
 }

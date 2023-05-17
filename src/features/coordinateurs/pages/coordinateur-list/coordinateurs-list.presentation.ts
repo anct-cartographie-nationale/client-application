@@ -4,7 +4,7 @@ export type CoordinateursListItemPresentation = {
   nom: string;
   commune: string;
   codePostal: string;
-  perimetre: 'Départemental' | 'Bassin de vie';
+  perimetre: string;
   nombreDePersonnesCoordonnees: number;
   dispositif: string;
 };

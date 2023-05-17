@@ -2,7 +2,7 @@ export type CoordinateurOnMapPresentation = {
   id: string;
   prenom: string;
   nom: string;
-  perimetre: 'Régional' | 'Départemental' | 'Bassin de vie';
+  perimetre: string;
   nombreDePersonnesCoordonnees: number;
   dispositif: string;
   latitude: number;

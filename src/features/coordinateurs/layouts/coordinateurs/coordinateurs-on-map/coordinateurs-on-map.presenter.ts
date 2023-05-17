@@ -1,8 +1,9 @@
-import { Observable, of } from 'rxjs';
-import coordinateursData from '../../../data/coordinateurs.json';
+import { Observable } from 'rxjs';
 import { CoordinateurOnMapPresentation } from '../../../presenters';
+import { CoordinateursRepository } from '../../../reporitories';
 
 export class CoordinateursOnMapPresenter {
-  public coordinateurs$ = (): Observable<CoordinateurOnMapPresentation[]> =>
-    of(coordinateursData as CoordinateurOnMapPresentation[]);
+  public constructor(private readonly _coordinateurs: CoordinateursRepository) {}
+
+  public coordinateurs$ = (): Observable<CoordinateurOnMapPresentation[]> => this._coordinateurs.getAll$();
 }
