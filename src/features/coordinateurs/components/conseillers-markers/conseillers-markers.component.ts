@@ -9,6 +9,8 @@ import { ConseillerOnMapPresentation, CoordinateurOnMapPresentation } from '../.
 export class ConseillersMarkersComponent {
   @Input() public conseillers: ConseillerOnMapPresentation[] = [];
 
+  @Input() public zoom: number = 0;
+
   @Output() public highlight: EventEmitter<ConseillerOnMapPresentation | undefined> = new EventEmitter<
     ConseillerOnMapPresentation | undefined
   >();

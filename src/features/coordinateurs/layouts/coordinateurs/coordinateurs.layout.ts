@@ -41,4 +41,6 @@ export class CoordinateursLayout {
   public onShowDetails = (id: string): void => {
     id != '' && this.router.navigate([id, 'details'], { relativeTo: this.route.parent });
   };
+
+  public currentZoom: number = 0;
 }

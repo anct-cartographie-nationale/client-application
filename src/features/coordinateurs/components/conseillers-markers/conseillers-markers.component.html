@@ -31,9 +31,10 @@
 <ng-container *ngFor="let conseiller of conseillers; index as i; trackBy: trackByConseillerId">
   <mgl-marker [lngLat]="[conseiller.longitude, conseiller.latitude]">
     <div
+      *ngIf="zoom > 8; else markerSmall"
       role="button"
       tabindex="-1"
-      class="marker-conseiller z-index-over-base"
+      class="marker-conseiller"
       (mouseenter)="highlight.emit(conseiller)"
       (mouseleave)="highlight.emit()"
       (click)="showDetails.emit(conseiller)">
@@ -42,5 +43,12 @@
         class="marker-conseiller-fg rounded-circle"
         [ngClass]="(conseiller.coordinateurs?.length ?? 0) > 0 ? 'bg-primary' : 'bg-muted'"></div>
     </div>
+    <ng-template #markerSmall>
+      <div tabindex="-1" class="marker-conseiller">
+        <div
+          class="rounded-circle square-xs"
+          [ngClass]="(conseiller.coordinateurs?.length ?? 0) > 0 ? 'bg-primary' : 'bg-muted'"></div>
+      </div>
+    </ng-template>
   </mgl-marker>
 </ng-container>
