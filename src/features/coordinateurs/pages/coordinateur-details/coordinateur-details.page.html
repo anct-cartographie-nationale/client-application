@@ -115,7 +115,9 @@
     </div>
   </div>
   <app-conseiller-details-modal
+    [distance]="conseillerSelected?.distance ?? undefined"
     [coordinateur]="coordinateur"
     [conseiller]="conseillerSelected"
+    [route]="route.parent"
     #conseillerDetailsModal></app-conseiller-details-modal>
 </ng-container>

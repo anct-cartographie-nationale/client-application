@@ -13,7 +13,7 @@ export class ConseillersMarkersComponent {
     ConseillerOnMapPresentation | undefined
   >();
 
-  @Output() public showDetails: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public showDetails: EventEmitter<ConseillerOnMapPresentation> = new EventEmitter<ConseillerOnMapPresentation>();
 
   public trackByConseillerId = (_: number, conseiller: ConseillerOnMapPresentation) => conseiller.id;
 }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="conseiller as conseillerSelected">
+<ng-container *ngIf="conseiller">
   <div
     *ngIf="activateModal$ | async"
     [class.show]="animate$ | async"
@@ -23,25 +23,31 @@
                 <ng-container *ngIf="(conseiller.coordinateurs?.length ?? 0) > 0; else nonCoordonne">
                   Coordonné par
                   <ng-container *ngFor="let coordinateur of conseiller.coordinateurs; first as isFirst; last as isLast">
-                    <ng-container *ngIf="isFirst">
-                      <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+                    <ng-container *ngIf="isFirst && route">
+                      <a [routerLink]="[coordinateur.id, 'details']" [relativeTo]="route" (click)="toggle()">
+                        {{ coordinateur.nom }}
+                      </a>
                     </ng-container>
-                    <ng-container *ngIf="!isFirst && !isLast">
+                    <ng-container *ngIf="!isFirst && !isLast && route">
                       ,
-                      <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+                      <a [routerLink]="[coordinateur.id, 'details']" [relativeTo]="route" (click)="toggle()">
+                        {{ coordinateur.nom }}
+                      </a>
                     </ng-container>
-                    <ng-container *ngIf="!isFirst && isLast">
+                    <ng-container *ngIf="!isFirst && isLast && route">
                       &#32;et
-                      <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+                      <a [routerLink]="[coordinateur.id, 'details']" [relativeTo]="route" (click)="toggle()">
+                        {{ coordinateur.nom }}
+                      </a>
                     </ng-container>
                   </ng-container>
                   &nbsp;
-                  <i class="fw-normal">({{ conseiller.distance | distance }})</i>
+                  <i *ngIf="distance" class="fw-normal">({{ distance | distance }})</i>
                 </ng-container>
                 <ng-template #nonCoordonne>
                   Non coordonné
-                  <i class="fw-normal">
-                    (à {{ conseiller.distance | distance }} de
+                  <i *ngIf="distance" class="fw-normal">
+                    (à {{ distance | distance }} de
                     <a [routerLink]="['../../', coordinateur?.id, 'details']">{{ coordinateur?.nom }}</a>
                     )
                   </i>
@@ -63,10 +69,7 @@
                   <div class="bg-light p-3">
                     <div class="text-muted mb-1">LIEU D'ACTIVITÉ PRINCIPAL</div>
                     <div class="d-flex">
-                      <img
-                        class="me-2"
-                        [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur?.dispositif + '.svg'"
-                        alt="" />
+                      <img class="me-2" [src]="assetsConfiguration.path + '/img/coordinateurs/CnFS.svg'" alt="" />
                       <div class="small">
                         <b>{{ conseiller.lieuActivitePrincipal.nom }}</b>
                         <br />

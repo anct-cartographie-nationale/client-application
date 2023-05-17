@@ -1,7 +1,7 @@
 <mgl-popup
   *ngIf="highlight | async as conseiller"
   anchor="bottom"
-  [offset]="[0, -10]"
+  [offset]="[0, -20]"
   [lngLat]="[conseiller.longitude, conseiller.latitude]"
   [closeButton]="false">
   <div class="text-center p-2 border-bottom border-3 text-wrap border-primary lh-sm fs-6">
@@ -31,14 +31,16 @@
 <ng-container *ngFor="let conseiller of conseillers; index as i; trackBy: trackByConseillerId">
   <mgl-marker [lngLat]="[conseiller.longitude, conseiller.latitude]">
     <div
-      tabindex="-1"
       role="button"
+      tabindex="-1"
+      class="marker-conseiller z-index-over-base"
       (mouseenter)="highlight.emit(conseiller)"
       (mouseleave)="highlight.emit()"
-      (click)="showDetails.emit(conseiller.coordinateurs?.[0]?.id ?? '')">
-      <svg class="marker-conseiller" width="7" height="7" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-        <circle [class.marker-conseiller--coordonne]="(conseiller.coordinateurs?.length ?? 0) > 0" cx="5" cy="5" r="5" />
-      </svg>
+      (click)="showDetails.emit(conseiller)">
+      <div class="marker-conseiller-bg rounded-circle bg-white"></div>
+      <div
+        class="marker-conseiller-fg rounded-circle"
+        [ngClass]="(conseiller.coordinateurs?.length ?? 0) > 0 ? 'bg-primary' : 'bg-muted'"></div>
     </div>
   </mgl-marker>
 </ng-container>

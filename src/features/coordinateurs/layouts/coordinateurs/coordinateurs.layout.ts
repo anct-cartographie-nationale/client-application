@@ -19,6 +19,8 @@ export class CoordinateursLayout {
 
   public conseillers$: Observable<ConseillerOnMapPresentation[]> = this._conseillersOnMapPresenter.conseillers$();
 
+  public conseillerSelected?: ConseillerOnMapPresentation;
+
   public nombreConseillersNonCoordonnes$: Observable<number> = this._conseillersOnMapPresenter.nombreConseillersNonCoordonnes$;
 
   public nombreConseillersCoordonnes$: Observable<number> = this._conseillersOnMapPresenter.nombreConseillersCoordonnes$;
