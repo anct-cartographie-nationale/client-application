@@ -53,7 +53,7 @@
                 class="nav-link me-5 pb-0 px-0"
                 ariaCurrentWhenActive="page"
                 routerLinkActive="active">
-                Afficher la carte
+                {{ (expanded$ | async) ? 'Afficher les structures' : 'Afficher la carte' }}
               </a>
             </li>
           </ul>
