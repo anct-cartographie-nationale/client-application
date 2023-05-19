@@ -310,6 +310,42 @@ jobs:
           name: build
           path: dist
 
+  build-coordinateurs-web-component:
+    name: Build Coordinateurs Web Component
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project workspace repository
+        uses: actions/checkout@v3
+        with:
+          repository: anct-cartographie-nationale/client-base
+
+      - name: Checkout client-application repository
+        uses: actions/checkout@v3
+        with:
+          path: projects/client-application
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build coordinateurs --named-chunks --output-hashing none
+
+      - name: Merge all script files
+        run: cat dist/coordinateurs/*.js > dist/coordinateurs/script.js
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: dist
+
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -323,7 +359,8 @@ jobs:
         build-client-application,
         build-mediation-numerique-web-component,
         build-cartographie-web-component,
-        build-orientation-web-component
+        build-orientation-web-component,
+        build-coordinateurs-web-component
       ]
 
     steps:
@@ -350,6 +387,7 @@ jobs:
           mv dist/mediation-numerique/script.js dist/whitelist/mediation-numerique.js
           mv dist/cartographie/script.js dist/whitelist/cartographie.js
           mv dist/orientation/script.js dist/whitelist/orientation.js
+          mv dist/coordinateurs/script.js dist/whitelist/coordinateurs.js
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
