@@ -7,12 +7,10 @@ import { MarkersPresenter } from '../../../core';
 import { ConseillerOnMapPresentation, CoordinateurOnMapPresentation } from '../../presenters';
 import { CoordinateursOnMapPresenter } from './coordinateurs-on-map';
 import { ConseillersOnMapPresenter } from './conseillers-on-map';
-import { coordinateursLayoutProviders } from './coordinateurs.layout.providers';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './coordinateurs.layout.html',
-  providers: coordinateursLayoutProviders
+  templateUrl: './coordinateurs.layout.html'
 })
 export class CoordinateursLayout {
   public coordinateurs$: Observable<CoordinateurOnMapPresentation[]> = this._coordinateursOnMapPresenter.coordinateurs$();
