@@ -1,6 +1,6 @@
 {
   "name": "@gouvfr-anct/cartographie-nationale",
-  "version": "5.6.0",
+  "version": "5.7.1",
   "description": "💻 Client pour l'affichage de la cartographie nationale de l’offre de médiation numérique dans un navigateur web.",
   "keywords": [
     "angular",
