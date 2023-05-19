@@ -9,11 +9,12 @@ import { UserLocationModule } from '../../../adresse';
 import { COMPONENTS } from '../../components';
 import { LAYOUTS } from '../../layouts';
 import { PAGES } from '../../pages';
+import { coordinateursProviders } from './coordinateurs.providers';
 
 @NgModule({
   declarations: [...LAYOUTS, ...PAGES, ...COMPONENTS],
   exports: [...LAYOUTS, ...PAGES],
-  providers: [MapService],
+  providers: [MapService, ...coordinateursProviders],
   imports: [
     CommonModule,
     HttpClientModule,

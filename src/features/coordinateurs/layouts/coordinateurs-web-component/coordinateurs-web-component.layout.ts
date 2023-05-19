@@ -19,11 +19,6 @@ export class CoordinateursWebComponentLayout implements OnInit {
     ZOOM_LEVEL_CONFIGURATION.regular = parseInt(zoom);
   }
 
-  // todo: set coordinateurs source
-  // @Input() set source(source: string) {
-  //   DATA_CONFIGURATION.coordinateurs = source;
-  // }
-
   public constructor(private readonly router: Router) {}
 
   public ngOnInit(): void {
