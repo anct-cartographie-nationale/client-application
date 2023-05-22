@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { TerritoirePresentation } from '../../../../core';
+import { TerritoirePresentation } from '../../../../core/presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

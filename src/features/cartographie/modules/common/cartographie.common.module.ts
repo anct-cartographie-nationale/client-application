@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MapService, NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
-import { PhonePipeModule, DistancePipeModule } from '../../../core';
+import { PhonePipeModule, DistancePipeModule } from '../../../core/pipes';
 import { AdresseModule, UserLocationModule } from '../../../adresse';
 import { pages } from '../../pages';
 import { CartographieLayout, ListHeaderLayout } from '../../layouts';

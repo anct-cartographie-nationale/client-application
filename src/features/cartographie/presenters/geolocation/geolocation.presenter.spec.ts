@@ -1,6 +1,6 @@
 import { firstValueFrom } from 'rxjs';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { NO_LOCALISATION } from '../../../core';
+import { NO_LOCALISATION } from '../../../core/models';
 import { GeolocationPresenter } from './geolocation.presenter';
 
 describe('geolocation presenter', (): void => {

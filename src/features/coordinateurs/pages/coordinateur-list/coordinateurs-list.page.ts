@@ -2,17 +2,23 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
-import { MarkersPresenter } from '../../../core';
+import { MarkersPresenter } from '../../../core/presenters';
 import { CoordinateursLayout } from '../../layouts';
+import { CoordinateursSortPresentation, DEFAULT_SORT } from '../../presenters';
+import { CoordinateursRepository } from '../../reporitories';
 import { CoordinateursListItemPresentation } from './coordinateurs-list.presentation';
 import { CoordinateursListPresenter } from './coordinateurs-list.presenter';
-import { coordinateursListProviders } from './coordinateurs-list.providers';
-import { CoordinateursSortPresentation, DEFAULT_SORT } from '../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './coordinateurs-list.page.html',
-  providers: coordinateursListProviders
+  providers: [
+    {
+      deps: [CoordinateursRepository],
+      provide: CoordinateursListPresenter,
+      useClass: CoordinateursListPresenter
+    }
+  ]
 })
 export class CoordinateursListPage {
   private _coordinateursSort$: BehaviorSubject<CoordinateursSortPresentation> =

@@ -17,11 +17,11 @@ import {
   FilterPresentation,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
-  LieuxMediationNumeriqueRepository,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation,
   onlyWithLocalisation
-} from '../../../core';
+} from '../../../core/presenters';
+import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { slideInAnimation } from '../../animations';
 
 const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresentation): FormGroup =>

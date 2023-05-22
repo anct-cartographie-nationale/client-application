@@ -1,4 +1,5 @@
-import { LieuxMediationNumeriquePresenter, LieuxMediationNumeriqueRepository, MarkersPresenter } from '../../../core';
+import { LieuxMediationNumeriquePresenter, MarkersPresenter } from '../../../core/presenters';
+import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { AddressPresenter, AddressRepository } from '../../../adresse';
 import { LieuxMediationNumeriqueDetailsPresenter } from '../../presenters';
 import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '../../../../root';

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FeatureConfiguration } from '../../../../root';
-import { LieuMediationNumeriquePresentation } from '../../../core';
+import { LieuMediationNumeriquePresentation } from '../../../core/presenters';
 
 @Component({
   selector: 'app-lieux-mediation-numerique-list',

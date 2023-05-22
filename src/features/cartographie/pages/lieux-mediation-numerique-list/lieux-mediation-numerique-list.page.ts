@@ -12,12 +12,12 @@ import {
   FilterPresentation,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
-  NO_LOCALISATION,
   RegionPresentation,
   MarkersPresenter,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation
-} from '../../../core';
+} from '../../../core/presenters';
+import { NO_LOCALISATION } from '../../../core/models';
 import { CartographieLayout } from '../../layouts';
 import {
   inLieuxZoomLevel,

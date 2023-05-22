@@ -7,7 +7,8 @@ import {
   Service,
   Url
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { Aidant, HorairesPresentation, OpeningState } from '../../../core';
+import { Aidant } from '../../../core/models';
+import { HorairesPresentation, OpeningState } from '../../../core/presenters';
 
 export type SourcePresentation = {
   label: string;

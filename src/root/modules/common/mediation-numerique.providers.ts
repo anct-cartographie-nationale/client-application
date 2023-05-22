@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { LieuxMediationNumeriqueRepository } from '../../../features/core';
+import { LieuxMediationNumeriqueRepository } from '../../../features/core/repositories';
 import { LieuxMediationNumeriqueHttp } from '../../../features/core/data';
 import {
   BRAND_CONFIGURATION,

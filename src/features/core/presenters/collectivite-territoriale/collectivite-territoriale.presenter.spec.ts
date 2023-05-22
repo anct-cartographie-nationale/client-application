@@ -1,5 +1,10 @@
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { DepartementPresentation, LieuMediationNumeriquePresentation, RegionPresentation, toFrance } from '../../../core';
+import {
+  DepartementPresentation,
+  LieuMediationNumeriquePresentation,
+  RegionPresentation,
+  toFrance
+} from '../../../core/presenters';
 import {
   DEPARTEMENT_ZOOM_LEVEL,
   inDepartementZoomLevel,

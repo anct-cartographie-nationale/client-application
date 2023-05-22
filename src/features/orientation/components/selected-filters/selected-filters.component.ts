@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FilterFormPresentation } from '../../../core';
+import { FilterFormPresentation } from '../../../core/presenters';
 import conditionAcces from '../../pages/accessibilite/condition-acces.json';
 import publicSpecifiqueAcceuilli from '../../pages/accessibilite/public-specifique-accueilli.json';
 

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { OpeningState } from '../../../../core';
+import { OpeningState } from '../../../../core/presenters';
 import { SourcePresentation } from '../../../presenters';
 
 @Component({

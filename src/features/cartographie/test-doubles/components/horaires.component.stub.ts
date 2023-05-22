@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { HorairesPresentation } from '../../../core';
+import { HorairesPresentation } from '../../../core/presenters';
 
 @Component({
   selector: 'app-horaires',

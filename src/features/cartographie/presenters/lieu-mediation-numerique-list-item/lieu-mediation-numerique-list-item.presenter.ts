@@ -1,5 +1,6 @@
 import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { ifAny, LieuMediationNumeriquePresentation, openingState } from '../../../core';
+import { LieuMediationNumeriquePresentation, openingState } from '../../../core/presenters';
+import { ifAny } from '../../../core/utilities';
 import {
   LieuMediationNumeriqueListItemPresentation,
   LieuMediationNumeriqueListItemPresentationConditionsAcces
