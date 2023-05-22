@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LabelNational, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { FilterPresentation } from '../../../../core';
+import { FilterPresentation } from '../../../../core/presenters';
 import { OrientationSheetForm } from '../../../models';
 
 @Component({

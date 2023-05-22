@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { RouterOutlet, UrlSegment } from '@angular/router';
+import { regionFromNom, RegionPresentation, MarkersPresenter } from '../../../core/presenters';
 import { getBreadcrumbItems, BreadcrumbItem } from '../../presenters';
-import { regionFromNom, RegionPresentation, MarkersPresenter } from '../../../core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

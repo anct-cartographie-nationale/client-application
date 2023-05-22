@@ -4,8 +4,8 @@ import { delay, Observable, switchMap, tap, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
-import { MarkersPresenter } from '../../../core';
-import { coordinateurDetailsProviders } from './coordinateur-details.providers';
+import { MarkersPresenter } from '../../../core/presenters';
+import { ConseillersRepository, CoordinateursRepository } from '../../reporitories';
 import { ConseillerDetailsPresentation, CoordinateurDetailsPresentation } from './coordinateur-details.presentation';
 import { CoordinateurDetailsPresenter } from './coordinateur-details.presenter';
 
@@ -17,7 +17,13 @@ const byDistance = (conseillerA: ConseillerDetailsPresentation, conseillerB: Con
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './coordinateur-details.page.html',
-  providers: coordinateurDetailsProviders
+  providers: [
+    {
+      deps: [ConseillersRepository, CoordinateursRepository],
+      provide: CoordinateurDetailsPresenter,
+      useClass: CoordinateurDetailsPresenter
+    }
+  ]
 })
 export class CoordinateurDetailsPage {
   public conseillerSelected?: ConseillerDetailsPresentation;

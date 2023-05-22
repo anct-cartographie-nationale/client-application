@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
-import { RegionPresentation } from '../../../core';
+import { RegionPresentation } from '../../../core/presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

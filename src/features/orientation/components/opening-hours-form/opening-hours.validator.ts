@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { OpeningHours } from '../../../core';
+import { OpeningHours } from '../../../core/presenters';
 
 const isOpenNow = (openingHoursFields: OpeningHours): boolean => openingHoursFields.day === 'now';
 

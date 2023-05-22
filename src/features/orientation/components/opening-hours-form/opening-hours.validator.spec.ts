@@ -1,4 +1,4 @@
-import { OpeningHours } from '../../../core';
+import { OpeningHours } from '../../../core/presenters';
 import { isValidOpeningHours } from './opening-hours.validator';
 
 describe('opening hours validator', (): void => {

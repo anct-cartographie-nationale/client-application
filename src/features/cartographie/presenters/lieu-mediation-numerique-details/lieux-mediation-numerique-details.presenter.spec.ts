@@ -20,7 +20,8 @@ import {
   Typologies,
   Url
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { LieuxMediationNumeriqueRepository, NO_LOCALISATION } from '../../../core';
+import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
+import { NO_LOCALISATION } from '../../../core/models';
 import { LieuxMediationNumeriqueDetailsPresenter } from './lieux-mediation-numerique-details.presenter';
 import { LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
 import { ParamMap } from '@angular/router';

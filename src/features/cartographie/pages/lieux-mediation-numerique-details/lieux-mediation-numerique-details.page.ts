@@ -12,7 +12,7 @@ import {
   toLocalisationFromFilterFormPresentation,
   toRegion,
   MarkersPresenter
-} from '../../../core';
+} from '../../../core/presenters';
 import {
   inLieuxZoomLevel,
   LabelPresentation,

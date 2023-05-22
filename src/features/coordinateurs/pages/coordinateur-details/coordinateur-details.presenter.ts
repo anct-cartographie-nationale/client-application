@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { geographicDistance } from '../../../core';
+import { geographicDistance } from '../../../core/presenters';
 import { Coordinateur } from '../../models';
 import { ConseillersRepository, CoordinateursRepository } from '../../reporitories';
 import { ConseillerDetailsPresentation, CoordinateurDetailsPresentation } from './coordinateur-details.presentation';

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DepartementPresentation } from '../../../core';
+import { DepartementPresentation } from '../../../core/presenters';
 
 @Component({
   selector: 'app-regions-list',

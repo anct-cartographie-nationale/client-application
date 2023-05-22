@@ -8,7 +8,7 @@ import {
   regionFromNom,
   RegionPresentation,
   MarkersPresenter
-} from '../../../core';
+} from '../../../core/presenters';
 import { CartographieLayout } from '../../layouts';
 
 const departementsFilteredByRegion = (departements: DepartementPresentation[], departementCodes: string[]) =>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
-import { OpeningHours } from '../../../core';
+import { OpeningHours } from '../../../core/presenters';
 import { openingHoursValidator } from './opening-hours.validator';
 
 type OpeningHoursControls = Record<keyof OpeningHours, FormControl<OpeningHours[keyof OpeningHours] | null>>;

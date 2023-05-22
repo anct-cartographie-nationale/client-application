@@ -1,5 +1,5 @@
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { NO_LOCALISATION } from '../../../core';
+import { NO_LOCALISATION } from '../../../core/models';
 import { localisationFromStrings } from './localisation.presenter';
 
 describe('localisation presenter', (): void => {

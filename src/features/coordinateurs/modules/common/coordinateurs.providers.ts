@@ -8,12 +8,10 @@ import {
   ZOOM_LEVEL_TOKEN
 } from '../../../../root';
 import { CacheInterceptor } from '../../../../root/interceptors';
-import { AddressPresenter, AddressRepository } from '../../../adresse';
-import { MarkersPresenter } from '../../../core';
+import { AddressHttp, AddressPresenter, AddressRepository } from '../../../adresse';
+import { MarkersPresenter } from '../../../core/presenters';
 import { ConseillersHttp, CoordinateursHttp } from '../../data';
 import { ConseillersRepository, CoordinateursRepository } from '../../reporitories';
-import { CoordinateursOnMapPresenter } from '../../layouts/coordinateurs/coordinateurs-on-map';
-import { ConseillersOnMapPresenter } from '../../layouts/coordinateurs/conseillers-on-map';
 
 export const coordinateursProviders = [
   {
@@ -44,14 +42,9 @@ export const coordinateursProviders = [
     useClass: ConseillersHttp
   },
   {
-    deps: [CoordinateursRepository],
-    provide: CoordinateursOnMapPresenter,
-    useClass: CoordinateursOnMapPresenter
-  },
-  {
-    deps: [ConseillersRepository],
-    provide: ConseillersOnMapPresenter,
-    useClass: ConseillersOnMapPresenter
+    deps: [HttpClient],
+    provide: AddressRepository,
+    useClass: AddressHttp
   },
   {
     deps: [AddressRepository],

@@ -2,15 +2,27 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
-import { MarkersPresenter } from '../../../core';
+import { MarkersPresenter } from '../../../core/presenters';
 import { ConseillerOnMapPresentation, CoordinateurOnMapPresentation } from '../../presenters';
+import { ConseillersRepository, CoordinateursRepository } from '../../reporitories';
 import { CoordinateursOnMapPresenter } from './coordinateurs-on-map';
 import { ConseillersOnMapPresenter } from './conseillers-on-map';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './coordinateurs.layout.html'
+  templateUrl: './coordinateurs.layout.html',
+  providers: [
+    {
+      deps: [CoordinateursRepository],
+      provide: CoordinateursOnMapPresenter,
+      useClass: CoordinateursOnMapPresenter
+    },
+    {
+      deps: [ConseillersRepository],
+      provide: ConseillersOnMapPresenter,
+      useClass: ConseillersOnMapPresenter
+    }
+  ]
 })
 export class CoordinateursLayout {
   public coordinateurs$: Observable<CoordinateurOnMapPresentation[]> = this._coordinateursOnMapPresenter.coordinateurs$();
@@ -26,7 +38,6 @@ export class CoordinateursLayout {
   public userLocalisation?: Localisation;
 
   public constructor(
-    @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
     public readonly markersPresenter: MarkersPresenter,
     public readonly router: Router,
     public readonly route: ActivatedRoute,

@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { BrandConfiguration, BRAND_TOKEN, ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

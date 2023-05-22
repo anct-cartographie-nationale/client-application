@@ -7,7 +7,7 @@ import {
   LieuMediationNumeriquePresentation,
   RegionPresentation,
   toDepartement
-} from '../../../core';
+} from '../../../core/presenters';
 import { HubPresentation } from '../../presenters';
 
 export const findLieuToFocus =

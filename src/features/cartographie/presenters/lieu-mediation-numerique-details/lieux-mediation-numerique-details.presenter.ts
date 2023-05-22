@@ -9,15 +9,10 @@ import {
   ModaliteAccompagnement,
   ModalitesAccompagnement
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import {
-  geographicDistance,
-  ifAny,
-  LieuMediationNumeriqueWithAidants,
-  LieuxMediationNumeriqueRepository,
-  NO_LOCALISATION,
-  openingState,
-  parseHoraires
-} from '../../../core';
+import { LieuMediationNumeriqueWithAidants, NO_LOCALISATION } from '../../../core/models';
+import { geographicDistance, openingState, parseHoraires } from '../../../core/presenters';
+import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
+import { ifAny } from '../../../core/utilities';
 import {
   LieuMediationNumeriqueDetailsPresentation,
   ModaliteAccompagnementPresentation,

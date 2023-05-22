@@ -1,6 +1,6 @@
 import { HubPresentation } from '../../presenters';
 import { toHub } from './lieux-mediation-numerique-list.presentation';
-import { RegionPresentation } from '../../../core';
+import { RegionPresentation } from '../../../core/presenters';
 
 describe('lieux mediation numerique list presentation', (): void => {
   it('should get hub from region', (): void => {

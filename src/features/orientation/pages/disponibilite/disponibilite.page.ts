@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { FEATURES_TOKEN, FeaturesConfiguration } from '../../../../root';
-import { OpeningHours } from '../../../core';
+import { OpeningHours } from '../../../core/presenters';
 import { OrientationLayout } from '../../layouts';
 import { OrientationInformationContent } from '../../presenters';
 

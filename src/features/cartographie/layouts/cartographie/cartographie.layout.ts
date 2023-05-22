@@ -15,12 +15,12 @@ import {
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation,
   nearestRegion,
-  ifAny,
   openingState,
   FrancePresentation,
   TerritoirePresentation,
   MarkersPresenter
-} from '../../../core';
+} from '../../../core/presenters';
+import { ifAny } from '../../../core/utilities';
 import {
   getNextRouteFromZoomLevel,
   shouldNavigateToListPage,

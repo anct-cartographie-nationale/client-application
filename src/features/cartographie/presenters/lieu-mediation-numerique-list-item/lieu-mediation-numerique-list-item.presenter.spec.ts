@@ -1,7 +1,7 @@
 import { ConditionAcces, LabelNational, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueListItemPresentation } from './lieu-mediation-numerique-list-item.presentation';
 import { toLieuxMediationNumeriqueListItemsPresentation } from './lieu-mediation-numerique-list-item.presenter';
-import { LieuMediationNumeriquePresentation } from '../../../core';
+import { LieuMediationNumeriquePresentation } from '../../../core/presenters';
 
 describe('lieux médiation numérique list item presenter', (): void => {
   it('should get minimal list item presenter', async (): Promise<void> => {

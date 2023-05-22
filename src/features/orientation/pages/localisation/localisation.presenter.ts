@@ -1,5 +1,6 @@
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { LieuMediationNumeriquePresentation, NO_LOCALISATION } from '../../../core';
+import { NO_LOCALISATION } from '../../../core/models';
+import { LieuMediationNumeriquePresentation } from '../../../core/presenters';
 
 export type DistanceRange = {
   distance: number;

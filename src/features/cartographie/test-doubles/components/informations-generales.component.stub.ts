@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { OpeningState } from '../../../core';
+import { OpeningState } from '../../../core/presenters';
 
 @Component({
   selector: 'app-informations-generales',

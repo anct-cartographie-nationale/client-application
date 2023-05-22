@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { BRAND_TOKEN, BrandConfiguration } from '../../../../root';
-import { FilterPresentation } from '../../../core';
+import { FilterPresentation } from '../../../core/presenters';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { OrientationSheetForm } from '../../models';
 

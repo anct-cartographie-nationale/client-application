@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FilterPresentation } from '../../../core';
+import { FilterPresentation } from '../../../core/presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

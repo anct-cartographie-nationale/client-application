@@ -1,5 +1,5 @@
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { departements, geographicDistance, FrancePresentation, regions, france } from '../../../core';
+import { departements, geographicDistance, FrancePresentation, regions, france } from '../../../core/presenters';
 import codePostalNotMatchingCodeDepartement from './code-postal-not-matching-code-departement.json';
 import { DepartementPresentation } from './presentations/departement.presentation';
 import { RegionPresentation } from './presentations/region.presentation';

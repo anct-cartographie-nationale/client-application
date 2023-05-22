@@ -4,7 +4,7 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable
 import { map, mergeWith } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { AddressFoundPresentation, AddressPresenter, AddressRepository } from '../../../adresse';
-import { LieuxMediationNumeriquePresenter } from '../../../core';
+import { LieuxMediationNumeriquePresenter } from '../../../core/presenters';
 import { OrientationLayout } from '../../layouts';
 import { localisationFromStrings } from './localisation.presenter';
 

@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { environment } from '../../../../environments/environment';
-import { LieuxMediationNumeriquePresenter, LieuxMediationNumeriqueRepository } from '../../../core';
+import { LieuxMediationNumeriquePresenter } from '../../../core/presenters';
+import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
