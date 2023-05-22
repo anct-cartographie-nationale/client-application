@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import {
   ASSETS_CONFIGURATION,
   ASSETS_TOKEN,
@@ -7,6 +7,7 @@ import {
   ZOOM_LEVEL_CONFIGURATION,
   ZOOM_LEVEL_TOKEN
 } from '../../../../root';
+import { CacheInterceptor } from '../../../../root/interceptors';
 import { AddressPresenter, AddressRepository } from '../../../adresse';
 import { MarkersPresenter } from '../../../core';
 import { ConseillersHttp, CoordinateursHttp } from '../../data';
@@ -56,5 +57,10 @@ export const coordinateursProviders = [
     deps: [AddressRepository],
     provide: AddressPresenter,
     useClass: AddressPresenter
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: CacheInterceptor,
+    multi: true
   }
 ];
