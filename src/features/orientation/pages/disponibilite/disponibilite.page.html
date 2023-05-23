@@ -12,17 +12,27 @@
           <h2 class="accordion-header" id="headingDatePrecise">
             <button
               type="button"
-              class="accordion-button orientation-btn p-3 collapsed"
+              class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative w-100"
               aria-controls="collapseDatePrecise"
-              [class.collapsed]="collapseDatePrecise.isCollapsed$ | async"
+              [class.bg-white]="(collapseDatePrecise.isCollapsed$ | async) === false"
               [attr.aria-expanded]="collapseDatePrecise.isExpanded$ | async"
               (click)="collapseDatePrecise.toggle()">
-              <i class="ri-calendar-todo-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-              <b class="orientation-btn-label">Je cherche des structures ouvertes à une date précise</b>
-              <i
-                class="ri-information-line me-2 fw-normal text-muted ri-2x position-absolute end-0 me-5 mb-2"
-                role="button"
-                (click)="selectOrientationInformation(false); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()"></i>
+              <span class="ri-circled bg-primary text-light fw-normal me-3">
+                <i class="ri-calendar-todo-line"></i>
+              </span>
+              <span class="orientation-btn-label my-auto text-start">
+                Je cherche des structures ouvertes à une date précise
+              </span>
+              <span class="ri-2x text-muted ms-auto me-3 end-0">
+                <i
+                  class="ri-information-line me-2 fw-normal"
+                  role="button"
+                  (click)="selectOrientationInformation(false); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()"></i>
+                <i class="ri-add-line" *ngIf="collapseDatePrecise.isCollapsed$ | async; else: expanded"></i>
+                <ng-template #expanded>
+                  <i class="ri-subtract-line"></i>
+                </ng-template>
+              </span>
             </button>
           </h2>
           <app-collapse
@@ -62,13 +72,17 @@
         <ng-container *ngIf="features.get('cartographie') as cartographie">
           <a
             *ngIf="cartographie.active"
-            class="accordion-button p-3 bg-light text-decoration-none"
+            class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative"
             [class.disabled]="((orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0) === 0"
             [routerLink]="['/','cartographie']"
             queryParamsHandling="preserve">
-            <i class="ri-road-map-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-            <b class="accordion-button-label">J’affiche toutes les structures correspondant à ma recherche</b>
-            <span class="ri-2x text-muted ms-auto position-absolute me-3 end-0">
+            <span class="ri-circled bg-primary text-light fw-normal me-3">
+              <i class="ri-road-map-line"></i>
+            </span>
+            <span class="orientation-btn-label my-auto text-start">
+              J’affiche toutes les structures correspondant à ma recherche
+            </span>
+            <span class="ri-2x text-muted ms-auto me-3 end-0">
               <i
                 class="ri-information-line me-2 fw-normal"
                 role="button"
@@ -78,13 +92,17 @@
           </a>
           <a
             *ngIf="!cartographie.active && cartographie.url"
-            class="accordion-button p-3 bg-light text-decoration-none"
+            class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative"
             [class.disabled]="((orientationLayout.lieuxMediationNumeriqueCount$ | async) ?? 0) === 0"
             [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
             rel="keep-params">
-            <i class="ri-road-map-line ri-xl ri-fw ri-space me-3 bg-primary text-light rounded-circle"></i>
-            <b class="accordion-button-label">J’affiche toutes les structures correspondant à ma recherche</b>
-            <span class="ri-2x text-muted ms-auto position-absolute me-3 end-0">
+            <span class="ri-circled bg-primary text-light fw-normal me-3">
+              <i class="ri-road-map-line"></i>
+            </span>
+            <span class="orientation-btn-label my-auto text-start">
+              J’affiche toutes les structures correspondant à ma recherche
+            </span>
+            <span class="ri-2x text-muted ms-auto me-3 end-0">
               <i
                 class="ri-information-line me-2 fw-normal"
                 role="button"
