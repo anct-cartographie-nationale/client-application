@@ -35,6 +35,17 @@ export class ConteneurComponent {
     public readonly router: Router
   ) {}
 
+  public close(): void {
+    this._isExpanded && this._hiding$.next(true);
+    this._isExpanded = false;
+    this._expanded$.next(false);
+
+    setTimeout(() => {
+      this._showing$.next(false);
+      this._hiding$.next(false);
+    }, ANIMATION_DURATION);
+  }
+
   public toggle(): void {
     this._isExpanded ? this._hiding$.next(true) : this._showing$.next(true);
     this._isExpanded = !this._isExpanded;
