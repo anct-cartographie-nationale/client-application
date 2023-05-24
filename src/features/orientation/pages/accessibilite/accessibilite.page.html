@@ -28,8 +28,9 @@
             appCheckboxArray
             formControlName="conditions_acces"
             class="form-check-input"
+            [attr.id]="'conditionFinancieresLabelChip' + i"
             [value]="conditionFinancieresOption.value"
-            [attr.id]="'conditionFinancieresLabelChip' + i" />
+            (change)="selectParticipation(i)" />
           <label class="form-check-label bg-white" [attr.for]="'conditionFinancieresLabelChip' + i">
             <b>{{ conditionFinancieresOption.label }}</b>
           </label>
