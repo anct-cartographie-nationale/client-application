@@ -1,15 +1,16 @@
 import { UrlSegment } from '@angular/router';
 import { BreadcrumbItem } from './breadcrumb-item.presentation';
 
-const breadcrumbItemsForUnhandledPaths: BreadcrumbItem[] = [
+const breadcrumbItemsForUnhandledPathsRegional: BreadcrumbItem[] = [
   {
-    label: 'Lieux de médiation numérique affichés sur la carte'
+    label: 'Hubs territoriaux pour un numérique inclusif',
+    link: ['https://societenumerique.gouv.fr/fr/dispositif/hubs-numerique/']
   }
 ];
 
-const breadcrumbItemsForRoot: BreadcrumbItem[] = [
+const breadcrumbItemsForUnhandledPathsLocal: BreadcrumbItem[] = [
   {
-    label: 'Lieux de médiation numérique par région'
+    label: 'Lieux de médiation numérique affichés sur la carte'
   }
 ];
 
@@ -45,7 +46,7 @@ const getBreadcrumbItemForIndex = (urlSegments: UrlSegment[], index: number): Br
 
 const getBreadcrumbItemsFromUrlSegments = (urlSegments: UrlSegment[]) =>
   isRootPath(urlSegments)
-    ? breadcrumbItemsForRoot
+    ? breadcrumbItemsForUnhandledPathsRegional
     : [
         ...urlSegments.reduce(
           (breadcrumbItems: BreadcrumbItem[], urlSegment: UrlSegment, index: number) =>
@@ -56,7 +57,10 @@ const getBreadcrumbItemsFromUrlSegments = (urlSegments: UrlSegment[]) =>
         )
       ];
 
-export const getBreadcrumbItems = (urlSegments: UrlSegment[]): BreadcrumbItem[] =>
+const breadcrumbItemsForUnhandledPaths = (zoomLevel: number): BreadcrumbItem[] =>
+  zoomLevel < 9 ? breadcrumbItemsForUnhandledPathsRegional : breadcrumbItemsForUnhandledPathsLocal;
+
+export const getBreadcrumbItems = (urlSegments: UrlSegment[], zoomLevel: number): BreadcrumbItem[] =>
   isUnhandledUrlSegments(urlSegments)
-    ? breadcrumbItemsForUnhandledPaths
+    ? breadcrumbItemsForUnhandledPaths(zoomLevel)
     : getBreadcrumbItemsFromUrlSegments(urlSegments.slice(0, 3));
