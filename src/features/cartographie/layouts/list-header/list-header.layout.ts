@@ -10,9 +10,10 @@ import { getBreadcrumbItems, BreadcrumbItem } from '../../presenters';
 export class ListHeaderLayout {
   @ViewChild(RouterOutlet) public routerOutlet!: RouterOutlet;
 
-  public getBreadcrumbItems = (urlSegments: UrlSegment[]): BreadcrumbItem[] => getBreadcrumbItems(urlSegments);
+  public getBreadcrumbItems = (urlSegments: UrlSegment[], zoomLevel: number): BreadcrumbItem[] =>
+    getBreadcrumbItems(urlSegments, zoomLevel);
 
-  public constructor(private _markersPresenter: MarkersPresenter) {}
+  public constructor(public readonly markersPresenter: MarkersPresenter) {}
 
   public showLieux(label: string): void {
     const regionMatchingLabel: RegionPresentation | undefined = regionFromNom(label);
@@ -20,10 +21,10 @@ export class ListHeaderLayout {
   }
 
   private setToRegionView(regionMatchingLabel: RegionPresentation): void {
-    this._markersPresenter.center(regionMatchingLabel.localisation, regionMatchingLabel.zoom);
+    this.markersPresenter.center(regionMatchingLabel.localisation, regionMatchingLabel.zoom);
   }
 
   private resetToDefaultView(): void {
-    this._markersPresenter.reset();
+    this.markersPresenter.reset();
   }
 }

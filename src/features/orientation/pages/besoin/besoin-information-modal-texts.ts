@@ -205,7 +205,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
       'Don de matériel',
       'Louer/se faire prêter',
       'Acheter ou louer à bas prix',
-      'Avoir un ordinateur, une connexion internet ou encore une imprimante à la maison'
+      'Avoir un ordinateur, une imprimante à la maison, etc.'
     ],
     label: 'Exemples'
   }
