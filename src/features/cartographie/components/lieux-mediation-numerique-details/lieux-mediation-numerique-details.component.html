@@ -51,12 +51,13 @@
         [status]="lieuMediationNumerique.status"></app-informations-pratiques>
     </li>
     <li
-      class="list-group-item"
+      class="list-group-item border-bottom-0"
       *ngIf="lieuMediationNumerique.presentation?.detail || lieuMediationNumerique.presentation?.resume">
       <app-description
         [detail]="lieuMediationNumerique.presentation?.detail"
         [resume]="lieuMediationNumerique.presentation?.resume"></app-description>
     </li>
+    <app-accessibilite [accessibilite]="lieuMediationNumerique.accessibilite"></app-accessibilite>
     <li class="list-group-item">
       <div class="row">
         <div class="col-md-4 mt-4">
