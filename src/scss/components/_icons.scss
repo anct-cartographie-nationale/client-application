@@ -90,6 +90,25 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   line-height: 2em;
 }
 
+.ri-circled {
+  padding: $spacer * 1.5;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  width: $square-lg;
+  height: $square-lg;
+
+  i {
+    position: absolute;
+    left: 0;
+    top: -3px;
+    min-width: 2em;
+    font-size: 1.5em;
+    line-height: 2em;
+    vertical-align: -0.075em;
+  }
+}
+
 .ri-wifi-line::before {
   content: '\f2c0';
 }

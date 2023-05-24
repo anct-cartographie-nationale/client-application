@@ -9,10 +9,8 @@
     *ngIf="serviceItem.value === selectedServiceItem">
     <i class="ri-check-line"></i>
   </span>
-  <span>
-    <i
-      [ngClass]="serviceItem.icon"
-      class="ri-xl ri-fw ri-space fw-normal me-3 bg-primary text-light rounded-circle d-block"></i>
+  <span class="ri-circled bg-primary text-light fw-normal me-3">
+    <i [ngClass]="serviceItem.icon"></i>
   </span>
   <span class="text-start">
     <span class="orientation-btn-label">{{ serviceItem.label }}</span>
