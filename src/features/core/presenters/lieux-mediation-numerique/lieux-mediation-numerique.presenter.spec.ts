@@ -677,7 +677,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
-  it('should filter lieux mediation numerique on publics_accueillis property', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on publics_accueillis that do not contains Adultes property', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -690,6 +690,69 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         }),
         services: Services([Service.AccederADuMateriel]),
         date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes]),
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = {
+      publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes])
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumerique: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      new LieuxMediationNumeriquePresenter(lieuxMediationNumeriqueRepository).lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter)
+      )
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumerique).toStrictEqual([
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccederADuMateriel],
+        date_maj: new Date('2022-10-10'),
+        publics_accueillis: [PublicAccueilli.Adultes],
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on publics_accueillis that do not contains Adultes and Surdité properties', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccederADuMateriel]),
+        date_maj: new Date('2022-10-10'),
+        publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes]),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
       {
@@ -716,12 +779,11 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
     } as LieuxMediationNumeriqueRepository;
 
-    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
-      lieuxMediationNumeriqueRepository
-    );
-
     const lieuxMediationNumerique: LieuMediationNumeriquePresentation[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+      new LieuxMediationNumeriquePresenter(lieuxMediationNumeriqueRepository).lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter)
+      )
     );
 
     expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumerique).toStrictEqual([
