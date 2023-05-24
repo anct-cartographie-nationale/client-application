@@ -1,6 +1,16 @@
 /* eslint-disable @angular-eslint/component-selector */
 
-import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+  QueryList
+} from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 const DEFAULT_INDEX: number = -1;
@@ -19,6 +29,8 @@ export class DropdownPaneComponent {
   public activeIndex: number = DEFAULT_INDEX;
 
   public expanded$: Observable<boolean> = this._expanded$.asObservable();
+
+  @ContentChildren('results') public results: QueryList<ElementRef> | null = null;
 
   @Input() public dropdownControl: HTMLElement | null = null;
 
@@ -47,6 +59,11 @@ export class DropdownPaneComponent {
   public setIndex(index: number): void {
     this.activeIndex = index;
     this.indexChange.next(this.activeIndex);
+  }
+
+  public focus(): void {
+    if (this.results == null || this.results.first == null) return;
+    this.results.first.nativeElement.firstChild.focus();
   }
 
   @HostListener('document:click', ['$event']) public onClickOutside(clickEvent: Event): void {
