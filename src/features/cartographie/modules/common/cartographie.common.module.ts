@@ -9,6 +9,7 @@ import { AdresseModule, UserLocationModule } from '../../../adresse';
 import { pages } from '../../pages';
 import { CartographieLayout, ListHeaderLayout } from '../../layouts';
 import { components } from '../../components';
+import { CollapseModule } from '@features/core/components';
 
 @NgModule({
   declarations: [CartographieLayout, ListHeaderLayout, ...pages, ...components],
@@ -23,7 +24,8 @@ import { components } from '../../components';
     AdresseModule,
     PhonePipeModule,
     DistancePipeModule,
-    UserLocationModule
+    UserLocationModule,
+    CollapseModule
   ]
 })
 export class CartographieCommonModule {}
