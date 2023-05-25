@@ -6,7 +6,7 @@
       class="my-5"
       style="max-width: 100%; max-height: 100px"
       alt="" />
-    <ng-container *ngIf="((route.queryParamMap | async)?.keys?.length ?? 0) === 0; else: restart">
+    <ng-container *ngIf="!hasActiveFilter; else: restart">
       <h1 class="h2 fw-bold">
         Bienvenue sur la Cartographie
         <span class="text-primary">{{ brandConfiguration.name }}</span>
