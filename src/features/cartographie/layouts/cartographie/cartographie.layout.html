@@ -40,7 +40,7 @@
       [movingOptions]="{speed: 2}"
       *ngIf="(markersPresenter.localisation$ | async) as localisation"
       class="h-100 w-100 overflow-hidden"
-      [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"
+      [style]="'assets/data/map-style.json'"
       [zoom]="[(markersPresenter.zoom$ | async) ?? 0]"
       [center]="[localisation.longitude, localisation.latitude]"
       (zoomEvt)="zooming($event)"

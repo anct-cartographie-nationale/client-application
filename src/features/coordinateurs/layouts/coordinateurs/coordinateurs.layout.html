@@ -35,7 +35,7 @@
           [movingMethod]="'flyTo'"
           [movingOptions]="{speed: 2}"
           class="h-100 w-100 overflow-hidden"
-          [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"
+          [style]="'assets/data/map-style.json'"
           [zoom]="[(markersPresenter.zoom$ | async) ?? 0]"
           (zoomEnd)="currentZoom = $event.target.getZoom()"
           [center]="[localisation.longitude, localisation.latitude]">
