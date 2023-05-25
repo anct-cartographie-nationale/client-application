@@ -1,4 +1,4 @@
-<div class="d-print-none h-100 d-flex flex-column">
+<div class="d-print-none d-flex h-100 flex-column">
   <app-informations-generales
     class="p-4 sticky-top bg-primary text-white d-block"
     [id]="lieuMediationNumerique.id"
@@ -8,13 +8,37 @@
     [status]="lieuMediationNumerique.status"
     [source]="lieuMediationNumerique.source"
     (closeDetails)="closeDetails.emit(lieuMediationNumerique)"></app-informations-generales>
-  <div class="bg-light position-relative">
+  <div class="position-relative">
     <app-boutons-action
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
       [priseRdv]="lieuMediationNumerique.prise_rdv"
       (print)="printSheetModal.toggle()"
       (sendByEmail)="sendByEmailModal.toggle()"></app-boutons-action>
+    <div class="border-top border-bottom d-xl-none" style="height: 275px">
+      <mgl-map
+        *ngIf="lieuMediationNumerique.localisation as localisation"
+        class="h-100 w-100 overflow-hidden"
+        [style]="'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json'"
+        [interactive]="false"
+        [attributionControl]="false"
+        [zoom]="[14]"
+        [center]="[localisation.longitude, localisation.latitude]">
+        <app-lieu-mediation-numerique-markers
+          *ngIf="localisation"
+          [displayTooltip]="false"
+          [lieuxMediationNumeriques]="[
+            {
+              id: lieuMediationNumerique.id,
+              nom: lieuMediationNumerique.nom,
+              labels_nationaux: lieuMediationNumerique.labels_nationaux,
+              latitude: localisation.latitude,
+              longitude: localisation.longitude
+            }
+          ]"></app-lieu-mediation-numerique-markers>
+      </mgl-map>
+    </div>
   </div>
+
   <ul class="list-group list-group-lg list-group-flush list-group-flush-at-edge flex-grow-1 mx-4">
     <li class="list-group-item">
       <app-informations-pratiques
@@ -23,7 +47,8 @@
         [accessibilite]="lieuMediationNumerique.accessibilite"
         [courriel]="lieuMediationNumerique.contact?.courriel"
         [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
-        [distance]="lieuMediationNumerique.distance"></app-informations-pratiques>
+        [distance]="lieuMediationNumerique.distance"
+        [status]="lieuMediationNumerique.status"></app-informations-pratiques>
     </li>
     <li
       class="list-group-item"
@@ -60,8 +85,8 @@
         [labelsAutres]="lieuMediationNumerique.labels_autres"
         (showLabel)="showLabel.emit($event)"></app-labellisations>
     </li>
-    <li class="list-group-item">
-      <button *ngIf="!lieuIsFranceServices()" (click)="reportAnError.emit()" class="btn btn-secondary btn-sm my-4">
+    <li *ngIf="!lieuIsFranceServices()" class="list-group-item">
+      <button (click)="reportAnError.emit()" class="btn btn-secondary btn-sm my-4">
         Signaler une erreur
         <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
       </button>

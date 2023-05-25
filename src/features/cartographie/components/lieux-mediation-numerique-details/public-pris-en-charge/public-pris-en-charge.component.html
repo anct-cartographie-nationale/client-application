@@ -1,7 +1,10 @@
 <ng-container *ngIf="publicsAccueillis">
   <div class="d-print-none">
     <div class="h5 text-muted text-uppercase mb-3">Propriété public</div>
-    <span class="badge rounded-pill text-bg-light p-2 me-2 mb-2 fs-6" *ngFor="let publicAccueilli of publicsAccueillis">
+    <span
+      class="badge rounded-pill text-bg-light p-2 me-2 mb-2 fs-6 overflow-hidden"
+      style="max-width: 400px; text-overflow: ellipsis"
+      *ngFor="let publicAccueilli of publicsAccueillis">
       <span class="opacity-75">{{ publicAccueilli }}</span>
     </span>
   </div>
