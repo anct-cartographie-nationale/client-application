@@ -34,8 +34,7 @@ import {
   ZOOM_LEVEL_TOKEN,
   ZoomLevelConfiguration
 } from '../../../../root';
-import { LngLatBounds, MapLibreEvent, StyleSpecification } from 'maplibre-gl';
-import styleJson from './style.json';
+import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
@@ -123,8 +122,6 @@ export class CartographieLayout {
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
   public userLocalisation?: Localisation;
-
-  public styleJsonFile: StyleSpecification = styleJson as StyleSpecification;
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
