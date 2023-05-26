@@ -2,7 +2,7 @@
   <mgl-popup
     *ngIf="highlight | async as lieuMediationNumerique"
     anchor="bottom"
-    [offset]="[0, -30]"
+    [offset]="[0, -40]"
     [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]"
     [closeButton]="false">
     <div
@@ -24,11 +24,11 @@
   </mgl-popup>
 </ng-container>
 <ng-container *ngFor="let lieuMediationNumerique of lieuxMediationNumeriques; index as i; trackBy: trackByLieuId">
-  <mgl-marker [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]">
+  <mgl-marker
+    [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]"
+    [className]="hoverId === lieuMediationNumerique.id || selectedId === lieuMediationNumerique.id ? 'marker-hover' : ''">
     <div
       role="button"
-      tabindex="-1"
-      [class.marker-hover]="hoverId === lieuMediationNumerique.id || selectedId === lieuMediationNumerique.id"
       (click)="showDetails.emit(lieuMediationNumerique)"
       (mouseenter)="highlight.emit(lieuMediationNumerique)"
       (mouseleave)="highlight.emit()">
@@ -40,10 +40,11 @@
           lieuMediationNumerique.status?.label !== 'Fermé' && lieuMediationNumerique.status?.label !== 'Ouvert'
         "
         width="45"
-        height="70"
-        viewBox="0 0 40 65"
+        height="79"
+        viewBox="0 0 40 74"
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
+        <ellipse class="marker-base" cx="20" cy="61.5" rx="11" ry="4" />
         <g *ngIf="lieuMediationNumerique.labels_nationaux?.includes($any('CNFS')); else defaultMarker" class="marker-body">
           <path class="marker-shape" d="m20.8 54.1 13.6-23.6V13.8L20 5.5 5.6 13.8v16.7l13.6 23.6z" />
           <path class="marker-shape-out" d="M29.6 16.6 20 11.1l-9.6 5.5v11.1l9.6 5.5 9.6-5.5v-3.2h-5.5v-4.7h5.5z" />
@@ -58,7 +59,6 @@
             <circle class="marker-opening-status" cx="27.2" cy="42.5" r="6.6" />
           </g>
         </ng-template>
-        <ellipse class="marker-base" cx="20" cy="61.5" rx="10" ry="2.5" />
       </svg>
     </div>
   </mgl-marker>

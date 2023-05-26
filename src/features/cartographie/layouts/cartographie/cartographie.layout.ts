@@ -59,6 +59,14 @@ const toLieuxWithOpeningState =
         )
       : lieuxMediationNumerique;
 
+const toLieuxByLongitude = (LieuxMediationNumerique: LieuMediationNumeriquePresentation[]) =>
+  LieuxMediationNumerique.sort(
+    (
+      lieuMediationNumeriqueA: LieuMediationNumeriquePresentation,
+      lieuMediationNumeriqueB: LieuMediationNumeriquePresentation
+    ): number => lieuMediationNumeriqueB.latitude - lieuMediationNumeriqueA.latitude
+  );
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cartographie.layout.html',
@@ -111,6 +119,7 @@ export class CartographieLayout {
         ),
         withLatestFrom(this._currentZoom$),
         map(toLieuxWithOpeningState(new Date())),
+        map(toLieuxByLongitude),
         delay(0),
         tap(() => this._loadingState$.next(false))
       );
