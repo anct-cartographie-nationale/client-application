@@ -7,23 +7,26 @@
 .marker-cnfs {
   .marker-body {
     transform: translateY(11px);
-    filter: drop-shadow(0 0 0 rgb(0 0 0 / 0%));
     transition: transform 0.35s cubic-bezier(0.3, 0.8, 0.55, 1.9), filter 0.4s ease-in-out;
 
     .marker-shape {
       stroke: $white;
-      stroke-width: 2px;
+      stroke-width: 1.5px;
+      filter: drop-shadow(0 0 0 rgb(0 0 0 / 0%));
     }
 
     .marker-opening-status {
       stroke: $white;
-      stroke-width: 3;
+      stroke-width: 1.5;
     }
   }
 
   .marker-base {
     opacity: 0;
     transition: 0.5s;
+    stroke: $white;
+    stroke-width: 3;
+    filter: drop-shadow(0 2px 2px $primary);
   }
 }
 
@@ -83,7 +86,15 @@
 
     .marker-body {
       transform: translateY(0);
-      filter: drop-shadow(0 2px 2px rgb(0 0 0 / 60%));
+
+      .marker-shape {
+        stroke-width: 3.5;
+        filter: drop-shadow(0 2px 2px rgb(0 0 0 / 60%));
+      }
+
+      .marker-opening-status {
+        stroke-width: 3.5;
+      }
     }
   }
 }
