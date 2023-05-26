@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { OpeningState } from '../../../../core/presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,4 +14,5 @@ export class InformationsPratiquesComponent {
   @Input() public courriel?: string;
   @Input() public telephone?: string;
   @Input() public distance?: number;
+  @Input() public status?: OpeningState;
 }
