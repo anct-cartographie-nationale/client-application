@@ -12,7 +12,6 @@ $muted: #999;
 $muted-dark: #888;
 $dark: #161616;
 $black: #000 !default;
-$acces-libre: #1a578b;
 $transparent: rgba(117 190 218 / 50%);
 $min-contrast-ratio: 2.7;
 $box-shadow-sm: 0 0.25rem 0.25rem rgba($black, 0.25);
@@ -27,8 +26,7 @@ $theme-colors: (
   'light': $light,
   'muted': $muted,
   'muted-dark': $muted-dark,
-  'dark': $dark,
-  'acces-libre': $acces-libre
+  'dark': $dark
 ) !default;
 $spacer: 1rem !default;
 $spacers: (

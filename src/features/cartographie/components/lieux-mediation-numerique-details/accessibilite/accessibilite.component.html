@@ -22,7 +22,7 @@
         </a>
         <div class="ps-3 d-flex text-muted-dark align-items-center">
           <i class="ri-close-circle-fill me-1"></i>
-          <em class="mt-1">Pas d'informations</em>
+          <em class="mt-1">Pas d'information</em>
         </div>
       </div>
     </ng-template>
@@ -41,7 +41,7 @@
         [alt]="'acces-libre.svg'" />
       <span class="ms-auto">
         <i *ngIf="collapseAccesLibre.isCollapsed$ | async" class="ri-information-line ri-xl text-muted-dark"></i>
-        <i *ngIf="collapseAccesLibre.isExpanded$ | async" class="ri-close-circle-fill ri-xl text-acces-libre"></i>
+        <i *ngIf="collapseAccesLibre.isExpanded$ | async" class="ri-close-circle-fill ri-xl text-primary"></i>
       </span>
     </button>
   </div>
