@@ -16,8 +16,29 @@
     [filters]="(filters$ | async) ?? undefined"></app-lieux-mediation-numerique-details>
 </div>
 <ng-template #lieuNotFound>
-  <div class="d-flex flex-column justify-content-between h-100">
-    <h2 class="bg-primary text-bg-dark p-3">Structure introuvable</h2>
+  <div
+    class="d-flex flex-column justify-content-between h-100 offcanvas offcanvas-start"
+    [class.show]="this.isExpanded"
+    aria-labelledby="offcanvasNoLieuFound"
+    [attr.aria-modal]="this.isExpanded"
+    [attr.role]="this.isExpanded"
+    style="position: relative; width: 100%">
+    <div class="d-flex align-items-center bg-primary text-bg-dark p-3">
+      <div class="d-flex flex-grow-1 p-3">
+        <i class="ri-4x ri-xl ri-close-circle-line me-3 mt-1"></i>
+        <div>
+          <p class="m-0">Erreur</p>
+          <h2 class="bg-primary">
+            <b>Structure introuvable</b>
+          </h2>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white opacity-100 small mb-0 me-2"
+        aria-label="Close"
+        (click)="onCloseNoLieuFound()"></button>
+    </div>
     <div class="text-center p-3">
       <img *ngIf="brandConfiguration.logo" class="mb-4 w-50" [src]="brandConfiguration.logo" alt="" />
       <h3 class="mb-5">

@@ -55,6 +55,8 @@ export class LieuxMediationNumeriqueDetailsPage {
     }))
   );
 
+  public isExpanded: boolean = true;
+
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
@@ -124,5 +126,13 @@ export class LieuxMediationNumeriqueDetailsPage {
         inLieuxZoomLevel(this._markersPresenter.getZoom()) ? undefined : this._zoomLevel.userPosition
       );
     this._markersPresenter.select(lieuMediationNumerique.id);
+  }
+
+  public onCloseNoLieuFound(): void {
+    this.isExpanded = false;
+    this._router.navigate(['../../regions'], {
+      relativeTo: this._route,
+      queryParamsHandling: 'preserve'
+    });
   }
 }
