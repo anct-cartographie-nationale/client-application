@@ -1,7 +1,7 @@
 import { ParamMap } from '@angular/router';
 import axios, { AxiosResponse } from 'axios';
 import { combineLatest, filter, Observable, withLatestFrom } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
 import {
   ConditionAcces,
   ConditionsAcces,
@@ -395,11 +395,18 @@ export class LieuxMediationNumeriqueDetailsPresenter {
       },
       headers: accesLibreHeaders
     });
-    const accesLibreUrl: string = erp.data.results
-      .filter((erp: Record<string, unknown>) => lieu.includes(erp['nom'] as string))
-      .map((erp: Record<string, unknown>) => erp['web_url'] as string);
+    const accesLibreUrl: string =
+      (erp.data.results.find((erp: Record<string, unknown>) => lieu.includes(erp['nom'] as string)) || {})['web_url'] || null;
     return accesLibreUrl;
   };
+
+  public accessibiliteIfAny = async (
+    lieu: string,
+    commune: string,
+    code_postal: string,
+    accessibilite?: string
+  ): Promise<string> =>
+    accessibilite != null ? accessibilite : await this.getAccessibiliteFromAccesLibre(lieu, commune, code_postal);
 
   public lieuMediationNumeriqueFromParams$(
     paramMap$: Observable<ParamMap>,
@@ -410,12 +417,17 @@ export class LieuxMediationNumeriqueDetailsPresenter {
       map(toLieuMediationNumeriqueMatchingRouteId),
       filter(definedLieuMediationNumeriqueOnly),
       withLatestFrom(localisation$),
-      map(
-        ([lieu, localisation]: [
+      mergeMap(
+        async ([lieu, localisation]: [
           LieuMediationNumeriqueWithAidants,
           Localisation
-        ]): LieuMediationNumeriqueDetailsPresentation => {
-          console.log(this.getAccessibiliteFromAccesLibre(lieu.nom, lieu.adresse.commune, lieu.adresse.code_postal));
+        ]): Promise<LieuMediationNumeriqueDetailsPresentation> => {
+          const accessibilite: string | undefined = await this.accessibiliteIfAny(
+            lieu.nom,
+            lieu.adresse.commune,
+            lieu.adresse.code_postal,
+            lieu.accessibilite
+          );
           return {
             id: lieu.id,
             nom: lieu.nom,
@@ -443,7 +455,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
               toModalitesAccompagnementPresentation(lieu.modalites_accompagnement),
               notEmpty
             ),
-            ...ifAny('accessibilite', lieu.accessibilite),
+            ...ifAny('accessibilite', accessibilite),
             ...ifAny('localisation', lieu.localisation),
             ...ifAny('distance', getDistance(lieu, localisation)),
             ...ifAny('prise_rdv', lieu.prise_rdv),
