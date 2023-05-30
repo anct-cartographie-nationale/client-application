@@ -1,4 +1,5 @@
 import { ParamMap } from '@angular/router';
+import axios, { AxiosResponse } from 'axios';
 import { combineLatest, filter, Observable, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -18,6 +19,12 @@ import {
   ModaliteAccompagnementPresentation,
   SourcePresentation
 } from './lieu-mediation-numerique-details.presentation';
+
+const accesLibreHeaders = {
+  accept: 'application/json',
+  'X-CSRFToken': 'MYo0jyUL4CdMAD9MJdWhIZmjkKVbuCZDphYa8TQicgogpSR5w9BwvMuCW9HoP5Ve',
+  Authorization: 'Api-Key DqA6JsmH.vnSuxUL8eDfTARBv8f138CC2ubLBX9A1'
+};
 
 const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
   [
@@ -380,6 +387,20 @@ export class LieuxMediationNumeriqueDetailsPresenter {
 
   public getAll$ = this.lieuxMediationNumeriqueRepository.getAll$();
 
+  public getAccessibiliteFromAccesLibre = async (lieu: string, commune: string, code_postal: string): Promise<string> => {
+    const erp: AxiosResponse = await axios.get('https://acceslibre.beta.gouv.fr/api/erps/', {
+      params: {
+        commune: commune,
+        code_postal: code_postal
+      },
+      headers: accesLibreHeaders
+    });
+    const accesLibreUrl: string = erp.data.results
+      .filter((erp: Record<string, unknown>) => lieu.includes(erp['nom'] as string))
+      .map((erp: Record<string, unknown>) => erp['web_url'] as string);
+    return accesLibreUrl;
+  };
+
   public lieuMediationNumeriqueFromParams$(
     paramMap$: Observable<ParamMap>,
     date: Date,
@@ -393,36 +414,43 @@ export class LieuxMediationNumeriqueDetailsPresenter {
         ([lieu, localisation]: [
           LieuMediationNumeriqueWithAidants,
           Localisation
-        ]): LieuMediationNumeriqueDetailsPresentation => ({
-          id: lieu.id,
-          nom: lieu.nom,
-          adresse: [
-            lieu.adresse.voie,
-            lieu.adresse.complement_adresse,
-            lieu.adresse.code_postal,
-            `${lieu.adresse.commune.charAt(0).toUpperCase()}${lieu.adresse.commune.substring(1).toLowerCase()}`
-          ].join(' '),
-          commune: lieu.adresse.commune,
-          code_postal: lieu.adresse.code_postal,
-          services: lieu.services,
-          ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
-          ...ifAny('status', openingState(date)(lieu.horaires)),
-          ...ifAny('typologies', lieu.typologies?.join(', ')),
-          ...ifAny('contact', lieu.contact),
-          ...ifAny('presentation', lieu.presentation),
-          ...ifAny('date_maj', lieu.date_maj),
-          ...ifAny('publics_accueillis', lieu.publics_accueillis),
-          ...ifAny('conditions_acces', toConditionAccesDetailsPresentation(lieu.conditions_acces)),
-          ...ifAny('labels_nationaux', lieu.labels_nationaux),
-          ...ifAny('labels_autres', lieu.labels_autres),
-          ...ifAny('modalites_accompagnement', toModalitesAccompagnementPresentation(lieu.modalites_accompagnement), notEmpty),
-          ...ifAny('accessibilite', lieu.accessibilite),
-          ...ifAny('localisation', lieu.localisation),
-          ...ifAny('distance', getDistance(lieu, localisation)),
-          ...ifAny('prise_rdv', lieu.prise_rdv),
-          ...ifAny('aidants', lieu.aidants),
-          ...ifAny('source', availableSourcesMap.get(lieu.source ?? '') ?? undefined)
-        })
+        ]): LieuMediationNumeriqueDetailsPresentation => {
+          console.log(this.getAccessibiliteFromAccesLibre(lieu.nom, lieu.adresse.commune, lieu.adresse.code_postal));
+          return {
+            id: lieu.id,
+            nom: lieu.nom,
+            adresse: [
+              lieu.adresse.voie,
+              lieu.adresse.complement_adresse,
+              lieu.adresse.code_postal,
+              `${lieu.adresse.commune.charAt(0).toUpperCase()}${lieu.adresse.commune.substring(1).toLowerCase()}`
+            ].join(' '),
+            commune: lieu.adresse.commune,
+            code_postal: lieu.adresse.code_postal,
+            services: lieu.services,
+            ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
+            ...ifAny('status', openingState(date)(lieu.horaires)),
+            ...ifAny('typologies', lieu.typologies?.join(', ')),
+            ...ifAny('contact', lieu.contact),
+            ...ifAny('presentation', lieu.presentation),
+            ...ifAny('date_maj', lieu.date_maj),
+            ...ifAny('publics_accueillis', lieu.publics_accueillis),
+            ...ifAny('conditions_acces', toConditionAccesDetailsPresentation(lieu.conditions_acces)),
+            ...ifAny('labels_nationaux', lieu.labels_nationaux),
+            ...ifAny('labels_autres', lieu.labels_autres),
+            ...ifAny(
+              'modalites_accompagnement',
+              toModalitesAccompagnementPresentation(lieu.modalites_accompagnement),
+              notEmpty
+            ),
+            ...ifAny('accessibilite', lieu.accessibilite),
+            ...ifAny('localisation', lieu.localisation),
+            ...ifAny('distance', getDistance(lieu, localisation)),
+            ...ifAny('prise_rdv', lieu.prise_rdv),
+            ...ifAny('aidants', lieu.aidants),
+            ...ifAny('source', availableSourcesMap.get(lieu.source ?? '') ?? undefined)
+          };
+        }
       )
     );
   }
