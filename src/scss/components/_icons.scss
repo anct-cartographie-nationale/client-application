@@ -336,3 +336,11 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-information-line::before {
   content: '\ee59';
 }
+
+.ri-close-circle-fill::before {
+  content: '\eb96';
+}
+
+.ri-edit-line::before {
+  content: '\ec86';
+}

@@ -25,7 +25,8 @@ import {
   SendByEmailModalComponent,
   PublicPrisEnChargeComponent,
   ServicesComponent,
-  MiseAJourComponent
+  MiseAJourComponent,
+  AccessibiliteComponent
 } from './lieux-mediation-numerique-details';
 import { LabelModalComponent } from './label-modal/label-modal.component';
 
@@ -55,5 +56,6 @@ export const components = [
   NoLieuxFoundComponent,
   HubModalComponent,
   LabelModalComponent,
-  MiseAJourComponent
+  MiseAJourComponent,
+  AccessibiliteComponent
 ];
