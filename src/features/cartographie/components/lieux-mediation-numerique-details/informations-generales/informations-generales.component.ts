@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { OpeningState } from '../../../../core/presenters';
 import { SourcePresentation } from '../../../presenters';
+import { isTooOld } from './informations-generales.presenter';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,4 +17,6 @@ export class InformationsGeneralesComponent {
   @Input() public source?: SourcePresentation;
 
   @Output() public closeDetails: EventEmitter<void> = new EventEmitter<void>();
+
+  public isTooOld = isTooOld(new Date());
 }
