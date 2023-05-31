@@ -19,7 +19,7 @@ export class HubModalComponent {
   private _animate$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._isShown);
   public animate$: Observable<boolean> = this._animate$;
 
-  public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
+  public constructor(@Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration) {}
 
   private show() {
     this._activateModal$.next(true);

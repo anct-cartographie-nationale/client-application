@@ -29,6 +29,8 @@ import {
 } from '../../presenters';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
 import {
+  ASSETS_TOKEN,
+  AssetsConfiguration,
   INITIAL_POSITION_TOKEN,
   InitialPositionConfiguration,
   ZOOM_LEVEL_TOKEN,
@@ -137,6 +139,7 @@ export class CartographieLayout {
     public readonly router: Router,
     public readonly route: ActivatedRoute,
     public readonly markersPresenter: MarkersPresenter,
+    @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
     @Inject(INITIAL_POSITION_TOKEN)

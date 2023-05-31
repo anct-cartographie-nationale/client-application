@@ -19,6 +19,6 @@ export const ROUTES: Routes = [
       }
     ],
     component: CoordinateursLayout,
-    path: ''
+    path: 'coordination'
   }
 ];

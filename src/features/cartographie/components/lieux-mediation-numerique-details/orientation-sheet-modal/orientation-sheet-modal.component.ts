@@ -1,8 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LabelNational, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
 import { FilterPresentation } from '../../../../core/presenters';
 import { OrientationSheetForm } from '../../../models';
 
@@ -51,6 +52,8 @@ export class OrientationSheetModalComponent {
   @Input() public filters?: FilterPresentation;
 
   @Output() public print: EventEmitter<OrientationSheetForm> = new EventEmitter<OrientationSheetForm>();
+
+  public constructor(@Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration) {}
 
   private show() {
     this._activateModal$.next(true);
