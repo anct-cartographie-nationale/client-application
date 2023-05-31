@@ -1,4 +1,4 @@
-import { firstValueFrom, of } from 'rxjs';
+import { Observable, firstValueFrom, of } from 'rxjs';
 import {
   Adresse,
   ConditionAcces,
@@ -23,8 +23,9 @@ import {
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { NO_LOCALISATION } from '../../../core/models';
 import { LieuxMediationNumeriqueDetailsPresenter } from './lieux-mediation-numerique-details.presenter';
-import { LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
+import { ErpReponse, LieuMediationNumeriqueDetailsPresentation } from './lieu-mediation-numerique-details.presentation';
 import { ParamMap } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 describe('lieux médiation numérique details presenter', (): void => {
   it('should filter only lieu with id', async (): Promise<void> => {
@@ -262,6 +263,18 @@ describe('lieux médiation numérique details presenter', (): void => {
   });
 
   it('should get url acces libre from api', async (): Promise<void> => {
+    const httpClient: HttpClient = {
+      get: (): Observable<ErpReponse> =>
+        of({
+          results: [
+            {
+              nom: 'Médiathèque',
+              web_url: 'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
+            }
+          ]
+        } as ErpReponse)
+    } as unknown as HttpClient;
+
     const lieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: 'structure-1',
@@ -277,9 +290,12 @@ describe('lieux médiation numérique details presenter', (): void => {
     ];
 
     const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
-      new LieuxMediationNumeriqueDetailsPresenter({
-        getAll$: () => of(lieuxMediationNumerique)
-      } as LieuxMediationNumeriqueRepository);
+      new LieuxMediationNumeriqueDetailsPresenter(
+        {
+          getAll$: () => of(lieuxMediationNumerique)
+        } as LieuxMediationNumeriqueRepository,
+        httpClient
+      );
 
     const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
       lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
@@ -319,9 +335,12 @@ describe('lieux médiation numérique details presenter', (): void => {
     ];
 
     const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
-      new LieuxMediationNumeriqueDetailsPresenter({
-        getAll$: () => of(lieuxMediationNumerique)
-      } as LieuxMediationNumeriqueRepository);
+      new LieuxMediationNumeriqueDetailsPresenter(
+        {
+          getAll$: () => of(lieuxMediationNumerique)
+        } as LieuxMediationNumeriqueRepository,
+        {} as HttpClient
+      );
 
     const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
       lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
@@ -345,6 +364,13 @@ describe('lieux médiation numérique details presenter', (): void => {
   });
 
   it('should return null accessibilite if no return from acces libre api', async (): Promise<void> => {
+    const httpClient: HttpClient = {
+      get: (): Observable<ErpReponse> =>
+        of({
+          results: []
+        } as ErpReponse)
+    } as unknown as HttpClient;
+
     const lieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: 'structure-1',
@@ -360,9 +386,12 @@ describe('lieux médiation numérique details presenter', (): void => {
     ];
 
     const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
-      new LieuxMediationNumeriqueDetailsPresenter({
-        getAll$: () => of(lieuxMediationNumerique)
-      } as LieuxMediationNumeriqueRepository);
+      new LieuxMediationNumeriqueDetailsPresenter(
+        {
+          getAll$: () => of(lieuxMediationNumerique)
+        } as LieuxMediationNumeriqueRepository,
+        httpClient
+      );
 
     const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
       lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(

@@ -3,6 +3,7 @@ import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { AddressPresenter, AddressRepository } from '../../../adresse';
 import { LieuxMediationNumeriqueDetailsPresenter } from '../../presenters';
 import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '../../../../root';
+import { HttpClient } from '@angular/common/http';
 
 export const cartographieLayoutProviders = [
   {
@@ -11,7 +12,7 @@ export const cartographieLayoutProviders = [
     useClass: LieuxMediationNumeriquePresenter
   },
   {
-    deps: [LieuxMediationNumeriqueRepository],
+    deps: [LieuxMediationNumeriqueRepository, HttpClient],
     provide: LieuxMediationNumeriqueDetailsPresenter,
     useClass: LieuxMediationNumeriqueDetailsPresenter
   },

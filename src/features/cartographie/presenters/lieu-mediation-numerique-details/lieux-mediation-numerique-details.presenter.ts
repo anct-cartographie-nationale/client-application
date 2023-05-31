@@ -1,7 +1,6 @@
 import { ParamMap } from '@angular/router';
-import axios, { AxiosResponse } from 'axios';
-import { combineLatest, filter, Observable, withLatestFrom } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { combineLatest, filter, firstValueFrom, Observable, of, withLatestFrom } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import {
   ConditionAcces,
   ConditionsAcces,
@@ -15,10 +14,13 @@ import { geographicDistance, openingState, parseHoraires } from '../../../core/p
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { ifAny } from '../../../core/utilities';
 import {
+  Erp,
+  ErpReponse,
   LieuMediationNumeriqueDetailsPresentation,
   ModaliteAccompagnementPresentation,
   SourcePresentation
 } from './lieu-mediation-numerique-details.presentation';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 const accesLibreHeaders = {
   accept: 'application/json',
@@ -383,7 +385,10 @@ const notEmpty = (
   modalitesAccompagnementPresentation.length > 0 ? modalitesAccompagnementPresentation : undefined;
 
 export class LieuxMediationNumeriqueDetailsPresenter {
-  public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
+  public constructor(
+    private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository,
+    private readonly httpClient?: HttpClient
+  ) {}
 
   public getAll$ = this.lieuxMediationNumeriqueRepository.getAll$();
 
@@ -392,18 +397,29 @@ export class LieuxMediationNumeriqueDetailsPresenter {
     commune: string,
     code_postal: string,
     localisation?: Localisation
-  ): Promise<string> => {
-    const erp: AxiosResponse = await axios.get('https://acceslibre.beta.gouv.fr/api/erps/', {
-      params: {
-        commune: commune,
-        code_postal: code_postal,
-        around: `${localisation?.latitude},${localisation?.longitude}`
-      },
-      headers: accesLibreHeaders
-    });
-    const accesLibreUrl: string =
-      (erp.data.results.find((erp: Record<string, unknown>) => lieu.includes(erp['nom'] as string)) || {})['web_url'] || null;
-    return accesLibreUrl;
+  ): Promise<string | undefined> => {
+    let params = new HttpParams().set('commune', commune).set('code_postal', code_postal);
+
+    if (localisation) {
+      params = params.set('around', `${localisation.latitude},${localisation.longitude}`);
+    }
+
+    const response$ = this.httpClient
+      ?.get<ErpReponse>('https://acceslibre.beta.gouv.fr/api/erps/', {
+        params: params,
+        headers: accesLibreHeaders
+      })
+      .pipe(
+        map((response) => {
+          const erp = response.results.find((erp: Erp) => lieu.includes(erp['nom'] as string));
+          return erp ? erp['web_url'] : null;
+        }),
+        catchError((_) => {
+          return of(null);
+        })
+      );
+
+    return response$ ? (await firstValueFrom(response$)) ?? undefined : undefined;
   };
 
   public accessibiliteIfAny = async (
@@ -412,7 +428,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
     code_postal: string,
     accessibilite?: string,
     localisation?: Localisation
-  ): Promise<string> =>
+  ): Promise<string | undefined> =>
     accessibilite != null ? accessibilite : await this.getAccessibiliteFromAccesLibre(lieu, commune, code_postal, localisation);
 
   public lieuMediationNumeriqueFromParams$(
