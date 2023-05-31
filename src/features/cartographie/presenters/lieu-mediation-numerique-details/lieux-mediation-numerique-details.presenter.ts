@@ -21,56 +21,6 @@ import {
 
 const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
   [
-    'conseiller-numerique',
-    {
-      label: 'Conseillers numérique France Services',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique-1/',
-      detail: "Ces données sont intégrées via l'espace Coop CNFS",
-      update_link: 'https://coop.conseiller-numerique.gouv.fr/mes-lieux-activite',
-      logo: 'CnFS'
-    }
-  ],
-  [
-    'dora',
-    {
-      label: 'Dora',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numeriques-en-france-disponibles-dans-le-referentiel-de-loffre-dinsertion-publie-par-data-inclusion/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'france-tiers-lieux',
-    {
-      label: 'France Tiers-Lieux',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-tiers-lieux/',
-      detail: 'Cartographie des tiers-lieux',
-      update_link: 'https://cartographie.francetierslieux.fr/',
-      logo: 'france-tiers-lieux'
-    }
-  ],
-  [
-    'hinaura',
-    {
-      label: 'Hinaura',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-auvergne-rhone-alpes-fournis-par-hinaura/',
-      detail: 'Formulaire Hinaura',
-      update_link: 'https://carto.hinaura.fr/?CommentModif',
-      logo: 'hinaura'
-    }
-  ],
-  [
-    'france-services',
-    {
-      label: 'France Services',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services',
-      detail:
-        'Les horaires et coordonnées de votre France services doivent être actualisés directement depuis l’onglet « Ma structure » de la Plateforme France services. Pour tout autre changement, veuillez-vous rapprocher de votre référent départemental.',
-      logo: 'fs'
-    }
-  ],
-  [
     'angers',
     {
       label: "Ville d'Angers",
@@ -91,6 +41,46 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
+    'cd23',
+    {
+      label: 'Département de la Creuse',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-la-creuse/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'cd33',
+    {
+      label: 'Département de la Gironde',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-gironde/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'cd40',
+    {
+      label: 'Département des Landes',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-les-landes/',
+      detail: "Plateforme d'échange de données en Nouvelle-Aquitaine",
+      update_link: 'https://www.pigma.org/onegeo-login/fr/signin/?next=%2Fonegeo-maps%2F',
+      logo: 'les-landes'
+    }
+  ],
+  [
+    'cd44',
+    {
+      label: 'Département de la Loire-Atlantique',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-loire-atlantique-fournis-par-loire-atlantique-1/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
     'cd49',
     {
       label: 'Département du Maine-et-Loire',
@@ -98,6 +88,76 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
       detail: "Ces données sont intégrées via l'outil DORA",
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora'
+    }
+  ],
+  [
+    'cd87',
+    {
+      label: 'Département de la Haute-Vienne',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-haute-vienne/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'conseiller-numerique',
+    {
+      label: 'Conseiller numérique France Services',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique-1/',
+      detail: "Ces données sont intégrées via l'espace Coop CNFS",
+      update_link: 'https://coop.conseiller-numerique.gouv.fr/mes-lieux-activite',
+      logo: 'CnFS'
+    }
+  ],
+  [
+    'cr93',
+    {
+      label: 'Région PACA',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-provence-alpes-cote-dazur-fournis-par-paca/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'dora',
+    {
+      label: 'Dora',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numeriques-en-france-disponibles-dans-le-referentiel-de-loffre-dinsertion-publie-par-data-inclusion/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'fibre-64',
+    {
+      label: 'Fibre 64',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-pyrenees-atlantique-fournis-par-fibre-64-3',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'france-services',
+    {
+      label: 'France Services',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services',
+      detail:
+        'Les horaires et coordonnées de votre France services doivent être actualisés directement depuis l’onglet « Ma structure » de la Plateforme France services. Pour tout autre changement, veuillez-vous rapprocher de votre référent départemental.',
+      logo: 'fs'
+    }
+  ],
+  [
+    'france-tiers-lieux',
+    {
+      label: 'France Tiers-Lieux',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-tiers-lieux/',
+      detail: 'Cartographie des tiers-lieux',
+      update_link: 'https://cartographie.francetierslieux.fr/',
+      logo: 'france-tiers-lieux'
     }
   ],
   [
@@ -111,160 +171,20 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'cd35',
+    'hinaura',
     {
-      label: "Département d'Ille-et-Vilaine",
-      link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
+      label: 'Hinaura',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-auvergne-rhone-alpes-fournis-par-hinaura/',
+      detail: 'Formulaire Hinaura',
+      update_link: 'https://carto.hinaura.fr/?CommentModif',
+      logo: 'hinaura'
     }
   ],
   [
-    'cd35',
-    {
-      label: "Département de l'Ille-et-Vilaine",
-      link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'odspep',
-    {
-      label: 'ODSPEP',
-      link: 'https://www.data.gouv.fr/fr/datasets/referentiel-de-loffre-dinsertion-liste-des-structures-et-services-dinsertion/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'rhinocc',
-    {
-      label: 'RhinOcc',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-occitanie-fournis-par-rhinocc/',
-      detail: 'Formulaire RhinOcc',
-      update_link: 'https://rhinocc.fr/recensement/',
-      logo: 'rhinocc'
-    }
-  ],
-  [
-    'mulhouse',
-    {
-      label: 'Mulhouse',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-haut-rhin-fournis-par-mulhouse/',
-      detail: 'Open data M2a',
-      update_link: 'https://data.mulhouse-alsace.fr/pages/accueil/',
-      logo: 'mulhouse'
-    }
-  ],
-  [
-    'cr93',
-    {
-      label: 'Paca',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-provence-alpes-cote-dazur-fournis-par-paca/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'numi',
-    {
-      label: 'Numi',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-normandie-fournis-par-numi/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd44',
-    {
-      label: 'Loire Atlantique',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-loire-atlantique-fournis-par-loire-atlantique-1/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd40',
-    {
-      label: 'Les Landes',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-les-landes/',
-      detail: "Plateforme d'échange de données en Nouvelle-Aquitaine",
-      update_link: 'https://www.pigma.org/onegeo-login/fr/signin/?next=%2Fonegeo-maps%2F',
-      logo: 'les-landes'
-    }
-  ],
-  [
-    'res-in',
-    {
-      label: 'Res-in',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-lyon-fournis-par-res-in/',
-      detail: "Plateforme Res'in",
-      update_link: 'https://resin.grandlyon.com/acteurs',
-      logo: 'resin'
-    }
-  ],
-  [
-    'ultra-numerique',
-    {
-      label: 'Ultra-numerique',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-la-reunion-fournis-par-ultra-numerique/',
-      detail: 'Plateforme Ultra Numerique',
-      update_link: 'https://reunion.ultranumerique.fr/',
-      logo: 'ultra-numerique'
-    }
-  ],
-  [
-    'mednum-hub-antilles',
+    'hub-antilles',
     {
       label: 'Mednum-Hub-Antilles',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-martinique-fournis-par-mednum-hub-antilles-4/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'etapes numerique',
-    {
-      label: 'Etapes Numerique',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-etapes-numerique/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd49',
-    {
-      label: 'Département du Maine-et-Loire',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-departement-du-maine-et-loire/',
-      detail: 'Plateforme open data du Maine et Loire',
-      update_link: 'https://data.maine-et-loire.fr/pages/demarche/',
-      logo: 'maine-et-loire'
-    }
-  ],
-  [
-    'cd87',
-    {
-      label: 'Haute-Vienne',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-haute-vienne/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd23',
-    {
-      label: 'La Creuse',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-la-creuse/',
       detail: "Ces données sont intégrées via l'outil DORA",
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora'
@@ -281,13 +201,43 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'cd33',
+    'mulhouse',
     {
-      label: 'Gironde',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-gironde/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
+      label: 'Ville de Mulhouse',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-haut-rhin-fournis-par-mulhouse/',
+      detail: 'Open data M2a',
+      update_link: 'https://data.mulhouse-alsace.fr/pages/accueil/',
+      logo: 'mulhouse'
+    }
+  ],
+  [
+    'res-in',
+    {
+      label: 'Rés-in',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-lyon-fournis-par-res-in/',
+      detail: "Plateforme Rés'in",
+      update_link: 'https://resin.grandlyon.com/acteurs',
+      logo: 'resin'
+    }
+  ],
+  [
+    'rhinocc',
+    {
+      label: 'RhinOcc',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-occitanie-fournis-par-rhinocc/',
+      detail: 'Formulaire RhinOcc',
+      update_link: 'https://rhinocc.fr/recensement/',
+      logo: 'rhinocc'
+    }
+  ],
+  [
+    'ultra-numerique',
+    {
+      label: 'Ultra-numerique',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-la-reunion-fournis-par-ultra-numerique/',
+      detail: 'Plateforme Ultra Numerique',
+      update_link: 'https://reunion.ultranumerique.fr/',
+      logo: 'ultra-numerique'
     }
   ]
 ]);
