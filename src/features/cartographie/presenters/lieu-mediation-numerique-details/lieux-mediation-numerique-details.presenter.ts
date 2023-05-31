@@ -387,11 +387,17 @@ export class LieuxMediationNumeriqueDetailsPresenter {
 
   public getAll$ = this.lieuxMediationNumeriqueRepository.getAll$();
 
-  public getAccessibiliteFromAccesLibre = async (lieu: string, commune: string, code_postal: string): Promise<string> => {
+  public getAccessibiliteFromAccesLibre = async (
+    lieu: string,
+    commune: string,
+    code_postal: string,
+    localisation?: Localisation
+  ): Promise<string> => {
     const erp: AxiosResponse = await axios.get('https://acceslibre.beta.gouv.fr/api/erps/', {
       params: {
         commune: commune,
-        code_postal: code_postal
+        code_postal: code_postal,
+        around: `${localisation?.latitude},${localisation?.longitude}`
       },
       headers: accesLibreHeaders
     });
@@ -404,9 +410,10 @@ export class LieuxMediationNumeriqueDetailsPresenter {
     lieu: string,
     commune: string,
     code_postal: string,
-    accessibilite?: string
+    accessibilite?: string,
+    localisation?: Localisation
   ): Promise<string> =>
-    accessibilite != null ? accessibilite : await this.getAccessibiliteFromAccesLibre(lieu, commune, code_postal);
+    accessibilite != null ? accessibilite : await this.getAccessibiliteFromAccesLibre(lieu, commune, code_postal, localisation);
 
   public lieuMediationNumeriqueFromParams$(
     paramMap$: Observable<ParamMap>,
@@ -426,7 +433,8 @@ export class LieuxMediationNumeriqueDetailsPresenter {
             lieu.nom,
             lieu.adresse.commune,
             lieu.adresse.code_postal,
-            lieu.accessibilite
+            lieu.accessibilite,
+            lieu.localisation
           );
           return {
             id: lieu.id,

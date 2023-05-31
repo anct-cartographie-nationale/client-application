@@ -260,4 +260,127 @@ describe('lieux médiation numérique details presenter', (): void => {
       distance: 0
     } as LieuMediationNumeriqueDetailsPresentation);
   });
+
+  it('should get url acces libre from api', async (): Promise<void> => {
+    const lieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: 'structure-1',
+        nom: 'Médiathèque',
+        adresse: Adresse({
+          commune: 'PLOUARZEL',
+          code_postal: '29810',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+        localisation: Localisation({ latitude: 48.433643, longitude: -4.729322 })
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
+      new LieuxMediationNumeriqueDetailsPresenter({
+        getAll$: () => of(lieuxMediationNumerique)
+      } as LieuxMediationNumeriqueRepository);
+
+    const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
+      lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
+        of(new Map<string, string>([['id', 'structure-1']]) as unknown as ParamMap),
+        new Date('2022-07-22T14:55:00.000Z'),
+        of(Localisation({ latitude: 48.433643, longitude: -4.729322 }))
+      )
+    );
+
+    expect(structure).toStrictEqual({
+      id: 'structure-1',
+      nom: 'Médiathèque',
+      adresse: `12 BIS RUE DE LECLERCQ  29810 Plouarzel`,
+      code_postal: '29810',
+      commune: 'PLOUARZEL',
+      services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+      localisation: Localisation({ latitude: 48.433643, longitude: -4.729322 }),
+      distance: 0,
+      accessibilite: 'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
+    } as LieuMediationNumeriqueDetailsPresentation);
+  });
+
+  it('should not use acces libre api but get accessibilite field value by default', async (): Promise<void> => {
+    const lieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: 'structure-1',
+        nom: 'Médiathèque',
+        adresse: Adresse({
+          commune: 'PLOUARZEL',
+          code_postal: '29810',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+        localisation: Localisation({ latitude: 48.433643, longitude: -4.729322 }),
+        accessibilite: 'https://www.test.com/'
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
+      new LieuxMediationNumeriqueDetailsPresenter({
+        getAll$: () => of(lieuxMediationNumerique)
+      } as LieuxMediationNumeriqueRepository);
+
+    const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
+      lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
+        of(new Map<string, string>([['id', 'structure-1']]) as unknown as ParamMap),
+        new Date('2022-07-22T14:55:00.000Z'),
+        of(Localisation({ latitude: 48.433643, longitude: -4.729322 }))
+      )
+    );
+
+    expect(structure).toStrictEqual({
+      id: 'structure-1',
+      nom: 'Médiathèque',
+      adresse: `12 BIS RUE DE LECLERCQ  29810 Plouarzel`,
+      code_postal: '29810',
+      commune: 'PLOUARZEL',
+      services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+      localisation: Localisation({ latitude: 48.433643, longitude: -4.729322 }),
+      distance: 0,
+      accessibilite: 'https://www.test.com/'
+    } as LieuMediationNumeriqueDetailsPresentation);
+  });
+
+  it('should return null accessibilite if no return from acces libre api', async (): Promise<void> => {
+    const lieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: 'structure-1',
+        nom: 'Médiathèque',
+        adresse: Adresse({
+          commune: 'PLOUARZEL',
+          code_postal: '01234',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+        localisation: Localisation({ latitude: 48.433643, longitude: -4.729322 })
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
+      new LieuxMediationNumeriqueDetailsPresenter({
+        getAll$: () => of(lieuxMediationNumerique)
+      } as LieuxMediationNumeriqueRepository);
+
+    const structure: LieuMediationNumeriqueDetailsPresentation = await firstValueFrom(
+      lieuxMediationNumeriqueDetailsPresenter.lieuMediationNumeriqueFromParams$(
+        of(new Map<string, string>([['id', 'structure-1']]) as unknown as ParamMap),
+        new Date('2022-07-22T14:55:00.000Z'),
+        of(Localisation({ latitude: 48.433643, longitude: -4.729322 }))
+      )
+    );
+
+    expect(structure).toStrictEqual({
+      id: 'structure-1',
+      nom: 'Médiathèque',
+      adresse: `12 BIS RUE DE LECLERCQ  01234 Plouarzel`,
+      code_postal: '01234',
+      commune: 'PLOUARZEL',
+      services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+      localisation: Localisation({ latitude: 48.433643, longitude: -4.729322 }),
+      distance: 0
+    } as LieuMediationNumeriqueDetailsPresentation);
+  });
 });
