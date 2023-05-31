@@ -16,28 +16,20 @@ const isInCorse = (codePostal: string): boolean => codePostal.startsWith('20');
 
 const isInOutremer = (codePostal: string): boolean => codePostal.startsWith('97');
 
-const isSaintMartin = (codePostal: string, commune: string): boolean => {
-  if (!commune) return false;
-  return codePostal.startsWith('97') && commune.toLocaleLowerCase().includes('saint martin');
-};
+const isInSaintMartin = (codePostal: string): boolean => codePostal === '97150';
 
 const convertEdgeCasesToCodeInsee = (codePostal: string): string =>
   codePostalNotMatchingCodeDepartementMap.get(codePostal) ?? codePostal;
 
-const codeDepartementFromCodePostal = (codePostal: string, commune: string) => {
-  if (isInCorse(codePostal)) {
-    return getCorseCodeDepartement(codePostal);
-  } else if (isSaintMartin(codePostal, commune)) {
-    return convertEdgeCasesToCodeInsee(codePostal).slice(0, 3);
-  } else if (isInOutremer(codePostal)) {
-    return codePostal.slice(0, 3);
-  }
+const codeDepartementFromCodePostal = (codePostal: string) => {
+  if (isInCorse(codePostal)) return getCorseCodeDepartement(codePostal);
+  if (isInSaintMartin(codePostal)) return convertEdgeCasesToCodeInsee(codePostal).slice(0, 3);
+  if (isInOutremer(codePostal)) return codePostal.slice(0, 3);
 
   return convertEdgeCasesToCodeInsee(codePostal).slice(0, 2);
 };
 
-const toCodeDepartement = (lieu: { code_postal: string; commune: string }): string =>
-  codeDepartementFromCodePostal(lieu.code_postal, lieu.commune);
+const toCodeDepartement = (lieu: { code_postal: string }): string => codeDepartementFromCodePostal(lieu.code_postal);
 
 export const toDepartement = (lieu: { code_postal: string; commune: string }): DepartementPresentation | undefined =>
   departements.find((departement: DepartementPresentation) => departement.code === toCodeDepartement(lieu));
