@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { MapService, NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
 import { CheckboxArrayModule } from '../../../core/directives';
@@ -20,7 +19,6 @@ import { coordinateursProviders } from './coordinateurs.providers';
   providers: [MapService, ...coordinateursProviders],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,

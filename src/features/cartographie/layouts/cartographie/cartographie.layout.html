@@ -1,3 +1,5 @@
+<pre>{{ assetsConfiguration.path }}</pre>
+
 <div *ngIf="loadingState$ | async" class="position-absolute top-0 w-100 h-100 bg-light z-index-over-all">
   <div class="container h-100">
     <div class="row justify-content-center h-100">
@@ -40,7 +42,7 @@
       [movingOptions]="{speed: 2}"
       *ngIf="(markersPresenter.localisation$ | async) as localisation"
       class="h-100 w-100 overflow-hidden"
-      [style]="'assets/data/map-style.json'"
+      [style]="assetsConfiguration.path + '/data/map-style.json'"
       [zoom]="[(markersPresenter.zoom$ | async) ?? 0]"
       [center]="[localisation.longitude, localisation.latitude]"
       (zoomEvt)="zooming($event)"
