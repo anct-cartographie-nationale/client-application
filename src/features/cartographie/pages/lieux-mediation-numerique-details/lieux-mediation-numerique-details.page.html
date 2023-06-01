@@ -16,13 +16,7 @@
     [filters]="(filters$ | async) ?? undefined"></app-lieux-mediation-numerique-details>
 </div>
 <ng-template #lieuNotFound>
-  <div
-    class="d-flex flex-column justify-content-between h-100 offcanvas offcanvas-start"
-    [class.show]="this.isExpanded"
-    aria-labelledby="offcanvasNoLieuFound"
-    [attr.aria-modal]="this.isExpanded"
-    [attr.role]="this.isExpanded"
-    style="position: relative; width: 100%">
+  <div class="d-flex flex-column justify-content-between h-100">
     <div class="d-flex align-items-center bg-primary text-bg-dark p-3">
       <div class="d-flex flex-grow-1 p-3">
         <i class="ri-4x ri-xl ri-close-circle-line me-3 mt-1"></i>
@@ -40,8 +34,8 @@
         (click)="onCloseNoLieuFound()"></button>
     </div>
     <div class="text-center p-3">
-      <img *ngIf="brandConfiguration.logo" class="mb-4 w-50" [src]="brandConfiguration.logo" alt="" />
-      <h3 class="mb-5">
+      <img *ngIf="brandConfiguration.logo_variant" class="mb-4 w-50" [src]="brandConfiguration.logo_variant" alt="" />
+      <h3 class="mb-5 fw-bold">
         Cette structure
         <br />
         <span class="text-primary">n’est plus disponible</span>
@@ -60,9 +54,8 @@
       </div>
     </div>
     <div class="bg-light text-center py-5">
-      <a class="btn btn-secondary me-4" routerLink="/orientation" queryParamsHandling="preserve">Nouvelle orientation</a>
-      <a class="btn btn-primary" routerLink="/cartographie/regions" queryParamsHandling="preserve">
-        Afficher les résultats
+      <a class="btn btn-secondary" routerLink="/orientation" queryParamsHandling="preserve">
+        Revenir à la page d'accueil
         <i class="ri-arrow-right-s-line"></i>
       </a>
     </div>
