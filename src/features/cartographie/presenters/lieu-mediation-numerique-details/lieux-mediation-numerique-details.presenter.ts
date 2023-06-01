@@ -1,6 +1,6 @@
 import { ParamMap } from '@angular/router';
 import { combineLatest, filter, firstValueFrom, Observable, of, withLatestFrom } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, expand, map, mergeMap, takeWhile, tap } from 'rxjs/operators';
 import {
   ConditionAcces,
   ConditionsAcces,
@@ -392,44 +392,77 @@ export class LieuxMediationNumeriqueDetailsPresenter {
 
   public getAll$ = this.lieuxMediationNumeriqueRepository.getAll$();
 
-  public getAccessibiliteFromAccesLibre = async (
-    lieu: string,
-    commune: string,
-    code_postal: string,
-    localisation?: Localisation
-  ): Promise<string | undefined> => {
-    let params = new HttpParams().set('commune', commune).set('code_postal', code_postal);
+  // public getAccessibiliteFromAccesLibre = async (
+  //   lieu: LieuMediationNumeriqueWithAidants
+  // ): Promise<string | undefined> => {
+  //   // let params = new HttpParams().set('commune', lieu.adresse.commune).set('code_postal', lieu.adresse.code_postal);
+  //   let params = new HttpParams().set('activite', 'bibliotheque-mediatheque').set('code_postal', lieu.adresse.code_postal)
 
-    if (localisation) {
-      params = params.set('around', `${localisation.latitude},${localisation.longitude}`);
-    }
+  //   // if (lieu.localisation) {
+  //   //   params = params.set('around', `${lieu.localisation.latitude},${lieu.localisation.longitude}`);
+  //   // }
+  //   const response$ = this.httpClient
+  //     ?.get<ErpReponse>('https://acceslibre.beta.gouv.fr/api/erps/', {
+  //       params: params,
+  //       headers: accesLibreHeaders
+  //     })
+  //     .pipe(
+  //       map((response) => {
+  //         const test = response.results.filter((erp: Erp) => erp.code_postal === "75010")
+  //         const erp = response.results.find((erp: Erp) => erp.siret.toLocaleLowerCase().includes(lieu.pivot.toLocaleLowerCase())) ||
+  //         response.results.find((erp: Erp) => erp.adresse.toLocaleLowerCase().includes(lieu.adresse.voie.toLocaleLowerCase())) ||
+  //         response.results.find((erp: Erp) => lieu.nom.toLocaleLowerCase().includes(erp.nom.toLocaleLowerCase()))
+  //         return erp ? erp.web_url : null;
+  //       }),
+  //       catchError((_) => {
+  //         return of(null);
+  //       })
+  //     );
 
-    const response$ = this.httpClient
-      ?.get<ErpReponse>('https://acceslibre.beta.gouv.fr/api/erps/', {
-        params: params,
-        headers: accesLibreHeaders
-      })
-      .pipe(
-        map((response) => {
-          const erp = response.results.find((erp: Erp) => lieu.includes(erp['nom'] as string));
-          return erp ? erp['web_url'] : null;
-        }),
-        catchError((_) => {
-          return of(null);
+  //   return response$ ? (await firstValueFrom(response$)) ?? undefined : undefined;
+  // };
+
+  public getAccessibiliteFromAccesLibre = async (lieu: LieuMediationNumeriqueWithAidants): Promise<string | undefined> => {
+    let params = new HttpParams().set('commune', lieu.adresse.commune).set('code_postal', lieu.adresse.code_postal);
+    let allResults: Erp[] = [];
+
+    const fetchResults = async (url: string) => {
+      const response$ = this.httpClient
+        ?.get<ErpReponse>(url, {
+          headers: accesLibreHeaders
         })
-      );
+        .pipe(
+          catchError((_) => {
+            return of(null);
+          })
+        );
 
-    return response$ ? (await firstValueFrom(response$)) ?? undefined : undefined;
+      if (response$) {
+        const response = await firstValueFrom(response$);
+        if (response) {
+          allResults.push(...response.results);
+          if (response.next) {
+            await fetchResults(response.next);
+          }
+        }
+      }
+    };
+
+    const apiUrl = 'https://acceslibre.beta.gouv.fr/api/erps/';
+    const initialUrl = `${apiUrl}?${params}`;
+    await fetchResults(initialUrl);
+
+    // console.log("allResults", allResults)
+    // const test = allResults.filter((erp: Erp) => erp.code_postal === lieu.adresse.code_postal);
+    const erp =
+      allResults.find((erp: Erp) => erp.siret?.toLocaleLowerCase().includes(lieu.pivot.toLocaleLowerCase())) ||
+      allResults.find((erp: Erp) => erp.adresse.toLocaleLowerCase().includes(lieu.adresse.voie.toLocaleLowerCase())) ||
+      allResults.find((erp: Erp) => lieu.nom.toLocaleLowerCase().includes(erp.nom.toLocaleLowerCase()));
+    return erp ? erp.web_url : undefined;
   };
 
-  public accessibiliteIfAny = async (
-    lieu: string,
-    commune: string,
-    code_postal: string,
-    accessibilite?: string,
-    localisation?: Localisation
-  ): Promise<string | undefined> =>
-    accessibilite != null ? accessibilite : await this.getAccessibiliteFromAccesLibre(lieu, commune, code_postal, localisation);
+  public accessibiliteIfAny = async (lieu: LieuMediationNumeriqueWithAidants): Promise<string | undefined> =>
+    lieu.accessibilite != null ? lieu.accessibilite : await this.getAccessibiliteFromAccesLibre(lieu);
 
   public lieuMediationNumeriqueFromParams$(
     paramMap$: Observable<ParamMap>,
@@ -445,13 +478,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           LieuMediationNumeriqueWithAidants,
           Localisation
         ]): Promise<LieuMediationNumeriqueDetailsPresentation> => {
-          const accessibilite: string | undefined = await this.accessibiliteIfAny(
-            lieu.nom,
-            lieu.adresse.commune,
-            lieu.adresse.code_postal,
-            lieu.accessibilite,
-            lieu.localisation
-          );
+          const accessibilite: string | undefined = await this.accessibiliteIfAny(lieu);
           return {
             id: lieu.id,
             nom: lieu.nom,

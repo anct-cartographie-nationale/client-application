@@ -367,8 +367,9 @@ describe('lieux médiation numérique details presenter', (): void => {
     const httpClient: HttpClient = {
       get: (): Observable<ErpReponse> =>
         of({
-          results: []
-        } as ErpReponse)
+          results: [],
+          next: null
+        } as unknown as ErpReponse)
     } as unknown as HttpClient;
 
     const lieuxMediationNumerique: LieuMediationNumerique[] = [

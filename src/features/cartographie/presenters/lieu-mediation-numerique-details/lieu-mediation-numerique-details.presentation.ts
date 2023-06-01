@@ -49,10 +49,14 @@ export type ModaliteAccompagnementPresentation = { label: string; icon: string; 
 
 export type Erp = {
   nom: string;
+  siret: string;
   web_url: string;
+  adresse: string;
+  code_postal: string;
   [key: string]: unknown;
 };
 
 export type ErpReponse = {
   results: Erp[];
+  next: string;
 };
