@@ -125,4 +125,11 @@ export class LieuxMediationNumeriqueDetailsPage {
       );
     this._markersPresenter.select(lieuMediationNumerique.id);
   }
+
+  public onCloseNoLieuFound(): void {
+    this._router.navigate(['../../regions'], {
+      relativeTo: this._route,
+      queryParamsHandling: 'preserve'
+    });
+  }
 }

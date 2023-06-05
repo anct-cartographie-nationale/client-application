@@ -17,31 +17,41 @@
 </div>
 <ng-template #lieuNotFound>
   <div class="d-flex flex-column justify-content-between h-100">
-    <h2 class="bg-primary text-bg-dark p-3">Structure introuvable</h2>
+    <div class="d-flex align-items-center bg-primary text-bg-dark p-3">
+      <div class="d-flex flex-grow-1 p-3">
+        <i class="ri-4x ri-xl ri-close-circle-line me-3 mt-1"></i>
+        <div>
+          <p class="m-0">Erreur</p>
+          <h2 class="bg-primary">
+            <b>Structure introuvable</b>
+          </h2>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white opacity-100 small mb-0 me-2"
+        aria-label="Close"
+        (click)="onCloseNoLieuFound()"></button>
+    </div>
     <div class="text-center p-3">
-      <img *ngIf="brandConfiguration.logo" class="mb-4 w-50" [src]="brandConfiguration.logo" alt="" />
-      <h3 class="mb-5">
+      <img *ngIf="brandConfiguration.logo" class="mb-5 w-50" [src]="brandConfiguration.logo" alt="" />
+      <h3 class="mb-5 fw-bold">
         Cette structure
         <br />
         <span class="text-primary">n’est plus disponible</span>
       </h3>
       <div>
+        <p>Nous sommes désolés, cette structure n'existe pas ou n'existe plus !</p>
         <p>
-          Nous sommes désolés, mais nous n’avons plus accès
+          Vous pouvez rechercher d'autres structures en naviguant sur la carte
           <br />
-          aux informations sur cette structure.
-        </p>
-        <p>
-          Vous pouvez chercher d’autres structures sur la carte,
-          <br />
-          ou revenir à l’outil d’orientation.
+          ou revenir à la page d'accueil et effectuer un parcours d'orientation.
         </p>
       </div>
     </div>
     <div class="bg-light text-center py-5">
-      <a class="btn btn-secondary me-4" routerLink="/orientation" queryParamsHandling="preserve">Nouvelle orientation</a>
-      <a class="btn btn-primary" routerLink="/cartographie/regions" queryParamsHandling="preserve">
-        Afficher les résultats
+      <a class="btn btn-secondary" routerLink="/orientation" queryParamsHandling="preserve">
+        Revenir à la page d'accueil
         <i class="ri-arrow-right-s-line"></i>
       </a>
     </div>

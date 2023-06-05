@@ -344,3 +344,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-edit-line::before {
   content: '\ec86';
 }
+
+.ri-close-circle-line::before {
+  content: '\eb97';
+}
