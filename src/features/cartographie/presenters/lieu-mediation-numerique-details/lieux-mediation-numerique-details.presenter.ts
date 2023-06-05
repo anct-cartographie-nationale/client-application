@@ -1,6 +1,6 @@
 import { ParamMap } from '@angular/router';
 import { combineLatest, filter, firstValueFrom, Observable, of, withLatestFrom } from 'rxjs';
-import { catchError, expand, map, mergeMap, takeWhile, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import {
   ConditionAcces,
   ConditionsAcces,
@@ -27,6 +27,8 @@ const accesLibreHeaders = {
   'X-CSRFToken': 'MYo0jyUL4CdMAD9MJdWhIZmjkKVbuCZDphYa8TQicgogpSR5w9BwvMuCW9HoP5Ve',
   Authorization: 'Api-Key DqA6JsmH.vnSuxUL8eDfTARBv8f138CC2ubLBX9A1'
 };
+
+const activitesPossible = ['mairie', 'bibliotheque', 'mediatheque'];
 
 const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
   [
@@ -392,38 +394,11 @@ export class LieuxMediationNumeriqueDetailsPresenter {
 
   public getAll$ = this.lieuxMediationNumeriqueRepository.getAll$();
 
-  // public getAccessibiliteFromAccesLibre = async (
-  //   lieu: LieuMediationNumeriqueWithAidants
-  // ): Promise<string | undefined> => {
-  //   // let params = new HttpParams().set('commune', lieu.adresse.commune).set('code_postal', lieu.adresse.code_postal);
-  //   let params = new HttpParams().set('activite', 'bibliotheque-mediatheque').set('code_postal', lieu.adresse.code_postal)
-
-  //   // if (lieu.localisation) {
-  //   //   params = params.set('around', `${lieu.localisation.latitude},${lieu.localisation.longitude}`);
-  //   // }
-  //   const response$ = this.httpClient
-  //     ?.get<ErpReponse>('https://acceslibre.beta.gouv.fr/api/erps/', {
-  //       params: params,
-  //       headers: accesLibreHeaders
-  //     })
-  //     .pipe(
-  //       map((response) => {
-  //         const test = response.results.filter((erp: Erp) => erp.code_postal === "75010")
-  //         const erp = response.results.find((erp: Erp) => erp.siret.toLocaleLowerCase().includes(lieu.pivot.toLocaleLowerCase())) ||
-  //         response.results.find((erp: Erp) => erp.adresse.toLocaleLowerCase().includes(lieu.adresse.voie.toLocaleLowerCase())) ||
-  //         response.results.find((erp: Erp) => lieu.nom.toLocaleLowerCase().includes(erp.nom.toLocaleLowerCase()))
-  //         return erp ? erp.web_url : null;
-  //       }),
-  //       catchError((_) => {
-  //         return of(null);
-  //       })
-  //     );
-
-  //   return response$ ? (await firstValueFrom(response$)) ?? undefined : undefined;
-  // };
-
   public getAccessibiliteFromAccesLibre = async (lieu: LieuMediationNumeriqueWithAidants): Promise<string | undefined> => {
-    let params = new HttpParams().set('commune', lieu.adresse.commune).set('code_postal', lieu.adresse.code_postal);
+    let params = new HttpParams()
+      .set('commune', lieu.adresse.commune)
+      .set('code_postal', lieu.adresse.code_postal)
+      .set('page_size', '500');
     let allResults: Erp[] = [];
 
     const fetchResults = async (url: string) => {
@@ -448,16 +423,21 @@ export class LieuxMediationNumeriqueDetailsPresenter {
       }
     };
 
-    const apiUrl = 'https://acceslibre.beta.gouv.fr/api/erps/';
-    const initialUrl = `${apiUrl}?${params}`;
+    const apiUrl: string = 'https://acceslibre.beta.gouv.fr/api/erps/';
+    const initialUrl: string = `${apiUrl}?${params}`;
     await fetchResults(initialUrl);
 
-    // console.log("allResults", allResults)
-    // const test = allResults.filter((erp: Erp) => erp.code_postal === lieu.adresse.code_postal);
-    const erp =
-      allResults.find((erp: Erp) => erp.siret?.toLocaleLowerCase().includes(lieu.pivot.toLocaleLowerCase())) ||
-      allResults.find((erp: Erp) => erp.adresse.toLocaleLowerCase().includes(lieu.adresse.voie.toLocaleLowerCase())) ||
-      allResults.find((erp: Erp) => lieu.nom.toLocaleLowerCase().includes(erp.nom.toLocaleLowerCase()));
+    const retrievActiviteFromName: string | undefined =
+      activitesPossible.filter((activite) => lieu.nom.toLocaleLowerCase().includes(activite)).join() || undefined;
+
+    const conditions = [
+      (erp: Erp) => erp.siret?.toLocaleLowerCase().includes(lieu.pivot.toLocaleLowerCase()),
+      (erp: Erp) => lieu.nom.toLocaleLowerCase().includes(erp.nom.toLocaleLowerCase()),
+      (erp: Erp) => erp.nom.toLocaleLowerCase().includes(lieu.nom.toLocaleLowerCase()),
+      (erp: Erp) => erp.adresse.toLocaleLowerCase().includes(lieu.adresse.voie.toLocaleLowerCase()),
+      (erp: Erp) => retrievActiviteFromName && erp.activite.slug.toLocaleLowerCase().includes(retrievActiviteFromName)
+    ];
+    const erp = allResults.find((item) => conditions.some((condition) => condition(item))) || undefined;
     return erp ? erp.web_url : undefined;
   };
 

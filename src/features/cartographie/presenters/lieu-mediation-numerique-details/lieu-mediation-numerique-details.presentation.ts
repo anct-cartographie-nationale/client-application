@@ -9,7 +9,6 @@ import {
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { Aidant } from '../../../core/models';
 import { HorairesPresentation, OpeningState } from '../../../core/presenters';
-import { noop } from 'rxjs';
 
 export type SourcePresentation = {
   label: string;
@@ -53,6 +52,7 @@ export type Erp = {
   web_url: string;
   adresse: string;
   code_postal: string;
+  activite: { nom: string; slug: string };
   [key: string]: unknown;
 };
 
