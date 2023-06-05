@@ -19,6 +19,6 @@ export const ROUTES: Routes = [
       }
     ],
     component: CoordinateursLayout,
-    path: 'coordination'
+    path: 'coordination-territoriale'
   }
 ];
