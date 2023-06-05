@@ -34,22 +34,18 @@
         (click)="onCloseNoLieuFound()"></button>
     </div>
     <div class="text-center p-3">
-      <img *ngIf="brandConfiguration.logo_variant" class="mb-4 w-50" [src]="brandConfiguration.logo_variant" alt="" />
+      <img *ngIf="brandConfiguration.logo" class="mb-5 w-50" [src]="brandConfiguration.logo" alt="" />
       <h3 class="mb-5 fw-bold">
         Cette structure
         <br />
         <span class="text-primary">n’est plus disponible</span>
       </h3>
       <div>
+        <p>Nous sommes désolés, cette structure n'existe pas ou n'existe plus !</p>
         <p>
-          Nous sommes désolés, mais nous n’avons plus accès
+          Vous pouvez rechercher d'autres structures en naviguant sur la carte
           <br />
-          aux informations sur cette structure.
-        </p>
-        <p>
-          Vous pouvez chercher d’autres structures sur la carte,
-          <br />
-          ou revenir à l’outil d’orientation.
+          ou revenir à la page d'accueil et effectuer un parcours d'orientation.
         </p>
       </div>
     </div>
