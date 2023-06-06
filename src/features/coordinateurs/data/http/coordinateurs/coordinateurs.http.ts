@@ -10,6 +10,6 @@ export class CoordinateursHttp extends CoordinateursRepository {
 
   public getAll$ = (): Observable<Coordinateur[]> =>
     this.httpClient.get<Coordinateur[]>(
-      'https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@5.10.0/assets/data/coordinateurs.json'
+      'https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@5.10.1/assets/data/coordinateurs.json'
     );
 }
