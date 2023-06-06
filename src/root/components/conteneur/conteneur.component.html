@@ -4,10 +4,17 @@
       <a [routerLink]="['/']" class="navbar-brand">
         <img
           class="ms-5"
-          *ngIf="brandConfiguration.logo; else brandName"
-          [src]="brandConfiguration.logo"
+          *ngIf="brandConfiguration.logo_text; else brandLogo"
+          [src]="brandConfiguration.logo_text"
           [alt]="'Accueil cartographie ' + brandConfiguration.name"
           height="48" />
+        <ng-template #brandLogo>
+          <img
+            *ngIf="brandConfiguration.logo; else brandName"
+            [src]="brandConfiguration.logo"
+            [alt]="'Accueil cartographie ' + brandConfiguration.name"
+            height="48" />
+        </ng-template>
         <ng-template #brandName>Cartographie {{ brandConfiguration.name }}</ng-template>
       </a>
       <button

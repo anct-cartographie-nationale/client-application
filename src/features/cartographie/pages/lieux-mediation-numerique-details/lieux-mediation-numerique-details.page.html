@@ -34,7 +34,10 @@
         (click)="onCloseNoLieuFound()"></button>
     </div>
     <div class="text-center p-3">
-      <img *ngIf="brandConfiguration.logo" class="mb-5 w-50" [src]="brandConfiguration.logo" alt="" />
+      <img *ngIf="brandConfiguration.logo; else brandLogo" class="mb-5 w-50" [src]="brandConfiguration.logo" alt="" />
+      <ng-template #brandLogo>
+        <img *ngIf="brandConfiguration.logo_text" class="mb-5 w-50" [src]="brandConfiguration.logo_text" alt="" />
+      </ng-template>
       <h3 class="mb-5 fw-bold">
         Cette structure
         <br />

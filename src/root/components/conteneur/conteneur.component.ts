@@ -15,6 +15,10 @@ export class ConteneurComponent {
     BRAND_CONFIGURATION.logo = logo;
   }
 
+  @Input() set logo_text(logo_text: string) {
+    BRAND_CONFIGURATION.logo_text = logo_text;
+  }
+
   @Input() set titre(name: string) {
     BRAND_CONFIGURATION.name = name;
   }
