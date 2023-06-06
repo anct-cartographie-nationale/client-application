@@ -10,6 +10,6 @@ export class ConseillersHttp extends ConseillersRepository {
 
   public getAll$ = (): Observable<Conseiller[]> =>
     this.httpClient.get<Conseiller[]>(
-      'http://anct-carto-client-feature-les-assembleurs.s3.eu-west-3.amazonaws.com/conseillers.json'
+      'https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@5.10.0/assets/data/conseillers.json'
     );
 }

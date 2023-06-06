@@ -1,5 +1,5 @@
 import { firstValueFrom, Observable, of } from 'rxjs';
-import coordinateursData from '../../../data/coordinateurs.json';
+import coordinateursData from '../../../../../assets/data/coordinateurs.json';
 import { CoordinateursRepository } from '../../../reporitories';
 import { Coordinateur } from '../../../models';
 import { CoordinateursOnMapPresenter } from './coordinateurs-on-map.presenter';
