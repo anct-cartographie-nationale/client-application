@@ -1,5 +1,5 @@
 import { firstValueFrom, Observable, of } from 'rxjs';
-import conseillersData from '../../../data/conseillers.json';
+import conseillersData from '../../../../../assets/data/conseillers.json';
 import { ConseillersRepository } from '../../../reporitories';
 import { Conseiller } from '../../../models';
 import { ConseillersOnMapPresenter } from './conseillers-on-map.presenter';
