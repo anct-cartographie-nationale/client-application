@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { BRAND_CONFIGURATION, BRAND_TOKEN, BrandConfiguration } from '../../configuration';
 import { Observable, Subject } from 'rxjs';
+import { BRAND_CONFIGURATION, BRAND_TOKEN, BrandConfiguration } from '../../configuration';
 
 const ANIMATION_DURATION = 300 as const;
 
@@ -13,10 +13,6 @@ const ANIMATION_DURATION = 300 as const;
 export class ConteneurComponent {
   @Input() set logo(logo: string) {
     BRAND_CONFIGURATION.logo = logo;
-  }
-
-  @Input() set logo_text(logo_text: string) {
-    BRAND_CONFIGURATION.logo_text = logo_text;
   }
 
   @Input() set titre(name: string) {
