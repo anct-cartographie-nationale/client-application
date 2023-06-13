@@ -1,5 +1,19 @@
 <div class="h-100 d-flex pt-5">
   <div class="w-100 my-auto text-center">
+    <img
+      *ngIf="brandConfiguration.logo; else brandLogo"
+      [src]="brandConfiguration.logo"
+      class="my-3"
+      style="max-width: 100%; max-height: 100px"
+      alt="" />
+    <ng-template #brandLogo>
+      <img
+        *ngIf="brandConfiguration.logoAvecTexte"
+        [src]="brandConfiguration.logoAvecTexte"
+        class="my-5"
+        style="max-width: 100%; max-height: 100px"
+        alt="" />
+    </ng-template>
     <ng-container *ngIf="!hasActiveFilter; else: restart">
       <h1 class="h2 fw-bold">
         Bienvenue sur
@@ -40,7 +54,10 @@
         </a>
       </div>
       <div class="my-4">
-        <a class="btn btn-link text-dark m-2" [routerLink]="['/', 'cartographie']" queryParamsHandling="preserve">
+        <a
+          class="text-dark text-decoration-none border-bottom border-dark pb-1 m-2"
+          [routerLink]="['/', 'cartographie']"
+          queryParamsHandling="preserve">
           Accéder directement à la carte
           <i class="ri-skip-forward-line"></i>
         </a>
