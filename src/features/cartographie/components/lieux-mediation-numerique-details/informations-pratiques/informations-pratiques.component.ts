@@ -9,10 +9,10 @@ import { OpeningState } from '../../../../core/presenters';
 })
 export class InformationsPratiquesComponent {
   @Input() public adresse!: string;
-  @Input() public conditionsAcces?: string;
-  @Input() public accessibilite?: Url;
-  @Input() public courriel?: string;
-  @Input() public telephone?: string;
-  @Input() public distance?: number;
-  @Input() public status?: OpeningState;
+  @Input() public conditionsAcces: string | undefined;
+  @Input() public accessibilite: Url | undefined;
+  @Input() public courriel: string | undefined;
+  @Input() public telephone: string | undefined;
+  @Input() public distance: number | undefined;
+  @Input() public status: OpeningState | undefined;
 }

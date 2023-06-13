@@ -7,5 +7,5 @@ import { PublicAccueilli } from '@gouvfr-anct/lieux-de-mediation-numerique';
   templateUrl: './public-pris-en-charge.component.html'
 })
 export class PublicPrisEnChargeComponent {
-  @Input() public publicsAccueillis?: PublicAccueilli[];
+  @Input() public publicsAccueillis: PublicAccueilli[] | undefined;
 }

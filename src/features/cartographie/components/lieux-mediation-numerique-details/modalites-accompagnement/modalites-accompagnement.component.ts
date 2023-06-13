@@ -7,5 +7,5 @@ import { ModaliteAccompagnementPresentation } from '../../../presenters';
   templateUrl: './modalites-accompagnement.component.html'
 })
 export class ModalitesAccompagnementComponent {
-  @Input() public modalitesAccompagnement?: ModaliteAccompagnementPresentation[];
+  @Input() public modalitesAccompagnement: ModaliteAccompagnementPresentation[] | undefined;
 }
