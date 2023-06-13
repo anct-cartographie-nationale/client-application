@@ -2,7 +2,7 @@ export const filterNotFoundEmailBody = (): string =>
   `Bonjour 👋,
 
 Je ne trouve pas mon besoin dans la liste de vos besoins sur le parcours d'orientation de la cartographie nationale.
-J'aimerai pouvoir filtrer les structures selon :
+J'aimerai pouvoir filtrer les lieux selon :
 
 
 

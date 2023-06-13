@@ -71,14 +71,13 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.DevenirAutonomeDansLesDemarchesAdministratives]: {
     titre: 'Être formé(e) pour réaliser mes démarches en ligne',
     description:
-      'Certaines structures proposent des ateliers permettant aux usagers d’apprendre à réaliser des démarches administratives en ligne en toute autonomie.',
+      'Certains lieux proposent des ateliers permettant aux usagers d’apprendre à réaliser des démarches administratives en ligne en toute autonomie.',
     elements: ['CAF', 'CPAM', 'Pole emploi', 'Impôts', 'Juridique'],
     label: 'Exemples'
   },
   [Service.CreerEtDevelopperMonEntreprise]: {
     titre: 'Créer et développer son entreprise',
-    description:
-      "Certaines structures spécialisées pour accompagner les usagers dans leurs démarches de création d'entreprise.",
+    description: "Certains lieux spécialisés pour accompagner les usagers dans leurs démarches de création d'entreprise.",
     elements: [
       'Créer mon auto-entreprise',
       'Connaître les sites internet permettant de gérer mon entreprise',
@@ -89,7 +88,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.AccompagnerLesDemarchesDeSante]: {
     titre: 'Etre aidé(e) dans ses démarches de santé',
     description:
-      'Vos démarches de santé son nombreuses, vous pouvez trouver certaines structures adaptées pour vous accompagner dans celles-ci.',
+      'Vos démarches de santé son nombreuses, vous pouvez trouver certains lieux adaptés pour vous accompagner dans celles-ci.',
     elements: [
       'Utiliser ameli.fr',
       'Trouver un médecin traitant',
@@ -130,7 +129,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.ApprofondirMaCultureNumerique]: {
     titre: 'Approfondir sa culture numérique',
     description:
-      'Certaines structures proposent des ateliers de perfectionnement ou des formations avancées sur des thématiques spécifiques.',
+      'Certains lieux proposent des ateliers de perfectionnement ou des formations avancées sur des thématiques spécifiques.',
     elements: [
       'Utiliser mon matériel de manière sécurisée',
       'Repérer les fake news',
@@ -142,14 +141,14 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.PromouvoirLaCitoyenneteNumerique]: {
     titre: 'Promouvoir la citoyenneté numérique',
     description:
-      'Certaines structures aident les usagers à utiliser leurs outils numériques de manière saine, responsable et sécurisée.',
+      'Certains lieux aident les usagers à utiliser leurs outils numériques de manière saine, responsable et sécurisée.',
     elements: ['Les droits et les interdits sur internet', 'Naviguer de manière responsable', 'Les comportements à risque'],
     label: 'Exemples'
   },
   [Service.CreerAvecLeNumerique]: {
     titre: 'Créer avec le numérique',
     description:
-      'Certaines structures accompagnent les usagers à la réalisation de leurs projets numériques et leurs donnent accès à des outils de création spécifiques.',
+      'Certains lieux accompagnent les usagers à la réalisation de leurs projets numériques et leurs donnent accès à des outils de création spécifiques.',
     elements: [
       'Créer un site vitrine ou marchand',
       'Faire de la retouche photo',
@@ -161,7 +160,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   [Service.SoutenirLaParentalite]: {
     titre: "Soutenir la parentalité et l'éducation numérique",
     description:
-      'Certaines structures conseillent les parents et leurs enfants sur les outils et techniques pour utiliser le numérique en toute sécurité.',
+      'Certains lieux conseillent les parents et leurs enfants sur les outils et techniques pour utiliser le numérique en toute sécurité.',
     elements: [
       'Les dangers pour mon enfant',
       'Le harcèlement sur les réseaux sociaux',
@@ -173,7 +172,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   },
   matériel: {
     titre: 'Équipement numérique',
-    description: "Certaines structures proposent du matériel en accès libre, en location ou à l'achat à des tarifs solidaires.",
+    description: "Certains lieux proposent du matériel en accès libre, en location ou à l'achat à des tarifs solidaires.",
     elements: [
       'Accéder à une connexion internet',
       'Accéder à du matériel numérique en libre service',
@@ -183,7 +182,7 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   },
   [Service.AccederAUneConnexionInternet]: {
     titre: 'Accéder à une connexion internet',
-    description: "Certaines structures proposent gratuitement ou sous conditions l'accès à une connexion internet.",
+    description: "Certains lieux proposent gratuitement ou sous conditions l'accès à une connexion internet.",
     elements: [
       'Accéder à du wifi en libre service',
       'Accéder à du wifi pour mes démarches administratives',
@@ -193,14 +192,13 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
   },
   [Service.AccederADuMateriel]: {
     titre: 'Accéder à du matériel en libre service',
-    description:
-      "Certaines structures proposent gratuitement ou sous conditions l'accès à du matériel numérique en libre service.",
+    description: "Certains lieux proposent gratuitement ou sous conditions l'accès à du matériel numérique en libre service.",
     elements: ['Imprimer gratuitement ou à bas prix', 'Accéder à un ordinateur'],
     label: 'Exemples'
   },
   [Service.EquiperEnMaterielInformatique]: {
     titre: 'Acheter ou louer du matériel à tarif solidaire',
-    description: "Certaines structures proposent en location ou à l'achat du matériel  à tarif solidaire.",
+    description: "Certains lieux proposent en location ou à l'achat du matériel  à tarif solidaire.",
     elements: [
       'Don de matériel',
       'Louer/se faire prêter',

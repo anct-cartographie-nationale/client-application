@@ -32,7 +32,7 @@ export class CarouselComponent {
   public slidePresentations: SlidePresentations[] = [
     {
       titre: 'Orientation',
-      text: `En quelques secondes, renseignez les besoins d'un bénéficiaire, son adresse et ses disponibilités afin d'afficher uniquement les structures qui pourront l'aider.`,
+      text: `En quelques secondes, renseignez les besoins d'un bénéficiaire, son adresse et ses disponibilités afin d'afficher uniquement les lieux qui pourront l'aider.`,
       imageUrl: '/assets/img/presentation/svg-orientation-vertical.svg',
       imageDescription: ''
     },

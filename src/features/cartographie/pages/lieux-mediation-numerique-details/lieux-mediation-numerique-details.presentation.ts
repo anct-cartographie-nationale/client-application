@@ -29,7 +29,7 @@ Numériquement, à bientôt !`.replace(/\n/gu, '%0D%0A');
 export const reportErrorEmailMessage = (detailsLink: string): string =>
   `Bonjour 👋,
 
-En naviguant sur cette fiche structure ${detailsLink}, j'ai repéré cette erreur :
+En naviguant sur cette fiche du lieu ${detailsLink}, j'ai repéré cette erreur :
 
 
 
