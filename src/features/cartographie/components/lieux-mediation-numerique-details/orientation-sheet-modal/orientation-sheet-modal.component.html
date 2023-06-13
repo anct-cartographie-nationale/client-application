@@ -11,8 +11,8 @@
     <div class="modal-content overflow-hidden">
       <div class="modal-header bg-primary text-bg-dark">
         <h2 class="modal-title fw-bold d-flex align-items-center" id="ficheOrientationModal">
-          <i class="ri-xl ri-printer-line me-3"></i>
-          Imprimer la fiche
+          <i class="ri-xl ri-road-map-line me-3"></i>
+          Fiche d'orientation
         </h2>
         <button
           type="button"
@@ -21,58 +21,66 @@
           (click)="close()"></button>
       </div>
       <div>
-        <div @slideLeft *ngIf="!isReadyToPrint">
-          <div class="modal-body col-lg-7 col-12 m-auto">
+        <div *ngIf="printOrientationSheetStep === 'usager'">
+          <div class="modal-body col-lg-8 col-12 m-auto">
+            <p class="text-center">
+              En renseignant ces informations, vous aiderez le médiateur numérique du lieu d'accueil pour la prise en charge du
+              bénéficiaire
+            </p>
             <form
               class="my-4"
-              id="orientationSheetForm"
-              [formGroup]="orientationSheetForm"
-              (ngSubmit)="onSubmitOrientationSheetForm()">
+              id="usagerOrientationSheetForm"
+              [formGroup]="usagerOrientationSheetForm"
+              (ngSubmit)="onSubmitUsagerOrientationSheetForm()">
               <p class="fw-bold">Qui est bénéficiaire ?</p>
-              <div class="mb-3">
-                <label for="firstname" class="form-label visually-hidden">Prénom du bénéficiaire</label>
-                <input
-                  type="text"
-                  maxlength="40"
-                  class="form-control"
-                  [class.is-invalid]="
-                    orientationSheetForm.get('firstname')?.touched && orientationSheetForm.get('firstname')?.invalid
-                  "
-                  id="firstname"
-                  placeholder="Prénom"
-                  aria-describedby="firstnameHelp"
-                  formControlName="firstname" />
-                <div
-                  id="firstnameHelp"
-                  [ngClass]="
-                    orientationSheetForm.get('firstname')?.touched && orientationSheetForm.get('firstname')?.invalid
-                      ? 'invalid-feedback'
-                      : 'form-text'
-                  ">
-                  * Champ obligatoire
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="firstname" class="form-label visually-hidden">Prénom du bénéficiaire</label>
+                  <input
+                    type="text"
+                    maxlength="40"
+                    class="form-control"
+                    [class.is-invalid]="
+                      usagerOrientationSheetForm.get('firstname')?.touched &&
+                      usagerOrientationSheetForm.get('firstname')?.invalid
+                    "
+                    id="firstname"
+                    placeholder="Prénom"
+                    aria-describedby="firstnameHelp"
+                    formControlName="firstname" />
+                  <small
+                    id="firstnameHelp"
+                    [ngClass]="
+                      usagerOrientationSheetForm.get('firstname')?.touched &&
+                      usagerOrientationSheetForm.get('firstname')?.invalid
+                        ? 'invalid-feedback'
+                        : 'text-muted'
+                    ">
+                    * Champ obligatoire
+                  </small>
                 </div>
-              </div>
-              <div class="mb-3">
-                <label for="lastname" class="form-label visually-hidden">Nom du bénéficiaire</label>
-                <input
-                  type="text"
-                  maxlength="40"
-                  class="form-control"
-                  [class.is-invalid]="
-                    orientationSheetForm.get('lastname')?.touched && orientationSheetForm.get('lastname')?.invalid
-                  "
-                  id="lastname"
-                  placeholder="Nom"
-                  aria-describedby="lastnameHelp"
-                  formControlName="lastname" />
-                <div
-                  id="lastnameHelp"
-                  [ngClass]="
-                    orientationSheetForm.get('lastname')?.touched && orientationSheetForm.get('lastname')?.invalid
-                      ? 'invalid-feedback'
-                      : 'form-text'
-                  ">
-                  * Champ obligatoire
+                <div class="col">
+                  <label for="lastname" class="form-label visually-hidden">Nom du bénéficiaire</label>
+                  <input
+                    type="text"
+                    maxlength="40"
+                    class="form-control"
+                    [class.is-invalid]="
+                      usagerOrientationSheetForm.get('lastname')?.touched && usagerOrientationSheetForm.get('lastname')?.invalid
+                    "
+                    id="lastname"
+                    placeholder="Nom"
+                    aria-describedby="lastnameHelp"
+                    formControlName="lastname" />
+                  <small
+                    id="lastnameHelp"
+                    [ngClass]="
+                      usagerOrientationSheetForm.get('lastname')?.touched && usagerOrientationSheetForm.get('lastname')?.invalid
+                        ? 'invalid-feedback'
+                        : 'text-muted'
+                    ">
+                    * Champ obligatoire
+                  </small>
                 </div>
               </div>
               <div class="mb-3">
@@ -82,17 +90,114 @@
             </form>
           </div>
           <div class="modal-footer justify-content-center">
-            <button type="button" class="btn btn-secondary me-3" (click)="print.emit(); close()">
-              <i class="ri-skip-forward-line"></i>
-              Passer cette étape
-            </button>
-            <button type="submit" form="orientationSheetForm" class="btn btn-primary">
+            <button type="submit" form="usagerOrientationSheetForm" class="btn btn-primary">
               Suivant
               <i class="ri-arrow-right-s-line"></i>
             </button>
           </div>
         </div>
-        <div @slideRight *ngIf="isReadyToPrint">
+        <div *ngIf="printOrientationSheetStep === 'prescripteur'">
+          <div class="modal-body col-lg-8 col-12 m-auto">
+            <p class="text-center">
+              Ces informations vont permettre au lieu d'accueil de savoir par qui a été orienté le bénéficiaire.
+            </p>
+            <form
+              class="my-4"
+              id="prescripteurOrientationSheetForm"
+              [formGroup]="prescripteurOrientationSheetForm"
+              (ngSubmit)="onSubmitPrescripteurOrientationSheetForm()">
+              <p class="fw-bold">Qui est à l'origine de l'orientation ?</p>
+              <div class="row mb-3">
+                <div class="col">
+                  <label for="prescripteurFirstname" class="form-label visually-hidden">Prénom du bénéficiaire</label>
+                  <input
+                    type="text"
+                    maxlength="40"
+                    class="form-control"
+                    [class.is-invalid]="
+                      prescripteurOrientationSheetForm.get('firstname')?.touched &&
+                      prescripteurOrientationSheetForm.get('firstname')?.invalid
+                    "
+                    id="prescripteurFirstname"
+                    placeholder="Prénom"
+                    aria-describedby="prescripteurFirstnameHelp"
+                    formControlName="firstname" />
+                  <small
+                    id="prescripteurFirstnameHelp"
+                    [ngClass]="
+                      prescripteurOrientationSheetForm.get('firstname')?.touched &&
+                      prescripteurOrientationSheetForm.get('firstname')?.invalid
+                        ? 'invalid-feedback'
+                        : 'text-muted'
+                    ">
+                    * Champ obligatoire
+                  </small>
+                </div>
+                <div class="col">
+                  <label for="prescripteurLastname" class="form-label visually-hidden">Nom du bénéficiaire</label>
+                  <input
+                    type="text"
+                    maxlength="40"
+                    class="form-control"
+                    [class.is-invalid]="
+                      prescripteurOrientationSheetForm.get('lastname')?.touched &&
+                      prescripteurOrientationSheetForm.get('lastname')?.invalid
+                    "
+                    id="prescripteurLastname"
+                    placeholder="Nom"
+                    aria-describedby="prescripteurLastnameHelp"
+                    formControlName="lastname" />
+                  <small
+                    id="prescripteurLastnameHelp"
+                    [ngClass]="
+                      prescripteurOrientationSheetForm.get('lastname')?.touched &&
+                      prescripteurOrientationSheetForm.get('lastname')?.invalid
+                        ? 'invalid-feedback'
+                        : 'text-muted'
+                    ">
+                    * Champ obligatoire
+                  </small>
+                </div>
+              </div>
+              <div>
+                <label for="prescripteurPlace" class="form-label">Lieu de la prescription</label>
+                <input
+                  type="text"
+                  maxlength="40"
+                  class="form-control"
+                  [class.is-invalid]="
+                    prescripteurOrientationSheetForm.get('place')?.touched &&
+                    prescripteurOrientationSheetForm.get('place')?.invalid
+                  "
+                  id="prescripteurPlace"
+                  placeholder="Endroit où a été réalisé la prescription"
+                  aria-describedby="prescripteurPlaceHelp"
+                  formControlName="place" />
+                <small
+                  id="prescripteurPlaceHelp"
+                  [ngClass]="
+                    prescripteurOrientationSheetForm.get('place')?.touched &&
+                    prescripteurOrientationSheetForm.get('place')?.invalid
+                      ? 'invalid-feedback'
+                      : 'text-muted'
+                  ">
+                  * Champ obligatoire
+                </small>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-secondary" (click)="printOrientationSheetStep = 'usager'">
+              <i class="ri-arrow-left-s-line"></i>
+              Précédent
+            </button>
+            <button type="submit" form="prescripteurOrientationSheetForm" class="btn btn-primary">
+              Suivant
+              <i class="ri-arrow-right-s-line"></i>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="printOrientationSheetStep === 'résumé'">
           <div class="modal-body row bg-white">
             <div class="col bg-light px-0">
               <div class="p-3">
@@ -139,6 +244,7 @@
               </div>
             </div>
             <div class="col" *ngIf="usager">
+              <h5 class="text-primary fw-bold mb-2">Résumé de la fiche d'orientation</h5>
               <div class="mb-5">
                 <b class="text-break">{{ usager.firstname }} {{ usager.lastname }}</b>
                 <div class="text-muted text-break" *ngIf="usager.details">{{ usager.details }}</div>
@@ -163,14 +269,20 @@
                   </span>
                 </div>
               </div>
+              <div class="mb-5" *ngIf="prescripteur">
+                <b>Orientation réalisée par :</b>
+                <div class="text-muted">
+                  {{ prescripteur.firstname }} {{ prescripteur.lastname }} - {{ prescripteur.place }}
+                </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer justify-content-center bg-light">
-            <button type="button" class="btn btn-secondary me-3" (click)="displayOrientationSheetForm()">
+            <button type="button" class="btn btn-secondary me-3" (click)="printOrientationSheetStep = 'prescripteur'">
               <i class="ri-arrow-left-s-line"></i>
-              Modifier
+              Modifier les informations
             </button>
-            <button type="button" class="btn btn-primary" (click)="print.emit(orientationSheetForm.getRawValue())">
+            <button type="button" class="btn btn-primary" (click)="printWithOrientationSheetDetails()">
               <i class="ri-printer-line me-1"></i>
               Imprimer la fiche
             </button>

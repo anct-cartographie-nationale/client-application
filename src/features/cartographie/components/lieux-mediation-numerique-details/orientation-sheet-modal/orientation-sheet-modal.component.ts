@@ -1,23 +1,12 @@
-import { animate, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LabelNational, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
 import { FilterPresentation } from '../../../../core/presenters';
-import { OrientationSheetForm } from '../../../models';
+import { OrientationSheetForm, PrescripteurOrientationSheetForm, UsagerOrientationSheetForm } from '../../../models';
 
 @Component({
-  animations: [
-    trigger('slideRight', [
-      transition(':enter', [style({ position: 'absolute', width: '100%', transform: 'translateX(100%)' }), animate(300)]),
-      transition(':leave', [animate(300, style({ position: 'absolute', width: '100%', transform: 'translateX(100%)' }))])
-    ]),
-    trigger('slideLeft', [
-      transition(':enter', [style({ position: 'absolute', width: '100%', transform: 'translateX(-100%)' }), animate(300)]),
-      transition(':leave', [animate(300, style({ position: 'absolute', width: '100%', transform: 'translateX(-100%)' }))])
-    ])
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-orientation-sheet-modal',
   templateUrl: './orientation-sheet-modal.component.html'
@@ -31,62 +20,82 @@ export class OrientationSheetModalComponent {
   private _animate$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._isShown);
   public animate$: Observable<boolean> = this._animate$;
 
-  public isReadyToPrint: boolean = false;
+  public printOrientationSheetStep: 'usager' | 'prescripteur' | 'résumé' = 'usager';
 
-  public usager: OrientationSheetForm | undefined;
+  public usager: UsagerOrientationSheetForm | undefined;
+  public prescripteur: PrescripteurOrientationSheetForm | undefined;
 
-  public orientationSheetForm = new FormGroup<Record<keyof OrientationSheetForm, AbstractControl>>({
-    firstname: new FormControl<OrientationSheetForm['firstname']>('', [Validators.required]),
-    lastname: new FormControl<OrientationSheetForm['lastname']>('', [Validators.required]),
-    details: new FormControl<OrientationSheetForm['details']>(undefined)
+  public usagerOrientationSheetForm = new FormGroup<Record<keyof UsagerOrientationSheetForm, AbstractControl>>({
+    firstname: new FormControl<UsagerOrientationSheetForm['firstname']>('', [Validators.required]),
+    lastname: new FormControl<UsagerOrientationSheetForm['lastname']>('', [Validators.required]),
+    details: new FormControl<UsagerOrientationSheetForm['details']>(undefined)
+  });
+
+  public prescripteurOrientationSheetForm = new FormGroup<Record<keyof PrescripteurOrientationSheetForm, AbstractControl>>({
+    firstname: new FormControl<PrescripteurOrientationSheetForm['firstname']>('', [Validators.required]),
+    lastname: new FormControl<PrescripteurOrientationSheetForm['lastname']>('', [Validators.required]),
+    place: new FormControl<PrescripteurOrientationSheetForm['place']>('', [Validators.required])
   });
 
   @Input() public id!: string;
   @Input() public nom!: string;
   @Input() public adresse!: string;
-  @Input() public courriel?: string;
+  @Input() public courriel: string | undefined;
   @Input() public telephone?: string;
-  @Input() public siteWeb?: string[] = [];
-  @Input() public labels_nationaux?: LabelNational[] = [];
-  @Input() public localisation?: Localisation;
+  @Input() public siteWeb: string[] | undefined = [];
+  @Input() public labels_nationaux: LabelNational[] | undefined = [];
+  @Input() public localisation: Localisation | undefined;
   @Input() public filters?: FilterPresentation;
 
   @Output() public print: EventEmitter<OrientationSheetForm> = new EventEmitter<OrientationSheetForm>();
 
   public constructor(@Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration) {}
 
-  private show() {
+  private show(): void {
     this._activateModal$.next(true);
     setTimeout(() => this._animate$.next(true), 100);
   }
 
-  private hide() {
+  private hide(): void {
     this._animate$.next(false);
     setTimeout(() => this._activateModal$.next(false), 300);
   }
 
-  public toggle() {
+  public toggle(): void {
     this._isShown ? this.hide() : this.show();
     this._isShown = !this._isShown;
   }
 
-  public onSubmitOrientationSheetForm() {
-    if (this.orientationSheetForm.invalid) {
-      this.orientationSheetForm.markAllAsTouched();
+  public onSubmitUsagerOrientationSheetForm() {
+    if (this.usagerOrientationSheetForm.invalid) {
+      this.usagerOrientationSheetForm.markAllAsTouched();
       return;
     }
 
-    this.isReadyToPrint = true;
-    this.usager = this.orientationSheetForm.getRawValue();
+    this.printOrientationSheetStep = 'prescripteur';
+    this.usager = this.usagerOrientationSheetForm.getRawValue();
   }
 
-  public displayOrientationSheetForm() {
-    this.isReadyToPrint = false;
+  public onSubmitPrescripteurOrientationSheetForm(): void {
+    if (this.prescripteurOrientationSheetForm.invalid) {
+      this.prescripteurOrientationSheetForm.markAllAsTouched();
+      return;
+    }
+
+    this.printOrientationSheetStep = 'résumé';
+    this.prescripteur = this.prescripteurOrientationSheetForm.getRawValue();
   }
 
   public close(): void {
     this.toggle();
-    this.orientationSheetForm.reset();
-    this.isReadyToPrint = false;
+    this.usagerOrientationSheetForm.reset();
+    this.printOrientationSheetStep = 'usager';
+  }
+
+  public printWithOrientationSheetDetails(): void {
+    this.print.emit({
+      usager: this.usagerOrientationSheetForm.getRawValue(),
+      prescripteur: this.prescripteurOrientationSheetForm.getRawValue()
+    });
   }
 }
