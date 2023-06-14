@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../../../root';
+import { DATA_COORDINATEURS_CONFIGURATION } from '../../data/configuration';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +18,14 @@ export class CoordinateursWebComponentLayout implements OnInit {
 
   @Input() set zoom(zoom: string) {
     ZOOM_LEVEL_CONFIGURATION.regular = parseInt(zoom);
+  }
+
+  @Input() set conseillersSource(conseillersSource: string) {
+    DATA_COORDINATEURS_CONFIGURATION.conseillers = conseillersSource;
+  }
+
+  @Input() set coordinateursSource(coordinateursSource: string) {
+    DATA_COORDINATEURS_CONFIGURATION.coordinateurs = coordinateursSource;
   }
 
   public constructor(private readonly router: Router) {}

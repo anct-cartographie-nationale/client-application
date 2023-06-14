@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Conseiller } from '../../../models';
 import { ConseillersRepository } from '../../../reporitories';
+import { DATA_COORDINATEURS_CONFIGURATION } from '../../configuration';
 
 export class ConseillersHttp extends ConseillersRepository {
   public constructor(private readonly httpClient: HttpClient) {
@@ -9,7 +10,5 @@ export class ConseillersHttp extends ConseillersRepository {
   }
 
   public getAll$ = (): Observable<Conseiller[]> =>
-    this.httpClient.get<Conseiller[]>(
-      'https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@5.10.1/assets/data/conseillers.json'
-    );
+    this.httpClient.get<Conseiller[]>(DATA_COORDINATEURS_CONFIGURATION.conseillers);
 }
