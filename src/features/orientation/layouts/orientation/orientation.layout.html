@@ -25,9 +25,9 @@
         <div class="d-flex flex-column px-4 h-100 overflow-auto">
           <div class="d-lg-block d-none flex-grow-1" *ngIf="this.router.url !== '/orientation'">
             <h2 class="text-center text-secondary fw-bold my-5">
-              Structures
+              Lieux
               <br />
-              {{ router.url === '/orientation' ? 'sur le territoire' : 'correspondantes'}}
+              {{ router.url === '/orientation' ? 'sur le territoire' : 'correspondants'}}
             </h2>
           </div>
           <div class="w-100 m-auto position-relative">
@@ -39,7 +39,7 @@
               <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
                 <div class="d-lg-none mt-4">
                   <b>{{ lieuxMediationNumerique.length}} / {{ lieuxMediationNumeriqueTotal.length }}</b>
-                  <div class="opacity-75">Structures trouvées sur le territoire</div>
+                  <div class="opacity-75">Lieux trouvées sur le territoire</div>
                 </div>
                 <div
                   [class.d-lg-none]="this.router.url === '/orientation'"
@@ -52,12 +52,12 @@
                       [found]="lieuxMediationNumerique.length"></app-filter-result-count>
                     <div class="mt-4">
                       <b class="fs-5" [ngPlural]="lieuxMediationNumerique.length">
-                        <ng-template ngPluralCase="=0">Structure trouvée</ng-template>
-                        <ng-template ngPluralCase="=1">Structure trouvée</ng-template>
-                        <ng-template ngPluralCase="other">Structures trouvées</ng-template>
+                        <ng-template ngPluralCase="=0">Lieu trouvé</ng-template>
+                        <ng-template ngPluralCase="=1">Lieu trouvé</ng-template>
+                        <ng-template ngPluralCase="other">Lieux trouvés</ng-template>
                       </b>
                       <br />
-                      / {{ lieuxMediationNumeriqueTotal.length }} structures sur le territoire
+                      / {{ lieuxMediationNumeriqueTotal.length }} lieux sur le territoire
                     </div>
                   </div>
                 </div>

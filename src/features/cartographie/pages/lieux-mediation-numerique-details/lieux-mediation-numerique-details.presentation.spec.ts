@@ -63,7 +63,7 @@ describe('lieux mediation numerique details presentation', (): void => {
     );
 
     expect(message).toBe(
-      "Bonjour 👋,%0D%0A%0D%0AEn naviguant sur cette fiche structure https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details, j'ai repéré cette erreur :%0D%0A%0D%0A%0D%0A%0D%0ANumériquement, à bientôt !"
+      "Bonjour 👋,%0D%0A%0D%0AEn naviguant sur cette fiche du lieu https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details, j'ai repéré cette erreur :%0D%0A%0D%0A%0D%0A%0D%0ANumériquement, à bientôt !"
     );
   });
 });

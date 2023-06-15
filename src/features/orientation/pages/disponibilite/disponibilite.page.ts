@@ -13,8 +13,8 @@ const DISPLAY_CARTOGRAPHIE_MODAL_CONTENT: OrientationInformationContent = {
 };
 
 const OPENING_HOURS_MODAL_CONTENT: OrientationInformationContent = {
-  titre: 'Recherche de structures ouvertes à des horaires précis',
-  description: "Vous pouvez ici choisir de filtrer la cartographie selon les jours et horaires d'ouverture des structures."
+  titre: 'Recherche de lieux ouverts à des horaires précis',
+  description: "Vous pouvez ici choisir de filtrer la cartographie selon les jours et horaires d'ouverture des lieux."
 };
 
 @Component({

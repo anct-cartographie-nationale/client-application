@@ -78,7 +78,7 @@ export class LieuxMediationNumeriqueDetailsPage {
     this._matomoTracker?.trackEvent(
       "parcours d'orientation",
       'fin',
-      `impression fiche ${orientationSheetValues ? "d'orientation" : 'structure'}`
+      `impression fiche ${orientationSheetValues ? "d'orientation" : 'lieu'}`
     );
     this._orientationSheetForm$.next(orientationSheetValues);
     setTimeout(() => {
@@ -89,7 +89,7 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   public onSendEmailTo(sendLieuByEmail: SendLieuByEmail): void {
     this._matomoTracker?.trackEvent("parcours d'orientation", 'fin', 'envoi par email');
-    document.location.href = `mailto:${sendLieuByEmail.email}?subject=[Médiation numérique] Fiche structure - ${
+    document.location.href = `mailto:${sendLieuByEmail.email}?subject=[Médiation numérique] Fiche lieu - ${
       sendLieuByEmail.lieu.nom
     }&body=${emailMessage(sendLieuByEmail.lieu, location.href)}`;
   }
@@ -97,7 +97,7 @@ export class LieuxMediationNumeriqueDetailsPage {
   public onReportAnError(lieu: LieuMediationNumeriqueDetailsPresentation): void {
     const mailTo: string = lieu.contact?.courriel ?? `cartographie.sonum@anct.gouv.fr`;
     const carbonCopy: string = lieu.contact?.courriel ? `cartographie.sonum@anct.gouv.fr` : '';
-    document.location.href = `mailto:${mailTo}?cc=${carbonCopy}&subject=Erreur sur la fiche structure : ${
+    document.location.href = `mailto:${mailTo}?cc=${carbonCopy}&subject=Erreur sur la fiche du lieu : ${
       lieu.nom
     }&body=${reportErrorEmailMessage(location.href)}`;
   }

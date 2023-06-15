@@ -86,7 +86,7 @@ export const labelToDisplayMap: Map<LabelNational, LabelPresentation> = new Map<
       ref: LabelNational.FranceServices,
       nom: 'France Services',
       description:
-        'Une maison France services est une structure qui combine accueil physique et accompagnement numérique, et qui regroupe en un même lieu plusieurs services.',
+        'Une maison France services est un lieu qui combine accueil physique et accompagnement numérique, et qui regroupe en un même lieu plusieurs services.',
       url: 'https://www.economie.gouv.fr/particuliers/france-services',
       carracteristiques: [
         Service.RealiserDesDemarchesAdministratives,
