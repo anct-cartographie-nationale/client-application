@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BRAND_CONFIGURATION, BRAND_TOKEN, BrandConfiguration } from '../../configuration';
 import { Observable, Subject, filter } from 'rxjs';
@@ -11,11 +11,12 @@ const ANIMATION_DURATION = 300 as const;
   templateUrl: './conteneur.component.html'
 })
 export class ConteneurComponent implements OnInit {
+  @ViewChild('container', { static: true }) container!: ElementRef;
+
   ngOnInit() {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      let div = document.getElementById('conteneurDiv');
-      if (div) {
-        div.scrollTop = 0;
+      if (this.container.nativeElement) {
+        this.container.nativeElement.scrollTop = 0;
       }
     });
   }
@@ -41,7 +42,8 @@ export class ConteneurComponent implements OnInit {
 
   public constructor(
     @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration,
-    public readonly router: Router
+    public readonly router: Router,
+    private elementRef: ElementRef
   ) {}
 
   public close(): void {
