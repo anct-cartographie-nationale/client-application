@@ -12,7 +12,7 @@
     <app-boutons-action
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
       [priseRdv]="lieuMediationNumerique.prise_rdv"
-      (print)="printSheetModal.toggle()"
+      (print)="print.emit()"
       (sendByEmail)="sendByEmailModal.toggle()"></app-boutons-action>
     <div class="border-top border-bottom d-xl-none" style="height: 275px">
       <mgl-map
@@ -88,10 +88,14 @@
         [labelsAutres]="lieuMediationNumerique.labels_autres"
         (showLabel)="showLabel.emit($event)"></app-labellisations>
     </li>
-    <li *ngIf="!lieuIsFranceServices()" class="list-group-item">
+    <li *ngIf="!lieuIsFranceServices()" class="list-group-item d-flex">
+      <button (click)="printSheetModal.toggle()" class="btn btn-primary btn-sm my-4 me-auto">
+        <i class="ri ri-compass-3-line ms-1"></i>
+        Imprimer fiche d'orientation
+      </button>
       <button (click)="reportAnError.emit()" class="btn btn-secondary btn-sm my-4">
         Signaler une erreur
-        <i class="ri ri-error-warning-line ms-1 align-bottom"></i>
+        <i class="ri ri-error-warning-line ms-1"></i>
       </button>
     </li>
   </ul>

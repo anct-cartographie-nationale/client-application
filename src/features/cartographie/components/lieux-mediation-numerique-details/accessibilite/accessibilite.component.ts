@@ -8,7 +8,7 @@ import { ASSETS_TOKEN, AssetsConfiguration } from 'projects/client-application/s
   templateUrl: './accessibilite.component.html'
 })
 export class AccessibiliteComponent {
-  @Input() public accessibilite?: Url;
+  @Input() public accessibilite: Url | undefined;
 
   public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
 }

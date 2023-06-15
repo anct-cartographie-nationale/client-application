@@ -8,7 +8,7 @@ import { ASSETS_TOKEN, AssetsConfiguration } from 'projects/client-application/s
   templateUrl: './mise-a-jour.component.html'
 })
 export class MiseAJourComponent {
-  @Input() public source?: SourcePresentation;
+  @Input() public source: SourcePresentation | undefined;
 
   public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
 }

@@ -72,10 +72,12 @@
       </div>
     </div>
     <div class="col-7 my-auto">
-      <div *ngIf="orientationSheetForm; else noOrientationSheetForm">
+      <div *ngIf="orientationSheetForm?.usager as usager; else noOrientationSheetForm">
         <small class="fw-bold text-muted">Informations sur le bénéficiaire</small>
-        <div class="h4 fw-bold text-break">{{ orientationSheetForm.firstname }} {{ orientationSheetForm.lastname }}</div>
-        <div class="small text-break mb-4" *ngIf="orientationSheetForm.details">{{ orientationSheetForm.details }}</div>
+        <div class="h4 fw-bold text-break">{{ usager.firstname }} {{ usager.lastname }}</div>
+        <div class="small text-break mb-4" *ngIf="usager.details">
+          {{ usager.details }}
+        </div>
         <div *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
           <small class="fw-bold text-muted">Objet du rendez-vous</small>
           <div>
@@ -117,5 +119,21 @@
       </ng-template>
     </div>
   </div>
-  <img *ngIf="brandConfiguration.logo" class="w-25 d-none d-print-block" [src]="brandConfiguration.logo" alt="" />
+  <div class="d-none d-print-block">
+    <div class="d-flex mt-3">
+      <img
+        class="w-25"
+        *ngIf="brandConfiguration.logoAvecTexte; else brandLogo"
+        [src]="brandConfiguration.logoAvecTexte"
+        [alt]="" />
+      <ng-template #brandLogo>
+        <img class="w-25" *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" [alt]="" />
+      </ng-template>
+      <div *ngIf="orientationSheetForm?.prescripteur as prescripteur" class="ms-auto border-start border-1">
+        <b>Orientation Réalisée par :</b>
+        <br />
+        {{ prescripteur.firstname }} {{ prescripteur.lastname }}
+      </div>
+    </div>
+  </div>
 </div>

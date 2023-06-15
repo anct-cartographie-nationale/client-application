@@ -101,7 +101,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   i {
     position: absolute;
     left: 0;
-    top: -3px;
+    top: 0;
     min-width: 2em;
     font-size: 1.5em;
     line-height: 2em;
@@ -351,4 +351,8 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-alert-line::before {
   content: '\ea21';
+}
+
+.ri-compass-3-line::before {
+  content: '\ebbe';
 }

@@ -6,6 +6,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   templateUrl: './description.component.html'
 })
 export class DescriptionComponent {
-  @Input() public resume?: string;
-  @Input() public detail?: string;
+  @Input() public resume: string | undefined;
+  @Input() public detail: string | undefined;
 }

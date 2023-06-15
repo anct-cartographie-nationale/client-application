@@ -36,7 +36,7 @@
     <div class="text-center p-3">
       <img *ngIf="brandConfiguration.logo; else brandLogo" class="mb-5 w-50" [src]="brandConfiguration.logo" alt="" />
       <ng-template #brandLogo>
-        <img *ngIf="brandConfiguration.logo_text" class="mb-5 w-50" [src]="brandConfiguration.logo_text" alt="" />
+        <img *ngIf="brandConfiguration.logoAvecTexte" class="mb-5 w-50" [src]="brandConfiguration.logoAvecTexte" alt="" />
       </ng-template>
       <h3 class="mb-5 fw-bold">
         Cette structure

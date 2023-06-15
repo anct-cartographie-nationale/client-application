@@ -6,8 +6,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   templateUrl: './boutons-action.component.html'
 })
 export class BoutonsActionComponent {
-  @Input() public siteWeb?: string[];
-  @Input() public priseRdv?: string;
+  @Input() public siteWeb: string[] | undefined;
+  @Input() public priseRdv: string | undefined;
 
   @Output() public print: EventEmitter<void> = new EventEmitter<void>();
   @Output() public sendByEmail: EventEmitter<void> = new EventEmitter<void>();

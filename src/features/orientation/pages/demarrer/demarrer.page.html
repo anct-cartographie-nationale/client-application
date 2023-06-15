@@ -1,39 +1,66 @@
 <div class="h-100 d-flex pt-5">
   <div class="w-100 my-auto text-center">
     <img
-      *ngIf="brandConfiguration.logo_text; else brandLogo"
-      [src]="brandConfiguration.logo_text"
-      class="my-5"
+      *ngIf="brandConfiguration.logo; else brandLogo"
+      [src]="brandConfiguration.logo"
+      class="my-3"
       style="max-width: 100%; max-height: 100px"
       alt="" />
     <ng-template #brandLogo>
       <img
-        *ngIf="brandConfiguration.logo"
-        [src]="brandConfiguration.logo"
+        *ngIf="brandConfiguration.logoAvecTexte"
+        [src]="brandConfiguration.logoAvecTexte"
         class="my-5"
         style="max-width: 100%; max-height: 100px"
         alt="" />
     </ng-template>
     <ng-container *ngIf="!hasActiveFilter; else: restart">
       <h1 class="h2 fw-bold">
-        Bienvenue sur la Cartographie
-        <span class="text-primary">{{ brandConfiguration.name }}</span>
+        Bienvenue sur
+        <br />
+        <span class="text-primary">la Cartographie {{ brandConfiguration.name }}</span>
+        <ng-container *ngIf="brandConfiguration.sousTitre">
+          <br />
+          <h5 class="text-primary">{{ brandConfiguration.sousTitre }}</h5>
+        </ng-container>
       </h1>
-      <p class="lead mt-4 mb-5">
-        Vous rencontrez un problème lié au numérique ?
-        <br />
-        Des structures sont à votre disposition sur le territoire pour répondre à votre besoin,
-        <br />
-        vous pourrez les localiser en quelques minutes grâce à notre outil d'orientation.
-      </p>
+      <div class="my-5 mx-lg-5 mx-2 fs-5">
+        <p>
+          Vous rencontrez un problème lié au numérique ?
+          <br />
+          Vous souhaitez accompagner une personne en difficulté avec le numérique ?
+        </p>
+        <p>
+          Vous pourrez facilement filtrer les lieux en fonction de votre besoin ou de ceux du bénéficiaire
+          <b>en utilisant notre outil d'orientation.</b>
+        </p>
+      </div>
       <div class="my-4">
-        <a class="btn btn-secondary m-2" [routerLink]="['/', 'cartographie']" queryParamsHandling="preserve">
-          <i class="ri-map-2-line fw-normal"></i>
-          Afficher la carte
+        <a
+          class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative"
+          [routerLink]="['besoin']"
+          queryParamsHandling="preserve">
+          <span class="ri-circled bg-primary text-light fw-normal me-3">
+            <i class="ri-compass-3-line"></i>
+          </span>
+          <span class="orientation-btn-label my-auto text-start">
+            Démarrer une orientation
+            <br />
+            <i class="small text-muted">Grâce à notre questionnaire en 4 étapes</i>
+          </span>
+          <span class="ri-2x text-muted ms-auto me-3 end-0">
+            <i class="ri-arrow-right-s-line"></i>
+          </span>
         </a>
-        <a class="btn btn-primary m-2" [routerLink]="['besoin']" queryParamsHandling="preserve">
-          Démarrer l'orientation
-          <i class="ri-arrow-right-s-line"></i>
+      </div>
+      <div class="mt-5 mb-4 text-muted">OU</div>
+      <div class="my-4">
+        <a
+          class="text-muted text-decoration-none border-bottom border-muted pb-1 m-2"
+          [routerLink]="['/', 'cartographie']"
+          queryParamsHandling="preserve">
+          Accéder directement à la carte
+          <i class="ri-skip-forward-line"></i>
         </a>
       </div>
     </ng-container>

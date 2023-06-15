@@ -2,8 +2,9 @@ import { InjectionToken } from '@angular/core';
 
 export type BrandConfiguration = {
   name: string;
+  sousTitre?: string;
   logo: string;
-  logo_text?: string;
+  logoAvecTexte?: string;
   illustration: string;
 };
 
@@ -17,7 +18,8 @@ export const BRAND_CONFIGURATION: BrandConfiguration = {
 
 export const BRAND_APPLICATION_CONFIGURATION: BrandConfiguration = {
   name: 'Nationale',
+  sousTitre: "des lieux d'inclusion numérique",
   logo: './assets/img/logo/cartographie-nationale-brand.png',
-  logo_text: './assets/img/logo/cartographie-nationale-brand-text.png',
+  logoAvecTexte: './assets/img/logo/cartographie-nationale-brand-text.png',
   illustration: 'svg-france-et-outremer.svg'
 };

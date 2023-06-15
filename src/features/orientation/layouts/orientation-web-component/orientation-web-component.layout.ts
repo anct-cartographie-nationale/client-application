@@ -11,12 +11,20 @@ export class OrientationWebComponentLayout implements OnInit {
     BRAND_CONFIGURATION.logo = logo;
   }
 
+  @Input() set logoAvecText(logoAvecText: string) {
+    BRAND_CONFIGURATION.logoAvecTexte = logoAvecText;
+  }
+
   @Input() set illustration(illustration: string) {
     BRAND_CONFIGURATION.illustration = `svg-${illustration}.svg`;
   }
 
   @Input() set titre(name: string) {
     BRAND_CONFIGURATION.name = name;
+  }
+
+  @Input() set sousTitre(sousTitre: string) {
+    BRAND_CONFIGURATION.sousTitre = sousTitre;
   }
 
   @Input() set source(source: string) {
