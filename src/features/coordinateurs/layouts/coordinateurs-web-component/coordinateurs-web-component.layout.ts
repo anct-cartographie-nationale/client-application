@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../../../root';
-import { DATA_COORDINATEURS_CONFIGURATION } from '../../data/configuration';
+import { DATA_COORDINATEURS_CONFIGURATION, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION } from '../../../../root';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
