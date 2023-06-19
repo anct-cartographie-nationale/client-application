@@ -97,7 +97,7 @@ describe('lieux médiation numérique details presenter', (): void => {
         label: 'Ouvert',
         limite: 'Ferme à 18h30'
       },
-      typologies: 'CHRS, CHU',
+      typologies: "Centres d'hébergement et de réinsertion sociale, Centres d'hébergement d'urgence",
       contact: Contact({
         telephone: '+33180059880',
         courriel: 'contact@laquincaillerie.tl',

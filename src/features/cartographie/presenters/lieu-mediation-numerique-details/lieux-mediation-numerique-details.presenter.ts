@@ -431,7 +431,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           services: lieu.services,
           ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
           ...ifAny('status', openingState(date)(lieu.horaires)),
-          ...ifAny('typologies', typologieMatchingMap.get(lieu.typologies?.[0] ?? '')),
+          ...ifAny('typologies', lieu.typologies?.map((typologie) => typologieMatchingMap.get(typologie) || '').join(', ')),
           ...ifAny('contact', lieu.contact),
           ...ifAny('presentation', lieu.presentation),
           ...ifAny('date_maj', lieu.date_maj),
