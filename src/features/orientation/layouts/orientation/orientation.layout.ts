@@ -120,4 +120,16 @@ export class OrientationLayout {
         }
       });
   }
+
+  public hasFilterValue(filter: FilterPresentation): boolean {
+    for (let key in filter) {
+      const value = filter[key as keyof FilterPresentation];
+
+      if (value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
+        continue;
+      }
+      return true;
+    }
+    return false;
+  }
 }
