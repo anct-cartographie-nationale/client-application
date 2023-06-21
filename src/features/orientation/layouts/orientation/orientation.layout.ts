@@ -125,11 +125,23 @@ export class OrientationLayout {
     for (let key in filter) {
       const value = filter[key as keyof FilterPresentation];
 
-      if (value === null || value === '' || (Array.isArray(value) && value.length === 0)) {
-        continue;
+      if (value != null && value !== '') {
+        if (!Array.isArray(value)) {
+          return true;
+        } else if (value.length > 0 && value.some((item) => this.hasValue(item))) {
+          return true;
+        }
       }
-      return true;
     }
+
     return false;
+  }
+
+  private hasValue(value: any): boolean {
+    if (Array.isArray(value)) {
+      return value.some((item) => this.hasValue(item));
+    }
+
+    return value != null && value !== '';
   }
 }

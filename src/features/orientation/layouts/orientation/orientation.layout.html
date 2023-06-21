@@ -21,21 +21,20 @@
           <i class="ri-arrow-right-s-line ri-xl pt-2 pb-3 text-primary" style="transform: rotate(90deg)"></i>
         </div>
       </div>
-
       <div class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block">
         <div class="d-flex flex-column px-4 h-100 overflow-auto">
           <div *ngIf="router.url !== '/orientation' && (filterPresentation$ | async) as filter">
             <div *ngIf="hasFilterValue(filter)">
-              <h6 class="text-center text-secondary fw-bold mt-5">Filtres activés</h6>
+              <h6 class="text-center text-secondary fw-bold my-2">Filtres activés</h6>
               <app-selected-filters
                 class="flex-grow-1 my-lg-1 my-3"
                 [filterForm]="filterForm"
-                [filterPresentation]="filterPresentation$ | async"></app-selected-filters>
+                [filterPresentation]="filter"></app-selected-filters>
               <div class="border-bottom my-lg-4 my-3"></div>
             </div>
           </div>
           <div class="d-lg-block mt-auto">
-            <h5 class="text-center text-secondary fw-bold mt-5">
+            <h5 class="text-center text-secondary fw-bold mt-2">
               Nombre de lieux
               <br />
               {{ router.url === '/orientation' ? 'référencés sur la carte' : 'correspondant à ma recherche'}}
@@ -63,11 +62,6 @@
               </ng-container>
             </ng-container>
           </div>
-          <!-- <app-selected-filters
-              class="flex-grow-1 my-lg-5 my-3"
-              [filterForm]="filterForm"
-              [filterPresentation]="filterPresentation$ | async"></app-selected-filters> -->
-          <!-- <div class="flex-grow-1 my-lg-2 my-2"></div> -->
           <div *ngIf="router.url !== '/orientation'">
             <div class="border-top my-lg-'' my-3"></div>
             <app-display-on-map-link
