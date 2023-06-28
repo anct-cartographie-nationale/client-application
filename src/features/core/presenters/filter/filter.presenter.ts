@@ -41,7 +41,7 @@ export type FilterQueryParamsPresentation = {
   address?: string;
   latitude?: `${number}`;
   longitude?: `${number}`;
-  distance?: '5000' | '20000';
+  distance?: `${number}`;
   accessibilite?: 'true' | 'false';
   conditions_acces?: string;
   publics_accueillis?: string;
@@ -58,6 +58,25 @@ export type FilterFormPresentation = FilterPresentation & {
 const wrapInArray = <T>(params: string | string[]): T[] => (Array.isArray(params) ? params : [params]) as unknown as T[];
 
 const toArray = <T>(params?: string | string[]): T[] => (!params ? [] : wrapInArray(params));
+
+const fieldsFrom = (filterFormPresentation: FilterFormPresentation): FilterFormPresentation[keyof FilterFormPresentation][] => [
+  filterFormPresentation.service,
+  filterFormPresentation.address,
+  filterFormPresentation.latitude,
+  filterFormPresentation.longitude,
+  filterFormPresentation.distance,
+  filterFormPresentation.accessibilite,
+  filterFormPresentation.conditions_acces,
+  filterFormPresentation.publics_accueillis,
+  filterFormPresentation.modalites_accompagnement,
+  filterFormPresentation.horaires_ouverture
+];
+
+const isFilled = (filterField: FilterFormPresentation[keyof FilterFormPresentation]): boolean =>
+  Array.isArray(filterField) ? filterField.length > 0 : filterField != null;
+
+export const hasActiveFilter = (filterFormPresentation: FilterFormPresentation): boolean =>
+  fieldsFrom(filterFormPresentation).some(isFilled);
 
 export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParamsPresentation): FilterFormPresentation => ({
   service: queryParams?.service,

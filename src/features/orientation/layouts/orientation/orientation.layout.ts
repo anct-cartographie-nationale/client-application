@@ -19,7 +19,8 @@ import {
   LieuxMediationNumeriquePresenter,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation,
-  onlyWithLocalisation
+  onlyWithLocalisation,
+  hasActiveFilter
 } from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { slideInAnimation } from '../../animations';
@@ -116,8 +117,10 @@ export class OrientationLayout {
       this.router.navigate([], {
         queryParams: {
           ...queryParams,
-          horaires_ouverture: JSON.stringify(queryParams.horaires_ouverture)
+          ...(queryParams.horaires_ouverture ? { horaires_ouverture: queryParams.horaires_ouverture } : {})
         }
       });
   }
+
+  public hasActiveFilter = hasActiveFilter;
 }
