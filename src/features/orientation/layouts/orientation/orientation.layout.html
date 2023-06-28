@@ -24,13 +24,13 @@
       <div class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block">
         <div class="d-flex flex-column px-4 h-100 overflow-auto">
           <div *ngIf="router.url !== '/orientation' && (filterPresentation$ | async) as filter">
-            <div *ngIf="hasFilterValue(filter)">
-              <h6 class="text-center text-secondary fw-bold my-2">Filtres activés</h6>
+            <div *ngIf="hasActiveFilter(filter)">
+              <h6 class="text-center text-secondary fw-bold mt-4 mb-3">Filtres activés</h6>
               <app-selected-filters
                 class="flex-grow-1 my-lg-1 my-3"
                 [filterForm]="filterForm"
                 [filterPresentation]="filter"></app-selected-filters>
-              <div class="border-bottom my-lg-4 my-3"></div>
+              <hr class="opacity-100" />
             </div>
           </div>
           <div class="d-lg-block mt-auto">
@@ -63,7 +63,7 @@
             </ng-container>
           </div>
           <div *ngIf="router.url !== '/orientation'">
-            <div class="border-top my-lg-'' my-3"></div>
+            <hr class="opacity-100" />
             <app-display-on-map-link
               class="d-block mb-4"
               [cartographieFeature]="features.get('cartographie')"

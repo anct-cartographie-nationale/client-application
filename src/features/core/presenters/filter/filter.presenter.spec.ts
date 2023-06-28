@@ -1,6 +1,5 @@
-import { FilterFormPresentation } from '../../../core/presenters';
-import { hasActiveFilter } from './demarrer.page.presenter';
 import { ConditionAcces, ModaliteAccompagnement, PublicAccueilli, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { FilterFormPresentation, hasActiveFilter } from './filter.presenter';
 
 describe('démarrer page prensenter', (): void => {
   it('should indicates that there is no active filter', (): void => {

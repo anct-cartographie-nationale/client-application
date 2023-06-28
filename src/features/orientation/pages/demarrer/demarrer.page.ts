@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BRAND_TOKEN, BrandConfiguration } from '../../../../root';
-import { toFilterFormPresentationFromQuery } from '../../../core/presenters';
+import { hasActiveFilter, toFilterFormPresentationFromQuery } from '../../../core/presenters';
 import { OrientationLayout } from '../../layouts';
-import { hasActiveFilter } from './demarrer.page.presenter';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
