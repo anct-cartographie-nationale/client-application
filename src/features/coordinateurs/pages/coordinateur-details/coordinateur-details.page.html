@@ -43,7 +43,13 @@
               Coordonne
               <b>{{ coordinateur.nombreDePersonnesCoordonnees}} {{ coordinateur.dispositif }}</b>
               répartis sur
-              <b>{{ coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees}} lieux</b>
+              <b>
+                {{ coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees}}
+                <span [ngPlural]="coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees">
+                  <ng-template ngPluralCase="1">lieu</ng-template>
+                  <ng-template ngPluralCase="other">lieux</ng-template>
+                </span>
+              </b>
             </div>
             {{ coordinateur.adresse }}
             <br />
