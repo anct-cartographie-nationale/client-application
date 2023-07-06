@@ -1,114 +1,126 @@
 <ng-container *ngIf="coordinateur$ | async as coordinateur">
-  <div class="p-4 sticky-top bg-primary text-white d-block" style="z-index: 0">
-    <div class="d-flex">
-      <img
-        [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.perimetre + '.svg'"
-        alt=""
-        style="height: 56px"
-        class="me-3 my-auto" />
-      <div class="flex-grow-1 align-self-center">
-        <h1 class="h2 fw-bold mb-0">{{ coordinateur.nom }}</h1>
-        <small class="d-flex align-items-center">
-          <b>
-            Coordinateur
-            <span class="text-lowercase">{{ coordinateur.perimetre}}</span>
-          </b>
-          &nbsp;-&nbsp;
-          <i>{{ coordinateur.commune }}</i>
-        </small>
+  <div class="d-flex flex-column h-100">
+    <div class="shadow-sm z-index-over-base">
+      <div class="p-4 bg-primary text-white d-block">
+        <div class="d-flex">
+          <img
+            [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.perimetre + '.svg'"
+            alt=""
+            style="height: 56px"
+            class="me-3 my-auto" />
+          <div class="flex-grow-1 align-self-center">
+            <h1 class="h2 fw-bold mb-0">{{ coordinateur.nom }}</h1>
+            <small class="d-flex align-items-center">
+              <b>
+                Coordinateur
+                <span class="text-lowercase">{{ coordinateur.perimetre}}</span>
+              </b>
+              &nbsp;-&nbsp;
+              <i>{{ coordinateur.commune }}</i>
+            </small>
+          </div>
+          <div class="d-flex flex-column">
+            <div class="flex-grow-1 text-end">
+              <button
+                (click)="closeDetails()"
+                type="button"
+                class="btn btn-close btn-close-white opacity-100"
+                tabindex="0"
+                aria-label="Close"></button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="d-flex flex-column">
-        <div class="flex-grow-1 text-end">
-          <button
-            (click)="closeDetails()"
-            type="button"
-            class="btn btn-close btn-close-white opacity-100"
-            tabindex="0"
-            aria-label="Close"></button>
+      <div class="p-4 bg-light">
+        <div class="row">
+          <div class="col">
+            <div class="text-primary mb-2">
+              <img
+                [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.dispositif + '.svg'"
+                alt=""
+                style="height: 24px"
+                class="me-1" />
+              Coordonne
+              <b>{{ coordinateur.nombreDePersonnesCoordonnees}} {{ coordinateur.dispositif }}</b>
+              répartis sur
+              <b>
+                {{ coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees}}
+                <span [ngPlural]="coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees">
+                  <ng-template ngPluralCase="1">lieu</ng-template>
+                  <ng-template ngPluralCase="other">lieux</ng-template>
+                </span>
+              </b>
+            </div>
+            {{ coordinateur.adresse }}
+            <br />
+          </div>
+          <div class="col-auto">
+            <a
+              *ngIf="coordinateur.courriel"
+              href="mailto:{{ coordinateur.courriel }}"
+              class="btn btn-sm btn-secondary d-block mb-2"
+              (click)="$event.stopPropagation()">
+              <i class="ri-mail-line me-2 text-right"></i>
+              <span>Contacter par mail</span>
+            </a>
+            <a
+              *ngIf="coordinateur.telephone"
+              href="tel://{{ coordinateur.telephone }}"
+              class="text-decoration-none d-block mb-2"
+              (click)="$event.stopPropagation()">
+              <i class="me-2 ri-phone-line"></i>
+              <span aria-hidden="true">{{ coordinateur.telephone | phone }}</span>
+              <span class="visually-hidden">Contacter par téléphone</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="p-4 bg-light row">
-    <div class="col">
-      <div class="text-primary mb-2">
-        <img
-          [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.dispositif + '.svg'"
-          alt=""
-          style="height: 24px"
-          class="me-1" />
-        Coordonne
-        <b>{{ coordinateur.nombreDePersonnesCoordonnees}} {{ coordinateur.dispositif }}</b>
-        répartis sur
-        <b>{{ coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees}} lieux</b>
-      </div>
-      {{ coordinateur.adresse }}
-      <br />
-    </div>
-    <div class="col-auto">
-      <a
-        *ngIf="coordinateur.courriel"
-        href="mailto:{{ coordinateur.courriel }}"
-        class="btn btn-sm btn-secondary d-block mb-2"
-        (click)="$event.stopPropagation()">
-        <i class="ri-mail-line me-2 text-right"></i>
-        <span>Contacter par mail</span>
-      </a>
-      <a
-        *ngIf="coordinateur.telephone"
-        href="tel://{{ coordinateur.telephone }}"
-        class="text-decoration-none d-block mb-2"
-        (click)="$event.stopPropagation()">
-        <i class="me-2 ri-phone-line"></i>
-        <span aria-hidden="true">{{ coordinateur.telephone | phone }}</span>
-        <span class="visually-hidden">Contacter par téléphone</span>
-      </a>
-    </div>
-  </div>
-  <div class="p-4">
-    <span class="text-muted">CNFS À PROXIMITÉ</span>
-    <div class="row g-3 mt-2">
-      <div *ngFor="let conseiller of conseillers$ | async" class="position-relative col-6">
-        <div class="bg-light p-3 h-100 d-flex flex-column">
-          <div class="mb-1">
-            <i
-              class="ri-account-circle-fill ri-lg text-primary"
-              [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"></i>
-            {{ conseiller.nom }}
-          </div>
-          <div class="flex-grow-1">
-            <small *ngIf="(conseiller.coordinateurs?.length ?? 0) > 0; else: nonCoordonne">
-              <b class="text-primary me-1">
-                Coordonné par
-                <ng-container *ngFor="let coordinateur of conseiller.coordinateurs; first as isFirst; last as isLast ">
-                  <ng-container *ngIf="isFirst">
-                    <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+    <div class="h-100 overflow-scroll p-4">
+      <span class="text-muted">CNFS À PROXIMITÉ</span>
+      <div class="row g-3 mt-2">
+        <div *ngFor="let conseiller of conseillers$ | async" class="position-relative col-6">
+          <div class="bg-light p-3 h-100 d-flex flex-column">
+            <div class="mb-1">
+              <i
+                class="ri-account-circle-fill ri-lg text-primary"
+                [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"></i>
+              {{ conseiller.nom }}
+            </div>
+            <div class="flex-grow-1">
+              <small *ngIf="(conseiller.coordinateurs?.length ?? 0) > 0; else: nonCoordonne">
+                <b class="text-primary me-1">
+                  Coordonné par
+                  <ng-container *ngFor="let coordinateur of conseiller.coordinateurs; first as isFirst; last as isLast ">
+                    <ng-container *ngIf="isFirst">
+                      <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+                    </ng-container>
+                    <ng-container *ngIf="!isFirst && !isLast">
+                      ,
+                      <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+                    </ng-container>
+                    <ng-container *ngIf="!isFirst && isLast">
+                      &#32;et
+                      <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
+                    </ng-container>
                   </ng-container>
-                  <ng-container *ngIf="!isFirst && !isLast">
-                    ,
-                    <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
-                  </ng-container>
-                  <ng-container *ngIf="!isFirst && isLast">
-                    &#32;et
-                    <a [routerLink]="['../../', coordinateur.id, 'details']">{{ coordinateur.nom }}</a>
-                  </ng-container>
-                </ng-container>
-              </b>
-              <i>({{ conseiller.distance | distance }})</i>
-            </small>
-            <ng-template #nonCoordonne>
-              <b>Non coordonné</b>
-              <br />
-              <i class="small">à {{ conseiller.distance | distance }} de {{ coordinateur.nom }}</i>
-            </ng-template>
-          </div>
-          <div>
-            <button
-              type="button"
-              class="btn btn-link link-muted-dark p-0 fw-bold stretched-link"
-              (click)="conseillerDetailsModal.toggle(); conseillerSelected = conseiller">
-              En savoir plus...
-            </button>
+                </b>
+                <i>({{ conseiller.distance | distance }})</i>
+              </small>
+              <ng-template #nonCoordonne>
+                <b>Non coordonné</b>
+                <br />
+                <i class="small">à {{ conseiller.distance | distance }} de {{ coordinateur.nom }}</i>
+              </ng-template>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-link link-muted-dark p-0 fw-bold stretched-link"
+                (click)="conseillerDetailsModal.toggle(); conseillerSelected = conseiller">
+                En savoir plus...
+              </button>
+            </div>
           </div>
         </div>
       </div>

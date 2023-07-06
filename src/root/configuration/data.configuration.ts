@@ -10,8 +10,8 @@ export type DataCoordinateursConfiguration = {
 };
 
 export const DATA_COORDINATEURS_CONFIGURATION: DataCoordinateursConfiguration = {
-  conseillers: 'https://beta.api.conseiller-numerique.gouv.fr/coordination-conseillers',
-  coordinateurs: 'https://beta.api.conseiller-numerique.gouv.fr/coordinateurs'
+  conseillers: 'https://api.conseiller-numerique.gouv.fr/coordination-conseillers',
+  coordinateurs: 'https://api.conseiller-numerique.gouv.fr/coordinateurs'
 };
 
 export const DATA_TOKEN: InjectionToken<DataConfiguration> = new InjectionToken<DataConfiguration>('data.configuration');
