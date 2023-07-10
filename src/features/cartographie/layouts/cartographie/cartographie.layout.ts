@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router, RouterOutlet, UrlSegment } from '@angular/router';
 import { BehaviorSubject, delay, Observable, of, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -18,14 +18,17 @@ import {
   openingState,
   FrancePresentation,
   TerritoirePresentation,
-  MarkersPresenter
+  MarkersPresenter,
+  regionFromNom
 } from '../../../core/presenters';
 import { ifAny } from '../../../core/utilities';
 import {
   getNextRouteFromZoomLevel,
   shouldNavigateToListPage,
   LieuMediationNumeriqueOnMapPresentation,
-  DEPARTEMENT_ZOOM_LEVEL
+  DEPARTEMENT_ZOOM_LEVEL,
+  BreadcrumbItem,
+  getBreadcrumbItems
 } from '../../presenters';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
 import {
@@ -126,13 +129,11 @@ export class CartographieLayout {
         tap(() => this._loadingState$.next(false))
       );
 
-  public defaultAddress$: Observable<string | null> = this.route.queryParamMap.pipe(
-    map((paramMap: ParamMap) => paramMap.get('address'))
-  );
-
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
   public userLocalisation?: Localisation;
+
+  @ViewChild(RouterOutlet) public routerOutlet!: RouterOutlet;
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
@@ -145,6 +146,14 @@ export class CartographieLayout {
     @Inject(INITIAL_POSITION_TOKEN)
     private readonly _initialPosition: InitialPositionConfiguration
   ) {}
+
+  public getBreadcrumbItems = (urlSegments: UrlSegment[], zoomLevel: number): BreadcrumbItem[] =>
+    getBreadcrumbItems(urlSegments, zoomLevel);
+
+  public showLieux(label: string): void {
+    const regionMatchingLabel: RegionPresentation | undefined = regionFromNom(label);
+    regionMatchingLabel ? this.onShowLieuxInZone(regionMatchingLabel) : this.markersPresenter.reset();
+  }
 
   public onShowLieuxInDepartement(departement: TerritoirePresentation): void {
     this.markersPresenter.center(departement.localisation, departement.zoom);
@@ -208,7 +217,8 @@ export class CartographieLayout {
       nearestRegion(localisation).nom,
       this.route.snapshot.queryParams['distance']
     );
-    shouldNavigateToListPage(route, this.route.children[0]?.children[0]?.routeConfig?.path) &&
+
+    shouldNavigateToListPage(route, this.route.children[0]?.routeConfig?.path) &&
       this.router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 

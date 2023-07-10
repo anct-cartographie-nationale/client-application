@@ -42,8 +42,7 @@ export class ConteneurComponent implements OnInit {
 
   public constructor(
     @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration,
-    public readonly router: Router,
-    private elementRef: ElementRef
+    public readonly router: Router
   ) {}
 
   public close(): void {
