@@ -356,3 +356,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-compass-3-line::before {
   content: '\ebbe';
 }
+
+.ri-arrow-drop-right-fill::before {
+  content: '\ea53';
+}
