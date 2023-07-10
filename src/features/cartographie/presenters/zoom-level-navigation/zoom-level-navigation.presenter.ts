@@ -33,8 +33,11 @@ const isLieux = (route: string[], routeConfigPath: string): boolean =>
 
 const hasDepartementAndLieuId = (routeConfigPath: string): boolean => routeConfigPath.endsWith(':nomDepartement/:id');
 
+const detailsPage = (routeConfigPath: string): boolean => routeConfigPath === ':id/details';
+
 export const shouldNavigateToListPage = (route: string[], routeConfigPath?: string): boolean =>
   routeConfigPath != null &&
+  !detailsPage(routeConfigPath) &&
   !hasDepartementAndLieuId(routeConfigPath) &&
   (isRegion(route, routeConfigPath) || isDepartement(route, routeConfigPath) || isLieux(route, routeConfigPath));
 

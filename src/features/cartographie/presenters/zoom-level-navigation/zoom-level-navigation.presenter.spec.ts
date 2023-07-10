@@ -72,6 +72,15 @@ describe('zoom level navigation presenter', (): void => {
     expect(shouldNavigate).toBe(false);
   });
 
+  it('should navigate to details page when route config is :id/details', (): void => {
+    const shouldNavigate: boolean = shouldNavigateToListPage(
+      ['regions', 'Île-de-France', '6305e54574996606f375c411'],
+      ':id/details'
+    );
+
+    expect(shouldNavigate).toBe(false);
+  });
+
   it('should navigate to regions/Île-de-France when route config is regions', (): void => {
     const shouldNavigate: boolean = shouldNavigateToListPage(['regions', 'Île-de-France'], 'regions');
 
