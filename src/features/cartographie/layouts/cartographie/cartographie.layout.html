@@ -31,35 +31,10 @@
   <nav class="navbar navbar-expand-lg bg-light shadow-sm z-index-over-base sticky-top">
     <div class="container-fluid">
       <div class="navbar-collapse">
-        <nav
-          *ngIf="getBreadcrumbItems((routerOutlet?.activatedRoute?.url | async) ?? [], (markersPresenter.zoom$ | async) ?? 0) as breadcrumbItems"
-          aria-label="Navigation par territoire">
-          <ng-container *ngFor="let breadcrumbItem of breadcrumbItems">
-            <span *ngIf="breadcrumbItem.link; else: currentPage" class="breadcrumb-item">
-              <a
-                *ngIf="breadcrumbItem.link[0].startsWith('http'); else: routerLink"
-                [href]="breadcrumbItem.link[0]"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="text-body">
-                {{ breadcrumbItem.label}}
-              </a>
-              <ng-template #routerLink>
-                <a
-                  [routerLink]="breadcrumbItem.link"
-                  queryParamsHandling="preserve"
-                  (click)="showLieux(breadcrumbItem.label)"
-                  class="text-body">
-                  {{ breadcrumbItem.label}}
-                </a>
-              </ng-template>
-            </span>
-            <ng-template #currentPage>
-              <span class="breadcrumb-item active text-body" aria-current="page">{{ breadcrumbItem.label }}</span>
-            </ng-template>
-            <i class="ri-arrow-drop-right-fill"></i>
-          </ng-container>
-        </nav>
+        <app-location-breadcrumb
+          [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
+          [zoom]="(markersPresenter.zoom$ | async) ?? 0"
+          (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
         <app-user-location
         [adresse]="(defaultAddress$ | async) ?? ''"
         (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>

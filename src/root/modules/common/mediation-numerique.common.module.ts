@@ -6,11 +6,10 @@ import { cartographieProviders } from '../../../features/cartographie/modules/co
 import { orientationProviders } from '../../../features/orientation/modules/common';
 import { ConteneurComponent } from '../../components';
 import { mediationNumeriqueProviders } from './mediation-numerique.providers';
-import { UserLocationModule } from '../../../features/adresse';
 
 @NgModule({
   declarations: [ConteneurComponent],
-  imports: [BrowserAnimationsModule, HttpClientModule, RouterModule, UserLocationModule],
+  imports: [BrowserAnimationsModule, HttpClientModule, RouterModule],
   exports: [ConteneurComponent, BrowserAnimationsModule],
   providers: [...cartographieProviders, ...orientationProviders, ...mediationNumeriqueProviders]
 })

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router, RouterOutlet, UrlSegment } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { BehaviorSubject, delay, Observable, of, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -18,17 +18,14 @@ import {
   openingState,
   FrancePresentation,
   TerritoirePresentation,
-  MarkersPresenter,
-  regionFromNom
+  MarkersPresenter
 } from '../../../core/presenters';
 import { ifAny } from '../../../core/utilities';
 import {
   getNextRouteFromZoomLevel,
   shouldNavigateToListPage,
   LieuMediationNumeriqueOnMapPresentation,
-  DEPARTEMENT_ZOOM_LEVEL,
-  BreadcrumbItem,
-  getBreadcrumbItems
+  DEPARTEMENT_ZOOM_LEVEL
 } from '../../presenters';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
 import {
@@ -46,7 +43,7 @@ const filteredByDepartementIfExist = (
   lieux: LieuMediationNumeriquePresentation[]
 ): LieuMediationNumeriquePresentation[] =>
   departement
-    ? lieux.filter((lieu: LieuMediationNumeriquePresentation) => toDepartement(lieu)?.code === departement.code)
+    ? lieux.filter((lieu: LieuMediationNumeriquePresentation): boolean => toDepartement(lieu)?.code === departement.code)
     : lieux;
 
 const toLieuxFilteredByDepartement = (lieux: LieuMediationNumeriquePresentation[], nomDepartement: string) =>
@@ -133,7 +130,7 @@ export class CartographieLayout {
 
   public userLocalisation?: Localisation;
 
-  @ViewChild(RouterOutlet) public routerOutlet!: RouterOutlet;
+  @ViewChild(RouterOutlet) public routerOutlet!: RouterOutlet | undefined;
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
@@ -146,14 +143,6 @@ export class CartographieLayout {
     @Inject(INITIAL_POSITION_TOKEN)
     private readonly _initialPosition: InitialPositionConfiguration
   ) {}
-
-  public getBreadcrumbItems = (urlSegments: UrlSegment[], zoomLevel: number): BreadcrumbItem[] =>
-    getBreadcrumbItems(urlSegments, zoomLevel);
-
-  public showLieux(label: string): void {
-    const regionMatchingLabel: RegionPresentation | undefined = regionFromNom(label);
-    regionMatchingLabel ? this.onShowLieuxInZone(regionMatchingLabel) : this.markersPresenter.reset();
-  }
 
   public onShowLieuxInDepartement(departement: TerritoirePresentation): void {
     this.markersPresenter.center(departement.localisation, departement.zoom);
