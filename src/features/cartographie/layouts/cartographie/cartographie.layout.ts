@@ -215,4 +215,13 @@ export class CartographieLayout {
   private getRouteParam(routeParam: string) {
     return this.route.children[0]?.children[0]?.snapshot.paramMap.get(routeParam) ?? '';
   }
+
+  public resetFilterOnGeolocate(localisation: Localisation): Localisation {
+    if (localisation)
+      this.router.navigate(['/cartographie'], {
+        queryParams: {},
+        queryParamsHandling: 'merge'
+      });
+    return (this.userLocalisation = localisation);
+  }
 }
