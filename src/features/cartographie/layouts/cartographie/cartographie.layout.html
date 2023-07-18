@@ -33,7 +33,9 @@
   </div>
   <div class="col overflow-auto position-relative">
     <div class="p-3 position-absolute start-0 z-index-over-base d-md-block d-none" *ngIf="(loadingState$ | async) === false">
-      <app-user-location [adresse]="(defaultAddress$ | async) ?? ''" (location)="userLocalisation = $event"></app-user-location>
+      <app-user-location
+        [adresse]="(defaultAddress$ | async) ?? ''"
+        (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
     </div>
     <mgl-map
       [movingMethod]="'flyTo'"
