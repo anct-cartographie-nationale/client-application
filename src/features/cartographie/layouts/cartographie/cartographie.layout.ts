@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, RouterOutlet } from '@angular/router';
 import { BehaviorSubject, delay, Observable, of, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -125,6 +125,10 @@ export class CartographieLayout {
         delay(0),
         tap(() => this._loadingState$.next(false))
       );
+
+  public defaultAddress$: Observable<string | null> = this.route.queryParamMap.pipe(
+    map((paramMap: ParamMap) => paramMap.get('address'))
+  );
 
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
