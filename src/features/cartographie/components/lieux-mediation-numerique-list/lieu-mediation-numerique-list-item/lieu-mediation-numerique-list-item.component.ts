@@ -22,4 +22,8 @@ export class LieuMediationNumeriqueListItemComponent {
     @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
     public readonly route: ActivatedRoute
   ) {}
+
+  public dateIsValide(dateMaj: Date): boolean {
+    return dateMaj > new Date('1970-01-01');
+  }
 }
