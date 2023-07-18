@@ -216,7 +216,7 @@ export class CartographieLayout {
     return this.route.children[0]?.children[0]?.snapshot.paramMap.get(routeParam) ?? '';
   }
 
-  public resetFilterOnGeolocate(localisation: Localisation): Localisation {
+  public resetBreadcrumbOnGeolocate(localisation: Localisation): Localisation {
     if (localisation)
       this.router.navigate(['/cartographie'], {
         queryParams: {},
