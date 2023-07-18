@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, ChildrenOutletContexts, Router } from '@angular/router';
 import { BehaviorSubject, delay, Observable, startWith, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -20,20 +20,11 @@ import {
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation,
   onlyWithLocalisation,
-  hasActiveFilter
+  hasActiveFilter,
+  createFormGroupFromFilterPresentation
 } from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { slideInAnimation } from '../../animations';
-
-const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresentation): FormGroup =>
-  Object.entries(filterPresentation).reduce(
-    (formGroup: FormGroup, [field, value]: [string, FilterPresentation[keyof FilterPresentation]]): FormGroup =>
-      new FormGroup({
-        ...formGroup.controls,
-        [field]: new FormControl(value)
-      }),
-    new FormGroup({})
-  );
 
 const toLieuxWithLocalisation = (lieux: LieuMediationNumerique[]) => lieux.filter(onlyWithLocalisation);
 

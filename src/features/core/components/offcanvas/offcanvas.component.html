@@ -1,0 +1,15 @@
+<div
+  class="offcanvas offcanvas-end"
+  [class.position-absolute]="isAbsolute"
+  [class.showing]="showing$ | async"
+  [class.show]="((expanded$ | async) || (hiding$ | async)) && (showing$ | async) === false"
+  [class.hiding]="hiding$ | async"
+  tabindex="-1"
+  id="offcanvasNavbar"
+  aria-labelledby="offcanvasNavbarLabel"
+  [attr.aria-modal]="(expanded$ | async) ? 'true' : null"
+  [attr.role]="(expanded$ | async) ? 'dialog' : null">
+  <div class="h-100" [class.offcanvas-body]="useContainer">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -30,8 +30,11 @@ import {
 } from './lieux-mediation-numerique-details';
 import { LabelModalComponent } from './label-modal/label-modal.component';
 import { LocationBreadcrumbComponent } from './location-breadcrumb/location-breadcrumb.component';
+import { AffinerRechercheFormComponent } from './affiner-recherche-form/affiner-recherche-form.component';
+import { ModifierOrientationComponent } from './modifier-orientation/modifier-orientation.component';
 
 export const components = [
+  AffinerRechercheFormComponent,
   LieuxMediationNumeriqueDetailsPrintComponent,
   LieuxMediationNumeriqueDetailsComponent,
   LieuMediationNumeriqueListItemComponent,
@@ -59,5 +62,6 @@ export const components = [
   LabelModalComponent,
   MiseAJourComponent,
   AccessibiliteComponent,
-  LocationBreadcrumbComponent
+  LocationBreadcrumbComponent,
+  ModifierOrientationComponent
 ];

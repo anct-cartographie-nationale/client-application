@@ -1,0 +1,17 @@
+<ng-container *ngIf="features.get('orientation') as orientation">
+  <a
+    class="btn btn-secondary me-3"
+    *ngIf="orientation.active"
+    [routerLink]="['/', 'orientation']"
+    queryParamsHandling="preserve">
+    <i class="ri-sound-module-line me-1"></i>
+    Modifier l'orientation
+  </a>
+  <a
+    *ngIf="!orientation.active && orientation.url"
+    class="btn btn-secondary me-3"
+    [href]="orientation.url + '?' + toQueryString($any(route.queryParams | async))">
+    <i class="ri-sound-module-line me-1"></i>
+    Modifier l'orientation
+  </a>
+</ng-container>

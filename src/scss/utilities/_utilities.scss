@@ -31,6 +31,7 @@ $utilities: map.merge(
       class: z-index,
       values: (
         base: 0,
+        over-nav: 800,
         over-base: 900,
         over-all: 1100
       )

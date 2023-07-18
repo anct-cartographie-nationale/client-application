@@ -9,7 +9,6 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FeatureConfiguration } from '../../../../../root';
@@ -58,9 +57,5 @@ export class LieuxMediationNumeriqueListComponent {
 
   public trackByLieuId(_: number, lieu: LieuMediationNumeriqueListItemPresentation) {
     return lieu.id;
-  }
-
-  public toQueryString(fromObject: {} = {}): string {
-    return new HttpParams({ fromObject }).toString();
   }
 }

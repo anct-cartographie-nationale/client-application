@@ -1,3 +1,4 @@
+import { FormControl, FormGroup } from '@angular/forms';
 import {
   ConditionAcces,
   Localisation,
@@ -95,3 +96,13 @@ export const toLocalisationFromFilterFormPresentation = (filter: FilterFormPrese
   filter.latitude && filter.longitude
     ? Localisation({ latitude: filter.latitude, longitude: filter.longitude })
     : NO_LOCALISATION;
+
+export const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresentation): FormGroup =>
+  Object.entries(filterPresentation).reduce(
+    (formGroup: FormGroup, [field, value]: [string, FilterPresentation[keyof FilterPresentation]]): FormGroup =>
+      new FormGroup({
+        ...formGroup.controls,
+        [field]: new FormControl(value)
+      }),
+    new FormGroup({})
+  );
