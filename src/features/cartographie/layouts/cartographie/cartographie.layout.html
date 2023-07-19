@@ -40,6 +40,7 @@
           (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
         <button
           class="navbar-btn ms-auto"
+          [attr.aria-controls]="affinerRechercheOffcanvas.id"
           [class.active]="affinerRechercheOffcanvas.expanded$ | async"
           (click)="affinerRechercheOffcanvas.toggle()">
           <i
@@ -96,7 +97,13 @@
           (highlight)="onHighlight($event?.id)"
           (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
       </mgl-map>
-      <app-offcanvas #affinerRechercheOffcanvas class="z-index-over-nav" [isAbsolute]="true" [useContainer]="false">
+      <app-offcanvas
+        #affinerRechercheOffcanvas
+        class="z-index-over-nav"
+        heading="Options pour affiner la recherche"
+        [isAbsolute]="true"
+        [useContainer]="false"
+        [useHeader]="false">
         <div class="d-flex flex-column h-100">
           <div class="flex-grow-1">
             <app-affiner-recherche-form></app-affiner-recherche-form>

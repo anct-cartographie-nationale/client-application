@@ -1,17 +1,25 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 const ANIMATION_DURATION = 300 as const;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-offcanvas',
+  selector: 'app-offcanvas[heading]',
   templateUrl: './offcanvas.component.html'
 })
-export class OffcanvasComponent {
-  @Input() isAbsolute: boolean = false;
+export class OffcanvasComponent implements OnChanges {
+  @Input() public isAbsolute: boolean = false;
 
-  @Input() useContainer: boolean = true;
+  @Input() public useContainer: boolean = true;
+
+  @Input() public useHeader: boolean = true;
+
+  @Input() public useCloseButton: boolean = true;
+
+  @Input() public heading!: string;
+
+  public id: string = '';
 
   private _isExpanded: boolean = false;
 
@@ -23,6 +31,10 @@ export class OffcanvasComponent {
 
   private _expanded$: Subject<boolean> = new Subject<boolean>();
   public expanded$: Observable<boolean> = this._expanded$.asObservable();
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['heading'].firstChange) this.id = this.heading.toLowerCase().replace(/\s/gu, '-');
+  }
 
   public toggle(): void {
     this._isExpanded ? this._hiding$.next(true) : this._showing$.next(true);

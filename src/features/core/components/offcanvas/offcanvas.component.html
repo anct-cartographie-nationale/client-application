@@ -5,10 +5,19 @@
   [class.show]="((expanded$ | async) || (hiding$ | async)) && (showing$ | async) === false"
   [class.hiding]="hiding$ | async"
   tabindex="-1"
-  id="offcanvasNavbar"
-  aria-labelledby="offcanvasNavbarLabel"
+  [id]="id"
+  [attr.aria-labelledby]="id + '-label'"
   [attr.aria-modal]="(expanded$ | async) ? 'true' : null"
   [attr.role]="(expanded$ | async) ? 'dialog' : null">
+  <div [class.offcanvas-header]="useHeader">
+    <h5 [class.visually-hidden]="!useHeader" [id]="id + '-label'">{{ heading }}</h5>
+    <button
+      *ngIf="useHeader && useCloseButton"
+      type="button"
+      class="ms-auto btn-close"
+      aria-label="Close"
+      (click)="toggle()"></button>
+  </div>
   <div class="h-100" [class.offcanvas-body]="useContainer">
     <ng-content></ng-content>
   </div>
