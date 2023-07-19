@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MapService, NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
 import { CollapseModule, OffcanvasModule } from '@features/core/components';
+import { CheckboxArrayModule } from '../../../core/directives';
 import { PhonePipeModule, DistancePipeModule } from '../../../core/pipes';
 import { AdresseModule, UserLocationModule } from '../../../adresse';
 import { pages } from '../../pages';
@@ -26,7 +27,8 @@ import { components } from '../../components';
     DistancePipeModule,
     UserLocationModule,
     CollapseModule,
-    OffcanvasModule
+    OffcanvasModule,
+    CheckboxArrayModule
   ]
 })
 export class CartographieCommonModule {}

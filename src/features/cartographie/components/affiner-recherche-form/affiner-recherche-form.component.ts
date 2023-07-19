@@ -1,37 +1,37 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { FilterFormPresentation, toFilterFormPresentationFromQuery } from '../../../core/presenters';
 
 type AffinerRechercheFields = {
-  priseRdv: FormControl<boolean>;
+  prise_rdv: FormControl<boolean>;
   accessibilite: FormControl<boolean>;
-  ouvertActuellement: FormControl<boolean>;
-  gratuit: FormControl<boolean>;
-  aidantsConnect: FormControl<boolean>;
-  conseillerNumerique: FormControl<boolean>;
-  franceServices: FormControl<boolean>;
+  ouvert_actuellement: FormControl<boolean>;
+  conditions_acces: FormControl<ConditionAcces[]>;
+  label_national: FormControl<LabelNational[]>;
 };
 
 type AffinerRechercheValues = {
-  priseRdv: boolean;
+  prise_rdv: boolean;
   accessibilite: boolean;
-  ouvertActuellement: boolean;
-  gratuit: boolean;
-  aidantsConnect: boolean;
-  conseillerNumerique: boolean;
-  franceServices: boolean;
+  ouvert_actuellement: boolean;
+  conditions_acces: ConditionAcces[];
+  label_national: LabelNational[];
 };
 
-const AFFINER_RECHERCHE_FORM: FormGroup<Record<keyof AffinerRechercheValues, FormControl>> = new FormGroup<
-  Record<keyof AffinerRechercheValues, FormControl>
->({
-  priseRdv: new FormControl<AffinerRechercheValues['priseRdv']>(false),
-  accessibilite: new FormControl<AffinerRechercheValues['accessibilite']>(false),
-  ouvertActuellement: new FormControl<AffinerRechercheValues['ouvertActuellement']>(false),
-  gratuit: new FormControl<AffinerRechercheValues['gratuit']>(false),
-  aidantsConnect: new FormControl<AffinerRechercheValues['aidantsConnect']>(false),
-  conseillerNumerique: new FormControl<AffinerRechercheValues['conseillerNumerique']>(false),
-  franceServices: new FormControl<AffinerRechercheValues['franceServices']>(false)
-});
+const AFFINER_RECHERCHE_FORM = (
+  filterFormPresentation: FilterFormPresentation
+): FormGroup<Record<keyof AffinerRechercheValues, FormControl>> =>
+  new FormGroup<Record<keyof AffinerRechercheValues, FormControl>>({
+    prise_rdv: new FormControl<AffinerRechercheValues['prise_rdv']>(filterFormPresentation.prise_rdv ?? false),
+    accessibilite: new FormControl<AffinerRechercheValues['accessibilite']>(filterFormPresentation.accessibilite ?? false),
+    ouvert_actuellement: new FormControl<AffinerRechercheValues['ouvert_actuellement']>(false),
+    conditions_acces: new FormControl<AffinerRechercheValues['conditions_acces']>(
+      filterFormPresentation.conditions_acces ?? []
+    ),
+    label_national: new FormControl<AffinerRechercheValues['label_national']>([])
+  });
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,5 +39,18 @@ const AFFINER_RECHERCHE_FORM: FormGroup<Record<keyof AffinerRechercheValues, For
   templateUrl: './affiner-recherche-form.component.html'
 })
 export class AffinerRechercheFormComponent {
-  public affinerRechercheForm: FormGroup<AffinerRechercheFields> = AFFINER_RECHERCHE_FORM;
+  public constructor(public route: ActivatedRoute, public readonly router: Router) {}
+
+  public affinerRechercheForm: FormGroup<AffinerRechercheFields> = AFFINER_RECHERCHE_FORM(
+    toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
+  );
+
+  public setFilterToQueryString(field: string): void {
+    this.router.navigate([], {
+      queryParams: {
+        ...this.route.snapshot.queryParams,
+        [field]: this.affinerRechercheForm.get(field)?.value
+      }
+    });
+  }
 }

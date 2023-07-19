@@ -31,6 +31,7 @@ export type FilterPresentation = {
   address?: string;
   distance?: number;
   accessibilite?: boolean;
+  prise_rdv?: boolean;
   conditions_acces?: ConditionAcces[];
   publics_accueillis?: PublicAccueilli[];
   modalites_accompagnement?: ModaliteAccompagnement[];
@@ -44,6 +45,7 @@ export type FilterQueryParamsPresentation = {
   longitude?: `${number}`;
   distance?: `${number}`;
   accessibilite?: 'true' | 'false';
+  prise_rdv?: 'true' | 'false';
   conditions_acces?: string;
   publics_accueillis?: string;
   modalites_accompagnement?: string;
@@ -67,6 +69,7 @@ const fieldsFrom = (filterFormPresentation: FilterFormPresentation): FilterFormP
   filterFormPresentation.longitude,
   filterFormPresentation.distance,
   filterFormPresentation.accessibilite,
+  filterFormPresentation.prise_rdv,
   filterFormPresentation.conditions_acces,
   filterFormPresentation.publics_accueillis,
   filterFormPresentation.modalites_accompagnement,
@@ -86,6 +89,7 @@ export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParam
   longitude: queryParams?.longitude ? parseFloat(queryParams.longitude) : undefined,
   distance: queryParams?.distance ? parseInt(queryParams.distance) : undefined,
   accessibilite: queryParams?.accessibilite === 'true' ? true : undefined,
+  prise_rdv: queryParams?.prise_rdv === 'true' ? true : undefined,
   conditions_acces: toArray(queryParams?.conditions_acces),
   publics_accueillis: toArray(queryParams?.publics_accueillis),
   modalites_accompagnement: toArray(queryParams?.modalites_accompagnement),
