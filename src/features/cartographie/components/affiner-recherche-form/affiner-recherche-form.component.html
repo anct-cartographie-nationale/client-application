@@ -1,56 +1,64 @@
-<div class="text-uppercase p-2 pt-4 border-bottom bg-white"><b class="text-muted">Accessibilité</b></div>
-<ul class="list-group list-group-flush fw-bold">
-  <li class="list-group-item bg-transparent">
-    <div class="form-check form-switch my-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="priseRDV" />
-      <label class="form-check-label" for="priseRDV">Pouvoir prendre RDV</label>
-    </div>
-  </li>
-  <li class="list-group-item bg-transparent">
-    <div class="form-check form-switch my-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="accessibilite" />
-      <label class="form-check-label" for="accessibilite">Informations pour les personnes en situation de handicap</label>
-    </div>
-  </li>
-  <li class="list-group-item bg-transparent">
-    <div class="form-check form-switch my-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="ouvert-actuellement" />
-      <label class="form-check-label" for="ouvert-actuellement">Ouvert actuellement</label>
-    </div>
-  </li>
-  <li class="list-group-item bg-transparent">
-    <div class="form-check form-switch my-2">
-      <label class="form-check-label">
-        <input class="form-check-input" type="checkbox" role="switch" />
-        Gratuit
-      </label>
-    </div>
-  </li>
-</ul>
-<div class="text-uppercase p-2 pt-4 border-bottom bg-white"><b class="text-muted">Labels nationaux</b></div>
-<ul class="list-group list-group-flush fw-bold">
-  <li class="list-group-item bg-transparent">
-    <div class="form-check form-switch my-2">
-      <label class="form-check-label">
-        <input class="form-check-input" type="checkbox" role="switch" />
-        Aidants connect
-      </label>
-    </div>
-  </li>
-  <li class="list-group-item bg-transparent">
-    <div class="form-check form-switch my-2">
-      <label class="form-check-label">
-        <input class="form-check-input" type="checkbox" role="switch" />
-        Conum
-      </label>
-    </div>
-  </li>
-  <li class="list-group-item bg-transparent">
-    <div class="form-check form-switch my-2">
-      <label class="form-check-label">
-        <input class="form-check-input" type="checkbox" role="switch" />
-        France Services
-      </label>
-    </div>
-  </li>
-</ul>
+<form [formGroup]="affinerRechercheForm">
+  <div class="text-uppercase p-2 pt-4 border-bottom bg-white"><b class="text-muted">Accessibilité</b></div>
+  <ul class="list-group list-group-flush fw-bold">
+    <li class="list-group-item bg-transparent">
+      <div class="form-check form-switch my-2">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" role="switch" formControlName="priseRdv" />
+          Pouvoir prendre RDV
+        </label>
+      </div>
+    </li>
+    <li class="list-group-item bg-transparent">
+      <div class="form-check form-switch my-2">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" role="switch" formControlName="accessibilite" />
+          Informations pour les personnes en situation de handicap
+        </label>
+      </div>
+    </li>
+    <li class="list-group-item bg-transparent">
+      <div class="form-check form-switch my-2">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" role="switch" formControlName="ouvertActuellement" />
+          Ouvert actuellement
+        </label>
+      </div>
+    </li>
+    <li class="list-group-item bg-transparent">
+      <div class="form-check form-switch my-2">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" role="switch" formControlName="gratuit" />
+          Gratuit
+        </label>
+      </div>
+    </li>
+  </ul>
+  <div class="text-uppercase p-2 pt-4 border-bottom bg-white"><b class="text-muted">Labels nationaux</b></div>
+  <ul class="list-group list-group-flush fw-bold">
+    <li class="list-group-item bg-transparent">
+      <div class="form-check form-switch my-2">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" role="switch" formControlName="aidantsConnect" />
+          Aidants connect
+        </label>
+      </div>
+    </li>
+    <li class="list-group-item bg-transparent">
+      <div class="form-check form-switch my-2">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" role="switch" formControlName="conseillerNumerique" />
+          Conseiller numérique
+        </label>
+      </div>
+    </li>
+    <li class="list-group-item bg-transparent">
+      <div class="form-check form-switch my-2">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" role="switch" formControlName="franceServices" />
+          France Services
+        </label>
+      </div>
+    </li>
+  </ul>
+</form>
