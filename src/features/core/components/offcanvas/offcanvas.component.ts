@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-const ANIMATION_DURATION = 300 as const;
+const ANIMATION_DURATION: 300 = 300 as const;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,9 +39,10 @@ export class OffcanvasComponent implements OnChanges {
   public toggle(): void {
     this._isExpanded ? this._hiding$.next(true) : this._showing$.next(true);
     this._isExpanded = !this._isExpanded;
-    this._expanded$.next(this._isExpanded);
+    this._isExpanded && this._expanded$.next(this._isExpanded);
 
-    setTimeout(() => {
+    setTimeout((): void => {
+      !this._isExpanded && this._expanded$.next(this._isExpanded);
       this._showing$.next(false);
       this._hiding$.next(false);
     }, ANIMATION_DURATION);

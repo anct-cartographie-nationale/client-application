@@ -1,9 +1,9 @@
 <div
   class="offcanvas offcanvas-end"
-  [class.position-absolute]="isAbsolute"
+  [class.position-absolute]="isAbsolute && (expanded$ | async)"
   [class.overflow-scroll]="isAbsolute"
   [class.showing]="showing$ | async"
-  [class.show]="((expanded$ | async) || (hiding$ | async)) && (showing$ | async) === false"
+  [class.show]="expanded$ | async"
   [class.hiding]="hiding$ | async"
   tabindex="-1"
   [id]="id"
