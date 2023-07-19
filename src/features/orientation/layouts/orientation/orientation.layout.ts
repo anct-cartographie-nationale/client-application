@@ -108,7 +108,7 @@ export class OrientationLayout {
       this.router.navigate([], {
         queryParams: {
           ...queryParams,
-          ...(queryParams.horaires_ouverture ? { horaires_ouverture: queryParams.horaires_ouverture } : {})
+          ...(queryParams.horaires_ouverture ? { horaires_ouverture: JSON.stringify(queryParams.horaires_ouverture) } : {})
         }
       });
   }

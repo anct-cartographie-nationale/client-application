@@ -35,10 +35,11 @@
           <input
             class="form-check-input"
             type="checkbox"
-            name="ouvert_actuellement"
+            name="horaires_ouverture"
             role="switch"
-            formControlName="ouvert_actuellement"
-            (change)="setFilterToQueryString('ouvert_actuellement')" />
+            [value]="{ day: 'now' }"
+            formControlName="horaires_ouverture"
+            (change)="setFilterToQueryString('horaires_ouverture')" />
           Ouvert actuellement
         </label>
       </div>
