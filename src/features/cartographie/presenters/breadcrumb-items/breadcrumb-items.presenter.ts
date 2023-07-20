@@ -20,8 +20,8 @@ const breadcrumbItemsForRegions: BreadcrumbItem[] = [
   }
 ];
 
-const isUnhandledUrlSegments = (urlSegments: UrlSegment[]): boolean =>
-  urlSegments.length === 0 || urlSegments[0].path !== 'regions';
+const isUnhandledUrlSegments = (urlSegments?: UrlSegment[]): boolean =>
+  urlSegments?.length === 0 || urlSegments?.[0]?.path !== 'regions';
 
 const isRootPath = (urlSegments: UrlSegment[]): boolean => urlSegments.length === 1;
 
