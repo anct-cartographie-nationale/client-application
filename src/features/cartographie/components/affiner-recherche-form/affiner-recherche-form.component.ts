@@ -7,17 +7,17 @@ import { FilterFormPresentation, OpeningHours, toFilterFormPresentationFromQuery
 type AffinerRechercheFields = {
   prise_rdv: FormControl<boolean>;
   accessibilite: FormControl<boolean>;
-  horaires_ouverture: FormControl<OpeningHours[]>;
+  horaires_ouverture: FormControl<OpeningHours[] | false>;
   conditions_acces: FormControl<ConditionAcces[]>;
-  label_national: FormControl<LabelNational[]>;
+  labels_nationaux: FormControl<LabelNational[]>;
 };
 
 type AffinerRechercheValues = {
   prise_rdv: boolean;
   accessibilite: boolean;
-  horaires_ouverture: OpeningHours[];
+  horaires_ouverture: OpeningHours[] | false;
   conditions_acces: ConditionAcces[];
-  label_national: LabelNational[];
+  labels_nationaux: LabelNational[];
 };
 
 const AFFINER_RECHERCHE_FORM = (
@@ -27,12 +27,12 @@ const AFFINER_RECHERCHE_FORM = (
     prise_rdv: new FormControl<AffinerRechercheValues['prise_rdv']>(filterFormPresentation.prise_rdv ?? false),
     accessibilite: new FormControl<AffinerRechercheValues['accessibilite']>(filterFormPresentation.accessibilite ?? false),
     horaires_ouverture: new FormControl<AffinerRechercheValues['horaires_ouverture']>(
-      filterFormPresentation.horaires_ouverture ?? []
+      filterFormPresentation.horaires_ouverture ?? false
     ),
     conditions_acces: new FormControl<AffinerRechercheValues['conditions_acces']>(
       filterFormPresentation.conditions_acces ?? []
     ),
-    label_national: new FormControl<AffinerRechercheValues['label_national']>([])
+    labels_nationaux: new FormControl<AffinerRechercheValues['labels_nationaux']>(filterFormPresentation.labels_nationaux ?? [])
   });
 
 @Component({

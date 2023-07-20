@@ -1,6 +1,7 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import {
   ConditionAcces,
+  LabelNational,
   Localisation,
   ModaliteAccompagnement,
   PublicAccueilli,
@@ -35,6 +36,7 @@ export type FilterPresentation = {
   conditions_acces?: ConditionAcces[];
   publics_accueillis?: PublicAccueilli[];
   modalites_accompagnement?: ModaliteAccompagnement[];
+  labels_nationaux?: LabelNational[];
   horaires_ouverture?: OpeningHours[];
 };
 
@@ -49,6 +51,7 @@ export type FilterQueryParamsPresentation = {
   conditions_acces?: string;
   publics_accueillis?: string;
   modalites_accompagnement?: string;
+  labels_nationaux?: string;
   horaires_ouverture?: string;
 };
 
@@ -73,6 +76,7 @@ const fieldsFrom = (filterFormPresentation: FilterFormPresentation): FilterFormP
   filterFormPresentation.conditions_acces,
   filterFormPresentation.publics_accueillis,
   filterFormPresentation.modalites_accompagnement,
+  filterFormPresentation.labels_nationaux,
   filterFormPresentation.horaires_ouverture
 ];
 
@@ -93,6 +97,7 @@ export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParam
   conditions_acces: toArray(queryParams?.conditions_acces),
   publics_accueillis: toArray(queryParams?.publics_accueillis),
   modalites_accompagnement: toArray(queryParams?.modalites_accompagnement),
+  labels_nationaux: toArray(queryParams?.labels_nationaux),
   horaires_ouverture: queryParams?.horaires_ouverture ? JSON.parse(queryParams?.horaires_ouverture) : undefined
 });
 
