@@ -4,7 +4,7 @@
       <app-no-lieux-found
         class="w-100 my-auto mx-4"
         (resetFilters)="resetFilters()"
-        [hasFilters]="(listOfLieuxWithoutFilters$ | async)?.length !== 0"
+        [filterPresentation]="filterPresentation$ | async"
         [queryParams]="toQueryString(route.queryParams)"
         [orientationFeature]="features.get('orientation')"></app-no-lieux-found>
     </div>

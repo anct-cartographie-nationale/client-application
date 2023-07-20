@@ -1,4 +1,4 @@
-import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LabelsNationaux, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
   LieuMediationNumeriquePresentation,
   toLieuxMediationNumeriquePresentation
@@ -11,16 +11,20 @@ import {
   distanceFilterOperator,
   modalitesAccompagnementFilterOperator,
   publicsAccueillisFilterOperator,
-  serviceFilterOperator
+  serviceFilterOperator,
+  priseRdvFilterOperator,
+  labelsNationauxFilterOperator
 } from '../filter-operators';
 
 const filterOperatorsMap: Map<string, FilterOperator> = new Map([
   ['distance', distanceFilterOperator],
   ['service', serviceFilterOperator],
   ['accessibilite', accessibiliteFilterOperator],
+  ['prise_rdv', priseRdvFilterOperator],
   ['conditions_acces', conditionsAccesFilterOperator],
   ['publics_accueillis', publicsAccueillisFilterOperator],
   ['modalites_accompagnement', modalitesAccompagnementFilterOperator],
+  ['labels_nationaux', labelsNationauxFilterOperator],
   ['horaires_ouverture', horairesOuvertureFilterOperator]
 ]);
 

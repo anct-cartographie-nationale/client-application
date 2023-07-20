@@ -27,56 +27,94 @@
     </div>
   </div>
 </div>
-<div class="d-flex h-100">
-  <div class="border-end col-12" [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">
-    <router-outlet></router-outlet>
-  </div>
-  <div class="col overflow-auto position-relative">
-    <div class="p-3 position-absolute start-0 z-index-over-base d-md-block d-none" *ngIf="(loadingState$ | async) === false">
-      <app-user-location
-        [adresse]="(defaultAddress$ | async) ?? ''"
-        (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
+<div class="d-flex h-100 flex-column">
+  <nav class="navbar navbar-expand-lg bg-light shadow-sm z-index-over-base sticky-top py-0 d-print-none">
+    <div class="container-fluid mx-3">
+      <div class="navbar-collapse">
+        <app-user-location
+          class="me-3"
+          [adresse]="(defaultAddress$ | async) ?? ''"
+          (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
+        <app-location-breadcrumb
+          [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
+          [zoom]="(markersPresenter.zoom$ | async) ?? 0"
+          (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
+        <button
+          class="navbar-btn ms-auto"
+          [attr.aria-controls]="affinerRechercheOffcanvas.id"
+          [class.active]="affinerRechercheOffcanvas.expanded$ | async"
+          (click)="affinerRechercheOffcanvas.toggle()">
+          <i
+            class="me-1"
+            [ngClass]="(affinerRechercheOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-sound-module-line'"></i>
+          Affiner ma recherche
+        </button>
+      </div>
     </div>
-    <mgl-map
-      [movingMethod]="'flyTo'"
-      [movingOptions]="{speed: 2}"
-      *ngIf="(markersPresenter.localisation$ | async) as localisation"
-      class="h-100 w-100 overflow-hidden"
-      [style]="assetsConfiguration.path + '/data/map-style.json'"
-      [zoom]="[(markersPresenter.zoom$ | async) ?? 0]"
-      [center]="[localisation.longitude, localisation.latitude]"
-      (zoomEvt)="zooming($event)"
-      (zoomEnd)="onMapViewUpdated($event)"
-      (mapDragEnd)="onMapViewUpdated($event)">
-      <mgl-marker *ngIf="userLocalisation" [lngLat]="[userLocalisation.longitude, userLocalisation.latitude]">
-        <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="14" cy="14" r="14" fill-opacity=".3" />
-          <circle class="user-marker" cx="14" cy="14" r="9" fill-opacity=".65" />
-        </svg>
-      </mgl-marker>
-      <app-territoire-markers
-        *ngIf="((currentZoom$ | async) ?? 0) <= 4"
-        [territoires]="(france$ | async) ?? []"
-        (showLieux)="onShowLieuxInZone($event)"></app-territoire-markers>
-      <app-territoire-markers
-        *ngIf="((currentZoom$ | async) ?? 0) <= 7 && ((currentZoom$ | async) ?? 0) > 4"
-        [territoires]="(regions$ | async) ?? []"
-        [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
-        (highlight)="onHighlight($event?.code)"
-        (showLieux)="onShowLieuxInRegion($event)"></app-territoire-markers>
-      <app-territoire-markers
-        *ngIf="((currentZoom$ | async) ?? 0) < departementZoomForDistance() && ((currentZoom$ | async) ?? 0) > 7"
-        [territoires]="(departements$ | async) ?? []"
-        [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
-        (highlight)="onHighlight($event?.code)"
-        (showLieux)="onShowLieuxInDepartement($event)"></app-territoire-markers>
-      <app-lieu-mediation-numerique-markers
-        *ngIf="((currentZoom$ | async) ?? 0) >= 8"
-        [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
-        [selectedId]="(markersPresenter.selected$ | async) ?? ''"
-        [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
-        (highlight)="onHighlight($event?.id)"
-        (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
-    </mgl-map>
+  </nav>
+  <div class="d-flex flex-grow-1 overflow-auto">
+    <div class="border-end col-12" [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col position-relative d-flex">
+      <mgl-map
+        [movingMethod]="'flyTo'"
+        [movingOptions]="{speed: 2}"
+        *ngIf="(markersPresenter.localisation$ | async) as localisation"
+        class="h-100 w-100 overflow-hidden"
+        [style]="assetsConfiguration.path + '/data/map-style.json'"
+        [zoom]="[(markersPresenter.zoom$ | async) ?? 0]"
+        [center]="[localisation.longitude, localisation.latitude]"
+        (zoomEvt)="zooming($event)"
+        (zoomEnd)="onMapViewUpdated($event)"
+        (mapDragEnd)="onMapViewUpdated($event)">
+        <mgl-marker *ngIf="userLocalisation" [lngLat]="[userLocalisation.longitude, userLocalisation.latitude]">
+          <svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="14" fill-opacity=".3" />
+            <circle class="user-marker" cx="14" cy="14" r="9" fill-opacity=".65" />
+          </svg>
+        </mgl-marker>
+        <app-territoire-markers
+          *ngIf="((currentZoom$ | async) ?? 0) <= 4"
+          [territoires]="(france$ | async) ?? []"
+          (showLieux)="onShowLieuxInZone($event)"></app-territoire-markers>
+        <app-territoire-markers
+          *ngIf="((currentZoom$ | async) ?? 0) <= 7 && ((currentZoom$ | async) ?? 0) > 4"
+          [territoires]="(regions$ | async) ?? []"
+          [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
+          (highlight)="onHighlight($event?.code)"
+          (showLieux)="onShowLieuxInRegion($event)"></app-territoire-markers>
+        <app-territoire-markers
+          *ngIf="((currentZoom$ | async) ?? 0) < departementZoomForDistance() && ((currentZoom$ | async) ?? 0) > 7"
+          [territoires]="(departements$ | async) ?? []"
+          [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
+          (highlight)="onHighlight($event?.code)"
+          (showLieux)="onShowLieuxInDepartement($event)"></app-territoire-markers>
+        <app-lieu-mediation-numerique-markers
+          *ngIf="((currentZoom$ | async) ?? 0) >= 8"
+          [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
+          [selectedId]="(markersPresenter.selected$ | async) ?? ''"
+          [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
+          (highlight)="onHighlight($event?.id)"
+          (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
+      </mgl-map>
+      <app-offcanvas
+        #affinerRechercheOffcanvas
+        class="z-index-over-nav"
+        heading="Options pour affiner la recherche"
+        [isAbsolute]="true"
+        [useContainer]="false"
+        [useHeader]="false">
+        <div class="d-flex flex-column h-100">
+          <div class="flex-grow-1">
+            <app-affiner-recherche-form></app-affiner-recherche-form>
+          </div>
+          <div class="mt-auto bg-white p-3 text-center">
+            <app-modifier-orientation></app-modifier-orientation>
+            <button class="btn btn-primary" (click)="affinerRechercheOffcanvas.toggle()">Terminer</button>
+          </div>
+        </div>
+      </app-offcanvas>
+    </div>
   </div>
 </div>

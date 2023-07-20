@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router, RouterOutlet } from '@angular/router';
 import { BehaviorSubject, delay, Observable, of, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -43,7 +43,7 @@ const filteredByDepartementIfExist = (
   lieux: LieuMediationNumeriquePresentation[]
 ): LieuMediationNumeriquePresentation[] =>
   departement
-    ? lieux.filter((lieu: LieuMediationNumeriquePresentation) => toDepartement(lieu)?.code === departement.code)
+    ? lieux.filter((lieu: LieuMediationNumeriquePresentation): boolean => toDepartement(lieu)?.code === departement.code)
     : lieux;
 
 const toLieuxFilteredByDepartement = (lieux: LieuMediationNumeriquePresentation[], nomDepartement: string) =>
@@ -134,6 +134,8 @@ export class CartographieLayout {
 
   public userLocalisation?: Localisation;
 
+  @ViewChild(RouterOutlet) public routerOutlet!: RouterOutlet | undefined;
+
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly router: Router,
@@ -208,7 +210,8 @@ export class CartographieLayout {
       nearestRegion(localisation).nom,
       this.route.snapshot.queryParams['distance']
     );
-    shouldNavigateToListPage(route, this.route.children[0]?.children[0]?.routeConfig?.path) &&
+
+    shouldNavigateToListPage(route, this.route.children[0]?.routeConfig?.path) &&
       this.router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 

@@ -1,5 +1,7 @@
+import { FormControl, FormGroup } from '@angular/forms';
 import {
   ConditionAcces,
+  LabelNational,
   Localisation,
   ModaliteAccompagnement,
   PublicAccueilli,
@@ -30,9 +32,11 @@ export type FilterPresentation = {
   address?: string;
   distance?: number;
   accessibilite?: boolean;
+  prise_rdv?: boolean;
   conditions_acces?: ConditionAcces[];
   publics_accueillis?: PublicAccueilli[];
   modalites_accompagnement?: ModaliteAccompagnement[];
+  labels_nationaux?: LabelNational[];
   horaires_ouverture?: OpeningHours[];
 };
 
@@ -43,9 +47,11 @@ export type FilterQueryParamsPresentation = {
   longitude?: `${number}`;
   distance?: `${number}`;
   accessibilite?: 'true' | 'false';
+  prise_rdv?: 'true' | 'false';
   conditions_acces?: string;
   publics_accueillis?: string;
   modalites_accompagnement?: string;
+  labels_nationaux?: string;
   horaires_ouverture?: string;
 };
 
@@ -66,9 +72,11 @@ const fieldsFrom = (filterFormPresentation: FilterFormPresentation): FilterFormP
   filterFormPresentation.longitude,
   filterFormPresentation.distance,
   filterFormPresentation.accessibilite,
+  filterFormPresentation.prise_rdv,
   filterFormPresentation.conditions_acces,
   filterFormPresentation.publics_accueillis,
   filterFormPresentation.modalites_accompagnement,
+  filterFormPresentation.labels_nationaux,
   filterFormPresentation.horaires_ouverture
 ];
 
@@ -85,9 +93,11 @@ export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParam
   longitude: queryParams?.longitude ? parseFloat(queryParams.longitude) : undefined,
   distance: queryParams?.distance ? parseInt(queryParams.distance) : undefined,
   accessibilite: queryParams?.accessibilite === 'true' ? true : undefined,
+  prise_rdv: queryParams?.prise_rdv === 'true' ? true : undefined,
   conditions_acces: toArray(queryParams?.conditions_acces),
   publics_accueillis: toArray(queryParams?.publics_accueillis),
   modalites_accompagnement: toArray(queryParams?.modalites_accompagnement),
+  labels_nationaux: toArray(queryParams?.labels_nationaux),
   horaires_ouverture: queryParams?.horaires_ouverture ? JSON.parse(queryParams?.horaires_ouverture) : undefined
 });
 
@@ -95,3 +105,13 @@ export const toLocalisationFromFilterFormPresentation = (filter: FilterFormPrese
   filter.latitude && filter.longitude
     ? Localisation({ latitude: filter.latitude, longitude: filter.longitude })
     : NO_LOCALISATION;
+
+export const createFormGroupFromFilterPresentation = (filterPresentation: FilterPresentation): FormGroup =>
+  Object.entries(filterPresentation).reduce(
+    (formGroup: FormGroup, [field, value]: [string, FilterPresentation[keyof FilterPresentation]]): FormGroup =>
+      new FormGroup({
+        ...formGroup.controls,
+        [field]: new FormControl(value)
+      }),
+    new FormGroup({})
+  );

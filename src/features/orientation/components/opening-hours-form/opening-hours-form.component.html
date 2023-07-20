@@ -2,7 +2,7 @@
   <app-text-separator *ngIf="!isFirst" class="my-4" background="light">OU</app-text-separator>
   <div class="d-flex">
     <i class="text-primary py-1 me-2 ri-check-line" [class.invisible]="openingHourGroup.invalid" aria-hidden="true"></i>
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md col-sm-12">
       <select
         class="form-select"
         [formControl]="openingHourGroup.controls.day"

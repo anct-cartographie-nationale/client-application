@@ -1,4 +1,4 @@
-<ng-container *ngIf="hasFilters; else lostInMap">
+<ng-container *ngIf="filterPresentation && hasActiveFilter(filterPresentation); else lostInMap">
   <h4 class="text-center fw-bold mb-3">Nous ne trouvons pas de résultats correspondant à votre recherche</h4>
   <p class="text-muted text-center">
     Aucun lieu n'est disponible selon ces critères.
@@ -6,21 +6,7 @@
     Modifiez ou supprimez certains de vos filtres précédemment sélectionnés
   </p>
   <div class="d-flex justify-content-center my-3">
-    <ng-container *ngIf="orientationFeature as orientation">
-      <a
-        class="btn btn-secondary bg-secondary text-primary me-3"
-        [routerLink]="['/', 'orientation', 'besoin']"
-        queryParamsHandling="preserve"
-        *ngIf="orientation.active">
-        Modifier mes filtres
-      </a>
-      <a
-        *ngIf="!orientation.active && orientation.url"
-        class="btn btn-secondary text-primary me-3"
-        [href]="orientation.url + '?' + queryParams">
-        Modifier mes filtres
-      </a>
-    </ng-container>
+    <app-modifier-orientation></app-modifier-orientation>
     <button class="btn bg-primary text-secondary" (click)="resetFilters.emit()">Réinitialiser mes filtres</button>
   </div>
 </ng-container>

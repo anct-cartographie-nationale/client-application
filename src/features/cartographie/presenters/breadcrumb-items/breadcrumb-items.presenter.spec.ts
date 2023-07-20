@@ -3,13 +3,12 @@ import { getBreadcrumbItems } from './breadcrumb-items.presenter';
 import { UrlSegment } from '@angular/router';
 
 describe('breadcrumb items', (): void => {
-  it('should display Hubs territoriaux pour un numérique inclusif label with /regions path', (): void => {
+  it('should display France label with /regions path', (): void => {
     const breadcrumbItems: BreadcrumbItem[] = getBreadcrumbItems([new UrlSegment('regions', {})], 5);
 
     expect(breadcrumbItems).toStrictEqual<BreadcrumbItem[]>([
       {
-        label: 'Hubs territoriaux pour un numérique inclusif',
-        link: ['https://societenumerique.gouv.fr/fr/dispositif/hubs-numerique/']
+        label: 'France'
       }
     ]);
   });
@@ -78,24 +77,22 @@ describe('breadcrumb items', (): void => {
     ]);
   });
 
-  it('should display Hubs territoriaux pour un numérique inclusif label with /:id path', (): void => {
+  it('should display France label with /:id path', (): void => {
     const breadcrumbItems: BreadcrumbItem[] = getBreadcrumbItems([new UrlSegment('62d94351c65b1606dd4d3779', {})], 5);
 
     expect(breadcrumbItems).toStrictEqual<BreadcrumbItem[]>([
       {
-        label: 'Hubs territoriaux pour un numérique inclusif',
-        link: ['https://societenumerique.gouv.fr/fr/dispositif/hubs-numerique/']
+        label: 'France'
       }
     ]);
   });
 
-  it('should display Hubs territoriaux pour un numérique inclusif label with / path', (): void => {
+  it('should display France label with / path', (): void => {
     const breadcrumbItems: BreadcrumbItem[] = getBreadcrumbItems([], 5);
 
     expect(breadcrumbItems).toStrictEqual<BreadcrumbItem[]>([
       {
-        label: 'Hubs territoriaux pour un numérique inclusif',
-        link: ['https://societenumerique.gouv.fr/fr/dispositif/hubs-numerique/']
+        label: 'France'
       }
     ]);
   });

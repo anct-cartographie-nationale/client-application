@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedFeatureConfiguration } from '../../../../root';
+import { FilterFormPresentation, hasActiveFilter } from '../../../core/presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,7 +9,9 @@ import { ActivatedFeatureConfiguration } from '../../../../root';
 })
 export class NoLieuxFoundComponent {
   @Input() public queryParams: string = '';
+  @Input() public filterPresentation: FilterFormPresentation | null = null;
   @Input() public orientationFeature?: ActivatedFeatureConfiguration<boolean>;
-  @Input() public hasFilters: boolean = true;
   @Output() public resetFilters: EventEmitter<void> = new EventEmitter<void>();
+
+  public hasActiveFilter = hasActiveFilter;
 }

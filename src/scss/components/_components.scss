@@ -4,10 +4,7 @@
 @import 'bootstrap/scss/containers';
 @import 'bootstrap/scss/grid';
 @import 'bootstrap/scss/tables';
-@import 'bootstrap/scss/forms/labels';
-@import 'bootstrap/scss/forms/form-check';
-@import 'bootstrap/scss/forms/form-range';
-@import 'bootstrap/scss/forms/validation';
+
 @import 'bootstrap/scss/buttons';
 @import 'bootstrap/scss/dropdown';
 @import 'bootstrap/scss/nav';
@@ -27,6 +24,12 @@
 @import 'bootstrap/scss/images';
 @import 'bootstrap/scss/modal';
 @import 'bootstrap/scss/offcanvas';
+@import 'bootstrap/scss/forms/labels';
+@import 'bootstrap/scss/forms/form-check';
+@import 'bootstrap/scss/forms/validation';
+@import 'bootstrap/scss/forms/form-control';
+@import 'bootstrap/scss/forms/form-select';
+@import 'bootstrap/scss/forms/input-group';
 
 @import './accordion';
 @import './breadcrumb';

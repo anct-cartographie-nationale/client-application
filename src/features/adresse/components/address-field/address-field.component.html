@@ -1,6 +1,9 @@
 <form [formGroup]="formGroup">
   <label for="address" class="visually-hidden">Quelle est votre adresse ?</label>
   <div class="input-group">
+    <span class="input-group-text px-2">
+      <i class="text-muted ri-search-line ri-lg"></i>
+    </span>
     <input
       #addressInput
       type="search"
@@ -18,12 +21,10 @@
       (focus)="addressInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
       (keyup.escape)="dropdownPane.reduce()"
       (keyup.enter)="dropdownPane.activeIndex = 0; dropdownPane.focus()" />
-    <span class="input-group-text">
-      <ng-content></ng-content>
-      <button type="button" *ngIf="addressInput.value && displayReset" class="btn btn-sm d-block" (click)="clear()">
-        <i class="ri-close-line"></i>
-      </button>
-    </span>
+    <button type="button" *ngIf="addressInput.value && displayReset" class="btn input-group-btn" (click)="clear()">
+      <i class="ri-close-line"></i>
+    </button>
+    <ng-content></ng-content>
   </div>
   <ul
     #dropdownPane="dropdownPane"
