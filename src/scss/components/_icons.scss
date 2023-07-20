@@ -360,3 +360,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-arrow-drop-right-fill::before {
   content: '\ea53';
 }
+
+.ri-search-line::before {
+  content: '\f0d1';
+}

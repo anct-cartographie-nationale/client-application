@@ -3,8 +3,7 @@ import { BreadcrumbItem } from './breadcrumb-item.presentation';
 
 const breadcrumbItemsForUnhandledPathsRegional: BreadcrumbItem[] = [
   {
-    label: 'Hubs territoriaux pour un numérique inclusif',
-    link: ['https://societenumerique.gouv.fr/fr/dispositif/hubs-numerique/']
+    label: 'France'
   }
 ];
 

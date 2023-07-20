@@ -5,14 +5,15 @@
     [addressNotFound]="(addressNotFound$ | async) ?? false"
     (selectAddress)="onSelectAddress($event)"
     (searchAddress)="onSearchAddress($event)">
-    <button type="button" class="btn btn-sm d-block" (click)="onGeoLocate()" *ngIf="(displayGeolocation$ | async) === true">
+    <button type="button" class="btn input-group-btn" (click)="onGeoLocate()" *ngIf="(displayGeolocation$ | async) === true">
+      <span class="border-end border-muted me-2"></span>
       <span
         *ngIf="loadingState$ | async; else geolocationIcon"
         class="spinner-border spinner-border-sm text-primary me-1"
         role="status"
         aria-hidden="true"></span>
       <ng-template #geolocationIcon>
-        <i class="ri-focus-3-line"></i>
+        <i class="ri-focus-3-line ri-lg text-muted"></i>
       </ng-template>
     </button>
   </app-address-field>

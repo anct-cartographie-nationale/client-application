@@ -2,7 +2,7 @@
   <div tabindex="-1" class="list-group list-group-flush flex-grow-1 overflow-auto">
     <div *ngFor="let region of regions" class="list-group-item d-flex" [class.list-group-item-hover]="hoverId === region.code">
       <a
-        class="list-group-item-action text-decoration-none flex-grow-1 py-3"
+        class="list-group-item-action text-decoration-none flex-grow-1 p-3"
         [routerLink]="['regions', region.nom]"
         [relativeTo]="route.parent"
         queryParamsHandling="preserve"

@@ -29,15 +29,16 @@
 </div>
 <div class="d-flex h-100 flex-column">
   <nav class="navbar navbar-expand-lg bg-light shadow-sm z-index-over-base sticky-top py-0 d-print-none">
-    <div class="container-fluid">
+    <div class="container-fluid mx-3">
       <div class="navbar-collapse">
+        <app-user-location
+          class="me-3"
+          [adresse]="(defaultAddress$ | async) ?? ''"
+          (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
         <app-location-breadcrumb
           [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
           [zoom]="(markersPresenter.zoom$ | async) ?? 0"
           (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
-        <app-user-location
-          [adresse]="(defaultAddress$ | async) ?? ''"
-          (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
         <button
           class="navbar-btn ms-auto"
           [attr.aria-controls]="affinerRechercheOffcanvas.id"
