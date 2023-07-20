@@ -13,7 +13,7 @@ import { HubPresentation } from '../../presenters';
 export const findLieuToFocus =
   (paramMap: ParamMap) =>
   (lieux: LieuMediationNumerique[]): LieuMediationNumerique | undefined =>
-    lieux.find((lieu: LieuMediationNumerique) => lieu.id === paramMap.get('id'));
+    lieux.find((lieu: LieuMediationNumerique): boolean => lieu.id === paramMap.get('id'));
 
 const shouldSortOnCodePostal = (
   lieuA: LieuMediationNumeriquePresentation,
@@ -31,7 +31,7 @@ export const toLieux =
   (lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] => {
     return localisation
       ? lieux
-      : lieux.sort((lieuA, lieuB) =>
+      : lieux.sort((lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediationNumeriquePresentation): number =>
           shouldSortOnCodePostal(lieuA, lieuB) ? sortOnCodePostal(lieuA, lieuB) : sortOnNom(lieuA, lieuB)
         );
   };
@@ -41,7 +41,7 @@ const filteredByDepartementIfExist = (
   lieux: LieuMediationNumeriquePresentation[]
 ): LieuMediationNumeriquePresentation[] =>
   departement
-    ? lieux.filter((lieu: LieuMediationNumeriquePresentation) => toDepartement(lieu)?.code === departement.code)
+    ? lieux.filter((lieu: LieuMediationNumeriquePresentation): boolean => toDepartement(lieu)?.code === departement.code)
     : lieux;
 
 export const toLieuxFilteredByDepartement = ([lieux, paramMap]: [

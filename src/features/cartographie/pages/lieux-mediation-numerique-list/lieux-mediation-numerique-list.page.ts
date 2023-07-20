@@ -55,9 +55,9 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     }))
   );
 
-  private _filterPresentation: FilterPresentation = toFilterFormPresentationFromQuery(this.route.snapshot.queryParams);
-
-  private _localisation: Localisation = toLocalisationFromFilterFormPresentation(this._filterPresentation);
+  private _localisation: Localisation = toLocalisationFromFilterFormPresentation(
+    toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
+  );
 
   private _isInitialZoomDone: boolean = false;
 
@@ -70,7 +70,7 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation[]> = combineLatest([
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       of(this._localisation),
-      of(this._filterPresentation),
+      this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
       new Date(),
       this.boundingBox$()
     ),
