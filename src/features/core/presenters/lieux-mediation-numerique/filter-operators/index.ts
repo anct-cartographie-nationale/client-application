@@ -3,6 +3,7 @@ export * from './conditions-acces.filter-operator';
 export * from './distance.filter-operator';
 export * from './horaires-ouverture.filter-operator';
 export * from './labels-nationaux.filter.operator';
+export * from './labels-autres.filter.operator';
 export * from './modalites-accompagnement.filter-operator';
 export * from './prise-rdv.filter-operator';
 export * from './publics-accueillis.filter-operator';

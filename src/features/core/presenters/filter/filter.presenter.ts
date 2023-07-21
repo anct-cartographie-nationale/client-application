@@ -37,6 +37,7 @@ export type FilterPresentation = {
   publics_accueillis?: PublicAccueilli[];
   modalites_accompagnement?: ModaliteAccompagnement[];
   labels_nationaux?: LabelNational[];
+  labels_autres?: string[];
   horaires_ouverture?: OpeningHours[];
 };
 
@@ -52,6 +53,7 @@ export type FilterQueryParamsPresentation = {
   publics_accueillis?: string;
   modalites_accompagnement?: string;
   labels_nationaux?: string;
+  labels_autres?: string;
   horaires_ouverture?: string;
 };
 
@@ -77,6 +79,7 @@ const fieldsFrom = (filterFormPresentation: FilterFormPresentation): FilterFormP
   filterFormPresentation.publics_accueillis,
   filterFormPresentation.modalites_accompagnement,
   filterFormPresentation.labels_nationaux,
+  filterFormPresentation.labels_autres,
   filterFormPresentation.horaires_ouverture
 ];
 
@@ -98,6 +101,7 @@ export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParam
   publics_accueillis: toArray(queryParams?.publics_accueillis),
   modalites_accompagnement: toArray(queryParams?.modalites_accompagnement),
   labels_nationaux: toArray(queryParams?.labels_nationaux),
+  labels_autres: toArray(queryParams?.labels_autres),
   horaires_ouverture: queryParams?.horaires_ouverture ? JSON.parse(queryParams?.horaires_ouverture) : undefined
 });
 
