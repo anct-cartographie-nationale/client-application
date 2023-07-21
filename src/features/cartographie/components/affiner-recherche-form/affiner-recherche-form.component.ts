@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { FilterFormPresentation, OpeningHours, toFilterFormPresentationFromQuery } from '../../../core/presenters';
+import {
+  FilterFormPresentation,
+  LieuMediationNumeriquePresentation,
+  OpeningHours,
+  toFilterFormPresentationFromQuery
+} from '../../../core/presenters';
+import { labelNationauxFrom } from './affiner-recherche-form.presenter';
 
 type AffinerRechercheFields = {
   prise_rdv: FormControl<boolean>;
@@ -41,11 +47,17 @@ const AFFINER_RECHERCHE_FORM = (
   templateUrl: './affiner-recherche-form.component.html'
 })
 export class AffinerRechercheFormComponent {
+  @Input() public lieuxMediationNumeriques: LieuMediationNumeriquePresentation[] = [];
+
   public constructor(public route: ActivatedRoute, public readonly router: Router) {}
 
   public affinerRechercheForm: FormGroup<AffinerRechercheFields> = AFFINER_RECHERCHE_FORM(
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
+
+  public labelNationauxFrom(lieuxMediationNumeriques: LieuMediationNumeriquePresentation[]): LabelNational[] {
+    return labelNationauxFrom(lieuxMediationNumeriques);
+  }
 
   public setFilterToQueryString(field: string): void {
     this.router.navigate([], {

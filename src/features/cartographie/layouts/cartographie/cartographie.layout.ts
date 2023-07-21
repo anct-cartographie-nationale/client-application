@@ -2,7 +2,17 @@ import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/
 import { ActivatedRoute, ParamMap, Router, RouterOutlet } from '@angular/router';
 import { BehaviorSubject, delay, Observable, of, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import {
+  ASSETS_TOKEN,
+  AssetsConfiguration,
+  INITIAL_POSITION_TOKEN,
+  InitialPositionConfiguration,
+  ZOOM_LEVEL_TOKEN,
+  ZoomLevelConfiguration
+} from '../../../../root';
+import { NO_LOCALISATION } from '../../../core/models';
 import {
   departementFromNom,
   DepartementPresentation,
@@ -28,15 +38,6 @@ import {
   DEPARTEMENT_ZOOM_LEVEL
 } from '../../presenters';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
-import {
-  ASSETS_TOKEN,
-  AssetsConfiguration,
-  INITIAL_POSITION_TOKEN,
-  InitialPositionConfiguration,
-  ZOOM_LEVEL_TOKEN,
-  ZoomLevelConfiguration
-} from '../../../../root';
-import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
@@ -125,6 +126,9 @@ export class CartographieLayout {
         delay(0),
         tap(() => this._loadingState$.next(false))
       );
+
+  public allLieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> =
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION));
 
   public defaultAddress$: Observable<string | null> = this.route.queryParamMap.pipe(
     map((paramMap: ParamMap) => paramMap.get('address'))

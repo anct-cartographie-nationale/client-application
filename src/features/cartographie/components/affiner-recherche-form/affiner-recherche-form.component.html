@@ -63,7 +63,7 @@
   </ul>
   <div class="text-uppercase p-2 pt-4 border-bottom bg-white"><b class="text-muted">Labels nationaux</b></div>
   <ul class="list-group list-group-flush fw-bold">
-    <li class="list-group-item bg-transparent">
+    <li *ngFor="let labelNational of labelNationauxFrom(lieuxMediationNumeriques)" class="list-group-item bg-transparent">
       <div class="form-check form-switch my-2">
         <label class="form-check-label">
           <input
@@ -71,43 +71,11 @@
             name="labels_nationaux"
             type="checkbox"
             role="switch"
-            value="Aidants Connect"
+            [value]="labelNational"
             appCheckboxArray
             formControlName="labels_nationaux"
             (change)="setFilterToQueryString('labels_nationaux')" />
-          Aidants connect
-        </label>
-      </div>
-    </li>
-    <li class="list-group-item bg-transparent">
-      <div class="form-check form-switch my-2">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            name="labels_nationaux"
-            type="checkbox"
-            role="switch"
-            value="CNFS"
-            appCheckboxArray
-            formControlName="labels_nationaux"
-            (change)="setFilterToQueryString('labels_nationaux')" />
-          Conseiller numérique
-        </label>
-      </div>
-    </li>
-    <li class="list-group-item bg-transparent">
-      <div class="form-check form-switch my-2">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            name="labels_nationaux"
-            type="checkbox"
-            role="switch"
-            value="France Services"
-            appCheckboxArray
-            formControlName="labels_nationaux"
-            (change)="setFilterToQueryString('labels_nationaux')" />
-          France Services
+          {{ labelNational }}
         </label>
       </div>
     </li>

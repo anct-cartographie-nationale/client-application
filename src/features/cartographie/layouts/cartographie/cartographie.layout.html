@@ -107,7 +107,9 @@
         [useHeader]="false">
         <div class="d-flex flex-column h-100">
           <div class="flex-grow-1">
-            <app-affiner-recherche-form></app-affiner-recherche-form>
+            <app-affiner-recherche-form
+              *ngIf="affinerRechercheOffcanvas.expanded$ | async"
+              [lieuxMediationNumeriques]="(allLieuxMediationNumerique$ | async) ?? []"></app-affiner-recherche-form>
           </div>
           <div class="mt-auto bg-white p-3 text-center">
             <app-modifier-orientation></app-modifier-orientation>
