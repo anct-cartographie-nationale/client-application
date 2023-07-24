@@ -61,55 +61,27 @@
       </div>
     </li>
   </ul>
-  <div class="text-uppercase p-2 pt-4 border-bottom bg-white"><b class="text-muted">Labels nationaux</b></div>
-  <ul class="list-group list-group-flush fw-bold">
-    <li class="list-group-item bg-transparent">
-      <div class="form-check form-switch my-2">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            name="labels_nationaux"
-            type="checkbox"
-            role="switch"
-            value="Aidants Connect"
-            appCheckboxArray
-            formControlName="labels_nationaux"
-            (change)="setFilterToQueryString('labels_nationaux')" />
-          Aidants connect
-        </label>
-      </div>
-    </li>
-    <li class="list-group-item bg-transparent">
-      <div class="form-check form-switch my-2">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            name="labels_nationaux"
-            type="checkbox"
-            role="switch"
-            value="CNFS"
-            appCheckboxArray
-            formControlName="labels_nationaux"
-            (change)="setFilterToQueryString('labels_nationaux')" />
-          Conseiller numérique
-        </label>
-      </div>
-    </li>
-    <li class="list-group-item bg-transparent">
-      <div class="form-check form-switch my-2">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            name="labels_nationaux"
-            type="checkbox"
-            role="switch"
-            value="France Services"
-            appCheckboxArray
-            formControlName="labels_nationaux"
-            (change)="setFilterToQueryString('labels_nationaux')" />
-          France Services
-        </label>
-      </div>
-    </li>
-  </ul>
+  <ng-container *ngIf="labelNationauxFrom(lieuxMediationNumeriques) as labelNationaux">
+    <ng-container *ngIf="labelNationaux.length > 1">
+      <div class="text-uppercase p-2 pt-4 border-bottom bg-white"><b class="text-muted">Labels nationaux</b></div>
+      <ul class="list-group list-group-flush fw-bold">
+        <li *ngFor="let labelNational of labelNationaux" class="list-group-item bg-transparent">
+          <div class="form-check form-switch my-2">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                name="labels_nationaux"
+                type="checkbox"
+                role="switch"
+                [value]="labelNational"
+                appCheckboxArray
+                formControlName="labels_nationaux"
+                (change)="setFilterToQueryString('labels_nationaux')" />
+              {{ labelNational }}
+            </label>
+          </div>
+        </li>
+      </ul>
+    </ng-container>
+  </ng-container>
 </form>

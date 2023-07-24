@@ -28,6 +28,7 @@ export type LieuMediationNumeriquePresentation = {
   site_web?: string;
   prise_rdv?: string;
   labels_nationaux?: LabelNational[];
+  labels_autres?: string[];
   accessibilite?: string;
   modalites_accompagnement?: ModaliteAccompagnement[];
   publics_accueillis?: PublicAccueilli[];
@@ -62,6 +63,7 @@ export const toLieuxMediationNumeriquePresentation = (
   ...ifAny('site_web', lieuMediationNumerique.contact?.site_web?.[0]),
   ...ifAny('prise_rdv', lieuMediationNumerique.prise_rdv),
   ...ifAny('labels_nationaux', lieuMediationNumerique.labels_nationaux),
+  ...ifAny('labels_autres', lieuMediationNumerique.labels_autres),
   ...ifAny('accessibilite', lieuMediationNumerique.accessibilite),
   ...ifAny('modalites_accompagnement', lieuMediationNumerique.modalites_accompagnement),
   ...ifAny('publics_accueillis', lieuMediationNumerique.publics_accueillis),

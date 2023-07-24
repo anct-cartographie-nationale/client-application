@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { FilterFormPresentation, OpeningHours, toFilterFormPresentationFromQuery } from '../../../core/presenters';
+import {
+  FilterFormPresentation,
+  LieuMediationNumeriquePresentation,
+  OpeningHours,
+  toFilterFormPresentationFromQuery
+} from '../../../core/presenters';
+import { labelsAutresFrom, labelNationauxFrom } from './affiner-recherche-form.presenter';
 
 type AffinerRechercheFields = {
   prise_rdv: FormControl<boolean>;
@@ -10,6 +16,7 @@ type AffinerRechercheFields = {
   horaires_ouverture: FormControl<OpeningHours[] | false>;
   conditions_acces: FormControl<ConditionAcces[]>;
   labels_nationaux: FormControl<LabelNational[]>;
+  labels_autres: FormControl<string[]>;
 };
 
 type AffinerRechercheValues = {
@@ -18,6 +25,7 @@ type AffinerRechercheValues = {
   horaires_ouverture: OpeningHours[] | false;
   conditions_acces: ConditionAcces[];
   labels_nationaux: LabelNational[];
+  labels_autres: string[];
 };
 
 const AFFINER_RECHERCHE_FORM = (
@@ -32,7 +40,10 @@ const AFFINER_RECHERCHE_FORM = (
     conditions_acces: new FormControl<AffinerRechercheValues['conditions_acces']>(
       filterFormPresentation.conditions_acces ?? []
     ),
-    labels_nationaux: new FormControl<AffinerRechercheValues['labels_nationaux']>(filterFormPresentation.labels_nationaux ?? [])
+    labels_nationaux: new FormControl<AffinerRechercheValues['labels_nationaux']>(
+      filterFormPresentation.labels_nationaux ?? []
+    ),
+    labels_autres: new FormControl<AffinerRechercheValues['labels_autres']>(filterFormPresentation.labels_autres ?? [])
   });
 
 @Component({
@@ -41,11 +52,17 @@ const AFFINER_RECHERCHE_FORM = (
   templateUrl: './affiner-recherche-form.component.html'
 })
 export class AffinerRechercheFormComponent {
+  @Input() public lieuxMediationNumeriques: LieuMediationNumeriquePresentation[] = [];
+
   public constructor(public route: ActivatedRoute, public readonly router: Router) {}
 
   public affinerRechercheForm: FormGroup<AffinerRechercheFields> = AFFINER_RECHERCHE_FORM(
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
+
+  public labelsAutresFrom = labelsAutresFrom;
+
+  public labelNationauxFrom = labelNationauxFrom;
 
   public setFilterToQueryString(field: string): void {
     this.router.navigate([], {
