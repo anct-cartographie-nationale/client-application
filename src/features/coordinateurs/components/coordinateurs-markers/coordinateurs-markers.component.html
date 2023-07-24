@@ -15,7 +15,13 @@
       <span class="text-lowercase">{{ coordinateur.perimetre }}</span>
     </span>
     <br />
-    <i class="text-muted">{{ coordinateur.nombreDePersonnesCoordonnees }} {{ coordinateur.dispositif }}</i>
+    <i class="text-muted">
+      {{ coordinateur.nombreDePersonnesCoordonnees }}
+      <ng-container [ngPlural]="coordinateur.nombreDePersonnesCoordonnees">
+        <ng-template ngPluralCase="1">conseiller numérique</ng-template>
+        <ng-template ngPluralCase="other">conseillers numériques</ng-template>
+      </ng-container>
+    </i>
   </div>
 </mgl-popup>
 <ng-container *ngFor="let coordinateur of coordinateurs; index as i; trackBy: trackByCoordinateurId">
