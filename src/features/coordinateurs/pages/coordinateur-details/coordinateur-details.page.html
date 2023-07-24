@@ -41,7 +41,13 @@
                 style="height: 24px"
                 class="me-1" />
               Coordonne
-              <b>{{ coordinateur.nombreDePersonnesCoordonnees}} {{ coordinateur.dispositif }}</b>
+              <b>
+                {{ coordinateur.nombreDePersonnesCoordonnees}}
+                <ng-container [ngPlural]="coordinateur.nombreDePersonnesCoordonnees">
+                  <ng-template ngPluralCase="1">conseiller numérique</ng-template>
+                  <ng-template ngPluralCase="other">conseillers numériques</ng-template>
+                </ng-container>
+              </b>
               répartis sur
               <b>
                 {{ coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees}}
@@ -77,7 +83,7 @@
       </div>
     </div>
     <div class="h-100 overflow-scroll p-4">
-      <span class="text-muted">CNFS À PROXIMITÉ</span>
+      <span class="text-muted">CONSEILLERS NUMÉRIQUES À PROXIMITÉ</span>
       <div class="row g-3 mt-2">
         <div *ngFor="let conseiller of conseillers$ | async" class="position-relative col-6">
           <div class="bg-light p-3 h-100 d-flex flex-column">

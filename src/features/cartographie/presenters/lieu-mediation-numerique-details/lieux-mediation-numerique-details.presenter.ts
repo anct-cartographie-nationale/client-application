@@ -177,7 +177,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
   [
     'conseiller-numerique',
     {
-      label: 'Conseiller numérique France Services',
+      label: 'Conseiller numérique',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique-1/',
       detail: "Ces données sont intégrées via l'espace Coop CNFS",
       update_link: 'https://coop.conseiller-numerique.gouv.fr/mes-lieux-activite',

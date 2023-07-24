@@ -23,7 +23,13 @@
             <h5 class="mb-0 fw-bold">{{ coordinateur.prenom }} {{ coordinateur.nom }}</h5>
           </div>
           <div class="col-auto text-end fst-italic">
-            <small>{{ coordinateur.nombreDePersonnesCoordonnees }} {{ coordinateur.dispositif }}</small>
+            <small>
+              {{ coordinateur.nombreDePersonnesCoordonnees }}
+              <ng-container [ngPlural]="coordinateur.nombreDePersonnesCoordonnees">
+                <ng-template ngPluralCase="1">conseiller numérique</ng-template>
+                <ng-template ngPluralCase="other">conseillers numériques</ng-template>
+              </ng-container>
+            </small>
             <br />
             <small>{{ coordinateur.commune }} ({{ coordinateur.codePostal }})</small>
           </div>

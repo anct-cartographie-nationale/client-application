@@ -9,9 +9,9 @@ describe('label presenter', (): void => {
 
     expect(labelPresentation).toStrictEqual<LabelPresentation>({
       ref: LabelNational.CNFS,
-      nom: 'Conseiller numérique France Services',
+      nom: 'Conseiller numérique',
       description:
-        'Un Conseiller numérique France Services a pour mission d’accompagner les Français dans leur appropriation des usages numériques quotidiens',
+        'Un Conseiller numérique a pour mission d’accompagner les Français dans leur appropriation des usages numériques quotidiens',
       url: 'https://www.conseiller-numerique.gouv.fr/',
       carracteristiques: [
         Service.RealiserDesDemarchesAdministratives,

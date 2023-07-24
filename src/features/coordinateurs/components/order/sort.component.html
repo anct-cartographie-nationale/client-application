@@ -24,7 +24,7 @@
       <span class="fw-bold flex-grow-1" [ngSwitch]="sortForm.controls.by.value">
         <ng-container *ngSwitchCase="'nom'">Trier par nom</ng-container>
         <ng-container *ngSwitchCase="'codePostal'">Trier par code postal</ng-container>
-        <ng-container *ngSwitchCase="'nombreCnfs'">Trier par nombre de CnFS</ng-container>
+        <ng-container *ngSwitchCase="'nombreCnfs'">Trier par nombre de conseillers numériques</ng-container>
       </span>
       <i class="ri-lg" [ngClass]="(collapseSort.isCollapsed$ | async) ? 'ri-arrow-down-s-line' : 'ri-close-line'"></i>
     </button>
@@ -81,7 +81,7 @@
             for="byNombreCnfs"
             class="form-check-label fw-bold ms-2 w-100"
             [class.text-muted]="sortForm.controls.by.value !== 'nombreCnfs'">
-            Trier par nombre de CnFS
+            Trier par nombre de conseillers numériques
           </label>
         </div>
       </li>
