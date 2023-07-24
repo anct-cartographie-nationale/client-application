@@ -125,9 +125,9 @@
         class="w-25"
         *ngIf="brandConfiguration.logoAvecTexte; else brandLogo"
         [src]="brandConfiguration.logoAvecTexte"
-        [alt]="" />
+        alt="" />
       <ng-template #brandLogo>
-        <img class="w-25" *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" [alt]="" />
+        <img class="w-25" *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" alt="" />
       </ng-template>
       <div *ngIf="orientationSheetForm?.prescripteur as prescripteur" class="ms-auto border-start border-1">
         <b>Orientation Réalisée par :</b>
