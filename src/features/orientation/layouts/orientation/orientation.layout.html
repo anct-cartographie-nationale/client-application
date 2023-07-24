@@ -1,16 +1,20 @@
 <div class="bg-light h-100 py-lg-5 p-3">
   <div class="container-lg p-0 h-100 shadow bg-white">
     <div class="row gx-0 h-100 overflow-auto flex-lg-row flex-column flex-nowrap">
-      <div
+      <main
         tabindex="-1"
         class="col-lg col-12 d-flex flex-column flex-grow-1 overflow-auto"
         appScroll
         (reachEnd)="hideArrow = $event">
         <ng-container *ngIf="this.router.url !== '/orientation'">
-          <div *ngIf="(filterPresentation$ | async) as filter" style="height: 0" class="sticky-lg-top">
+          <nav
+            aria-label="Étapes de l'orientation"
+            *ngIf="(filterPresentation$ | async) as filter"
+            style="height: 0"
+            class="sticky-lg-top">
             <app-nav class="d-lg-block d-none pt-3 bg-white" [filter]="filter"></app-nav>
             <app-nav class="d-lg-none pt-3 d-block" [filter]="filter" size="sm"></app-nav>
-          </div>
+          </nav>
         </ng-container>
         <div class="px-3 flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
           <router-outlet></router-outlet>
@@ -20,8 +24,8 @@
           [class.invisible]="hideArrow">
           <i class="ri-arrow-right-s-line ri-xl pt-2 pb-3 text-primary" style="transform: rotate(90deg)"></i>
         </div>
-      </div>
-      <div class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block">
+      </main>
+      <aside class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block">
         <div class="d-flex flex-column px-4 h-100 overflow-auto">
           <div *ngIf="router.url !== '/orientation' && (filterPresentation$ | async) as filter">
             <div *ngIf="hasActiveFilter(filter)">
@@ -73,7 +77,7 @@
             </app-display-on-map-link>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
   </div>
 </div>
