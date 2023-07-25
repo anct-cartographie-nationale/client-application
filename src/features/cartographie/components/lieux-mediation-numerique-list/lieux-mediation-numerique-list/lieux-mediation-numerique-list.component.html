@@ -1,6 +1,7 @@
 <div class="h-100 d-flex flex-column">
   <div #container class="list-group list-group-flush flex-grow-1 overflow-auto" tabindex="-1">
-    <div
+    <h1 class="visually-hidden">Liste des lieux d'inclusion numérique</h1>
+    <article
       #item
       *ngFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
       [attr.id]="lieuMediationNumerique.id"
@@ -11,12 +12,12 @@
         (showLabel)="showLabel.emit($event)"
         (enableHover)="enableHover.emit($event)"
         (disableHover)="disableHover.emit()"></app-mediation-numerique-list-item>
-    </div>
+    </article>
   </div>
   <div class="bg-primary py-3 px-4 g-0 row">
     <div class="col-auto">
       <button class="btn btn-outline-light" (click)="print.emit()">
-        <i class="ri-printer-line me-2"></i>
+        <i class="ri-printer-line me-2" aria-hidden="true"></i>
         <span>Imprimer la liste</span>
       </button>
     </div>

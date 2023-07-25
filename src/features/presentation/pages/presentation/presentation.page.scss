@@ -39,4 +39,8 @@
   &:hover {
     background-color: #8585f6;
   }
+
+  &:focus {
+    box-shadow: $focus-box-shadow;
+  }
 }

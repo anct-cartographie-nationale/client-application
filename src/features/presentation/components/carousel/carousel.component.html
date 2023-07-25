@@ -1,4 +1,4 @@
-<h1 class="h4 mt-5 fw-bold text-secondary text-center">Les avantages de cet outil :</h1>
+<h2 class="mt-5 fw-bold text-secondary text-center">Les avantages de cet outil :</h2>
 <div class="carousel slide carousel-fade">
   <div class="carousel-indicators">
     <button
@@ -11,9 +11,10 @@
       [attr.aria-label]="'Slide ' + i">
       <i
         *ngIf="this.currentSlide === i; else notActive"
-        class="ri-checkbox-blank-circle-fill ri-xl ri-fw ri-space text-light ms-auto me-auto"></i>
+        class="ri-checkbox-blank-circle-fill ri-xl ri-fw ri-space text-light ms-auto me-auto"
+        aria-hidden="true"></i>
       <ng-template #notActive>
-        <i class="ri-checkbox-blank-circle-line ri-xl ri-fw ri-space text-light ms-auto me-auto"></i>
+        <i class="ri-checkbox-blank-circle-line ri-xl ri-fw ri-space text-light ms-auto me-auto" aria-hidden="true"></i>
       </ng-template>
     </button>
   </div>
@@ -26,18 +27,19 @@
             <img src="{{ slides.imageUrl }}" class="img-fluid" alt="" width="70%" />
           </div>
           <div class="col-md-6 my-auto" *ngIf="slides.titre !== 'Standardisation'">
-            <h5 class="text-secondary fw-bold">{{ slides.titre }}</h5>
+            <h3 class="h5 text-secondary fw-bold">{{ slides.titre }}</h3>
             <p class="text-secondary">
               {{ slides.text }}
             </p>
             <a href="https://dora.fabrique.social.gouv.fr" target="_blank">
+              <span class="visually-hidden">Accéder à DORA</span>
               <img
                 class="my-3"
                 width="auto"
                 height="auto"
                 *ngIf="slides.titre === 'La mise à jour'"
                 src="/assets/img/presentation/dora-logo.svg"
-                alt="Accéder à DORA" />
+                alt="" />
             </a>
           </div>
           <div class="col-md-6 my-auto" *ngIf="slides.titre === 'Standardisation'">
@@ -65,10 +67,10 @@
   </div>
   <button class="carousel-control-prev" type="button" (click)="previousSlide.emit()">
     <i class="ri-arrow-left-circle-fill ri-2x ri-fw ri-space text-light m-5" aria-hidden="true"></i>
-    <span class="visually-hidden">Previous</span>
+    <span class="visually-hidden">Précédent</span>
   </button>
   <button class="carousel-control-next" type="button" (click)="nextSlide.emit()">
     <i class="ri-arrow-right-circle-fill ri-2x ri-fw ri-space text-light m-5" aria-hidden="true"></i>
-    <span class="visually-hidden">Next</span>
+    <span class="visually-hidden">Suivant</span>
   </button>
 </div>

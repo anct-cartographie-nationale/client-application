@@ -23,4 +23,8 @@
     background-color: var(--#{$prefix}tile-btn-hover-bg) !important;
     color: var(--#{$prefix}tile-btn-hover-color) !important;
   }
+
+  &:focus-visible {
+    box-shadow: $focus-box-shadow inset;
+  }
 }

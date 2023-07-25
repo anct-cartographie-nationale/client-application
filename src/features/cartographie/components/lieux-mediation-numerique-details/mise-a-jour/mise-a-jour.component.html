@@ -2,19 +2,17 @@
   <div
     *ngIf="source.logo as logo"
     class="d-flex justify-content-center align-items-center bg-white rounded-circle"
-    style="min-width: 50px; min-height: 50px; max-width: 50px; max-height: 50px">
-    <img
-      class="img-fluid"
-      [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
-      [alt]="'Label ' + logo" />
+    style="width: 50px; height: 50px">
+    <img class="img-fluid" [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'" alt="" />
   </div>
   <div class="d-flex flex-grow-1 flex-column px-2" *ngIf="source.detail as detail">
     <p class="fw-bold mb-0 text-start opacity-75">Mettre à jour la fiche</p>
     <i class="opacity-75 text-start text-muted">{{ detail }}</i>
   </div>
   <div *ngIf="source?.update_link as update_link">
-    <a class="text-decoration-none" href="{{ update_link }}" target="_blank" rel="noopener noreferrer">
-      <i class="ri-2x ri-external-link-line my-auto me-2 opacity-75 text-muted"></i>
+    <a class="btn btn-link text-decoration-none" href="{{ update_link }}" target="_blank" rel="noopener noreferrer">
+      <span class="visually-hidden">Accéder au formulaire de mise à jour</span>
+      <i class="ri-2x ri-external-link-line my-auto me-2 opacity-75 text-muted" aria-hidden="true"></i>
     </a>
   </div>
 </div>

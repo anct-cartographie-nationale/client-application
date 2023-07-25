@@ -12,9 +12,11 @@ $muted: #999;
 $muted-dark: #888;
 $dark: #161616;
 $black: #000 !default;
+$focus: #2626a2ff;
 $transparent: rgba(117 190 218 / 50%);
 $min-contrast-ratio: 2.7;
 $box-shadow-sm: 0 0.25rem 0.25rem rgba($black, 0.25);
+$focus-box-shadow: 0 0 0 0.25rem rgba($focus, 0.5);
 $theme-colors: (
   'primary': $primary,
   'secondary': $secondary,

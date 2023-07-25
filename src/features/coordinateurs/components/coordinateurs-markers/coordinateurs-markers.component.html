@@ -26,9 +26,8 @@
 </mgl-popup>
 <ng-container *ngFor="let coordinateur of coordinateurs; index as i; trackBy: trackByCoordinateurId">
   <mgl-marker [lngLat]="[coordinateur.longitude, coordinateur.latitude]">
-    <div
-      role="button"
-      tabindex="-1"
+    <button
+      class="btn"
       [class.marker-hover]="hoverId === coordinateur.id || selectedId === coordinateur.id"
       (mouseenter)="highlight.emit(coordinateur)"
       (mouseleave)="highlight.emit()"
@@ -96,6 +95,6 @@
           <path d="M17.455 14.584V11.59L14.82 10.1l-2.637 1.49v2.994l2.637 1.506z" fill="#e1000f" />
         </g>
       </svg>
-    </div>
+    </button>
   </mgl-marker>
 </ng-container>

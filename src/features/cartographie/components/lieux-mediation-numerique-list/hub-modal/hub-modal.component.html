@@ -11,13 +11,13 @@
     <div class="modal-content overflow-hidden">
       <div class="modal-header bg-primary text-bg-dark">
         <h2 class="modal-title d-flex" id="hubModal">
-          <i class="ri-xl ri-information-line me-3"></i>
+          <i class="ri-xl ri-information-line me-3" aria-hidden="true"></i>
           <b>Informations Hub</b>
         </h2>
         <button
           type="button"
           class="btn-close btn-close-white opacity-100 small mb-0"
-          aria-label="Close"
+          aria-label="Fermer"
           (click)="close()"></button>
       </div>
       <div class="bg-white">
@@ -40,7 +40,7 @@
               </span>
             </div>
             <span *ngIf="hub.lieuxCount as lieuxCount" class="rounded-5 bg-light py-1 px-3" [ngPlural]="lieuxCount">
-              <i class="ri-map-pin-5-line"></i>
+              <i class="ri-map-pin-5-line" aria-hidden="true"></i>
               Ce hub a référencé
               <ng-template ngPluralCase="=1">
                 <b>1 lieu</b>
@@ -57,13 +57,13 @@
               href="https://societenumerique.gouv.fr/fr/dispositif/hubs-numerique/"
               target="_blank"
               rel="noopener noreferrer">
-              <i class="ri ri-external-link-line my-auto me-2 opacity-75 text-muted"></i>
+              <i class="ri ri-external-link-line my-auto me-2 opacity-75 text-muted" aria-hidden="true"></i>
             </a>
           </div>
         </div>
         <div class="modal-footer justify-content-center bg-light">
           <button type="button" class="btn btn-secondary me-3" (click)="close()">
-            <i class="ri-arrow-go-back-line"></i>
+            <i class="ri-arrow-go-back-line" aria-hidden="true"></i>
             Retour à la carte
           </button>
           <a
@@ -74,7 +74,7 @@
             class="btn btn-primary"
             (click)="close()">
             Accéder au site
-            <i class="ri-external-link-line"></i>
+            <i class="ri-external-link-line" aria-hidden="true"></i>
           </a>
         </div>
       </div>

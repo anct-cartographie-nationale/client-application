@@ -11,15 +11,15 @@
     <div class="card h-100 border-0 rounded-0 bg-light" style="border-radius: 0">
       <div class="card-body">
         <div class="d-flex align-items-center mb-2">
-          <i class="ri-user-3-line ri-fw ri-space bg-primary text-light rounded-circle"></i>
+          <i class="ri-user-3-line ri-fw ri-space bg-primary text-light rounded-circle" aria-hidden="true"></i>
           <h6 class="card-title mt-2 fw-bold ms-3">{{ aidant.nom }}</h6>
         </div>
         <div *ngIf="aidant.telephone" class="d-flex align-items-center">
-          <i class="ri-phone-line ri-fw ri-space"></i>
+          <i class="ri-phone-line ri-fw ri-space" aria-hidden="true"></i>
           <p class="card-text ms-2">{{ aidant.telephone | phone }}</p>
         </div>
         <div *ngIf="aidant.courriel" class="d-flex">
-          <i class="ri-mail-line ri-fw ri-space"></i>
+          <i class="ri-mail-line ri-fw ri-space" aria-hidden="true"></i>
           <p class="card-text ms-2" style="margin-top: 0.1rem">{{ aidant.courriel }}</p>
         </div>
       </div>

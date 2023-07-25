@@ -1,7 +1,7 @@
 <div class="row d-print-none">
   <div class="text-center col-md col-6 my-md-0 my-3" *ngFor="let modaliteAccompagnement of modalitesAccompagnement">
     <span class="ri-circled bg-light fw-normal">
-      <i [ngClass]="modaliteAccompagnement.icon"></i>
+      <i [ngClass]="modaliteAccompagnement.icon" aria-hidden="true"></i>
     </span>
     <div class="mt-2">
       <b class="text-lowercase">{{ modaliteAccompagnement.label }}</b>

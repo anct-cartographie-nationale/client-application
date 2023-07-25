@@ -1,6 +1,10 @@
 <div class="h-100 d-flex flex-column" *ngIf="regions">
   <div tabindex="-1" class="list-group list-group-flush flex-grow-1 overflow-auto">
-    <div *ngFor="let region of regions" class="list-group-item d-flex" [class.list-group-item-hover]="hoverId === region.code">
+    <h1 class="visually-hidden">Résultats par région</h1>
+    <article
+      *ngFor="let region of regions"
+      [class.list-group-item-hover]="hoverId === region.code"
+      class="list-group-item d-flex">
       <a
         class="list-group-item-action text-decoration-none flex-grow-1 p-3"
         [routerLink]="['regions', region.nom]"
@@ -9,7 +13,7 @@
         (click)="showLieux.emit(region)"
         (mouseover)="enableHover.emit(region.code)"
         (mouseout)="disableHover.emit()">
-        <h5 class="fw-bold mb-0">{{ region.nom }}</h5>
+        <h2 class="h5 fw-bold mb-0">{{ region.nom }}</h2>
         <div class="text-muted">{{ region.lieuxCount }} résultats</div>
       </a>
       <button *ngIf="region.hub" class="btn btn-link" (click)="showHub.emit(region)">
@@ -19,6 +23,6 @@
           [title]="region.hub.nom"
           style="max-width: 120px" />
       </button>
-    </div>
+    </article>
   </div>
 </div>

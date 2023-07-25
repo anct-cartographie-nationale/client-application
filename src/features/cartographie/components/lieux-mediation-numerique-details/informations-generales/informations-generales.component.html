@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <i class="ri-4x ri-map-pin-2-line my-auto me-2 d-md-inline d-none"></i>
+  <i class="ri-4x ri-map-pin-2-line my-auto me-2 d-md-inline d-none" aria-hidden="true"></i>
   <div class="flex-grow-1 align-self-center">
     <small *ngIf="typologie">{{ typologie }}</small>
     <h1 class="h2 fw-bold mb-0 text-first-letter-uppercase">
@@ -7,7 +7,7 @@
     </h1>
     <ng-container *ngIf="date">
       <span *ngIf="isTooOld(date); else updateDate" class="badge rounded-pill bg-tertiary text-primary fw-normal me-1">
-        <i class="ri-alert-line"></i>
+        <i class="ri-alert-line" aria-hidden="true"></i>
         Dernière mise à jour il y a plus d'un an
       </span>
       <ng-template #updateDate>
@@ -27,7 +27,7 @@
         type="button"
         class="btn btn-close btn-close-white opacity-100"
         tabindex="0"
-        aria-label="Close"
+        aria-label="Revenir à la liste"
         (click)="closeDetails.emit()"></button>
     </div>
   </div>

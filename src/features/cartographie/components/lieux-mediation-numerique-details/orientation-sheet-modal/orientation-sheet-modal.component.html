@@ -11,13 +11,13 @@
     <div class="modal-content overflow-hidden">
       <div class="modal-header bg-primary text-bg-dark">
         <h2 class="modal-title fw-bold d-flex align-items-center" id="ficheOrientationModal">
-          <i class="ri-xl ri-road-map-line me-3"></i>
+          <i class="ri-xl ri-road-map-line me-3" aria-hidden="true"></i>
           Fiche d'orientation
         </h2>
         <button
           type="button"
           class="btn-close btn-close-white opacity-100 small mb-0"
-          aria-label="Close"
+          aria-label="Fermer"
           (click)="close()"></button>
       </div>
       <div>
@@ -92,7 +92,7 @@
           <div class="modal-footer justify-content-center">
             <button type="submit" form="usagerOrientationSheetForm" class="btn btn-primary">
               Suivant
-              <i class="ri-arrow-right-s-line"></i>
+              <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
             </button>
           </div>
         </div>
@@ -188,7 +188,7 @@
           </div>
           <div class="modal-footer justify-content-center">
             <button type="button" class="btn btn-secondary" (click)="printOrientationSheetStep = 'usager'">
-              <i class="ri-arrow-left-s-line"></i>
+              <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
               Précédent
             </button>
             <button type="submit" form="prescripteurOrientationSheetForm" class="btn btn-primary">
@@ -205,7 +205,7 @@
                 <br />
                 {{ adresse }}
               </div>
-              <div style="height: 200px">
+              <div style="height: 200px" aria-hidden="true">
                 <mgl-map
                   *ngIf="localisation"
                   class="h-100 w-100 overflow-hidden"

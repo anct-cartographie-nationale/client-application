@@ -7,14 +7,14 @@
   (mouseout)="disableHover.emit()">
   <div class="row d-print-none">
     <div class="col">
-      <h5 class="mb-0 text-first-letter-uppercase fw-bold">
+      <h2 class="h5 mb-0 text-first-letter-uppercase fw-bold">
         {{ lieuMediationNumerique.nom }}
-      </h5>
+      </h2>
       <div class="text-muted">{{ lieuMediationNumerique.adresse }}</div>
       <div class="mt-1" *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</div>
       <div *ngIf="lieuMediationNumerique.status" class="text-muted">
         <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
-          <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+          <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
           {{ lieuMediationNumerique.status.label }}
         </span>
         ·
@@ -23,27 +23,28 @@
     </div>
     <div class="col-auto text-end" *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone">
       <a
+        aria-hidden="true"
         tabindex="-1"
         *ngIf="lieuMediationNumerique.courriel as courriel"
         href="mailto:{{ courriel }}"
         class="btn btn-sm btn-secondary d-block mb-2"
         (click)="$event.stopPropagation()">
-        <i class="ri-mail-line me-2 text-right"></i>
-        <span>Contacter par mail</span>
+        <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
+        Contacter par mail
       </a>
       <a
+        aria-hidden="true"
         tabindex="-1"
         *ngIf="lieuMediationNumerique.telephone as telephone"
         href="tel://{{ telephone }}"
         class="text-decoration-none link-dark d-block mb-2"
         (click)="$event.stopPropagation()">
         <span aria-hidden="true">{{ telephone | phone }}</span>
-        <span class="visually-hidden">Contacter par téléphone</span>
-        <i class="ms-2 ri-phone-line"></i>
+        <i class="ms-2 ri-phone-line" aria-hidden="true"></i>
       </a>
       <div class="d-flex" *ngIf="lieuMediationNumerique.prise_rdv">
         <p class="text-muted">Prise de Rendez-vous disponible</p>
-        <i class="ri-calendar-check-line ms-1"></i>
+        <i class="ri-calendar-check-line ms-1" aria-hidden="true"></i>
       </div>
     </div>
   </div>
@@ -52,6 +53,7 @@
       <ng-container *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
         <button
           tabindex="-1"
+          aria-hidden="true"
           *ngFor="let label of labelsNationaux"
           (click)="showLabel.emit(label); $event.stopPropagation(); $event.preventDefault()"
           class="btn btn-link p-0 me-3">
@@ -80,15 +82,15 @@
   <div>{{ lieuMediationNumerique.adresse }}</div>
   <div class="text-muted my-1">
     <div *ngIf="lieuMediationNumerique.telephone">
-      <i class="ri ri-phone-line"></i>
+      <i class="ri ri-phone-line" aria-hidden="true"></i>
       {{ lieuMediationNumerique.telephone }}
     </div>
     <div *ngIf="lieuMediationNumerique.courriel">
-      <i class="ri ri-mail-line"></i>
+      <i class="ri ri-mail-line" aria-hidden="true"></i>
       {{ lieuMediationNumerique.courriel }}
     </div>
     <div *ngIf="lieuMediationNumerique.site_web">
-      <i class="ri ri-link"></i>
+      <i class="ri ri-link" aria-hidden="true"></i>
       {{ lieuMediationNumerique.site_web }}
     </div>
   </div>

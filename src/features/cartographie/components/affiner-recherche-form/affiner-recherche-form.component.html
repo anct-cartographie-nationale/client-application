@@ -1,69 +1,71 @@
 <form [formGroup]="affinerRechercheForm">
-  <div class="text-uppercase p-2 pt-4 border-bottom bg-white"><b class="text-muted">Accessibilité</b></div>
-  <ul class="list-group list-group-flush fw-bold">
-    <li class="list-group-item bg-transparent">
-      <div class="form-check form-switch my-2">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            name="prise_rdv"
-            role="switch"
-            formControlName="prise_rdv"
-            (change)="setFilterToQueryString('prise_rdv')" />
-          Pouvoir prendre RDV
-        </label>
-      </div>
-    </li>
-    <li class="list-group-item bg-transparent">
-      <div class="form-check form-switch my-2">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            name="accessibilite"
-            role="switch"
-            formControlName="accessibilite"
-            (change)="setFilterToQueryString('accessibilite')" />
-          Informations pour les personnes en situation de handicap
-        </label>
-      </div>
-    </li>
-    <li class="list-group-item bg-transparent">
-      <div class="form-check form-switch my-2">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            name="horaires_ouverture"
-            role="switch"
-            [value]="{ day: 'now' }"
-            formControlName="horaires_ouverture"
-            (change)="setFilterToQueryString('horaires_ouverture')" />
-          Ouvert actuellement
-        </label>
-      </div>
-    </li>
-    <li class="list-group-item bg-transparent">
-      <div class="form-check form-switch my-2">
-        <label class="form-check-label">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            name="conditions_acces"
-            role="switch"
-            value="Gratuit : Je peux accéder gratuitement au lieu et à ses services"
-            appCheckboxArray
-            formControlName="conditions_acces"
-            (change)="setFilterToQueryString('conditions_acces')" />
-          Gratuit
-        </label>
-      </div>
-    </li>
-  </ul>
+  <fieldset>
+    <legend class="text-uppercase p-2 pt-4 border-bottom bg-white text-muted h6 fw-bold">Accessibilité</legend>
+    <ul class="list-group list-group-flush fw-bold">
+      <li class="list-group-item bg-transparent">
+        <div class="form-check form-switch my-2">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="prise_rdv"
+              role="switch"
+              formControlName="prise_rdv"
+              (change)="setFilterToQueryString('prise_rdv')" />
+            Pouvoir prendre RDV
+          </label>
+        </div>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <div class="form-check form-switch my-2">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="accessibilite"
+              role="switch"
+              formControlName="accessibilite"
+              (change)="setFilterToQueryString('accessibilite')" />
+            Informations pour les personnes en situation de handicap
+          </label>
+        </div>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <div class="form-check form-switch my-2">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="horaires_ouverture"
+              role="switch"
+              [value]="{ day: 'now' }"
+              formControlName="horaires_ouverture"
+              (change)="setFilterToQueryString('horaires_ouverture')" />
+            Ouvert actuellement
+          </label>
+        </div>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <div class="form-check form-switch my-2">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="conditions_acces"
+              role="switch"
+              value="Gratuit : Je peux accéder gratuitement au lieu et à ses services"
+              appCheckboxArray
+              formControlName="conditions_acces"
+              (change)="setFilterToQueryString('conditions_acces')" />
+            Gratuit
+          </label>
+        </div>
+      </li>
+    </ul>
+  </fieldset>
   <ng-container *ngIf="labelNationauxFrom(lieuxMediationNumeriques) as labelNationaux">
-    <ng-container *ngIf="labelNationaux.length > 1">
-      <div class="text-uppercase p-2 pt-4 border-bottom bg-white"><b class="text-muted">Labels nationaux</b></div>
+    <fieldset *ngIf="labelNationaux.length > 1">
+      <legend class="text-uppercase p-2 pt-4 border-bottom bg-white text-muted h6 fw-bold">Labels nationaux</legend>
       <ul class="list-group list-group-flush fw-bold">
         <li *ngFor="let labelNational of labelNationaux" class="list-group-item bg-transparent">
           <div class="form-check form-switch my-2">
@@ -82,6 +84,6 @@
           </div>
         </li>
       </ul>
-    </ng-container>
+    </fieldset>
   </ng-container>
 </form>

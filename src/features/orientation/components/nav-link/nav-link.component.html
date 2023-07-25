@@ -12,7 +12,12 @@
     [class.square-sm]="size === 'sm'"
     [class.square]="size === 'auto'"
     *ngIf="filtersCount || filtersCheck">
-    <small class="d-block" *ngIf="filtersCount">{{ filtersCount }}</small>
-    <i *ngIf="filtersCheck" class="d-block ri-check-line"></i>
+    <span class="visually-hidden">(contient</span>
+    <small class="d-block" *ngIf="filtersCount; else noFiltersCount">
+      {{ filtersCount }}
+      <span class="visually-hidden">éléments filtrés)</span>
+    </small>
+    <ng-template #noFiltersCount><span class="visually-hidden">&nbsp;un élément filtré)</span></ng-template>
+    <i *ngIf="filtersCheck" class="d-block ri-check-line" aria-hidden="true"></i>
   </span>
 </a>

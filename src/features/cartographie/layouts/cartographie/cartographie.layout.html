@@ -48,7 +48,8 @@
           (click)="affinerRechercheOffcanvas.toggle()">
           <i
             class="me-1"
-            [ngClass]="(affinerRechercheOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-sound-module-line'"></i>
+            [ngClass]="(affinerRechercheOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-sound-module-line'"
+            aria-hidden="true"></i>
           Affiner ma recherche
         </button>
       </div>
@@ -58,8 +59,9 @@
     <main class="border-end col-12" [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">
       <router-outlet></router-outlet>
     </main>
-    <div class="col position-relative d-flex">
+    <aside aria-label="carte interactive des lieux d'inclusion numérique" class="col position-relative d-flex">
       <mgl-map
+        aria-hidden="true"
         [movingMethod]="'flyTo'"
         [movingOptions]="{speed: 2}"
         *ngIf="(markersPresenter.localisation$ | async) as localisation"
@@ -119,6 +121,6 @@
           </div>
         </div>
       </app-offcanvas>
-    </div>
+    </aside>
   </div>
 </div>

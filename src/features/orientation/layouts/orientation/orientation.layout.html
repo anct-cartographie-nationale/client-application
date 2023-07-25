@@ -8,7 +8,7 @@
         (reachEnd)="hideArrow = $event">
         <ng-container *ngIf="this.router.url !== '/orientation'">
           <nav
-            aria-label="Étapes de l'orientation"
+            aria-label="étapes de l'orientation"
             *ngIf="(filterPresentation$ | async) as filter"
             style="height: 0"
             class="sticky-lg-top">
@@ -22,14 +22,14 @@
         <div
           class="d-flex justify-content-center shadow-white-top z-index-over-base bg-white sticky-bottom"
           [class.invisible]="hideArrow">
-          <i class="ri-arrow-right-s-line ri-xl pt-2 pb-3 text-primary" style="transform: rotate(90deg)"></i>
+          <i class="ri-arrow-right-s-line ri-xl pt-2 pb-3 text-primary" style="transform: rotate(90deg)" aria-hidden="true"></i>
         </div>
       </main>
-      <aside class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block">
+      <aside class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block" aria-label="état de l'orientation">
         <div class="d-flex flex-column px-4 h-100 overflow-auto">
           <div *ngIf="router.url !== '/orientation' && (filterPresentation$ | async) as filter">
             <div *ngIf="hasActiveFilter(filter)">
-              <h6 class="text-center text-secondary fw-bold mt-4 mb-3">Filtres activés</h6>
+              <h2 class="h6 text-center text-secondary fw-bold mt-4 mb-3">Filtres activés</h2>
               <app-selected-filters
                 class="flex-grow-1 my-lg-1 my-3"
                 [filterForm]="filterForm"
@@ -38,11 +38,11 @@
             </div>
           </div>
           <div class="d-lg-block mt-auto">
-            <h5 class="text-center text-secondary fw-bold mt-2">
+            <h2 class="h5 text-center text-secondary fw-bold mt-2">
               Nombre de lieux
               <br />
               {{ router.url === '/orientation' ? 'référencés sur la carte' : 'correspondant à ma recherche'}}
-            </h5>
+            </h2>
           </div>
           <div class="w-100 mb-auto position-relative">
             <img

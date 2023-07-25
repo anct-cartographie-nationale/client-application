@@ -11,13 +11,13 @@
     <div class="modal-content overflow-hidden">
       <div class="modal-header bg-primary text-bg-dark">
         <h2 class="modal-title fw-bold d-flex align-items-center" id="ficheOrientationModal">
-          <i class="ri-xl ri-mail-send-line me-3"></i>
+          <i class="ri-xl ri-mail-send-line me-3" aria-hidden="true"></i>
           Envoyer par mail
         </h2>
         <button
           type="button"
           class="btn-close btn-close-white opacity-100 small mb-0"
-          aria-label="Close"
+          aria-label="Fermer"
           (click)="close()"></button>
       </div>
       <div>
@@ -50,7 +50,7 @@
         <div class="modal-footer justify-content-center">
           <button type="button" class="btn btn-secondary me-3" (click)="close()">Annuler</button>
           <button type="submit" form="sendByEmailForm" class="btn btn-primary">
-            <i class="ri-mail-send-line"></i>
+            <i class="ri-mail-send-line" aria-hidden="true"></i>
             Envoyer
           </button>
         </div>

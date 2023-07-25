@@ -15,7 +15,8 @@
             <div>
               <i
                 class="ri-xl ri-account-circle-fill me-3"
-                [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"></i>
+                [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"
+                aria-hidden="true"></i>
             </div>
             <div class="fw-bold">
               <div class="fs-4">{{ conseiller.nom }}</div>
@@ -58,7 +59,7 @@
           <button
             type="button"
             class="btn-close btn-close opacity-100 small mb-0"
-            aria-label="Close"
+            aria-label="Fermer"
             (click)="close()"></button>
         </div>
         <div class="bg-white">
