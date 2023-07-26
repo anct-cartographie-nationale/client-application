@@ -6,10 +6,11 @@ $tertiary: color.adjust($primary, $lightness: 60%);
 $success: #4caf50;
 $info: #adb5bd;
 $warning: #ffc107;
-$danger: #dc3545;
+$danger: #d42d3d;
 $light: #f4f4f4;
 $muted: #999;
-$muted-dark: #888;
+$muted-dark: #606d6f;
+$muted-light: #bababa;
 $dark: #161616;
 $black: #000 !default;
 $focus: #2626a2ff;
@@ -28,6 +29,7 @@ $theme-colors: (
   'light': $light,
   'muted': $muted,
   'muted-dark': $muted-dark,
+  'muted-light': $muted-light,
   'dark': $dark
 ) !default;
 $spacer: 1rem !default;

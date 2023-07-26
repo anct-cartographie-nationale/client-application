@@ -16,15 +16,15 @@
   <span class="text-start">
     <span class="orientation-btn-label">{{ serviceItem.label }}</span>
     <br />
-    <i class="small text-muted">{{ serviceItem.description }}</i>
+    <i class="small text-muted-dark">{{ serviceItem.description }}</i>
   </span>
   <span class="ms-auto d-flex">
     <button
       class="btn btn-link p-0 text-decoration-none"
       (click)="displayInformations.emit($any(serviceItem.value)); $event.stopPropagation(); $event.preventDefault()">
       <span class="visually-hidden">Info</span>
-      <i class="ri-information-line fw-normal text-muted ri-2x" aria-hidden="true"></i>
+      <i class="ri-information-line fw-normal text-muted-dark ri-2x" aria-hidden="true"></i>
     </button>
-    <i class="ri-arrow-right-s-line text-muted ri-2x" aria-hidden="true"></i>
+    <i class="ri-arrow-right-s-line text-muted-dark ri-2x" aria-hidden="true"></i>
   </span>
 </a>

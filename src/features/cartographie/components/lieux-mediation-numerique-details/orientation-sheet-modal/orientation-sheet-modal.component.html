@@ -54,7 +54,7 @@
                       usagerOrientationSheetForm.get('firstname')?.touched &&
                       usagerOrientationSheetForm.get('firstname')?.invalid
                         ? 'invalid-feedback'
-                        : 'text-muted'
+                        : 'text-muted-dark'
                     ">
                     * Champ obligatoire
                   </small>
@@ -77,7 +77,7 @@
                     [ngClass]="
                       usagerOrientationSheetForm.get('lastname')?.touched && usagerOrientationSheetForm.get('lastname')?.invalid
                         ? 'invalid-feedback'
-                        : 'text-muted'
+                        : 'text-muted-dark'
                     ">
                     * Champ obligatoire
                   </small>
@@ -128,7 +128,7 @@
                       prescripteurOrientationSheetForm.get('firstname')?.touched &&
                       prescripteurOrientationSheetForm.get('firstname')?.invalid
                         ? 'invalid-feedback'
-                        : 'text-muted'
+                        : 'text-muted-dark'
                     ">
                     * Champ obligatoire
                   </small>
@@ -153,7 +153,7 @@
                       prescripteurOrientationSheetForm.get('lastname')?.touched &&
                       prescripteurOrientationSheetForm.get('lastname')?.invalid
                         ? 'invalid-feedback'
-                        : 'text-muted'
+                        : 'text-muted-dark'
                     ">
                     * Champ obligatoire
                   </small>
@@ -179,7 +179,7 @@
                     prescripteurOrientationSheetForm.get('place')?.touched &&
                     prescripteurOrientationSheetForm.get('place')?.invalid
                       ? 'invalid-feedback'
-                      : 'text-muted'
+                      : 'text-muted-dark'
                   ">
                   * Champ obligatoire
                 </small>
@@ -193,7 +193,7 @@
             </button>
             <button type="submit" form="prescripteurOrientationSheetForm" class="btn btn-primary">
               Suivant
-              <i class="ri-arrow-right-s-line"></i>
+              <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
             </button>
           </div>
         </div>
@@ -228,17 +228,17 @@
                     ]"></app-lieu-mediation-numerique-markers>
                 </mgl-map>
               </div>
-              <div *ngIf="telephone || courriel || siteWeb?.length" class="p-3 text-muted">
+              <div *ngIf="telephone || courriel || siteWeb?.length" class="p-3 text-muted-dark">
                 <div *ngIf="telephone">
-                  <i class="ri-phone-line"></i>
+                  <i class="ri-phone-line" aria-hidden="true"></i>
                   {{ telephone }}
                 </div>
                 <div *ngIf="courriel">
-                  <i class="ri-mail-line"></i>
+                  <i class="ri-mail-line" aria-hidden="true"></i>
                   <span class="text-break">{{ courriel }}</span>
                 </div>
                 <div *ngIf="siteWeb">
-                  <i class="ri-link"></i>
+                  <i class="ri-link" aria-hidden="true"></i>
                   <span class="text-break">{{ siteWeb[0] }}</span>
                 </div>
               </div>
@@ -247,7 +247,7 @@
               <h5 class="text-primary fw-bold mb-2">Résumé de la fiche d'orientation</h5>
               <div class="mb-5">
                 <b class="text-break">{{ usager.firstname }} {{ usager.lastname }}</b>
-                <div class="text-muted text-break" *ngIf="usager.details">{{ usager.details }}</div>
+                <div class="text-muted-dark text-break" *ngIf="usager.details">{{ usager.details }}</div>
               </div>
               <div
                 class="mb-5"
@@ -271,7 +271,7 @@
               </div>
               <div class="mb-5" *ngIf="prescripteur">
                 <b>Orientation réalisée par :</b>
-                <div class="text-muted">
+                <div class="text-muted-dark">
                   {{ prescripteur.firstname }} {{ prescripteur.lastname }} - {{ prescripteur.place }}
                 </div>
               </div>
@@ -279,11 +279,11 @@
           </div>
           <div class="modal-footer justify-content-center bg-light">
             <button type="button" class="btn btn-secondary me-3" (click)="printOrientationSheetStep = 'prescripteur'">
-              <i class="ri-arrow-left-s-line"></i>
+              <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
               Modifier les informations
             </button>
             <button type="button" class="btn btn-primary" (click)="printWithOrientationSheetDetails()">
-              <i class="ri-printer-line me-1"></i>
+              <i class="ri-printer-line me-1" aria-hidden="true"></i>
               Imprimer la fiche
             </button>
           </div>
