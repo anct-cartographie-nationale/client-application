@@ -4,7 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, combineLatestWith, delay, Observable, of, startWith, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LabelNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { FEATURES_TOKEN, FeaturesConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
+import {
+  FEATURES_TOKEN,
+  FeaturesConfiguration,
+  SET_TITLE_ACTION,
+  SetTitleAction,
+  ZOOM_LEVEL_TOKEN,
+  ZoomLevelConfiguration
+} from '../../../../root';
 import {
   byCollectiviteTerritorialeNom,
   departementFromNom,
@@ -117,6 +124,7 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     public readonly features: FeaturesConfiguration,
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
+    @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly route: ActivatedRoute,
     private readonly _router: Router,
@@ -141,13 +149,20 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     this.markersPresenter.highlight(highlightedId ?? '');
   }
 
-  public select(id: string, latitude: number, longitude: number) {
+  public select(id: string, latitude: number, longitude: number): void {
     !inLieuxZoomLevel(this.markersPresenter.getZoom()) &&
       this.markersPresenter.center(Localisation({ latitude, longitude }), this._zoomLevel.userPosition);
     this.markersPresenter.select(id);
   }
 
-  public inLieuxZoomLevel = inLieuxZoomLevel;
+  public inLieuxZoomLevel(zoomLevel: number, distance?: string): boolean {
+    const departement: DepartementPresentation | undefined = departementFromNom(
+      this.route.snapshot.paramMap.get('nomDepartement') ?? ''
+    );
+    const isInZoomLevel: boolean = inLieuxZoomLevel(zoomLevel, distance);
+    isInZoomLevel ? this.setTitle([departement?.nom, 'Liste des lieux']) : this.setTitle(['Regions']);
+    return isInZoomLevel;
+  }
 
   public resetFilters(): void {
     this._router.navigate([], { relativeTo: this.route.parent });

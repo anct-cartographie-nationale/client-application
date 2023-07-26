@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PresentationFeatureRoutingModule } from './presentation.feature-routing.module';
 import { CarouselComponent } from '../components';
-import { PresentationLayout } from '../pages';
+import { PresentationPage } from '../pages';
+import { PresentationFeatureRoutingModule } from './presentation.feature-routing.module';
 
 @NgModule({
-  declarations: [PresentationLayout, CarouselComponent],
+  declarations: [PresentationPage, CarouselComponent],
   imports: [PresentationFeatureRoutingModule, CommonModule]
 })
 export class PresentationFeatureModule {}

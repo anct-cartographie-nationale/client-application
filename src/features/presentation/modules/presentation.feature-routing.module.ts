@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PresentationLayout } from '../pages';
+import { PresentationPage } from '../pages';
 
 const ROUTES: Routes = [
   {
-    component: PresentationLayout,
+    component: PresentationPage,
     path: ''
   }
 ];

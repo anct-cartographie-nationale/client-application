@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { ConditionAcces, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
 import { OrientationLayout } from '../../layouts';
 import {
   OrientationInformationContent,
@@ -31,7 +32,12 @@ export class AccessibilitePage {
   private readonly conditionAccessField: AbstractControl<ConditionAcces[]> | null =
     this.orientationLayout.filterForm.get('conditions_acces');
 
-  public constructor(public readonly orientationLayout: OrientationLayout) {}
+  public constructor(
+    public readonly orientationLayout: OrientationLayout,
+    @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction
+  ) {
+    setTitle(['Accessibilité', 'Orientation']);
+  }
 
   public selectParticipation(participationIndex: number): void {
     if (this.conditionAccessField?.value == null) return;

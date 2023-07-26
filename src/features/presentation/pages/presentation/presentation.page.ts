@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
 import { environment } from '../../../../environments/environment';
 import { LieuxMediationNumeriquePresenter, onlyWithLocalisation } from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
@@ -19,16 +20,20 @@ const toLieuxWithLocalisation = (lieux: LieuMediationNumerique[]) => lieux.filte
   ],
   styleUrls: ['./presentation.page.scss']
 })
-export class PresentationLayout {
+export class PresentationPage {
   private _currentSlide$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public currentSlide$: Observable<number> = this._currentSlide$.asObservable();
   public environment: Boolean = environment.production;
   public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$.pipe(map(toLieuxWithLocalisation));
 
-  public constructor(private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter) {}
+  public constructor(
+    private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
+    @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction
+  ) {
+    setTitle(['Présentation']);
+  }
 
-  // carousel navigator
   onSwitchSlide = (value: number): void => {
     this._currentSlide$.next(value);
   };

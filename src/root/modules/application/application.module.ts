@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { MatomoModule } from 'ngx-matomo';
+import { setTitleAction } from '../../actions';
 import { ApplicationRootLayout } from '../../layouts/application-root/application-root-layout.component';
-import { MediationNumeriqueCommonModule } from '../common/mediation-numerique.common.module';
-import { ApplicationRoutingModule } from './application-routing.module';
 import {
   ASSETS_APPLICATION_CONFIGURATION,
   ASSETS_TOKEN,
   BRAND_APPLICATION_CONFIGURATION,
   BRAND_TOKEN
 } from '../../configuration';
+import { setTitleActionProvider } from '../../providers';
+import { MediationNumeriqueCommonModule } from '../common/mediation-numerique.common.module';
+import { ApplicationRoutingModule } from './application-routing.module';
 
 @NgModule({
   declarations: [ApplicationRootLayout],
@@ -29,7 +32,8 @@ import {
     {
       provide: BRAND_TOKEN,
       useValue: BRAND_APPLICATION_CONFIGURATION
-    }
+    },
+    setTitleActionProvider(setTitleAction, [BRAND_TOKEN, Title])
   ],
   bootstrap: [ApplicationRootLayout]
 })
