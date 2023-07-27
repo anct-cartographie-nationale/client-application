@@ -1,16 +1,14 @@
 <form [formGroup]="formGroup">
   <label for="address" class="visually-hidden">Quelle est votre adresse ?</label>
+  <i class="text-muted ri-search-line ri-lg position-absolute mt-2 ms-2 ps-1 z-index-over-base" aria-hidden="true"></i>
   <div class="input-group">
-    <span class="input-group-text px-2">
-      <i class="text-muted ri-search-line ri-lg"></i>
-    </span>
     <input
       #addressInput
       type="search"
       placeholder="Entrez une adresse"
       name="address"
       id="address"
-      class="form-control"
+      class="form-control ps-5"
       autocomplete="off"
       aria-describedby="address"
       aria-haspopup="true"
@@ -33,7 +31,7 @@
     [class.show]="(dropdownPane.expanded$ | async) && addressSuggestions.length > 0"
     class="dropdown-menu position-absolute mt-1"
     aria-labelledby="address">
-    <li #results *ngFor="let address of addressSuggestions; index as addressIndex; trackBy: trackByAddressName">
+    <li *ngFor="let address of addressSuggestions; index as addressIndex; trackBy: trackByAddressName">
       <button
         type="button"
         class="dropdown-item"
