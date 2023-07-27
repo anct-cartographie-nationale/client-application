@@ -47,4 +47,10 @@ export class OffcanvasComponent implements OnChanges {
       this._hiding$.next(false);
     }, ANIMATION_DURATION);
   }
+
+  public close(): void {
+    if (!this._isExpanded) return;
+    this._isExpanded = false;
+    this._expanded$.next(false);
+  }
 }

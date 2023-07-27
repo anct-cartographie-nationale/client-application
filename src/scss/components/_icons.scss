@@ -364,3 +364,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-search-line::before {
   content: '\f0d1';
 }
+
+.ri-question-line::before {
+  content: '\f045';
+}

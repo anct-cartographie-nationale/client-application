@@ -22,8 +22,11 @@
   margin-bottom: calc(var(--bs-nav-link-padding-y) * -1);
   border: none;
   border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-  border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
   color: $muted-dark;
+
+  &:last-child {
+    border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
+  }
 
   &:hover {
     color: $body-color;
