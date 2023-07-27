@@ -55,11 +55,17 @@
       </div>
     </div>
   </nav>
-  <div class="d-flex flex-grow-1 overflow-auto">
-    <main class="border-end col-12" [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">
+  <div class="d-flex flex-grow-1 overflow-hidden">
+    <main
+      class="border-end col-12 show-map"
+      [class.show-map-for-small-devices]="showMapForSmallDevices$ | async"
+      [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">
       <router-outlet></router-outlet>
     </main>
-    <aside aria-label="carte interactive des lieux d'inclusion numérique" class="col position-relative d-flex">
+    <aside
+      aria-label="carte interactive des lieux d'inclusion numérique"
+      class="col-lg col-12 position-relative d-flex flex-column show-map"
+      [class.show-map-for-small-devices]="showMapForSmallDevices$ | async">
       <mgl-map
         aria-hidden="true"
         [movingMethod]="'flyTo'"
@@ -102,6 +108,17 @@
           (highlight)="onHighlight($event?.id)"
           (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
       </mgl-map>
+      <div class="p-3 d-flex d-lg-none bg-primary align-items-center">
+        <button class="btn btn-link link-light text-decoration-none" (click)="toggleMapForSmallDevices()">
+          <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
+          Afficher la liste
+        </button>
+        <i class="ms-auto small text-white" *ngIf="(resultsCount$ | async) as resultCount" [ngPlural]="resultCount">
+          <ng-template ngPluralCase="=0">Aucun résultat</ng-template>
+          <ng-template ngPluralCase="=1">1 résultat</ng-template>
+          <ng-template ngPluralCase="other">{{ resultCount }} résultats</ng-template>
+        </i>
+      </div>
       <app-offcanvas
         #affinerRechercheOffcanvas
         class="z-index-over-all"

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output
 import { ActivatedRoute } from '@angular/router';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 import { RegionPresentation } from '../../../core/presenters';
+import { CartographieLayout } from '../../layouts';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,6 +20,7 @@ export class RegionsListComponent {
 
   public constructor(
     @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
+    public cartographieLayout: CartographieLayout,
     public readonly route: ActivatedRoute
   ) {}
 }

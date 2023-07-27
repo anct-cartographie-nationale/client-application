@@ -1,17 +1,10 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, RouterOutlet } from '@angular/router';
-import { BehaviorSubject, delay, Observable, of, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, delay, Observable, of, Subject, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import {
-  ASSETS_TOKEN,
-  AssetsConfiguration,
-  INITIAL_POSITION_TOKEN,
-  InitialPositionConfiguration,
-  ZOOM_LEVEL_TOKEN,
-  ZoomLevelConfiguration
-} from '../../../../root';
+import { ASSETS_TOKEN, AssetsConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import { NO_LOCALISATION } from '../../../core/models';
 import {
   departementFromNom,
@@ -76,11 +69,17 @@ const toLieuxByLongitude = (LieuxMediationNumerique: LieuMediationNumeriquePrese
   providers: cartographieLayoutProviders
 })
 export class CartographieLayout {
+  private _showMapForSmallDevices$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public showMapForSmallDevices$: Observable<boolean> = this._showMapForSmallDevices$.asObservable();
+
   private _currentZoom$: BehaviorSubject<number> = new BehaviorSubject(this._zoomLevel.regular);
   public currentZoom$: Observable<number> = this._currentZoom$.asObservable();
 
   private _loadingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public loadingState$: Observable<boolean> = this._loadingState$.asObservable();
+
+  private _resultsCount$: Subject<number> = new Subject<number>();
+  public resultsCount$: Observable<number> = this._resultsCount$.asObservable();
 
   private _lieuxMediationNumeriqueListPresenterArgs: [Observable<Localisation>, Observable<FilterPresentation>, Date] = [
     of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))),
@@ -99,14 +98,20 @@ export class CartographieLayout {
     .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
       delay(0),
-      tap(() => this._loadingState$.next(false))
+      tap(() => {
+        this._loadingState$.next(false);
+        this._resultsCount$.next(0);
+      })
     );
 
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
       delay(0),
-      tap(() => this._loadingState$.next(false))
+      tap(() => {
+        this._loadingState$.next(false);
+        this._resultsCount$.next(0);
+      })
     );
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueOnMapPresentation[]> =
@@ -124,7 +129,10 @@ export class CartographieLayout {
         map(toLieuxWithOpeningState(new Date())),
         map(toLieuxByLongitude),
         delay(0),
-        tap(() => this._loadingState$.next(false))
+        tap((lieux: LieuMediationNumeriquePresentation[]): void => {
+          this._resultsCount$.next(lieux.length);
+          this._loadingState$.next(false);
+        })
       );
 
   public allLieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> =
@@ -147,9 +155,7 @@ export class CartographieLayout {
     public readonly markersPresenter: MarkersPresenter,
     @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
     @Inject(ZOOM_LEVEL_TOKEN)
-    private readonly _zoomLevel: ZoomLevelConfiguration,
-    @Inject(INITIAL_POSITION_TOKEN)
-    private readonly _initialPosition: InitialPositionConfiguration
+    private readonly _zoomLevel: ZoomLevelConfiguration
   ) {}
 
   public onShowLieuxInDepartement(departement: TerritoirePresentation): void {
@@ -173,9 +179,10 @@ export class CartographieLayout {
     this.router.navigate([lieu.id, 'details'], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
     this.markersPresenter.center(Localisation({ latitude: lieu.latitude, longitude: lieu.longitude }));
     this.markersPresenter.select(lieu.id);
+    this.toggleMapForSmallDevices();
   }
 
-  public onHighlight(highlightedId?: string) {
+  public onHighlight(highlightedId?: string): void {
     this.markersPresenter.highlight(highlightedId ?? '');
   }
 
@@ -230,5 +237,9 @@ export class CartographieLayout {
         queryParamsHandling: 'merge'
       });
     return (this.userLocalisation = localisation);
+  }
+
+  public toggleMapForSmallDevices(): void {
+    this._showMapForSmallDevices$.next(!this._showMapForSmallDevices$.value);
   }
 }

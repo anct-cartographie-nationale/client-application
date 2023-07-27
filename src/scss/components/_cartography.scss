@@ -12,3 +12,14 @@
     width: 760px;
   }
 }
+
+.show-map {
+  transition: all 0.3s ease-in-out;
+
+  @include media-breakpoint-down(lg) {
+    &.show-map-for-small-devices {
+      transition: all 0.5s ease-in-out;
+      transform: translateX(-100%);
+    }
+  }
+}

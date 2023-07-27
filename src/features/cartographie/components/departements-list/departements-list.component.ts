@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { DepartementPresentation } from '../../../core/presenters';
+import { CartographieLayout } from '../../layouts';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,4 +14,6 @@ export class DepartementsListComponent {
   @Output() showLieux: EventEmitter<DepartementPresentation> = new EventEmitter<DepartementPresentation>();
   @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
+
+  public constructor(public cartographieLayout: CartographieLayout) {}
 }
