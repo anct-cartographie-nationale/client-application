@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FeatureConfiguration } from '../../../../../root';
 import { LieuMediationNumeriqueListItemPresentation } from '../../../presenters';
+import { CartographieLayout } from '../../../layouts';
 
 const itemById =
   (id: string) =>
@@ -42,7 +43,7 @@ export class LieuxMediationNumeriqueListComponent {
   @ViewChild('container') public container!: ElementRef;
   @ViewChildren('item') public items!: QueryList<ElementRef>;
 
-  public constructor(public readonly route: ActivatedRoute) {}
+  public constructor(public readonly route: ActivatedRoute, public readonly cartographieLayout: CartographieLayout) {}
 
   public scrollTo(focusId: string) {
     setTimeout(() => {
