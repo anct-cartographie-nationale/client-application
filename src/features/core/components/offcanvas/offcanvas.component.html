@@ -1,7 +1,6 @@
 <div
-  class="offcanvas offcanvas-end"
+  class="offcanvas offcanvas-top"
   [class.position-absolute]="isAbsolute && (expanded$ | async)"
-  [class.overflow-scroll]="isAbsolute"
   [class.showing]="showing$ | async"
   [class.show]="expanded$ | async"
   [class.hiding]="hiding$ | async"
