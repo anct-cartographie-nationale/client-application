@@ -20,7 +20,8 @@
       (keyup.escape)="dropdownPane.reduce()"
       (keyup.enter)="dropdownPane.activeIndex = 0; dropdownPane.focus()" />
     <button type="button" *ngIf="addressInput.value && displayReset" class="btn input-group-btn" (click)="clear()">
-      <i class="ri-close-line"></i>
+      <span class="visually-hidden">Effacer</span>
+      <i class="ri-close-line" aria-hidden="true"></i>
     </button>
     <ng-content></ng-content>
   </div>

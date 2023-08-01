@@ -11,12 +11,12 @@
   [attr.aria-modal]="(expanded$ | async) ? 'true' : null"
   [attr.role]="(expanded$ | async) ? 'dialog' : null">
   <div [class.offcanvas-header]="useHeader">
-    <h5 [class.visually-hidden]="!useHeader" [id]="id + '-label'">{{ heading }}</h5>
+    <h2 class="h5" [class.visually-hidden]="!useHeader" [id]="id + '-label'">{{ heading }}</h2>
     <button
       *ngIf="useHeader && useCloseButton"
       type="button"
       class="ms-auto btn-close"
-      aria-label="Close"
+      aria-label="Fermer"
       (click)="toggle()"></button>
   </div>
   <div class="h-100" [class.offcanvas-body]="useContainer">

@@ -6,7 +6,7 @@
     </address>
     <div class="mb-2">
       <a class="text-decoration-none" *ngIf="accessibilite" href="{{ accessibilite }}" target="_blank">
-        <i class="ri-wheelchair-line ri-xl text-primary"></i>
+        <i class="ri-wheelchair-line ri-xl text-primary" aria-hidden="true"></i>
         <b>Consulter les informations d'accessibilité</b>
       </a>
     </div>
@@ -15,13 +15,13 @@
   <div class="col-md-auto col-12 text-md-end d-print-none" *ngIf="courriel || telephone">
     <div class="mb-3" *ngIf="status">
       <span [class.text-success]="status.label === 'Ouvert'" [class.text-danger]="status.label === 'Fermé'">
-        <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+        <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
         {{ status.label }}
       </span>
       <small class="text-muted">· {{ status.limite }}</small>
     </div>
     <a *ngIf="courriel" href="mailto:{{ courriel }}" class="btn btn-sm btn-secondary mb-2" (click)="$event.stopPropagation()">
-      <i class="ri-mail-line me-2 text-right"></i>
+      <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
       <span>Contacter par mail</span>
     </a>
     <a
@@ -29,7 +29,7 @@
       href="tel://{{ telephone }}"
       class="text-decoration-none d-block text-muted"
       (click)="$event.stopPropagation()">
-      <i class="me-2 ri-phone-line"></i>
+      <i class="me-2 ri-phone-line" aria-hidden="true"></i>
       <span aria-hidden="true">{{ telephone | phone }}</span>
       <span class="visually-hidden">Contacter par téléphone</span>
     </a>

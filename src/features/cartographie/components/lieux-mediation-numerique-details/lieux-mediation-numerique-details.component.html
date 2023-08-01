@@ -14,7 +14,7 @@
       [priseRdv]="lieuMediationNumerique.prise_rdv"
       (print)="print.emit()"
       (sendByEmail)="sendByEmailModal.toggle()"></app-boutons-action>
-    <div class="border-top border-bottom d-xl-none" style="height: 275px">
+    <div class="border-top border-bottom d-xl-none" style="height: 275px" aria-hidden="true">
       <mgl-map
         *ngIf="lieuMediationNumerique.localisation as localisation"
         class="h-100 w-100 overflow-hidden"
@@ -90,16 +90,16 @@
     </li>
     <li *ngIf="!lieuIsFranceServices()" class="list-group-item d-flex">
       <button (click)="printSheetModal.toggle()" class="btn btn-primary btn-sm my-4 me-auto">
-        <i class="ri ri-compass-3-line ms-1"></i>
+        <i class="ri ri-compass-3-line ms-1" aria-hidden="true"></i>
         Imprimer fiche d'orientation
       </button>
       <button (click)="reportAnError.emit()" class="btn btn-secondary btn-sm my-4">
         Signaler une erreur
-        <i class="ri ri-error-warning-line ms-1"></i>
+        <i class="ri ri-error-warning-line ms-1" aria-hidden="true"></i>
       </button>
     </li>
   </ul>
-  <div class="bg-light px-4 text-end">
+  <div class="bg-light px-4">
     <app-mise-a-jour [source]="lieuMediationNumerique.source"></app-mise-a-jour>
   </div>
 </div>

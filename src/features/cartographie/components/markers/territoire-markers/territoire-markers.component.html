@@ -1,8 +1,7 @@
 <mgl-marker
   *ngFor="let territoire of territoires; index as i; trackBy: trackByTerritoireCode"
   [lngLat]="[territoire.localisation.longitude, territoire.localisation.latitude]">
-  <div
-    role="button"
+  <button
     tabindex="-1"
     class="marker-group"
     [class.marker-hover]="hoverId === territoire.code"
@@ -14,5 +13,5 @@
     <div class="marker-group-fg rounded-circle d-flex bg-primary">
       <span class="m-auto text-white fw-bold fs-6">{{ territoire.lieuxCount ?? 0 }}</span>
     </div>
-  </div>
+  </button>
 </mgl-marker>

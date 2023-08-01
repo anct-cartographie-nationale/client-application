@@ -23,7 +23,7 @@
   border: none;
   border-left: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
   border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
-  color: $text-muted;
+  color: $muted-dark;
 
   &:hover {
     color: $body-color;

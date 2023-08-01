@@ -2,39 +2,43 @@
   <app-sort (sortChange)="onSortChange($event)"></app-sort>
   <ng-container *ngIf="coordinateurs$ | async as coordinateurs">
     <div *ngIf="coordinateurs.length" class="list-group list-group-flush flex-grow-1 overflow-auto" tabindex="-1">
-      <a
+      <h1 class="visually-hidden">Liste des coordinateurs</h1>
+      <article
+        class="list-group-item"
         *ngFor="let coordinateur of coordinateurs; trackBy: trackByCoordinateurId"
-        [routerLink]="[coordinateur.id, 'details']"
-        [relativeTo]="route.parent"
-        [attr.id]="coordinateur.id"
-        [class.list-group-item-hover]="(markersPresenter.highlighted$ | async) === coordinateur.id"
-        (mouseover)="markersPresenter.highlight(coordinateur.id)"
-        (mouseout)="markersPresenter.highlight('')"
-        class="list-group-item link-dark p-4">
-        <div class="row">
-          <div style="width: 38px" class="col-auto p-0 m-auto text-center">
-            <img [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.perimetre + '.svg'" alt="" />
+        [class.list-group-item-hover]="(markersPresenter.highlighted$ | async) === coordinateur.id">
+        <a
+          [routerLink]="[coordinateur.id, 'details']"
+          [relativeTo]="route.parent"
+          [attr.id]="coordinateur.id"
+          (mouseover)="markersPresenter.highlight(coordinateur.id)"
+          (mouseout)="markersPresenter.highlight('')"
+          class="link-dark text-decoration-none p-4">
+          <div class="row">
+            <div style="width: 38px" class="col-auto p-0 m-auto text-center">
+              <img [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.perimetre + '.svg'" alt="" />
+            </div>
+            <div class="col">
+              <b class="text-primary">
+                Coordinateur
+                <span class="text-lowercase">{{ coordinateur.perimetre}}</span>
+              </b>
+              <h2 class="h5 mb-0 fw-bold">{{ coordinateur.prenom }} {{ coordinateur.nom }}</h2>
+            </div>
+            <div class="col-auto text-end fst-italic">
+              <small>
+                {{ coordinateur.nombreDePersonnesCoordonnees }}
+                <ng-container [ngPlural]="coordinateur.nombreDePersonnesCoordonnees">
+                  <ng-template ngPluralCase="1">conseiller numérique</ng-template>
+                  <ng-template ngPluralCase="other">conseillers numériques</ng-template>
+                </ng-container>
+              </small>
+              <br />
+              <small>{{ coordinateur.commune }} ({{ coordinateur.codePostal }})</small>
+            </div>
           </div>
-          <div class="col">
-            <b class="text-primary">
-              Coordinateur
-              <span class="text-lowercase">{{ coordinateur.perimetre}}</span>
-            </b>
-            <h5 class="mb-0 fw-bold">{{ coordinateur.prenom }} {{ coordinateur.nom }}</h5>
-          </div>
-          <div class="col-auto text-end fst-italic">
-            <small>
-              {{ coordinateur.nombreDePersonnesCoordonnees }}
-              <ng-container [ngPlural]="coordinateur.nombreDePersonnesCoordonnees">
-                <ng-template ngPluralCase="1">conseiller numérique</ng-template>
-                <ng-template ngPluralCase="other">conseillers numériques</ng-template>
-              </ng-container>
-            </small>
-            <br />
-            <small>{{ coordinateur.commune }} ({{ coordinateur.codePostal }})</small>
-          </div>
-        </div>
-      </a>
+        </a>
+      </article>
     </div>
   </ng-container>
 </div>

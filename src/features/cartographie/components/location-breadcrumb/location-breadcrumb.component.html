@@ -25,6 +25,6 @@
     <ng-template #currentPage>
       <span class="breadcrumb-item active text-body opacity-75" aria-current="page">{{ breadcrumbItem.label }}</span>
     </ng-template>
-    <i *ngIf="!isLast" class="ri-arrow-drop-right-fill"></i>
+    <i *ngIf="!isLast" class="ri-arrow-drop-right-fill" aria-hidden="true"></i>
   </ng-container>
 </small>

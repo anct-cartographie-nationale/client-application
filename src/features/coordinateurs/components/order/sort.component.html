@@ -8,10 +8,16 @@
       formControlName="direction"
       (change)="onSortUpdated()" />
     <label class="btn border-0 rounded-0 border-end text-primary px-3 pt-4 pb-2 fw-normal d-flex flex-column" for="btn-check">
-      <i class="ri-arrow-left-right-line ri-lg pb-1"></i>
+      <i class="ri-arrow-left-right-line ri-lg pb-1" aria-hidden="true"></i>
       <i class="text-xxs">
-        <ng-container *ngIf="sortForm.controls.direction.value; else asc">A-Z</ng-container>
-        <ng-template #asc>Z-A</ng-template>
+        <ng-container *ngIf="sortForm.controls.direction.value; else asc">
+          <span aria-hidden="true">A-Z</span>
+          <span class="visually-hidden">Ordre croissant</span>
+        </ng-container>
+        <ng-template #asc>
+          <span aria-hidden="true">Z-A</span>
+          <span class="visually-hidden">Ordre décroissant</span>
+        </ng-template>
       </i>
     </label>
     <button
@@ -26,7 +32,10 @@
         <ng-container *ngSwitchCase="'codePostal'">Trier par code postal</ng-container>
         <ng-container *ngSwitchCase="'nombreCnfs'">Trier par nombre de conseillers numériques</ng-container>
       </span>
-      <i class="ri-lg" [ngClass]="(collapseSort.isCollapsed$ | async) ? 'ri-arrow-down-s-line' : 'ri-close-line'"></i>
+      <i
+        class="ri-lg"
+        [ngClass]="(collapseSort.isCollapsed$ | async) ? 'ri-arrow-down-s-line' : 'ri-close-line'"
+        aria-hidden="true"></i>
     </button>
   </div>
   <app-collapse #collapseSort id="collapseSort" aria-labelledby="sortHeading">
@@ -44,7 +53,7 @@
           <label
             for="byNom"
             class="form-check-label fw-bold ms-2 w-100"
-            [class.text-muted]="sortForm.controls.by.value !== 'nom'">
+            [class.text-muted-dark]="sortForm.controls.by.value !== 'nom'">
             Trier par nom
           </label>
         </div>
@@ -62,7 +71,7 @@
           <label
             for="byCodePostal"
             class="form-check-label fw-bold ms-2 w-100"
-            [class.text-muted]="sortForm.controls.by.value !== 'codePostal'">
+            [class.text-muted-dark]="sortForm.controls.by.value !== 'codePostal'">
             Trier par code postal
           </label>
         </div>
@@ -80,7 +89,7 @@
           <label
             for="byNombreCnfs"
             class="form-check-label fw-bold ms-2 w-100"
-            [class.text-muted]="sortForm.controls.by.value !== 'nombreCnfs'">
+            [class.text-muted-dark]="sortForm.controls.by.value !== 'nombreCnfs'">
             Trier par nombre de conseillers numériques
           </label>
         </div>

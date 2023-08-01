@@ -1,9 +1,15 @@
 <ng-container *ngFor="let openingHourGroup of openingHoursForm.controls ?? []; index as i; first as isFirst">
   <app-text-separator *ngIf="!isFirst" class="my-4" background="light">OU</app-text-separator>
-  <div class="d-flex">
+  <fieldset class="d-flex">
+    <legend class="visually-hidden">
+      Filtre horaire numéro {{ i + 1 }}
+      <span *ngIf="openingHourGroup.valid">(valide)</span>
+    </legend>
     <i class="text-primary py-1 me-2 ri-check-line" [class.invisible]="openingHourGroup.invalid" aria-hidden="true"></i>
     <div class="col-md col-sm-12">
+      <label [for]="'jour-ouverture-' + i" class="visually-hidden">Choix du jour d'ouverture</label>
       <select
+        [id]="'jour-ouverture-' + i"
         class="form-select"
         [formControl]="openingHourGroup.controls.day"
         aria-label="Jour d'ouverture"
@@ -23,26 +29,34 @@
     <div
       class="col-md-4 col-sm-12 ms-1"
       *ngIf="openingHourGroup.controls.day.value && openingHourGroup.controls.day.value !== 'now'">
-      <select
-        *ngIf="openingHourGroup.controls.period.value !== 'hours'"
-        class="form-select"
-        [formControl]="openingHourGroup.controls.period"
-        (change)="onAddOpeningHourGroup(i)"
-        aria-label="Heures d'ouvertures">
-        <option value="" disabled selected>Heure de début</option>
-        <option value="all">Toute la journée</option>
-        <option value="hours">Choisir une heure...</option>
-      </select>
-      <input
-        *ngIf="openingHourGroup.controls.period.value === 'hours'"
-        [formControl]="openingHourGroup.controls.start"
-        (change)="onAddOpeningHourGroup(i)"
-        class="form-control"
-        type="time"
-        name="start" />
+      <ng-container *ngIf="openingHourGroup.controls.period.value !== 'hours'">
+        <label [for]="'plage-horaire-' + i" class="visually-hidden">Plage horaire</label>
+        <select
+          [id]="'plage-horaire-' + i"
+          class="form-select"
+          [formControl]="openingHourGroup.controls.period"
+          (change)="onAddOpeningHourGroup(i)"
+          aria-label="Heures d'ouvertures">
+          <option value="" disabled selected>Heure de début</option>
+          <option value="all">Toute la journée</option>
+          <option value="hours">Choisir une heure...</option>
+        </select>
+      </ng-container>
+      <ng-container *ngIf="openingHourGroup.controls.period.value === 'hours'">
+        <label [for]="'debut-' + i" class="visually-hidden">Heure de début</label>
+        <input
+          [id]="'debut-' + i"
+          [formControl]="openingHourGroup.controls.start"
+          (change)="onAddOpeningHourGroup(i)"
+          class="form-control"
+          type="time"
+          name="start" />
+      </ng-container>
     </div>
     <div class="col-4 ms-2" *ngIf="openingHourGroup.controls.period.value === 'hours'">
+      <label [for]="'fin-' + i" class="visually-hidden">Heure de fin</label>
       <input
+        [id]="'fin-' + i"
         [formControl]="openingHourGroup.controls.end"
         (change)="onAddOpeningHourGroup(i)"
         class="form-control"
@@ -56,7 +70,7 @@
       title="Supprimer cette ligne"
       (click)="removeOpeningHours(i)">
       <i class="ri-close-line" aria-hidden="true"></i>
-      <span class="visually-hidden">Supprimer cette ligne</span>
+      <span class="visually-hidden">Supprimer le filtre horaire numéro {{ i }}</span>
     </button>
-  </div>
+  </fieldset>
 </ng-container>

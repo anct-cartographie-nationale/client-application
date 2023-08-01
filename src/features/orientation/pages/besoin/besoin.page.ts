@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+import { Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
 import {
   filterNotFoundEmailBody,
   OrientationInformationContent,
@@ -12,7 +14,6 @@ import apprentissageDeBase from './apprentissage-de-base.json';
 import cultureNumerique from './culture-numerique.json';
 import manqueDeMateriel from './manque-de-materiel.json';
 import { BESOIN_INFORMATION_MODAL_TEXTS } from './besoin-information-modal-texts';
-import { Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,7 +31,12 @@ export class BesoinPage {
 
   public manqueDeMaterielOrientationItems: OrientationItemPresentation<string>[] = manqueDeMateriel;
 
-  public constructor(public readonly orientationLayout: OrientationLayout) {}
+  public constructor(
+    public readonly orientationLayout: OrientationLayout,
+    @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction
+  ) {
+    setTitle(['Besoin', 'Orientation']);
+  }
 
   public serviceControl: AbstractControl | null = this.orientationLayout.filterForm.get('service');
 

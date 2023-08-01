@@ -9,3 +9,7 @@
 .text-xxs {
   font-size: 0.55em;
 }
+
+.text-hover-light:hover {
+  color: $light !important;
+}

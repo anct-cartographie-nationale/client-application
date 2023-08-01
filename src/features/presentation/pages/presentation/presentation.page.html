@@ -1,137 +1,139 @@
-<div class="bg-welcome py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 my-auto p-5">
-        <img src="/assets/img/presentation/personnages_sur_carte.svg" class="img-fluid" alt="" />
-      </div>
-      <div class="col-md-6 my-auto">
-        <h1 class="fw-bold text-secondary mb-4">Bienvenue sur la cartographie nationale des lieux d'inclusion numérique</h1>
-        <p class="text-secondary mb-4">
-          Cette plateforme vise à faciliter l’identification des lieux d'inclusion numérique ainsi que l’orientation des usagers
-          finaux. Avant d'accéder à la cartographie, vous pourrez en quelques clics exprimer les besoins de votre bénéficiaire
-          et trouver les lieux qui y répondent le mieux.
-          <br />
-        </p>
-        <div>
-          <a [routerLink]="['orientation']" class="btn btn-discover rounded-0">Découvrir la plateforme</a>
+<main>
+  <section class="bg-welcome py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 my-auto p-5">
+          <img src="/assets/img/presentation/personnages_sur_carte.svg" class="img-fluid" alt="" />
+        </div>
+        <div class="col-md-6 my-auto">
+          <h1 class="fw-bold text-secondary mb-4">Bienvenue sur la cartographie nationale des lieux d'inclusion numérique</h1>
+          <p class="text-secondary mb-4">
+            Cette plateforme vise à faciliter l’identification des lieux d'inclusion numérique ainsi que l’orientation des
+            usagers finaux. Avant d'accéder à la cartographie, vous pourrez en quelques clics exprimer les besoins de votre
+            bénéficiaire et trouver les lieux qui y répondent le mieux.
+            <br />
+          </p>
+          <div>
+            <a [routerLink]="['orientation']" class="btn btn-discover rounded-0">Découvrir la plateforme</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="container text-center">
-  <h2 class="fw-bold my-5 text-black text-center">
-    Vous êtes un acteur local souhaitant intégrer
-    <br />
-    la cartographie sur votre site web ?
-  </h2>
-  <img src="/assets/img/presentation/multipuces.svg" class="img-fluid w-50" alt="" />
-  <div class="my-5">
-    <a
-      class="btn btn-outline-primary align-items-center d-inline-flex rounded-0 me-3"
-      href="https://labase.anct.gouv.fr/base/356"
-      target="_blank"
-      rel="noopener noreferrer">
-      <i class="ri-information-line ri me-2"></i>
-      Plus d'infos
-    </a>
-    <a
-      class="btn btn-primary align-items-center d-inline-flex rounded-0"
-      href="https://github.com/anct-cartographie-nationale/client-application#documentation"
-      target="_blank"
-      rel="noopener noreferrer">
-      <i class="ri-map-pin-2-line ri me-2"></i>
-      Intégrer la cartographie
-    </a>
-  </div>
-</div>
-<div class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
-  <app-carousel
-    [currentSlide]="(currentSlide$ | async) ?? 0"
-    (switchSlide)="onSwitchSlide($event)"
-    (nextSlide)="onNextSlide()"
-    (previousSlide)="onPreviousSlide()"></app-carousel>
-</div>
-<div class="py-5 bg-info">
-  <div class="container">
+  </section>
+  <section class="container text-center">
+    <h2 class="fw-bold my-5 text-black text-center">
+      Vous êtes un acteur local souhaitant intégrer
+      <br />
+      la cartographie sur votre site web ?
+    </h2>
+    <img src="/assets/img/presentation/multipuces.svg" class="img-fluid w-50" alt="" />
+    <div class="my-5">
+      <a
+        class="btn btn-outline-primary align-items-center d-inline-flex rounded-0 me-3"
+        href="https://labase.anct.gouv.fr/base/356"
+        target="_blank"
+        rel="noopener noreferrer">
+        <i class="ri-information-line ri me-2" aria-hidden="true"></i>
+        Plus d'infos
+      </a>
+      <a
+        class="btn btn-primary align-items-center d-inline-flex rounded-0"
+        href="https://github.com/anct-cartographie-nationale/client-application#documentation"
+        target="_blank"
+        rel="noopener noreferrer">
+        <i class="ri-map-pin-2-line ri me-2" aria-hidden="true"></i>
+        Intégrer la cartographie
+      </a>
+    </div>
+  </section>
+  <section class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
+    <app-carousel
+      [currentSlide]="(currentSlide$ | async) ?? 0"
+      (switchSlide)="onSwitchSlide($event)"
+      (nextSlide)="onNextSlide()"
+      (previousSlide)="onPreviousSlide()"></app-carousel>
+  </section>
+  <section class="py-5 bg-info">
+    <div class="container">
+      <div class="row justify-content-lg-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold text-black mb-4">Une nouvelle cartographie&nbsp;? Pourquoi&nbsp;?</h2>
+          <p>
+            L’objectif de cette cartographie est de participer à l’amélioration de l'accompagnement proposé par les
+            professionnels de la médiation numérique.
+            <br />
+          </p>
+          <p>
+            L'idéologie de celle-ci est de proposer un outil à la fois national et local. La base de données est ouverte et
+            contributive : de la plus petite collectivité à un hub territorial, chacun peut implémenter sur son site cet outil
+            et afficher l'offre de médiation de son territoire. Travailler sur cette base de données commune vise à centraliser
+            les informations afin de les actualiser plus facilement et améliorer la visibilité et le quotidien des travailleurs
+            sociaux en particulier des médiateurs numériques.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="container mb-5" *ngIf="!this.environment">
+    <h2 class="fw-bold my-5 text-black text-center">De quel écosystème parle-t-on ?</h2>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card h-100 rounded-0">
+          <img src="/assets/img/presentation/svg-dora.svg" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h3 class="fw-bold card-title">Dora</h3>
+            <p class="card-text">
+              Vous travaillez dans un lieu d'inclusion numérique&nbsp;? Utilisez les formulaires Dora afin de renseigner vos
+              données !
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 rounded-0">
+          <img src="/assets/img/presentation/svg-rdv.svg" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h3 class="fw-bold card-title">RDV Solidarité</h3>
+            <p class="card-text">La prise de Rendez-vous est désormais possible directement depuis la cartographie.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 rounded-0">
+          <img src="/assets/img/presentation/svg-labase.svg" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h3 class="fw-bold card-title">La Base</h3>
+            <p class="card-text">
+              La Base regroupe les ressources des professionnels du numérique d’intérêt général dont l’inclusion et la médiation
+              numériques.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100 rounded-0">
+          <img src="/assets/img/presentation/svg-ifn.svg" class="card-img-top" alt="" />
+          <div class="card-body">
+            <h3 class="h5 fw-bold card-title">IFN</h3>
+            <p class="card-text">
+              C'est l'indice de fragilité numérique : son rôle est de cibler le besoin de médiation numérique dans les
+              territoires.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="container text-center">
+    <h2 class="fw-bold my-5">Les chiffres clefs de la cartographie</h2>
     <div class="row justify-content-lg-center">
-      <div class="col-lg-8">
-        <h3 class="fw-bold text-black mb-4">Une nouvelle cartographie&nbsp;? Pourquoi&nbsp;?</h3>
-        <p>
-          L’objectif de cette cartographie est de participer à l’amélioration de l'accompagnement proposé par les professionnels
-          de la médiation numérique.
-          <br />
-        </p>
-        <p>
-          L'idéologie de celle-ci est de proposer un outil à la fois national et local. La base de données est ouverte et
-          contributive : de la plus petite collectivité à un hub territorial, chacun peut implémenter sur son site cet outil et
-          afficher l'offre de médiation de son territoire. Travailler sur cette base de données commune vise à centraliser les
-          informations afin de les actualiser plus facilement et améliorer la visibilité et le quotidien des travailleurs
-          sociaux en particulier des médiateurs numériques.
-        </p>
+      <div class="col-4">
+        <img src="/assets/img/presentation/svg-maisons.svg" class="img-fluid" alt="" />
+        <h3 class="fw-bold" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
+          {{lieuxMediationNumeriqueTotal.length}} lieux référencés
+        </h3>
+        <p>Sur l'ensemble du territoire.</p>
       </div>
     </div>
-  </div>
-</div>
-<div class="container mb-5" *ngIf="!this.environment">
-  <h3 class="fw-bold my-5 text-black text-center">De quel écosystème parle-t-on ?</h3>
-  <div class="row row-cols-1 row-cols-md-2 g-4">
-    <div class="col">
-      <div class="card h-100 rounded-0">
-        <img src="/assets/img/presentation/svg-dora.svg" class="card-img-top" alt="" />
-        <div class="card-body">
-          <h5 class="fw-bold card-title">Dora</h5>
-          <p class="card-text">
-            Vous travaillez dans un lieu d'inclusion numérique&nbsp;? Utilisez les formulaires Dora afin de renseigner vos
-            données !
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100 rounded-0">
-        <img src="/assets/img/presentation/svg-rdv.svg" class="card-img-top" alt="" />
-        <div class="card-body">
-          <h5 class="fw-bold card-title">RDV Solidarité</h5>
-          <p class="card-text">La prise de Rendez-vous est désormais possible directement depuis la cartographie.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100 rounded-0">
-        <img src="/assets/img/presentation/svg-labase.svg" class="card-img-top" alt="" />
-        <div class="card-body">
-          <h5 class="fw-bold card-title">La Base</h5>
-          <p class="card-text">
-            La Base regroupe les ressources des professionnels du numérique d’intérêt général dont l’inclusion et la médiation
-            numériques.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100 rounded-0">
-        <img src="/assets/img/presentation/svg-ifn.svg" class="card-img-top" alt="" />
-        <div class="card-body">
-          <h5 class="h5 fw-bold card-title">IFN</h5>
-          <p class="card-text">
-            C'est l'indice de fragilité numérique : son rôle est de cibler le besoin de médiation numérique dans les
-            territoires.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container text-center">
-  <h4 class="fw-bold my-5">Les chiffres clefs de la cartographie</h4>
-  <div class="row justify-content-lg-center">
-    <div class="col-4">
-      <img src="/assets/img/presentation/svg-maisons.svg" class="img-fluid" alt="" />
-      <h4 class="fw-bold" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
-        {{lieuxMediationNumeriqueTotal.length}} lieux référencés
-      </h4>
-      <p>Sur l'ensemble du territoire.</p>
-    </div>
-  </div>
-</div>
+  </section>
+</main>

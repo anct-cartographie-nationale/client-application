@@ -4,7 +4,14 @@ import { combineLatestWith, Observable, of, Subject, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatomoTracker } from 'ngx-matomo';
 import { LabelNational, LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { BRAND_TOKEN, BrandConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
+import {
+  BRAND_TOKEN,
+  BrandConfiguration,
+  SET_TITLE_ACTION,
+  SetTitleAction,
+  ZOOM_LEVEL_TOKEN,
+  ZoomLevelConfiguration
+} from '../../../../root';
 import {
   FilterPresentation,
   toDepartement,
@@ -35,7 +42,12 @@ export class LieuxMediationNumeriqueDetailsPage {
         new Date(),
         of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this._route.snapshot.queryParams)))
       )
-      .pipe(tap((lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) => this.select(lieuMediationNumerique)));
+      .pipe(
+        tap((lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) =>
+          this.setTitle([lieuMediationNumerique.nom, 'Fiche du lieu'])
+        ),
+        tap((lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation) => this.select(lieuMediationNumerique))
+      );
 
   private readonly _orientationSheetForm$: Subject<OrientationSheetForm | undefined> = new Subject<
     OrientationSheetForm | undefined
@@ -63,6 +75,7 @@ export class LieuxMediationNumeriqueDetailsPage {
     private readonly _markersPresenter: MarkersPresenter,
     private readonly _route: ActivatedRoute,
     private readonly _router: Router,
+    @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction,
     @Optional() private readonly _matomoTracker?: MatomoTracker
   ) {
     this._hasDepartementFilter =

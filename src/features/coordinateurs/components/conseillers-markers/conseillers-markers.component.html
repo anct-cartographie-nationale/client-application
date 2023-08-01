@@ -9,7 +9,8 @@
       <div class="mb-1">
         <i
           class="ri-account-circle-fill ri-lg text-primary"
-          [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"></i>
+          [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"
+          aria-hidden="true"></i>
         {{ conseiller.nom }}
       </div>
       <div class="flex-grow-1">
@@ -30,10 +31,8 @@
 </mgl-popup>
 <ng-container *ngFor="let conseiller of conseillers; index as i; trackBy: trackByConseillerId">
   <mgl-marker [lngLat]="[conseiller.longitude, conseiller.latitude]">
-    <div
+    <button
       *ngIf="zoom > 8; else markerSmall"
-      role="button"
-      tabindex="-1"
       class="marker-conseiller"
       (mouseenter)="highlight.emit(conseiller)"
       (mouseleave)="highlight.emit()"
@@ -42,9 +41,9 @@
       <div
         class="marker-conseiller-fg rounded-circle"
         [ngClass]="(conseiller.coordinateurs?.length ?? 0) > 0 ? 'bg-primary' : 'bg-muted'"></div>
-    </div>
+    </button>
     <ng-template #markerSmall>
-      <div tabindex="-1" class="marker-conseiller">
+      <div class="marker-conseiller">
         <div
           class="rounded-circle square-xs"
           [ngClass]="(conseiller.coordinateurs?.length ?? 0) > 0 ? 'bg-primary' : 'bg-muted'"></div>

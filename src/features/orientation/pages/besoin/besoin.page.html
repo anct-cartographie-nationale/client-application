@@ -4,69 +4,77 @@
       Quel est
       <span class="text-primary">votre besoin&nbsp;?</span>
     </h1>
-    <h5 class="text-center fw-bold mb-5 text-muted">Sélectionnez une thématique parmi la liste ci-dessous</h5>
-    <div class="d-flex flex-row mb-3 mt-4">
-      <h2 class="text-muted h6 fw-bold mb-0">APPRENTISSAGE DE BASE</h2>
-      <button
-        type="button"
-        class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-        (click)="selectedOrientationInformation = orientationInformations['apprentissage']; informationOrientationModal.toggle()">
-        plus d'infos
-      </button>
-    </div>
+    <p class="text-center fw-bold mb-5 text-muted mb-5">Sélectionnez une thématique parmi la liste ci-dessous</p>
     <ng-container *ngIf="serviceControl as serviceControl">
-      <app-besoin-link
-        [serviceItems]="apprentissageDeBaseOrientationItems"
-        [selectedServiceItem]="serviceControl.value"
-        (selectServiceValue)="serviceControl.setValue($event)"
-        (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
-      <div class="d-flex flex-row mb-3 mt-4">
-        <h2 class="text-muted h6 fw-bold mb-0">DÉMARCHES</h2>
-        <button
-          type="button"
-          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-          (click)="selectedOrientationInformation = orientationInformations['démarches']; informationOrientationModal.toggle()">
-          plus d'infos
-        </button>
-      </div>
-      <app-besoin-link
-        [serviceItems]="demarchesOrientationItems"
-        [selectedServiceItem]="serviceControl.value"
-        (selectServiceValue)="serviceControl.setValue($event)"
-        (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
-      <div class="d-flex flex-row mb-3 mt-4">
-        <h2 class="text-muted h6 fw-bold mb-0">CULTURE NUMÉRIQUE</h2>
-        <button
-          type="button"
-          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-          (click)="selectedOrientationInformation = orientationInformations['culture-numérique']; informationOrientationModal.toggle()">
-          plus d'infos
-        </button>
-      </div>
-      <app-besoin-link
-        [serviceItems]="cultureNumeriqueOrientationItems"
-        [selectedServiceItem]="serviceControl.value"
-        (selectServiceValue)="serviceControl.setValue($event)"
-        (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
-      <div class="d-flex flex-row mb-3 mt-4">
-        <h2 class="text-muted h6 fw-bold mb-0">MANQUE DE MATERIEL</h2>
-        <button
-          type="button"
-          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-          (click)="selectedOrientationInformation = orientationInformations['matériel']; informationOrientationModal.toggle()">
-          plus d'infos
-        </button>
-      </div>
-      <app-besoin-link
-        [serviceItems]="manqueDeMaterielOrientationItems"
-        [selectedServiceItem]="serviceControl.value"
-        (selectServiceValue)="serviceControl.setValue($event)"
-        (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+      <section aria-label="Apprentissage de base">
+        <div class="d-flex flex-row mb-3 mt-4">
+          <h2 class="text-muted h6 fw-bold mb-0 text-uppercase">Apprentissage de base</h2>
+          <button
+            type="button"
+            class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+            (click)="selectedOrientationInformation = orientationInformations['apprentissage']; informationOrientationModal.toggle()">
+            plus d'infos
+          </button>
+        </div>
+        <app-besoin-link
+          [serviceItems]="apprentissageDeBaseOrientationItems"
+          [selectedServiceItem]="serviceControl.value"
+          (selectServiceValue)="serviceControl.setValue($event)"
+          (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+      </section>
+      <section aria-label="Démarches">
+        <div class="d-flex flex-row mb-3 mt-4">
+          <h2 class="text-muted h6 fw-bold mb-0 text-uppercase">Démarches</h2>
+          <button
+            type="button"
+            class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+            (click)="selectedOrientationInformation = orientationInformations['démarches']; informationOrientationModal.toggle()">
+            plus d'infos
+          </button>
+        </div>
+        <app-besoin-link
+          [serviceItems]="demarchesOrientationItems"
+          [selectedServiceItem]="serviceControl.value"
+          (selectServiceValue)="serviceControl.setValue($event)"
+          (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+      </section>
+      <section aria-label="Culture numérique">
+        <div class="d-flex flex-row mb-3 mt-4">
+          <h2 class="text-muted h6 fw-bold mb-0 text-uppercase">Culture numérique</h2>
+          <button
+            type="button"
+            class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+            (click)="selectedOrientationInformation = orientationInformations['culture-numérique']; informationOrientationModal.toggle()">
+            plus d'infos
+          </button>
+        </div>
+        <app-besoin-link
+          [serviceItems]="cultureNumeriqueOrientationItems"
+          [selectedServiceItem]="serviceControl.value"
+          (selectServiceValue)="serviceControl.setValue($event)"
+          (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+      </section>
+      <section aria-label="Manque de matériel">
+        <div class="d-flex flex-row mb-3 mt-4">
+          <h2 class="text-muted h6 fw-bold mb-0 text-uppercase">Manque de matériel</h2>
+          <button
+            type="button"
+            class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+            (click)="selectedOrientationInformation = orientationInformations['matériel']; informationOrientationModal.toggle()">
+            plus d'infos
+          </button>
+        </div>
+        <app-besoin-link
+          [serviceItems]="manqueDeMaterielOrientationItems"
+          [selectedServiceItem]="serviceControl.value"
+          (selectServiceValue)="serviceControl.setValue($event)"
+          (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+      </section>
     </ng-container>
     <div class="text-center mt-5">
       <div class="text-muted mb-2">Vous ne trouvez pas votre besoin ?</div>
       <button class="btn btn-sm btn-secondary d-inline-block mb-2" (click)="onFilterNotFound()">
-        <i class="ri-mail-line me-2 text-right"></i>
+        <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
         <b>Contactez-nous !</b>
       </button>
     </div>
@@ -83,6 +91,6 @@
     class="btn btn-primary"
     (click)="serviceControl?.setValue(selectedOrientationInformationType); informationOrientationModal.close()">
     Choisir cette option
-    <i class="ri-arrow-right-s-line"></i>
+    <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
   </a>
 </app-information-orientation-modal>

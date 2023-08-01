@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
+import { ASSETS_TOKEN, AssetsConfiguration, SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
 import { MarkersPresenter } from '../../../core/presenters';
 import { CoordinateursLayout } from '../../layouts';
 import { CoordinateursSortPresentation, DEFAULT_SORT } from '../../presenters';
@@ -30,11 +30,13 @@ export class CoordinateursListPage {
 
   public constructor(
     @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
+    @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction,
     public readonly markersPresenter: MarkersPresenter,
     public readonly route: ActivatedRoute,
-    private readonly _coordinateursListPresenter: CoordinateursListPresenter,
-    private readonly _coordinateursLayout: CoordinateursLayout
-  ) {}
+    private readonly _coordinateursListPresenter: CoordinateursListPresenter
+  ) {
+    setTitle(['Liste des coordinateurs']);
+  }
 
   public trackByCoordinateurId = (_: number, coordinateur: CoordinateursListItemPresentation) => coordinateur.id;
 

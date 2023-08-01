@@ -5,68 +5,74 @@
       <span class="text-primary">type d'accompagnement</span>
       recherchez-vous&nbsp;?
     </h1>
-    <div class="text-center fw-bold mb-5 text-muted">
+    <p class="text-center fw-bold mb-5 text-muted">
       Affinez votre recherche en sélectionnant des critères spécifiques d'accompagnement
-    </div>
+    </p>
     <form [formGroup]="orientationLayout.filterForm">
-      <div class="d-flex flex-row mb-3 mt-4">
-        <h2 class="text-muted h6 fw-bold mb-0">PARTICIPATION</h2>
-        <button
-          type="button"
-          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-          (click)="selectedOrientationInformation = orientationInformations['participation']; informationOrientationModal.toggle()">
-          plus d'infos
-        </button>
-      </div>
-      <div class="bg-light px-3 py-2">
-        <div
-          class="form-check form-check-inline form-chip my-2"
-          *ngFor="let conditionFinancieresOption of conditionAccesOptions; index as i">
-          <input
-            type="checkbox"
-            name="conditions_acces"
-            appCheckboxArray
-            formControlName="conditions_acces"
-            class="form-check-input"
-            [attr.id]="'conditionFinancieresLabelChip' + i"
-            [value]="conditionFinancieresOption.value"
-            (change)="selectParticipation(i)" />
-          <label class="form-check-label bg-white" [attr.for]="'conditionFinancieresLabelChip' + i">
-            <b>{{ conditionFinancieresOption.label }}</b>
-          </label>
+      <fieldset>
+        <legend class="visually-hidden">Participation</legend>
+        <div class="d-flex flex-row mb-3 mt-4">
+          <span class="text-muted h6 fw-bold mb-0 w-auto text-uppercase" aria-hidden="true">Participation</span>
+          <button
+            type="button"
+            class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+            (click)="selectedOrientationInformation = orientationInformations['participation']; informationOrientationModal.toggle()">
+            plus d'infos
+          </button>
         </div>
-      </div>
-      <div class="d-flex flex-row mb-3 mt-4">
-        <h2 class="text-muted h6 fw-bold mb-0">ACCUEIL ADAPTÉ</h2>
-        <button
-          type="button"
-          class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-          (click)="selectedOrientationInformation = orientationInformations['accueil-specifique']; informationOrientationModal.toggle()">
-          plus d'infos
-        </button>
-      </div>
-      <div class="bg-light px-3 py-2">
-        <div
-          class="form-check form-check-inline form-chip my-2"
-          *ngFor="let accueilSpecifiqueOption of publicSpecifiqueAcceuilliOptions; index as i">
-          <input
-            type="checkbox"
-            name="publics_accueillis"
-            appCheckboxArray
-            formControlName="publics_accueillis"
-            class="form-check-input"
-            [value]="accueilSpecifiqueOption.value"
-            [attr.id]="'accueilSpecifiqueLabelChip' + i" />
-          <label class="form-check-label bg-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
-            <b>{{ accueilSpecifiqueOption.label }}</b>
-          </label>
+        <div class="bg-light px-3 py-2">
+          <div
+            class="form-check form-check-inline form-chip my-2"
+            *ngFor="let conditionFinancieresOption of conditionAccesOptions; index as i">
+            <input
+              type="checkbox"
+              name="conditions_acces"
+              appCheckboxArray
+              formControlName="conditions_acces"
+              class="form-check-input"
+              [attr.id]="'conditionFinancieresLabelChip' + i"
+              [value]="conditionFinancieresOption.value"
+              (change)="selectParticipation(i)" />
+            <label class="form-check-label bg-white" [attr.for]="'conditionFinancieresLabelChip' + i">
+              <b>{{ conditionFinancieresOption.label }}</b>
+            </label>
+          </div>
         </div>
-      </div>
+      </fieldset>
+      <fieldset>
+        <legend class="visually-hidden">Accueil adapté</legend>
+        <div class="d-flex flex-row mb-3 mt-4">
+          <span class="text-muted h6 fw-bold mb-0 w-auto text-uppercase" aria-hidden="true">Accueil adapté</span>
+          <button
+            type="button"
+            class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
+            (click)="selectedOrientationInformation = orientationInformations['accueil-specifique']; informationOrientationModal.toggle()">
+            plus d'infos
+          </button>
+        </div>
+        <div class="bg-light px-3 py-2">
+          <div
+            class="form-check form-check-inline form-chip my-2"
+            *ngFor="let accueilSpecifiqueOption of publicSpecifiqueAcceuilliOptions; index as i">
+            <input
+              type="checkbox"
+              name="publics_accueillis"
+              appCheckboxArray
+              formControlName="publics_accueillis"
+              class="form-check-input"
+              [value]="accueilSpecifiqueOption.value"
+              [attr.id]="'accueilSpecifiqueLabelChip' + i" />
+            <label class="form-check-label bg-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
+              <b>{{ accueilSpecifiqueOption.label }}</b>
+            </label>
+          </div>
+        </div>
+      </fieldset>
     </form>
     <div class="text-center mt-5">
       <a class="btn btn-primary mx-3" [routerLink]="['..', 'disponibilite']" queryParamsHandling="preserve">
         Valider
-        <i class="ri-arrow-right-s-line"></i>
+        <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
       </a>
     </div>
   </div>

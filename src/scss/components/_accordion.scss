@@ -1,4 +1,6 @@
 .orientation-btn {
+  --bs-btn-focus-shadow-rgb: 38, 38, 162;
+
   border: none;
 
   &:hover {
@@ -7,18 +9,8 @@
     }
   }
 
-  &:focus {
-    z-index: 3;
-    border-color: transparent;
-    outline: 0;
-    box-shadow: none;
-  }
-
   &:focus-visible {
-    z-index: 3;
-    border-color: var(--#{$prefix}accordion-btn-focus-border-color);
-    outline: 0;
-    box-shadow: var(--#{$prefix}accordion-btn-focus-box-shadow);
+    box-shadow: var(--bs-btn-focus-box-shadow) !important;
   }
 
   .orientation-btn-label {

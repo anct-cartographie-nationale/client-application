@@ -5,7 +5,7 @@
       <span class="text-primary">disponibilités</span>
       &nbsp;?
     </h1>
-    <h5 class="text-center mb-4 mx-5 text-muted">Indiquez quel(s) jour(s) et à quelle(s) heure(s) vous serez disponible</h5>
+    <p class="text-center fw-bold mb-5 text-muted">Indiquez quel(s) jour(s) et à quelle(s) heure(s) vous serez disponible</p>
     <form [formGroup]="orientationLayout.filterForm">
       <div class="accordion" id="accordionDisponibilite">
         <div class="accordion-item mb-3">
@@ -18,17 +18,22 @@
               [attr.aria-expanded]="collapseDatePrecise.isExpanded$ | async"
               (click)="collapseDatePrecise.toggle()">
               <span class="ri-circled bg-primary text-light fw-normal me-3">
-                <i class="ri-calendar-todo-line"></i>
+                <i class="ri-calendar-todo-line" aria-hidden="true"></i>
               </span>
               <span class="orientation-btn-label my-auto text-start">Je cherche des lieux ouverts à une date précise</span>
-              <span class="ri-2x text-muted ms-auto me-3 end-0">
+              <span class="ms-auto me-3 end-0 d-flex">
+                <button
+                  class="btn p-0 border-0"
+                  (click)="selectOrientationInformation(false); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()">
+                  <span class="visually-hidden">Info</span>
+                  <i class="ri-information-line fw-normal ri-2x text-muted" aria-hidden="true"></i>
+                </button>
                 <i
-                  class="ri-information-line me-2 fw-normal"
-                  role="button"
-                  (click)="selectOrientationInformation(false); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()"></i>
-                <i class="ri-add-line" *ngIf="collapseDatePrecise.isCollapsed$ | async; else: expanded"></i>
+                  class="ri-add-line ri-2x text-muted"
+                  *ngIf="collapseDatePrecise.isCollapsed$ | async; else: expanded"
+                  aria-hidden="true"></i>
                 <ng-template #expanded>
-                  <i class="ri-subtract-line"></i>
+                  <i class="ri-subtract-line ri-2x text-muted" aria-hidden="true"></i>
                 </ng-template>
               </span>
             </button>
@@ -38,7 +43,8 @@
             id="collapseDatePrecise"
             [state]="hasOpeningsHours ? 'expanded' : 'collapsed'"
             aria-labelledby="headingDatePrecise">
-            <div class="accordion-body bg-light py-4">
+            <fieldset class="accordion-body bg-light py-4">
+              <legend class="visually-hidden">Filtres pour les horaires</legend>
               <app-opening-hours-form
                 #openingHoursForm
                 (selectOpeningHours)="onSelectOpeningHours($event)"
@@ -49,7 +55,7 @@
                   class="btn btn-secondary m-3"
                   (click)="openingHoursForm.onResetOpeningHoursForm(); collapseDatePrecise.toggle()">
                   Annuler
-                  <i class="ri-close-line"></i>
+                  <i class="ri-close-line" aria-hidden="true"></i>
                 </button>
                 <app-display-on-map-link
                   buttonStyle="primary"
@@ -59,7 +65,7 @@
                   Afficher les résultats
                 </app-display-on-map-link>
               </div>
-            </div>
+            </fieldset>
           </app-collapse>
         </div>
       </div>
@@ -75,15 +81,17 @@
             [routerLink]="['/','cartographie']"
             queryParamsHandling="preserve">
             <span class="ri-circled bg-primary text-light fw-normal me-3">
-              <i class="ri-road-map-line"></i>
+              <i class="ri-road-map-line" aria-hidden="true"></i>
             </span>
             <span class="orientation-btn-label my-auto text-start">J’affiche tous les lieux correspondant à ma recherche</span>
-            <span class="ri-2x text-muted ms-auto me-3 end-0">
-              <i
-                class="ri-information-line me-2 fw-normal"
-                role="button"
-                (click)="selectOrientationInformation(true); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()"></i>
-              <i class="ri-arrow-right-s-line"></i>
+            <span class="ms-auto me-3 end-0 d-flex">
+              <button
+                class="btn p-0 border-0"
+                (click)="selectOrientationInformation(true); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()">
+                <span class="visually-hidden">Info</span>
+                <i class="ri-information-line fw-normal ri-2x text-muted" aria-hidden="true"></i>
+              </button>
+              <i class="ri-arrow-right-s-line ri-2x text-muted" aria-hidden="true"></i>
             </span>
           </a>
           <a
@@ -93,15 +101,17 @@
             [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
             rel="keep-params">
             <span class="ri-circled bg-primary text-light fw-normal me-3">
-              <i class="ri-road-map-line"></i>
+              <i class="ri-road-map-line" aria-hidden="true"></i>
             </span>
             <span class="orientation-btn-label my-auto text-start">J’affiche tous les lieux correspondant à ma recherche</span>
-            <span class="ri-2x text-muted ms-auto me-3 end-0">
-              <i
-                class="ri-information-line me-2 fw-normal"
-                role="button"
-                (click)="selectOrientationInformation(true); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()"></i>
-              <i class="ri-arrow-right-s-line"></i>
+            <span class="ms-auto me-3 end-0 d-flex">
+              <button
+                class="btn p-0 border-0"
+                (click)="selectOrientationInformation(true); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()">
+                <span class="visually-hidden">Info</span>
+                <i class="ri-information-line fw-normal ri-2x text-muted" aria-hidden="true"></i>
+              </button>
+              <i class="ri-arrow-right-s-line ri-2x text-muted" aria-hidden="true"></i>
             </span>
           </a>
         </ng-container>
@@ -121,7 +131,7 @@
       class="btn btn-primary"
       (click)="informationOrientationModal.close()">
       Afficher les résultats
-      <i class="ri-arrow-right-s-line"></i>
+      <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
     </a>
     <a
       *ngIf="!cartographie.active && displayCartographieLink"
@@ -129,7 +139,7 @@
       class="btn btn-primary"
       (click)="informationOrientationModal.close()">
       Afficher les résultats
-      <i class="ri-arrow-right-s-line"></i>
+      <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
     </a>
   </ng-container>
 </app-information-orientation-modal>

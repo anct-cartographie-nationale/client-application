@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap } from 'rxjs';
 import { map, mergeWith } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
 import { AddressFoundPresentation, AddressPresenter, AddressRepository } from '../../../adresse';
-import { LieuxMediationNumeriquePresenter } from '../../../core/presenters';
 import { OrientationLayout } from '../../layouts';
 import { localisationFromStrings } from './localisation.presenter';
 
@@ -48,7 +48,7 @@ export class LocalisationPage {
         switchMap(
           (localisation: Localisation): Observable<AddressFoundPresentation[]> => this._addressPresenter.reverse$(localisation)
         ),
-        map((address: AddressFoundPresentation[]) => {
+        map((address: AddressFoundPresentation[]): boolean => {
           this.orientationLayout.filterForm.get('address')?.setValue(address[0].label);
           return false;
         })
@@ -58,10 +58,12 @@ export class LocalisationPage {
 
   public constructor(
     private readonly _addressPresenter: AddressPresenter,
-    private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly _route: ActivatedRoute,
-    public readonly orientationLayout: OrientationLayout
-  ) {}
+    public readonly orientationLayout: OrientationLayout,
+    @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction
+  ) {
+    setTitle(['Localisation', 'Orientation']);
+  }
 
   public onSelectAddress(address: AddressFoundPresentation): void {
     this.orientationLayout.filterForm.get('address')?.setValue(address.label);
@@ -93,6 +95,4 @@ export class LocalisationPage {
   public onSearchAddress(searchTerm: string): void {
     this._searchTerm$.next(searchTerm);
   }
-
-  protected readonly customElements = customElements;
 }

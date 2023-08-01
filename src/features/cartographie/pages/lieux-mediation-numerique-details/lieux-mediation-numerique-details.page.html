@@ -19,7 +19,7 @@
   <div class="d-flex flex-column justify-content-between h-100">
     <div class="d-flex align-items-center bg-primary text-bg-dark p-3">
       <div class="d-flex flex-grow-1 p-3">
-        <i class="ri-4x ri-xl ri-close-circle-line me-3 mt-1"></i>
+        <i class="ri-4x ri-xl ri-close-circle-line me-3 mt-1" aria-hidden="true"></i>
         <div>
           <p class="m-0">Erreur</p>
           <h2 class="bg-primary">
@@ -30,7 +30,7 @@
       <button
         type="button"
         class="btn-close btn-close-white opacity-100 small mb-0 me-2"
-        aria-label="Close"
+        aria-label="Revenir à la liste des régions"
         (click)="onCloseNoLieuFound()"></button>
     </div>
     <div class="text-center p-3">
@@ -55,7 +55,7 @@
     <div class="bg-light text-center py-5">
       <a class="btn btn-secondary" routerLink="/orientation" queryParamsHandling="preserve">
         Revenir à la page d'accueil
-        <i class="ri-arrow-right-s-line"></i>
+        <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
       </a>
     </div>
   </div>

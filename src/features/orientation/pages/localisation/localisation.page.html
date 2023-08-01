@@ -4,9 +4,9 @@
       <span class="text-primary">Où</span>
       résidez-vous &nbsp;?
     </h1>
-    <div class="text-center fw-bold mb-5 text-muted">
+    <p class="text-center fw-bold mb-5 text-muted">
       Renseignez votre adresse puis définissez la distance maximale jusqu'à laquelle vous pouvez vous déplacer
-    </div>
+    </p>
     <form class="bg-light py-5" [formGroup]="orientationLayout.filterForm">
       <div class="row gx-0 justify-content-center">
         <div class="col-9">
@@ -27,7 +27,7 @@
                 <span class="text-primary">Chargement...</span>
               </div>
               <span *ngIf="(loadingState$ | async) === false">
-                <i class="ri-map-pin-2-line"></i>
+                <i class="ri-map-pin-2-line" aria-hidden="true"></i>
                 Me géolocaliser
               </span>
             </button>
@@ -48,15 +48,17 @@
             step="5000"
             formControlName="distance" />
           <div class="d-flex mt-4">
-            <div class="mx-auto d-flex align-items-end">
-              <div class="bg-white py-1 px-5 border-bottom border-2 rounded-top">
+            <div class="mx-auto d-flex align-items-center">
+              <label for="distance-range" class="bg-white py-1 px-5 border-bottom border-2 rounded-top">
                 Rayon :
                 <b class="text-primary">{{ orientationLayout.filterForm.get('distance')?.value / 1000 + ' km' }}</b>
-              </div>
-              <i
-                class="ri-information-line ms-2 fw-normal text-muted ri-2x"
-                role="button"
-                (click)="informationOrientationModal.toggle()"></i>
+              </label>
+              <button
+                class="btn btn-link text-decoration-none p-0 border-0 ms-2"
+                (click)="informationOrientationModal.toggle()">
+                <span class="visually-hidden">Info</span>
+                <i class="ri-information-line fw-normal text-muted ri-2x" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -65,7 +67,7 @@
     <div class="text-center mt-5">
       <a class="btn btn-primary mx-3" [routerLink]="['..', 'accessibilite']" queryParamsHandling="preserve">
         Valider
-        <i class="ri-arrow-right-s-line"></i>
+        <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
       </a>
     </div>
   </div>

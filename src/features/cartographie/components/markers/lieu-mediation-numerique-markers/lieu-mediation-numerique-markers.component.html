@@ -11,7 +11,7 @@
       <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
       <div *ngIf="lieuMediationNumerique.status; else noOpeningHours" class="text-muted">
         <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
-          <i class="ri-checkbox-blank-circle-fill ri-xxs"></i>
+          <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
           {{ lieuMediationNumerique.status.label }}
         </span>
         ·
@@ -27,8 +27,9 @@
   <mgl-marker
     [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]"
     [className]="hoverId === lieuMediationNumerique.id || selectedId === lieuMediationNumerique.id ? 'marker-hover' : ''">
-    <div
-      role="button"
+    <button
+      tabindex="-1"
+      class="btn"
       (click)="showDetails.emit(lieuMediationNumerique)"
       (mouseenter)="highlight.emit(lieuMediationNumerique)"
       (mouseleave)="highlight.emit()">
@@ -60,6 +61,6 @@
           </g>
         </ng-template>
       </svg>
-    </div>
+    </button>
   </mgl-marker>
 </ng-container>
