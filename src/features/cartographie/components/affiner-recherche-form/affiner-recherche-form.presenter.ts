@@ -14,3 +14,6 @@ export const labelNationauxFrom = (LieuxMediationNumerique: LieuMediationNumeriq
 
 export const labelsAutresFrom = (LieuxMediationNumerique: LieuMediationNumeriquePresentation[]): string[] =>
   deduplicate(LieuxMediationNumerique.flatMap(toLabelsAutre));
+
+export const strategiesTerritorialesFrom = (LieuxMediationNumerique: LieuMediationNumeriquePresentation[]): string[] =>
+  labelsAutresFrom(LieuxMediationNumerique).filter((autreLabel: string) => autreLabel === 'QPV' || autreLabel === 'ZRR');
