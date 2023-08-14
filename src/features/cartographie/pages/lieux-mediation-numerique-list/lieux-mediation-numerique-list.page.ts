@@ -31,10 +31,10 @@ import {
   inLieuxZoomLevel,
   LieuMediationNumeriqueListItemPresentation,
   toLieuxMediationNumeriqueListItemsPresentation,
-  inRegionZoomLevel,
   HubPresentation,
   LabelPresentation,
-  labelToDisplayMap
+  labelToDisplayMap,
+  DEPARTEMENT_ZOOM_LEVEL
 } from '../../presenters';
 import { findLieuToFocus, toHub, toLieux, toLieuxFilteredByDepartement } from './lieux-mediation-numerique-list.presentation';
 import { FormGroup } from '@angular/forms';
@@ -108,7 +108,6 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     );
 
   public zoom$: Observable<number> = combineLatest([this.markersPresenter.zoom$, this.lieuSelected$]).pipe(
-    delay(0),
     map(([zoom, lieu]: [number, LieuMediationNumerique | undefined]) => {
       lieu &&
         lieu.localisation &&
@@ -136,9 +135,11 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     const departement: DepartementPresentation | undefined = departementFromNom(
       this.route.snapshot.paramMap.get('nomDepartement') ?? ''
     );
-    departement &&
-      inRegionZoomLevel(this.markersPresenter.getZoom()) &&
+    if (departement != null) {
       this.markersPresenter.center(departement.localisation, departement.zoom);
+    } else if (this.markersPresenter.getZoom() < DEPARTEMENT_ZOOM_LEVEL) {
+      this.markersPresenter.reset();
+    }
   }
 
   public printPage() {

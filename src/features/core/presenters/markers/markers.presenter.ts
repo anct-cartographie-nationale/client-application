@@ -78,28 +78,28 @@ export class MarkersPresenter {
     private readonly _initialPosition: InitialPositionConfiguration
   ) {}
 
-  public boundingBox(boundingBox: [Localisation, Localisation]) {
+  public boundingBox(boundingBox: [Localisation, Localisation]): void {
     this._boundingBox$.next(boundingBox);
   }
 
-  public center(localisation: Localisation, zoom: number = this._currentZoom) {
-    this._localisation$.next(localisation);
-    this._zoom$.next(zoom);
-    this._currentZoom = zoom;
+  public center(localisation: Localisation, zoom: number = this._currentZoom): void {
+    setTimeout(() => {
+      this._localisation$.next(localisation);
+      this._zoom$.next(zoom);
+      this._currentZoom = zoom;
+    });
   }
 
-  public select(markerId: string) {
+  public select(markerId: string): void {
     this._selected$.next(markerId);
   }
 
-  public highlight(markerId: string) {
+  public highlight(markerId: string): void {
     this._highlighted$.next(markerId);
   }
 
   public reset(): void {
-    this._localisation$.next(Localisation(this._initialPosition));
-    this._zoom$.next(this._zoomLevel.regular);
-    this._currentZoom = this._zoomLevel.regular;
+    this.center(Localisation(this._initialPosition), this._zoomLevel.regular);
   }
 
   public getZoom(): number {

@@ -24,7 +24,7 @@ export class CollapseComponent {
 
   private readonly _state$: BehaviorSubject<CollapseState> = new BehaviorSubject<CollapseState>('collapsed');
 
-  public readonly state$: Observable<CollapseState> = this._state$.asObservable().pipe(delay(0));
+  public readonly state$: Observable<CollapseState> = this._state$.asObservable();
 
   public isCollapsed$: Observable<boolean> = this.state$.pipe(map((state: CollapseState) => state === 'collapsed'));
 
