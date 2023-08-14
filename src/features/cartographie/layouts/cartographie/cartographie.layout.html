@@ -46,12 +46,22 @@
           class="navbar-btn ms-auto"
           [attr.aria-controls]="affinerRechercheOffcanvas.id"
           [class.active]="affinerRechercheOffcanvas.expanded$ | async"
-          (click)="affinerRechercheOffcanvas.toggle()">
+          (click)="affinerRechercheOffcanvas.toggle(); aideOffcanvas.close()">
           <i
             class="me-1"
             [ngClass]="(affinerRechercheOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-sound-module-line'"
             aria-hidden="true"></i>
           Affiner ma recherche
+        </button>
+        <button
+          class="navbar-btn pb-1 pt-0"
+          [attr.aria-controls]="aideOffcanvas.id"
+          [class.active]="aideOffcanvas.expanded$ | async"
+          (click)="aideOffcanvas.toggle(); affinerRechercheOffcanvas.close()">
+          <i
+            class="ri-2x"
+            [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-circle-line text-primary' : 'ri-question-line'"></i>
+          <span class="visually-hidden">À propos</span>
         </button>
       </div>
     </div>
@@ -127,7 +137,7 @@
         [isAbsolute]="true"
         [useContainer]="false"
         [useHeader]="false">
-        <div class="d-flex flex-column h-100">
+        <div class="d-flex flex-column h-100 border-top">
           <div class="flex-grow-1">
             <app-affiner-recherche-form
               *ngIf="affinerRechercheOffcanvas.expanded$ | async"
@@ -136,6 +146,57 @@
           <div class="mt-auto bg-white p-3 text-center">
             <app-modifier-orientation></app-modifier-orientation>
             <button class="btn btn-primary" (click)="affinerRechercheOffcanvas.toggle()">Terminer</button>
+          </div>
+        </div>
+      </app-offcanvas>
+      <app-offcanvas
+        #aideOffcanvas
+        class="z-index-over-all"
+        heading="À propos"
+        [isAbsolute]="true"
+        [useContainer]="false"
+        [useHeader]="false">
+        <div class="d-flex flex-column h-100 bg-white border-top">
+          <div class="list-group list-group-flush">
+            <a
+              href="https://labase.anct.gouv.fr/ressource/995"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="list-group-item list-group-item-action fw-bold py-4">
+              FAQ
+            </a>
+            <a
+              href="https://labase.anct.gouv.fr/ressource/974"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="list-group-item list-group-item-action fw-bold py-4">
+              Comment orienter ?
+            </a>
+          </div>
+          <div class="mt-auto bg-light p-4">
+            <a
+              class="btn orientation-btn bg-white mb-3 p-3 rounded-0 d-flex d-flex align-items-center"
+              href="https://labase.anct.gouv.fr/base/356?tags=&page=0&tab=resources"
+              target="_blank"
+              rel="noopener noreferrer">
+              <span class="ri-circled bg-primary text-light fw-normal me-3" aria-hidden="true"><i class="ri-link"></i></span>
+              <span class="orientation-btn-label my-auto text-start lh-sm">
+                La Cartographie nationale sur la Base
+                <br />
+                <i class="small text-muted">
+                  Comment enregistrer vos données sur la cartographie ? Comment orienter un bénéficiaire ? Les réponses à vos
+                  questions sont ici.
+                </i>
+              </span>
+            </a>
+            <a
+              class="btn orientation-btn bg-white mb-3 p-3 rounded-0 d-flex align-items-center"
+              href="mailto:cartographie.sonum@anct.gouv.fr">
+              <img src="/assets/img/logo/cartographie-nationale-brand.png" height="45" class="me-3" alt="" />
+              <span class="orientation-btn-label my-auto text-start lh-sm">
+                Contactez l'équipe de la Cartographie nationale des lieux d'inclusion numérique
+              </span>
+            </a>
           </div>
         </div>
       </app-offcanvas>
