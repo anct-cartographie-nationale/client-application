@@ -89,15 +89,11 @@ export class CartographieLayout {
 
   public france$: Observable<FrancePresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueFrance$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(
-      delay(0),
-      tap(() => this._loadingState$.next(false))
-    );
+    .pipe(tap(() => this._loadingState$.next(false)));
 
   public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
-      delay(0),
       tap(() => {
         this._loadingState$.next(false);
         this._resultsCount$.next(0);
@@ -107,7 +103,6 @@ export class CartographieLayout {
   public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
-      delay(0),
       tap(() => {
         this._loadingState$.next(false);
         this._resultsCount$.next(0);
@@ -128,7 +123,6 @@ export class CartographieLayout {
         withLatestFrom(this._currentZoom$),
         map(toLieuxWithOpeningState(new Date())),
         map(toLieuxByLongitude),
-        delay(0),
         tap((lieux: LieuMediationNumeriquePresentation[]): void => {
           this._resultsCount$.next(lieux.length);
           this._loadingState$.next(false);
@@ -226,7 +220,7 @@ export class CartographieLayout {
       this.router.navigate(route, { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
-  private getRouteParam(routeParam: string) {
+  private getRouteParam(routeParam: string): string {
     return this.route.children[0]?.children[0]?.snapshot.paramMap.get(routeParam) ?? '';
   }
 

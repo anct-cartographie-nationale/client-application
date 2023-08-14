@@ -36,11 +36,14 @@ export class DepartementsPage implements OnInit {
     public readonly markersPresenter: MarkersPresenter,
     @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction
   ) {}
+
   public ngOnInit(): void {
     const region: RegionPresentation | undefined = regionFromNom(this._route.snapshot.paramMap.get('nomRegion') ?? '');
-    region && this.markersPresenter.center(region.localisation, region.zoom);
-    this.setTitle([region?.nom, 'Départements']);
+    if (region == null) return;
+    this.setTitle([region.nom, 'Départements']);
+    this.markersPresenter.center(region.localisation, region.zoom);
   }
+
   public hover(highlightedId?: string) {
     this.markersPresenter.highlight(highlightedId ?? '');
   }
