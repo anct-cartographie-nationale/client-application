@@ -1,7 +1,8 @@
 <a
   *ngFor="let serviceItem of serviceItems"
   routerLink="../localisation"
-  queryParamsHandling="preserve"
+  queryParamsHandling="merge"
+  [queryParams]="{ service: serviceItem.value }"
   class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative"
   (click)="selectServiceValue.emit(serviceItem.value)">
   <span

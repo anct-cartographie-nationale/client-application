@@ -14,7 +14,7 @@
         <div class="text-muted">{{ lieuMediationNumerique.adresse }}</div>
         <div class="mt-1" *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</div>
         <div *ngIf="lieuMediationNumerique.status" class="text-muted">
-          <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
+          <span [class.text-primary]="lieuMediationNumerique.status.label === 'Ouvert'">
             <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
             {{ lieuMediationNumerique.status.label }}
           </span>

@@ -10,7 +10,7 @@
       [ngClass]="lieuMediationNumerique.status?.label === 'Ouvert' ? 'border-success' : 'border-muted'">
       <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
       <div *ngIf="lieuMediationNumerique.status; else noOpeningHours" class="text-muted">
-        <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
+        <span [class.text-primary]="lieuMediationNumerique.status.label === 'Ouvert'">
           <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
           {{ lieuMediationNumerique.status.label }}
         </span>
