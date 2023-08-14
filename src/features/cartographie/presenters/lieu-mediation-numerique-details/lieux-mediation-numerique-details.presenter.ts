@@ -95,6 +95,16 @@ const typologieMatchingMap = new Map([
 
 const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
   [
+    'aidants-connect',
+    {
+      label: 'Aidants Connect',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-aidants-connect/',
+      detail: "Formulaire d'habilitation Aidants Connect",
+      update_link: 'https://aidantsconnect.beta.gouv.fr/habilitation/demandeur/',
+      logo: 'aidants-connect'
+    }
+  ],
+  [
     'angers',
     {
       label: "Ville d'Angers",
@@ -115,6 +125,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
+    'cd17',
+    {
+      label: 'Département de la Charente-Maritime',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-charente-maritime/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
     'cd23',
     {
       label: 'Département de la Creuse',
@@ -124,6 +144,17 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
       logo: 'dora'
     }
   ],
+  [
+    'cd28-appui-territorial',
+    {
+      label: "Département de l'Eure-et-Loir",
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-eure-et-loir-fournis-par-appui-territorial-deure-et-loir/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+
   [
     'cd33',
     {
@@ -165,6 +196,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
+    'cd85',
+    {
+      label: 'Département de la Vendée',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-vendee-fournis-par-vendee/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
     'cd87',
     {
       label: 'Département de la Haute-Vienne',
@@ -185,6 +226,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
+    'conumm',
+    {
+      label: 'Conumm',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-conumm/',
+      detail: 'Formulaire Conumm',
+      update_link: 'https://framaforms.org/cartographie-des-espaces-de-mediation-numerique-en-pays-de-la-loire-1580983145',
+      logo: 'Conumm'
+    }
+  ],
+  [
     'cr93',
     {
       label: 'Région PACA',
@@ -202,6 +253,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
       detail: "Ces données sont intégrées via l'outil DORA",
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora'
+    }
+  ],
+  [
+    'etapes-numerique',
+    {
+      label: 'Etapes Numerique',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-etapes-numerique/',
+      detail: 'Données gérées par La Poste et la Banque des Territoires',
+      update_link: '',
+      logo: 'etapes-num'
     }
   ],
   [
@@ -282,6 +343,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
       detail: 'Open data M2a',
       update_link: 'https://data.mulhouse-alsace.fr/pages/accueil/',
       logo: 'mulhouse'
+    }
+  ],
+  [
+    'numi',
+    {
+      label: 'Numi',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-normandie-fournis-par-numi/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
     }
   ],
   [
