@@ -368,3 +368,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-question-line::before {
   content: '\f045';
 }
+
+.ri-menu-line::before {
+  content: '\ef3e';
+}

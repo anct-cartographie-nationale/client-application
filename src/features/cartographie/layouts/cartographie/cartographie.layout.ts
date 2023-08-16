@@ -225,11 +225,7 @@ export class CartographieLayout {
   }
 
   public resetBreadcrumbOnGeolocate(localisation: Localisation): Localisation {
-    if (localisation)
-      this.router.navigate(['/cartographie'], {
-        queryParams: {},
-        queryParamsHandling: 'merge'
-      });
+    localisation && this.router.navigate(['/cartographie'], { queryParams: {}, queryParamsHandling: 'merge' });
     return (this.userLocalisation = localisation);
   }
 

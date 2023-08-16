@@ -1,5 +1,6 @@
 <div
-  class="offcanvas offcanvas-top offcanvas-end ms-auto h-auto overflow-auto"
+  class="offcanvas offcanvas-end"
+  [ngClass]="className"
   [class.position-absolute]="isAbsolute && (expanded$ | async)"
   [class.showing]="showing$ | async"
   [class.show]="expanded$ | async"

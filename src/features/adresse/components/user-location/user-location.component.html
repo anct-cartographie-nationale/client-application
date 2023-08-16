@@ -1,5 +1,6 @@
 <div class="d-flex">
   <app-address-field
+    [class.w-100]="fullWidth"
     [defaultValue]="(initialSearch$ | async) ?? ''"
     [addressSuggestions]="(addressesFound$ | async) ?? []"
     [addressNotFound]="(addressNotFound$ | async) ?? false"
