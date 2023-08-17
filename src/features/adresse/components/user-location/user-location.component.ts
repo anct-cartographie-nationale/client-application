@@ -21,6 +21,8 @@ const setZoomUserPosition = (defaultUserPosition: number, distance?: number): nu
 export class UserLocationComponent implements OnInit {
   @Input() adresse?: string;
 
+  @Input() fullWidth: boolean = false;
+
   private readonly _initialSearch$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   private readonly _searchTerm$: Subject<string> = new Subject<string>();

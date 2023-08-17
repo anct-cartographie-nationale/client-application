@@ -29,53 +29,131 @@
 </div>
 <div class="d-flex h-100 flex-column">
   <nav
-    [ngClass]="(loadingState$ | async) ? 'z-index-over-base' : 'z-index-over-all'"
-    class="navbar navbar-expand-lg bg-light shadow-sm sticky-top py-0 d-print-none"
+    class="navbar navbar-expand-lg bg-light shadow-sm sticky-top py-0 d-print-none z-index-elevated"
     aria-label="cartographie">
-    <div class="container-fluid mx-3">
-      <div class="navbar-collapse">
-        <app-user-location
-          class="me-3"
-          [adresse]="(defaultAddress$ | async) ?? ''"
-          (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
-        <app-location-breadcrumb
-          [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
-          [zoom]="(markersPresenter.zoom$ | async) ?? 0"
-          (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
-        <button
-          class="navbar-btn ms-auto"
-          [attr.aria-controls]="affinerRechercheOffcanvas.id"
-          [class.active]="affinerRechercheOffcanvas.expanded$ | async"
-          (click)="affinerRechercheOffcanvas.toggle(); aideOffcanvas.close()">
-          <i
-            class="me-1"
-            [ngClass]="(affinerRechercheOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-sound-module-line'"
-            aria-hidden="true"></i>
-          Affiner ma recherche
-        </button>
-        <button
-          class="navbar-btn pb-1 pt-0"
-          [attr.aria-controls]="aideOffcanvas.id"
-          [class.active]="aideOffcanvas.expanded$ | async"
-          (click)="aideOffcanvas.toggle(); affinerRechercheOffcanvas.close()">
-          <i
-            class="ri-2x"
-            [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-circle-line text-primary' : 'ri-question-line'"></i>
-          <span class="visually-hidden">À propos</span>
-        </button>
-      </div>
+    <div class="container-fluid ms-sm-4 p-0">
+      <app-user-location
+        class="me-3 d-sm-inline-block d-none"
+        [adresse]="(defaultAddress$ | async) ?? ''"
+        (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
+      <app-location-breadcrumb
+        class="d-lg-inline-block d-none"
+        [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
+        [zoom]="(markersPresenter.zoom$ | async) ?? 0"
+        (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
+      <button
+        class="navbar-btn ms-auto flex-sm-grow-0 flex-grow-1 text-start"
+        [attr.aria-controls]="affinerRechercheOffcanvas.id"
+        [class.active]="affinerRechercheOffcanvas.expanded$ | async"
+        (click)="affinerRechercheOffcanvas.toggle(); aideOffcanvas.close()">
+        <i
+          class="me-1"
+          [ngClass]="(affinerRechercheOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-sound-module-line'"
+          aria-hidden="true"></i>
+        Affiner ma recherche
+      </button>
+      <button
+        class="navbar-btn pb-1 pt-0"
+        [attr.aria-controls]="aideOffcanvas.id"
+        [class.active]="aideOffcanvas.expanded$ | async"
+        (click)="aideOffcanvas.toggle(); affinerRechercheOffcanvas.close()">
+        <i
+          class="ri-2x"
+          [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-circle-line text-primary' : 'ri-question-line'"></i>
+        <span class="visually-hidden">À propos</span>
+      </button>
     </div>
   </nav>
-  <div class="d-flex flex-grow-1 overflow-hidden">
+  <app-location-breadcrumb
+    class="d-lg-none d-block ps-sm-4 p-3 border-bottom"
+    [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
+    [zoom]="(markersPresenter.zoom$ | async) ?? 0"
+    (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
+  <div class="d-flex flex-grow-1 overflow-hidden position-relative">
+    <app-offcanvas
+      #affinerRechercheOffcanvas
+      heading="Options pour affiner la recherche"
+      [useContainer]="false"
+      [useHeader]="false"
+      class="position-absolute h-100 end-0"
+      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-elevated">
+      <div class="d-flex flex-column h-100 border-top">
+        <div class="flex-grow-1">
+          <app-user-location
+            class="m-3 d-sm-none d-block"
+            [adresse]="(defaultAddress$ | async) ?? ''"
+            [fullWidth]="true"
+            (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
+          <app-affiner-recherche-form
+            *ngIf="affinerRechercheOffcanvas.expanded$ | async"
+            [lieuxMediationNumeriques]="(allLieuxMediationNumerique$ | async) ?? []"></app-affiner-recherche-form>
+        </div>
+        <div class="mt-auto bg-white p-3 text-center">
+          <app-modifier-orientation></app-modifier-orientation>
+          <button class="btn btn-primary" (click)="affinerRechercheOffcanvas.toggle()">Terminer</button>
+        </div>
+      </div>
+    </app-offcanvas>
+    <app-offcanvas
+      #aideOffcanvas
+      heading="À propos"
+      [useContainer]="false"
+      [useHeader]="false"
+      class="position-absolute h-100 end-0"
+      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-elevated">
+      <div class="d-flex flex-column h-100 bg-white border-top">
+        <div class="list-group list-group-flush">
+          <a
+            href="https://labase.anct.gouv.fr/ressource/995"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="list-group-item list-group-item-action fw-bold py-4">
+            FAQ
+          </a>
+          <a
+            href="https://labase.anct.gouv.fr/ressource/974"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="list-group-item list-group-item-action fw-bold py-4">
+            Comment orienter ?
+          </a>
+        </div>
+        <div class="mt-auto bg-light p-4">
+          <a
+            class="btn orientation-btn bg-white mb-3 p-3 rounded-0 d-flex d-flex align-items-center"
+            href="https://labase.anct.gouv.fr/base/356?tags=&page=0&tab=resources"
+            target="_blank"
+            rel="noopener noreferrer">
+            <span class="ri-circled bg-primary text-light fw-normal me-3" aria-hidden="true"><i class="ri-link"></i></span>
+            <span class="orientation-btn-label my-auto text-start lh-sm">
+              La Cartographie nationale sur la Base
+              <br />
+              <i class="small text-muted">
+                Comment enregistrer vos données sur la cartographie ? Comment orienter un bénéficiaire ? Les réponses à vos
+                questions sont ici.
+              </i>
+            </span>
+          </a>
+          <a
+            class="btn orientation-btn bg-white mb-3 p-3 rounded-0 d-flex align-items-center"
+            href="mailto:cartographie.sonum@anct.gouv.fr">
+            <img src="/assets/img/logo/cartographie-nationale-brand.png" height="45" class="me-3" alt="" />
+            <span class="orientation-btn-label my-auto text-start lh-sm">
+              Contactez l'équipe de la Cartographie nationale des lieux d'inclusion numérique
+            </span>
+          </a>
+        </div>
+      </div>
+    </app-offcanvas>
     <main
-      class="border-end col-12 show-map"
+      class="border-end col-12 show-map position-relative"
       [class.show-map-for-small-devices]="showMapForSmallDevices$ | async"
       [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">
       <router-outlet></router-outlet>
     </main>
     <aside
       aria-label="carte interactive des lieux d'inclusion numérique"
-      class="col-lg col-12 position-relative d-flex flex-column show-map"
+      class="col-lg col-12 d-flex flex-column show-map"
       [class.show-map-for-small-devices]="showMapForSmallDevices$ | async">
       <mgl-map
         aria-hidden="true"
@@ -120,7 +198,7 @@
           (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
       </mgl-map>
       <div class="p-3 d-flex d-lg-none bg-primary align-items-center">
-        <button class="btn btn-link link-light text-decoration-none" (click)="toggleMapForSmallDevices()">
+        <button class="btn btn-link link-light text-decoration-none px-0" (click)="toggleMapForSmallDevices()">
           <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
           Afficher la liste
         </button>
@@ -130,76 +208,6 @@
           <ng-template ngPluralCase="other">{{ resultCount }} résultats</ng-template>
         </i>
       </div>
-      <app-offcanvas
-        #affinerRechercheOffcanvas
-        class="z-index-over-all"
-        heading="Options pour affiner la recherche"
-        [isAbsolute]="true"
-        [useContainer]="false"
-        [useHeader]="false">
-        <div class="d-flex flex-column h-100 border-top">
-          <div class="flex-grow-1">
-            <app-affiner-recherche-form
-              *ngIf="affinerRechercheOffcanvas.expanded$ | async"
-              [lieuxMediationNumeriques]="(allLieuxMediationNumerique$ | async) ?? []"></app-affiner-recherche-form>
-          </div>
-          <div class="mt-auto bg-white p-3 text-center">
-            <app-modifier-orientation></app-modifier-orientation>
-            <button class="btn btn-primary" (click)="affinerRechercheOffcanvas.toggle()">Terminer</button>
-          </div>
-        </div>
-      </app-offcanvas>
-      <app-offcanvas
-        #aideOffcanvas
-        class="z-index-over-all"
-        heading="À propos"
-        [isAbsolute]="true"
-        [useContainer]="false"
-        [useHeader]="false">
-        <div class="d-flex flex-column h-100 bg-white border-top">
-          <div class="list-group list-group-flush">
-            <a
-              href="https://labase.anct.gouv.fr/ressource/995"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="list-group-item list-group-item-action fw-bold py-4">
-              FAQ
-            </a>
-            <a
-              href="https://labase.anct.gouv.fr/ressource/974"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="list-group-item list-group-item-action fw-bold py-4">
-              Comment orienter ?
-            </a>
-          </div>
-          <div class="mt-auto bg-light p-4">
-            <a
-              class="btn orientation-btn bg-white mb-3 p-3 rounded-0 d-flex d-flex align-items-center"
-              href="https://labase.anct.gouv.fr/base/356?tags=&page=0&tab=resources"
-              target="_blank"
-              rel="noopener noreferrer">
-              <span class="ri-circled bg-primary text-light fw-normal me-3" aria-hidden="true"><i class="ri-link"></i></span>
-              <span class="orientation-btn-label my-auto text-start lh-sm">
-                La Cartographie nationale sur la Base
-                <br />
-                <i class="small text-muted">
-                  Comment enregistrer vos données sur la cartographie ? Comment orienter un bénéficiaire ? Les réponses à vos
-                  questions sont ici.
-                </i>
-              </span>
-            </a>
-            <a
-              class="btn orientation-btn bg-white mb-3 p-3 rounded-0 d-flex align-items-center"
-              href="mailto:cartographie.sonum@anct.gouv.fr">
-              <img src="/assets/img/logo/cartographie-nationale-brand.png" height="45" class="me-3" alt="" />
-              <span class="orientation-btn-label my-auto text-start lh-sm">
-                Contactez l'équipe de la Cartographie nationale des lieux d'inclusion numérique
-              </span>
-            </a>
-          </div>
-        </div>
-      </app-offcanvas>
     </aside>
   </div>
 </div>

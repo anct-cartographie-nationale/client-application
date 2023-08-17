@@ -17,6 +17,8 @@ export class OffcanvasComponent implements OnChanges {
 
   @Input() public useCloseButton: boolean = true;
 
+  @Input() public className: string = '';
+
   @Input() public heading!: string;
 
   public id: string = '';

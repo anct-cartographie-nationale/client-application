@@ -4,7 +4,7 @@
     <article
       *ngFor="let region of regions"
       [class.list-group-item-hover]="hoverId === region.code"
-      class="list-group-item d-flex">
+      class="list-group-item d-flex p-sm-2 p-0">
       <a
         class="list-group-item-action text-decoration-none flex-grow-1 p-3"
         [routerLink]="['regions', region.nom]"

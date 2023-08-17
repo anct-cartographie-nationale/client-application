@@ -1,6 +1,6 @@
 <div class="vh-100 d-flex flex-column flex-grow-1">
-  <header class="navbar navbar-expand-lg bg-white d-print-none border-bottom z-index-over-all">
-    <div class="container-fluid mx-3">
+  <header class="navbar navbar-expand-lg bg-white d-print-none border-bottom z-index-over-base">
+    <div class="container-fluid mx-sm-3 mx-0">
       <a [routerLink]="['/']" class="navbar-brand">
         <img
           *ngIf="brandConfiguration.logoAvecTexte; else brandLogo"
@@ -16,61 +16,52 @@
         </ng-template>
         <ng-template #brandName>Cartographie {{ brandConfiguration.name }}</ng-template>
       </a>
+      <app-offcanvas
+        #navbarOffcanvas
+        heading="Menu principal"
+        [useHeader]="false"
+        className="w-100 mt-lg-0 mt-navbar z-index-over-all">
+        <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              [routerLink]="['/', 'orientation']"
+              queryParamsHandling="preserve"
+              class="nav-link me-4 pb-0 px-0"
+              ariaCurrentWhenActive="page"
+              routerLinkActive="active"
+              (click)="navbarOffcanvas.close()">
+              Orienter un bénéficiaire
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              [routerLink]="['/', 'cartographie']"
+              queryParamsHandling="preserve"
+              class="nav-link pb-0 px-0"
+              ariaCurrentWhenActive="page"
+              routerLinkActive="active"
+              (click)="navbarOffcanvas.close()">
+              {{ (navbarOffcanvas.expanded$ | async) ? 'Afficher les lieux' : 'Afficher la carte' }}
+            </a>
+          </li>
+        </ul>
+      </app-offcanvas>
       <button
-        class="navbar-toggler"
-        [class.collapsed]="(expanded$ | async) === false"
+        class="navbar-toggler btn border-0 py-2 px-2"
         type="button"
-        aria-controls="navbar"
-        [attr.aria-expanded]="expanded$ | async"
-        aria-label="Toggle navigation"
-        (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
+        [ngClass]="(navbarOffcanvas.expanded$ | async) ? 'btn-primary' : 'btn-link-light'"
+        [class.collapsed]="(navbarOffcanvas.expanded$ | async) === false"
+        [attr.aria-expanded]="navbarOffcanvas.expanded$ | async"
+        [attr.aria-controls]="navbarOffcanvas.id"
+        [class.active]="navbarOffcanvas.expanded$ | async"
+        aria-label="Afficher le menu de navigation"
+        (click)="navbarOffcanvas.toggle()">
+        <i [ngClass]="(navbarOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-menu-line'" aria-hidden="true"></i>
       </button>
-      <nav
-        class="offcanvas offcanvas-end"
-        [class.showing]="showing$ | async"
-        [class.show]="((expanded$ | async) || (hiding$ | async)) && (showing$ | async) === false"
-        [class.hiding]="hiding$ | async"
-        tabindex="-1"
-        id="offcanvasNavbar"
-        aria-labelledby="offcanvasNavbarLabel"
-        [attr.aria-modal]="(expanded$ | async) ? 'true' : null"
-        [attr.role]="(expanded$ | async) ? 'dialog' : null">
-        <div class="offcanvas-header">
-          <h5 class="visually-hidden" id="offcanvasNavbarLabel">Menu principal</h5>
-          <button type="button" class="ms-auto btn-close" aria-label="Fermer" (click)="toggle()"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a
-                [routerLink]="['/', 'orientation']"
-                queryParamsHandling="preserve"
-                class="nav-link me-4 pb-0 px-0"
-                ariaCurrentWhenActive="page"
-                routerLinkActive="active"
-                (click)="close()">
-                Orienter un bénéficiaire
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                [routerLink]="['/', 'cartographie']"
-                queryParamsHandling="preserve"
-                class="nav-link pb-0 px-0"
-                ariaCurrentWhenActive="page"
-                routerLinkActive="active"
-                (click)="close()">
-                {{ (expanded$ | async) ? 'Afficher les lieux' : 'Afficher la carte' }}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
     </div>
   </header>
   <div class="d-flex flex-row flex-grow-1 overflow-hidden h-100">
-    <div class="col overflow-auto" #container tabindex="-1">
+    <div class="col overflow-auto" tabindex="-1">
       <ng-content></ng-content>
       <ng-content select="[slot=footer]"></ng-content>
     </div>
