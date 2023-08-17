@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, combineLatestWith, delay, Observable, of, startWith, Subject } from 'rxjs';
+import { combineLatest, combineLatestWith, Observable, of, startWith, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LabelNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
@@ -135,18 +135,16 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     const departement: DepartementPresentation | undefined = departementFromNom(
       this.route.snapshot.paramMap.get('nomDepartement') ?? ''
     );
-    if (departement != null) {
-      this.markersPresenter.center(departement.localisation, departement.zoom);
-    } else if (this.markersPresenter.getZoom() < DEPARTEMENT_ZOOM_LEVEL) {
-      this.markersPresenter.reset();
-    }
+
+    if (departement == null) return;
+    this.markersPresenter.center(departement.localisation, departement.zoom);
   }
 
-  public printPage() {
+  public printPage(): void {
     window.print();
   }
 
-  public hover(highlightedId?: string) {
+  public hover(highlightedId?: string): void {
     this.markersPresenter.highlight(highlightedId ?? '');
   }
 
@@ -177,11 +175,11 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     return new HttpParams({ fromObject }).toString();
   }
 
-  public onShowHub(region: RegionPresentation) {
+  public onShowHub(region: RegionPresentation): void {
     this._hubToDisplay$.next(toHub(region));
   }
 
-  public onShowLabel(label: LabelNational) {
+  public onShowLabel(label: LabelNational): void {
     const labelPresentation: LabelPresentation | undefined = labelToDisplayMap.get(label);
     labelPresentation && this._labelToDisplay$.next(labelPresentation);
   }

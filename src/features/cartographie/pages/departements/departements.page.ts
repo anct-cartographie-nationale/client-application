@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -42,6 +42,11 @@ export class DepartementsPage implements OnInit {
     if (region == null) return;
     this.setTitle([region.nom, 'Départements']);
     this.markersPresenter.center(region.localisation, region.zoom);
+  }
+
+  @HostListener('window:popstate')
+  public onPopstate(): void {
+    ['/cartographie', '/cartographie/regions'].includes(location.pathname) && this.markersPresenter.reset();
   }
 
   public hover(highlightedId?: string) {
