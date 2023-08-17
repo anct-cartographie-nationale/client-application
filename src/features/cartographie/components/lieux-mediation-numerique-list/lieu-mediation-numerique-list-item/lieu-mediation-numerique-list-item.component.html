@@ -1,82 +1,86 @@
-<a
-  class="text-decoration-none link-dark"
-  [routerLink]="[lieuMediationNumerique.id, 'details']"
-  [relativeTo]="route.parent"
-  queryParamsHandling="preserve"
-  (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
-  (mouseout)="disableHover.emit()">
-  <div class="row d-print-none">
-    <div class="col">
-      <h2 class="h5 mb-0 text-first-letter-uppercase fw-bold">
-        {{ lieuMediationNumerique.nom }}
-      </h2>
-      <div class="text-muted">{{ lieuMediationNumerique.adresse }}</div>
-      <div class="mt-1" *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</div>
-      <div *ngIf="lieuMediationNumerique.status" class="text-muted">
-        <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
-          <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
-          {{ lieuMediationNumerique.status.label }}
-        </span>
-        ·
-        <small>{{ lieuMediationNumerique.status.limite }}</small>
+<div class="position-relative d-print-none">
+  <a
+    class="text-decoration-none link-dark"
+    [routerLink]="[lieuMediationNumerique.id, 'details']"
+    [relativeTo]="route.parent"
+    queryParamsHandling="preserve"
+    (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
+    (mouseout)="disableHover.emit()">
+    <div class="row d-print-none">
+      <div class="col">
+        <h2 class="h5 mb-0 text-first-letter-uppercase fw-bold">
+          {{ lieuMediationNumerique.nom }}
+        </h2>
+        <div class="text-muted">{{ lieuMediationNumerique.adresse }}</div>
+        <div class="mt-1" *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</div>
+        <div *ngIf="lieuMediationNumerique.status" class="text-muted">
+          <span [class.text-success]="lieuMediationNumerique.status.label === 'Ouvert'">
+            <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
+            {{ lieuMediationNumerique.status.label }}
+          </span>
+          ·
+          <small>{{ lieuMediationNumerique.status.limite }}</small>
+        </div>
+        <div class="text-muted" *ngIf="lieuMediationNumerique.prise_rdv">
+          <i class="ri-calendar-check-line me-1" aria-hidden="true"></i>
+          Prise de Rendez-vous disponible
+        </div>
+      </div>
+      <div style="width: 180px" *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone"></div>
+    </div>
+    <div class="d-flex flex-row d-print-none">
+      <div
+        class="mt-3 d-flex flex-column text-end ms-auto"
+        style="width: 160px"
+        *ngIf="lieuMediationNumerique.conditions_acces || lieuMediationNumerique.date_maj">
+        <div
+          [ngClass]="lieuMediationNumerique.conditions_acces.isFree ? 'text-primary' : 'text-muted'"
+          *ngIf="lieuMediationNumerique.conditions_acces; else emptyConditionAcces">
+          {{ lieuMediationNumerique.conditions_acces.label }}
+        </div>
+        <ng-template #emptyConditionAcces>
+          <div *ngIf="(lieuMediationNumerique.labels_nationaux ?? []).length > 0" aria-hidden="true">&nbsp;</div>
+        </ng-template>
+        <small
+          *ngIf="lieuMediationNumerique.date_maj && dateIsValide(lieuMediationNumerique.date_maj)"
+          class="text-muted fst-italic">
+          Mise à jour le {{ lieuMediationNumerique.date_maj | date : 'dd/MM/y' }}
+        </small>
       </div>
     </div>
-    <div class="col-auto text-end" *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone">
-      <a
-        aria-hidden="true"
-        tabindex="-1"
-        *ngIf="lieuMediationNumerique.courriel as courriel"
-        href="mailto:{{ courriel }}"
-        class="btn btn-sm btn-secondary d-block mb-2"
-        (click)="$event.stopPropagation()">
-        <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
-        Contacter par mail
-      </a>
-      <a
-        aria-hidden="true"
-        tabindex="-1"
-        *ngIf="lieuMediationNumerique.telephone as telephone"
-        href="tel://{{ telephone }}"
-        class="text-decoration-none link-dark d-block mb-2"
-        (click)="$event.stopPropagation()">
-        <span aria-hidden="true">{{ telephone | phone }}</span>
-        <i class="ms-2 ri-phone-line" aria-hidden="true"></i>
-      </a>
-      <div class="d-flex" *ngIf="lieuMediationNumerique.prise_rdv">
-        <p class="text-muted">Prise de Rendez-vous disponible</p>
-        <i class="ri-calendar-check-line ms-1" aria-hidden="true"></i>
-      </div>
-    </div>
+  </a>
+  <div
+    class="text-end position-absolute top-0 end-0"
+    style="width: 160px"
+    *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone">
+    <a
+      *ngIf="lieuMediationNumerique.courriel as courriel"
+      href="mailto:{{ courriel }}"
+      class="btn btn-sm btn-secondary d-block mb-2"
+      (click)="$event.stopPropagation()">
+      <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
+      Contacter par mail
+    </a>
+    <a
+      *ngIf="lieuMediationNumerique.telephone as telephone"
+      href="tel://{{ telephone }}"
+      class="text-decoration-none link-dark d-block mb-2"
+      (click)="$event.stopPropagation()">
+      <span aria-hidden="true">{{ telephone | phone }}</span>
+      <span class="visually-hidden">Contacter par téléphone</span>
+      <i class="ms-2 ri-phone-line" aria-hidden="true"></i>
+    </a>
   </div>
-  <div class="d-flex flex-row d-print-none">
-    <div class="flex-grow-1 mt-auto">
-      <ng-container *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
-        <button
-          tabindex="-1"
-          aria-hidden="true"
-          *ngFor="let label of labelsNationaux"
-          (click)="showLabel.emit(label); $event.stopPropagation(); $event.preventDefault()"
-          class="btn btn-link p-0 me-3">
+  <div class="position-absolute row g-2 start-0 bottom-0">
+    <ng-container *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
+      <div class="col" *ngFor="let label of labelsNationaux">
+        <button (click)="showLabel.emit(label); $event.stopPropagation(); $event.preventDefault()" class="btn btn-link p-0">
           <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + label" />
         </button>
-      </ng-container>
-    </div>
-    <div
-      class="mt-4 d-flex flex-column text-end"
-      *ngIf="lieuMediationNumerique.conditions_acces || lieuMediationNumerique.date_maj">
-      <div
-        [ngClass]="lieuMediationNumerique.conditions_acces.isFree ? 'text-primary' : 'text-muted'"
-        *ngIf="lieuMediationNumerique.conditions_acces">
-        {{ lieuMediationNumerique.conditions_acces.label }}
       </div>
-      <small
-        *ngIf="lieuMediationNumerique.date_maj && dateIsValide(lieuMediationNumerique.date_maj)"
-        class="text-muted fst-italic">
-        Mise à jour le {{ lieuMediationNumerique.date_maj | date : 'dd/MM/y' }}
-      </small>
-    </div>
+    </ng-container>
   </div>
-</a>
+</div>
 <div class="d-none d-print-block small">
   <div class="fw-bold">{{ lieuMediationNumerique.nom }}</div>
   <div>{{ lieuMediationNumerique.adresse }}</div>
