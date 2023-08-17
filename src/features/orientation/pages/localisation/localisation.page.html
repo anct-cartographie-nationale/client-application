@@ -1,17 +1,17 @@
 <div class="h-100 d-flex pt-5">
   <div class="w-100 my-auto">
-    <h1 class="h2 text-center fw-bold mt-5">
+    <h1 class="h2 text-center fw-bold mt-sm-5 mt-3">
       <span class="text-primary">Où</span>
       résidez-vous &nbsp;?
     </h1>
-    <p class="text-center fw-bold mb-5 text-muted">
+    <p class="text-center fw-bold mb-sm-5 mb-4 text-muted">
       Renseignez votre adresse puis définissez la distance maximale jusqu'à laquelle vous pouvez vous déplacer
     </p>
     <form class="bg-light py-5" [formGroup]="orientationLayout.filterForm">
       <div class="row gx-0 justify-content-center">
-        <div class="col-9">
-          <div class="row gx-0">
-            <div class="col-md col-12 me-3">
+        <div class="col-md-9 col-11">
+          <div class="row g-4">
+            <div class="col-sm">
               <app-address-field
                 [displayReset]="true"
                 [addressSuggestions]="(addressesFound$ | async) ?? []"
@@ -21,7 +21,7 @@
                 (resetAddress)="onResetAddress()"
                 (searchAddress)="onSearchAddress($event)"></app-address-field>
             </div>
-            <button class="btn btn-secondary mt-md-0 mt-3 text-nowrap col-auto mx-auto" (click)="onGeoLocate()">
+            <button class="btn btn-secondary text-nowrap col-auto mx-auto" (click)="onGeoLocate()">
               <div *ngIf="loadingState$ | async">
                 <span class="spinner-border spinner-border-sm text-primary me-1" role="status" aria-hidden="true"></span>
                 <span class="text-primary">Chargement...</span>
@@ -37,7 +37,17 @@
       <div
         *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value"
         class="row justify-content-center">
-        <div class="col-9 my-5">
+        <div class="col-9 mt-5 position-relative">
+          <span
+            style="left: 24px; top: 16px"
+            [ngClass]="orientationLayout.filterForm.get('distance')?.value / 1000 === 5 ? 'bg-primary text-white' : 'bg-white'"
+            class="pe-none position-absolute translate-middle rounded-circle text-center square-range-thumb">
+            <i>
+              <span class="visually-hidden">Distance minimale :</span>
+              5
+              <span class="visually-hidden">km</span>
+            </i>
+          </span>
           <input
             type="range"
             id="distance-range"
@@ -47,6 +57,16 @@
             max="100000"
             step="5000"
             formControlName="distance" />
+          <span
+            style="top: 16px; right: 0"
+            [ngClass]="orientationLayout.filterForm.get('distance')?.value / 1000 === 100 ? 'bg-primary text-white' : 'bg-white'"
+            class="pe-none position-absolute translate-middle rounded-circle text-center square-range-thumb">
+            <i>
+              <span class="visually-hidden">Distance maximale :</span>
+              100
+              <span class="visually-hidden">km</span>
+            </i>
+          </span>
           <div class="d-flex mt-4">
             <div class="mx-auto d-flex align-items-center">
               <label for="distance-range" class="bg-white py-1 px-5 border-bottom border-2 rounded-top">
@@ -64,7 +84,7 @@
         </div>
       </div>
     </form>
-    <div class="text-center mt-5">
+    <div class="text-center mt-4">
       <a class="btn btn-primary mx-3" [routerLink]="['..', 'accessibilite']" queryParamsHandling="preserve">
         Valider
         <i class="ri-arrow-right-s-line" aria-hidden="true"></i>

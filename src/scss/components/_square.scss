@@ -21,6 +21,17 @@
   }
 }
 
+.square-range-thumb {
+  width: $square-range-thumb;
+  height: $square-range-thumb;
+
+  * {
+    font-size: $small-font-size * 0.8;
+    display: inline-block;
+    transform: translateY(-2px);
+  }
+}
+
 .square-lg {
   width: $square-lg;
   height: $square-lg;

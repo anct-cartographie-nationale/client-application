@@ -11,9 +11,9 @@
             aria-label="étapes de l'orientation"
             *ngIf="(filterPresentation$ | async) as filter"
             style="height: 0"
-            class="sticky-lg-top">
-            <app-nav class="d-lg-block d-none pt-3 bg-white" [filter]="filter"></app-nav>
-            <app-nav class="d-lg-none pt-3 d-block" [filter]="filter" size="sm"></app-nav>
+            class="sticky-lg-top nav-underline">
+            <app-nav class="d-sm-block d-none pt-3 bg-white" [filter]="filter"></app-nav>
+            <app-nav class="d-sm-none pt-3 d-block" [filter]="filter" size="sm"></app-nav>
           </nav>
         </ng-container>
         <div class="px-3 flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
@@ -22,7 +22,7 @@
         <div
           class="d-flex justify-content-center shadow-white-top z-index-over-base bg-white sticky-bottom"
           [class.invisible]="hideArrow">
-          <i class="ri-arrow-right-s-line ri-xl pt-2 pb-3 text-primary" style="transform: rotate(90deg)" aria-hidden="true"></i>
+          <i class="ri-arrow-down-s-line ri-xl py-2 text-primary" aria-hidden="true"></i>
         </div>
       </main>
       <aside class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block" aria-label="état de l'orientation">
@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="d-lg-block mt-auto">
-            <h2 class="h5 text-center text-secondary fw-bold mt-2">
+            <h2 class="h5 text-center text-secondary fw-bold my-3">
               Nombre de lieux
               <br />
               {{ router.url === '/orientation' ? 'référencés sur la carte' : 'correspondant à ma recherche'}}
@@ -51,7 +51,7 @@
               class="d-lg-block d-none" />
             <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
               <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
-                <div class="d-lg-none mt-4">
+                <div class="d-lg-none my-3">
                   <b>{{ lieuxMediationNumerique.length}} / {{ lieuxMediationNumeriqueTotal.length }}</b>
                   <div class="opacity-75">Lieux trouvées sur le territoire</div>
                 </div>
