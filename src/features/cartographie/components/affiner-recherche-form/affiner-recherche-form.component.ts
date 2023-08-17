@@ -8,7 +8,7 @@ import {
   OpeningHours,
   toFilterFormPresentationFromQuery
 } from '../../../core/presenters';
-import { labelsAutresFrom, labelNationauxFrom } from './affiner-recherche-form.presenter';
+import { labelsAutresFrom, labelNationauxFrom, strategiesTerritorialesFrom } from './affiner-recherche-form.presenter';
 
 type AffinerRechercheFields = {
   prise_rdv: FormControl<boolean>;
@@ -54,13 +54,19 @@ const AFFINER_RECHERCHE_FORM = (
 export class AffinerRechercheFormComponent {
   @Input() public lieuxMediationNumeriques: LieuMediationNumeriquePresentation[] = [];
 
+  public labelMap: Map<string, string> = new Map<string, string>([
+    ['CNFS', 'Conseillers Numériques'],
+    ['QPV', 'QPV (quartier prioritaire de la ville)'],
+    ['ZRR', 'ZRR (zones de revitalisation rurale)']
+  ]);
+
   public constructor(public route: ActivatedRoute, public readonly router: Router) {}
 
   public affinerRechercheForm: FormGroup<AffinerRechercheFields> = AFFINER_RECHERCHE_FORM(
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
 
-  public labelsAutresFrom = labelsAutresFrom;
+  public strategiesTerritorialesFrom = strategiesTerritorialesFrom;
 
   public labelNationauxFrom = labelNationauxFrom;
 
