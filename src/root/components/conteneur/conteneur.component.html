@@ -20,7 +20,7 @@
         #navbarOffcanvas
         heading="Menu principal"
         [useHeader]="false"
-        className="w-100 mt-lg-0 mt-navbar z-index-over-all">
+        className="w-100 mt-lg-0 mt-navbar z-index-over">
         <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a
@@ -55,7 +55,7 @@
         [attr.aria-controls]="navbarOffcanvas.id"
         [class.active]="navbarOffcanvas.expanded$ | async"
         aria-label="Afficher le menu de navigation"
-        (click)="navbarOffcanvas.toggle()">
+        (click)="navbarOffcanvas.toggle($event)">
         <i [ngClass]="(navbarOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-menu-line'" aria-hidden="true"></i>
       </button>
     </div>

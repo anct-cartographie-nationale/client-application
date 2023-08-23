@@ -45,7 +45,7 @@
         class="navbar-btn ms-auto flex-sm-grow-0 flex-grow-1 text-start"
         [attr.aria-controls]="affinerRechercheOffcanvas.id"
         [class.active]="affinerRechercheOffcanvas.expanded$ | async"
-        (click)="affinerRechercheOffcanvas.toggle(); aideOffcanvas.close()">
+        (click)="affinerRechercheOffcanvas.toggle($event); aideOffcanvas.close()">
         <i
           class="me-1"
           [ngClass]="(affinerRechercheOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-sound-module-line'"
@@ -56,7 +56,7 @@
         class="navbar-btn pb-1 pt-0"
         [attr.aria-controls]="aideOffcanvas.id"
         [class.active]="aideOffcanvas.expanded$ | async"
-        (click)="aideOffcanvas.toggle(); affinerRechercheOffcanvas.close()">
+        (click)="aideOffcanvas.toggle($event); affinerRechercheOffcanvas.close()">
         <i
           class="ri-2x"
           [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-circle-line text-primary' : 'ri-question-line'"></i>
@@ -76,7 +76,7 @@
       [useContainer]="false"
       [useHeader]="false"
       class="position-absolute h-100 end-0"
-      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-elevated">
+      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-over">
       <div class="d-flex flex-column h-100 border-top">
         <div class="flex-grow-1">
           <app-user-location
@@ -90,7 +90,7 @@
         </div>
         <div class="mt-auto bg-white p-3 text-center">
           <app-modifier-orientation></app-modifier-orientation>
-          <button class="btn btn-primary" (click)="affinerRechercheOffcanvas.toggle()">Terminer</button>
+          <button class="btn btn-primary" (click)="affinerRechercheOffcanvas.toggle($event)">Terminer</button>
         </div>
       </div>
     </app-offcanvas>
@@ -100,7 +100,7 @@
       [useContainer]="false"
       [useHeader]="false"
       class="position-absolute h-100 end-0"
-      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-elevated">
+      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-over">
       <div class="d-flex flex-column h-100 bg-white border-top">
         <div class="list-group list-group-flush">
           <a
