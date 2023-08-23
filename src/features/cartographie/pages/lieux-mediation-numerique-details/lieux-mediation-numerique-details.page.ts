@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { MatomoTracker } from 'ngx-matomo';
 import { LabelNational, LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
+  ASSETS_TOKEN,
+  AssetsConfiguration,
   BRAND_TOKEN,
   BrandConfiguration,
   SET_TITLE_ACTION,
@@ -71,6 +73,7 @@ export class LieuxMediationNumeriqueDetailsPage {
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
     @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration,
+    @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
     private readonly _lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter,
     private readonly _markersPresenter: MarkersPresenter,
     private readonly _route: ActivatedRoute,

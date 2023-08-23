@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MapService, NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
-import { CollapseModule, OffcanvasModule } from '@features/core/components';
+import { CollapseModule, OffcanvasModule, ModalModule } from '@features/core/components';
 import { CheckboxArrayModule } from '../../../core/directives';
 import { PhonePipeModule, DistancePipeModule } from '../../../core/pipes';
 import { AdresseModule, UserLocationModule } from '../../../adresse';
@@ -28,7 +28,8 @@ import { components } from '../../components';
     UserLocationModule,
     CollapseModule,
     OffcanvasModule,
-    CheckboxArrayModule
+    CheckboxArrayModule,
+    ModalModule
   ]
 })
 export class CartographieCommonModule {}

@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { LabelNational, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
+import { ModalComponent } from '../../../../core/components';
 import { FilterPresentation } from '../../../../core/presenters';
 import { OrientationSheetForm, PrescripteurOrientationSheetForm, UsagerOrientationSheetForm } from '../../../models';
 
@@ -12,13 +12,7 @@ import { OrientationSheetForm, PrescripteurOrientationSheetForm, UsagerOrientati
   templateUrl: './orientation-sheet-modal.component.html'
 })
 export class OrientationSheetModalComponent {
-  private _isShown: boolean = false;
-
-  private _activateModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._isShown);
-  public activateModal$: Observable<boolean> = this._activateModal$.asObservable();
-
-  private _animate$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._isShown);
-  public animate$: Observable<boolean> = this._animate$;
+  @ViewChild(ModalComponent) public control!: ModalComponent;
 
   public printOrientationSheetStep: 'usager' | 'prescripteur' | 'résumé' = 'usager';
 
@@ -51,22 +45,7 @@ export class OrientationSheetModalComponent {
 
   public constructor(@Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration) {}
 
-  private show(): void {
-    this._activateModal$.next(true);
-    setTimeout(() => this._animate$.next(true), 100);
-  }
-
-  private hide(): void {
-    this._animate$.next(false);
-    setTimeout(() => this._activateModal$.next(false), 300);
-  }
-
-  public toggle(): void {
-    this._isShown ? this.hide() : this.show();
-    this._isShown = !this._isShown;
-  }
-
-  public onSubmitUsagerOrientationSheetForm() {
+  public onSubmitUsagerOrientationSheetForm(): void {
     if (this.usagerOrientationSheetForm.invalid) {
       this.usagerOrientationSheetForm.markAllAsTouched();
       return;
@@ -77,6 +56,7 @@ export class OrientationSheetModalComponent {
   }
 
   public onSubmitPrescripteurOrientationSheetForm(): void {
+    console.log('onSubmitPrescripteurOrientationSheetForm');
     if (this.prescripteurOrientationSheetForm.invalid) {
       this.prescripteurOrientationSheetForm.markAllAsTouched();
       return;
@@ -86,9 +66,9 @@ export class OrientationSheetModalComponent {
     this.prescripteur = this.prescripteurOrientationSheetForm.getRawValue();
   }
 
-  public close(): void {
-    this.toggle();
+  public onClose(): void {
     this.usagerOrientationSheetForm.reset();
+    this.prescripteurOrientationSheetForm.reset();
     this.printOrientationSheetStep = 'usager';
   }
 

@@ -1,10 +1,13 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, combineLatestWith, Observable, of, startWith, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LabelNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
+  ASSETS_TOKEN,
+  AssetsConfiguration,
   FEATURES_TOKEN,
   FeaturesConfiguration,
   SET_TITLE_ACTION,
@@ -33,11 +36,9 @@ import {
   toLieuxMediationNumeriqueListItemsPresentation,
   HubPresentation,
   LabelPresentation,
-  labelToDisplayMap,
-  DEPARTEMENT_ZOOM_LEVEL
+  labelToDisplayMap
 } from '../../presenters';
 import { findLieuToFocus, toHub, toLieux, toLieuxFilteredByDepartement } from './lieux-mediation-numerique-list.presentation';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -125,6 +126,7 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     private readonly _zoomLevel: ZoomLevelConfiguration,
     @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction,
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
+    @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
     public readonly route: ActivatedRoute,
     private readonly _router: Router,
     private readonly _cartographieLayout: CartographieLayout,

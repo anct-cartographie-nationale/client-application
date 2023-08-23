@@ -16,7 +16,7 @@
         <h2 class="h5 fw-bold mb-0">{{ region.nom }}</h2>
         <div class="text-muted">{{ region.lieuxCount }} résultats</div>
       </a>
-      <button *ngIf="region.hub" class="btn btn-link" (click)="showHub.emit(region)">
+      <button *ngIf="region.hub" class="btn btn-link" (click)="showHub.emit(region); showHubInvokingContext.emit($event)">
         <img
           [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + region.hub.nom + '.png'"
           [alt]="region.hub.nom"

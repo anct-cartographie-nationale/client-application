@@ -16,7 +16,7 @@
           <button
             type="button"
             class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-            (click)="selectedOrientationInformation = orientationInformations['participation']; informationOrientationModal.toggle()">
+            (click)="selectedOrientationInformation = orientationInformations['participation']; informationOrientationModal.control.toggle($event)">
             plus d'infos
           </button>
         </div>
@@ -46,7 +46,7 @@
           <button
             type="button"
             class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-            (click)="selectedOrientationInformation = orientationInformations['accueil-specifique']; informationOrientationModal.toggle()">
+            (click)="selectedOrientationInformation = orientationInformations['accueil-specifique']; informationOrientationModal.control.toggle($event)">
             plus d'infos
           </button>
         </div>
@@ -79,5 +79,4 @@
 </div>
 <app-information-orientation-modal
   #informationOrientationModal
-  [orientationInformation]="selectedOrientationInformation"
-  (hideChange)="selectedOrientationInformationType = null"></app-information-orientation-modal>
+  [orientationInformation]="selectedOrientationInformation"></app-information-orientation-modal>

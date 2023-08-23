@@ -36,7 +36,7 @@
       class="marker-conseiller"
       (mouseenter)="highlight.emit(conseiller)"
       (mouseleave)="highlight.emit()"
-      (click)="showDetails.emit(conseiller)">
+      (click)="showDetails.emit(conseiller); showDetailsInvokingContext.emit($event)">
       <div class="marker-conseiller-bg rounded-circle bg-white"></div>
       <div
         class="marker-conseiller-fg rounded-circle"

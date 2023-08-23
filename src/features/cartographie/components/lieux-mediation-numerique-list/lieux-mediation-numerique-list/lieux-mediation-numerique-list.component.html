@@ -10,6 +10,7 @@
       <app-mediation-numerique-list-item
         [lieuMediationNumerique]="lieuMediationNumerique"
         (showLabel)="showLabel.emit($event)"
+        (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"
         (enableHover)="enableHover.emit($event)"
         (disableHover)="disableHover.emit()"></app-mediation-numerique-list-item>
     </article>

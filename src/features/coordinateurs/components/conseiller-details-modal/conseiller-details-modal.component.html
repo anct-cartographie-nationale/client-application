@@ -1,133 +1,104 @@
-<ng-container *ngIf="conseiller">
-  <div
-    *ngIf="activateModal$ | async"
-    [class.show]="animate$ | async"
-    class="modal d-block fade"
-    tabindex="-1"
-    aria-labelledby="hubModal"
-    spellcheck="false"
-    aria-modal="true"
-    role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content overflow-hidden">
-        <div class="modal-header text-primary">
-          <h2 class="modal-title d-flex align-items-center" id="hubModal">
-            <div>
-              <i
-                class="ri-xl ri-account-circle-fill me-3"
-                [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"
-                aria-hidden="true"></i>
-            </div>
-            <div class="fw-bold">
-              <div class="fs-4">{{ conseiller.nom }}</div>
-              <div class="fs-6 text-body">
-                <ng-container *ngIf="(conseiller.coordinateurs?.length ?? 0) > 0; else nonCoordonne">
-                  Coordonné par
-                  <ng-container *ngFor="let coordinateur of conseiller.coordinateurs; first as isFirst; last as isLast">
-                    <ng-container *ngIf="isFirst && route">
-                      <a [routerLink]="[coordinateur.id, 'details']" [relativeTo]="route" (click)="toggle()">
-                        {{ coordinateur.nom }}
-                      </a>
-                    </ng-container>
-                    <ng-container *ngIf="!isFirst && !isLast && route">
-                      ,
-                      <a [routerLink]="[coordinateur.id, 'details']" [relativeTo]="route" (click)="toggle()">
-                        {{ coordinateur.nom }}
-                      </a>
-                    </ng-container>
-                    <ng-container *ngIf="!isFirst && isLast && route">
-                      &#32;et
-                      <a [routerLink]="[coordinateur.id, 'details']" [relativeTo]="route" (click)="toggle()">
-                        {{ coordinateur.nom }}
-                      </a>
-                    </ng-container>
-                  </ng-container>
-                  &nbsp;
-                  <i *ngIf="distance" class="fw-normal">({{ distance | distance }})</i>
-                </ng-container>
-                <ng-template #nonCoordonne>
-                  Non coordonné
-                  <i *ngIf="distance" class="fw-normal">
-                    (à {{ distance | distance }} de
-                    <a [routerLink]="['../../', coordinateur?.id, 'details']">{{ coordinateur?.nom }}</a>
-                    )
-                  </i>
-                </ng-template>
-              </div>
-            </div>
-          </h2>
-          <button
-            type="button"
-            class="btn-close btn-close opacity-100 small mb-0"
-            aria-label="Fermer"
-            (click)="close()"></button>
-        </div>
-        <div class="bg-white">
-          <div class="modal-body">
-            <div class="row">
-              <div [ngClass]="conseiller.lieuActivite?.length ? 'col-auto' : 'col-12'" class="d-flex flex-column">
-                <div class="flex-grow-1 mb-5">
-                  <div class="bg-light p-3">
-                    <div class="text-muted-dark mb-1 text-uppercase">Lieu d'activité principal</div>
-                    <div class="d-flex">
-                      <img class="me-2" [src]="assetsConfiguration.path + '/img/coordinateurs/CnFS.svg'" alt="" />
-                      <div class="small">
-                        <b>{{ conseiller.lieuActivitePrincipal.nom }}</b>
-                        <br />
-                        <span class="text-muted">{{ conseiller.lieuActivitePrincipal.adresse }}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="mt-auto">
-                  <div class="text-muted mb-1">STRUCTURE PORTEUSE</div>
-                  <div class="small">
-                    <b>{{ conseiller.structurePorteuse.nom }}</b>
-                    <br />
-                    {{ conseiller.structurePorteuse.adresse }}
-                  </div>
-                </div>
-              </div>
-              <div class="col" *ngIf="conseiller.lieuActivite?.length as lieuxCount" [ngPlural]="lieuxCount">
-                <div class="text-muted mt-3 mb-1">
-                  ACTIF DANS
-                  <ng-template ngPluralCase="=1">1 AUTRE LIEU</ng-template>
-                  <ng-template ngPluralCase="other">{{ lieuxCount }} AUTRES LIEUX</ng-template>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item small px-0 d-flex" *ngFor="let lieuActivite of conseiller.lieuActivite">
-                    <span class="flex-grow-1">
-                      <b>{{ lieuActivite.nom }}</b>
-                      ({{ lieuActivite.codePostal }} - {{ lieuActivite.commune }})
-                    </span>
-                    <a
-                      [href]="'https://www.conseiller-numerique.gouv.fr/' + lieuActivite.id + '/details'"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="fw-bold ms-auto link-muted-dark">
-                      Voir la fiche
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer justify-content-center bg-light">
-            <button type="button" class="btn btn-secondary me-3" (click)="close()">
-              <i class="ri-arrow-go-back-line"></i>
-              Retour à la carte
-            </button>
-            <a
-              *ngIf="conseiller.telephone"
-              href="tel://{{ conseiller.telephone }}"
-              class="text-decoration-none link-muted-dark">
-              <i class="me-1 ri-phone-line"></i>
-              {{ conseiller.telephone | phone }}
-            </a>
-          </div>
+<app-modal #modal heading="conseiller modal" closeLabel="Retour à la carte" [customHeading]="modalHeader" bgTitle="light">
+  <ng-template #modalHeader>
+    <div class="text-primary d-flex align-items-center bg-light" *ngIf="conseiller">
+      <div>
+        <i
+          class="ri-xl ri-account-circle-fill me-3"
+          [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"
+          aria-hidden="true"></i>
+      </div>
+      <div class="fw-bold">
+        <div class="fs-4">{{ conseiller.nom }}</div>
+        <div class="fs-6 text-body">
+          <ng-container *ngIf="(conseiller.coordinateurs?.length ?? 0) > 0; else nonCoordonne">
+            Coordonné par
+            <ng-container *ngFor="let coordinateur of conseiller.coordinateurs; first as isFirst; last as isLast">
+              <ng-container *ngIf="isFirst && route">
+                <a [routerLink]="[coordinateur.id, 'details']" [relativeTo]="route" (click)="modal.toggle($event)">
+                  {{ coordinateur.nom }}
+                </a>
+              </ng-container>
+              <ng-container *ngIf="!isFirst && !isLast && route">
+                ,
+                <a [routerLink]="[coordinateur.id, 'details']" [relativeTo]="route" (click)="modal.toggle($event)">
+                  {{ coordinateur.nom }}
+                </a>
+              </ng-container>
+              <ng-container *ngIf="!isFirst && isLast && route">
+                &#32;et
+                <a [routerLink]="[coordinateur.id, 'details']" [relativeTo]="route" (click)="modal.toggle($event)">
+                  {{ coordinateur.nom }}
+                </a>
+              </ng-container>
+            </ng-container>
+            &nbsp;
+            <i *ngIf="distance" class="fw-normal">({{ distance | distance }})</i>
+          </ng-container>
+          <ng-template #nonCoordonne>
+            Non coordonné
+            <i *ngIf="distance" class="fw-normal">
+              (à {{ distance | distance }} de
+              <a [routerLink]="['../../', coordinateur?.id, 'details']">{{ coordinateur?.nom }}</a>
+              )
+            </i>
+          </ng-template>
         </div>
       </div>
     </div>
+  </ng-template>
+  <div *ngIf="conseiller" class="row">
+    <div [ngClass]="conseiller.lieuActivite?.length ? 'col-auto' : 'col-12'" class="d-flex flex-column">
+      <div class="flex-grow-1 mb-5" *ngIf="conseiller.lieuActivitePrincipal.nom">
+        <div class="bg-light p-3">
+          <div class="text-muted-dark mb-1 text-uppercase">Lieu d'activité principal</div>
+          <div class="d-flex">
+            <img class="me-2" [src]="assetsConfiguration.path + '/img/coordinateurs/CnFS.svg'" alt="" />
+            <div class="small">
+              <b>{{ conseiller.lieuActivitePrincipal.nom }}</b>
+              <br />
+              <span class="text-muted">{{ conseiller.lieuActivitePrincipal.adresse }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-auto">
+        <div class="text-muted mb-1">STRUCTURE PORTEUSE</div>
+        <div class="small">
+          <b>{{ conseiller.structurePorteuse.nom }}</b>
+          <br />
+          {{ conseiller.structurePorteuse.adresse }}
+        </div>
+      </div>
+    </div>
+    <div class="col" *ngIf="conseiller.lieuActivite?.length as lieuxCount" [ngPlural]="lieuxCount">
+      <div class="text-muted mt-3 mb-1">
+        ACTIF DANS
+        <ng-template ngPluralCase="=1">1 AUTRE LIEU</ng-template>
+        <ng-template ngPluralCase="other">{{ lieuxCount }} AUTRES LIEUX</ng-template>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item small px-0 d-flex" *ngFor="let lieuActivite of conseiller.lieuActivite">
+          <span class="flex-grow-1">
+            <b>{{ lieuActivite.nom }}</b>
+            ({{ lieuActivite.codePostal }} - {{ lieuActivite.commune }})
+          </span>
+          <a
+            [href]="'https://www.conseiller-numerique.gouv.fr/' + lieuActivite.id + '/details'"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="fw-bold ms-auto link-muted-dark">
+            Voir la fiche
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div *ngIf="activateModal$ | async" class="modal-backdrop fade" [class.show]="animate$ | async"></div>
-</ng-container>
+  <a
+    slot="footer"
+    *ngIf="conseiller?.telephone as telephone"
+    href="tel://{{ telephone }}"
+    class="text-decoration-none link-muted-dark">
+    <i class="me-1 ri-phone-line"></i>
+    {{ telephone | phone }}
+  </a>
+</app-modal>

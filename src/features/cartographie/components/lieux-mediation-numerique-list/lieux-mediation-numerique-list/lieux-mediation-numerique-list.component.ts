@@ -39,6 +39,7 @@ export class LieuxMediationNumeriqueListComponent {
   @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
   @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+  @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   @ViewChild('container') public container!: ElementRef;
   @ViewChildren('item') public items!: QueryList<ElementRef>;

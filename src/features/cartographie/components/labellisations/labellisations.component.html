@@ -1,6 +1,9 @@
 <h2 class="h5 text-muted text-uppercase">Labellisations</h2>
 <ng-container *ngIf="labelsNationaux">
-  <button *ngFor="let label of labelsNationaux" (click)="showLabel.emit(label)" class="btn btn-link p-0 me-3">
+  <button
+    *ngFor="let label of labelsNationaux"
+    (click)="showLabel.emit(label); showLabelInvokingContext.emit($event)"
+    class="btn btn-link p-0 me-3">
     <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + label" />
   </button>
 </ng-container>

@@ -18,7 +18,8 @@
       (selectLieu)="select($event.id, $event.latitude, $event.longitude)"
       (enableHover)="hover($event)"
       (disableHover)="hover()"
-      (showLabel)="onShowLabel($event); labelModal.toggle()"></app-lieux-mediation-numerique-list>
+      (showLabel)="onShowLabel($event)"
+      (showLabelInvokingContext)="labelModal.control.toggle($event)"></app-lieux-mediation-numerique-list>
     <app-lieux-mediation-numerique-list-print
       class="d-none d-print-block"
       [filters]="(filters$ | async) ?? undefined"
@@ -32,7 +33,8 @@
     [hoverId]="markersPresenter.highlighted$ | async"
     (enableHover)="hover($event)"
     (disableHover)="hover()"
-    (showHub)="onShowHub($event); hubModal.toggle()"
+    (showHub)="onShowHub($event)"
+    (showHubInvokingContext)="hubModal.control.toggle($event)"
     (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-regions-list>
-  <app-hub-modal [hub]="hubToDisplay$ | async" #hubModal></app-hub-modal>
+  <app-hub-modal #hubModal [hub]="hubToDisplay$ | async"></app-hub-modal>
 </ng-template>

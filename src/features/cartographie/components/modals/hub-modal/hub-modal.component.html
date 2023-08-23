@@ -1,0 +1,48 @@
+<app-modal #modal heading="Informations Hub" icon="ri-information-line" closeLabel="Retour à la carte">
+  <div *ngIf="hub" class="text-center">
+    <img class="mb-4" [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + hub.nom + '.png'" [alt]="'Logo' + hub.nom" />
+    <h3 class="h4 fw-bold">
+      HUB d'inclusion numérique
+      <br />
+      <span class="text-primary">{{ hub.region }}</span>
+    </h3>
+    <div class="mt-5 mb-4">
+      <span *ngFor="let departement of hub.departements; last as isLast" class="d-inline-block">
+        <b>{{ departement.nom }}</b>
+        <i>&ensp;({{ departement.numero }})</i>
+        <ng-container *ngIf="!isLast">&ensp;-&ensp;</ng-container>
+      </span>
+    </div>
+    <span *ngIf="hub.lieuxCount as lieuxCount" class="rounded-5 bg-light py-1 px-3" [ngPlural]="lieuxCount">
+      <i class="ri-map-pin-5-line" aria-hidden="true"></i>
+      Ce hub a référencé
+      <ng-template ngPluralCase="=1">
+        <b>1 lieu</b>
+      </ng-template>
+      <ng-template ngPluralCase="other">
+        <b>{{ lieuxCount }} lieux</b>
+      </ng-template>
+    </span>
+  </div>
+  <div class="mt-4 d-flex justify-content-center">
+    <div class="text-muted small">Qu'est ce qu'un Hub territorial ?</div>
+    <a
+      class="text-decoration-none"
+      href="https://societenumerique.gouv.fr/fr/dispositif/hubs-numerique/"
+      target="_blank"
+      rel="noopener noreferrer">
+      <i class="ri ri-external-link-line my-auto me-2 opacity-75 text-muted" aria-hidden="true"></i>
+    </a>
+  </div>
+  <a
+    slot="footer"
+    *ngIf="hub?.url as href"
+    [href]="href"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn btn-primary"
+    (click)="modal.close()">
+    Accéder au site
+    <i class="ri-external-link-line" aria-hidden="true"></i>
+  </a>
+</app-modal>

@@ -22,7 +22,12 @@
   <span class="ms-auto d-flex">
     <button
       class="btn btn-link p-0 text-decoration-none"
-      (click)="displayInformations.emit($any(serviceItem.value)); $event.stopPropagation(); $event.preventDefault()">
+      (click)="
+        displayInformations.emit($any(serviceItem.value));
+        displayInformationsInvokingContext.emit($event);
+        $event.stopPropagation();
+        $event.preventDefault()
+      ">
       <span class="visually-hidden">Info</span>
       <i class="ri-information-line fw-normal text-muted-dark ri-2x" aria-hidden="true"></i>
     </button>

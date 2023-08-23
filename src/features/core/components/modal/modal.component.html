@@ -1,0 +1,43 @@
+<div
+  #dialog
+  *ngIf="activateModal$ | async"
+  [class.show]="animate$ | async"
+  class="modal d-block fade"
+  tabindex="-1"
+  [attr.aria-labelledby]="id"
+  spellcheck="false"
+  aria-modal="true"
+  role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content overflow-hidden">
+      <div class="modal-header text-bg-dark" [ngClass]="'bg-' + bgTitle">
+        <h2 class="modal-title d-flex align-items-center" [id]="id">
+          <ng-container *ngTemplateOutlet="customHeading ?? defaultHeading"></ng-container>
+          <ng-template #defaultHeading>
+            <i class="ri-xl me-3" [ngClass]="icon" aria-hidden="true"></i>
+            <b>{{ heading }}</b>
+          </ng-template>
+        </h2>
+        <button
+          type="button"
+          class="btn-close opacity-100 small mb-0"
+          [class.btn-close-white]="bgTitle === 'primary'"
+          aria-label="Fermer"
+          (click)="close()"></button>
+      </div>
+      <div [ngClass]="'bg-' + bgBody">
+        <div class="modal-body">
+          <ng-content></ng-content>
+        </div>
+        <div class="modal-footer justify-content-center" [ngClass]="'bg-' + bgFooter">
+          <button *ngIf="closeLabel" type="button" class="btn btn-secondary me-3" (click)="close()">
+            <i class="ri-arrow-go-back-line" aria-hidden="true"></i>
+            {{ closeLabel }}
+          </button>
+          <ng-content select="[slot=footer]"></ng-content>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="activateModal$ | async" class="modal-backdrop fade" [class.show]="animate$ | async"></div>

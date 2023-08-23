@@ -51,7 +51,8 @@
             <app-conseillers-markers
               [zoom]="currentZoom"
               [conseillers]="(conseillers$ | async) ?? []"
-              (showDetails)="conseillerDetailsModal.toggle(); conseillerSelected = $event"></app-conseillers-markers>
+              (showDetails)=" conseillerSelected = $event"
+              (showDetailsInvokingContext)="conseillerDetailsModal.control.toggle($event)"></app-conseillers-markers>
             <app-coordinateurs-markers
               [coordinateurs]="(coordinateurs$ | async) ?? []"
               [selectedId]="(markersPresenter.selected$ | async) ?? ''"
@@ -65,6 +66,6 @@
   </div>
 </div>
 <app-conseiller-details-modal
+  #conseillerDetailsModal
   [conseiller]="$any(conseillerSelected)"
-  [route]="route"
-  #conseillerDetailsModal></app-conseiller-details-modal>
+  [route]="route"></app-conseiller-details-modal>

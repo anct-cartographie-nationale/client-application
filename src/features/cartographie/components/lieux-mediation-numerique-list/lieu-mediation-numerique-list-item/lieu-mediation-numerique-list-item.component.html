@@ -74,7 +74,11 @@
   <div class="position-absolute row g-2 start-0 bottom-0">
     <ng-container *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
       <div class="col" *ngFor="let label of labelsNationaux">
-        <button (click)="showLabel.emit(label); $event.stopPropagation(); $event.preventDefault()" class="btn btn-link p-0">
+        <button
+          (click)="
+            showLabel.emit(label); showLabelInvokingContext.emit($event); $event.stopPropagation(); $event.preventDefault()
+          "
+          class="btn btn-link p-0">
           <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + label" />
         </button>
       </div>

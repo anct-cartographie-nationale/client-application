@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { ModalComponent } from '../../../../core/components';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,47 +8,25 @@ import { BehaviorSubject, Observable } from 'rxjs';
   templateUrl: './send-by-email-modal.component.html'
 })
 export class SendByEmailModalComponent {
-  private _isShown: boolean = false;
+  @ViewChild(ModalComponent) control!: ModalComponent;
 
-  private _activateModal$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._isShown);
-  public activateModal$: Observable<boolean> = this._activateModal$.asObservable();
-
-  private _animate$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this._isShown);
-  public animate$: Observable<boolean> = this._animate$;
-
-  public sendByEmailForm = new FormGroup<{ email: AbstractControl }>({
+  public sendByEmailForm: FormGroup<{ email: AbstractControl }> = new FormGroup<{ email: AbstractControl }>({
     email: new FormControl<string>('', [Validators.required, Validators.email])
   });
 
   @Output() public sendEmailTo: EventEmitter<string> = new EventEmitter<string>();
 
-  private show() {
-    this._activateModal$.next(true);
-    setTimeout(() => this._animate$.next(true), 100);
-  }
-
-  private hide() {
-    this._animate$.next(false);
-    setTimeout(() => this._activateModal$.next(false), 300);
-  }
-
-  public toggle() {
-    this._isShown ? this.hide() : this.show();
-    this._isShown = !this._isShown;
-  }
-
-  public onSubmitSendByEmailForm() {
+  public onSubmitSendByEmailForm(): void {
     if (this.sendByEmailForm.invalid) {
       this.sendByEmailForm.markAllAsTouched();
       return;
     }
 
     this.sendEmailTo.emit(this.sendByEmailForm.controls.email.value);
-    this.close();
+    this.sendByEmailForm.reset();
   }
 
-  public close(): void {
-    this.toggle();
+  public onClose(): void {
     this.sendByEmailForm.reset();
   }
 }

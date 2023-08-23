@@ -5,8 +5,7 @@ import { RegionsListComponent } from './regions-list/regions-list.component';
 import {
   LieuxMediationNumeriqueListComponent,
   LieuMediationNumeriqueListItemComponent,
-  LieuxMediationNumeriqueListPrintComponent,
-  HubModalComponent
+  LieuxMediationNumeriqueListPrintComponent
 } from './lieux-mediation-numerique-list';
 import { LieuMediationNumeriqueMarkersComponent } from './markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
 import { TerritoireMarkersComponent } from './markers/territoire-markers/territoire-markers.component';
@@ -28,10 +27,10 @@ import {
   MiseAJourComponent,
   AccessibiliteComponent
 } from './lieux-mediation-numerique-details';
-import { LabelModalComponent } from './label-modal/label-modal.component';
 import { LocationBreadcrumbComponent } from './location-breadcrumb/location-breadcrumb.component';
 import { AffinerRechercheFormComponent } from './affiner-recherche-form/affiner-recherche-form.component';
 import { ModifierOrientationComponent } from './modifier-orientation/modifier-orientation.component';
+import { HubModalComponent, LabelModalComponent } from './modals';
 
 export const components = [
   AffinerRechercheFormComponent,
@@ -58,10 +57,10 @@ export const components = [
   LieuMediationNumeriqueMarkersComponent,
   TerritoireMarkersComponent,
   NoLieuxFoundComponent,
-  HubModalComponent,
-  LabelModalComponent,
   MiseAJourComponent,
   AccessibiliteComponent,
   LocationBreadcrumbComponent,
-  ModifierOrientationComponent
+  ModifierOrientationComponent,
+  LabelModalComponent,
+  HubModalComponent
 ];

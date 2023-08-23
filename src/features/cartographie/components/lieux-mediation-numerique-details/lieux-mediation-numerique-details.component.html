@@ -13,7 +13,7 @@
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
       [priseRdv]="lieuMediationNumerique.prise_rdv"
       (print)="print.emit()"
-      (sendByEmail)="sendByEmailModal.toggle()"></app-boutons-action>
+      (sendByEmail)="sendByEmailModal.control.toggle($event)"></app-boutons-action>
     <div class="border-top border-bottom d-xl-none" style="height: 275px" aria-hidden="true">
       <mgl-map
         *ngIf="lieuMediationNumerique.localisation as localisation"
@@ -86,10 +86,11 @@
       <app-labellisations
         [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
         [labelsAutres]="lieuMediationNumerique.labels_autres"
-        (showLabel)="showLabel.emit($event)"></app-labellisations>
+        (showLabel)="showLabel.emit($event)"
+        (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"></app-labellisations>
     </li>
     <li *ngIf="!lieuIsFranceServices()" class="list-group-item d-flex">
-      <button (click)="printSheetModal.toggle()" class="btn btn-primary btn-sm my-4 me-auto">
+      <button (click)="orientationSheetModal.control.toggle($event)" class="btn btn-primary btn-sm my-4 me-auto">
         <i class="ri ri-compass-3-line ms-1" aria-hidden="true"></i>
         Imprimer fiche d'orientation
       </button>
@@ -105,7 +106,7 @@
 </div>
 <app-orientation-sheet-modal
   class="d-print-none"
-  #printSheetModal
+  #orientationSheetModal
   [id]="lieuMediationNumerique.id"
   [nom]="lieuMediationNumerique.nom"
   [labels_nationaux]="lieuMediationNumerique.labels_nationaux"

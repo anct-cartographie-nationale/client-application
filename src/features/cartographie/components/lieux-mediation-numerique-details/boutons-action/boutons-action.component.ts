@@ -10,5 +10,5 @@ export class BoutonsActionComponent {
   @Input() public priseRdv: string | undefined;
 
   @Output() public print: EventEmitter<void> = new EventEmitter<void>();
-  @Output() public sendByEmail: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public sendByEmail: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 }

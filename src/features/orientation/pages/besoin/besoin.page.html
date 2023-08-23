@@ -12,7 +12,7 @@
           <button
             type="button"
             class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-            (click)="selectedOrientationInformation = orientationInformations['apprentissage']; informationOrientationModal.toggle()">
+            (click)="selectedOrientationInformation = orientationInformations['apprentissage']; selectedOrientationInformationType = null; informationOrientationModal.control.toggle($event)">
             plus d'infos
           </button>
         </div>
@@ -20,7 +20,8 @@
           [serviceItems]="apprentissageDeBaseOrientationItems"
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
-          (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+          (displayInformations)="selectOrientationInformation($event)"
+          (displayInformationsInvokingContext)="informationOrientationModal.control.toggle($event)"></app-besoin-link>
       </section>
       <section aria-label="Démarches">
         <div class="d-flex flex-row mb-3 mt-4">
@@ -28,7 +29,7 @@
           <button
             type="button"
             class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-            (click)="selectedOrientationInformation = orientationInformations['démarches']; informationOrientationModal.toggle()">
+            (click)="selectedOrientationInformation = orientationInformations['démarches']; selectedOrientationInformationType = null; informationOrientationModal.control.toggle($event)">
             plus d'infos
           </button>
         </div>
@@ -36,7 +37,8 @@
           [serviceItems]="demarchesOrientationItems"
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
-          (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+          (displayInformations)="selectOrientationInformation($event)"
+          (displayInformationsInvokingContext)="informationOrientationModal.control.toggle($event)"></app-besoin-link>
       </section>
       <section aria-label="Culture numérique">
         <div class="d-flex flex-row mb-3 mt-4">
@@ -44,7 +46,7 @@
           <button
             type="button"
             class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-            (click)="selectedOrientationInformation = orientationInformations['culture-numérique']; informationOrientationModal.toggle()">
+            (click)="selectedOrientationInformation = orientationInformations['culture-numérique']; selectedOrientationInformationType = null; informationOrientationModal.control.toggle($event)">
             plus d'infos
           </button>
         </div>
@@ -52,7 +54,8 @@
           [serviceItems]="cultureNumeriqueOrientationItems"
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
-          (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+          (displayInformations)="selectOrientationInformation($event)"
+          (displayInformationsInvokingContext)="informationOrientationModal.control.toggle($event)"></app-besoin-link>
       </section>
       <section aria-label="Manque de matériel">
         <div class="d-flex flex-row mb-3 mt-4">
@@ -60,7 +63,7 @@
           <button
             type="button"
             class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-            (click)="selectedOrientationInformation = orientationInformations['matériel']; informationOrientationModal.toggle()">
+            (click)="selectedOrientationInformation = orientationInformations['matériel']; selectedOrientationInformationType = null; informationOrientationModal.control.toggle($event)">
             plus d'infos
           </button>
         </div>
@@ -68,7 +71,8 @@
           [serviceItems]="manqueDeMaterielOrientationItems"
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
-          (displayInformations)="selectOrientationInformation($event); informationOrientationModal.toggle()"></app-besoin-link>
+          (displayInformations)="selectOrientationInformation($event)"
+          (displayInformationsInvokingContext)="informationOrientationModal.control.toggle($event)"></app-besoin-link>
       </section>
     </ng-container>
     <div class="text-center mt-4">
@@ -80,16 +84,13 @@
     </div>
   </div>
 </div>
-<app-information-orientation-modal
-  #informationOrientationModal
-  [orientationInformation]="selectedOrientationInformation"
-  (hideChange)="selectedOrientationInformationType = null">
+<app-information-orientation-modal #informationOrientationModal [orientationInformation]="selectedOrientationInformation">
   <a
     *ngIf="selectedOrientationInformationType"
     routerLink="../localisation"
     queryParamsHandling="preserve"
     class="btn btn-primary"
-    (click)="serviceControl?.setValue(selectedOrientationInformationType); informationOrientationModal.close()">
+    (click)="serviceControl?.setValue(selectedOrientationInformationType); informationOrientationModal.control.close()">
     Choisir cette option
     <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
   </a>

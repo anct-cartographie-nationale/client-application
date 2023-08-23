@@ -1,61 +1,41 @@
-<div
-  *ngIf="activateModal$ | async"
-  [class.show]="animate$ | async"
-  class="modal d-block fade"
-  tabindex="-1"
-  aria-labelledby="ficheOrientationModal"
-  spellcheck="false"
-  aria-modal="true"
-  role="dialog">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content overflow-hidden">
-      <div class="modal-header bg-primary text-bg-dark">
-        <h2 class="modal-title fw-bold d-flex align-items-center" id="ficheOrientationModal">
-          <i class="ri-xl ri-mail-send-line me-3" aria-hidden="true"></i>
-          Envoyer par mail
-        </h2>
-        <button
-          type="button"
-          class="btn-close btn-close-white opacity-100 small mb-0"
-          aria-label="Fermer"
-          (click)="close()"></button>
-      </div>
-      <div>
-        <div class="modal-body col-lg-7 col-12 m-auto">
-          <form class="my-4" id="sendByEmailForm" [formGroup]="sendByEmailForm" (ngSubmit)="onSubmitSendByEmailForm()">
-            <p class="fw-bold">Qui est bénéficiaire ?</p>
-            <div class="mb-3">
-              <label for="email" class="form-label visually-hidden">À qui souhaitez-vous envoyer la fiche ?</label>
-              <input
-                type="text"
-                maxlength="40"
-                class="form-control"
-                [class.is-invalid]="sendByEmailForm.controls.email.touched && sendByEmailForm.controls.email.invalid"
-                id="email"
-                placeholder="Adresse e-mail du bénéficiaire"
-                aria-describedby="emailHelp"
-                formControlName="email" />
-              <div
-                id="emailHelp"
-                [ngClass]="
-                  sendByEmailForm.controls.email.touched && sendByEmailForm.controls.email.invalid
-                    ? 'invalid-feedback'
-                    : 'text-muted-dark'
-                ">
-                * Champ obligatoire
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-secondary me-3" (click)="close()">Annuler</button>
-          <button type="submit" form="sendByEmailForm" class="btn btn-primary">
-            <i class="ri-mail-send-line" aria-hidden="true"></i>
-            Envoyer
-          </button>
-        </div>
+<app-modal
+  #modal
+  heading="Envoyer par mail"
+  icon="ri-mail-send-line"
+  closeLabel="Annuler"
+  bgBody="light"
+  bgFooter="white"
+  (closed)="onClose()">
+  <form
+    class="my-4 mx-auto col-lg-7 col-12"
+    id="sendByEmailForm"
+    [formGroup]="sendByEmailForm"
+    (ngSubmit)="onSubmitSendByEmailForm(); modal.close()">
+    <p class="fw-bold">Qui est bénéficiaire ?</p>
+    <div class="mb-3">
+      <label for="email" class="form-label visually-hidden">À qui souhaitez-vous envoyer la fiche ?</label>
+      <input
+        type="text"
+        maxlength="40"
+        class="form-control"
+        [class.is-invalid]="sendByEmailForm.controls.email.touched && sendByEmailForm.controls.email.invalid"
+        id="email"
+        placeholder="Adresse e-mail du bénéficiaire"
+        aria-describedby="emailHelp"
+        formControlName="email" />
+      <div
+        id="emailHelp"
+        [ngClass]="
+          sendByEmailForm.controls.email.touched && sendByEmailForm.controls.email.invalid
+            ? 'invalid-feedback'
+            : 'text-muted-dark'
+        ">
+        * Champ obligatoire
       </div>
     </div>
-  </div>
-</div>
-<div *ngIf="activateModal$ | async" class="modal-backdrop fade" [class.show]="animate$ | async"></div>
+  </form>
+  <button slot="footer" type="submit" form="sendByEmailForm" class="btn btn-primary">
+    <i class="ri-mail-send-line" aria-hidden="true"></i>
+    Envoyer
+  </button>
+</app-modal>

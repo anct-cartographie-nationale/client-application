@@ -12,6 +12,7 @@ export class LabellisationsComponent {
   @Input() public labelsAutres: string[] | undefined;
 
   @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+  @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
 }

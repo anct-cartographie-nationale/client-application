@@ -20,8 +20,6 @@ import { preventInconsistentSelection } from './accessibilite.presenter';
 export class AccessibilitePage {
   public selectedOrientationInformation: OrientationInformationContent | null = null;
 
-  public selectedOrientationInformationType: Service | null = null;
-
   public conditionAccesOptions: OrientationItemPresentation<string>[] = conditionAccesData;
 
   public publicSpecifiqueAcceuilliOptions: OrientationItemPresentation<string>[] = publicSpecifiqueAcceuilli;
