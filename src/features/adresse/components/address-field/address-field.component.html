@@ -17,8 +17,11 @@
       [attr.aria-expanded]="dropdownPane.expanded$ | async"
       (input)="search(addressInput.value); addressInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
       (focus)="addressInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
-      (keyup.escape)="dropdownPane.reduce()"
-      (keyup.enter)="dropdownPane.activeIndex = 0; dropdownPane.focus()" />
+      (focusout)="dropdownPane.reduce()"
+      (keydown.escape)="dropdownPane.reduce()"
+      (keydown.arrowDown)="dropdownPane.nextIndex()"
+      (keydown.arrowUp)="dropdownPane.previousIndex()"
+      (keydown.enter)="setAddressSuggestion(addressSuggestions[dropdownPane.activeIndex]); dropdownPane.reduce()" />
     <button type="button" *ngIf="addressInput.value && displayReset" class="btn input-group-btn" (click)="clear()">
       <span class="visually-hidden">Effacer</span>
       <i class="ri-close-line" aria-hidden="true"></i>
@@ -32,9 +35,10 @@
     [class.show]="(dropdownPane.expanded$ | async) && addressSuggestions.length > 0"
     class="dropdown-menu position-absolute mt-1"
     aria-labelledby="address">
-    <li *ngFor="let address of addressSuggestions; index as addressIndex; trackBy: trackByAddressName">
+    <li #results *ngFor="let address of addressSuggestions; index as addressIndex; trackBy: trackByAddressName">
       <button
         type="button"
+        tabindex="-1"
         class="dropdown-item"
         [class.active]="dropdownPane.activeIndex === addressIndex"
         [attr.aria-current]="dropdownPane.activeIndex === addressIndex ? true : null"
