@@ -79,6 +79,9 @@ export class OpeningHoursFormComponent {
 
   public onAddOpeningHourGroup(index: number): void {
     this.appendOpeningHoursFieldFor(index) && this.openingHoursForm.controls.push(openingHoursFormControl());
+  }
+
+  public updateFilterIfValid(index: number): void {
     this.isValidOpeningHoursGroupAt(index) && this.updateFilters();
   }
 

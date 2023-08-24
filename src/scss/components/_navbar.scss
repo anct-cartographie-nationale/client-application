@@ -1,10 +1,10 @@
 .nav-underline {
   .nav-link {
     text-decoration: none;
-  }
 
-  .active {
-    border-bottom: 1px solid $primary;
+    &.active {
+      border-bottom: 1px solid $primary;
+    }
   }
 }
 
