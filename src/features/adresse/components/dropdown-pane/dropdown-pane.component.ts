@@ -31,8 +31,6 @@ export class DropdownPaneComponent {
 
   @ContentChildren('results') public results!: QueryList<ElementRef>;
 
-  @Input() public dropdownControl: HTMLElement | null = null;
-
   @Output() public readonly indexChange: EventEmitter<number> = new EventEmitter<number>();
 
   @Input() public set expanded(expanded: boolean) {
@@ -47,7 +45,6 @@ export class DropdownPaneComponent {
   }
 
   public reduce(): void {
-    this.dropdownControl?.focus();
     this._expanded$.next(false);
     this._expanded = false;
   }

@@ -43,7 +43,7 @@ export class AddressFieldComponent implements OnChanges {
     return `${address.label}-${address.context}`;
   }
 
-  public clear() {
+  public clear(): void {
     this.formGroup.get('address')?.reset();
     this.resetAddress.emit();
   }

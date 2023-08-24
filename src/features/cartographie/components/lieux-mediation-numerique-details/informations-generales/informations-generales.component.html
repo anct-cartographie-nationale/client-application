@@ -1,5 +1,14 @@
-<div class="d-flex">
-  <i class="ri-4x ri-map-pin-2-line my-auto me-2 d-md-inline d-none" aria-hidden="true"></i>
+<div class="d-flex flex-row-reverse">
+  <div class="d-flex flex-column">
+    <div class="flex-grow-1 text-end">
+      <button
+        type="button"
+        class="btn btn-close btn-close-white opacity-100"
+        tabindex="0"
+        aria-label="Revenir à la liste"
+        (click)="closeDetails.emit()"></button>
+    </div>
+  </div>
   <div class="flex-grow-1 align-self-center">
     <small *ngIf="typologie">{{ typologie }}</small>
     <h1 class="h2 fw-bold mb-0 text-first-letter-uppercase">
@@ -21,14 +30,5 @@
       </a>
     </small>
   </div>
-  <div class="d-flex flex-column">
-    <div class="flex-grow-1 text-end">
-      <button
-        type="button"
-        class="btn btn-close btn-close-white opacity-100"
-        tabindex="0"
-        aria-label="Revenir à la liste"
-        (click)="closeDetails.emit()"></button>
-    </div>
-  </div>
+  <i class="ri-4x ri-map-pin-2-line my-auto me-2 d-md-inline d-none" aria-hidden="true"></i>
 </div>
