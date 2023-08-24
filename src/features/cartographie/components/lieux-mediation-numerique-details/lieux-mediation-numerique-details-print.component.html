@@ -9,11 +9,11 @@
       Fiche lieu
     </ng-template>
   </h3>
-  <div class="map-container">
-    <div class="border-top" style="height: 250px" aria-hidden="true">
+  <div class="map-container" aria-hidden="true">
+    <div class="border-top" style="height: 250px">
       <mgl-map
         *ngIf="lieuMediationNumerique.localisation"
-        class="h-100 w-100 overflow-hidden"
+        class="h-100 w-100 overflow-hidden d-none d-print-block"
         [style]="assetsConfiguration.path + '/data/map-style.json'"
         [interactive]="false"
         [attributionControl]="false"
