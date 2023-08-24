@@ -27,11 +27,11 @@
               class="mb-4"
               [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + hub.nom + '.png'"
               [alt]="'Logo' + hub.nom" />
-            <h4 class="fw-bold">
+            <h3 class="h4 fw-bold">
               HUB d'inclusion numérique
               <br />
               <span class="text-primary">{{ hub.region }}</span>
-            </h4>
+            </h3>
             <div class="mt-5 mb-4">
               <span *ngFor="let departement of hub.departements; last as isLast" class="d-inline-block">
                 <b>{{ departement.nom }}</b>
@@ -51,12 +51,12 @@
             </span>
           </div>
           <div class="mt-4 d-flex justify-content-center">
-            <div class="text-muted small">Qu'est ce qu'un Hub territorial ?</div>
             <a
-              class="text-decoration-none"
+              class="text-decoration-none link-muted small"
               href="https://societenumerique.gouv.fr/fr/dispositif/hubs-numerique/"
               target="_blank"
               rel="noopener noreferrer">
+              Qu'est ce qu'un Hub territorial ?
               <i class="ri ri-external-link-line my-auto me-2 opacity-75 text-muted" aria-hidden="true"></i>
             </a>
           </div>
