@@ -13,6 +13,7 @@
         <div class="accordion-item mb-3">
           <h2 class="accordion-header" id="headingDatePrecise">
             <button
+              #collapseDatePreciseControl
               type="button"
               class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative w-100"
               aria-controls="collapseDatePrecise"
@@ -42,7 +43,7 @@
           </h2>
           <app-collapse
             #collapseDatePrecise
-            id="collapseDatePrecise"
+            [control]="collapseDatePreciseControl"
             [state]="hasOpeningsHours ? 'expanded' : 'collapsed'"
             aria-labelledby="headingDatePrecise">
             <fieldset class="accordion-body bg-light px-3 py-4">

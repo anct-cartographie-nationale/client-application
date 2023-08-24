@@ -21,6 +21,7 @@
       </i>
     </label>
     <button
+      #collapseSortControl
       type="button"
       class="accordion-button collapsed d-flex px-3 pt-1"
       aria-controls="collapseSort"
@@ -38,7 +39,7 @@
         aria-hidden="true"></i>
     </button>
   </div>
-  <app-collapse #collapseSort id="collapseSort" aria-labelledby="sortHeading">
+  <app-collapse #collapseSort [control]="collapseSortControl" aria-labelledby="sortHeading">
     <ul class="list-group list-group-flush accordion-body border-top ps-1">
       <li class="list-group-item bg-transparent">
         <div class="form-check">
