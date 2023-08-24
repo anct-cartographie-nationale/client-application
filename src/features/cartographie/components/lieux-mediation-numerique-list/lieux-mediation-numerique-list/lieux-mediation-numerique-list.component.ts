@@ -46,15 +46,16 @@ export class LieuxMediationNumeriqueListComponent {
 
   public constructor(public readonly route: ActivatedRoute, public readonly cartographieLayout: CartographieLayout) {}
 
-  public scrollTo(focusId: string) {
-    setTimeout(() => {
-      this.container.nativeElement.scrollTo({
-        top:
-          this.items.find(itemById(focusId))?.nativeElement.getBoundingClientRect().y -
-          this.container.nativeElement.getBoundingClientRect().y,
-        behavior: 'smooth'
-      });
-    }, 400);
+  public scrollTo(focusId: string): void {
+    setTimeout((): void => {
+      const item: ElementRef<HTMLElement> | undefined = this.items?.find(itemById(focusId));
+      item &&
+        this.container.nativeElement.scrollTo({
+          top: item.nativeElement.getBoundingClientRect().y - this.container.nativeElement.getBoundingClientRect().y,
+          behavior: 'smooth'
+        });
+      (item?.nativeElement.querySelectorAll('.link-lieu') as NodeListOf<HTMLElement>)[0].focus();
+    });
   }
 
   public trackByLieuId(_: number, lieu: LieuMediationNumeriqueListItemPresentation) {
