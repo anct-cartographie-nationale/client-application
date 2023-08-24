@@ -65,7 +65,7 @@
     </div>
   </nav>
   <app-location-breadcrumb
-    class="d-lg-none d-block ps-sm-4 p-3 border-bottom"
+    class="d-lg-none d-block d-print-none ps-sm-4 p-3 border-bottom"
     [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
     [zoom]="(markersPresenter.zoom$ | async) ?? 0"
     (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
@@ -146,7 +146,7 @@
       </div>
     </app-offcanvas>
     <main
-      class="border-end col-12 show-map position-relative"
+      class="col-12 show-map position-relative"
       [class.show-map-for-small-devices]="showMapForSmallDevices$ | async"
       [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">
       <router-outlet></router-outlet>

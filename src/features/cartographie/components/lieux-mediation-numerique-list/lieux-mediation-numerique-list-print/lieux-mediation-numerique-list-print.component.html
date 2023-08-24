@@ -1,68 +1,52 @@
-<div class="position-absolute bg-white top-0 start-0 end-0 bottom-0 d-none d-print-block">
-  <div class="position-fixed top-0"></div>
-  <div class="position-fixed bottom-0">
-    <div class="border-top border-dark border-2">
-      <img class="w-25" [src]="brandConfiguration.logo" alt="" />
-    </div>
+<h2 class="h3 mb-3 pb-1 border-bottom border-dark border-2">
+  <i class="ri ri-list-check me-2" aria-hidden="true"></i>
+  Liste des lieux
+</h2>
+<div
+  class="bg-light px-4 py-3 mb-2"
+  *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
+  <small class="fw-bold text-muted">Détails de la recherche</small>
+  <div>FILTRES ACTIVÉS</div>
+  <div>
+    <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.address">
+      {{ filters?.address }}
+    </span>
+    <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.distance">
+      0-{{ (filters?.distance ?? 0) / 1000 }}km
+    </span>
+    <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.service">
+      {{ filters?.service }}
+    </span>
+    <span
+      class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"
+      *ngFor="let public_accueilli of filters?.publics_accueillis ?? []">
+      {{ public_accueilli }}
+    </span>
+    <span
+      class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"
+      *ngFor="let modaliteAccompagnement of filters?.modalites_accompagnement ?? []">
+      {{ modaliteAccompagnement }}
+    </span>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <td>
-          <div class="page-header-space"></div>
-        </td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <h2 class="h3 mb-3 pb-1 border-bottom border-dark border-2">
-            <i class="ri ri-list-check me-2" aria-hidden="true"></i>
-            Liste des lieux
-          </h2>
-          <div
-            class="bg-light px-4 py-3 mb-2"
-            *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
-            <small class="fw-bold text-muted">Détails de la recherche</small>
-            <div>FILTRES ACTIVÉS</div>
-            <div>
-              <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.address">
-                {{ filters?.address }}
-              </span>
-              <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.distance">
-                0-{{ (filters?.distance ?? 0) / 1000 }}km
-              </span>
-              <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.service">
-                {{ filters?.service }}
-              </span>
-              <span
-                class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"
-                *ngFor="let public_accueilli of filters?.publics_accueillis ?? []">
-                {{ public_accueilli }}
-              </span>
-              <span
-                class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"
-                *ngFor="let modaliteAccompagnement of filters?.modalites_accompagnement ?? []">
-                {{ modaliteAccompagnement }}
-              </span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6" *ngFor="let lieuMediationNumerique of lieuxMediationNumerique">
-              <app-mediation-numerique-list-item
-                class="d-block border-bottom h-100 py-1"
-                [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td>
-          <div class="page-footer-space"></div>
-        </td>
-      </tr>
-    </tfoot>
-  </table>
 </div>
+<table class="border-0">
+  <tfoot>
+    <tr>&nbsp;</tr>
+    <tr>
+      <td class="border-top border-dark border-2 w-100 pt-2">
+        <img [src]="brandConfiguration.logoAvecTexte ?? brandConfiguration.logo" height="50px" class="pt-2" alt="" />
+      </td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <td class="row">
+        <div class="col-6" *ngFor="let lieuMediationNumerique of lieuxMediationNumerique">
+          <app-mediation-numerique-list-item
+            class="d-block border-bottom h-100 py-1"
+            [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
