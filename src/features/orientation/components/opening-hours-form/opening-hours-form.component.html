@@ -15,8 +15,7 @@
             class="form-select"
             [formControl]="openingHourGroup.controls.day"
             aria-label="Jour d'ouverture"
-            (change)="onDaySelect(openingHourGroup); onAddOpeningHourGroup(i)"
-            (focusout)="updateFilterIfValid(i)">
+            (change)="onDaySelect(openingHourGroup); onOpeningHourChanges(i)">
             <option value="" disabled selected>Choisir un jour</option>
             <option value="now">Ouvert Maintenant</option>
             <option value="all">Tous les jours</option>
@@ -36,10 +35,9 @@
               [id]="'plage-horaire-' + i"
               class="form-select"
               [formControl]="openingHourGroup.controls.period"
-              (change)="onAddOpeningHourGroup(i)"
-              (focusout)="updateFilterIfValid(i)"
+              (change)="onOpeningHourChanges(i)"
               aria-label="Heures d'ouvertures">
-              <option value="" disabled selected>Heure de début</option>
+              <option value="" disabled selected>Choisir les horaires</option>
               <option value="all">Toute la journée</option>
               <option value="hours">Choisir une heure...</option>
             </select>
@@ -47,24 +45,22 @@
           <ng-container *ngIf="openingHourGroup.controls.period.value === 'hours'">
             <label [for]="'debut-' + i" class="visually-hidden">Heure de début</label>
             <input
+              type="time"
+              class="form-control"
               [id]="'debut-' + i"
               [formControl]="openingHourGroup.controls.start"
-              (change)="onAddOpeningHourGroup(i)"
-              (focusout)="updateFilterIfValid(i)"
-              class="form-control"
-              type="time"
+              (change)="onOpeningHourChanges(i)"
               name="start" />
           </ng-container>
         </div>
         <div class="col" *ngIf="openingHourGroup.controls.period.value === 'hours'">
           <label [for]="'fin-' + i" class="visually-hidden">Heure de fin</label>
           <input
+            type="time"
+            class="form-control"
             [id]="'fin-' + i"
             [formControl]="openingHourGroup.controls.end"
-            (change)="onAddOpeningHourGroup(i)"
-            (focusout)="updateFilterIfValid(i)"
-            class="form-control"
-            type="time"
+            (change)="onOpeningHourChanges(i)"
             name="end" />
         </div>
       </div>

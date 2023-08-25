@@ -1,4 +1,4 @@
-import { combineLatest, debounceTime, Observable, of, tap } from 'rxjs';
+import { combineLatest, debounceTime, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import {

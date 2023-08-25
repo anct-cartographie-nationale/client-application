@@ -44,6 +44,8 @@ const fromControlToOpeningHoursFields = (openingHoursFormControl: AbstractContro
 })
 export class OpeningHoursFormComponent {
   @Input() set openingHours(openingHours: OpeningHours[]) {
+    if (this.openingHoursForm.controls.length > 1) return;
+
     this.openingHoursForm = new FormArray<FormGroup<OpeningHoursControls>>(
       (openingHours ?? []).map((openingHours: OpeningHours) =>
         openingHoursFormControl({ ...DEFAULT_OPENING_HOURS, ...openingHours })
@@ -77,11 +79,8 @@ export class OpeningHoursFormComponent {
     openingHoursFormGroup.controls.day.value === 'now' && openingHoursFormGroup.reset({ ...DEFAULT_OPENING_HOURS, day: 'now' });
   }
 
-  public onAddOpeningHourGroup(index: number): void {
+  public onOpeningHourChanges(index: number): void {
     this.appendOpeningHoursFieldFor(index) && this.openingHoursForm.controls.push(openingHoursFormControl());
-  }
-
-  public updateFilterIfValid(index: number): void {
     this.isValidOpeningHoursGroupAt(index) && this.updateFilters();
   }
 
