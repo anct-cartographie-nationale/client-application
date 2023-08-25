@@ -19,7 +19,7 @@
           <ng-container *ngFor="let coordinateur of conseiller.coordinateurs; first as isFirst; last as isLast">
             <ng-container *ngIf="isFirst">{{ coordinateur.nom }}</ng-container>
             <ng-container *ngIf="!isFirst && !isLast">, {{ coordinateur.nom }}</ng-container>
-            <ng-container *ngIf="!isFirst && isLast">&#32;et{{ coordinateur.nom }}</ng-container>
+            <ng-container *ngIf="!isFirst && isLast">&#32;et {{ coordinateur.nom }}</ng-container>
           </ng-container>
         </b>
         <ng-template #nonCoordonne>
@@ -33,7 +33,7 @@
   <mgl-marker [lngLat]="[conseiller.longitude, conseiller.latitude]">
     <button
       *ngIf="zoom > 8; else markerSmall"
-      class="marker-conseiller"
+      class="btn marker-conseiller"
       (mouseenter)="highlight.emit(conseiller)"
       (mouseleave)="highlight.emit()"
       (click)="showDetails.emit(conseiller); showDetailsInvokingContext.emit($event)">

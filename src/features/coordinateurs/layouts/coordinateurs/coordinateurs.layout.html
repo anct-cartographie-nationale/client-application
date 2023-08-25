@@ -35,6 +35,7 @@
         <aside class="h-100" aria-hidden="true">
           <mgl-map
             *ngIf="(markersPresenter.localisation$ | async) as localisation"
+            tabindex="-1"
             [movingMethod]="'flyTo'"
             [movingOptions]="{speed: 2}"
             class="h-100 w-100 overflow-hidden"

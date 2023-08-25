@@ -27,7 +27,8 @@
 <ng-container *ngFor="let coordinateur of coordinateurs; index as i; trackBy: trackByCoordinateurId">
   <mgl-marker [lngLat]="[coordinateur.longitude, coordinateur.latitude]">
     <button
-      class="btn"
+      class="btn z-index-over-all"
+      tabindex="-1"
       [class.marker-hover]="hoverId === coordinateur.id || selectedId === coordinateur.id"
       (mouseenter)="highlight.emit(coordinateur)"
       (mouseleave)="highlight.emit()"

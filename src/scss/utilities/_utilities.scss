@@ -42,3 +42,8 @@ $utilities: map.merge(
 .shadow-white-top {
   box-shadow: 0 -20px 10px 0 $white;
 }
+
+*:focus-visible {
+  z-index: 1;
+  position: relative;
+}

@@ -50,7 +50,7 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     combineLatestWith(this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$),
     map(([hub, lieux]: [HubPresentation, LieuMediationNumerique[]]) => ({
       ...hub,
-      lieuxCount: lieux.filter((lieu: LieuMediationNumerique) => lieu.source === hub.source).length
+      lieuxCount: lieux.filter((lieu: LieuMediationNumerique): boolean => lieu.source === hub.source).length
     }))
   );
 
