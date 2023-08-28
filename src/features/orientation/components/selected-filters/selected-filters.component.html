@@ -36,6 +36,30 @@
     &times; {{ getLabelFromValue(modaliteAccompagnement) }}
   </button>
   <button
+    *ngFor="let labelNational of filter.labels_nationaux"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(labelNational, 'labels_nationaux')">
+    &times; {{ labelNational }}
+  </button>
+  <button
+    *ngFor="let labelAutre of filter.labels_autres"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(labelAutre, 'labels_autres')">
+    &times; {{ labelAutre }}
+  </button>
+  <button
+    *ngIf="filter.prise_rdv"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(filter.prise_rdv, 'prise_rdv')">
+    &times; Prise de RDV
+  </button>
+  <button
+    *ngIf="filter.accessibilite"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(filter.accessibilite, 'accessibilite')">
+    &times; Accessibilite
+  </button>
+  <button
     *ngIf="filter.horaires_ouverture"
     class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
     (click)="resetForm(filter.horaires_ouverture, 'horaires_ouverture')">

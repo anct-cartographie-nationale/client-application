@@ -22,6 +22,10 @@ export class SelectedFiltersComponent {
       this.filterForm.get('longitude')?.setValue(undefined);
     } else if (key === 'horaires_ouverture') {
       this.filterForm.get('horaires_ouverture')?.setValue(undefined);
+    } else if (key === 'prise_rdv') {
+      this.filterForm.get('prise_rdv')?.setValue(false);
+    } else if (key === 'accessibilite') {
+      this.filterForm.get('accessibilite')?.setValue(false);
     } else {
       const keyArrayCoppy = [...this.filterForm.value[key]];
       const indexOfValue = keyArrayCoppy.indexOf(value);
