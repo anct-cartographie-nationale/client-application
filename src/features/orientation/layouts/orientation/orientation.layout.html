@@ -1,7 +1,7 @@
 <div class="bg-light h-100 py-lg-5 p-3">
   <div class="container-lg p-0 h-100 shadow bg-white">
     <div class="row gx-0 h-100 overflow-auto flex-lg-row flex-column flex-nowrap">
-      <main
+      <div
         tabindex="-1"
         class="col-lg col-12 d-flex flex-column flex-grow-1 overflow-auto"
         appScroll
@@ -16,16 +16,19 @@
             <app-nav class="d-sm-none pt-3 d-block" [filter]="filter" size="sm"></app-nav>
           </nav>
         </ng-container>
-        <div class="px-3 flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
+        <main id="content" class="px-3 flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
           <router-outlet></router-outlet>
-        </div>
+        </main>
         <div
           class="d-flex justify-content-center shadow-white-top z-index-over-base bg-white sticky-bottom"
           [class.invisible]="hideArrow">
           <i class="ri-arrow-down-s-line ri-xl py-2 text-primary" aria-hidden="true"></i>
         </div>
-      </main>
-      <aside class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block" aria-label="état de l'orientation">
+      </div>
+      <aside
+        id="results"
+        class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block"
+        aria-label="état de l'orientation">
         <div class="d-flex flex-column px-4 h-100 overflow-auto">
           <div *ngIf="router.url !== '/orientation' && (filterPresentation$ | async) as filter">
             <div *ngIf="hasActiveFilter(filter)">

@@ -9,9 +9,11 @@ import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 })
 export class LabellisationsComponent {
   @Input() public labelsNationaux: LabelNational[] | undefined;
+
   @Input() public labelsAutres: string[] | undefined;
 
   @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}

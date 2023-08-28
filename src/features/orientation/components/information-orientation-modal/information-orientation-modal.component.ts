@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
-import { OrientationInformationContent } from '../../presenters';
 import { ModalComponent } from '../../../core/components';
+import { OrientationInformationContent } from '../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

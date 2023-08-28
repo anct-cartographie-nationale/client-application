@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, Renderer2 } from '@angular/core';
+import { SkipLinkPresenter } from '../../../features/core';
 import { BRAND_CONFIGURATION, BRAND_TOKEN, BrandConfiguration } from '../../configuration';
 
 @Component({
@@ -18,6 +18,17 @@ export class ConteneurComponent {
 
   public constructor(
     @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration,
-    public readonly router: Router
+    public readonly skipLinkPresenter: SkipLinkPresenter,
+    private renderer: Renderer2,
+    private elementRef: ElementRef
   ) {}
+
+  public skipTo(id: string): void {
+    const targetElement = this.elementRef.nativeElement.querySelector(`#${id}`);
+    if (!targetElement) return;
+    this.renderer.setAttribute(targetElement, 'tabindex', '-1');
+    targetElement.focus();
+    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    this.renderer.removeAttribute(targetElement, 'tabindex');
+  }
 }

@@ -1,3 +1,8 @@
+<app-skip-link fragment="content">Contenu</app-skip-link>
+<app-skip-link fragment="address">Rechercher une adresse</app-skip-link>
+<app-skip-link fragment="filter">Affiner ma recherche</app-skip-link>
+<app-skip-link fragment="help">Aide</app-skip-link>
+<app-skip-link fragment="footer">Pied de page</app-skip-link>
 <div
   *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique; else lieuNotFound"
   tabindex="-1"
@@ -12,7 +17,7 @@
     (reportAnError)="onReportAnError(lieuMediationNumerique)"
     (closeDetails)="onCloseDetails($event)"
     (showLabel)="onShowLabel($event)"
-    (showLabelInvokingContext)="labelModal.toggle($event)"
+    (showLabelInvokingContext)="labelModal.control.toggle($event)"
     [lieuMediationNumerique]="lieuMediationNumerique"
     [filters]="(filters$ | async) ?? undefined"></app-lieux-mediation-numerique-details>
 </div>
@@ -61,41 +66,4 @@
     </div>
   </div>
 </ng-template>
-<app-modal #labelModal heading="Informations label" icon="ri-information-line" closeLabel="Retour à la carte">
-  <ng-container *ngIf="(labelToDisplay$ | async) as label">
-    <img
-      [src]="assetsConfiguration.path + '/img/logo/labels/' + label.ref + '.svg'"
-      [alt]="'Logo ' + label.nom"
-      class="mb-3"
-      style="width: 180px; max-height: 120px" />
-    <h4 class="fw-bold text-primary">{{ label.nom }}</h4>
-    <p class="mb-0 mt-3">{{ label.description }}</p>
-    <div class="my-3">
-      <i *ngFor="let carracteristique of label.carracteristiques" class="badge rounded-pill text-bg-light fw-normal me-2">
-        {{ carracteristique }}
-      </i>
-    </div>
-    <span *ngIf="label.lieuxCount as lieuxCount" [ngPlural]="lieuxCount" class="rounded-5 bg-light py-1 px-3">
-      <i class="ri-map-pin-5-line me-2" aria-hidden="true"></i>
-      <ng-template ngPluralCase="=1">
-        <b>1 lieu</b>
-        utilise ce label
-      </ng-template>
-      <ng-template ngPluralCase="other">
-        <b>{{ lieuxCount }} lieux</b>
-        utilisent ce label
-      </ng-template>
-    </span>
-  </ng-container>
-  <a
-    slot="footer"
-    *ngIf="(labelToDisplay$ | async)?.url as href"
-    [href]="href"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="btn btn-primary"
-    (click)="labelModal.close()">
-    Accéder au site
-    <i class="ri-external-link-line" aria-hidden="true"></i>
-  </a>
-</app-modal>
+<app-label-modal #labelModal [label]="labelToDisplay$ | async"></app-label-modal>

@@ -13,8 +13,11 @@ export class LieuMediationNumeriqueListItemComponent {
   @Input() public lieuMediationNumerique!: LieuMediationNumeriqueListItemPresentation;
 
   @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
   @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
+
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly payant: ConditionAcces.Payant = ConditionAcces.Payant;

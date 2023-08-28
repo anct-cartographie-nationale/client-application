@@ -18,7 +18,6 @@
       </ng-template>
     </button>
   </div>
-
   <div class="carousel-inner" *ngFor="let slides of slidePresentations; index as i">
     <div *ngIf="currentSlide === i" class="row justify-content-center pb-5">
       <div class="col-xl-6 col-9 my-5" @carouselAnimation>
@@ -31,15 +30,9 @@
             <p class="text-secondary">
               {{ slides.text }}
             </p>
-            <a href="https://dora.fabrique.social.gouv.fr" target="_blank">
+            <a *ngIf="slides.titre === 'La mise à jour'" href="https://dora.fabrique.social.gouv.fr" target="_blank">
               <span class="visually-hidden">Accéder à DORA</span>
-              <img
-                class="my-3"
-                width="auto"
-                height="auto"
-                *ngIf="slides.titre === 'La mise à jour'"
-                src="/assets/img/presentation/dora-logo.svg"
-                alt="" />
+              <img class="my-3" width="auto" height="auto" src="/assets/img/presentation/dora-logo.svg" alt="" />
             </a>
           </div>
           <div class="col-md-6 my-auto" *ngIf="slides.titre === 'Standardisation'">

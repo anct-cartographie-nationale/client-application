@@ -27,21 +27,30 @@ const itemById =
 })
 export class LieuxMediationNumeriqueListComponent {
   @Input() public lieuxMediationNumerique: LieuMediationNumeriqueListItemPresentation[] = [];
+
   @Input() public hoverId: string | null = null;
+
   @Input() public orientationFeature?: FeatureConfiguration;
+
   @Input() public set focusId(focusId: string | undefined) {
     focusId && this.scrollTo(focusId);
   }
 
   @Output() public print: EventEmitter<void> = new EventEmitter<void>();
+
   @Output() public selectLieu: EventEmitter<LieuMediationNumeriqueListItemPresentation> =
     new EventEmitter<LieuMediationNumeriqueListItemPresentation>();
+
   @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
+
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
+
   @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   @ViewChild('container') public container!: ElementRef;
+
   @ViewChildren('item') public items!: QueryList<ElementRef>;
 
   public constructor(public readonly route: ActivatedRoute, public readonly cartographieLayout: CartographieLayout) {}

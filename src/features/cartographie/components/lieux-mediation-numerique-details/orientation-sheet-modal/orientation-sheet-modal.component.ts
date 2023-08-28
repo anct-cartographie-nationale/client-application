@@ -56,7 +56,6 @@ export class OrientationSheetModalComponent {
   }
 
   public onSubmitPrescripteurOrientationSheetForm(): void {
-    console.log('onSubmitPrescripteurOrientationSheetForm');
     if (this.prescripteurOrientationSheetForm.invalid) {
       this.prescripteurOrientationSheetForm.markAllAsTouched();
       return;

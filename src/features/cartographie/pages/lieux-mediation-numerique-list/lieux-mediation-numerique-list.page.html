@@ -1,3 +1,8 @@
+<app-skip-link fragment="content">Contenu</app-skip-link>
+<app-skip-link fragment="address">Rechercher une adresse</app-skip-link>
+<app-skip-link fragment="filter">Affiner ma recherche</app-skip-link>
+<app-skip-link fragment="help">Aide</app-skip-link>
+<app-skip-link fragment="footer">Pied de page</app-skip-link>
 <ng-container *ngIf="inLieuxZoomLevel((zoom$ | async) ?? 0, getDistance()); else : regions">
   <ng-container *ngIf="lieuxMediationNumerique$ | async as lieuxMediationNumerique">
     <div class="d-flex h-100" *ngIf="lieuxMediationNumerique?.length === 0">

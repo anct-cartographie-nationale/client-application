@@ -1,5 +1,5 @@
 <div class="h-100 d-flex flex-column">
-  <nav class="navbar navbar-expand-lg bg-light shadow-sm z-index-over-base sticky-top" aria-label="coordination">
+  <nav class="navbar navbar-expand-lg bg-light shadow-sm z-index-elevated sticky-top" aria-label="coordination">
     <div class="container-fluid">
       <div class="navbar-collapse">
         <app-user-location (location)="userLocalisation = $event"></app-user-location>
@@ -8,7 +8,7 @@
   </nav>
   <div class="flex-grow-1 overflow-auto">
     <div class="d-flex h-100">
-      <main class="border-end col-12 map-list h-100"><router-outlet></router-outlet></main>
+      <main id="content" class="border-end col-12 map-list h-100"><router-outlet></router-outlet></main>
       <div class="col overflow-auto position-relative">
         <aside
           class="position-absolute bottom-0 end-0 z-index-over-all mb-4 me-2 bg-white shadow-sm"

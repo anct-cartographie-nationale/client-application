@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MapService, NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
+import { SkipLinkModule } from '../../../core';
 import { CheckboxArrayModule } from '../../../core/directives';
 import { CollapseModule, ModalModule } from '../../../core/components';
 import { DistancePipeModule, PhonePipeModule } from '../../../core/pipes';
@@ -28,7 +29,8 @@ import { coordinateursProviders } from './coordinateurs.providers';
     CheckboxArrayModule,
     CollapseModule,
     DistancePipeModule,
-    ModalModule
+    ModalModule,
+    SkipLinkModule
   ]
 })
 export class CoordinateursCommonModule {}

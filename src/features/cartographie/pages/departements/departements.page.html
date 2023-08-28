@@ -1,3 +1,8 @@
+<app-skip-link fragment="content">Contenu</app-skip-link>
+<app-skip-link fragment="address">Rechercher une adresse</app-skip-link>
+<app-skip-link fragment="filter">Affiner ma recherche</app-skip-link>
+<app-skip-link fragment="help">Aide</app-skip-link>
+<app-skip-link fragment="footer">Pied de page</app-skip-link>
 <app-departements-list
   [departements]="(departements$ | async) ?? []"
   [hoverId]="markersPresenter.highlighted$ | async"

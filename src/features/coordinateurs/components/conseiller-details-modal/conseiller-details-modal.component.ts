@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
-import { Conseiller } from '../../models';
 import { ModalComponent } from '../../../core/components';
+import { Conseiller } from '../../models';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

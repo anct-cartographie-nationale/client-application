@@ -37,11 +37,13 @@
         [adresse]="(defaultAddress$ | async) ?? ''"
         (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
       <app-location-breadcrumb
+        id="breadcrumb"
         class="d-lg-inline-block d-none"
         [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
         [zoom]="(markersPresenter.zoom$ | async) ?? 0"
         (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
       <button
+        id="filter"
         class="navbar-btn ms-auto flex-sm-grow-0 flex-grow-1 text-start"
         [attr.aria-controls]="affinerRechercheOffcanvas.id"
         [class.active]="affinerRechercheOffcanvas.expanded$ | async"
@@ -53,6 +55,7 @@
         Affiner ma recherche
       </button>
       <button
+        id="help"
         class="navbar-btn pb-1 pt-0"
         [attr.aria-controls]="aideOffcanvas.id"
         [class.active]="aideOffcanvas.expanded$ | async"
@@ -146,6 +149,7 @@
       </div>
     </app-offcanvas>
     <main
+      id="content"
       class="col-12 show-map position-relative"
       [class.show-map-for-small-devices]="showMapForSmallDevices$ | async"
       [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">

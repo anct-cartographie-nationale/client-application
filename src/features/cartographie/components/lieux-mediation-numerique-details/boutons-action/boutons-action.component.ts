@@ -7,8 +7,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export class BoutonsActionComponent {
   @Input() public siteWeb: string[] | undefined;
+
   @Input() public priseRdv: string | undefined;
 
   @Output() public print: EventEmitter<void> = new EventEmitter<void>();
+
   @Output() public sendByEmail: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 }
