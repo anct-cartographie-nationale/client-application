@@ -3,23 +3,24 @@
   routerLink="../localisation"
   queryParamsHandling="merge"
   [queryParams]="{ service: serviceItem.value }"
-  class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative"
+  class="btn orientation-btn bg-light mb-3 px-lg-3 px-2 py-0 rounded-0 d-flex position-relative"
   (click)="selectServiceValue.emit(serviceItem.value)">
   <span
-    class="position-absolute top-0 start-0 z-index-over-base mt-sm-4 ms-sm-4 mt-1 ms-1 translate-middle square d-flex text-center small bg-secondary text-primary border border-primary rounded-circle"
+    class="position-absolute top-0 start-0 z-index-over-base ms-lg-4 mt-sm-4 ms-sm-3 mt-1 ms-1 translate-middle square d-flex text-center small bg-secondary text-primary border border-primary rounded-circle"
     *ngIf="serviceItem.value === selectedServiceItem">
     <span class="visually-hidden">Service sélectionné</span>
     <i class="ri-check-line m-auto" aria-hidden="true"></i>
   </span>
-  <span class="ri-circled bg-primary text-light fw-normal me-3 d-sm-block d-none">
+  <span class="ri-circled bg-primary text-light fw-normal me-3 mt-3 d-sm-block d-none">
     <i [ngClass]="serviceItem.icon" aria-hidden="true"></i>
   </span>
-  <span class="text-start">
+  <span class="text-start py-lg-3 py-2">
     <span class="orientation-btn-label">{{ serviceItem.label }}</span>
     <br />
     <i class="small text-muted-dark">{{ serviceItem.description }}</i>
   </span>
-  <span class="ms-auto d-flex">
+  <span class="ms-auto d-flex flex-column">
+    <i class="ri-arrow-right-s-line text-muted-dark ri-2x mb-auto" aria-hidden="true"></i>
     <button
       class="btn btn-link p-0 text-decoration-none"
       (click)="
@@ -29,8 +30,7 @@
         $event.preventDefault()
       ">
       <span class="visually-hidden">Info</span>
-      <i class="ri-information-line fw-normal text-muted-dark ri-2x" aria-hidden="true"></i>
+      <i class="ri-information-line fw-normal text-muted-dark ri-2x text-opacity-50" aria-hidden="true"></i>
     </button>
-    <i class="ri-arrow-right-s-line text-muted-dark ri-2x my-auto" aria-hidden="true"></i>
   </span>
 </a>

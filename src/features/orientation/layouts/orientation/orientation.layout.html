@@ -1,86 +1,105 @@
 <div class="bg-light h-100 py-lg-5 p-3">
   <div class="container-lg p-0 h-100 shadow bg-white">
-    <div class="row gx-0 h-100 overflow-auto flex-lg-row flex-column flex-nowrap">
-      <div
-        tabindex="-1"
-        class="col-lg col-12 d-flex flex-column flex-grow-1 overflow-auto"
-        appScroll
-        (reachEnd)="hideArrow = $event">
-        <ng-container *ngIf="this.router.url !== '/orientation'">
-          <nav
-            aria-label="étapes de l'orientation"
-            *ngIf="(filterPresentation$ | async) as filter"
-            style="height: 0"
-            class="sticky-lg-top nav-underline">
-            <app-nav class="d-sm-block d-none pt-3 bg-white" [filter]="filter"></app-nav>
-            <app-nav class="d-sm-none pt-3 d-block" [filter]="filter" size="sm"></app-nav>
-          </nav>
-        </ng-container>
-        <main id="content" class="px-3 flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
-          <router-outlet></router-outlet>
-        </main>
-        <div
-          class="d-flex justify-content-center shadow-white-top z-index-over-base bg-white sticky-bottom"
-          [class.invisible]="hideArrow">
-          <i class="ri-arrow-down-s-line ri-xl py-2 text-primary" aria-hidden="true"></i>
-        </div>
-      </div>
-      <aside
-        id="results"
-        class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block"
-        aria-label="état de l'orientation">
-        <div class="d-flex flex-column px-4 h-100 overflow-auto">
-          <div *ngIf="router.url !== '/orientation' && (filterPresentation$ | async) as filter">
-            <div *ngIf="hasActiveFilter(filter)">
-              <h2 class="h6 text-center text-secondary fw-bold mt-4 mb-3">Filtres activés</h2>
-              <app-selected-filters
-                class="flex-grow-1 my-lg-1 my-3"
-                [filterForm]="filterForm"
-                [filterPresentation]="filter"></app-selected-filters>
-              <hr class="opacity-100" />
+    <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
+      <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
+        <div class="row gx-0 h-100 overflow-auto flex-lg-row flex-column flex-nowrap">
+          <div
+            tabindex="-1"
+            class="col-lg col-12 d-flex flex-column flex-grow-1 overflow-auto"
+            appScroll
+            (reachEnd)="hideArrow = $event">
+            <ng-container *ngIf="this.router.url !== '/orientation'">
+              <nav
+                aria-label="étapes de l'orientation"
+                *ngIf="(filterPresentation$ | async) as filter"
+                style="height: 0"
+                class="sticky-lg-top nav-underline">
+                <app-nav class="d-sm-block d-none pt-3 bg-white" [filter]="filter"></app-nav>
+                <app-nav class="d-sm-none pt-3 d-block" [filter]="filter" size="sm"></app-nav>
+              </nav>
+            </ng-container>
+            <main id="content" class="px-3 flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
+              <router-outlet></router-outlet>
+            </main>
+            <div
+              class="d-flex justify-content-center shadow-white-top z-index-over bg-white sticky-bottom"
+              [class.invisible]="hideArrow">
+              <i class="ri-arrow-down-s-line ri-xl py-2 text-primary" aria-hidden="true"></i>
             </div>
           </div>
-          <div class="d-lg-block mt-auto">
-            <h2 class="h5 text-center text-secondary fw-bold my-3">
-              Nombre de lieux
-              <br />
-              {{ router.url === '/orientation' ? 'référencés sur la carte' : 'correspondant à ma recherche'}}
-            </h2>
-          </div>
-          <div class="w-100 mb-auto position-relative">
-            <img
-              [src]="assetsConfiguration.path + '/img/orientation/' + brandConfiguration.illustration"
-              alt=""
-              class="d-lg-block d-none" />
-            <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
-              <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
-                <div class="d-lg-none my-3">
-                  <b>{{ lieuxMediationNumerique.length}} / {{ lieuxMediationNumeriqueTotal.length }}</b>
-                  <div class="opacity-75">Lieux trouvées sur le territoire</div>
+          <aside
+            id="results"
+            class="col-lg-4 col-12 bg-primary text-white text-center d-lg-block"
+            aria-label="état de l'orientation">
+            <div class="d-flex flex-column px-4 h-100 overflow-auto">
+              <ng-container *ngIf="router.url !== '/orientation' && (filterPresentation$ | async) as filter">
+                <ng-container *ngIf="hasActiveFilter(filter)">
+                  <h2 class="h6 text-center text-secondary fw-bold mt-4 mb-3">Filtres activés</h2>
+                  <app-selected-filters
+                    class="flex-grow-1 my-lg-1 mb-3"
+                    [filterForm]="filterForm"
+                    [filterPresentation]="filter"></app-selected-filters>
+                  <div class="d-lg-none d-block" style="height: 130px"></div>
+                </ng-container>
+              </ng-container>
+              <div class="d-lg-flex flex-column d-none h-100">
+                <div class="mt-auto">
+                  <h2 class="h5 text-center text-secondary fw-bold my-3 mt-auto">
+                    Nombre de lieux
+                    <br />
+                    {{ router.url === '/orientation' ? 'référencés sur la carte' : 'correspondant à ma recherche'}}
+                  </h2>
                 </div>
-                <div class="d-lg-block d-none position-absolute w-100" style="top: 17%">
-                  <div>
-                    <app-filter-result-count
-                      class="my-auto"
-                      [total]="lieuxMediationNumeriqueTotal.length"
-                      [found]="lieuxMediationNumerique.length"></app-filter-result-count>
+                <div class="w-100 mb-auto position-relative">
+                  <img
+                    [src]="assetsConfiguration.path + '/img/orientation/' + brandConfiguration.illustration"
+                    alt=""
+                    class="d-lg-block d-none" />
+                  <div class="d-lg-block d-none position-absolute w-100" style="top: 17%">
+                    <div>
+                      <app-filter-result-count
+                        class="my-auto"
+                        [total]="lieuxMediationNumeriqueTotal.length"
+                        [found]="lieuxMediationNumerique.length"></app-filter-result-count>
+                    </div>
                   </div>
                 </div>
-              </ng-container>
-            </ng-container>
-          </div>
-          <div *ngIf="router.url !== '/orientation'">
-            <hr class="opacity-100" />
-            <app-display-on-map-link
-              class="d-block mb-4"
-              [cartographieFeature]="features.get('cartographie')"
-              [lieuxMediationNumeriqueCount]="1"
-              [queryParams]="route.queryParams">
-              Afficher la carte
-            </app-display-on-map-link>
+                <div *ngIf="router.url !== '/orientation'">
+                  <app-display-on-map-link
+                    class="d-block mb-4"
+                    [cartographieFeature]="features.get('cartographie')"
+                    [lieuxMediationNumeriqueCount]="1"
+                    [queryParams]="route.queryParams">
+                    Afficher la carte
+                  </app-display-on-map-link>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+        <div
+          class="w-100 bg-primary text-white text-center d-lg-none position-sticky z-index-elevated"
+          style="transform: translateY(-100%)">
+          <hr class="m-0" />
+          <div class="p-3">
+            <div class="mb-3">
+              <b>
+                {{ lieuxMediationNumerique.length}} / {{ lieuxMediationNumeriqueTotal.length }}
+                <br />
+                Lieux trouvées sur le territoire
+              </b>
+            </div>
+            <div *ngIf="router.url !== '/orientation'">
+              <app-display-on-map-link
+                [cartographieFeature]="features.get('cartographie')"
+                [lieuxMediationNumeriqueCount]="1"
+                [queryParams]="route.queryParams">
+                Afficher la carte
+              </app-display-on-map-link>
+            </div>
           </div>
         </div>
-      </aside>
-    </div>
+      </ng-container>
+    </ng-container>
   </div>
 </div>
