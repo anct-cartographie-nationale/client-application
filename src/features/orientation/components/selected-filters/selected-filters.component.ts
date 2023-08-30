@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { FilterFormPresentation } from '../../../core/presenters';
 import conditionAcces from '../../pages/accessibilite/condition-acces.json';
 import publicSpecifiqueAcceuilli from '../../pages/accessibilite/public-specifique-accueilli.json';
+import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -40,5 +41,9 @@ export class SelectedFiltersComponent {
         return field.value === value;
       })?.label ?? ''
     );
+  }
+
+  public getLabelFromCNFS(value: string): string {
+    return value === LabelNational.CNFS ? 'Conseillers numériques' : value;
   }
 }
