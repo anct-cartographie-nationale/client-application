@@ -4,8 +4,8 @@
     <p [innerHTML]="orientationInformation.description"></p>
     <div *ngIf="orientationInformation.label" class="text-muted small mb-2">{{ orientationInformation.label }}</div>
     <i
-      style="font-size: 0.85em"
-      class="badge rounded-pill text-bg-light fw-normal me-2 ng-star-inserted"
+      style="font-size: 0.85em; white-space: normal"
+      class="badge rounded-pill text-bg-light fw-normal me-2 my-1 ng-star-inserted"
       *ngFor="let element of orientationInformation.elements">
       {{ element }}
     </i>
