@@ -1,0 +1,38 @@
+<app-modal #modal heading="Informations label" icon="ri-information-line" closeLabel="Retour à la carte">
+  <div *ngIf="label" class="text-center">
+    <img
+      [src]="assetsConfiguration.path + '/img/logo/labels/' + label.ref + '.svg'"
+      [alt]="'Logo ' + label.nom"
+      class="mb-3"
+      style="width: 180px; max-height: 120px" />
+    <h3 class="h4 fw-bold text-primary">{{ label.nom }}</h3>
+    <p class="mb-0 mt-3">{{ label.description }}</p>
+    <div class="my-3">
+      <i *ngFor="let carracteristique of label.carracteristiques" class="badge rounded-pill text-bg-light fw-normal me-2">
+        {{ carracteristique }}
+      </i>
+    </div>
+    <span *ngIf="label.lieuxCount as lieuxCount" [ngPlural]="lieuxCount" class="rounded-5 bg-light py-1 px-3">
+      <i class="ri-map-pin-5-line me-2" aria-hidden="true"></i>
+      <ng-template ngPluralCase="=1">
+        <b>1 lieu</b>
+        utilise ce label
+      </ng-template>
+      <ng-template ngPluralCase="other">
+        <b>{{ lieuxCount }} lieux</b>
+        utilisent ce label
+      </ng-template>
+    </span>
+  </div>
+  <a
+    slot="footer"
+    *ngIf="label?.url as href"
+    [href]="href"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn btn-primary"
+    (click)="modal.close()">
+    Accéder au site
+    <i class="ri-external-link-line" aria-hidden="true"></i>
+  </a>
+</app-modal>

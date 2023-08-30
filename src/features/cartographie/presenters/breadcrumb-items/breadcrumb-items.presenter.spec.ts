@@ -102,7 +102,8 @@ describe('breadcrumb items', (): void => {
 
     expect(breadcrumbItems).toStrictEqual<BreadcrumbItem[]>([
       {
-        label: 'Lieux de médiation numérique affichés sur la carte'
+        label: 'Retour à la liste des régions',
+        link: ['regions']
       }
     ]);
   });
@@ -112,7 +113,8 @@ describe('breadcrumb items', (): void => {
 
     expect(breadcrumbItems).toStrictEqual<BreadcrumbItem[]>([
       {
-        label: 'Lieux de médiation numérique affichés sur la carte'
+        label: 'Retour à la liste des régions',
+        link: ['regions']
       }
     ]);
   });

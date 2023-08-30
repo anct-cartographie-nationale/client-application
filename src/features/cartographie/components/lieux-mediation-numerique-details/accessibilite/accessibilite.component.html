@@ -29,7 +29,7 @@
   </div>
   <div class="d-flex align-items-center">
     <button
-      id="headingAccesLibre"
+      #collapseAccesLibreControl
       class="btn btn-link p-3 text-decoration-none"
       aria-controls="collapseAccesLibre"
       [class.collapsed]="collapseAccesLibre.isCollapsed$ | async"
@@ -52,7 +52,7 @@
     </button>
   </div>
 </div>
-<app-collapse #collapseAccesLibre id="collapseAccesLibre" aria-labelledby="headingAccesLibre">
+<app-collapse #collapseAccesLibre [control]="collapseAccesLibreControl" aria-labelledby="headingAccesLibre">
   <div class="accordion-body bg-light ps-3 p-2">
     <em style="font-size: 0.85em">
       Accès libre est une plateforme regroupant toutes les informations d’accessibilité des lieux ouverts au public.

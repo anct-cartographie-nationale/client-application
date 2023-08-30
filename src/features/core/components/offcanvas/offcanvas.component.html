@@ -1,4 +1,5 @@
 <div
+  #dialog
   class="offcanvas offcanvas-end"
   [ngClass]="className"
   [class.position-absolute]="isAbsolute && (expanded$ | async)"
@@ -9,7 +10,8 @@
   [id]="id"
   [attr.aria-labelledby]="id + '-label'"
   [attr.aria-modal]="(expanded$ | async) ? 'true' : null"
-  [attr.role]="(expanded$ | async) ? 'dialog' : null">
+  [attr.role]="(expanded$ | async) ? 'dialog' : null"
+  style="max-width: 500px">
   <div [class.offcanvas-header]="useHeader">
     <h2 class="h5" [class.visually-hidden]="!useHeader" [id]="id + '-label'">{{ heading }}</h2>
     <button
@@ -17,7 +19,7 @@
       type="button"
       class="ms-auto btn-close"
       aria-label="Fermer"
-      (click)="toggle()"></button>
+      (click)="toggle($event)"></button>
   </div>
   <div class="h-100" [class.offcanvas-body]="useContainer">
     <ng-content></ng-content>

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { ConditionAcces, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { ConditionAcces } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
 import { OrientationLayout } from '../../layouts';
 import {
@@ -19,8 +19,6 @@ import { preventInconsistentSelection } from './accessibilite.presenter';
 })
 export class AccessibilitePage {
   public selectedOrientationInformation: OrientationInformationContent | null = null;
-
-  public selectedOrientationInformationType: Service | null = null;
 
   public conditionAccesOptions: OrientationItemPresentation<string>[] = conditionAccesData;
 

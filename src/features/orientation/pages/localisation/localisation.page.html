@@ -1,3 +1,6 @@
+<app-skip-link fragment="content">Contenu</app-skip-link>
+<app-skip-link fragment="results">Résultat</app-skip-link>
+<app-skip-link fragment="footer">Pied de page</app-skip-link>
 <div class="h-100 d-flex pt-5">
   <div class="w-100 my-auto">
     <h1 class="h2 text-center fw-bold mt-sm-5 mt-3">
@@ -75,7 +78,7 @@
               </label>
               <button
                 class="btn btn-link text-decoration-none p-0 border-0 ms-2"
-                (click)="informationOrientationModal.toggle()">
+                (click)="informationOrientationModal.control.toggle($event)">
                 <span class="visually-hidden">Info</span>
                 <i class="ri-information-line fw-normal text-muted ri-2x" aria-hidden="true"></i>
               </button>

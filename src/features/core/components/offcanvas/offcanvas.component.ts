@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 const ANIMATION_DURATION: 300 = 300 as const;
@@ -21,6 +30,8 @@ export class OffcanvasComponent implements OnChanges {
 
   @Input() public heading!: string;
 
+  @ViewChild('dialog', { read: ElementRef }) public dialog!: ElementRef<HTMLElement>;
+
   public id: string = '';
 
   private _isExpanded: boolean = false;
@@ -34,20 +45,35 @@ export class OffcanvasComponent implements OnChanges {
   private _expanded$: Subject<boolean> = new Subject<boolean>();
   public expanded$: Observable<boolean> = this._expanded$.asObservable();
 
+  private _invokingContext?: HTMLElement;
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['heading'].firstChange) this.id = this.heading.toLowerCase().replace(/\s/gu, '-');
   }
 
-  public toggle(): void {
-    this._isExpanded ? this._hiding$.next(true) : this._showing$.next(true);
-    this._isExpanded = !this._isExpanded;
-    this._isExpanded && this._expanded$.next(this._isExpanded);
-
+  private show(): void {
+    this._showing$.next(true);
+    this._expanded$.next(true);
     setTimeout((): void => {
-      !this._isExpanded && this._expanded$.next(this._isExpanded);
       this._showing$.next(false);
+      this.dialog.nativeElement.focus();
+    }, ANIMATION_DURATION);
+  }
+
+  @HostListener('keyup.escape')
+  private hide(): void {
+    this._hiding$.next(true);
+    this._invokingContext?.focus();
+    setTimeout((): void => {
+      this._expanded$.next(false);
       this._hiding$.next(false);
     }, ANIMATION_DURATION);
+  }
+
+  public toggle(event: MouseEvent): void {
+    this._invokingContext = event.target as HTMLElement;
+    this._isExpanded ? this.hide() : this.show();
+    this._isExpanded = !this._isExpanded;
   }
 
   public close(): void {

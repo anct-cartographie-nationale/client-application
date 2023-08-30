@@ -1,3 +1,8 @@
+<app-skip-link fragment="content">Contenu</app-skip-link>
+<app-skip-link fragment="address">Rechercher une adresse</app-skip-link>
+<app-skip-link fragment="filter">Affiner ma recherche</app-skip-link>
+<app-skip-link fragment="help">Aide</app-skip-link>
+<app-skip-link fragment="footer">Pied de page</app-skip-link>
 <ng-container *ngIf="inLieuxZoomLevel((zoom$ | async) ?? 0, getDistance()); else : regions">
   <ng-container *ngIf="lieuxMediationNumerique$ | async as lieuxMediationNumerique">
     <div class="d-flex h-100" *ngIf="lieuxMediationNumerique?.length === 0">
@@ -18,7 +23,8 @@
       (selectLieu)="select($event.id, $event.latitude, $event.longitude)"
       (enableHover)="hover($event)"
       (disableHover)="hover()"
-      (showLabel)="onShowLabel($event); labelModal.toggle()"></app-lieux-mediation-numerique-list>
+      (showLabel)="onShowLabel($event)"
+      (showLabelInvokingContext)="labelModal.control.toggle($event)"></app-lieux-mediation-numerique-list>
     <app-lieux-mediation-numerique-list-print
       class="d-none d-print-block"
       [filters]="(filters$ | async) ?? undefined"
@@ -32,7 +38,8 @@
     [hoverId]="markersPresenter.highlighted$ | async"
     (enableHover)="hover($event)"
     (disableHover)="hover()"
-    (showHub)="onShowHub($event); hubModal.toggle()"
+    (showHub)="onShowHub($event)"
+    (showHubInvokingContext)="hubModal.control.toggle($event)"
     (showLieux)="markersPresenter.center($event.localisation, $event.zoom)"></app-regions-list>
-  <app-hub-modal [hub]="hubToDisplay$ | async" #hubModal></app-hub-modal>
+  <app-hub-modal #hubModal [hub]="hubToDisplay$ | async"></app-hub-modal>
 </ng-template>

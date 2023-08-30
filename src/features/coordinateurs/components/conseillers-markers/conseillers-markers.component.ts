@@ -17,5 +17,7 @@ export class ConseillersMarkersComponent {
 
   @Output() public showDetails: EventEmitter<ConseillerOnMapPresentation> = new EventEmitter<ConseillerOnMapPresentation>();
 
+  @Output() public showDetailsInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
   public trackByConseillerId = (_: number, conseiller: ConseillerOnMapPresentation) => conseiller.id;
 }

@@ -6,7 +6,6 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
   Output,
   QueryList
@@ -30,9 +29,7 @@ export class DropdownPaneComponent {
 
   public expanded$: Observable<boolean> = this._expanded$.asObservable();
 
-  @ContentChildren('results') public results: QueryList<ElementRef> | null = null;
-
-  @Input() public dropdownControl: HTMLElement | null = null;
+  @ContentChildren('results') public results?: QueryList<ElementRef>;
 
   @Output() public readonly indexChange: EventEmitter<number> = new EventEmitter<number>();
 
@@ -41,17 +38,13 @@ export class DropdownPaneComponent {
     this._expanded = expanded;
   }
 
-  private clickOnMenuControl(clickEvent: Event): boolean {
-    return clickEvent.target === this.dropdownControl;
-  }
-
   public expand(): void {
     this._expanded$.next(true);
     this._expanded = true;
+    this.activeIndex = 0;
   }
 
   public reduce(): void {
-    this.dropdownControl?.focus();
     this._expanded$.next(false);
     this._expanded = false;
   }
@@ -61,17 +54,17 @@ export class DropdownPaneComponent {
     this.indexChange.next(this.activeIndex);
   }
 
+  public nextIndex(): void {
+    if (this.results?.first == null) return;
+    this.activeIndex === this.results.length - 1 ? this.setIndex(0) : this.setIndex(this.activeIndex + 1);
+  }
+
+  public previousIndex(): void {
+    if (this.results?.first == null) return;
+    this.activeIndex === 0 ? this.setIndex(this.results.length - 1) : this.setIndex(this.activeIndex - 1);
+  }
+
   public focus(): void {
-    if (this.results == null || this.results.first == null) return;
-    this.results.first.nativeElement.firstChild.focus();
-  }
-
-  @HostListener('document:click', ['$event']) public onClickOutside(clickEvent: Event): void {
-    if (!this._expanded || this.clickOnMenuControl(clickEvent)) return;
-    this._expanded$.next(false);
-  }
-
-  @HostListener('keydown.escape') public onEscape(): void {
-    this.reduce();
+    this.results?.first != null && this.results.first.nativeElement.firstChild.focus();
   }
 }

@@ -1,5 +1,5 @@
-<form [formGroup]="sortForm" class="accordion-item border-bottom" [class.bg-light]="collapseSort.isExpanded$ | async">
-  <div class="accordion-header d-flex" id="sortHeading">
+<form id="sort" [formGroup]="sortForm" class="accordion-item border-bottom" [class.bg-light]="collapseSort.isExpanded$ | async">
+  <div class="d-flex">
     <input
       type="checkbox"
       class="btn-check"
@@ -7,7 +7,9 @@
       autocomplete="off"
       formControlName="direction"
       (change)="onSortUpdated()" />
-    <label class="btn border-0 rounded-0 border-end text-primary px-3 pt-4 pb-2 fw-normal d-flex flex-column" for="btn-check">
+    <label
+      class="btn btn-link text-decoration-none border-0 rounded-0 border-end text-primary px-3 pt-4 pb-2 fw-normal d-flex flex-column"
+      for="btn-check">
       <i class="ri-arrow-left-right-line ri-lg pb-1" aria-hidden="true"></i>
       <i class="text-xxs">
         <ng-container *ngIf="sortForm.controls.direction.value; else asc">
@@ -21,8 +23,9 @@
       </i>
     </label>
     <button
+      #collapseSortControl
       type="button"
-      class="accordion-button collapsed d-flex px-3 pt-1"
+      class="btn btn-link link-dark text-decoration-none px-3 align-items-center w-100 text-start d-flex"
       aria-controls="collapseSort"
       [class.collapsed]="collapseSort.isCollapsed$ | async"
       [attr.aria-expanded]="collapseSort.isExpanded$ | async"
@@ -38,7 +41,7 @@
         aria-hidden="true"></i>
     </button>
   </div>
-  <app-collapse #collapseSort id="collapseSort" aria-labelledby="sortHeading">
+  <app-collapse #collapseSort [control]="collapseSortControl">
     <ul class="list-group list-group-flush accordion-body border-top ps-1">
       <li class="list-group-item bg-transparent">
         <div class="form-check">

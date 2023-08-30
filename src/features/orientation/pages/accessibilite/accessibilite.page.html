@@ -1,3 +1,6 @@
+<app-skip-link fragment="content">Contenu</app-skip-link>
+<app-skip-link fragment="results">Résultat</app-skip-link>
+<app-skip-link fragment="footer">Pied de page</app-skip-link>
 <div class="h-100 d-flex pt-5">
   <div class="w-100 my-auto">
     <h1 class="h2 text-center fw-bold mt-sm-5 mt-3">
@@ -16,7 +19,7 @@
           <button
             type="button"
             class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-            (click)="selectedOrientationInformation = orientationInformations['participation']; informationOrientationModal.toggle()">
+            (click)="selectedOrientationInformation = orientationInformations['participation']; informationOrientationModal.control.toggle($event)">
             plus d'infos
           </button>
         </div>
@@ -46,7 +49,7 @@
           <button
             type="button"
             class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-            (click)="selectedOrientationInformation = orientationInformations['accueil-specifique']; informationOrientationModal.toggle()">
+            (click)="selectedOrientationInformation = orientationInformations['accueil-specifique']; informationOrientationModal.control.toggle($event)">
             plus d'infos
           </button>
         </div>
@@ -79,5 +82,4 @@
 </div>
 <app-information-orientation-modal
   #informationOrientationModal
-  [orientationInformation]="selectedOrientationInformation"
-  (hideChange)="selectedOrientationInformationType = null"></app-information-orientation-modal>
+  [orientationInformation]="selectedOrientationInformation"></app-information-orientation-modal>

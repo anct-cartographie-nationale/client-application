@@ -1,6 +1,9 @@
+<app-skip-link fragment="content">Contenu</app-skip-link>
+<app-skip-link fragment="address">Rechercher une adresse</app-skip-link>
+<app-skip-link fragment="footer">Pied de page</app-skip-link>
 <ng-container *ngIf="coordinateur$ | async as coordinateur">
   <div class="d-flex flex-column h-100">
-    <div class="shadow-sm z-index-over-base">
+    <div class="shadow-sm z-index-over">
       <div class="p-4 bg-primary text-white d-block">
         <div class="d-flex">
           <img
@@ -124,7 +127,7 @@
               <button
                 type="button"
                 class="btn btn-link link-muted-dark p-0 fw-bold stretched-link"
-                (click)="conseillerDetailsModal.toggle(); conseillerSelected = conseiller">
+                (click)="conseillerDetailsModal.control.toggle($event); conseillerSelected = conseiller">
                 En savoir plus...
               </button>
             </div>
@@ -134,9 +137,9 @@
     </div>
   </div>
   <app-conseiller-details-modal
+    #conseillerDetailsModal
     [distance]="conseillerSelected?.distance ?? undefined"
     [coordinateur]="coordinateur"
     [conseiller]="conseillerSelected"
-    [route]="route.parent"
-    #conseillerDetailsModal></app-conseiller-details-modal>
+    [route]="route.parent"></app-conseiller-details-modal>
 </ng-container>

@@ -7,7 +7,7 @@ type CollapseState = 'expanded' | 'collapsed';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'app-collapse',
+  selector: 'app-collapse[control]',
   templateUrl: './collapse.component.html',
   animations: [
     trigger('collapse', [
@@ -21,6 +21,8 @@ export class CollapseComponent {
   @Input() public set state(state: CollapseState) {
     this._state$.next(state);
   }
+
+  @Input() control!: HTMLElement;
 
   private readonly _state$: BehaviorSubject<CollapseState> = new BehaviorSubject<CollapseState>('collapsed');
 

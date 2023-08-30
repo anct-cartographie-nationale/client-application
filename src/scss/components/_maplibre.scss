@@ -19,3 +19,7 @@
 .maplibregl-popup-content {
   padding: 0 !important;
 }
+
+.maplibregl-ctrl-bottom-right {
+  z-index: 0 !important;
+}

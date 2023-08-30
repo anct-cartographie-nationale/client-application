@@ -9,7 +9,8 @@ const breadcrumbItemsForUnhandledPathsRegional: BreadcrumbItem[] = [
 
 const breadcrumbItemsForUnhandledPathsLocal: BreadcrumbItem[] = [
   {
-    label: 'Lieux de médiation numérique affichés sur la carte'
+    label: 'Retour à la liste des régions',
+    link: ['regions']
   }
 ];
 

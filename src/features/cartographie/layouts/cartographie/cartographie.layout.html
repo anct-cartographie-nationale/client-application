@@ -37,15 +37,17 @@
         [adresse]="(defaultAddress$ | async) ?? ''"
         (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
       <app-location-breadcrumb
+        id="breadcrumb"
         class="d-lg-inline-block d-none"
         [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
         [zoom]="(markersPresenter.zoom$ | async) ?? 0"
         (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
       <button
+        id="filter"
         class="navbar-btn ms-auto flex-sm-grow-0 flex-grow-1 text-start"
         [attr.aria-controls]="affinerRechercheOffcanvas.id"
         [class.active]="affinerRechercheOffcanvas.expanded$ | async"
-        (click)="affinerRechercheOffcanvas.toggle(); aideOffcanvas.close()">
+        (click)="affinerRechercheOffcanvas.toggle($event); aideOffcanvas.close()">
         <i
           class="me-1"
           [ngClass]="(affinerRechercheOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-sound-module-line'"
@@ -53,10 +55,11 @@
         Affiner ma recherche
       </button>
       <button
+        id="help"
         class="navbar-btn pb-1 pt-0"
         [attr.aria-controls]="aideOffcanvas.id"
         [class.active]="aideOffcanvas.expanded$ | async"
-        (click)="aideOffcanvas.toggle(); affinerRechercheOffcanvas.close()">
+        (click)="aideOffcanvas.toggle($event); affinerRechercheOffcanvas.close()">
         <i
           class="ri-2x"
           [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-circle-line text-primary' : 'ri-question-line'"></i>
@@ -65,7 +68,7 @@
     </div>
   </nav>
   <app-location-breadcrumb
-    class="d-lg-none d-block ps-sm-4 p-3 border-bottom"
+    class="d-lg-none d-block d-print-none ps-sm-4 p-3 border-bottom"
     [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
     [zoom]="(markersPresenter.zoom$ | async) ?? 0"
     (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
@@ -76,7 +79,7 @@
       [useContainer]="false"
       [useHeader]="false"
       class="position-absolute h-100 end-0"
-      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-elevated">
+      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-over">
       <div class="d-flex flex-column h-100 border-top">
         <div class="flex-grow-1">
           <app-user-location
@@ -90,7 +93,7 @@
         </div>
         <div class="mt-auto bg-white p-3 text-center">
           <app-modifier-orientation></app-modifier-orientation>
-          <button class="btn btn-primary" (click)="affinerRechercheOffcanvas.toggle()">Terminer</button>
+          <button class="btn btn-primary" (click)="affinerRechercheOffcanvas.toggle($event)">Terminer</button>
         </div>
       </div>
     </app-offcanvas>
@@ -100,7 +103,7 @@
       [useContainer]="false"
       [useHeader]="false"
       class="position-absolute h-100 end-0"
-      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-elevated">
+      className="offcanvas-top h-100 w-auto position-relative overflow-auto z-index-over">
       <div class="d-flex flex-column h-100 bg-white border-top">
         <div class="list-group list-group-flush">
           <a
@@ -146,7 +149,8 @@
       </div>
     </app-offcanvas>
     <main
-      class="border-end col-12 show-map position-relative"
+      id="content"
+      class="col-12 show-map position-relative"
       [class.show-map-for-small-devices]="showMapForSmallDevices$ | async"
       [ngClass]="router.url.includes('/details') ? 'map-details' : 'map-list'">
       <router-outlet></router-outlet>

@@ -1,4 +1,4 @@
-<div class="h-100 d-flex flex-column">
+<div class="h-100 d-flex flex-column border-end">
   <div #container class="list-group list-group-flush flex-grow-1 overflow-auto" tabindex="-1">
     <h1 class="visually-hidden">Liste des lieux d'inclusion numérique</h1>
     <article
@@ -10,6 +10,7 @@
       <app-mediation-numerique-list-item
         [lieuMediationNumerique]="lieuMediationNumerique"
         (showLabel)="showLabel.emit($event)"
+        (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"
         (enableHover)="enableHover.emit($event)"
         (disableHover)="disableHover.emit()"></app-mediation-numerique-list-item>
     </article>

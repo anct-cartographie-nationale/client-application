@@ -1,12 +1,12 @@
 <div class="position-relative d-print-none">
   <a
-    class="text-decoration-none link-dark"
+    class="text-decoration-none link-dark link-lieu"
     [routerLink]="[lieuMediationNumerique.id, 'details']"
     [relativeTo]="route.parent"
     queryParamsHandling="preserve"
     (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
     (mouseout)="disableHover.emit()">
-    <div class="row d-print-none">
+    <div class="row g-0 d-print-none">
       <div class="col">
         <h2 class="h5 mb-0 text-first-letter-uppercase fw-bold">
           {{ lieuMediationNumerique.nom }}
@@ -31,7 +31,7 @@
     <div class="d-flex flex-row d-print-none">
       <div
         class="mt-3 d-flex flex-column text-end ms-auto"
-        style="width: 160px"
+        style="width: 180px"
         *ngIf="lieuMediationNumerique.conditions_acces || lieuMediationNumerique.date_maj">
         <div
           [ngClass]="lieuMediationNumerique.conditions_acces.isFree ? 'text-primary' : 'text-muted'"
@@ -51,7 +51,7 @@
   </a>
   <div
     class="text-end position-absolute top-0 end-0"
-    style="width: 160px"
+    style="width: 180px"
     *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone">
     <a
       *ngIf="lieuMediationNumerique.courriel as courriel"
@@ -74,7 +74,11 @@
   <div class="position-absolute row g-2 start-0 bottom-0">
     <ng-container *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
       <div class="col" *ngFor="let label of labelsNationaux">
-        <button (click)="showLabel.emit(label); $event.stopPropagation(); $event.preventDefault()" class="btn btn-link p-0">
+        <button
+          (click)="
+            showLabel.emit(label); showLabelInvokingContext.emit($event); $event.stopPropagation(); $event.preventDefault()
+          "
+          class="btn btn-link p-0">
           <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + label" />
         </button>
       </div>

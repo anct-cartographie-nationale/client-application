@@ -1,19 +1,25 @@
+<app-skip-link fragment="coordinateurs">Contenu</app-skip-link>
+<app-skip-link fragment="sort">Trier les coordinateurs</app-skip-link>
+<app-skip-link fragment="address">Rechercher une adresse</app-skip-link>
+<app-skip-link fragment="footer">Pied de page</app-skip-link>
 <div class="h-100 d-flex flex-column">
   <app-sort (sortChange)="onSortChange($event)"></app-sort>
   <ng-container *ngIf="coordinateurs$ | async as coordinateurs">
-    <div *ngIf="coordinateurs.length" class="list-group list-group-flush flex-grow-1 overflow-auto" tabindex="-1">
-      <h1 class="visually-hidden">Liste des coordinateurs</h1>
+    <div #container *ngIf="coordinateurs.length" class="list-group list-group-flush flex-grow-1 overflow-auto" tabindex="-1">
+      <h1 id="coordinateurs" class="visually-hidden">Liste des coordinateurs</h1>
       <article
-        class="list-group-item"
+        class="list-group-item p-1"
         *ngFor="let coordinateur of coordinateurs; trackBy: trackByCoordinateurId"
         [class.list-group-item-hover]="(markersPresenter.highlighted$ | async) === coordinateur.id">
         <a
+          #coordinateurLink
           [routerLink]="[coordinateur.id, 'details']"
           [relativeTo]="route.parent"
           [attr.id]="coordinateur.id"
           (mouseover)="markersPresenter.highlight(coordinateur.id)"
           (mouseout)="markersPresenter.highlight('')"
-          class="link-dark text-decoration-none p-4">
+          class="link-dark text-decoration-none d-block py-4 px-3"
+          [class.active]="(coordinateurSelected$ | async) === coordinateur.id">
           <div class="row">
             <div style="width: 38px" class="col-auto p-0 m-auto text-center">
               <img [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.perimetre + '.svg'" alt="" />

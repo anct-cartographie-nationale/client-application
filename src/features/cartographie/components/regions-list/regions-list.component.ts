@@ -14,6 +14,7 @@ export class RegionsListComponent {
   @Input() public hoverId: string | null = null;
 
   @Output() showHub: EventEmitter<RegionPresentation> = new EventEmitter<RegionPresentation>();
+  @Output() showHubInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   @Output() showLieux: EventEmitter<RegionPresentation> = new EventEmitter<RegionPresentation>();
   @Output() public enableHover: EventEmitter<string> = new EventEmitter<string>();
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();

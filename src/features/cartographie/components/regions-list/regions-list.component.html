@@ -1,4 +1,4 @@
-<div class="h-100 d-flex flex-column" *ngIf="regions">
+<div class="h-100 d-flex flex-column border-end" *ngIf="regions">
   <div tabindex="-1" class="list-group list-group-flush flex-grow-1 overflow-auto">
     <h1 class="visually-hidden">Résultats par région</h1>
     <article
@@ -16,7 +16,7 @@
         <h2 class="h5 fw-bold mb-0">{{ region.nom }}</h2>
         <div class="text-muted">{{ region.lieuxCount }} résultats</div>
       </a>
-      <button *ngIf="region.hub" class="btn btn-link" (click)="showHub.emit(region)">
+      <button *ngIf="region.hub" class="btn btn-link" (click)="showHub.emit(region); showHubInvokingContext.emit($event)">
         <img
           [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + region.hub.nom + '.png'"
           [alt]="region.hub.nom"
@@ -25,7 +25,7 @@
       </button>
     </article>
   </div>
-  <div class="bg-primary py-3 px-4 text-end d-block d-lg-none">
+  <div class="bg-primary py-3 px-4 text-end d-block d-lg-none d-print-none">
     <button class="btn btn-link link-light text-decoration-none" (click)="cartographieLayout.toggleMapForSmallDevices()">
       Afficher la carte
       <i class="ri-arrow-right-s-line" aria-hidden="true"></i>

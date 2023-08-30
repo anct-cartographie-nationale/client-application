@@ -1,5 +1,5 @@
 <div class="h-100 d-flex flex-column">
-  <nav class="navbar navbar-expand-lg bg-light shadow-sm z-index-over-base sticky-top" aria-label="coordination">
+  <nav class="navbar navbar-expand-lg bg-light shadow-sm z-index-elevated sticky-top" aria-label="coordination">
     <div class="container-fluid">
       <div class="navbar-collapse">
         <app-user-location (location)="userLocalisation = $event"></app-user-location>
@@ -8,7 +8,7 @@
   </nav>
   <div class="flex-grow-1 overflow-auto">
     <div class="d-flex h-100">
-      <main class="border-end col-12 map-list h-100"><router-outlet></router-outlet></main>
+      <main id="content" class="border-end col-12 map-list h-100"><router-outlet></router-outlet></main>
       <div class="col overflow-auto position-relative">
         <aside
           class="position-absolute bottom-0 end-0 z-index-over-all mb-4 me-2 bg-white shadow-sm"
@@ -35,6 +35,7 @@
         <aside class="h-100" aria-hidden="true">
           <mgl-map
             *ngIf="(markersPresenter.localisation$ | async) as localisation"
+            tabindex="-1"
             [movingMethod]="'flyTo'"
             [movingOptions]="{speed: 2}"
             class="h-100 w-100 overflow-hidden"
@@ -51,7 +52,8 @@
             <app-conseillers-markers
               [zoom]="currentZoom"
               [conseillers]="(conseillers$ | async) ?? []"
-              (showDetails)="conseillerDetailsModal.toggle(); conseillerSelected = $event"></app-conseillers-markers>
+              (showDetails)=" conseillerSelected = $event"
+              (showDetailsInvokingContext)="conseillerDetailsModal.control.toggle($event)"></app-conseillers-markers>
             <app-coordinateurs-markers
               [coordinateurs]="(coordinateurs$ | async) ?? []"
               [selectedId]="(markersPresenter.selected$ | async) ?? ''"
@@ -65,6 +67,6 @@
   </div>
 </div>
 <app-conseiller-details-modal
+  #conseillerDetailsModal
   [conseiller]="$any(conseillerSelected)"
-  [route]="route"
-  #conseillerDetailsModal></app-conseiller-details-modal>
+  [route]="route"></app-conseiller-details-modal>

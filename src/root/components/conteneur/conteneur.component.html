@@ -1,4 +1,19 @@
 <div class="vh-100 d-flex flex-column flex-grow-1">
+  <div class="visually-hidden-focusable bg-light">
+    <div class="container-fluid">
+      <a
+        *ngFor="let skipLink of skipLinkPresenter.skipLinks$ | async"
+        class="d-inline-flex p-2 m-1"
+        [routerLink]="['.']"
+        [relativeTo]="skipLink.route"
+        queryParamsHandling="preserve"
+        [fragment]="skipLink.fragment"
+        spellcheck="false"
+        (click)="skipTo(skipLink.fragment)">
+        <ng-template [ngTemplateOutlet]="skipLink.content"></ng-template>
+      </a>
+    </div>
+  </div>
   <header class="navbar navbar-expand-lg bg-white d-print-none border-bottom z-index-over-base">
     <div class="container-fluid mx-sm-3 mx-0">
       <a [routerLink]="['/']" class="navbar-brand">
@@ -20,7 +35,7 @@
         #navbarOffcanvas
         heading="Menu principal"
         [useHeader]="false"
-        className="w-100 mt-lg-0 mt-navbar z-index-over-all">
+        className="w-100 mt-lg-0 mt-navbar z-index-over">
         <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a
@@ -55,7 +70,7 @@
         [attr.aria-controls]="navbarOffcanvas.id"
         [class.active]="navbarOffcanvas.expanded$ | async"
         aria-label="Afficher le menu de navigation"
-        (click)="navbarOffcanvas.toggle()">
+        (click)="navbarOffcanvas.toggle($event)">
         <i [ngClass]="(navbarOffcanvas.expanded$ | async) ? 'ri-close-line' : 'ri-menu-line'" aria-hidden="true"></i>
       </button>
     </div>

@@ -1,3 +1,6 @@
+<app-skip-link fragment="content">Contenu</app-skip-link>
+<app-skip-link fragment="results">Résultat</app-skip-link>
+<app-skip-link fragment="footer">Pied de page</app-skip-link>
 <div class="h-100 d-flex pt-5">
   <div class="w-100 my-auto">
     <h1 class="h2 text-center fw-bold mt-sm-5 mt-3">
@@ -13,6 +16,7 @@
         <div class="accordion-item mb-3">
           <h2 class="accordion-header" id="headingDatePrecise">
             <button
+              #collapseDatePreciseControl
               type="button"
               class="btn orientation-btn bg-light mb-3 p-3 rounded-0 d-flex position-relative w-100"
               aria-controls="collapseDatePrecise"
@@ -26,7 +30,7 @@
               <span class="ms-auto me-3 end-0 d-flex">
                 <button
                   class="btn p-0 border-0"
-                  (click)="selectOrientationInformation(false); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()">
+                  (click)="selectOrientationInformation(false); informationOrientationModal.control.toggle($event); $event.stopPropagation(); $event.preventDefault()">
                   <span class="visually-hidden">Info</span>
                   <i class="ri-information-line fw-normal ri-2x text-muted" aria-hidden="true"></i>
                 </button>
@@ -42,7 +46,7 @@
           </h2>
           <app-collapse
             #collapseDatePrecise
-            id="collapseDatePrecise"
+            [control]="collapseDatePreciseControl"
             [state]="hasOpeningsHours ? 'expanded' : 'collapsed'"
             aria-labelledby="headingDatePrecise">
             <fieldset class="accordion-body bg-light px-3 py-4">
@@ -89,7 +93,7 @@
             <span class="ms-auto me-3 end-0 d-flex">
               <button
                 class="btn p-0 border-0"
-                (click)="selectOrientationInformation(true); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()">
+                (click)="selectOrientationInformation(true); informationOrientationModal.control.toggle($event); $event.stopPropagation(); $event.preventDefault()">
                 <span class="visually-hidden">Info</span>
                 <i class="ri-information-line fw-normal ri-2x text-muted" aria-hidden="true"></i>
               </button>
@@ -109,7 +113,7 @@
             <span class="ms-auto me-3 end-0 d-flex">
               <button
                 class="btn p-0 border-0"
-                (click)="selectOrientationInformation(true); informationOrientationModal.toggle(); $event.stopPropagation(); $event.preventDefault()">
+                (click)="selectOrientationInformation(true); informationOrientationModal.control.toggle($event); $event.stopPropagation(); $event.preventDefault()">
                 <span class="visually-hidden">Info</span>
                 <i class="ri-information-line fw-normal ri-2x text-muted" aria-hidden="true"></i>
               </button>
@@ -121,17 +125,14 @@
     </ng-container>
   </div>
 </div>
-<app-information-orientation-modal
-  #informationOrientationModal
-  [orientationInformation]="selectedOrientationInformation"
-  (hideChange)="displayCartographieLink = false">
+<app-information-orientation-modal #informationOrientationModal [orientationInformation]="selectedOrientationInformation">
   <ng-container *ngIf="features.get('cartographie') as cartographie">
     <a
       *ngIf="cartographie.active && displayCartographieLink"
       [routerLink]="['/','cartographie']"
       queryParamsHandling="preserve"
       class="btn btn-primary"
-      (click)="informationOrientationModal.close()">
+      (click)="informationOrientationModal.control.close()">
       Afficher les résultats
       <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
     </a>
@@ -139,7 +140,7 @@
       *ngIf="!cartographie.active && displayCartographieLink"
       [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
       class="btn btn-primary"
-      (click)="informationOrientationModal.close()">
+      (click)="informationOrientationModal.control.close()">
       Afficher les résultats
       <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
     </a>
