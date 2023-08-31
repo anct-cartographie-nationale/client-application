@@ -46,5 +46,5 @@ export class PresentationPage {
     this._currentSlide$.next(this._currentSlide$.value + 1 > 3 ? 0 : this._currentSlide$.value + 1);
   };
 
-  public slidesBackground: string[] = ['bg-orientation', 'bg-visibilite', 'bg-centralisation', 'bg-actualisation'];
+  public slidesBackground: string[] = ['bg-orientation', 'bg-centralisation', 'bg-actualisation', 'bg-visibilite'];
 }
