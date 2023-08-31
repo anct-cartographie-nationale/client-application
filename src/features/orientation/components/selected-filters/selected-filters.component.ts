@@ -43,7 +43,5 @@ export class SelectedFiltersComponent {
     );
   }
 
-  public getLabelFromCNFS(value: string): string {
-    return value === LabelNational.CNFS ? 'Conseillers numériques' : value;
-  }
+  public labelMap: Map<string, string> = new Map<LabelNational, string>([[LabelNational.CNFS, 'Conseillers Numériques']]);
 }
