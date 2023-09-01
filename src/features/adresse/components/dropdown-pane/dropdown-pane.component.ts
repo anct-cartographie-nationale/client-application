@@ -45,8 +45,10 @@ export class DropdownPaneComponent {
   }
 
   public reduce(): void {
-    this._expanded$.next(false);
-    this._expanded = false;
+    setTimeout(() => {
+      this._expanded$.next(false);
+      this._expanded = false;
+    }, 100);
   }
 
   public setIndex(index: number): void {
