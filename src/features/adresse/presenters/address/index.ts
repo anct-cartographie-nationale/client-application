@@ -1,2 +1,2 @@
 export * from './address.presenter';
-export * from './address-found.presentation';
+export * from './result-found.presentation';

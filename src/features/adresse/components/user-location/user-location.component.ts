@@ -1,11 +1,23 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable, of, Subject, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  forkJoin,
+  Observable,
+  of,
+  Subject,
+  switchMap,
+  tap
+} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import { MarkersPresenter } from '../../../core/presenters';
-import { AddressFoundPresentation, AddressPresenter } from '../../presenters';
+import { Searchable, SEARCHABLE_TOKEN } from '../../configuration';
+import { ResultFoundPresentation } from '../../presenters';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
@@ -35,14 +47,18 @@ export class UserLocationComponent implements OnInit {
 
   public readonly displayGeolocation$: Observable<boolean> = this._displayGeolocation$.asObservable();
 
-  public addressNotFound$: Observable<boolean> = of(false);
+  public notFound$: Observable<boolean> = of(false);
 
-  public addressesFound$: Observable<AddressFoundPresentation[]> = this._searchTerm$.pipe(
+  public resultsFound$: Observable<ResultFoundPresentation[]> = this._searchTerm$.pipe(
     map((searchTerm: string): string => searchTerm.trim()),
     filter((searchTerm: string): boolean => searchTerm.length >= MIN_SEARCH_TERM_LENGTH),
     debounceTime(SEARCH_DEBOUNCE_TIME),
     distinctUntilChanged(),
-    switchMap((searchTerm: string): Observable<AddressFoundPresentation[]> => this._addressPresenter.search$(searchTerm))
+    switchMap(
+      (searchTerm: string): Observable<ResultFoundPresentation[][]> =>
+        forkJoin(this._searchables.map((searchable: Searchable) => searchable.search$(searchTerm)))
+    ),
+    map((resultsToCombine: ResultFoundPresentation[][]) => resultsToCombine.flat())
   );
 
   public initialSearch$: Observable<string> = this._initialSearch$.pipe(
@@ -50,9 +66,13 @@ export class UserLocationComponent implements OnInit {
     filter((searchTerm: string): boolean => searchTerm.length >= MIN_SEARCH_TERM_LENGTH),
     debounceTime(SEARCH_DEBOUNCE_TIME),
     distinctUntilChanged(),
-    switchMap((searchTerm: string): Observable<AddressFoundPresentation[]> => this._addressPresenter.search$(searchTerm)),
-    tap((addressesFound: AddressFoundPresentation[]) => addressesFound[0] && this.onSelectAddress(addressesFound[0])),
-    map((addressesFound: AddressFoundPresentation[]) => addressesFound[0]?.label)
+    switchMap(
+      (searchTerm: string): Observable<ResultFoundPresentation[][]> =>
+        forkJoin(this._searchables.map((searchable: Searchable) => searchable.search$(searchTerm)))
+    ),
+    map((resultsToCombine: ResultFoundPresentation[][]) => resultsToCombine.flat()),
+    tap((addressesFound: ResultFoundPresentation[]) => addressesFound[0] && this.onSelected(addressesFound[0])),
+    map((addressesFound: ResultFoundPresentation[]) => addressesFound[0]?.label)
   );
 
   @Output() public location: EventEmitter<Localisation> = new EventEmitter<Localisation>();
@@ -60,7 +80,8 @@ export class UserLocationComponent implements OnInit {
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
-    private readonly _addressPresenter: AddressPresenter,
+    @Inject(SEARCHABLE_TOKEN)
+    private readonly _searchables: Searchable[],
     public readonly markersPresenter: MarkersPresenter,
     public readonly route: ActivatedRoute
   ) {}
@@ -69,16 +90,16 @@ export class UserLocationComponent implements OnInit {
     this.adresse && this._initialSearch$.next(this.adresse);
   }
 
-  public onSearchAddress(searchTerm: string): void {
+  public onSearch(searchTerm: string): void {
     this._searchTerm$.next(searchTerm);
   }
 
-  public onSelectAddress(address: AddressFoundPresentation): void {
+  public onSelected(selectedResult: ResultFoundPresentation): void {
     this.markersPresenter.center(
-      address.localisation,
+      selectedResult.localisation,
       setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
     );
-    this.location.emit(address.localisation);
+    this.location.emit(selectedResult.localisation);
     this._displayGeolocation$.next(true);
   }
 

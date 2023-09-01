@@ -4,7 +4,9 @@ import { ConseillersRepository } from '../../../reporitories';
 import { Conseiller } from '../../../models';
 import { ConseillersOnMapPresenter } from './conseillers-on-map.presenter';
 
-const conseillersRepository: ConseillersRepository = { getAll$: (): Observable<Conseiller[]> => of(conseillersData) };
+const conseillersRepository: ConseillersRepository = {
+  getAll$: (): Observable<Conseiller[]> => of(conseillersData)
+} as ConseillersRepository;
 
 describe('conseillers on map presenter', (): void => {
   it('should get all conseillers on map', async (): Promise<void> => {

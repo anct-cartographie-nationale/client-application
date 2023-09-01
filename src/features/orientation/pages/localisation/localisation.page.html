@@ -15,14 +15,14 @@
         <div class="col-md-9 col-11">
           <div class="row g-4">
             <div class="col-sm">
-              <app-address-field
+              <app-search-field
                 [displayReset]="true"
-                [addressSuggestions]="(addressesFound$ | async) ?? []"
-                [addressNotFound]="(addressNotFound$ | async) ?? false"
+                [suggestions]="(addressesFound$ | async) ?? []"
+                [isNotFound]="(addressNotFound$ | async) ?? false"
                 [defaultValue]="orientationLayout.filterForm.get('address')?.value"
-                (selectAddress)="onSelectAddress($event)"
-                (resetAddress)="onResetAddress()"
-                (searchAddress)="onSearchAddress($event)"></app-address-field>
+                (selected)="onSelectAddress($event)"
+                (resetSearch)="onResetAddress()"
+                (search)="onSearchAddress($event)"></app-search-field>
             </div>
             <button class="btn btn-secondary text-nowrap col-auto mx-auto" (click)="onGeoLocate()">
               <div *ngIf="loadingState$ | async">

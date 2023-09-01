@@ -4,7 +4,7 @@ import { BehaviorSubject, debounceTime, distinctUntilChanged, filter, Observable
 import { map, mergeWith } from 'rxjs/operators';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
-import { AddressFoundPresentation, AddressPresenter, AddressRepository } from '../../../adresse';
+import { ResultFoundPresentation, AddressPresenter, AddressRepository } from '../../../adresse';
 import { OrientationLayout } from '../../layouts';
 import { localisationFromStrings } from './localisation.presenter';
 
@@ -25,12 +25,12 @@ const SEARCH_DEBOUNCE_TIME: number = 300;
 export class LocalisationPage {
   private readonly _searchTerm$: Subject<string> = new Subject<string>();
 
-  public addressesFound$: Observable<AddressFoundPresentation[]> = this._searchTerm$.pipe(
+  public addressesFound$: Observable<ResultFoundPresentation[]> = this._searchTerm$.pipe(
     map((searchTerm: string): string => searchTerm.trim()),
     filter((searchTerm: string): boolean => searchTerm.length >= MIN_SEARCH_TERM_LENGTH),
     debounceTime(SEARCH_DEBOUNCE_TIME),
     distinctUntilChanged(),
-    switchMap((searchTerm: string): Observable<AddressFoundPresentation[]> => this._addressPresenter.search$(searchTerm))
+    switchMap((searchTerm: string): Observable<ResultFoundPresentation[]> => this._addressPresenter.search$(searchTerm))
   );
 
   public addressNotFound$: Observable<boolean> = of(false);
@@ -46,9 +46,9 @@ export class LocalisationPage {
     mergeWith(
       this._geoLocation$.pipe(
         switchMap(
-          (localisation: Localisation): Observable<AddressFoundPresentation[]> => this._addressPresenter.reverse$(localisation)
+          (localisation: Localisation): Observable<ResultFoundPresentation[]> => this._addressPresenter.reverse$(localisation)
         ),
-        map((address: AddressFoundPresentation[]): boolean => {
+        map((address: ResultFoundPresentation[]): boolean => {
           this.orientationLayout.filterForm.get('address')?.setValue(address[0].label);
           return false;
         })
@@ -65,7 +65,7 @@ export class LocalisationPage {
     setTitle(['Localisation', 'Orientation']);
   }
 
-  public onSelectAddress(address: AddressFoundPresentation): void {
+  public onSelectAddress(address: ResultFoundPresentation): void {
     this.orientationLayout.filterForm.get('address')?.setValue(address.label);
     this.orientationLayout.filterForm.get('latitude')?.setValue(address.localisation.latitude);
     this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);

@@ -1,6 +1,6 @@
 import { LieuxMediationNumeriquePresenter, MarkersPresenter } from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
-import { AddressPresenter, AddressRepository } from '../../../adresse';
+import { AddressPresenter, AddressRepository, SEARCHABLE_TOKEN } from '../../../adresse';
 import { LieuxMediationNumeriqueDetailsPresenter } from '../../presenters';
 import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '../../../../root';
 
@@ -17,8 +17,15 @@ export const cartographieLayoutProviders = [
   },
   {
     deps: [AddressRepository],
-    provide: AddressPresenter,
-    useClass: AddressPresenter
+    provide: SEARCHABLE_TOKEN,
+    useClass: AddressPresenter,
+    multi: true
+  },
+  {
+    deps: [LieuxMediationNumeriqueRepository],
+    provide: SEARCHABLE_TOKEN,
+    useClass: LieuxMediationNumeriquePresenter,
+    multi: true
   },
   {
     deps: [ZOOM_LEVEL_TOKEN, INITIAL_POSITION_TOKEN],

@@ -24,6 +24,7 @@ import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.p
 import { LieuxMediationNumeriquePresenter } from './lieux-mediation-numerique.presenter';
 import { DepartementPresentation, RegionPresentation } from '../collectivite-territoriale';
 import { NO_LOCALISATION } from '../../models';
+import { ResultFoundPresentation } from '../../../adresse';
 
 describe('lieux-mediation-numerique-list presenter', (): void => {
   it('should append the distance from some localisation to a lieu mediation numerique', async (): Promise<void> => {
@@ -2336,6 +2337,133 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           source: 'hinaura',
           url: 'https://www.hinaura.fr/'
         }
+      }
+    ]);
+  });
+
+  it('should search a lieu by name and do not find any matches', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        nom: 'Anonymal',
+        adresse: Adresse({ code_postal: '51100', commune: 'Reims', voie: '12 BIS RUE DE LECLERCQ' }),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const searchResults: ResultFoundPresentation[] = await firstValueFrom(lieuxMediationNumeriqueListPresenter.search$('test'));
+
+    expect<ResultFoundPresentation[]>(searchResults).toStrictEqual([]);
+  });
+
+  it('should search a lieu by name and find a match', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        nom: 'Anonymal',
+        adresse: Adresse({ code_postal: '51100', commune: 'Reims', voie: '12 BIS RUE DE LECLERCQ' }),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const searchResults: ResultFoundPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.search$('Anonym')
+    );
+
+    expect<ResultFoundPresentation[]>(searchResults).toStrictEqual([
+      {
+        context: '12 BIS RUE DE LECLERCQ 51100, Reims',
+        label: 'Anonymal',
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      }
+    ]);
+  });
+
+  it('should search a lieu by name and find a match event if the case is different', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        nom: 'Anonymal',
+        adresse: Adresse({ code_postal: '51100', commune: 'Reims', voie: '12 BIS RUE DE LECLERCQ' }),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const searchResults: ResultFoundPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.search$('ANONYM')
+    );
+
+    expect<ResultFoundPresentation[]>(searchResults).toStrictEqual([
+      {
+        context: '12 BIS RUE DE LECLERCQ 51100, Reims',
+        label: 'Anonymal',
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      }
+    ]);
+  });
+
+  it('should search a lieu by name and limit to 2 results', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        nom: 'Anonymal Reims',
+        adresse: Adresse({ code_postal: '51100', commune: 'Reims', voie: '12 BIS RUE DE LECLERCQ' }),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      } as LieuMediationNumerique,
+      {
+        nom: 'Anonymal Nantes',
+        adresse: Adresse({ code_postal: '44000', commune: 'Nantes', voie: '17 rue Paul Bellamy' }),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      } as LieuMediationNumerique,
+      {
+        nom: 'Anonymal Dijon',
+        adresse: Adresse({ code_postal: '21000', commune: 'Dijon', voie: '43 RUE DES ATELIERS' }),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      } as LieuMediationNumerique
+    ];
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const searchResults: ResultFoundPresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.search$('ANONYM', 2)
+    );
+
+    expect<ResultFoundPresentation[]>(searchResults).toStrictEqual([
+      {
+        context: '12 BIS RUE DE LECLERCQ 51100, Reims',
+        label: 'Anonymal Reims',
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        context: '17 rue Paul Bellamy 44000, Nantes',
+        label: 'Anonymal Nantes',
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       }
     ]);
   });
