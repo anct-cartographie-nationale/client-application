@@ -21,7 +21,8 @@ import {
   openingState,
   FrancePresentation,
   TerritoirePresentation,
-  MarkersPresenter
+  MarkersPresenter,
+  WithLieuxCount
 } from '../../../core/presenters';
 import { ifAny } from '../../../core/utilities';
 import { ResultFoundPresentation } from '../../../adresse';
@@ -88,25 +89,30 @@ export class CartographieLayout {
     new Date()
   ];
 
-  public france$: Observable<FrancePresentation[]> = this._lieuxMediationNumeriqueListPresenter
+  public france$: Observable<WithLieuxCount<FrancePresentation[]>> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueFrance$(...this._lieuxMediationNumeriqueListPresenterArgs)
-    .pipe(tap(() => this._loadingState$.next(false)));
-
-  public regions$: Observable<RegionPresentation[]> = this._lieuxMediationNumeriqueListPresenter
-    .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
-      tap(() => {
+      tap(({ lieuxCount }: WithLieuxCount<FrancePresentation[]>): void => {
         this._loadingState$.next(false);
-        this._resultsCount$.next(0);
+        this._resultsCount$.next(lieuxCount);
       })
     );
 
-  public departements$: Observable<DepartementPresentation[]> = this._lieuxMediationNumeriqueListPresenter
+  public regions$: Observable<WithLieuxCount<RegionPresentation[]>> = this._lieuxMediationNumeriqueListPresenter
+    .lieuxMediationNumeriqueByRegion$(...this._lieuxMediationNumeriqueListPresenterArgs)
+    .pipe(
+      tap(({ lieuxCount }: WithLieuxCount<RegionPresentation[]>): void => {
+        this._loadingState$.next(false);
+        this._resultsCount$.next(lieuxCount);
+      })
+    );
+
+  public departements$: Observable<WithLieuxCount<DepartementPresentation[]>> = this._lieuxMediationNumeriqueListPresenter
     .lieuxMediationNumeriqueByDepartement$(...this._lieuxMediationNumeriqueListPresenterArgs)
     .pipe(
-      tap(() => {
+      tap(({ lieuxCount }: WithLieuxCount<DepartementPresentation[]>): void => {
         this._loadingState$.next(false);
-        this._resultsCount$.next(0);
+        this._resultsCount$.next(lieuxCount);
       })
     );
 
@@ -125,7 +131,7 @@ export class CartographieLayout {
         map(toLieuxWithOpeningState(new Date())),
         map(toLieuxByLongitude),
         tap((lieux: LieuMediationNumeriquePresentation[]): void => {
-          this._resultsCount$.next(lieux.length);
+          lieux.length > 0 && this._resultsCount$.next(lieux.length);
           this._loadingState$.next(false);
         })
       );
@@ -139,9 +145,14 @@ export class CartographieLayout {
 
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
 
-  public userLocalisation?: Localisation;
+  private readonly _userLocalisation$: BehaviorSubject<Localisation> = new BehaviorSubject<Localisation>(NO_LOCALISATION);
+  public readonly userLocalisation$: Observable<Localisation> = this._userLocalisation$.asObservable();
 
   @ViewChild(RouterOutlet) public routerOutlet!: RouterOutlet | undefined;
+
+  public currentDepartement?: string;
+
+  public currentRegion?: string;
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
@@ -166,8 +177,8 @@ export class CartographieLayout {
     this.router.navigate(['regions', region.nom], { relativeTo: this.route.parent, queryParamsHandling: 'preserve' });
   }
 
-  public onShowLieuxInZone(zone: TerritoirePresentation): void {
-    this.markersPresenter.center(zone.localisation, zone.zoom);
+  public onShowLieuxInZone(zone?: TerritoirePresentation): void {
+    zone ? this.markersPresenter.center(zone.localisation, zone.zoom) : this.markersPresenter.reset();
   }
 
   public onShowDetails(lieu: LieuMediationNumeriqueOnMapPresentation): void {
@@ -225,13 +236,16 @@ export class CartographieLayout {
     return this.route.children[0]?.children[0]?.snapshot.paramMap.get(routeParam) ?? '';
   }
 
-  public resetBreadcrumbOnGeolocate(result: ResultFoundPresentation<{ id?: string }>): Localisation {
+  public onResultFound(result: ResultFoundPresentation<{ id?: string }>): void {
     result.localisation &&
       this.router.navigate(result.payload?.id ? ['/cartographie', result.payload.id, 'details'] : ['/cartographie'], {
-        queryParams: {},
+        queryParams: {
+          latitude: result.localisation.latitude,
+          longitude: result.localisation.longitude
+        },
         queryParamsHandling: 'merge'
       });
-    return (this.userLocalisation = result.localisation);
+    this._userLocalisation$.next(result.localisation);
   }
 
   public toggleMapForSmallDevices(): void {

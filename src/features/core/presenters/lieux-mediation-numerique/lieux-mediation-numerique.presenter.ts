@@ -19,6 +19,7 @@ import { byDistance, filteredLieuxMediationNumerique } from './helpers/filter';
 import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ResultFoundPresentation, Searchable } from '../../../adresse';
 import { NO_LOCALISATION } from '../../models';
+import { WithLieuxCount } from '../collectivite-territoriale';
 
 type LieuxMediationNumeriqueFilterParameters = [LieuMediationNumerique[], Localisation, FilterPresentation];
 
@@ -40,29 +41,36 @@ const toLieuxMediationNumeriqueByDistance =
 
 const toLieuxMediationNumeriqueByDepartement =
   (date: Date) =>
-  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): DepartementPresentation[] =>
-    filteredLieuxMediationNumerique(...filterParameters, date)
-      .map(toDepartement)
-      .filter(onlyDefined)
-      .reduce(countLieuxInCollectiviteTerritoriale as () => DepartementPresentation[], [])
-      .sort(byLieuxCount);
+  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): WithLieuxCount<DepartementPresentation[]> =>
+    ((lieux: LieuMediationNumeriquePresentation[]): WithLieuxCount<DepartementPresentation[]> => ({
+      payload: lieux
+        .map(toDepartement)
+        .filter(onlyDefined)
+        .reduce(countLieuxInCollectiviteTerritoriale as () => DepartementPresentation[], []),
+      lieuxCount: lieux.length
+    }))(filteredLieuxMediationNumerique(...filterParameters, date));
 
 const toLieuxMediationNumeriqueByRegion =
   (date: Date) =>
-  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): RegionPresentation[] =>
-    filteredLieuxMediationNumerique(...filterParameters, date)
-      .map(toRegion)
-      .filter(onlyDefined)
-      .reduce(countLieuxInCollectiviteTerritoriale as () => RegionPresentation[], [])
-      .sort(byLieuxCount);
+  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): WithLieuxCount<RegionPresentation[]> =>
+    ((lieux: LieuMediationNumeriquePresentation[]): WithLieuxCount<RegionPresentation[]> => ({
+      payload: lieux
+        .map(toRegion)
+        .filter(onlyDefined)
+        .reduce(countLieuxInCollectiviteTerritoriale as () => RegionPresentation[], []),
+      lieuxCount: lieux.length
+    }))(filteredLieuxMediationNumerique(...filterParameters, date));
 
 const toLieuxMediationNumeriqueFrance =
   (date: Date) =>
-  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): FrancePresentation[] =>
-    filteredLieuxMediationNumerique(...filterParameters, date)
-      .map(toFrance)
-      .filter(onlyDefined)
-      .reduce(countLieuxInCollectiviteTerritoriale as () => FrancePresentation[], []);
+  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters) =>
+    ((lieux: LieuMediationNumeriquePresentation[]): WithLieuxCount<FrancePresentation[]> => ({
+      payload: lieux
+        .map(toFrance)
+        .filter(onlyDefined)
+        .reduce(countLieuxInCollectiviteTerritoriale as () => FrancePresentation[], []),
+      lieuxCount: lieux.length
+    }))(filteredLieuxMediationNumerique(...filterParameters, date));
 
 const toResultFound = ({
   id,
@@ -107,7 +115,7 @@ export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string
     localisation$: Observable<Localisation>,
     filter$: Observable<FilterPresentation> = of({}),
     date: Date = new Date()
-  ): Observable<DepartementPresentation[]> {
+  ): Observable<WithLieuxCount<DepartementPresentation[]>> {
     return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
       debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
       map(toLieuxMediationNumeriqueByDepartement(date))
@@ -118,7 +126,7 @@ export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string
     localisation$: Observable<Localisation>,
     filter$: Observable<FilterPresentation> = of({}),
     date: Date = new Date()
-  ): Observable<RegionPresentation[]> {
+  ): Observable<WithLieuxCount<RegionPresentation[]>> {
     return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
       debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
       map(toLieuxMediationNumeriqueByRegion(date))
@@ -129,7 +137,7 @@ export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string
     localisation$: Observable<Localisation>,
     filter$: Observable<FilterPresentation> = of({}),
     date: Date = new Date()
-  ): Observable<FrancePresentation[]> {
+  ): Observable<WithLieuxCount<FrancePresentation[]>> {
     return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
       debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
       map(toLieuxMediationNumeriqueFrance(date))

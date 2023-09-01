@@ -22,7 +22,7 @@ import {
 import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
 import { LieuxMediationNumeriquePresenter } from './lieux-mediation-numerique.presenter';
-import { DepartementPresentation, RegionPresentation } from '../collectivite-territoriale';
+import { DepartementPresentation, RegionPresentation, WithLieuxCount } from '../collectivite-territoriale';
 import { NO_LOCALISATION } from '../../models';
 import { ResultFoundPresentation } from '../../../adresse';
 
@@ -2283,11 +2283,11 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const departementPresentations: DepartementPresentation[] = await firstValueFrom(
+    const departementPresentations: WithLieuxCount<DepartementPresentation[]> = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDepartement$(of(NO_LOCALISATION), of({}), undefined)
     );
 
-    expect<DepartementPresentation[]>(departementPresentations).toStrictEqual([
+    expect<DepartementPresentation[]>(departementPresentations.payload).toStrictEqual([
       {
         code: '69',
         nom: 'Rhône',
@@ -2317,11 +2317,11 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const regionPresentations: RegionPresentation[] = await firstValueFrom(
+    const regionPresentations: WithLieuxCount<RegionPresentation[]> = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByRegion$(of(NO_LOCALISATION), of({}), undefined)
     );
 
-    expect<RegionPresentation[]>(regionPresentations).toStrictEqual([
+    expect<RegionPresentation[]>(regionPresentations.payload).toStrictEqual([
       {
         code: '84',
         nom: 'Auvergne-Rhône-Alpes',

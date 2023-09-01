@@ -20,8 +20,6 @@ const ANIMATION_DURATION: 300 = 300 as const;
 export class OffcanvasComponent implements OnChanges {
   @Input() public isAbsolute: boolean = false;
 
-  @Input() public useContainer: boolean = true;
-
   @Input() public useHeader: boolean = true;
 
   @Input() public useCloseButton: boolean = true;
