@@ -2,27 +2,24 @@
   <div class="col-md col-12">
     <address class="mb-2">
       {{ adresse }}
-      <ng-container *ngIf="distance">- {{ distance | distance }}</ng-container>
     </address>
-    <div class="mb-2">
-      <a class="text-decoration-none" *ngIf="accessibilite" href="{{ accessibilite }}" target="_blank">
-        <i class="ri-wheelchair-line ri-xl text-primary" aria-hidden="true"></i>
-        <b>Consulter les informations d'accessibilité</b>
-      </a>
-    </div>
-    <div *ngIf="conditionsAcces" class="text-primary mb-2">{{ conditionsAcces }}</div>
-  </div>
-  <div class="col-md-auto col-12 text-md-end d-print-none" *ngIf="courriel || telephone">
-    <div class="mb-3" *ngIf="status">
-      <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
+    <div *ngIf="distance">{{ distance | distance }}</div>
+    <div class="mb-3 d-flex align-items-center" *ngIf="status">
+      <i
+        [class.text-primary]="status.label === 'Ouvert'"
+        class="ri-checkbox-blank-circle-fill ri-xxs me-1"
+        aria-hidden="true"></i>
       <span [class.text-primary]="status.label === 'Ouvert'" [class.text-danger]="status.label === 'Fermé'">
         {{ status.label }}
       </span>
-      <small class="text-muted">· {{ status.limite }}</small>
+      <span class="mx-1">·</span>
+      <i class="small text-muted align-self-end">{{ status.limite }}</i>
     </div>
-    <a *ngIf="courriel" href="mailto:{{ courriel }}" class="btn btn-sm btn-secondary mb-2" (click)="$event.stopPropagation()">
+  </div>
+  <div class="col-md-auto col-12 text-md-end d-print-none" *ngIf="courriel || telephone">
+    <a *ngIf="courriel" href="mailto:{{ courriel }}" class="btn btn-sm btn-secondary mb-1" (click)="$event.stopPropagation()">
       <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
-      <span>Contacter par mail</span>
+      Contacter par mail
     </a>
     <a
       *ngIf="telephone"
@@ -34,4 +31,11 @@
       <span class="visually-hidden">Contacter par téléphone</span>
     </a>
   </div>
+  <div class="mt-2">
+    <a class="text-decoration-none" *ngIf="accessibilite" href="{{ accessibilite }}" target="_blank">
+      <i class="ri-wheelchair-line ri-xl text-primary" aria-hidden="true"></i>
+      <b>Consulter les informations d'accessibilité</b>
+    </a>
+  </div>
+  <div *ngIf="conditionsAcces" class="text-primary mt-2">{{ conditionsAcces }}</div>
 </div>
