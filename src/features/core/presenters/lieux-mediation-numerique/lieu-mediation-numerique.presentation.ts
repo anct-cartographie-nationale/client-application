@@ -38,6 +38,8 @@ export type LieuMediationNumeriquePresentation = {
   distance?: number;
 };
 
+export type LieuMediationNumeriquePresentationWithDistance = LieuMediationNumeriquePresentation & { distance: number };
+
 const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisation: Localisation): number | undefined =>
   lieuMediationNumerique.localisation == null || localisation === NO_LOCALISATION
     ? undefined
