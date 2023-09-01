@@ -35,6 +35,8 @@ export class UserLocationComponent implements OnInit {
 
   @Input() fullWidth: boolean = false;
 
+  @Input() placeholder: string = 'Entrez une adresse';
+
   private readonly _initialSearch$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   private readonly _searchTerm$: Subject<string> = new Subject<string>();

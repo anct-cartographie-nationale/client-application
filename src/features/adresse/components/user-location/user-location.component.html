@@ -1,5 +1,7 @@
 <div class="d-flex">
   <app-search-field
+    style="width: 375px"
+    [placeholder]="placeholder"
     [class.w-100]="fullWidth"
     [defaultValue]="(initialSearch$ | async) ?? ''"
     [suggestions]="(resultsFound$ | async) ?? []"

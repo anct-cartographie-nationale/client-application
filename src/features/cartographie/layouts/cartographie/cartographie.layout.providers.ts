@@ -16,15 +16,15 @@ export const cartographieLayoutProviders = [
     useClass: LieuxMediationNumeriqueDetailsPresenter
   },
   {
-    deps: [AddressRepository],
-    provide: SEARCHABLE_TOKEN,
-    useClass: AddressPresenter,
-    multi: true
-  },
-  {
     deps: [LieuxMediationNumeriqueRepository],
     provide: SEARCHABLE_TOKEN,
     useClass: LieuxMediationNumeriquePresenter,
+    multi: true
+  },
+  {
+    deps: [AddressRepository],
+    provide: SEARCHABLE_TOKEN,
+    useClass: AddressPresenter,
     multi: true
   },
   {

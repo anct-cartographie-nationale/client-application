@@ -10,17 +10,19 @@ import { ResultFoundPresentation } from '../../../adresse';
 export class SearchFieldComponent implements OnChanges {
   @Input() public suggestions: ResultFoundPresentation[] = [];
 
+  @Input() public isNotFound: boolean = false;
+
+  @Input() public displayReset: boolean = false;
+
+  @Input() public placeholder: string = 'Entrez une adresse';
+
+  @Input() public defaultValue?: string;
+
   @Output() public readonly selected: EventEmitter<ResultFoundPresentation> = new EventEmitter<ResultFoundPresentation>();
 
   @Output() public readonly resetSearch: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() public readonly search: EventEmitter<string> = new EventEmitter<string>();
-
-  @Input() public isNotFound: boolean = false;
-
-  @Input() public displayReset: boolean = false;
-
-  @Input() public defaultValue?: string;
 
   formGroup: FormGroup = new FormGroup({ search: new FormControl() });
 

@@ -33,6 +33,7 @@
     aria-label="cartographie">
     <div class="container-fluid ms-sm-4 p-0">
       <app-user-location
+        placeholder="Recherchez un lieu ou une adresse"
         class="me-3 d-sm-inline-block d-none"
         [adresse]="(defaultAddress$ | async) ?? ''"
         (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
@@ -83,6 +84,7 @@
       <div class="d-flex flex-column h-100 border-top">
         <div class="flex-grow-1">
           <app-user-location
+            placeholder="Recherchez un lieu ou une adresse"
             class="m-3 d-sm-none d-block"
             [adresse]="(defaultAddress$ | async) ?? ''"
             [fullWidth]="true"
