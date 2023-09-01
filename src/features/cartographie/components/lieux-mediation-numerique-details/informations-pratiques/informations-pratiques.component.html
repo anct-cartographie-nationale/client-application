@@ -14,8 +14,8 @@
   </div>
   <div class="col-md-auto col-12 text-md-end d-print-none" *ngIf="courriel || telephone">
     <div class="mb-3" *ngIf="status">
+      <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
       <span [class.text-primary]="status.label === 'Ouvert'" [class.text-danger]="status.label === 'Fermé'">
-        <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
         {{ status.label }}
       </span>
       <small class="text-muted">· {{ status.limite }}</small>
