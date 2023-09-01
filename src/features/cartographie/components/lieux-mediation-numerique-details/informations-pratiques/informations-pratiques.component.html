@@ -7,6 +7,7 @@
     <div class="mb-3 d-flex align-items-center" *ngIf="status">
       <i
         [class.text-primary]="status.label === 'Ouvert'"
+        [class.text-danger]="status.label === 'Fermé'"
         class="ri-checkbox-blank-circle-fill ri-xxs me-1"
         aria-hidden="true"></i>
       <span [class.text-primary]="status.label === 'Ouvert'" [class.text-danger]="status.label === 'Fermé'">
