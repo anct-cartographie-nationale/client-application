@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, Renderer2 } from '@angular/core';
-import { SkipLinkPresenter } from '../../../features/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, Input, Renderer2, ViewChild } from '@angular/core';
+import { OffcanvasComponent, SkipLinkPresenter } from '../../../features/core';
 import { BRAND_CONFIGURATION, BRAND_TOKEN, BrandConfiguration } from '../../configuration';
 
 @Component({
@@ -15,6 +15,8 @@ export class ConteneurComponent {
   @Input() set titre(name: string) {
     BRAND_CONFIGURATION.name = name;
   }
+
+  @ViewChild('navbarOffcanvas') navbarOffcanvas!: OffcanvasComponent;
 
   public constructor(
     @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration,

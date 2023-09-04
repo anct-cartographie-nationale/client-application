@@ -1,5 +1,18 @@
-<app-conteneur>
+<app-conteneur #conteneur>
   <router-outlet></router-outlet>
+  <ng-container slot="links">
+    <li class="nav-item">
+      <a
+        [routerLink]="['/', 'presentation']"
+        queryParamsHandling="preserve"
+        class="nav-link ms-4 pb-0 px-0"
+        ariaCurrentWhenActive="page"
+        routerLinkActive="active"
+        (click)="conteneur.navbarOffcanvas.close()">
+        Présentation
+      </a>
+    </li>
+  </ng-container>
   <footer id="footer" slot="footer" class="container-fluid p-4 bg-dark d-print-none">
     <div class="row justify-content-between">
       <div class="col-lg-auto">
