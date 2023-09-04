@@ -65,14 +65,16 @@ const toLieuxMediationNumeriqueFrance =
       .reduce(countLieuxInCollectiviteTerritoriale as () => FrancePresentation[], []);
 
 const toResultFound = ({
+  id,
   adresse,
   nom,
   localisation
 }: LieuMediationNumerique & {
   localisation: Localisation;
-}): ResultFoundPresentation => ({
+}): ResultFoundPresentation<{ id: string }> => ({
   context: `${adresse.voie} ${adresse.code_postal}, ${adresse.commune}`,
   label: nom,
+  payload: { id },
   localisation
 });
 
@@ -85,7 +87,7 @@ const onlyNomMatching =
   } =>
     lieu.nom.toLowerCase().includes(searchTerm.toLowerCase()) && lieu.localisation != null;
 
-export class LieuxMediationNumeriquePresenter implements Searchable {
+export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string }> {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
   public lieuxMediationNumeriqueByDistance$(
@@ -134,9 +136,9 @@ export class LieuxMediationNumeriquePresenter implements Searchable {
     );
   }
 
-  public search$(searchTerm: string, limit: number = 5): Observable<ResultFoundPresentation[]> {
+  public search$(searchTerm: string, limit: number = 5): Observable<ResultFoundPresentation<{ id: string }>[]> {
     return this.lieuxMediationNumerique$.pipe(
-      map((lieux: LieuMediationNumerique[]): ResultFoundPresentation[] =>
+      map((lieux: LieuMediationNumerique[]): ResultFoundPresentation<{ id: string }>[] =>
         lieux.filter(onlyNomMatching(searchTerm)).slice(0, limit).map(toResultFound)
       )
     );

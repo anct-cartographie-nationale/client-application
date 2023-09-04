@@ -77,7 +77,7 @@ export class UserLocationComponent implements OnInit {
     map((addressesFound: ResultFoundPresentation[]) => addressesFound[0]?.label)
   );
 
-  @Output() public location: EventEmitter<Localisation> = new EventEmitter<Localisation>();
+  @Output() public resultFound: EventEmitter<ResultFoundPresentation> = new EventEmitter<ResultFoundPresentation>();
 
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
@@ -101,7 +101,7 @@ export class UserLocationComponent implements OnInit {
       selectedResult.localisation,
       setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
     );
-    this.location.emit(selectedResult.localisation);
+    this.resultFound.emit(selectedResult);
     this._displayGeolocation$.next(true);
   }
 
@@ -117,7 +117,7 @@ export class UserLocationComponent implements OnInit {
         localisation,
         setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
       );
-      this.location.emit(localisation);
+      this.resultFound.emit({ context: '', label: '', localisation });
 
       this._loadingState$.next(false);
       this._displayGeolocation$.next(false);

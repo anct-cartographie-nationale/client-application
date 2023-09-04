@@ -36,7 +36,7 @@
         placeholder="Recherchez un lieu ou une adresse"
         class="me-3 d-sm-inline-block d-none"
         [adresse]="(defaultAddress$ | async) ?? ''"
-        (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
+        (resultFound)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
       <app-location-breadcrumb
         id="breadcrumb"
         class="d-lg-inline-block d-none"
@@ -88,7 +88,7 @@
             class="m-3 d-sm-none d-block"
             [adresse]="(defaultAddress$ | async) ?? ''"
             [fullWidth]="true"
-            (location)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
+            (resultFound)="resetBreadcrumbOnGeolocate($event)"></app-user-location>
           <app-affiner-recherche-form
             *ngIf="affinerRechercheOffcanvas.expanded$ | async"
             [lieuxMediationNumeriques]="(allLieuxMediationNumerique$ | async) ?? []"></app-affiner-recherche-form>

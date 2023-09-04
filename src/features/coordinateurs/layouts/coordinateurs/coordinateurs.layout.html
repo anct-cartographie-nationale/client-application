@@ -4,7 +4,7 @@
       <div class="navbar-collapse">
         <app-user-location
           placeholder="Recherchez un Conum ou une adresse"
-          (location)="userLocalisation = $event"></app-user-location>
+          (resultFound)="userLocalisation = $event.localisation"></app-user-location>
       </div>
     </div>
   </nav>
