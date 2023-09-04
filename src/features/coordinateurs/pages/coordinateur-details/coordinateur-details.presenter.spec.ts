@@ -6,7 +6,9 @@ import { ConseillersRepository, CoordinateursRepository } from '../../reporitori
 import { CoordinateurDetailsPresenter } from './coordinateur-details.presenter';
 import { ConseillerDetailsPresentation, CoordinateurDetailsPresentation } from './coordinateur-details.presentation';
 
-const conseillersRepository: ConseillersRepository = { getAll$: (): Observable<Conseiller[]> => of(conseillersData) };
+const conseillersRepository: ConseillersRepository = {
+  getAll$: (): Observable<Conseiller[]> => of(conseillersData)
+} as ConseillersRepository;
 const coordinateursRepository: CoordinateursRepository = { getAll$: (): Observable<Coordinateur[]> => of(coordinateursData) };
 
 describe('coordinateur details presenter', (): void => {

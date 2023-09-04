@@ -17,6 +17,7 @@ import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.p
 import { byBoundingBox } from './helpers/bounding-box';
 import { byDistance, filteredLieuxMediationNumerique } from './helpers/filter';
 import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { ResultFoundPresentation, Searchable } from '../../../adresse';
 import { NO_LOCALISATION } from '../../models';
 
 type LieuxMediationNumeriqueFilterParameters = [LieuMediationNumerique[], Localisation, FilterPresentation];
@@ -63,7 +64,30 @@ const toLieuxMediationNumeriqueFrance =
       .filter(onlyDefined)
       .reduce(countLieuxInCollectiviteTerritoriale as () => FrancePresentation[], []);
 
-export class LieuxMediationNumeriquePresenter {
+const toResultFound = ({
+  id,
+  adresse,
+  nom,
+  localisation
+}: LieuMediationNumerique & {
+  localisation: Localisation;
+}): ResultFoundPresentation<{ id: string }> => ({
+  context: `${adresse.voie} ${adresse.code_postal}, ${adresse.commune}`,
+  label: nom,
+  payload: { id },
+  localisation
+});
+
+const onlyNomMatching =
+  (searchTerm: string) =>
+  (
+    lieu: LieuMediationNumerique
+  ): lieu is LieuMediationNumerique & {
+    localisation: Localisation;
+  } =>
+    lieu.nom.toLowerCase().includes(searchTerm.toLowerCase()) && lieu.localisation != null;
+
+export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string }> {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
   public lieuxMediationNumeriqueByDistance$(
@@ -109,6 +133,14 @@ export class LieuxMediationNumeriquePresenter {
     return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
       debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
       map(toLieuxMediationNumeriqueFrance(date))
+    );
+  }
+
+  public search$(searchTerm: string, limit: number = 5): Observable<ResultFoundPresentation<{ id: string }>[]> {
+    return this.lieuxMediationNumerique$.pipe(
+      map((lieux: LieuMediationNumerique[]): ResultFoundPresentation<{ id: string }>[] =>
+        lieux.filter(onlyNomMatching(searchTerm)).slice(0, limit).map(toResultFound)
+      )
     );
   }
 

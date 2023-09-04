@@ -1,0 +1,55 @@
+<form [formGroup]="formGroup" class="position-relative">
+  <label for="search" class="visually-hidden">Quelle est votre adresse ?</label>
+  <i class="text-muted ri-search-line ri-lg position-absolute mt-2 ms-2 ps-1 z-index-over-base" aria-hidden="true"></i>
+  <div class="input-group">
+    <input
+      #searchInput
+      type="search"
+      [placeholder]="placeholder"
+      name="search"
+      id="search"
+      class="form-control ps-5"
+      autocomplete="off"
+      aria-describedby="search"
+      aria-haspopup="true"
+      formControlName="search"
+      [attr.aria-describedby]="isNotFound ? 'search-desc-error' : null"
+      [attr.aria-expanded]="dropdownPane.expanded$ | async"
+      (input)="search.next(searchInput.value); searchInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
+      (focus)="searchInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
+      (focusout)="dropdownPane.reduce()"
+      (keydown.escape)="dropdownPane.reduce()"
+      (keydown.arrowDown)="$event.preventDefault(); dropdownPane.nextIndex()"
+      (keydown.arrowUp)="$event.preventDefault(); dropdownPane.previousIndex()"
+      (keydown.enter)="setSuggestion(suggestions[dropdownPane.activeIndex]); dropdownPane.reduce()" />
+    <button type="button" *ngIf="searchInput.value && displayReset" class="btn input-group-btn" (click)="clear()">
+      <span class="visually-hidden">Effacer</span>
+      <i class="ri-close-line" aria-hidden="true"></i>
+    </button>
+    <ng-content></ng-content>
+  </div>
+  <ul
+    #dropdownPane="dropdownPane"
+    appDropdownPane
+    [class.show]="(dropdownPane.expanded$ | async) && suggestions.length > 0"
+    class="dropdown-menu position-absolute mt-1"
+    role="listbox"
+    aria-labelledby="search">
+    <li #results *ngFor="let suggestion of suggestions; index as suggestionIndex; trackBy: trackBySuggestionName">
+      <button
+        type="button"
+        tabindex="-1"
+        role="option"
+        class="dropdown-item"
+        [class.active]="dropdownPane.activeIndex === suggestionIndex"
+        [attr.aria-current]="dropdownPane.activeIndex === suggestionIndex ? true : null"
+        (focusin)="dropdownPane.setIndex(suggestionIndex)"
+        (focusout)="dropdownPane.setIndex(-1)"
+        (mousedown)="setSuggestion(suggestion); dropdownPane.reduce()">
+        <b>{{ suggestion.label }}</b>
+        <br />
+        <small>{{ suggestion.context }}</small>
+      </button>
+    </li>
+  </ul>
+</form>

@@ -8,7 +8,7 @@ import {
   ZOOM_LEVEL_TOKEN
 } from '../../../../root';
 import { CacheInterceptor } from '../../../../root/interceptors';
-import { AddressHttp, AddressPresenter, AddressRepository } from '../../../adresse';
+import { AddressHttp, AddressPresenter, AddressRepository, SEARCHABLE_TOKEN } from '../../../adresse';
 import { MarkersPresenter } from '../../../core/presenters';
 import { ConseillersHttp, CoordinateursHttp } from '../../data';
 import { ConseillersRepository, CoordinateursRepository } from '../../reporitories';
@@ -48,8 +48,15 @@ export const coordinateursProviders = [
   },
   {
     deps: [AddressRepository],
-    provide: AddressPresenter,
-    useClass: AddressPresenter
+    provide: SEARCHABLE_TOKEN,
+    useClass: AddressPresenter,
+    multi: true
+  },
+  {
+    deps: [HttpClient],
+    provide: SEARCHABLE_TOKEN,
+    useClass: ConseillersHttp,
+    multi: true
   },
   {
     provide: HTTP_INTERCEPTORS,

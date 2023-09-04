@@ -24,6 +24,7 @@ import {
   MarkersPresenter
 } from '../../../core/presenters';
 import { ifAny } from '../../../core/utilities';
+import { ResultFoundPresentation } from '../../../adresse';
 import {
   getNextRouteFromZoomLevel,
   shouldNavigateToListPage,
@@ -224,9 +225,13 @@ export class CartographieLayout {
     return this.route.children[0]?.children[0]?.snapshot.paramMap.get(routeParam) ?? '';
   }
 
-  public resetBreadcrumbOnGeolocate(localisation: Localisation): Localisation {
-    localisation && this.router.navigate(['/cartographie'], { queryParams: {}, queryParamsHandling: 'merge' });
-    return (this.userLocalisation = localisation);
+  public resetBreadcrumbOnGeolocate(result: ResultFoundPresentation<{ id?: string }>): Localisation {
+    result.localisation &&
+      this.router.navigate(result.payload?.id ? ['/cartographie', result.payload.id, 'details'] : ['/cartographie'], {
+        queryParams: {},
+        queryParamsHandling: 'merge'
+      });
+    return (this.userLocalisation = result.localisation);
   }
 
   public toggleMapForSmallDevices(): void {

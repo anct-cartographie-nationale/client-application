@@ -1,11 +1,13 @@
 <div class="d-flex">
-  <app-address-field
+  <app-search-field
+    style="width: 375px"
+    [placeholder]="placeholder"
     [class.w-100]="fullWidth"
     [defaultValue]="(initialSearch$ | async) ?? ''"
-    [addressSuggestions]="(addressesFound$ | async) ?? []"
-    [addressNotFound]="(addressNotFound$ | async) ?? false"
-    (selectAddress)="onSelectAddress($event)"
-    (searchAddress)="onSearchAddress($event)">
+    [suggestions]="(resultsFound$ | async) ?? []"
+    [isNotFound]="(notFound$ | async) ?? false"
+    (selected)="onSelected($event)"
+    (search)="onSearch($event)">
     <button type="button" class="btn input-group-btn" (click)="onGeoLocate()" *ngIf="(displayGeolocation$ | async) === true">
       <span class="border-end border-muted me-2"></span>
       <ng-container *ngIf="loadingState$ | async; else geolocationIcon">
@@ -17,5 +19,5 @@
         <i class="ri-focus-3-line ri-lg text-muted" aria-hidden="true"></i>
       </ng-template>
     </button>
-  </app-address-field>
+  </app-search-field>
 </div>
