@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { FilterFormPresentation } from '../../../core/presenters';
 import conditionAcces from '../../pages/accessibilite/condition-acces.json';
 import publicSpecifiqueAcceuilli from '../../pages/accessibilite/public-specifique-accueilli.json';
+import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,6 +23,10 @@ export class SelectedFiltersComponent {
       this.filterForm.get('longitude')?.setValue(undefined);
     } else if (key === 'horaires_ouverture') {
       this.filterForm.get('horaires_ouverture')?.setValue(undefined);
+    } else if (key === 'prise_rdv') {
+      this.filterForm.get('prise_rdv')?.setValue(false);
+    } else if (key === 'accessibilite') {
+      this.filterForm.get('accessibilite')?.setValue(false);
     } else {
       const keyArrayCoppy = [...this.filterForm.value[key]];
       const indexOfValue = keyArrayCoppy.indexOf(value);
@@ -37,4 +42,6 @@ export class SelectedFiltersComponent {
       })?.label ?? ''
     );
   }
+
+  public labelMap: Map<string, string> = new Map<LabelNational, string>([[LabelNational.CNFS, 'Conseillers Numériques']]);
 }
