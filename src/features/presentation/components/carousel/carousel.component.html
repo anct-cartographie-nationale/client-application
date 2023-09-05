@@ -30,9 +30,13 @@
             <p class="text-secondary">
               {{ slides.text }}
             </p>
-            <a *ngIf="slides.titre === 'La mise à jour'" href="https://dora.fabrique.social.gouv.fr" target="_blank">
+            <a
+              *ngIf="slides.titre === 'La mise à jour'"
+              href="https://dora.fabrique.social.gouv.fr"
+              target="_blank"
+              rel="noopener noreferrer">
               <span class="visually-hidden">Accéder à DORA</span>
-              <img class="my-3" width="auto" height="auto" src="/assets/img/presentation/dora-logo.svg" alt="" />
+              <img class="my-3" height="100px" src="/assets/img/presentation/dora-logo.svg" alt="" />
             </a>
           </div>
           <div class="col-md-6 my-auto" *ngIf="slides.titre === 'Standardisation'">
@@ -40,17 +44,36 @@
             <p class="text-secondary">
               Nous référençons les lieux d'inclusion numérique qui ont renseigné leurs données au format du
               <a
-                class="text-decoration-none"
                 href="https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique-2/"
-                target="_blank">
+                style="color: white; font-weight: bold; text-decoration: underline"
+                target="_blank"
+                rel="noopener noreferrer">
                 standard de données des lieux d'inclusion numérique
               </a>
               établi par la
-              <a class="text-decoration-none" href="https://lamednum.coop/" target="_blank">Mednum</a>
+              <a
+                href="https://lamednum.coop/"
+                style="color: white; font-weight: bold; text-decoration: underline"
+                target="_blank"
+                rel="noopener noreferrer">
+                Mednum
+              </a>
               ,
-              <a class="text-decoration-none" href="https://datactivist.coop/fr/" target="_blank">Datactivist</a>
+              <a
+                href="https://datactivist.coop/fr/"
+                style="color: white; font-weight: bold; text-decoration: underline"
+                target="_blank"
+                rel="noopener noreferrer">
+                Datactivist
+              </a>
               et
-              <a class="text-decoration-none" href="https://agence-cohesion-territoires.gouv.fr/" target="_blank">l'ANCT</a>
+              <a
+                href="https://agence-cohesion-territoires.gouv.fr/"
+                style="color: white; font-weight: bold; text-decoration: underline"
+                target="_blank"
+                rel="noopener noreferrer">
+                l'ANCT
+              </a>
               .
             </p>
           </div>
