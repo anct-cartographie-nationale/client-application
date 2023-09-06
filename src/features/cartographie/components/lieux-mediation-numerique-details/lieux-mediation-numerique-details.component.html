@@ -57,7 +57,7 @@
         [detail]="lieuMediationNumerique.presentation?.detail"
         [resume]="lieuMediationNumerique.presentation?.resume"></app-description>
     </li>
-    <li class="list-group-item border-0">
+    <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.accessibilite === undefined">
       <app-accessibilite [accessibilite]="lieuMediationNumerique.accessibilite"></app-accessibilite>
     </li>
     <li class="list-group-item">

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest, combineLatestWith, Observable, of, startWith, Subject } from 'rxjs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { combineLatest, combineLatestWith, merge, Observable, of, startWith, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LabelNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
@@ -26,7 +26,8 @@ import {
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation,
   FilterFormPresentation,
-  createFormGroupFromFilterPresentation
+  createFormGroupFromFilterPresentation,
+  WithLieuxCount
 } from '../../../core/presenters';
 import { NO_LOCALISATION } from '../../../core/models';
 import { CartographieLayout } from '../../layouts';
@@ -38,7 +39,12 @@ import {
   LabelPresentation,
   labelToDisplayMap
 } from '../../presenters';
-import { findLieuToFocus, toHub, toLieux, toLieuxFilteredByDepartement } from './lieux-mediation-numerique-list.presentation';
+import {
+  findLieuToFocus,
+  toHub,
+  toSortedLieux,
+  toLieuxFilteredByDepartement
+} from './lieux-mediation-numerique-list.presentation';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,8 +69,11 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     }))
   );
 
-  private _localisation: Localisation = toLocalisationFromFilterFormPresentation(
-    toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
+  private _localisation$: Observable<Localisation> = merge(
+    this.route.queryParams.pipe(
+      map((params: Params): Localisation => toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(params)))
+    ),
+    this._cartographieLayout.userLocalisation$
   );
 
   private _isInitialZoomDone: boolean = false;
@@ -77,7 +86,7 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation[]> = combineLatest([
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
-      of(this._localisation),
+      this._localisation$,
       this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
       new Date(),
       this.boundingBox$()
@@ -85,12 +94,14 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     this.route.paramMap
   ]).pipe(
     map(toLieuxFilteredByDepartement),
-    map(toLieux(this._localisation)),
+    map(toSortedLieux),
     map(toLieuxMediationNumeriqueListItemsPresentation(new Date()))
   );
 
   public regions$: Observable<RegionPresentation[]> = this._cartographieLayout.regions$.pipe(
-    map((regions: RegionPresentation[]): RegionPresentation[] => [...regions].sort(byCollectiviteTerritorialeNom))
+    map((regions: WithLieuxCount<RegionPresentation[]>): RegionPresentation[] =>
+      [...regions.payload].sort(byCollectiviteTerritorialeNom)
+    )
   );
 
   public filterForm: FormGroup = createFormGroupFromFilterPresentation(

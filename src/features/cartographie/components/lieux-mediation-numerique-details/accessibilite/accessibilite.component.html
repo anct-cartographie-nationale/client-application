@@ -1,31 +1,19 @@
 <div class="bg-light p-3 d-print-none d-flex">
   <div class="d-flex flex-grow-1 align-items-center">
-    <div class="d-flex" *ngIf="accessibilite; else noAccessibilite">
-      <a href="{{ accessibilite }}" class="btn btn-sm btn-secondary d-block" target="_blank" rel="noopener noreferrer">
-        <i class="ri-wheelchair-line me-1 text-right" aria-hidden="true"></i>
-        <span>Consulter l'accessibilité</span>
+    <div class="d-flex">
+      <a
+        href="https://acceslibre.beta.gouv.fr/contrib/start/"
+        class="btn btn-sm btn-secondary d-block"
+        target="_blank"
+        rel="noopener noreferrer">
+        <i class="ri-edit-line me-1 text-right" aria-hidden="true"></i>
+        <span>Renseigner l'accessibilité</span>
       </a>
-      <div class="ps-3 d-flex mt-1 text-primary">
-        <i class="ri-check-line me-1" aria-hidden="true"></i>
-        <em>Informations renseignées</em>
+      <div class="ps-3 d-flex text-muted-dark align-items-baseline">
+        <i class="ri-close-circle-fill me-1" aria-hidden="true"></i>
+        <em class="mt-1">Pas d'information</em>
       </div>
     </div>
-    <ng-template #noAccessibilite>
-      <div class="d-flex">
-        <a
-          href="https://acceslibre.beta.gouv.fr/contrib/start/"
-          class="btn btn-sm btn-secondary d-block"
-          target="_blank"
-          rel="noopener noreferrer">
-          <i class="ri-edit-line me-1 text-right" aria-hidden="true"></i>
-          <span>Renseigner l'accessibilité</span>
-        </a>
-        <div class="ps-3 d-flex text-muted-dark align-items-baseline">
-          <i class="ri-close-circle-fill me-1" aria-hidden="true"></i>
-          <em class="mt-1">Pas d'information</em>
-        </div>
-      </div>
-    </ng-template>
   </div>
   <div class="d-flex align-items-center">
     <button

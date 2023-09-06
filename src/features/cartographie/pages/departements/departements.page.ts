@@ -7,7 +7,8 @@ import {
   DepartementPresentation,
   regionFromNom,
   RegionPresentation,
-  MarkersPresenter
+  MarkersPresenter,
+  WithLieuxCount
 } from '../../../core/presenters';
 import { CartographieLayout } from '../../layouts';
 import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
@@ -24,10 +25,11 @@ export class DepartementsPage implements OnInit {
     this._cartographieLayout.departements$,
     this._route.paramMap
   ]).pipe(
-    map(([departements, paramMap]: [DepartementPresentation[], ParamMap]): DepartementPresentation[] =>
-      departementsFilteredByRegion(departements, regionFromNom(paramMap.get('nomRegion') ?? '')?.departements ?? []).sort(
-        byCollectiviteTerritorialeNom
-      )
+    map(([departements, paramMap]: [WithLieuxCount<DepartementPresentation[]>, ParamMap]): DepartementPresentation[] =>
+      departementsFilteredByRegion(
+        departements.payload,
+        regionFromNom(paramMap.get('nomRegion') ?? '')?.departements ?? []
+      ).sort(byCollectiviteTerritorialeNom)
     )
   );
   public constructor(

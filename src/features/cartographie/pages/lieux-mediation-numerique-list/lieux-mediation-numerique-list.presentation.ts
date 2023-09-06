@@ -1,10 +1,11 @@
 import { ParamMap } from '@angular/router';
-import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
   departementFromCode,
   departementFromNom,
   DepartementPresentation,
   LieuMediationNumeriquePresentation,
+  LieuMediationNumeriquePresentationWithDistance,
   RegionPresentation,
   toDepartement
 } from '../../../core/presenters';
@@ -20,21 +21,26 @@ const shouldSortOnCodePostal = (
   lieuB: LieuMediationNumeriquePresentation
 ): boolean => lieuA.code_postal !== lieuB.code_postal;
 
+const hasDistance = (lieu: LieuMediationNumeriquePresentation): lieu is LieuMediationNumeriquePresentationWithDistance =>
+  lieu.distance != null;
+
 const sortOnCodePostal = (lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediationNumeriquePresentation): number =>
   lieuA.code_postal < lieuB.code_postal ? -1 : 1;
+
+const sortOnDistance = (
+  lieuA: LieuMediationNumeriquePresentationWithDistance,
+  lieuB: LieuMediationNumeriquePresentationWithDistance
+): number => lieuA.distance - lieuB.distance;
 
 const sortOnNom = (lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediationNumeriquePresentation): number =>
   lieuA.nom < lieuB.nom ? -1 : 1;
 
-export const toLieux =
-  (localisation: Localisation) =>
-  (lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] => {
-    return localisation
-      ? lieux
-      : lieux.sort((lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediationNumeriquePresentation): number =>
-          shouldSortOnCodePostal(lieuA, lieuB) ? sortOnCodePostal(lieuA, lieuB) : sortOnNom(lieuA, lieuB)
-        );
-  };
+export const toSortedLieux = (lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] =>
+  lieux.sort((lieuA: LieuMediationNumeriquePresentation, lieuB: LieuMediationNumeriquePresentation): number => {
+    if (hasDistance(lieuA) && hasDistance(lieuB)) return sortOnDistance(lieuA, lieuB);
+    if (shouldSortOnCodePostal(lieuA, lieuB)) return sortOnCodePostal(lieuA, lieuB);
+    return sortOnNom(lieuA, lieuB);
+  });
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,

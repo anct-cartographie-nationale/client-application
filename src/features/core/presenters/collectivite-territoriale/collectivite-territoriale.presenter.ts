@@ -1,8 +1,14 @@
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
-import { departements, geographicDistance, FrancePresentation, regions, france } from '../../../core/presenters';
+import {
+  departements,
+  geographicDistance,
+  FrancePresentation,
+  regions,
+  france,
+  DepartementPresentation,
+  RegionPresentation
+} from '../../../core/presenters';
 import codePostalNotMatchingCodeDepartement from './code-postal-not-matching-code-departement.json';
-import { DepartementPresentation } from './presentations/departement.presentation';
-import { RegionPresentation } from './presentations/region.presentation';
 
 const codePostalNotMatchingCodeDepartementMap: Map<string, string> = new Map<string, string>(
   codePostalNotMatchingCodeDepartement as []
@@ -32,7 +38,7 @@ const codeDepartementFromCodePostal = (codePostal: string) => {
 const toCodeDepartement = (lieu: { code_postal: string }): string => codeDepartementFromCodePostal(lieu.code_postal);
 
 export const toDepartement = (lieu: { code_postal: string; commune: string }): DepartementPresentation | undefined =>
-  departements.find((departement: DepartementPresentation) => departement.code === toCodeDepartement(lieu));
+  departements.find((departement: DepartementPresentation): boolean => departement.code === toCodeDepartement(lieu));
 
 export const toRegion = (lieu: { code_postal: string; commune: string }): RegionPresentation | undefined =>
   regions.find((region: RegionPresentation) => region.departements.includes(toCodeDepartement(lieu)));

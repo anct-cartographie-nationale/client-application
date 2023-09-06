@@ -62,5 +62,6 @@ export const toLieuxMediationNumeriqueListItemsPresentation =
       ...ifAny('labels_nationaux', toListItemLabelsNationaux(lieuMediationNumerique.labels_nationaux)),
       ...ifAny('conditions_acces', toListItemConditionsAcces(lieuMediationNumerique.conditions_acces)),
       ...ifAny('distance', lieuMediationNumerique.distance),
+      ...ifAny('prise_rdv', lieuMediationNumerique.prise_rdv),
       ...ifAny('status', openingState(date)(lieuMediationNumerique.horaires))
     }));

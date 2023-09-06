@@ -6,53 +6,52 @@
     queryParamsHandling="preserve"
     (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
     (mouseout)="disableHover.emit()">
-    <div class="row g-0 d-print-none">
-      <div class="col">
+    <div class="row d-print-none">
+      <div class="col me-3">
         <h2 class="h5 mb-0 text-first-letter-uppercase fw-bold">
           {{ lieuMediationNumerique.nom }}
         </h2>
         <div class="text-muted">{{ lieuMediationNumerique.adresse }}</div>
         <div class="mt-1" *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</div>
-        <div *ngIf="lieuMediationNumerique.status" class="text-muted">
+        <div *ngIf="lieuMediationNumerique.status" class="text-muted d-inline-flex flex-wrap align-items-center">
+          <i
+            class="ri-checkbox-blank-circle-fill ri-xxs me-1"
+            [class.text-primary]="lieuMediationNumerique.status.label === 'Ouvert'"
+            aria-hidden="true"></i>
           <span [class.text-primary]="lieuMediationNumerique.status.label === 'Ouvert'">
-            <i class="ri-checkbox-blank-circle-fill ri-xxs" aria-hidden="true"></i>
             {{ lieuMediationNumerique.status.label }}
           </span>
-          ·
-          <small>{{ lieuMediationNumerique.status.limite }}</small>
-        </div>
-        <div class="text-muted" *ngIf="lieuMediationNumerique.prise_rdv">
-          <i class="ri-calendar-check-line me-1" aria-hidden="true"></i>
-          Prise de Rendez-vous disponible
+          <span class="mx-1">·</span>
+          <i class="small align-self-end">{{ lieuMediationNumerique.status.limite }}</i>
         </div>
       </div>
-      <div style="width: 180px" *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone"></div>
-    </div>
-    <div class="d-flex flex-row d-print-none">
       <div
-        class="mt-3 d-flex flex-column text-end ms-auto"
         style="width: 180px"
-        *ngIf="lieuMediationNumerique.conditions_acces || lieuMediationNumerique.date_maj">
-        <div
-          [ngClass]="lieuMediationNumerique.conditions_acces.isFree ? 'text-primary' : 'text-muted'"
-          *ngIf="lieuMediationNumerique.conditions_acces; else emptyConditionAcces">
-          {{ lieuMediationNumerique.conditions_acces.label }}
-        </div>
-        <ng-template #emptyConditionAcces>
-          <div *ngIf="(lieuMediationNumerique.labels_nationaux ?? []).length > 0" aria-hidden="true">&nbsp;</div>
-        </ng-template>
-        <small
-          *ngIf="lieuMediationNumerique.date_maj && dateIsValide(lieuMediationNumerique.date_maj)"
-          class="text-muted fst-italic">
-          Mise à jour le {{ lieuMediationNumerique.date_maj | date : 'dd/MM/y' }}
-        </small>
+        *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone || lieuMediationNumerique.prise_rdv"></div>
+    </div>
+    <div
+      class="mt-4 d-flex flex-column text-end ms-auto"
+      style="width: 180px"
+      *ngIf="lieuMediationNumerique.conditions_acces || lieuMediationNumerique.date_maj">
+      <div
+        [ngClass]="lieuMediationNumerique.conditions_acces.isFree ? 'text-primary' : 'text-muted'"
+        *ngIf="lieuMediationNumerique.conditions_acces; else emptyConditionAcces">
+        {{ lieuMediationNumerique.conditions_acces.label }}
       </div>
+      <ng-template #emptyConditionAcces>
+        <div *ngIf="(lieuMediationNumerique.labels_nationaux ?? []).length > 0" aria-hidden="true">&nbsp;</div>
+      </ng-template>
+      <small
+        *ngIf="lieuMediationNumerique.date_maj && dateIsValide(lieuMediationNumerique.date_maj)"
+        class="text-muted fst-italic">
+        Mise à jour le {{ lieuMediationNumerique.date_maj | date : 'dd/MM/y' }}
+      </small>
     </div>
   </a>
   <div
     class="text-end position-absolute top-0 end-0"
     style="width: 180px"
-    *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone">
+    *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone || lieuMediationNumerique.prise_rdv">
     <a
       *ngIf="lieuMediationNumerique.courriel as courriel"
       href="mailto:{{ courriel }}"
@@ -64,12 +63,16 @@
     <a
       *ngIf="lieuMediationNumerique.telephone as telephone"
       href="tel://{{ telephone }}"
-      class="text-decoration-none link-dark d-block mb-2"
+      class="text-decoration-none text-muted"
       (click)="$event.stopPropagation()">
       <span aria-hidden="true">{{ telephone | phone }}</span>
       <span class="visually-hidden">Contacter par téléphone</span>
       <i class="ms-2 ri-phone-line" aria-hidden="true"></i>
     </a>
+    <div class="text-muted" *ngIf="lieuMediationNumerique.prise_rdv">
+      RDV disponible
+      <i class="ri-calendar-check-line ms-1" aria-hidden="true"></i>
+    </div>
   </div>
   <div class="position-absolute row g-2 start-0 bottom-0">
     <ng-container *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
