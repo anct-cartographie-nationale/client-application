@@ -6,24 +6,15 @@ import { OpeningHours } from '../../../core/presenters';
 import { OrientationLayout } from '../../layouts';
 import { OrientationInformationContent } from '../../presenters';
 
-const DISPLAY_CARTOGRAPHIE_MODAL_CONTENT: OrientationInformationContent = {
-  titre: 'Afficher tous les résultats',
-  description:
-    'En affichant les résultats, vous terminez le parcours d’orientation et accédez à la carte, filtrée selon tous les critères précédemment sélectionnés.'
-};
-
-const OPENING_HOURS_MODAL_CONTENT: OrientationInformationContent = {
-  titre: 'Recherche de lieux ouverts à des horaires précis',
-  description: "Vous pouvez ici choisir de filtrer la cartographie selon les jours et horaires d'ouverture des lieux."
-};
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './disponibilite.page.html'
 })
 export class DisponibilitePage {
-  public selectedOrientationInformation: OrientationInformationContent | null = null;
-
-  public displayCartographieLink: boolean = false;
+  public selectedOrientationInformation: OrientationInformationContent = {
+    titre: 'Recherche de lieux ouverts à des horaires précis',
+    description: "Vous pouvez ici choisir de filtrer la cartographie selon les jours et horaires d'ouverture des lieux."
+  };
 
   public constructor(
     @Inject(FEATURES_TOKEN)
@@ -43,12 +34,5 @@ export class DisponibilitePage {
 
   public toQueryString(fromObject: {} = {}): string {
     return new HttpParams({ fromObject }).toString();
-  }
-
-  public selectOrientationInformation(displayCartographie: boolean): void {
-    this.displayCartographieLink = displayCartographie;
-    this.selectedOrientationInformation = displayCartographie
-      ? DISPLAY_CARTOGRAPHIE_MODAL_CONTENT
-      : OPENING_HOURS_MODAL_CONTENT;
   }
 }
