@@ -36,31 +36,33 @@
         heading="Menu principal"
         [useHeader]="false"
         className="w-100 mt-lg-0 mt-navbar z-index-over">
-        <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
-          <ng-content select="[slot=links]"></ng-content>
-          <li class="nav-item">
-            <a
-              [routerLink]="['/', 'orientation']"
-              queryParamsHandling="preserve"
-              class="nav-link ms-4 pb-0 px-0"
-              ariaCurrentWhenActive="page"
-              routerLinkActive="active"
-              (click)="navbarOffcanvas.close()">
-              Orienter un bénéficiaire
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              [routerLink]="['/', 'cartographie']"
-              queryParamsHandling="preserve"
-              class="nav-link ms-4 pb-0 px-0"
-              ariaCurrentWhenActive="page"
-              routerLinkActive="active"
-              (click)="navbarOffcanvas.close()">
-              {{ (navbarOffcanvas.expanded$ | async) ? 'Afficher les lieux' : 'Afficher la carte' }}
-            </a>
-          </li>
-        </ul>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav nav-underline ms-auto mb-2 mb-lg-0">
+            <ng-content select="[slot=links]"></ng-content>
+            <li class="nav-item">
+              <a
+                [routerLink]="['/', 'orientation']"
+                queryParamsHandling="preserve"
+                class="nav-link ms-4 pb-0 px-0"
+                ariaCurrentWhenActive="page"
+                routerLinkActive="active"
+                (click)="navbarOffcanvas.close()">
+                Orienter un bénéficiaire
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                [routerLink]="['/', 'cartographie']"
+                queryParamsHandling="preserve"
+                class="nav-link ms-4 pb-0 px-0"
+                ariaCurrentWhenActive="page"
+                routerLinkActive="active"
+                (click)="navbarOffcanvas.close()">
+                {{ (navbarOffcanvas.expanded$ | async) ? 'Afficher les lieux' : 'Afficher la carte' }}
+              </a>
+            </li>
+          </ul>
+        </div>
       </app-offcanvas>
       <button
         class="navbar-toggler btn border-0 py-2 px-2"
