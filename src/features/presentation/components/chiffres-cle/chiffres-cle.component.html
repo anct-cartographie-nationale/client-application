@@ -27,7 +27,7 @@
           {{ region.lieuxCount }}
         </p>
         <p class="col text-end">
-          {{ (((region.lieuxCount ?? 0) / (lieuxMediationNumeriqueTotal.length ?? 1)) * 100).toFixed(0) | number }} %
+          {{ (((region.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }} %
         </p>
       </div>
     </div>
@@ -65,8 +65,7 @@
               </p>
               <p class="col text-end">
                 {{
-                  (((getPublicProperties()?.lieuxCount ?? 0) / (lieuxMediationNumeriqueTotal.length ?? 1)) * 100).toFixed(0)
-                    | number
+                  (((getPublicProperties()?.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number
                 }}
                 %
               </p>
@@ -82,9 +81,7 @@
                       {{ typologie.lieuxCount }}
                     </p>
                     <p class="col text-end">
-                      {{
-                        (((typologie.lieuxCount ?? 0) / (lieuxMediationNumeriqueTotal.length ?? 1)) * 100).toFixed(0) | number
-                      }}
+                      {{ (((typologie.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }}
                       %
                     </p>
                   </div>
@@ -104,7 +101,7 @@
               {{ typologie.lieuxCount }}
             </p>
             <p class="col text-end">
-              {{ (((typologie.lieuxCount ?? 0) / (lieuxMediationNumeriqueTotal.length ?? 1)) * 100).toFixed(0) | number }}
+              {{ (((typologie.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }}
               %
             </p>
           </div>
@@ -124,7 +121,7 @@
             {{ label.lieuxCount }}
           </p>
           <p class="col text-end">
-            {{ (((label.lieuxCount ?? 0) / (lieuxMediationNumeriqueTotal.length ?? 1)) * 100).toFixed(0) | number }} %
+            {{ (((label.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }} %
           </p>
         </div>
       </div>
@@ -132,7 +129,7 @@
         <p class="col-8 text-start flex-grow-1">Territoires prioritaires</p>
         <p class="col me-2 fw-bold text-end">{{ getTerritoiresPrioritaireCount() }}</p>
         <p class="col text-end">
-          {{ ((getTerritoiresPrioritaireCount() / (lieuxMediationNumeriqueTotal.length ?? 1)) * 100).toFixed(0) | number }} %
+          {{ ((getTerritoiresPrioritaireCount() / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }} %
         </p>
       </div>
       <div *ngFor="let label of labels">
@@ -144,7 +141,7 @@
             {{ label.lieuxCount }}
           </p>
           <p class="col text-end">
-            {{ (((label.lieuxCount ?? 0) / (lieuxMediationNumeriqueTotal.length ?? 1)) * 100).toFixed(0) | number }} %
+            {{ (((label.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }} %
           </p>
         </div>
       </div>
