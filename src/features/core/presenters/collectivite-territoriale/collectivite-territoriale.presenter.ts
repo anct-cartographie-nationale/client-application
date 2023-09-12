@@ -6,7 +6,8 @@ import {
   regions,
   france,
   DepartementPresentation,
-  RegionPresentation
+  RegionPresentation,
+  LabelsNationauxPresentation
 } from '../../../core/presenters';
 import codePostalNotMatchingCodeDepartement from './code-postal-not-matching-code-departement.json';
 
@@ -81,7 +82,7 @@ export const countLieuxInCollectiviteTerritoriale = <T extends RegionPresentatio
     collectivitesTerritorialesWithLieuxCount.find(matchingCollectiviteTerritorialeCode(collectiviteTerritoriale))
   );
 
-export const byLieuxCount = <T extends RegionPresentation | DepartementPresentation>(
+export const byLieuxCount = <T extends RegionPresentation | DepartementPresentation | LabelsNationauxPresentation>(
   collectiviteTerritorialeA: T,
   collectiviteTerritorialeB: T
 ): number => (collectiviteTerritorialeB.lieuxCount ?? 0) - (collectiviteTerritorialeA.lieuxCount ?? 0);

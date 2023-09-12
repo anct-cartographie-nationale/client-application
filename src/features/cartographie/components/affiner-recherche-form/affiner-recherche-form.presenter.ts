@@ -1,6 +1,9 @@
 import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriquePresentation } from '../../../core/presenters';
 
+export const isQPV: RegExp = /(?:^|;)(QPV)(?:;|$)/g;
+export const isZRR: RegExp = /(?:^|;)(ZRR)(?:;|$)/g;
+
 const toLabelNationaux = (lieuMediationNumerique: LieuMediationNumeriquePresentation): LabelNational[] =>
   lieuMediationNumerique.labels_nationaux ?? [];
 
@@ -16,4 +19,4 @@ export const labelsAutresFrom = (LieuxMediationNumerique: LieuMediationNumerique
   deduplicate(LieuxMediationNumerique.flatMap(toLabelsAutre));
 
 export const strategiesTerritorialesFrom = (LieuxMediationNumerique: LieuMediationNumeriquePresentation[]): string[] =>
-  labelsAutresFrom(LieuxMediationNumerique).filter((autreLabel: string) => autreLabel === 'QPV' || autreLabel === 'ZRR');
+  labelsAutresFrom(LieuxMediationNumerique).filter((autreLabel: string) => isQPV.test(autreLabel) || isZRR.test(autreLabel));

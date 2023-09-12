@@ -130,15 +130,17 @@
     </div>
   </section>
   <section class="container text-center">
-    <h2 class="fw-bold my-5">Les chiffres clefs de la cartographie</h2>
-    <div class="row justify-content-lg-center">
-      <div class="col-4">
-        <img src="/assets/img/presentation/svg-maisons.svg" class="img-fluid" alt="" />
-        <h3 class="fw-bold" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
-          {{lieuxMediationNumeriqueTotal.length}} lieux référencés
-        </h3>
-        <p>Sur l'ensemble du territoire.</p>
-      </div>
+    <div class="my-3" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
+      <h2 class="ps-3 fw-bold my-5 text-start">Chiffres clefs d'utilisation</h2>
+      <h6 class="ps-3 fw-bold my-5 text-start">
+        Pour tout savoir en chiffre, sur la progression de l'utilisation de l'outil sur le territoire, retour en chiffre sur
+        l'avancement actuel du projet
+      </h6>
+      <app-chiffres-cle
+        [regions]="(regions$ | async) ?? []"
+        [lieuxMediationNumeriqueTotal]="(lieuxMediationNumeriqueTotal$ | async) ?? []"
+        [typologies]="(typologies$ | async) ?? []"
+        [labels]="(labelsNationaux$ | async) ?? []"></app-chiffres-cle>
     </div>
   </section>
 </main>
