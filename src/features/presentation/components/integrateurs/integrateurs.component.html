@@ -1,0 +1,24 @@
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col" *ngFor="let integrateur of integrateursPresentation">
+    <div class="card h-100 rounded-0">
+      <div class="row g-0">
+        <div class="col-md-6">
+          <img src="/assets/img/presentation/{{ integrateur.bgImage }}" class="w-100" alt="" />
+        </div>
+        <div class="col-md-6 text-start p-4">
+          <span class="badge card-badge-title ms-3 my-2">{{ integrateur.titre }}</span>
+          <div class="card-body h-100 d-flex" style="flex-direction: column">
+            <h3 class="fw-bold card-title my-2">{{ integrateur.sousTitre }}</h3>
+            <p class="card-text mt-2 mb-5 flex-grow-1">{{ integrateur.text }}</p>
+            <a class="btn-link text-decoration-none" href="{{ integrateur.link }}" target="_blank" rel="noopener noreferrer">
+              <div class="d-flex">
+                <i class="ri ri-external-link-line me-2"></i>
+                <p>{{ integrateur.linkTitre }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
