@@ -74,6 +74,13 @@
       </div>
     </div>
   </section>
+  <section class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
+    <app-carousel
+      [currentSlide]="(currentSlide$ | async) ?? 0"
+      (switchSlide)="onSwitchSlide($event)"
+      (nextSlide)="onNextSlide()"
+      (previousSlide)="onPreviousSlide()"></app-carousel>
+  </section>
   <section class="container mb-5" *ngIf="!this.environment">
     <h2 class="fw-bold my-5 text-black text-center">De quel écosystème parle-t-on ?</h2>
     <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -122,6 +129,16 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+  <section class="text-center py-5 bg-integration">
+    <div class="container">
+      <h2 class="fw-bold my-5 text-black text-center">
+        Comme de nombreux acteurs
+        <br />
+        implémentez la cartographie sur votre site internet
+      </h2>
+      <app-integrateurs />
     </div>
   </section>
   <section class="container text-center">
