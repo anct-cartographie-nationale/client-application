@@ -8,6 +8,7 @@ type IntegrateursPresentation = {
   link: string;
   linkTitre: string;
   bgImage: string;
+  bgPrimary: string;
 };
 
 @Component({
@@ -21,35 +22,38 @@ export class IntegrateursComponent {
     {
       titre: 'OUTIL',
       sousTitre: 'Cartographie Nationale',
-      text: `La cartographie est intégrée sur un site dédié, dans lequel l'ensemble du territoire et des acteurs sont
-      représentés`,
+      text: `Nous sommes notre premier intégrateur.`,
       link: 'https://cartographie.societenumerique.gouv.fr/cartographie',
       linkTitre: 'Consulter la cartographie',
-      bgImage: 'carto-nationale-map.svg'
+      bgImage: 'france-et-outremer-map.svg',
+      bgPrimary: 'bg-carto-nationale-cnfs'
     },
     {
       titre: 'HUB',
       sousTitre: 'Mednum Antilles',
-      text: `Mednum Antilles est le HUB de l'inclusion numérique aux Antilles`,
+      text: `Cartographie des lieux d'inclusion numérique aux Antilles.`,
       link: 'http://anct-carto-client-feature-hub-antilles-default-view.s3-website.eu-west-3.amazonaws.com/orientation',
       linkTitre: 'Consulter leur cartographie',
-      bgImage: 'carto-nationale-map.svg'
+      bgImage: 'antille-guyane-map.svg',
+      bgPrimary: 'bg-mednum-antilles'
+    },
+    {
+      titre: 'LABEL',
+      sousTitre: 'Conseiller Numérique',
+      text: `Cartographie recensant uniquement les conseillers numériques et leurs lieux de permanence.`,
+      link: 'https://www.conseiller-numerique.gouv.fr/carte',
+      linkTitre: 'Consulter leur cartographie',
+      bgImage: 'france-et-outremer-map.svg',
+      bgPrimary: 'bg-carto-nationale-cnfs'
     },
     {
       titre: 'HUB',
       sousTitre: 'Numi',
-      text: `Numi est le HUB de l'inclusion numérique en Normandie`,
+      text: `Cartographie des lieux d'inclusion numérique en Normandie.`,
       link: 'https://ledome.info/ressources/numi/',
       linkTitre: 'Consulter leur cartographie',
-      bgImage: 'carto-nationale-map.svg'
-    },
-    {
-      titre: 'LABEL',
-      sousTitre: 'CNFS',
-      text: `Conseiller Numérique France Service à intégré la cartographie sur son site web`,
-      link: 'https://www.conseiller-numerique.gouv.fr/carte',
-      linkTitre: 'Consulter leur cartographie',
-      bgImage: 'cnfs-map.svg'
+      bgImage: 'normandie-map.svg',
+      bgPrimary: 'bg-numi'
     }
   ];
 }
