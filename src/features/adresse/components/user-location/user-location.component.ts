@@ -18,6 +18,7 @@ import { ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import { MarkersPresenter } from '../../../core/presenters';
 import { Searchable, SEARCHABLE_TOKEN } from '../../configuration';
 import { ResultFoundPresentation } from '../../presenters';
+import { AddressType } from '../../models';
 
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
@@ -51,16 +52,16 @@ export class UserLocationComponent implements OnInit {
 
   public notFound$: Observable<boolean> = of(false);
 
-  public resultsFound$: Observable<ResultFoundPresentation[]> = this._searchTerm$.pipe(
+  public resultsFound$: Observable<ResultFoundPresentation<{ type: AddressType }>[]> = this._searchTerm$.pipe(
     map((searchTerm: string): string => searchTerm.trim()),
     filter((searchTerm: string): boolean => searchTerm.length >= MIN_SEARCH_TERM_LENGTH),
     debounceTime(SEARCH_DEBOUNCE_TIME),
     distinctUntilChanged(),
     switchMap(
-      (searchTerm: string): Observable<ResultFoundPresentation[][]> =>
-        forkJoin(this._searchables.map((searchable: Searchable) => searchable.search$(searchTerm)))
+      (searchTerm: string): Observable<ResultFoundPresentation<{ type: AddressType }>[][]> =>
+        forkJoin(this._searchables.map((searchable: Searchable<{ type: AddressType }>) => searchable.search$(searchTerm)))
     ),
-    map((resultsToCombine: ResultFoundPresentation[][]) => resultsToCombine.flat())
+    map((resultsToCombine: ResultFoundPresentation<{ type: AddressType }>[][]) => resultsToCombine.flat())
   );
 
   public initialSearch$: Observable<string> = this._initialSearch$.pipe(
@@ -69,21 +70,26 @@ export class UserLocationComponent implements OnInit {
     debounceTime(SEARCH_DEBOUNCE_TIME),
     distinctUntilChanged(),
     switchMap(
-      (searchTerm: string): Observable<ResultFoundPresentation[][]> =>
-        forkJoin(this._searchables.map((searchable: Searchable) => searchable.search$(searchTerm)))
+      (searchTerm: string): Observable<ResultFoundPresentation<{ type: AddressType }>[][]> =>
+        forkJoin(this._searchables.map((searchable: Searchable<{ type: AddressType }>) => searchable.search$(searchTerm)))
     ),
-    map((resultsToCombine: ResultFoundPresentation[][]) => resultsToCombine.flat()),
-    tap((addressesFound: ResultFoundPresentation[]) => addressesFound[0] && this.onSelected(addressesFound[0])),
-    map((addressesFound: ResultFoundPresentation[]) => addressesFound[0]?.label)
+    map((resultsToCombine: ResultFoundPresentation<{ type: AddressType }>[][]) => resultsToCombine.flat()),
+    tap(
+      (addressesFound: ResultFoundPresentation<{ type: AddressType }>[]) =>
+        addressesFound[0] && this.onSelected(addressesFound[0])
+    ),
+    map((addressesFound: ResultFoundPresentation<{ type: AddressType }>[]) => addressesFound[0]?.label)
   );
 
-  @Output() public resultFound: EventEmitter<ResultFoundPresentation> = new EventEmitter<ResultFoundPresentation>();
+  @Output() public resultFound: EventEmitter<ResultFoundPresentation<{ type: AddressType | 'user' }>> = new EventEmitter<
+    ResultFoundPresentation<{ type: AddressType | 'user' }>
+  >();
 
   public constructor(
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
     @Inject(SEARCHABLE_TOKEN)
-    private readonly _searchables: Searchable[],
+    private readonly _searchables: Searchable<{ type: AddressType }>[],
     public readonly markersPresenter: MarkersPresenter,
     public readonly route: ActivatedRoute
   ) {}
@@ -96,7 +102,7 @@ export class UserLocationComponent implements OnInit {
     this._searchTerm$.next(searchTerm);
   }
 
-  public onSelected(selectedResult: ResultFoundPresentation): void {
+  public onSelected(selectedResult: ResultFoundPresentation<{ type: AddressType }>): void {
     this.markersPresenter.center(
       selectedResult.localisation,
       setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
@@ -117,7 +123,7 @@ export class UserLocationComponent implements OnInit {
         localisation,
         setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
       );
-      this.resultFound.emit({ context: '', label: '', localisation });
+      this.resultFound.emit({ context: '', label: '', localisation, payload: { type: 'user' } });
 
       this._loadingState$.next(false);
       this._displayGeolocation$.next(false);

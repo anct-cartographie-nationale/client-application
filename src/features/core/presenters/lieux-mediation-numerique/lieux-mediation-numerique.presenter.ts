@@ -2,7 +2,6 @@ import { combineLatest, debounceTime, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import {
-  byLieuxCount,
   countLieuxInCollectiviteTerritoriale,
   onlyDefined,
   DepartementPresentation,
@@ -264,10 +263,10 @@ const toResultFound = ({
   localisation
 }: LieuMediationNumerique & {
   localisation: Localisation;
-}): ResultFoundPresentation<{ id: string }> => ({
+}): ResultFoundPresentation<{ id: string; type: 'place' }> => ({
   context: `${adresse.voie} ${adresse.code_postal}, ${adresse.commune}`,
   label: nom,
-  payload: { id },
+  payload: { id, type: 'place' },
   localisation
 });
 
@@ -280,7 +279,7 @@ const onlyNomMatching =
   } =>
     lieu.nom.toLowerCase().includes(searchTerm.toLowerCase()) && lieu.localisation != null;
 
-export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string }> {
+export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string; type: 'place' }> {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
   public lieuxMediationNumeriqueByDistance$(
@@ -351,9 +350,9 @@ export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string
     );
   }
 
-  public search$(searchTerm: string, limit: number = 5): Observable<ResultFoundPresentation<{ id: string }>[]> {
+  public search$(searchTerm: string, limit: number = 5): Observable<ResultFoundPresentation<{ id: string; type: 'place' }>[]> {
     return this.lieuxMediationNumerique$.pipe(
-      map((lieux: LieuMediationNumerique[]): ResultFoundPresentation<{ id: string }>[] =>
+      map((lieux: LieuMediationNumerique[]): ResultFoundPresentation<{ id: string; type: 'place' }>[] =>
         lieux.filter(onlyNomMatching(searchTerm)).slice(0, limit).map(toResultFound)
       )
     );

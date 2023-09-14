@@ -29,7 +29,8 @@ export class AddressHttp extends AddressRepository {
               localisation: Localisation({
                 latitude: addressTransferFeature.geometry.coordinates[1],
                 longitude: addressTransferFeature.geometry.coordinates[0]
-              })
+              }),
+              type: addressTransferFeature.properties.type
             })
           )
         )
@@ -50,7 +51,8 @@ export class AddressHttp extends AddressRepository {
               localisation: Localisation({
                 latitude: addressTransferFeature.geometry.coordinates[1],
                 longitude: addressTransferFeature.geometry.coordinates[0]
-              })
+              }),
+              type: addressTransferFeature.properties.type
             })
           )
         )

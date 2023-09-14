@@ -40,15 +40,32 @@
         type="button"
         tabindex="-1"
         role="option"
-        class="dropdown-item"
+        class="dropdown-item pb-0"
         [class.active]="dropdownPane.activeIndex === suggestionIndex"
         [attr.aria-current]="dropdownPane.activeIndex === suggestionIndex ? true : null"
         (focusin)="dropdownPane.setIndex(suggestionIndex)"
         (focusout)="dropdownPane.setIndex(-1)"
         (mousedown)="setSuggestion(suggestion); dropdownPane.reduce()">
-        <b>{{ suggestion.label }}</b>
+        <i class="small text-primary" [ngSwitch]="suggestion.payload.type">
+          <ng-container *ngSwitchCase="'place'">Lieu d'inclusion numérique</ng-container>
+          <ng-container *ngSwitchCase="'municipality'">Commune</ng-container>
+          <ng-container *ngSwitchDefault>Adresse</ng-container>
+        </i>
         <br />
-        <small>{{ suggestion.context }}</small>
+        <span class="d-inline-flex">
+          <i
+            class="text-primary ri-2x me-2 ri-focus-3-line"
+            style="margin-top: -5px"
+            [class.ri-community-line]="suggestion.payload.type === 'municipality'"
+            [class.ri-map-pin-2-line]="suggestion.payload.type === 'place'"
+            aria-hidden="true"></i>
+          <span class="lh-sm">
+            {{ suggestion.label }}
+            <br />
+            <span class="text-muted">{{ suggestion.context }}</span>
+          </span>
+        </span>
+        <hr class="mb-0 mt-2 border-muted" />
       </button>
     </li>
   </ul>

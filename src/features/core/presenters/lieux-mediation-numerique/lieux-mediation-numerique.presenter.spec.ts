@@ -2381,16 +2381,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const searchResults: ResultFoundPresentation<{ id: string }>[] = await firstValueFrom(
+    const searchResults: ResultFoundPresentation<{ id: string; type: string }>[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.search$('Anonym')
     );
 
-    expect<ResultFoundPresentation<{ id: string }>[]>(searchResults).toStrictEqual([
+    expect<ResultFoundPresentation<{ id: string; type: string }>[]>(searchResults).toStrictEqual([
       {
         context: '12 BIS RUE DE LECLERCQ 51100, Reims',
         label: 'Anonymal',
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),
-        payload: { id: '288b41b0-20ef-426c-9cac-0af99203365d' }
+        payload: { id: '288b41b0-20ef-426c-9cac-0af99203365d', type: 'place' }
       }
     ]);
   });
@@ -2413,17 +2413,18 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const searchResults: ResultFoundPresentation<{ id: string }>[] = await firstValueFrom(
+    const searchResults: ResultFoundPresentation<{ id: string; type: string }>[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.search$('ANONYM')
     );
 
-    expect<ResultFoundPresentation<{ id: string }>[]>(searchResults).toStrictEqual([
+    expect<ResultFoundPresentation<{ id: string; type: string }>[]>(searchResults).toStrictEqual([
       {
         context: '12 BIS RUE DE LECLERCQ 51100, Reims',
         label: 'Anonymal',
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),
         payload: {
-          id: '288b41b0-20ef-426c-9cac-0af99203365d'
+          id: '288b41b0-20ef-426c-9cac-0af99203365d',
+          type: 'place'
         }
       }
     ]);
@@ -2459,17 +2460,18 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       lieuxMediationNumeriqueRepository
     );
 
-    const searchResults: ResultFoundPresentation<{ id: string }>[] = await firstValueFrom(
+    const searchResults: ResultFoundPresentation<{ id: string; type: string }>[] = await firstValueFrom(
       lieuxMediationNumeriqueListPresenter.search$('ANONYM', 2)
     );
 
-    expect<ResultFoundPresentation<{ id: string }>[]>(searchResults).toStrictEqual([
+    expect<ResultFoundPresentation<{ id: string; type: string }>[]>(searchResults).toStrictEqual([
       {
         context: '12 BIS RUE DE LECLERCQ 51100, Reims',
         label: 'Anonymal Reims',
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),
         payload: {
-          id: '288b41b0-20ef-426c-9cac-0af99203365d'
+          id: '288b41b0-20ef-426c-9cac-0af99203365d',
+          type: 'place'
         }
       },
       {
@@ -2477,7 +2479,8 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         label: 'Anonymal Nantes',
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),
         payload: {
-          id: 'd27dc31b-cb32-488f-9cfd-01baa4dcbae4'
+          id: 'd27dc31b-cb32-488f-9cfd-01baa4dcbae4',
+          type: 'place'
         }
       }
     ]);

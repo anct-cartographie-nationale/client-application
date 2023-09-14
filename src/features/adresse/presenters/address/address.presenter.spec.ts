@@ -16,7 +16,8 @@ describe('address presenter', (): void => {
             localisation: Localisation({
               latitude: 4.8375548,
               longitude: 45.7665478
-            })
+            }),
+            type: 'housenumber'
           }
         ]);
       },
@@ -28,7 +29,8 @@ describe('address presenter', (): void => {
             localisation: Localisation({
               latitude: 4.8375548,
               longitude: 45.7665478
-            })
+            }),
+            type: 'housenumber'
           }
         ]);
       }
@@ -53,7 +55,8 @@ describe('address presenter', (): void => {
         localisation: Localisation({
           latitude: 4.8375548,
           longitude: 45.7665478
-        })
+        }),
+        payload: { type: 'housenumber' }
       }
     ]);
 
@@ -64,7 +67,8 @@ describe('address presenter', (): void => {
         localisation: Localisation({
           latitude: 4.8375548,
           longitude: 45.7665478
-        })
+        }),
+        payload: { type: 'housenumber' }
       }
     ]);
   });

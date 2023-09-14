@@ -2,7 +2,11 @@ import { InjectionToken } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResultFoundPresentation } from '../presenters';
 
-export interface Searchable<T = {}> {
+export type WithType<ResultType = string> = {
+  type: ResultType;
+};
+
+export interface Searchable<T extends WithType = WithType> {
   search$(searchTerm: string): Observable<ResultFoundPresentation<T>[]>;
 }
 

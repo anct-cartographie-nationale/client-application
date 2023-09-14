@@ -1,8 +1,10 @@
 import { FeatureCollection, Point } from 'geojson';
+import { AddressType } from '../../models';
 
 export type AddressTransferProperties = {
   label: string;
   context: string;
+  type: AddressType;
   x: number;
   y: number;
 };

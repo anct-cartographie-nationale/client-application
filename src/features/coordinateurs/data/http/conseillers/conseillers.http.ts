@@ -12,13 +12,16 @@ const onlyMatchingConseillerNom =
   (conseiller: Conseiller): boolean =>
     conseiller.nom.toLowerCase().includes(searchTerm.toLowerCase());
 
-const toResultFound = (conseiller: Conseiller): ResultFoundPresentation => ({
+const toResultFound = (conseiller: Conseiller): ResultFoundPresentation<{ type: 'conseiller' }> => ({
   context: conseiller.structurePorteuse.adresse,
   label: conseiller.nom,
   localisation: Localisation({
     latitude: conseiller.latitude,
     longitude: conseiller.longitude
-  })
+  }),
+  payload: {
+    type: 'conseiller'
+  }
 });
 
 export class ConseillersHttp extends ConseillersRepository {
