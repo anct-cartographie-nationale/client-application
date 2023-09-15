@@ -279,6 +279,34 @@ const onlyNomMatching =
   } =>
     lieu.nom.toLowerCase().includes(searchTerm.toLowerCase()) && lieu.localisation != null;
 
+const onlyAdresseMatching =
+  (searchTerm: string) =>
+  (
+    lieu: LieuMediationNumerique
+  ): lieu is LieuMediationNumerique & {
+    localisation: Localisation;
+  } =>
+    `${lieu.adresse.voie} ${lieu.adresse.commune}`.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    lieu.localisation != null;
+
+const appendSearchByAdresse = (
+  matchingByName: ResultFoundPresentation<{
+    id: string;
+    type: 'place';
+  }>[],
+  lieux: LieuMediationNumerique[],
+  searchTerm: string
+): ResultFoundPresentation<{
+  id: string;
+  type: 'place';
+}>[] => [
+  ...matchingByName,
+  ...lieux
+    .filter(onlyAdresseMatching(searchTerm))
+    .slice(0, 5 - matchingByName.length)
+    .map(toResultFound)
+];
+
 export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string; type: 'place' }> {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
@@ -352,9 +380,14 @@ export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string
 
   public search$(searchTerm: string, limit: number = 5): Observable<ResultFoundPresentation<{ id: string; type: 'place' }>[]> {
     return this.lieuxMediationNumerique$.pipe(
-      map((lieux: LieuMediationNumerique[]): ResultFoundPresentation<{ id: string; type: 'place' }>[] =>
-        lieux.filter(onlyNomMatching(searchTerm)).slice(0, limit).map(toResultFound)
-      )
+      map((lieux: LieuMediationNumerique[]): ResultFoundPresentation<{ id: string; type: 'place' }>[] => {
+        const matchingByName: ResultFoundPresentation<{ id: string; type: 'place' }>[] = lieux
+          .filter(onlyNomMatching(searchTerm))
+          .slice(0, limit)
+          .map(toResultFound);
+
+        return matchingByName.length === 5 ? matchingByName : appendSearchByAdresse(matchingByName, lieux, searchTerm);
+      })
     );
   }
 
