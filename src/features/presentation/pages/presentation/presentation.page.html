@@ -26,28 +26,23 @@
     </div>
   </section>
   <section class="container text-center">
-    <h2 class="fw-bold my-5 text-black text-center">
-      Vous êtes un acteur local souhaitant intégrer
+    <h2 class="my-5 text-black text-center">
+      Vous souhaitez savoir comment
+      <span class="fw-bold">apparaître</span>
       <br />
-      la cartographie sur votre site web ?
+      sur la cartographie ou
+      <span class="fw-bold">mettre à jour</span>
+      vos données ?
     </h2>
-    <img src="/assets/img/presentation/multipuces.svg" class="img-fluid w-50" alt="" />
+    <img src="/assets/img/presentation/multipuces.svg" class="img-fluid" style="max-width: 30%" alt="" />
     <div class="my-5">
       <a
-        class="btn btn-outline-primary align-items-center d-inline-flex rounded-0 me-3"
-        href="https://labase.anct.gouv.fr/base/356"
+        class="btn btn-primary rounded-0"
+        href="https://labase.anct.gouv.fr/ressource/1474"
         target="_blank"
         rel="noopener noreferrer">
-        <i class="ri-information-line ri me-2" aria-hidden="true"></i>
-        Plus d'infos
-      </a>
-      <a
-        class="btn btn-primary align-items-center d-inline-flex rounded-0"
-        href="https://github.com/anct-cartographie-nationale/client-application#documentation"
-        target="_blank"
-        rel="noopener noreferrer">
-        <i class="ri-map-pin-2-line ri me-2" aria-hidden="true"></i>
-        Intégrer la cartographie
+        <i class="ri-edit-line ri me-2" aria-hidden="true"></i>
+        Référencer ma structure
       </a>
     </div>
   </section>
@@ -57,6 +52,27 @@
       (switchSlide)="onSwitchSlide($event)"
       (nextSlide)="onNextSlide()"
       (previousSlide)="onPreviousSlide()"></app-carousel>
+  </section>
+  <section class="py-5 bg-info">
+    <div class="container">
+      <div class="row justify-content-lg-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold text-black mb-4">Une nouvelle cartographie&nbsp;? Pourquoi&nbsp;?</h2>
+          <p>
+            L’objectif de cette cartographie est de participer à l’amélioration de l'accompagnement proposé par les
+            professionnels de la médiation numérique.
+            <br />
+          </p>
+          <p>
+            L'idéologie de celle-ci est de proposer un outil à la fois national et local. La base de données est ouverte et
+            contributive : de la plus petite collectivité à un hub territorial, chacun peut implémenter sur son site cet outil
+            et afficher l'offre de médiation de son territoire. Travailler sur cette base de données commune vise à centraliser
+            les informations afin de les actualiser plus facilement et améliorer la visibilité et le quotidien des travailleurs
+            sociaux en particulier des médiateurs numériques.
+          </p>
+        </div>
+      </div>
+    </div>
   </section>
   <section class="container mb-5" *ngIf="!this.environment">
     <h2 class="fw-bold my-5 text-black text-center">De quel écosystème parle-t-on ?</h2>
