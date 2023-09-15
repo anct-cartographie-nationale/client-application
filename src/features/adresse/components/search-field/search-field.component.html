@@ -16,7 +16,7 @@
       [attr.aria-describedby]="isNotFound ? 'search-desc-error' : null"
       [attr.aria-expanded]="dropdownPane.expanded$ | async"
       (input)="search.next(searchInput.value); searchInput.value.length <= 2 ? dropdownPane.reduce() : dropdownPane.expand()"
-      (focus)="searchInput.value.length <= 2 ? dropdownPane.reduce() : dropdownPane.expand()"
+      (focus)="suggestions = previousSuggestions; searchInput.value.length <= 2 ? dropdownPane.reduce() : dropdownPane.expand()"
       (focusout)="dropdownPane.reduce()"
       (keydown.escape)="dropdownPane.reduce()"
       (keydown.arrowDown)="$event.preventDefault(); dropdownPane.nextIndex()"
@@ -32,6 +32,7 @@
     #dropdownPane="dropdownPane"
     appDropdownPane
     [class.show]="(dropdownPane.expanded$ | async) && suggestions.length > 0"
+    (reduced)="onReduced()"
     class="dropdown-menu position-absolute mt-1"
     role="listbox"
     aria-labelledby="search">

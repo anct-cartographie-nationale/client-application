@@ -26,7 +26,9 @@ export class SearchFieldComponent<TResultType extends string> implements OnChang
 
   @Output() public readonly search: EventEmitter<string> = new EventEmitter<string>();
 
-  formGroup: FormGroup = new FormGroup({ search: new FormControl() });
+  public formGroup: FormGroup = new FormGroup({ search: new FormControl() });
+
+  public previousSuggestions: ResultFoundPresentation<{ type: TResultType }>[] = [];
 
   public ngOnChanges(simpleChanges: SimpleChanges): void {
     simpleChanges['defaultValue'] && this.formGroup.get('search')?.setValue(this.defaultValue ?? '');
@@ -45,5 +47,10 @@ export class SearchFieldComponent<TResultType extends string> implements OnChang
   public clear(): void {
     this.formGroup.get('search')?.reset();
     this.resetSearch.emit();
+  }
+
+  public onReduced(): void {
+    if (this.suggestions.length > 0) this.previousSuggestions = this.suggestions;
+    this.suggestions = [];
   }
 }

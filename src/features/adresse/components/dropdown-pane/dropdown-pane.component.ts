@@ -33,6 +33,8 @@ export class DropdownPaneComponent {
 
   @Output() public readonly indexChange: EventEmitter<number> = new EventEmitter<number>();
 
+  @Output() public readonly reduced: EventEmitter<void> = new EventEmitter<void>();
+
   @Input() public set expanded(expanded: boolean) {
     this._expanded$.next(expanded);
     this._expanded = expanded;
@@ -48,6 +50,7 @@ export class DropdownPaneComponent {
     setTimeout(() => {
       this._expanded$.next(false);
       this._expanded = false;
+      this.reduced.emit();
     }, 100);
   }
 
