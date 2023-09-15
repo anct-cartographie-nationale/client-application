@@ -25,34 +25,6 @@
       </div>
     </div>
   </section>
-  <section class="container text-center">
-    <h2 class="my-5 text-black text-center">
-      Vous souhaitez savoir comment
-      <span class="fw-bold">apparaître</span>
-      <br />
-      sur la cartographie ou
-      <span class="fw-bold">mettre à jour</span>
-      vos données ?
-    </h2>
-    <img src="/assets/img/presentation/multipuces.svg" class="img-fluid" style="max-width: 30%" alt="" />
-    <div class="my-5">
-      <a
-        class="btn btn-primary rounded-0"
-        href="https://labase.anct.gouv.fr/ressource/1474"
-        target="_blank"
-        rel="noopener noreferrer">
-        <i class="ri-edit-line ri me-2" aria-hidden="true"></i>
-        Référencer ma structure
-      </a>
-    </div>
-  </section>
-  <section class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
-    <app-carousel
-      [currentSlide]="(currentSlide$ | async) ?? 0"
-      (switchSlide)="onSwitchSlide($event)"
-      (nextSlide)="onNextSlide()"
-      (previousSlide)="onPreviousSlide()"></app-carousel>
-  </section>
   <section class="py-5 bg-info">
     <div class="container">
       <div class="row justify-content-lg-center">
@@ -74,54 +46,42 @@
       </div>
     </div>
   </section>
-  <section class="container mb-5" *ngIf="!this.environment">
-    <h2 class="fw-bold my-5 text-black text-center">De quel écosystème parle-t-on ?</h2>
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-      <div class="col">
-        <div class="card h-100 rounded-0">
-          <img src="/assets/img/presentation/svg-dora.svg" class="card-img-top" alt="" />
-          <div class="card-body">
-            <h3 class="fw-bold card-title">Dora</h3>
-            <p class="card-text">
-              Vous travaillez dans un lieu d'inclusion numérique&nbsp;? Utilisez les formulaires Dora afin de renseigner vos
-              données !
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 rounded-0">
-          <img src="/assets/img/presentation/svg-rdv.svg" class="card-img-top" alt="" />
-          <div class="card-body">
-            <h3 class="fw-bold card-title">RDV Solidarité</h3>
-            <p class="card-text">La prise de Rendez-vous est désormais possible directement depuis la cartographie.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 rounded-0">
-          <img src="/assets/img/presentation/svg-labase.svg" class="card-img-top" alt="" />
-          <div class="card-body">
-            <h3 class="fw-bold card-title">La Base</h3>
-            <p class="card-text">
-              La Base regroupe les ressources des professionnels du numérique d’intérêt général dont l’inclusion et la médiation
-              numériques.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 rounded-0">
-          <img src="/assets/img/presentation/svg-ifn.svg" class="card-img-top" alt="" />
-          <div class="card-body">
-            <h3 class="h5 fw-bold card-title">IFN</h3>
-            <p class="card-text">
-              C'est l'indice de fragilité numérique : son rôle est de cibler le besoin de médiation numérique dans les
-              territoires.
-            </p>
-          </div>
-        </div>
-      </div>
+  <section class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
+    <app-carousel
+      [currentSlide]="(currentSlide$ | async) ?? 0"
+      (switchSlide)="onSwitchSlide($event)"
+      (nextSlide)="onNextSlide()"
+      (previousSlide)="onPreviousSlide()"></app-carousel>
+  </section>
+  <section class="container text-center">
+    <h2 class="my-5 text-black text-center">
+      Vous souhaitez savoir comment
+      <span class="fw-bold">apparaître</span>
+      <br />
+      sur la cartographie ou
+      <span class="fw-bold">mettre à jour</span>
+      vos données ?
+    </h2>
+    <img src="/assets/img/presentation/multipuces.svg" class="img-fluid" style="max-width: 30%" alt="" />
+    <div class="my-5">
+      <a
+        class="btn btn-primary rounded-0"
+        href="https://labase.anct.gouv.fr/ressource/1474"
+        target="_blank"
+        rel="noopener noreferrer">
+        <i class="ri-edit-line ri me-2" aria-hidden="true"></i>
+        Référencer ma structure
+      </a>
+    </div>
+  </section>
+  <section class="text-center bg-integration py-5">
+    <div class="container">
+      <h2 class="fw-bold my-5 text-black text-center">
+        Comme de nombreux acteurs
+        <br />
+        implémentez la cartographie sur votre site internet
+      </h2>
+      <app-integrateurs></app-integrateurs>
     </div>
   </section>
   <section class="container text-center">
