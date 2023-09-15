@@ -7,8 +7,8 @@ import { ResultFoundPresentation } from '../../../adresse';
   selector: 'app-search-field',
   templateUrl: './search-field.component.html'
 })
-export class SearchFieldComponent implements OnChanges {
-  @Input() public suggestions: ResultFoundPresentation[] = [];
+export class SearchFieldComponent<TResultType extends string> implements OnChanges {
+  @Input() public suggestions: ResultFoundPresentation<{ type: TResultType }>[] = [];
 
   @Input() public isNotFound: boolean = false;
 
@@ -18,30 +18,39 @@ export class SearchFieldComponent implements OnChanges {
 
   @Input() public defaultValue?: string;
 
-  @Output() public readonly selected: EventEmitter<ResultFoundPresentation> = new EventEmitter<ResultFoundPresentation>();
+  @Output() public readonly selected: EventEmitter<ResultFoundPresentation<{ type: TResultType }>> = new EventEmitter<
+    ResultFoundPresentation<{ type: TResultType }>
+  >();
 
   @Output() public readonly resetSearch: EventEmitter<void> = new EventEmitter<void>();
 
   @Output() public readonly search: EventEmitter<string> = new EventEmitter<string>();
 
-  formGroup: FormGroup = new FormGroup({ search: new FormControl() });
+  public formGroup: FormGroup = new FormGroup({ search: new FormControl() });
+
+  public previousSuggestions: ResultFoundPresentation<{ type: TResultType }>[] = [];
 
   public ngOnChanges(simpleChanges: SimpleChanges): void {
     simpleChanges['defaultValue'] && this.formGroup.get('search')?.setValue(this.defaultValue ?? '');
   }
 
-  public setSuggestion(suggestion: ResultFoundPresentation): void {
+  public setSuggestion(suggestion: ResultFoundPresentation<{ type: TResultType }>): void {
     this.formGroup.get('search')?.setValue(suggestion.label);
     this.search.next(suggestion.label);
     this.selected.next(suggestion);
   }
 
-  public trackBySuggestionName(_: number, suggestion: ResultFoundPresentation): string {
+  public trackBySuggestionName(_: number, suggestion: ResultFoundPresentation<{ type: TResultType }>): string {
     return `${suggestion.label}-${suggestion.context}`;
   }
 
   public clear(): void {
     this.formGroup.get('search')?.reset();
     this.resetSearch.emit();
+  }
+
+  public onReduced(): void {
+    if (this.suggestions.length > 0) this.previousSuggestions = this.suggestions;
+    this.suggestions = [];
   }
 }

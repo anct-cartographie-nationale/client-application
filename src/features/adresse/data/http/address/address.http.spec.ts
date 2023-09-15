@@ -19,7 +19,8 @@ describe('address http', (): void => {
               },
               properties: {
                 context: '80, Somme, Hauts-de-France',
-                label: '8 Boulevard du Port 80000 Amiens'
+                label: '8 Boulevard du Port 80000 Amiens',
+                type: 'housenumber'
               }
             }
           ]
@@ -36,7 +37,8 @@ describe('address http', (): void => {
         localisation: Localisation({
           latitude: 45.7665478,
           longitude: 4.8375548
-        })
+        }),
+        type: 'housenumber'
       }
     ]);
   });

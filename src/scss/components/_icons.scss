@@ -109,6 +109,10 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   }
 }
 
+.ri-focus-3-line::before {
+  content: '\ed4c';
+}
+
 .ri-wifi-line::before {
   content: '\f2c0';
 }
@@ -313,10 +317,6 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\ef06';
 }
 
-.ri-focus-3-line::before {
-  content: '\ed4c';
-}
-
 .ri-sound-module-line::before {
   content: '\f162';
 }
@@ -387,4 +387,8 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-medal-2-line::before {
   content: '\ef26';
+}
+
+.ri-community-line::before {
+  content: '\ebba';
 }

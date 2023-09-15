@@ -15,8 +15,8 @@
       formControlName="search"
       [attr.aria-describedby]="isNotFound ? 'search-desc-error' : null"
       [attr.aria-expanded]="dropdownPane.expanded$ | async"
-      (input)="search.next(searchInput.value); searchInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
-      (focus)="searchInput.value.length <= 3 ? dropdownPane.reduce() : dropdownPane.expand()"
+      (input)="search.next(searchInput.value); searchInput.value.length <= 2 ? dropdownPane.reduce() : dropdownPane.expand()"
+      (focus)="suggestions = previousSuggestions; searchInput.value.length <= 2 ? dropdownPane.reduce() : dropdownPane.expand()"
       (focusout)="dropdownPane.reduce()"
       (keydown.escape)="dropdownPane.reduce()"
       (keydown.arrowDown)="$event.preventDefault(); dropdownPane.nextIndex()"
@@ -32,23 +32,51 @@
     #dropdownPane="dropdownPane"
     appDropdownPane
     [class.show]="(dropdownPane.expanded$ | async) && suggestions.length > 0"
+    (reduced)="onReduced()"
     class="dropdown-menu position-absolute mt-1"
     role="listbox"
     aria-labelledby="search">
-    <li #results *ngFor="let suggestion of suggestions; index as suggestionIndex; trackBy: trackBySuggestionName">
+    <li
+      #results
+      *ngFor="let suggestion of suggestions; index as suggestionIndex; trackBy: trackBySuggestionName; let isLast = last">
       <button
         type="button"
         tabindex="-1"
         role="option"
         class="dropdown-item"
+        [class.border-bottom]="!isLast"
         [class.active]="dropdownPane.activeIndex === suggestionIndex"
         [attr.aria-current]="dropdownPane.activeIndex === suggestionIndex ? true : null"
         (focusin)="dropdownPane.setIndex(suggestionIndex)"
         (focusout)="dropdownPane.setIndex(-1)"
         (mousedown)="setSuggestion(suggestion); dropdownPane.reduce()">
-        <b>{{ suggestion.label }}</b>
+        <i class="small text-primary" [ngSwitch]="suggestion.payload.type">
+          <ng-container *ngSwitchCase="'place'">Lieu d'inclusion numérique</ng-container>
+          <ng-container *ngSwitchCase="'municipality'">Commune</ng-container>
+          <ng-container *ngSwitchCase="'conseiller'">Consiller Numérique</ng-container>
+          <ng-container *ngSwitchDefault>Adresse</ng-container>
+        </i>
         <br />
-        <small>{{ suggestion.context }}</small>
+        <span class="d-inline-flex">
+          <i
+            class="text-primary ri-2x me-2 ri-focus-3-line"
+            style="margin-top: -5px"
+            [class.ri-community-line]="suggestion.payload.type === 'municipality'"
+            [class.ri-map-pin-2-line]="suggestion.payload.type === 'place'"
+            [class.ri-account-circle-fill]="suggestion.payload.type === 'conseiller'"
+            aria-hidden="true"></i>
+          <span class="lh-sm">
+            <ng-container *ngFor="let part of suggestion.label | highlight : searchInput.value">
+              <span [ngClass]="{ 'fw-bold': part.matchString }">{{ part.value }}</span>
+            </ng-container>
+            <br />
+            <span class="text-muted">
+              <ng-container *ngFor="let part of suggestion.context | highlight : searchInput.value">
+                <span [ngClass]="{ 'fw-bold': part.matchString }">{{ part.value }}</span>
+              </ng-container>
+            </span>
+          </span>
+        </span>
       </button>
     </li>
   </ul>

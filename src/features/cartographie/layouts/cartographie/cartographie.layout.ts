@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, RouterOutlet } from '@angular/router';
-import { BehaviorSubject, delay, Observable, of, Subject, tap, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -10,27 +10,27 @@ import {
   departementFromNom,
   DepartementPresentation,
   FilterPresentation,
+  FrancePresentation,
   LieuMediationNumeriquePresentation,
   LieuxMediationNumeriquePresenter,
+  MarkersPresenter,
+  nearestRegion,
+  openingState,
   regionFromDepartement,
   RegionPresentation,
+  TerritoirePresentation,
   toDepartement,
   toFilterFormPresentationFromQuery,
   toLocalisationFromFilterFormPresentation,
-  nearestRegion,
-  openingState,
-  FrancePresentation,
-  TerritoirePresentation,
-  MarkersPresenter,
   WithLieuxCount
 } from '../../../core/presenters';
 import { ifAny } from '../../../core/utilities';
-import { ResultFoundPresentation } from '../../../adresse';
+import { AddressType, ResultFoundPresentation } from '../../../adresse';
 import {
+  DEPARTEMENT_ZOOM_LEVEL,
   getNextRouteFromZoomLevel,
-  shouldNavigateToListPage,
   LieuMediationNumeriqueOnMapPresentation,
-  DEPARTEMENT_ZOOM_LEVEL
+  shouldNavigateToListPage
 } from '../../presenters';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
 
@@ -236,7 +236,7 @@ export class CartographieLayout {
     return this.route.children[0]?.children[0]?.snapshot.paramMap.get(routeParam) ?? '';
   }
 
-  public onResultFound(result: ResultFoundPresentation<{ id?: string }>): void {
+  public onResultFound(result: ResultFoundPresentation<{ id?: string; type: AddressType | 'user' }>): void {
     result.localisation &&
       this.router.navigate(result.payload?.id ? ['/cartographie', result.payload.id, 'details'] : ['/cartographie'], {
         queryParams: {
