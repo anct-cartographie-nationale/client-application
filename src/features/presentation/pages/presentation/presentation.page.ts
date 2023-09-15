@@ -10,7 +10,8 @@ import {
   TypologiePresentation,
   onlyWithLocalisation,
   toFilterFormPresentationFromQuery,
-  toLocalisationFromFilterFormPresentation
+  toLocalisationFromFilterFormPresentation,
+  WithLieuxCount
 } from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 
@@ -39,7 +40,7 @@ export class PresentationPage {
     of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery()))
   ];
 
-  public regions$: Observable<RegionPresentation[]> =
+  public regions$: Observable<WithLieuxCount<RegionPresentation[]>> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByRegion$(
       ...this._lieuxMediationNumeriqueListPresenterArgs
     );

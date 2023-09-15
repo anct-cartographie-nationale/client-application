@@ -112,7 +112,7 @@
     <div class="my-3" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
       <h2 class="ps-3 fw-bold my-5 text-start">Chiffres clefs d'utilisation</h2>
       <app-chiffres-cle
-        [regions]="(regions$ | async) ?? []"
+        [regions]="(regions$ | async)"
         [lieuxMediationNumeriqueTotal]="(lieuxMediationNumeriqueTotal$ | async) ?? []"
         [typologies]="(typologies$ | async) ?? []"
         [labels]="(labelsNationaux$ | async) ?? []"></app-chiffres-cle>

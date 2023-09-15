@@ -1,150 +1,162 @@
 <div class="row">
   <div class="col">
-    <div class="card h-100 p-4 rounded-0">
-      <div *ngIf="lieuxMediationNumeriqueTotal" class="text-start">
-        <div class="d-flex">
-          <i class="ri-map-pin-2-fill ri-4x pe-2 text-primary"></i>
-          <h5 class="mt-2">
-            <span class="fw-bold">{{ lieuxMediationNumeriqueTotal.length }}</span>
-            <br />
-            <span class="fw-bold">Lieux d'inclusion numérique recensés</span>
-            <br />
-            sur la cartographie nationale
-          </h5>
-        </div>
-        <hr />
+    <div class="card p-4 rounded-0" *ngIf="lieuxMediationNumeriqueTotal">
+      <div class="d-flex text-start">
+        <i class="ri-map-pin-2-fill ri-4x pe-2 text-primary" aria-hidden="true"></i>
+        <h3 class="mt-2 h5">
+          <b>{{ lieuxMediationNumeriqueTotal.length }}</b>
+          <br />
+          <b>Lieux d'inclusion numérique recensés</b>
+          <br />
+          sur la cartographie nationale
+        </h3>
       </div>
-      <div class="d-flex align-items-center">
-        <h5 class="col-8 fw-bold text-start mt-4 flex-grow-1">Regions</h5>
-        <i class="ri-map-pin-2-fill me-2 ri-xl col mt-4 text-end" title="nombre de lieux"></i>
-        <i class="ri-pie-chart-2-fill me-2 ri-xl col mt-4 text-end text-info" title="pourcentage de lieux"></i>
-      </div>
-      <div class="d-flex" *ngFor="let region of regions">
-        <p class="col-8 text-start flex-grow-1">
-          {{ region.nom }}
-        </p>
-        <p class="col me-2 fw-bold text-end">
-          {{ region.lieuxCount }}
-        </p>
-        <p class="col text-end">
-          {{ (((region.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }} %
-        </p>
-      </div>
+      <hr />
+      <table class="table table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col" class="w-100">
+              <h4 class="col-8 fw-bold text-start mt-4 flex-grow-1">Regions</h4>
+            </th>
+            <th scope="col" class="text-end">
+              <i class="ri-map-pin-2-fill ri-xl me-2" title="nombre de lieux" aria-hidden="true"></i>
+              <span class="visually-hidden">Nombre de lieux</span>
+            </th>
+            <th scope="col" class="text-end text-info">
+              <i class="ri-pie-chart-2-fill ri-xl me-1" title="pourcentage de lieux" aria-hidden="true"></i>
+              <span class="visually-hidden">Pourcentage de lieux</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let region of sortByLieuxCount(regions?.payload)">
+            <th scope="row" class="text-start fw-normal w-100">{{ region.nom }}</th>
+            <td class="text-end fw-bold">{{ region.lieuxCount }}</td>
+            <td class="text-end">
+              {{ (((region.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }}&nbsp;%
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <div class="col align-self-start">
     <div class="card h-100 p-4 rounded-0">
-      <div class="d-flex align-items-center">
-        <h5 class="col-8 fw-bold text-start mt-4 flex-grow-1">Typologies</h5>
-        <i class="ri-bank-fill me-2 ri-xl col mt-4 text-end" title="nombre de lieux"></i>
-        <i class="ri-pie-chart-2-fill me-2 ri-xl col mt-4 text-end text-info" title="pourcentage de lieux"></i>
-      </div>
-      <div class="accordion" id="accordionTypologie">
-        <div class="accordion-item">
-          <ng-container *ngIf="typologies" class="mb-3">
-            <div
-              #collapseTypologiesControl
-              type="button"
-              class="d-flex rounded-0 d-flex position-relative w-100 justify-content-between"
-              aria-controls="collapseTypologies"
-              [class.bg-white]="(collapseTypologies.isCollapsed$ | async) === false"
-              [attr.aria-expanded]="collapseTypologies.isExpanded$ | async"
-              (click)="collapseTypologies.toggle()">
-              <p class="col-8 text-start flex-grow-1">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col" class="w-100">
+              <h4 class="col-8 fw-bold text-start mt-4 flex-grow-1">Typologies</h4>
+            </th>
+            <th scope="col" class="text-end">
+              <i class="ri-bank-fill ri-xl me-2" title="nombre de lieux" aria-hidden="true"></i>
+              <span class="visually-hidden">Nombre de lieux</span>
+            </th>
+            <th scope="col" class="text-end text-info">
+              <i class="ri-pie-chart-2-fill ri-xl me-1" title="pourcentage de lieux" aria-hidden="true"></i>
+              <span class="visually-hidden">Pourcentage de lieux</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr>
+            <th scope="row" class="text-start fw-normal w-100">
+              <button
+                class="btn btn-link link-dark text-decoration-none p-0"
+                #collapseTypologiesControl
+                aria-controls="collapseTypologies"
+                [attr.aria-expanded]="collapseTypologies.isExpanded$ | async"
+                (click)="collapseTypologies.toggle()">
                 {{ getPublicProperties()?.nom }}
                 <i
-                  class="ri-arrow-right-s-line ri-lg"
-                  *ngIf="collapseTypologies.isCollapsed$ | async; else expanded"
+                  class="ri-lg"
+                  [ngClass]="(collapseTypologies.isCollapsed$ | async) ? 'ri-arrow-right-s-line' : 'ri-arrow-down-s-line'"
                   aria-hidden="true"></i>
-                <ng-template #expanded>
-                  <i class="ri-arrow-down-s-line ri-lg" aria-hidden="true"></i>
-                </ng-template>
-              </p>
-              <p class="col me-2 fw-bold text-end">
-                {{ getPublicProperties()?.lieuxCount }}
-              </p>
-              <p class="col text-end">
-                {{
-                  (((getPublicProperties()?.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number
-                }}
-                %
-              </p>
-            </div>
-            <app-collapse #collapseTypologies [control]="collapseTypologiesControl">
-              <div *ngFor="let typologie of typologies" class="ps-1">
-                <div *ngIf="typologie.type === 'publique' && typologie.sousType">
-                  <div class="d-flex">
-                    <p class="col-8 text-start flex-grow-1">
-                      {{ typologie.nom }}
-                    </p>
-                    <p class="col me-2 fw-bold text-end">
-                      {{ typologie.lieuxCount }}
-                    </p>
-                    <p class="col text-end">
-                      {{ (((typologie.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }}
-                      %
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </app-collapse>
-          </ng-container>
-        </div>
-      </div>
-      <div *ngFor="let typologie of typologies">
-        <div *ngIf="!typologie.type">
-          <div class="d-flex">
-            <p class="col-8 text-start flex-grow-1">
-              {{ typologie.nom }}
-            </p>
-            <p class="col me-2 fw-bold text-end">
-              {{ typologie.lieuxCount }}
-            </p>
-            <p class="col text-end">
-              {{ (((typologie.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }}
-              %
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="d-flex align-items-center">
-        <h5 class="col-8 fw-bold text-start mt-4 flex-grow-1">Labels</h5>
-        <i class="ri-medal-2-line me-2 ri-xl col mt-4 text-end" title="nombre de lieux"></i>
-        <i class="ri-pie-chart-2-fill me-2 ri-xl col mt-4 text-end text-info" title="pourcentage de lieux"></i>
-      </div>
-      <div *ngFor="let label of labels">
-        <div class="d-flex" *ngIf="label.nom !== 'QPV' && label.nom !== 'ZRR'">
-          <p class="col-8 text-start flex-grow-1">
-            {{ labelMap.get(label.nom) ?? label.nom }}
-          </p>
-          <p class="col me-2 fw-bold text-end">
-            {{ label.lieuxCount }}
-          </p>
-          <p class="col text-end">
-            {{ (((label.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }} %
-          </p>
-        </div>
-      </div>
-      <div class="d-flex">
-        <p class="col-8 text-start flex-grow-1">Territoires prioritaires</p>
-        <p class="col me-2 fw-bold text-end">{{ getTerritoiresPrioritaireCount() }}</p>
-        <p class="col text-end">
-          {{ ((getTerritoiresPrioritaireCount() / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }} %
-        </p>
-      </div>
-      <div *ngFor="let label of labels">
-        <div class="d-flex" *ngIf="label.nom === 'QPV' || label.nom === 'ZRR'">
-          <p class="col-8 text-start flex-grow-1">
-            {{ labelMap.get(label.nom) ?? label.nom }}
-          </p>
-          <p class="col me-2 fw-bold text-end">
-            {{ label.lieuxCount }}
-          </p>
-          <p class="col text-end">
-            {{ (((label.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }} %
-          </p>
-        </div>
-      </div>
+              </button>
+            </th>
+            <td class="text-end fw-bold">{{ getPublicProperties()?.lieuxCount }}</td>
+            <td class="text-end">
+              {{
+                (((getPublicProperties()?.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number
+              }}&nbsp;%
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class="p-0 ps-2">
+              <app-collapse #collapseTypologies [control]="collapseTypologiesControl">
+                <table class="table table-borderless mb-0">
+                  <tbody>
+                    <tr *ngFor="let typologie of typologies" class="ps-1">
+                      <ng-container *ngIf="typologie.type === 'publique' && typologie.sousType">
+                        <th scope="row" class="text-start fw-normal w-100">{{ typologie.nom }}</th>
+                        <td class="text-end fw-bold">{{ typologie.lieuxCount }}</td>
+                        <td class="text-end">
+                          {{
+                            (((typologie.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number
+                          }}&nbsp;%
+                        </td>
+                      </ng-container>
+                    </tr>
+                  </tbody>
+                </table>
+              </app-collapse>
+            </td>
+          </tr>
+          <tr *ngFor="let typologie of typologies">
+            <ng-container *ngIf="!typologie.type">
+              <th scope="row" class="text-start fw-normal w-100">{{ typologie.nom }}</th>
+              <td class="text-end fw-bold">{{ typologie.lieuxCount }}</td>
+              <td class="text-end">
+                {{ (((typologie.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }}&nbsp;%
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col" class="w-100">
+              <h4 class="col-8 fw-bold text-start mt-4 flex-grow-1">Labels</h4>
+            </th>
+            <th scope="col" class="text-end">
+              <i class="ri-medal-2-line ri-xl me-2" title="nombre de lieux" aria-hidden="true"></i>
+              <span class="visually-hidden">Nombre de lieux</span>
+            </th>
+            <th scope="col" class="text-end text-info">
+              <i class="ri-pie-chart-2-fill ri-xl me-1" title="pourcentage de lieux" aria-hidden="true"></i>
+              <span class="visually-hidden">Pourcentage de lieux</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let label of labels">
+            <ng-container *ngIf="label.nom !== 'QPV' && label.nom !== 'ZRR'">
+              <th scope="row" class="text-start fw-normal w-100">{{ labelMap.get(label.nom) ?? label.nom }}</th>
+              <td class="text-end fw-bold">{{ label.lieuxCount }}</td>
+              <td class="text-end">
+                {{ (((label.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }}&nbsp;%
+              </td>
+            </ng-container>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start fw-normal w-100">Territoires prioritaires</th>
+            <td class="text-end fw-bold">{{ getTerritoiresPrioritaireCount() }}</td>
+            <td class="text-end">
+              {{ ((getTerritoiresPrioritaireCount() / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }}&nbsp;%
+            </td>
+          </tr>
+          <tr *ngFor="let label of labels">
+            <ng-container *ngIf="label.nom === 'QPV' || label.nom === 'ZRR'">
+              <th scope="row" class="text-start fw-normal w-100">{{ labelMap.get(label.nom) ?? label.nom }}</th>
+              <td class="text-end fw-bold">{{ label.lieuxCount }}</td>
+              <td class="text-end">
+                {{ (((label.lieuxCount ?? 0) / lieuxMediationNumeriqueTotal.length) * 100).toFixed(0) | number }}&nbsp;%
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

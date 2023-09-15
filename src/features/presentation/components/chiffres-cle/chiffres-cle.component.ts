@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { LabelsNationauxPresentation, RegionPresentation, TypologiePresentation } from '@features/core/presenters';
+import {
+  LabelsNationauxPresentation,
+  RegionPresentation,
+  TypologiePresentation,
+  WithLieuxCount
+} from '@features/core/presenters';
 import { LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
@@ -8,7 +13,7 @@ import { LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numeriqu
   templateUrl: './chiffres-cle.component.html'
 })
 export class ChiffresCleComponent {
-  @Input() public regions: RegionPresentation[] = [];
+  @Input() public regions: WithLieuxCount<RegionPresentation[]> | null = { payload: [], lieuxCount: 0 };
   @Input() public lieuxMediationNumeriqueTotal: LieuMediationNumerique[] = [];
   @Input() public typologies: TypologiePresentation[] = [];
   @Input() public labels: LabelsNationauxPresentation[] = [];
@@ -29,5 +34,12 @@ export class ChiffresCleComponent {
 
   public getPublicProperties(): TypologiePresentation | undefined {
     return this.typologies.find((typologie: TypologiePresentation) => typologie.nom === 'Public');
+  }
+
+  public sortByLieuxCount(regions: RegionPresentation[] = []): RegionPresentation[] {
+    return regions.sort(
+      (regionA: RegionPresentation, regionB: RegionPresentation): number =>
+        (regionB.lieuxCount ?? 0) - (regionA.lieuxCount ?? 0)
+    );
   }
 }
