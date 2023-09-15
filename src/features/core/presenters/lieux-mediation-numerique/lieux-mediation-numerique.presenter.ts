@@ -10,13 +10,16 @@ import {
   RegionPresentation,
   toDepartement,
   toFrance,
-  toRegion
+  toRegion,
+  TypologiePresentation,
+  LabelsNationauxPresentation,
+  DataInclusionTypologies
 } from '../collectivite-territoriale';
 import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
 import { byBoundingBox } from './helpers/bounding-box';
 import { byDistance, filteredLieuxMediationNumerique } from './helpers/filter';
-import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LabelNational, LieuMediationNumerique, Localisation, Typologie } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ResultFoundPresentation, Searchable } from '../../../adresse';
 import { NO_LOCALISATION } from '../../models';
 import { WithLieuxCount } from '../collectivite-territoriale';
@@ -60,6 +63,188 @@ const toLieuxMediationNumeriqueByRegion =
         .reduce(countLieuxInCollectiviteTerritoriale as () => RegionPresentation[], []),
       lieuxCount: lieux.length
     }))(filteredLieuxMediationNumerique(...filterParameters, date));
+
+const getTypologieType = (lieu: { typologies?: string }, type: string): boolean => {
+  if (!lieu.typologies) {
+    return false;
+  }
+  const typologiesArray = lieu.typologies
+    .toString()
+    .split(',')
+    .map((typologie) => typologie.trim());
+
+  return typologiesArray.every((typologie) => {
+    const typologieInfo = DataInclusionTypologies[typologie as keyof typeof DataInclusionTypologies];
+    return typologieInfo && typologieInfo.type === type;
+  });
+};
+
+const getTypologieSubType = (lieu: { typologies?: string }, subtype: string): boolean => {
+  if (!lieu.typologies) {
+    return false;
+  }
+  const typologiesArray = lieu.typologies
+    .toString()
+    .split(',')
+    .map((typologie) => typologie.trim());
+
+  return typologiesArray.every((typologie) => {
+    const typologieInfo = DataInclusionTypologies[typologie as keyof typeof DataInclusionTypologies];
+    return typologieInfo && typologieInfo.type === 'publique' && typologieInfo.subtype === subtype;
+  });
+};
+
+const getLieuxCountPercentage = (typeCount: number, totalLieux: number): string =>
+  `${((typeCount / totalLieux) * 100).toFixed(0)} %`;
+
+const toLieuxMediationNumeriqueByTypologie =
+  (date: Date) =>
+  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): TypologiePresentation[] => {
+    const filteredLieux = filteredLieuxMediationNumerique(...filterParameters, date).filter(onlyDefined);
+
+    const assoCount = filteredLieux
+      .map((lieu: LieuMediationNumeriquePresentation) => getTypologieType(lieu, 'association'))
+      .filter(Boolean).length;
+    const acteurPrives = filteredLieux
+      .map((lieu: LieuMediationNumeriquePresentation) => getTypologieType(lieu, 'privee'))
+      .filter(Boolean).length;
+    const publicCount = filteredLieux
+      .map((lieu: LieuMediationNumeriquePresentation) => getTypologieType(lieu, 'publique'))
+      .filter(Boolean).length;
+    const communeCount = filteredLieux
+      .map((lieu: LieuMediationNumeriquePresentation) => getTypologieSubType(lieu, 'commune'))
+      .filter(Boolean).length;
+    const EpciCount = filteredLieux
+      .map((lieu: LieuMediationNumeriquePresentation) => getTypologieSubType(lieu, 'epci'))
+      .filter(Boolean).length;
+    const departementCount = filteredLieux
+      .map((lieu: LieuMediationNumeriquePresentation) => getTypologieSubType(lieu, 'departement'))
+      .filter(Boolean).length;
+    const othersCount = filteredLieux
+      .map((lieu: LieuMediationNumeriquePresentation) => getTypologieSubType(lieu, 'autre'))
+      .filter(Boolean).length;
+    const totalLieux = filteredLieux.length;
+    const notDefinedLieux = totalLieux - (assoCount + acteurPrives + publicCount);
+    const publicNotDefinedLieux = publicCount - (communeCount + EpciCount + departementCount + othersCount);
+
+    return [
+      {
+        nom: 'Public',
+        type: 'publique',
+        lieuxCount: publicCount,
+        lieuxPercentage: getLieuxCountPercentage(publicCount, totalLieux)
+      },
+      {
+        nom: 'Commune',
+        type: 'publique',
+        sousType: 'commune',
+        lieuxCount: communeCount,
+        lieuxPercentage: getLieuxCountPercentage(communeCount, publicCount)
+      },
+      {
+        nom: 'EPCI',
+        type: 'publique',
+        sousType: 'epci',
+        lieuxCount: EpciCount,
+        lieuxPercentage: getLieuxCountPercentage(EpciCount, publicCount)
+      },
+      {
+        nom: 'Departement',
+        type: 'publique',
+        sousType: 'departement',
+        lieuxCount: departementCount,
+        lieuxPercentage: getLieuxCountPercentage(departementCount, publicCount)
+      },
+      {
+        nom: 'Autre',
+        type: 'publique',
+        sousType: 'autre',
+        lieuxCount: othersCount,
+        lieuxPercentage: getLieuxCountPercentage(othersCount, publicCount)
+      },
+      {
+        nom: 'Non Défini',
+        type: 'publique',
+        sousType: 'non défini',
+        lieuxCount: publicNotDefinedLieux,
+        lieuxPercentage: getLieuxCountPercentage(publicNotDefinedLieux, publicCount)
+      },
+      {
+        nom: 'Associations',
+        lieuxCount: assoCount,
+        lieuxPercentage: getLieuxCountPercentage(assoCount, totalLieux)
+      },
+      {
+        nom: 'Autre acteurs privés',
+        lieuxCount: acteurPrives,
+        lieuxPercentage: getLieuxCountPercentage(acteurPrives, totalLieux)
+      },
+      {
+        nom: 'Non défini',
+        lieuxCount: notDefinedLieux,
+        lieuxPercentage: getLieuxCountPercentage(notDefinedLieux, totalLieux)
+      }
+    ];
+  };
+
+const toLieuxMediationNumeriqueByLabelsNationaux =
+  (date: Date) =>
+  ([...filterParameters]: LieuxMediationNumeriqueFilterParameters): LabelsNationauxPresentation[] => {
+    const filteredLieux = filteredLieuxMediationNumerique(...filterParameters, date).filter(onlyDefined);
+    const lieuxByLabelsNationaux: LabelsNationauxPresentation[] = filteredLieux.reduce<LabelsNationauxPresentation[]>(
+      (acc, lieu) => {
+        const labelNationaux: string[] | undefined = lieu.labels_nationaux
+          ?.toString()
+          .split(',')
+          .map((label) => label.trim());
+
+        const labelsAutres: string[] | undefined = lieu.labels_autres
+          ?.toString()
+          .split(',')
+          .map((label) => label.trim());
+
+        labelNationaux?.some((label: string) => {
+          if (!label) return;
+          const existingLabel: LabelsNationauxPresentation | undefined = acc.find((item: LabelsNationauxPresentation) =>
+            label?.includes(item.nom as LabelNational)
+          );
+          if (existingLabel) {
+            existingLabel.lieuxCount = (existingLabel.lieuxCount || 0) + 1;
+          } else {
+            acc.push({
+              nom: label,
+              lieuxCount: 1
+            });
+          }
+        });
+
+        labelsAutres
+          ?.filter((label: string) => label.includes('QPV') || label.includes('ZRR'))
+          .some((labelAutre: string) => {
+            if (!labelAutre) return;
+            const existingLabelAutre: LabelsNationauxPresentation | undefined = acc.find(
+              (item: LabelsNationauxPresentation) => labelAutre === item.nom
+            );
+            if (existingLabelAutre) {
+              existingLabelAutre.lieuxCount = (existingLabelAutre.lieuxCount || 0) + 1;
+            } else {
+              acc.push({
+                nom: labelAutre,
+                lieuxCount: 1
+              });
+            }
+          });
+        return acc;
+      },
+      []
+    );
+
+    lieuxByLabelsNationaux.map((label) => {
+      label.lieuxPercentage = (((label.lieuxCount || 0) / filteredLieux.length) * 100).toFixed(0);
+    });
+
+    return lieuxByLabelsNationaux;
+  };
 
 const toLieuxMediationNumeriqueFrance =
   (date: Date) =>
@@ -130,6 +315,28 @@ export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string
     return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
       debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
       map(toLieuxMediationNumeriqueByRegion(date))
+    );
+  }
+
+  public lieuxMediationNumeriqueByTypologie$(
+    localisation$: Observable<Localisation>,
+    filter$: Observable<FilterPresentation> = of({}),
+    date: Date = new Date()
+  ): Observable<TypologiePresentation[]> {
+    return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
+      debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
+      map(toLieuxMediationNumeriqueByTypologie(date))
+    );
+  }
+
+  public lieuxMediationNumeriqueByLabelsNationaux$(
+    localisation$: Observable<Localisation>,
+    filter$: Observable<FilterPresentation> = of({}),
+    date: Date = new Date()
+  ): Observable<LabelsNationauxPresentation[]> {
+    return combineLatest([this.lieuxMediationNumerique$, localisation$, filter$]).pipe(
+      debounceTime(MAP_INTERACTION_DEBOUNCE_TIME),
+      map(toLieuxMediationNumeriqueByLabelsNationaux(date))
     );
   }
 

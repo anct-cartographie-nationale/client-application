@@ -1,9 +1,18 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
-import { LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
+import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
 import { environment } from '../../../../environments/environment';
-import { LieuxMediationNumeriquePresenter, onlyWithLocalisation } from '../../../core/presenters';
+import {
+  LabelsNationauxPresentation,
+  LieuxMediationNumeriquePresenter,
+  RegionPresentation,
+  TypologiePresentation,
+  onlyWithLocalisation,
+  toFilterFormPresentationFromQuery,
+  toLocalisationFromFilterFormPresentation,
+  WithLieuxCount
+} from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 
 const toLieuxWithLocalisation = (lieux: LieuMediationNumerique[]) => lieux.filter(onlyWithLocalisation);
@@ -26,6 +35,25 @@ export class PresentationPage {
   public environment: Boolean = environment.production;
   public lieuxMediationNumeriqueTotal$: Observable<LieuMediationNumerique[]> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$.pipe(map(toLieuxWithLocalisation));
+
+  private _lieuxMediationNumeriqueListPresenterArgs: [Observable<Localisation>] = [
+    of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery()))
+  ];
+
+  public regions$: Observable<WithLieuxCount<RegionPresentation[]>> =
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByRegion$(
+      ...this._lieuxMediationNumeriqueListPresenterArgs
+    );
+
+  public typologies$: Observable<TypologiePresentation[]> =
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByTypologie$(
+      ...this._lieuxMediationNumeriqueListPresenterArgs
+    );
+
+  public labelsNationaux$: Observable<LabelsNationauxPresentation[]> =
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByLabelsNationaux$(
+      ...this._lieuxMediationNumeriqueListPresenterArgs
+    );
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,

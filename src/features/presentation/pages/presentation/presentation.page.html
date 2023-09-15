@@ -58,27 +58,6 @@
       (nextSlide)="onNextSlide()"
       (previousSlide)="onPreviousSlide()"></app-carousel>
   </section>
-  <section class="py-5 bg-info">
-    <div class="container">
-      <div class="row justify-content-lg-center">
-        <div class="col-lg-8">
-          <h2 class="fw-bold text-black mb-4">Une nouvelle cartographie&nbsp;? Pourquoi&nbsp;?</h2>
-          <p>
-            L’objectif de cette cartographie est de participer à l’amélioration de l'accompagnement proposé par les
-            professionnels de la médiation numérique.
-            <br />
-          </p>
-          <p>
-            L'idéologie de celle-ci est de proposer un outil à la fois national et local. La base de données est ouverte et
-            contributive : de la plus petite collectivité à un hub territorial, chacun peut implémenter sur son site cet outil
-            et afficher l'offre de médiation de son territoire. Travailler sur cette base de données commune vise à centraliser
-            les informations afin de les actualiser plus facilement et améliorer la visibilité et le quotidien des travailleurs
-            sociaux en particulier des médiateurs numériques.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
   <section class="container mb-5" *ngIf="!this.environment">
     <h2 class="fw-bold my-5 text-black text-center">De quel écosystème parle-t-on ?</h2>
     <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -130,15 +109,13 @@
     </div>
   </section>
   <section class="container text-center">
-    <h2 class="fw-bold my-5">Les chiffres clefs de la cartographie</h2>
-    <div class="row justify-content-lg-center">
-      <div class="col-4">
-        <img src="/assets/img/presentation/svg-maisons.svg" class="img-fluid" alt="" />
-        <h3 class="fw-bold" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
-          {{lieuxMediationNumeriqueTotal.length}} lieux référencés
-        </h3>
-        <p>Sur l'ensemble du territoire.</p>
-      </div>
+    <div class="my-3" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
+      <h2 class="ps-3 fw-bold my-5 text-start">Chiffres clefs d'utilisation</h2>
+      <app-chiffres-cle
+        [regions]="(regions$ | async)"
+        [lieuxMediationNumeriqueTotal]="(lieuxMediationNumeriqueTotal$ | async) ?? []"
+        [typologies]="(typologies$ | async) ?? []"
+        [labels]="(labelsNationaux$ | async) ?? []"></app-chiffres-cle>
     </div>
   </section>
 </main>

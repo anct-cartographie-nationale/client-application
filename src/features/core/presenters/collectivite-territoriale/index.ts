@@ -9,3 +9,5 @@ export const france: FrancePresentation[] = franceJSON as FrancePresentation[];
 
 export * from './collectivite-territoriale.presenter';
 export * from './presentations/territoire.presentation';
+export * from './presentations/typologies.presentation';
+export * from './presentations/labelsNationaux.presentation';
