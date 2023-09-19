@@ -5,7 +5,7 @@
       class="badge rounded-pill text-bg-light p-2 me-2 mb-2 fs-6 overflow-hidden"
       style="max-width: 400px; text-overflow: ellipsis"
       *ngFor="let publicAccueilli of publicsAccueillis">
-      <span class="opacity-75">{{ publicAccueilli }}</span>
+      <span class="opacity-75">{{ publicsAccueilliMap.get(publicAccueilli) ?? publicAccueilli }}</span>
     </span>
   </div>
   <div class="d-none d-print-block">

@@ -8,4 +8,9 @@ import { PublicAccueilli } from '@gouvfr-anct/lieux-de-mediation-numerique';
 })
 export class PublicPrisEnChargeComponent {
   @Input() public publicsAccueillis: PublicAccueilli[] | undefined;
+
+  public publicsAccueilliMap: Map<PublicAccueilli, string> = new Map([
+    [PublicAccueilli.HandicapsPsychiques, 'Handicaps psychiques'],
+    [PublicAccueilli.HandicapsMentaux, 'Handicaps mentaux']
+  ]);
 }
