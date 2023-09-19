@@ -1,43 +1,43 @@
-<div class="bg-light p-3 d-print-none d-flex">
-  <div class="d-flex flex-grow-1 align-items-center">
-    <div class="d-flex">
-      <a
-        href="https://acceslibre.beta.gouv.fr/contrib/start/"
-        class="btn btn-sm btn-secondary d-block"
-        target="_blank"
-        rel="noopener noreferrer">
-        <i class="ri-edit-line me-1 text-right" aria-hidden="true"></i>
-        <span>Renseigner l'accessibilité</span>
-      </a>
-      <div class="ps-3 d-flex text-muted-dark align-items-baseline">
-        <i class="ri-close-circle-fill me-1" aria-hidden="true"></i>
-        <em class="mt-1">Pas d'information</em>
-      </div>
-    </div>
+<div class="row g-0 bg-light p-3 d-print-none">
+  <div class="col-sm-auto col-12">
+    <a
+      href="https://acceslibre.beta.gouv.fr/contrib/start/"
+      class="btn btn-sm btn-secondary m-auto d-block"
+      target="_blank"
+      rel="noopener noreferrer">
+      <i class="ri-edit-line me-1 text-right" aria-hidden="true"></i>
+      <span>Renseigner l'accessibilité</span>
+    </a>
   </div>
-  <div class="d-flex align-items-center">
-    <button
-      #collapseAccesLibreControl
-      class="btn btn-link p-3 text-decoration-none"
-      aria-controls="collapseAccesLibre"
-      [class.collapsed]="collapseAccesLibre.isCollapsed$ | async"
-      [attr.aria-expanded]="collapseAccesLibre.isExpanded$ | async"
-      (click)="collapseAccesLibre.toggle()">
-      <img
-        class="img-fluid me-2"
-        [src]="assetsConfiguration.path + '/img/logo/acces-libre/acces-libre.svg'"
-        alt="À propos du site accès libre" />
-      <span class="ms-auto">
-        <i
-          *ngIf="collapseAccesLibre.isCollapsed$ | async"
-          class="ri-information-line ri-xl text-muted-dark"
-          aria-hidden="true"></i>
-        <i
-          *ngIf="collapseAccesLibre.isExpanded$ | async"
-          class="ri-close-circle-fill ri-xl text-primary"
-          aria-hidden="true"></i>
-      </span>
-    </button>
+  <div class="col-sm col-12 row g-0 mt-1">
+    <div class="col-6">
+      <i class="ri-close-circle-fill me-1 ms-sm-2 ms-0" aria-hidden="true"></i>
+      <em class="mt-1">Pas d'information</em>
+    </div>
+    <div class="col-6 text-end">
+      <button
+        #collapseAccesLibreControl
+        class="btn btn-link text-decoration-none p-0"
+        aria-controls="collapseAccesLibre"
+        [class.collapsed]="collapseAccesLibre.isCollapsed$ | async"
+        [attr.aria-expanded]="collapseAccesLibre.isExpanded$ | async"
+        (click)="collapseAccesLibre.toggle()">
+        <img
+          class="img-fluid ms-auto me-2"
+          [src]="assetsConfiguration.path + '/img/logo/acces-libre/acces-libre.svg'"
+          alt="À propos du site accès libre" />
+        <span class="ms-auto">
+          <i
+            *ngIf="collapseAccesLibre.isCollapsed$ | async"
+            class="ri-information-line ri-xl text-muted-dark"
+            aria-hidden="true"></i>
+          <i
+            *ngIf="collapseAccesLibre.isExpanded$ | async"
+            class="ri-close-circle-fill ri-xl text-primary"
+            aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
   </div>
 </div>
 <app-collapse #collapseAccesLibre [control]="collapseAccesLibreControl" aria-labelledby="headingAccesLibre">
