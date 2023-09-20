@@ -233,6 +233,10 @@
     "localisation": {
       "longitude": -52.5,
       "latitude": 4
+    },
+    "hub": {
+      "nom": "Guyaclic",
+      "url": "https://www.facebook.com/guyaclic/"
     }
   },
   {
