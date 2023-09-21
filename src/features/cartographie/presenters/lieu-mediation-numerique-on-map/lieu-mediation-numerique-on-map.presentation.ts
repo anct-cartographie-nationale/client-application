@@ -8,4 +8,5 @@ export type LieuMediationNumeriqueOnMapPresentation = {
   longitude: number;
   status?: OpeningState;
   labels_nationaux?: LabelNational[];
+  prise_rdv?: string;
 };
