@@ -1,0 +1,26 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let webinaire of webinairePresentation">
+    <div class="card h-100 rounded-0">
+      <img src="/assets/img/presentation/webinaire/{{ webinaire.image }}" class="w-100" alt="" />
+      <div class="card-body h-100 d-flex p-4" style="flex-direction: column">
+        <div class="d-flex">
+          <i class="ri ri-timer-fill" style="color: #459c99"></i>
+          <p class="ms-3 text-muted">{{ webinaire.duration }}</p>
+        </div>
+        <div class="h-100">
+          <h3 class="fw-bold card-title my-2">{{ webinaire.titre }}</h3>
+        </div>
+        <p class="card-text mt-2 mb-5 flex-grow-1">{{ webinaire.text }}</p>
+        <div>
+          <a
+            class="btn btn-primary rounded-0"
+            href="{{ webinaire.inscription_link }}"
+            target="_blank"
+            rel="noopener noreferrer">
+            S'inscrire au webinaire
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
