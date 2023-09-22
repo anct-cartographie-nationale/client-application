@@ -18,7 +18,11 @@
             lieux d'inclusion numérique avec des services adaptés à vos besoins ou à ceux de vos bénéficiaires !
             <br />
           </p>
-          <div>
+          <div class="flex">
+            <a (click)="onScrollToAnchor('webinaire')" class="btn btn-outline-secondary rounded-0 me-4">
+              <i class="ri-arrow-down-line me-2" style="font-weight: 100" aria-hidden="true"></i>
+              Accéder aux webinaire
+            </a>
             <a [routerLink]="['orientation']" class="btn btn-discover rounded-0">Orienter un bénéficiaire</a>
           </div>
         </div>
@@ -51,7 +55,8 @@
       [currentSlide]="(currentSlide$ | async) ?? 0"
       (switchSlide)="onSwitchSlide($event)"
       (nextSlide)="onNextSlide()"
-      (previousSlide)="onPreviousSlide()"></app-carousel>
+      (previousSlide)="onPreviousSlide()"
+      (scrollToAnchor)="onScrollToAnchor($event)"></app-carousel>
   </section>
   <section class="text-center bg-integration py-5">
     <div class="container">
@@ -73,7 +78,7 @@
         [labels]="(labelsNationaux$ | async) ?? []"></app-chiffres-cle>
     </div>
   </section>
-  <section class="bg-integration py-5">
+  <section class="bg-integration py-5" id="webinaire">
     <div class="container">
       <h2 class="ps-3 fw-bold my-5 text-center text-primary">
         Découvrez nos webinaire, pour en savoir plus

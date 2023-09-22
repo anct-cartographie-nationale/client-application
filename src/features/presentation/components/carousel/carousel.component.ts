@@ -28,6 +28,7 @@ export class CarouselComponent {
   @Output() switchSlide: EventEmitter<number> = new EventEmitter<number>();
   @Output() nextSlide: EventEmitter<void> = new EventEmitter<void>();
   @Output() previousSlide: EventEmitter<void> = new EventEmitter<void>();
+  @Output() scrollToAnchor: EventEmitter<string> = new EventEmitter<string>();
 
   public slidePresentations: SlidePresentations[] = [
     {

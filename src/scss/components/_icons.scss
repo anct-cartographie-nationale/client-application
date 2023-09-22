@@ -396,3 +396,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-timer-fill::before {
   content: '\f212';
 }
+
+.ri-arrow-down-line::before {
+  content: '\ea4c';
+}
