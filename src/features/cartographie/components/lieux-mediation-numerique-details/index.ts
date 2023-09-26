@@ -13,3 +13,5 @@ export * from './lieux-mediation-numerique-details.component';
 export * from './lieux-mediation-numerique-details-print.component';
 export * from './mise-a-jour/mise-a-jour.component';
 export * from './accessibilite/accessibilite.component';
+export * from './bandeau-erreur/bandeau-erreur.component';
+export * from './erreur-form-modal/erreur-form-modal.component';

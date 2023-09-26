@@ -29,8 +29,9 @@ import {
   LieuMediationNumeriqueDetailsPresentation,
   LieuxMediationNumeriqueDetailsPresenter
 } from '../../presenters';
-import { OrientationSheetForm, SendLieuByEmail } from '../../models';
+import { ErreursReportForm, OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { emailMessage, reportErrorEmailMessage } from './lieux-mediation-numerique-details.presentation';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,6 +60,11 @@ export class LieuxMediationNumeriqueDetailsPage {
   public filters$: Observable<FilterPresentation> = this._route.queryParams.pipe(map(toFilterFormPresentationFromQuery));
 
   private readonly _hasDepartementFilter: boolean = true;
+
+  public erreursReportFormGroup: FormGroup = new FormGroup<Record<keyof ErreursReportForm, AbstractControl>>({
+    selected: new FormControl<ErreursReportForm['selected']>([]),
+    precision: new FormControl<ErreursReportForm['precision']>('')
+  });
 
   private _labelToDisplay$: Subject<LabelPresentation> = new Subject<LabelPresentation>();
   public labelToDisplay$: Observable<LabelPresentation> = this._labelToDisplay$.asObservable().pipe(
@@ -115,7 +121,11 @@ export class LieuxMediationNumeriqueDetailsPage {
     const carbonCopy: string = lieu.contact?.courriel ? `cartographie.sonum@anct.gouv.fr` : '';
     document.location.href = `mailto:${mailTo}?cc=${carbonCopy}&subject=Erreur sur la fiche du lieu : ${
       lieu.nom
-    }&body=${reportErrorEmailMessage(location.href)}`;
+    }&body=${reportErrorEmailMessage(
+      location.href,
+      this.erreursReportFormGroup.controls['selected'].value,
+      this.erreursReportFormGroup.controls['precision'].value
+    )}`;
   }
 
   public onCloseDetails(lieu: LieuMediationNumeriqueDetailsPresentation): void {

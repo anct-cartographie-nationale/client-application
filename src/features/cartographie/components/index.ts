@@ -25,7 +25,9 @@ import {
   PublicPrisEnChargeComponent,
   ServicesComponent,
   MiseAJourComponent,
-  AccessibiliteComponent
+  AccessibiliteComponent,
+  BandeauErreurComponent,
+  ErreurFormModalComponent
 } from './lieux-mediation-numerique-details';
 import { LocationBreadcrumbComponent } from './location-breadcrumb/location-breadcrumb.component';
 import { AffinerRechercheFormComponent } from './affiner-recherche-form/affiner-recherche-form.component';
@@ -62,5 +64,7 @@ export const components = [
   LocationBreadcrumbComponent,
   ModifierOrientationComponent,
   LabelModalComponent,
-  HubModalComponent
+  HubModalComponent,
+  BandeauErreurComponent,
+  ErreurFormModalComponent
 ];

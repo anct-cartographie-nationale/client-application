@@ -89,21 +89,22 @@
         (showLabel)="showLabel.emit($event)"
         (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"></app-labellisations>
     </li>
-    <li *ngIf="!lieuIsFranceServices()" class="list-group-item d-flex">
-      <button (click)="orientationSheetModal.control.toggle($event)" class="btn btn-primary btn-sm my-4 me-auto">
-        <i class="ri ri-compass-3-line ms-1" aria-hidden="true"></i>
-        Imprimer fiche d'orientation
-      </button>
-      <button (click)="reportAnError.emit()" class="btn btn-secondary btn-sm my-4">
-        Signaler une erreur
-        <i class="ri ri-error-warning-line ms-1" aria-hidden="true"></i>
-      </button>
-    </li>
   </ul>
-  <div class="bg-light px-4">
+  <div class="bg-light px-2">
     <app-mise-a-jour [source]="lieuMediationNumerique.source"></app-mise-a-jour>
   </div>
+  <div class="bg-primary p-2" *ngIf="!lieuIsFranceServices()">
+    <app-bandeau-erreur
+      (openOrientationSheetModal)="orientationSheetModal.control.toggle($event)"
+      (openErreurFormModal)="erreurFormModal.control.toggle($event)"
+      (closeDetails)="closeDetails.emit(lieuMediationNumerique)"></app-bandeau-erreur>
+  </div>
 </div>
+<app-erreur-form-modal
+  class="d-print-none"
+  #erreurFormModal
+  [erreursReportFormGroup]="erreursReportFormGroup"
+  (reportAnError)="reportAnError.emit()"></app-erreur-form-modal>
 <app-orientation-sheet-modal
   class="d-print-none"
   #orientationSheetModal

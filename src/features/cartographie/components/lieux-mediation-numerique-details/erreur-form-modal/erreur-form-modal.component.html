@@ -1,0 +1,54 @@
+<app-modal
+  #modal
+  heading="Signaler une erreur"
+  icon="ri-error-warning-line"
+  bgBody="light"
+  bgFooter="white"
+  (closed)="erreursReportFormGroup.reset()">
+  <div>
+    <form
+      id="erreurGroup"
+      class="my-4 mx-auto col-lg-7 col-12"
+      [formGroup]="erreursReportFormGroup"
+      (ngSubmit)="reportAnError.emit(); modal.close()">
+      <p class="fw-bold m-0">L'erreur concerne :</p>
+      <div class="mb-4">
+        <label class="text-muted mb-1" style="font-size: small">
+          choisissez la ou les sections de la fiche qui sont erronées
+        </label>
+        <div>
+          <div class="form-check form-check-inline form-chip my-2" *ngFor="let availableErreur of availableErreurs; index as i">
+            <input
+              type="checkbox"
+              name="selected"
+              appCheckboxArray
+              formControlName="selected"
+              class="form-check-input"
+              [attr.id]="'availableErreurChip' + i"
+              [value]="availableErreur" />
+            <label class="form-check-label bg-white" [attr.for]="'availableErreurChip' + i">
+              <b>{{ availableErreur }}</b>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <p class="fw-bold m-0">Quelle(s) correction(s) souhaitez-vous apporter?</p>
+        <label class="text-muted mb-1" style="font-size: small">
+          ces corrections seront directement transmises au référent du lieu
+        </label>
+        <textarea
+          formControlName="precision"
+          placeholder="Commencez à écrire"
+          class="form-control"
+          id="precision"
+          rows="3"
+          maxlength="800"></textarea>
+      </div>
+    </form>
+  </div>
+  <button slot="footer" type="submit" form="erreurGroup" class="btn btn-primary">
+    <i class="ri-mail-send-line" aria-hidden="true"></i>
+    Signaler l'erreur
+  </button>
+</app-modal>
