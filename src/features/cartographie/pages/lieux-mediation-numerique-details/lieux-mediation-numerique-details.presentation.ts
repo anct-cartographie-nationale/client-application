@@ -36,4 +36,4 @@ export const reportErrorEmailMessage = (detailsLink: string, erreursSelected: st
   
   Merci pour votre collaboration et à bientôt !
   
-  Numériquement, à bientôt !`.replace(/\n/gu, '%0D%0A');
+  Numériquement.`.replace(/\n/gu, '%0D%0A');
