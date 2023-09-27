@@ -9,7 +9,8 @@
     [ngClass]="'btn-' + buttonStyle"
     [class.disabled]="lieuxMediationNumeriqueCount === 0"
     [routerLink]="['/', 'cartographie']"
-    queryParamsHandling="preserve">
+    queryParamsHandling="preserve"
+    (click)="matomoTracking()">
     <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
   </a>
   <a
