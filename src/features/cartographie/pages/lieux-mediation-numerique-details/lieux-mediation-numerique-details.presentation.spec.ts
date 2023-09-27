@@ -68,7 +68,7 @@ describe('lieux mediation numerique details presentation', (): void => {
     );
 
     expect(message).toBe(
-      'Bonjour 👋,%0D%0A  %0D%0A  En naviguant sur la cartographie nationale, j\'ai repéré une erreur sur votre fiche https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details,%0D%0A  concernant la section Contacts, la section Horaires : Erreur dans les contacts et les horaires%0D%0A  %0D%0A  Pour mettre à jour ces informations, suivez les instructions en bas de fiche "mettre à jour la fiche".%0D%0A  %0D%0A  Merci pour votre collaboration et à bientôt !%0D%0A  %0D%0A  Numériquement.'
+      'Bonjour 👋,%0D%0A  %0D%0AEn naviguant sur la cartographie nationale, j\'ai repéré une erreur sur votre fiche https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details, concernant la section Contacts, la section Horaires : %0D%0A%0D%0AErreur dans les contacts et les horaires%0D%0A%0D%0APour mettre à jour ces informations, suivez les instructions en bas de fiche "mettre à jour la fiche".%0D%0A%0D%0AMerci pour votre collaboration et à bientôt !%0D%0A%0D%0ANumériquement.'
     );
   });
 });

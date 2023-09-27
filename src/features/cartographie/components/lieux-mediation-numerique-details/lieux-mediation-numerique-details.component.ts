@@ -35,6 +35,6 @@ export class LieuxMediationNumeriqueDetailsComponent {
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   public lieuIsFranceServices(): boolean {
-    return this.lieuMediationNumerique.labels_nationaux?.includes(LabelNational.FranceServices) ?? false;
+    return this.lieuMediationNumerique.labels_nationaux?.[0] === LabelNational.FranceServices ?? false;
   }
 }
