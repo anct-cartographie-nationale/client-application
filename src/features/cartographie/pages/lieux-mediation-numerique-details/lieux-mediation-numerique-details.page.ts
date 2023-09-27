@@ -117,8 +117,8 @@ export class LieuxMediationNumeriqueDetailsPage {
   }
 
   public onReportAnError(lieu: LieuMediationNumeriqueDetailsPresentation): void {
-    const mailTo: string = lieu.contact?.courriel ?? `cartographie.sonum@anct.gouv.fr`;
-    const carbonCopy: string = lieu.contact?.courriel ? `cartographie.sonum@anct.gouv.fr` : '';
+    const mailTo: string = `cartographie.sonum@anct.gouv.fr`;
+    const carbonCopy: string = lieu.contact?.courriel ?? '';
     document.location.href = `mailto:${mailTo}?cc=${carbonCopy}&subject=Erreur sur la fiche du lieu : ${
       lieu.nom
     }&body=${reportErrorEmailMessage(

@@ -93,7 +93,7 @@
   <div class="bg-light px-2">
     <app-mise-a-jour [source]="lieuMediationNumerique.source"></app-mise-a-jour>
   </div>
-  <div class="bg-primary p-2" *ngIf="!lieuIsFranceServices()">
+  <div class="bg-primary p-2">
     <app-bandeau-erreur
       (openOrientationSheetModal)="orientationSheetModal.control.toggle($event)"
       (openErreurFormModal)="erreurFormModal.control.toggle($event)"
