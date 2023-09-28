@@ -73,7 +73,7 @@
         class="navbar-btn pb-1 pt-0 mt-1"
         [attr.aria-controls]="aideOffcanvas.id"
         [class.active]="aideOffcanvas.expanded$ | async"
-        (click)="aideOffcanvas.toggle($event); affinerRechercheOffcanvas.close()">
+        (click)="aideOffcanvas.toggle($event); affinerRechercheOffcanvas.close(); matomoAideButtonTracking()">
         <i
           class="ri-2x"
           [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-circle-line text-primary' : 'ri-question-line'"></i>

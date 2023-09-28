@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Optional, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, RouterOutlet } from '@angular/router';
 import { BehaviorSubject, Observable, of, Subject, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -33,6 +33,7 @@ import {
   shouldNavigateToListPage
 } from '../../presenters';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
+import { MatomoTracker } from 'ngx-matomo';
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
@@ -161,7 +162,8 @@ export class CartographieLayout {
     public readonly markersPresenter: MarkersPresenter,
     @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
     @Inject(ZOOM_LEVEL_TOKEN)
-    private readonly _zoomLevel: ZoomLevelConfiguration
+    private readonly _zoomLevel: ZoomLevelConfiguration,
+    @Optional() private readonly _matomoTracker?: MatomoTracker
   ) {}
 
   public onShowLieuxInDepartement(departement: TerritoirePresentation): void {
@@ -250,5 +252,9 @@ export class CartographieLayout {
 
   public toggleMapForSmallDevices(): void {
     this._showMapForSmallDevices$.next(!this._showMapForSmallDevices$.value);
+  }
+
+  public matomoAideButtonTracking(): void {
+    this._matomoTracker?.trackEvent('Cartograhie', 'Sidebar', 'Bouton aide');
   }
 }
