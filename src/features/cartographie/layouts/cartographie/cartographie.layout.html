@@ -70,7 +70,7 @@
       </button>
       <button
         id="help"
-        class="navbar-btn pb-1 pt-0"
+        class="navbar-btn pb-1 pt-0 mt-1"
         [attr.aria-controls]="aideOffcanvas.id"
         [class.active]="aideOffcanvas.expanded$ | async"
         (click)="aideOffcanvas.toggle($event); affinerRechercheOffcanvas.close()">
