@@ -1,10 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DisplayOnMapLinkComponent } from './display-on-map-link.component';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('DisplayOnMapLinkComponent', (): void => {
   beforeEach(async (): Promise<void> => {
     await TestBed.configureTestingModule({
-      declarations: [DisplayOnMapLinkComponent]
+      declarations: [DisplayOnMapLinkComponent],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            queryParams: of([])
+          }
+        }
+      ]
     })
       .compileComponents()
       .catch((): void => {
