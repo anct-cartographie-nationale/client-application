@@ -3,6 +3,7 @@ import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { FilterPresentation } from '../../../core/presenters';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,6 +15,8 @@ export class LieuxMediationNumeriqueDetailsComponent {
 
   @Input() public filters?: FilterPresentation;
 
+  @Input() public erreursReportFormGroup!: FormGroup;
+
   @Output() public print: EventEmitter<OrientationSheetForm> = new EventEmitter<OrientationSheetForm>();
 
   @Output() public sendEmailTo: EventEmitter<SendLieuByEmail> = new EventEmitter<SendLieuByEmail>();
@@ -23,11 +26,11 @@ export class LieuxMediationNumeriqueDetailsComponent {
   @Output() public closeDetails: EventEmitter<LieuMediationNumeriqueDetailsPresentation> =
     new EventEmitter<LieuMediationNumeriqueDetailsPresentation>();
 
+  @Output() public openOrientationSheetModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
+  @Output() public openErreurFormModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
   @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
 
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
-
-  public lieuIsFranceServices(): boolean {
-    return this.lieuMediationNumerique.labels_nationaux?.includes(LabelNational.FranceServices) ?? false;
-  }
 }

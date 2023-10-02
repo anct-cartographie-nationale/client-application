@@ -26,11 +26,17 @@ Retrouvez toutes les informations de ce lieu sur le site web de la cartographie 
 
 Numériquement, à bientôt !`.replace(/\n/gu, '%0D%0A');
 
-export const reportErrorEmailMessage = (detailsLink: string): string =>
+export const reportErrorEmailMessage = (detailsLink: string, erreursSelected: string[], erreursPrecision: string): string =>
   `Bonjour 👋,
+  
+En naviguant sur la cartographie nationale, j'ai repéré une erreur sur votre fiche ${detailsLink}, concernant ${erreursSelected
+    .map((erreur) => `la section ${erreur}`)
+    .join(', ')} : 
 
-En naviguant sur cette fiche du lieu ${detailsLink}, j'ai repéré cette erreur :
+${erreursPrecision}
 
+Pour mettre à jour ces informations, suivez les instructions en bas de fiche "mettre à jour la fiche".
 
+Merci pour votre collaboration et à bientôt !
 
-Numériquement, à bientôt !`.replace(/\n/gu, '%0D%0A');
+Numériquement.`.replace(/\n/gu, '%0D%0A');

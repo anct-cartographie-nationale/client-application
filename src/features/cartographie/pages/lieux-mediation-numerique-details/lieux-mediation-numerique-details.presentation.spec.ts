@@ -1,6 +1,7 @@
 import { Contact, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { emailMessage, reportErrorEmailMessage } from './lieux-mediation-numerique-details.presentation';
+import { AvailableErreur } from '../../models';
 
 describe('lieux mediation numerique details presentation', (): void => {
   it('should get message with only required text', (): void => {
@@ -58,12 +59,16 @@ describe('lieux mediation numerique details presentation', (): void => {
   });
 
   it('should get error report message', (): void => {
+    const erreursReportSelected: AvailableErreur[] = [AvailableErreur.contacts, AvailableErreur.horaires];
+    const erreursPrecision: string = 'Erreur dans les contacts et les horaires';
     const message: string = reportErrorEmailMessage(
-      'https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details'
+      'https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details',
+      erreursReportSelected,
+      erreursPrecision
     );
 
     expect(message).toBe(
-      "Bonjour 👋,%0D%0A%0D%0AEn naviguant sur cette fiche du lieu https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details, j'ai repéré cette erreur :%0D%0A%0D%0A%0D%0A%0D%0ANumériquement, à bientôt !"
+      'Bonjour 👋,%0D%0A  %0D%0AEn naviguant sur la cartographie nationale, j\'ai repéré une erreur sur votre fiche https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details, concernant la section Contacts, la section Horaires : %0D%0A%0D%0AErreur dans les contacts et les horaires%0D%0A%0D%0APour mettre à jour ces informations, suivez les instructions en bas de fiche "mettre à jour la fiche".%0D%0A%0D%0AMerci pour votre collaboration et à bientôt !%0D%0A%0D%0ANumériquement.'
     );
   });
 });

@@ -1,0 +1,20 @@
+<div class="d-flex p-0">
+  <button (click)="openOrientationSheetModal.emit($event)" class="btn btn-primary btn-sm my-auto">
+    <i class="ri-printer-line me-2" aria-hidden="true"></i>
+    fiche d'orientation
+  </button>
+  <div class="flex-grow-1 my-auto">
+    <button (click)="openErreurFormModal.emit($event)" class="btn btn-sm text-muted">
+      <i class="ri ri-error-warning-line ms-1" aria-hidden="true"></i>
+      Signaler une erreur dans cette fiche
+    </button>
+  </div>
+  <div class="d-flex mt-3">
+    <p class="text-muted-light">Retour</p>
+    <button
+      class="btn btn-sm btn-close btn-close-white opacity-100"
+      tabindex="0"
+      aria-label="Revenir à la liste"
+      (click)="closeDetails.emit()"></button>
+  </div>
+</div>
