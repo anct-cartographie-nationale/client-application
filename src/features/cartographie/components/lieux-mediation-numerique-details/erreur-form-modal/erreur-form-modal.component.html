@@ -13,9 +13,7 @@
       (ngSubmit)="reportAnError.emit(); modal.close()">
       <p class="fw-bold m-0">L'erreur concerne :</p>
       <div class="mb-4">
-        <label class="text-muted mb-1" style="font-size: small">
-          choisissez la ou les sections de la fiche qui sont erronées
-        </label>
+        <small class="text-muted mb-1">choisissez la ou les sections de la fiche qui sont erronées</small>
         <div>
           <div class="form-check form-check-inline form-chip my-2" *ngFor="let availableErreur of availableErreurs; index as i">
             <input
@@ -33,10 +31,8 @@
         </div>
       </div>
       <div class="mb-4">
-        <p class="fw-bold m-0">Quelle(s) correction(s) souhaitez-vous apporter?</p>
-        <label class="text-muted mb-1" style="font-size: small">
-          ces corrections seront directement transmises au référent du lieu
-        </label>
+        <label class="fw-bold m-0" for="precision">Quelle(s) correction(s) souhaitez-vous apporter?</label>
+        <p class="text-muted mb-1 small">ces corrections seront directement transmises au référent du lieu</p>
         <textarea
           formControlName="precision"
           placeholder="Commencez à écrire"
