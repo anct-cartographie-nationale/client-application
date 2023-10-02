@@ -195,6 +195,7 @@
         (zoomEvt)="zooming($event)"
         (zoomEnd)="onMapViewUpdated($event)"
         (mapDragEnd)="onMapViewUpdated($event)">
+        <mgl-control mglNavigation [showZoom]="true" [showCompass]="false" position="top-left"></mgl-control>
         <mgl-marker
           *ngIf="userLocalisation$ | async as userLocalisation"
           [lngLat]="[userLocalisation.longitude, userLocalisation.latitude]">
