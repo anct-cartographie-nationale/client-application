@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
@@ -30,6 +30,7 @@ const toLieuxWithLocalisation = (lieux: LieuMediationNumerique[]) => lieux.filte
   styleUrls: ['./presentation.page.scss']
 })
 export class PresentationPage {
+  @ViewChild('webinaire') webinaireRef!: ElementRef;
   private _currentSlide$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public currentSlide$: Observable<number> = this._currentSlide$.asObservable();
   public environment: Boolean = environment.production;
@@ -57,7 +58,6 @@ export class PresentationPage {
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
-    private elementRef: ElementRef,
     @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction
   ) {
     setTitle(['Présentation']);
@@ -77,9 +77,7 @@ export class PresentationPage {
 
   public slidesBackground: string[] = ['bg-orientation', 'bg-centralisation', 'bg-actualisation', 'bg-visibilite'];
 
-  onScrollToAnchor = (id: string): void => {
-    this.elementRef.nativeElement
-      .querySelector(`#${id}`)
-      .scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+  onScrollToAnchor = (): void => {
+    this.webinaireRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
   };
 }

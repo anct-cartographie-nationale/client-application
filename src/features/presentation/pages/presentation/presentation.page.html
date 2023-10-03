@@ -19,10 +19,10 @@
             <br />
           </p>
           <div class="flex">
-            <a (click)="onScrollToAnchor('webinaire')" class="btn btn-outline-secondary rounded-0 me-4">
-              <i class="ri-arrow-down-line me-2" style="font-weight: 100" aria-hidden="true"></i>
+            <button (click)="onScrollToAnchor()" class="btn btn-outline-secondary rounded-0 me-4">
+              <i class="ri-arrow-down-line me-2 small" aria-hidden="true"></i>
               Accéder aux webinaire
-            </a>
+            </button>
             <a [routerLink]="['orientation']" class="btn btn-discover rounded-0">Orienter un bénéficiaire</a>
           </div>
         </div>
@@ -56,7 +56,7 @@
       (switchSlide)="onSwitchSlide($event)"
       (nextSlide)="onNextSlide()"
       (previousSlide)="onPreviousSlide()"
-      (scrollToAnchor)="onScrollToAnchor($event)"></app-carousel>
+      (scrollToAnchor)="onScrollToAnchor()"></app-carousel>
   </section>
   <section class="text-center bg-integration py-5">
     <div class="container">
@@ -78,7 +78,7 @@
         [labels]="(labelsNationaux$ | async) ?? []"></app-chiffres-cle>
     </div>
   </section>
-  <section class="bg-integration py-5" id="webinaire">
+  <section #webinaire class="bg-integration py-5">
     <div class="container">
       <h2 class="ps-3 fw-bold my-5 text-center text-primary">
         Découvrez nos webinaire, pour en savoir plus
