@@ -1,0 +1,62 @@
+[
+  {
+    "icon": "ri-smartphone-line",
+    "value": "Prendre en main un smartphone ou une tablette"
+  },
+  {
+    "icon": "ri-mouse-line",
+    "value": "Prendre en main un ordinateur"
+  },
+  {
+    "icon": "ri-calendar-check-line",
+    "value": "Utiliser le numérique au quotidien"
+  },
+  {
+    "icon": "ri-image-2-line",
+    "value": "Approfondir ma culture numérique"
+  },
+  {
+    "icon": "ri-medal-line",
+    "value": "Promouvoir la citoyenneté numérique"
+  },
+  {
+    "icon": "ri-pen-nib-line",
+    "value": "Créer avec le numérique"
+  },
+  {
+    "icon": "ri-parent-line",
+    "value": "Soutenir la parentalité et l'éducation avec le numérique"
+  },
+  {
+    "icon": "ri-user-line",
+    "value": "Réaliser des démarches administratives avec un accompagnement"
+  },
+  {
+    "icon": "ri-user-star-line",
+    "value": "Devenir autonome dans les démarches administratives"
+  },
+  {
+    "icon": "ri-slideshow-line",
+    "value": "Créer et développer mon entreprise"
+  },
+  {
+    "icon": "ri-stethoscope-line",
+    "value": "Accompagner les démarches de santé"
+  },
+  {
+    "icon": "ri-contacts-line",
+    "value": "Favoriser mon insertion professionnelle"
+  },
+  {
+    "icon": "ri-wifi-line",
+    "value": "Accéder à une connexion internet"
+  },
+  {
+    "icon": "ri-settings-5-line",
+    "value": "Accéder à du matériel"
+  },
+  {
+    "icon": "ri-shopping-cart-line",
+    "value": "S'équiper en matériel informatique"
+  }
+]
