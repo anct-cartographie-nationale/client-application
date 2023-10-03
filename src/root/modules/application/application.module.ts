@@ -32,8 +32,7 @@ import { ApplicationRoutingModule } from './application-routing.module';
     {
       provide: BRAND_TOKEN,
       useValue: BRAND_APPLICATION_CONFIGURATION
-    },
-    setTitleActionProvider(setTitleAction, [BRAND_TOKEN, Title])
+    }
   ],
   bootstrap: [ApplicationRootLayout]
 })
