@@ -56,6 +56,40 @@ describe('horaires presenter', (): void => {
     expect(timeTableOpeningHours).toStrictEqual(undefined);
   });
 
+  it('should get horaires for odd week', (): void => {
+    const openingHours: string = 'week 1-53/2 Mo 09:30-12:30,13:30-15:30; PH off';
+    const date: Date = new Date('2022-07-22T09:00:00.000Z');
+
+    const timeTableOpeningHours = parseHoraires(date)(openingHours);
+
+    expect(timeTableOpeningHours).toStrictEqual({
+      Lundi: '09h30 - 12h30\n13h30 - 15h30',
+      Mardi: 'Fermé',
+      Mercredi: 'Fermé',
+      Jeudi: 'Fermé',
+      Vendredi: 'Fermé',
+      Samedi: 'Fermé',
+      Dimanche: 'Fermé'
+    });
+  });
+
+  it('should get horaires full closed if we are in even week', (): void => {
+    const openingHours: string = 'week 1-53/2 Mo 09:30-12:30,13:30-15:30; PH off';
+    const date: Date = new Date('2022-07-29T09:00:00.000Z');
+
+    const timeTableOpeningHours = parseHoraires(date)(openingHours);
+
+    expect(timeTableOpeningHours).toStrictEqual({
+      Lundi: 'Fermé',
+      Mardi: 'Fermé',
+      Mercredi: 'Fermé',
+      Jeudi: 'Fermé',
+      Vendredi: 'Fermé',
+      Samedi: 'Fermé',
+      Dimanche: 'Fermé'
+    });
+  });
+
   it('should get Ouvert state', (): void => {
     const openingHours: string = 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00';
     const date: Date = new Date('2022-07-22T09:00:00.000Z');

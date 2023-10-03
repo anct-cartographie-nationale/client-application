@@ -18,7 +18,7 @@ import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
 import { byBoundingBox } from './helpers/bounding-box';
 import { byDistance, filteredLieuxMediationNumerique } from './helpers/filter';
-import { LabelNational, LieuMediationNumerique, Localisation, Typologie } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LabelNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ResultFoundPresentation, Searchable } from '../../../adresse';
 import { NO_LOCALISATION } from '../../models';
 import { WithLieuxCount } from '../collectivite-territoriale';

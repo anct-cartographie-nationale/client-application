@@ -70,12 +70,13 @@ const initialTimeTableOpeningHours: HorairesPresentation = {
   Samedi: 'Fermé',
   Dimanche: 'Fermé'
 };
+
 export const parseHoraires =
   (date: Date) =>
   (horairesOSM?: string): HorairesPresentation | undefined => {
     try {
       return horairesOSM
-        ? new opening_hours(horairesOSM)
+        ? new opening_hours(horairesOSM, null)
             .getOpenIntervals(firstTimeOfTheDay(firstDayOfTheWeek(date)), lastTimeOfTheDay(lastDayOfTheWeek(date)))
             .reduce(
               (

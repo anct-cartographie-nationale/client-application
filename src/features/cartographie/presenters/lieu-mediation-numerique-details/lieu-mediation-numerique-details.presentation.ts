@@ -26,6 +26,7 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   code_postal: string;
   services: Service[];
   horaires?: HorairesPresentation;
+  full_horaires?: HorairesPresentation[];
   status?: OpeningState;
   typologies?: string;
   contact?: Contact;
