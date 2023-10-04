@@ -2,7 +2,7 @@
   <a
     class="text-decoration-none link-dark link-lieu"
     [routerLink]="[lieuMediationNumerique.id, 'details']"
-    (click)="matomoTracking()"
+    (click)="matomoTracking(lieuMediationNumerique.id)"
     [relativeTo]="route.parent"
     queryParamsHandling="preserve"
     (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
