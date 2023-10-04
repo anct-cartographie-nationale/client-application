@@ -119,6 +119,13 @@ export class LieuxMediationNumeriqueDetailsPage {
   public onReportAnError(lieu: LieuMediationNumeriqueDetailsPresentation): void {
     const mailTo: string = `cartographie.sonum@anct.gouv.fr`;
     const carbonCopy: string = lieu.contact?.courriel ?? '';
+    this._matomoTracker?.trackEvent(
+      "rapport d'erreurs",
+      lieu.nom,
+      `${this.erreursReportFormGroup.controls['selected'].value.join(', ')} - ${
+        this.erreursReportFormGroup.controls['precision'].value ?? 'Pas de précision'
+      } `
+    );
     document.location.href = `mailto:${mailTo}?cc=${carbonCopy}&subject=Erreur sur la fiche du lieu : ${
       lieu.nom
     }&body=${reportErrorEmailMessage(
