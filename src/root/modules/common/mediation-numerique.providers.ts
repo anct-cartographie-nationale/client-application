@@ -10,6 +10,9 @@ import {
   FEATURES_TOKEN
 } from '../../configuration';
 import { CacheInterceptor } from '../../interceptors';
+import { setTitleActionProvider } from '../../providers';
+import { setTitleAction } from '../../actions';
+import { Title } from '@angular/platform-browser';
 
 export const mediationNumeriqueProviders = [
   {
@@ -33,5 +36,6 @@ export const mediationNumeriqueProviders = [
     provide: HTTP_INTERCEPTORS,
     useClass: CacheInterceptor,
     multi: true
-  }
+  },
+  setTitleActionProvider(setTitleAction, [BRAND_TOKEN, Title])
 ];
