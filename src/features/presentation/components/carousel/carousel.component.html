@@ -38,6 +38,13 @@
               <span class="visually-hidden">Accéder à DORA</span>
               <img class="my-3" height="100px" src="/assets/img/presentation/dora-logo.svg" alt="" />
             </a>
+            <button
+              *ngIf="slides.titre === 'Orientation'"
+              (click)="scrollToAnchor.emit()"
+              class="me-4 p-0 btn btn-link text-decoration-none text-secondary">
+              <i class="ri-arrow-down-line small" aria-hidden="true"></i>
+              En savoir plus
+            </button>
           </div>
           <div class="col-md-6 my-auto" *ngIf="slides.titre === 'Standardisation'">
             <h5 class="text-secondary fw-bold">{{ slides.titre }}</h5>

@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
-import { animate, animation, style, transition, trigger, useAnimation } from '@angular/animations';
 
 type IntegrateursPresentation = {
   titre: string;
