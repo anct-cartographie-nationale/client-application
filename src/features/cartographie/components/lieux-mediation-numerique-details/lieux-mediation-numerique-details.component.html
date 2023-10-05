@@ -50,25 +50,73 @@
         [distance]="lieuMediationNumerique.distance"
         [status]="lieuMediationNumerique.status"></app-informations-pratiques>
     </li>
-    <li
-      class="list-group-item"
-      *ngIf="lieuMediationNumerique.presentation?.detail || lieuMediationNumerique.presentation?.resume">
-      <app-description
-        [detail]="lieuMediationNumerique.presentation?.detail"
-        [resume]="lieuMediationNumerique.presentation?.resume"></app-description>
+    <li class="list-group-item">
+      <div class="row mb-5">
+        <ng-container *ngIf="lieuMediationNumerique.horaires; else noOpeningHours">
+          <div class="col-md-6 mt-4">
+            <app-horaires
+              [horaires]="lieuMediationNumerique.horaires"
+              [singleHoraires]="!lieuMediationNumerique.full_horaires"
+              sousTitre="Cette semaine"
+              weekOffset="0"></app-horaires>
+          </div>
+        </ng-container>
+        <ng-template #noOpeningHours>
+          <div class="col-md-6 mt-4 d-flex justify-content-center align-items-center text-center">
+            Les Horaires de ce lieu
+            <br />
+            sont inconnus
+          </div>
+        </ng-template>
+        <div class="col-md-6 mt-md-0 mt-4 d-flex align-items-center justify-content-center">
+          <div>
+            <app-description
+              [detail]="lieuMediationNumerique.presentation?.detail"
+              [resume]="lieuMediationNumerique.presentation?.resume"></app-description>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="lieuMediationNumerique.full_horaires">
+        <app-collapse #collapseHorairesDetaille [control]="collapseHorairesDetailleControl">
+          <li class="list-group-item border-0 border-top">
+            <div class="row">
+              <h2 class="h5 my-3 d-print-none fw-bold text-muted">Horaires détaillées</h2>
+              <div class="col-md-6 mt-4" *ngFor="let weekHoraires of lieuMediationNumerique.full_horaires.slice(0, 2)">
+                <app-horaires
+                  [horaires]="weekHoraires['horaires_presentation']"
+                  [typeOfWeek]="weekHoraires['type']"></app-horaires>
+              </div>
+              <div
+                class="col-md-6 mt-4"
+                *ngFor="let weekHoraires of lieuMediationNumerique.full_horaires; let weekOffset = index">
+                <app-horaires [horaires]="weekHoraires['horaires_presentation']" [weekOffset]="weekOffset + 1"></app-horaires>
+              </div>
+            </div>
+          </li>
+        </app-collapse>
+        <div class="my-3">
+          <small *ngIf="collapseHorairesDetaille.isCollapsed$ | async" class="d-flex justify-content-center text-primary my-1">
+            <i class="ri ri-error-warning-line ms-2 text-primary" aria-hidden="true"></i>
+            Attention, les horaires de cette structure varient en fonction des semaines
+          </small>
+          <div class="d-flex justify-content-center">
+            <button
+              class="btn btn-sm btn-secondary my-2"
+              #collapseHorairesDetailleControl
+              aria-controls="collapseHorairesDetaille"
+              [attr.aria-expanded]="collapseHorairesDetaille.isExpanded$ | async"
+              (click)="collapseHorairesDetaille.toggle()">
+              {{ (collapseHorairesDetaille.isCollapsed$ | async) ? 'Afficher tout les horaires' : 'Réduire les horaires' }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </li>
+    <li class="list-group-item border-0">
+      <app-services [services]="lieuMediationNumerique.services"></app-services>
     </li>
     <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.accessibilite === undefined">
       <app-accessibilite [accessibilite]="lieuMediationNumerique.accessibilite"></app-accessibilite>
-    </li>
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-md-5 mt-4">
-          <app-horaires [horaires]="lieuMediationNumerique.horaires"></app-horaires>
-        </div>
-        <div class="col-md-7 mt-md-0 mt-4">
-          <app-services [services]="lieuMediationNumerique.services"></app-services>
-        </div>
-      </div>
     </li>
     <li class="list-group-item" *ngIf="lieuMediationNumerique.aidants">
       <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>

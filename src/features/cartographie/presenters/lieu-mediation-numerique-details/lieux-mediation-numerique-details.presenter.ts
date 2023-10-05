@@ -10,7 +10,13 @@ import {
   ModalitesAccompagnement
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueWithAidants, NO_LOCALISATION } from '../../../core/models';
-import { geographicDistance, HorairesPresentation, openingState, parseHoraires } from '../../../core/presenters';
+import {
+  geographicDistance,
+  HorairesPresentation,
+  HorairesPresentationWithType,
+  openingState,
+  parseHoraires
+} from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { ifAny } from '../../../core/utilities';
 import {
@@ -470,13 +476,30 @@ const notEmpty = (
 ): ModaliteAccompagnementPresentation[] | undefined =>
   modalitesAccompagnementPresentation.length > 0 ? modalitesAccompagnementPresentation : undefined;
 
+const getWeekNumber = (date: Date): number => {
+  const days = Math.floor((date.getTime() - new Date(date.getFullYear(), 0, 1).getTime()) / (24 * 60 * 60 * 1000));
+  return Math.ceil((days + 1) / 7);
+};
+
+const getHorairesWeeksByWeeks =
+  (date: Date) =>
+  (horaires: string): HorairesPresentationWithType[] => {
+    const typeOfWeek = getWeekNumber(date);
+    return Array(5)
+      .fill(null)
+      .map((_, i) => {
+        const dateWeeksByWeeks = new Date(date.getTime() + i * 7 * 24 * 60 * 60 * 1000);
+        const type: string = (typeOfWeek + i) % 2 === 0 ? 'paire' : 'impaire';
+        return { type: type, horaires_presentation: parseHoraires(dateWeeksByWeeks)(horaires) };
+      })
+      .filter((item): item is HorairesPresentationWithType => item.horaires_presentation !== null)
+      .slice(1);
+  };
+
 const ifAnyHorairesWithWeeks =
   (date: Date) =>
-  (horaires?: string): HorairesPresentation => {
-    return horaires?.includes('week')
-      ? ifAny('full_horaires', parseHoraires(new Date(date.getTime() + 14 * 24 * 60 * 60 * 1000))(horaires))
-      : {};
-  };
+  (horaires?: string): HorairesPresentation[] | {} =>
+    horaires?.includes('week') ? ifAny('full_horaires', getHorairesWeeksByWeeks(date)(horaires)) : [];
 
 export class LieuxMediationNumeriqueDetailsPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
@@ -496,78 +519,37 @@ export class LieuxMediationNumeriqueDetailsPresenter {
         ([lieu, localisation]: [
           LieuMediationNumeriqueWithAidants,
           Localisation
-        ]): LieuMediationNumeriqueDetailsPresentation => {
-          console.log('yo', {
-            id: lieu.id,
-            nom: lieu.nom,
-            adresse: [
-              lieu.adresse.voie,
-              lieu.adresse.complement_adresse,
-              lieu.adresse.code_postal,
-              `${lieu.adresse.commune.charAt(0).toUpperCase()}${lieu.adresse.commune.substring(1).toLowerCase()}`
-            ].join(' '),
-            commune: lieu.adresse.commune,
-            code_postal: lieu.adresse.code_postal,
-            services: lieu.services,
-            ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
-            ...ifAnyHorairesWithWeeks(date)(lieu.horaires),
-            ...ifAny('status', openingState(date)(lieu.horaires)),
-            ...ifAny('typologies', lieu.typologies?.map((typologie) => typologieMatchingMap.get(typologie) || '').join(', ')),
-            ...ifAny('contact', lieu.contact),
-            ...ifAny('presentation', lieu.presentation),
-            ...ifAny('date_maj', lieu.date_maj),
-            ...ifAny('publics_accueillis', lieu.publics_accueillis),
-            ...ifAny('conditions_acces', toConditionAccesDetailsPresentation(lieu.conditions_acces)),
-            ...ifAny('labels_nationaux', lieu.labels_nationaux),
-            ...ifAny('labels_autres', lieu.labels_autres),
-            ...ifAny(
-              'modalites_accompagnement',
-              toModalitesAccompagnementPresentation(lieu.modalites_accompagnement),
-              notEmpty
-            ),
-            ...ifAny('accessibilite', lieu.accessibilite),
-            ...ifAny('localisation', lieu.localisation),
-            ...ifAny('distance', getDistance(lieu, localisation)),
-            ...ifAny('prise_rdv', lieu.prise_rdv),
-            ...ifAny('aidants', lieu.aidants),
-            ...ifAny('source', availableSourcesMap.get(lieu.source ?? '') ?? undefined)
-          });
-          return {
-            id: lieu.id,
-            nom: lieu.nom,
-            adresse: [
-              lieu.adresse.voie,
-              lieu.adresse.complement_adresse,
-              lieu.adresse.code_postal,
-              `${lieu.adresse.commune.charAt(0).toUpperCase()}${lieu.adresse.commune.substring(1).toLowerCase()}`
-            ].join(' '),
-            commune: lieu.adresse.commune,
-            code_postal: lieu.adresse.code_postal,
-            services: lieu.services,
-            ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
-            ...ifAnyHorairesWithWeeks(date)(lieu.horaires),
-            ...ifAny('status', openingState(date)(lieu.horaires)),
-            ...ifAny('typologies', lieu.typologies?.map((typologie) => typologieMatchingMap.get(typologie) || '').join(', ')),
-            ...ifAny('contact', lieu.contact),
-            ...ifAny('presentation', lieu.presentation),
-            ...ifAny('date_maj', lieu.date_maj),
-            ...ifAny('publics_accueillis', lieu.publics_accueillis),
-            ...ifAny('conditions_acces', toConditionAccesDetailsPresentation(lieu.conditions_acces)),
-            ...ifAny('labels_nationaux', lieu.labels_nationaux),
-            ...ifAny('labels_autres', lieu.labels_autres),
-            ...ifAny(
-              'modalites_accompagnement',
-              toModalitesAccompagnementPresentation(lieu.modalites_accompagnement),
-              notEmpty
-            ),
-            ...ifAny('accessibilite', lieu.accessibilite),
-            ...ifAny('localisation', lieu.localisation),
-            ...ifAny('distance', getDistance(lieu, localisation)),
-            ...ifAny('prise_rdv', lieu.prise_rdv),
-            ...ifAny('aidants', lieu.aidants),
-            ...ifAny('source', availableSourcesMap.get(lieu.source ?? '') ?? undefined)
-          };
-        }
+        ]): LieuMediationNumeriqueDetailsPresentation => ({
+          id: lieu.id,
+          nom: lieu.nom,
+          adresse: [
+            lieu.adresse.voie,
+            lieu.adresse.complement_adresse,
+            lieu.adresse.code_postal,
+            `${lieu.adresse.commune.charAt(0).toUpperCase()}${lieu.adresse.commune.substring(1).toLowerCase()}`
+          ].join(' '),
+          commune: lieu.adresse.commune,
+          code_postal: lieu.adresse.code_postal,
+          services: lieu.services,
+          ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
+          ...ifAnyHorairesWithWeeks(date)(lieu.horaires),
+          ...ifAny('status', openingState(date)(lieu.horaires)),
+          ...ifAny('typologies', lieu.typologies?.map((typologie) => typologieMatchingMap.get(typologie) || '').join(', ')),
+          ...ifAny('contact', lieu.contact),
+          ...ifAny('presentation', lieu.presentation),
+          ...ifAny('date_maj', lieu.date_maj),
+          ...ifAny('publics_accueillis', lieu.publics_accueillis),
+          ...ifAny('conditions_acces', toConditionAccesDetailsPresentation(lieu.conditions_acces)),
+          ...ifAny('labels_nationaux', lieu.labels_nationaux),
+          ...ifAny('labels_autres', lieu.labels_autres),
+          ...ifAny('modalites_accompagnement', toModalitesAccompagnementPresentation(lieu.modalites_accompagnement), notEmpty),
+          ...ifAny('accessibilite', lieu.accessibilite),
+          ...ifAny('localisation', lieu.localisation),
+          ...ifAny('distance', getDistance(lieu, localisation)),
+          ...ifAny('prise_rdv', lieu.prise_rdv),
+          ...ifAny('aidants', lieu.aidants),
+          ...ifAny('source', availableSourcesMap.get(lieu.source ?? '') ?? undefined)
+        })
       )
     );
   }

@@ -154,3 +154,17 @@ export const isOpenOn =
       return false;
     }
   };
+
+export const getIntervalWeekByOffset = (weekOffset: string | number): string => {
+  const today = new Date();
+  const startOfTheWeek = new Date(today);
+  startOfTheWeek.setDate(today.getDate() - today.getDay() + 1);
+  startOfTheWeek.setDate(startOfTheWeek.getDate() + parseInt(weekOffset.toString()) * 7);
+  const endOfTheWeek = new Date(startOfTheWeek);
+  endOfTheWeek.setDate(startOfTheWeek.getDate() + 6);
+  const year = today.getFullYear().toString().slice(-2);
+
+  return `Du ${startOfTheWeek.toLocaleDateString().replace(/\/\d{4}/, `/${year}`)} au ${endOfTheWeek
+    .toLocaleDateString()
+    .replace(/\/\d{4}/, `/${year}`)}`;
+};
