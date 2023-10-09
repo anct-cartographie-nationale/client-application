@@ -1,15 +1,8 @@
 <div class="d-flex">
-  <ng-container *ngIf="!singleHoraires">
-    <h2 class="h6 mb-3 d-print-none fw-bold flex-grow-1" *ngIf="sousTitre">{{ sousTitre }}</h2>
-    <small *ngIf="typeOfWeek; else noType" class="text-muted">
-      <em>semaine {{ typeOfWeek }}</em>
-    </small>
-    <ng-template #noType>
-      <small class="text-muted">
-        <em>{{ getWeekByIteration(weekOffset) }}</em>
-      </small>
-    </ng-template>
-  </ng-container>
+  <h2 class="h6 mb-3 d-print-none fw-bold flex-grow-1" *ngIf="sousTitre">{{ sousTitre }}</h2>
+  <small class="text-muted">
+    <em>{{ getWeekByIteration(weekOffset) }}</em>
+  </small>
 </div>
 <small class="text-muted-dark fw-bold mb-2 d-none d-print-block">Horaires d'ouverture</small>
 <ng-container *ngIf="horaires">

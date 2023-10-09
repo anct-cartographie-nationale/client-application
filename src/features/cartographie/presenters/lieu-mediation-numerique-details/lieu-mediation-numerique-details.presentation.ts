@@ -8,7 +8,7 @@ import {
   Url
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { Aidant } from '../../../core/models';
-import { HorairesPresentation, HorairesPresentationWithType, OpeningState } from '../../../core/presenters';
+import { HorairesPresentation, OpeningState } from '../../../core/presenters';
 
 export type SourcePresentation = {
   label: string;
@@ -26,7 +26,7 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   code_postal: string;
   services: Service[];
   horaires?: HorairesPresentation;
-  full_horaires?: HorairesPresentationWithType[];
+  full_horaires?: HorairesPresentation[];
   status?: OpeningState;
   typologies?: string;
   contact?: Contact;

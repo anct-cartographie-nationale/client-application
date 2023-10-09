@@ -10,13 +10,7 @@ import {
   ModalitesAccompagnement
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueWithAidants, NO_LOCALISATION } from '../../../core/models';
-import {
-  geographicDistance,
-  HorairesPresentation,
-  HorairesPresentationWithType,
-  openingState,
-  parseHoraires
-} from '../../../core/presenters';
+import { geographicDistance, HorairesPresentation, openingState, parseHoraires } from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { ifAny } from '../../../core/utilities';
 import {
@@ -476,30 +470,22 @@ const notEmpty = (
 ): ModaliteAccompagnementPresentation[] | undefined =>
   modalitesAccompagnementPresentation.length > 0 ? modalitesAccompagnementPresentation : undefined;
 
-const getWeekNumber = (date: Date): number => {
-  const days = Math.floor((date.getTime() - new Date(date.getFullYear(), 0, 1).getTime()) / (24 * 60 * 60 * 1000));
-  return Math.ceil((days + 1) / 7);
-};
-
 const getHorairesWeeksByWeeks =
   (date: Date) =>
-  (horaires: string): HorairesPresentationWithType[] => {
-    const typeOfWeek = getWeekNumber(date);
+  (horaires: string): HorairesPresentation[] => {
     return Array(5)
       .fill(null)
-      .map((_, i) => {
-        const dateWeeksByWeeks = new Date(date.getTime() + i * 7 * 24 * 60 * 60 * 1000);
-        const type: string = (typeOfWeek + i) % 2 === 0 ? 'paire' : 'impaire';
-        return { type: type, horaires_presentation: parseHoraires(dateWeeksByWeeks)(horaires) };
-      })
-      .filter((item): item is HorairesPresentationWithType => item.horaires_presentation !== null)
+      .map((_, i) => parseHoraires(new Date(date.getTime() + i * 7 * 24 * 60 * 60 * 1000))(horaires))
+      .filter((horaires): horaires is HorairesPresentation => horaires != null)
       .slice(1);
   };
 
 const ifAnyHorairesWithWeeks =
   (date: Date) =>
-  (horaires?: string): HorairesPresentation[] | {} =>
-    horaires?.includes('week') ? ifAny('full_horaires', getHorairesWeeksByWeeks(date)(horaires)) : [];
+  (horaires?: string): HorairesPresentation[] | {} => {
+    console.log(getHorairesWeeksByWeeks(date)(horaires!));
+    return horaires?.includes('week') ? ifAny('full_horaires', getHorairesWeeksByWeeks(date)(horaires)) : [];
+  };
 
 export class LieuxMediationNumeriqueDetailsPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}

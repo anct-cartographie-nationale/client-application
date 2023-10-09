@@ -54,11 +54,7 @@
       <div class="row mb-5">
         <ng-container *ngIf="lieuMediationNumerique.horaires; else noOpeningHours">
           <div class="col-md-6 mt-4">
-            <app-horaires
-              [horaires]="lieuMediationNumerique.horaires"
-              [singleHoraires]="!lieuMediationNumerique.full_horaires"
-              sousTitre="Cette semaine"
-              weekOffset="0"></app-horaires>
+            <app-horaires [horaires]="lieuMediationNumerique.horaires" sousTitre="Cette semaine" weekOffset="0"></app-horaires>
           </div>
         </ng-container>
         <ng-template #noOpeningHours>
@@ -81,15 +77,10 @@
           <li class="list-group-item border-0 border-top">
             <div class="row">
               <h2 class="h5 my-3 d-print-none fw-bold text-muted">Horaires détaillées</h2>
-              <div class="col-md-6 mt-4" *ngFor="let weekHoraires of lieuMediationNumerique.full_horaires.slice(0, 2)">
-                <app-horaires
-                  [horaires]="weekHoraires['horaires_presentation']"
-                  [typeOfWeek]="weekHoraires['type']"></app-horaires>
-              </div>
               <div
                 class="col-md-6 mt-4"
                 *ngFor="let weekHoraires of lieuMediationNumerique.full_horaires; let weekOffset = index">
-                <app-horaires [horaires]="weekHoraires['horaires_presentation']" [weekOffset]="weekOffset + 1"></app-horaires>
+                <app-horaires [horaires]="weekHoraires" [weekOffset]="weekOffset + 1"></app-horaires>
               </div>
             </div>
           </li>
