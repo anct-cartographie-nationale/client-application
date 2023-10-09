@@ -482,10 +482,8 @@ const getHorairesWeeksByWeeks =
 
 const ifAnyHorairesWithWeeks =
   (date: Date) =>
-  (horaires?: string): HorairesPresentation[] | {} => {
-    console.log(getHorairesWeeksByWeeks(date)(horaires!));
-    return horaires?.includes('week') ? ifAny('full_horaires', getHorairesWeeksByWeeks(date)(horaires)) : [];
-  };
+  (horaires?: string): HorairesPresentation[] | {} =>
+    horaires?.includes('week') ? ifAny('full_horaires', getHorairesWeeksByWeeks(date)(horaires)) : [];
 
 export class LieuxMediationNumeriqueDetailsPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
