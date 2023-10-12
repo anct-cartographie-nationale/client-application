@@ -1,37 +1,41 @@
-<h2 class="h5 text-muted-dark mb-3 d-print-none text-uppercase">Horaires</h2>
+<div class="d-flex">
+  <h2 class="h6 mb-3 d-print-none fw-bold flex-grow-1" *ngIf="sousTitre">{{ sousTitre }}</h2>
+  <small class="text-muted">
+    <em>{{ getWeekByIteration(weekOffset) }}</em>
+  </small>
+</div>
 <small class="text-muted-dark fw-bold mb-2 d-none d-print-block">Horaires d'ouverture</small>
-<ng-container *ngIf="horaires; else noOpeningHours">
-  <table class="table table-horaires table-borderless table-sm mb-0 text-prewrap">
+<ng-container *ngIf="horaires">
+  <table class="table table-horaires table-borderless mb-0 text-prewrap align-middle">
     <tbody>
-      <tr>
-        <th scope="row" class="day text-muted fw-bold">Lundi</th>
-        <td>{{ horaires['Lundi'] }}</td>
+      <tr class="bg-light">
+        <th class="day text-muted fw-bold">Lundi</th>
+        <td class="text-end">{{ horaires['Lundi'] }}</td>
       </tr>
       <tr>
         <th scope="row" class="day text-muted fw-bold">Mardi</th>
-        <td>{{ horaires['Mardi'] }}</td>
+        <td class="text-end">{{ horaires['Mardi'] }}</td>
       </tr>
-      <tr>
+      <tr class="bg-light">
         <th scope="row" class="day text-muted fw-bold">Mercredi</th>
-        <td>{{ horaires['Mercredi'] }}</td>
+        <td class="text-end">{{ horaires['Mercredi'] }}</td>
       </tr>
       <tr>
         <th scope="row" class="day text-muted fw-bold">Jeudi</th>
-        <td>{{ horaires['Jeudi'] }}</td>
+        <td class="text-end">{{ horaires['Jeudi'] }}</td>
       </tr>
-      <tr>
+      <tr class="bg-light">
         <th scope="row" class="day text-muted fw-bold">Vendredi</th>
-        <td>{{ horaires['Vendredi'] }}</td>
+        <td class="text-end">{{ horaires['Vendredi'] }}</td>
       </tr>
       <tr>
         <th class="day text-muted fw-bold">Samedi</th>
-        <td>{{ horaires['Samedi'] }}</td>
+        <td class="text-end">{{ horaires['Samedi'] }}</td>
       </tr>
-      <tr>
+      <tr class="bg-light">
         <th scope="row" class="day text-muted fw-bold">Dimanche</th>
-        <td>{{ horaires['Dimanche'] }}</td>
+        <td class="text-end">{{ horaires['Dimanche'] }}</td>
       </tr>
     </tbody>
   </table>
 </ng-container>
-<ng-template #noOpeningHours>Horaires d'ouverture inconnus</ng-template>

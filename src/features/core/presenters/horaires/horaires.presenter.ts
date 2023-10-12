@@ -70,12 +70,13 @@ const initialTimeTableOpeningHours: HorairesPresentation = {
   Samedi: 'Fermé',
   Dimanche: 'Fermé'
 };
+
 export const parseHoraires =
   (date: Date) =>
   (horairesOSM?: string): HorairesPresentation | undefined => {
     try {
       return horairesOSM
-        ? new opening_hours(horairesOSM)
+        ? new opening_hours(horairesOSM, null)
             .getOpenIntervals(firstTimeOfTheDay(firstDayOfTheWeek(date)), lastTimeOfTheDay(lastDayOfTheWeek(date)))
             .reduce(
               (
@@ -153,3 +154,16 @@ export const isOpenOn =
       return false;
     }
   };
+
+export const getIntervalWeekByOffset = (weekOffset: string | number, today: Date): string => {
+  const startOfTheWeek = new Date(today);
+  startOfTheWeek.setDate(today.getDate() - today.getDay() + 1);
+  startOfTheWeek.setDate(startOfTheWeek.getDate() + parseInt(weekOffset.toString()) * 7);
+  const endOfTheWeek = new Date(startOfTheWeek);
+  endOfTheWeek.setDate(startOfTheWeek.getDate() + 6);
+  const year = today.getFullYear().toString().slice(-2);
+
+  return `Du ${startOfTheWeek.toLocaleDateString().replace(/\/\d{4}/, `/${year}`)} au ${endOfTheWeek
+    .toLocaleDateString()
+    .replace(/\/\d{4}/, `/${year}`)}`;
+};

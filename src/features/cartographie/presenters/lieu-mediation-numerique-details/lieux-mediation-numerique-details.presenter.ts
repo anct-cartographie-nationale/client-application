@@ -10,7 +10,7 @@ import {
   ModalitesAccompagnement
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueWithAidants, NO_LOCALISATION } from '../../../core/models';
-import { geographicDistance, openingState, parseHoraires } from '../../../core/presenters';
+import { geographicDistance, HorairesPresentation, openingState, parseHoraires } from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { ifAny } from '../../../core/utilities';
 import {
@@ -470,6 +470,21 @@ const notEmpty = (
 ): ModaliteAccompagnementPresentation[] | undefined =>
   modalitesAccompagnementPresentation.length > 0 ? modalitesAccompagnementPresentation : undefined;
 
+const getHorairesWeeksByWeeks =
+  (date: Date) =>
+  (horaires: string): HorairesPresentation[] => {
+    return Array(5)
+      .fill(null)
+      .map((_, i) => parseHoraires(new Date(date.getTime() + i * 7 * 24 * 60 * 60 * 1000))(horaires))
+      .filter((horaires): horaires is HorairesPresentation => horaires != null)
+      .slice(1);
+  };
+
+const ifAnyHorairesWithWeeks =
+  (date: Date) =>
+  (horaires?: string): HorairesPresentation[] | {} =>
+    horaires?.includes('week') ? ifAny('full_horaires', getHorairesWeeksByWeeks(date)(horaires)) : [];
+
 export class LieuxMediationNumeriqueDetailsPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
 
@@ -501,6 +516,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           code_postal: lieu.adresse.code_postal,
           services: lieu.services,
           ...ifAny('horaires', parseHoraires(date)(lieu.horaires)),
+          ...ifAnyHorairesWithWeeks(date)(lieu.horaires),
           ...ifAny('status', openingState(date)(lieu.horaires)),
           ...ifAny('typologies', lieu.typologies?.map((typologie) => typologieMatchingMap.get(typologie) || '').join(', ')),
           ...ifAny('contact', lieu.contact),

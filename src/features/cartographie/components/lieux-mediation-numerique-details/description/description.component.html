@@ -1,2 +1,11 @@
-<p class="my-3 presentation-resume" *ngIf="resume">{{ resume }}</p>
-<p class="my-3 presentation-detail" *ngIf="detail">{{ detail }}</p>
+<ng-container *ngIf="resume || detail; else noDescription">
+  <p class="my-3 presentation-resume" *ngIf="resume">{{ resume }}</p>
+  <p class="my-3 presentation-detail" *ngIf="detail">{{ detail }}</p>
+</ng-container>
+<ng-template #noDescription>
+  <div class="mt-4 text-center">
+    La description de ce lieu
+    <br />
+    n'est pas encore renseignée
+  </div>
+</ng-template>
