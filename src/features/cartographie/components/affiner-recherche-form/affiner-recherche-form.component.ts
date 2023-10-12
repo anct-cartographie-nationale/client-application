@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Optional } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -9,6 +9,7 @@ import {
   toFilterFormPresentationFromQuery
 } from '../../../core/presenters';
 import { labelsAutresFrom, labelNationauxFrom, strategiesTerritorialesFrom } from './affiner-recherche-form.presenter';
+import { MatomoTracker } from 'ngx-matomo';
 
 type AffinerRechercheFields = {
   prise_rdv: FormControl<boolean>;
@@ -60,7 +61,11 @@ export class AffinerRechercheFormComponent {
     ['ZRR', 'ZRR (zones de revitalisation rurale)']
   ]);
 
-  public constructor(public route: ActivatedRoute, public readonly router: Router) {}
+  public constructor(
+    public route: ActivatedRoute,
+    public readonly router: Router,
+    @Optional() private readonly _matomoTracker?: MatomoTracker
+  ) {}
 
   public affinerRechercheForm: FormGroup<AffinerRechercheFields> = AFFINER_RECHERCHE_FORM(
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
@@ -71,6 +76,7 @@ export class AffinerRechercheFormComponent {
   public labelNationauxFrom = labelNationauxFrom;
 
   public setFilterToQueryString(field: string): void {
+    this._matomoTracker?.trackEvent('Cartographie', 'Affiner recherche', field);
     this.router.navigate([], {
       queryParams: {
         ...this.route.snapshot.queryParams,

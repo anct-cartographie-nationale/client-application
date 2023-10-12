@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Optional, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
 import { LieuMediationNumeriqueListItemPresentation } from '../../../presenters';
+import { MatomoTracker } from 'ngx-matomo';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,10 +25,15 @@ export class LieuMediationNumeriqueListItemComponent {
 
   public constructor(
     @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
-    public readonly route: ActivatedRoute
+    public readonly route: ActivatedRoute,
+    @Optional() private readonly _matomoTracker?: MatomoTracker
   ) {}
 
   public dateIsValide(dateMaj: Date): boolean {
     return dateMaj > new Date('1970-01-01');
+  }
+
+  public matomoTracking(lieuID: string): void {
+    this._matomoTracker?.trackEvent('Fiches', 'Début', `Ouverture de fiches - ${lieuID}`);
   }
 }
