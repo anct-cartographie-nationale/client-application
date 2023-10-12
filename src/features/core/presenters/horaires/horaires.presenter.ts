@@ -155,8 +155,7 @@ export const isOpenOn =
     }
   };
 
-export const getIntervalWeekByOffset = (weekOffset: string | number): string => {
-  const today = new Date();
+export const getIntervalWeekByOffset = (weekOffset: string | number, today: Date): string => {
   const startOfTheWeek = new Date(today);
   startOfTheWeek.setDate(today.getDate() - today.getDay() + 1);
   startOfTheWeek.setDate(startOfTheWeek.getDate() + parseInt(weekOffset.toString()) * 7);

@@ -12,6 +12,7 @@ export class HorairesComponent {
   @Input() public weekOffset: string | number = '';
 
   public getWeekByIteration(weekOffset: string | number): string {
-    return getIntervalWeekByOffset(weekOffset);
+    const today = new Date();
+    return getIntervalWeekByOffset(weekOffset, today);
   }
 }
