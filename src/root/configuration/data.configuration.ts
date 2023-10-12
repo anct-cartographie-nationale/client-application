@@ -17,6 +17,5 @@ export const DATA_COORDINATEURS_CONFIGURATION: DataCoordinateursConfiguration = 
 export const DATA_TOKEN: InjectionToken<DataConfiguration> = new InjectionToken<DataConfiguration>('data.configuration');
 
 export const DATA_CONFIGURATION: DataConfiguration = {
-  lieuxDeMediationNumerique:
-    '../../assets/data/20231003-bus-france-services-en-charente-lieux-de-mediation-numeriques-nouvelle-aquitaine.json'
+  lieuxDeMediationNumerique: 'https://www.data.gouv.fr/fr/datasets/r/bdfef095-f3a9-4e66-84bb-ea05d5c9c3a5'
 };
