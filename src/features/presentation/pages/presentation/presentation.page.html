@@ -68,17 +68,7 @@
       <app-integrateurs></app-integrateurs>
     </div>
   </section>
-  <section class="container text-center">
-    <div class="my-3" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
-      <h2 class="ps-3 fw-bold my-5 text-start">Chiffres clefs d'utilisation</h2>
-      <app-chiffres-cle
-        [regions]="(regions$ | async)"
-        [lieuxMediationNumeriqueTotal]="(lieuxMediationNumeriqueTotal$ | async) ?? []"
-        [typologies]="(typologies$ | async) ?? []"
-        [labels]="(labelsNationaux$ | async) ?? []"></app-chiffres-cle>
-    </div>
-  </section>
-  <section #webinaire class="bg-integration py-5" id="webinaire">
+  <section #webinaire class="py-5">
     <div class="container">
       <h2 class="ps-3 fw-bold my-5 text-center text-primary">
         Découvrez nos webinaires, pour en savoir plus
@@ -86,6 +76,16 @@
         sur cette cartographie et ses usages variés
       </h2>
       <app-webinaire></app-webinaire>
+    </div>
+  </section>
+  <section class="bg-integration text-center">
+    <div class="container my-3 p-2" *ngIf="lieuxMediationNumeriqueTotal$ | async as lieuxMediationNumeriqueTotal">
+      <h2 class="ps-3 fw-bold my-5 text-start">Chiffres clefs d'utilisation</h2>
+      <app-chiffres-cle
+        [regions]="(regions$ | async)"
+        [lieuxMediationNumeriqueTotal]="(lieuxMediationNumeriqueTotal$ | async) ?? []"
+        [typologies]="(typologies$ | async) ?? []"
+        [labels]="(labelsNationaux$ | async) ?? []"></app-chiffres-cle>
     </div>
   </section>
 </main>
