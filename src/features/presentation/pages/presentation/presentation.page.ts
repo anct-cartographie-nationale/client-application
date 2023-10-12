@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
@@ -30,7 +30,7 @@ const toLieuxWithLocalisation = (lieux: LieuMediationNumerique[]) => lieux.filte
   ],
   styleUrls: ['./presentation.page.scss']
 })
-export class PresentationPage implements AfterViewInit {
+export class PresentationPage implements OnInit {
   @ViewChild('webinaire') webinaireRef!: ElementRef;
   private _currentSlide$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public currentSlide$: Observable<number> = this._currentSlide$.asObservable();
@@ -83,7 +83,7 @@ export class PresentationPage implements AfterViewInit {
     this.webinaireRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
   };
 
-  ngAfterViewInit() {
+  ngOnInit() {
     if (this._route.snapshot.fragment === 'webinaire') {
       this.webinaireRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }
