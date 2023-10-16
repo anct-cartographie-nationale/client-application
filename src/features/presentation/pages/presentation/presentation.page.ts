@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
@@ -14,6 +14,7 @@ import {
   WithLieuxCount
 } from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
+import { ActivatedRoute } from '@angular/router';
 
 const toLieuxWithLocalisation = (lieux: LieuMediationNumerique[]) => lieux.filter(onlyWithLocalisation);
 
@@ -29,7 +30,7 @@ const toLieuxWithLocalisation = (lieux: LieuMediationNumerique[]) => lieux.filte
   ],
   styleUrls: ['./presentation.page.scss']
 })
-export class PresentationPage {
+export class PresentationPage implements AfterViewInit {
   @ViewChild('webinaire') webinaireRef!: ElementRef;
   private _currentSlide$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public currentSlide$: Observable<number> = this._currentSlide$.asObservable();
@@ -58,7 +59,8 @@ export class PresentationPage {
 
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
-    @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction
+    @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction,
+    public readonly _route: ActivatedRoute
   ) {
     setTitle(['Présentation']);
   }
@@ -78,6 +80,12 @@ export class PresentationPage {
   public slidesBackground: string[] = ['bg-orientation', 'bg-centralisation', 'bg-actualisation', 'bg-visibilite'];
 
   onScrollToAnchor = (): void => {
-    this.webinaireRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    this.webinaireRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'start', inline: 'start' });
   };
+
+  ngAfterViewInit() {
+    if (this._route.snapshot.fragment) {
+      this.onScrollToAnchor();
+    }
+  }
 }
