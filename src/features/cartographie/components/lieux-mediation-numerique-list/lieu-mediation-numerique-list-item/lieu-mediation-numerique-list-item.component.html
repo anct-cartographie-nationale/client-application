@@ -7,6 +7,10 @@
     queryParamsHandling="preserve"
     (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
     (mouseout)="disableHover.emit()">
+    <div class="mb-4 text-primary text-uppercase d-flex align-items-center" *ngIf="lieuMediationNumerique.prive">
+      <i class="ri-close-circle-line ri-xl me-2" aria-hidden="true"></i>
+      <span class="small">cette structure n'accueil pas de public !</span>
+    </div>
     <div class="row d-print-none">
       <div class="col me-3">
         <h2 class="h5 mb-0 text-first-letter-uppercase fw-bold">

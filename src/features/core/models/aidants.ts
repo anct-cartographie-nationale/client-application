@@ -6,6 +6,7 @@ import {
   isValidCourriel,
   isValidTelephone
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LieuMediationNumeriqueWithNoPublic } from './no-public';
 
 export type Aidant = Model<
   'Aidant',
@@ -18,9 +19,10 @@ export type Aidant = Model<
 
 export type Aidants = Aidant[];
 
-export type LieuMediationNumeriqueWithAidants = LieuMediationNumerique & {
-  aidants?: Aidants;
-};
+export type LieuMediationNumeriqueWithAidants = LieuMediationNumeriqueWithNoPublic &
+  LieuMediationNumerique & {
+    aidants?: Aidants;
+  };
 
 const throwAidantError = (aidant: Omit<Aidant, 'isAidant'>): Aidant => {
   if (aidant.courriel && !isValidCourriel(aidant.courriel)) {

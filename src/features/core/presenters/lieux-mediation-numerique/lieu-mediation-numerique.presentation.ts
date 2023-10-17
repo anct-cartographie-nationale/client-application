@@ -37,6 +37,11 @@ export type LieuMediationNumeriquePresentation = {
   horaires?: string;
   source?: string;
   distance?: number;
+  prive?: boolean;
+};
+
+type LieuMediationNumeriqueWithNoPublic = LieuMediationNumerique & {
+  prive?: boolean;
 };
 
 export type LieuMediationNumeriquePresentationWithDistance = LieuMediationNumeriquePresentation & { distance: number };
@@ -47,7 +52,7 @@ const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisatio
     : geographicDistance(lieuMediationNumerique.localisation, localisation);
 
 export const toLieuxMediationNumeriquePresentation = (
-  lieuMediationNumerique: LieuMediationNumerique & { localisation: Localisation },
+  lieuMediationNumerique: LieuMediationNumeriqueWithNoPublic & { localisation: Localisation },
   localisation: Localisation
 ): LieuMediationNumeriquePresentation => ({
   id: lieuMediationNumerique.id,
@@ -74,5 +79,7 @@ export const toLieuxMediationNumeriquePresentation = (
   ...ifAny('conditions_acces', lieuMediationNumerique.conditions_acces),
   ...ifAny('horaires', lieuMediationNumerique.horaires),
   ...ifAny('distance', getDistance(lieuMediationNumerique, localisation)),
-  ...ifAny('source', lieuMediationNumerique.source)
+  ...ifAny('source', lieuMediationNumerique.source),
+  prive: true
+  // ...ifAny('prive', lieuMediationNumerique.prive)
 });
