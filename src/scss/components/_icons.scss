@@ -109,6 +109,25 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   }
 }
 
+.ri-circled-sm {
+  padding: $spacer * 1.2;
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+  width: $square-sm;
+  height: $square-sm;
+
+  i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    min-width: 1.6em;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    vertical-align: -0.075em;
+  }
+}
+
 .ri-focus-3-line::before {
   content: '\ed4c';
 }

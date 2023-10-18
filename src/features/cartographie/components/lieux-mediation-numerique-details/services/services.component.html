@@ -1,10 +1,15 @@
-<div *ngIf="services" class="bg-light p-4 d-print-none">
-  <h2 class="h5 text-muted-dark text-uppercase">Services</h2>
-  <ul class="ps-3 fw-bold" *ngIf="services.length > 0; else noServices">
-    <li *ngFor="let service of services">{{ service }}</li>
-  </ul>
-  <ng-template #noServices>Services inconnus</ng-template>
+<div class="d-print-none row" *ngIf="services; else noServices">
+  <h2 class="h5 text-muted-dark">Services proposés</h2>
+  <div *ngFor="let service of services" class="col-6 my-2">
+    <div class="bg-light py-3 d-flex align-items-center">
+      <span class="ri-circled-sm bg-primary text-light fw-normal d-sm-block d-none me-3 ms-3 text-center">
+        <i [ngClass]="getIconFromServices(service)" aria-hidden="true"></i>
+      </span>
+      <small>{{ service }}</small>
+    </div>
+  </div>
 </div>
+<ng-template #noServices>Services inconnus</ng-template>
 
 <div *ngIf="services" class="d-none d-print-block">
   <small class="fw-bold text-muted">Services</small>
