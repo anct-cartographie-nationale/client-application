@@ -141,7 +141,7 @@ export class CartographieLayout {
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION));
 
   public defaultAddress$: Observable<string | null> = this.route.queryParamMap.pipe(
-    map((paramMap: ParamMap) => paramMap.get('address'))
+    map((paramMap: ParamMap) => (this.fromOrientation ? null : paramMap.get('address')))
   );
 
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
