@@ -80,6 +80,5 @@ export const toLieuxMediationNumeriquePresentation = (
   ...ifAny('horaires', lieuMediationNumerique.horaires),
   ...ifAny('distance', getDistance(lieuMediationNumerique, localisation)),
   ...ifAny('source', lieuMediationNumerique.source),
-  prive: true
-  // ...ifAny('prive', lieuMediationNumerique.prive)
+  ...ifAny('prive', lieuMediationNumerique.prive)
 });

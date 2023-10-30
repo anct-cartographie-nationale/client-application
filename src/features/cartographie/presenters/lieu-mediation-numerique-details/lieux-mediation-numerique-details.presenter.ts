@@ -538,8 +538,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
             ...ifAny('prise_rdv', lieu.prise_rdv),
             ...ifAny('aidants', lieu.aidants),
             ...ifAny('source', availableSourcesMap.get(lieu.source ?? '') ?? undefined),
-            prive: true
-            // ...ifAny('prive', lieu.prive)
+            ...ifAny('prive', lieu.prive)
           };
         }
       )
