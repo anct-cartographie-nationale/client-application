@@ -42,6 +42,7 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   distance?: number;
   prise_rdv?: string;
   aidants?: Aidant[];
+  prive?: boolean;
   source?: SourcePresentation;
 };
 

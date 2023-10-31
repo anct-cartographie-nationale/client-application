@@ -14,6 +14,12 @@
       [priseRdv]="lieuMediationNumerique.prise_rdv"
       (print)="print.emit()"
       (sendByEmail)="sendByEmailModal.control.toggle($event)"></app-boutons-action>
+    <div class="p-4 bg-tertiary d-flex align-items-center" *ngIf="lieuMediationNumerique.prive">
+      <span class="flex-grow-1">Attention, cette structure n'accueille pas de public !</span>
+      <button type="button" class="btn" aria-label="Revenir à la liste" (click)="closeDetails.emit(lieuMediationNumerique)">
+        <i class="ri-close-circle-line ri-xl" aria-hidden="true"></i>
+      </button>
+    </div>
     <div class="border-top border-bottom d-xl-none" style="height: 275px" aria-hidden="true">
       <mgl-map
         *ngIf="lieuMediationNumerique.localisation as localisation"

@@ -30,4 +30,5 @@ export type LieuMediationNumeriqueListItemPresentation = {
   labels_nationaux?: LieuMediationNumeriqueListItemPresentationLabelNational[];
   distance?: number;
   prise_rdv?: string;
+  prive?: boolean;
 };

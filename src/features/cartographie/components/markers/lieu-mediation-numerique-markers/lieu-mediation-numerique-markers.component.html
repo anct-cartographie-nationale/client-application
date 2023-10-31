@@ -19,6 +19,7 @@
         ·
         <small>{{ lieuMediationNumerique.status.limite }}</small>
       </div>
+      <span class="my-1 fs-4" *ngIf="lieuMediationNumerique.prive">Ce lieu n'accueille pas de public</span>
       <ng-template #noOpeningHours>
         <div class="text-muted">Horaires inconnus</div>
       </ng-template>
@@ -31,6 +32,7 @@
     [className]="hoverId === lieuMediationNumerique.id || selectedId === lieuMediationNumerique.id ? 'marker-hover' : ''">
     <button
       tabindex="-1"
+      [ngClass]="{ 'opacity-50': lieuMediationNumerique.prive }"
       class="btn"
       (click)="showDetails.emit(lieuMediationNumerique)"
       (mouseenter)="highlight.emit(lieuMediationNumerique)"

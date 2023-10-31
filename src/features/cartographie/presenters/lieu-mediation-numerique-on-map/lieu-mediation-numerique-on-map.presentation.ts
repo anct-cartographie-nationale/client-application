@@ -9,4 +9,5 @@ export type LieuMediationNumeriqueOnMapPresentation = {
   status?: OpeningState;
   labels_nationaux?: LabelNational[];
   prise_rdv?: string;
+  prive?: boolean;
 };

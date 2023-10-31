@@ -1,4 +1,5 @@
 import { SchemaLieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { LieuMediationNumeriqueWithNoPublicTransfer } from './lieu-mediation-numerique-with-no-public-transfer';
 
 export type AidantTransfer = {
   nom: string;
@@ -6,6 +7,7 @@ export type AidantTransfer = {
   courriel: string;
 };
 
-export type LieuMediationNumeriqueWithAidantsTransfer = SchemaLieuMediationNumerique & {
-  aidants?: AidantTransfer[];
-};
+export type LieuMediationNumeriqueWithAidantsTransfer = LieuMediationNumeriqueWithNoPublicTransfer &
+  SchemaLieuMediationNumerique & {
+    aidants?: AidantTransfer[];
+  };

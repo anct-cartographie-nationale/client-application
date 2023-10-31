@@ -6,6 +6,7 @@
       *ngFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
       [attr.id]="lieuMediationNumerique.id"
       [class.list-group-item-hover]="hoverId === lieuMediationNumerique.id"
+      [ngClass]="{ 'bg-muted-light': lieuMediationNumerique.prive }"
       class="list-group-item py-4 px-sm-4 px-3">
       <app-mediation-numerique-list-item
         [lieuMediationNumerique]="lieuMediationNumerique"
