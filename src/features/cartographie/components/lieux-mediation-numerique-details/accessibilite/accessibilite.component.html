@@ -22,10 +22,6 @@
         [class.collapsed]="collapseAccesLibre.isCollapsed$ | async"
         [attr.aria-expanded]="collapseAccesLibre.isExpanded$ | async"
         (click)="collapseAccesLibre.toggle()">
-        <img
-          class="img-fluid ms-auto me-2"
-          [src]="assetsConfiguration.path + '/img/logo/acces-libre/acces-libre.svg'"
-          alt="À propos du site accès libre" />
         <span class="ms-auto">
           <i
             *ngIf="collapseAccesLibre.isCollapsed$ | async"
