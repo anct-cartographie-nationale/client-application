@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, Optional, ViewChild } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router, RouterOutlet } from '@angular/router';
-import { BehaviorSubject, Observable, of, Subject, tap, withLatestFrom } from 'rxjs';
+import { ActivatedRoute, ParamMap, Params, Router, RouterOutlet } from '@angular/router';
+import { BehaviorSubject, combineLatest, Observable, of, Subject, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -85,7 +85,9 @@ export class CartographieLayout {
   public resultsCount$: Observable<number> = this._resultsCount$.asObservable();
 
   private _lieuxMediationNumeriqueListPresenterArgs: [Observable<Localisation>, Observable<FilterPresentation>, Date] = [
-    of(toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))),
+    this.route.queryParams.pipe(
+      map((queryParams: Params) => toLocalisationFromFilterFormPresentation(toFilterFormPresentationFromQuery(queryParams)))
+    ),
     this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
     new Date()
   ];
@@ -117,31 +119,31 @@ export class CartographieLayout {
       })
     );
 
-  public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueOnMapPresentation[]> =
-    this._lieuxMediationNumeriqueListPresenter
-      .lieuxMediationNumeriqueByDistance$(
-        ...this._lieuxMediationNumeriqueListPresenterArgs,
-        this.markersPresenter.boundingBox$,
-        this.currentZoom$
-      )
-      .pipe(
-        map((lieux: LieuMediationNumeriquePresentation[]): LieuMediationNumeriquePresentation[] =>
-          toLieuxFilteredByDepartement(lieux, this.getRouteParam('nomDepartement'))
-        ),
-        withLatestFrom(this._currentZoom$),
-        map(toLieuxWithOpeningState(new Date())),
-        map(toLieuxByLongitude),
-        tap((lieux: LieuMediationNumeriquePresentation[]): void => {
-          lieux.length > 0 && this._resultsCount$.next(lieux.length);
-          this._loadingState$.next(false);
-        })
-      );
+  public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueOnMapPresentation[]> = combineLatest([
+    this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
+      ...this._lieuxMediationNumeriqueListPresenterArgs,
+      this.markersPresenter.boundingBox$,
+      this.currentZoom$
+    ),
+    this.route.paramMap
+  ]).pipe(
+    map(([lieux]: [LieuMediationNumeriquePresentation[], ParamMap]): LieuMediationNumeriquePresentation[] =>
+      toLieuxFilteredByDepartement(lieux, this.getRouteParam('nomDepartement'))
+    ),
+    withLatestFrom(this._currentZoom$),
+    map(toLieuxWithOpeningState(new Date())),
+    map(toLieuxByLongitude),
+    tap((lieux: LieuMediationNumeriquePresentation[]): void => {
+      lieux.length > 0 && this._resultsCount$.next(lieux.length);
+      this._loadingState$.next(false);
+    })
+  );
 
   public allLieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> =
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION));
 
   public defaultAddress$: Observable<string | null> = this.route.queryParamMap.pipe(
-    map((paramMap: ParamMap) => (this.fromOrientation ? null : paramMap.get('address')))
+    map((paramMap: ParamMap) => paramMap.get('address'))
   );
 
   public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
@@ -242,6 +244,7 @@ export class CartographieLayout {
     result.localisation &&
       this.router.navigate(result.payload?.id ? ['/cartographie', result.payload.id, 'details'] : ['/cartographie'], {
         queryParams: {
+          address: result.label,
           latitude: result.localisation.latitude,
           longitude: result.localisation.longitude
         },

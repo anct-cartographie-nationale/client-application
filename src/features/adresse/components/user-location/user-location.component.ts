@@ -38,6 +38,8 @@ export class UserLocationComponent implements OnInit {
 
   @Input() placeholder: string = 'Entrez une adresse';
 
+  @Input() fromOrientation: boolean = false;
+
   private readonly _initialSearch$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   private readonly _searchTerm$: Subject<string> = new Subject<string>();
@@ -71,7 +73,11 @@ export class UserLocationComponent implements OnInit {
     distinctUntilChanged(),
     switchMap(
       (searchTerm: string): Observable<ResultFoundPresentation<{ type: AddressType }>[][]> =>
-        forkJoin(this._searchables.map((searchable: Searchable<{ type: AddressType }>) => searchable.search$(searchTerm)))
+        forkJoin(
+          this._searchables.map((searchable: Searchable<{ type: AddressType }>) =>
+            searchable.search$(searchTerm, this.fromOrientation)
+          )
+        )
     ),
     map((resultsToCombine: ResultFoundPresentation<{ type: AddressType }>[][]) => resultsToCombine.flat()),
     tap(
