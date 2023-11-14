@@ -380,7 +380,7 @@ export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string
 
   public search$(
     searchTerm: string,
-    fromOrientation: boolean,
+    fromOrientation?: boolean,
     limit: number = 5
   ): Observable<ResultFoundPresentation<{ id: string; type: 'place' }>[]> {
     return fromOrientation
