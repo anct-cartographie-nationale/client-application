@@ -2461,7 +2461,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     );
 
     const searchResults: ResultFoundPresentation<{ id: string; type: string }>[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.search$('ANONYM', 2)
+      lieuxMediationNumeriqueListPresenter.search$('ANONYM', false, 2)
     );
 
     expect<ResultFoundPresentation<{ id: string; type: string }>[]>(searchResults).toStrictEqual([

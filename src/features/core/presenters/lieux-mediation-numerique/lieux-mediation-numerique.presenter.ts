@@ -378,17 +378,23 @@ export class LieuxMediationNumeriquePresenter implements Searchable<{ id: string
     );
   }
 
-  public search$(searchTerm: string, limit: number = 5): Observable<ResultFoundPresentation<{ id: string; type: 'place' }>[]> {
-    return this.lieuxMediationNumerique$.pipe(
-      map((lieux: LieuMediationNumerique[]): ResultFoundPresentation<{ id: string; type: 'place' }>[] => {
-        const matchingByName: ResultFoundPresentation<{ id: string; type: 'place' }>[] = lieux
-          .filter(onlyNomMatching(searchTerm))
-          .slice(0, limit)
-          .map(toResultFound);
+  public search$(
+    searchTerm: string,
+    fromOrientation?: boolean,
+    limit: number = 5
+  ): Observable<ResultFoundPresentation<{ id: string; type: 'place' }>[]> {
+    return fromOrientation
+      ? of([])
+      : this.lieuxMediationNumerique$.pipe(
+          map((lieux: LieuMediationNumerique[]): ResultFoundPresentation<{ id: string; type: 'place' }>[] => {
+            const matchingByName: ResultFoundPresentation<{ id: string; type: 'place' }>[] = lieux
+              .filter(onlyNomMatching(searchTerm))
+              .slice(0, limit)
+              .map(toResultFound);
 
-        return matchingByName.length === 5 ? matchingByName : appendSearchByAdresse(matchingByName, lieux, searchTerm);
-      })
-    );
+            return matchingByName.length === 5 ? matchingByName : appendSearchByAdresse(matchingByName, lieux, searchTerm);
+          })
+        );
   }
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumerique[]> = this.lieuxMediationNumeriqueRepository.getAll$();

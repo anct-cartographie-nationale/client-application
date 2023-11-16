@@ -7,7 +7,7 @@ export type WithType<ResultType = string> = {
 };
 
 export interface Searchable<T extends WithType = WithType> {
-  search$(searchTerm: string): Observable<ResultFoundPresentation<T>[]>;
+  search$(searchTerm: string, fromOrientation?: boolean): Observable<ResultFoundPresentation<T>[]>;
 }
 
 export const SEARCHABLE_TOKEN: InjectionToken<Searchable> = new InjectionToken<Searchable>('address.searchable');
