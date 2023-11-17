@@ -31,7 +31,7 @@
         </div>
         <div class="modal-footer justify-content-center px-lg-4 px-1" [ngClass]="'bg-' + bgFooter">
           <button *ngIf="closeLabel" type="button" class="btn btn-secondary me-1" (click)="close()">
-            <i class="ri-arrow-go-back-line d-lg-inline-block d-none" aria-hidden="true"></i>
+            <i class="ri-arrow-left-s-line d-lg-inline-block d-none" aria-hidden="true"></i>
             {{ closeLabel }}
           </button>
           <ng-content select="[slot=footer]"></ng-content>
