@@ -12,7 +12,7 @@
     <app-boutons-action
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
       [priseRdv]="lieuMediationNumerique.prise_rdv"
-      (print)="print.emit()"
+      (openImpressionChoiceModal)="impressionChoiceModal.control.toggle($event)"
       (sendByEmail)="sendByEmailModal.control.toggle($event)"></app-boutons-action>
     <div class="p-4 bg-tertiary d-flex align-items-center" *ngIf="lieuMediationNumerique.prive">
       <span class="flex-grow-1">Attention, cette structure n'accueille pas de public !</span>

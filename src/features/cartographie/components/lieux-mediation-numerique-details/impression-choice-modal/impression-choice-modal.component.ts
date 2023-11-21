@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { OrientationSheetForm } from '@features/cartographie/models';
 import { ModalComponent } from '@features/core';
 
 @Component({
