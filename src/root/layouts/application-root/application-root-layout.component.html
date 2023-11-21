@@ -15,11 +15,52 @@
   </ng-container>
   <footer id="footer" slot="footer" class="container-fluid p-4 bg-dark d-print-none">
     <div class="row justify-content-between">
-      <div class="col-lg-auto">
+      <div class="col-lg-auto d-none d-sm-block">
         <img src="/assets/img/footer/footer-mark.svg" class="img-fluid me-4" alt="" />
         <img src="/assets/img/footer/footer-anct-logo.svg" class="img-fluid" alt="" />
       </div>
-      <div class="col-xl-6 col-lg mt-lg-0 mt-4 text-secondary">
+      <div class="d-block d-sm-none">
+        <small class="text-white">Avec le soutien de :</small>
+        <div class="col-lg-auto mt-2 d-flex d-sm-none">
+          <img src="/assets/img/footer/footer-mark.svg" class="me-4" alt="" width="30%" />
+          <img src="/assets/img/footer/footer-anct-logo.svg" alt="" width="50%" />
+        </div>
+      </div>
+      <div class="d-block d-sm-none">
+        <hr class="mt-4 text-secondary" />
+      </div>
+      <div class="col-xl-6 text-secondary d-flex flex-column d-sm-none">
+        <small class="my-2">
+          La Cartographie nationale des lieux d'inclusion numérique peut être
+          <a href="https://labase.anct.gouv.fr/ressource/993" class="text-white" target="_blank" rel="noopener noreferrer">
+            intégrée facilement sur votre site web.
+          </a>
+        </small>
+        <br />
+        <small class="my-2">
+          Vous pouvez y renseigner votre structure en passant par
+          <a href="https://labase.anct.gouv.fr/ressource/975" class="text-white" target="_blank" rel="noopener noreferrer">
+            DORA.
+          </a>
+        </small>
+        <br />
+        <small class="my-2">
+          Les informations collectées se basent sur un
+          <a
+            class="text-white"
+            href="https://schema.data.gouv.fr/LaMednum/standard-mediation-num/0.1.0/documentation.html"
+            target="_blank"
+            rel="noopener noreferrer">
+            schéma de données des lieux d'inclusion numérique
+          </a>
+          propulsé par la Mednum et Datactivist.
+        </small>
+      </div>
+      <div class="d-block d-sm-none">
+        <hr class="mt-4 text-secondary" />
+      </div>
+
+      <div class="col-xl-6 col-lg mt-lg-0 mt-4 text-secondary d-none d-sm-block">
         <p>
           La Cartographie nationale des lieux d'inclusion numérique peut être
           <a href="https://labase.anct.gouv.fr/ressource/993" class="text-white" target="_blank" rel="noopener noreferrer">
@@ -76,11 +117,93 @@
           </span>
         </div>
       </div>
-      <div>
+      <div class="d-none d-sm-block">
         <hr class="mt-5 mb-2 text-secondary" />
       </div>
     </div>
-    <div>
+    <div class="d-flex d-sm-none">
+      <ul class="nav d-flex flex-column">
+        <li class="nav-item">
+          <a
+            class="nav-link link-muted-light text-hover-light ps-0"
+            href="https://labase.anct.gouv.fr/base/356"
+            target="_blank"
+            rel="noopener noreferrer">
+            Documentation
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link link-muted-light text-hover-light ps-0"
+            href="mailto:cartographie.sonum@anct.gouv.fr"
+            target="_blank"
+            rel="noopener noreferrer">
+            Nous contacter
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link link-muted-light text-hover-light ps-0"
+            [routerLink]="['presentation']"
+            fragment="webinaire"
+            target="_blank"
+            rel="noopener noreferrer">
+            Participer à nos webinaires
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link link-muted-light text-hover-light ps-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="['presentation']"
+            aria-current="page">
+            Présentation de la cartographie
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link link-muted-light text-hover-light ps-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="['mentions-legales']"
+            aria-current="page">
+            Mentions légales
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link link-muted-light text-hover-light ps-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="['donnees-personnelles']"
+            aria-current="page">
+            Données personnelles
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link link-muted-light text-hover-light ps-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="['gestion-des-cookies']"
+            aria-current="page">
+            Gestion des cookies
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link link-muted-light text-hover-light ps-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            [href]="['accessibilite']"
+            aria-current="page">
+            Accessibilité : non-conforme
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="d-none d-sm-block">
       <ul class="nav">
         <li class="nav-item">
           <a
@@ -135,4 +258,5 @@
       </ul>
     </div>
   </footer>
+  <!-- <footer id="footer" slot="footer" class="container-fluid p-4 bg-dark d-print-none d-block d-sm-none"></footer> -->
 </app-conteneur>
