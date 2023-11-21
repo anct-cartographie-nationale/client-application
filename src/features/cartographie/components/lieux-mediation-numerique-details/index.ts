@@ -15,3 +15,4 @@ export * from './mise-a-jour/mise-a-jour.component';
 export * from './accessibilite/accessibilite.component';
 export * from './bandeau-erreur/bandeau-erreur.component';
 export * from './erreur-form-modal/erreur-form-modal.component';
+export * from './impression-choice-modal/impression-choice-modal.component';

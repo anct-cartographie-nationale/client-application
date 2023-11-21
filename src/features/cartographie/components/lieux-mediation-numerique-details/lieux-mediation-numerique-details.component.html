@@ -150,11 +150,16 @@
   </div>
   <div class="bg-primary p-2">
     <app-bandeau-erreur
-      (openOrientationSheetModal)="orientationSheetModal.control.toggle($event)"
+      (openImpressionChoiceModal)="impressionChoiceModal.control.toggle($event)"
       (openErreurFormModal)="erreurFormModal.control.toggle($event)"
       (closeDetails)="closeDetails.emit(lieuMediationNumerique)"></app-bandeau-erreur>
   </div>
 </div>
+<app-impression-choice-modal
+  (orientationSheetModalModal)="orientationSheetModal.control.toggle($event)"
+  (print)="print.emit()"
+  class="d-print-none"
+  #impressionChoiceModal></app-impression-choice-modal>
 <app-erreur-form-modal
   class="d-print-none"
   #erreurFormModal

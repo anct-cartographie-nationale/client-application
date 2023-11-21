@@ -27,7 +27,8 @@ import {
   MiseAJourComponent,
   AccessibiliteComponent,
   BandeauErreurComponent,
-  ErreurFormModalComponent
+  ErreurFormModalComponent,
+  ImpressionChoiceModalComponent
 } from './lieux-mediation-numerique-details';
 import { LocationBreadcrumbComponent } from './location-breadcrumb/location-breadcrumb.component';
 import { AffinerRechercheFormComponent } from './affiner-recherche-form/affiner-recherche-form.component';
@@ -66,5 +67,6 @@ export const components = [
   LabelModalComponent,
   HubModalComponent,
   BandeauErreurComponent,
-  ErreurFormModalComponent
+  ErreurFormModalComponent,
+  ImpressionChoiceModalComponent
 ];

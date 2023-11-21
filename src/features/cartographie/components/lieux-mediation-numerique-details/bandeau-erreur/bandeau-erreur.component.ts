@@ -9,4 +9,5 @@ export class BandeauErreurComponent {
   @Output() public openErreurFormModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   @Output() public closeDetails: EventEmitter<void> = new EventEmitter<void>();
   @Output() public openOrientationSheetModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+  @Output() public openImpressionChoiceModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 }
