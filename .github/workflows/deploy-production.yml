@@ -32,11 +32,13 @@ jobs:
         run: yarn
 
       - name: Set mednum custom style
-        run: |
-          cp -r projects/client-application/src/scss.mednum/* projects/client-application/src/scss
+        run: cp -r projects/client-application/src/scss.mednum/* projects/client-application/src/scss
 
       - name: Build
         run: yarn build client-application
+
+      - name: Lieux mediation numérique data from API
+        run: curl https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique | gunzip >> ./dist/client-application/assets/data/lieux-inclusion-numerique.json
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
