@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { OpeningState } from '../../../../core/presenters';
 import { SourcePresentation } from '../../../presenters';
 import { isTooOld } from './informations-generales.presenter';
+import { ASSETS_TOKEN, AssetsConfiguration } from 'projects/client-application/src/root';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,9 +15,12 @@ export class InformationsGeneralesComponent {
   @Input() public typologie: string | undefined;
   @Input() public date: Date | undefined;
   @Input() public status: OpeningState | undefined;
-  @Input() public source: SourcePresentation | undefined;
+  @Input() public sources: SourcePresentation[] | undefined;
 
   @Output() public closeDetails: EventEmitter<void> = new EventEmitter<void>();
+  @Output() scrollToSource: EventEmitter<string> = new EventEmitter<string>();
 
   public isTooOld = isTooOld(new Date());
+
+  public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
 }

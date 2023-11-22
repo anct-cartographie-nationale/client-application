@@ -1,6 +1,7 @@
 <div class="d-flex flex-row-reverse">
-  <div class="d-flex flex-column">
-    <div class="flex-grow-1 text-end">
+  <div class="flex-grow-1 align-self-center">
+    <div class="d-flex">
+      <small class="flex-grow-1" *ngIf="typologie">{{ typologie }}</small>
       <button
         type="button"
         class="btn btn-close btn-close-white opacity-100"
@@ -8,27 +9,59 @@
         aria-label="Revenir à la liste"
         (click)="closeDetails.emit()"></button>
     </div>
-  </div>
-  <div class="flex-grow-1 align-self-center">
-    <small *ngIf="typologie">{{ typologie }}</small>
-    <h1 class="h2 fw-bold mb-0 text-first-letter-uppercase">
-      {{ nom }}
-    </h1>
-    <ng-container *ngIf="date">
-      <span *ngIf="isTooOld(date); else updateDate" class="badge rounded-pill bg-tertiary text-primary fw-normal me-1">
-        <i class="ri-alert-line" aria-hidden="true"></i>
-        Dernière mise à jour il y a plus d'un an
-      </span>
-      <ng-template #updateDate>
-        <span class="mt-1 fst-italic me-2">Mise à jour le {{ date | date : 'dd/MM/y' }}</span>
-      </ng-template>
-    </ng-container>
-    <small *ngIf="source" class="opacity-75 fst-italic">
-      source :
-      <a href="{{ source.link }}" target="_blank" rel="noopener noreferrer" class="text-secondary">
-        {{ source.label }}
-      </a>
-    </small>
+    <div class="d-flex">
+      <div class="w-50 flex-grow-1">
+        <h1 class="h2 fw-bold mb-0 text-first-letter-uppercase">
+          {{ nom }}
+        </h1>
+        <ng-container *ngIf="date">
+          <span *ngIf="isTooOld(date); else updateDate" class="badge rounded-pill bg-tertiary text-primary fw-normal me-1">
+            <i class="ri-alert-line" aria-hidden="true"></i>
+            Dernière mise à jour il y a plus d'un an
+          </span>
+          <ng-template #updateDate>
+            <span class="mt-1 fst-italic me-2">Mise à jour le {{ date | date : 'dd/MM/y' }}</span>
+          </ng-template>
+        </ng-container>
+        <div class="d-flex">
+          <div class="text-end ms-1" *ngFor="let source of sources">
+            <a
+              role="button"
+              (click)="scrollToSource.emit()"
+              *ngIf="source.logo as logo"
+              class="d-block d-sm-none text-secondary mt-1">
+              <span class="circle-wrapper">
+                <img
+                  class="img-fluid p-1"
+                  [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
+                  alt="{{ source.label }}" />
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-2" *ngIf="sources">
+        <small role="button" (click)="scrollToSource.emit()" class="d-none d-sm-block opacity-75 fst-italic d-flex">
+          <span class="text-decoration-underline">Sources des données</span>
+        </small>
+        <div class="d-flex justify-content-end">
+          <div class="text-end ms-1" *ngFor="let source of sources">
+            <a
+              role="button"
+              (click)="scrollToSource.emit()"
+              *ngIf="source.logo as logo"
+              class="d-none d-sm-block text-secondary mt-1 circle-wrapper">
+              <span class="circle-wrapper">
+                <img
+                  class="img-fluid p-1"
+                  [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
+                  alt="{{ source.label }}" />
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <i class="ri-4x ri-map-pin-2-line my-auto me-2 d-md-inline d-none" aria-hidden="true"></i>
 </div>

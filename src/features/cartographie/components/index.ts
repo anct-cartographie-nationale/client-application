@@ -24,11 +24,11 @@ import {
   SendByEmailModalComponent,
   PublicPrisEnChargeComponent,
   ServicesComponent,
-  MiseAJourComponent,
   AccessibiliteComponent,
   BandeauErreurComponent,
   ErreurFormModalComponent,
-  ImpressionChoiceModalComponent
+  ImpressionChoiceModalComponent,
+  SourceDonneesComponent
 } from './lieux-mediation-numerique-details';
 import { LocationBreadcrumbComponent } from './location-breadcrumb/location-breadcrumb.component';
 import { AffinerRechercheFormComponent } from './affiner-recherche-form/affiner-recherche-form.component';
@@ -60,7 +60,6 @@ export const components = [
   LieuMediationNumeriqueMarkersComponent,
   TerritoireMarkersComponent,
   NoLieuxFoundComponent,
-  MiseAJourComponent,
   AccessibiliteComponent,
   LocationBreadcrumbComponent,
   ModifierOrientationComponent,
@@ -68,5 +67,6 @@ export const components = [
   HubModalComponent,
   BandeauErreurComponent,
   ErreurFormModalComponent,
-  ImpressionChoiceModalComponent
+  ImpressionChoiceModalComponent,
+  SourceDonneesComponent
 ];

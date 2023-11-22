@@ -6,8 +6,9 @@
     [typologie]="lieuMediationNumerique.typologies"
     [date]="lieuMediationNumerique.date_maj"
     [status]="lieuMediationNumerique.status"
-    [source]="lieuMediationNumerique.source"
-    (closeDetails)="closeDetails.emit(lieuMediationNumerique)"></app-informations-generales>
+    [sources]="lieuMediationNumerique.source"
+    (closeDetails)="closeDetails.emit(lieuMediationNumerique)"
+    (scrollToSource)="onScrollToSource()"></app-informations-generales>
   <div class="position-relative">
     <app-boutons-action
       [siteWeb]="lieuMediationNumerique.contact?.site_web"
@@ -135,6 +136,11 @@
         (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"></app-labellisations>
     </li>
   </ul>
+  <div #source class="bg-light px-2">
+    <div class="mx-3">
+      <app-source-donnees></app-source-donnees>
+    </div>
+  </div>
   <span class="d-flex ms-3 my-1">
     <a
       class="nav-link me-1 text-primary"
@@ -145,9 +151,6 @@
       Participer au webinaire "Mettre à jour ses données"
     </a>
   </span>
-  <div class="bg-light px-2">
-    <app-mise-a-jour [source]="lieuMediationNumerique.source"></app-mise-a-jour>
-  </div>
   <div class="bg-primary p-2">
     <app-bandeau-erreur
       (openImpressionChoiceModal)="impressionChoiceModal.control.toggle($event)"
