@@ -95,7 +95,7 @@ const typologieMatchingMap = new Map([
 
 const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, SourcePresentation>([
   [
-    'aidants-connect',
+    'Aidants Connect',
     {
       label: 'Aidants Connect',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-aidants-connect/',
@@ -105,7 +105,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'angers',
+    'Angers',
     {
       label: "Ville d'Angers",
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-angers/',
@@ -115,108 +115,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'assembleurs',
-    {
-      label: 'Les Assembleurs',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-hauts-de-france-fournis-par-les-assembleurs/',
-      detail: 'Formulaire des Assembleurs',
-      update_link: 'https://solen1.enquetes.social.gouv.fr/cgi-9/HE/SF?P=76z14z2z-1z-1z2747C6FAAF',
-      logo: 'assembleurs'
-    }
-  ],
-  [
-    'cd17',
-    {
-      label: 'Département de la Charente-Maritime',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-charente-maritime/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd23',
-    {
-      label: 'Département de la Creuse',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-la-creuse/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd28-appui-territorial',
-    {
-      label: "Département de l'Eure-et-Loir",
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-eure-et-loir-fournis-par-appui-territorial-deure-et-loir/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-
-  [
-    'cd33',
-    {
-      label: 'Département de la Gironde',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-gironde/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd40',
-    {
-      label: 'Département des Landes',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-les-landes/',
-      detail: "Plateforme d'échange de données en Nouvelle-Aquitaine",
-      update_link: 'https://www.pigma.org/onegeo-login/fr/signin/?next=%2Fonegeo-maps%2F',
-      logo: 'les-landes'
-    }
-  ],
-  [
-    'cd44',
-    {
-      label: 'Département de la Loire-Atlantique',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-loire-atlantique-fournis-par-loire-atlantique-1/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd49',
-    {
-      label: 'Département du Maine-et-Loire',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-departement-du-maine-et-loire/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd85',
-    {
-      label: 'Département de la Vendée',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-vendee-fournis-par-vendee/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'cd87',
-    {
-      label: 'Département de la Haute-Vienne',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-haute-vienne/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'conseiller-numerique',
+    'Conseiller Numerique',
     {
       label: 'Conseiller numérique',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-conseiller-numerique-1/',
@@ -226,7 +125,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'conumm',
+    'Conumm',
     {
       label: 'Conumm',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-conumm/',
@@ -236,17 +135,27 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'cr93',
+    'Corse',
     {
-      label: 'Région PACA',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-provence-alpes-cote-dazur-fournis-par-paca/',
+      label: 'La Corse',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-corse-fournis-par-corse/',
       detail: "Ces données sont intégrées via l'outil DORA",
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora'
     }
   ],
   [
-    'dora',
+    'Département du Maine-et-Loire',
+    {
+      label: 'Département du Maine-et-Loire',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-maine-et-loire-fournis-par-departement-du-maine-et-loire/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'Dora',
     {
       label: 'Dora',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numeriques-en-france-disponibles-dans-le-referentiel-de-loffre-dinsertion-publie-par-data-inclusion/',
@@ -256,7 +165,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'etapes-numerique',
+    'Etapes Numerique',
     {
       label: 'Etapes Numerique',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-etapes-numerique/',
@@ -266,7 +175,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'fibre-64',
+    'Fibre 64',
     {
       label: 'Fibre 64',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-pyrenees-atlantique-fournis-par-fibre-64-3',
@@ -276,7 +185,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'france-services',
+    'France Services',
     {
       label: 'France Services',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-services',
@@ -286,7 +195,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'france-tiers-lieux',
+    'France tiers-lieux',
     {
       label: 'France Tiers-Lieux',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-france-tiers-lieux/',
@@ -296,7 +205,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'francilin',
+    'Francil-in',
     {
       label: "Francil'IN",
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-ile-de-france-fournis-par-francil-in/',
@@ -306,7 +215,27 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'hinaura',
+    'Gironde',
+    {
+      label: 'Département de la Gironde',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-gironde/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'Haute-Vienne',
+    {
+      label: 'Département de la Haute-Vienne',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-haute-vienne/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'Hinaura',
     {
       label: 'Hinaura',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-auvergne-rhone-alpes-fournis-par-hinaura/',
@@ -316,17 +245,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'hub-antilles',
-    {
-      label: 'Mednum-Hub-Antilles',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-martinique-fournis-par-mednum-hub-antilles-4/',
-      detail: "Ces données sont intégrées via l'outil DORA",
-      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
-      logo: 'dora'
-    }
-  ],
-  [
-    'hub-lo',
+    'Hub-lo',
     {
       label: 'Hub-lo',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-centre-val-de-loire-fournis-par-hub-lo-1/',
@@ -336,7 +255,47 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'mulhouse',
+    'La Creuse',
+    {
+      label: 'Département de la Creuse',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-la-creuse/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'Les Assembleurs',
+    {
+      label: 'Les Assembleurs',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-hauts-de-france-fournis-par-les-assembleurs/',
+      detail: 'Formulaire des Assembleurs',
+      update_link: 'https://solen1.enquetes.social.gouv.fr/cgi-9/HE/SF?P=76z14z2z-1z-1z2747C6FAAF',
+      logo: 'assembleurs'
+    }
+  ],
+  [
+    'Les Landes',
+    {
+      label: 'Département des Landes',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-les-landes/',
+      detail: "Plateforme d'échange de données en Nouvelle-Aquitaine",
+      update_link: 'https://www.pigma.org/onegeo-login/fr/signin/?next=%2Fonegeo-maps%2F',
+      logo: 'les-landes'
+    }
+  ],
+  [
+    'Loire Atlantique',
+    {
+      label: 'Département de la Loire-Atlantique',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-loire-atlantique-fournis-par-loire-atlantique-1/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'Mulhouse',
     {
       label: 'Ville de Mulhouse',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-haut-rhin-fournis-par-mulhouse/',
@@ -346,17 +305,17 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'numi',
+    'Paca',
     {
-      label: 'Numi',
-      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-normandie-fournis-par-numi/',
+      label: 'Région PACA',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-provence-alpes-cote-dazur-fournis-par-paca/',
       detail: "Ces données sont intégrées via l'outil DORA",
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora'
     }
   ],
   [
-    'res-in',
+    'Res-in',
     {
       label: 'Rés-in',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-lyon-fournis-par-res-in/',
@@ -366,7 +325,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'rhinocc',
+    'RhinOcc',
     {
       label: 'RhinOcc',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-occitanie-fournis-par-rhinocc/',
@@ -376,13 +335,23 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
-    'ultra-numerique',
+    'Ultra-numerique',
     {
       label: 'Ultra-numerique',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-la-reunion-fournis-par-ultra-numerique/',
       detail: 'Plateforme Ultra Numerique',
       update_link: 'https://reunion.ultranumerique.fr/',
       logo: 'ultra-numerique'
+    }
+  ],
+  [
+    'Vendée',
+    {
+      label: 'Département de la Vendée',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-vendee-fournis-par-vendee/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
     }
   ]
 ]);
