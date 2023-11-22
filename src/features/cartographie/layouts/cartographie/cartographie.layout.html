@@ -43,7 +43,8 @@
         class="d-lg-block d-none"
         [url]="(routerOutlet?.activatedRoute?.url | async) ?? []"
         [zoom]="(markersPresenter.zoom$ | async) ?? 0"
-        (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"></app-location-breadcrumb>
+        (showLieux)="$event ? onShowLieuxInZone($event) : markersPresenter.reset()"
+        [mapIsDragging]="this.mapIsDragging"></app-location-breadcrumb>
       <button
         id="filter"
         class="navbar-btn btn-affiner-recherche ms-auto flex-sm-grow-0 flex-grow-1 text-start"
@@ -214,7 +215,7 @@
         [center]="[localisation.longitude, localisation.latitude]"
         (zoomEvt)="zooming($event)"
         (zoomEnd)="onMapViewUpdated($event)"
-        (mapDragEnd)="onMapViewUpdated($event)">
+        (mapDragEnd)="onMapViewUpdatedDragging($event)">
         <mgl-control mglNavigation [showZoom]="true" [showCompass]="false" position="top-left"></mgl-control>
         <mgl-marker
           *ngIf="userLocalisation$ | async as userLocalisation"
@@ -238,6 +239,7 @@
           *ngIf="((currentZoom$ | async) ?? 0) < departementZoomForDistance() && ((currentZoom$ | async) ?? 0) > 7"
           [territoires]="(departements$ | async)?.payload ?? []"
           [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
+          (updateMapIsDragging)="updateDragging()"
           (highlight)="onHighlight($event?.code)"
           (showLieux)="onShowLieuxInDepartement($event)"></app-territoire-markers>
         <app-lieu-mediation-numerique-markers

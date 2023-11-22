@@ -1,47 +1,49 @@
 <ng-container *ngIf="breadcrumbItems$ | async as breadcrumbItems">
-  <small class="d-lg-flex d-none align-items-center" aria-label="Navigation par territoire">
-    <ng-container *ngFor="let breadcrumbItem of breadcrumbItems; let isLast = last">
-      <span *ngIf="breadcrumbItem.link; else currentPage" class="breadcrumb-item">
-        <a
-          *ngIf="breadcrumbItem.link[0].startsWith('http'); else routerLink"
-          [href]="breadcrumbItem.link[0]"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-body opacity-75">
-          {{ breadcrumbItem.label }}
-        </a>
-        <ng-template #routerLink>
+  <div *ngIf="!mapIsDragging">
+    <small class="d-lg-flex d-none align-items-center" aria-label="Navigation par territoire">
+      <ng-container *ngFor="let breadcrumbItem of breadcrumbItems; let isLast = last">
+        <span *ngIf="breadcrumbItem.link; else currentPage" class="breadcrumb-item">
           <a
-            [routerLink]="breadcrumbItem.link"
-            queryParamsHandling="preserve"
-            (click)="onClick(breadcrumbItem.label)"
+            *ngIf="breadcrumbItem.link[0].startsWith('http'); else routerLink"
+            [href]="breadcrumbItem.link[0]"
+            target="_blank"
+            rel="noopener noreferrer"
             class="text-body opacity-75">
             {{ breadcrumbItem.label }}
           </a>
+          <ng-template #routerLink>
+            <a
+              [routerLink]="breadcrumbItem.link"
+              queryParamsHandling="preserve"
+              (click)="onClick(breadcrumbItem.label)"
+              class="text-body opacity-75">
+              {{ breadcrumbItem.label }}
+            </a>
+          </ng-template>
+        </span>
+        <ng-template #currentPage>
+          <span class="breadcrumb-item active text-body opacity-75" aria-current="page">{{ breadcrumbItem.label }}</span>
         </ng-template>
-      </span>
-      <ng-template #currentPage>
-        <span class="breadcrumb-item active text-body opacity-75" aria-current="page">{{ breadcrumbItem.label }}</span>
-      </ng-template>
-      <i *ngIf="!isLast" class="ri-arrow-drop-right-fill" aria-hidden="true"></i>
-    </ng-container>
-  </small>
-  <div class="d-lg-none d-block list-group list-group-flush fw-bold">
-    <a
-      *ngIf="breadcrumbItems?.[1]?.link"
-      [routerLink]="breadcrumbItems[1].link"
-      queryParamsHandling="preserve"
-      (click)="onClick(breadcrumbItems[1].label)"
-      class="list-group-item py-3 list-group-item-action">
-      Changer de département
-    </a>
-    <a
-      *ngIf="breadcrumbItems?.[0]?.link"
-      [routerLink]="breadcrumbItems[0].link"
-      queryParamsHandling="preserve"
-      (click)="onClick(breadcrumbItems[0].label)"
-      class="list-group-item py-3 list-group-item-action">
-      Changer de région
-    </a>
+        <i *ngIf="!isLast" class="ri-arrow-drop-right-fill" aria-hidden="true"></i>
+      </ng-container>
+    </small>
+    <div class="d-lg-none d-block list-group list-group-flush fw-bold">
+      <a
+        *ngIf="breadcrumbItems?.[1]?.link"
+        [routerLink]="breadcrumbItems[1].link"
+        queryParamsHandling="preserve"
+        (click)="onClick(breadcrumbItems[1].label)"
+        class="list-group-item py-3 list-group-item-action">
+        Changer de département
+      </a>
+      <a
+        *ngIf="breadcrumbItems?.[0]?.link"
+        [routerLink]="breadcrumbItems[0].link"
+        queryParamsHandling="preserve"
+        (click)="onClick(breadcrumbItems[0].label)"
+        class="list-group-item py-3 list-group-item-action">
+        Changer de région
+      </a>
+    </div>
   </div>
 </ng-container>

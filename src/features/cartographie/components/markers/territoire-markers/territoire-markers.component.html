@@ -7,7 +7,7 @@
     [class.marker-hover]="hoverId === territoire.code"
     (mouseenter)="highlight.emit(territoire)"
     (mouseleave)="highlight.emit()"
-    (click)="showLieux.emit(territoire)">
+    (click)="showLieux.emit(territoire); this.updateMapIsDragging.emit()">
     <div class="marker-group-bg rounded-circle shadow-sm"></div>
     <div class="marker-group-bg rounded-circle bg-white"></div>
     <div class="marker-group-fg rounded-circle d-flex bg-primary">

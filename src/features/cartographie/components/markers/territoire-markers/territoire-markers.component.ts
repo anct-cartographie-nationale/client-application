@@ -15,6 +15,8 @@ export class TerritoireMarkersComponent {
     TerritoirePresentation | undefined
   >();
 
+  @Output() updateMapIsDragging: EventEmitter<void> = new EventEmitter<void>();
+
   public trackByTerritoireCode(_: number, territoire: TerritoirePresentation) {
     return territoire.code;
   }
