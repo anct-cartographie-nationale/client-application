@@ -28,6 +28,8 @@ export class LieuxMediationNumeriqueDetailsComponent {
 
   @Output() public openOrientationSheetModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
+  @Output() public openImpressionChoiceModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
   @Output() public openErreurFormModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();

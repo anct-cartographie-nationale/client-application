@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Optional, Output } from '@angular/core';
+import { MatomoTracker } from 'ngx-matomo';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,7 +11,13 @@ export class BoutonsActionComponent {
 
   @Input() public priseRdv: string | undefined;
 
-  @Output() public print: EventEmitter<void> = new EventEmitter<void>();
-
   @Output() public sendByEmail: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
+  @Output() public openImpressionChoiceModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
+  public constructor(@Optional() private readonly _matomoTracker?: MatomoTracker) {}
+
+  public onPrintFromActionButton(): void {
+    this._matomoTracker?.trackEvent('fiche détail', 'bouton action', `impression fiche`);
+  }
 }
