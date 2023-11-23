@@ -31,13 +31,6 @@ export class WebinaireComponent {
       inscription_link: 'https://airtable.com/app2MF0d9XxkCwv0p/shrX7zSTk8pOtoKik?mtm_campaign=fromwebsitecarto',
       image: 'webinaire-mise-a-jour.svg',
       replay: 'https://www.youtube.com/watch?v=YJjsMjVPluY'
-    },
-    {
-      titre: 'Permanence visio : posez vos questions et nous y répondons',
-      duration: '45 min - 1 fois par mois',
-      text: `Nous sommes à votre écoute pour répondre à vos questions et vos besoins spécifiques.`,
-      inscription_link: 'https://airtable.com/app2MF0d9XxkCwv0p/shriflITshG3ba1RC?mtm_campaign=fromwebsitecarto',
-      image: 'webinaire-portes-ouvertes.svg'
     }
   ];
 }
