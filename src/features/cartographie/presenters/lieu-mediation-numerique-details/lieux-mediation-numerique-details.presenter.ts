@@ -115,6 +115,26 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
+    'Bus France Services en Charente',
+    {
+      label: 'Bus FS en Charente',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-bus-france-services-en-charente/',
+      detail:
+        'Les horaires et coordonnées de votre France services doivent être actualisés directement depuis l’onglet « Ma structure » de la Plateforme France services. Pour tout autre changement, veuillez-vous rapprocher de votre référent départemental.',
+      logo: 'fs'
+    }
+  ],
+  [
+    'Département de la Charente Maritime',
+    {
+      label: 'Département de la Charente Maritime',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-nouvelle-aquitaine-fournis-par-charente-maritime/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
     'Conseiller Numerique',
     {
       label: 'Conseiller numérique',
@@ -159,6 +179,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     {
       label: 'Dora',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numeriques-en-france-disponibles-dans-le-referentiel-de-loffre-dinsertion-publie-par-data-inclusion/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
+    'Epernay',
+    {
+      label: 'Epernay',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-marne-fournis-par-epernay/',
       detail: "Ces données sont intégrées via l'outil DORA",
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora'
@@ -292,6 +322,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
       detail: "Ces données sont intégrées via l'outil DORA",
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora'
+    }
+  ],
+  [
+    'Mednum BFC',
+    {
+      label: 'Mednum BFC',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-bourgogne-franche-comte-fournis-par-mednum-bfc/',
+      detail: 'Formulaire de la Mednum BFC',
+      update_link: 'https://www.mednum-bfc.fr/maj-lieu/',
+      logo: 'mednum-bfc'
     }
   ],
   [
