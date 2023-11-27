@@ -32,11 +32,11 @@ export class CoordinateursWebComponentLayout implements OnInit {
     DATA_COORDINATEURS_CONFIGURATION.coordinateurs = coordinateursSource;
   }
 
-  @Input() set brandName(name: string) {
+  @Input() set titre(name: string) {
     BRAND_CONFIGURATION.name = name;
   }
 
-  @Input() set brandSousTitre(sousTitre: string) {
+  @Input() set sousTitre(sousTitre: string) {
     BRAND_CONFIGURATION.sousTitre = sousTitre;
   }
 
