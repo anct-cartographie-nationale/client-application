@@ -24,12 +24,6 @@
     &times; {{ getLabelFromValue(publicAccueilli) }}
   </button>
   <button
-    *ngFor="let conditionAcces of filter.conditions_acces"
-    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
-    (click)="resetForm(conditionAcces, 'conditions_acces')">
-    &times; {{ getLabelFromValue(conditionAcces) }}
-  </button>
-  <button
     *ngFor="let modaliteAccompagnement of filter.modalites_accompagnement"
     class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
     (click)="resetForm(modaliteAccompagnement, 'modalites_accompagnement')">

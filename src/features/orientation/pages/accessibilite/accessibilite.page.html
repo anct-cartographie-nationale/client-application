@@ -4,48 +4,14 @@
 <div class="h-100 d-flex pt-5">
   <div class="w-100 my-auto">
     <h1 class="h2 text-center fw-bold mt-sm-5 mt-3">
-      Quel
-      <span class="text-primary">type d'accompagnement</span>
-      recherchez-vous&nbsp;?
+      Recherchez-vous des lieux proposant un
+      <span class="text-primary">accueil adapté</span>
+      à certains publics ?&nbsp;
     </h1>
-    <p class="text-center fw-bold mb-sm-5 mb-4 text-muted">
-      Affinez votre recherche en sélectionnant des critères spécifiques d'accompagnement
-    </p>
+    <p class="text-center fw-bold mb-sm-5 mb-4 text-muted">Sélectionnez un ou plusieurs publics parmi la liste ci-dessous</p>
     <form [formGroup]="orientationLayout.filterForm">
       <fieldset>
-        <legend class="visually-hidden">Participation</legend>
-        <div class="d-flex flex-row mb-3 mt-4">
-          <span class="text-muted h6 fw-bold mb-0 w-auto text-uppercase" aria-hidden="true">Participation</span>
-          <button
-            type="button"
-            class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"
-            (click)="selectedOrientationInformation = orientationInformations['participation']; informationOrientationModal.control.toggle($event)">
-            plus d'infos
-          </button>
-        </div>
-        <div class="bg-light px-3 py-2">
-          <div
-            class="form-check form-check-inline form-chip my-2"
-            *ngFor="let conditionFinancieresOption of conditionAccesOptions; index as i">
-            <input
-              type="checkbox"
-              name="conditions_acces"
-              appCheckboxArray
-              formControlName="conditions_acces"
-              class="form-check-input"
-              [attr.id]="'conditionFinancieresLabelChip' + i"
-              [value]="conditionFinancieresOption.value"
-              (change)="selectParticipation(i)" />
-            <label class="form-check-label bg-white" [attr.for]="'conditionFinancieresLabelChip' + i">
-              <b>{{ conditionFinancieresOption.label }}</b>
-            </label>
-          </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend class="visually-hidden">Accueil adapté</legend>
-        <div class="d-flex flex-row mb-3 mt-4">
-          <span class="text-muted h6 fw-bold mb-0 w-auto text-uppercase" aria-hidden="true">Accueil adapté</span>
+        <div class="d-flex flex-row mb-3 mt-1">
           <button
             type="button"
             class="btn btn-link link-muted-dark p-0 ms-auto fst-italic"

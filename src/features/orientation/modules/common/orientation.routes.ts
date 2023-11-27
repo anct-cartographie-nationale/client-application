@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AccessibilitePage, BesoinPage, DemarrerPage, DisponibilitePage, LocalisationPage } from '../../pages';
+import { BesoinPage, AccessibilitePage, DemarrerPage, DisponibilitePage, LocalisationPage } from '../../pages';
 import { OrientationLayout } from '../../layouts';
 
 export const ROUTES: Routes = [
