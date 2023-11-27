@@ -1,9 +1,11 @@
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import {
-  ASSETS_CONFIGURATION,
-  ASSETS_TOKEN,
+  BRAND_CONFIGURATION,
+  BRAND_TOKEN,
   INITIAL_POSITION_TOKEN,
   POSITION_CONFIGURATION,
+  setTitleAction,
+  setTitleActionProvider,
   ZOOM_LEVEL_CONFIGURATION,
   ZOOM_LEVEL_TOKEN
 } from '../../../../root';
@@ -12,11 +14,12 @@ import { AddressHttp, AddressPresenter, AddressRepository, SEARCHABLE_TOKEN } fr
 import { MarkersPresenter } from '../../../core/presenters';
 import { ConseillersHttp, CoordinateursHttp } from '../../data';
 import { ConseillersRepository, CoordinateursRepository } from '../../reporitories';
+import { Title } from '@angular/platform-browser';
 
 export const coordinateursProviders = [
   {
-    provide: ASSETS_TOKEN,
-    useValue: ASSETS_CONFIGURATION
+    provide: BRAND_TOKEN,
+    useValue: BRAND_CONFIGURATION
   },
   {
     provide: INITIAL_POSITION_TOKEN,
@@ -62,5 +65,6 @@ export const coordinateursProviders = [
     provide: HTTP_INTERCEPTORS,
     useClass: CacheInterceptor,
     multi: true
-  }
+  },
+  setTitleActionProvider(setTitleAction, [BRAND_TOKEN, Title])
 ];
