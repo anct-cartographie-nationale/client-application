@@ -11,6 +11,9 @@
 npm-debug.log
 yarn-error.log
 
+# Project data
+/src/assets/data/lieux-inclusion-numerique.json
+
 # IDEs and editors
 .idea/
 .project
