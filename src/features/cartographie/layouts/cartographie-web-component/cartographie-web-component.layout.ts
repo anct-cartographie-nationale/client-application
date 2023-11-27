@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
+  BRAND_CONFIGURATION,
   DATA_CONFIGURATION,
   FEATURES_TOKEN,
   FeaturesConfiguration,
@@ -27,6 +28,14 @@ export class CartographieWebComponentLayout implements OnInit {
 
   @Input() set source(source: string) {
     DATA_CONFIGURATION.lieuxDeMediationNumerique = source;
+  }
+
+  @Input() set titre(name: string) {
+    BRAND_CONFIGURATION.name = name;
+  }
+
+  @Input() set sousTitre(sousTitre: string) {
+    BRAND_CONFIGURATION.sousTitre = sousTitre;
   }
 
   @Input() set lienOrientation(lienOrientation: string) {
