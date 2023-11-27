@@ -47,7 +47,7 @@
             <i class="ri-compass-3-line" aria-hidden="true"></i>
           </span>
           <span class="orientation-btn-label my-auto text-start">
-            Démarrer une orientation
+            Orienter un bénéficiaire
             <br />
             <i class="small text-muted-dark">Grâce à notre questionnaire en 4 étapes</i>
           </span>
@@ -62,8 +62,7 @@
           class="text-muted text-decoration-none border-bottom border-muted pb-1 m-2"
           [routerLink]="['/', 'cartographie']"
           queryParamsHandling="preserve">
-          Accéder directement à la carte
-          <i class="ri-skip-forward-line" aria-hidden="true"></i>
+          Afficher la carte
         </a>
       </div>
     </ng-container>
@@ -75,11 +74,11 @@
       <div class="my-5">
         <a class="btn btn-primary m-2" [routerLink]="['besoin']" queryParamsHandling="preserve">
           <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
-          Reprendre l'orientation
+          Précédent
         </a>
         <a class="btn btn-secondary m-2" [routerLink]="['besoin']" (click)="orientationLayout.filterForm.reset()">
-          Nouvelle orientation
-          <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+          Orienter un bénéficiaire
+          <i class="ri-compass-3-line" aria-hidden="true"></i>
         </a>
       </div>
     </ng-template>
