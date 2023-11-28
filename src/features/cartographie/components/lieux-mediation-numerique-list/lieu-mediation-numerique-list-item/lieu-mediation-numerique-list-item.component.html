@@ -33,7 +33,7 @@
       </div>
     </a>
     <div
-      class="col-auto text-end z-index-elevated"
+      class="col-auto text-end z-index-over"
       *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone || lieuMediationNumerique.prise_rdv">
       <a
         *ngIf="lieuMediationNumerique.courriel as courriel"
@@ -57,7 +57,7 @@
     </div>
   </div>
   <div class="row g-2 mt-1" *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
-    <div class="col-auto z-index-elevated" *ngFor="let label of labelsNationaux">
+    <div class="col-auto z-index-over" *ngFor="let label of labelsNationaux">
       <button (click)="showLabel.emit(label); showLabelInvokingContext.emit($event)" class="btn btn-link p-0">
         <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + label" />
       </button>

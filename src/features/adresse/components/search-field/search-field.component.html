@@ -15,7 +15,11 @@
       autocomplete="off"
       aria-describedby="search"
       aria-haspopup="true"
+      aria-autocomplete="list"
+      aria-controls="search-result"
+      [attr.aria-activedescendant]="(dropdownPane.expanded$ | async) ? 'search-result-' + dropdownPane.activeIndex : null"
       formControlName="search"
+      role="combobox"
       [attr.aria-describedby]="isNotFound ? 'search-desc-error' : null"
       [attr.aria-expanded]="dropdownPane.expanded$ | async"
       (input)="search.next(searchInput.value); searchInput.value.length <= 2 ? dropdownPane.reduce() : dropdownPane.expand()"
@@ -32,16 +36,19 @@
     <ng-content></ng-content>
   </div>
   <ul
+    id="search-result"
     #dropdownPane="dropdownPane"
     appDropdownPane
     [class.show]="(dropdownPane.expanded$ | async) && suggestions.length > 0"
     (reduced)="onReduced()"
     class="dropdown-menu position-absolute mt-1"
     role="listbox"
-    aria-labelledby="search">
+    aria-labelledby="résultats de la recherche">
     <li
       #results
-      *ngFor="let suggestion of suggestions; index as suggestionIndex; trackBy: trackBySuggestionName; let isLast = last">
+      *ngFor="let suggestion of suggestions; index as suggestionIndex; trackBy: trackBySuggestionName; let isLast = last"
+      id="search-result-{{ suggestionIndex }}"
+      [attr.aria-selected]="dropdownPane.activeIndex === suggestionIndex ? true : null">
       <button
         type="button"
         tabindex="-1"
@@ -49,7 +56,6 @@
         class="dropdown-item"
         [class.border-bottom]="!isLast"
         [class.active]="dropdownPane.activeIndex === suggestionIndex"
-        [attr.aria-current]="dropdownPane.activeIndex === suggestionIndex ? true : null"
         (focusin)="dropdownPane.setIndex(suggestionIndex)"
         (focusout)="dropdownPane.setIndex(-1)"
         (mousedown)="setSuggestion(suggestion); dropdownPane.reduce()">
