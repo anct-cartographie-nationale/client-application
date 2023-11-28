@@ -7,7 +7,7 @@
       [attr.id]="lieuMediationNumerique.id"
       [class.list-group-item-hover]="hoverId === lieuMediationNumerique.id"
       [ngClass]="{ 'bg-muted-light': lieuMediationNumerique.prive }"
-      class="list-group-item py-4 px-sm-4 px-3">
+      class="list-group-item p-0">
       <app-mediation-numerique-list-item
         [lieuMediationNumerique]="lieuMediationNumerique"
         (showLabel)="showLabel.emit($event)"
