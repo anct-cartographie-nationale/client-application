@@ -6,7 +6,9 @@ type WebinairePresentation = {
   text: string;
   image: string;
   inscription_link: string;
-  replay?: string;
+  inscription_text: string;
+  replay_link?: string;
+  replay_text?: string;
 };
 
 @Component({
@@ -21,16 +23,20 @@ export class WebinaireComponent {
       duration: '45 min - 1 fois par mois',
       text: `Consacré à l'utilisation du parcours d'orientation et la navigation sur la carte. `,
       inscription_link: 'https://airtable.com/app2MF0d9XxkCwv0p/shrfwVic55IqzxKfG?mtm_campaign=fromwebsitecarto',
+      inscription_text: 'Webinaire orientation',
       image: 'webinaire-orientation.svg',
-      replay: 'https://www.youtube.com/watch?v=bn1jipMvzoA'
+      replay_link: 'https://www.youtube.com/watch?v=bn1jipMvzoA',
+      replay_text: 'Replay orientation'
     },
     {
       titre: 'Mettez à jour vos données sur la cartographie',
       duration: '45 min - 1 fois par mois',
       text: `Consacré à l'utilisation des outils de mise à jour de données, en particulier l'outil DORA.`,
       inscription_link: 'https://airtable.com/app2MF0d9XxkCwv0p/shrX7zSTk8pOtoKik?mtm_campaign=fromwebsitecarto',
+      inscription_text: 'Webinaire données',
       image: 'webinaire-mise-a-jour.svg',
-      replay: 'https://www.youtube.com/watch?v=YJjsMjVPluY'
+      replay_link: 'https://www.youtube.com/watch?v=YJjsMjVPluY',
+      replay_text: 'Replay données'
     }
   ];
 }

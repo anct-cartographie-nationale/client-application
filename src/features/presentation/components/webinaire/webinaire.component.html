@@ -17,15 +17,15 @@
             href="{{ webinaire.inscription_link }}"
             target="_blank"
             rel="noopener noreferrer">
-            S'inscrire au webinaire
+            <small>{{ webinaire.inscription_text }}</small>
           </a>
           <a
-            *ngIf="webinaire.replay"
+            *ngIf="webinaire.replay_link"
             class="btn btn-primary rounded-0 ms-auto"
-            href="{{ webinaire.replay }}"
+            href="{{ webinaire.replay_link }}"
             target="_blank"
             rel="noopener noreferrer">
-            Replay
+            <small>{{ webinaire.replay_text }}</small>
           </a>
         </div>
       </div>
