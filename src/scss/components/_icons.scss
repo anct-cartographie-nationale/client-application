@@ -490,3 +490,27 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-calendar-event-fill::before {
   content: '\eb24';
 }
+
+.ri-arrow-right-line::before {
+  content: '\ea6c';
+}
+
+.ri-arrow-left-line::before {
+  content: '\ea60';
+}
+
+.ri-user-fill::before {
+  content: '\f25f';
+}
+
+.ri-slideshow-2-fill::before {
+  content: '\f151';
+}
+
+.ri-service-fill::before {
+  content: '\f0e1';
+}
+
+.ri-group-fill::before {
+  content: '\ede2';
+}

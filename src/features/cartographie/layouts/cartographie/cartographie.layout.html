@@ -76,10 +76,9 @@
         [attr.aria-controls]="aideOffcanvas.id"
         [class.active]="aideOffcanvas.expanded$ | async"
         (click)="aideOffcanvas.toggle($event); affinerRechercheOffcanvas.close(); matomoAideButtonTracking()">
-        <i
-          class="ri-2x"
-          [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-circle-line text-primary' : 'ri-question-line'"></i>
+        <i class="me-1" [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-line text-primary' : 'ri-question-line'"></i>
         <span class="visually-hidden">À propos</span>
+        <span class="my-auto">Aide</span>
       </button>
     </div>
   </nav>
@@ -159,7 +158,7 @@
               <i class="ri-calendar-todo-line" aria-hidden="true"></i>
             </span>
             <span class="orientation-btn-label my-auto text-start lh-sm">
-              Webinaires
+              Participez au(x) webinaire(s)
               <br />
               <i class="small text-muted">
                 Mettre à jour ses données, utiliser l'outil d'orientation, nous vous proposons des webinaires pour vous
@@ -252,7 +251,7 @@
       </mgl-map>
       <div class="p-3 d-flex d-lg-none bg-primary align-items-center">
         <button class="btn btn-link link-light text-decoration-none px-0" (click)="toggleMapForSmallDevices()">
-          <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
+          <i class="ri-arrow-left-line" aria-hidden="true"></i>
           Afficher la liste
         </button>
         <i class="ms-auto small text-white" *ngIf="(resultsCount$ | async) as resultCount" [ngPlural]="resultCount">

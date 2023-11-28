@@ -412,7 +412,7 @@ const modaliteAccompagnementMap: Map<ModaliteAccompagnement, ModaliteAccompagnem
     ModaliteAccompagnement.Seul,
     {
       label: 'Seul',
-      icon: 'ri-user-3-line',
+      icon: 'ri-user-fill',
       description: "j'ai accès à du materiel et une connexion"
     }
   ],
@@ -420,7 +420,7 @@ const modaliteAccompagnementMap: Map<ModaliteAccompagnement, ModaliteAccompagnem
     ModaliteAccompagnement.AvecDeLAide,
     {
       label: "Avec de l'aide",
-      icon: 'ri-group-line',
+      icon: 'ri-group-fill',
       description: "je suis accompagné dans l'usage du numérique"
     }
   ],
@@ -428,7 +428,7 @@ const modaliteAccompagnementMap: Map<ModaliteAccompagnement, ModaliteAccompagnem
     ModaliteAccompagnement.AMaPlace,
     {
       label: 'À ma place',
-      icon: 'ri-service-line',
+      icon: 'ri-service-fill',
       description: 'une personne fait les démarches à ma place'
     }
   ],
