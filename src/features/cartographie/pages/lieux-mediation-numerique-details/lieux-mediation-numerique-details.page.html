@@ -41,9 +41,17 @@
         (click)="onCloseNoLieuFound()"></button>
     </div>
     <div class="text-center p-3">
-      <img *ngIf="brandConfiguration.logo; else brandLogo" class="mb-5 img-fluid" [src]="brandConfiguration.logo" alt="" />
+      <img
+        *ngIf="brandConfiguration.logo; else brandLogo"
+        class="mb-5 img-fluid"
+        [src]="brandConfiguration.logo"
+        alt="Logo principal" />
       <ng-template #brandLogo>
-        <img *ngIf="brandConfiguration.logoAvecTexte" class="mb-5 w-50" [src]="brandConfiguration.logoAvecTexte" alt="" />
+        <img
+          *ngIf="brandConfiguration.logoAvecTexte"
+          class="mb-5 w-50"
+          [src]="brandConfiguration.logoAvecTexte"
+          alt="Logo secondaire" />
       </ng-template>
       <h3 class="mb-5 fw-bold">
         Ce lieu

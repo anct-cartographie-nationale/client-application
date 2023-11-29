@@ -3,7 +3,10 @@
     <div class="card h-100 rounded-0" style="min-height: 45vh">
       <div class="row g-0 h-100">
         <div class="col d-flex justify-content-center align-items-center p-4" [ngClass]="integrateur.bgPrimary">
-          <img src="/assets/img/presentation/{{ integrateur.bgImage }}" class="w-100" alt="" />
+          <img
+            src="/assets/img/presentation/{{ integrateur.bgImage }}"
+            class="w-100"
+            alt="'Integrateur ' + integrateur.titre" />
         </div>
         <div class="col text-start p-4">
           <span class="badge card-badge-title ms-3 my-2">{{ integrateur.titre }}</span>
