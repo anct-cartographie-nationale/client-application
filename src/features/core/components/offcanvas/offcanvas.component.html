@@ -11,8 +11,7 @@
   [attr.aria-labelledby]="useHeader ? id + '-label' : null"
   [attr.aria-label]="useHeader ? null : heading"
   [attr.aria-modal]="(expanded$ | async) ? 'true' : null"
-  [attr.role]="(expanded$ | async) ? 'dialog' : null"
-  style="max-width: 500px">
+  [attr.role]="(expanded$ | async) ? 'dialog' : null">
   <div [class.offcanvas-header]="useHeader">
     <h2 *ngIf="useHeader" class="h5" [id]="id + '-label'">{{ heading }}</h2>
     <button
