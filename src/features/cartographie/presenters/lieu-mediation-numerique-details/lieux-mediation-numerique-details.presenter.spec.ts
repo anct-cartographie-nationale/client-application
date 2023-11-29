@@ -115,8 +115,8 @@ describe('lieux médiation numérique details presenter', (): void => {
       labels_nationaux: [LabelNational.FranceServices, LabelNational.APTIC, LabelNational.PointRelaisCAF],
       labels_autres: ['SudLabs', 'Nièvre médiation numérique'],
       modalites_accompagnement: [
-        { label: 'Seul', icon: 'ri-user-3-line', description: "j'ai accès à du materiel et une connexion" },
-        { label: "Avec de l'aide", icon: 'ri-group-line', description: "je suis accompagné dans l'usage du numérique" }
+        { label: 'Seul', icon: 'ri-user-fill', description: "j'ai accès à du materiel et une connexion" },
+        { label: "Avec de l'aide", icon: 'ri-group-fill', description: "je suis accompagné dans l'usage du numérique" }
       ],
       accessibilite: Url(
         'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
