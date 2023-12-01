@@ -14,6 +14,8 @@ export class LocationBreadcrumbComponent implements OnChanges {
 
   @Input() public zoom: number = 0;
 
+  @Input() public mapIsDragging: boolean = false;
+
   @Output() public showLieux: EventEmitter<RegionPresentation | undefined> = new EventEmitter<RegionPresentation | undefined>();
 
   @Output() public region: EventEmitter<string | undefined> = new EventEmitter<string | undefined>();

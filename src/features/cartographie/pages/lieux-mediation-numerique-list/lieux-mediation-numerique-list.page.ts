@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { combineLatest, combineLatestWith, merge, Observable, of, startWith, Subject } from 'rxjs';
+import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import { combineLatest, combineLatestWith, merge, Observable, startWith, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LabelNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
@@ -27,9 +27,9 @@ import {
   toLocalisationFromFilterFormPresentation,
   FilterFormPresentation,
   createFormGroupFromFilterPresentation,
-  WithLieuxCount
+  WithLieuxCount,
+  LieuMediationNumeriquePresentation
 } from '../../../core/presenters';
-import { NO_LOCALISATION } from '../../../core/models';
 import { CartographieLayout } from '../../layouts';
 import {
   inLieuxZoomLevel,
@@ -42,8 +42,8 @@ import {
 import {
   findLieuToFocus,
   toHub,
-  toSortedLieux,
-  toLieuxFilteredByDepartement
+  toLieuxFilteredByDepartement,
+  toSortedLieux
 } from './lieux-mediation-numerique-list.presentation';
 
 @Component({
@@ -78,10 +78,8 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
 
   private _isInitialZoomDone: boolean = false;
 
-  private boundingBox$(): Observable<[Localisation, Localisation]> {
-    return this.route.snapshot.paramMap.get('nomDepartement')
-      ? of([NO_LOCALISATION, NO_LOCALISATION])
-      : this.markersPresenter.boundingBox$;
+  private getRouteParam(routeParam: string): string {
+    return this.route.children[0]?.children[0]?.snapshot.paramMap.get(routeParam) ?? '';
   }
 
   public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueListItemPresentation[]> = combineLatest([
@@ -89,11 +87,14 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
       this._localisation$,
       this.route.queryParams.pipe(map(toFilterFormPresentationFromQuery)),
       new Date(),
-      this.boundingBox$()
+      this.markersPresenter.boundingBox$,
+      this._cartographieLayout.currentZoom$
     ),
     this.route.paramMap
   ]).pipe(
-    map(toLieuxFilteredByDepartement),
+    map(([lieux]: [LieuMediationNumeriquePresentation[], ParamMap]): LieuMediationNumeriquePresentation[] =>
+      toLieuxFilteredByDepartement(lieux, this.getRouteParam('nomDepartement'))
+    ),
     map(toSortedLieux),
     map(toLieuxMediationNumeriqueListItemsPresentation(new Date()))
   );

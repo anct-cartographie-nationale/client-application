@@ -157,6 +157,12 @@ export class CartographieLayout {
 
   public currentRegion?: string;
 
+  public mapIsDragging: boolean = false;
+
+  public updateDragging(): void {
+    this.mapIsDragging = false;
+  }
+
   public constructor(
     private readonly _lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter,
     public readonly router: Router,
@@ -202,6 +208,17 @@ export class CartographieLayout {
   }
 
   public onMapViewUpdated(value: MapLibreEvent<MouseEvent | TouchEvent | WheelEvent | undefined>): void {
+    const localisation: Localisation = Localisation({
+      latitude: value.target.getCenter().lat,
+      longitude: value.target.getCenter().lng
+    });
+    this.markersPresenter.center(localisation, value.target.getZoom());
+    this.updateMarkers(value.target.getBounds());
+    this.navigateToPageMatchingZoomLevel(value.target.getZoom(), localisation);
+  }
+
+  public onMapViewUpdatedDragging(value: MapLibreEvent<MouseEvent | TouchEvent | WheelEvent | undefined>): void {
+    this.mapIsDragging = true;
     const localisation: Localisation = Localisation({
       latitude: value.target.getCenter().lat,
       longitude: value.target.getCenter().lng

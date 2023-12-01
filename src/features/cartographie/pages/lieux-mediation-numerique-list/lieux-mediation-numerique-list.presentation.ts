@@ -50,11 +50,8 @@ const filteredByDepartementIfExist = (
     ? lieux.filter((lieu: LieuMediationNumeriquePresentation): boolean => toDepartement(lieu)?.code === departement.code)
     : lieux;
 
-export const toLieuxFilteredByDepartement = ([lieux, paramMap]: [
-  LieuMediationNumeriquePresentation[],
-  ParamMap
-]): LieuMediationNumeriquePresentation[] =>
-  filteredByDepartementIfExist(departementFromNom(paramMap.get('nomDepartement') ?? ''), lieux);
+export const toLieuxFilteredByDepartement = (lieux: LieuMediationNumeriquePresentation[], nomDepartement: string) =>
+  filteredByDepartementIfExist(departementFromNom(nomDepartement), lieux);
 
 export const toHub = (region: RegionPresentation): HubPresentation => ({
   nom: region.hub?.nom,
