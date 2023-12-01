@@ -7,6 +7,7 @@
             *ngIf="breadcrumbItem.link[0].startsWith('http'); else routerLink"
             [href]="breadcrumbItem.link[0]"
             target="_blank"
+            title="{{ breadcrumbItem.label }} (nouvel onglet)"
             rel="noopener noreferrer"
             class="text-body opacity-75">
             {{ breadcrumbItem.label }}
