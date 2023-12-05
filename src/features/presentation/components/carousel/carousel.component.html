@@ -27,7 +27,7 @@
       <div class="col-xl-6 col-9 my-5" @carouselAnimation>
         <div class="row">
           <div class="col-md-6 my-auto d-flex justify-content-end align-items-center">
-            <img src="{{ slides.imageUrl }}" class="img-fluid" alt="'Slide ' + slides.titre" width="70%" />
+            <img src="{{ slides.imageUrl }}" class="img-fluid" alt="" width="70%" />
           </div>
           <div class="col-md-6 my-auto" *ngIf="slides.titre !== 'Standardisation'">
             <h3 class="h5 text-secondary fw-bold">{{ slides.titre }}</h3>
@@ -39,8 +39,7 @@
               href="https://dora.fabrique.social.gouv.fr"
               target="_blank"
               rel="noopener noreferrer">
-              <span class="visually-hidden">Accéder à DORA</span>
-              <img class="my-3" height="100px" src="/assets/img/presentation/dora-logo.svg" alt="Logo Dora" />
+              <img class="my-3" height="100px" src="/assets/img/presentation/dora-logo.svg" alt="Accéder à DORA" />
             </a>
             <button
               *ngIf="slides.titre === 'Orientation'"

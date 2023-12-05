@@ -8,14 +8,14 @@
       [src]="brandConfiguration.logo"
       class="my-3"
       style="max-width: 100%; max-height: 100px"
-      alt="Logo principal" />
+      alt="" />
     <ng-template #brandLogo>
       <img
         *ngIf="brandConfiguration.logoAvecTexte"
         [src]="brandConfiguration.logoAvecTexte"
         class="my-5"
         style="max-width: 100%; max-height: 100px"
-        alt="Logo secondaire" />
+        alt="" />
     </ng-template>
     <ng-container *ngIf="!hasActiveFilter; else: restart">
       <h1 class="h2 fw-bold">

@@ -22,9 +22,7 @@
           [class.active]="(coordinateurSelected$ | async) === coordinateur.id">
           <div class="row">
             <div style="width: 38px" class="col-auto p-0 m-auto text-center">
-              <img
-                [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.perimetre + '.svg'"
-                alt="Image Coordinateur principal" />
+              <img [src]="assetsConfiguration.path + '/img/coordinateurs/' + coordinateur.perimetre + '.svg'" alt="" />
             </div>
             <div class="col">
               <b class="text-primary">
