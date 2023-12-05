@@ -23,7 +23,7 @@ export class IntegrateursComponent {
       sousTitre: 'Cartographie Nationale',
       text: `Nous sommes notre premier intégrateur.`,
       link: 'https://cartographie.societenumerique.gouv.fr/cartographie',
-      linkTitre: 'Consulter la cartographie',
+      linkTitre: 'Consulter notre cartographie',
       bgImage: 'france-et-outremer-map.svg',
       bgPrimary: 'bg-carto-nationale-cnfs'
     },
@@ -32,7 +32,7 @@ export class IntegrateursComponent {
       sousTitre: 'Mednum Antilles',
       text: `Cartographie des lieux d'inclusion numérique aux Antilles.`,
       link: 'http://anct-carto-client-feature-hub-antilles-default-view.s3-website.eu-west-3.amazonaws.com/orientation',
-      linkTitre: 'Consulter leur cartographie',
+      linkTitre: 'Cartographie de la Mednum Antilles',
       bgImage: 'antille-guyane-map.svg',
       bgPrimary: 'bg-mednum-antilles'
     },
@@ -41,7 +41,7 @@ export class IntegrateursComponent {
       sousTitre: 'Conseiller Numérique',
       text: `Cartographie recensant uniquement les conseillers numériques et leurs lieux de permanence.`,
       link: 'https://www.conseiller-numerique.gouv.fr/carte',
-      linkTitre: 'Consulter leur cartographie',
+      linkTitre: 'Cartographie de Conseiller Numérique',
       bgImage: 'france-et-outremer-map.svg',
       bgPrimary: 'bg-carto-nationale-cnfs'
     },
@@ -50,7 +50,7 @@ export class IntegrateursComponent {
       sousTitre: 'Numi',
       text: `Cartographie des lieux d'inclusion numérique en Normandie.`,
       link: 'https://ledome.info/ressources/numi/',
-      linkTitre: 'Consulter leur cartographie',
+      linkTitre: 'Cartographie de Numi',
       bgImage: 'normandie-map.svg',
       bgPrimary: 'bg-numi'
     }
