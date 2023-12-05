@@ -141,16 +141,12 @@
       <app-source-donnees></app-source-donnees>
     </div>
   </div>
-  <span class="d-flex ms-3 my-1">
-    <a
-      class="nav-link me-1 text-primary"
-      href="https://airtable.com/app2MF0d9XxkCwv0p/shrX7zSTk8pOtoKik?mtm_campaign=fromwebsitecarto"
-      target="_blank"
-      rel="noopener noreferrer">
-      <span role="img" class="ri-calendar-todo-line me-2" aria-hidden="true"></span>
-      Participer au webinaire "Mettre à jour ses données"
-    </a>
-  </span>
+  <div class="row bg-light py-2">
+    <div class="col-6"></div>
+    <div class="col bg-secondary py-3 me-4">
+      <app-webinaire></app-webinaire>
+    </div>
+  </div>
   <div class="bg-primary p-2">
     <app-bandeau-erreur
       (openImpressionChoiceModal)="impressionChoiceModal.control.toggle($event)"
