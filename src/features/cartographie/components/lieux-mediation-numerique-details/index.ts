@@ -17,3 +17,4 @@ export * from './erreur-form-modal/erreur-form-modal.component';
 export * from './impression-choice-modal/impression-choice-modal.component';
 export * from './source-donnees/source-donnees.component';
 export * from './webinaire/webinaire.component';
+export * from './source-footer/source-footer.component';

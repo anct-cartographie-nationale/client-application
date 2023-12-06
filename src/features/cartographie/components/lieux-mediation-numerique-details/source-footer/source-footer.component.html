@@ -1,0 +1,38 @@
+<div class="">
+  <h2 class="h5 text-muted text-uppercase">Vous travaillez dans cette structure ?</h2>
+  <p>
+    Mettez vous même les données de votre
+    <br />
+    structure à jour
+  </p>
+  <div class="row flex-column" *ngIf="sources">
+    <div *ngFor="let source of sources" class="col my-2">
+      <div class="bg-secondary py-3 d-flex align-items-center">
+        <div class="d-flex align-items-center ms-2">
+          <span class="circle-wrapper-light">
+            <img
+              *ngIf="source.logo as logo"
+              class="img-fluid p-2"
+              [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
+              alt="{{ source.label }}" />
+          </span>
+          <div class="flex-column mt-2 ms-2">
+            <span>
+              <a
+                role="button"
+                [attr.href]="source?.update_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-decoration-none mt-1">
+                <p class="mb-0 text-dark fw-bold">{{ source.label }}</p>
+              </a>
+            </span>
+            <span class="fst-italic me-2">
+              <small>Dernière mise à jour {{ date | date : 'dd/MM/y' }}</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

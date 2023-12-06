@@ -7,7 +7,6 @@ import { MatomoTracker } from 'ngx-matomo';
   templateUrl: './bandeau-erreur.component.html'
 })
 export class BandeauErreurComponent {
-  @Output() public openErreurFormModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   @Output() public closeDetails: EventEmitter<void> = new EventEmitter<void>();
   @Output() public openImpressionChoiceModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
