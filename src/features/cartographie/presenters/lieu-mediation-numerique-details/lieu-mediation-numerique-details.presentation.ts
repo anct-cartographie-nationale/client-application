@@ -43,7 +43,7 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   prise_rdv?: string;
   aidants?: Aidant[];
   prive?: boolean;
-  source?: SourcePresentation;
+  source?: SourcePresentation[];
 };
 
 export type ModaliteAccompagnementPresentation = { label: string; icon: string; description: string };

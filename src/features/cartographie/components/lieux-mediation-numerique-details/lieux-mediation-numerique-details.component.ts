@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { OrientationSheetForm, SendLieuByEmail } from '../../models';
@@ -11,6 +11,8 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './lieux-mediation-numerique-details.component.html'
 })
 export class LieuxMediationNumeriqueDetailsComponent {
+  @ViewChild('source') sourceRef!: ElementRef;
+
   @Input() public lieuMediationNumerique!: LieuMediationNumeriqueDetailsPresentation;
 
   @Input() public filters?: FilterPresentation;
@@ -35,4 +37,8 @@ export class LieuxMediationNumeriqueDetailsComponent {
   @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
 
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+
+  onScrollToSource = (): void => {
+    this.sourceRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'start', inline: 'start' });
+  };
 }
