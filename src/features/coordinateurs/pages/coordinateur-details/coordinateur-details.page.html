@@ -60,8 +60,7 @@
                 </span>
               </span>
             </div>
-            {{ coordinateur.adresse }}
-            <br />
+            <address>{{ coordinateur.adresse }}</address>
           </div>
           <div class="col-auto">
             <a
@@ -119,8 +118,7 @@
                 <i>({{ conseiller.distance | distance }})</i>
               </small>
               <ng-template #nonCoordonne>
-                <span class="fw-bold">Non coordonné</span>
-                <br />
+                <span class="d-block fw-bold">Non coordonné</span>
                 <i class="small">à {{ conseiller.distance | distance }} de {{ coordinateur.nom }}</i>
               </ng-template>
             </div>

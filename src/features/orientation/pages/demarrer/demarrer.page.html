@@ -19,19 +19,16 @@
     </ng-template>
     <ng-container *ngIf="!hasActiveFilter; else: restart">
       <h1 class="h2 fw-bold">
-        Bienvenue sur
-        <br />
+        <span class="d-block">Bienvenue sur</span>
         <span class="text-primary">la Cartographie {{ brandConfiguration.name }}</span>
         <ng-container *ngIf="brandConfiguration.sousTitre">
-          <br />
-          <span class="h5 text-primary">{{ brandConfiguration.sousTitre }}</span>
+          <span class="h5 text-primary d-block">{{ brandConfiguration.sousTitre }}</span>
         </ng-container>
       </h1>
       <div class="my-5 mx-lg-5 mx-2 fs-5">
         <p>
-          Vous rencontrez un problème lié au numérique&nbsp;?
-          <br />
-          Vous souhaitez accompagner une personne en difficulté avec le numérique&nbsp;?
+          <span class="d-block">Vous rencontrez un problème lié au numérique&nbsp;?</span>
+          <span class="d-block">Vous souhaitez accompagner une personne en difficulté avec le numérique&nbsp;?</span>
         </p>
         <p>
           Vous pourrez facilement filtrer les lieux en fonction de votre besoin ou de ceux du bénéficiaire
@@ -47,8 +44,7 @@
             <span role="img" class="ri-compass-3-line" aria-hidden="true"></span>
           </span>
           <span class="orientation-btn-label my-auto text-start">
-            Orienter un bénéficiaire
-            <br />
+            <span class="d-block">Orienter un bénéficiaire</span>
             <i class="small text-muted-dark">Grâce à notre questionnaire en 4 étapes</i>
           </span>
           <span class="ri-2x text-muted ms-auto me-3 end-0">

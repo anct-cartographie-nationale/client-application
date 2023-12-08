@@ -9,8 +9,7 @@
                 <p class="text-muted">Patientez quelques instants</p>
                 <h3 class="card-title text-primary">
                   Nous recherchons les lieux
-                  <br />
-                  correspondant à votre recherche
+                  <span class="d-block">correspondant à votre recherche</span>
                 </h3>
               </ng-container>
               <ng-template #welcome>
@@ -65,8 +64,7 @@
             aria-hidden="true"></i>
           <span class="my-auto" style="line-height: 0.75rem">
             <small class="lh-sm fst-italic">{{ currentDepartement ?? currentRegion ?? 'France' }}</small>
-            <br />
-            <span>Affiner ma recherche</span>
+            <span class="d-block">Affiner ma recherche</span>
           </span>
         </span>
       </button>
@@ -76,7 +74,7 @@
         [attr.aria-controls]="aideOffcanvas.id"
         [class.active]="aideOffcanvas.expanded$ | async"
         (click)="aideOffcanvas.toggle($event); affinerRechercheOffcanvas.close(); matomoAideButtonTracking()">
-        <i class="me-1" [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-line text-primary' : 'ri-question-line'"></i>
+        <span role="img class="me-1" [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-line text-primary' : 'ri-question-line'" aria-hidden="true"></span>
         <span class="visually-hidden">À propos</span>
         <span class="my-auto">Aide</span>
       </button>
@@ -162,8 +160,7 @@
             </span>
             <span class="orientation-btn-label my-auto text-start lh-sm">
               Participez au(x) webinaire(s)
-              <br />
-              <span role="img" class="small text-muted">
+              <span class="small text-muted d-block fst-italic">
                 Mettre à jour ses données, utiliser l'outil d'orientation, nous vous proposons des webinaires pour vous
                 accompagner dans l'utilisation de la cartographie
               </span>
@@ -180,8 +177,7 @@
             </span>
             <span class="orientation-btn-label my-auto text-start lh-sm">
               La Cartographie nationale sur la Base
-              <br />
-              <span role="img" class="small text-muted">
+              <span class="small text-muted d-block fst-italic">
                 Comment enregistrer vos données sur la cartographie ? Comment orienter un bénéficiaire ? Les réponses à vos
                 questions sont ici.
               </span>

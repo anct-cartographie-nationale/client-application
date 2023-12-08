@@ -3,8 +3,7 @@
     <img class="mb-4" [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + hub.nom + '.png'" [alt]="'Logo' + hub.nom" />
     <h3 class="h4 fw-bold">
       HUB d'inclusion numérique
-      <br />
-      <span class="text-primary">{{ hub.region }}</span>
+      <span class="text-primary d-block">{{ hub.region }}</span>
     </h3>
     <div class="mt-5 mb-4">
       <span *ngFor="let departement of hub.departements; last as isLast" class="d-inline-block">

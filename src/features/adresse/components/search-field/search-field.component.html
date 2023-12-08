@@ -65,8 +65,7 @@
           <ng-container *ngSwitchCase="'conseiller'">Consiller Numérique</ng-container>
           <ng-container *ngSwitchDefault>Adresse</ng-container>
         </i>
-        <br />
-        <span class="d-inline-flex">
+        <span class="d-flex">
           <span
             role="img"
             class="text-primary ri-2x me-2 ri-focus-3-line"
@@ -79,8 +78,7 @@
             <ng-container *ngFor="let part of suggestion.label | highlight : searchInput.value">
               <span [ngClass]="{ 'fw-bold': part.matchString }">{{ part.value }}</span>
             </ng-container>
-            <br />
-            <span class="text-muted">
+            <span class="text-muted d-block">
               <ng-container *ngFor="let part of suggestion.context | highlight : searchInput.value">
                 <span [ngClass]="{ 'fw-bold': part.matchString }">{{ part.value }}</span>
               </ng-container>

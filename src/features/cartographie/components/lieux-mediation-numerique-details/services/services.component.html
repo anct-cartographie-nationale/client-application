@@ -12,8 +12,7 @@
 <ng-template #noServices>Services inconnus</ng-template>
 
 <div *ngIf="services" class="d-none d-print-block">
-  <small class="fw-bold text-muted">Services</small>
-  <br />
+  <div class="fw-bold text-muted small">Services</div>
   <div *ngIf="services.length > 0; else noServices">
     <span class="badge rounded-pill text-bg-light py-1 fw-normal" *ngFor="let service of services">{{ service }}</span>
   </div>

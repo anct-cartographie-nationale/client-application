@@ -55,8 +55,7 @@
           <div class="d-flex">
             <img class="me-2" [src]="assetsConfiguration.path + '/img/coordinateurs/CnFS.svg'" alt="" />
             <div class="small">
-              <b>{{ conseiller.lieuActivitePrincipal.nom }}</b>
-              <br />
+              <b class="d-block">{{ conseiller.lieuActivitePrincipal.nom }}</b>
               <span class="text-muted">{{ conseiller.lieuActivitePrincipal.adresse }}</span>
             </div>
           </div>
@@ -65,8 +64,8 @@
       <div class="mt-auto">
         <div class="text-muted mb-1">STRUCTURE PORTEUSE</div>
         <div class="small">
-          <b>{{ conseiller.structurePorteuse.nom }}</b>
-          <br />
+          <b class="d-block">{{ conseiller.structurePorteuse.nom }}</b>
+          >
           {{ conseiller.structurePorteuse.adresse }}
         </div>
       </div>

@@ -17,8 +17,7 @@
       queryParamsHandling="merge"
       [queryParams]="{ service: serviceItem.value }"
       (click)="selectServiceValue.emit(serviceItem.value)">
-      <span class="orientation-btn-label">{{ serviceItem.label }}</span>
-      <br />
+      <span class="orientation-btn-label d-block">{{ serviceItem.label }}</span>
       <i class="small text-muted-dark">{{ serviceItem.description }}</i>
     </a>
   </h3>
