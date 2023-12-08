@@ -20,7 +20,10 @@
             Dernière mise à jour il y a plus d'un an
           </span>
           <ng-template #updateDate>
-            <span class="mt-1 fst-italic me-2">Mise à jour le {{ date | date : 'dd/MM/y' }}</span>
+            <span class="mt-1 fst-italic me-2">
+              Mise à jour le
+              <time>{{ date | date : 'dd/MM/y' }}</time>
+            </span>
           </ng-template>
         </ng-container>
         <div class="d-flex">

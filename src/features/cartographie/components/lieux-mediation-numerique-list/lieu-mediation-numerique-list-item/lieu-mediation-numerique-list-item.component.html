@@ -74,7 +74,8 @@
       <small
         *ngIf="lieuMediationNumerique.date_maj && dateIsValide(lieuMediationNumerique.date_maj)"
         class="text-muted fst-italic">
-        Mise à jour le {{ lieuMediationNumerique.date_maj | date : 'dd/MM/y' }}
+        Mise à jour le
+        <time>{{ lieuMediationNumerique.date_maj | date : 'dd/MM/y' }}</time>
       </small>
     </div>
   </div>
