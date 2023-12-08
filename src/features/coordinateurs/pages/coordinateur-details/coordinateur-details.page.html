@@ -78,8 +78,8 @@
               class="text-decoration-none d-block mb-2"
               (click)="$event.stopPropagation()">
               <span role="img" class="me-2 ri-phone-line" aria-hidden="true"></span>
-              <span aria-hidden="true">{{ coordinateur.telephone | phone }}</span>
-              <span class="visually-hidden">Contacter par téléphone</span>
+              <span class="visually-hidden">Contacter par téléphone :</span>
+              {{ coordinateur.telephone | phone }}
             </a>
           </div>
         </div>

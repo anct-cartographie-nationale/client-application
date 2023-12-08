@@ -46,9 +46,9 @@
         *ngIf="lieuMediationNumerique.telephone as telephone"
         href="tel://{{ telephone }}"
         class="text-decoration-none text-muted">
+        <span class="visually-hidden">Contacter par téléphone :</span>
+        {{ telephone | phone }}
         <span role="img" class="ms-2 ri-phone-line" aria-hidden="true"></span>
-        <span aria-hidden="true">{{ telephone | phone }}</span>
-        <span class="visually-hidden">Contacter par téléphone</span>
       </a>
       <div class="text-primary" *ngIf="lieuMediationNumerique.prise_rdv">
         RDV disponible

@@ -29,8 +29,8 @@
       class="text-decoration-none d-block text-muted"
       (click)="$event.stopPropagation()">
       <span role="img" class="me-2 ri-phone-line" aria-hidden="true"></span>
-      <span aria-hidden="true">{{ telephone | phone }}</span>
-      <span class="visually-hidden">Contacter par téléphone</span>
+      <span class="visually-hidden">Contacter par téléphone :</span>
+      {{ telephone | phone }}
     </a>
   </div>
   <div class="mt-2">
