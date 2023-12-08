@@ -8,16 +8,14 @@
             class="col-lg col-12 d-flex flex-column flex-grow-1 overflow-auto"
             appScroll
             (reachEnd)="hideArrow = $event">
-            <ng-container *ngIf="this.router.url !== '/orientation'">
-              <nav
-                aria-label="étapes de l'orientation"
-                *ngIf="(filterPresentation$ | async) as filter"
-                style="height: 0"
-                class="sticky-lg-top nav-underline">
-                <app-nav class="d-sm-block d-none pt-3 bg-white" [filter]="filter"></app-nav>
-                <app-nav class="d-sm-none pt-3 d-block" [filter]="filter" size="sm"></app-nav>
-              </nav>
-            </ng-container>
+            <nav
+              *ngIf="filterPresentation$ | async as filter"
+              aria-label="étapes de l'orientation"
+              style="height: 0"
+              class="sticky-lg-top nav-underline">
+              <app-nav class="d-sm-block d-none pt-3 bg-white" [filter]="filter"></app-nav>
+              <app-nav class="d-sm-none pt-3 d-block" [filter]="filter" size="sm"></app-nav>
+            </nav>
             <main id="content" class="px-3 flex-grow-1" [@routeAnimations]="getRouteAnimationData()">
               <router-outlet></router-outlet>
             </main>
