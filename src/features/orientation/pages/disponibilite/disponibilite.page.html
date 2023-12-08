@@ -15,16 +15,16 @@
       <div class="accordion" id="accordionDisponibilite">
         <div class="accordion-item mb-3">
           <div class="accordion-header" id="headingDatePrecise">
-            <button
+            <div
               class="orientation-btn bg-light mb-3 px-lg-3 px-2 py-0 rounded-0 d-flex position-relative w-100"
               [class.bg-white]="(collapseDatePrecise.isCollapsed$ | async) === false"
               [attr.aria-expanded]="collapseDatePrecise.isExpanded$ | async">
-              <span class="ri-circled bg-primary text-light fw-normal me-3 my-auto d-sm-block d-none">
+              <span class="ri-circled bg-primary text-light text-center fw-normal me-3 my-auto d-sm-block d-none">
                 <span role="img" class="ri-calendar-event-fill" aria-hidden="true"></span>
               </span>
               <h2 class="orientation-btn-label my-auto text-start">
                 <button
-                  class="btn btn-link text-body text-decoration-none stretched-link fw-bold"
+                  class="btn btn-link text-body text-decoration-none stretched-link fw-bold p-0"
                   #collapseDatePreciseControl
                   aria-controls="collapseDatePrecise"
                   type="button"
@@ -51,7 +51,7 @@
                     aria-hidden="true"></span>
                 </button>
               </span>
-            </button>
+            </div>
           </div>
           <app-collapse
             #collapseDatePrecise
