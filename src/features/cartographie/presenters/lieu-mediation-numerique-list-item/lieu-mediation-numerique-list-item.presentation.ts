@@ -13,7 +13,10 @@ export type LieuMediationNumeriqueListItemPresentationConditionsAcces = {
   isFree: boolean;
 };
 
-export type LieuMediationNumeriqueListItemPresentationLabelNational = LabelNational.CNFS | LabelNational.FranceServices;
+export type LieuMediationNumeriqueListItemPresentationLabelNational =
+  | LabelNational.CNFS
+  | LabelNational.FranceServices
+  | LabelNational.AidantsConnect;
 
 export type LieuMediationNumeriqueListItemPresentation = {
   id: string;
