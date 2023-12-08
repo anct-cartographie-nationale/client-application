@@ -8,12 +8,13 @@
   [class.hiding]="hiding$ | async"
   tabindex="-1"
   [id]="id"
-  [attr.aria-labelledby]="id + '-label'"
+  [attr.aria-labelledby]="useHeader ? id + '-label' : null"
+  [attr.aria-label]="useHeader ? null : heading"
   [attr.aria-modal]="(expanded$ | async) ? 'true' : null"
   [attr.role]="(expanded$ | async) ? 'dialog' : null"
   style="max-width: 500px">
   <div [class.offcanvas-header]="useHeader">
-    <h2 class="h5" [class.visually-hidden]="!useHeader" [id]="id + '-label'">{{ heading }}</h2>
+    <h2 *ngIf="useHeader" class="h5" [id]="id + '-label'">{{ heading }}</h2>
     <button
       *ngIf="useHeader && useCloseButton"
       type="button"
