@@ -7,10 +7,11 @@
   <div class="text-center p-2 border-bottom border-3 text-wrap border-primary lh-sm fs-6">
     <div class="bg-light p-2 h-100 d-flex flex-column">
       <div class="mb-1">
-        <i
+        <span
+          role="img"
           class="ri-account-circle-fill ri-lg text-primary"
           [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"
-          aria-hidden="true"></i>
+          aria-hidden="true"></span>
         {{ conseiller.nom }}
       </div>
       <div class="flex-grow-1">

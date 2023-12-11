@@ -193,15 +193,15 @@
         </div>
         <div *ngIf="telephone || courriel || siteWeb?.length" class="p-3 text-muted-dark">
           <div *ngIf="telephone">
-            <i class="ri-phone-line" aria-hidden="true"></i>
+            <span role="img" class="ri-phone-line" aria-hidden="true"></span>
             {{ telephone }}
           </div>
           <div *ngIf="courriel">
-            <i class="ri-mail-line" aria-hidden="true"></i>
+            <span role="img" class="ri-mail-line" aria-hidden="true"></span>
             <span class="text-break">{{ courriel }}</span>
           </div>
           <div *ngIf="siteWeb">
-            <i class="ri-external-link-line" aria-hidden="true"></i>
+            <span role="img" class="ri-external-link-line" aria-hidden="true"></span>
             <span class="text-break">{{ siteWeb[0] }}</span>
           </div>
         </div>
@@ -243,26 +243,26 @@
     <ng-container *ngIf="printOrientationSheetStep === 'usager'">
       <button type="submit" form="usagerOrientationSheetForm" class="btn btn-primary">
         Suivant
-        <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+        <span role="img" class="ri-arrow-right-s-line" aria-hidden="true"></span>
       </button>
     </ng-container>
     <ng-container *ngIf="printOrientationSheetStep === 'prescripteur'">
       <button type="button" class="btn btn-secondary" (click)="printOrientationSheetStep = 'usager'">
-        <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
+        <span role="img" class="ri-arrow-left-s-line" aria-hidden="true"></span>
         Précédent
       </button>
       <button type="submit" form="prescripteurOrientationSheetForm" class="btn btn-primary">
         Suivant
-        <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+        <span role="img" class="ri-arrow-right-s-line" aria-hidden="true"></span>
       </button>
     </ng-container>
     <ng-container *ngIf="printOrientationSheetStep === 'résumé'">
       <button type="button" class="btn btn-secondary me-3" (click)="printOrientationSheetStep = 'prescripteur'">
-        <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
+        <span role="img" class="ri-arrow-left-s-line" aria-hidden="true"></span>
         Précédent
       </button>
       <button type="button" class="btn btn-primary" (click)="printWithOrientationSheetDetails()">
-        <i class="ri-printer-line me-1 bold" aria-hidden="true"></i>
+        <span role="img" class="ri-printer-line me-1 bold" aria-hidden="true"></span>
         Imprimer
       </button>
     </ng-container>

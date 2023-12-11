@@ -3,12 +3,13 @@
     <h3 class="text-primary fw-bold mb-4">{{ orientationInformation.titre }}</h3>
     <p [innerHTML]="orientationInformation.description"></p>
     <div *ngIf="orientationInformation.label" class="text-muted small mb-2">{{ orientationInformation.label }}</div>
-    <i
+    <span
       style="font-size: 0.85em; white-space: normal"
+      role="img"
       class="badge rounded-pill text-bg-light fw-normal me-2 my-1 ng-star-inserted"
       *ngFor="let element of orientationInformation.elements">
       {{ element }}
-    </i>
+    </span>
   </div>
   <div class="d-flex justify-content-center">
     <a

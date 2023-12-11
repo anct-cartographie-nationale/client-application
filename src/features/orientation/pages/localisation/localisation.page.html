@@ -30,7 +30,7 @@
                 <span class="text-primary">Chargement...</span>
               </div>
               <span *ngIf="(loadingState$ | async) === false">
-                <i class="ri-focus-3-line" aria-hidden="true"></i>
+                <span role="img" class="ri-focus-3-line" aria-hidden="true"></span>
                 Me géolocaliser
               </span>
             </button>
@@ -79,8 +79,13 @@
               <button
                 class="btn btn-link text-decoration-none p-0 border-0 ms-2"
                 (click)="informationOrientationModal.control.toggle($event)">
+                <<<<<<< Updated upstream
                 <span class="visually-hidden">Info</span>
                 <i class="ri-information-line fw-normal text-muted ri-2x" aria-hidden="true"></i>
+                =======
+                <span class="visually-hidden fw-bold">Info</span>
+                <span role="img" class="ri-information-line fw-normal text-muted ri-2x" aria-hidden="true"></span>
+                >>>>>>> Stashed changes
               </button>
             </div>
           </div>
@@ -90,7 +95,7 @@
     <div class="text-center mt-4">
       <a class="btn btn-primary mx-3" [routerLink]="['..', 'accessibilite']" queryParamsHandling="preserve">
         Suivant
-        <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+        <span role="img" class="ri-arrow-right-s-line" aria-hidden="true"></span>
       </a>
     </div>
   </div>

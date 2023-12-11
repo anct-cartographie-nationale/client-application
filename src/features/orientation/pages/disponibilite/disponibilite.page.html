@@ -24,22 +24,31 @@
               [attr.aria-expanded]="collapseDatePrecise.isExpanded$ | async"
               (click)="collapseDatePrecise.toggle()">
               <span class="ri-circled bg-primary text-light fw-normal me-3 my-auto d-sm-block d-none">
-                <i class="ri-calendar-event-fill" aria-hidden="true"></i>
+                <span role="img" class="ri-calendar-event-fill" aria-hidden="true"></span>
               </span>
               <span class="orientation-btn-label my-auto text-start">Je cherche des lieux ouverts à une date précise</span>
               <span class="ms-auto end-0 d-flex flex-column">
-                <i
+                <span
+                  role="img"
                   class="ri-add-line ri-2x text-muted"
                   *ngIf="collapseDatePrecise.isCollapsed$ | async; else: expanded"
-                  aria-hidden="true"></i>
+                  aria-hidden="true"></span>
                 <ng-template #expanded>
-                  <i class="ri-subtract-line ri-2x text-muted" aria-hidden="true"></i>
+                  <span role="img" class="ri-subtract-line ri-2x text-muted" aria-hidden="true"></span>
                 </ng-template>
                 <button
                   class="btn p-0 border-0"
                   (click)="informationOrientationModal.control.toggle($event); $event.stopPropagation(); $event.preventDefault()">
+                  <<<<<<< Updated upstream
                   <span class="visually-hidden">Info</span>
                   <i class="ri-information-line fw-normal text-muted-dark ri-2x text-opacity-50" aria-hidden="true"></i>
+                  =======
+                  <span class="visually-hidden fw-bold">Info</span>
+                  <span
+                    role="img"
+                    class="ri-information-line fw-normal text-muted-dark ri-2x text-opacity-50"
+                    aria-hidden="true"></span>
+                  >>>>>>> Stashed changes
                 </button>
               </span>
             </button>
@@ -60,7 +69,7 @@
                   type="button"
                   class="btn my-3 me-3 btn-secondary"
                   (click)="openingHoursForm.onResetOpeningHoursForm(); collapseDatePrecise.toggle()">
-                  <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
+                  <span role="img" class="ri-arrow-left-s-line" aria-hidden="true"></span>
                   Précédent
                 </button>
                 <app-display-on-map-link
@@ -87,11 +96,11 @@
             [routerLink]="['/','cartographie']"
             queryParamsHandling="preserve">
             <span class="ri-circled bg-primary text-light fw-normal me-3 d-sm-block d-none">
-              <i class="ri-map-pin-2-line" aria-hidden="true"></i>
+              <span role="img" class="ri-map-pin-2-line" aria-hidden="true"></span>
             </span>
             <span class="orientation-btn-label my-auto text-start">J’affiche tous les lieux correspondant à ma recherche</span>
             <span class="ms-auto me-3 end-0 d-flex">
-              <i class="ri-arrow-right-s-line ri-2x text-muted my-auto" aria-hidden="true"></i>
+              <span role="img" class="ri-arrow-right-s-line ri-2x text-muted my-auto" aria-hidden="true"></span>
             </span>
           </a>
           <a
@@ -101,11 +110,11 @@
             [href]="cartographie.url + '?' + toQueryString($any(route.queryParams | async))"
             rel="keep-params">
             <span class="ri-circled bg-primary text-light fw-normal me-3">
-              <i class="ri-road-map-line" aria-hidden="true"></i>
+              <span role="img" class="ri-road-map-line" aria-hidden="true"></span>
             </span>
             <span class="orientation-btn-label my-auto text-start">J’affiche tous les lieux correspondant à ma recherche</span>
             <span class="ms-auto me-3 end-0 d-flex">
-              <i class="ri-arrow-right-s-line ri-2x text-muted" aria-hidden="true"></i>
+              <span role="img" class="ri-arrow-right-s-line ri-2x text-muted" aria-hidden="true"></span>
             </span>
           </a>
         </ng-container>

@@ -155,15 +155,15 @@
             target="_blank"
             rel="noopener noreferrer">
             <span class="ri-circled bg-primary text-light fw-normal me-3" aria-hidden="true">
-              <i class="ri-calendar-todo-line" aria-hidden="true"></i>
+              <span role="img" class="ri-calendar-todo-line" aria-hidden="true"></span>
             </span>
             <span class="orientation-btn-label my-auto text-start lh-sm">
               Participez au(x) webinaire(s)
               <br />
-              <i class="small text-muted">
+              <span role="img" class="small text-muted">
                 Mettre à jour ses données, utiliser l'outil d'orientation, nous vous proposons des webinaires pour vous
                 accompagner dans l'utilisation de la cartographie
-              </i>
+              </span>
             </span>
           </a>
           <a
@@ -171,14 +171,16 @@
             href="https://labase.anct.gouv.fr/base/356?tags=&page=0&tab=resources"
             target="_blank"
             rel="noopener noreferrer">
-            <span class="ri-circled bg-primary text-light fw-normal me-3" aria-hidden="true"><i class="ri-link"></i></span>
+            <span role="img" class="ri-circled bg-primary text-light fw-normal me-3" aria-hidden="true">
+              <i class="ri-link"></i>
+            </span>
             <span class="orientation-btn-label my-auto text-start lh-sm">
               La Cartographie nationale sur la Base
               <br />
-              <i class="small text-muted">
+              <span role="img" class="small text-muted">
                 Comment enregistrer vos données sur la cartographie ? Comment orienter un bénéficiaire ? Les réponses à vos
                 questions sont ici.
-              </i>
+              </span>
             </span>
           </a>
           <a
@@ -251,7 +253,7 @@
       </mgl-map>
       <div class="p-3 d-flex d-lg-none bg-primary align-items-center">
         <button class="btn btn-link link-light text-decoration-none px-0" (click)="toggleMapForSmallDevices()">
-          <i class="ri-arrow-left-line" aria-hidden="true"></i>
+          <span role="img" class="ri-arrow-left-line" aria-hidden="true"></span>
           Afficher la liste
         </button>
         <i class="ms-auto small text-white" *ngIf="(resultsCount$ | async) as resultCount" [ngPlural]="resultCount">

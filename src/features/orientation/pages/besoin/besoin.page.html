@@ -81,8 +81,13 @@
     <div class="text-center mt-4">
       <div class="text-muted mb-2">Vous ne trouvez pas votre besoin ?</div>
       <button class="btn btn-sm btn-secondary d-inline-block mb-2" (click)="onFilterNotFound()">
+        <<<<<<< Updated upstream
         <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
         <b>Contactez-nous !</b>
+        =======
+        <span role="img" class="ri-mail-line me-2 text-right" aria-hidden="true"></span>
+        <span class="fw-bold">Contactez-nous !</span>
+        >>>>>>> Stashed changes
       </button>
     </div>
   </div>
@@ -95,6 +100,6 @@
     class="btn btn-primary"
     (click)="serviceControl?.setValue(selectedOrientationInformationType); informationOrientationModal.control.close()">
     Choisir cette option
-    <i class="ri-check-line d-lg-inline-block d-none" aria-hidden="true"></i>
+    <span role="img" class="ri-check-line d-lg-inline-block d-none" aria-hidden="true"></span>
   </a>
 </app-information-orientation-modal>
