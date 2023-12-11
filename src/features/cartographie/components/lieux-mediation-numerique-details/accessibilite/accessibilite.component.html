@@ -11,7 +11,7 @@
   </div>
   <div class="col-sm col-12 row g-0 mt-1">
     <div class="col-6">
-      <i class="ri-close-line me-1 ms-sm-2 ms-0" aria-hidden="true"></i>
+      <span role="img" class="ri-close-line me-1 ms-sm-2 ms-0" aria-hidden="true"></span>
       <em class="mt-1">Pas d'information</em>
     </div>
     <div class="col-6 text-end">
@@ -23,14 +23,16 @@
         [attr.aria-expanded]="collapseAccesLibre.isExpanded$ | async"
         (click)="collapseAccesLibre.toggle()">
         <span class="ms-auto">
-          <i
+          <span
             *ngIf="collapseAccesLibre.isCollapsed$ | async"
+            role="img"
             class="ri-information-line ri-xl text-muted-dark"
-            aria-hidden="true"></i>
-          <i
+            aria-hidden="true"></span>
+          <span
             *ngIf="collapseAccesLibre.isExpanded$ | async"
+            role="img"
             class="ri-close-circle-fill ri-xl text-primary"
-            aria-hidden="true"></i>
+            aria-hidden="true"></span>
         </span>
       </button>
     </div>

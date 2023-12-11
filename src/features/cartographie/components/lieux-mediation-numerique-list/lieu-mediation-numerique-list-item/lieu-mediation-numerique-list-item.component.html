@@ -8,7 +8,7 @@
     (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
     (mouseout)="disableHover.emit()">
     <div class="mb-4 text-primary d-flex align-items-center" *ngIf="lieuMediationNumerique.prive">
-      <i class="ri-close-circle-line ri-xl me-2" aria-hidden="true"></i>
+      <span role="img" class="ri-close-circle-line ri-xl me-2" aria-hidden="true"></span>
       <span class="small">cette structure n'accueille pas de public !</span>
     </div>
     <div class="row d-print-none">

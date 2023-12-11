@@ -27,7 +27,7 @@
       (keydown.enter)="setSuggestion(suggestions[dropdownPane.activeIndex]); dropdownPane.reduce()" />
     <button type="button" *ngIf="searchInput.value && displayReset" class="btn input-group-btn" (click)="clear()">
       <span class="visually-hidden">Effacer</span>
-      <i class="ri-close-line" aria-hidden="true"></i>
+      <span role="img" class="ri-close-line" aria-hidden="true"></span>
     </button>
     <ng-content></ng-content>
   </div>
@@ -61,13 +61,14 @@
         </i>
         <br />
         <span class="d-inline-flex">
-          <i
+          <span
+            role="img"
             class="text-primary ri-2x me-2 ri-focus-3-line"
             style="margin-top: -5px"
             [class.ri-community-line]="suggestion.payload.type === 'municipality'"
             [class.ri-map-pin-2-line]="suggestion.payload.type === 'place'"
             [class.ri-account-circle-fill]="suggestion.payload.type === 'conseiller'"
-            aria-hidden="true"></i>
+            aria-hidden="true"></span>
           <span class="lh-sm">
             <ng-container *ngFor="let part of suggestion.label | highlight : searchInput.value">
               <span [ngClass]="{ 'fw-bold': part.matchString }">{{ part.value }}</span>

@@ -1,11 +1,11 @@
 <div class="lieux-mediation-numerique-details-print d-flex flex-column border-3 overflow-hidden">
   <h3 class="mb-3 d-none d-print-block">
     <ng-container *ngIf="orientationSheetForm; else noOrientationSheetFormTitle">
-      <i class="ri-account-pin-circle-fill me-2" aria-hidden="true"></i>
+      <span role="img" class="ri-account-pin-circle-fill me-2" aria-hidden="true"></span>
       Fiche d'orientation
     </ng-container>
     <ng-template #noOrientationSheetFormTitle>
-      <i class="ri-file-text-line me-2" aria-hidden="true"></i>
+      <span role="img" class="ri-file-text-line me-2" aria-hidden="true"></span>
       Fiche lieu
     </ng-template>
   </h3>
@@ -45,7 +45,7 @@
         <app-horaires [horaires]="lieuMediationNumerique.horaires"></app-horaires>
         <div class="lh-1 text-muted border-2">
           <div class="mt-3 d-flex align-items-center" *ngIf="lieuMediationNumerique.contact?.telephone">
-            <i class="ri ri-lg ri-phone-line border-end pe-2 me-2" aria-hidden="true"></i>
+            <span role="img" class="ri ri-lg ri-phone-line border-end pe-2 me-2" aria-hidden="true"></span>
             <small>
               Téléphone
               <br />
