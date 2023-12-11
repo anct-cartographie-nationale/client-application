@@ -1,4 +1,4 @@
-<app-modal #modal heading="Informations label" icon="ri-information-line" closeLabel="Retour à la carte">
+<app-modal #modal heading="Plus d'infos" icon="ri-information-line" closeLabel="Précédent">
   <div *ngIf="label" class="text-center">
     <img
       [src]="assetsConfiguration.path + '/img/logo/labels/' + label.ref + '.svg'"
@@ -32,7 +32,7 @@
     rel="noopener noreferrer"
     class="btn btn-primary"
     (click)="modal.close()">
-    Accéder au site
+    Voir le site
     <i class="ri-external-link-line" aria-hidden="true"></i>
   </a>
 </app-modal>

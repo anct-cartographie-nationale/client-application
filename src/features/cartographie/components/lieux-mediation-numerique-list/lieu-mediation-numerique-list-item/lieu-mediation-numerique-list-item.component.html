@@ -63,16 +63,16 @@
       class="btn btn-sm btn-secondary d-block mb-2"
       (click)="$event.stopPropagation()">
       <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
-      Contacter par mail
+      Contacter
     </a>
     <a
       *ngIf="lieuMediationNumerique.telephone as telephone"
       href="tel://{{ telephone }}"
       class="text-decoration-none text-muted"
       (click)="$event.stopPropagation()">
+      <i class="ms-2 ri-phone-line" aria-hidden="true"></i>
       <span aria-hidden="true">{{ telephone | phone }}</span>
       <span class="visually-hidden">Contacter par téléphone</span>
-      <i class="ms-2 ri-phone-line" aria-hidden="true"></i>
     </a>
     <div class="text-primary" *ngIf="lieuMediationNumerique.prise_rdv">
       RDV disponible
@@ -106,7 +106,7 @@
       {{ lieuMediationNumerique.courriel }}
     </div>
     <div *ngIf="lieuMediationNumerique.site_web">
-      <i class="ri ri-link" aria-hidden="true"></i>
+      <i class="ri ri-external-link-line" aria-hidden="true"></i>
       {{ lieuMediationNumerique.site_web }}
     </div>
   </div>

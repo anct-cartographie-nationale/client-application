@@ -1,6 +1,6 @@
 <app-modal
   heading="Fiche d'orientation"
-  icon="ri-road-map-line"
+  icon="ri-book-mark-line"
   [bgBody]="['usager', 'prescripteur'].includes(printOrientationSheetStep) ? 'light' : 'white'"
   [bgFooter]="['usager', 'prescripteur'].includes(printOrientationSheetStep) ? 'white' : 'light'"
   (closed)="onClose()">
@@ -201,7 +201,7 @@
             <span class="text-break">{{ courriel }}</span>
           </div>
           <div *ngIf="siteWeb">
-            <i class="ri-link" aria-hidden="true"></i>
+            <i class="ri-external-link-line" aria-hidden="true"></i>
             <span class="text-break">{{ siteWeb[0] }}</span>
           </div>
         </div>
@@ -259,11 +259,11 @@
     <ng-container *ngIf="printOrientationSheetStep === 'résumé'">
       <button type="button" class="btn btn-secondary me-3" (click)="printOrientationSheetStep = 'prescripteur'">
         <i class="ri-arrow-left-s-line" aria-hidden="true"></i>
-        Modifier les informations
+        Précédent
       </button>
       <button type="button" class="btn btn-primary" (click)="printWithOrientationSheetDetails()">
-        <i class="ri-printer-line me-1" aria-hidden="true"></i>
-        Imprimer la fiche
+        <i class="ri-printer-line me-1 bold" aria-hidden="true"></i>
+        Imprimer
       </button>
     </ng-container>
   </ng-container>
