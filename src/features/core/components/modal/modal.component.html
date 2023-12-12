@@ -15,7 +15,7 @@
           <ng-container *ngTemplateOutlet="customHeading ?? defaultHeading"></ng-container>
           <ng-template #defaultHeading>
             <span role="img" class="ri-xl me-3 d-lg-inline d-none" [ngClass]="icon" aria-hidden="true"></span>
-            <b>{{ heading }}</b>
+            <span class="fw-bold">{{ heading }}</span>
           </ng-template>
         </h2>
         <button

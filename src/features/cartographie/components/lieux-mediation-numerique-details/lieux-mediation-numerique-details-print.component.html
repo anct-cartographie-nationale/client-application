@@ -49,7 +49,7 @@
             <small>
               Téléphone
               <br />
-              <b class="text-body">{{ lieuMediationNumerique.contact?.telephone ?? '' | phone }}</b>
+              <span class="text-body fw-bold">{{ lieuMediationNumerique.contact?.telephone ?? '' | phone }}</span>
             </small>
           </div>
           <div class="mt-3 d-flex align-items-center" *ngIf="lieuMediationNumerique.contact?.courriel">
@@ -130,7 +130,7 @@
         <img class="w-25" *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" alt="" />
       </ng-template>
       <div *ngIf="orientationSheetForm?.prescripteur as prescripteur" class="ms-auto border-start border-1">
-        <b>Orientation Réalisée par :</b>
+        <span class="fw-bold">Orientation Réalisée par :</span>
         <br />
         {{ prescripteur.firstname }} {{ prescripteur.lastname }}
       </div>
