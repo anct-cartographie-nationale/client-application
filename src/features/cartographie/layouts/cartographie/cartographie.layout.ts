@@ -34,6 +34,9 @@ import {
 } from '../../presenters';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
 import { MatomoTracker } from 'ngx-matomo';
+import Supercluster, { AnyProps, ClusterFeature, PointFeature } from 'supercluster';
+import { LieuMediationNumeriqueCluster } from '../../components/markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
+import { Position } from '@maplibre/ngx-maplibre-gl';
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
@@ -65,6 +68,29 @@ const toLieuxByLongitude = (LieuxMediationNumerique: LieuMediationNumeriquePrese
       lieuMediationNumeriqueB: LieuMediationNumeriquePresentation
     ): number => lieuMediationNumeriqueB.latitude - lieuMediationNumeriqueA.latitude
   );
+
+const toLieuMediationNumeriqueToGeoJsonFeature = (lieu: LieuMediationNumeriquePresentation): LieuMediationNumeriqueCluster => {
+  return {
+    type: 'Feature',
+    properties: lieu,
+    geometry: { type: 'Point', coordinates: [lieu.longitude, lieu.latitude] }
+  };
+};
+
+// todo: replace `(PointFeature<AnyProps> | ClusterFeature<AnyProps>)[]`
+const toCluster = ([lieuxMediationNumerique, zoom, [topLeft, bottomRight]]: [
+  LieuMediationNumeriquePresentation[],
+  number,
+  [Localisation, Localisation]
+]): (PointFeature<AnyProps> | ClusterFeature<AnyProps>)[] =>
+  new Supercluster({ radius: 100, maxZoom: 16 })
+    .load(
+      lieuxMediationNumerique.map(toLieuMediationNumeriqueToGeoJsonFeature) as unknown as (
+        | PointFeature<AnyProps>
+        | ClusterFeature<AnyProps>
+      )[]
+    )
+    .getClusters([topLeft.longitude, bottomRight.latitude, bottomRight.longitude, topLeft.latitude], zoom);
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -119,7 +145,8 @@ export class CartographieLayout {
       })
     );
 
-  public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueOnMapPresentation[]> = combineLatest([
+  // todo: replace `(PointFeature<AnyProps> | ClusterFeature<AnyProps>)[]`
+  public lieuxMediationNumeriqueClusters$: Observable<(PointFeature<AnyProps> | ClusterFeature<AnyProps>)[]> = combineLatest([
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       ...this._lieuxMediationNumeriqueListPresenterArgs,
       this.markersPresenter.boundingBox$,
@@ -136,7 +163,9 @@ export class CartographieLayout {
     tap((lieux: LieuMediationNumeriquePresentation[]): void => {
       lieux.length > 0 && this._resultsCount$.next(lieux.length);
       this._loadingState$.next(false);
-    })
+    }),
+    withLatestFrom(this.currentZoom$, this.markersPresenter.boundingBox$),
+    map(toCluster)
   );
 
   public allLieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> =
@@ -196,6 +225,10 @@ export class CartographieLayout {
     this.markersPresenter.center(Localisation({ latitude: lieu.latitude, longitude: lieu.longitude }));
     this.markersPresenter.select(lieu.id);
     this.toggleMapForSmallDevices();
+  }
+
+  public onSelectCluster(localisation: Localisation): void {
+    this.markersPresenter.center(localisation, this.markersPresenter.getZoom() + 2);
   }
 
   public onHighlight(highlightedId?: string): void {

@@ -247,13 +247,17 @@
           (updateMapIsDragging)="updateDragging()"
           (highlight)="onHighlight($event?.code)"
           (showLieux)="onShowLieuxInDepartement($event)"></app-territoire-markers>
-        <app-lieu-mediation-numerique-markers
-          *ngIf="((currentZoom$ | async) ?? 0) >= 8"
-          [lieuxMediationNumeriques]="(lieuxMediationNumerique$ | async) ?? []"
-          [selectedId]="(markersPresenter.selected$ | async) ?? ''"
-          [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
-          (highlight)="onHighlight($event?.id)"
-          (showDetails)="onShowDetails($event)"></app-lieu-mediation-numerique-markers>
+        <ng-container *ngIf="((currentZoom$ | async) ?? 0) >= 8">
+          <ng-container *ngIf="lieuxMediationNumeriqueClusters$ | async as clusters">
+            <app-lieu-mediation-numerique-markers
+              [lieuxMediationNumeriqueClusters]="clusters"
+              [selectedId]="(markersPresenter.selected$ | async) ?? ''"
+              [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
+              (highlight)="onHighlight($event?.id)"
+              (showDetails)="onShowDetails($event)"
+              (selectCluster)="onSelectCluster($event)"></app-lieu-mediation-numerique-markers>
+          </ng-container>
+        </ng-container>
       </mgl-map>
       <div class="p-3 d-flex d-lg-none bg-primary align-items-center">
         <button class="btn btn-link link-light text-decoration-none px-0" (click)="toggleMapForSmallDevices()">
