@@ -83,11 +83,11 @@
           <hr class="m-0" />
           <div class="p-3">
             <div class="mb-3">
-              <b>
+              <span class="fw-bold">
                 {{ lieuxMediationNumerique.length}} / {{ lieuxMediationNumeriqueTotal.length }}
                 <br />
-                Lieux trouvées sur le territoire
-              </b>
+                Lieux trouvés sur le territoire
+              </span>
             </div>
             <div *ngIf="router.url !== '/orientation'">
               <app-display-on-map-link

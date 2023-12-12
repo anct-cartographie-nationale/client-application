@@ -14,10 +14,10 @@
           <div class="flex-grow-1 align-self-center">
             <h1 class="h2 fw-bold mb-0">{{ coordinateur.nom }}</h1>
             <small class="d-flex align-items-center">
-              <b>
+              <span class="fw-bold">
                 Coordinateur
                 <span class="text-lowercase">{{ coordinateur.perimetre}}</span>
-              </b>
+              </span>
               &nbsp;-&nbsp;
               <i>{{ coordinateur.commune }}</i>
             </small>
@@ -44,21 +44,21 @@
                 style="height: 24px"
                 class="me-1" />
               Coordonne
-              <b>
+              <span class="fw-bold">
                 {{ coordinateur.nombreDePersonnesCoordonnees}}
                 <ng-container [ngPlural]="coordinateur.nombreDePersonnesCoordonnees">
                   <ng-template ngPluralCase="1">conseiller numérique</ng-template>
                   <ng-template ngPluralCase="other">conseillers numériques</ng-template>
                 </ng-container>
-              </b>
+              </span>
               répartis sur
-              <b>
+              <span class="fw-bold">
                 {{ coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees}}
                 <span [ngPlural]="coordinateur.nombreDeStructuresAvecDesPersonnesCoordonnees">
                   <ng-template ngPluralCase="1">lieu</ng-template>
                   <ng-template ngPluralCase="other">lieux</ng-template>
                 </span>
-              </b>
+              </span>
             </div>
             {{ coordinateur.adresse }}
             <br />
@@ -119,7 +119,7 @@
                 <i>({{ conseiller.distance | distance }})</i>
               </small>
               <ng-template #nonCoordonne>
-                <b>Non coordonné</b>
+                <span class="fw-bold">Non coordonné</span>
                 <br />
                 <i class="small">à {{ conseiller.distance | distance }} de {{ coordinateur.nom }}</i>
               </ng-template>
