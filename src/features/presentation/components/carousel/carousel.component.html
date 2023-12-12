@@ -9,12 +9,16 @@
       (click)="switchSlide.emit(i)"
       [attr.aria-current]="currentSlide === i"
       [attr.aria-label]="'Slide ' + i">
-      <i
+      <span
         *ngIf="this.currentSlide === i; else notActive"
+        role="img"
         class="ri-checkbox-blank-circle-fill ri-xl ri-fw ri-space text-light ms-auto me-auto"
-        aria-hidden="true"></i>
+        aria-hidden="true"></span>
       <ng-template #notActive>
-        <i class="ri-checkbox-blank-circle-line ri-xl ri-fw ri-space text-light ms-auto me-auto" aria-hidden="true"></i>
+        <span
+          role="img"
+          class="ri-checkbox-blank-circle-line ri-xl ri-fw ri-space text-light ms-auto me-auto"
+          aria-hidden="true"></span>
       </ng-template>
     </button>
   </div>
@@ -42,7 +46,7 @@
               *ngIf="slides.titre === 'Orientation'"
               (click)="scrollToAnchor.emit()"
               class="me-4 p-0 btn btn-link text-decoration-none text-secondary">
-              <i class="ri-arrow-down-line small" aria-hidden="true"></i>
+              <span role="img" class="ri-arrow-down-line small" aria-hidden="true"></span>
               En savoir plus
             </button>
           </div>
@@ -89,11 +93,11 @@
     </div>
   </div>
   <button class="carousel-control-prev" type="button" (click)="previousSlide.emit()">
-    <i class="ri-arrow-left-circle-fill ri-2x ri-fw ri-space text-light m-5" aria-hidden="true"></i>
+    <span role="img" class="ri-arrow-left-circle-fill ri-2x ri-fw ri-space text-light m-5" aria-hidden="true"></span>
     <span class="visually-hidden">Précédent</span>
   </button>
   <button class="carousel-control-next" type="button" (click)="nextSlide.emit()">
-    <i class="ri-arrow-right-circle-fill ri-2x ri-fw ri-space text-light m-5" aria-hidden="true"></i>
+    <span role="img" class="ri-arrow-right-circle-fill ri-2x ri-fw ri-space text-light m-5" aria-hidden="true"></span>
     <span class="visually-hidden">Suivant</span>
   </button>
 </div>

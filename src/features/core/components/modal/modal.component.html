@@ -14,7 +14,7 @@
         <h2 class="modal-title d-flex align-items-center" [id]="id">
           <ng-container *ngTemplateOutlet="customHeading ?? defaultHeading"></ng-container>
           <ng-template #defaultHeading>
-            <i class="ri-xl me-3 d-lg-inline d-none" [ngClass]="icon" aria-hidden="true"></i>
+            <span role="img" class="ri-xl me-3 d-lg-inline d-none" [ngClass]="icon" aria-hidden="true"></span>
             <b>{{ heading }}</b>
           </ng-template>
         </h2>
@@ -31,7 +31,7 @@
         </div>
         <div class="modal-footer justify-content-center px-lg-4 px-1" [ngClass]="'bg-' + bgFooter">
           <button *ngIf="closeLabel" type="button" class="btn btn-secondary me-1" (click)="close()">
-            <i class="ri-arrow-left-s-line d-lg-inline-block d-none" aria-hidden="true"></i>
+            <span role="img" class="ri-arrow-left-s-line d-lg-inline-block d-none" aria-hidden="true"></span>
             {{ closeLabel }}
           </button>
           <ng-content select="[slot=footer]"></ng-content>

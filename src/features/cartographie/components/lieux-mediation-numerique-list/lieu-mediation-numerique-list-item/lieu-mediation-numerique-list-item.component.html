@@ -8,7 +8,7 @@
     (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
     (mouseout)="disableHover.emit()">
     <div class="mb-4 text-primary d-flex align-items-center" *ngIf="lieuMediationNumerique.prive">
-      <i class="ri-close-circle-line ri-xl me-2" aria-hidden="true"></i>
+      <span role="img" class="ri-close-circle-line ri-xl me-2" aria-hidden="true"></span>
       <span class="small">cette structure n'accueille pas de public !</span>
     </div>
     <div class="row d-print-none">
@@ -27,7 +27,7 @@
             {{ lieuMediationNumerique.status.label }}
           </span>
           <span class="mx-1">·</span>
-          <i class="small align-self-end">{{ lieuMediationNumerique.status.limite }}</i>
+          <span role="img" class="small align-self-end">{{ lieuMediationNumerique.status.limite }}</span>
         </div>
       </div>
       <div
@@ -62,7 +62,7 @@
       href="mailto:{{ courriel }}"
       class="btn btn-sm btn-secondary d-block mb-2"
       (click)="$event.stopPropagation()">
-      <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
+      <span role="img" class="ri-mail-line me-2 text-right" aria-hidden="true"></span>
       Contacter
     </a>
     <a
@@ -70,13 +70,13 @@
       href="tel://{{ telephone }}"
       class="text-decoration-none text-muted"
       (click)="$event.stopPropagation()">
-      <i class="ms-2 ri-phone-line" aria-hidden="true"></i>
+      <span role="img" class="ms-2 ri-phone-line" aria-hidden="true"></span>
       <span aria-hidden="true">{{ telephone | phone }}</span>
       <span class="visually-hidden">Contacter par téléphone</span>
     </a>
     <div class="text-primary" *ngIf="lieuMediationNumerique.prise_rdv">
       RDV disponible
-      <i class="ri-calendar-check-line ms-1" aria-hidden="true"></i>
+      <span role="img" class="ri-calendar-check-line ms-1" aria-hidden="true"></span>
     </div>
   </div>
   <div class="position-absolute row g-2 start-0 bottom-0">
@@ -98,15 +98,15 @@
   <div>{{ lieuMediationNumerique.adresse }}</div>
   <div class="text-muted my-1">
     <div *ngIf="lieuMediationNumerique.telephone">
-      <i class="ri ri-phone-line" aria-hidden="true"></i>
+      <span role="img" class="ri ri-phone-line" aria-hidden="true"></span>
       {{ lieuMediationNumerique.telephone }}
     </div>
     <div *ngIf="lieuMediationNumerique.courriel">
-      <i class="ri ri-mail-line" aria-hidden="true"></i>
+      <span role="img" class="ri ri-mail-line" aria-hidden="true"></span>
       {{ lieuMediationNumerique.courriel }}
     </div>
     <div *ngIf="lieuMediationNumerique.site_web">
-      <i class="ri ri-external-link-line" aria-hidden="true"></i>
+      <span role="img" class="ri ri-external-link-line" aria-hidden="true"></span>
       {{ lieuMediationNumerique.site_web }}
     </div>
   </div>

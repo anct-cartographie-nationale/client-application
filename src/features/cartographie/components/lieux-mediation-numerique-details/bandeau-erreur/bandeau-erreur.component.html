@@ -1,11 +1,11 @@
 <div class="d-flex p-0">
   <button (click)="openImpressionChoiceModal.emit($event); onPrintFromBandeauErreur()" class="btn btn-primary btn-sm my-auto">
-    <i class="ri-printer-line me-2" aria-hidden="true"></i>
+    <span role="img" class="ri-printer-line me-2" aria-hidden="true"></span>
     Imprimer
   </button>
   <div class="flex-grow-1 my-auto">
     <button (click)="openErreurFormModal.emit($event)" class="btn btn-sm text-muted">
-      <i class="ri ri-error-warning-line ms-1" aria-hidden="true"></i>
+      <span role="img" class="ri ri-error-warning-line ms-1" aria-hidden="true"></span>
       Signaler une erreur dans cette fiche
     </button>
   </div>

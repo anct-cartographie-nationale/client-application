@@ -16,7 +16,7 @@
         </h1>
         <ng-container *ngIf="date">
           <span *ngIf="isTooOld(date); else updateDate" class="badge rounded-pill bg-tertiary text-primary fw-normal me-1">
-            <i class="ri-alert-line" aria-hidden="true"></i>
+            <span role="img" class="ri-alert-line" aria-hidden="true"></span>
             Dernière mise à jour il y a plus d'un an
           </span>
           <ng-template #updateDate>
@@ -63,5 +63,5 @@
       </div>
     </div>
   </div>
-  <i class="ri-4x ri-map-pin-2-line my-auto me-2 d-md-inline d-none" aria-hidden="true"></i>
+  <span role="img" class="ri-4x ri-map-pin-2-line my-auto me-2 d-md-inline d-none" aria-hidden="true"></span>
 </div>

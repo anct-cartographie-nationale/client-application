@@ -2,10 +2,11 @@
   <ng-template #modalHeader>
     <div class="text-primary d-flex align-items-center bg-light" *ngIf="conseiller">
       <div>
-        <i
+        <span
+          role="img"
           class="ri-xl ri-account-circle-fill me-3"
           [class.text-muted]="(conseiller.coordinateurs?.length ?? 0) === 0"
-          aria-hidden="true"></i>
+          aria-hidden="true"></span>
       </div>
       <div class="fw-bold">
         <div class="fs-4">{{ conseiller.nom }}</div>
@@ -98,7 +99,7 @@
     *ngIf="conseiller?.telephone as telephone"
     href="tel://{{ telephone }}"
     class="text-decoration-none link-muted-dark">
-    <i class="me-1 ri-phone-line"></i>
+    <span role="img" class="me-1 ri-phone-line"></span>
     {{ telephone | phone }}
   </a>
 </app-modal>

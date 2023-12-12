@@ -5,21 +5,22 @@
     </address>
     <div *ngIf="distance">{{ distance | distance }}</div>
     <div class="mb-3 d-flex align-items-center" *ngIf="status">
-      <i
+      <span
         [class.text-primary]="status.label === 'Ouvert'"
         [class.text-danger]="status.label === 'Fermé'"
+        role="img"
         class="ri-checkbox-blank-circle-fill ri-xxs me-1"
-        aria-hidden="true"></i>
+        aria-hidden="true"></span>
       <span [class.text-primary]="status.label === 'Ouvert'" [class.text-danger]="status.label === 'Fermé'">
         {{ status.label }}
       </span>
       <span class="mx-1">·</span>
-      <i class="small text-muted align-self-end">{{ status.limite }}</i>
+      <span role="img" class="small text-muted align-self-end">{{ status.limite }}</span>
     </div>
   </div>
   <div class="col-md-auto col-12 text-md-end d-print-none" *ngIf="courriel || telephone">
     <a *ngIf="courriel" href="mailto:{{ courriel }}" class="btn btn-sm btn-secondary mb-1" (click)="$event.stopPropagation()">
-      <i class="ri-mail-line me-2 text-right" aria-hidden="true"></i>
+      <span role="img" class="ri-mail-line me-2 text-right" aria-hidden="true"></span>
       Contacter
     </a>
     <a
@@ -27,14 +28,14 @@
       href="tel://{{ telephone }}"
       class="text-decoration-none d-block text-muted"
       (click)="$event.stopPropagation()">
-      <i class="me-2 ri-phone-line" aria-hidden="true"></i>
+      <span role="img" class="me-2 ri-phone-line" aria-hidden="true"></span>
       <span aria-hidden="true">{{ telephone | phone }}</span>
       <span class="visually-hidden">Contacter par téléphone</span>
     </a>
   </div>
   <div class="mt-2">
     <a class="text-decoration-none" *ngIf="accessibilite" href="{{ accessibilite }}" target="_blank">
-      <i class="ri-wheelchair-line ri-xl text-primary" aria-hidden="true"></i>
+      <span role="img" class="ri-wheelchair-line ri-xl text-primary" aria-hidden="true"></span>
       <b>Consulter les informations d'accessibilité</b>
     </a>
   </div>

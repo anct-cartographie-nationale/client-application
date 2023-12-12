@@ -14,7 +14,7 @@
       </span>
     </div>
     <span *ngIf="hub.lieuxCount as lieuxCount" class="rounded-5 bg-light py-1 px-3" [ngPlural]="lieuxCount">
-      <i class="ri-map-pin-5-line" aria-hidden="true"></i>
+      <span role="img" class="ri-map-pin-5-line" aria-hidden="true"></span>
       Ce hub a référencé
       <ng-template ngPluralCase="=1">
         <b>1 lieu</b>
@@ -31,7 +31,7 @@
       href="https://societenumerique.gouv.fr/fr/dispositif/hubs-numerique/"
       target="_blank"
       rel="noopener noreferrer">
-      <i class="ri ri-external-link-line my-auto me-2 opacity-75 text-muted" aria-hidden="true"></i>
+      <span role="img" class="ri ri-external-link-line my-auto me-2 opacity-75 text-muted" aria-hidden="true"></span>
     </a>
   </div>
   <a
@@ -43,6 +43,6 @@
     class="btn btn-primary"
     (click)="modal.close()">
     Accéder au site
-    <i class="ri-external-link-line" aria-hidden="true"></i>
+    <span role="img" class="ri-external-link-line" aria-hidden="true"></span>
   </a>
 </app-modal>

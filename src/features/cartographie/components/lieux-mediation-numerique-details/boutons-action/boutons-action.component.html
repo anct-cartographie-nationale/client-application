@@ -7,7 +7,7 @@
       target="_blank"
       rel="noopener noreferrer">
       <span class="ri-circled text-light fw-normal" [ngClass]="priseRdv ? 'bg-primary' : 'bg-muted-dark'">
-        <i class="ri-calendar-check-line" aria-hidden="true"></i>
+        <span role="img" class="ri-calendar-check-line" aria-hidden="true"></span>
       </span>
       <b class="mt-md-2 mb-md-0 ms-md-0 ms-2">RDV en ligne</b>
     </a>
@@ -20,7 +20,7 @@
       target="_blank"
       rel="noopener noreferrer">
       <span class="ri-circled text-light fw-normal" [ngClass]="siteWeb?.[0] ? 'bg-primary' : 'bg-muted-dark'">
-        <i class="ri-external-link-line" aria-hidden="true"></i>
+        <span role="img" class="ri-external-link-line" aria-hidden="true"></span>
       </span>
       <b class="mt-md-2 mb-md-0 ms-md-0 ms-2">Voir le site</b>
     </a>
@@ -30,8 +30,8 @@
       type="button"
       class="btn btn-tile px-md-0 py-md-4 p-2 d-flex flex-md-column flex-row"
       (click)="openImpressionChoiceModal.emit($event); onPrintFromActionButton()">
-      <span class="ri-circled bg-primary text-light fw-normal">
-        <i class="ri-printer-line" aria-hidden="true"></i>
+      <span role="img" class="ri-circled bg-primary text-light fw-normal">
+        <span role="img" class="ri-printer-line" aria-hidden="true"></span>
       </span>
       <b class="mt-md-2 mb-md-0 ms-md-0 ms-2">Imprimer</b>
     </button>
@@ -42,7 +42,7 @@
       class="btn btn-tile px-md-0 py-md-4 p-2 d-flex flex-md-column flex-row"
       (click)="sendByEmail.emit($event)">
       <span class="ri-circled bg-primary text-light fw-normal">
-        <i class="ri-mail-send-line" aria-hidden="true"></i>
+        <span role="img" class="ri-mail-send-line" aria-hidden="true"></span>
       </span>
       <b class="mt-md-2 mb-md-0 ms-md-0 ms-2">Envoyer par mail</b>
     </button>
