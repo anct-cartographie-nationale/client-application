@@ -24,7 +24,7 @@
             <div
               class="d-flex justify-content-center shadow-white-top z-index-over bg-white sticky-bottom"
               [class.invisible]="hideArrow">
-              <i class="ri-arrow-down-s-line ri-xl py-2 text-primary" aria-hidden="true"></i>
+              <span role="img" class="ri-arrow-down-s-line ri-xl py-2 text-primary" aria-hidden="true"></span>
             </div>
           </div>
           <aside
@@ -83,11 +83,11 @@
           <hr class="m-0" />
           <div class="p-3">
             <div class="mb-3">
-              <b>
+              <span class="fw-bold">
                 {{ lieuxMediationNumerique.length}} / {{ lieuxMediationNumeriqueTotal.length }}
                 <br />
                 Lieux trouvées sur le territoire
-              </b>
+              </span>
             </div>
             <div *ngIf="router.url !== '/orientation'">
               <app-display-on-map-link

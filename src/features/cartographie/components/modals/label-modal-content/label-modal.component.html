@@ -13,13 +13,13 @@
       </i>
     </div>
     <span *ngIf="label.lieuxCount as lieuxCount" [ngPlural]="lieuxCount" class="rounded-5 bg-light py-1 px-3">
-      <i class="ri-map-pin-5-line me-2" aria-hidden="true"></i>
+      <span role="img" class="ri-map-pin-5-line me-2" aria-hidden="true"></span>
       <ng-template ngPluralCase="=1">
-        <b>1 lieu</b>
+        <span class="fw-bold">1 lieu</span>
         utilise ce label
       </ng-template>
       <ng-template ngPluralCase="other">
-        <b>{{ lieuxCount }} lieux</b>
+        <span class="fw-bold">{{ lieuxCount }} lieux</span>
         utilisent ce label
       </ng-template>
     </span>
@@ -33,6 +33,6 @@
     class="btn btn-primary"
     (click)="modal.close()">
     Voir le site
-    <i class="ri-external-link-line" aria-hidden="true"></i>
+    <span role="img" class="ri-external-link-line" aria-hidden="true"></span>
   </a>
 </app-modal>

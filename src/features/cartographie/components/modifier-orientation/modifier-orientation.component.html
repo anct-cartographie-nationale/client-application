@@ -4,14 +4,14 @@
     *ngIf="orientation.active"
     [routerLink]="['/', 'orientation', 'besoin']"
     queryParamsHandling="preserve">
-    <i class="ri-compass-3-line me-1" aria-hidden="true"></i>
+    <span role="img" class="ri-compass-3-line me-1" aria-hidden="true"></span>
     Modifier l'orientation
   </a>
   <a
     *ngIf="!orientation.active && orientation.url"
     class="btn btn-secondary me-3"
     [href]="orientation.url + '?' + toQueryString($any(route.queryParams | async))">
-    <i class="ri-sound-module-line me-1" aria-hidden="true"></i>
+    <span role="img" class="ri-sound-module-line me-1" aria-hidden="true"></span>
     Modifier l'orientation
   </a>
 </ng-container>

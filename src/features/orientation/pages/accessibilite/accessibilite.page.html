@@ -37,7 +37,7 @@
               [value]="conditionFinancieresOption.value"
               (change)="selectParticipation(i)" />
             <label class="form-check-label bg-white" [attr.for]="'conditionFinancieresLabelChip' + i">
-              <b>{{ conditionFinancieresOption.label }}</b>
+              <span class="fw-bold">{{ conditionFinancieresOption.label }}</span>
             </label>
           </div>
         </div>
@@ -66,7 +66,7 @@
               [value]="accueilSpecifiqueOption.value"
               [attr.id]="'accueilSpecifiqueLabelChip' + i" />
             <label class="form-check-label bg-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
-              <b>{{ accueilSpecifiqueOption.label }}</b>
+              <span class="fw-bold">{{ accueilSpecifiqueOption.label }}</span>
             </label>
           </div>
         </div>
@@ -75,7 +75,7 @@
     <div class="text-center mt-4">
       <a class="btn btn-primary mx-3" [routerLink]="['..', 'disponibilite']" queryParamsHandling="preserve">
         Suivant
-        <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+        <span role="img" class="ri-arrow-right-s-line" aria-hidden="true"></span>
       </a>
     </div>
   </div>

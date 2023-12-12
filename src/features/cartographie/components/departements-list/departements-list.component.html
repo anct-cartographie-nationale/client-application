@@ -14,7 +14,7 @@
         (mouseout)="disableHover.emit()">
         <h2 class="h5 mb-0">
           ({{ departement.code }})
-          <b>{{ departement.nom }}</b>
+          <span class="fw-bold">{{ departement.nom }}</span>
         </h2>
         <div class="text-muted">{{ departement.lieuxCount }} résultats</div>
       </a>
@@ -23,7 +23,7 @@
   <div class="bg-primary py-3 px-4 text-end d-block d-lg-none d-print-none">
     <button class="btn btn-link link-light text-decoration-none" (click)="cartographieLayout.toggleMapForSmallDevices()">
       Afficher la carte
-      <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
+      <span role="img" class="ri-arrow-right-s-line" aria-hidden="true"></span>
     </button>
   </div>
 </div>

@@ -8,19 +8,19 @@
     </h3>
     <div class="mt-5 mb-4">
       <span *ngFor="let departement of hub.departements; last as isLast" class="d-inline-block">
-        <b>{{ departement.nom }}</b>
-        <i>&ensp;({{ departement.numero }})</i>
+        <span class="fw-bold">{{ departement.nom }}</span>
+        <span class="fw-bold">&ensp;({{ departement.numero }})</span>
         <ng-container *ngIf="!isLast">&ensp;-&ensp;</ng-container>
       </span>
     </div>
     <span *ngIf="hub.lieuxCount as lieuxCount" class="rounded-5 bg-light py-1 px-3" [ngPlural]="lieuxCount">
-      <i class="ri-map-pin-5-line" aria-hidden="true"></i>
+      <span role="img" class="ri-map-pin-5-line" aria-hidden="true"></span>
       Ce hub a référencé
       <ng-template ngPluralCase="=1">
-        <b>1 lieu</b>
+        <span class="fw-bold">1 lieu</span>
       </ng-template>
       <ng-template ngPluralCase="other">
-        <b>{{ lieuxCount }} lieux</b>
+        <span class="fw-bold">{{ lieuxCount }} lieux</span>
       </ng-template>
     </span>
   </div>
@@ -43,6 +43,6 @@
     class="btn btn-primary"
     (click)="modal.close()">
     Accéder au site
-    <i class="ri-external-link-line" aria-hidden="true"></i>
+    <span role="img" class="ri-external-link-line" aria-hidden="true"></span>
   </a>
 </app-modal>

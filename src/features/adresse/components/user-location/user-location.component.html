@@ -11,11 +11,11 @@
     <button type="button" class="btn input-group-btn" (click)="onGeoLocate()" *ngIf="(displayGeolocation$ | async) === true">
       <span class="border-end border-muted me-2"></span>
       <ng-container *ngIf="loadingState$ | async; else geolocationIcon">
-        <span class="visually-hidden">Géolocalisation en cours...</span>
+        <span class="visually-hidden fw-bold">Géolocalisation en cours...</span>
         <span class="spinner-border spinner-border-sm text-primary me-1" role="status" aria-hidden="true"></span>
       </ng-container>
       <ng-template #geolocationIcon>
-        <span class="visually-hidden">Géolocalisation</span>
+        <span class="visually-hidden fw-bold">Géolocalisation</span>
         <i class="ri-focus-3-line ri-lg text-muted" aria-hidden="true"></i>
       </ng-template>
     </button>

@@ -44,14 +44,14 @@
           [routerLink]="['besoin']"
           queryParamsHandling="preserve">
           <span class="ri-circled bg-primary text-light fw-normal me-3 d-sm-inline d-none">
-            <i class="ri-compass-3-line" aria-hidden="true"></i>
+            <span role="img" class="ri-compass-3-line" aria-hidden="true"></span>
           </span>
           <span class="orientation-btn-label my-auto text-start">
             Orienter un bénéficiaire
             <br />
-            <i class="small text-muted-dark">Grâce à notre questionnaire en 4 étapes</i>
+            <span role="img" class="small text-muted-dark">Grâce à notre questionnaire en 4 étapes</span>
           </span>
-          <span class="ri-2x text-muted ms-auto me-3 end-0">
+          <span role="img" class="ri-2x text-muted ms-auto me-3 end-0">
             <i class="ri-arrow-right-s-line" aria-hidden="true"></i>
           </span>
         </a>
@@ -78,7 +78,7 @@
         </a>
         <a class="btn btn-secondary m-2" [routerLink]="['besoin']" (click)="orientationLayout.filterForm.reset()">
           Nouvelle orientation
-          <i class="ri-compass-3-line" aria-hidden="true"></i>
+          <span role="img" class="ri-compass-3-line" aria-hidden="true"></span>
         </a>
       </div>
     </ng-template>

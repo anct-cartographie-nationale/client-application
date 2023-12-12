@@ -16,9 +16,9 @@
       (openImpressionChoiceModal)="impressionChoiceModal.control.toggle($event)"
       (sendByEmail)="sendByEmailModal.control.toggle($event)"></app-boutons-action>
     <div class="p-4 bg-tertiary d-flex align-items-center" *ngIf="lieuMediationNumerique.prive">
-      <span class="flex-grow-1">Attention, cette structure n'accueille pas de public !</span>
+      <span class="flex-grow-1 fw-bold">Attention, cette structure n'accueille pas de public !</span>
       <button type="button" class="btn" aria-label="Revenir à la liste" (click)="closeDetails.emit(lieuMediationNumerique)">
-        <i class="ri-close-circle-line ri-xl" aria-hidden="true"></i>
+        <span role="img" class="ri-close-circle-line ri-xl" aria-hidden="true"></span>
       </button>
     </div>
     <div class="border-top border-bottom d-xl-none" style="height: 275px" aria-hidden="true">
@@ -94,7 +94,7 @@
         </app-collapse>
         <div class="my-3">
           <small *ngIf="collapseHorairesDetaille.isCollapsed$ | async" class="d-flex justify-content-center text-primary my-1">
-            <i class="ri ri-error-warning-line ms-2 text-primary" aria-hidden="true"></i>
+            <span role="img" class="ri ri-error-warning-line ms-2 text-primary" aria-hidden="true"></span>
             Attention, les horaires de cette structure varient en fonction des semaines
           </small>
           <div class="d-flex justify-content-center">
@@ -147,7 +147,7 @@
       href="https://airtable.com/app2MF0d9XxkCwv0p/shrX7zSTk8pOtoKik?mtm_campaign=fromwebsitecarto"
       target="_blank"
       rel="noopener noreferrer">
-      <i class="ri-calendar-todo-line me-2" aria-hidden="true"></i>
+      <span role="img" class="ri-calendar-todo-line me-2" aria-hidden="true"></span>
       Participer au webinaire "Mettre à jour ses données"
     </a>
   </span>
