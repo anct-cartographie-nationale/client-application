@@ -136,21 +136,27 @@
         (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"></app-labellisations>
     </li>
   </ul>
-  <div #source class="bg-light px-2">
-    <div class="mx-3">
+  <div #source class="bg-light px-3 py-3">
+    <div class="mx-2">
       <app-source-donnees></app-source-donnees>
+      <button (click)="erreurFormModal.control.toggle($event)" class="btn btn-secondary btn-sm my-auto">
+        <i class="ri ri-error-warning-line ms-1" aria-hidden="true"></i>
+        Signaler une erreur
+      </button>
     </div>
+    <hr class="text-info" />
   </div>
-  <div class="row bg-light py-2">
-    <div class="col-6"></div>
-    <div class="col bg-secondary py-3 me-4">
+  <div class="row bg-light py-2 g-5">
+    <div class="col-6 ms-4">
+      <app-source-footer [sources]="lieuMediationNumerique.source" [date]="lieuMediationNumerique.date_maj"></app-source-footer>
+    </div>
+    <div class="col-5 bg-secondary py-3 me-4">
       <app-webinaire></app-webinaire>
     </div>
   </div>
   <div class="bg-primary p-2">
     <app-bandeau-erreur
       (openImpressionChoiceModal)="impressionChoiceModal.control.toggle($event)"
-      (openErreurFormModal)="erreurFormModal.control.toggle($event)"
       (closeDetails)="closeDetails.emit(lieuMediationNumerique)"></app-bandeau-erreur>
   </div>
 </div>

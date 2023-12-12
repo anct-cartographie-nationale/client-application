@@ -29,7 +29,8 @@ import {
   ErreurFormModalComponent,
   ImpressionChoiceModalComponent,
   SourceDonneesComponent,
-  WebinaireComponent
+  WebinaireComponent,
+  SourceFooterComponent
 } from './lieux-mediation-numerique-details';
 import { LocationBreadcrumbComponent } from './location-breadcrumb/location-breadcrumb.component';
 import { AffinerRechercheFormComponent } from './affiner-recherche-form/affiner-recherche-form.component';
@@ -70,5 +71,6 @@ export const components = [
   ErreurFormModalComponent,
   ImpressionChoiceModalComponent,
   SourceDonneesComponent,
-  WebinaireComponent
+  WebinaireComponent,
+  SourceFooterComponent
 ];
