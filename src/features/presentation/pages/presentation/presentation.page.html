@@ -23,7 +23,7 @@
               <span role="img" class="ri-arrow-down-line me-2 small" aria-hidden="true"></span>
               Accéder aux webinaires
             </button>
-            <a [routerLink]="['/', 'orientation']" class="btn btn-discover rounded-0">Orienter un bénéficiaire</a>
+            <a [routerLink]="['/', 'orientation']" class="btn btn-outline-secondary rounded-0">Orienter un bénéficiaire</a>
           </div>
         </div>
       </div>
@@ -50,7 +50,10 @@
       </a>
     </div>
   </section>
-  <section class="py-2" [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
+  <section
+    class="focus-ring py-1 px-2 text-decoration-none border rounded-2"
+    style="--bs-focus-ring-color: #ffffff; opacity: 1"
+    [ngClass]="slidesBackground[(currentSlide$ | async ) ?? 0] ">
     <app-carousel
       [currentSlide]="(currentSlide$ | async) ?? 0"
       (switchSlide)="onSwitchSlide($event)"

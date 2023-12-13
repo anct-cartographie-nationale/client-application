@@ -55,14 +55,20 @@
 }
 
 .btn-discover {
-  color: $primary;
-  background-color: #8585f6;
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid white;
+  box-shadow: white;
+  outline: 0;
 
   &:hover {
-    background-color: #8585f6;
+    background-color: #fff;
+    color: black;
   }
 
   &:focus {
     box-shadow: $focus-box-shadow;
+    background-color: #fff;
+    color: black;
   }
 }
