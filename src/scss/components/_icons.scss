@@ -117,7 +117,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   width: $square-sm;
   height: $square-sm;
 
-  i {
+  span[role='img'] {
     position: absolute;
     left: 0;
     top: 0;
