@@ -25,7 +25,10 @@ const formatAdresse = (lieuMediationNumerique: LieuMediationNumeriquePresentatio
 
 const toListItemLabelsNationaux = (labelsNationaux?: LabelNational[]): LabelNational[] | undefined =>
   labelsNationaux?.filter(
-    (labelNational: LabelNational) => labelNational === LabelNational.CNFS || labelNational === LabelNational.FranceServices
+    (labelNational: LabelNational) =>
+      labelNational === LabelNational.CNFS ||
+      labelNational === LabelNational.FranceServices ||
+      labelNational === LabelNational.AidantsConnect
   );
 
 const toListItemConditionsAcces = (
