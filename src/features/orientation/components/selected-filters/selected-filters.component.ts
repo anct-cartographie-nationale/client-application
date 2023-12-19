@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FilterFormPresentation } from '../../../core/presenters';
-import conditionAcces from '../../pages/accessibilite/condition-acces.json';
 import publicSpecifiqueAcceuilli from '../../pages/accessibilite/public-specifique-accueilli.json';
 import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
@@ -37,7 +36,7 @@ export class SelectedFiltersComponent {
 
   public getLabelFromValue(value: string): string {
     return (
-      [...conditionAcces, ...publicSpecifiqueAcceuilli].find((field: { value: string; label: string }) => {
+      [...publicSpecifiqueAcceuilli].find((field: { value: string; label: string }) => {
         return field.value === value;
       })?.label ?? ''
     );
