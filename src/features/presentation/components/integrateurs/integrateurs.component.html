@@ -10,7 +10,12 @@
           <div class="card-body h-100 d-flex" style="flex-direction: column">
             <h3 class="fw-bold card-title my-2">{{ integrateur.sousTitre }}</h3>
             <p class="card-text mt-2 mb-5 flex-grow-1">{{ integrateur.text }}</p>
-            <a class="btn-link text-decoration-none" href="{{ integrateur.link }}" target="_blank" rel="noopener noreferrer">
+            <a
+              class="btn-link text-decoration-none"
+              href="{{ integrateur.link }}"
+              target="_blank"
+              title="{{ integrateur.sousTitre }} (nouvel onglet)"
+              rel="noopener noreferrer">
               <div class="d-flex">
                 <span role="img" class="ri ri-external-link-line me-2"></span>
                 <p class="mt-1" style="font-size: smaller">{{ integrateur.linkTitre }}</p>
@@ -26,6 +31,7 @@
   class="btn btn-primary align-items-center d-inline-flex rounded-0 mt-5"
   href="https://github.com/anct-cartographie-nationale/client-application#documentation"
   target="_blank"
+  title="Intégrer la cartographie (nouvel onglet)"
   rel="noopener noreferrer">
   <span role="img" class="ri-map-pin-2-line ri me-2" aria-hidden="true"></span>
   Intégrer la cartographie
