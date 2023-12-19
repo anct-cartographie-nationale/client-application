@@ -37,7 +37,8 @@
     </button>
   </div>
   <div class="col">
-    <button
+    <a
+      role="button"
       type="button"
       class="btn btn-tile px-md-0 py-md-4 p-2 d-flex flex-md-column flex-row"
       (click)="sendByEmail.emit($event)">
@@ -45,6 +46,6 @@
         <span role="img" class="ri-mail-send-line" aria-hidden="true"></span>
       </span>
       <span class="mt-md-2 mb-md-0 ms-md-0 ms-2 fw-bold">Envoyer par mail</span>
-    </button>
+    </a>
   </div>
 </div>
