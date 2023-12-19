@@ -1,8 +1,8 @@
 import { DisponibilitePage } from './disponibilite/disponibilite.page';
 import { DemarrerPage } from './demarrer/demarrer.page';
 import { LocalisationPage } from './localisation/localisation.page';
-import { AccessibilitePage } from './accessibilite/accessibilite.page';
 import { BesoinPage } from './besoin/besoin.page';
+import { AccessibilitePage } from './accessibilite/accessibilite.page';
 
 export * from './accessibilite/accessibilite.page';
 export * from './besoin/besoin.page';
