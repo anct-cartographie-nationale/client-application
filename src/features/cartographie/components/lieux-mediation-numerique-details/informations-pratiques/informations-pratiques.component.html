@@ -34,7 +34,12 @@
     </a>
   </div>
   <div class="mt-2">
-    <a class="text-decoration-none" *ngIf="accessibilite" href="{{ accessibilite }}" target="_blank">
+    <a
+      class="text-decoration-none"
+      *ngIf="accessibilite"
+      href="{{ accessibilite }}"
+      title="Consulter les informations d'accessibilité (nouvel onglet)"
+      target="_blank">
       <span role="img" class="ri-wheelchair-line ri-xl text-primary" aria-hidden="true"></span>
       <span class="fw-bold">Consulter les informations d'accessibilité</span>
     </a>
