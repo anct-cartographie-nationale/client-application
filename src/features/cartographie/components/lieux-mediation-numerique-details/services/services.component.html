@@ -3,7 +3,7 @@
   <div *ngFor="let service of services" class="col-6 my-2">
     <div class="bg-light py-3 d-flex align-items-center">
       <span class="ri-circled-sm bg-primary text-light fw-normal d-sm-block d-none me-3 ms-3 text-center">
-        <i [ngClass]="getIconFromServices(service)" aria-hidden="true"></i>
+        <span role="img" [ngClass]="getIconFromServices(service)" aria-hidden="true"></span>
       </span>
       <small>{{ service }}</small>
     </div>
