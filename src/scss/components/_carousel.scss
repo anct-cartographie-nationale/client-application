@@ -6,25 +6,19 @@
     }
   }
 
-  .carousel-control-prev {
-    border: 2px solid transparent;
-    padding: 5px;
-    transition: border-color 0.3s;
-  }
-
-  .carousel-control-prev:focus {
-    border-color: white;
-    outline: none;
-  }
-
+  .carousel-control-prev,
   .carousel-control-next {
-    border: 2px solid transparent;
-    padding: 5px;
-    transition: border-color 0.3s;
-  }
+    .carousel-control-icon {
+      border: 2px solid transparent;
+      border-radius: 50%;
+      transition: border-color 0.3s;
+    }
 
-  .carousel-control-next:focus {
-    border-color: white;
-    outline: none;
+    &:focus {
+      .carousel-control-icon {
+        border-color: white;
+        outline: none;
+      }
+    }
   }
 }
