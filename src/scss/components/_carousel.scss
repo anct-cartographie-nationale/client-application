@@ -6,8 +6,25 @@
     }
   }
 
-  .visually-hidden .ri-arrow-left-circle-fill::before {
-    box-shadow: 0 0 2px white;
-    opacity: 1;
+  .carousel-control-prev {
+    border: 2px solid transparent;
+    padding: 5px;
+    transition: border-color 0.3s;
+  }
+
+  .carousel-control-prev:focus {
+    border-color: white;
+    outline: none;
+  }
+
+  .carousel-control-next {
+    border: 2px solid transparent;
+    padding: 5px;
+    transition: border-color 0.3s;
+  }
+
+  .carousel-control-next:focus {
+    border-color: white;
+    outline: none;
   }
 }
