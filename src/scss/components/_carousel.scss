@@ -1,0 +1,13 @@
+.carousel {
+  .btn {
+    &.active:focus-visible,
+    &:focus-visible {
+      box-shadow: 0 0 0 3px white;
+    }
+  }
+
+  .visually-hidden .ri-arrow-left-circle-fill::before {
+    box-shadow: 0 0 2px white;
+    opacity: 1;
+  }
+}
