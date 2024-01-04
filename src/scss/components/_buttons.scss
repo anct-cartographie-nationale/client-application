@@ -4,3 +4,11 @@
     padding-bottom: 2px !important;
   }
 }
+
+.btn-secondary.active.active-primary:focus {
+  box-shadow: 0 0 0 3px rgba(192 192 255 100%), 1px 1px 3px 3px rgba(0 0 145 100%);
+}
+
+.btn-secondary:focus {
+  box-shadow: 0 0 0 3px rgba(192 192 255 100%), 1px 1px 3px 3px rgba(0 0 145 100%);
+}
