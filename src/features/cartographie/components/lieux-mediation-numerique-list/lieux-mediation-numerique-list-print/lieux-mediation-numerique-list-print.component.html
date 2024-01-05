@@ -1,12 +1,9 @@
-<h2 class="h3 mb-3 pb-1 border-bottom border-dark border-2">
-  <span role="img" class="ri ri-list-check me-2" aria-hidden="true"></span>
-  Liste des lieux
-</h2>
+<h2 class="h3 mb-3 pb-1 border-bottom border-dark border-2">Liste des lieux</h2>
 <div
   class="bg-light px-4 py-3 mb-2"
   *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
   <small class="fw-bold text-muted">Détails de la recherche</small>
-  <div>FILTRES ACTIVÉS</div>
+  <div>Filtres activés</div>
   <div>
     <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.address">
       {{ filters?.address }}
@@ -40,11 +37,30 @@
   </tfoot>
   <tbody>
     <tr>
-      <td class="row">
-        <div class="col-6" *ngFor="let lieuMediationNumerique of lieuxMediationNumerique | slice : 0 : 100">
-          <app-mediation-numerique-list-item
-            class="d-block border-bottom h-100 py-1"
-            [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>
+      <td class="d-flex">
+        <div class="d-flex flex-column me-1">
+          <div
+            *ngFor="
+              let lieu of lieuxMediationNumerique | slice : 0 : ceilOnMin(lieuxMediationNumerique.length) / 2;
+              let isLast = last
+            "
+            [ngClass]="{ 'list-items-print': !isLast, 'allow-page-break': isLast }">
+            <app-mediation-numerique-list-item
+              class="d-block border-bottom h-100"
+              [lieuMediationNumerique]="lieu"></app-mediation-numerique-list-item>
+          </div>
+        </div>
+        <div class="d-flex flex-column">
+          <div
+            *ngFor="
+              let lieu of lieuxMediationNumerique | slice : ceilOnMin(lieuxMediationNumerique.length) / 2;
+              let isLast = last
+            "
+            [ngClass]="{ 'list-items-print': !isLast, 'allow-page-break': isLast }">
+            <app-mediation-numerique-list-item
+              class="d-block border-bottom h-100"
+              [lieuMediationNumerique]="lieu"></app-mediation-numerique-list-item>
+          </div>
         </div>
       </td>
     </tr>

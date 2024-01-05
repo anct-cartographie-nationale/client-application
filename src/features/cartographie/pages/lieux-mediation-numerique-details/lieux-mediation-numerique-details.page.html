@@ -6,7 +6,7 @@
 <div
   *ngIf="(lieuMediationNumerique$ | async) as lieuMediationNumerique; else lieuNotFound"
   tabindex="-1"
-  class="h-100 overflow-auto border-end">
+  class="h-100 overflow-auto">
   <app-lieux-mediation-numerique-details-print
     [lieuMediationNumerique]="lieuMediationNumerique"
     [filters]="(filters$ | async) ?? undefined"

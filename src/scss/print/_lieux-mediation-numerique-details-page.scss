@@ -19,6 +19,7 @@
 
   .map-container {
     height: auto;
+    width: auto;
   }
 
   .table-horaires {
@@ -26,7 +27,7 @@
       font-size: $font-size-sm;
     }
 
-    & td {
+    & tr {
       padding: 0.25rem 0;
       border-top: solid $gray-300 2px !important;
     }
@@ -38,6 +39,14 @@
     .day {
       font-weight: bold;
     }
+  }
+
+  .list-items-print {
+    break-inside: avoid-page !important;
+  }
+
+  .allow-page-break {
+    height: 100vh;
   }
 
   .presentation-resume {
