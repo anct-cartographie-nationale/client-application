@@ -43,7 +43,7 @@
     (reduced)="onReduced()"
     class="dropdown-menu position-absolute mt-1"
     role="listbox"
-    aria-labelledby="résultats de la recherche">
+    aria-label="résultats de la recherche">
     <li
       #results
       *ngFor="let suggestion of suggestions; index as suggestionIndex; trackBy: trackBySuggestionName; let isLast = last"

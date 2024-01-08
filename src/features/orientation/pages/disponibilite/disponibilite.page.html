@@ -17,8 +17,7 @@
           <div class="accordion-header" id="headingDatePrecise">
             <div
               class="orientation-btn bg-light mb-3 px-lg-3 px-2 py-0 rounded-0 d-flex position-relative w-100"
-              [class.bg-white]="(collapseDatePrecise.isCollapsed$ | async) === false"
-              [attr.aria-expanded]="collapseDatePrecise.isExpanded$ | async">
+              [class.bg-white]="(collapseDatePrecise.isCollapsed$ | async) === false">
               <span class="ri-circled bg-primary text-light text-center fw-normal me-3 my-auto d-sm-block d-none">
                 <span role="img" class="ri-calendar-event-fill" aria-hidden="true"></span>
               </span>
@@ -28,6 +27,7 @@
                   #collapseDatePreciseControl
                   aria-controls="collapseDatePrecise"
                   type="button"
+                  [attr.aria-expanded]="collapseDatePrecise.isExpanded$ | async"
                   (click)="collapseDatePrecise.toggle()">
                   Je cherche des lieux ouverts à une date précise
                 </button>
@@ -68,6 +68,7 @@
                 <button
                   type="button"
                   class="btn my-3 me-3 btn-secondary"
+                  [attr.aria-expanded]="collapseDatePrecise.isExpanded$ | async"
                   (click)="openingHoursForm.onResetOpeningHoursForm(); collapseDatePrecise.toggle()">
                   <span role="img" class="ri-arrow-left-s-line" aria-hidden="true"></span>
                   Précédent
