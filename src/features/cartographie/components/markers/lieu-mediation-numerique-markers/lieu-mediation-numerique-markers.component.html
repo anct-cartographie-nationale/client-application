@@ -27,7 +27,7 @@
   </mgl-popup>
 </ng-container>
 <ng-container *ngFor="let cluster of lieuxMediationNumeriqueClusters">
-  <ng-container *ngIf="cluster.properties?.cluster === true; else lieuMarker">
+  <ng-container *ngIf="cluster.properties['cluster'] === true; else lieuMarker">
     <mgl-marker [lngLat]="$any(cluster.geometry.coordinates)">
       <button
         tabindex="-1"
@@ -41,11 +41,15 @@
           )
         ">
         <svg width="52" height="64" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M52 26c0 23.43-26 38-26 38S0 49.43 0 26C0 11.64 11.64 0 26 0s26 11.64 26 26Z" fill="#000091" />
-          <path d="M52 26c0 23.43-26 38-26 38S0 49.43 0 26C0 11.64 11.64 0 26 0s26 11.64 26 26Z" stroke="#fff" />
+          <path
+            d="M49.642 26.497C49.642 47.855 26 61.137 26 61.137S2.358 47.854 2.358 26.496c0-13.09 10.584-23.7 23.642-23.7s23.642 10.61 23.642 23.7z"
+            fill="#000091" />
+          <path
+            d="M49.642 26.497C49.642 47.855 26 61.137 26 61.137S2.358 47.854 2.358 26.496c0-13.09 10.584-23.7 23.642-23.7s23.642 10.61 23.642 23.7z"
+            stroke="#fff" />
         </svg>
         <div class="marker-cluster-fg d-flex">
-          <span class="m-auto text-white fw-bold fs-6 mt-4">{{ cluster.properties?.point_count ?? 0 }}</span>
+          <span class="m-auto text-white fw-bold fs-6 mt-4">{{ cluster.properties['point_count'] ?? 0 }}</span>
         </div>
       </button>
     </mgl-marker>

@@ -74,3 +74,5 @@ export const components = [
   WebinaireComponent,
   SourceFooterComponent
 ];
+
+export * from './markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
