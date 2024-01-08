@@ -74,7 +74,11 @@
         [attr.aria-controls]="aideOffcanvas.id"
         [class.active]="aideOffcanvas.expanded$ | async"
         (click)="aideOffcanvas.toggle($event); affinerRechercheOffcanvas.close(); matomoAideButtonTracking()">
-        <span role="img class="me-1" [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-line text-primary' : 'ri-question-line'" aria-hidden="true"></span>
+        <span
+          role="img"
+          class="me-1"
+          [ngClass]="(aideOffcanvas.expanded$ | async) ? 'ri-close-line text-primary' : 'ri-question-line'"
+          aria-hidden="true"></span>
         <span class="visually-hidden">À propos</span>
         <span class="my-auto">Aide</span>
       </button>
