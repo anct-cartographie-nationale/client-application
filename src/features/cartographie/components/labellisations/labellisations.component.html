@@ -4,7 +4,7 @@
     *ngFor="let label of labelsNationaux"
     (click)="showLabel.emit(label); showLabelInvokingContext.emit($event)"
     class="btn btn-link p-0 me-3">
-    <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + label" />
+    <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + toLabelNom(label)" />
   </button>
 </ng-container>
 <div class="mt-3" *ngIf="labelsAutres">

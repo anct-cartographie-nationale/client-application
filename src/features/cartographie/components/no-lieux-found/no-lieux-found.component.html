@@ -1,10 +1,9 @@
 <ng-container *ngIf="filterPresentation && hasActiveFilter(filterPresentation); else lostInMap">
   <h4 class="text-center fw-bold mb-3">Nous ne trouvons pas de résultats correspondant à votre recherche</h4>
-  <p class="text-muted text-center">
-    Aucun lieu n'est disponible selon ces critères.
-    <br />
-    Modifiez ou supprimez certains de vos filtres précédemment sélectionnés
-  </p>
+  <div class="text-muted text-center">
+    <p>Aucun lieu n'est disponible selon ces critères.</p>
+    <p>Modifiez ou supprimez certains de vos filtres précédemment sélectionnés.</p>
+  </div>
   <div class="d-flex justify-content-center my-3">
     <app-modifier-orientation></app-modifier-orientation>
     <button class="btn bg-primary text-secondary" (click)="resetFilters.emit()">Réinitialiser mes filtres</button>

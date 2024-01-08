@@ -43,8 +43,7 @@
               <div class="d-lg-flex flex-column d-none h-100">
                 <div class="mt-auto">
                   <h2 class="h5 text-center text-secondary fw-bold my-3 mt-auto">
-                    Nombre de lieux
-                    <br />
+                    <span class="d-block">Nombre de lieux</span>
                     {{ router.url === '/orientation' ? 'référencés sur la carte' : 'correspondant à ma recherche'}}
                   </h2>
                 </div>
@@ -82,8 +81,7 @@
           <div class="p-3">
             <div class="mb-3">
               <span class="fw-bold">
-                {{ lieuxMediationNumerique.length}} / {{ lieuxMediationNumeriqueTotal.length }}
-                <br />
+                <span class="d-block">{{ lieuxMediationNumerique.length}} / {{ lieuxMediationNumeriqueTotal.length }}</span>
                 Lieux trouvés sur le territoire
               </span>
             </div>

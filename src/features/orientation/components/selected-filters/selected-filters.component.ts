@@ -13,24 +13,24 @@ export class SelectedFiltersComponent {
   @Input() public filterPresentation: FilterFormPresentation | null = null;
   @Input() public filterForm!: FormGroup;
 
-  public resetForm(value: unknown, key: string) {
-    if (key === 'service') this.filterForm.get('service')?.setValue(undefined);
+  public resetForm(value: unknown, key: string): void {
+    if (key === 'service') this.filterForm.get('service')?.reset();
     else if (key === 'address' || key === 'distance') {
-      this.filterForm.get('address')?.setValue(undefined);
-      this.filterForm.get('distance')?.setValue(undefined);
-      this.filterForm.get('latitude')?.setValue(undefined);
-      this.filterForm.get('longitude')?.setValue(undefined);
+      this.filterForm.get('address')?.reset();
+      this.filterForm.get('distance')?.reset();
+      this.filterForm.get('latitude')?.reset();
+      this.filterForm.get('longitude')?.reset();
     } else if (key === 'horaires_ouverture') {
-      this.filterForm.get('horaires_ouverture')?.setValue(undefined);
+      this.filterForm.get('horaires_ouverture')?.reset();
     } else if (key === 'prise_rdv') {
-      this.filterForm.get('prise_rdv')?.setValue(false);
+      this.filterForm.get('prise_rdv')?.reset();
     } else if (key === 'accessibilite') {
-      this.filterForm.get('accessibilite')?.setValue(false);
+      this.filterForm.get('accessibilite')?.reset();
     } else {
-      const keyArrayCoppy = [...this.filterForm.value[key]];
-      const indexOfValue = keyArrayCoppy.indexOf(value);
-      indexOfValue > -1 && keyArrayCoppy.splice(indexOfValue, 1);
-      this.filterForm.get(key)?.setValue([...keyArrayCoppy]);
+      const keyArrayCopy = [...this.filterForm.value[key]];
+      const indexOfValue = keyArrayCopy.indexOf(value);
+      indexOfValue > -1 && keyArrayCopy.splice(indexOfValue, 1);
+      this.filterForm.get(key)?.setValue([...keyArrayCopy]);
     }
   }
 
