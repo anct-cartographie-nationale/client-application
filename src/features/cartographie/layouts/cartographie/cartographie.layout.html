@@ -70,7 +70,7 @@
       </button>
       <button
         id="help"
-        class="navbar-btn pb-1 pt-0 mt-1"
+        class="navbar-btn flex-sm-grow-0 flex-grow-1 text-start active"
         [attr.aria-controls]="aideOffcanvas.id"
         [class.active]="aideOffcanvas.expanded$ | async"
         (click)="aideOffcanvas.toggle($event); affinerRechercheOffcanvas.close(); matomoAideButtonTracking()">
