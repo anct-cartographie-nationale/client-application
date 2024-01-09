@@ -8,7 +8,6 @@ import { ASSETS_TOKEN, AssetsConfiguration } from 'projects/client-application/s
   templateUrl: './source-footer.component.html'
 })
 export class SourceFooterComponent {
-  @Input() public date: Date | undefined;
   @Input() public sources: SourcePresentation[] | undefined;
 
   public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
