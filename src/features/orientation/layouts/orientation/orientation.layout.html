@@ -65,7 +65,7 @@
                   <app-display-on-map-link
                     class="d-block mb-4"
                     [cartographieFeature]="features.get('cartographie')"
-                    [lieuxMediationNumeriqueCount]="1"
+                    [lieuxMediationNumeriqueCount]="(lieuxMediationNumeriqueCount$ | async) ?? 0"
                     [queryParams]="route.queryParams">
                     Afficher les lieux
                   </app-display-on-map-link>
@@ -88,7 +88,7 @@
             <div *ngIf="router.url !== '/orientation'">
               <app-display-on-map-link
                 [cartographieFeature]="features.get('cartographie')"
-                [lieuxMediationNumeriqueCount]="1"
+                [lieuxMediationNumeriqueCount]="(lieuxMediationNumeriqueCount$ | async) ?? 0"
                 [queryParams]="route.queryParams">
                 Afficher la carte
               </app-display-on-map-link>
