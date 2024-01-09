@@ -1,20 +1,22 @@
 <div class="h-100 d-flex flex-column border-end">
   <div #container class="list-group list-group-flush flex-grow-1 overflow-auto" tabindex="-1">
     <h1 class="visually-hidden">Liste des lieux d'inclusion numérique</h1>
-    <article
-      #item
-      *ngFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
-      [attr.id]="lieuMediationNumerique.id"
-      [class.list-group-item-hover]="hoverId === lieuMediationNumerique.id"
-      [ngClass]="{ 'bg-muted-light': lieuMediationNumerique.prive }"
-      class="list-group-item p-0">
-      <app-mediation-numerique-list-item
-        [lieuMediationNumerique]="lieuMediationNumerique"
-        (showLabel)="showLabel.emit($event)"
-        (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"
-        (enableHover)="enableHover.emit($event)"
-        (disableHover)="disableHover.emit()"></app-mediation-numerique-list-item>
-    </article>
+    <cdk-virtual-scroll-viewport itemSize="80" class="h-100">
+      <article
+        #item
+        *cdkVirtualFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
+        [attr.id]="lieuMediationNumerique.id"
+        [class.list-group-item-hover]="hoverId === lieuMediationNumerique.id"
+        [ngClass]="{ 'bg-muted-light': lieuMediationNumerique.prive }"
+        class="list-group-item p-0">
+        <app-mediation-numerique-list-item
+          [lieuMediationNumerique]="lieuMediationNumerique"
+          (showLabel)="showLabel.emit($event)"
+          (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"
+          (enableHover)="enableHover.emit($event)"
+          (disableHover)="disableHover.emit()"></app-mediation-numerique-list-item>
+      </article>
+    </cdk-virtual-scroll-viewport>
   </div>
   <div class="bg-primary py-3 px-4 g-0 row align-items-center">
     <div class="col-auto">

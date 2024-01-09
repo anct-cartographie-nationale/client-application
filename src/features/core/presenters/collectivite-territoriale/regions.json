@@ -172,7 +172,7 @@
     "code": "11",
     "nom": "Île-de-France",
     "departements": ["75", "77", "78", "91", "92", "93", "94", "95"],
-    "zoom": 9,
+    "zoom": 8.9,
     "localisation": {
       "longitude": 2.504722,
       "latitude": 48.709167

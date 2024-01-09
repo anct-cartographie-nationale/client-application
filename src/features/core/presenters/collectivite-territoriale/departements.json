@@ -677,7 +677,7 @@
   {
     "code": "75",
     "nom": "Paris",
-    "zoom": 12.5,
+    "zoom": 12,
     "localisation": {
       "longitude": 2.34208259060678,
       "latitude": 48.856648617634399
