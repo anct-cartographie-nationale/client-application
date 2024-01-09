@@ -1,0 +1,24 @@
+.carousel {
+  .btn {
+    &.active:focus-visible,
+    &:focus-visible {
+      box-shadow: 0 0 0 3px white;
+    }
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    .carousel-control-icon {
+      border: 2px solid transparent;
+      border-radius: 50%;
+      transition: border-color 0.3s;
+    }
+
+    &:focus {
+      .carousel-control-icon {
+        border-color: white;
+        outline: none;
+      }
+    }
+  }
+}
