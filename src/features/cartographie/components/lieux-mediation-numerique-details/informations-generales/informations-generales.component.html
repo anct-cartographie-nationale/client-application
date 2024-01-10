@@ -1,7 +1,7 @@
 <div class="d-flex flex-row-reverse">
   <div class="flex-grow-1 align-self-center">
     <div class="d-flex">
-      <small class="flex-grow-1" *ngIf="typologie">{{ typologie }}</small>
+      <small class="flex-grow-1" [class.typologie]="!typologie">{{ typologie }}</small>
       <button
         type="button"
         class="btn btn-close btn-close-white opacity-100"
