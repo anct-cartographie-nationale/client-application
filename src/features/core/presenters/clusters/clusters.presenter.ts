@@ -55,15 +55,15 @@ export class ClustersPresenter {
     return this._clusters;
   }
 
-  public expansionZoom(cluster_id: number) {
+  public expansionZoom(clusterId: number) {
     const curentZoom: number = this._markersPresenter.getZoom();
-    const nextZoom: number = this._superCluster.getClusterExpansionZoom(cluster_id);
+    const nextZoom: number = this._superCluster.getClusterExpansionZoom(clusterId);
 
     return nextZoom - curentZoom < 2 ? curentZoom + 2 : nextZoom;
   }
 
-  public clusterIdFromLieuId(id: string): number | undefined {
-    return this._clusterIdMap.get(id);
+  public clusterIdFromLieuId(lieuId: string): number | undefined {
+    return this._clusterIdMap.get(lieuId);
   }
 
   public lieuxIdsInClusterId(clusterId: number): string[] {

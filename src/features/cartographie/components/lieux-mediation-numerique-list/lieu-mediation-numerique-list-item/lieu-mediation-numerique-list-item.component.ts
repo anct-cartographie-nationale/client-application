@@ -33,8 +33,8 @@ export class LieuMediationNumeriqueListItemComponent {
     return dateMaj > new Date('1970-01-01');
   }
 
-  public matomoTracking(lieuID: string): void {
-    this._matomoTracker?.trackEvent('Fiches', 'Début', `Ouverture de fiches - ${lieuID}`);
+  public showDetails(lieu: LieuMediationNumeriqueListItemPresentation): void {
+    this._matomoTracker?.trackEvent('Fiches', 'Début', `Ouverture de fiches - ${lieu.id}`);
   }
 
   public toLabelNom(label: LabelNational): string | undefined {

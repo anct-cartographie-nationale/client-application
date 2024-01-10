@@ -154,7 +154,7 @@ export class LieuxMediationNumeriqueDetailsPage {
     lieuMediationNumerique.localisation &&
       this._markersPresenter.center(
         lieuMediationNumerique.localisation,
-        inLieuxZoomLevel(this._markersPresenter.getZoom()) ? undefined : this._zoomLevel.userPosition
+        inLieuxZoomLevel(this._markersPresenter.getZoom()) ? 17 : this._zoomLevel.userPosition
       );
     this._markersPresenter.select(lieuMediationNumerique.id);
   }

@@ -68,7 +68,7 @@ export class LieuxMediationNumeriqueListComponent {
           top: item.nativeElement.getBoundingClientRect().y - this.container.nativeElement.getBoundingClientRect().y,
           behavior: 'smooth'
         });
-      (item?.nativeElement.querySelectorAll('.link-lieu') as NodeListOf<HTMLElement>)[0].focus();
+      item && (item?.nativeElement.querySelectorAll('.link-lieu') as NodeListOf<HTMLElement>)[0].focus();
     });
   }
 

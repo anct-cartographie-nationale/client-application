@@ -3,7 +3,7 @@
     <a
       class="text-decoration-none link-dark link-lieu stretched-link col"
       [routerLink]="[lieuMediationNumerique.id, 'details']"
-      (click)="matomoTracking(lieuMediationNumerique.id)"
+      (click)="showDetails(lieuMediationNumerique)"
       [relativeTo]="route.parent"
       queryParamsHandling="preserve"
       (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
