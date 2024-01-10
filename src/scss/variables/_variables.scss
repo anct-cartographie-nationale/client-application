@@ -57,7 +57,9 @@ $form-range-thumb-width: 1.5rem;
 $offcanvas-horizontal-width: 450px;
 $dropdown-link-active-color: inherit;
 $dropdown-link-active-bg: #e9ecef;
-
+$form-label-color: $muted-dark;
+$form-label-font-style: italic;
+$form-label-font-size: 0.875rem;
 @import './accordion';
 @import './buttons';
 @import './dropdown';
