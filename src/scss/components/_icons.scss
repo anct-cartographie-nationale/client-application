@@ -529,3 +529,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 .ri-book-marked-line::before {
   content: '\ead9';
 }
+
+.ri-star-line::before {
+  content: '\f18b';
+}

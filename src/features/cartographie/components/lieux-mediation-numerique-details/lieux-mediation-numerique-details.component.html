@@ -165,6 +165,20 @@
       <small class="fst-italic text-muted">Dernière mise à jour {{ lieuMediationNumerique.date_maj | date : 'dd/MM/y' }}</small>
     </div>
   </div>
+  <div class="bg-white py-4">
+    <div class="d-flex ms-4 p-0">
+      <button class="btn btn-primary btn-sm my-auto">
+        <i class="ri-printer-line me-2" aria-hidden="true"></i>
+        Imprimer
+      </button>
+      <div class="ms-3">
+        <button class="btn btn-secondary btn-sm m-auto">
+          <i class="ri-star-line"></i>
+          Je donne mon avis
+        </button>
+      </div>
+    </div>
+  </div>
   <div class="bg-primary p-2">
     <app-bandeau-erreur
       (openImpressionChoiceModal)="impressionChoiceModal.control.toggle($event)"
