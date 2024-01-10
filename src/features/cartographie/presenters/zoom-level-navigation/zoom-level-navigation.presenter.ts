@@ -1,6 +1,6 @@
-export const REGION_ZOOM_LEVEL: number = 7;
+export const REGION_ZOOM_LEVEL: number = window.innerWidth <= 1400 ? 6 : 7;
 export const DEPARTEMENT_ZOOM_LEVEL: number = 9;
-export const LIEUX_ZOOM_LEVEL: number = 10;
+export const LIEUX_ZOOM_LEVEL: number = window.innerWidth <= 1400 ? 9 : 10;
 export const FAR_ZOOM_LEVEL: number = 11;
 export const NEAR_ZOOM_LEVEL: number = 13;
 
@@ -10,7 +10,8 @@ const LIEUX_ROUTE: string = '.';
 export const inRegionZoomLevel = (zoomLevel: number) => zoomLevel <= REGION_ZOOM_LEVEL;
 export const inLieuxZoomLevel = (zoomLevel: number, distance?: string) => {
   const stayInLieuxZoom: boolean = parseInt(distance ?? '') >= 50000 && parseInt(distance ?? '') <= 100000;
-  return zoomLevel > (stayInLieuxZoom ? DEPARTEMENT_ZOOM_LEVEL - 1 : DEPARTEMENT_ZOOM_LEVEL);
+  const lowScreenSize: boolean = window.innerWidth <= 1400;
+  return zoomLevel > (stayInLieuxZoom || lowScreenSize ? DEPARTEMENT_ZOOM_LEVEL - 1 : DEPARTEMENT_ZOOM_LEVEL);
 };
 
 export const inDepartementZoomLevel = (zoomLevel: number) => !inRegionZoomLevel(zoomLevel) && !inLieuxZoomLevel(zoomLevel);

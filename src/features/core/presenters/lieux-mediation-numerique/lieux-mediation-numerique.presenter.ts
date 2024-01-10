@@ -36,7 +36,7 @@ const toLieuxMediationNumeriqueByDistance =
     number
   ]): LieuMediationNumeriquePresentation[] => {
     const stayInLieuxZoom: boolean = filters.distance ? filters.distance >= 50000 && filters.distance <= 100000 : false;
-    return zoomLevel < (stayInLieuxZoom ? LIEUX_ZOOM_LEVEL - 1 : LIEUX_ZOOM_LEVEL)
+    return zoomLevel < (stayInLieuxZoom || window.innerWidth <= 1400 ? LIEUX_ZOOM_LEVEL - 1 : LIEUX_ZOOM_LEVEL)
       ? []
       : filteredLieuxMediationNumerique(lieux.filter(byBoundingBox(boundingBox)), localisation, filters, date).sort(byDistance);
   };
