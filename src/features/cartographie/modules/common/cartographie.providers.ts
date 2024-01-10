@@ -1,5 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { INITIAL_POSITION_TOKEN, POSITION_CONFIGURATION, ZOOM_LEVEL_CONFIGURATION, ZOOM_LEVEL_TOKEN } from '../../../../root';
+import {
+  CLUSTER_CONFIGURATION,
+  CLUSTER_TOKEN,
+  INITIAL_POSITION_TOKEN,
+  POSITION_CONFIGURATION,
+  ZOOM_LEVEL_CONFIGURATION,
+  ZOOM_LEVEL_TOKEN
+} from '../../../../root';
 import { AddressHttp, AddressRepository } from '../../../adresse';
 
 export const cartographieProviders = [
@@ -10,6 +17,10 @@ export const cartographieProviders = [
   {
     provide: ZOOM_LEVEL_TOKEN,
     useValue: ZOOM_LEVEL_CONFIGURATION
+  },
+  {
+    provide: CLUSTER_TOKEN,
+    useValue: CLUSTER_CONFIGURATION
   },
   {
     deps: [HttpClient],

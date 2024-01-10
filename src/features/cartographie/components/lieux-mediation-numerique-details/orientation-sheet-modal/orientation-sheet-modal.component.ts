@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LabelNational, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
-import { ModalComponent } from '../../../../core/components';
+import { ModalComponent } from '../../../../core';
 import { FilterPresentation } from '../../../../core/presenters';
 import { OrientationSheetForm, PrescripteurOrientationSheetForm, UsagerOrientationSheetForm } from '../../../models';
 

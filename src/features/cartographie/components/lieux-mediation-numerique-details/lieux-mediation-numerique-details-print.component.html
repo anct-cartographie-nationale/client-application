@@ -21,13 +21,18 @@
         [center]="[lieuMediationNumerique.localisation.longitude, lieuMediationNumerique.localisation.latitude]">
         <app-lieu-mediation-numerique-markers
           *ngIf="lieuMediationNumerique.localisation"
-          [lieuxMediationNumeriques]="[
+          [lieuxMediationNumeriqueClusters]="[
             {
-              id: lieuMediationNumerique.id,
-              nom: lieuMediationNumerique.nom,
-              labels_nationaux: lieuMediationNumerique.labels_nationaux,
-              latitude: lieuMediationNumerique.localisation.latitude,
-              longitude: lieuMediationNumerique.localisation.longitude
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: [lieuMediationNumerique.localisation.longitude, lieuMediationNumerique.localisation.latitude]
+              },
+              properties: {
+                id: lieuMediationNumerique.id,
+                nom: lieuMediationNumerique.nom,
+                labels_nationaux: lieuMediationNumerique.labels_nationaux
+              }
             }
           ]"></app-lieu-mediation-numerique-markers>
       </mgl-map>

@@ -1,5 +1,19 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AnyProps, ClusterFeature } from 'supercluster';
+import { LieuMediationNumeriquePresentation } from '../../../../core/presenters';
+import { ClustersPresenter } from '../../../../core/presenters/clusters';
+import { Cluster } from '../../../models';
 import { LieuMediationNumeriqueOnMapPresentation } from '../../../presenters';
+
+export type LieuMediationNumeriqueCluster = {
+  type: 'Feature';
+  geometry: { type: 'Point'; coordinates: [number, number] };
+  properties: { cluster?: boolean } | LieuMediationNumeriquePresentation;
+};
+
+const matchingLieuInForCluster = (id: string) => (cluster: Cluster) => cluster.properties['id'] === id;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -7,7 +21,7 @@ import { LieuMediationNumeriqueOnMapPresentation } from '../../../presenters';
   templateUrl: './lieu-mediation-numerique-markers.component.html'
 })
 export class LieuMediationNumeriqueMarkersComponent {
-  @Input() public lieuxMediationNumeriques: LieuMediationNumeriqueOnMapPresentation[] = [];
+  @Input() public lieuxMediationNumeriqueClusters: Cluster[] = [];
   @Input() public selectedId: string = '';
   @Input() public hoverId: string = '';
   @Input() public displayTooltip: boolean = true;
@@ -15,11 +29,17 @@ export class LieuMediationNumeriqueMarkersComponent {
   @Output() public showDetails: EventEmitter<LieuMediationNumeriqueOnMapPresentation> =
     new EventEmitter<LieuMediationNumeriqueOnMapPresentation>();
 
-  @Output() public highlight: EventEmitter<LieuMediationNumeriqueOnMapPresentation | undefined> = new EventEmitter<
-    LieuMediationNumeriqueOnMapPresentation | undefined
-  >();
+  @Output() public selectCluster: EventEmitter<ClusterFeature<AnyProps>> = new EventEmitter<ClusterFeature<AnyProps>>();
 
-  public trackByLieuId(_: number, lieu: LieuMediationNumeriqueOnMapPresentation) {
-    return lieu.id;
-  }
+  @Output() public highlight: EventEmitter<string> = new EventEmitter<string>();
+
+  public constructor(public clustersPresenter: ClustersPresenter) {}
+
+  public highlightedLieu: Observable<LieuMediationNumeriqueOnMapPresentation | undefined> = this.highlight.pipe(
+    map((id: string) => {
+      return this.lieuxMediationNumeriqueClusters.find(matchingLieuInForCluster(id))?.properties as
+        | LieuMediationNumeriqueOnMapPresentation
+        | undefined;
+    })
+  );
 }

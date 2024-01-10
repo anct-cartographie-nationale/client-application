@@ -41,7 +41,7 @@
   <tbody>
     <tr>
       <td class="row">
-        <div class="col-6" *ngFor="let lieuMediationNumerique of lieuxMediationNumerique">
+        <div class="col-6" *ngFor="let lieuMediationNumerique of lieuxMediationNumerique | slice : 0 : 100">
           <app-mediation-numerique-list-item
             class="d-block border-bottom h-100 py-1"
             [lieuMediationNumerique]="lieuMediationNumerique"></app-mediation-numerique-list-item>

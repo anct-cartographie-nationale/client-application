@@ -179,13 +179,18 @@
             <app-lieu-mediation-numerique-markers
               *ngIf="localisation"
               [displayTooltip]="false"
-              [lieuxMediationNumeriques]="[
+              [lieuxMediationNumeriqueClusters]="[
                 {
-                  id: id,
-                  nom: nom,
-                  labels_nationaux: labels_nationaux,
-                  latitude: localisation.latitude,
-                  longitude: localisation.longitude
+                  type: 'Feature',
+                  geometry: {
+                    type: 'Point',
+                    coordinates: [localisation.longitude, localisation.latitude]
+                  },
+                  properties: {
+                    id: id,
+                    nom: nom,
+                    labels_nationaux: labels_nationaux
+                  }
                 }
               ]"></app-lieu-mediation-numerique-markers>
           </mgl-map>

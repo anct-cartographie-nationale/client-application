@@ -1,8 +1,9 @@
-import { LieuxMediationNumeriquePresenter, MarkersPresenter } from '../../../core/presenters';
-import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
+import { CLUSTER_TOKEN, INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '../../../../root';
 import { AddressPresenter, AddressRepository, SEARCHABLE_TOKEN } from '../../../adresse';
+import { LieuxMediationNumeriquePresenter, MarkersPresenter } from '../../../core/presenters';
+import { ClustersPresenter } from '../../../core/presenters/clusters';
+import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { LieuxMediationNumeriqueDetailsPresenter } from '../../presenters';
-import { INITIAL_POSITION_TOKEN, ZOOM_LEVEL_TOKEN } from '../../../../root';
 
 export const cartographieLayoutProviders = [
   {
@@ -31,5 +32,10 @@ export const cartographieLayoutProviders = [
     deps: [ZOOM_LEVEL_TOKEN, INITIAL_POSITION_TOKEN],
     provide: MarkersPresenter,
     useClass: MarkersPresenter
+  },
+  {
+    deps: [MarkersPresenter, CLUSTER_TOKEN],
+    provide: ClustersPresenter,
+    useClass: ClustersPresenter
   }
 ];

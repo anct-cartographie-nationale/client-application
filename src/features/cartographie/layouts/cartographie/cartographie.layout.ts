@@ -3,6 +3,8 @@ import { ActivatedRoute, ParamMap, Params, Router, RouterOutlet } from '@angular
 import { BehaviorSubject, combineLatest, Observable, of, Subject, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
+import { MatomoTracker } from 'ngx-matomo';
+import { AnyProps, ClusterFeature } from 'supercluster';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import { NO_LOCALISATION } from '../../../core/models';
@@ -24,8 +26,11 @@ import {
   toLocalisationFromFilterFormPresentation,
   WithLieuxCount
 } from '../../../core/presenters';
+import { ClustersPresenter } from '../../../core/presenters/clusters';
 import { ifAny } from '../../../core/utilities';
 import { AddressType, ResultFoundPresentation } from '../../../adresse';
+import { LieuMediationNumeriqueCluster } from '../../components';
+import { Cluster } from '../../models';
 import {
   DEPARTEMENT_ZOOM_LEVEL,
   getNextRouteFromZoomLevel,
@@ -33,7 +38,6 @@ import {
   shouldNavigateToListPage
 } from '../../presenters';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
-import { MatomoTracker } from 'ngx-matomo';
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
@@ -65,6 +69,14 @@ const toLieuxByLongitude = (LieuxMediationNumerique: LieuMediationNumeriquePrese
       lieuMediationNumeriqueB: LieuMediationNumeriquePresentation
     ): number => lieuMediationNumeriqueB.latitude - lieuMediationNumeriqueA.latitude
   );
+
+const toLieuMediationNumeriqueToGeoJsonFeature = (lieu: LieuMediationNumeriquePresentation): LieuMediationNumeriqueCluster => {
+  return {
+    type: 'Feature',
+    properties: lieu,
+    geometry: { type: 'Point', coordinates: [lieu.longitude, lieu.latitude] }
+  };
+};
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -119,7 +131,7 @@ export class CartographieLayout {
       })
     );
 
-  public lieuxMediationNumerique$: Observable<LieuMediationNumeriqueOnMapPresentation[]> = combineLatest([
+  public lieuxMediationNumeriqueClusters$: Observable<Cluster[]> = combineLatest([
     this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(
       ...this._lieuxMediationNumeriqueListPresenterArgs,
       this.markersPresenter.boundingBox$,
@@ -136,7 +148,11 @@ export class CartographieLayout {
     tap((lieux: LieuMediationNumeriquePresentation[]): void => {
       lieux.length > 0 && this._resultsCount$.next(lieux.length);
       this._loadingState$.next(false);
-    })
+    }),
+    withLatestFrom(this.currentZoom$, this.markersPresenter.boundingBox$),
+    map((clusterParams: [LieuMediationNumeriquePresentation[], number, [Localisation, Localisation]]) =>
+      this._clusterPresenter.fromLieuxMediationNumerique(clusterParams)
+    )
   );
 
   public allLieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> =
@@ -168,6 +184,7 @@ export class CartographieLayout {
     public readonly router: Router,
     public readonly route: ActivatedRoute,
     public readonly markersPresenter: MarkersPresenter,
+    private readonly _clusterPresenter: ClustersPresenter,
     @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
@@ -196,6 +213,16 @@ export class CartographieLayout {
     this.markersPresenter.center(Localisation({ latitude: lieu.latitude, longitude: lieu.longitude }));
     this.markersPresenter.select(lieu.id);
     this.toggleMapForSmallDevices();
+  }
+
+  public onSelectCluster(cluster: ClusterFeature<AnyProps>): void {
+    this.markersPresenter.center(
+      Localisation({
+        latitude: cluster.geometry.coordinates[1],
+        longitude: cluster.geometry.coordinates[0]
+      }),
+      this._clusterPresenter.expansionZoom(cluster.properties.cluster_id)
+    );
   }
 
   public onHighlight(highlightedId?: string): void {

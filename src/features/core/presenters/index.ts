@@ -3,4 +3,4 @@ export * from './distance';
 export * from './filter';
 export * from './horaires';
 export * from './lieux-mediation-numerique';
-export * from './markers';
+export * from './markers/markers.presenter';

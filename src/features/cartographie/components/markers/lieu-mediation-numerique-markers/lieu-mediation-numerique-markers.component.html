@@ -1,78 +1,108 @@
 <ng-container *ngIf="displayTooltip">
-  <mgl-popup
-    *ngIf="highlight | async as lieuMediationNumerique"
-    anchor="bottom"
-    [offset]="[0, -40]"
-    [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]"
-    [closeButton]="false">
-    <div *ngIf="lieuMediationNumerique.prise_rdv" class="text-center text-primary fs-6 p-2" style="background-color: #c0c0ff">
-      Prise de RDV en ligne disponible
-    </div>
-    <div
-      class="text-center p-3 border-bottom border-3 text-wrap"
-      [ngClass]="lieuMediationNumerique.status?.label === 'Ouvert' ? 'border-success' : 'border-muted'">
-      <b class="fs-5">{{ lieuMediationNumerique.nom }}</b>
-      <div *ngIf="lieuMediationNumerique.status; else noOpeningHours" class="text-muted">
-        <span [class.text-primary]="lieuMediationNumerique.status.label === 'Ouvert'">
-          {{ lieuMediationNumerique.status.label }}
-        </span>
-        ·
-        <small>{{ lieuMediationNumerique.status.limite }}</small>
+  <ng-container *ngIf="highlightedLieu | async as highlighted">
+    <mgl-popup
+      *ngIf="highlighted.id"
+      anchor="bottom"
+      [offset]="[0, -40]"
+      [lngLat]="[highlighted.longitude, highlighted.latitude]"
+      [closeButton]="false">
+      <div *ngIf="highlighted.prise_rdv" class="text-center text-primary fs-6 p-2" style="background-color: #c0c0ff">
+        Prise de RDV en ligne disponible
       </div>
-      <span class="my-1 fs-4" *ngIf="lieuMediationNumerique.prive">Ce lieu n'accueille pas de public</span>
-      <ng-template #noOpeningHours>
-        <div class="text-muted">Horaires inconnus</div>
-      </ng-template>
-    </div>
-  </mgl-popup>
-</ng-container>
-<ng-container *ngFor="let lieuMediationNumerique of lieuxMediationNumeriques; index as i; trackBy: trackByLieuId">
-  <mgl-marker
-    [lngLat]="[lieuMediationNumerique.longitude, lieuMediationNumerique.latitude]"
-    [className]="hoverId === lieuMediationNumerique.id || selectedId === lieuMediationNumerique.id ? 'marker-hover' : ''">
-    <button
-      tabindex="-1"
-      [ngClass]="{ 'opacity-50': lieuMediationNumerique.prive }"
-      class="btn"
-      (click)="showDetails.emit(lieuMediationNumerique)"
-      (mouseenter)="highlight.emit(lieuMediationNumerique)"
-      (mouseleave)="highlight.emit()">
-      <svg
-        [ngClass]="lieuMediationNumerique.labels_nationaux?.includes($any('CNFS')) ? 'marker-cnfs' : 'marker-default'"
-        [class.marker-status-open]="lieuMediationNumerique.status?.label === 'Ouvert'"
-        [class.marker-status-closed]="lieuMediationNumerique.status?.label === 'Fermé'"
-        [class.marker-status-unknown]="
-          lieuMediationNumerique.status?.label !== 'Fermé' && lieuMediationNumerique.status?.label !== 'Ouvert'
-        "
-        width="50"
-        height="85"
-        viewBox="0 0 45 80"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg">
-        <ellipse class="marker-base" cx="22.75" cy="59.5" rx="11.3" ry="4" />
-        <g *ngIf="lieuMediationNumerique.labels_nationaux?.includes($any('CNFS')); else defaultMarker" class="marker-body">
-          <path class="marker-shape" d="m23.527 54.153 13.6-23.6v-16.7l-14.4-8.3-14.4 8.3v16.7l13.6 23.6z" />
-          <path class="marker-shape-out" d="m32.327 16.653-9.6-5.5-9.6 5.5v11.1l9.6 5.5 9.6-5.5v-3.2h-5.5v-4.7h5.5z" />
-          <path class="marker-shape-in" d="M18.627 19.853v4.7l4.1 2.4 4.1-2.4v-4.7l-4.1-2.4z" />
-        </g>
-        <ng-template #defaultMarker>
-          <g class="marker-body">
-            <path
-              class="marker-shape"
-              d="M22.727 6c-8.8 0-16 7.2-16 16s16 32 16 32 16-23.2 16-32-7.2-16-16-16zm0 21c-2.9 0-5.3-2.4-5.3-5.3s2.4-5.3 5.3-5.3 5.3 2.4 5.3 5.3-2.4 5.3-5.3 5.3z" />
-          </g>
+      <div
+        class="text-center p-3 border-bottom border-3 text-wrap"
+        [ngClass]="highlighted.status?.label === 'Ouvert' ? 'border-success' : 'border-muted'">
+        <b class="fs-5">{{ highlighted.nom }}</b>
+        <div *ngIf="highlighted.status; else noOpeningHours" class="text-muted">
+          <span [class.text-primary]="highlighted.status.label === 'Ouvert'">
+            {{ highlighted.status.label }}
+          </span>
+          ·
+          <small>{{ highlighted.status.limite }}</small>
+        </div>
+        <span class="my-1 fs-4" *ngIf="highlighted.prive">Ce lieu n'accueille pas de public</span>
+        <ng-template #noOpeningHours>
+          <div class="text-muted">Horaires inconnus</div>
         </ng-template>
-        <g *ngIf="lieuMediationNumerique.prise_rdv">
-          <path d="M34.257 69.177v8h12l-4-4 4-4z" fill="#c0c0ff" />
-          <path d="m34.257 77.177 4-4h-4z" fill="#000091" />
-          <path d="M11.198 69.177v8h-12l4-4-4-4z" fill="#c0c0ff" />
-          <path d="m11.198 77.177-4-4h4z" fill="#000091" />
-          <path fill="#c0c0ff" d="M7.198 61.176h31.059v12H7.197Z" />
+      </div>
+    </mgl-popup>
+  </ng-container>
+</ng-container>
+<ng-container *ngFor="let cluster of lieuxMediationNumeriqueClusters">
+  <ng-container *ngIf="cluster.properties['cluster'] === true; else lieuMarker">
+    <mgl-marker
+      [lngLat]="$any(cluster.geometry.coordinates)"
+      [className]="clustersPresenter.clusterIdFromLieuId(hoverId) === cluster.properties['cluster_id'] ? 'marker-hover' : ''">
+      <button
+        tabindex="-1"
+        class="btn text-white marker-cluster"
+        (click)="selectCluster.emit($any(cluster))"
+        (mouseenter)="highlight.emit(cluster.properties['cluster_id'])"
+        (mouseleave)="highlight.emit()">
+        <svg width="52" height="64" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
-            d="M12.845 70.706v-7.059h2.085c1.5 0 2.427.797 2.427 2.108 0 .857-.4 1.492-1.102 1.825l2.135 3.126h-1.628l-1.822-2.854h-.711v2.854zm2.163-5.869h-.78v1.825h.78c.585 0 .926-.353.926-.927 0-.535-.341-.898-.926-.898zm4.161 5.87v-7.06h2.68c2.163 0 3.625 1.624 3.625 3.53 0 1.906-1.462 3.53-3.625 3.53zm2.631-5.759h-1.315v4.457H21.8c1.267 0 2.183-.978 2.183-2.228 0-1.26-.916-2.229-2.183-2.229zm3.833-1.3h1.471l2.017 5.515 2.017-5.516h1.472l-2.583 7.06h-1.812z"
+            d="M49.642 26.497C49.642 47.855 26 61.137 26 61.137S2.358 47.854 2.358 26.496c0-13.09 10.584-23.7 23.642-23.7s23.642 10.61 23.642 23.7z"
             fill="#000091" />
-        </g>
-      </svg>
-    </button>
-  </mgl-marker>
+          <path
+            d="M49.642 26.497C49.642 47.855 26 61.137 26 61.137S2.358 47.854 2.358 26.496c0-13.09 10.584-23.7 23.642-23.7s23.642 10.61 23.642 23.7z"
+            stroke="#fff" />
+        </svg>
+        <div class="marker-cluster-fg d-flex">
+          <span class="m-auto text-white fw-bold fs-6 mt-4">
+            {{ cluster.properties['point_count'] ?? 0 }}
+          </span>
+        </div>
+      </button>
+    </mgl-marker>
+  </ng-container>
+  <ng-template #lieuMarker>
+    <mgl-marker
+      [lngLat]="$any(cluster.geometry.coordinates)"
+      [className]="hoverId === cluster.properties['id'] || selectedId === cluster.properties['id'] ? 'marker-hover' : ''">
+      <button
+        tabindex="-1"
+        [ngClass]="{ 'opacity-50': cluster.properties['prive'] }"
+        class="btn"
+        (click)="showDetails.emit($any(cluster.properties))"
+        (mouseenter)="highlight.emit(cluster.properties['id'])"
+        (mouseleave)="highlight.emit()">
+        <svg
+          [ngClass]="cluster.properties['labels_nationaux']?.includes($any('CNFS')) ? 'marker-cnfs' : 'marker-default'"
+          [class.marker-status-open]="cluster.properties['status']?.label === 'Ouvert'"
+          [class.marker-status-closed]="cluster.properties['status']?.label === 'Fermé'"
+          [class.marker-status-unknown]="
+            cluster.properties['status']?.label !== 'Fermé' && cluster.properties['status']?.label !== 'Ouvert'
+          "
+          width="50"
+          height="85"
+          viewBox="0 0 45 80"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <ellipse class="marker-base" cx="22.75" cy="59.5" rx="11.3" ry="4" />
+          <g *ngIf="cluster.properties['labels_nationaux']?.includes($any('CNFS')); else defaultMarker" class="marker-body">
+            <path class="marker-shape" d="m23.527 54.153 13.6-23.6v-16.7l-14.4-8.3-14.4 8.3v16.7l13.6 23.6z" />
+            <path class="marker-shape-out" d="m32.327 16.653-9.6-5.5-9.6 5.5v11.1l9.6 5.5 9.6-5.5v-3.2h-5.5v-4.7h5.5z" />
+            <path class="marker-shape-in" d="M18.627 19.853v4.7l4.1 2.4 4.1-2.4v-4.7l-4.1-2.4z" />
+          </g>
+          <ng-template #defaultMarker>
+            <g class="marker-body">
+              <path
+                class="marker-shape"
+                d="M22.727 6c-8.8 0-16 7.2-16 16s16 32 16 32 16-23.2 16-32-7.2-16-16-16zm0 21c-2.9 0-5.3-2.4-5.3-5.3s2.4-5.3 5.3-5.3 5.3 2.4 5.3 5.3-2.4 5.3-5.3 5.3z" />
+            </g>
+          </ng-template>
+          <g *ngIf="cluster.properties['prise_rdv']">
+            <path d="M34.257 69.177v8h12l-4-4 4-4z" fill="#c0c0ff" />
+            <path d="m34.257 77.177 4-4h-4z" fill="#000091" />
+            <path d="M11.198 69.177v8h-12l4-4-4-4z" fill="#c0c0ff" />
+            <path d="m11.198 77.177-4-4h4z" fill="#000091" />
+            <path fill="#c0c0ff" d="M7.198 61.176h31.059v12H7.197Z" />
+            <path
+              d="M12.845 70.706v-7.059h2.085c1.5 0 2.427.797 2.427 2.108 0 .857-.4 1.492-1.102 1.825l2.135 3.126h-1.628l-1.822-2.854h-.711v2.854zm2.163-5.869h-.78v1.825h.78c.585 0 .926-.353.926-.927 0-.535-.341-.898-.926-.898zm4.161 5.87v-7.06h2.68c2.163 0 3.625 1.624 3.625 3.53 0 1.906-1.462 3.53-3.625 3.53zm2.631-5.759h-1.315v4.457H21.8c1.267 0 2.183-.978 2.183-2.228 0-1.26-.916-2.229-2.183-2.229zm3.833-1.3h1.471l2.017 5.515 2.017-5.516h1.472l-2.583 7.06h-1.812z"
+              fill="#000091" />
+          </g>
+        </svg>
+      </button>
+    </mgl-marker>
+  </ng-template>
 </ng-container>

@@ -1,9 +1,9 @@
-<div class="d-print-none my-4 mx-sm-4 mx-2">
+<div class="d-print-none py-4 px-sm-4 px-2">
   <div class="row g-2">
     <a
       class="text-decoration-none link-dark link-lieu stretched-link col"
       [routerLink]="[lieuMediationNumerique.id, 'details']"
-      (click)="matomoTracking(lieuMediationNumerique.id)"
+      (click)="showDetails(lieuMediationNumerique)"
       [relativeTo]="route.parent"
       queryParamsHandling="preserve"
       (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
