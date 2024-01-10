@@ -4,7 +4,7 @@ import { BehaviorSubject, combineLatest, Observable, of, Subject, tap, withLates
 import { map } from 'rxjs/operators';
 import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
 import { MatomoTracker } from 'ngx-matomo';
-import Supercluster from 'supercluster';
+import { AnyProps, ClusterFeature } from 'supercluster';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration, ZOOM_LEVEL_TOKEN, ZoomLevelConfiguration } from '../../../../root';
 import { NO_LOCALISATION } from '../../../core/models';
@@ -26,9 +26,11 @@ import {
   toLocalisationFromFilterFormPresentation,
   WithLieuxCount
 } from '../../../core/presenters';
+import { ClustersPresenter } from '../../../core/presenters/clusters';
 import { ifAny } from '../../../core/utilities';
 import { AddressType, ResultFoundPresentation } from '../../../adresse';
 import { LieuMediationNumeriqueCluster } from '../../components';
+import { Cluster } from '../../models';
 import {
   DEPARTEMENT_ZOOM_LEVEL,
   getNextRouteFromZoomLevel,
@@ -36,7 +38,6 @@ import {
   shouldNavigateToListPage
 } from '../../presenters';
 import { cartographieLayoutProviders } from './cartographie.layout.providers';
-import { Cluster } from '../../models';
 
 const filteredByDepartementIfExist = (
   departement: DepartementPresentation | undefined,
@@ -76,15 +77,6 @@ const toLieuMediationNumeriqueToGeoJsonFeature = (lieu: LieuMediationNumeriquePr
     geometry: { type: 'Point', coordinates: [lieu.longitude, lieu.latitude] }
   };
 };
-
-const toCluster = ([lieuxMediationNumerique, zoom, [topLeft, bottomRight]]: [
-  LieuMediationNumeriquePresentation[],
-  number,
-  [Localisation, Localisation]
-]): Cluster[] =>
-  new Supercluster({ radius: 35, maxZoom: 16 })
-    .load(lieuxMediationNumerique.map(toLieuMediationNumeriqueToGeoJsonFeature))
-    .getClusters([topLeft.longitude, bottomRight.latitude, bottomRight.longitude, topLeft.latitude], zoom);
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -158,7 +150,9 @@ export class CartographieLayout {
       this._loadingState$.next(false);
     }),
     withLatestFrom(this.currentZoom$, this.markersPresenter.boundingBox$),
-    map(toCluster)
+    map((clusterParams: [LieuMediationNumeriquePresentation[], number, [Localisation, Localisation]]) =>
+      this._clusterPresenter.fromLieuxMediationNumerique(clusterParams)
+    )
   );
 
   public allLieuxMediationNumerique$: Observable<LieuMediationNumeriquePresentation[]> =
@@ -190,6 +184,7 @@ export class CartographieLayout {
     public readonly router: Router,
     public readonly route: ActivatedRoute,
     public readonly markersPresenter: MarkersPresenter,
+    private readonly _clusterPresenter: ClustersPresenter,
     @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
     @Inject(ZOOM_LEVEL_TOKEN)
     private readonly _zoomLevel: ZoomLevelConfiguration,
@@ -220,8 +215,14 @@ export class CartographieLayout {
     this.toggleMapForSmallDevices();
   }
 
-  public onSelectCluster(localisation: Localisation): void {
-    this.markersPresenter.center(localisation, this.markersPresenter.getZoom() + 2);
+  public onSelectCluster(cluster: ClusterFeature<AnyProps>): void {
+    this.markersPresenter.center(
+      Localisation({
+        latitude: cluster.geometry.coordinates[1],
+        longitude: cluster.geometry.coordinates[0]
+      }),
+      this._clusterPresenter.expansionZoom(cluster.properties.cluster_id)
+    );
   }
 
   public onHighlight(highlightedId?: string): void {

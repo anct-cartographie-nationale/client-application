@@ -253,7 +253,7 @@
               [lieuxMediationNumeriqueClusters]="clusters"
               [selectedId]="(markersPresenter.selected$ | async) ?? ''"
               [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
-              (highlight)="onHighlight($event?.id)"
+              (highlight)="onHighlight($event)"
               (showDetails)="onShowDetails($event)"
               (selectCluster)="onSelectCluster($event)"></app-lieu-mediation-numerique-markers>
           </ng-container>

@@ -141,6 +141,14 @@
   .marker-group-fg {
     @include marker-dimensions($marker-territoire-size-fg-hover);
   }
+
+  .marker-cluster {
+    stroke-width: 4;
+
+    .marker-cluster-fg {
+      opacity: 1;
+    }
+  }
 }
 
 .marker-cluster {

@@ -11,9 +11,9 @@ import { CollapseModule, ModalModule, OffcanvasModule, TextSeparatorModule } fro
 import { CheckboxArrayModule } from '../../../core/directives';
 import { DistancePipeModule, PhonePipeModule } from '../../../core/pipes';
 import { AdresseModule, UserLocationModule } from '../../../adresse';
+import { components } from '../../components';
 import { pages } from '../../pages';
 import { CartographieLayout } from '../../layouts';
-import { components } from '../../components';
 
 @NgModule({
   declarations: [CartographieLayout, ...pages, ...components],

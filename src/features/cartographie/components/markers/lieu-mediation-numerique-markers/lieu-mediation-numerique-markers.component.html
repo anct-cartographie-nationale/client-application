@@ -1,45 +1,44 @@
 <ng-container *ngIf="displayTooltip">
-  <mgl-popup
-    *ngIf="highlight | async as highlighted"
-    anchor="bottom"
-    [offset]="[0, -40]"
-    [lngLat]="[highlighted.longitude, highlighted.latitude]"
-    [closeButton]="false">
-    <div *ngIf="highlighted.prise_rdv" class="text-center text-primary fs-6 p-2" style="background-color: #c0c0ff">
-      Prise de RDV en ligne disponible
-    </div>
-    <div
-      class="text-center p-3 border-bottom border-3 text-wrap"
-      [ngClass]="highlighted.status?.label === 'Ouvert' ? 'border-success' : 'border-muted'">
-      <b class="fs-5">{{ highlighted.nom }}</b>
-      <div *ngIf="highlighted.status; else noOpeningHours" class="text-muted">
-        <span [class.text-primary]="highlighted.status.label === 'Ouvert'">
-          {{ highlighted.status.label }}
-        </span>
-        ·
-        <small>{{ highlighted.status.limite }}</small>
+  <ng-container *ngIf="highlightedLieu | async as highlighted">
+    <mgl-popup
+      *ngIf="highlighted.id"
+      anchor="bottom"
+      [offset]="[0, -40]"
+      [lngLat]="[highlighted.longitude, highlighted.latitude]"
+      [closeButton]="false">
+      <div *ngIf="highlighted.prise_rdv" class="text-center text-primary fs-6 p-2" style="background-color: #c0c0ff">
+        Prise de RDV en ligne disponible
       </div>
-      <span class="my-1 fs-4" *ngIf="highlighted.prive">Ce lieu n'accueille pas de public</span>
-      <ng-template #noOpeningHours>
-        <div class="text-muted">Horaires inconnus</div>
-      </ng-template>
-    </div>
-  </mgl-popup>
+      <div
+        class="text-center p-3 border-bottom border-3 text-wrap"
+        [ngClass]="highlighted.status?.label === 'Ouvert' ? 'border-success' : 'border-muted'">
+        <b class="fs-5">{{ highlighted.nom }}</b>
+        <div *ngIf="highlighted.status; else noOpeningHours" class="text-muted">
+          <span [class.text-primary]="highlighted.status.label === 'Ouvert'">
+            {{ highlighted.status.label }}
+          </span>
+          ·
+          <small>{{ highlighted.status.limite }}</small>
+        </div>
+        <span class="my-1 fs-4" *ngIf="highlighted.prive">Ce lieu n'accueille pas de public</span>
+        <ng-template #noOpeningHours>
+          <div class="text-muted">Horaires inconnus</div>
+        </ng-template>
+      </div>
+    </mgl-popup>
+  </ng-container>
 </ng-container>
 <ng-container *ngFor="let cluster of lieuxMediationNumeriqueClusters">
   <ng-container *ngIf="cluster.properties['cluster'] === true; else lieuMarker">
-    <mgl-marker [lngLat]="$any(cluster.geometry.coordinates)">
+    <mgl-marker
+      [lngLat]="$any(cluster.geometry.coordinates)"
+      [className]="clustersPresenter.clusterIdFromLieuId(hoverId) === cluster.properties['cluster_id'] ? 'marker-hover' : ''">
       <button
         tabindex="-1"
         class="btn text-white marker-cluster"
-        (click)="
-          selectCluster.emit(
-            $any({
-              latitude: cluster.geometry.coordinates[1],
-              longitude: cluster.geometry.coordinates[0]
-            })
-          )
-        ">
+        (click)="selectCluster.emit($any(cluster))"
+        (mouseenter)="highlight.emit(cluster.properties['cluster_id'])"
+        (mouseleave)="highlight.emit()">
         <svg width="52" height="64" viewBox="0 0 52 64" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M49.642 26.497C49.642 47.855 26 61.137 26 61.137S2.358 47.854 2.358 26.496c0-13.09 10.584-23.7 23.642-23.7s23.642 10.61 23.642 23.7z"
@@ -49,7 +48,9 @@
             stroke="#fff" />
         </svg>
         <div class="marker-cluster-fg d-flex">
-          <span class="m-auto text-white fw-bold fs-6 mt-4">{{ cluster.properties['point_count'] ?? 0 }}</span>
+          <span class="m-auto text-white fw-bold fs-6 mt-4">
+            {{ cluster.properties['point_count'] ?? 0 }}
+          </span>
         </div>
       </button>
     </mgl-marker>
@@ -63,7 +64,7 @@
         [ngClass]="{ 'opacity-50': cluster.properties['prive'] }"
         class="btn"
         (click)="showDetails.emit($any(cluster.properties))"
-        (mouseenter)="highlight.emit($any(cluster.properties))"
+        (mouseenter)="highlight.emit(cluster.properties['id'])"
         (mouseleave)="highlight.emit()">
         <svg
           [ngClass]="cluster.properties['labels_nationaux']?.includes($any('CNFS')) ? 'marker-cnfs' : 'marker-default'"

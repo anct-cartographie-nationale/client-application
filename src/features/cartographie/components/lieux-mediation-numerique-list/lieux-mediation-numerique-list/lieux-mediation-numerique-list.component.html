@@ -6,7 +6,10 @@
         #item
         *cdkVirtualFor="let lieuMediationNumerique of lieuxMediationNumerique; trackBy: trackByLieuId"
         [attr.id]="lieuMediationNumerique.id"
-        [class.list-group-item-hover]="hoverId === lieuMediationNumerique.id"
+        [class.list-group-item-hover]="
+          hoverId === lieuMediationNumerique.id ||
+          clustersPresenter.lieuxIdsInClusterId($any(hoverId)).includes(lieuMediationNumerique.id)
+        "
         [ngClass]="{ 'bg-muted-light': lieuMediationNumerique.prive }"
         class="list-group-item p-0">
         <app-mediation-numerique-list-item
