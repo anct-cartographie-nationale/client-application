@@ -38,7 +38,7 @@
   <tbody>
     <tr>
       <td class="d-flex">
-        <div class="d-flex flex-column me-1">
+        <div class="d-flex flex-column">
           <div
             *ngFor="
               let lieu of lieuxMediationNumerique | slice : 0 : ceilOnMin(lieuxMediationNumerique.length) / 2;
@@ -53,7 +53,8 @@
         <div class="d-flex flex-column">
           <div
             *ngFor="
-              let lieu of lieuxMediationNumerique | slice : ceilOnMin(lieuxMediationNumerique.length) / 2;
+              let lieu of lieuxMediationNumerique
+                | slice : ceilOnMin(lieuxMediationNumerique.length) / 2 : ceilOnMin(lieuxMediationNumerique.length);
               let isLast = last
             "
             [ngClass]="{ 'list-items-print': !isLast, 'allow-page-break': isLast }">
