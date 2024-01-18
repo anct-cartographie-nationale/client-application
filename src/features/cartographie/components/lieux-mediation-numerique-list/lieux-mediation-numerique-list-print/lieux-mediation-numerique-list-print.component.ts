@@ -13,4 +13,8 @@ export class LieuxMediationNumeriqueListPrintComponent {
   @Input() public filters?: FilterPresentation;
 
   public constructor(@Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration) {}
+
+  ceilOnMin(lieuxCount: number): number {
+    return Math.ceil(Math.min(100, lieuxCount));
+  }
 }

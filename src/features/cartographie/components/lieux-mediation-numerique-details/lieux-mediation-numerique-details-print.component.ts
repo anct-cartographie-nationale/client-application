@@ -14,8 +14,13 @@ export class LieuxMediationNumeriqueDetailsPrintComponent {
   @Input() public orientationSheetForm?: OrientationSheetForm;
   @Input() public filters?: FilterPresentation;
 
+  public currentUrl: string = '';
+  public currentDate = new Date();
+
   public constructor(
     @Inject(ASSETS_TOKEN) public readonly assetsConfiguration: AssetsConfiguration,
     @Inject(BRAND_TOKEN) public readonly brandConfiguration: BrandConfiguration
-  ) {}
+  ) {
+    this.currentUrl = document.location.origin.replace(/^https?:\/\//, '');
+  }
 }

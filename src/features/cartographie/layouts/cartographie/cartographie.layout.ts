@@ -70,14 +70,6 @@ const toLieuxByLongitude = (LieuxMediationNumerique: LieuMediationNumeriquePrese
     ): number => lieuMediationNumeriqueB.latitude - lieuMediationNumeriqueA.latitude
   );
 
-const toLieuMediationNumeriqueToGeoJsonFeature = (lieu: LieuMediationNumeriquePresentation): LieuMediationNumeriqueCluster => {
-  return {
-    type: 'Feature',
-    properties: lieu,
-    geometry: { type: 'Point', coordinates: [lieu.longitude, lieu.latitude] }
-  };
-};
-
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cartographie.layout.html',
