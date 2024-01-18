@@ -1,20 +1,23 @@
-<div *ngFor="let source of sources" class="bg-secondary d-flex p-3">
-  <span class="circle-wrapper-light">
-    <img
-      *ngIf="source.logo as logo"
-      class="img-fluid p-2"
-      [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
-      alt="{{ source.label }}" />
-  </span>
-  <div class="flex-column mt-2 ms-2">
-    <small class="fst-italic d-block text-muted">Vous travaillez dans cette structure ?</small>
-    <a
-      role="button"
-      [attr.href]="source?.update_link"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-decoration-none mt-1 fw-bold text-dark">
-      Modifier sur {{ source.label }}
-    </a>
-  </div>
+<div class="bg-secondary d-flex p-3 h-100 align-items-center">
+  <a
+    role="button"
+    [attr.href]="sources?.[0]?.update_link"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="d-flex align-items-center text-decoration-none mt-1 text-primary fw-bold">
+    <div class="d-flex flex-column">
+      <div class="my-1 mx-2" *ngFor="let source of sources">
+        <span class="circle-wrapper-light">
+          <img
+            *ngIf="source.logo as logo"
+            class="img-fluid p-2"
+            [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
+            alt="{{ source.label }}" />
+        </span>
+      </div>
+    </div>
+    <div class="flex-column ms-2">
+      <small class="text-primary fw-bold">Mettre à jour les données</small>
+    </div>
+  </a>
 </div>
