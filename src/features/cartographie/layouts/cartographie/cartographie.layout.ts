@@ -278,6 +278,7 @@ export class CartographieLayout {
 
   public onResultFound(result: ResultFoundPresentation<{ id?: string; type: AddressType | 'user' }>): void {
     result.localisation &&
+      !this.router.url.includes('details') &&
       this.router.navigate(result.payload?.id ? ['/cartographie', result.payload.id, 'details'] : ['/cartographie'], {
         queryParams: {
           address: result.label,
