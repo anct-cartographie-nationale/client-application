@@ -10,6 +10,15 @@ import {
 } from './zoom-level-navigation.presenter';
 
 describe('zoom level navigation presenter', (): void => {
+  const originalInnerWidth = window.innerWidth;
+  beforeAll(() => {
+    window.innerWidth = 1500;
+  });
+
+  afterAll(() => {
+    window.innerWidth = originalInnerWidth;
+  });
+
   it('should get regions when current zoom level is region and previous zoom level is different from region', (): void => {
     const nextRoute: string[] = getNextRouteFromZoomLevel(REGION_ZOOM_LEVEL);
 

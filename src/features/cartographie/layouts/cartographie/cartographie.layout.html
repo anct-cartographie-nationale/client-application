@@ -241,13 +241,13 @@
           (highlight)="onHighlight($event?.code)"
           (showLieux)="onShowLieuxInRegion($event)"></app-territoire-markers>
         <app-territoire-markers
-          *ngIf="((currentZoom$ | async) ?? 0) < departementZoomForDistance() && ((currentZoom$ | async) ?? 0) > 7"
+          *ngIf="((currentZoom$ | async) ?? 0) <= departementZoomForDistance() && ((currentZoom$ | async) ?? 0) > 7"
           [territoires]="(departements$ | async)?.payload ?? []"
           [hoverId]="(markersPresenter.highlighted$ | async) ?? ''"
           (updateMapIsDragging)="updateDragging()"
           (highlight)="onHighlight($event?.code)"
           (showLieux)="onShowLieuxInDepartement($event)"></app-territoire-markers>
-        <ng-container *ngIf="((currentZoom$ | async) ?? 0) >= 8">
+        <ng-container *ngIf="((currentZoom$ | async) ?? 0) > 8">
           <ng-container *ngIf="lieuxMediationNumeriqueClusters$ | async as clusters">
             <app-lieu-mediation-numerique-markers
               [lieuxMediationNumeriqueClusters]="clusters"

@@ -9,3 +9,9 @@ $font-family-main-lower: string.to-lower-case($font-family-main);
 @each $font-weight, $font-weight-alias in $font-italic-main {
   @include font-face($font-family-main, $font-path-main + $font-weight-alias, $font-extensions-main, italic, $font-weight);
 }
+
+@include media-breakpoint-down(xxl) {
+  html {
+    font-size: 80% !important;
+  }
+}

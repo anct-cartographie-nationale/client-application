@@ -21,6 +21,15 @@ import {
 } from './collectivite-territoriale.presenter';
 
 describe('collectivite territoriale presenter', (): void => {
+  const originalInnerWidth = window.innerWidth;
+  beforeAll(() => {
+    window.innerWidth = 1500;
+  });
+
+  afterAll(() => {
+    window.innerWidth = originalInnerWidth;
+  });
+
   it('should get département from code postal', (): void => {
     const lieuDeMediationNumerique: LieuMediationNumeriquePresentation = {
       code_postal: '69210'
@@ -179,7 +188,8 @@ describe('collectivite territoriale presenter', (): void => {
   });
 
   it('should check that lieux zoom level is not in deparement zoom level', (): void => {
-    const isDepartementZoomLevel: boolean = inDepartementZoomLevel(LIEUX_ZOOM_LEVEL);
+    const lieuxZoomLevel: number = window.innerWidth >= 1400 ? LIEUX_ZOOM_LEVEL + 1 : LIEUX_ZOOM_LEVEL;
+    const isDepartementZoomLevel: boolean = inDepartementZoomLevel(lieuxZoomLevel);
 
     expect(isDepartementZoomLevel).toStrictEqual(false);
   });
