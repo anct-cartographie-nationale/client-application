@@ -28,9 +28,7 @@ export class FilterResultCountComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.pageIsZoomed =
-      getComputedStyle(this.textElement.nativeElement).fontSize === this.initialFontSize || window.innerWidth <= 1400
-        ? false
-        : true;
+      getComputedStyle(this.textElement.nativeElement).fontSize === this.initialFontSize || window.innerWidth > 1400;
     this.cdr.detectChanges();
   }
 }
