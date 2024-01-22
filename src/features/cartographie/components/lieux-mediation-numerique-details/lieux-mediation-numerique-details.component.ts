@@ -1,9 +1,19 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  Optional
+} from '@angular/core';
 import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { FilterPresentation } from '../../../core/presenters';
 import { FormGroup } from '@angular/forms';
+import { MatomoTracker } from 'ngx-matomo';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,7 +48,13 @@ export class LieuxMediationNumeriqueDetailsComponent {
 
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
+  public constructor(@Optional() private readonly _matomoTracker?: MatomoTracker) {}
+
   onScrollToSource = (): void => {
     this.sourceRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'start', inline: 'start' });
   };
+
+  public onPrintFromBandeau(): void {
+    this._matomoTracker?.trackEvent('fiche détail', 'bandeau footer', `impression fiche`);
+  }
 }

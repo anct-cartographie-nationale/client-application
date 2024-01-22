@@ -165,10 +165,21 @@
       <small class="fst-italic text-muted">Dernière mise à jour {{ lieuMediationNumerique.date_maj | date : 'dd/MM/y' }}</small>
     </div>
   </div>
-  <div class="bg-primary p-2">
-    <app-bandeau-erreur
-      (openImpressionChoiceModal)="impressionChoiceModal.control.toggle($event)"
-      (closeDetails)="closeDetails.emit(lieuMediationNumerique)"></app-bandeau-erreur>
+  <div class="bg-white py-4">
+    <div class="d-flex ms-4 p-0">
+      <button
+        (click)="impressionChoiceModal.control.toggle($event); onPrintFromBandeau()"
+        class="btn btn-primary btn-sm my-auto">
+        <span role="img" class="ri-printer-line me-2" aria-hidden="true"></span>
+        Imprimer
+      </button>
+    </div>
+  </div>
+  <div class="bg-primary p-3">
+    <button class="btn text-white fw-normal" (click)="closeDetails.emit(lieuMediationNumerique)">
+      <span role="img" class="ri-arrow-left-s-line" aria-hidden="true"></span>
+      Revenir à la liste
+    </button>
   </div>
 </div>
 <app-impression-choice-modal
