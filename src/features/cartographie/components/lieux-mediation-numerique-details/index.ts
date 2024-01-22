@@ -12,7 +12,6 @@ export * from './aidants/aidants.component';
 export * from './lieux-mediation-numerique-details.component';
 export * from './lieux-mediation-numerique-details-print.component';
 export * from './accessibilite/accessibilite.component';
-export * from './bandeau-erreur/bandeau-erreur.component';
 export * from './erreur-form-modal/erreur-form-modal.component';
 export * from './impression-choice-modal/impression-choice-modal.component';
 export * from './source-donnees/source-donnees.component';
