@@ -1,12 +1,4 @@
-@include media-breakpoint-up(xxl) {
-  .map-list {
-    flex: 0 0 auto;
-    width: 50%;
-    max-width: 660px;
-  }
-}
-
-@include media-breakpoint-down(xxl) {
+@include media-breakpoint-up(lg) {
   .map-list {
     flex: 0 0 auto;
     width: 35%;
