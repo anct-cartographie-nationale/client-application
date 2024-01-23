@@ -24,10 +24,9 @@
     <i class="small text-muted-dark">{{ serviceItem.description }}</i>
   </div>
 
-  <span class="ms-auto d-flex flex-column">
-    <span role="img" class="ri-arrow-right-s-line text-muted-dark ri-2x mb-auto" aria-hidden="true"></span>
+  <span class="ms-auto d-flex align-items-center mt-3">
     <button
-      class="btn btn-link p-0 text-decoration-none z-index-over-base"
+      class="btn btn-link p-0 text-decoration-none z-index-over-base mb-auto"
       (click)="
         displayInformations.emit($any(serviceItem.value));
         displayInformationsInvokingContext.emit($event);
@@ -37,5 +36,6 @@
       <span class="visually-hidden">Info</span>
       <span role="img" class="ri-information-line fw-normal text-muted-dark ri-2x text-opacity-50" aria-hidden="true"></span>
     </button>
+    <span role="img" class="ri-arrow-right-s-line text-muted-dark ri-2x mb-auto" aria-hidden="true"></span>
   </span>
 </div>
