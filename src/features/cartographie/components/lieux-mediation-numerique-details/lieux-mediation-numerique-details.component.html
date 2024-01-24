@@ -149,13 +149,13 @@
   <div class="row bg-light py-2 me-0">
     <div class="col-6 ms-4 d-flex justify-content-between flex-column">
       <h2 class="h5 text-muted text-uppercase text-center">Une erreur sur les données ?</h2>
-      <div class="text-center mb-4">
+      <div class="text-center">
         <button (click)="erreurFormModal.control.toggle($event)" class="btn btn-secondary btn-sm m-auto">
           <i class="ri ri-alert-line ms-1" aria-hidden="true"></i>
           Signaler une erreur
         </button>
       </div>
-      <app-text-separator background="light">OU</app-text-separator>
+      <div class="text-center">OU</div>
       <app-source-footer [sources]="lieuMediationNumerique.source"></app-source-footer>
     </div>
     <div class="col-5 bg-secondary py-2 ms-2 align-items=stretch">
