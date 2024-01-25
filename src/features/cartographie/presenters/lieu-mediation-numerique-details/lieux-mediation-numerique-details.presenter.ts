@@ -497,7 +497,7 @@ const ifAnyHorairesWithWeeks =
 const getMultipleSourcesIfAny = (id: string, lieuSource?: string): SourcePresentation[] =>
   id.includes('|')
     ? Array.from(availableSourcesMap)
-        .filter(([source]: [string, SourcePresentation]) => id.includes(source))
+        .filter(([source]: [string, SourcePresentation]) => id.replace(/-/g, ' ').includes(source))
         .map(([, source]) => source)
     : [availableSourcesMap.get(lieuSource ?? '') ?? []].flat();
 

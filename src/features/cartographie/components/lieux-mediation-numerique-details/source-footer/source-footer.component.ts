@@ -11,4 +11,8 @@ export class SourceFooterComponent {
   @Input() public sources: SourcePresentation[] | undefined;
 
   public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
+
+  public getFirstUpdateLink(sources: SourcePresentation[] | undefined): string {
+    return sources?.find((source) => source.update_link)?.update_link || '';
+  }
 }
