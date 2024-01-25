@@ -29,7 +29,6 @@ import {
 import { ClustersPresenter } from '../../../core/presenters/clusters';
 import { ifAny } from '../../../core/utilities';
 import { AddressType, ResultFoundPresentation } from '../../../adresse';
-import { LieuMediationNumeriqueCluster } from '../../components';
 import { Cluster } from '../../models';
 import {
   DEPARTEMENT_ZOOM_LEVEL,
@@ -156,7 +155,14 @@ export class CartographieLayout {
     map((paramMap: ParamMap) => paramMap.get('address'))
   );
 
-  public fromOrientation: boolean = Object.keys(this.route.snapshot.queryParams).length > 0;
+  public searchType$: Observable<string | null> = this.route.queryParamMap.pipe(
+    map((paramMap: ParamMap) => paramMap.get('addressType'))
+  );
+
+  private _fromOrientation$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    Object.keys(this.route.snapshot.queryParams).length > 0
+  );
+  public readonly fromOrientation$: Observable<boolean> = this._fromOrientation$.asObservable();
 
   private readonly _userLocalisation$: BehaviorSubject<Localisation> = new BehaviorSubject<Localisation>(NO_LOCALISATION);
   public readonly userLocalisation$: Observable<Localisation> = this._userLocalisation$.asObservable();

@@ -66,6 +66,7 @@ export class LocalisationPage {
   }
 
   public onSelectAddress(address: ResultFoundPresentation): void {
+    this.orientationLayout.filterForm.get('addressType')?.setValue(address.payload.type);
     this.orientationLayout.filterForm.get('address')?.setValue(address.label);
     this.orientationLayout.filterForm.get('latitude')?.setValue(address.localisation.latitude);
     this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);

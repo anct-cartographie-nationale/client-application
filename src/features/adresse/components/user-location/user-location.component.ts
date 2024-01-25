@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import {
   BehaviorSubject,
   debounceTime,
@@ -33,6 +33,8 @@ const setZoomUserPosition = (defaultUserPosition: number, distance?: number): nu
 })
 export class UserLocationComponent implements OnInit {
   @Input() adresse?: string;
+
+  @Input() adresseType?: string;
 
   @Input() fullWidth: boolean = false;
 
@@ -82,9 +84,13 @@ export class UserLocationComponent implements OnInit {
     map((resultsToCombine: ResultFoundPresentation<{ type: AddressType }>[][]) => resultsToCombine.flat()),
     tap(
       (addressesFound: ResultFoundPresentation<{ type: AddressType }>[]) =>
-        addressesFound[0] && this.onSelected(addressesFound[0])
+        addressesFound &&
+        this.onSelected(addressesFound.find((address) => address.payload.type === this.adresseType) || addressesFound[0])
     ),
-    map((addressesFound: ResultFoundPresentation<{ type: AddressType }>[]) => addressesFound[0]?.label)
+    map(
+      (addressesFound: ResultFoundPresentation<{ type: AddressType }>[]) =>
+        addressesFound.find((address) => address.payload.type === this.adresseType)?.label || addressesFound[0].label
+    )
   );
 
   @Output() public resultFound: EventEmitter<ResultFoundPresentation<{ type: AddressType | 'user' }>> = new EventEmitter<

@@ -5,7 +5,7 @@
         <div class="card border-0 shadow m-auto">
           <div class="card-body p-5">
             <div class="d-flex flex-column text-center">
-              <ng-container *ngIf="fromOrientation; else: welcome">
+              <ng-container *ngIf="(fromOrientation$ | async); else: welcome">
                 <p class="text-muted">Patientez quelques instants</p>
                 <h3 class="card-title text-primary">
                   Nous recherchons les lieux
@@ -35,7 +35,8 @@
         placeholder="Recherchez un lieu ou une adresse"
         class="me-3 d-sm-inline-block d-none"
         [adresse]="(defaultAddress$ | async) ?? ''"
-        [fromOrientation]="this.fromOrientation"
+        [adresseType]="(searchType$ | async) ?? ''"
+        [fromOrientation]="(this.fromOrientation$ | async) ?? false"
         (resultFound)="onResultFound($event)"></app-user-location>
       <app-location-breadcrumb
         id="breadcrumb"
@@ -97,8 +98,9 @@
             placeholder="Recherchez un lieu ou une adresse"
             class="m-3 d-sm-none d-block"
             [adresse]="(defaultAddress$ | async) ?? ''"
+            [adresseType]="(searchType$ | async) ?? ''"
             [fullWidth]="true"
-            [fromOrientation]="this.fromOrientation"
+            [fromOrientation]="(this.fromOrientation$ | async) ?? false"
             (resultFound)="onResultFound($event)"></app-user-location>
           <app-location-breadcrumb
             class="d-lg-none d-block"
