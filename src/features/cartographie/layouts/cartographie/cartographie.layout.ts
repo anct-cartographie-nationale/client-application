@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Inject, Optional, ViewChild } from 
 import { ActivatedRoute, ParamMap, Params, Router, RouterOutlet } from '@angular/router';
 import { BehaviorSubject, combineLatest, Observable, of, Subject, tap, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LngLatBounds, MapLibreEvent } from 'maplibre-gl';
+import { LngLatBounds, Map, MapLibreEvent } from 'maplibre-gl';
 import { MatomoTracker } from 'ngx-matomo';
 import { AnyProps, ClusterFeature } from 'supercluster';
 import { Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -190,6 +190,10 @@ export class CartographieLayout {
     private readonly _zoomLevel: ZoomLevelConfiguration,
     @Optional() private readonly _matomoTracker?: MatomoTracker
   ) {}
+
+  public onMapLoaded(map: Map): void {
+    map.resize();
+  }
 
   public onShowLieuxInDepartement(departement: TerritoirePresentation): void {
     this.markersPresenter.center(departement.localisation, departement.zoom);
