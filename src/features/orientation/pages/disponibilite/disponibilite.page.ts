@@ -30,6 +30,7 @@ export class DisponibilitePage {
 
   public onSelectOpeningHours(openingHours: OpeningHours[]): void {
     this.orientationLayout.filterForm.get('horaires_ouverture')?.setValue(openingHours);
+    this.orientationLayout.addLastFilter('', 'horaires_ouverture');
   }
 
   public toQueryString(fromObject: {} = {}): string {

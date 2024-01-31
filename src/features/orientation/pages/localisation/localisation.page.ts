@@ -72,6 +72,7 @@ export class LocalisationPage {
     this.orientationLayout.filterForm.get('longitude')?.setValue(address.localisation.longitude);
     this.orientationLayout.filterForm.get('distance')?.setValue(30000);
     this._localisation$.next(address.localisation);
+    this.orientationLayout.addLastFilter(address.label, 'address');
   }
 
   public onResetAddress(): void {
@@ -88,9 +89,15 @@ export class LocalisationPage {
       this.orientationLayout.filterForm.get('longitude')?.setValue(position.coords.longitude);
       this.orientationLayout.filterForm.get('distance')?.setValue(30000);
       this.orientationLayout.filterForm.get('address')?.setValue(null);
+      this.orientationLayout.addLastFilter(position.coords.latitude.toString(), 'latitude');
       this._geoLocation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
       this._localisation$.next(Localisation({ latitude: position.coords.latitude, longitude: position.coords.longitude }));
     });
+  }
+
+  public handleRangeChange(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.orientationLayout.addLastFilter(value, 'distance');
   }
 
   public onSearchAddress(searchTerm: string): void {

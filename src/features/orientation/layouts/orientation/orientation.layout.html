@@ -1,4 +1,4 @@
-<div class="bg-light h-100 py-lg-5 p-3">
+<div class="bg-light h-100 py-lg-5 p-3 overflow-visible position-relative">
   <div class="container-lg p-0 h-100 shadow bg-white">
     <ng-container *ngIf="(lieuxMediationNumerique$ | async) as lieuxMediationNumerique">
       <ng-container *ngIf="(lieuxMediationNumeriqueTotal$ | async) as lieuxMediationNumeriqueTotal">
@@ -98,4 +98,49 @@
       </ng-container>
     </ng-container>
   </div>
+  <div *ngIf="(lieuxMediationNumeriqueCount$ | async) === 0">
+    <app-offcanvas
+      #aucunResultatCanvas
+      heading="Aucun résulat"
+      [useHeader]="false"
+      class="offcanvas position-absolute w-100 end-0"
+      className="offcanvas-bottom w-100 h-auto position-relative overflow-auto z-index-over-all bg-warning-secondary show">
+      <div class="container d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center flex-grow-1">
+          <span role="img" class="ri-alert-line ri-3x py-1 text-primary me-3 d-none d-sm-block" aria-hidden="true"></span>
+          <div class="d-none d-sm-flex flex-column my-4">
+            <h3 class="text-primary fw-bold mt-1 mb-0">Aucun résultat !</h3>
+            <small class="text-primary fw-bold">
+              Nous ne trouvons pas de résultats correspondant à votre recherche.
+              <br />
+              Afin d'y remédier, veuillez modifier ou supprimer certains de vos filtres sélectionnés
+            </small>
+          </div>
+          <div class="d-flex d-sm-none flex-column mt-4">
+            <h3 class="text-primary fw-bold mt-1 mb-0">Aucun résultat !</h3>
+            <small class="text-primary fw-bold">
+              Nous ne trouvons pas de résultats correspondant à votre
+              <br />
+              recherche. Afin d'y remédier, veuillez modifier ou
+              <br />
+              supprimer certains de vos filtres sélectionnés
+            </small>
+          </div>
+        </div>
+        <div class="d-none d-sm-block">
+          <button type="button" class="btn my-3 me-3 btn-primary" (click)="deleteLastFilter()">Annuler dernier filtre</button>
+          <button type="button" class="btn my-3 me-3 btn-secondary" (click)="resetFormModal.control.toggle($event)">
+            Tout réinitialiser
+          </button>
+        </div>
+      </div>
+      <div class="d-block d-sm-none text-center">
+        <button type="button" class="btn my-3 me-3 btn-primary" (click)="deleteLastFilter()">Annuler dernier filtre</button>
+        <button type="button" class="btn my-3 me-3 btn-secondary" (click)="resetFormModal.control.toggle($event)">
+          Tout réinitialiser
+        </button>
+      </div>
+    </app-offcanvas>
+  </div>
 </div>
+<app-reset-form-modal #resetFormModal (resetAllFilter)="filterForm.reset()"></app-reset-form-modal>

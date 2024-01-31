@@ -14,6 +14,8 @@ export class BesoinLinkComponent {
 
   @Output() public selectServiceValue: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output() public addLastFilter: EventEmitter<string> = new EventEmitter<string>();
+
   @Output() public displayInformations: EventEmitter<Service> = new EventEmitter<Service>();
 
   @Output() public displayInformationsInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();

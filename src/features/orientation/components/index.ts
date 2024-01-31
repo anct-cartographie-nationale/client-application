@@ -6,6 +6,7 @@ import { InformationOrientationModalComponent } from './information-orientation-
 import { FilterResultCountComponent } from './filter-result-count/filter-result-count.component';
 import { NavComponent } from './nav/nav.component';
 import { OpeningHoursFormComponent } from './opening-hours-form';
+import { ResetFormModalComponent } from './reset-form-modal/reset-form-modal.component';
 
 export const components = [
   BesoinLinkComponent,
@@ -15,5 +16,6 @@ export const components = [
   DisplayOnMapLinkComponent,
   InformationOrientationModalComponent,
   FilterResultCountComponent,
-  OpeningHoursFormComponent
+  OpeningHoursFormComponent,
+  ResetFormModalComponent
 ];

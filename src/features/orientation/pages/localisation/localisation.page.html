@@ -59,7 +59,8 @@
             min="5000"
             max="100000"
             step="5000"
-            formControlName="distance" />
+            formControlName="distance"
+            (change)="handleRangeChange($event)" />
           <span
             style="top: 16px; right: 0"
             [ngClass]="orientationLayout.filterForm.get('distance')?.value / 1000 === 100 ? 'bg-primary text-white' : 'bg-white'"
