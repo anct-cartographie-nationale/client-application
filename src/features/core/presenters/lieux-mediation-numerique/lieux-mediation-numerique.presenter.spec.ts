@@ -2387,6 +2387,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect<ResultFoundPresentation<{ id: string; type: string }>[]>(searchResults).toStrictEqual([
       {
+        id: '288b41b0-20ef-426c-9cac-0af99203365d',
         context: '12 BIS RUE DE LECLERCQ 51100, Reims',
         label: 'Anonymal',
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),
@@ -2419,6 +2420,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect<ResultFoundPresentation<{ id: string; type: string }>[]>(searchResults).toStrictEqual([
       {
+        id: '288b41b0-20ef-426c-9cac-0af99203365d',
         context: '12 BIS RUE DE LECLERCQ 51100, Reims',
         label: 'Anonymal',
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),
@@ -2466,6 +2468,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
 
     expect<ResultFoundPresentation<{ id: string; type: string }>[]>(searchResults).toStrictEqual([
       {
+        id: '288b41b0-20ef-426c-9cac-0af99203365d',
         context: '12 BIS RUE DE LECLERCQ 51100, Reims',
         label: 'Anonymal Reims',
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),
@@ -2475,6 +2478,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         }
       },
       {
+        id: 'd27dc31b-cb32-488f-9cfd-01baa4dcbae4',
         context: '17 rue Paul Bellamy 44000, Nantes',
         label: 'Anonymal Nantes',
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),

@@ -18,6 +18,7 @@ describe('address http', (): void => {
                 coordinates: [4.8375548, 45.7665478]
               },
               properties: {
+                id: 'addressTransferId',
                 context: '80, Somme, Hauts-de-France',
                 label: '8 Boulevard du Port 80000 Amiens',
                 type: 'housenumber'
@@ -32,6 +33,7 @@ describe('address http', (): void => {
 
     expect(addresses).toStrictEqual([
       {
+        id: 'addressTransferId',
         context: '80, Somme, Hauts-de-France',
         label: '8 Boulevard du Port 80000 Amiens',
         localisation: Localisation({
