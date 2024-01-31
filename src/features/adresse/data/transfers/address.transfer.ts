@@ -2,6 +2,7 @@ import { FeatureCollection, Point } from 'geojson';
 import { AddressType } from '../../models';
 
 export type AddressTransferProperties = {
+  id: string;
   label: string;
   context: string;
   type: AddressType;

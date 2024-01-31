@@ -35,7 +35,7 @@
         placeholder="Recherchez un lieu ou une adresse"
         class="me-3 d-sm-inline-block d-none"
         [adresse]="(defaultAddress$ | async) ?? ''"
-        [adresseType]="(searchType$ | async) ?? ''"
+        [adresseId]="(defaultAddressId$ | async) ?? ''"
         [fromOrientation]="(this.fromOrientation$ | async) ?? false"
         (resultFound)="onResultFound($event)"></app-user-location>
       <app-location-breadcrumb
@@ -98,7 +98,7 @@
             placeholder="Recherchez un lieu ou une adresse"
             class="m-3 d-sm-none d-block"
             [adresse]="(defaultAddress$ | async) ?? ''"
-            [adresseType]="(searchType$ | async) ?? ''"
+            [adresseId]="(defaultAddressId$ | async) ?? ''"
             [fullWidth]="true"
             [fromOrientation]="(this.fromOrientation$ | async) ?? false"
             (resultFound)="onResultFound($event)"></app-user-location>

@@ -13,6 +13,7 @@ const onlyMatchingConseillerNom =
     conseiller.nom.toLowerCase().includes(searchTerm.toLowerCase());
 
 const toResultFound = (conseiller: Conseiller): ResultFoundPresentation<{ type: 'conseiller' }> => ({
+  id: conseiller.id,
   context: conseiller.structurePorteuse.adresse,
   label: conseiller.nom,
   localisation: Localisation({

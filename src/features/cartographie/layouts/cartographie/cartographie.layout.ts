@@ -155,8 +155,8 @@ export class CartographieLayout {
     map((paramMap: ParamMap) => paramMap.get('address'))
   );
 
-  public searchType$: Observable<string | null> = this.route.queryParamMap.pipe(
-    map((paramMap: ParamMap) => paramMap.get('addressType'))
+  public defaultAddressId$: Observable<string | null> = this.route.queryParamMap.pipe(
+    map((paramMap: ParamMap) => paramMap.get('addressId'))
   );
 
   private _fromOrientation$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(

@@ -24,6 +24,7 @@ export class AddressHttp extends AddressRepository {
         map((addressTransfer: AddressTransfer): Address[] =>
           addressTransfer.features.map(
             (addressTransferFeature: Feature<Point, AddressTransferProperties>): Address => ({
+              id: addressTransferFeature.properties.id,
               context: addressTransferFeature.properties.context,
               label: addressTransferFeature.properties.label,
               localisation: Localisation({
@@ -46,6 +47,7 @@ export class AddressHttp extends AddressRepository {
         map((addressTransfer: AddressTransfer): Address[] =>
           addressTransfer.features.map(
             (addressTransferFeature: Feature<Point, AddressTransferProperties>): Address => ({
+              id: addressTransferFeature.properties.id,
               context: addressTransferFeature.properties.context,
               label: addressTransferFeature.properties.label,
               localisation: Localisation({

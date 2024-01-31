@@ -264,6 +264,7 @@ const toResultFound = ({
 }: LieuMediationNumerique & {
   localisation: Localisation;
 }): ResultFoundPresentation<{ id: string; type: 'place' }> => ({
+  id: id,
   context: `${adresse.voie} ${adresse.code_postal}, ${adresse.commune}`,
   label: nom,
   payload: { id, type: 'place' },
