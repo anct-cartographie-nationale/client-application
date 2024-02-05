@@ -27,7 +27,6 @@ import {
   AccessibiliteComponent,
   ErreurFormModalComponent,
   ImpressionChoiceModalComponent,
-  SourceDonneesComponent,
   WebinaireComponent,
   SourceFooterComponent
 } from './lieux-mediation-numerique-details';
@@ -68,7 +67,6 @@ export const components = [
   HubModalComponent,
   ErreurFormModalComponent,
   ImpressionChoiceModalComponent,
-  SourceDonneesComponent,
   WebinaireComponent,
   SourceFooterComponent
 ];

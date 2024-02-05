@@ -139,30 +139,29 @@
         (showLabel)="showLabel.emit($event)"
         (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"></app-labellisations>
     </li>
-  </ul>
-  <div #source class="bg-light px-3 py-3">
-    <div class="mx-2">
-      <app-source-donnees></app-source-donnees>
-    </div>
-    <hr class="text-info" />
-  </div>
-  <div class="row bg-light py-2 me-0">
-    <div class="col-6 ms-4 d-flex justify-content-between flex-column">
-      <h2 class="h5 text-muted text-uppercase text-center">Une erreur sur les données ?</h2>
-      <div class="text-center">
+    <li class="list-group-item">
+      <div class="d-flex">
+        <h2 class="h5 text-muted text-uppercase mt-1 flex-grow-1">Une erreur sur les données ?</h2>
         <button (click)="erreurFormModal.control.toggle($event)" class="btn btn-secondary btn-sm m-auto">
           <i class="ri ri-alert-line ms-1" aria-hidden="true"></i>
           Signaler une erreur
         </button>
       </div>
-      <div class="text-center">OU</div>
+    </li>
+  </ul>
+  <div class="row bg-light py-2 mx-3">
+    <small class="my-2">
+      Vous travaillez dans cette structure ou êtes habilités à mettre à jour les données de cette fiche ?
+      <br />
+      Cliquez sur le lien ci-dessous.
+      <br />
+      Si besoin, nous organisons des webinaires mensuels pour vous accompagner dans cette mise à jour.
+    </small>
+    <div class="col-6">
       <app-source-footer [sources]="lieuMediationNumerique.source"></app-source-footer>
     </div>
-    <div class="col-5 bg-secondary py-2 ms-2 align-items=stretch">
+    <div class="col-6">
       <app-webinaire></app-webinaire>
-    </div>
-    <div class="col m-4 mt-2">
-      <small class="fst-italic text-muted">Dernière mise à jour {{ lieuMediationNumerique.date_maj | date : 'dd/MM/y' }}</small>
     </div>
   </div>
   <div class="bg-white py-4">
