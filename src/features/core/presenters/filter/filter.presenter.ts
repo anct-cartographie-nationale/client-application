@@ -44,6 +44,7 @@ export type FilterPresentation = {
 export type FilterQueryParamsPresentation = {
   service?: Service;
   address?: string;
+  address_id?: string;
   latitude?: `${number}`;
   longitude?: `${number}`;
   distance?: `${number}`;
@@ -61,6 +62,7 @@ export type FilterFormPresentation = FilterPresentation & {
   address?: string;
   latitude?: number;
   longitude?: number;
+  addressId?: string;
 };
 
 const wrapInArray = <T>(params: string | string[]): T[] => (Array.isArray(params) ? params : [params]) as unknown as T[];
@@ -92,6 +94,7 @@ export const hasActiveFilter = (filterFormPresentation: FilterFormPresentation):
 export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParamsPresentation): FilterFormPresentation => ({
   service: queryParams?.service,
   address: queryParams?.address,
+  addressId: queryParams?.address_id,
   latitude: queryParams?.latitude ? parseFloat(queryParams.latitude) : undefined,
   longitude: queryParams?.longitude ? parseFloat(queryParams.longitude) : undefined,
   distance: queryParams?.distance ? parseInt(queryParams.distance) : undefined,

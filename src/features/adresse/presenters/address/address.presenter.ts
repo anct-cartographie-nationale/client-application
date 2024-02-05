@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 const toResultFound = (addresses: Address[]): ResultFoundPresentation<{ type: AddressType }>[] =>
   addresses.map(
     (address: Address): ResultFoundPresentation<{ type: AddressType }> => ({
+      id: address.id,
       context: address.context,
       label: address.label,
       localisation: address.localisation,

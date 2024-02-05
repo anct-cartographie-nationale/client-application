@@ -26,6 +26,11 @@ const SEARCH_DEBOUNCE_TIME: number = 300;
 const setZoomUserPosition = (defaultUserPosition: number, distance?: number): number =>
   distance ? (distance >= 50000 && distance <= 100000 ? 8 : 10) : defaultUserPosition;
 
+const findAddressById = (
+  addresses: ResultFoundPresentation<{ type: AddressType }>[],
+  id?: string
+): ResultFoundPresentation<{ type: AddressType }> | undefined => addresses.find((address) => address.id === id);
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-user-location',
@@ -33,6 +38,8 @@ const setZoomUserPosition = (defaultUserPosition: number, distance?: number): nu
 })
 export class UserLocationComponent implements OnInit {
   @Input() adresse?: string;
+
+  @Input() adresseId?: string;
 
   @Input() fullWidth: boolean = false;
 
@@ -82,9 +89,12 @@ export class UserLocationComponent implements OnInit {
     map((resultsToCombine: ResultFoundPresentation<{ type: AddressType }>[][]) => resultsToCombine.flat()),
     tap(
       (addressesFound: ResultFoundPresentation<{ type: AddressType }>[]) =>
-        addressesFound[0] && this.onSelected(addressesFound[0])
+        addressesFound && this.onSelected(findAddressById(addressesFound, this.adresseId) || addressesFound[0])
     ),
-    map((addressesFound: ResultFoundPresentation<{ type: AddressType }>[]) => addressesFound[0]?.label)
+    map(
+      (addressesFound: ResultFoundPresentation<{ type: AddressType }>[]) =>
+        findAddressById(addressesFound, this.adresseId)?.label || addressesFound[0].label
+    )
   );
 
   @Output() public resultFound: EventEmitter<ResultFoundPresentation<{ type: AddressType | 'user' }>> = new EventEmitter<
@@ -129,7 +139,7 @@ export class UserLocationComponent implements OnInit {
         localisation,
         setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this.route.snapshot.queryParams['distance']))
       );
-      this.resultFound.emit({ context: '', label: '', localisation, payload: { type: 'user' } });
+      this.resultFound.emit({ id: '', context: '', label: '', localisation, payload: { type: 'user' } });
 
       this._loadingState$.next(false);
       this._displayGeolocation$.next(false);

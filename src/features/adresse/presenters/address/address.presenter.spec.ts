@@ -11,6 +11,7 @@ describe('address presenter', (): void => {
       search$: (): Observable<Address[]> => {
         return of([
           {
+            id: 'testId-01',
             context: '80, Somme, Hauts-de-France',
             label: '8 Boulevard du Port 80000 Amiens',
             localisation: Localisation({
@@ -24,6 +25,7 @@ describe('address presenter', (): void => {
       reverse$: (): Observable<Address[]> => {
         return of([
           {
+            id: 'testId-01',
             context: '80, Somme, Hauts-de-France',
             label: '8 Boulevard du Port 80000 Amiens',
             localisation: Localisation({
@@ -50,6 +52,7 @@ describe('address presenter', (): void => {
 
     expect(addressesFound).toStrictEqual([
       {
+        id: 'testId-01',
         context: '80, Somme, Hauts-de-France',
         label: '8 Boulevard du Port 80000 Amiens',
         localisation: Localisation({
@@ -62,6 +65,7 @@ describe('address presenter', (): void => {
 
     expect(addressesFoundReverse).toStrictEqual([
       {
+        id: 'testId-01',
         context: '80, Somme, Hauts-de-France',
         label: '8 Boulevard du Port 80000 Amiens',
         localisation: Localisation({
