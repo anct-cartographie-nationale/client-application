@@ -1,6 +1,6 @@
 <app-modal
   heading="Fiche d'orientation"
-  icon="ri-book-mark-line"
+  icon="ri-book-marked-line"
   [bgBody]="['usager', 'prescripteur'].includes(printOrientationSheetStep) ? 'light' : 'white'"
   [bgFooter]="['usager', 'prescripteur'].includes(printOrientationSheetStep) ? 'white' : 'light'"
   (closed)="onClose()">
@@ -65,7 +65,7 @@
               </small>
             </div>
           </div>
-          <p class="fw-bold">Qui est bénéficiaire ?</p>
+          <p class="fw-bold">Avez-vous des précisions à apporter ?</p>
           <div class="mb-3">
             <label for="details" class="form-label">Remontez des informations au prochain médiateur</label>
             <textarea class="form-control" id="details" rows="3" maxlength="800" formControlName="details"></textarea>
