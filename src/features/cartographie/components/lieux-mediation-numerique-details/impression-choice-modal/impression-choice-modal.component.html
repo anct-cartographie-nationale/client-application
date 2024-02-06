@@ -1,7 +1,7 @@
 <app-modal #modal heading="Imprimer" icon="ri-printer-line" bgBody="light" bgFooter="light">
   <div class="text-center">
-    <h5 class="h5 fw-bold text-primary">Vous êtes médiateur numérique ?</h5>
-    <div class="my-3">
+    <h5 class="h5 fw-bold text-primary mt-5">Vous êtes médiateur numérique ?</h5>
+    <div class="my-2 mb-4">
       <span class="d-block">Vous pouvez générer une fiche d'orientation pour la structure</span>
       qui accueillera votre bénéficiaire.
     </div>
@@ -9,7 +9,7 @@
   <button
     type="button"
     (click)="orientationSheetModalModal.emit($event); modal.close()"
-    class="btn bg-white mb-3 px-lg-3 px-2 py-3 rounded-0 d-flex position-relative w-100">
+    class="btn bg-white mb-5 px-lg-3 px-2 py-3 rounded-0 d-flex position-relative w-100">
     <span class="ri-circled bg-primary text-light fw-normal me-3 my-auto d-sm-block d-none">
       <span role="img" class="ri-book-marked-line" aria-hidden="true"></span>
     </span>
@@ -23,7 +23,7 @@
   <button
     type="button"
     (click)="print.emit()"
-    class="btn bg-white mb-3 px-lg-3 px-2 py-3 rounded-0 d-flex position-relative w-100">
+    class="btn bg-white mb-4 px-lg-3 px-2 py-3 rounded-0 d-flex position-relative w-100 mt-4">
     <span class="ri-circled bg-primary text-light fw-normal me-3 my-auto d-sm-block d-none">
       <span role="img" class="ri-printer-line" aria-hidden="true"></span>
     </span>
