@@ -12,14 +12,15 @@
     </span>
   </div>
   <div class="d-flex justify-content-center">
-    <span role="img" class="ri ri-external-link-line my-auto me-2 opacity-75 text-muted" aria-hidden="true"></span>
-    <div class="text-muted small">Participez au(x) webinaire(s)</div>
     <a
       [routerLink]="['/presentation']"
       fragment="webinaire"
       target="_blank"
       title="Inscrivez-vous à nos webinaires (nouvel onglet)"
-      rel="noopener noreferrer"></a>
+      rel="noopener noreferrer">
+      <span role="img" class="ri ri-external-link-line my-auto me-2 opacity-75 text-muted" aria-hidden="true"></span>
+      <span class="text-muted small">Participez au(x) webinaire(s)</span>
+    </a>
   </div>
   <ng-container slot="footer">
     <ng-content></ng-content>
