@@ -12,7 +12,21 @@
               role="switch"
               formControlName="prise_rdv"
               (change)="setFilterToQueryString('prise_rdv')" />
-            Pouvoir prendre RDV
+            Prise de RDV en ligne
+          </label>
+        </div>
+      </li>
+      <li class="list-group-item bg-transparent">
+        <div class="form-check form-switch my-2">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              name="service"
+              role="switch"
+              formControlName="service"
+              (change)="setFilterToQueryString('service')" />
+            Prise en main Mon espace Santé
           </label>
         </div>
       </li>
@@ -26,7 +40,7 @@
               role="switch"
               formControlName="accessibilite"
               (change)="setFilterToQueryString('accessibilite')" />
-            Informations pour les personnes en situation de handicap
+            Accessibilité renseignée
           </label>
         </div>
       </li>
