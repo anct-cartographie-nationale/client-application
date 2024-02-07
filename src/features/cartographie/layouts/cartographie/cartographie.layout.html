@@ -113,14 +113,10 @@
             *ngIf="affinerRechercheOffcanvas.expanded$ | async"
             [lieuxMediationNumeriques]="(allLieuxMediationNumerique$ | async) ?? []"></app-affiner-recherche-form>
         </div>
-        <div class="bg-white p-3 g-0 row align-items-center">
+        <div class="bg-white p-3 g-0 row align-items-center justify-content-center">
           <div class="col-auto">
             <app-modifier-orientation></app-modifier-orientation>
             <button class="btn btn-primary" (click)="affinerRechercheOffcanvas.toggle($event)">Terminer</button>
-          </div>
-          <div class="col text-end" *ngIf="(resultsCount$ | async) as resultCount; else: noResults" [ngPlural]="resultCount">
-            <ng-template ngPluralCase="=1">1 résultat</ng-template>
-            <ng-template ngPluralCase="other">{{ resultCount }} résultats</ng-template>
           </div>
           <ng-template #noResults>
             <div class="col text-end">Aucun résultat</div>
