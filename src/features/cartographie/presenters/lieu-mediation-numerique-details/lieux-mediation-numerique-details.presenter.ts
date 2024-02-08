@@ -495,7 +495,7 @@ const ifAnyHorairesWithWeeks =
     horaires?.includes('week') ? ifAny('full_horaires', getHorairesWeeksByWeeks(date)(horaires)) : [];
 
 const getMultipleSourcesIfAny = (id: string, lieuSource?: string): SourcePresentation[] =>
-  id.includes('|')
+  id.includes('_')
     ? Array.from(availableSourcesMap)
         .filter(([source]: [string, SourcePresentation]) => id.replace(/-/g, ' ').includes(source))
         .map(([, source]) => source)
