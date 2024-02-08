@@ -30,7 +30,8 @@
               formControlName="publics_accueillis"
               class="form-check-input"
               [value]="accueilSpecifiqueOption.value"
-              [attr.id]="'accueilSpecifiqueLabelChip' + i" />
+              [attr.id]="'accueilSpecifiqueLabelChip' + i"
+              (change)="orientationLayout.addLastFilter(accueilSpecifiqueOption.value, 'publics_accueillis', $event)" />
             <label class="form-check-label bg-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
               <b>{{ accueilSpecifiqueOption.label }}</b>
             </label>

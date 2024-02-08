@@ -24,6 +24,7 @@
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
           (displayInformations)="selectOrientationInformation($event)"
+          (addLastFilter)="orientationLayout.addLastFilter($event, 'services')"
           (displayInformationsInvokingContext)="informationOrientationModal.control.toggle($event)"></app-besoin-link>
       </section>
       <section aria-label="Démarches">
@@ -41,6 +42,7 @@
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
           (displayInformations)="selectOrientationInformation($event)"
+          (addLastFilter)="orientationLayout.addLastFilter($event, 'services')"
           (displayInformationsInvokingContext)="informationOrientationModal.control.toggle($event)"></app-besoin-link>
       </section>
       <section aria-label="Culture numérique">
@@ -58,6 +60,7 @@
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
           (displayInformations)="selectOrientationInformation($event)"
+          (addLastFilter)="orientationLayout.addLastFilter($event, 'services')"
           (displayInformationsInvokingContext)="informationOrientationModal.control.toggle($event)"></app-besoin-link>
       </section>
       <section aria-label="Manque de matériel">
@@ -75,6 +78,7 @@
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
           (displayInformations)="selectOrientationInformation($event)"
+          (addLastFilter)="orientationLayout.addLastFilter($event, 'services')"
           (displayInformationsInvokingContext)="informationOrientationModal.control.toggle($event)"></app-besoin-link>
       </section>
     </ng-container>

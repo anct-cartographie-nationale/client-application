@@ -54,15 +54,37 @@ const toLieuxWithLocalisation = (lieux: LieuMediationNumerique[]) => lieux.filte
   ]
 })
 export class OrientationLayout {
-  private _lieuxMediationNumeriqueCount$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  private _lieuxMediationNumeriqueCount$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
 
-  public lieuxMediationNumeriqueCount$: Observable<number> = this._lieuxMediationNumeriqueCount$.asObservable();
+  public lieuxMediationNumeriqueCount$: Observable<number | null> = this._lieuxMediationNumeriqueCount$.asObservable();
 
   public hideArrow: boolean = false;
 
   public filterForm: FormGroup = createFormGroupFromFilterPresentation(
     toFilterFormPresentationFromQuery(this.route.snapshot.queryParams)
   );
+
+  public lastFilterAdded: { key: string; value: string } | null = null;
+
+  public addLastFilter(value: string, key: string, event?: Event) {
+    const shouldUpdate: boolean = key === 'publics_accueillis' ? (event?.target as HTMLInputElement).checked : true;
+    if (shouldUpdate) this.lastFilterAdded = { key, value };
+  }
+
+  public deleteLastFilter() {
+    if (this.lastFilterAdded) {
+      if (this.lastFilterAdded.key === 'services') this.filterForm.get('service')?.reset();
+      else if (this.lastFilterAdded.key === 'horaires_ouverture') this.filterForm.get(this.lastFilterAdded.key)?.reset();
+      else if (['address', 'latitude', 'distance'].includes(this.lastFilterAdded.key))
+        ['address', 'distance', 'latitude', 'longitude'].forEach((key) => this.filterForm.get(key)?.reset());
+      else {
+        const keyArrayCopy = [...this.filterForm.value[this.lastFilterAdded.key]];
+        const indexOfValue = keyArrayCopy.indexOf(this.lastFilterAdded.value);
+        indexOfValue > -1 && keyArrayCopy.splice(indexOfValue, 1);
+        this.filterForm.get(this.lastFilterAdded.key)?.setValue([...keyArrayCopy]);
+      }
+    }
+  }
 
   public filterPresentation$: Observable<FilterFormPresentation> = this.filterForm.valueChanges.pipe(
     startWith<FilterFormPresentation>(toFilterFormPresentationFromQuery(this.route.snapshot.queryParams))

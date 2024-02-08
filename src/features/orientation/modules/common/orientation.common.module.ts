@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { SkipLinkModule, CollapseModule, ModalModule, TextSeparatorModule } from '../../../core';
+import { SkipLinkModule, CollapseModule, ModalModule, TextSeparatorModule, OffcanvasModule } from '../../../core';
 import { CheckboxArrayModule } from '../../../core/directives';
 import { AdresseModule } from '../../../adresse';
 import { pages } from '../../pages';
@@ -24,7 +24,8 @@ import { directives } from '../../directives';
     CollapseModule,
     ModalModule,
     SkipLinkModule,
-    TextSeparatorModule
+    TextSeparatorModule,
+    OffcanvasModule
   ]
 })
 export class OrientationCommonModule {}

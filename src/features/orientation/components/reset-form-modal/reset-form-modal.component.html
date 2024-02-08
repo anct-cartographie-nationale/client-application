@@ -1,0 +1,31 @@
+<app-modal #modal heading="Réinitialisation" icon="ri-compass-3-line" closeLabel="Précédent" bgBody="light" bgFooter="white">
+  <div class="my-auto text-center">
+    <img *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" class="my-3 mh-100 mw-100" alt="" />
+    <ng-template #brandLogo>
+      <img
+        *ngIf="brandConfiguration.logoAvecTexte"
+        [src]="brandConfiguration.logoAvecTexte"
+        class="my-5 mh-100 mw-100"
+        alt="" />
+    </ng-template>
+    <h5 class="fw-bold mb-0">Souhaitez-vous vraiment</h5>
+    <h5 class="fw-bold text-primary mb-4">réinitialiser les filtres ?</h5>
+    <p>
+      Attention, si vous réinitialisez les filtres,
+      <br />
+      les informations que vous avez déja saisies seront perdues
+      <br />
+      Souhaitez-vous vraiment réinitialiser ?
+    </p>
+  </div>
+  <a
+    role="button"
+    [routerLink]="['besoin']"
+    slot="footer"
+    type="submit"
+    class="btn btn-primary"
+    (click)="resetAllFilter.emit(); modal.close()">
+    <i class="ri-compass-3-line" aria-hidden="true"></i>
+    Réinitialiser les filtres
+  </a>
+</app-modal>

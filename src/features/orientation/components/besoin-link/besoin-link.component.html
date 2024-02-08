@@ -17,7 +17,7 @@
         routerLink="../localisation"
         queryParamsHandling="merge"
         [queryParams]="{ service: serviceItem.value }"
-        (click)="selectServiceValue.emit(serviceItem.value)">
+        (click)="selectServiceValue.emit(serviceItem.value); addLastFilter.emit(serviceItem.value)">
         <span class="orientation-btn-label d-block">{{ serviceItem.label }}</span>
       </a>
     </h3>
