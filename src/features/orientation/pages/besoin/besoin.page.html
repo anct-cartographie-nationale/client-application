@@ -21,6 +21,7 @@
         </div>
         <app-besoin-link
           [serviceItems]="apprentissageDeBaseOrientationItems"
+          [serviceFilter]="serviceFilter$ | async"
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
           (displayInformations)="selectOrientationInformation($event)"
@@ -39,6 +40,7 @@
         </div>
         <app-besoin-link
           [serviceItems]="demarchesOrientationItems"
+          [serviceFilter]="serviceFilter$ | async"
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
           (displayInformations)="selectOrientationInformation($event)"
@@ -57,6 +59,7 @@
         </div>
         <app-besoin-link
           [serviceItems]="cultureNumeriqueOrientationItems"
+          [serviceFilter]="serviceFilter$ | async"
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
           (displayInformations)="selectOrientationInformation($event)"
@@ -75,6 +78,7 @@
         </div>
         <app-besoin-link
           [serviceItems]="manqueDeMaterielOrientationItems"
+          [serviceFilter]="serviceFilter$ | async"
           [selectedServiceItem]="serviceControl.value"
           (selectServiceValue)="serviceControl.setValue($event)"
           (displayInformations)="selectOrientationInformation($event)"
