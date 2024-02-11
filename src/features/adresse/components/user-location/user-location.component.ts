@@ -23,7 +23,7 @@ import { AddressType } from '../../models';
 const MIN_SEARCH_TERM_LENGTH: number = 3;
 const SEARCH_DEBOUNCE_TIME: number = 300;
 
-const setZoomUserPosition = (defaultUserPosition: number, distance?: number): number =>
+export const setZoomUserPosition = (defaultUserPosition: number, distance?: number): number =>
   distance ? (distance >= 50000 && distance <= 100000 ? 8 : 10) : defaultUserPosition;
 
 const findAddressById = (
