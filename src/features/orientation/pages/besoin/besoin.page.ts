@@ -14,6 +14,8 @@ import apprentissageDeBase from './apprentissage-de-base.json';
 import cultureNumerique from './culture-numerique.json';
 import manqueDeMateriel from './manque-de-materiel.json';
 import { BESOIN_INFORMATION_MODAL_TEXTS } from './besoin-information-modal-texts';
+import { Observable, map } from 'rxjs';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,12 +35,17 @@ export class BesoinPage {
 
   public constructor(
     public readonly orientationLayout: OrientationLayout,
+    public readonly route: ActivatedRoute,
     @Inject(SET_TITLE_ACTION) readonly setTitle: SetTitleAction
   ) {
     setTitle(['Besoin', 'Orientation']);
   }
 
   public serviceControl: AbstractControl | null = this.orientationLayout.filterForm.get('service');
+
+  public serviceFilter$: Observable<string | null> = this.route.queryParamMap.pipe(
+    map((paramMap: ParamMap) => paramMap.get('service'))
+  );
 
   public selectedOrientationInformation: OrientationInformationContent | null = null;
 
