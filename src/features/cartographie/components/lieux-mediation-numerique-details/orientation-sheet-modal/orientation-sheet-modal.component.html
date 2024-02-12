@@ -246,7 +246,11 @@
   </div>
   <ng-container slot="footer">
     <ng-container *ngIf="printOrientationSheetStep === 'usager'">
-      <button type="submit" form="usagerOrientationSheetForm" class="btn btn-primary">
+      <button
+        type="submit"
+        form="usagerOrientationSheetForm"
+        class="btn btn-primary"
+        [disabled]="!usagerOrientationSheetForm.valid">
         Suivant
         <span role="img" class="ri-arrow-right-s-line" aria-hidden="true"></span>
       </button>
