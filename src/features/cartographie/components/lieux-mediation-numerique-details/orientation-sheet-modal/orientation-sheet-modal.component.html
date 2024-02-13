@@ -260,7 +260,11 @@
         <span role="img" class="ri-arrow-left-s-line" aria-hidden="true"></span>
         Précédent
       </button>
-      <button type="submit" form="prescripteurOrientationSheetForm" class="btn btn-primary">
+      <button
+        type="submit"
+        form="prescripteurOrientationSheetForm"
+        class="btn btn-primary"
+        [disabled]="!prescripteurOrientationSheetForm.valid">
         Suivant
         <span role="img" class="ri-arrow-right-s-line" aria-hidden="true"></span>
       </button>
