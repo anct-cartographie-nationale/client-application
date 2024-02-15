@@ -87,11 +87,9 @@ export class MarkersPresenter {
   }
 
   public center(localisation: Localisation, zoom: number = this._currentZoom): void {
-    setTimeout(() => {
-      this._localisation$.next(localisation);
-      this._zoom$.next(zoom);
-      this._currentZoom = zoom;
-    });
+    this._localisation$.next(localisation);
+    this._zoom$.next(zoom);
+    this._currentZoom = zoom;
   }
 
   public select(markerId: string): void {

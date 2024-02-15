@@ -23,7 +23,6 @@ import {
   MarkersPresenter
 } from '../../../core/presenters';
 import {
-  inLieuxZoomLevel,
   LabelPresentation,
   labelToDisplayMap,
   LieuMediationNumeriqueDetailsPresentation,
@@ -157,11 +156,7 @@ export class LieuxMediationNumeriqueDetailsPage {
   }
 
   private select(lieuMediationNumerique: LieuMediationNumeriqueDetailsPresentation): void {
-    lieuMediationNumerique.localisation &&
-      this._markersPresenter.center(
-        lieuMediationNumerique.localisation,
-        inLieuxZoomLevel(this._markersPresenter.getZoom()) ? 17 : this._zoomLevel.userPosition
-      );
+    lieuMediationNumerique.localisation && this._markersPresenter.center(lieuMediationNumerique.localisation);
     this._markersPresenter.select(lieuMediationNumerique.id);
   }
 
