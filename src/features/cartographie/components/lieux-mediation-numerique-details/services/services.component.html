@@ -1,8 +1,8 @@
 <div class="d-print-none row" *ngIf="services; else noServices">
   <h2 class="h5 text-muted-dark">Services proposés</h2>
-  <div *ngFor="let service of services" class="col-6 my-2">
+  <div *ngFor="let service of services" class="col-md-6 col-sm-12 my-2">
     <div class="bg-light py-3 d-flex align-items-center">
-      <span class="ri-circled-sm bg-primary text-light fw-normal d-sm-block d-none me-3 ms-3 text-center">
+      <span class="ri-circled-sm bg-primary text-light fw-normal me-3 ms-3 text-center">
         <span role="img" [ngClass]="getIconFromServices(service)" aria-hidden="true"></span>
       </span>
       <small>{{ service }}</small>
