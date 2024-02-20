@@ -32,6 +32,7 @@ import {
 import { ErreursReportForm, OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { emailMessage, reportErrorEmailMessage } from './lieux-mediation-numerique-details.presentation';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { setZoomUserPosition } from '@features/adresse/components';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -143,6 +144,11 @@ export class LieuxMediationNumeriqueDetailsPage {
         queryParamsHandling: 'preserve'
       }
     );
+    if (lieu.localisation && !this._hasDepartementFilter)
+      this._markersPresenter.center(
+        lieu.localisation,
+        setZoomUserPosition(this._zoomLevel.userPosition, parseInt(this._route.snapshot.queryParams['distance']))
+      );
   }
 
   public onShowLabel(label: LabelNational) {
