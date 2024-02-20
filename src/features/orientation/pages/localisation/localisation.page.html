@@ -11,6 +11,9 @@
       Renseignez votre adresse puis définissez la distance maximale jusqu'à laquelle vous pouvez vous déplacer
     </p>
     <form class="bg-light py-5" [formGroup]="orientationLayout.filterForm">
+      <div class="ms-5">
+        <label class="form-label ms-5">Entrez une adresse :</label>
+      </div>
       <div class="row gx-0 justify-content-center">
         <div class="col-md-9 col-11">
           <div class="row g-4">
@@ -24,7 +27,7 @@
                 (resetSearch)="onResetAddress()"
                 (search)="onSearchAddress($event)"></app-search-field>
             </div>
-            <button class="btn btn-secondary text-nowrap col-auto mx-auto" (click)="onGeoLocate()">
+            <button class="btn btn-sm btn-secondary text-nowrap col-auto mx-auto" (click)="onGeoLocate()">
               <div *ngIf="loadingState$ | async">
                 <span class="spinner-border spinner-border-sm text-primary me-1" role="status" aria-hidden="true"></span>
                 <span class="text-primary">Chargement...</span>
