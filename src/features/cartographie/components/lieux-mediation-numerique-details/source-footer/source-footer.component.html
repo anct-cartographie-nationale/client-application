@@ -7,20 +7,25 @@
     rel="noopener noreferrer"
     class="text-decoration-none mt-1 text-primary fw-bold">
     <div class="d-flex ms-2 align-items-center">
-      <div class="my-1 me-4" *ngFor="let source of sources">
-        <span class="circle-wrapper-light">
-          <img
-            *ngIf="source.logo as logo"
-            class="img-fluid p-2"
-            [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
-            alt="{{ source.label }}" />
-        </span>
+      <div class="row">
+        <div class="my-1 me-3 col-3 text-center" *ngFor="let source of sources">
+          <span class="circle-wrapper-light">
+            <img
+              *ngIf="source.logo as logo"
+              class="img-fluid p-2"
+              [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
+              alt="{{ source.label }}" />
+          </span>
+        </div>
       </div>
-      <small
-        [ngClass]="sources && sources[0].label === 'France Services' ? 'text-muted' : 'text-primary'"
-        class="fw-bold text-center mt-1 mb-2">
-        Mettre à jour les données
-      </small>
+      <div class="d-flex flex-column text-center">
+        <small
+          [ngClass]="sources && sources[0].label === 'France Services' ? 'text-muted' : 'text-primary'"
+          class="fw-bold text-center mt-1 mb-2">
+          Mettre à jour les données
+        </small>
+        <small class="text-muted-dark mt-0 mb-2">Vos modifications seront prises en compte dans quelques jours</small>
+      </div>
     </div>
   </a>
 </div>
