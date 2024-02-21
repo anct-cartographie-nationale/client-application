@@ -149,11 +149,9 @@
       </div>
     </li>
   </ul>
-  <div class="row bg-light py-2 mx-3">
-    <small class="my-2">
+  <div class="row bg-light pt-2 mx-3 pb-4 d-sm-flex d-none">
+    <small class="my-4 fw-bold">
       Vous travaillez dans cette structure ou êtes habilités à mettre à jour les données de cette fiche ?
-      <br />
-      Cliquez sur le lien ci-dessous.
       <br />
       Si besoin, nous organisons des webinaires mensuels pour vous accompagner dans cette mise à jour.
     </small>
@@ -161,6 +159,23 @@
       <app-source-footer [sources]="lieuMediationNumerique.source"></app-source-footer>
     </div>
     <div class="col-6">
+      <app-webinaire></app-webinaire>
+    </div>
+  </div>
+  <div class="flex-column bg-light pt-2 pb-4 d-sm-none d-flex">
+    <small class="mt-4 mb-2 mx-4 fw-bold">
+      Vous travaillez dans cette structure ou êtes habilités à
+      <br aria-hidden="true" />
+      mettre à jour les données de cette fiche ? Si besoin, nous
+      <br aria-hidden="true" />
+      organisons des webinaires mensuels pour vous
+      <br aria-hidden="true" />
+      accompagner dans cette mise à jour.
+    </small>
+    <div class="col-sm-12 mt-2 mb-3 mx-4">
+      <app-source-footer [sources]="lieuMediationNumerique.source"></app-source-footer>
+    </div>
+    <div class="col-sm-12 mx-4">
       <app-webinaire></app-webinaire>
     </div>
   </div>
