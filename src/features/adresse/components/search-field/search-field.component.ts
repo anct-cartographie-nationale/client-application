@@ -14,7 +14,7 @@ export class SearchFieldComponent<TResultType extends string> implements OnChang
 
   @Input() public displayReset: boolean = false;
 
-  @Input() public placeholder: string = 'Entrez une adresse';
+  @Input() public placeholder: string = 'Adresse,CP,Ville...';
 
   @Input() public defaultValue?: string;
 
