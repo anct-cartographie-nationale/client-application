@@ -16,7 +16,7 @@ const openingHoursFormControl = (openingHours: OpeningHours = DEFAULT_OPENING_HO
   new FormGroup<OpeningHoursControls>(
     {
       day: new FormControl<OpeningHours['day']>(openingHours.day),
-      period: new FormControl<OpeningHours['period']>(openingHours.period),
+      period: new FormControl<OpeningHours['period']>(openingHours.period || 'hours'),
       start: new FormControl<OpeningHours['start']>(openingHours.start),
       end: new FormControl<OpeningHours['end']>(openingHours.end)
     },
@@ -79,7 +79,12 @@ export class OpeningHoursFormComponent {
     openingHoursFormGroup.controls.day.value === 'now' && openingHoursFormGroup.reset({ ...DEFAULT_OPENING_HOURS, day: 'now' });
   }
 
-  public onOpeningHourChanges(index: number): void {
+  public onOpeningHourChanges(index: number, event?: Event): void {
+    if (event) {
+      this.openingHoursForm.at(index).controls.period.setValue((event.target as HTMLInputElement).checked ? 'all' : 'hours');
+      this.updateFilters();
+    }
+
     this.appendOpeningHoursFieldFor(index) && this.openingHoursForm.controls.push(openingHoursFormControl());
     this.isValidOpeningHoursGroupAt(index) && this.updateFilters();
   }
@@ -88,5 +93,10 @@ export class OpeningHoursFormComponent {
     this.openingHoursForm.controls = [];
     this.openingHoursForm.controls.push(openingHoursFormControl());
     this.selectOpeningHours.emit();
+  }
+
+  public clearDateInput(index: number, field: string): void {
+    this.openingHoursForm.at(index).controls[field as keyof OpeningHoursControls].setValue('');
+    this.updateFilters();
   }
 }
