@@ -1,6 +1,6 @@
 import { DoBootstrap, Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ASSETS_CONFIGURATION, ASSETS_TOKEN, mediationNumeriqueProviders } from '../../../../../root';
 import { SkipLinkModule } from '../../../../core';
 import { CartographieWebComponentLayout } from '../../../layouts';
@@ -10,7 +10,7 @@ import { CartographieWebComponentRoutingModule } from './cartographie.web-compon
 
 @NgModule({
   declarations: [CartographieWebComponentLayout],
-  imports: [BrowserModule, CartographieCommonModule, CartographieWebComponentRoutingModule, SkipLinkModule.forRoot()],
+  imports: [BrowserAnimationsModule, CartographieCommonModule, CartographieWebComponentRoutingModule, SkipLinkModule.forRoot()],
   providers: [
     ...cartographieProviders,
     ...mediationNumeriqueProviders,
