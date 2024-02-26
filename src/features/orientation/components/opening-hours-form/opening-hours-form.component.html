@@ -1,4 +1,4 @@
-<ng-container *ngFor="let openingHourGroup of openingHoursForm.controls ?? []; index as i; first as isFirst">
+<ng-container *ngFor="let openingHourGroup of openingHoursForm.controls ?? []; index as i; first as isFirst; last as isLast">
   <app-text-separator *ngIf="!isFirst" class="mt-4" background="light">OU</app-text-separator>
   <fieldset>
     <legend class="visually-hidden">
@@ -12,66 +12,96 @@
         [class.invisible]="openingHourGroup.invalid"
         aria-hidden="true"></span>
       <div class="row g-2 px-2 flex-grow-1">
-        <div class="col-sm col-12">
-          <label [for]="'jour-ouverture-' + i" class="visually-hidden">Choix du jour d'ouverture</label>
-          <select
-            [id]="'jour-ouverture-' + i"
-            class="form-select"
-            [formControl]="openingHourGroup.controls.day"
-            aria-label="Jour d'ouverture"
-            (change)="onDaySelect(openingHourGroup); onOpeningHourChanges(i)">
-            <option value="" disabled selected>Choisir un jour</option>
-            <option value="now">Ouvert Maintenant</option>
-            <option value="all">Tous les jours</option>
-            <option value="mo">Lundi</option>
-            <option value="tu">Mardi</option>
-            <option value="we">Mercredi</option>
-            <option value="th">Jeudi</option>
-            <option value="fr">Vendredi</option>
-            <option value="sa">Samedi</option>
-            <option value="su">Dimanche</option>
-          </select>
+        <div class="d-flex align-items-center">
+          <div class="col-sm col-12">
+            <label [for]="'jour-ouverture-' + i"><small class="text-muted">Choisir un jour</small></label>
+            <div class="input-group">
+              <button
+                type="button"
+                *ngIf="openingHourGroup.controls.day.value"
+                class="btn input-group-btn link-dark opacity-75 text-decoration-none p-0"
+                title="Supprimer ce jour"
+                (click)="clearDateInput(i, 'day')">
+                <span role="img" class="ri-close-line mx-1" aria-hidden="true"></span>
+                <span class="visually-hidden">Effacer le jour numéro {{ i }}</span>
+              </button>
+              <select
+                [id]="'jour-ouverture-' + i"
+                class="form-select"
+                [formControl]="openingHourGroup.controls.day"
+                aria-label="Jour d'ouverture"
+                (change)="onDaySelect(openingHourGroup); onOpeningHourChanges(i)">
+                <option value="now">Ouvert Maintenant</option>
+                <option value="all">Tous les jours</option>
+                <option value="mo">Lundi</option>
+                <option value="tu">Mardi</option>
+                <option value="we">Mercredi</option>
+                <option value="th">Jeudi</option>
+                <option value="fr">Vendredi</option>
+                <option value="sa">Samedi</option>
+                <option value="su">Dimanche</option>
+              </select>
+            </div>
+          </div>
+          <div class="col mt-4" *ngIf="openingHourGroup.controls.day.value && openingHourGroup.controls.day.value !== 'now'">
+            <div class="form-check form-switch my-2 ms-3">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" role="switch" (change)="onOpeningHourChanges(i, $event)" />
+                Toute la journée
+              </label>
+            </div>
+          </div>
         </div>
-        <div class="col" *ngIf="openingHourGroup.controls.day.value && openingHourGroup.controls.day.value !== 'now'">
-          <ng-container *ngIf="openingHourGroup.controls.period.value !== 'hours'">
-            <label [for]="'plage-horaire-' + i" class="visually-hidden">Plage horaire</label>
-            <select
-              [id]="'plage-horaire-' + i"
-              class="form-select"
-              [formControl]="openingHourGroup.controls.period"
-              (change)="onOpeningHourChanges(i)"
-              aria-label="Heures d'ouvertures">
-              <option value="" disabled selected>Choisir les horaires</option>
-              <option value="all">Toute la journée</option>
-              <option value="hours">Choisir une heure...</option>
-            </select>
-          </ng-container>
-          <ng-container *ngIf="openingHourGroup.controls.period.value === 'hours'">
-            <label [for]="'debut-' + i" class="visually-hidden">Heure de début</label>
-            <input
-              type="time"
-              class="form-control"
-              [id]="'debut-' + i"
-              [formControl]="openingHourGroup.controls.start"
-              (change)="onOpeningHourChanges(i)"
-              name="start" />
-          </ng-container>
-        </div>
-        <div class="col" *ngIf="openingHourGroup.controls.period.value === 'hours'">
-          <label [for]="'fin-' + i" class="visually-hidden">Heure de fin</label>
-          <input
-            type="time"
-            class="form-control"
-            [id]="'fin-' + i"
-            [formControl]="openingHourGroup.controls.end"
-            (change)="onOpeningHourChanges(i)"
-            name="end" />
+
+        <div class="row g-2 px-2 flex-grow-1" *ngIf="openingHourGroup.controls.period.value === 'hours'">
+          <div class="col-6" *ngIf="openingHourGroup.controls.day.value && openingHourGroup.controls.day.value !== 'now'">
+            <label [for]="'debut-' + i"><small class="text-muted">Choisir une date de début</small></label>
+            <div class="input-group">
+              <button
+                type="button"
+                *ngIf="openingHourGroup.controls.start.value"
+                class="btn input-group-btn link-dark opacity-75 text-decoration-none p-0"
+                title="Supprimer cette date de début"
+                (click)="clearDateInput(i, 'start')">
+                <span role="img" class="ri-close-line mx-1" aria-hidden="true"></span>
+                <span class="visually-hidden">Effacer la date de début numéro {{ i }}</span>
+              </button>
+              <input
+                type="time"
+                class="form-control"
+                [id]="'debut-' + i"
+                [formControl]="openingHourGroup.controls.start"
+                (change)="onOpeningHourChanges(i)"
+                name="start" />
+            </div>
+          </div>
+          <div class="col-6" *ngIf="openingHourGroup.controls.day.value">
+            <label [for]="'fin-' + i"><small class="text-muted">Choisir une date de fin</small></label>
+            <div class="input-group">
+              <button
+                type="button"
+                *ngIf="openingHourGroup.controls.end.value"
+                class="btn input-group-btn link-dark opacity-75 text-decoration-none p-0"
+                title="Supprimer cette date de fin"
+                (click)="clearDateInput(i, 'end')">
+                <span role="img" class="ri-close-line mx-1" aria-hidden="true"></span>
+                <span class="visually-hidden">Effacer la date de fin numéro {{ i }}</span>
+              </button>
+              <input
+                type="time"
+                class="form-control"
+                [id]="'fin-' + i"
+                [formControl]="openingHourGroup.controls.end"
+                (change)="onOpeningHourChanges(i)"
+                name="end" />
+            </div>
+          </div>
         </div>
       </div>
       <button
         type="button"
         class="btn btn-link link-dark opacity-75 text-decoration-none p-0"
-        [class.invisible]="openingHourGroup.controls.day.value === ''"
+        [class.invisible]="!openingHourGroup || isLast"
         title="Supprimer cette ligne"
         (click)="removeOpeningHours(i)">
         <span role="img" class="ri-close-line" aria-hidden="true"></span>
