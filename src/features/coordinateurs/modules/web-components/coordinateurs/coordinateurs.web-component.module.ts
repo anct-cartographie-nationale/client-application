@@ -4,7 +4,6 @@ import { createCustomElement } from '@angular/elements';
 import { ASSETS_CONFIGURATION, ASSETS_TOKEN } from '../../../../../root';
 import { SkipLinkModule } from '../../../../core';
 import { CoordinateursWebComponentLayout } from '../../../layouts';
-import { coordinateursProviders } from '../../common';
 import { CoordinateursCommonModule } from '../../common/coordinateurs.common.module';
 import { CoordinateursWebComponentRoutingModule } from './coordinateurs.web-component-routing.module';
 
@@ -17,7 +16,6 @@ import { CoordinateursWebComponentRoutingModule } from './coordinateurs.web-comp
     SkipLinkModule.forRoot()
   ],
   providers: [
-    ...coordinateursProviders,
     {
       provide: ASSETS_TOKEN,
       useValue: ASSETS_CONFIGURATION
