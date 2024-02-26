@@ -10,7 +10,7 @@ import {
   ModalitesAccompagnement
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueWithAidants, NO_LOCALISATION } from '../../../core/models';
-import { geographicDistance, HorairesPresentation, openingState, parseHoraires } from '../../../core/presenters';
+import { geographicDistance, HorairesPresentation, openingState, parseHoraires, regions } from '../../../core/presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../core/repositories';
 import { ifAny } from '../../../core/utilities';
 import {
@@ -494,15 +494,29 @@ const ifAnyHorairesWithWeeks =
   (horaires?: string): HorairesPresentation[] | {} =>
     horaires?.includes('week') ? ifAny('full_horaires', getHorairesWeeksByWeeks(date)(horaires)) : [];
 
-const getMultipleSourcesIfAny = (id: string, lieuSource?: string): SourcePresentation[] =>
-  id.includes('__')
-    ? Array.from(availableSourcesMap)
-        .filter(([source]: [string, SourcePresentation]) => id.replace(/-/g, ' ').includes(source))
-        .map(([, source]) => source)
-    : [availableSourcesMap.get(lieuSource ?? '') ?? []].flat();
+const capitalizeFirstLetter = (string: string): string => string.charAt(0).toUpperCase() + string.slice(1);
 
-const getSourcesIfAny = (id: string, lieuSource?: string): SourcePresentation[] | undefined =>
-  lieuSource ? getMultipleSourcesIfAny(id, lieuSource) : undefined;
+const getMultipleSourcesIfAny = (id: string, lieuCodePostal: string, lieuSource?: string): SourcePresentation[] => {
+  const regionAuvergneRhoneAlpes = regions.find((region) => region.nom === 'Auvergne-Rhône-Alpes');
+
+  let sources: SourcePresentation[] = id.includes('__')
+    ? Array.from(availableSourcesMap)
+        .filter(([source]: [string, SourcePresentation]) => capitalizeFirstLetter(id.replace(/-/g, ' ')).includes(source))
+        .map(([, source]) => source)
+    : [availableSourcesMap.get(capitalizeFirstLetter(lieuSource ?? '')) ?? []].flat();
+
+  if (regionAuvergneRhoneAlpes?.departements.includes(lieuCodePostal.slice(0, 2)) && lieuSource === 'dora') {
+    sources = sources.map((source: SourcePresentation) => ({
+      ...source,
+      update_link: availableSourcesMap.get('Hinaura')?.update_link
+    }));
+  }
+
+  return sources;
+};
+
+const getSourcesIfAny = (id: string, lieuCodePostal: string, lieuSource?: string): SourcePresentation[] | undefined =>
+  lieuSource ? getMultipleSourcesIfAny(id, lieuCodePostal, lieuSource) : undefined;
 
 export class LieuxMediationNumeriqueDetailsPresenter {
   public constructor(private readonly lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository) {}
@@ -551,7 +565,7 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           ...ifAny('distance', getDistance(lieu, localisation)),
           ...ifAny('prise_rdv', lieu.prise_rdv),
           ...ifAny('aidants', lieu.aidants),
-          ...ifAny('source', getSourcesIfAny(lieu.id, lieu.source ?? '')),
+          ...ifAny('source', getSourcesIfAny(lieu.id, lieu.adresse.code_postal, lieu.source ?? '')),
           ...ifAny('prive', lieu.prive)
         })
       )
