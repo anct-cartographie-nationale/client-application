@@ -1,31 +1,24 @@
-<div class="bg-secondary d-flex p-2 h-100 align-items-center">
-  <a
-    role="button"
-    [attr.href]="getFirstUpdateLink(sources) || null"
-    [style.cursor]="getFirstUpdateLink(sources) ? 'pointer' : 'default'"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="text-decoration-none mt-1 text-primary fw-bold">
-    <div class="d-flex ms-2 align-items-center">
-      <div class="row">
-        <div class="my-1 me-3 col-3 text-center" *ngFor="let source of sources">
-          <span class="circle-wrapper-light">
-            <img
-              *ngIf="source.logo as logo"
-              class="img-fluid p-2"
-              [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
-              alt="{{ source.label }}" />
-          </span>
-        </div>
-      </div>
-      <div class="d-flex flex-column text-center">
-        <small
-          [ngClass]="sources && sources[0].label === 'France Services' ? 'text-muted' : 'text-primary'"
-          class="fw-bold text-center mt-1 mb-2">
-          Mettre à jour les données
-        </small>
-        <small class="text-muted-dark mt-0 mb-2">Vos modifications seront prises en compte dans quelques jours</small>
-      </div>
+<a
+  class="nav-link bg-secondary lh-sm p-3"
+  [attr.href]="getFirstUpdateLink(sources) || null"
+  target="_blank"
+  rel="noopener noreferrer"
+  title="S'inscrire au webinaire (nouvel onglet)">
+  <div class="row align-items-center g-0">
+    <div class="col-auto d-flex g-2">
+      <span *ngFor="let source of sources" class="circle-wrapper-light square-xl me-2">
+        <img
+          *ngIf="source.logo as logo"
+          class="img-fluid p-2"
+          [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
+          alt="{{ source.label }}" />
+      </span>
     </div>
-  </a>
-</div>
+    <div class="col">
+      <div [ngClass]="sources?.[0]?.label === 'France Services' ? 'text-muted' : 'text-primary'" class="fw-bold">
+        Mettre à jour les données
+      </div>
+      <small class="text-muted-dark fst-italic">Vos modifications seront prises en compte dans quelques jours</small>
+    </div>
+  </div>
+</a>
