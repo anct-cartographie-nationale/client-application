@@ -1,0 +1,16 @@
+<small>
+  <span role="img" class="ri-numbers-fill ri-xl text-primary" aria-hidden="true"></span>
+  Cette fiche est remplie à
+  <span class="text-primary fw-bold">{{ scoreCompletion(lieuMediationNumerique) }}%</span>
+</small>
+<div class="progress my-2">
+  <div
+    class="progress-bar"
+    role="progressbar"
+    aria-label="Score completion"
+    [style.width]="scoreCompletion(lieuMediationNumerique) + '%'"
+    aria-valuenow="scoreCompletion(lieuMediationNumerique)"
+    aria-valuemin="0"
+    aria-valuemax="100"></div>
+</div>
+<small class="text-primary">{{ scoreExplanation(scoreCompletion(lieuMediationNumerique)) }}</small>
