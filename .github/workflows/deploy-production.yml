@@ -37,6 +37,9 @@ jobs:
       - name: Build
         run: yarn build client-application
 
+      - name: Update blacklist data
+        run: cp projects/client-application/src/assets/data/lieux-mediation-numerique.blacklist.json ./dist/client-application/assets/data/
+
       - name: Lieux mediation numérique data from API
         run: curl https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique | gunzip >> ./dist/client-application/assets/data/lieux-inclusion-numerique.json
 

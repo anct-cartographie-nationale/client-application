@@ -9,10 +9,22 @@ export type DataCoordinateursConfiguration = {
   coordinateurs: string;
 };
 
+export type DataBlacklistConfiguration = {
+  lieuxDeMediationNumeriqueBlacklist: string;
+};
+
 export const DATA_COORDINATEURS_CONFIGURATION: DataCoordinateursConfiguration = {
   conseillers: 'https://api.conseiller-numerique.gouv.fr/coordination-conseillers',
   coordinateurs: 'https://api.conseiller-numerique.gouv.fr/coordinateurs'
 };
+
+export const DATA_BLACKLIST_CONFIGURATION: DataBlacklistConfiguration = {
+  lieuxDeMediationNumeriqueBlacklist: '../../../assets/data/lieux-mediation-numerique.blacklist.json'
+};
+
+export const DATA_BLACKLIST_TOKEN: InjectionToken<DataBlacklistConfiguration> = new InjectionToken<DataBlacklistConfiguration>(
+  'data.configuration.blacklist'
+);
 
 export const DATA_TOKEN: InjectionToken<DataConfiguration> = new InjectionToken<DataConfiguration>('data.configuration');
 

@@ -93,6 +93,27 @@ Exécuter `yarn prettier` pour mettre à niveau la syntaxe de l'ensemble des fic
   - Ajouter les nouveaux `codepoint` à la fin du fichier [icons.scss](./src/scss/components/_icons.scss) disponibles dans le fichier `remixicon.css`
   - Relancer le serveur pour appliquer les changements
 
+### Gestion des Lieux de Médiation Numérique
+
+Dans certaines situations, il peut être nécessaire d'exclure des lieux de médiation numérique de l'affichage sur la cartographie nationale. Pour gérer ces cas, une liste noire a été mise en place. Cette liste noire permet d'identifier de manière claire les lieux qui ne doivent plus être affichés, assurant ainsi que la cartographie reste à jour et ne présente que les lieux pertinents.
+
+### Utilisation de la Liste Noire :
+
+- Accédez au fichier JSON `lieux-mediation-numerique.blacklist.json` > `src/assets/data/lieux-mediation-numerique.blacklist.json`.
+- Cliquer sur l'icône de modification en haut à droite de la page (le crayon).
+- Ajoutez l'identifiant du lieu à exclure en suivant le format :
+  `{
+"id": "Id du lieu",
+"source" : "Source du lieu"  
+}`.
+- Validez vos changements en cliquant sur `Commit changes`.
+- Dans la section `Commit message` saisissez un message descriptif, par exemple : `update-liste-noire`.
+- Créez une nouvelle branche pour ce commit et proposez un nom de branche descriptif, tel que : `update-liste-noire-DD-MM-YY`.
+- Cliquer sur `Sign off and propose changes` pour proposer les modifications.
+- Créez une Pull Request en cliquant sur `Create pull request`.
+- Assignez un validateur dans la section `Reviewers` pour l'examen de la Pull Request.
+- Une fois validée, effectuez un `Squash and merge` pour intégrer les changements en production.
+
 ## Contribution
 
 ### Nommage des branches

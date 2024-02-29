@@ -4,6 +4,8 @@ import { LieuxMediationNumeriqueHttp } from '../../../features/core/data';
 import {
   BRAND_CONFIGURATION,
   BRAND_TOKEN,
+  DATA_BLACKLIST_CONFIGURATION,
+  DATA_BLACKLIST_TOKEN,
   DATA_CONFIGURATION,
   DATA_TOKEN,
   FEATURES_CONFIGURATION,
@@ -28,7 +30,11 @@ export const mediationNumeriqueProviders = [
     useValue: DATA_CONFIGURATION
   },
   {
-    deps: [DATA_TOKEN, HttpClient],
+    provide: DATA_BLACKLIST_TOKEN,
+    useValue: DATA_BLACKLIST_CONFIGURATION
+  },
+  {
+    deps: [DATA_TOKEN, DATA_BLACKLIST_TOKEN, HttpClient],
     provide: LieuxMediationNumeriqueRepository,
     useClass: LieuxMediationNumeriqueHttp
   },
