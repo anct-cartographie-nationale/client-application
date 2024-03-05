@@ -59,7 +59,9 @@
   <div class="row g-2 mt-1" *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
     <div class="col-auto z-index-over" *ngFor="let label of labelsNationaux">
       <button (click)="showLabel.emit(label); showLabelInvokingContext.emit($event)" class="btn btn-link p-0">
-        <img [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'" [alt]="'Label ' + toLabelNom(label)" />
+        <img
+          [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'"
+          [alt]="'Plus d\'information à propos du label ' + toLabelNom(label)" />
       </button>
     </div>
     <div class="col text-end" *ngIf="lieuMediationNumerique.conditions_acces || lieuMediationNumerique.date_maj">
