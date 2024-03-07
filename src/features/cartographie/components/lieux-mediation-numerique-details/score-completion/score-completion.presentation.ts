@@ -1,55 +1,64 @@
 export const TOTAL_SCORE_COMPLETION: number = 41;
 
-type Score = number;
+export type ScoreDetail = {
+  score: number;
+  name: string;
+};
+
+export type ScorePresence = {
+  name: string;
+  presence: boolean;
+};
 
 type ScoreCompletion = {
-  [key: string]: Score | ScoreContact | ScorePresentation | ScoreLocalisation;
+  [key: string]: ScoreDetail | ScoreContact | ScorePresentation | ScoreLocalisation;
 };
 
 type ScoreContact = {
-  telephone: Score;
-  courriel: Score;
-  site_web: Score;
+  telephone: ScoreDetail;
+  courriel: ScoreDetail;
+  site_web: ScoreDetail;
 };
 
 type ScorePresentation = {
-  presentation_detail: Score;
-  presentation_resume: Score;
+  presentation_detail: ScoreDetail;
+  presentation_resume: ScoreDetail;
 };
 
 type ScoreLocalisation = {
-  latitude: Score;
-  longitude: Score;
+  latitude: ScoreDetail;
+  longitude: ScoreDetail;
 };
 
 export const scoreCompletionTable: ScoreCompletion = {
-  nom: 2,
-  adresse: 2,
-  commune: 2,
-  code_postal: 2,
-  services: 2,
-  horaires: 2,
-  typologies: 2,
+  nom: { score: 2, name: 'Nom' },
+  adresse: { score: 2, name: 'Adresse' },
+  commune: { score: 2, name: 'Commune' },
+  code_postal: { score: 2, name: 'Code postal' },
+  services: { score: 2, name: 'Services' },
+  horaires: { score: 2, name: 'Horaires' },
+  typologies: { score: 2, name: 'Typologie' },
   contact: {
-    telephone: 2,
-    courriel: 2,
-    site_web: 2
+    telephone: { score: 2, name: 'Téléphone' },
+    courriel: { score: 2, name: 'Courriel' },
+    site_web: { score: 2, name: 'Site web' }
   },
   presentation: {
-    presentation_detail: 2,
-    presentation_resume: 2
+    presentation_detail: { score: 2, name: 'Présentation détaillée' },
+    presentation_resume: { score: 2, name: 'Présentation résumée' }
   },
-  date_maj: 2,
-  publics_accueillis: 2,
-  conditions_acces: 2,
-  labels_nationaux: 2,
-  modalites_accompagnement: 2,
-  accessibilite: 1,
+  date_maj: { score: 2, name: 'Date de mise à jour' },
+  publics_accueillis: { score: 2, name: 'Publics accueillis' },
+  conditions_acces: { score: 2, name: 'Conditions d’accès' },
+  labels_nationaux: { score: 2, name: 'Label nationaux' },
+  autres_labels: { score: 2, name: 'Autres labels' },
+  modalites_accompagnement: { score: 2, name: 'Modalités d’accompagnement' },
+  accessibilite: { score: 1, name: 'Accessibilité' },
   localisation: {
-    latitude: 1,
-    longitude: 1
+    latitude: { score: 1, name: 'Latitude' },
+    longitude: { score: 1, name: 'Longitude' }
   },
-  prise_rdv: 1,
-  source: 1,
-  pivot: 2
+  prise_rdv: { score: 1, name: 'Prise de RDV' },
+  source: { score: 1, name: 'Source' },
+  pivot: { score: 2, name: 'Pivot' }
 };
