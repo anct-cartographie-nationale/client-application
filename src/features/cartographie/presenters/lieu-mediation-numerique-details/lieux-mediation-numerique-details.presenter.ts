@@ -100,7 +100,7 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
       label: 'Aidants Connect',
       link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-national-fournis-par-aidants-connect/',
       detail: "Formulaire d'habilitation Aidants Connect",
-      update_link: 'https://aidantsconnect.beta.gouv.fr/habilitation/demandeur/',
+      update_link: 'https://aidantsconnect.beta.gouv.fr/accounts/login/',
       logo: 'aidants-connect'
     }
   ],

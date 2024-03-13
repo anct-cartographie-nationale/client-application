@@ -1,14 +1,16 @@
-<a
-  class="nav-link bg-secondary lh-sm p-3"
-  [attr.href]="getFirstUpdateLink(sources) || null"
-  target="_blank"
-  rel="noopener noreferrer"
-  title="S'inscrire au webinaire (nouvel onglet)">
-  <div class="row align-items-center g-0">
-    <div class="col-auto d-flex g-2">
-      <span *ngFor="let source of sources" class="circle-wrapper-light square-xl me-2">
+<div class="row align-items-center g-0 bg-secondary p-3">
+  <div class="col-auto d-flex g-2">
+    <a
+      class="nav-link lh-sm"
+      [ngClass]="source.label === 'France Services' ? ['opacity-50', 'pointer-events-none'] : 'opacity-100'"
+      *ngFor="let source of sources"
+      [attr.href]="getUpdateLink(source)"
+      target="_blank"
+      rel="noopener noreferrer"
+      [title]="source.label === 'France Services' ? '' : 'Mettre à jour les données (nouvel onglet)'">
+      <span class="circle-wrapper-light square-xl me-2">
         <img
-          *ngIf="source.update_link as update_link; else noUpdateLink"
+          *ngIf="source.update_link || source.label === 'France Services'; else noUpdateLink"
           class="img-fluid p-2"
           [src]="assetsConfiguration.path + '/img/logo/source-update/' + source.logo + '.svg'"
           alt="{{ source.label }}" />
@@ -19,12 +21,14 @@
             alt="{{ source.label }}" />
         </ng-template>
       </span>
-    </div>
-    <div class="col">
-      <div [ngClass]="sources?.[0]?.label === 'France Services' ? 'text-muted' : 'text-primary'" class="fw-bold">
-        Mettre à jour les données
-      </div>
-      <small class="text-muted-dark fst-italic">Vos modifications seront prises en compte dans quelques jours</small>
-    </div>
+    </a>
   </div>
-</a>
+  <div class="col">
+    <div
+      [ngClass]="sources?.[0]?.label === 'France Services' && sources?.length === 1 ? 'text-muted' : 'text-primary'"
+      class="fw-bold">
+      Mettre à jour les données
+    </div>
+    <small class="text-muted-dark fst-italic">Vos modifications seront prises en compte dans quelques jours</small>
+  </div>
+</div>
