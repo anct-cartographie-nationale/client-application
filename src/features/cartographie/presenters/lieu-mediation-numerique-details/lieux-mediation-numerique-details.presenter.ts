@@ -105,6 +105,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
+    'Mairie Aix en Provence',
+    {
+      label: 'Ville Aix en Provence',
+      link: '',
+      detail: '',
+      update_link: '',
+      logo: ''
+    }
+  ],
+  [
     'Angers',
     {
       label: "Ville d'Angers",

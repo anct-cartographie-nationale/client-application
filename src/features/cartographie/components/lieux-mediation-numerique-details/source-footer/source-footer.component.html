@@ -8,11 +8,14 @@
     <div class="col-auto d-flex g-2">
       <span *ngFor="let source of sources" class="circle-wrapper-light square-xl me-2">
         <img
-          *ngIf="source.logo as logo"
+          *ngIf="source.logo as logo; else noLogo"
           class="img-fluid p-2"
           [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
           alt="{{ source.label }}" />
       </span>
+      <ng-template #noLogo>
+        <span role="img" class="ri-lg ri-database-2-line text-primary" aria-hidden="true"></span>
+      </ng-template>
     </div>
     <div class="col">
       <div [ngClass]="sources?.[0]?.label === 'France Services' ? 'text-muted' : 'text-primary'" class="fw-bold">
