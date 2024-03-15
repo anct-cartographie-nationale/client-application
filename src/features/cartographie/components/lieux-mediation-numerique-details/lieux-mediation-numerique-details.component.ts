@@ -57,6 +57,7 @@ export class LieuxMediationNumeriqueDetailsComponent {
 
   public onPrintFromBandeau(): void {
     if (environment.production) {
+      this._matomoTracker?.trackEvent('fiche détail', 'bandeau footer', `impression fiche`);
       const sourceLabels = this.lieuMediationNumerique.source?.map((source) => source.label).join(', ');
       this._matomoTracker?.trackEvent('fiche détail', sourceLabels ?? 'Source inconnue', 'bandeau footer - impression fiche');
     }

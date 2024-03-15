@@ -23,6 +23,7 @@ export class BoutonsActionComponent {
 
   public onPrintFromActionButton(): void {
     if (environment.production) {
+      this._matomoTracker?.trackEvent('fiche détail', 'bouton action', `impression fiche`);
       const sourceLabels = this.sources?.map((source) => source.label).join(', ');
       this._matomoTracker?.trackEvent('fiche détail', sourceLabels ?? 'Source inconnue', `bouton action - impression fiche`);
     }
@@ -30,6 +31,7 @@ export class BoutonsActionComponent {
 
   public onSendEmailFromActionButton(): void {
     if (environment.production) {
+      this._matomoTracker?.trackEvent('fiche détail', 'bouton action', `envoyer par email`);
       const sourceLabels = this.sources?.map((source) => source.label).join(', ');
       this._matomoTracker?.trackEvent('fiche détail', sourceLabels ?? 'Source inconnue', `bouton action - envoyer par email`);
     }
