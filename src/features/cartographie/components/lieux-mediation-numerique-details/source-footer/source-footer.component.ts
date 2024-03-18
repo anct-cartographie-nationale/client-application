@@ -13,6 +13,9 @@ export class SourceFooterComponent {
   public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
 
   public getFirstUpdateLink(sources: SourcePresentation[] | undefined): string {
-    return sources?.find((source) => source.update_link)?.update_link || '';
+    return (
+      sources?.find((source) => source.update_link)?.update_link ||
+      'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F'
+    );
   }
 }
