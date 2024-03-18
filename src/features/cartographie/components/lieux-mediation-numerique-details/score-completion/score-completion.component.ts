@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { scoreCompletionPresence, scoreCompletion } from './score-completion.presenter';
+import { scoreCompletionPresence, scoreCompletionRate } from './score-completion.presenter';
 import { LieuMediationNumeriqueDetailsPresentation } from '@features/cartographie/presenters';
-import { ScorePresence } from './score-completion.presentation';
+import { ScorePresenceField } from './score-completion.presentation';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -11,10 +11,10 @@ import { ScorePresence } from './score-completion.presentation';
 export class ScoreCompletionComponent {
   @Input() public lieuMediationNumerique!: LieuMediationNumeriqueDetailsPresentation;
 
-  public scoreCompletion = scoreCompletion;
+  public scoreCompletion = scoreCompletionRate;
   public scoreCompletionPresence = scoreCompletionPresence;
 
-  public sortScoreCompletionPresence(scorePresence: ScorePresence[]): ScorePresence[] {
-    return scorePresence.sort((a, b) => Number(b.presence) - Number(a.presence));
+  public sortScoreCompletionPresence(scorePresence: ScorePresenceField[]): ScorePresenceField[] {
+    return scorePresence.sort((a, b) => Number(a.presence) - Number(b.presence));
   }
 }
