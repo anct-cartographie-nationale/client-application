@@ -1,4 +1,4 @@
-import { scoreCompletion } from './score-completion.presenter';
+import { scoreCompletionRate } from './score-completion.presenter';
 import {
   Adresse,
   ConditionAcces,
@@ -22,10 +22,7 @@ import {
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { firstValueFrom, of } from 'rxjs';
 import { ParamMap } from '@angular/router';
-import {
-  LieuMediationNumeriqueDetailsPresentation,
-  LieuxMediationNumeriqueDetailsPresenter
-} from '../../../../cartographie/presenters';
+import { LieuMediationNumeriqueDetailsPresentation, LieuxMediationNumeriqueDetailsPresenter } from '../../../presenters';
 import { LieuxMediationNumeriqueRepository } from '../../../../core/repositories';
 import { NO_LOCALISATION } from '../../../../core/models';
 
@@ -85,9 +82,9 @@ describe('score completion presenter', (): void => {
       )
     );
 
-    const scoreCompletionTotal: number = scoreCompletion(structure);
+    const scoreCompletionTotal: number = scoreCompletionRate(structure);
 
-    expect(scoreCompletionTotal).toStrictEqual(80);
+    expect(scoreCompletionTotal).toStrictEqual(95);
   });
 
   it('should return low score completion', async (): Promise<void> => {
@@ -126,7 +123,7 @@ describe('score completion presenter', (): void => {
       )
     );
 
-    const scoreCompletionTotal: number = scoreCompletion(structure);
+    const scoreCompletionTotal: number = scoreCompletionRate(structure);
 
     expect(scoreCompletionTotal).toStrictEqual(39);
   });
