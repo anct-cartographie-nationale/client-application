@@ -19,7 +19,7 @@
       <button *ngIf="region.hub" class="btn btn-link" (click)="showHub.emit(region); showHubInvokingContext.emit($event)">
         <img
           [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + region.hub.nom + '.png'"
-          [alt]="region.hub.nom"
+          [alt]="'Plus d\'information à propos de ' + region.hub.nom"
           [title]="region.hub.nom"
           style="max-width: 120px" />
       </button>

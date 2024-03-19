@@ -1,9 +1,6 @@
 <app-modal #modal heading="Plus d'infos" icon="ri-information-line" closeLabel="Retour à la carte">
   <div *ngIf="hub" class="text-center">
-    <img
-      class="mb-4"
-      [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + hub.nom + '.png'"
-      [alt]="'Plus d\'information à propos de ' + hub.nom" />
+    <img class="mb-4" [src]="assetsConfiguration.path + '/img/logo/hubs/48/' + hub.nom + '.png'" alt="" />
     <h3 class="h4 fw-bold">
       HUB d'inclusion numérique
       <span class="text-primary d-block">{{ hub.region }}</span>
