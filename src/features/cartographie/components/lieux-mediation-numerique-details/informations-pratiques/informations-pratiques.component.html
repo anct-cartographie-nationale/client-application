@@ -19,7 +19,11 @@
     </div>
   </div>
   <div class="col-md-auto col-12 text-md-end d-print-none" *ngIf="courriel || telephone">
-    <a *ngIf="courriel" href="mailto:{{ courriel }}" class="btn btn-sm btn-secondary mb-1" (click)="$event.stopPropagation()">
+    <a
+      *ngIf="courriel"
+      [href]="prepareMailtoLink(courriel)"
+      class="btn btn-sm btn-secondary mb-1"
+      (click)="$event.stopPropagation()">
       <span role="img" class="ri-mail-line me-2 text-right" aria-hidden="true"></span>
       Contacter
     </a>
