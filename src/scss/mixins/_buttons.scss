@@ -53,7 +53,7 @@
 
   &.active.active-primary {
     color: $primary;
-    box-shadow: 0 0 0 1px $primary;
+    box-shadow: -0.5px 0.5px 0 1.5px $primary;
 
     &:focus-visible {
       border-color: var(--bs-btn-hover-border-color);
