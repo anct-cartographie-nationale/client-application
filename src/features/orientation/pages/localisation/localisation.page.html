@@ -44,13 +44,24 @@
         *ngIf="orientationLayout.filterForm.get('latitude')?.value && orientationLayout.filterForm.get('longitude')?.value"
         class="row justify-content-center">
         <div class="col-9 mt-5 position-relative">
+          <span class="visually-hidden">La distance maximum doit être comprise</span>
           <span
             style="left: 24px; top: 16px"
             [ngClass]="orientationLayout.filterForm.get('distance')?.value / 1000 === 5 ? 'bg-primary text-white' : 'bg-white'"
             class="pe-none position-absolute translate-middle rounded-circle text-center square-range-thumb">
             <i>
-              <span class="visually-hidden">Distance minimale :</span>
+              <span class="visually-hidden">entre :</span>
               5
+              <span class="visually-hidden">km</span>
+            </i>
+          </span>
+          <span
+            style="top: 16px; right: 0"
+            [ngClass]="orientationLayout.filterForm.get('distance')?.value / 1000 === 100 ? 'bg-primary text-white' : 'bg-white'"
+            class="pe-none position-absolute translate-middle rounded-circle text-center square-range-thumb">
+            <i>
+              <span class="visually-hidden">et</span>
+              100
               <span class="visually-hidden">km</span>
             </i>
           </span>
@@ -64,29 +75,23 @@
             step="5000"
             formControlName="distance"
             (change)="handleRangeChange($event)" />
-          <span
-            style="top: 16px; right: 0"
-            [ngClass]="orientationLayout.filterForm.get('distance')?.value / 1000 === 100 ? 'bg-primary text-white' : 'bg-white'"
-            class="pe-none position-absolute translate-middle rounded-circle text-center square-range-thumb">
-            <i>
-              <span class="visually-hidden">Distance maximale :</span>
-              100
-              <span class="visually-hidden">km</span>
-            </i>
-          </span>
           <div class="d-flex mt-4">
-            <div class="mx-auto d-flex align-items-center">
-              <label for="distance-range" class="bg-white py-1 px-5 border-bottom border-2 rounded-top">
-                Rayon :
-                <b class="text-primary">{{ orientationLayout.filterForm.get('distance')?.value / 1000 + ' km' }}</b>
-              </label>
-              <button
-                class="btn btn-link text-decoration-none p-0 border-0 ms-2"
-                (click)="informationOrientationModal.control.toggle($event)">
-                <span class="visually-hidden">Info</span>
-                <span role="img" class="ri-information-line fw-normal text-muted ri-2x" aria-hidden="true"></span>
-              </button>
-            </div>
+            <label class="mx-auto" for="distance-range">
+              <span class="form-label">Distance maximum :</span>
+              <div>
+                <b class="text-primary bg-white py-2 px-5 border-bottom border-2 rounded-top">
+                  {{ orientationLayout.filterForm.get('distance')?.value / 1000 + ' km' }}
+                </b>
+                <button
+                  class="btn btn-link text-decoration-none p-0 border-0 ms-2"
+                  (click)="informationOrientationModal.control.toggle($event)">
+                  <span class="visually-hidden">Info</span>
+                  <span role="img" class="ri-information-line fw-normal text-muted ri-2x" aria-hidden="true"></span>
+                </button>
+              </div>
+            </label>
+
+            <div class="d-flex align-items-center"></div>
           </div>
         </div>
       </div>
