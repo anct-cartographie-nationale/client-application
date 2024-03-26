@@ -4,9 +4,8 @@ $primary: #000091;
 $secondary: #fff;
 $tertiary: color.adjust($primary, $lightness: 60%);
 $success: #4caf50;
-$info: #adb5bd;
+$info: #8585f6;
 $warning: #ffc107;
-$warning-secondary: #c0c0ff;
 $danger: #d42d3d;
 $light: #f4f4f4;
 $muted: #999;
@@ -27,7 +26,6 @@ $theme-colors: (
   'success': $success,
   'info': $info,
   'warning': $warning,
-  'warning-secondary': $warning-secondary,
   'danger': $danger,
   'light': $light,
   'muted': $muted,
