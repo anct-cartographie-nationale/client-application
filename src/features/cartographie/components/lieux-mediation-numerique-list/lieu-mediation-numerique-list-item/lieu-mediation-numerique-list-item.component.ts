@@ -4,6 +4,7 @@ import { MatomoTracker } from 'ngx-matomo';
 import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
 import { labelToDisplayMap, LieuMediationNumeriqueListItemPresentation } from '../../../presenters';
+import { environment } from 'projects/client-application/src/environments/environment';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,7 +35,9 @@ export class LieuMediationNumeriqueListItemComponent {
   }
 
   public showDetails(lieu: LieuMediationNumeriqueListItemPresentation): void {
-    this._matomoTracker?.trackEvent('Fiches', 'Début', `Ouverture de fiches - ${lieu.id}`);
+    if (environment.production) {
+      this._matomoTracker?.trackEvent('Fiches', 'Début', `Ouverture de fiches - ${lieu.id}`);
+    }
   }
 
   public toLabelNom(label: LabelNational): string | undefined {

@@ -14,6 +14,7 @@ import { OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { FilterPresentation } from '../../../core/presenters';
 import { FormGroup } from '@angular/forms';
 import { MatomoTracker } from 'ngx-matomo';
+import { environment } from 'projects/client-application/src/environments/environment';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,6 +56,10 @@ export class LieuxMediationNumeriqueDetailsComponent {
   };
 
   public onPrintFromBandeau(): void {
-    this._matomoTracker?.trackEvent('fiche détail', 'bandeau footer', `impression fiche`);
+    if (environment.production) {
+      this._matomoTracker?.trackEvent('fiche détail', 'bandeau footer', `impression fiche`);
+      const sourceLabels = this.lieuMediationNumerique.source?.map((source) => source.label).join(', ');
+      this._matomoTracker?.trackEvent('fiche détail', sourceLabels ?? 'Source inconnue', 'bandeau footer - impression fiche');
+    }
   }
 }

@@ -43,7 +43,7 @@
       role="button"
       type="button"
       class="btn btn-tile px-md-0 py-md-4 p-2 d-flex flex-md-column flex-row"
-      (click)="sendByEmail.emit($event)">
+      (click)="sendByEmail.emit($event); onSendEmailFromActionButton()">
       <span class="ri-circled bg-primary text-light fw-normal">
         <span role="img" class="ri-mail-send-line" aria-hidden="true"></span>
       </span>
