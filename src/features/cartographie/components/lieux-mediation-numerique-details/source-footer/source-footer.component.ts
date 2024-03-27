@@ -12,10 +12,10 @@ export class SourceFooterComponent {
 
   public constructor(@Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration) {}
 
-  public getFirstUpdateLink(sources: SourcePresentation[] | undefined): string {
-    return (
-      sources?.find((source) => source.update_link)?.update_link ||
-      'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F'
-    );
+  public getUpdateLink(source: SourcePresentation | undefined): string | null {
+    if (source?.update_link) return source.update_link;
+    else if (!source?.update_link && source?.label !== 'France Services')
+      return 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F';
+    else return null;
   }
 }
