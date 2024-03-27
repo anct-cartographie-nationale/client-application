@@ -105,6 +105,15 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
+    'Mairie Aix en Provence',
+    {
+      label: 'Ville Aix en Provence',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-bouches-du-rhone-fournis-par-mairie-aix-en-provence/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      logo: ''
+    }
+  ],
+  [
     'Angers',
     {
       label: "Ville d'Angers",

@@ -8,10 +8,16 @@
     <div class="col-auto d-flex g-2">
       <span *ngFor="let source of sources" class="circle-wrapper-light square-xl me-2">
         <img
-          *ngIf="source.logo as logo"
+          *ngIf="source.update_link as update_link; else noUpdateLink"
           class="img-fluid p-2"
-          [src]="assetsConfiguration.path + '/img/logo/source-update/' + logo + '.svg'"
+          [src]="assetsConfiguration.path + '/img/logo/source-update/' + source.logo + '.svg'"
           alt="{{ source.label }}" />
+        <ng-template #noUpdateLink>
+          <img
+            class="img-fluid p-2"
+            [src]="assetsConfiguration.path + '/img/logo/source-update/' + 'dora.svg'"
+            alt="{{ source.label }}" />
+        </ng-template>
       </span>
     </div>
     <div class="col">
