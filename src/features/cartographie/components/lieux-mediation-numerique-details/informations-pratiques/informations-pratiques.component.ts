@@ -15,4 +15,15 @@ export class InformationsPratiquesComponent {
   @Input() public telephone: string | undefined;
   @Input() public distance: number | undefined;
   @Input() public status: OpeningState | undefined;
+
+  public prepareMailtoLink(courriels: string): string {
+    const courrielList = courriels.split(';');
+    let mailtoLink = `mailto:${courrielList[0]}`;
+
+    if (courrielList.length > 1) {
+      const ccEmails = courrielList.slice(1).join(',');
+      mailtoLink += `?cc=${ccEmails}`;
+    }
+    return mailtoLink;
+  }
 }
