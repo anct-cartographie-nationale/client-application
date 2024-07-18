@@ -1,4 +1,13 @@
 <div class="row">
+  <div class="col-12 small bg-info text-primary p-3 mb-4 d-flex align-items-center" *ngIf="isAidantsConnect(sources)">
+    <span role="img" aria-hidden="true" class="ri-alert-line ri-2x pe-3"></span>
+    <span>
+      <span class="fw-bold">Attention, cette structure n'accueille peut-être pas de public</span>
+      <span class="d-block">
+        Nous vous conseillons de la contacter par téléphone ou par mail avant de vous rendre sur place.
+      </span>
+    </span>
+  </div>
   <div class="col-md col-12">
     <address class="mb-2">
       {{ adresse }}
