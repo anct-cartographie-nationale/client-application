@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { OpeningState } from '../../../../core/presenters';
+import { SourcePresentation } from '../../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,4 +16,9 @@ export class InformationsPratiquesComponent {
   @Input() public telephone: string | undefined;
   @Input() public distance: number | undefined;
   @Input() public status: OpeningState | undefined;
+  @Input() public sources: SourcePresentation[] | undefined;
+
+  public isAidantsConnect(sources?: SourcePresentation[]) {
+    return sources?.map((source: SourcePresentation) => source.label).includes('Aidants Connect');
+  }
 }

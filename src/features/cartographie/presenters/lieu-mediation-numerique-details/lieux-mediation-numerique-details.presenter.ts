@@ -304,6 +304,16 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
     }
   ],
   [
+    'Le Havre',
+    {
+      label: 'Ville du Havre',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-le-havre-fournis-par-le-havre/',
+      detail: "Ces données sont intégrées via l'outil DORA",
+      update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
+      logo: 'dora'
+    }
+  ],
+  [
     'Les Assembleurs',
     {
       label: 'Les Assembleurs',
