@@ -19,6 +19,6 @@ export class InformationsPratiquesComponent {
   @Input() public sources: SourcePresentation[] | undefined;
 
   public isAidantsConnect(sources?: SourcePresentation[]) {
-    return sources?.map((source: SourcePresentation) => source.label).includes('Aidants Connect');
+    return sources?.length === 1 && sources?.map((source: SourcePresentation) => source.label).includes('Aidants Connect');
   }
 }
