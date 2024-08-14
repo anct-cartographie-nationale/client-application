@@ -144,6 +144,11 @@
         (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"></app-labellisations>
     </li>
     <li class="list-group-item">
+      <div class="p-3 rounded-3" style="background-color: #c0c0ff">
+        <app-score-completion [lieuMediationNumerique]="lieuMediationNumerique"></app-score-completion>
+      </div>
+    </li>
+    <li class="list-group-item">
       <div class="d-flex">
         <h2 class="h5 text-muted text-uppercase mt-1 flex-grow-1">Une erreur sur les données ?</h2>
         <button (click)="erreurFormModal.control.toggle($event)" class="btn btn-secondary btn-sm m-auto">

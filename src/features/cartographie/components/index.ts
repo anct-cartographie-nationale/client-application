@@ -28,7 +28,8 @@ import {
   ErreurFormModalComponent,
   ImpressionChoiceModalComponent,
   WebinaireComponent,
-  SourceFooterComponent
+  SourceFooterComponent,
+  ScoreCompletionComponent
 } from './lieux-mediation-numerique-details';
 import { LocationBreadcrumbComponent } from './location-breadcrumb/location-breadcrumb.component';
 import { AffinerRechercheFormComponent } from './affiner-recherche-form/affiner-recherche-form.component';
@@ -68,7 +69,8 @@ export const components = [
   ErreurFormModalComponent,
   ImpressionChoiceModalComponent,
   WebinaireComponent,
-  SourceFooterComponent
+  SourceFooterComponent,
+  ScoreCompletionComponent
 ];
 
 export * from './markers/lieu-mediation-numerique-markers/lieu-mediation-numerique-markers.component';
