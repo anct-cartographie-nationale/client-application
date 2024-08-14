@@ -1,9 +1,9 @@
-<small>
+<small class="mx-1">
   <span role="img" class="ri-numbers-fill ri-xl text-primary" aria-hidden="true"></span>
   Cette fiche est remplie à
   <span class="text-primary fw-bold">{{ scoreCompletion(lieuMediationNumerique) }}%</span>
 </small>
-<div class="progress my-2">
+<div class="progress my-2 mx-1">
   <div
     class="progress-bar"
     role="progressbar"
@@ -13,4 +13,40 @@
     aria-valuemin="0"
     aria-valuemax="100"></div>
 </div>
-<small class="text-primary">Vous pouvez mettre à jour ces informations en suivant les informations en bas de la fiche.</small>
+<small class="text-primary mx-1">
+  Vous pouvez mettre à jour ces informations en suivant les informations en bas de la fiche.
+</small>
+<app-collapse #collapseScoreCompletion [control]="collapseScoreCompletionControl" aria-labelledby="headingAccesLibre">
+  <table class="table">
+    <tbody class="table-group">
+      <tr
+        [ngClass]="field.presence ? 'border-primary' : 'border-dark'"
+        *ngFor="let field of sortScoreCompletionPresence(scoreCompletionPresence(lieuMediationNumerique))">
+        <th scope="row" class="text-start fw-bold w-100">
+          <small class="fw-bold" [ngClass]="field.presence ? 'text-primary' : 'text-dark'">{{ field.name }}</small>
+        </th>
+        <td class="text-end">
+          <small class="text-primary fw-bold">
+            <span
+              class="ri-xl"
+              role="img"
+              [ngClass]="field.presence ? 'ri-check-line text-primary' : 'ri-close-line text-dark'"
+              aria-hidden="true"></span>
+          </small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</app-collapse>
+<div class="d-flex justify-content-end">
+  <button
+    class="btn btn-link text-body fw-bold p-0"
+    #collapseScoreCompletionControl
+    aria-controls="collapseScoreCompletion"
+    type="button"
+    [class.collapsed]="collapseScoreCompletion.isCollapsed$ | async"
+    [attr.aria-expanded]="collapseScoreCompletion.isExpanded$ | async"
+    (click)="collapseScoreCompletion.toggle()">
+    <small class="text-right">{{ (collapseScoreCompletion.isCollapsed$ | async) ? 'Détails' : 'Réduire' }}</small>
+  </button>
+</div>

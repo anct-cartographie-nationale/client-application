@@ -1,55 +1,49 @@
-export const TOTAL_SCORE_COMPLETION: number = 41;
+import { LieuMediationNumeriqueDetailsPresentation } from '../../../presenters';
 
-type Score = number;
+type Join<K, P> = K extends string | number ? (P extends string | number ? `${K}.${P}` : never) : never;
 
-type ScoreCompletion = {
-  [key: string]: Score | ScoreContact | ScorePresentation | ScoreLocalisation;
+type Paths<T> = T extends object
+  ? {
+      [K in keyof T]-?: K extends string | number ? `${K}` | Join<K, Paths<T[K]>> : never;
+    }[keyof T]
+  : never;
+
+export type ScoreCoefficientField = {
+  coefficient: number;
+  name: string;
+  field: Paths<LieuMediationNumeriqueDetailsPresentation>;
 };
 
-type ScoreContact = {
-  telephone: Score;
-  courriel: Score;
-  site_web: Score;
-};
+export type ScorePresenceField = { presence: boolean; name: string; field: Paths<LieuMediationNumeriqueDetailsPresentation> };
 
-type ScorePresentation = {
-  presentation_detail: Score;
-  presentation_resume: Score;
-};
+export const SCORE_FIELDS: ScoreCoefficientField[] = [
+  { coefficient: 2, name: 'Nom', field: 'adresse' },
+  { coefficient: 2, name: 'Adresse', field: 'adresse' },
+  { coefficient: 2, name: 'Commune', field: 'commune' },
+  { coefficient: 2, name: 'Code postal', field: 'code_postal' },
+  { coefficient: 2, name: 'Services', field: 'services' },
+  { coefficient: 2, name: 'Horaires', field: 'horaires' },
+  { coefficient: 2, name: 'Typologie', field: 'typologies' },
+  { coefficient: 2, name: 'Téléphone', field: 'contact.telephone' },
+  { coefficient: 2, name: 'Courriel', field: 'contact.courriel' },
+  { coefficient: 2, name: 'Site web', field: 'contact.site_web' },
+  { coefficient: 2, name: 'Présentation détaillée', field: 'presentation.detail' },
+  { coefficient: 2, name: 'Présentation résumée', field: 'presentation.resume' },
+  { coefficient: 2, name: 'Date de mise à jour', field: 'date_maj' },
+  { coefficient: 2, name: 'Publics accueillis', field: 'publics_accueillis' },
+  { coefficient: 2, name: 'Conditions d’accès', field: 'conditions_acces' },
+  { coefficient: 2, name: 'Label nationaux', field: 'labels_nationaux' },
+  { coefficient: 2, name: 'Autres labels', field: 'labels_autres' },
+  { coefficient: 2, name: 'Modalités d’accompagnement', field: 'modalites_accompagnement' },
+  { coefficient: 1, name: 'Accessibilité', field: 'accessibilite' },
+  { coefficient: 1, name: 'Latitude', field: 'localisation.latitude' },
+  { coefficient: 1, name: 'Longitude', field: 'localisation.longitude' },
+  { coefficient: 1, name: 'Prise de RDV', field: 'prise_rdv' },
+  { coefficient: 1, name: 'Source', field: 'source' }
+  // todo: ajouter le pivot
+];
 
-type ScoreLocalisation = {
-  latitude: Score;
-  longitude: Score;
-};
-
-export const scoreCompletionTable: ScoreCompletion = {
-  nom: 2,
-  adresse: 2,
-  commune: 2,
-  code_postal: 2,
-  services: 2,
-  horaires: 2,
-  typologies: 2,
-  contact: {
-    telephone: 2,
-    courriel: 2,
-    site_web: 2
-  },
-  presentation: {
-    presentation_detail: 2,
-    presentation_resume: 2
-  },
-  date_maj: 2,
-  publics_accueillis: 2,
-  conditions_acces: 2,
-  labels_nationaux: 2,
-  modalites_accompagnement: 2,
-  accessibilite: 1,
-  localisation: {
-    latitude: 1,
-    longitude: 1
-  },
-  prise_rdv: 1,
-  source: 1,
-  pivot: 2
-};
+export const TOTAL_SCORE_COEFFICIENTS: number = SCORE_FIELDS.reduce(
+  (totalCoefficients: number, { coefficient }: ScoreCoefficientField) => totalCoefficients + coefficient,
+  0
+);
