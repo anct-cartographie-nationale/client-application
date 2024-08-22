@@ -68,7 +68,19 @@ describe('lieux mediation numerique details presentation', (): void => {
     );
 
     expect(message).toBe(
-      'Bonjour 👋,%0D%0A  %0D%0AEn naviguant sur la cartographie nationale, j\'ai repéré une erreur sur votre fiche https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details, concernant la section Contacts, la section Horaires : %0D%0A%0D%0AErreur dans les contacts et les horaires%0D%0A%0D%0APour mettre à jour ces informations, suivez les instructions en bas de fiche "mettre à jour la fiche".%0D%0A%0D%0AMerci pour votre collaboration et à bientôt !%0D%0A%0D%0ANumériquement.'
+      'Bonjour 👋,%0D%0A%0D%0AEn naviguant sur la cartographie nationale, j\'ai repéré une erreur sur votre fiche https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details, concernant la section Contacts, la section Horaires :%0D%0A%0D%0AErreur dans les contacts et les horaires%0D%0A%0D%0APour mettre à jour ces informations, suivez les instructions en bas de fiche "mettre à jour la fiche".%0D%0A%0D%0AMerci pour votre collaboration et à bientôt !%0D%0A%0D%0ANumériquement.'
+    );
+  });
+
+  it("should get error report message for la structure n'existe plus", (): void => {
+    const erreursReportSelected: AvailableErreur[] = [AvailableErreur.lieuNExistePlus];
+    const message: string = reportErrorEmailMessage(
+      'https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details',
+      erreursReportSelected
+    );
+
+    expect(message).toBe(
+      'Bonjour 👋,%0D%0A%0D%0AEn naviguant sur la cartographie nationale, j\'ai repéré la fiche https://cartographie.societenumerique.gouv.fr/cartographie/638622e80830e306f21ecc64/details, qui n\'existe plus.%0D%0A%0D%0A%0D%0A%0D%0APour mettre à jour ces informations, suivez les instructions en bas de fiche "mettre à jour la fiche".%0D%0A%0D%0AMerci pour votre collaboration et à bientôt !%0D%0A%0D%0ANumériquement.'
     );
   });
 });

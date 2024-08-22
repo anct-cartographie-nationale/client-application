@@ -6,7 +6,7 @@ export enum AvailableErreur {
   accompagnements = 'Accompagnements',
   labels = 'Labels',
   public = 'Public',
-  autre = 'Autre'
+  lieuNExistePlus = "Le lieu n'existe plus"
 }
 
 export type ErreursReportForm = {
