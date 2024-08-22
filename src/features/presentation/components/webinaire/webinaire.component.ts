@@ -2,13 +2,10 @@ import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from 
 
 type WebinairePresentation = {
   titre: string;
-  duration: string;
   text: string;
   image: string;
-  inscription_link: string;
-  inscription_text: string;
-  replay_link?: string;
-  replay_text?: string;
+  link: string;
+  link_text: string;
 };
 
 @Component({
@@ -19,24 +16,25 @@ type WebinairePresentation = {
 export class WebinaireComponent {
   public webinairePresentation: WebinairePresentation[] = [
     {
-      titre: 'Apprenez à orienter vos bénéficiaires grâce à la cartographie',
-      duration: '45 min - 1 fois par mois',
-      text: `Consacré à l'utilisation du parcours d'orientation et la navigation sur la carte. `,
-      inscription_link: 'https://airtable.com/app2MF0d9XxkCwv0p/shrfwVic55IqzxKfG?mtm_campaign=fromwebsitecarto',
-      inscription_text: 'Webinaire orientation',
-      image: 'webinaire-orientation.svg',
-      replay_link: 'https://www.youtube.com/watch?v=bn1jipMvzoA',
-      replay_text: 'Replay orientation'
+      titre: 'Apparaître ou modifier ses données sur la cartographie nationale',
+      text: 'Pas-à-pas pour vous guider dans la mise à jour de vos données.',
+      link: 'https://lesbases.anct.gouv.fr/ressources/comment-apparaitre-ou-modifier-vos-donnees-sur-la-cartographie-nationale',
+      link_text: 'Voir la ressource sur les bases',
+      image: 'mise-a-jour-donnees.svg'
     },
     {
-      titre: 'Mettez à jour vos données sur la cartographie',
-      duration: '45 min - 1 fois par mois',
-      text: `Consacré à l'utilisation des outils de mise à jour de données, en particulier l'outil DORA.`,
-      inscription_link: 'https://airtable.com/app2MF0d9XxkCwv0p/shrX7zSTk8pOtoKik?mtm_campaign=fromwebsitecarto',
-      inscription_text: 'Webinaire données',
-      image: 'webinaire-mise-a-jour.svg',
-      replay_link: 'https://www.youtube.com/watch?v=YJjsMjVPluY',
-      replay_text: 'Replay données'
+      titre: 'Intégrer la cartographie sur son site web',
+      text: "Pas-à-pas pour intégrer la cartographie nationale sur votre site web, sans besoin d'avoir des compétences de programmation.",
+      link: 'https://lesbases.anct.gouv.fr/ressources/integrer-la-cartographie-sur-mon-site-web',
+      link_text: 'Voir la ressource sur les bases',
+      image: 'integrer-cartographie.svg'
+    },
+    {
+      titre: "Évolution du standard national des lieux d'inclusion numérique",
+      text: "Descriptif des évolutions du standard national des lieux d'inclusion numérique (version 1.0.1)",
+      link: 'https://lesbases.anct.gouv.fr/ressources/evolution-du-standard-national ',
+      link_text: 'Voir la ressource sur les bases',
+      image: 'standard-donnees.svg'
     }
   ];
 }
