@@ -3,10 +3,6 @@
     <div class="card h-100 rounded-0">
       <img src="/assets/img/presentation/webinaire/{{ webinaire.image }}" class="w-100" alt="" />
       <div class="card-body h-100 d-flex p-4 flex-column">
-        <div class="d-flex">
-          <span role="img" class="ri ri-timer-fill" style="color: #459c99" aria-hidden="true"></span>
-          <p class="ms-2 text-muted">{{ webinaire.duration }}</p>
-        </div>
         <div class="h-100">
           <h3 class="fw-bold card-title my-2">{{ webinaire.titre }}</h3>
         </div>
@@ -14,23 +10,23 @@
         <div class="d-flex">
           <a
             class="btn btn-primary rounded-0"
-            href="{{ webinaire.inscription_link }}"
+            href="{{ webinaire.link }}"
             target="_blank"
-            title="S'inscrire au webinaire (nouvel onglet)"
+            title="{{ webinaire.link_text }} - {{ webinaire.titre }} (nouvel onglet)"
             rel="noopener noreferrer">
-            <small>{{ webinaire.inscription_text }}</small>
-          </a>
-          <a
-            *ngIf="webinaire.replay_link"
-            class="btn btn-primary rounded-0 ms-auto"
-            href="{{ webinaire.replay_link }}"
-            target="_blank"
-            title="Replay du webinaire (nouvel onglet)"
-            rel="noopener noreferrer">
-            <small>{{ webinaire.replay_text }}</small>
+            <small>{{ webinaire.link_text }}</small>
           </a>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div class="text-center">
+  <a
+    class="btn btn-primary rounded-0 mt-5"
+    href="https://lesbases.anct.gouv.fr/bases/cartographie-nationale-de-l-inclusion-numerique"
+    target="_blank"
+    title="Accéder à toutes les ressources sur les bases (nouvel onglet)">
+    Accéder à toutes les ressources
+  </a>
 </div>
