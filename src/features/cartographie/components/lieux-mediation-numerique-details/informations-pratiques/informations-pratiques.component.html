@@ -27,8 +27,8 @@
       <span role="img" class="small text-muted align-self-end">{{ status.limite }}</span>
     </div>
   </div>
-  <div class="col-md-auto col-12 text-md-end d-print-none" *ngIf="courriel || telephone">
-    <a *ngIf="courriel" href="mailto:{{ courriel }}" class="btn btn-sm btn-secondary mb-1" (click)="$event.stopPropagation()">
+  <div class="col-md-auto col-12 text-md-end d-print-none" *ngIf="courriels || telephone">
+    <a *ngIf="courriels" href="mailto:{{ courriels }}" class="btn btn-sm btn-secondary mb-1" (click)="$event.stopPropagation()">
       <span role="img" class="ri-mail-line me-2 text-right" aria-hidden="true"></span>
       Contacter
     </a>
@@ -45,13 +45,13 @@
   <div class="mt-2">
     <a
       class="text-decoration-none"
-      *ngIf="accessibilite"
-      href="{{ accessibilite }}"
+      *ngIf="ficheAccesLibre"
+      href="{{ ficheAccesLibre }}"
       title="Consulter les informations d'accessibilité (nouvel onglet)"
       target="_blank">
       <span role="img" class="ri-wheelchair-line ri-xl text-primary" aria-hidden="true"></span>
       <span class="fw-bold">Consulter les informations d'accessibilité</span>
     </a>
   </div>
-  <div *ngIf="conditionsAcces" class="text-primary mt-2">{{ conditionsAcces }}</div>
+  <div *ngIf="fraisACharge" class="text-primary mt-2">{{ fraisACharge }}</div>
 </div>

@@ -1,23 +1,23 @@
 import { ChangeDetectionStrategy, Component, Input, Optional } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConditionAcces, LabelNational, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational, Frais, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
   FilterFormPresentation,
   LieuMediationNumeriquePresentation,
   OpeningHours,
   toFilterFormPresentationFromQuery
 } from '../../../core/presenters';
-import { labelNationauxFrom, strategiesTerritorialesFrom } from './affiner-recherche-form.presenter';
+import { dispositifProgrammesNationauxFrom, strategiesTerritorialesFrom } from './affiner-recherche-form.presenter';
 import { MatomoTracker } from 'ngx-matomo';
 
 type AffinerRechercheFields = {
   prise_rdv: FormControl<boolean>;
   accessibilite: FormControl<boolean>;
   horaires_ouverture: FormControl<OpeningHours[] | false>;
-  conditions_acces: FormControl<ConditionAcces[]>;
-  labels_nationaux: FormControl<LabelNational[]>;
-  labels_autres: FormControl<string[]>;
+  frais_a_charge: FormControl<Frais[]>;
+  dispositif_programmes_nationaux: FormControl<DispositifProgrammeNational[]>;
+  autres_formations_labels: FormControl<string[]>;
   service: FormControl<Service | undefined>;
 };
 
@@ -25,9 +25,9 @@ type AffinerRechercheValues = {
   prise_rdv: boolean;
   accessibilite: boolean;
   horaires_ouverture: OpeningHours[] | false;
-  conditions_acces: ConditionAcces[];
-  labels_nationaux: LabelNational[];
-  labels_autres: string[];
+  frais_a_charge: Frais[];
+  dispositif_programmes_nationaux: DispositifProgrammeNational[];
+  autres_formations_labels: string[];
   service: Service | undefined;
 };
 
@@ -36,17 +36,17 @@ const AFFINER_RECHERCHE_FORM = (
 ): FormGroup<Record<keyof AffinerRechercheValues, FormControl>> =>
   new FormGroup<Record<keyof AffinerRechercheValues, FormControl>>({
     prise_rdv: new FormControl<AffinerRechercheValues['prise_rdv']>(filterFormPresentation.prise_rdv ?? false),
-    accessibilite: new FormControl<AffinerRechercheValues['accessibilite']>(filterFormPresentation.accessibilite ?? false),
+    accessibilite: new FormControl<AffinerRechercheValues['accessibilite']>(filterFormPresentation.fiche_acces_libre ?? false),
     horaires_ouverture: new FormControl<AffinerRechercheValues['horaires_ouverture']>(
       filterFormPresentation.horaires_ouverture ?? false
     ),
-    conditions_acces: new FormControl<AffinerRechercheValues['conditions_acces']>(
-      filterFormPresentation.conditions_acces ?? []
+    frais_a_charge: new FormControl<AffinerRechercheValues['frais_a_charge']>(filterFormPresentation.frais_a_charge ?? []),
+    dispositif_programmes_nationaux: new FormControl<AffinerRechercheValues['dispositif_programmes_nationaux']>(
+      filterFormPresentation.dispositif_programmes_nationaux ?? []
     ),
-    labels_nationaux: new FormControl<AffinerRechercheValues['labels_nationaux']>(
-      filterFormPresentation.labels_nationaux ?? []
+    autres_formations_labels: new FormControl<AffinerRechercheValues['autres_formations_labels']>(
+      filterFormPresentation.autres_formations_labels ?? []
     ),
-    labels_autres: new FormControl<AffinerRechercheValues['labels_autres']>(filterFormPresentation.labels_autres ?? []),
     service: new FormControl<AffinerRechercheValues['service']>(filterFormPresentation.service)
   });
 
@@ -76,18 +76,13 @@ export class AffinerRechercheFormComponent {
 
   public strategiesTerritorialesFrom = strategiesTerritorialesFrom;
 
-  public labelNationauxFrom = labelNationauxFrom;
-
-  public toggleService(field: string): Service | undefined {
-    return this.affinerRechercheForm.get(field)?.value ? Service.AccompagnerLesDemarchesDeSante : undefined;
-  }
+  public labelNationauxFrom = dispositifProgrammesNationauxFrom;
 
   public setFilterToQueryString(field: string): void {
     this._matomoTracker?.trackEvent('Cartographie', 'Affiner recherche', field);
     this.router.navigate([], {
       queryParams: {
         ...this.route.snapshot.queryParams,
-        [field]: field === 'service' ? this.toggleService(field) : this.affinerRechercheForm.get(field)?.value,
         ...(field === 'horaires_ouverture' && this.affinerRechercheForm.get(field)?.value
           ? { horaires_ouverture: JSON.stringify([{ day: 'now' }]) }
           : {})

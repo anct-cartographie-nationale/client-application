@@ -1,163 +1,162 @@
 import {
-  ConditionAcces,
-  LabelNational,
+  DispositifProgrammeNational,
   ModaliteAccompagnement,
-  PublicAccueilli,
+  PublicSpecifiquementAdresse,
   Service
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LabelPresentation } from './label.presentation';
 
-export const labelToDisplayMap: Map<LabelNational, LabelPresentation> = new Map<LabelNational, LabelPresentation>([
+export const labelToDisplayMap: Map<DispositifProgrammeNational, LabelPresentation> = new Map<
+  DispositifProgrammeNational,
+  LabelPresentation
+>([
   [
-    LabelNational.CNFS,
+    DispositifProgrammeNational.ConseillersNumeriques,
     {
-      ref: LabelNational.CNFS,
-      nom: 'Conseiller numérique',
+      ref: DispositifProgrammeNational.ConseillersNumeriques,
+      nom: DispositifProgrammeNational.ConseillersNumeriques,
       description:
         'Un Conseiller numérique a pour mission d’accompagner les Français dans leur appropriation des usages numériques quotidiens',
       url: 'https://www.conseiller-numerique.gouv.fr/',
       carracteristiques: [
-        Service.RealiserDesDemarchesAdministratives,
-        Service.AccompagnerLesDemarchesDeSante,
-        Service.FavoriserMonInsertionProfessionnelle,
-        Service.DevenirAutonomeDansLesDemarchesAdministratives,
-        Service.PrendreEnMainUnOrdinateur,
-        Service.SoutenirLaParentalite,
-        Service.UtiliserLeNumerique
+        Service.AideAuxDemarchesAdministratives,
+        Service.InsertionProfessionnelleViaLeNumerique,
+        Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+        Service.ParentaliteEtEducationAvecLeNumerique,
+        Service.ComprehensionDuMondeNumerique,
+        Service.UtilisationSecuriseeDuNumerique,
+        ModaliteAccompagnement.AccompagnementIndividuel
       ]
     }
   ],
   [
-    LabelNational.AidantsConnect,
+    DispositifProgrammeNational.AidantsConnect,
     {
-      ref: LabelNational.AidantsConnect,
-      nom: 'Aidants Connect',
+      ref: DispositifProgrammeNational.AidantsConnect,
+      nom: DispositifProgrammeNational.AidantsConnect,
       description:
         "Aidants Connect permet à des professionnels de réaliser des démarches administratives à la place d'un usager de façon sécurisée.",
       url: 'https://aidantsconnect.beta.gouv.fr/',
       carracteristiques: [
-        Service.RealiserDesDemarchesAdministratives,
-        Service.AccompagnerLesDemarchesDeSante,
-        Service.CreerEtDevelopperMonEntreprise,
-        ModaliteAccompagnement.AMaPlace
+        Service.AideAuxDemarchesAdministratives,
+        Service.InsertionProfessionnelleViaLeNumerique,
+        ModaliteAccompagnement.AccompagnementIndividuel
       ]
     }
   ],
   [
-    LabelNational.APTIC,
+    DispositifProgrammeNational.BibliothequesNumeriqueDeReference,
     {
-      ref: LabelNational.APTIC,
-      nom: 'APTIC',
+      ref: DispositifProgrammeNational.BibliothequesNumeriqueDeReference,
+      nom: DispositifProgrammeNational.BibliothequesNumeriqueDeReference,
       description:
-        '#APTIC c’est le pass qui rapproche le citoyen du numérique. Conçu sur le modèle des titres-restaurant, il permet de payer totalement ou partiellement des services de médiation numérique.',
-      url: 'https://www.aptic.fr/',
-      carracteristiques: [ConditionAcces.AccepteLePassNumerique]
+        'Le programme des « Bibliothèques numériques de référence » a pour vocation d’aider les collectivités territoriales à se doter d’infrastructures informatiques et numériques de haut niveau afin de proposer aux publics de leurs bibliothèques des collections et services numériques de premier plan',
+      url: 'https://www.culture.gouv.fr/Thematiques/livre-et-lecture/les-bibliotheques-publiques/Numerique-et-bibliotheques/Les-Bibliotheques-numeriques-de-reference',
+      carracteristiques: [Service.LoisirsEtCreationsNumeriques]
     }
   ],
   [
-    LabelNational.CampusConnecte,
+    DispositifProgrammeNational.CertificationPIX,
     {
-      ref: LabelNational.CampusConnecte,
-      nom: 'Campus Connecté',
+      ref: DispositifProgrammeNational.CertificationPIX,
+      nom: DispositifProgrammeNational.CertificationPIX,
       description:
-        "Les campus connectés sont des lieux d'études où les jeunes peuvent suivre, près de chez eux, des formations à distance dans l'enseignement supérieur en bénéficiant d'un tutorat individuel et collectif. Des diplômes de qualité sont proposés à distance par les établissements d'enseignement supérieur.",
-      url: 'https://www.enseignementsup-recherche.gouv.fr/fr/campus-connectes',
+        'La Certification Pix est un diplôme officiel qui reconnaît et valorise les compétences numériques des lauréats.',
+      url: 'https://pix.fr/se-certifier',
       carracteristiques: [
-        Service.FavoriserMonInsertionProfessionnelle,
-        ModaliteAccompagnement.DansUnAtelier,
-        PublicAccueilli.Jeunes
+        Service.InsertionProfessionnelleViaLeNumerique,
+        Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+        Service.ComprehensionDuMondeNumerique,
+        Service.UtilisationSecuriseeDuNumerique
       ]
     }
   ],
   [
-    LabelNational.FabriquesDeTerritoire,
+    DispositifProgrammeNational.EmmausConnect,
     {
-      ref: LabelNational.FabriquesDeTerritoire,
-      nom: 'Fabrique de territoire',
+      ref: DispositifProgrammeNational.EmmausConnect,
+      nom: DispositifProgrammeNational.EmmausConnect,
       description:
-        'Un tiers-lieu Fabrique de territoire participe à l’émergence d’autres tiers-lieux de moindre envergure et accompagne la montée en compétences numérique sur son territoire.',
-      url: 'https://agence-cohesion-territoires.gouv.fr/fabriques-de-territoire-582',
-      carracteristiques: ['Tiers-lieux et coworking']
+        'Emmaüs Connect accompagne les personnes en situation de précarité pour accéder aux services numériques essentiels.',
+      url: 'https://emmaus-connect.org/',
+      carracteristiques: [Service.AccesInternetEtMaterielInformatique]
     }
   ],
   [
-    LabelNational.FranceServices,
+    DispositifProgrammeNational.FranceServices,
     {
-      ref: LabelNational.FranceServices,
-      nom: 'France Services',
+      ref: DispositifProgrammeNational.FranceServices,
+      nom: DispositifProgrammeNational.FranceServices,
       description:
         'Une maison France services est un lieu qui combine accueil physique et accompagnement numérique, et qui regroupe en un même lieu plusieurs services.',
       url: 'https://www.economie.gouv.fr/particuliers/france-services',
+      carracteristiques: [Service.AideAuxDemarchesAdministratives, Service.InsertionProfessionnelleViaLeNumerique]
+    }
+  ],
+  [
+    DispositifProgrammeNational.LaCroixRouge,
+    {
+      ref: DispositifProgrammeNational.LaCroixRouge,
+      nom: DispositifProgrammeNational.LaCroixRouge,
+      description:
+        "La Croix-Rouge française offre un accompagnement numérique personnalisé, avec des points d'accès à des ordinateurs et des imprimantes mis à disposition dans ses lieux d'accueil de jour, ses vestiboutiques, ainsi que ses dispositifs mobiles qui sillonnent le territoire pour aller à la rencontre des usagers.",
+      url: 'https://www.croix-rouge.fr/aide-a-l-insertion/jai-besoin-detre-aide-sur-les-outils-numeriques',
       carracteristiques: [
-        Service.RealiserDesDemarchesAdministratives,
-        Service.AccompagnerLesDemarchesDeSante,
-        Service.FavoriserMonInsertionProfessionnelle,
-        Service.DevenirAutonomeDansLesDemarchesAdministratives
+        Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+        Service.InsertionProfessionnelleViaLeNumerique,
+        Service.UtilisationSecuriseeDuNumerique,
+        Service.AccesInternetEtMaterielInformatique
       ]
     }
   ],
   [
-    LabelNational.FrenchTech,
+    DispositifProgrammeNational.GrandeEcoleDuNumerique,
     {
-      ref: LabelNational.FrenchTech,
-      nom: 'La French Tech',
-      description:
-        "La French Tech à pour mission de faire de la France l'un des pays les plus attractifs au monde pour les start-up qui veulent se lancer, partir à la conquête des marchés internationaux et bâtir un avenir qui ait du sens.",
-      url: 'https://lafrenchtech.com',
-      carracteristiques: [Service.CreerEtDevelopperMonEntreprise]
-    }
-  ],
-  [
-    LabelNational.GrandesEcolesDuNumerique,
-    {
-      ref: LabelNational.GrandesEcolesDuNumerique,
-      nom: 'Grandes écoles du numérique',
+      ref: DispositifProgrammeNational.GrandeEcoleDuNumerique,
+      nom: DispositifProgrammeNational.GrandeEcoleDuNumerique,
       description:
         "les Grandes écoles du numérique visent à apporter une réponse aux besoins en compétences dans les métiers du numérique et à favoriser la formation et l'insertion sociale et professionnelle des personnes éloignées de l'emploi.",
       url: 'https://www.grandeecolenumerique.fr/',
-      carracteristiques: [Service.FavoriserMonInsertionProfessionnelle, Service.CreerAvecLeNumerique]
+      carracteristiques: [Service.InsertionProfessionnelleViaLeNumerique, Service.LoisirsEtCreationsNumeriques]
     }
   ],
   [
-    LabelNational.PointNumeriqueCAF,
+    DispositifProgrammeNational.PointNumeriqueCAF,
     {
-      ref: LabelNational.PointNumeriqueCAF,
-      nom: 'Point numérique CAF',
+      ref: DispositifProgrammeNational.PointNumeriqueCAF,
+      nom: DispositifProgrammeNational.PointNumeriqueCAF,
       description:
         'Les points numériques caf.fr sont des espaces numériques aménagés mettant à disposition des ordinateurs, scanners et imprimantes, pour effectuer vos démarches en ligne.',
       url: 'https://www.caf.fr/allocataires/caf-de-l-essonne/actualites-departementales/vos-points-relais-et-points-numeriques-caffr',
+      carracteristiques: [Service.AideAuxDemarchesAdministratives, ModaliteAccompagnement.EnAutonomie]
+    }
+  ],
+  [
+    DispositifProgrammeNational.PromeneursDuNet,
+    {
+      ref: DispositifProgrammeNational.PromeneursDuNet,
+      nom: DispositifProgrammeNational.PromeneursDuNet,
+      description:
+        'Les Promeneurs du Net sont des professionnels qui créent, maintiennent le lien, écoutent, conseillent et soutiennent les jeunes sur Internet.',
+      url: 'https://www.promeneursdunet.fr/',
       carracteristiques: [
-        Service.RealiserDesDemarchesAdministratives,
-        Service.AccompagnerLesDemarchesDeSante,
-        ModaliteAccompagnement.Seul
+        Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+        Service.ComprehensionDuMondeNumerique,
+        Service.UtilisationSecuriseeDuNumerique,
+        ModaliteAccompagnement.AccompagnementIndividuel,
+        PublicSpecifiquementAdresse.Jeunes
       ]
     }
   ],
   [
-    LabelNational.PointRelaisCAF,
+    DispositifProgrammeNational.RelaisNumeriqueEmmausConnect,
     {
-      ref: LabelNational.PointRelaisCAF,
-      nom: 'Point relais CAF',
+      ref: DispositifProgrammeNational.RelaisNumeriqueEmmausConnect,
+      nom: DispositifProgrammeNational.RelaisNumeriqueEmmausConnect,
       description:
-        'les points relais caf.fr sont des espaces numériques aménagés mettant à disposition des ordinateurs, scanners et imprimantes, pour effectuer vos démarches en ligne.',
-      url: 'https://www.caf.fr/allocataires/caf-de-l-essonne/actualites-departementales/vos-points-relais-et-points-numeriques-caffr',
-      carracteristiques: [
-        Service.RealiserDesDemarchesAdministratives,
-        Service.AccompagnerLesDemarchesDeSante,
-        ModaliteAccompagnement.Seul,
-        ModaliteAccompagnement.AvecDeLAide
-      ]
-    }
-  ],
-  [
-    LabelNational.RelaisPoleEmploi,
-    {
-      ref: LabelNational.RelaisPoleEmploi,
-      nom: 'Relais Pôle Emploi',
-      description:
-        "Les Relais Emploi travaillent en partenariat avec Pôle Emploi, ils ont pour mission de renseigner toutes personnes en recherche d’emploi, stages, formations et d'apporter des informations diverses en lien avec l’emploi.",
-      url: 'https://www.pole-emploi.fr/',
-      carracteristiques: [Service.FavoriserMonInsertionProfessionnelle, Service.CreerEtDevelopperMonEntreprise]
+        'Les Relais Numériques, ce sont des structures de l’action sociale qui proposent de l’aide sur le numérique aux personnes en situation de précarité avec le soutien opérationnel de l’association Emmaüs Connect.',
+      url: 'https://lesrelaisnumeriques.org/',
+      carracteristiques: [Service.InsertionProfessionnelleViaLeNumerique, Service.AideAuxDemarchesAdministratives]
     }
   ]
 ]);

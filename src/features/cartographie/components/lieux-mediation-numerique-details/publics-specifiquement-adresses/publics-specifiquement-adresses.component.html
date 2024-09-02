@@ -1,15 +1,15 @@
-<ng-container *ngIf="publicsAccueillis">
+<ng-container *ngIf="publicsSpecifiquementAdresses">
   <div class="d-print-none">
     <h2 class="h5 text-muted text-uppercase mb-3">Propriété public</h2>
     <span
       class="badge rounded-pill text-bg-light p-2 me-2 mb-2 fs-6 overflow-hidden"
       style="max-width: 400px; text-overflow: ellipsis"
-      *ngFor="let publicAccueilli of publicsAccueillis">
-      <span class="opacity-75">{{ publicsAccueilliMap.get(publicAccueilli) ?? publicAccueilli }}</span>
+      *ngFor="let publicSpecifiquementAdresse of publicsSpecifiquementAdresses">
+      <span class="opacity-75">{{ publicSpecifiquementAdresse }}</span>
     </span>
   </div>
   <div class="d-none d-print-block">
-    <span class="badge rounded-pill text-bg-light py-1 fw-normal" *ngFor="let publicAccueilli of publicsAccueillis">
+    <span class="badge rounded-pill text-bg-light py-1 fw-normal" *ngFor="let publicAccueilli of publicsSpecifiquementAdresses">
       {{ publicAccueilli }}
     </span>
   </div>

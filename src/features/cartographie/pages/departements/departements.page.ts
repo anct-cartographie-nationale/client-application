@@ -12,10 +12,12 @@ import {
 } from '../../../core/presenters';
 import { CartographieLayout } from '../../layouts';
 import { SET_TITLE_ACTION, SetTitleAction } from '../../../../root';
+
 const departementsFilteredByRegion = (departements: DepartementPresentation[], departementCodes: string[]) =>
   departements.filter(
     (departement: DepartementPresentation) => departementCodes.length === 0 || departementCodes.includes(departement.code)
   );
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './departements.page.html'

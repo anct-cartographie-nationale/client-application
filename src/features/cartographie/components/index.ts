@@ -22,14 +22,14 @@ import {
   ModalitesAccompagnementComponent,
   OrientationSheetModalComponent,
   SendByEmailModalComponent,
-  PublicPrisEnChargeComponent,
   ServicesComponent,
   AccessibiliteComponent,
   ErreurFormModalComponent,
   ImpressionChoiceModalComponent,
   WebinaireComponent,
   SourceFooterComponent,
-  ScoreCompletionComponent
+  ScoreCompletionComponent,
+  PublicsSpecifiquementAdressesComponent
 } from './lieux-mediation-numerique-details';
 import { LocationBreadcrumbComponent } from './location-breadcrumb/location-breadcrumb.component';
 import { AffinerRechercheFormComponent } from './affiner-recherche-form/affiner-recherche-form.component';
@@ -52,7 +52,7 @@ export const components = [
   ModalitesAccompagnementComponent,
   OrientationSheetModalComponent,
   SendByEmailModalComponent,
-  PublicPrisEnChargeComponent,
+  PublicsSpecifiquementAdressesComponent,
   AidantsComponent,
   LabellisationsComponent,
   CartographieLoaderComponent,

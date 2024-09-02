@@ -10,7 +10,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FeatureConfiguration } from '../../../../../root';
 import { LieuMediationNumeriqueListItemPresentation } from '../../../presenters';
 import { ClustersPresenter } from '../../../../core/presenters/clusters';
@@ -46,7 +46,7 @@ export class LieuxMediationNumeriqueListComponent {
 
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
-  @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+  @Output() public showLabel: EventEmitter<DispositifProgrammeNational> = new EventEmitter<DispositifProgrammeNational>();
 
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 

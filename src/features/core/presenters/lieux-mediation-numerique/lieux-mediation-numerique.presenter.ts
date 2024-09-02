@@ -18,7 +18,7 @@ import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
 import { byBoundingBox } from './helpers/bounding-box';
 import { byDistance, filteredLieuxMediationNumerique } from './helpers/filter';
-import { LabelNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ResultFoundPresentation, Searchable } from '../../../adresse';
 import { NO_LOCALISATION } from '../../models';
 import { WithLieuxCount } from '../collectivite-territoriale';
@@ -192,32 +192,32 @@ const toLieuxMediationNumeriqueByLabelsNationaux =
     const filteredLieux = filteredLieuxMediationNumerique(...filterParameters, date).filter(onlyDefined);
     const lieuxByLabelsNationaux: LabelsNationauxPresentation[] = filteredLieux.reduce<LabelsNationauxPresentation[]>(
       (acc, lieu) => {
-        const labelNationaux: string[] | undefined = lieu.labels_nationaux
+        const dispositifProgrammesNationaux: string[] | undefined = lieu.dispositif_programmes_nationaux
           ?.toString()
           .split(',')
           .map((label) => label.trim());
 
-        const labelsAutres: string[] | undefined = lieu.labels_autres
+        const autresFormationsLabels: string[] | undefined = lieu.autres_formations_labels
           ?.toString()
           .split(',')
           .map((label) => label.trim());
 
-        labelNationaux?.some((label: string) => {
-          if (!label) return;
+        dispositifProgrammesNationaux?.some((dispositifProgrammeNational: string) => {
+          if (!dispositifProgrammeNational) return;
           const existingLabel: LabelsNationauxPresentation | undefined = acc.find((item: LabelsNationauxPresentation) =>
-            label?.includes(item.nom as LabelNational)
+            dispositifProgrammeNational?.includes(item.nom as DispositifProgrammeNational)
           );
           if (existingLabel) {
             existingLabel.lieuxCount = (existingLabel.lieuxCount || 0) + 1;
           } else {
             acc.push({
-              nom: label,
+              nom: dispositifProgrammeNational,
               lieuxCount: 1
             });
           }
         });
 
-        labelsAutres
+        autresFormationsLabels
           ?.filter((label: string) => label.includes('QPV') || label.includes('ZRR'))
           .some((labelAutre: string) => {
             if (!labelAutre) return;

@@ -44,7 +44,7 @@
               properties: {
                 id: lieuMediationNumerique.id,
                 nom: lieuMediationNumerique.nom,
-                labels_nationaux: lieuMediationNumerique.labels_nationaux
+                labels_nationaux: lieuMediationNumerique.dispositif_programmes_nationaux
               }
             }
           ]"></app-lieu-mediation-numerique-markers>
@@ -57,9 +57,9 @@
       <app-informations-pratiques
         [adresse]="lieuMediationNumerique.adresse"
         [sources]="lieuMediationNumerique.source"
-        [conditionsAcces]="lieuMediationNumerique.conditions_acces"
-        [accessibilite]="lieuMediationNumerique.accessibilite"
-        [courriel]="lieuMediationNumerique.contact?.courriel"
+        [fraisACharge]="lieuMediationNumerique.frais_a_charge"
+        [ficheAccesLibre]="lieuMediationNumerique.fiche_acces_libre"
+        [courriels]="lieuMediationNumerique.contact?.courriels"
         [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
         [distance]="lieuMediationNumerique.distance"
         [status]="lieuMediationNumerique.status"></app-informations-pratiques>
@@ -121,8 +121,8 @@
     <li class="list-group-item border-0">
       <app-services [services]="lieuMediationNumerique.services"></app-services>
     </li>
-    <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.accessibilite === undefined">
-      <app-accessibilite [accessibilite]="lieuMediationNumerique.accessibilite"></app-accessibilite>
+    <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.fiche_acces_libre === undefined">
+      <app-accessibilite [accessibilite]="lieuMediationNumerique.fiche_acces_libre"></app-accessibilite>
     </li>
     <li class="list-group-item" *ngIf="lieuMediationNumerique.aidants">
       <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>
@@ -131,15 +131,19 @@
       <app-modalites-accompagnement
         [modalitesAccompagnement]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
     </li>
-    <li class="list-group-item" *ngIf="lieuMediationNumerique.publics_accueillis?.length">
-      <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
-    </li>
+    <!--    <li class="list-group-item" *ngIf="lieuMediationNumerique.publics_specifiquement_adresses?.length">-->
+    <!--      <app-public-pris-en-charge-->
+    <!--        [publicSpecifiquementAdresse]="lieuMediationNumerique.publics_specifiquement_adresses"></app-public-pris-en-charge>-->
+    <!--    </li>-->
     <li
       class="list-group-item"
-      *ngIf="lieuMediationNumerique.labels_nationaux?.length || lieuMediationNumerique.labels_autres?.length">
+      *ngIf="
+        lieuMediationNumerique.dispositif_programmes_nationaux?.length ||
+        lieuMediationNumerique.autres_formations_labels?.length
+      ">
       <app-labellisations
-        [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
-        [labelsAutres]="lieuMediationNumerique.labels_autres"
+        [dispositifProgrammesNationaux]="lieuMediationNumerique.dispositif_programmes_nationaux"
+        [labelsAutres]="lieuMediationNumerique.autres_formations_labels"
         (showLabel)="showLabel.emit($event)"
         (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"></app-labellisations>
     </li>
@@ -203,9 +207,9 @@
   #orientationSheetModal
   [id]="lieuMediationNumerique.id"
   [nom]="lieuMediationNumerique.nom"
-  [labels_nationaux]="lieuMediationNumerique.labels_nationaux"
+  [dispositifProgrammesNationaux]="lieuMediationNumerique.dispositif_programmes_nationaux"
   [adresse]="lieuMediationNumerique.adresse"
-  [courriel]="lieuMediationNumerique.contact?.courriel"
+  [courriels]="lieuMediationNumerique.contact?.courriels"
   [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
   [siteWeb]="lieuMediationNumerique.contact?.site_web"
   [localisation]="lieuMediationNumerique.localisation"

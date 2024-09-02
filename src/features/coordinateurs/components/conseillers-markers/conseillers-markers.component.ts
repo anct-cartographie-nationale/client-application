@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { ConseillerOnMapPresentation, CoordinateurOnMapPresentation } from '../../presenters';
+import { ConseillerOnMapPresentation } from '../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

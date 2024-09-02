@@ -1,19 +1,23 @@
-import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriquePresentation } from '../../../core/presenters';
 
-const toLabelNationaux = (lieuMediationNumerique: LieuMediationNumeriquePresentation): LabelNational[] =>
-  lieuMediationNumerique.labels_nationaux ?? [];
+const toDispositifProgrammesNationaux = (
+  lieuMediationNumerique: LieuMediationNumeriquePresentation
+): DispositifProgrammeNational[] => lieuMediationNumerique.dispositif_programmes_nationaux ?? [];
 
-const toLabelsAutre = (lieuMediationNumerique: LieuMediationNumeriquePresentation): string[] =>
-  lieuMediationNumerique.labels_autres ?? [];
+const toAutresFormationsLabels = (lieuMediationNumerique: LieuMediationNumeriquePresentation): string[] =>
+  lieuMediationNumerique.autres_formations_labels ?? [];
 
 const deduplicate = <T>(duplicates: T[]): T[] => Array.from(new Set(duplicates));
 
-export const labelNationauxFrom = (LieuxMediationNumerique: LieuMediationNumeriquePresentation[]): LabelNational[] =>
-  deduplicate(LieuxMediationNumerique.flatMap(toLabelNationaux));
+export const dispositifProgrammesNationauxFrom = (
+  LieuxMediationNumerique: LieuMediationNumeriquePresentation[]
+): DispositifProgrammeNational[] => deduplicate(LieuxMediationNumerique.flatMap(toDispositifProgrammesNationaux));
 
-export const labelsAutresFrom = (LieuxMediationNumerique: LieuMediationNumeriquePresentation[]): string[] =>
-  deduplicate(LieuxMediationNumerique.flatMap(toLabelsAutre));
+export const autresFormationsLabelsFrom = (LieuxMediationNumerique: LieuMediationNumeriquePresentation[]): string[] =>
+  deduplicate(LieuxMediationNumerique.flatMap(toAutresFormationsLabels));
 
 export const strategiesTerritorialesFrom = (LieuxMediationNumerique: LieuMediationNumeriquePresentation[]): string[] =>
-  labelsAutresFrom(LieuxMediationNumerique).filter((autreLabel: string) => autreLabel === 'QPV' || autreLabel === 'ZRR');
+  autresFormationsLabelsFrom(LieuxMediationNumerique).filter(
+    (autreLabel: string) => autreLabel === 'QPV' || autreLabel === 'ZRR'
+  );

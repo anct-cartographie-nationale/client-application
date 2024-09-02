@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatestWith, Observable, of, Subject, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatomoTracker } from 'ngx-matomo';
-import { LabelNational, LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational, LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
   ASSETS_TOKEN,
   AssetsConfiguration,
@@ -71,7 +71,8 @@ export class LieuxMediationNumeriqueDetailsPage {
     combineLatestWith(this._lieuxMediationNumeriqueDetailsPresenter.getAll$),
     map(([label, lieux]: [LabelPresentation, LieuMediationNumerique[]]) => ({
       ...label,
-      lieuxCount: lieux.filter((lieu: LieuMediationNumerique) => lieu.labels_nationaux?.includes(label.ref)).length
+      lieuxCount: lieux.filter((lieu: LieuMediationNumerique) => lieu.dispositif_programmes_nationaux?.includes(label.ref))
+        .length
     }))
   );
 
@@ -118,7 +119,7 @@ export class LieuxMediationNumeriqueDetailsPage {
 
   public onReportAnError(lieu: LieuMediationNumeriqueDetailsPresentation): void {
     const mailTo: string = `cartographie.sonum@anct.gouv.fr`;
-    const carbonCopy: string = lieu.contact?.courriel ?? '';
+    const carbonCopy: string = lieu.contact?.courriels?.[0] ?? '';
     this._matomoTracker?.trackEvent(
       "rapport d'erreurs",
       lieu.nom,
@@ -150,8 +151,8 @@ export class LieuxMediationNumeriqueDetailsPage {
       );
   }
 
-  public onShowLabel(label: LabelNational) {
-    const labelPresentation: LabelPresentation | undefined = labelToDisplayMap.get(label);
+  public onShowLabel(dispositifProgrammeNational: DispositifProgrammeNational) {
+    const labelPresentation: LabelPresentation | undefined = labelToDisplayMap.get(dispositifProgrammeNational);
     labelPresentation && this._labelToDisplay$.next(labelPresentation);
   }
 

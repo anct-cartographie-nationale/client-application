@@ -2,21 +2,23 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom, Observable, of } from 'rxjs';
 import {
   Adresse,
-  CleBan,
-  ConditionAcces,
-  ConditionsAcces,
   Contact,
+  Courriel,
+  DispositifProgrammeNational,
+  DispositifProgrammesNationaux,
+  Frais,
+  FraisACharge,
   Id,
-  LabelNational,
-  LabelsNationaux,
   LieuMediationNumerique,
   Localisation,
   ModaliteAccompagnement,
   ModalitesAccompagnement,
   Nom,
   Pivot,
-  PublicAccueilli,
-  PublicsAccueillis,
+  PriseEnChargeSpecifique,
+  PrisesEnChargeSpecifiques,
+  PublicSpecifiquementAdresse,
+  PublicsSpecifiquementAdresses,
   SchemaLieuMediationNumerique,
   Service,
   Services,
@@ -46,10 +48,10 @@ describe('lieux mediation numérique http', (): void => {
             latitude: 43.52609,
             longitude: 5.41423,
             cle_ban: '13001_3079_00001',
-            typologie: [Typologie.TIERS_LIEUX, Typologie.ASSO].join(';'),
+            typologie: [Typologie.TIERS_LIEUX, Typologie.ASSO].join('|'),
             telephone: '+33180059880',
-            courriel: 'contact@laquincaillerie.tl',
-            site_web: ['https://www.laquincaillerie.tl/', 'https://m.facebook.com/laquincaillerienumerique/'].join(';'),
+            courriels: 'contact@laquincaillerie.tl',
+            site_web: ['https://www.laquincaillerie.tl/', 'https://m.facebook.com/laquincaillerienumerique/'].join('|'),
             horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
             presentation_resume:
               'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
@@ -58,27 +60,31 @@ describe('lieux mediation numérique http', (): void => {
             source: 'Hubik',
             structure_parente: 'Pôle emploi',
             date_maj: '2022-06-02',
-            publics_accueillis: [
-              PublicAccueilli.FamillesEnfants,
-              PublicAccueilli.Adultes,
-              PublicAccueilli.DeficienceVisuelle
-            ].join(';'),
+            publics_specifiquement_adresses: [
+              PublicSpecifiquementAdresse.FamillesEnfants,
+              PublicSpecifiquementAdresse.Seniors
+            ].join('|'),
+            prise_en_charge_specifique: [PriseEnChargeSpecifique.Surdite, PriseEnChargeSpecifique.DeficienceVisuelle].join('|'),
             services: [
-              Service.DevenirAutonomeDansLesDemarchesAdministratives,
-              Service.RealiserDesDemarchesAdministratives,
-              Service.PrendreEnMainUnSmartphoneOuUneTablette,
-              Service.PrendreEnMainUnOrdinateur,
-              Service.UtiliserLeNumerique,
-              Service.ApprofondirMaCultureNumerique,
-              Service.FavoriserMonInsertionProfessionnelle,
-              Service.AccederAUneConnexionInternet,
-              Service.AccederADuMateriel
-            ].join(';'),
-            conditions_acces: [ConditionAcces.Gratuit, ConditionAcces.Payant].join(';'),
-            labels_nationaux: [LabelNational.FranceServices, LabelNational.APTIC, LabelNational.PointRelaisCAF].join(';'),
-            labels_autres: ['SudLabs', 'Nièvre médiation numérique'].join(';'),
-            modalites_accompagnement: [ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide].join(';'),
-            accessibilite:
+              Service.AideAuxDemarchesAdministratives,
+              Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+              Service.ComprehensionDuMondeNumerique,
+              Service.UtilisationSecuriseeDuNumerique,
+              Service.InsertionProfessionnelleViaLeNumerique,
+              Service.AccesInternetEtMaterielInformatique
+            ].join('|'),
+            frais_a_charge: [Frais.Gratuit, Frais.Payant].join('|'),
+            dispositif_programmes_nationaux: [
+              DispositifProgrammeNational.FranceServices,
+              DispositifProgrammeNational.FranceServices,
+              DispositifProgrammeNational.AidantsConnect
+            ].join('|'),
+            autres_formations_labels: ['SudLabs', 'Nièvre médiation numérique'].join('|'),
+            modalites_accompagnement: [
+              ModaliteAccompagnement.EnAutonomie,
+              ModaliteAccompagnement.AccompagnementIndividuel
+            ].join('|'),
+            fiche_acces_libre:
               'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/',
             prise_rdv: 'https://www.rdv-solidarites.fr/'
           }
@@ -109,11 +115,10 @@ describe('lieux mediation numérique http', (): void => {
           latitude: 43.52609,
           longitude: 5.41423
         }),
-        cle_ban: CleBan('13001_3079_00001'),
         typologies: Typologies([Typologie.TIERS_LIEUX, Typologie.ASSO]),
         contact: Contact({
           telephone: '+33180059880',
-          courriel: 'contact@laquincaillerie.tl',
+          courriels: [Courriel('contact@laquincaillerie.tl')],
           site_web: [Url('https://www.laquincaillerie.tl/'), Url('https://m.facebook.com/laquincaillerienumerique/')]
         }),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
@@ -125,27 +130,34 @@ describe('lieux mediation numérique http', (): void => {
         source: 'Hubik',
         structure_parente: 'Pôle emploi',
         date_maj: new Date('2022-06-02'),
-        publics_accueillis: PublicsAccueillis([
-          PublicAccueilli.FamillesEnfants,
-          PublicAccueilli.Adultes,
-          PublicAccueilli.DeficienceVisuelle
+        publics_specifiquement_adresses: PublicsSpecifiquementAdresses([
+          PublicSpecifiquementAdresse.FamillesEnfants,
+          PublicSpecifiquementAdresse.Seniors
+        ]),
+        prise_en_charge_specifique: PrisesEnChargeSpecifiques([
+          PriseEnChargeSpecifique.Surdite,
+          PriseEnChargeSpecifique.DeficienceVisuelle
         ]),
         services: Services([
-          Service.DevenirAutonomeDansLesDemarchesAdministratives,
-          Service.RealiserDesDemarchesAdministratives,
-          Service.PrendreEnMainUnSmartphoneOuUneTablette,
-          Service.PrendreEnMainUnOrdinateur,
-          Service.UtiliserLeNumerique,
-          Service.ApprofondirMaCultureNumerique,
-          Service.FavoriserMonInsertionProfessionnelle,
-          Service.AccederAUneConnexionInternet,
-          Service.AccederADuMateriel
+          Service.AideAuxDemarchesAdministratives,
+          Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+          Service.ComprehensionDuMondeNumerique,
+          Service.UtilisationSecuriseeDuNumerique,
+          Service.InsertionProfessionnelleViaLeNumerique,
+          Service.AccesInternetEtMaterielInformatique
         ]),
-        labels_nationaux: LabelsNationaux([LabelNational.FranceServices, LabelNational.APTIC, LabelNational.PointRelaisCAF]),
-        conditions_acces: ConditionsAcces([ConditionAcces.Gratuit, ConditionAcces.Payant]),
-        labels_autres: ['SudLabs', 'Nièvre médiation numérique'],
-        modalites_accompagnement: ModalitesAccompagnement([ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide]),
-        accessibilite: Url(
+        dispositif_programmes_nationaux: DispositifProgrammesNationaux([
+          DispositifProgrammeNational.FranceServices,
+          DispositifProgrammeNational.FranceServices,
+          DispositifProgrammeNational.AidantsConnect
+        ]),
+        frais_a_charge: FraisACharge([Frais.Gratuit, Frais.Payant]),
+        autres_formations_labels: ['SudLabs', 'Nièvre médiation numérique'],
+        modalites_accompagnement: ModalitesAccompagnement([
+          ModaliteAccompagnement.EnAutonomie,
+          ModaliteAccompagnement.AccompagnementIndividuel
+        ]),
+        fiche_acces_libre: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
         ),
         prise_rdv: Url('https://www.rdv-solidarites.fr/')
@@ -165,11 +177,11 @@ describe('lieux mediation numérique http', (): void => {
             code_postal: '13211',
             adresse: '4 AV DE SAINT MENET',
             services: [
-              Service.PrendreEnMainUnSmartphoneOuUneTablette,
-              Service.PrendreEnMainUnOrdinateur,
-              Service.UtiliserLeNumerique,
-              Service.ApprofondirMaCultureNumerique
-            ].join(';'),
+              Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+              Service.ComprehensionDuMondeNumerique,
+              Service.UtilisationSecuriseeDuNumerique,
+              Service.LoisirsEtCreationsNumeriques
+            ].join('|'),
             latitude: 4.8375548,
             longitude: 45.7665478,
             date_maj: '2022-12-05',
@@ -201,10 +213,10 @@ describe('lieux mediation numérique http', (): void => {
           longitude: 45.7665478
         }),
         services: Services([
-          Service.PrendreEnMainUnSmartphoneOuUneTablette,
-          Service.PrendreEnMainUnOrdinateur,
-          Service.UtiliserLeNumerique,
-          Service.ApprofondirMaCultureNumerique
+          Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+          Service.ComprehensionDuMondeNumerique,
+          Service.UtilisationSecuriseeDuNumerique,
+          Service.LoisirsEtCreationsNumeriques
         ]),
         date_maj: new Date('2022-12-05T00:00:00.000Z')
       }
@@ -224,11 +236,11 @@ describe('lieux mediation numérique http', (): void => {
             code_insee: '13055',
             adresse: '4 AV DE SAINT MENET',
             services: [
-              Service.PrendreEnMainUnSmartphoneOuUneTablette,
-              Service.PrendreEnMainUnOrdinateur,
-              Service.UtiliserLeNumerique,
-              Service.ApprofondirMaCultureNumerique
-            ].join(';'),
+              Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+              Service.ComprehensionDuMondeNumerique,
+              Service.UtilisationSecuriseeDuNumerique,
+              Service.LoisirsEtCreationsNumeriques
+            ].join('|'),
             date_maj: '2022-12-05',
             pivot: '91224046510114'
           }
@@ -255,10 +267,10 @@ describe('lieux mediation numérique http', (): void => {
           voie: '4 AV DE SAINT MENET'
         }),
         services: Services([
-          Service.PrendreEnMainUnSmartphoneOuUneTablette,
-          Service.PrendreEnMainUnOrdinateur,
-          Service.UtiliserLeNumerique,
-          Service.ApprofondirMaCultureNumerique
+          Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+          Service.ComprehensionDuMondeNumerique,
+          Service.UtilisationSecuriseeDuNumerique,
+          Service.LoisirsEtCreationsNumeriques
         ]),
         date_maj: new Date('2022-12-05T00:00:00.000Z')
       }
@@ -278,11 +290,11 @@ describe('lieux mediation numérique http', (): void => {
             code_insee: '13055',
             adresse: '4 AV DE SAINT MENET',
             services: [
-              Service.PrendreEnMainUnSmartphoneOuUneTablette,
-              Service.PrendreEnMainUnOrdinateur,
-              Service.UtiliserLeNumerique,
-              Service.ApprofondirMaCultureNumerique
-            ].join(';'),
+              Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+              Service.ComprehensionDuMondeNumerique,
+              Service.UtilisationSecuriseeDuNumerique,
+              Service.LoisirsEtCreationsNumeriques
+            ].join('|'),
             date_maj: '2022-12-05',
             pivot: '91224046510114',
             aidants: [
@@ -318,10 +330,10 @@ describe('lieux mediation numérique http', (): void => {
           voie: '4 AV DE SAINT MENET'
         }),
         services: Services([
-          Service.PrendreEnMainUnSmartphoneOuUneTablette,
-          Service.PrendreEnMainUnOrdinateur,
-          Service.UtiliserLeNumerique,
-          Service.ApprofondirMaCultureNumerique
+          Service.MaitriseDesOutilsNumeriquesDuQuotidien,
+          Service.ComprehensionDuMondeNumerique,
+          Service.UtilisationSecuriseeDuNumerique,
+          Service.LoisirsEtCreationsNumeriques
         ]),
         date_maj: new Date('2022-12-05T00:00:00.000Z'),
         aidants: Aidants([

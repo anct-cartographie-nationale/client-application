@@ -53,13 +53,13 @@
           </div>
         </div>
 
-        <div class="row g-2 px-2 flex-grow-1" *ngIf="openingHourGroup.controls.period.value === 'hours'">
+        <div class="row g-2 px-2 flex-grow-1" *ngIf="openingHourGroup.controls.period?.value === 'hours'">
           <div class="col-6" *ngIf="openingHourGroup.controls.day.value && openingHourGroup.controls.day.value !== 'now'">
             <label [for]="'debut-' + i"><small class="text-muted">Choisir une date de début</small></label>
             <div class="input-group">
               <button
                 type="button"
-                *ngIf="openingHourGroup.controls.start.value"
+                *ngIf="openingHourGroup.controls.start?.value"
                 class="btn input-group-btn link-dark opacity-75 text-decoration-none p-0"
                 title="Supprimer cette date de début"
                 (click)="clearDateInput(i, 'start')">
@@ -80,7 +80,7 @@
             <div class="input-group">
               <button
                 type="button"
-                *ngIf="openingHourGroup.controls.end.value"
+                *ngIf="openingHourGroup.controls.end?.value"
                 class="btn input-group-btn link-dark opacity-75 text-decoration-none p-0"
                 title="Supprimer cette date de fin"
                 (click)="clearDateInput(i, 'end')">

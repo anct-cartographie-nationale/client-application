@@ -2,14 +2,14 @@ import { Contact, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { AvailableErreur } from '../../models';
 
-const formatServices = (services: Service[]): string => `${services.join('%0D%0A- ')}`;
+const formatServicesIfAny = (services?: Service[]): string => `${services ? services.join('%0D%0A- ') : 'Services inconnus'}`;
 
 const formatTelephoneIfAny = (telephone?: string): string => (telephone ? `%0D%0A${telephone}` : '');
 
 const formatCourrielIfAny = (telephone?: string): string => (telephone ? `%0D%0AC${telephone}` : '');
 
 const formatContactIfAny = (contact?: Contact): string =>
-  contact ? `${formatTelephoneIfAny(contact.telephone)}${formatCourrielIfAny(contact.courriel)}%0D%0A` : '';
+  contact ? `${formatTelephoneIfAny(contact.telephone)}${formatCourrielIfAny(contact.courriels?.[0])}%0D%0A` : '';
 
 export const emailMessage = (lieu: LieuMediationNumeriqueDetailsPresentation, detailsLink: string): string =>
   `Bonjour 👋,
@@ -21,7 +21,7 @@ ${lieu.nom}
 ${lieu.adresse}
 ${formatContactIfAny(lieu.contact)}
 Services disponibles :
-- ${formatServices(lieu.services)}
+- ${formatServicesIfAny(lieu.services)}
 
 Retrouvez toutes les informations de ce lieu sur le site web de la cartographie : ${detailsLink}
 

@@ -31,7 +31,7 @@
               properties: {
                 id: lieuMediationNumerique.id,
                 nom: lieuMediationNumerique.nom,
-                labels_nationaux: lieuMediationNumerique.labels_nationaux
+                labels_nationaux: lieuMediationNumerique.dispositif_programmes_nationaux
               }
             }
           ]"></app-lieu-mediation-numerique-markers>
@@ -55,11 +55,11 @@
               <span class="fw-bold text-body d-block">{{ lieuMediationNumerique.contact?.telephone ?? '' | phone }}</span>
             </small>
           </div>
-          <div class="mt-3 d-flex align-items-center" *ngIf="lieuMediationNumerique.contact?.courriel">
+          <div class="mt-3 d-flex align-items-center" *ngIf="(lieuMediationNumerique.contact?.courriels ?? []).length > 0">
             <span role="img" class="ri ri-lg ri-mail-line border-end pe-2 me-2" aria-hidden="true"></span>
             <small>
               Mail
-              <span class="fw-bold text-body text-break d-block">{{ lieuMediationNumerique.contact?.courriel }}</span>
+              <span class="fw-bold text-body text-break d-block">{{ lieuMediationNumerique.contact?.courriels?.[0] }}</span>
             </small>
           </div>
           <div class="mt-3 d-flex align-items-center" *ngIf="lieuMediationNumerique.contact?.site_web">
@@ -79,7 +79,13 @@
         <div class="text-break mb-4" *ngIf="usager.details">
           {{ usager.details }}
         </div>
-        <div *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
+        <div
+          *ngIf="
+            filters?.service ||
+            filters?.publics_specifiquement_adresses?.length ||
+            filters?.prise_en_charge_specifique?.length ||
+            filters?.modalites_accompagnement?.length
+          ">
           <span class="fw-bold text-muted">Objet du rendez-vous</span>
           <div>
             <span class="badge rounded-pill text-bg-light py-1 fw-normal" *ngIf="filters?.service">
@@ -87,8 +93,13 @@
             </span>
             <span
               class="badge rounded-pill text-bg-light py-1 fw-normal"
-              *ngFor="let public_accueilli of filters?.publics_accueillis ?? []">
-              {{ public_accueilli }}
+              *ngFor="let publicsSpecifiquementAdresses of filters?.publics_specifiquement_adresses ?? []">
+              {{ publicsSpecifiquementAdresses }}
+            </span>
+            <span
+              class="badge rounded-pill text-bg-light py-1 fw-normal"
+              *ngFor="let priseEnChargeSpecifique of filters?.prise_en_charge_specifique ?? []">
+              {{ priseEnChargeSpecifique }}
             </span>
             <span
               class="badge rounded-pill text-bg-light py-1 fw-normal"
@@ -110,12 +121,17 @@
         <div class="mb-3">
           <app-services [services]="lieuMediationNumerique.services"></app-services>
         </div>
-        <div *ngIf="lieuMediationNumerique.modalites_accompagnement || lieuMediationNumerique.publics_accueillis">
+        <div
+          *ngIf="
+            lieuMediationNumerique.modalites_accompagnement ||
+            lieuMediationNumerique.publics_specifiquement_adresses ||
+            lieuMediationNumerique.prise_en_charge_specifique
+          ">
           <div class="small fw-bold text-muted mb-2">Caractéristiques du lieu</div>
           <app-modalites-accompagnement
             [modalitesAccompagnement]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
-          <app-public-pris-en-charge
-            [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
+          <!--          <app-public-pris-en-charge-->
+          <!--            [publicSpecifiquementAdresse]="lieuMediationNumerique.publics_specifiquement_adresses"></app-public-pris-en-charge>-->
         </div>
       </ng-template>
     </div>
@@ -123,10 +139,10 @@
   <div class="d-none d-print-block">
     <div class="d-flex mt-3 row">
       <div class="container-fluid mx-sm-3 mx-0 col mt-1">
-        <img height="48" *ngIf="brandConfiguration.logoAvecTexte; brandLogo" [src]="brandConfiguration.logoAvecTexte" alt="" />
-        <ng-template #brandLogo>
-          <img height="48" *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" alt="" />
-        </ng-template>
+        <!--        <img height="48" *ngIf="brandConfiguration.logoAvecTexte; brandLogo" [src]="brandConfiguration.logoAvecTexte" alt="" />-->
+        <!--        <ng-template #brandLogo>-->
+        <!--          <img height="48" *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" alt="" />-->
+        <!--        </ng-template>-->
       </div>
       <div class="d-flex col flex-column mb-2 text-start">
         <div

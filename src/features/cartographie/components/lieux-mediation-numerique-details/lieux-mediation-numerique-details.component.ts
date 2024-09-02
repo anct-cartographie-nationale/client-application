@@ -8,7 +8,7 @@ import {
   ViewChild,
   Optional
 } from '@angular/core';
-import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { FilterPresentation } from '../../../core/presenters';
@@ -45,7 +45,7 @@ export class LieuxMediationNumeriqueDetailsComponent {
 
   @Output() public openErreurFormModal: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
-  @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+  @Output() public showLabel: EventEmitter<DispositifProgrammeNational> = new EventEmitter<DispositifProgrammeNational>();
 
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 

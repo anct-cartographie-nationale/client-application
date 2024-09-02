@@ -34,9 +34,13 @@
     </a>
     <div
       class="col-auto text-end z-index-over"
-      *ngIf="lieuMediationNumerique.courriel || lieuMediationNumerique.telephone || lieuMediationNumerique.prise_rdv">
+      *ngIf="
+        (lieuMediationNumerique.courriels ?? []).length > 0 ||
+        lieuMediationNumerique.telephone ||
+        lieuMediationNumerique.prise_rdv
+      ">
       <a
-        *ngIf="lieuMediationNumerique.courriel as courriel"
+        *ngIf="lieuMediationNumerique.courriels?.[0] as courriel"
         href="mailto:{{ courriel }}"
         class="btn btn-sm btn-secondary d-block mb-2">
         <span role="img" class="ri-mail-line me-2 fw-normal" aria-hidden="true"></span>
@@ -56,22 +60,24 @@
       </div>
     </div>
   </div>
-  <div class="row g-2 mt-1" *ngIf="lieuMediationNumerique.labels_nationaux as labelsNationaux">
-    <div class="col-auto z-index-over" *ngFor="let label of labelsNationaux">
-      <button (click)="showLabel.emit(label); showLabelInvokingContext.emit($event)" class="btn btn-link p-0">
+  <div class="row g-2 mt-1" *ngIf="lieuMediationNumerique.dispositif_programmes_nationaux as dispositifProgrammesNationaux">
+    <div class="col-auto z-index-over" *ngFor="let dispositifProgrammeNational of dispositifProgrammesNationaux">
+      <button
+        (click)="showLabel.emit(dispositifProgrammeNational); showLabelInvokingContext.emit($event)"
+        class="btn btn-link p-0">
         <img
-          [src]="assetsConfiguration.path + '/img/logo/labels/' + label + '.svg'"
-          [alt]="'Plus d\'information à propos du label ' + toLabelNom(label)" />
+          [src]="assetsConfiguration.path + '/img/logo/labels/' + dispositifProgrammeNational + '.svg'"
+          [alt]="'Plus d\'information à propos du label ' + toLabelNom(dispositifProgrammeNational)" />
       </button>
     </div>
-    <div class="col text-end" *ngIf="lieuMediationNumerique.conditions_acces || lieuMediationNumerique.date_maj">
+    <div class="col text-end" *ngIf="lieuMediationNumerique.frais_a_charge || lieuMediationNumerique.date_maj">
       <div
-        [ngClass]="lieuMediationNumerique.conditions_acces.isFree ? 'text-primary' : 'text-muted'"
-        *ngIf="lieuMediationNumerique.conditions_acces; else emptyConditionAcces">
-        {{ lieuMediationNumerique.conditions_acces.label }}
+        [ngClass]="lieuMediationNumerique.frais_a_charge.isFree ? 'text-primary' : 'text-muted'"
+        *ngIf="lieuMediationNumerique.frais_a_charge; else emptyConditionAcces">
+        {{ lieuMediationNumerique.frais_a_charge.label }}
       </div>
       <ng-template #emptyConditionAcces>
-        <div *ngIf="(lieuMediationNumerique.labels_nationaux ?? []).length > 0" aria-hidden="true">&nbsp;</div>
+        <div *ngIf="(lieuMediationNumerique.dispositif_programmes_nationaux ?? []).length > 0" aria-hidden="true">&nbsp;</div>
       </ng-template>
       <small
         *ngIf="lieuMediationNumerique.date_maj && dateIsValide(lieuMediationNumerique.date_maj)"
@@ -90,9 +96,9 @@
       <span role="img" class="ri ri-phone-line" aria-hidden="true"></span>
       {{ lieuMediationNumerique.telephone }}
     </div>
-    <div *ngIf="lieuMediationNumerique.courriel">
+    <div *ngIf="(lieuMediationNumerique.courriels ?? []).length > 0">
       <span role="img" class="ri ri-mail-line" aria-hidden="true"></span>
-      {{ lieuMediationNumerique.courriel }}
+      {{ lieuMediationNumerique.courriels?.[0] }}
     </div>
     <div *ngIf="lieuMediationNumerique.site_web">
       <span role="img" class="ri ri-external-link-line" aria-hidden="true"></span>

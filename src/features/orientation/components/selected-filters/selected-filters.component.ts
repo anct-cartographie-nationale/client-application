@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FormGroup } from '@angular/forms';
 import { FilterFormPresentation } from '../../../core/presenters';
 import publicSpecifiqueAcceuilli from '../../pages/accessibilite/public-specifique-accueilli.json';
-import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,8 +24,8 @@ export class SelectedFiltersComponent {
       this.filterForm.get('horaires_ouverture')?.reset();
     } else if (key === 'prise_rdv') {
       this.filterForm.get('prise_rdv')?.reset();
-    } else if (key === 'accessibilite') {
-      this.filterForm.get('accessibilite')?.reset();
+    } else if (key === 'fiche_acces_libre') {
+      this.filterForm.get('fiche_acces_libre')?.reset();
     } else {
       const keyArrayCopy = [...this.filterForm.value[key]];
       const indexOfValue = keyArrayCopy.indexOf(value);
@@ -42,5 +42,7 @@ export class SelectedFiltersComponent {
     );
   }
 
-  public labelMap: Map<string, string> = new Map<LabelNational, string>([[LabelNational.CNFS, 'Conseillers Numériques']]);
+  public labelMap: Map<string, string> = new Map<DispositifProgrammeNational, string>([
+    [DispositifProgrammeNational.ConseillersNumeriques, 'Conseillers Numériques']
+  ]);
 }

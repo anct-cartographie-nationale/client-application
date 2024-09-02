@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { combineLatest, combineLatestWith, merge, Observable, startWith, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { LabelNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational, LieuMediationNumerique, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import {
   ASSETS_TOKEN,
   AssetsConfiguration,
@@ -65,7 +65,8 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     combineLatestWith(this._lieuxMediationNumeriqueListPresenter.lieuxMediationNumerique$),
     map(([label, lieux]: [LabelPresentation, LieuMediationNumerique[]]) => ({
       ...label,
-      lieuxCount: lieux.filter((lieu: LieuMediationNumerique) => lieu.labels_nationaux?.includes(label.ref)).length
+      lieuxCount: lieux.filter((lieu: LieuMediationNumerique) => lieu.dispositif_programmes_nationaux?.includes(label.ref))
+        .length
     }))
   );
 
@@ -193,8 +194,8 @@ export class LieuxMediationNumeriqueListPage implements OnInit {
     this._hubToDisplay$.next(toHub(region));
   }
 
-  public onShowLabel(label: LabelNational): void {
-    const labelPresentation: LabelPresentation | undefined = labelToDisplayMap.get(label);
+  public onShowLabel(dispositifProgrammeNational: DispositifProgrammeNational): void {
+    const labelPresentation: LabelPresentation | undefined = labelToDisplayMap.get(dispositifProgrammeNational);
     labelPresentation && this._labelToDisplay$.next(labelPresentation);
   }
 }

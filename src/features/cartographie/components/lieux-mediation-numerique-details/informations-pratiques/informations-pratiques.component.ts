@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { Courriel, Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { OpeningState } from '../../../../core/presenters';
 import { SourcePresentation } from '../../../presenters';
 
@@ -10,9 +10,9 @@ import { SourcePresentation } from '../../../presenters';
 })
 export class InformationsPratiquesComponent {
   @Input() public adresse!: string;
-  @Input() public conditionsAcces: string | undefined;
-  @Input() public accessibilite: Url | undefined;
-  @Input() public courriel: string | undefined;
+  @Input() public fraisACharge: string | undefined;
+  @Input() public ficheAccesLibre: Url | undefined;
+  @Input() public courriels: Courriel[] | undefined;
   @Input() public telephone: string | undefined;
   @Input() public distance: number | undefined;
   @Input() public status: OpeningState | undefined;

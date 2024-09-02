@@ -7,43 +7,25 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
     description:
       "Les apprentissages de bases sont souvent dispensés / proposés sous formes d'ateliers collectifs et destinés aux personnes souhaitant s'initier à l'utilisation d'un appareil numérique.",
     elements: [
+      "Apprendre à me servir d'un clavier et d'une souris",
+      'Utiliser mon ordinateur pour la première fois',
       'Prendre en main un smartphone ou une tablette',
       'Prendre en main un ordinateur',
       'Utiliser le numérique au quotidien'
     ],
     label: 'Liste des apprentissages de base'
   },
-  [Service.PrendreEnMainUnSmartphoneOuUneTablette]: {
-    titre: 'Prendre en main un smartphone ou une tablette',
-    description:
-      'Un accompagnement collectif ou individuel pour initier les usagers à la prise en main de smartphones ou de tablettes.',
-    elements: [
-      "Apprendre à me servir d'un écran tactile",
-      'Utiliser mon smartphone pour la première fois',
-      'Configurer mon smartphone',
-      'Connaître les outils de base présents sur mon smartphone'
-    ],
-    label: 'Exemples'
-  },
-  [Service.PrendreEnMainUnOrdinateur]: {
-    titre: 'Prendre en main un ordinateur',
-    description:
-      "Un accompagnement collectif ou individuel pour initier les usagers à la prise en main d'un ordinateur fixe ou portable.",
-    elements: [
-      "Apprendre à me servir d'un clavier et d'une souris",
-      'Utiliser mon ordinateur pour la première fois',
-      'Configurer mon ordinateur',
-      'Connaître les outils de base présents sur mon ordinateur'
-    ],
-    label: 'Exemples'
-  },
-  [Service.UtiliserLeNumerique]: {
-    titre: 'Utiliser le numérique au quotidien',
+  [Service.MaitriseDesOutilsNumeriquesDuQuotidien]: {
+    titre: 'Maitrise des outils numériques du quotidien',
     description:
       'Faire découvrir aux usagers les fonctionnalités propres aux appareils numériques et les opportunités de la navigation web.',
     elements: [
-      'Utiliser des périphériques',
-      'Utiliser les outils de Google',
+      "Apprendre à me servir d'un clavier et d'une souris",
+      'Utiliser mon ordinateur pour la première fois',
+      'Prendre en main un smartphone ou une tablette',
+      'Prendre en main un ordinateur',
+      'Utiliser le numérique au quotidien',
+      'Utiliser des services sur internet',
       'Utiliser un tableur, un traitement de texte, etc.'
     ],
     label: 'Exemples'
@@ -61,46 +43,15 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
     ],
     label: 'Liste des apprentissages de base'
   },
-  [Service.RealiserDesDemarchesAdministratives]: {
+  [Service.AideAuxDemarchesAdministratives]: {
     titre: 'Être aidé(e) ponctuellement pour réaliser mes démarches en ligne',
     description:
       'Pour certaines démarches, des professionnels sont disponibles pour aider les usagers à réaliser certaines démarches en ligne, voire à les faire à leur place.',
     elements: ['CAF', 'CPAM', 'Pôle emploi', 'Impôts', 'Juridique'],
     label: 'Exemples'
   },
-  [Service.DevenirAutonomeDansLesDemarchesAdministratives]: {
-    titre: 'Être formé(e) pour réaliser mes démarches en ligne',
-    description:
-      'Certains lieux proposent des ateliers permettant aux usagers d’apprendre à réaliser des démarches administratives en ligne en toute autonomie.',
-    elements: ['CAF', 'CPAM', 'Pole emploi', 'Impôts', 'Juridique'],
-    label: 'Exemples'
-  },
-  [Service.CreerEtDevelopperMonEntreprise]: {
-    titre: 'Créer et développer son entreprise',
-    description: "Certains lieux spécialisés pour accompagner les usagers dans leurs démarches de création d'entreprise.",
-    elements: [
-      'Créer mon auto-entreprise',
-      'Connaître les sites internet permettant de gérer mon entreprise',
-      'Fermer mon entreprise'
-    ],
-    label: 'Exemples'
-  },
-  [Service.AccompagnerLesDemarchesDeSante]: {
-    titre: 'Etre aidé(e) dans ses démarches de santé',
-    description:
-      'Vos démarches de santé son nombreuses, vous pouvez trouver certains lieux adaptés pour vous accompagner dans celles-ci.',
-    elements: [
-      'Utiliser ameli.fr',
-      'Trouver un médecin traitant',
-      'Trouver un rendez-vous chez une spécialiste',
-      'Apprendre à utiliser Doctolib ou Qare',
-      'Dossier Affection de longue durée',
-      'Arrêt maladie - accident de travail - RQTH'
-    ],
-    label: 'Exemples'
-  },
-  [Service.FavoriserMonInsertionProfessionnelle]: {
-    titre: 'Favoriser son insertion professionnelle',
+  [Service.InsertionProfessionnelleViaLeNumerique]: {
+    titre: 'Insertion professionnelle via le numérique',
     description:
       "Des aidants professionnels disponibles pour accompagner les usagers dans leur parcours d'insertion professionnelle.",
     elements: [
@@ -110,7 +61,10 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
       'Utiliser Linkedin',
       'Postuler en ligne',
       'Formation et reconversion professionnelle',
-      'CPF : gérer son compte et trouver sa formation'
+      'CPF : gérer son compte et trouver sa formation',
+      'Créer mon auto-entreprise',
+      'Connaître les sites internet permettant de gérer mon entreprise',
+      'Fermer mon entreprise'
     ],
     label: 'Exemples'
   },
@@ -126,38 +80,53 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
     ],
     label: 'Liste des apprentissages de base'
   },
-  [Service.ApprofondirMaCultureNumerique]: {
-    titre: 'Approfondir sa culture numérique',
+  [Service.ComprehensionDuMondeNumerique]: {
+    titre: 'Comprehension du monde numérique',
     description:
       'Certains lieux proposent des ateliers de perfectionnement ou des formations avancées sur des thématiques spécifiques.',
     elements: [
-      'Utiliser mon matériel de manière sécurisée',
-      'Repérer les fake news',
       'Comment gérer mes données',
-      'Comprendre et gérer ses réseaux sociaux'
+      'Comprendre et gérer ses réseaux sociaux',
+      "Comprendre le fonctionnement d'Internet et du Web",
+      'Introduction aux technologies émergentes (IA, blockchain, etc.)',
+      'Découvrir les outils de collaboration en ligne (Google Drive, Microsoft Teams, etc.)',
+      'Introduction aux algorithmes et à leur impact sur la société',
+      'Naviguer dans le monde des applications mobiles et de leurs autorisations',
+      'Décrypter le langage des nouvelles technologies'
     ],
     label: 'Exemples'
   },
-  [Service.PromouvoirLaCitoyenneteNumerique]: {
-    titre: 'Promouvoir la citoyenneté numérique',
+  [Service.UtilisationSecuriseeDuNumerique]: {
+    titre: 'Utilisation sécurisée du numérique',
     description:
       'Certains lieux aident les usagers à utiliser leurs outils numériques de manière saine, responsable et sécurisée.',
-    elements: ['Les droits et les interdits sur internet', 'Naviguer de manière responsable', 'Les comportements à risque'],
-    label: 'Exemples'
-  },
-  [Service.CreerAvecLeNumerique]: {
-    titre: 'Créer avec le numérique',
-    description:
-      'Certains lieux accompagnent les usagers à la réalisation de leurs projets numériques et leurs donnent accès à des outils de création spécifiques.',
     elements: [
-      'Créer un site vitrine ou marchand',
-      'Faire de la retouche photo',
-      'Faire du montage vidéo',
-      'Fablabs et imprimantes 3D'
+      'Créer et gérer des mots de passe sécurisés',
+      'Reconnaître et éviter les tentatives de phishing',
+      'Mettre à jour et sécuriser ses logiciels et appareils',
+      'Comprendre les réglages de confidentialité sur les réseaux sociaux',
+      'Protéger ses données personnelles en ligne',
+      'Connaître les bonnes pratiques pour les paiements en ligne',
+      'Éviter les escroqueries et fraudes en ligne'
     ],
     label: 'Exemples'
   },
-  [Service.SoutenirLaParentalite]: {
+  [Service.LoisirsEtCreationsNumeriques]: {
+    titre: 'Loisirs et créations numériques',
+    description:
+      'Certains lieux proposent des activités pour découvrir et s’initier à des pratiques numériques créatives et récréatives.',
+    elements: [
+      'Découvrir les bases de la retouche photo et du montage vidéo',
+      'S’initier au codage et à la programmation avec des ateliers ludiques',
+      'Apprendre à utiliser des logiciels de musique numérique',
+      'Créer des animations ou des dessins numériques',
+      'Découvrir la modélisation 3D et l’impression 3D',
+      'Apprendre à créer des podcasts ou des vidéos YouTube',
+      'S’initier aux bases de la photographie numérique et à l’utilisation des appareils photo numériques'
+    ],
+    label: 'Exemples'
+  },
+  [Service.ParentaliteEtEducationAvecLeNumerique]: {
     titre: "Soutenir la parentalité et l'éducation numérique",
     description:
       'Certains lieux conseillent les parents et leurs enfants sur les outils et techniques pour utiliser le numérique en toute sécurité.',
@@ -180,30 +149,28 @@ export const BESOIN_INFORMATION_MODAL_TEXTS: Record<BesoinOrientationInformation
     ],
     label: 'Liste des apprentissages de base'
   },
-  [Service.AccederAUneConnexionInternet]: {
-    titre: 'Accéder à une connexion internet',
-    description: "Certains lieux proposent gratuitement ou sous conditions l'accès à une connexion internet.",
+  [Service.AccesInternetEtMaterielInformatique]: {
+    titre: 'Accéder à une connexion internet et à du matériel en libre service',
+    description:
+      "Certains lieux proposent gratuitement ou sous conditions l'accès à une connexion internet ou l'accès à du matériel numérique en libre service.",
     elements: [
       'Accéder à du wifi en libre service',
       'Accéder à du wifi pour mes démarches administratives',
-      'Obtenir une clé 4G'
+      'Imprimer gratuitement ou à bas prix',
+      'Accéder à un ordinateur',
+      'Accéder à une tablette'
     ],
     label: 'Exemples'
   },
-  [Service.AccederADuMateriel]: {
-    titre: 'Accéder à du matériel en libre service',
-    description: "Certains lieux proposent gratuitement ou sous conditions l'accès à du matériel numérique en libre service.",
-    elements: ['Imprimer gratuitement ou à bas prix', 'Accéder à un ordinateur'],
-    label: 'Exemples'
-  },
-  [Service.EquiperEnMaterielInformatique]: {
-    titre: 'Acheter ou louer du matériel à tarif solidaire',
-    description: "Certains lieux proposent en location ou à l'achat du matériel  à tarif solidaire.",
+  [Service.MaterielInformatiqueAPrixSolidaire]: {
+    titre: 'Acheter ou louer du matériel informatique à tarif solidaire',
+    description: "Certains lieux proposent en location ou à l'achat du matériel à tarif solidaire.",
     elements: [
       'Don de matériel',
       'Louer/se faire prêter',
       'Acheter ou louer à bas prix',
-      'Avoir un ordinateur, une imprimante à la maison, etc.'
+      'Avoir un ordinateur, une imprimante à la maison, etc.',
+      'Obtenir une clé 4G'
     ],
     label: 'Exemples'
   }

@@ -9,7 +9,11 @@
     <app-nav-link
       [size]="size"
       [link]="['accessibilite']"
-      [filtersCount]="(filter.publics_accueillis?.length ?? 0) + (filter.modalites_accompagnement?.length ?? 0)">
+      [filtersCount]="
+        (filter.publics_specifiquement_adresses?.length ?? 0) +
+        (filter.prise_en_charge_specifique?.length ?? 0) +
+        (filter.modalites_accompagnement?.length ?? 0)
+      ">
       Accessibilité
     </app-nav-link>
   </li>
