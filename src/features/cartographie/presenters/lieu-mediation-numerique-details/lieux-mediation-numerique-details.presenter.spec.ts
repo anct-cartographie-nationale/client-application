@@ -5,12 +5,18 @@ import {
   Courriel,
   DispositifProgrammeNational,
   DispositifProgrammesNationaux,
+  FormationLabel,
+  FormationsLabels,
   Frais,
   FraisACharge,
   Id,
+  Itinerance,
+  Itinerances,
   LieuMediationNumerique,
   Localisation,
+  ModaliteAcces,
   ModaliteAccompagnement,
+  ModalitesAcces,
   ModalitesAccompagnement,
   Nom,
   Pivot,
@@ -59,6 +65,15 @@ describe('lieux médiation numérique details presenter', (): void => {
             "Notre parcours d'initiation permet l'acquisition de compétences numériques de base. Nous proposons également un accompagnement à destination des personnes déjà initiées qui souhaiteraient approfondir leurs connaissances. Du matériel informatique est en libre accès pour nos adhérents tous les après-midis. En plus de d'accueillir les personnes dans notre lieu en semaine (sur rendez-vous), nous assurons une permanence le samedi matin dans la médiathèque XX."
         },
         date_maj: new Date('2022-06-02'),
+        itinerance: Itinerances([Itinerance.Itinerant, Itinerance.Fixe]),
+        modalites_acces: ModalitesAcces([
+          ModaliteAcces.SePresenter,
+          ModaliteAcces.Telephoner,
+          ModaliteAcces.ContacterParMail,
+          ModaliteAcces.PrendreRdvEnLigne,
+          ModaliteAcces.PrescriptionParMail,
+          ModaliteAcces.PasDePublic
+        ]),
         publics_specifiquement_adresses: PublicsSpecifiquementAdresses([
           PublicSpecifiquementAdresse.Seniors,
           PublicSpecifiquementAdresse.Jeunes
@@ -73,10 +88,24 @@ describe('lieux médiation numérique details presenter', (): void => {
           DispositifProgrammeNational.ConseillersNumeriques,
           DispositifProgrammeNational.AidantsConnect
         ]),
+        formations_labels: FormationsLabels([
+          FormationLabel.CollectifRessourcesEtActeursReemploi,
+          FormationLabel.ArniaMednum,
+          FormationLabel.FabriquesDeTerritoire,
+          FormationLabel.Ordi3,
+          FormationLabel.SudLabs,
+          FormationLabel.EtapesNumeriques,
+          FormationLabel.FormeADuplex,
+          FormationLabel.MesPapiers,
+          FormationLabel.LesEclaireurs,
+          FormationLabel.FormeAMonEspaceSante
+        ]),
         autres_formations_labels: ['SudLabs', 'Nièvre médiation numérique'],
         modalites_accompagnement: ModalitesAccompagnement([
           ModaliteAccompagnement.EnAutonomie,
-          ModaliteAccompagnement.AccompagnementIndividuel
+          ModaliteAccompagnement.AccompagnementIndividuel,
+          ModaliteAccompagnement.DansUnAtelier,
+          ModaliteAccompagnement.ADistance
         ]),
         fiche_acces_libre: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
@@ -129,18 +158,41 @@ describe('lieux médiation numérique details presenter', (): void => {
           "Notre parcours d'initiation permet l'acquisition de compétences numériques de base. Nous proposons également un accompagnement à destination des personnes déjà initiées qui souhaiteraient approfondir leurs connaissances. Du matériel informatique est en libre accès pour nos adhérents tous les après-midis. En plus de d'accueillir les personnes dans notre lieu en semaine (sur rendez-vous), nous assurons une permanence le samedi matin dans la médiathèque XX."
       },
       date_maj: new Date('2022-06-02'),
+      itinerance: true,
+      modalites_acces: [
+        ModaliteAcces.SePresenter,
+        ModaliteAcces.Telephoner,
+        ModaliteAcces.ContacterParMail,
+        ModaliteAcces.PrendreRdvEnLigne,
+        ModaliteAcces.PrescriptionParMail,
+        ModaliteAcces.PasDePublic
+      ],
       publics_specifiquement_adresses: [PublicSpecifiquementAdresse.Seniors, PublicSpecifiquementAdresse.Jeunes],
       prise_en_charge_specifique: [PriseEnChargeSpecifique.Surdite, PriseEnChargeSpecifique.DeficienceVisuelle],
-      frais_a_charge: 'Gratuit, Payant',
+      frais_a_charge: [Frais.Gratuit, Frais.Payant],
       dispositif_programmes_nationaux: [
         DispositifProgrammeNational.FranceServices,
         DispositifProgrammeNational.ConseillersNumeriques,
         DispositifProgrammeNational.AidantsConnect
       ],
+      formations_labels: [
+        FormationLabel.CollectifRessourcesEtActeursReemploi,
+        FormationLabel.ArniaMednum,
+        FormationLabel.FabriquesDeTerritoire,
+        FormationLabel.Ordi3,
+        FormationLabel.SudLabs,
+        FormationLabel.EtapesNumeriques,
+        FormationLabel.FormeADuplex,
+        FormationLabel.MesPapiers,
+        FormationLabel.LesEclaireurs,
+        FormationLabel.FormeAMonEspaceSante
+      ],
       autres_formations_labels: ['SudLabs', 'Nièvre médiation numérique'],
       modalites_accompagnement: [
-        { label: 'En autonomie', icon: 'ri-user-fill', description: "j'ai accès à du materiel et une connexion" },
-        { label: "Avec de l'aide", icon: 'ri-group-fill', description: "je suis accompagné dans l'usage du numérique" }
+        { label: 'Seul', icon: 'ri-user-fill', description: "J'ai accès à du matériel et une connexion" },
+        { label: "Avec de l'aide", icon: 'ri-group-fill', description: "Je suis accompagné dans l'usage du numérique" },
+        { label: 'Dans un atelier', icon: 'ri-slideshow-2-fill', description: "J'apprends à utiliser le numérique" },
+        { label: 'À distance', icon: 'ri-customer-service-fill', description: 'Je suis accompagné au téléphone ou en ligne' }
       ],
       fiche_acces_libre: Url(
         'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'

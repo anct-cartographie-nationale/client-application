@@ -1,16 +1,18 @@
 <ng-container *ngIf="publicsSpecifiquementAdresses">
   <div class="d-print-none">
-    <h2 class="h5 text-muted text-uppercase mb-3">Propriété public</h2>
+    <h2 class="h5 text-muted mb-4">Publics spécifiques</h2>
     <span
-      class="badge rounded-pill text-bg-light p-2 me-2 mb-2 fs-6 overflow-hidden"
+      class="badge rounded-pill text-bg-light px-3 py-2 me-1 my-1 fw-normal"
       style="max-width: 400px; text-overflow: ellipsis"
       *ngFor="let publicSpecifiquementAdresse of publicsSpecifiquementAdresses">
       <span class="opacity-75">{{ publicSpecifiquementAdresse }}</span>
     </span>
   </div>
   <div class="d-none d-print-block">
-    <span class="badge rounded-pill text-bg-light py-1 fw-normal" *ngFor="let publicAccueilli of publicsSpecifiquementAdresses">
-      {{ publicAccueilli }}
+    <span
+      class="badge rounded-pill text-bg-light py-1 fw-normal"
+      *ngFor="let publicSpecifiquementAdresse of publicsSpecifiquementAdresses">
+      {{ publicSpecifiquementAdresse }}
     </span>
   </div>
 </ng-container>

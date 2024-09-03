@@ -9,8 +9,10 @@ import { SourcePresentation, toCourrielsWithCC } from '../../../presenters';
   templateUrl: './informations-pratiques.component.html'
 })
 export class InformationsPratiquesComponent {
+  @Input() public nom!: string;
   @Input() public adresse!: string;
-  @Input() public fraisACharge: string | undefined;
+  @Input() public itinerence?: boolean = false;
+  @Input() public fraisACharge?: string[] = [];
   @Input() public ficheAccesLibre: Url | undefined;
   @Input() public courriels: Courriel[] | undefined;
   @Input() public telephone: string | undefined;

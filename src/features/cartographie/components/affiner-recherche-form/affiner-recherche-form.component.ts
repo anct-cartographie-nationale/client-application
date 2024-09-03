@@ -59,7 +59,7 @@ export class AffinerRechercheFormComponent {
   @Input() public lieuxMediationNumeriques: LieuMediationNumeriquePresentation[] = [];
 
   public labelMap: Map<string, string> = new Map<string, string>([
-    ['CNFS', 'Conseillers Numériques'],
+    [DispositifProgrammeNational.ConseillersNumeriques, DispositifProgrammeNational.ConseillersNumeriques],
     ['QPV', 'QPV (quartier prioritaire de la ville)'],
     ['ZRR', 'ZRR (zones de revitalisation rurale)']
   ]);

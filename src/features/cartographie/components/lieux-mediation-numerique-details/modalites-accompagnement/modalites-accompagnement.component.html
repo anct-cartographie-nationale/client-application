@@ -3,12 +3,10 @@
     <span class="ri-circled bg-light fw-normal">
       <span role="img" [ngClass]="modaliteAccompagnement.icon" aria-hidden="true"></span>
     </span>
-    <div class="mt-2">
-      <b class="text-lowercase">{{ modaliteAccompagnement.label }}</b>
+    <div class="mt-2 fw-bold">
+      {{ modaliteAccompagnement.label }}
     </div>
-    <div class="mt-2">
-      <small class="text-muted fst-italic">{{ modaliteAccompagnement.description }}</small>
-    </div>
+    <small class="text-muted fst-italic">{{ modaliteAccompagnement.description }}</small>
   </div>
 </div>
 <div class="d-none d-print-block">

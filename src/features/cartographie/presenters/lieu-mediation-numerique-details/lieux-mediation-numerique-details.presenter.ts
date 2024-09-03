@@ -2,8 +2,7 @@ import { ParamMap } from '@angular/router';
 import { combineLatest, filter, Observable, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  Frais,
-  FraisACharge,
+  Itinerance,
   LieuMediationNumerique,
   Localisation,
   ModaliteAccompagnement,
@@ -415,12 +414,6 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
   ]
 ]);
 
-const fraisAChargeMap: Map<Frais, string> = new Map<Frais, string>([
-  [Frais.Gratuit, 'Gratuit'],
-  [Frais.GratuitSousCondition, 'Gratuit sous condition'],
-  [Frais.Payant, 'Payant']
-]);
-
 const modaliteAccompagnementMap: Map<ModaliteAccompagnement, ModaliteAccompagnementPresentation> = new Map<
   ModaliteAccompagnement,
   ModaliteAccompagnementPresentation
@@ -428,9 +421,9 @@ const modaliteAccompagnementMap: Map<ModaliteAccompagnement, ModaliteAccompagnem
   [
     ModaliteAccompagnement.EnAutonomie,
     {
-      label: 'En autonomie',
+      label: 'Seul',
       icon: 'ri-user-fill',
-      description: "j'ai accès à du materiel et une connexion"
+      description: "J'ai accès à du matériel et une connexion"
     }
   ],
   [
@@ -438,15 +431,23 @@ const modaliteAccompagnementMap: Map<ModaliteAccompagnement, ModaliteAccompagnem
     {
       label: "Avec de l'aide",
       icon: 'ri-group-fill',
-      description: "je suis accompagné dans l'usage du numérique"
+      description: "Je suis accompagné dans l'usage du numérique"
     }
   ],
   [
     ModaliteAccompagnement.DansUnAtelier,
     {
       label: 'Dans un atelier',
-      icon: 'ri-tools-line',
-      description: "j'apprends à utiliser le numérique"
+      icon: 'ri-slideshow-2-fill',
+      description: "J'apprends à utiliser le numérique"
+    }
+  ],
+  [
+    ModaliteAccompagnement.ADistance,
+    {
+      label: 'À distance',
+      icon: 'ri-customer-service-fill',
+      description: 'Je suis accompagné au téléphone ou en ligne'
     }
   ]
 ]);
@@ -466,9 +467,6 @@ const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisatio
   localisation === NO_LOCALISATION || lieuMediationNumerique.localisation == null
     ? undefined
     : geographicDistance(lieuMediationNumerique.localisation, localisation);
-
-const toFraisAChargeDetailsPresentation = (frais_a_charge?: FraisACharge): string | undefined =>
-  frais_a_charge?.map((frais: Frais) => fraisAChargeMap.get(frais)).join(', ');
 
 const keepDefined = (
   modaliteAccompagnement: ModaliteAccompagnementPresentation | undefined
@@ -564,10 +562,13 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           ...ifAny('contact', lieu.contact),
           ...ifAny('presentation', lieu.presentation),
           ...ifAny('date_maj', lieu.date_maj),
+          ...ifAny('itinerance', lieu.itinerance?.includes(Itinerance.Itinerant)),
+          ...ifAny('modalites_acces', lieu.modalites_acces),
           ...ifAny('publics_specifiquement_adresses', lieu.publics_specifiquement_adresses),
           ...ifAny('prise_en_charge_specifique', lieu.prise_en_charge_specifique),
-          ...ifAny('frais_a_charge', toFraisAChargeDetailsPresentation(lieu.frais_a_charge)),
+          ...ifAny('frais_a_charge', lieu.frais_a_charge),
           ...ifAny('dispositif_programmes_nationaux', lieu.dispositif_programmes_nationaux),
+          ...ifAny('formations_labels', lieu.formations_labels),
           ...ifAny('autres_formations_labels', lieu.autres_formations_labels),
           ...ifAny('modalites_accompagnement', toModalitesAccompagnementPresentation(lieu.modalites_accompagnement), notEmpty),
           ...ifAny('fiche_acces_libre', lieu.fiche_acces_libre),

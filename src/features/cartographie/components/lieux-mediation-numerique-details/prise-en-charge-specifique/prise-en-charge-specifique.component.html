@@ -1,0 +1,18 @@
+<ng-container *ngIf="prisesEnChargeSpecifiques">
+  <div class="d-print-none">
+    <h2 class="h5 text-muted mb-4">Prise en charge spécifique</h2>
+    <span
+      class="badge rounded-pill text-bg-light px-3 py-2 me-1 my-1 fw-normal"
+      style="max-width: 400px; text-overflow: ellipsis"
+      *ngFor="let priseEnChargeSpecifique of prisesEnChargeSpecifiques">
+      <span class="opacity-75">{{ priseEnChargeSpecifique }}</span>
+    </span>
+  </div>
+  <div class="d-none d-print-block">
+    <span
+      class="badge rounded-pill text-bg-light py-1 fw-normal"
+      *ngFor="let priseEnChargeSpecifique of prisesEnChargeSpecifiques">
+      {{ priseEnChargeSpecifique }}
+    </span>
+  </div>
+</ng-container>

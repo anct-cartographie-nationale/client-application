@@ -67,7 +67,13 @@
         (mouseenter)="highlight.emit(cluster.properties['id'])"
         (mouseleave)="highlight.emit()">
         <svg
-          [ngClass]="cluster.properties['labels_nationaux']?.includes($any('CNFS')) ? 'marker-cnfs' : 'marker-default'"
+          [ngClass]="
+            cluster.properties['dispositif_programmes_nationaux']?.includes(
+              $any(DispositifProgrammeNational.ConseillersNumeriques)
+            )
+              ? 'marker-cnfs'
+              : 'marker-default'
+          "
           [class.marker-status-open]="cluster.properties['status']?.label === 'Ouvert'"
           [class.marker-status-closed]="cluster.properties['status']?.label === 'Fermé'"
           [class.marker-status-unknown]="
@@ -79,7 +85,14 @@
           fill="none"
           xmlns="http://www.w3.org/2000/svg">
           <ellipse class="marker-base" cx="22.75" cy="59.5" rx="11.3" ry="4" />
-          <g *ngIf="cluster.properties['labels_nationaux']?.includes($any('CNFS')); else defaultMarker" class="marker-body">
+          <g
+            *ngIf="
+              cluster.properties['dispositif_programmes_nationaux']?.includes(
+                $any(DispositifProgrammeNational.ConseillersNumeriques)
+              );
+              else defaultMarker
+            "
+            class="marker-body">
             <path class="marker-shape" d="m23.527 54.153 13.6-23.6v-16.7l-14.4-8.3-14.4 8.3v16.7l13.6 23.6z" />
             <path class="marker-shape-out" d="m32.327 16.653-9.6-5.5-9.6 5.5v11.1l9.6 5.5 9.6-5.5v-3.2h-5.5v-4.7h5.5z" />
             <path class="marker-shape-in" d="M18.627 19.853v4.7l4.1 2.4 4.1-2.4v-4.7l-4.1-2.4z" />

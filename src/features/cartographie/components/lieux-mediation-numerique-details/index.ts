@@ -7,6 +7,7 @@ export * from './modalites-accompagnement/modalites-accompagnement.component';
 export * from './orientation-sheet-modal/orientation-sheet-modal.component';
 export * from './send-by-email-modal/send-by-email-modal.component';
 export * from './publics-specifiquement-adresses/publics-specifiquement-adresses.component';
+export * from './prise-en-charge-specifique/prise-en-charge-specifique.component';
 export * from './services/services.component';
 export * from './aidants/aidants.component';
 export * from './lieux-mediation-numerique-details.component';

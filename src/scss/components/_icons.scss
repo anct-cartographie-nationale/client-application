@@ -124,7 +124,7 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
     min-width: 1.6em;
     font-size: 1.5em;
     line-height: 1.5em;
-    vertical-align: -0.075em;
+    margin-top: 0.075em;
   }
 }
 
@@ -148,10 +148,6 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.ri-focus-3-line::before {
-  content: '\ed4c';
 }
 
 .ri-wifi-line::before {
@@ -178,16 +174,8 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\ea13';
 }
 
-.ri-arrow-right-s-fill::before {
-  content: '\ea6d';
-}
-
 .ri-check-line::before {
   content: '\eb7b';
-}
-
-.ri-close-line::before {
-  content: '\eb99';
 }
 
 .ri-checkbox-blank-circle-line::before {
@@ -208,6 +196,10 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-arrow-left-s-line::before {
   content: '\ea64';
+}
+
+.ri-notification-3-line::before {
+  content: '\ef94';
 }
 
 .ri-mouse-line::before {
@@ -262,12 +254,12 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\ea5b';
 }
 
-.ri-arrow-go-back-line::before {
-  content: '\ea58';
-}
-
 .ri-external-link-line::before {
   content: '\ecaf';
+}
+
+.ri-arrow-go-back-line::before {
+  content: '\ea58';
 }
 
 .ri-file-text-line::before {
@@ -354,8 +346,16 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\efde';
 }
 
+.ri-map-pin-4-line::before {
+  content: '\ef0e';
+}
+
 .ri-map-2-line::before {
   content: '\ef06';
+}
+
+.ri-focus-3-line::before {
+  content: '\ed4c';
 }
 
 .ri-sound-module-line::before {
@@ -374,8 +374,8 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\ea08';
 }
 
-.ri-information-line::before {
-  content: '\ee59';
+.ri-close-line::before {
+  content: '\eb99';
 }
 
 .ri-close-circle-fill::before {
@@ -384,6 +384,10 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
 
 .ri-edit-line::before {
   content: '\ec86';
+}
+
+.ri-information-line::before {
+  content: '\ee59';
 }
 
 .ri-close-circle-line::before {
@@ -526,22 +530,38 @@ $font-family-icons-lower: string.to-lower-case($font-family-icons);
   content: '\ede2';
 }
 
-.ri-book-marked-line::before {
-  content: '\ead9';
-}
-
 .ri-star-line::before {
   content: '\f18b';
 }
 
-.ri-download-2-fill::before {
-  content: '\ec53';
+.ri-download-2-line::before {
+  content: '\ec54';
+}
+
+.ri-numbers-fill::before {
+  content: '\efa9';
 }
 
 .ri-database-2-line::before {
   content: '\ec16';
 }
 
-.ri-numbers-fill::before {
-  content: '\efa9';
+.ri-book-marked-line::before {
+  content: '\ead9';
+}
+
+.ri-bus-line::before {
+  content: '\eb13';
+}
+
+.ri-shield-user-fill::before {
+  content: '\f10b';
+}
+
+.ri-globe-fill::before {
+  content: '\edd0';
+}
+
+.ri-customer-service-fill::before {
+  content: '\ec0d';
 }

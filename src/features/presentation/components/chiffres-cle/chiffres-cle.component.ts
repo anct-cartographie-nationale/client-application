@@ -5,7 +5,7 @@ import {
   TypologiePresentation,
   WithLieuxCount
 } from '@features/core/presenters';
-import { LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational, LieuMediationNumerique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,9 +19,9 @@ export class ChiffresCleComponent {
   @Input() public labels: LabelsNationauxPresentation[] = [];
 
   public labelMap: Map<string, string> = new Map<string, string>([
-    ['CNFS', 'Lieux accueillant des conseillers numérique'],
-    ['France Services', 'Points accueil numérique labellisés France services'],
-    ['Aidants Connect', 'Points accueil habilités Aidants Connect'],
+    [DispositifProgrammeNational.ConseillersNumeriques, 'Lieux accueillant des conseillers numérique'],
+    [DispositifProgrammeNational.FranceServices, 'Points accueil numérique labellisés France services'],
+    [DispositifProgrammeNational.AidantsConnect, 'Points accueil habilités Aidants Connect'],
     ['QPV', 'Lieux situés en quartier prioritaire de la ville (QPV)'],
     ['ZRR', 'Lieux situés en zone de revitalisation rurale (ZRR)']
   ]);

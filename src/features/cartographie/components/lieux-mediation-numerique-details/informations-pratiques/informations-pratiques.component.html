@@ -8,26 +8,25 @@
       </span>
     </span>
   </div>
-  <div class="col-md col-12">
-    <address class="mb-2">
+  <div class="col">
+    <div class="h4 fw-bold mb-0">{{ nom }}</div>
+    <address class="text-muted mb-0">
       {{ adresse }}
     </address>
     <div *ngIf="distance">{{ distance | distance }}</div>
-    <div class="mb-3 d-flex align-items-center" *ngIf="status">
-      <span
-        [class.text-primary]="status.label === 'Ouvert'"
-        [class.text-danger]="status.label === 'Fermé'"
-        role="img"
-        class="ri-checkbox-blank-circle-fill ri-xxs me-1"
-        aria-hidden="true"></span>
+    <div class="d-flex align-items-center" *ngIf="status">
       <span [class.text-primary]="status.label === 'Ouvert'" [class.text-danger]="status.label === 'Fermé'">
         {{ status.label }}
       </span>
       <span class="mx-1">·</span>
       <span role="img" class="small text-muted align-self-end">{{ status.limite }}</span>
     </div>
+    <span *ngIf="itinerence" class="badge rounded-pill text-bg-light px-3 py-2 mt-2 fw-normal">
+      <span class="ri-bus-line me-1"></span>
+      Itinérence
+    </span>
   </div>
-  <div class="col-md-auto col-12 text-md-end d-print-none" *ngIf="courriels || telephone">
+  <div class="col-auto text-end d-print-none" *ngIf="courriels || telephone">
     <a
       *ngIf="courriels"
       href="mailto:{{ toCourrielsWithCC(courriels) }}"
@@ -41,21 +40,25 @@
       href="tel://{{ telephone }}"
       class="text-decoration-none d-block text-muted"
       (click)="$event.stopPropagation()">
-      <span role="img" class="me-2 ri-phone-line" aria-hidden="true"></span>
+      <span role="img" class="me-2 ri-phone-line small" aria-hidden="true"></span>
       <span class="visually-hidden">Contacter par téléphone :</span>
-      {{ telephone | phone }}
+      <span class="small">{{ telephone | phone }}</span>
     </a>
   </div>
-  <div class="mt-2">
+  <div *ngIf="ficheAccesLibre || fraisACharge" class="mt-4">
     <a
       class="text-decoration-none"
       *ngIf="ficheAccesLibre"
       href="{{ ficheAccesLibre }}"
       title="Consulter les informations d'accessibilité (nouvel onglet)"
       target="_blank">
-      <span role="img" class="ri-wheelchair-line ri-xl text-primary" aria-hidden="true"></span>
-      <span class="fw-bold">Consulter les informations d'accessibilité</span>
+      <span role="img" class="ri-wheelchair-line ri text-primary" aria-hidden="true"></span>
+      Consulter les informations d'accessibilité
     </a>
   </div>
-  <div *ngIf="fraisACharge" class="text-primary mt-2">{{ fraisACharge }}</div>
+  <div *ngIf="fraisACharge" class="mt-2">
+    <span *ngFor="let frais of fraisACharge" class="badge rounded-pill text-bg-info px-3 py-2 me-1">
+      {{ frais }}
+    </span>
+  </div>
 </div>

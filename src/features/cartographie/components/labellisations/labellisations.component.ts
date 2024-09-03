@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output } from '@angular/core';
-import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational, FormationLabel } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../root';
 import { labelToDisplayMap } from '../../presenters';
 
@@ -11,7 +11,9 @@ import { labelToDisplayMap } from '../../presenters';
 export class LabellisationsComponent {
   @Input() public dispositifProgrammesNationaux: DispositifProgrammeNational[] | undefined;
 
-  @Input() public labelsAutres: string[] | undefined;
+  @Input() public formationsLabels: FormationLabel[] | undefined;
+
+  @Input() public autresFormationsLabels: string[] | undefined;
 
   @Output() public showLabel: EventEmitter<DispositifProgrammeNational> = new EventEmitter<DispositifProgrammeNational>();
 

@@ -14,7 +14,10 @@
     aria-valuemax="100"></div>
 </div>
 <small class="text-primary mx-1">
-  Vous pouvez mettre à jour ces informations en suivant les informations en bas de la fiche.
+  <ng-container *ngIf="scoreCompletion(lieuMediationNumerique) < 80; else filled">
+    Vous pouvez mettre à jour ces informations en suivant les informations en bas de la fiche.
+  </ng-container>
+  <ng-template #filled>Cette structure semble à jour avec la bonne quantité d’informations renseignées !</ng-template>
 </small>
 <app-collapse #collapseScoreCompletion [control]="collapseScoreCompletionControl" aria-labelledby="headingAccesLibre">
   <table class="table">

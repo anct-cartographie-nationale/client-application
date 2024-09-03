@@ -1,7 +1,9 @@
 import {
   Contact,
   DispositifProgrammeNational,
+  FormationLabel,
   Localisation,
+  ModaliteAcces,
   Presentation,
   PriseEnChargeSpecifique,
   PublicSpecifiquementAdresse,
@@ -35,9 +37,12 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   date_maj?: Date;
   publics_specifiquement_adresses?: PublicSpecifiquementAdresse[];
   prise_en_charge_specifique?: PriseEnChargeSpecifique[];
-  frais_a_charge?: string;
+  frais_a_charge?: string[];
+  itinerance?: boolean;
   dispositif_programmes_nationaux?: DispositifProgrammeNational[];
+  formations_labels?: FormationLabel[];
   autres_formations_labels?: string[];
+  modalites_acces?: ModaliteAcces[];
   modalites_accompagnement?: ModaliteAccompagnementPresentation[];
   fiche_acces_libre?: Url;
   localisation?: Localisation;

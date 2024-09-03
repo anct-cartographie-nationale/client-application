@@ -29,7 +29,8 @@ import {
   WebinaireComponent,
   SourceFooterComponent,
   ScoreCompletionComponent,
-  PublicsSpecifiquementAdressesComponent
+  PublicsSpecifiquementAdressesComponent,
+  PriseEnChargeSpecifiqueComponent
 } from './lieux-mediation-numerique-details';
 import { LocationBreadcrumbComponent } from './location-breadcrumb/location-breadcrumb.component';
 import { AffinerRechercheFormComponent } from './affiner-recherche-form/affiner-recherche-form.component';
@@ -53,6 +54,7 @@ export const components = [
   OrientationSheetModalComponent,
   SendByEmailModalComponent,
   PublicsSpecifiquementAdressesComponent,
+  PriseEnChargeSpecifiqueComponent,
   AidantsComponent,
   LabellisationsComponent,
   CartographieLoaderComponent,
