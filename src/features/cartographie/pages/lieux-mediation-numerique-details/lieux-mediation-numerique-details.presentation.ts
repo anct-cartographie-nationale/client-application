@@ -6,7 +6,7 @@ const formatServicesIfAny = (services?: Service[]): string => `${services ? serv
 
 const formatTelephoneIfAny = (telephone?: string): string => (telephone ? `%0D%0A${telephone}` : '');
 
-const formatCourrielIfAny = (telephone?: string): string => (telephone ? `%0D%0AC${telephone}` : '');
+const formatCourrielIfAny = (courriel?: string): string => (courriel ? `%0D%0AC${courriel}` : '');
 
 const formatContactIfAny = (contact?: Contact): string =>
   contact ? `${formatTelephoneIfAny(contact.telephone)}${formatCourrielIfAny(contact.courriels?.[0])}%0D%0A` : '';

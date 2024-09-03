@@ -25,7 +25,7 @@ export type LieuMediationNumeriquePresentation = {
   latitude: number;
   longitude: number;
   telephone?: string;
-  courriels?: string;
+  courriels?: string[];
   site_web?: string;
   prise_rdv?: string;
   typologies?: string;
@@ -70,8 +70,8 @@ export const toLieuxMediationNumeriquePresentation = (
   longitude: lieuMediationNumerique.localisation.longitude,
   ...ifAny('typologies', lieuMediationNumerique.typologies),
   ...ifAny('telephone', lieuMediationNumerique.contact?.telephone),
-  ...ifAny('courriels', lieuMediationNumerique.contact?.courriels?.[0]), // todo: multiple courriels
-  ...ifAny('site_web', lieuMediationNumerique.contact?.site_web?.[0]), // todo: multiple websites
+  ...ifAny('courriels', lieuMediationNumerique.contact?.courriels),
+  ...ifAny('site_web', lieuMediationNumerique.contact?.site_web),
   ...ifAny('prise_rdv', lieuMediationNumerique.prise_rdv),
   ...ifAny('dispositif_programmes_nationaux', lieuMediationNumerique.dispositif_programmes_nationaux),
   ...ifAny('autres_formations_labels', lieuMediationNumerique.autres_formations_labels),

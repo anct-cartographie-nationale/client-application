@@ -34,6 +34,38 @@ describe('lieux médiation numérique list item presenter', (): void => {
     ]);
   });
 
+  it('should get list item presenter with single courriel', async (): Promise<void> => {
+    const lieuxMediationNumerique: LieuMediationNumeriquePresentation[] = [
+      {
+        id: '6001a35f16b08100062e415f',
+        nom: 'Anonymal',
+        voie: '12 BIS RUE DE LECLERCQ',
+        code_postal: '51100',
+        commune: 'REIMS',
+        date_maj: new Date('2022-10-10'),
+        services: [Service.AccesInternetEtMaterielInformatique],
+        latitude: 46.2814605,
+        longitude: 4.468874,
+        courriels: ['contact@laquincaillerie.tl']
+      }
+    ];
+
+    const lieuMediationNumeriqueListItemPresenter: LieuMediationNumeriqueListItemPresentation[] =
+      toLieuxMediationNumeriqueListItemsPresentation(new Date('2023-02-09'))(lieuxMediationNumerique);
+
+    expect(lieuMediationNumeriqueListItemPresenter).toStrictEqual<LieuMediationNumeriqueListItemPresentation[]>([
+      {
+        id: '6001a35f16b08100062e415f',
+        nom: 'Anonymal',
+        adresse: '12 Bis Rue De Leclercq 51100, Reims',
+        latitude: 46.2814605,
+        longitude: 4.468874,
+        date_maj: new Date('2022-10-10'),
+        courriels: 'contact@laquincaillerie.tl'
+      }
+    ]);
+  });
+
   it('should get full list item presenter', async (): Promise<void> => {
     const lieuxMediationNumerique: LieuMediationNumeriquePresentation[] = [
       {
@@ -48,7 +80,7 @@ describe('lieux médiation numérique list item presenter', (): void => {
         latitude: 46.2814605,
         longitude: 4.468874,
         telephone: '+33180059880',
-        courriels: 'contact@laquincaillerie.tl',
+        courriels: ['contact@laquincaillerie.tl', 'accueil@laquincaillerie.tl', 'hello@laquincaillerie.tl'],
         dispositif_programmes_nationaux: [
           DispositifProgrammeNational.ConseillersNumeriques,
           DispositifProgrammeNational.PointNumeriqueCAF,
@@ -71,7 +103,7 @@ describe('lieux médiation numérique list item presenter', (): void => {
         latitude: 46.2814605,
         longitude: 4.468874,
         telephone: '+33180059880',
-        courriels: 'contact@laquincaillerie.tl',
+        courriels: 'contact@laquincaillerie.tl?cc=accueil@laquincaillerie.tl,hello@laquincaillerie.tl',
         date_maj: new Date('2022-10-10'),
         dispositif_programmes_nationaux: [
           DispositifProgrammeNational.ConseillersNumeriques,

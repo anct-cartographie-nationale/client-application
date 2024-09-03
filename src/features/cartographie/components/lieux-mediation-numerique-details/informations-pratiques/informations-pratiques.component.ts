@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Courriel, Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { OpeningState } from '../../../../core/presenters';
-import { SourcePresentation } from '../../../presenters';
+import { SourcePresentation, toCourrielsWithCC } from '../../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,5 +20,9 @@ export class InformationsPratiquesComponent {
 
   public isAidantsConnect(sources?: SourcePresentation[]) {
     return sources?.length === 1 && sources?.map((source: SourcePresentation) => source.label).includes('Aidants Connect');
+  }
+
+  public toCourrielsWithCC(courriels?: string[]) {
+    return toCourrielsWithCC(courriels);
   }
 }
