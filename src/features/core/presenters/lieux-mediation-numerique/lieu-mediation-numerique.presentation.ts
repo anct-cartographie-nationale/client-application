@@ -1,6 +1,7 @@
 import {
   DispositifProgrammeNational,
   Frais,
+  Itinerance,
   LieuMediationNumerique,
   Localisation,
   ModaliteAccompagnement,
@@ -29,6 +30,7 @@ export type LieuMediationNumeriquePresentation = {
   site_web?: string;
   prise_rdv?: string;
   typologies?: string;
+  itinerance?: Itinerance[];
   dispositif_programmes_nationaux?: DispositifProgrammeNational[];
   autres_formations_labels?: string[];
   fiche_acces_libre?: string;
@@ -73,6 +75,7 @@ export const toLieuxMediationNumeriquePresentation = (
   ...ifAny('courriels', lieuMediationNumerique.contact?.courriels),
   ...ifAny('site_web', lieuMediationNumerique.contact?.site_web),
   ...ifAny('prise_rdv', lieuMediationNumerique.prise_rdv),
+  ...ifAny('itinerance', lieuMediationNumerique.itinerance),
   ...ifAny('dispositif_programmes_nationaux', lieuMediationNumerique.dispositif_programmes_nationaux),
   ...ifAny('autres_formations_labels', lieuMediationNumerique.autres_formations_labels),
   ...ifAny('fiche_acces_libre', lieuMediationNumerique.fiche_acces_libre),

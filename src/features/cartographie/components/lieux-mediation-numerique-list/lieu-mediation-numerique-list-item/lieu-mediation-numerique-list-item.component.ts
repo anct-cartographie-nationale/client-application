@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatomoTracker } from 'ngx-matomo';
 import { DispositifProgrammeNational, Frais } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
-import { labelToDisplayMap, LieuMediationNumeriqueListItemPresentation } from '../../../presenters';
+import { labelToDisplayMap, LieuMediationNumeriqueListItemPresentation, toCourrielsWithCC } from '../../../presenters';
 import { environment } from 'projects/client-application/src/environments/environment';
 
 @Component({
@@ -42,5 +42,9 @@ export class LieuMediationNumeriqueListItemComponent {
 
   public toLabelNom(dispositifProgrammeNational: DispositifProgrammeNational): string | undefined {
     return labelToDisplayMap.get(dispositifProgrammeNational)?.nom;
+  }
+
+  public toCourrielsWithCC(courriels?: string[]) {
+    return toCourrielsWithCC(courriels);
   }
 }

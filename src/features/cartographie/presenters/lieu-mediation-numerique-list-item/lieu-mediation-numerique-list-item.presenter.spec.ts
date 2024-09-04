@@ -1,4 +1,10 @@
-import { Frais, DispositifProgrammeNational, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import {
+  Frais,
+  DispositifProgrammeNational,
+  Service,
+  Itinerances,
+  Itinerance
+} from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueListItemPresentation } from './lieu-mediation-numerique-list-item.presentation';
 import { toLieuxMediationNumeriqueListItemsPresentation } from './lieu-mediation-numerique-list-item.presenter';
 import { LieuMediationNumeriquePresentation } from '../../../core/presenters';
@@ -76,6 +82,7 @@ describe('lieux médiation numérique list item presenter', (): void => {
         complement_adresse: "Le patio du bois de l'aulne",
         commune: 'REIMS',
         date_maj: new Date('2022-10-10'),
+        itinerance: Itinerances([Itinerance.Itinerant, Itinerance.Fixe]),
         services: [Service.MaterielInformatiqueAPrixSolidaire],
         latitude: 46.2814605,
         longitude: 4.468874,
@@ -103,8 +110,9 @@ describe('lieux médiation numérique list item presenter', (): void => {
         latitude: 46.2814605,
         longitude: 4.468874,
         telephone: '+33180059880',
-        courriels: 'contact@laquincaillerie.tl?cc=accueil@laquincaillerie.tl,hello@laquincaillerie.tl',
+        courriels: 'contact@laquincaillerie.tl, accueil@laquincaillerie.tl, hello@laquincaillerie.tl',
         date_maj: new Date('2022-10-10'),
+        itinerance: true,
         dispositif_programmes_nationaux: [
           DispositifProgrammeNational.ConseillersNumeriques,
           DispositifProgrammeNational.FranceServices

@@ -59,7 +59,9 @@
             <span role="img" class="ri ri-lg ri-mail-line border-end pe-2 me-2" aria-hidden="true"></span>
             <small>
               Mail
-              <span class="fw-bold text-body text-break d-block">{{ lieuMediationNumerique.contact?.courriels?.[0] }}</span>
+              <span class="fw-bold text-body text-break d-block">
+                {{ lieuMediationNumerique.contact?.courriels?.join(', ') }}
+              </span>
             </small>
           </div>
           <div class="mt-3 d-flex align-items-center" *ngIf="lieuMediationNumerique.contact?.site_web">

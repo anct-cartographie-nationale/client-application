@@ -1,4 +1,4 @@
-import { Frais, DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { Frais, DispositifProgrammeNational, Itinerance } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriquePresentation, openingState } from '../../../core/presenters';
 import { ifAny } from '../../../core/utilities';
 import { toCourrielsWithCC } from '../courriels';
@@ -59,8 +59,9 @@ export const toLieuxMediationNumeriqueListItemsPresentation =
       longitude: lieuMediationNumerique.longitude,
       date_maj: lieuMediationNumerique.date_maj,
       ...ifAny('telephone', lieuMediationNumerique.telephone),
-      ...ifAny('courriels', toCourrielsWithCC(lieuMediationNumerique.courriels)),
+      ...ifAny('courriels', lieuMediationNumerique.courriels?.join(', ')),
       ...ifAny('site_web', lieuMediationNumerique.site_web),
+      ...ifAny('itinerance', lieuMediationNumerique.itinerance?.includes(Itinerance.Itinerant)),
       ...ifAny(
         'dispositif_programmes_nationaux',
         toListItemLabelsNationaux(lieuMediationNumerique.dispositif_programmes_nationaux)

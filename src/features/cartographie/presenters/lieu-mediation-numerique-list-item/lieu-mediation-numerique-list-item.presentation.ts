@@ -28,6 +28,7 @@ export type LieuMediationNumeriqueListItemPresentation = {
   status?: OpeningState;
   frais_a_charge?: LieuMediationNumeriqueListItemPresentationFraisACharge;
   dispositif_programmes_nationaux?: LieuMediationNumeriqueListItemPresentationDispositifProgrammesNationaux[];
+  itinerance?: boolean;
   distance?: number;
   prise_rdv?: string;
   prive?: boolean;
