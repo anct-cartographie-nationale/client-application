@@ -22,9 +22,7 @@
         </ng-template>
       </span>
     </a>
-  </div>
-  <div class="col d-flex align-items-center">
-    <span class="ri-circled-sm bg-light text-primary me-3 text-center">
+    <span *ngIf="sources?.length === 0" class="ri-circled-sm bg-light text-primary me-3 text-center">
       <span role="img" aria-hidden="true" class="ri-database-2-line"></span>
     </span>
     <div class="lh-1">

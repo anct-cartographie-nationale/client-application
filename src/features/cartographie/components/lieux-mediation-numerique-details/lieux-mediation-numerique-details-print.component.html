@@ -132,35 +132,31 @@
           <div class="small fw-bold text-muted mb-2">Caractéristiques du lieu</div>
           <app-modalites-accompagnement
             [modalitesAccompagnement]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
-          <!--          <app-public-pris-en-charge-->
-          <!--            [publicSpecifiquementAdresse]="lieuMediationNumerique.publics_specifiquement_adresses"></app-public-pris-en-charge>-->
+          <app-publics-specifiquement-adresses
+            [publicsSpecifiquementAdresses]="
+              lieuMediationNumerique.publics_specifiquement_adresses
+            "></app-publics-specifiquement-adresses>
+          <app-prise-en-charge-specifique
+            [prisesEnChargeSpecifiques]="lieuMediationNumerique.prise_en_charge_specifique"></app-prise-en-charge-specifique>
         </div>
       </ng-template>
     </div>
   </div>
   <div class="d-none d-print-block">
-    <div class="d-flex mt-3 row">
-      <div class="container-fluid mx-sm-3 mx-0 col mt-1">
-        <!--        <img height="48" *ngIf="brandConfiguration.logoAvecTexte; brandLogo" [src]="brandConfiguration.logoAvecTexte" alt="" />-->
-        <!--        <ng-template #brandLogo>-->
-        <!--          <img height="48" *ngIf="brandConfiguration.logo" [src]="brandConfiguration.logo" alt="" />-->
-        <!--        </ng-template>-->
+    <div class="d-flex col flex-column mb-2 text-start">
+      <div
+        class="d-flex col flex-column mb-2 text-start"
+        *ngIf="orientationSheetForm?.prescripteur as prescripteur; else noOrientationSheetFormFooter">
+        <small class="fw-bold">Orientation Réalisée par :</small>
+        <small>{{ prescripteur.firstname }} {{ prescripteur.lastname }}</small>
+        <small>{{ prescripteur.place }}</small>
       </div>
-      <div class="d-flex col flex-column mb-2 text-start">
-        <div
-          class="d-flex col flex-column mb-2 text-start"
-          *ngIf="orientationSheetForm?.prescripteur as prescripteur; else noOrientationSheetFormFooter">
-          <small class="fw-bold">Orientation Réalisée par :</small>
-          <small>{{ prescripteur.firstname }} {{ prescripteur.lastname }}</small>
-          <small>{{ prescripteur.place }}</small>
-        </div>
-        <ng-template #noOrientationSheetFormFooter>
-          <small>Fiche imprimée depuis</small>
-          <small class="fw-bold">Cartographie {{ brandConfiguration.name }}</small>
-          <small class="fw-bold">{{ currentUrl }}</small>
-          <small>le {{ currentDate | date : 'dd/MM/yyyy' }}</small>
-        </ng-template>
-      </div>
+      <ng-template #noOrientationSheetFormFooter>
+        <small>Fiche imprimée depuis</small>
+        <small class="fw-bold">Cartographie {{ brandConfiguration.name }}</small>
+        <small class="fw-bold">{{ currentUrl }}</small>
+        <small>le {{ currentDate | date : 'dd/MM/yyyy' }}</small>
+      </ng-template>
     </div>
   </div>
 </div>

@@ -145,13 +145,13 @@
             <label class="form-check-label">
               <input
                 class="form-check-input"
-                name="labels_autres"
+                name="autres_formations_labels"
                 type="checkbox"
                 role="switch"
                 [value]="strategieTerritoriale"
                 appCheckboxArray
-                formControlName="labels_autres"
-                (change)="setFilterToQueryString('labels_autres')" />
+                formControlName="autres_formations_labels"
+                (change)="setFilterToQueryString('autres_formations_labels')" />
               {{ labelMap.get(strategieTerritoriale) ?? strategieTerritoriale }}
             </label>
           </div>

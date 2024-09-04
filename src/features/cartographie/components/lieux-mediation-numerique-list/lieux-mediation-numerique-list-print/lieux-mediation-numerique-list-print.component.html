@@ -2,7 +2,7 @@
 <div
   class="bg-light px-4 py-3 mb-2"
   *ngIf="
-    filters?.service ||
+    filters?.service?.length ||
     filters?.publics_specifiquement_adresses?.length ||
     filters?.prise_en_charge_specifique?.length ||
     filters?.modalites_accompagnement?.length
