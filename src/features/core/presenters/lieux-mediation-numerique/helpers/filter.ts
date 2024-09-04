@@ -15,7 +15,8 @@ import {
   dispositifProgrammesNationauxFilterOperator,
   autresFormationsLabelsFilterOperator,
   ficheAccesLibreFilterOperator,
-  priseEnChargeSpecifiqueFilterOperator
+  priseEnChargeSpecifiqueFilterOperator,
+  formationsLabelsFilterOperator
 } from '../filter-operators';
 
 const filterOperatorsMap: Map<string, FilterOperator> = new Map([
@@ -28,6 +29,7 @@ const filterOperatorsMap: Map<string, FilterOperator> = new Map([
   ['prise_en_charge_specifique', priseEnChargeSpecifiqueFilterOperator],
   ['modalites_accompagnement', modalitesAccompagnementFilterOperator],
   ['dispositif_programmes_nationaux', dispositifProgrammesNationauxFilterOperator],
+  ['formations_labels', formationsLabelsFilterOperator],
   ['autres_formations_labels', autresFormationsLabelsFilterOperator],
   ['horaires_ouverture', horairesOuvertureFilterOperator]
 ]);

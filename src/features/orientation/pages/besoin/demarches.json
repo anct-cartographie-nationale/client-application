@@ -1,32 +1,14 @@
 [
   {
-    "label": "Être aidé(e) ponctuellement pour réaliser mes démarches en ligne",
-    "description": "Demande CAF, CPAM, Pôle emploi…",
-    "icon": "ri-user-line",
-    "value": "Réaliser des démarches administratives avec un accompagnement"
+    "label": "Aide aux démarches administratives",
+    "description": "Demande CAF, CPAM, France Travail, mon espace santé, Ameli, prise en main des sites et applications administratifs…",
+    "icon": "ri-lifebuoy-fill",
+    "value": "Aide aux démarches administratives"
   },
   {
-    "label": "Être formé(e) pour réaliser mes démarches en ligne",
-    "description": "Ateliers collectifs de prise en main des sites et applications…",
-    "icon": "ri-user-star-line",
-    "value": "Devenir autonome dans les démarches administratives"
-  },
-  {
-    "label": "Créer et développer son entreprise",
-    "description": "Immatriculation, modification, cessation d'entreprise…",
-    "icon": "ri-slideshow-line",
-    "value": "Créer et développer mon entreprise"
-  },
-  {
-    "label": "Etre aidé(e) dans ses démarches de santé",
-    "description": "Mon espace santé, Ameli…",
-    "icon": "ri-stethoscope-line",
-    "value": "Accompagner les démarches de santé"
-  },
-  {
-    "label": "Favoriser son insertion professionnelle",
+    "label": "Insertion professionnelle via le numérique",
     "description": "CV, recherche d’emploi ou de formation…",
-    "icon": "ri-contacts-line",
-    "value": "Favoriser mon insertion professionnelle"
+    "icon": "ri-vip-crown-fill",
+    "value": "Insertion professionnelle via le numérique"
   }
 ]

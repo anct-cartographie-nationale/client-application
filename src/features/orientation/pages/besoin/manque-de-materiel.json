@@ -1,20 +1,14 @@
 [
   {
-    "label": "Accéder à une connexion internet",
-    "description": "Wifi, clef 4G…",
-    "icon": "ri-wifi-line",
+    "label": "Accès internet et matériel informatique",
+    "description": "Ordinateur, imprimante, scanner, Wifi, clef 4G…",
+    "icon": "ri-settings-5-fill",
     "value": "Accéder à une connexion internet"
   },
   {
-    "label": "Accéder à du matériel numérique en libre service",
-    "description": "Ordinateur, imprimante, scanner…",
-    "icon": "ri-settings-5-line",
-    "value": "Accéder à du matériel"
-  },
-  {
-    "label": "Acheter du matériel numérique à tarif solidaire",
+    "label": "Acquisition de matériel informatique à prix solidaire",
     "description": "Ordinateur, smartphone, clé 4G, forfait internet…",
-    "icon": "ri-shopping-cart-line",
-    "value": "S'équiper en matériel informatique"
+    "icon": "ri-shopping-cart-fill",
+    "value": "Acquisition de matériel informatique à prix solidaire"
   }
 ]

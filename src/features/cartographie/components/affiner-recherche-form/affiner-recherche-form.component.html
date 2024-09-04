@@ -22,24 +22,10 @@
             <input
               class="form-check-input"
               type="checkbox"
-              name="service"
+              name="fiche_acces_libre"
               role="switch"
-              formControlName="service"
-              (change)="setFilterToQueryString('service')" />
-            Prise en main de Mon espace Santé
-          </label>
-        </div>
-      </li>
-      <li class="list-group-item bg-transparent">
-        <div class="form-check form-switch my-2">
-          <label class="form-check-label">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              name="accessibilite"
-              role="switch"
-              formControlName="accessibilite"
-              (change)="setFilterToQueryString('accessibilite')" />
+              formControlName="fiche_acces_libre"
+              (change)="setFilterToQueryString('fiche_acces_libre')" />
             Accessibilité renseignée
           </label>
         </div>
@@ -67,7 +53,7 @@
               type="checkbox"
               name="frais_a_charge"
               role="switch"
-              value="Gratuit : Je peux accéder gratuitement au lieu et à ses services"
+              value="Gratuit"
               appCheckboxArray
               formControlName="frais_a_charge"
               (change)="setFilterToQueryString('frais_a_charge')" />
@@ -77,9 +63,11 @@
       </li>
     </ul>
   </fieldset>
-  <ng-container *ngIf="labelNationauxFrom(lieuxMediationNumeriques) as labelNationaux">
+  <ng-container *ngIf="dispositifProgrammesNationauxFrom(lieuxMediationNumeriques) as labelNationaux">
     <fieldset *ngIf="labelNationaux.length > 1">
-      <legend class="text-uppercase p-2 pt-4 border-bottom bg-white text-muted h6 fw-bold">Labels nationaux</legend>
+      <legend class="text-uppercase p-2 pt-4 border-bottom bg-white text-muted h6 fw-bold">
+        Dispositifs et programmes nationaux
+      </legend>
       <ul class="list-group list-group-flush fw-bold">
         <li *ngFor="let labelNational of labelNationaux" class="list-group-item bg-transparent">
           <div class="form-check form-switch my-2">
@@ -94,6 +82,54 @@
                 formControlName="dispositif_programmes_nationaux"
                 (change)="setFilterToQueryString('dispositif_programmes_nationaux')" />
               {{ labelMap.get(labelNational) ?? labelNational }}
+            </label>
+          </div>
+        </li>
+      </ul>
+    </fieldset>
+  </ng-container>
+  <ng-container *ngIf="formationsLabelsFrom(lieuxMediationNumeriques) as formationLabels">
+    <fieldset *ngIf="formationLabels.length > 1">
+      <legend class="text-uppercase p-2 pt-4 border-bottom bg-white text-muted h6 fw-bold">
+        Labels, certifications et formations
+      </legend>
+      <ul class="list-group list-group-flush fw-bold">
+        <li *ngFor="let formationLabel of formationLabels" class="list-group-item bg-transparent">
+          <div class="form-check form-switch my-2">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                name="formations_labels"
+                type="checkbox"
+                role="switch"
+                [value]="formationLabel"
+                appCheckboxArray
+                formControlName="formations_labels"
+                (change)="setFilterToQueryString('formations_labels')" />
+              {{ labelMap.get(formationLabel) ?? formationLabel }}
+            </label>
+          </div>
+        </li>
+      </ul>
+    </fieldset>
+  </ng-container>
+  <ng-container *ngIf="servicesFrom(lieuxMediationNumeriques) as services">
+    <fieldset *ngIf="services.length > 1">
+      <legend class="text-uppercase p-2 pt-4 border-bottom bg-white text-muted h6 fw-bold">Services</legend>
+      <ul class="list-group list-group-flush fw-bold">
+        <li *ngFor="let service of services" class="list-group-item bg-transparent">
+          <div class="form-check form-switch my-2">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                name="service"
+                type="checkbox"
+                role="switch"
+                [value]="service"
+                appCheckboxArray
+                formControlName="service"
+                (change)="setFilterToQueryString('service')" />
+              {{ labelMap.get(service) ?? service }}
             </label>
           </div>
         </li>

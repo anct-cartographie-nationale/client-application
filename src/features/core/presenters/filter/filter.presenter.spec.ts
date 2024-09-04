@@ -30,7 +30,7 @@ describe('démarrer page prensenter', (): void => {
 
   it('should indicates that there is an active filter when service is defined', (): void => {
     const filterFormPresentation: FilterFormPresentation = {
-      service: Service.MaitriseDesOutilsNumeriquesDuQuotidien
+      service: [Service.MaitriseDesOutilsNumeriquesDuQuotidien]
     };
 
     const activeFilter: boolean = hasActiveFilter(filterFormPresentation);

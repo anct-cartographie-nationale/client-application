@@ -19,7 +19,9 @@ import {
   PrisesEnChargeSpecifiques,
   Service,
   Services,
-  Url
+  Url,
+  FormationsLabels,
+  FormationLabel
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
@@ -233,7 +235,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       }
     ];
 
-    const filter: FilterPresentation = { service: Service.InsertionProfessionnelleViaLeNumerique };
+    const filter: FilterPresentation = { service: [Service.InsertionProfessionnelleViaLeNumerique] };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -1460,6 +1462,141 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         dispositif_programmes_nationaux: [DispositifProgrammeNational.FranceServices],
         latitude: 46.56,
         longitude: 3.19
+      }
+    ]);
+  });
+
+  it('should not filter lieux mediation numerique on formations_labels property when filter is empty', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        formations_labels: FormationsLabels([FormationLabel.EtapesNumeriques]),
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = { formations_labels: FormationsLabels([]) };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: 'structure-1',
+        nom: 'Anonymal',
+        code_postal: '51100',
+        commune: 'Reims',
+        voie: '12 BIS RUE DE LECLERCQ',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        latitude: 46.2814605,
+        longitude: 4.468874
+      },
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        formations_labels: FormationsLabels([FormationLabel.EtapesNumeriques]),
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on formations_labels property containing Etapes numeriques value', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        formations_labels: FormationsLabels([FormationLabel.EtapesNumeriques]),
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = {
+      formations_labels: FormationsLabels([FormationLabel.EtapesNumeriques])
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        formations_labels: [FormationLabel.EtapesNumeriques],
+        latitude: 45.7689958,
+        longitude: 4.8343466
       }
     ]);
   });

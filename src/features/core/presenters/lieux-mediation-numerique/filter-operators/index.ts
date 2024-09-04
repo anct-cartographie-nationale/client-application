@@ -1,4 +1,5 @@
 export * from './fiche-acces-libre.filter-operator';
+export * from './formations-labels.filter-operator';
 export * from './frais-a-charge-filter.operator';
 export * from './distance.filter-operator';
 export * from './horaires-ouverture.filter-operator';

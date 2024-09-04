@@ -6,7 +6,8 @@ import {
   ModaliteAccompagnement,
   PublicSpecifiquementAdresse,
   PriseEnChargeSpecifique,
-  Service
+  Service,
+  FormationLabel
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriquePresentation } from '../lieux-mediation-numerique';
 import { NO_LOCALISATION } from '../../models';
@@ -29,7 +30,7 @@ export type OpeningHours = {
 };
 
 export type FilterPresentation = {
-  service?: Service;
+  service?: Service[];
   address?: string;
   distance?: number;
   fiche_acces_libre?: boolean;
@@ -39,12 +40,13 @@ export type FilterPresentation = {
   prise_en_charge_specifique?: PriseEnChargeSpecifique[];
   modalites_accompagnement?: ModaliteAccompagnement[];
   dispositif_programmes_nationaux?: DispositifProgrammeNational[];
+  formations_labels?: FormationLabel[];
   autres_formations_labels?: string[];
   horaires_ouverture?: OpeningHours[];
 };
 
 export type FilterQueryParamsPresentation = {
-  service?: Service;
+  service?: Service[];
   address?: string;
   address_id?: string;
   latitude?: `${number}`;
@@ -57,6 +59,7 @@ export type FilterQueryParamsPresentation = {
   prise_en_charge_specifique?: string;
   modalites_accompagnement?: string;
   dispositif_programmes_nationaux?: string;
+  formations_labels?: string;
   autres_formations_labels?: string;
   horaires_ouverture?: string;
 };
@@ -96,7 +99,7 @@ export const hasActiveFilter = (filterFormPresentation: FilterFormPresentation):
   fieldsFrom(filterFormPresentation).some(isFilled);
 
 export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParamsPresentation): FilterFormPresentation => ({
-  service: queryParams?.service,
+  service: toArray(queryParams?.service),
   address: queryParams?.address,
   addressId: queryParams?.address_id,
   latitude: queryParams?.latitude ? parseFloat(queryParams.latitude) : undefined,
@@ -109,6 +112,7 @@ export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParam
   prise_en_charge_specifique: toArray(queryParams?.prise_en_charge_specifique),
   modalites_accompagnement: toArray(queryParams?.modalites_accompagnement),
   dispositif_programmes_nationaux: toArray(queryParams?.dispositif_programmes_nationaux),
+  formations_labels: toArray(queryParams?.formations_labels),
   autres_formations_labels: toArray(queryParams?.autres_formations_labels),
   horaires_ouverture: queryParams?.horaires_ouverture ? JSON.parse(queryParams?.horaires_ouverture) : undefined
 });
