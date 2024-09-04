@@ -1,0 +1,30 @@
+[
+  {
+    "label": "Illettrisme",
+    "value": "Illettrisme"
+  },
+  {
+    "label": "Langues étrangères (anglais)",
+    "value": "Langues étrangères (anglais)"
+  },
+  {
+    "label": "Langues étrangères (autres)",
+    "value": "Langues étrangères (autres)"
+  },
+  {
+    "label": "Handicaps moteurs",
+    "value": "Handicaps moteurs"
+  },
+  {
+    "label": "Handicaps mentaux",
+    "value": "Handicaps mentaux"
+  },
+  {
+    "label": "Déficience visuelle",
+    "value": "Déficience visuelle"
+  },
+  {
+    "label": "Surdité",
+    "value": "Surdité"
+  }
+]

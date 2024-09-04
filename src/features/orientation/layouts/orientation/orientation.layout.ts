@@ -67,7 +67,7 @@ export class OrientationLayout {
   public lastFilterAdded: { key: string; value: string } | null = null;
 
   public addLastFilter(value: string, key: string, event?: Event) {
-    const shouldUpdate: boolean = key === 'publics_accueillis' ? (event?.target as HTMLInputElement).checked : true;
+    const shouldUpdate: boolean = key === 'prise_en_charge_specifique' ? (event?.target as HTMLInputElement).checked : true;
     if (shouldUpdate) this.lastFilterAdded = { key, value };
   }
 

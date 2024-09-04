@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational, PriseEnChargeSpecifique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FormGroup } from '@angular/forms';
 import { FilterFormPresentation } from '../../../core/presenters';
-import publicSpecifiqueAcceuilli from '../../pages/accessibilite/public-specifique-accueilli.json';
+import prisesEnChargeSpecifiques from '../../pages/accessibilite/prise-en-charge-specifique.json';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,7 +36,7 @@ export class SelectedFiltersComponent {
 
   public getLabelFromValue(value: string): string {
     return (
-      [...publicSpecifiqueAcceuilli].find((field: { value: string; label: string }) => {
+      [...prisesEnChargeSpecifiques].find((field: { value: string; label: string }) => {
         return field.value === value;
       })?.label ?? ''
     );
