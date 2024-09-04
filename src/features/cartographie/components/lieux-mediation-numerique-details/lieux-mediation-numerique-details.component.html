@@ -130,9 +130,6 @@
     <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.services">
       <app-services [services]="lieuMediationNumerique.services"></app-services>
     </li>
-    <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.fiche_acces_libre === undefined">
-      <app-accessibilite [accessibilite]="lieuMediationNumerique.fiche_acces_libre"></app-accessibilite>
-    </li>
     <li class="list-group-item" *ngIf="lieuMediationNumerique.aidants">
       <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>
     </li>
@@ -170,6 +167,9 @@
       <div class="p-3 rounded-3" style="background-color: #c0c0ff">
         <app-score-completion [lieuMediationNumerique]="lieuMediationNumerique"></app-score-completion>
       </div>
+    </li>
+    <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.fiche_acces_libre === undefined">
+      <app-accessibilite></app-accessibilite>
     </li>
     <li class="list-group-item">
       <div class="d-flex">
