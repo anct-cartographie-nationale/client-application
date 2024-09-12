@@ -1,41 +1,39 @@
 <div class="d-print-none py-4 px-sm-4 px-2">
   <div class="row g-2">
-    <a
-      class="text-decoration-none link-dark link-lieu stretched-link col"
-      [routerLink]="[lieuMediationNumerique.id, 'details']"
-      (click)="showDetails(lieuMediationNumerique)"
-      [relativeTo]="route.parent"
-      queryParamsHandling="preserve"
-      (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
-      (mouseout)="disableHover.emit()">
-      <div class="mb-4 text-primary d-flex align-items-center" *ngIf="lieuMediationNumerique.prive">
-        <span role="img" class="ri-close-circle-line ri-xl me-2" aria-hidden="true"></span>
-        <span class="small">cette structure n'accueille pas de public !</span>
-      </div>
-      <div class="d-print-none">
-        <h2 class="h5 mb-0 text-first-letter-uppercase fw-bold pe-1">
-          {{ lieuMediationNumerique.nom }}
-        </h2>
-        <div class="text-muted">{{ lieuMediationNumerique.adresse }}</div>
-        <div class="mt-1" *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</div>
-        <div *ngIf="lieuMediationNumerique.status" class="text-muted d-inline-flex flex-wrap align-items-center">
-          <span
-            role="img"
-            class="ri-checkbox-blank-circle-fill ri-xxs me-1"
-            [class.text-primary]="lieuMediationNumerique.status.label === 'Ouvert'"
-            aria-hidden="true"></span>
-          <span [class.text-primary]="lieuMediationNumerique.status.label === 'Ouvert'">
-            {{ lieuMediationNumerique.status.label }}
-          </span>
-          <span class="mx-1">·</span>
-          <span role="img" class="small align-self-end">{{ lieuMediationNumerique.status.limite }}</span>
+    <div class="col">
+      <a
+        class="text-decoration-none link-dark link-lieu stretched-link"
+        [routerLink]="[lieuMediationNumerique.id, 'details']"
+        (click)="showDetails(lieuMediationNumerique)"
+        [relativeTo]="route.parent"
+        queryParamsHandling="preserve"
+        (mouseover)="enableHover.emit(lieuMediationNumerique.id)"
+        (mouseout)="disableHover.emit()">
+        <div class="mb-4 text-primary d-flex align-items-center" *ngIf="lieuMediationNumerique.prive">
+          <span role="img" class="ri-close-circle-line ri-xl me-2" aria-hidden="true"></span>
+          <span class="small">cette structure n'accueille pas de public !</span>
         </div>
+        <div class="d-print-none">
+          <h2 class="h5 mb-0 text-first-letter-uppercase fw-bold pe-1">
+            {{ lieuMediationNumerique.nom }}
+          </h2>
+        </div>
+      </a>
+      <div class="text-muted">{{ lieuMediationNumerique.adresse }}</div>
+      <div class="mt-1" *ngIf="lieuMediationNumerique.distance">{{ lieuMediationNumerique.distance | distance }}</div>
+      <div *ngIf="lieuMediationNumerique.status" class="text-muted d-inline-flex flex-wrap align-items-center">
+        <span
+          role="img"
+          class="ri-checkbox-blank-circle-fill ri-xxs me-1"
+          [class.text-primary]="lieuMediationNumerique.status.label === 'Ouvert'"
+          aria-hidden="true"></span>
+        <span [class.text-primary]="lieuMediationNumerique.status.label === 'Ouvert'">
+          {{ lieuMediationNumerique.status.label }}
+        </span>
+        <span class="mx-1">·</span>
+        <span role="img" class="small align-self-end">{{ lieuMediationNumerique.status.limite }}</span>
       </div>
-      <div *ngIf="lieuMediationNumerique.itinerance" class="badge rounded-pill text-bg-light px-3 py-2 mt-2">
-        <span class="ri-bus-line me-1" role="img" aria-hidden="true"></span>
-        Itinérance
-      </div>
-    </a>
+    </div>
     <div
       class="col-auto text-end z-index-over"
       *ngIf="
@@ -63,6 +61,13 @@
         <span role="img" class="ri-calendar-check-line ms-1" aria-hidden="true"></span>
       </div>
     </div>
+  </div>
+  <div
+    *ngIf="lieuMediationNumerique.itinerance"
+    class="badge rounded-pill text-bg-light px-3 py-2 mt-2"
+    title="Ce lieu se déplace d'un endroit à l'autre pour offrir ses services d'inclusion numérique en suivant un planning précis">
+    <span class="ri-bus-line me-1" role="img" aria-hidden="true"></span>
+    Itinérance
   </div>
   <div class="row g-2 mt-1" *ngIf="lieuMediationNumerique.dispositif_programmes_nationaux as dispositifProgrammesNationaux">
     <div class="col-auto z-index-over" *ngFor="let dispositifProgrammeNational of dispositifProgrammesNationaux">
