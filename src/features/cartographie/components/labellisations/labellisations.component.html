@@ -12,15 +12,13 @@
 </ng-container>
 <ng-container *ngIf="formationsLabels">
   <h2 class="h5 text-muted mt-3 mb-4">Labels, certifications et formations</h2>
-  <span class="badge rounded-pill text-bg-light px-3 py-2 me-1 my-1 fw-normal" *ngFor="let formationLabel of formationsLabels">
+  <span class="badge rounded-pill text-bg-light px-3 py-2 me-1 my-1" *ngFor="let formationLabel of formationsLabels">
     {{ formationLabel }}
   </span>
 </ng-container>
 <ng-container *ngIf="autresFormationsLabels">
   <h2 class="h5 text-muted mt-3 mb-4">Autres labels, certifications ou formations</h2>
-  <span
-    class="badge rounded-pill text-bg-light px-3 py-2 me-1 my-1 fw-normal"
-    *ngFor="let autreFormationLabel of autresFormationsLabels">
+  <span class="badge rounded-pill text-bg-light px-3 py-2 me-1 my-1" *ngFor="let autreFormationLabel of autresFormationsLabels">
     {{ autreFormationLabel }}
   </span>
 </ng-container>
