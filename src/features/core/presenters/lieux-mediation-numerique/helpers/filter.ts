@@ -21,7 +21,7 @@ import {
 
 const filterOperatorsMap: Map<string, FilterOperator> = new Map([
   ['distance', distanceFilterOperator],
-  ['service', serviceFilterOperator],
+  ['services', serviceFilterOperator],
   ['fiche_acces_libre', ficheAccesLibreFilterOperator],
   ['prise_rdv', priseRdvFilterOperator],
   ['frais_a_charge', fraisAChargeFilterOperator],

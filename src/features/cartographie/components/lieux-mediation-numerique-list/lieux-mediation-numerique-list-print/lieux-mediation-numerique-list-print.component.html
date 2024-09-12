@@ -2,7 +2,7 @@
 <div
   class="bg-light px-4 py-3 mb-2"
   *ngIf="
-    filters?.service?.length ||
+    filters?.services?.length ||
     filters?.publics_specifiquement_adresses?.length ||
     filters?.prise_en_charge_specifique?.length ||
     filters?.modalites_accompagnement?.length
@@ -16,8 +16,8 @@
     <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.distance">
       0-{{ (filters?.distance ?? 0) / 1000 }}km
     </span>
-    <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.service">
-      {{ filters?.service }}
+    <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngFor="let service of filters?.services ?? []">
+      {{ filters?.services }}
     </span>
     <span
       class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"

@@ -12,4 +12,4 @@ const arePresentIn =
 export const serviceFilterOperator: FilterOperator = (
   lieuMediationNumerique: LieuMediationNumeriquePresentation,
   filter: FilterPresentation
-): boolean => (shouldApply(filter.service) ? filter.service.every(arePresentIn(lieuMediationNumerique)) ?? false : true);
+): boolean => (shouldApply(filter.services) ? filter.services.some(arePresentIn(lieuMediationNumerique)) ?? false : true);

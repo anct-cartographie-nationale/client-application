@@ -220,12 +220,16 @@
         <div
           class="mb-5"
           *ngIf="
-            filters?.service || filters?.publics_specifiquement_adresses?.length || filters?.modalites_accompagnement?.length
+            filters?.services?.length ||
+            filters?.publics_specifiquement_adresses?.length ||
+            filters?.modalites_accompagnement?.length
           ">
           <b>Objet du rendez-vous :</b>
           <div>
-            <span class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start" *ngIf="filters?.service">
-              {{ filters?.service }}
+            <span
+              class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start"
+              *ngFor="let service of filters?.services ?? []">
+              {{ service }}
             </span>
             <span
               class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start"

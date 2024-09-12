@@ -73,7 +73,7 @@ export class OrientationLayout {
 
   public deleteLastFilter() {
     if (this.lastFilterAdded) {
-      if (this.lastFilterAdded.key === 'services') this.filterForm.get('service')?.reset();
+      if (this.lastFilterAdded.key === 'services') this.filterForm.get('services')?.reset();
       else if (this.lastFilterAdded.key === 'horaires_ouverture') this.filterForm.get(this.lastFilterAdded.key)?.reset();
       else if (['address', 'latitude', 'distance'].includes(this.lastFilterAdded.key))
         ['address', 'distance', 'latitude', 'longitude'].forEach((key) => this.filterForm.get(key)?.reset());

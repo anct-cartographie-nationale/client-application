@@ -10,7 +10,7 @@ import { FilterFormPresentation, hasActiveFilter } from './filter.presenter';
 describe('démarrer page prensenter', (): void => {
   it('should indicates that there is no active filter', (): void => {
     const filterFormPresentation: FilterFormPresentation = {
-      service: undefined,
+      services: [],
       address: undefined,
       latitude: undefined,
       longitude: undefined,
@@ -30,7 +30,7 @@ describe('démarrer page prensenter', (): void => {
 
   it('should indicates that there is an active filter when service is defined', (): void => {
     const filterFormPresentation: FilterFormPresentation = {
-      service: [Service.MaitriseDesOutilsNumeriquesDuQuotidien]
+      services: [Service.MaitriseDesOutilsNumeriquesDuQuotidien]
     };
 
     const activeFilter: boolean = hasActiveFilter(filterFormPresentation);

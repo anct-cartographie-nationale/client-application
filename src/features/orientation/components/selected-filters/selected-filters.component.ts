@@ -14,7 +14,7 @@ export class SelectedFiltersComponent {
   @Input() public filterForm!: FormGroup;
 
   public resetForm(value: unknown, key: string): void {
-    if (key === 'service') this.filterForm.get('service')?.reset();
+    if (key === 'services') this.filterForm.get('services')?.reset();
     else if (key === 'address' || key === 'distance') {
       this.filterForm.get('address')?.reset();
       this.filterForm.get('distance')?.reset();

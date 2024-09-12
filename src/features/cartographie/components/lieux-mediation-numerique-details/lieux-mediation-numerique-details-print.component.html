@@ -83,15 +83,15 @@
         </div>
         <div
           *ngIf="
-            filters?.service ||
+            filters?.services?.length ||
             filters?.publics_specifiquement_adresses?.length ||
             filters?.prise_en_charge_specifique?.length ||
             filters?.modalites_accompagnement?.length
           ">
           <span class="fw-bold text-muted">Objet du rendez-vous</span>
           <div>
-            <span class="badge rounded-pill text-bg-light py-1 fw-normal" *ngIf="filters?.service">
-              {{ filters?.service }}
+            <span class="badge rounded-pill text-bg-light py-1 fw-normal" *ngFor="let service of filters?.services ?? []">
+              {{ service }}
             </span>
             <span
               class="badge rounded-pill text-bg-light py-1 fw-normal"

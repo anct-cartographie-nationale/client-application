@@ -1,11 +1,11 @@
 <ng-container *ngIf="filterPresentation as filter">
   <button
-    *ngIf="filter.service"
+    *ngFor="let service of filter.services"
     class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
-    (click)="resetForm(filter.service, 'service')">
+    (click)="resetForm(service, 'services')">
     <span class="visually-hidden">Retirer</span>
     <span class="ri-close-line" role="img" aria-hidden="true"></span>
-    {{ filter.service }}
+    {{ service }}
   </button>
   <button
     *ngIf="filter.address"

@@ -24,7 +24,7 @@ type AffinerRechercheFields = {
   dispositif_programmes_nationaux: FormControl<DispositifProgrammeNational[]>;
   formations_labels: FormControl<FormationLabel[]>;
   autres_formations_labels: FormControl<string[]>;
-  service: FormControl<Service[]>;
+  services: FormControl<Service[]>;
 };
 
 type AffinerRechercheValues = {
@@ -35,7 +35,7 @@ type AffinerRechercheValues = {
   dispositif_programmes_nationaux: DispositifProgrammeNational[];
   formations_labels: FormationLabel[];
   autres_formations_labels: string[];
-  service: Service[];
+  services: Service[];
 };
 
 const AFFINER_RECHERCHE_FORM = (
@@ -59,7 +59,7 @@ const AFFINER_RECHERCHE_FORM = (
     autres_formations_labels: new FormControl<AffinerRechercheValues['autres_formations_labels']>(
       filterFormPresentation.autres_formations_labels ?? []
     ),
-    service: new FormControl<AffinerRechercheValues['service']>(filterFormPresentation.service ?? [])
+    services: new FormControl<AffinerRechercheValues['services']>(filterFormPresentation.services ?? [])
   });
 
 @Component({

@@ -30,7 +30,7 @@ export type OpeningHours = {
 };
 
 export type FilterPresentation = {
-  service?: Service[];
+  services?: Service[];
   address?: string;
   distance?: number;
   fiche_acces_libre?: boolean;
@@ -46,7 +46,7 @@ export type FilterPresentation = {
 };
 
 export type FilterQueryParamsPresentation = {
-  service?: Service[];
+  services?: Service[];
   address?: string;
   address_id?: string;
   latitude?: `${number}`;
@@ -76,7 +76,7 @@ const wrapInArray = <T>(params: string | string[]): T[] => (Array.isArray(params
 const toArray = <T>(params?: string | string[]): T[] => (!params ? [] : wrapInArray(params));
 
 const fieldsFrom = (filterFormPresentation: FilterFormPresentation): FilterFormPresentation[keyof FilterFormPresentation][] => [
-  filterFormPresentation.service,
+  filterFormPresentation.services,
   filterFormPresentation.address,
   filterFormPresentation.latitude,
   filterFormPresentation.longitude,
@@ -99,7 +99,7 @@ export const hasActiveFilter = (filterFormPresentation: FilterFormPresentation):
   fieldsFrom(filterFormPresentation).some(isFilled);
 
 export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParamsPresentation): FilterFormPresentation => ({
-  service: toArray(queryParams?.service),
+  services: toArray(queryParams?.services),
   address: queryParams?.address,
   addressId: queryParams?.address_id,
   latitude: queryParams?.latitude ? parseFloat(queryParams.latitude) : undefined,

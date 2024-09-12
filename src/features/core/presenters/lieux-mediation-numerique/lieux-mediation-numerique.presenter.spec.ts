@@ -235,7 +235,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
       }
     ];
 
-    const filter: FilterPresentation = { service: [Service.InsertionProfessionnelleViaLeNumerique] };
+    const filter: FilterPresentation = { services: [Service.InsertionProfessionnelleViaLeNumerique] };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)

@@ -122,13 +122,13 @@
             <label class="form-check-label">
               <input
                 class="form-check-input"
-                name="service"
+                name="services"
                 type="checkbox"
                 role="switch"
                 [value]="service"
                 appCheckboxArray
-                formControlName="service"
-                (change)="setFilterToQueryString('service')" />
+                formControlName="services"
+                (change)="setFilterToQueryString('services')" />
               {{ labelMap.get(service) ?? service }}
             </label>
           </div>
