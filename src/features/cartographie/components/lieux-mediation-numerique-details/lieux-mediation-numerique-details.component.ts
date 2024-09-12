@@ -52,7 +52,7 @@ export class LieuxMediationNumeriqueDetailsComponent {
   public constructor(@Optional() private readonly _matomoTracker?: MatomoTracker) {}
 
   onScrollToSource = (): void => {
-    this.sourceRef.nativeElement.scrollIntoView({ behavior: 'instant', block: 'start', inline: 'start' });
+    this.sourceRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' });
   };
 
   public onPrintFromBandeau(): void {
