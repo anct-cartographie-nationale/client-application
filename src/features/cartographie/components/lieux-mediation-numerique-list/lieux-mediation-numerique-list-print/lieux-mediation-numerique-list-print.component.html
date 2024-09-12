@@ -1,7 +1,12 @@
 <h2 class="h3 mb-3 pb-1 border-bottom border-dark border-2">Liste des lieux</h2>
 <div
   class="bg-light px-4 py-3 mb-2"
-  *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
+  *ngIf="
+    filters?.services?.length ||
+    filters?.publics_specifiquement_adresses?.length ||
+    filters?.prise_en_charge_specifique?.length ||
+    filters?.modalites_accompagnement?.length
+  ">
   <small class="fw-bold text-muted">Détails de la recherche</small>
   <div>Filtres activés</div>
   <div>
@@ -11,13 +16,18 @@
     <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.distance">
       0-{{ (filters?.distance ?? 0) / 1000 }}km
     </span>
-    <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngIf="filters?.service">
-      {{ filters?.service }}
+    <span class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal" *ngFor="let service of filters?.services ?? []">
+      {{ filters?.services }}
     </span>
     <span
       class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"
-      *ngFor="let public_accueilli of filters?.publics_accueillis ?? []">
-      {{ public_accueilli }}
+      *ngFor="let publicsSpecifiquementAdresses of filters?.publics_specifiquement_adresses ?? []">
+      {{ publicsSpecifiquementAdresses }}
+    </span>
+    <span
+      class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"
+      *ngFor="let priseEnChargeSpecifique of filters?.prise_en_charge_specifique ?? []">
+      {{ priseEnChargeSpecifique }}
     </span>
     <span
       class="badge rounded-pill bg-muted-dark py-1 me-1 fw-normal"

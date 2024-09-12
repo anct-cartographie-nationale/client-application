@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Optional, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatomoTracker } from 'ngx-matomo';
-import { ConditionAcces, LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational, Frais } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
-import { labelToDisplayMap, LieuMediationNumeriqueListItemPresentation } from '../../../presenters';
+import { labelToDisplayMap, LieuMediationNumeriqueListItemPresentation, toCourrielsWithCC } from '../../../presenters';
 import { environment } from 'projects/client-application/src/environments/environment';
 
 @Component({
@@ -14,7 +14,7 @@ import { environment } from 'projects/client-application/src/environments/enviro
 export class LieuMediationNumeriqueListItemComponent {
   @Input() public lieuMediationNumerique!: LieuMediationNumeriqueListItemPresentation;
 
-  @Output() public showLabel: EventEmitter<LabelNational> = new EventEmitter<LabelNational>();
+  @Output() public showLabel: EventEmitter<DispositifProgrammeNational> = new EventEmitter<DispositifProgrammeNational>();
 
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
@@ -22,7 +22,7 @@ export class LieuMediationNumeriqueListItemComponent {
 
   @Output() public disableHover: EventEmitter<void> = new EventEmitter<void>();
 
-  public readonly payant: ConditionAcces.Payant = ConditionAcces.Payant;
+  public readonly payant: Frais.Payant = Frais.Payant;
 
   public constructor(
     @Inject(ASSETS_TOKEN) public assetsConfiguration: AssetsConfiguration,
@@ -40,7 +40,11 @@ export class LieuMediationNumeriqueListItemComponent {
     }
   }
 
-  public toLabelNom(label: LabelNational): string | undefined {
-    return labelToDisplayMap.get(label)?.nom;
+  public toLabelNom(dispositifProgrammeNational: DispositifProgrammeNational): string | undefined {
+    return labelToDisplayMap.get(dispositifProgrammeNational)?.nom;
+  }
+
+  public toCourrielsWithCC(courriels?: string[]) {
+    return toCourrielsWithCC(courriels);
   }
 }

@@ -5,28 +5,32 @@ import {
 } from '../lieu-mediation-numerique.presentation';
 import { FilterOperator, FilterPresentation } from '../../filter';
 import {
-  accessibiliteFilterOperator,
-  conditionsAccesFilterOperator,
+  fraisAChargeFilterOperator,
   horairesOuvertureFilterOperator,
   distanceFilterOperator,
   modalitesAccompagnementFilterOperator,
-  publicsAccueillisFilterOperator,
+  publicsSpecifiquementAdressesFilterOperator,
   serviceFilterOperator,
   priseRdvFilterOperator,
-  labelsNationauxFilterOperator,
-  labelsAutresFilterOperator
+  dispositifProgrammesNationauxFilterOperator,
+  autresFormationsLabelsFilterOperator,
+  ficheAccesLibreFilterOperator,
+  priseEnChargeSpecifiqueFilterOperator,
+  formationsLabelsFilterOperator
 } from '../filter-operators';
 
 const filterOperatorsMap: Map<string, FilterOperator> = new Map([
   ['distance', distanceFilterOperator],
-  ['service', serviceFilterOperator],
-  ['accessibilite', accessibiliteFilterOperator],
+  ['services', serviceFilterOperator],
+  ['fiche_acces_libre', ficheAccesLibreFilterOperator],
   ['prise_rdv', priseRdvFilterOperator],
-  ['conditions_acces', conditionsAccesFilterOperator],
-  ['publics_accueillis', publicsAccueillisFilterOperator],
+  ['frais_a_charge', fraisAChargeFilterOperator],
+  ['publics_specifiquement_adresses', publicsSpecifiquementAdressesFilterOperator],
+  ['prise_en_charge_specifique', priseEnChargeSpecifiqueFilterOperator],
   ['modalites_accompagnement', modalitesAccompagnementFilterOperator],
-  ['labels_nationaux', labelsNationauxFilterOperator],
-  ['labels_autres', labelsAutresFilterOperator],
+  ['dispositif_programmes_nationaux', dispositifProgrammesNationauxFilterOperator],
+  ['formations_labels', formationsLabelsFilterOperator],
+  ['autres_formations_labels', autresFormationsLabelsFilterOperator],
   ['horaires_ouverture', horairesOuvertureFilterOperator]
 ]);
 

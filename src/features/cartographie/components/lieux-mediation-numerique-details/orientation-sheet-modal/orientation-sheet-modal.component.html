@@ -190,20 +190,20 @@
                   properties: {
                     id: id,
                     nom: nom,
-                    labels_nationaux: labels_nationaux
+                    dispositif_programmes_nationaux: dispositifProgrammesNationaux
                   }
                 }
               ]"></app-lieu-mediation-numerique-markers>
           </mgl-map>
         </div>
-        <div *ngIf="telephone || courriel || siteWeb?.length" class="p-3 text-muted-dark">
+        <div *ngIf="telephone || courriels || siteWeb?.length" class="p-3 text-muted-dark">
           <div *ngIf="telephone">
             <span role="img" class="ri-phone-line" aria-hidden="true"></span>
             {{ telephone }}
           </div>
-          <div *ngIf="courriel">
+          <div *ngIf="courriels">
             <span role="img" class="ri-mail-line" aria-hidden="true"></span>
-            <span class="text-break">{{ courriel }}</span>
+            <span class="text-break">{{ courriels }}</span>
           </div>
           <div *ngIf="siteWeb">
             <span role="img" class="ri-external-link-line" aria-hidden="true"></span>
@@ -219,16 +219,27 @@
         </div>
         <div
           class="mb-5"
-          *ngIf="filters?.service || filters?.publics_accueillis?.length || filters?.modalites_accompagnement?.length">
+          *ngIf="
+            filters?.services?.length ||
+            filters?.publics_specifiquement_adresses?.length ||
+            filters?.modalites_accompagnement?.length
+          ">
           <b>Objet du rendez-vous :</b>
           <div>
-            <span class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start" *ngIf="filters?.service">
-              {{ filters?.service }}
+            <span
+              class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start"
+              *ngFor="let service of filters?.services ?? []">
+              {{ service }}
             </span>
             <span
               class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start"
-              *ngFor="let public_accueilli of filters?.publics_accueillis ?? []">
-              {{ public_accueilli }}
+              *ngFor="let publicSpecifiquementAdresse of filters?.publics_specifiquement_adresses ?? []">
+              {{ publicSpecifiquementAdresse }}
+            </span>
+            <span
+              class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start"
+              *ngFor="let priseEnChargeSpecifique of filters?.prise_en_charge_specifique ?? []">
+              {{ priseEnChargeSpecifique }}
             </span>
             <span
               class="badge rounded-pill text-bg-light py-1 fw-normal text-wrap text-start"

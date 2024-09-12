@@ -1,17 +1,24 @@
-import { ConditionAcces, ModaliteAccompagnement, PublicAccueilli, Service } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import {
+  Frais,
+  ModaliteAccompagnement,
+  PriseEnChargeSpecifique,
+  PublicSpecifiquementAdresse,
+  Service
+} from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FilterFormPresentation, hasActiveFilter } from './filter.presenter';
 
 describe('démarrer page prensenter', (): void => {
   it('should indicates that there is no active filter', (): void => {
     const filterFormPresentation: FilterFormPresentation = {
-      service: undefined,
+      services: [],
       address: undefined,
       latitude: undefined,
       longitude: undefined,
       distance: undefined,
-      accessibilite: undefined,
-      conditions_acces: [],
-      publics_accueillis: [],
+      fiche_acces_libre: undefined,
+      frais_a_charge: [],
+      publics_specifiquement_adresses: [],
+      prise_en_charge_specifique: [],
       modalites_accompagnement: [],
       horaires_ouverture: undefined
     };
@@ -23,7 +30,7 @@ describe('démarrer page prensenter', (): void => {
 
   it('should indicates that there is an active filter when service is defined', (): void => {
     const filterFormPresentation: FilterFormPresentation = {
-      service: Service.UtiliserLeNumerique
+      services: [Service.MaitriseDesOutilsNumeriquesDuQuotidien]
     };
 
     const activeFilter: boolean = hasActiveFilter(filterFormPresentation);
@@ -73,7 +80,7 @@ describe('démarrer page prensenter', (): void => {
 
   it('should indicates that there is an active filter when accessibilite is defined', (): void => {
     const filterFormPresentation: FilterFormPresentation = {
-      accessibilite: false
+      fiche_acces_libre: false
     };
 
     const activeFilter: boolean = hasActiveFilter(filterFormPresentation);
@@ -81,9 +88,9 @@ describe('démarrer page prensenter', (): void => {
     expect(activeFilter).toBe(true);
   });
 
-  it('should indicates that there is an active filter when conditions_acces is defined', (): void => {
+  it('should indicates that there is an active filter when frais_a_charge is defined', (): void => {
     const filterFormPresentation: FilterFormPresentation = {
-      conditions_acces: [ConditionAcces.GratuitSousCondition]
+      frais_a_charge: [Frais.GratuitSousCondition]
     };
 
     const activeFilter: boolean = hasActiveFilter(filterFormPresentation);
@@ -91,9 +98,19 @@ describe('démarrer page prensenter', (): void => {
     expect(activeFilter).toBe(true);
   });
 
-  it('should indicates that there is an active filter when publics_accueillis is defined', (): void => {
+  it('should indicates that there is an active filter when publics_specifiquement_adresses is defined', (): void => {
     const filterFormPresentation: FilterFormPresentation = {
-      publics_accueillis: [PublicAccueilli.Surdite]
+      publics_specifiquement_adresses: [PublicSpecifiquementAdresse.Seniors]
+    };
+
+    const activeFilter: boolean = hasActiveFilter(filterFormPresentation);
+
+    expect(activeFilter).toBe(true);
+  });
+
+  it('should indicates that there is an active filter when prise_en_charge_specifique is defined', (): void => {
+    const filterFormPresentation: FilterFormPresentation = {
+      prise_en_charge_specifique: [PriseEnChargeSpecifique.Surdite]
     };
 
     const activeFilter: boolean = hasActiveFilter(filterFormPresentation);
@@ -103,7 +120,7 @@ describe('démarrer page prensenter', (): void => {
 
   it('should indicates that there is an active filter when modalites_accompagnement is defined', (): void => {
     const filterFormPresentation: FilterFormPresentation = {
-      modalites_accompagnement: [ModaliteAccompagnement.AMaPlace]
+      modalites_accompagnement: [ModaliteAccompagnement.AccompagnementIndividuel]
     };
 
     const activeFilter: boolean = hasActiveFilter(filterFormPresentation);

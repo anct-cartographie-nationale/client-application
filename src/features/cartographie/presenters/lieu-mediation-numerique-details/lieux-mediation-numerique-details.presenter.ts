@@ -2,8 +2,7 @@ import { ParamMap } from '@angular/router';
 import { combineLatest, filter, Observable, withLatestFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  ConditionAcces,
-  ConditionsAcces,
+  Itinerance,
   LieuMediationNumerique,
   Localisation,
   ModaliteAccompagnement,
@@ -415,48 +414,40 @@ const availableSourcesMap: Map<string, SourcePresentation> = new Map<string, Sou
   ]
 ]);
 
-const conditionsAccesMap: Map<ConditionAcces, string> = new Map<ConditionAcces, string>([
-  [ConditionAcces.Gratuit, 'Gratuit'],
-  [ConditionAcces.GratuitSousCondition, 'Gratuit sous condition'],
-  [ConditionAcces.Payant, 'Payant'],
-  [ConditionAcces.AccepteLePassNumerique, 'Accepte le Pass Numérique'],
-  [ConditionAcces.Adhesion, 'Adhésion']
-]);
-
 const modaliteAccompagnementMap: Map<ModaliteAccompagnement, ModaliteAccompagnementPresentation> = new Map<
   ModaliteAccompagnement,
   ModaliteAccompagnementPresentation
 >([
   [
-    ModaliteAccompagnement.Seul,
+    ModaliteAccompagnement.EnAutonomie,
     {
       label: 'Seul',
       icon: 'ri-user-fill',
-      description: "j'ai accès à du materiel et une connexion"
+      description: "J'ai accès à du matériel et une connexion"
     }
   ],
   [
-    ModaliteAccompagnement.AvecDeLAide,
+    ModaliteAccompagnement.AccompagnementIndividuel,
     {
       label: "Avec de l'aide",
       icon: 'ri-group-fill',
-      description: "je suis accompagné dans l'usage du numérique"
-    }
-  ],
-  [
-    ModaliteAccompagnement.AMaPlace,
-    {
-      label: 'À ma place',
-      icon: 'ri-service-fill',
-      description: 'une personne fait les démarches à ma place'
+      description: "Je suis accompagné dans l'usage du numérique"
     }
   ],
   [
     ModaliteAccompagnement.DansUnAtelier,
     {
       label: 'Dans un atelier',
-      icon: 'ri-tools-line',
-      description: "j'apprends à utiliser le numérique"
+      icon: 'ri-slideshow-2-fill',
+      description: "J'apprends à utiliser le numérique"
+    }
+  ],
+  [
+    ModaliteAccompagnement.ADistance,
+    {
+      label: 'À distance',
+      icon: 'ri-customer-service-fill',
+      description: 'Je suis accompagné au téléphone ou en ligne'
     }
   ]
 ]);
@@ -476,9 +467,6 @@ const getDistance = (lieuMediationNumerique: LieuMediationNumerique, localisatio
   localisation === NO_LOCALISATION || lieuMediationNumerique.localisation == null
     ? undefined
     : geographicDistance(lieuMediationNumerique.localisation, localisation);
-
-const toConditionAccesDetailsPresentation = (conditions_acces?: ConditionsAcces): string | undefined =>
-  conditions_acces?.map((conditionsAcces: ConditionAcces) => conditionsAccesMap.get(conditionsAcces)).join(', ');
 
 const keepDefined = (
   modaliteAccompagnement: ModaliteAccompagnementPresentation | undefined
@@ -574,12 +562,16 @@ export class LieuxMediationNumeriqueDetailsPresenter {
           ...ifAny('contact', lieu.contact),
           ...ifAny('presentation', lieu.presentation),
           ...ifAny('date_maj', lieu.date_maj),
-          ...ifAny('publics_accueillis', lieu.publics_accueillis),
-          ...ifAny('conditions_acces', toConditionAccesDetailsPresentation(lieu.conditions_acces)),
-          ...ifAny('labels_nationaux', lieu.labels_nationaux),
-          ...ifAny('labels_autres', lieu.labels_autres),
+          ...ifAny('itinerance', lieu.itinerance?.includes(Itinerance.Itinerant)),
+          ...ifAny('modalites_acces', lieu.modalites_acces),
+          ...ifAny('publics_specifiquement_adresses', lieu.publics_specifiquement_adresses),
+          ...ifAny('prise_en_charge_specifique', lieu.prise_en_charge_specifique),
+          ...ifAny('frais_a_charge', lieu.frais_a_charge),
+          ...ifAny('dispositif_programmes_nationaux', lieu.dispositif_programmes_nationaux),
+          ...ifAny('formations_labels', lieu.formations_labels),
+          ...ifAny('autres_formations_labels', lieu.autres_formations_labels),
           ...ifAny('modalites_accompagnement', toModalitesAccompagnementPresentation(lieu.modalites_accompagnement), notEmpty),
-          ...ifAny('accessibilite', lieu.accessibilite),
+          ...ifAny('fiche_acces_libre', lieu.fiche_acces_libre),
           ...ifAny('localisation', lieu.localisation),
           ...ifAny('distance', getDistance(lieu, localisation)),
           ...ifAny('prise_rdv', lieu.prise_rdv),

@@ -6,7 +6,7 @@ import {
   OrientationInformationContent,
   OrientationItemPresentation
 } from '../../presenters';
-import publicSpecifiqueAcceuilli from './public-specifique-accueilli.json';
+import priseEnChargeSpecifique from './prise-en-charge-specifique.json';
 import { ACCESSIBILITE_INFORMATION_MODAL_TEXTS } from './accessibilite-information-modal-texts';
 
 @Component({
@@ -16,7 +16,7 @@ import { ACCESSIBILITE_INFORMATION_MODAL_TEXTS } from './accessibilite-informati
 export class AccessibilitePage {
   public selectedOrientationInformation: OrientationInformationContent | null = null;
 
-  public publicSpecifiqueAcceuilliOptions: OrientationItemPresentation<string>[] = publicSpecifiqueAcceuilli;
+  public priseEnChargeSpecifiqueOptions: OrientationItemPresentation<string>[] = priseEnChargeSpecifique;
 
   public readonly orientationInformations: Record<AccessibiliteOrientationInformationTypes, OrientationInformationContent> =
     ACCESSIBILITE_INFORMATION_MODAL_TEXTS;

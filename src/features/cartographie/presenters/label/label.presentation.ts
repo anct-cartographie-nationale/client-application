@@ -1,7 +1,7 @@
-import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 export type LabelPresentation = {
-  ref: LabelNational;
+  ref: DispositifProgrammeNational;
   nom: string;
   description: string;
   url: string;

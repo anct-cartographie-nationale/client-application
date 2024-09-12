@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { DispositifProgrammeNational, PriseEnChargeSpecifique } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FormGroup } from '@angular/forms';
 import { FilterFormPresentation } from '../../../core/presenters';
-import publicSpecifiqueAcceuilli from '../../pages/accessibilite/public-specifique-accueilli.json';
-import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import prisesEnChargeSpecifiques from '../../pages/accessibilite/prise-en-charge-specifique.json';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,7 +14,7 @@ export class SelectedFiltersComponent {
   @Input() public filterForm!: FormGroup;
 
   public resetForm(value: unknown, key: string): void {
-    if (key === 'service') this.filterForm.get('service')?.reset();
+    if (key === 'services') this.filterForm.get('services')?.reset();
     else if (key === 'address' || key === 'distance') {
       this.filterForm.get('address')?.reset();
       this.filterForm.get('distance')?.reset();
@@ -24,8 +24,8 @@ export class SelectedFiltersComponent {
       this.filterForm.get('horaires_ouverture')?.reset();
     } else if (key === 'prise_rdv') {
       this.filterForm.get('prise_rdv')?.reset();
-    } else if (key === 'accessibilite') {
-      this.filterForm.get('accessibilite')?.reset();
+    } else if (key === 'fiche_acces_libre') {
+      this.filterForm.get('fiche_acces_libre')?.reset();
     } else {
       const keyArrayCopy = [...this.filterForm.value[key]];
       const indexOfValue = keyArrayCopy.indexOf(value);
@@ -36,11 +36,13 @@ export class SelectedFiltersComponent {
 
   public getLabelFromValue(value: string): string {
     return (
-      [...publicSpecifiqueAcceuilli].find((field: { value: string; label: string }) => {
+      [...prisesEnChargeSpecifiques].find((field: { value: string; label: string }) => {
         return field.value === value;
       })?.label ?? ''
     );
   }
 
-  public labelMap: Map<string, string> = new Map<LabelNational, string>([[LabelNational.CNFS, 'Conseillers Numériques']]);
+  public labelMap: Map<string, string> = new Map<DispositifProgrammeNational, string>([
+    [DispositifProgrammeNational.ConseillersNumeriques, 'Conseillers Numériques']
+  ]);
 }

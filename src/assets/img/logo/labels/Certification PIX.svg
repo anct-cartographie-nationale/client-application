@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="203.94374"
+   height="153.69908"
+   viewBox="0 0 203.94374 153.69908"
+   version="1.1"
+   id="svg34"
+   sodipodi:docname="pix.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview36"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="4.540404"
+     inkscape:cx="102.9644"
+     inkscape:cy="76.865406"
+     inkscape:window-width="2560"
+     inkscape:window-height="1363"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="6.-logos/logos--pix/couleur" />
+  <!--Generator: Sketch 55 (78076) - https://sketchapp.com-->
+  <title
+     id="title2">6. logos/logos--pix/couleur</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <defs
+     id="defs26">
+    <linearGradient
+       x1="92.6434"
+       y1="0.0062896158"
+       x2="92.6434"
+       y2="54.422432"
+       id="linearGradient-1"
+       gradientTransform="scale(0.65033618,1.5376663)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#12A3FF"
+         offset="0%"
+         id="stop6" />
+      <stop
+         stop-color="#3D68FF"
+         offset="100%"
+         id="stop8" />
+    </linearGradient>
+    <linearGradient
+       x1="43.966398"
+       y1="0.0072567213"
+       x2="43.966398"
+       y2="62.790548"
+       id="linearGradient-2"
+       gradientTransform="scale(0.75033334,1.332741)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#FFBE00"
+         offset="0%"
+         id="stop11" />
+      <stop
+         stop-color="#FF9F00"
+         offset="100%"
+         id="stop13" />
+    </linearGradient>
+    <linearGradient
+       x1="69.059023"
+       y1="45.67671"
+       x2="69.059023"
+       y2="115.73052"
+       id="linearGradient-3"
+       gradientTransform="scale(0.80532802,1.24173)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#12A3FF"
+         offset="0%"
+         id="stop16" />
+      <stop
+         stop-color="#3D68FF"
+         offset="100%"
+         id="stop18" />
+    </linearGradient>
+    <linearGradient
+       x1="282.24734"
+       y1="23.690452"
+       x2="282.24734"
+       y2="59.956541"
+       id="linearGradient-4"
+       gradientTransform="scale(0.42228528,2.3680674)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         stop-color="#12A3FF"
+         offset="0%"
+         id="stop21" />
+      <stop
+         stop-color="#3D68FF"
+         offset="100%"
+         id="stop23" />
+    </linearGradient>
+  </defs>
+  <g
+     id="6.-logos/logos--pix/couleur"
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd"
+     transform="translate(-17,-22.1)">
+    <g
+       id="Group"
+       transform="translate(143,58.5)">
+      <path
+         d="m 42.554995,61.426229 3.097357,-3.758159 c 2.755863,-3.177837 4.714289,-6.2465 5.875276,-9.26917 l 23.577015,28.785778 c 4.279239,5.4833 4.075207,6.498859 -3.056557,6.498859 H 69.60272 c -7.131764,0 -9.780861,-1.421663 -14.060101,-6.498859 z M 42.554962,22.26702 55.542619,6.5085306 C 59.821859,1.4313344 62.470956,0.00967133 69.60272,0.00967133 h 2.445366 c 7.131764,0 7.335796,1.01555957 3.056557,6.49885927 L 51.527628,35.294308 c -1.16099,-3.022676 -3.119421,-6.091345 -5.875293,-9.26919 z"
+         id="Combined-Shape"
+         fill="url(#linearGradient-1)"
+         style="fill:url(#linearGradient-1)" />
+      <path
+         d="m 41.865595,83.683537 c 7.131765,0 7.335796,-1.015559 3.056557,-6.498859 L 20.469698,47.330054 c -1.833874,-2.23387 -2.852826,-4.061937 -2.852826,-5.4836 0,-1.624715 1.018952,-3.452482 2.852826,-5.4833 L 44.922152,6.5085306 C 49.201391,1.0252309 48.99736,0.00967133 41.865595,0.00967133 h -2.445366 c -7.131764,0 -9.780861,1.42166307 -14.060101,6.49885927 L 6.6133278,29.254839 c -7.9472889,9.139133 -7.9472889,16.044397 0,25.183531 L 25.360128,77.184678 c 4.27924,5.077196 6.928337,6.498859 14.060101,6.498859 z"
+         id="Page-1"
+         fill="url(#linearGradient-2)"
+         transform="matrix(-1,0,0,1,48.414118,0)"
+         style="fill:url(#linearGradient-2)" />
+    </g>
+    <path
+       d="m 17,168.2196 c 0,6.06359 1.520962,7.57949 7.604811,7.57949 h 2.027755 c 6.083848,0 7.60481,-1.5159 7.60481,-7.57949 v -35.20208 c 4.562887,7.24246 12.843713,10.94802 24.842188,10.94802 23.490156,0 35.150768,-12.29555 35.150768,-36.71798 V 92.593987 c 0,-24.422722 -12.505559,-35.875844 -38.699778,-35.875844 C 31.195452,56.718143 17,68.508292 17,92.593987 Z m 59.824025,-60.6353 c 0,14.14818 -4.731818,20.0434 -21.124247,20.0434 -16.730584,0 -21.462402,-6.06359 -21.462402,-20.0434 V 93.099092 c 0,-14.148179 5.069972,-20.211768 21.462402,-20.211768 16.730291,0 21.124247,6.063589 21.124247,20.211768 z"
+       id="Fill-1"
+       fill="url(#linearGradient-3)"
+       style="fill:url(#linearGradient-3)" />
+    <path
+       d="m 110.48574,134.40164 c 0,6.06359 1.52096,7.57949 7.60481,7.57949 h 2.19669 c 6.08385,0 7.60481,-1.5159 7.60481,-7.57949 V 66.018488 c 0,-6.063589 -1.52096,-7.579486 -7.60481,-7.579486 h -2.19669 c -6.08385,0 -7.60481,1.515897 -7.60481,7.579486 z m 1.18281,-94.153112 c 4.22502,4.042295 10.9846,4.042295 15.04069,0 4.22473,-4.210955 4.22473,-10.948016 0,-14.990312 -4.05609,-4.210954 -10.81567,-4.210954 -15.04069,0 -4.22473,4.042296 -4.22473,10.779357 0,14.990312 z"
+       id="Fill-2"
+       fill="url(#linearGradient-4)"
+       style="fill:url(#linearGradient-4)" />
+  </g>
+  <metadata
+     id="metadata853">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>6. logos/logos--pix/couleur</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>

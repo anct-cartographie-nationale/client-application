@@ -1,11 +1,11 @@
 <ng-container *ngIf="filterPresentation as filter">
   <button
-    *ngIf="filter.service"
+    *ngFor="let service of filter.services"
     class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
-    (click)="resetForm(filter.service, 'service')">
+    (click)="resetForm(service, 'services')">
     <span class="visually-hidden">Retirer</span>
     <span class="ri-close-line" role="img" aria-hidden="true"></span>
-    {{ filter.service }}
+    {{ service }}
   </button>
   <button
     *ngIf="filter.address"
@@ -24,12 +24,20 @@
     Moins de {{ filter.distance / 1000 }} km
   </button>
   <button
-    *ngFor="let publicAccueilli of filter.publics_accueillis"
+    *ngFor="let priseEnChargeSpecifique of filter.prise_en_charge_specifique"
     class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
-    (click)="resetForm(publicAccueilli, 'publics_accueillis')">
+    (click)="resetForm(priseEnChargeSpecifique, 'prise_en_charge_specifique')">
     <span class="visually-hidden">Retirer</span>
     <span class="ri-close-line" role="img" aria-hidden="true"></span>
-    {{ getLabelFromValue(publicAccueilli) }}
+    {{ getLabelFromValue(priseEnChargeSpecifique) }}
+  </button>
+  <button
+    *ngFor="let publicSpecifiquementAdresse of filter.publics_specifiquement_adresses"
+    class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
+    (click)="resetForm(publicSpecifiquementAdresse, 'publics_specifiquement_adresses')">
+    <span class="visually-hidden">Retirer</span>
+    <span class="ri-close-line" role="img" aria-hidden="true"></span>
+    {{ getLabelFromValue(publicSpecifiquementAdresse) }}
   </button>
   <button
     *ngFor="let modaliteAccompagnement of filter.modalites_accompagnement"
@@ -40,20 +48,20 @@
     {{ getLabelFromValue(modaliteAccompagnement) }}
   </button>
   <button
-    *ngFor="let labelNational of filter.labels_nationaux"
+    *ngFor="let dispositifProgrammeNational of filter.dispositif_programmes_nationaux"
     class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
-    (click)="resetForm(labelNational, 'labels_nationaux')">
+    (click)="resetForm(dispositifProgrammeNational, 'dispositif_programmes_nationaux')">
     <span class="visually-hidden">Retirer</span>
     <span class="ri-close-line" role="img" aria-hidden="true"></span>
-    {{ labelMap.get(labelNational) ?? labelNational }}
+    {{ labelMap.get(dispositifProgrammeNational) ?? dispositifProgrammeNational }}
   </button>
   <button
-    *ngFor="let labelAutre of filter.labels_autres"
+    *ngFor="let autreFormationLabel of filter.autres_formations_labels"
     class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
-    (click)="resetForm(labelAutre, 'labels_autres')">
+    (click)="resetForm(autreFormationLabel, 'autres_formations_labels')">
     <span class="visually-hidden">Retirer</span>
     <span class="ri-close-line" role="img" aria-hidden="true"></span>
-    {{ labelAutre }}
+    {{ autreFormationLabel }}
   </button>
   <button
     *ngIf="filter.prise_rdv"
@@ -64,9 +72,9 @@
     Prise de RDV
   </button>
   <button
-    *ngIf="filter.accessibilite"
+    *ngIf="filter.fiche_acces_libre"
     class="btn btn-chip btn-chip-trim btn-sm btn-tertiary text-primary me-2 mb-2"
-    (click)="resetForm(filter.accessibilite, 'accessibilite')">
+    (click)="resetForm(filter.fiche_acces_libre, 'fiche_acces_libre')">
     <span class="visually-hidden">Retirer</span>
     <span class="ri-close-line" role="img" aria-hidden="true"></span>
     Accessibilité

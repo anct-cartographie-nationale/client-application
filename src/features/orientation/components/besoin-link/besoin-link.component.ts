@@ -12,9 +12,9 @@ export class BesoinLinkComponent {
 
   @Input() public selectedServiceItem?: string;
 
-  @Input() public serviceFilter: string | null = '';
+  @Input() public serviceFilter: string[] | null = [];
 
-  @Output() public selectServiceValue: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public selectServiceValue: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   @Output() public addLastFilter: EventEmitter<string> = new EventEmitter<string>();
 

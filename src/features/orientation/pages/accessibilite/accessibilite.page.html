@@ -22,18 +22,18 @@
         <div class="bg-light px-3 py-2">
           <div
             class="form-check form-check-inline form-chip my-2"
-            *ngFor="let accueilSpecifiqueOption of publicSpecifiqueAcceuilliOptions; index as i">
+            *ngFor="let priseEnChargeSpecifiqueOption of priseEnChargeSpecifiqueOptions; index as i">
             <input
               type="checkbox"
-              name="publics_accueillis"
+              name="prise_en_charge_specifique"
               appCheckboxArray
-              formControlName="publics_accueillis"
+              formControlName="prise_en_charge_specifique"
               class="form-check-input"
-              [value]="accueilSpecifiqueOption.value"
-              [attr.id]="'accueilSpecifiqueLabelChip' + i"
-              (change)="orientationLayout.addLastFilter(accueilSpecifiqueOption.value, 'publics_accueillis', $event)" />
-            <label class="form-check-label bg-white" [attr.for]="'accueilSpecifiqueLabelChip' + i">
-              <b>{{ accueilSpecifiqueOption.label }}</b>
+              [value]="priseEnChargeSpecifiqueOption.value"
+              [attr.id]="'priseEnChargeSpecifique' + i"
+              (change)="orientationLayout.addLastFilter(priseEnChargeSpecifiqueOption.value, 'prise_en_charge_specifique', $event)" />
+            <label class="form-check-label bg-white" [attr.for]="'priseEnChargeSpecifique' + i">
+              <b>{{ priseEnChargeSpecifiqueOption.label }}</b>
             </label>
           </div>
         </div>

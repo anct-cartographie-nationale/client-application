@@ -41,10 +41,12 @@ export class BesoinPage {
     setTitle(['Besoin', 'Orientation']);
   }
 
-  public serviceControl: AbstractControl | null = this.orientationLayout.filterForm.get('service');
+  public serviceControl: AbstractControl | null = this.orientationLayout.filterForm.get('services');
 
-  public serviceFilter$: Observable<string | null> = this.route.queryParamMap.pipe(
-    map((paramMap: ParamMap) => paramMap.get('service'))
+  public serviceFilter$: Observable<string[]> = this.route.queryParamMap.pipe(
+    map((paramMap: ParamMap) => paramMap.get('services')),
+    map((service: string | null) => (Array.isArray(service) || service == null ? service : [service])),
+    map((services: string[] | null) => (services == null ? [] : services))
   );
 
   public selectedOrientationInformation: OrientationInformationContent | null = null;

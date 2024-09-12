@@ -1,4 +1,4 @@
-<div class="row align-items-center g-0 bg-secondary p-3">
+<div class="row align-items-center g-0 bg-secondary py-3 px-2">
   <div class="col-auto d-flex g-2">
     <a
       class="nav-link lh-sm"
@@ -22,13 +22,16 @@
         </ng-template>
       </span>
     </a>
-  </div>
-  <div class="col">
-    <div
-      [ngClass]="sources?.[0]?.label === 'France Services' && sources?.length === 1 ? 'text-muted' : 'text-primary'"
-      class="fw-bold">
-      Mettre à jour les données
+    <span *ngIf="sources?.length === 0" class="ri-circled-sm bg-light text-primary me-3 text-center">
+      <span role="img" aria-hidden="true" class="ri-database-2-line"></span>
+    </span>
+    <div class="lh-1">
+      <div
+        [ngClass]="sources?.[0]?.label === 'France Services' && sources?.length === 1 ? 'text-muted' : 'text-primary'"
+        class="fw-bold">
+        Mettre à jour les données
+      </div>
+      <small class="text-muted-dark fst-italic">Vos modifications seront prises en compte dans quelques jours</small>
     </div>
-    <small class="text-muted-dark fst-italic">Vos modifications seront prises en compte dans quelques jours</small>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { LabelNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { OpeningState } from '../../../core/presenters';
 
 export type LieuMediationNumeriqueOnMapPresentation = {
@@ -7,7 +7,7 @@ export type LieuMediationNumeriqueOnMapPresentation = {
   latitude: number;
   longitude: number;
   status?: OpeningState;
-  labels_nationaux?: LabelNational[];
+  dispositif_programmes_nationaux?: DispositifProgrammeNational[];
   prise_rdv?: string;
   prive?: boolean;
 };

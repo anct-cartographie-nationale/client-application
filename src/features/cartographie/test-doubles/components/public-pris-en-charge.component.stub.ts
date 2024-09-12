@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { PublicAccueilli } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { PublicSpecifiquementAdresse } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 @Component({
-  selector: 'app-public-pris-en-charge',
+  selector: 'app-public-specifiquement-adresse',
   template: ''
 })
-export class PublicPrisEnChargeStubComponent {
-  @Input() public publicsAccueillis?: PublicAccueilli[];
+export class PublicSpecifiquementAdresseStubComponent {
+  @Input() public publicSpecifiquementAdresse?: PublicSpecifiquementAdresse[];
 }

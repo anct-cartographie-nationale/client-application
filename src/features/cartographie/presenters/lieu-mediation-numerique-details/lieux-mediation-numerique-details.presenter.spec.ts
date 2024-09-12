@@ -1,19 +1,29 @@
 import { firstValueFrom, of } from 'rxjs';
 import {
   Adresse,
-  ConditionAcces,
-  ConditionsAcces,
   Contact,
+  Courriel,
+  DispositifProgrammeNational,
+  DispositifProgrammesNationaux,
+  FormationLabel,
+  FormationsLabels,
+  Frais,
+  FraisACharge,
   Id,
-  LabelNational,
-  LabelsNationaux,
+  Itinerance,
+  Itinerances,
   LieuMediationNumerique,
   Localisation,
+  ModaliteAcces,
   ModaliteAccompagnement,
+  ModalitesAcces,
   ModalitesAccompagnement,
   Nom,
-  PublicAccueilli,
-  PublicsAccueillis,
+  Pivot,
+  PriseEnChargeSpecifique,
+  PrisesEnChargeSpecifiques,
+  PublicSpecifiquementAdresse,
+  PublicsSpecifiquementAdresses,
   Service,
   Services,
   Typologie,
@@ -32,6 +42,7 @@ describe('lieux médiation numérique details presenter', (): void => {
       {} as LieuMediationNumerique,
       {
         id: Id('6001a35f16b08100062e415f'),
+        pivot: Pivot('43493312300029'),
         nom: Nom('Anonymal'),
         adresse: Adresse({
           commune: 'reims',
@@ -44,25 +55,62 @@ describe('lieux médiation numérique details presenter', (): void => {
         typologies: Typologies([Typologie.CHRS, Typologie.CHU]),
         contact: Contact({
           telephone: '+33180059880',
-          courriel: 'contact@laquincaillerie.tl',
+          courriels: [Courriel('contact@laquincaillerie.tl')],
           site_web: [Url('https://www.laquincaillerie.tl/'), Url('https://m.facebook.com/laquincaillerienumerique/')]
         }),
-        services: Services([Service.PrendreEnMainUnOrdinateur, Service.AccederADuMateriel]),
+        services: Services([Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique]),
         presentation: {
           resume: 'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
           detail:
             "Notre parcours d'initiation permet l'acquisition de compétences numériques de base. Nous proposons également un accompagnement à destination des personnes déjà initiées qui souhaiteraient approfondir leurs connaissances. Du matériel informatique est en libre accès pour nos adhérents tous les après-midis. En plus de d'accueillir les personnes dans notre lieu en semaine (sur rendez-vous), nous assurons une permanence le samedi matin dans la médiathèque XX."
         },
         date_maj: new Date('2022-06-02'),
-        publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes, PublicAccueilli.DeficienceVisuelle]),
-        conditions_acces: ConditionsAcces([ConditionAcces.Gratuit, ConditionAcces.Payant]),
-        labels_nationaux: LabelsNationaux([LabelNational.FranceServices, LabelNational.APTIC, LabelNational.PointRelaisCAF]),
-        labels_autres: ['SudLabs', 'Nièvre médiation numérique'],
-        modalites_accompagnement: ModalitesAccompagnement([ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide]),
-        accessibilite: Url(
+        itinerance: Itinerances([Itinerance.Itinerant, Itinerance.Fixe]),
+        modalites_acces: ModalitesAcces([
+          ModaliteAcces.SePresenter,
+          ModaliteAcces.Telephoner,
+          ModaliteAcces.ContacterParMail,
+          ModaliteAcces.PrendreRdvEnLigne,
+          ModaliteAcces.PrescriptionParMail,
+          ModaliteAcces.PasDePublic
+        ]),
+        publics_specifiquement_adresses: PublicsSpecifiquementAdresses([
+          PublicSpecifiquementAdresse.Seniors,
+          PublicSpecifiquementAdresse.Jeunes
+        ]),
+        prise_en_charge_specifique: PrisesEnChargeSpecifiques([
+          PriseEnChargeSpecifique.Surdite,
+          PriseEnChargeSpecifique.DeficienceVisuelle
+        ]),
+        frais_a_charge: FraisACharge([Frais.Gratuit, Frais.Payant]),
+        dispositif_programmes_nationaux: DispositifProgrammesNationaux([
+          DispositifProgrammeNational.FranceServices,
+          DispositifProgrammeNational.ConseillersNumeriques,
+          DispositifProgrammeNational.AidantsConnect
+        ]),
+        formations_labels: FormationsLabels([
+          FormationLabel.CollectifRessourcesEtActeursReemploi,
+          FormationLabel.ArniaMednum,
+          FormationLabel.FabriquesDeTerritoire,
+          FormationLabel.Ordi3,
+          FormationLabel.SudLabs,
+          FormationLabel.EtapesNumeriques,
+          FormationLabel.FormeADuplex,
+          FormationLabel.MesPapiers,
+          FormationLabel.LesEclaireurs,
+          FormationLabel.FormeAMonEspaceSante
+        ]),
+        autres_formations_labels: ['SudLabs', 'Nièvre médiation numérique'],
+        modalites_accompagnement: ModalitesAccompagnement([
+          ModaliteAccompagnement.EnAutonomie,
+          ModaliteAccompagnement.AccompagnementIndividuel,
+          ModaliteAccompagnement.DansUnAtelier,
+          ModaliteAccompagnement.ADistance
+        ]),
+        fiche_acces_libre: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
         )
-      } as LieuMediationNumerique
+      }
     ];
 
     const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
@@ -100,36 +148,66 @@ describe('lieux médiation numérique details presenter', (): void => {
       typologies: "Centres d'hébergement et de réinsertion sociale, Centres d'hébergement d'urgence",
       contact: Contact({
         telephone: '+33180059880',
-        courriel: 'contact@laquincaillerie.tl',
+        courriels: [Courriel('contact@laquincaillerie.tl')],
         site_web: [Url('https://www.laquincaillerie.tl/'), Url('https://m.facebook.com/laquincaillerienumerique/')]
       }),
-      services: [Service.PrendreEnMainUnOrdinateur, Service.AccederADuMateriel],
+      services: [Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique],
       presentation: {
         resume: 'Notre association propose des formations aux outils numériques à destination des personnes âgées.',
         detail:
           "Notre parcours d'initiation permet l'acquisition de compétences numériques de base. Nous proposons également un accompagnement à destination des personnes déjà initiées qui souhaiteraient approfondir leurs connaissances. Du matériel informatique est en libre accès pour nos adhérents tous les après-midis. En plus de d'accueillir les personnes dans notre lieu en semaine (sur rendez-vous), nous assurons une permanence le samedi matin dans la médiathèque XX."
       },
       date_maj: new Date('2022-06-02'),
-      publics_accueillis: ['Adultes', 'Déficience visuelle'],
-      conditions_acces: 'Gratuit, Payant',
-      labels_nationaux: [LabelNational.FranceServices, LabelNational.APTIC, LabelNational.PointRelaisCAF],
-      labels_autres: ['SudLabs', 'Nièvre médiation numérique'],
-      modalites_accompagnement: [
-        { label: 'Seul', icon: 'ri-user-fill', description: "j'ai accès à du materiel et une connexion" },
-        { label: "Avec de l'aide", icon: 'ri-group-fill', description: "je suis accompagné dans l'usage du numérique" }
+      itinerance: true,
+      modalites_acces: [
+        ModaliteAcces.SePresenter,
+        ModaliteAcces.Telephoner,
+        ModaliteAcces.ContacterParMail,
+        ModaliteAcces.PrendreRdvEnLigne,
+        ModaliteAcces.PrescriptionParMail,
+        ModaliteAcces.PasDePublic
       ],
-      accessibilite: Url(
+      publics_specifiquement_adresses: [PublicSpecifiquementAdresse.Seniors, PublicSpecifiquementAdresse.Jeunes],
+      prise_en_charge_specifique: [PriseEnChargeSpecifique.Surdite, PriseEnChargeSpecifique.DeficienceVisuelle],
+      frais_a_charge: [Frais.Gratuit, Frais.Payant],
+      dispositif_programmes_nationaux: [
+        DispositifProgrammeNational.FranceServices,
+        DispositifProgrammeNational.ConseillersNumeriques,
+        DispositifProgrammeNational.AidantsConnect
+      ],
+      formations_labels: [
+        FormationLabel.CollectifRessourcesEtActeursReemploi,
+        FormationLabel.ArniaMednum,
+        FormationLabel.FabriquesDeTerritoire,
+        FormationLabel.Ordi3,
+        FormationLabel.SudLabs,
+        FormationLabel.EtapesNumeriques,
+        FormationLabel.FormeADuplex,
+        FormationLabel.MesPapiers,
+        FormationLabel.LesEclaireurs,
+        FormationLabel.FormeAMonEspaceSante
+      ],
+      autres_formations_labels: ['SudLabs', 'Nièvre médiation numérique'],
+      modalites_accompagnement: [
+        { label: 'Seul', icon: 'ri-user-fill', description: "J'ai accès à du matériel et une connexion" },
+        { label: "Avec de l'aide", icon: 'ri-group-fill', description: "Je suis accompagné dans l'usage du numérique" },
+        { label: 'Dans un atelier', icon: 'ri-slideshow-2-fill', description: "J'apprends à utiliser le numérique" },
+        { label: 'À distance', icon: 'ri-customer-service-fill', description: 'Je suis accompagné au téléphone ou en ligne' }
+      ],
+      fiche_acces_libre: Url(
         'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
       )
-    } as LieuMediationNumeriqueDetailsPresentation);
+    });
   });
 
   it('should find the lieu matching the id param', async (): Promise<void> => {
     const lieuxMediationNumerique: LieuMediationNumerique[] = [
       { id: '61e9260c2ac971550065e262' } as LieuMediationNumerique,
       {
-        id: '6001a35f16b08100062e415f',
-        nom: 'Anonymal',
+        id: Id('6001a35f16b08100062e415f'),
+        pivot: Pivot('43493312300029'),
+        nom: Nom('Anonymal'),
+        date_maj: new Date('2022-06-02'),
         adresse: Adresse({
           commune: 'reims',
           code_postal: '51100',
@@ -137,8 +215,8 @@ describe('lieux médiation numérique details presenter', (): void => {
           voie: '12 BIS RUE DE LECLERCQ',
           complement_adresse: "Le patio du bois de l'Aulne"
         }),
-        services: ['Prendre en main un ordinateur', 'Accéder à du matériel']
-      } as LieuMediationNumerique,
+        services: Services([Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique])
+      },
       { id: '6001a3b716b08100062e4168' } as LieuMediationNumerique
     ];
 
@@ -158,19 +236,22 @@ describe('lieux médiation numérique details presenter', (): void => {
 
     expect(structure).toStrictEqual({
       id: '6001a35f16b08100062e415f',
+      date_maj: new Date('2022-06-02'),
       nom: 'Anonymal',
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
       code_postal: '51100',
       commune: 'reims',
-      services: ['Prendre en main un ordinateur', 'Accéder à du matériel']
-    } as LieuMediationNumeriqueDetailsPresentation);
+      services: [Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique]
+    });
   });
 
   it('should get the opening status of the lieu found when opening hours are specified', async (): Promise<void> => {
     const lieuxMediationNumerique: LieuMediationNumerique[] = [
       {
-        id: '6001a35f16b08100062e415f',
-        nom: 'Anonymal',
+        id: Id('6001a35f16b08100062e415f'),
+        pivot: Pivot('43493312300029'),
+        nom: Nom('Anonymal'),
+        date_maj: new Date('2022-06-02'),
         adresse: Adresse({
           commune: 'reims',
           code_postal: '51100',
@@ -178,9 +259,9 @@ describe('lieux médiation numérique details presenter', (): void => {
           voie: '12 BIS RUE DE LECLERCQ',
           complement_adresse: "Le patio du bois de l'Aulne"
         }),
-        services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+        services: Services([Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique]),
         horaires: 'Mo,Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00'
-      } as LieuMediationNumerique
+      }
     ];
 
     const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
@@ -199,10 +280,11 @@ describe('lieux médiation numérique details presenter', (): void => {
     expect(structure).toStrictEqual({
       id: '6001a35f16b08100062e415f',
       nom: 'Anonymal',
+      date_maj: new Date('2022-06-02'),
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
       code_postal: '51100',
       commune: 'reims',
-      services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+      services: [Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique],
       horaires: {
         Lundi: '09h00 - 12h00\n14h00 - 18h30',
         Mardi: 'Fermé',
@@ -216,14 +298,16 @@ describe('lieux médiation numérique details presenter', (): void => {
         label: 'Ouvert',
         limite: 'Ferme à 18h30'
       }
-    } as LieuMediationNumeriqueDetailsPresentation);
+    });
   });
 
   it('should get the lieu with distance', async (): Promise<void> => {
     const lieuxMediationNumerique: LieuMediationNumerique[] = [
       {
-        id: '6001a35f16b08100062e415f',
-        nom: 'Anonymal',
+        id: Id('6001a35f16b08100062e415f'),
+        pivot: Pivot('43493312300029'),
+        nom: Nom('Anonymal'),
+        date_maj: new Date('2022-06-02'),
         adresse: Adresse({
           commune: 'reims',
           code_postal: '51100',
@@ -231,9 +315,9 @@ describe('lieux médiation numérique details presenter', (): void => {
           voie: '12 BIS RUE DE LECLERCQ',
           complement_adresse: "Le patio du bois de l'Aulne"
         }),
-        services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+        services: Services([Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
-      } as LieuMediationNumerique
+      }
     ];
 
     const lieuxMediationNumeriqueDetailsPresenter: LieuxMediationNumeriqueDetailsPresenter =
@@ -252,12 +336,13 @@ describe('lieux médiation numérique details presenter', (): void => {
     expect(structure).toStrictEqual({
       id: '6001a35f16b08100062e415f',
       nom: 'Anonymal',
+      date_maj: new Date('2022-06-02'),
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
       code_postal: '51100',
       commune: 'reims',
-      services: ['Prendre en main un ordinateur', 'Accéder à du matériel'],
+      services: [Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique],
       localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 }),
       distance: 0
-    } as LieuMediationNumeriqueDetailsPresentation);
+    });
   });
 });

@@ -6,6 +6,7 @@ import { LieuMediationNumeriquePresentation } from '../../../../core/presenters'
 import { ClustersPresenter } from '../../../../core/presenters/clusters';
 import { Cluster } from '../../../models';
 import { LieuMediationNumeriqueOnMapPresentation } from '../../../presenters';
+import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 
 export type LieuMediationNumeriqueCluster = {
   type: 'Feature';
@@ -42,4 +43,5 @@ export class LieuMediationNumeriqueMarkersComponent {
         | undefined;
     })
   );
+  protected readonly DispositifProgrammeNational = DispositifProgrammeNational;
 }

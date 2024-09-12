@@ -2,22 +2,26 @@ import { firstValueFrom, Observable, of } from 'rxjs';
 import { LieuxMediationNumeriqueRepository } from '../../repositories';
 import {
   Adresse,
-  ConditionAcces,
-  ConditionsAcces,
+  Frais,
+  FraisACharge,
   Id,
-  LabelNational,
-  LabelsNationaux,
+  DispositifProgrammeNational,
+  DispositifProgrammesNationaux,
   LieuMediationNumerique,
   Localisation,
   ModaliteAccompagnement,
   ModalitesAccompagnement,
   Nom,
   Pivot,
-  PublicAccueilli,
-  PublicsAccueillis,
+  PublicSpecifiquementAdresse,
+  PublicsSpecifiquementAdresses,
+  PriseEnChargeSpecifique,
+  PrisesEnChargeSpecifiques,
   Service,
   Services,
-  Url
+  Url,
+  FormationsLabels,
+  FormationLabel
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { FilterPresentation } from '../filter';
 import { LieuMediationNumeriquePresentation } from './lieu-mediation-numerique.presentation';
@@ -40,7 +44,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
               commune: 'Reims',
               voie: '12 BIS RUE DE LECLERCQ'
             }),
-            services: Services([Service.AccederADuMateriel]),
+            services: Services([Service.AccesInternetEtMaterielInformatique]),
             date_maj: new Date('2022-10-10'),
             localisation: Localisation({
               latitude: 46.2814605,
@@ -70,7 +74,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         distance: 63586.94404350499,
         latitude: 46.2814605,
         longitude: 4.468874,
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         voie: '12 BIS RUE DE LECLERCQ'
       }
     ]);
@@ -89,7 +93,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ'
       }),
-      services: Services([Service.AccederADuMateriel]),
+      services: Services([Service.AccesInternetEtMaterielInformatique]),
       date_maj: new Date('2022-10-10'),
       localisation: Localisation({
         latitude,
@@ -118,7 +122,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         date_maj: new Date('2022-10-10'),
         latitude,
         longitude,
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         voie: '12 BIS RUE DE LECLERCQ'
       }
     ]);
@@ -135,7 +139,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -148,7 +152,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
@@ -182,7 +186,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         date_maj: new Date('2022-10-10'),
         latitude: 45.7689958,
         longitude: 4.8343466,
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         voie: '18 rue Robert Galley',
         distance: 3303.8115461567304
       },
@@ -194,7 +198,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874,
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         voie: '12 BIS RUE DE LECLERCQ',
         distance: 63653.064922230085
       }
@@ -213,7 +217,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           voie: '12 BIS RUE DE LECLERCQ'
         }),
         date_maj: new Date('2022-10-10'),
-        services: Services([Service.RealiserDesDemarchesAdministratives]),
+        services: Services([Service.AideAuxDemarchesAdministratives]),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
       {
@@ -226,12 +230,12 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           voie: '18 rue Robert Galley'
         }),
         date_maj: new Date('2022-10-10'),
-        services: Services([Service.CreerEtDevelopperMonEntreprise]),
+        services: Services([Service.InsertionProfessionnelleViaLeNumerique]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
-    const filter: FilterPresentation = { service: Service.CreerEtDevelopperMonEntreprise };
+    const filter: FilterPresentation = { services: [Service.InsertionProfessionnelleViaLeNumerique] };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -252,7 +256,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         date_maj: new Date('2022-10-10'),
-        services: [Service.CreerEtDevelopperMonEntreprise],
+        services: [Service.InsertionProfessionnelleViaLeNumerique],
         voie: '18 rue Robert Galley',
         latitude: 45.7689958,
         longitude: 4.8343466
@@ -271,7 +275,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({
           latitude: 47,
@@ -288,7 +292,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           voie: '18 rue Robert Galley'
         }),
         date_maj: new Date('2022-10-10'),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         localisation: Localisation({
           latitude: 46,
           longitude: 4
@@ -325,7 +329,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         date_maj: new Date('2022-10-10'),
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         voie: '18 rue Robert Galley',
         distance: 4738.19581538169,
         latitude: 46,
@@ -345,9 +349,9 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        accessibilite: Url(
+        fiche_acces_libre: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
         ),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
@@ -361,13 +365,13 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
-    const filter: FilterPresentation = { accessibilite: true };
+    const filter: FilterPresentation = { fiche_acces_libre: true };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -388,9 +392,9 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         date_maj: new Date('2022-10-10'),
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         voie: '12 BIS RUE DE LECLERCQ',
-        accessibilite:
+        fiche_acces_libre:
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/',
         latitude: 46.2814605,
         longitude: 4.468874
@@ -409,9 +413,9 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        accessibilite: Url(
+        fiche_acces_libre: Url(
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/'
         ),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
@@ -425,13 +429,13 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
-    const filter: FilterPresentation = { accessibilite: false };
+    const filter: FilterPresentation = { fiche_acces_libre: false };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -452,9 +456,9 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        accessibilite:
+        fiche_acces_libre:
           'https://acceslibre.beta.gouv.fr/app/29-lampaul-plouarzel/a/bibliotheque-mediatheque/erp/mediatheque-13/',
         latitude: 46.2814605,
         longitude: 4.468874
@@ -465,7 +469,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 45.7689958,
         longitude: 4.8343466
@@ -485,7 +489,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           voie: '12 BIS RUE DE LECLERCQ'
         }),
         date_maj: new Date('2022-10-10'),
-        services: Services([Service.RealiserDesDemarchesAdministratives]),
+        services: Services([Service.AideAuxDemarchesAdministratives]),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),
         prise_rdv: Url('https://www.rdv-aide-numerique.fr/book/6331a826ac7aea06f2f9eb63')
       },
@@ -499,7 +503,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           voie: '18 rue Robert Galley'
         }),
         date_maj: new Date('2022-10-10'),
-        services: Services([Service.CreerEtDevelopperMonEntreprise]),
+        services: Services([Service.InsertionProfessionnelleViaLeNumerique]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
@@ -525,7 +529,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         date_maj: new Date('2022-10-10'),
-        services: [Service.RealiserDesDemarchesAdministratives],
+        services: [Service.AideAuxDemarchesAdministratives],
         voie: '12 BIS RUE DE LECLERCQ',
         latitude: 46.2814605,
         longitude: 4.468874,
@@ -545,7 +549,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 }),
         prise_rdv: Url('https://www.rdv-aide-numerique.fr/book/6331a826ac7aea06f2f9eb63')
@@ -559,7 +563,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
@@ -586,7 +590,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874,
@@ -598,7 +602,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 45.7689958,
         longitude: 4.8343466
@@ -606,7 +610,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
     ]);
   });
 
-  it('should not filter lieux mediation numerique on conditions_access property when filter is empty', async (): Promise<void> => {
+  it('should not filter lieux mediation numerique on frais_a_charge property when filter is empty', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -617,7 +621,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -630,14 +634,14 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        conditions_acces: ConditionsAcces([ConditionAcces.Gratuit, ConditionAcces.GratuitSousCondition]),
+        frais_a_charge: FraisACharge([Frais.Gratuit, Frais.GratuitSousCondition]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
-    const filter: FilterPresentation = { conditions_acces: ConditionsAcces([]) };
+    const filter: FilterPresentation = { frais_a_charge: FraisACharge([]) };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -658,7 +662,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874
@@ -669,16 +673,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        conditions_acces: [ConditionAcces.Gratuit, ConditionAcces.GratuitSousCondition],
+        frais_a_charge: [Frais.Gratuit, Frais.GratuitSousCondition],
         latitude: 45.7689958,
         longitude: 4.8343466
       }
     ]);
   });
 
-  it('should filter lieux mediation numerique on conditions_access property', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on frais_a_charge property', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -689,7 +693,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -702,15 +706,15 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        conditions_acces: ConditionsAcces([ConditionAcces.Gratuit, ConditionAcces.GratuitSousCondition]),
+        frais_a_charge: FraisACharge([Frais.Gratuit, Frais.GratuitSousCondition]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
     const filter: FilterPresentation = {
-      conditions_acces: ConditionsAcces([ConditionAcces.Gratuit, ConditionAcces.GratuitSousCondition])
+      frais_a_charge: FraisACharge([Frais.Gratuit, Frais.GratuitSousCondition])
     };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
@@ -732,16 +736,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        conditions_acces: [ConditionAcces.Gratuit, ConditionAcces.GratuitSousCondition],
+        frais_a_charge: [Frais.Gratuit, Frais.GratuitSousCondition],
         latitude: 45.7689958,
         longitude: 4.8343466
       }
     ]);
   });
 
-  it('should not filter lieux mediation numerique on publics_accueillis property when filter is empty', async (): Promise<void> => {
+  it('should not filter lieux mediation numerique on publics_specifiquement_adresses property when filter is empty', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -752,7 +756,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -765,14 +769,17 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes, PublicAccueilli.Surdite]),
+        prise_en_charge_specifique: PrisesEnChargeSpecifiques([
+          PriseEnChargeSpecifique.Surdite,
+          PriseEnChargeSpecifique.Illettrisme
+        ]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
-    const filter: FilterPresentation = { publics_accueillis: PublicsAccueillis([]) };
+    const filter: FilterPresentation = { publics_specifiquement_adresses: PublicsSpecifiquementAdresses([]) };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -793,7 +800,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874
@@ -804,9 +811,84 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        publics_accueillis: [PublicAccueilli.Adultes, PublicAccueilli.Surdite],
+        prise_en_charge_specifique: [PriseEnChargeSpecifique.Surdite, PriseEnChargeSpecifique.Illettrisme],
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should not filter lieux mediation numerique on prise_en_charge_specifique property when filter is empty', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        publics_specifiquement_adresses: PublicsSpecifiquementAdresses([
+          PublicSpecifiquementAdresse.Seniors,
+          PublicSpecifiquementAdresse.Jeunes
+        ]),
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = { publics_specifiquement_adresses: PublicsSpecifiquementAdresses([]) };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: 'structure-1',
+        nom: 'Anonymal',
+        code_postal: '51100',
+        commune: 'Reims',
+        voie: '12 BIS RUE DE LECLERCQ',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        latitude: 46.2814605,
+        longitude: 4.468874
+      },
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        publics_specifiquement_adresses: [PublicSpecifiquementAdresse.Seniors, PublicSpecifiquementAdresse.Jeunes],
         latitude: 45.7689958,
         longitude: 4.8343466
       }
@@ -824,7 +906,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -837,15 +919,15 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes]),
+        publics_specifiquement_adresses: PublicsSpecifiquementAdresses([PublicSpecifiquementAdresse.Seniors]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
     const filter: FilterPresentation = {
-      publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes])
+      publics_specifiquement_adresses: PublicsSpecifiquementAdresses([PublicSpecifiquementAdresse.Seniors])
     };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
@@ -866,16 +948,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        publics_accueillis: [PublicAccueilli.Adultes],
+        publics_specifiquement_adresses: [PublicSpecifiquementAdresse.Seniors],
         latitude: 45.7689958,
         longitude: 4.8343466
       }
     ]);
   });
 
-  it('should filter lieux mediation numerique on publics_accueillis that do not contains Adultes and Surdité properties', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on publics_specifiquement_adresses that do not contains Senior and Jeunes properties', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -886,9 +968,9 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes]),
+        publics_specifiquement_adresses: PublicsSpecifiquementAdresses([PublicSpecifiquementAdresse.Seniors]),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
       {
@@ -900,15 +982,21 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes, PublicAccueilli.Surdite]),
+        publics_specifiquement_adresses: PublicsSpecifiquementAdresses([
+          PublicSpecifiquementAdresse.Seniors,
+          PublicSpecifiquementAdresse.Jeunes
+        ]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
     const filter: FilterPresentation = {
-      publics_accueillis: PublicsAccueillis([PublicAccueilli.Adultes, PublicAccueilli.Surdite])
+      publics_specifiquement_adresses: PublicsSpecifiquementAdresses([
+        PublicSpecifiquementAdresse.Seniors,
+        PublicSpecifiquementAdresse.Jeunes
+      ])
     };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
@@ -929,9 +1017,78 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        publics_accueillis: [PublicAccueilli.Adultes, PublicAccueilli.Surdite],
+        publics_specifiquement_adresses: [PublicSpecifiquementAdresse.Seniors, PublicSpecifiquementAdresse.Jeunes],
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on prise_en_charge_specifique that do not contains Surdité and Illetrisme properties', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        prise_en_charge_specifique: PrisesEnChargeSpecifiques([PriseEnChargeSpecifique.Surdite]),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        prise_en_charge_specifique: PrisesEnChargeSpecifiques([
+          PriseEnChargeSpecifique.Surdite,
+          PriseEnChargeSpecifique.Illettrisme
+        ]),
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = {
+      prise_en_charge_specifique: PrisesEnChargeSpecifiques([
+        PriseEnChargeSpecifique.Surdite,
+        PriseEnChargeSpecifique.Illettrisme
+      ])
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumerique: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      new LieuxMediationNumeriquePresenter(lieuxMediationNumeriqueRepository).lieuxMediationNumeriqueByDistance$(
+        of(NO_LOCALISATION),
+        of(filter)
+      )
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumerique).toStrictEqual([
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        prise_en_charge_specifique: [PriseEnChargeSpecifique.Surdite, PriseEnChargeSpecifique.Illettrisme],
         latitude: 45.7689958,
         longitude: 4.8343466
       }
@@ -949,7 +1106,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -962,9 +1119,12 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        modalites_accompagnement: ModalitesAccompagnement([ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide]),
+        modalites_accompagnement: ModalitesAccompagnement([
+          ModaliteAccompagnement.EnAutonomie,
+          ModaliteAccompagnement.AccompagnementIndividuel
+        ]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
@@ -990,7 +1150,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874
@@ -1001,9 +1161,9 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        modalites_accompagnement: [ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide],
+        modalites_accompagnement: [ModaliteAccompagnement.EnAutonomie, ModaliteAccompagnement.AccompagnementIndividuel],
         latitude: 45.7689958,
         longitude: 4.8343466
       }
@@ -1021,7 +1181,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1034,15 +1194,21 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        modalites_accompagnement: ModalitesAccompagnement([ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide]),
+        modalites_accompagnement: ModalitesAccompagnement([
+          ModaliteAccompagnement.EnAutonomie,
+          ModaliteAccompagnement.AccompagnementIndividuel
+        ]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
     const filter: FilterPresentation = {
-      modalites_accompagnement: ModalitesAccompagnement([ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide])
+      modalites_accompagnement: ModalitesAccompagnement([
+        ModaliteAccompagnement.EnAutonomie,
+        ModaliteAccompagnement.AccompagnementIndividuel
+      ])
     };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
@@ -1064,16 +1230,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        modalites_accompagnement: [ModaliteAccompagnement.Seul, ModaliteAccompagnement.AvecDeLAide],
+        modalites_accompagnement: [ModaliteAccompagnement.EnAutonomie, ModaliteAccompagnement.AccompagnementIndividuel],
         latitude: 45.7689958,
         longitude: 4.8343466
       }
     ]);
   });
 
-  it('should not filter lieux mediation numerique on labels_nationaux property when filter is empty', async (): Promise<void> => {
+  it('should not filter lieux mediation numerique on dispositif_programmes_nationaux property when filter is empty', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -1084,7 +1250,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1097,14 +1263,14 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        labels_nationaux: LabelsNationaux([LabelNational.CNFS]),
+        dispositif_programmes_nationaux: DispositifProgrammesNationaux([DispositifProgrammeNational.ConseillersNumeriques]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
-    const filter: FilterPresentation = { labels_nationaux: LabelsNationaux([]) };
+    const filter: FilterPresentation = { dispositif_programmes_nationaux: DispositifProgrammesNationaux([]) };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -1125,7 +1291,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874
@@ -1136,16 +1302,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        labels_nationaux: [LabelNational.CNFS],
+        dispositif_programmes_nationaux: [DispositifProgrammeNational.ConseillersNumeriques],
         latitude: 45.7689958,
         longitude: 4.8343466
       }
     ]);
   });
 
-  it('should filter lieux mediation numerique on labels_nationaux property containing CnFS value', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on dispositif_programmes_nationaux property containing CnFS value', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -1156,7 +1322,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1169,90 +1335,15 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        labels_nationaux: LabelsNationaux([LabelNational.CNFS]),
+        dispositif_programmes_nationaux: DispositifProgrammesNationaux([DispositifProgrammeNational.ConseillersNumeriques]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
-      }
-    ];
-
-    const filter: FilterPresentation = { labels_nationaux: LabelsNationaux([LabelNational.CNFS]) };
-
-    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
-      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
-    } as LieuxMediationNumeriqueRepository;
-
-    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
-      lieuxMediationNumeriqueRepository
-    );
-
-    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
-    );
-
-    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
-      {
-        id: 'structure-2',
-        nom: 'Médiation Numérique Lyonnaise',
-        code_postal: '69004',
-        commune: 'Lyon',
-        voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
-        date_maj: new Date('2022-10-10'),
-        labels_nationaux: [LabelNational.CNFS],
-        latitude: 45.7689958,
-        longitude: 4.8343466
-      }
-    ]);
-  });
-
-  it('should filter lieux mediation numerique on labels_nationaux property containing CnFS or France Services value', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumerique[] = [
-      {
-        id: Id('structure-1'),
-        nom: Nom('Anonymal'),
-        pivot: Pivot('43493312300029'),
-        adresse: Adresse({
-          code_postal: '51100',
-          commune: 'Reims',
-          voie: '12 BIS RUE DE LECLERCQ'
-        }),
-        services: Services([Service.AccederADuMateriel]),
-        date_maj: new Date('2022-10-10'),
-        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
-      },
-      {
-        id: Id('structure-2'),
-        nom: Nom('Médiation Numérique Lyonnaise'),
-        pivot: Pivot('43493312300029'),
-        adresse: Adresse({
-          code_postal: '69004',
-          commune: 'Lyon',
-          voie: '18 rue Robert Galley'
-        }),
-        services: Services([Service.AccederADuMateriel]),
-        date_maj: new Date('2022-10-10'),
-        labels_nationaux: LabelsNationaux([LabelNational.CNFS]),
-        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
-      },
-      {
-        id: Id('structure-3'),
-        nom: Nom('Les bidouilleurs'),
-        pivot: Pivot('43493312300029'),
-        adresse: Adresse({
-          code_postal: '75006',
-          commune: 'Paris',
-          voie: '13 rue cassette'
-        }),
-        services: Services([Service.AccederADuMateriel]),
-        date_maj: new Date('2022-10-10'),
-        labels_nationaux: LabelsNationaux([LabelNational.FranceServices]),
-        localisation: Localisation({ latitude: 46.56, longitude: 3.19 })
       }
     ];
 
     const filter: FilterPresentation = {
-      labels_nationaux: LabelsNationaux([LabelNational.CNFS, LabelNational.FranceServices])
+      dispositif_programmes_nationaux: DispositifProgrammesNationaux([DispositifProgrammeNational.ConseillersNumeriques])
     };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
@@ -1274,9 +1365,89 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        labels_nationaux: [LabelNational.CNFS],
+        dispositif_programmes_nationaux: [DispositifProgrammeNational.ConseillersNumeriques],
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on dispositif_programmes_nationaux property containing CnFS or France Services value', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        dispositif_programmes_nationaux: DispositifProgrammesNationaux([DispositifProgrammeNational.ConseillersNumeriques]),
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      },
+      {
+        id: Id('structure-3'),
+        nom: Nom('Les bidouilleurs'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '75006',
+          commune: 'Paris',
+          voie: '13 rue cassette'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        dispositif_programmes_nationaux: DispositifProgrammesNationaux([DispositifProgrammeNational.FranceServices]),
+        localisation: Localisation({ latitude: 46.56, longitude: 3.19 })
+      }
+    ];
+
+    const filter: FilterPresentation = {
+      dispositif_programmes_nationaux: DispositifProgrammesNationaux([
+        DispositifProgrammeNational.ConseillersNumeriques,
+        DispositifProgrammeNational.FranceServices
+      ])
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        dispositif_programmes_nationaux: [DispositifProgrammeNational.ConseillersNumeriques],
         latitude: 45.7689958,
         longitude: 4.8343466
       },
@@ -1286,16 +1457,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '75006',
         commune: 'Paris',
         voie: '13 rue cassette',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        labels_nationaux: [LabelNational.FranceServices],
+        dispositif_programmes_nationaux: [DispositifProgrammeNational.FranceServices],
         latitude: 46.56,
         longitude: 3.19
       }
     ]);
   });
 
-  it('should not filter lieux mediation numerique on labels_autres property when filter is empty', async (): Promise<void> => {
+  it('should not filter lieux mediation numerique on formations_labels property when filter is empty', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -1306,7 +1477,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1319,14 +1490,14 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        labels_autres: ['Hinaura'],
+        formations_labels: FormationsLabels([FormationLabel.EtapesNumeriques]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
     ];
 
-    const filter: FilterPresentation = { labels_autres: [] };
+    const filter: FilterPresentation = { formations_labels: FormationsLabels([]) };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
       getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
@@ -1347,7 +1518,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874
@@ -1358,16 +1529,16 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        labels_autres: ['Hinaura'],
+        formations_labels: FormationsLabels([FormationLabel.EtapesNumeriques]),
         latitude: 45.7689958,
         longitude: 4.8343466
       }
     ]);
   });
 
-  it('should filter lieux mediation numerique on labels_autres property containing Hinaura value', async (): Promise<void> => {
+  it('should filter lieux mediation numerique on formations_labels property containing Etapes numeriques value', async (): Promise<void> => {
     const LieuxMediationNumerique: LieuMediationNumerique[] = [
       {
         id: Id('structure-1'),
@@ -1378,7 +1549,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1391,90 +1562,15 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
-        labels_autres: ['Hinaura'],
+        formations_labels: FormationsLabels([FormationLabel.EtapesNumeriques]),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
-      }
-    ];
-
-    const filter: FilterPresentation = { labels_autres: ['Hinaura'] };
-
-    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
-      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
-    } as LieuxMediationNumeriqueRepository;
-
-    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
-      lieuxMediationNumeriqueRepository
-    );
-
-    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
-      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
-    );
-
-    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
-      {
-        id: 'structure-2',
-        nom: 'Médiation Numérique Lyonnaise',
-        code_postal: '69004',
-        commune: 'Lyon',
-        voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
-        date_maj: new Date('2022-10-10'),
-        labels_autres: ['Hinaura'],
-        latitude: 45.7689958,
-        longitude: 4.8343466
-      }
-    ]);
-  });
-
-  it('should filter lieux mediation numerique on labels_autres property containing Hinaura or EPN value', async (): Promise<void> => {
-    const LieuxMediationNumerique: LieuMediationNumerique[] = [
-      {
-        id: Id('structure-1'),
-        nom: Nom('Anonymal'),
-        pivot: Pivot('43493312300029'),
-        adresse: Adresse({
-          code_postal: '51100',
-          commune: 'Reims',
-          voie: '12 BIS RUE DE LECLERCQ'
-        }),
-        services: Services([Service.AccederADuMateriel]),
-        date_maj: new Date('2022-10-10'),
-        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
-      },
-      {
-        id: Id('structure-2'),
-        nom: Nom('Médiation Numérique Lyonnaise'),
-        pivot: Pivot('43493312300029'),
-        adresse: Adresse({
-          code_postal: '69004',
-          commune: 'Lyon',
-          voie: '18 rue Robert Galley'
-        }),
-        services: Services([Service.AccederADuMateriel]),
-        date_maj: new Date('2022-10-10'),
-        labels_autres: ['Hinaura'],
-        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
-      },
-      {
-        id: Id('structure-3'),
-        nom: Nom('Les bidouilleurs'),
-        pivot: Pivot('43493312300029'),
-        adresse: Adresse({
-          code_postal: '75006',
-          commune: 'Paris',
-          voie: '13 rue cassette'
-        }),
-        services: Services([Service.AccederADuMateriel]),
-        date_maj: new Date('2022-10-10'),
-        labels_autres: ['EPN'],
-        localisation: Localisation({ latitude: 46.56, longitude: 3.19 })
       }
     ];
 
     const filter: FilterPresentation = {
-      labels_autres: ['Hinaura', 'EPN']
+      formations_labels: FormationsLabels([FormationLabel.EtapesNumeriques])
     };
 
     const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
@@ -1496,9 +1592,219 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        labels_autres: ['Hinaura'],
+        formations_labels: [FormationLabel.EtapesNumeriques],
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should not filter lieux mediation numerique on autres_formations_labels property when filter is empty', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        autres_formations_labels: ['Hinaura'],
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = { autres_formations_labels: [] };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: 'structure-1',
+        nom: 'Anonymal',
+        code_postal: '51100',
+        commune: 'Reims',
+        voie: '12 BIS RUE DE LECLERCQ',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        latitude: 46.2814605,
+        longitude: 4.468874
+      },
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        autres_formations_labels: ['Hinaura'],
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on autres_formations_labels property containing Hinaura value', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        autres_formations_labels: ['Hinaura'],
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      }
+    ];
+
+    const filter: FilterPresentation = { autres_formations_labels: ['Hinaura'] };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        autres_formations_labels: ['Hinaura'],
+        latitude: 45.7689958,
+        longitude: 4.8343466
+      }
+    ]);
+  });
+
+  it('should filter lieux mediation numerique on autres_formations_labels property containing Hinaura or EPN value', async (): Promise<void> => {
+    const LieuxMediationNumerique: LieuMediationNumerique[] = [
+      {
+        id: Id('structure-1'),
+        nom: Nom('Anonymal'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '51100',
+          commune: 'Reims',
+          voie: '12 BIS RUE DE LECLERCQ'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
+      },
+      {
+        id: Id('structure-2'),
+        nom: Nom('Médiation Numérique Lyonnaise'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '69004',
+          commune: 'Lyon',
+          voie: '18 rue Robert Galley'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        autres_formations_labels: ['Hinaura'],
+        localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
+      },
+      {
+        id: Id('structure-3'),
+        nom: Nom('Les bidouilleurs'),
+        pivot: Pivot('43493312300029'),
+        adresse: Adresse({
+          code_postal: '75006',
+          commune: 'Paris',
+          voie: '13 rue cassette'
+        }),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
+        date_maj: new Date('2022-10-10'),
+        autres_formations_labels: ['EPN'],
+        localisation: Localisation({ latitude: 46.56, longitude: 3.19 })
+      }
+    ];
+
+    const filter: FilterPresentation = {
+      autres_formations_labels: ['Hinaura', 'EPN']
+    };
+
+    const lieuxMediationNumeriqueRepository: LieuxMediationNumeriqueRepository = {
+      getAll$: (): Observable<LieuMediationNumerique[]> => of(LieuxMediationNumerique)
+    } as LieuxMediationNumeriqueRepository;
+
+    const lieuxMediationNumeriqueListPresenter: LieuxMediationNumeriquePresenter = new LieuxMediationNumeriquePresenter(
+      lieuxMediationNumeriqueRepository
+    );
+
+    const lieuxMediationNumeriquePresentation: LieuMediationNumeriquePresentation[] = await firstValueFrom(
+      lieuxMediationNumeriqueListPresenter.lieuxMediationNumeriqueByDistance$(of(NO_LOCALISATION), of(filter))
+    );
+
+    expect<LieuMediationNumeriquePresentation[]>(lieuxMediationNumeriquePresentation).toStrictEqual([
+      {
+        id: 'structure-2',
+        nom: 'Médiation Numérique Lyonnaise',
+        code_postal: '69004',
+        commune: 'Lyon',
+        voie: '18 rue Robert Galley',
+        services: [Service.AccesInternetEtMaterielInformatique],
+        date_maj: new Date('2022-10-10'),
+        autres_formations_labels: ['Hinaura'],
         latitude: 45.7689958,
         longitude: 4.8343466
       },
@@ -1508,9 +1814,9 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '75006',
         commune: 'Paris',
         voie: '13 rue cassette',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
-        labels_autres: ['EPN'],
+        autres_formations_labels: ['EPN'],
         latitude: 46.56,
         longitude: 3.19
       }
@@ -1528,7 +1834,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1541,7 +1847,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
@@ -1573,7 +1879,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874
@@ -1584,7 +1890,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         latitude: 45.7689958,
@@ -1604,7 +1910,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1617,7 +1923,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
@@ -1658,7 +1964,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         latitude: 45.7689958,
@@ -1678,7 +1984,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
@@ -1726,7 +2032,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1739,7 +2045,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         horaires: 'Tu-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
@@ -1780,7 +2086,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         horaires: 'Tu-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         latitude: 45.7689958,
@@ -1800,7 +2106,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1813,7 +2119,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         horaires: 'Tu-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
@@ -1852,7 +2158,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         horaires: 'Tu-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         latitude: 45.7689958,
@@ -1872,7 +2178,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Th 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
@@ -1886,7 +2192,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
@@ -1918,7 +2224,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00-12:00,14:00-18:30; Sa 08:30-12:00',
         latitude: 45.7689958,
@@ -1938,7 +2244,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -1951,7 +2257,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00,14:00-18:30; Sa 08:30-12:00',
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
@@ -1983,7 +2289,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874
@@ -1994,7 +2300,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         horaires: 'Mo-Fr 09:00,14:00-18:30; Sa 08:30-12:00',
         latitude: 45.7689958,
@@ -2014,7 +2320,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.2814605, longitude: 4.468874 })
       },
@@ -2027,7 +2333,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 })
       }
@@ -2052,7 +2358,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '51100',
         commune: 'Reims',
         voie: '12 BIS RUE DE LECLERCQ',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 46.2814605,
         longitude: 4.468874
@@ -2063,7 +2369,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         code_postal: '69004',
         commune: 'Lyon',
         voie: '18 rue Robert Galley',
-        services: [Service.AccederADuMateriel],
+        services: [Service.AccesInternetEtMaterielInformatique],
         date_maj: new Date('2022-10-10'),
         latitude: 45.7689958,
         longitude: 4.8343466
@@ -2082,7 +2388,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10')
       }
     ];
@@ -2113,7 +2419,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 47.25, longitude: 4.38 })
       },
@@ -2126,7 +2432,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 41.16, longitude: 4.22 })
       },
@@ -2139,7 +2445,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Paris',
           voie: '13 rue cassette'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.56, longitude: 3.19 })
       },
@@ -2152,7 +2458,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: "L'Arbresle",
           voie: '12 rue de la rRpublique'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.73, longitude: 5.61 })
       },
@@ -2165,7 +2471,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '126 Boulevard des Minimes'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 40.45, longitude: 3.62 })
       },
@@ -2178,7 +2484,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Marseille',
           voie: '3 impasse d vieux port'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 46.46, longitude: 4.78 })
       }
@@ -2211,7 +2517,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
         date_maj: new Date('2022-10-10'),
         latitude: 46.46,
         longitude: 4.78,
-        services: ['Accéder à du matériel']
+        services: [Service.AccesInternetEtMaterielInformatique]
       }
     ]);
   });
@@ -2227,7 +2533,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Reims',
           voie: '12 BIS RUE DE LECLERCQ'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 47.25, longitude: 4.38 })
       },
@@ -2240,7 +2546,7 @@ describe('lieux-mediation-numerique-list presenter', (): void => {
           commune: 'Lyon',
           voie: '18 rue Robert Galley'
         }),
-        services: Services([Service.AccederADuMateriel]),
+        services: Services([Service.AccesInternetEtMaterielInformatique]),
         date_maj: new Date('2022-10-10'),
         localisation: Localisation({ latitude: 41.16, longitude: 4.22 })
       }

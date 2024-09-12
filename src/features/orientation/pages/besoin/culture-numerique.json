@@ -1,26 +1,26 @@
 [
   {
-    "label": "Approfondir sa culture numérique",
+    "label": "Compréhension du monde numérique",
     "description": "Sécurité, fake news, gestion des données…",
-    "icon": "ri-image-2-line",
-    "value": "Approfondir ma culture numérique"
+    "icon": "ri-globe-fill",
+    "value": "Compréhension du monde numérique"
   },
   {
-    "label": "Promouvoir la citoyenneté numérique",
+    "label": "Utilisation sécurisée du numérique",
     "description": "Aider à la navigation dans nos environnements numériques de manière sécuritaire et responsable",
-    "icon": "ri-medal-line",
-    "value": "Promouvoir la citoyenneté numérique"
+    "icon": "ri-shield-user-fill",
+    "value": "Utilisation sécurisée du numérique"
   },
   {
-    "label": "Créer avec le numérique",
+    "label": "Loisirs et créations numériques",
     "description": "Montage photo, vidéo, fablab…",
-    "icon": "ri-pen-nib-line",
-    "value": "Créer avec le numérique"
+    "icon": "ri-palette-fill",
+    "value": "Loisirs et créations numériques"
   },
   {
-    "label": "Soutenir la parentalité et l’éducation avec le numérique",
+    "label": "Parentalité et éducation avec le numérique",
     "description": "Être parent à l’ère numérique, utiliser des applications éducatives, scolaires…",
-    "icon": "ri-parent-line",
-    "value": "Soutenir la parentalité et l'éducation avec le numérique"
+    "icon": "ri-parent-fill",
+    "value": "Parentalité et éducation avec le numérique"
   }
 ]

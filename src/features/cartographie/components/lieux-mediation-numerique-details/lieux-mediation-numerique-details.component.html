@@ -44,28 +44,29 @@
               properties: {
                 id: lieuMediationNumerique.id,
                 nom: lieuMediationNumerique.nom,
-                labels_nationaux: lieuMediationNumerique.labels_nationaux
+                dispositif_programmes_nationaux: lieuMediationNumerique.dispositif_programmes_nationaux
               }
             }
           ]"></app-lieu-mediation-numerique-markers>
       </mgl-map>
     </div>
   </div>
-
   <ul class="list-group list-group-lg list-group-flush list-group-flush-at-edge flex-grow-1 mx-4">
     <li class="list-group-item">
       <app-informations-pratiques
+        [nom]="lieuMediationNumerique.nom"
         [adresse]="lieuMediationNumerique.adresse"
         [sources]="lieuMediationNumerique.source"
-        [conditionsAcces]="lieuMediationNumerique.conditions_acces"
-        [accessibilite]="lieuMediationNumerique.accessibilite"
-        [courriel]="lieuMediationNumerique.contact?.courriel"
+        [itinerence]="lieuMediationNumerique.itinerance"
+        [fraisACharge]="lieuMediationNumerique.frais_a_charge"
+        [ficheAccesLibre]="lieuMediationNumerique.fiche_acces_libre"
+        [courriels]="lieuMediationNumerique.contact?.courriels"
         [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
         [distance]="lieuMediationNumerique.distance"
         [status]="lieuMediationNumerique.status"></app-informations-pratiques>
     </li>
-    <li class="list-group-item">
-      <div class="row mb-5">
+    <li class="list-group-item border-0">
+      <div class="row">
         <ng-container *ngIf="lieuMediationNumerique.horaires; else noOpeningHours">
           <div class="col-md-6 mt-4">
             <app-horaires [horaires]="lieuMediationNumerique.horaires" sousTitre="Cette semaine" weekOffset="0"></app-horaires>
@@ -89,7 +90,7 @@
       </div>
       <ng-container *ngIf="lieuMediationNumerique.full_horaires">
         <app-collapse #collapseHorairesDetaille [control]="collapseHorairesDetailleControl">
-          <li class="list-group-item border-0 border-top">
+          <div class="list-group-item border-0 border-top mt-5">
             <div class="row">
               <h2 class="h5 my-3 d-print-none fw-bold text-muted">Horaires détaillées</h2>
               <div
@@ -98,7 +99,7 @@
                 <app-horaires [horaires]="weekHoraires" [weekOffset]="weekOffset + 1"></app-horaires>
               </div>
             </div>
-          </li>
+          </div>
         </app-collapse>
         <div class="my-3">
           <small *ngIf="collapseHorairesDetaille.isCollapsed$ | async" class="d-flex justify-content-center text-primary my-1">
@@ -118,11 +119,16 @@
         </div>
       </ng-container>
     </li>
-    <li class="list-group-item border-0">
-      <app-services [services]="lieuMediationNumerique.services"></app-services>
+    <li class="list-group-item" *ngIf="lieuMediationNumerique.modalites_acces">
+      <h2 class="h5 text-muted-dark mb-4">Comment accéder au service ?</h2>
+      <span
+        *ngFor="let modaliteAcces of lieuMediationNumerique.modalites_acces"
+        class="badge rounded-pill text-bg-light px-3 py-2 me-1 my-1">
+        {{ modaliteAcces }}
+      </span>
     </li>
-    <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.accessibilite === undefined">
-      <app-accessibilite [accessibilite]="lieuMediationNumerique.accessibilite"></app-accessibilite>
+    <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.services">
+      <app-services [services]="lieuMediationNumerique.services"></app-services>
     </li>
     <li class="list-group-item" *ngIf="lieuMediationNumerique.aidants">
       <app-aidants [aidants]="lieuMediationNumerique.aidants"></app-aidants>
@@ -131,26 +137,43 @@
       <app-modalites-accompagnement
         [modalitesAccompagnement]="lieuMediationNumerique.modalites_accompagnement"></app-modalites-accompagnement>
     </li>
-    <li class="list-group-item" *ngIf="lieuMediationNumerique.publics_accueillis?.length">
-      <app-public-pris-en-charge [publicsAccueillis]="lieuMediationNumerique.publics_accueillis"></app-public-pris-en-charge>
+    <li
+      class="list-group-item"
+      [ngClass]="{ 'border-0': lieuMediationNumerique.modalites_accompagnement?.length }"
+      *ngIf="lieuMediationNumerique.publics_specifiquement_adresses?.length">
+      <app-publics-specifiquement-adresses
+        [publicsSpecifiquementAdresses]="
+          lieuMediationNumerique.publics_specifiquement_adresses
+        "></app-publics-specifiquement-adresses>
+    </li>
+    <li class="list-group-item" *ngIf="lieuMediationNumerique.prise_en_charge_specifique?.length">
+      <app-prise-en-charge-specifique
+        [prisesEnChargeSpecifiques]="lieuMediationNumerique.prise_en_charge_specifique"></app-prise-en-charge-specifique>
     </li>
     <li
       class="list-group-item"
-      *ngIf="lieuMediationNumerique.labels_nationaux?.length || lieuMediationNumerique.labels_autres?.length">
+      *ngIf="
+        lieuMediationNumerique.dispositif_programmes_nationaux?.length ||
+        lieuMediationNumerique.autres_formations_labels?.length
+      ">
       <app-labellisations
-        [labelsNationaux]="lieuMediationNumerique.labels_nationaux"
-        [labelsAutres]="lieuMediationNumerique.labels_autres"
+        [dispositifProgrammesNationaux]="lieuMediationNumerique.dispositif_programmes_nationaux"
+        [formationsLabels]="lieuMediationNumerique.formations_labels"
+        [autresFormationsLabels]="lieuMediationNumerique.autres_formations_labels"
         (showLabel)="showLabel.emit($event)"
         (showLabelInvokingContext)="showLabelInvokingContext.emit($event)"></app-labellisations>
     </li>
-    <li class="list-group-item">
+    <li class="list-group-item border-0">
       <div class="p-3 rounded-3" style="background-color: #c0c0ff">
         <app-score-completion [lieuMediationNumerique]="lieuMediationNumerique"></app-score-completion>
       </div>
     </li>
+    <li class="list-group-item border-0" *ngIf="lieuMediationNumerique.fiche_acces_libre === undefined">
+      <app-accessibilite></app-accessibilite>
+    </li>
     <li class="list-group-item">
       <div class="d-flex">
-        <h2 class="h5 text-muted text-uppercase mt-1 flex-grow-1">Une erreur sur les données ?</h2>
+        <h2 class="h5 text-muted mt-1 flex-grow-1">Une erreur sur les données</h2>
         <button (click)="erreurFormModal.control.toggle($event)" class="btn btn-secondary btn-sm m-auto">
           <i class="ri ri-alert-line ms-1 fw-normal" aria-hidden="true"></i>
           Signaler une erreur
@@ -203,9 +226,9 @@
   #orientationSheetModal
   [id]="lieuMediationNumerique.id"
   [nom]="lieuMediationNumerique.nom"
-  [labels_nationaux]="lieuMediationNumerique.labels_nationaux"
+  [dispositifProgrammesNationaux]="lieuMediationNumerique.dispositif_programmes_nationaux"
   [adresse]="lieuMediationNumerique.adresse"
-  [courriel]="lieuMediationNumerique.contact?.courriel"
+  [courriels]="lieuMediationNumerique.contact?.courriels"
   [telephone]="lieuMediationNumerique.contact?.telephone ?? '' | phone"
   [siteWeb]="lieuMediationNumerique.contact?.site_web"
   [localisation]="lieuMediationNumerique.localisation"

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="52.959892mm"
+   height="48.818268mm"
+   viewBox="0 0 52.959892 48.818268"
+   version="1.1"
+   id="svg15690"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="Promeneurs du net.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview15692"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="4.2257738"
+     inkscape:cx="86.493035"
+     inkscape:cy="118.55817"
+     inkscape:window-width="2560"
+     inkscape:window-height="1363"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g15763"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs15687" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-79.510068,-31.511255)">
+    <g
+       id="g15763"
+       transform="translate(74.153858,27.906016)">
+      <text
+         xml:space="preserve"
+         style="font-size:9.525px;font-family:Arial;-inkscape-font-specification:Arial;text-align:center;letter-spacing:0.264583px;text-anchor:middle;fill:#005a77;fill-opacity:1;stroke-width:0.529167;paint-order:markers fill stroke"
+         x="31.642975"
+         y="42.508305"
+         id="text17042"><tspan
+           sodipodi:role="line"
+           id="tspan17040"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.525px;font-family:AnjaliOldLipi;-inkscape-font-specification:AnjaliOldLipi;fill:#005a77;fill-opacity:1;stroke-width:0.529167"
+           x="31.775267"
+           y="42.508305"
+           dx="0">Promeneurs</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.525px;font-family:AnjaliOldLipi;-inkscape-font-specification:AnjaliOldLipi;text-align:center;letter-spacing:0.132292px;text-anchor:middle;fill:#005a77;fill-opacity:1;stroke-width:0.529167;paint-order:markers fill stroke"
+         x="31.286957"
+         y="52.311886"
+         id="text75470"><tspan
+           sodipodi:role="line"
+           id="tspan75468"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial;fill:#005a77;fill-opacity:1;stroke-width:0.529167"
+           x="31.353104"
+           y="52.311886">du Net</tspan></text>
+      <path
+         id="path128883"
+         style="color:#000000;fill:#005a77;fill-opacity:1;stroke-width:3.77953;-inkscape-stroke:none;paint-order:markers fill stroke"
+         d="m 414.42578,119.09766 c -29.93094,0 -54.24219,24.31124 -54.24219,54.24218 0,29.93095 24.31125,54.24219 54.24219,54.24219 2.41647,0 4.79035,-0.17476 7.12305,-0.48242 l 16.18945,13.18555 1.32227,-18.64649 c 17.55954,-8.98454 29.60742,-27.2401 29.60742,-48.29883 0,-29.93094 -24.31124,-54.24218 -54.24219,-54.24218 z m 0,4.67382 c 27.4022,0 49.56836,22.16617 49.56836,49.56836 0,20.08742 -11.91227,37.35756 -29.06641,45.14649 v 0.01 l -0.0508,-0.0391 -0.61133,13.09766 -7.20117,-5.45899 -4.5332,-3.85547 c -2.63761,0.43272 -5.34422,0.66211 -8.10547,0.66211 -27.4022,0 -49.57031,-22.1603 -49.57031,-49.5625 0,-27.40219 22.16811,-49.56836 49.57031,-49.56836 z"
+         transform="matrix(0.26458333,0,0,0.26458333,-74.153858,-27.906016)" />
+    </g>
+    <path
+       id="path157913-9"
+       style="color:#000000;fill:#e85017;fill-opacity:1;stroke-width:1;-inkscape-stroke:none;paint-order:markers fill stroke"
+       d="m 100.24535,38.09938 c -3.85067,5.427498 -2.77829,11.995743 0.47646,16.408302 3.17034,-1.481564 5.36401,-4.543846 5.36401,-8.100282 0,-3.731977 -2.41556,-6.919918 -5.84047,-8.30802 z"
+       sodipodi:nodetypes="ccsc" />
+    <path
+       id="path157913-9-6"
+       style="color:#000000;fill:#e85017;fill-opacity:1;stroke-width:3.77953;-inkscape-stroke:none;paint-order:markers fill stroke"
+       d="m 364.26758,141.03906 c -20.08395,0 -36.57617,15.2476 -36.57617,34.20703 0,12.65839 7.35106,23.65864 18.21484,29.57422 l 0.77344,12.9668 10.7207,-8.94336 c 2.22704,0.39825 4.52166,0.60937 6.86719,0.60937 3.03565,0 5.98937,-0.35092 8.8164,-1.00781 -1.14329,-1.34154 -2.22412,-2.73815 -3.23437,-4.1875 -1.81058,0.29473 -3.67564,0.44922 -5.58203,0.44922 -2.23598,0 -4.41482,-0.21289 -6.51563,-0.61523 l -8.00746,6.37541 -0.4066,-9.18596 c -10.08838,-4.95814 -16.90039,-14.78345 -16.90039,-26.03516 0,-16.20588 14.1314,-29.46875 31.83008,-29.46875 1.10882,0 2.20492,0.0507 3.2832,0.15235 0.88893,-1.51622 1.84962,-2.98455 2.87695,-4.40235 -2.00452,-0.31952 -4.0626,-0.48827 -6.16015,-0.48828 z"
+       transform="scale(0.26458333)"
+       sodipodi:nodetypes="cscccsccscccssccc" />
+  </g>
+</svg>

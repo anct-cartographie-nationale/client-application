@@ -1,4 +1,5 @@
 export * from './breadcrumb-items';
+export * from './courriels';
 export * from './geolocation';
 export * from './hub';
 export * from './label';

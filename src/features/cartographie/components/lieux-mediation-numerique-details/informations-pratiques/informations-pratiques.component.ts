@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { Courriel, Url } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { OpeningState } from '../../../../core/presenters';
-import { SourcePresentation } from '../../../presenters';
+import { SourcePresentation, toCourrielsWithCC } from '../../../presenters';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -9,10 +9,12 @@ import { SourcePresentation } from '../../../presenters';
   templateUrl: './informations-pratiques.component.html'
 })
 export class InformationsPratiquesComponent {
+  @Input() public nom!: string;
   @Input() public adresse!: string;
-  @Input() public conditionsAcces: string | undefined;
-  @Input() public accessibilite: Url | undefined;
-  @Input() public courriel: string | undefined;
+  @Input() public itinerence?: boolean = false;
+  @Input() public fraisACharge?: string[] = [];
+  @Input() public ficheAccesLibre: Url | undefined;
+  @Input() public courriels: Courriel[] | undefined;
   @Input() public telephone: string | undefined;
   @Input() public distance: number | undefined;
   @Input() public status: OpeningState | undefined;
@@ -20,5 +22,9 @@ export class InformationsPratiquesComponent {
 
   public isAidantsConnect(sources?: SourcePresentation[]) {
     return sources?.length === 1 && sources?.map((source: SourcePresentation) => source.label).includes('Aidants Connect');
+  }
+
+  public toCourrielsWithCC(courriels?: string[]) {
+    return toCourrielsWithCC(courriels);
   }
 }

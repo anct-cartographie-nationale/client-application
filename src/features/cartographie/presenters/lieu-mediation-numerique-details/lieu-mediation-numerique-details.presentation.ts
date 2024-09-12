@@ -1,9 +1,12 @@
 import {
   Contact,
-  LabelNational,
+  DispositifProgrammeNational,
+  FormationLabel,
   Localisation,
+  ModaliteAcces,
   Presentation,
-  PublicAccueilli,
+  PriseEnChargeSpecifique,
+  PublicSpecifiquementAdresse,
   Service,
   Url
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
@@ -24,7 +27,7 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   adresse: string;
   commune: string;
   code_postal: string;
-  services: Service[];
+  services?: Service[];
   horaires?: HorairesPresentation;
   full_horaires?: HorairesPresentation[];
   status?: OpeningState;
@@ -32,12 +35,16 @@ export type LieuMediationNumeriqueDetailsPresentation = {
   contact?: Contact;
   presentation?: Presentation;
   date_maj?: Date;
-  publics_accueillis?: PublicAccueilli[];
-  conditions_acces?: string;
-  labels_nationaux?: LabelNational[];
-  labels_autres?: string[];
+  publics_specifiquement_adresses?: PublicSpecifiquementAdresse[];
+  prise_en_charge_specifique?: PriseEnChargeSpecifique[];
+  frais_a_charge?: string[];
+  itinerance?: boolean;
+  dispositif_programmes_nationaux?: DispositifProgrammeNational[];
+  formations_labels?: FormationLabel[];
+  autres_formations_labels?: string[];
+  modalites_acces?: ModaliteAcces[];
   modalites_accompagnement?: ModaliteAccompagnementPresentation[];
-  accessibilite?: Url;
+  fiche_acces_libre?: Url;
   localisation?: Localisation;
   distance?: number;
   prise_rdv?: string;

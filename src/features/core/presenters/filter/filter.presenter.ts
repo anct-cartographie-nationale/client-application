@@ -1,11 +1,13 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import {
-  ConditionAcces,
-  LabelNational,
+  Frais,
+  DispositifProgrammeNational,
   Localisation,
   ModaliteAccompagnement,
-  PublicAccueilli,
-  Service
+  PublicSpecifiquementAdresse,
+  PriseEnChargeSpecifique,
+  Service,
+  FormationLabel
 } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriquePresentation } from '../lieux-mediation-numerique';
 import { NO_LOCALISATION } from '../../models';
@@ -28,33 +30,37 @@ export type OpeningHours = {
 };
 
 export type FilterPresentation = {
-  service?: Service;
+  services?: Service[];
   address?: string;
   distance?: number;
-  accessibilite?: boolean;
+  fiche_acces_libre?: boolean;
   prise_rdv?: boolean;
-  conditions_acces?: ConditionAcces[];
-  publics_accueillis?: PublicAccueilli[];
+  frais_a_charge?: Frais[];
+  publics_specifiquement_adresses?: PublicSpecifiquementAdresse[];
+  prise_en_charge_specifique?: PriseEnChargeSpecifique[];
   modalites_accompagnement?: ModaliteAccompagnement[];
-  labels_nationaux?: LabelNational[];
-  labels_autres?: string[];
+  dispositif_programmes_nationaux?: DispositifProgrammeNational[];
+  formations_labels?: FormationLabel[];
+  autres_formations_labels?: string[];
   horaires_ouverture?: OpeningHours[];
 };
 
 export type FilterQueryParamsPresentation = {
-  service?: Service;
+  services?: Service[];
   address?: string;
   address_id?: string;
   latitude?: `${number}`;
   longitude?: `${number}`;
   distance?: `${number}`;
-  accessibilite?: 'true' | 'false';
+  fiche_acces_libre?: 'true' | 'false';
   prise_rdv?: 'true' | 'false';
-  conditions_acces?: string;
-  publics_accueillis?: string;
+  frais_a_charge?: string;
+  publics_specifiquement_adresses?: string;
+  prise_en_charge_specifique?: string;
   modalites_accompagnement?: string;
-  labels_nationaux?: string;
-  labels_autres?: string;
+  dispositif_programmes_nationaux?: string;
+  formations_labels?: string;
+  autres_formations_labels?: string;
   horaires_ouverture?: string;
 };
 
@@ -70,18 +76,19 @@ const wrapInArray = <T>(params: string | string[]): T[] => (Array.isArray(params
 const toArray = <T>(params?: string | string[]): T[] => (!params ? [] : wrapInArray(params));
 
 const fieldsFrom = (filterFormPresentation: FilterFormPresentation): FilterFormPresentation[keyof FilterFormPresentation][] => [
-  filterFormPresentation.service,
+  filterFormPresentation.services,
   filterFormPresentation.address,
   filterFormPresentation.latitude,
   filterFormPresentation.longitude,
   filterFormPresentation.distance,
-  filterFormPresentation.accessibilite,
+  filterFormPresentation.fiche_acces_libre,
   filterFormPresentation.prise_rdv,
-  filterFormPresentation.conditions_acces,
-  filterFormPresentation.publics_accueillis,
+  filterFormPresentation.frais_a_charge,
+  filterFormPresentation.publics_specifiquement_adresses,
+  filterFormPresentation.prise_en_charge_specifique,
   filterFormPresentation.modalites_accompagnement,
-  filterFormPresentation.labels_nationaux,
-  filterFormPresentation.labels_autres,
+  filterFormPresentation.dispositif_programmes_nationaux,
+  filterFormPresentation.autres_formations_labels,
   filterFormPresentation.horaires_ouverture
 ];
 
@@ -92,19 +99,21 @@ export const hasActiveFilter = (filterFormPresentation: FilterFormPresentation):
   fieldsFrom(filterFormPresentation).some(isFilled);
 
 export const toFilterFormPresentationFromQuery = (queryParams?: FilterQueryParamsPresentation): FilterFormPresentation => ({
-  service: queryParams?.service,
+  services: toArray(queryParams?.services),
   address: queryParams?.address,
   addressId: queryParams?.address_id,
   latitude: queryParams?.latitude ? parseFloat(queryParams.latitude) : undefined,
   longitude: queryParams?.longitude ? parseFloat(queryParams.longitude) : undefined,
   distance: queryParams?.distance ? parseInt(queryParams.distance) : undefined,
-  accessibilite: queryParams?.accessibilite === 'true' ? true : undefined,
+  fiche_acces_libre: queryParams?.fiche_acces_libre === 'true' ? true : undefined,
   prise_rdv: queryParams?.prise_rdv === 'true' ? true : undefined,
-  conditions_acces: toArray(queryParams?.conditions_acces),
-  publics_accueillis: toArray(queryParams?.publics_accueillis),
+  frais_a_charge: toArray(queryParams?.frais_a_charge),
+  publics_specifiquement_adresses: toArray(queryParams?.publics_specifiquement_adresses),
+  prise_en_charge_specifique: toArray(queryParams?.prise_en_charge_specifique),
   modalites_accompagnement: toArray(queryParams?.modalites_accompagnement),
-  labels_nationaux: toArray(queryParams?.labels_nationaux),
-  labels_autres: toArray(queryParams?.labels_autres),
+  dispositif_programmes_nationaux: toArray(queryParams?.dispositif_programmes_nationaux),
+  formations_labels: toArray(queryParams?.formations_labels),
+  autres_formations_labels: toArray(queryParams?.autres_formations_labels),
   horaires_ouverture: queryParams?.horaires_ouverture ? JSON.parse(queryParams?.horaires_ouverture) : undefined
 });
 

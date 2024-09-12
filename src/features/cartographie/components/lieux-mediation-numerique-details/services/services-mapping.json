@@ -1,62 +1,38 @@
 [
   {
-    "icon": "ri-smartphone-fill",
-    "value": "Prendre en main un smartphone ou une tablette"
-  },
-  {
-    "icon": "ri-mouse-fill",
-    "value": "Prendre en main un ordinateur"
+    "icon": "ri-lifebuoy-fill",
+    "value": "Aide aux démarches administratives"
   },
   {
     "icon": "ri-calendar-fill",
-    "value": "Utiliser le numérique au quotidien"
-  },
-  {
-    "icon": "ri-image-fill",
-    "value": "Approfondir ma culture numérique"
-  },
-  {
-    "icon": "ri-medal-2-fill",
-    "value": "Promouvoir la citoyenneté numérique"
-  },
-  {
-    "icon": "ri-palette-fill",
-    "value": "Créer avec le numérique"
-  },
-  {
-    "icon": "ri-parent-fill",
-    "value": "Soutenir la parentalité et l'éducation avec le numérique"
-  },
-  {
-    "icon": "ri-lifebuoy-fill",
-    "value": "Réaliser des démarches administratives avec un accompagnement"
-  },
-  {
-    "icon": "ri-user-star-fill",
-    "value": "Devenir autonome dans les démarches administratives"
-  },
-  {
-    "icon": "ri-funds-fill",
-    "value": "Créer et développer mon entreprise"
-  },
-  {
-    "icon": "ri-stethoscope-fill",
-    "value": "Accompagner les démarches de santé"
+    "value": "Maîtrise des outils numériques du quotidien"
   },
   {
     "icon": "ri-vip-crown-fill",
-    "value": "Favoriser mon insertion professionnelle"
+    "value": "Insertion professionnelle via le numérique"
   },
   {
-    "icon": "ri-wifi-fill",
-    "value": "Accéder à une connexion internet"
+    "icon": "ri-shield-user-fill",
+    "value": "Utilisation sécurisée du numérique"
+  },
+  {
+    "icon": "ri-parent-fill",
+    "value": "Parentalité et éducation avec le numérique"
+  },
+  {
+    "icon": "ri-palette-fill",
+    "value": "Loisirs et créations numériques"
+  },
+  {
+    "icon": "ri-globe-fill",
+    "value": "Compréhension du monde numérique"
   },
   {
     "icon": "ri-settings-5-fill",
-    "value": "Accéder à du matériel"
+    "value": "Accès internet et matériel informatique"
   },
   {
     "icon": "ri-shopping-cart-fill",
-    "value": "S'équiper en matériel informatique"
+    "value": "Acquisition de matériel informatique à prix solidaire"
   }
 ]

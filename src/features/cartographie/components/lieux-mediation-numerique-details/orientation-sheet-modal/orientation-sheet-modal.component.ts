@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject, Input, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LabelNational, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
+import { Courriel, DispositifProgrammeNational, Localisation } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { ASSETS_TOKEN, AssetsConfiguration } from '../../../../../root';
 import { ModalComponent } from '../../../../core';
 import { FilterPresentation } from '../../../../core/presenters';
@@ -34,10 +34,10 @@ export class OrientationSheetModalComponent {
   @Input() public id!: string;
   @Input() public nom!: string;
   @Input() public adresse!: string;
-  @Input() public courriel: string | undefined;
+  @Input() public courriels: Courriel[] | undefined;
   @Input() public telephone?: string;
   @Input() public siteWeb: string[] | undefined = [];
-  @Input() public labels_nationaux: LabelNational[] | undefined = [];
+  @Input() public dispositifProgrammesNationaux: DispositifProgrammeNational[] | undefined = [];
   @Input() public localisation: Localisation | undefined;
   @Input() public filters?: FilterPresentation;
 
