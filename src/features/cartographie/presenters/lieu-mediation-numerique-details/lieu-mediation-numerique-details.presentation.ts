@@ -19,6 +19,7 @@ export type SourcePresentation = {
   detail?: string;
   update_link?: string;
   logo?: string;
+  origin?: { api: string; token?: string };
 };
 
 export type LieuMediationNumeriqueDetailsPresentation = {

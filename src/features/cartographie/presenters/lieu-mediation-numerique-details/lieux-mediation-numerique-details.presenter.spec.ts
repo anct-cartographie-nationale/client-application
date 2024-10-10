@@ -141,6 +141,7 @@ describe('lieux médiation numérique details presenter', (): void => {
         Samedi: '08h30 - 12h00',
         Dimanche: 'Fermé'
       },
+      source: [],
       status: {
         label: 'Ouvert',
         limite: 'Ferme à 18h30'
@@ -241,6 +242,7 @@ describe('lieux médiation numérique details presenter', (): void => {
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
       code_postal: '51100',
       commune: 'reims',
+      source: [],
       services: [Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique]
     });
   });
@@ -284,6 +286,7 @@ describe('lieux médiation numérique details presenter', (): void => {
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
       code_postal: '51100',
       commune: 'reims',
+      source: [],
       services: [Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique],
       horaires: {
         Lundi: '09h00 - 12h00\n14h00 - 18h30',
@@ -340,6 +343,7 @@ describe('lieux médiation numérique details presenter', (): void => {
       adresse: `12 BIS RUE DE LECLERCQ Le patio du bois de l'Aulne 51100 Reims`,
       code_postal: '51100',
       commune: 'reims',
+      source: [],
       services: [Service.MaitriseDesOutilsNumeriquesDuQuotidien, Service.AccesInternetEtMaterielInformatique],
       localisation: Localisation({ latitude: 45.7689958, longitude: 4.8343466 }),
       distance: 0
