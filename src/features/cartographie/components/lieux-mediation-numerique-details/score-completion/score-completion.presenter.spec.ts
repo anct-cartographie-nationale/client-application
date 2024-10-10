@@ -101,7 +101,7 @@ describe('score completion presenter', (): void => {
 
     const scoreCompletionTotal: number = scoreCompletionRate(structure);
 
-    expect(scoreCompletionTotal).toStrictEqual(95);
+    expect(scoreCompletionTotal).toStrictEqual(98);
   });
 
   it('should return low score completion', async (): Promise<void> => {

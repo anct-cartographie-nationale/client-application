@@ -1,3 +1,4 @@
+import { MatomoTracker } from 'ngx-matomo';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,22 +7,25 @@ import {
   Input,
   Output,
   ViewChild,
-  Optional
+  Optional,
+  OnInit
 } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { DispositifProgrammeNational } from '@gouvfr-anct/lieux-de-mediation-numerique';
 import { LieuMediationNumeriqueDetailsPresentation } from '../../presenters';
 import { OrientationSheetForm, SendLieuByEmail } from '../../models';
 import { FilterPresentation } from '../../../core/presenters';
-import { FormGroup } from '@angular/forms';
-import { MatomoTracker } from 'ngx-matomo';
 import { environment } from 'projects/client-application/src/environments/environment';
+
+const authorizationToken = (token?: string) => (token ? { headers: { Authorization: `Bearer ${token}` } } : {});
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-lieux-mediation-numerique-details',
   templateUrl: './lieux-mediation-numerique-details.component.html'
 })
-export class LieuxMediationNumeriqueDetailsComponent {
+export class LieuxMediationNumeriqueDetailsComponent implements OnInit {
   @ViewChild('source') sourceRef!: ElementRef;
 
   @Input() public lieuMediationNumerique!: LieuMediationNumeriqueDetailsPresentation;
@@ -49,17 +53,23 @@ export class LieuxMediationNumeriqueDetailsComponent {
 
   @Output() public showLabelInvokingContext: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
-  public constructor(@Optional() private readonly _matomoTracker?: MatomoTracker) {}
+  public constructor(private readonly _http: HttpClient, @Optional() private readonly _matomoTracker?: MatomoTracker) {}
+
+  public ngOnInit(): void {
+    this.lieuMediationNumerique.source?.forEach((source) => {
+      if (source.origin == null) return;
+      this._http.get(source.origin.api, authorizationToken(source.origin.token)).subscribe();
+    });
+  }
 
   onScrollToSource = (): void => {
     this.sourceRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'start' });
   };
 
   public onPrintFromBandeau(): void {
-    if (environment.production) {
-      this._matomoTracker?.trackEvent('fiche détail', 'bandeau footer', `impression fiche`);
-      const sourceLabels = this.lieuMediationNumerique.source?.map((source) => source.label).join(', ');
-      this._matomoTracker?.trackEvent('fiche détail', sourceLabels ?? 'Source inconnue', 'bandeau footer - impression fiche');
-    }
+    if (!environment.production) return;
+    this._matomoTracker?.trackEvent('fiche détail', 'bandeau footer', `impression fiche`);
+    const sourceLabels = this.lieuMediationNumerique.source?.map((source) => source.label).join(', ');
+    this._matomoTracker?.trackEvent('fiche détail', sourceLabels ?? 'Source inconnue', 'bandeau footer - impression fiche');
   }
 }
