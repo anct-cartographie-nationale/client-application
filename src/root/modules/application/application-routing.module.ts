@@ -27,7 +27,7 @@ import { ROUTES } from '../common/mediation-numerique.routes';
         loadChildren: async () => (await import('@features/donnees-personnelles')).DonneesPersonnellesFeatureModule,
         path: 'donnees-personnelles'
       },
-      { path: '**', pathMatch: 'full', redirectTo: 'orientation' }
+      { path: '**', pathMatch: 'full', redirectTo: 'cartographie' }
     ])
   ]
 })
