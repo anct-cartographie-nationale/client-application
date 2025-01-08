@@ -380,6 +380,16 @@ const availableSourcesMap: Map<string, SourcePresentationCallback> = new Map<str
     })
   ],
   [
+    'Siilab',
+    (_: string) => ({
+      label: 'Siilab',
+      link: 'https://www.data.gouv.fr/fr/datasets/lieux-de-mediation-numerique-sur-le-territoire-hauts-de-france-fournis-par-siilab/',
+      detail: 'Formulaire Siilab',
+      update_link: 'https://solen1.enquetes.social.gouv.fr/cgi-3/HE/SF?P=76z14z2z-1z-1z2747C6FAAF',
+      logo: 'siilab'
+    })
+  ],
+  [
     'RhinOcc',
     (_: string) => ({
       label: 'RhinOcc',
