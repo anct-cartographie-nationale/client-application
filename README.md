@@ -253,7 +253,8 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 ...
 <body>
   <fr-mediation-numerique-conteneur>
-    <fr-mediation-numerique></fr-mediation-numerique>
+    <fr-mediation-numerique
+      source="https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique?adresse[beginsWith][code_insee]=14,27,50,61,76"></fr-mediation-numerique>
   </fr-mediation-numerique-conteneur>
 
   <script
@@ -262,6 +263,8 @@ L'éditeur en ligne de [w3schools](https://www.w3schools.com/html/tryit.asp?file
 </body>
 ...
 ```
+
+En indiquant la source, il est possible de filtrer les lieux de médiation numérique, dans cet exemple, seuls les lieux des départements 14, 27, 50, 61 et 76 sont affichés, ce qui correspond aux lieux de médiation numérique de Normandie.
 
 La version finale devrait ressembler à celà :
 
@@ -275,7 +278,8 @@ La version finale devrait ressembler à celà :
   </head>
   <body>
     <fr-mediation-numerique-conteneur>
-      <fr-mediation-numerique></fr-mediation-numerique>
+      <fr-mediation-numerique
+        source="https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique?adresse[beginsWith][code_insee]=14,27,50,61,76"></fr-mediation-numerique>
     </fr-mediation-numerique-conteneur>
 
     <script
@@ -295,7 +299,8 @@ Exemple :
 
 ```html
 <fr-mediation-numerique-conteneur titre="Hub B" logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg">
-  <fr-mediation-numerique></fr-mediation-numerique>
+  <fr-mediation-numerique
+    source="https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique?adresse[beginsWith][code_insee]=14,27,50,61,76"></fr-mediation-numerique>
 </fr-mediation-numerique-conteneur>
 ```
 
@@ -328,15 +333,17 @@ Exemple:
 
 ```html
 <fr-mediation-numerique-conteneur>
-  <fr-mediation-numerique illustration="france-et-outremer"></fr-mediation-numerique>
+  <fr-mediation-numerique
+    illustration="france-et-outremer"
+    source="https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique?adresse[beginsWith][code_insee]=14,27,50,61,76"></fr-mediation-numerique>
 </fr-mediation-numerique-conteneur>
 ```
 
 #### Source de données
 
-Pour utiliser une autre source il faut préciser une url qui fournit les données conformes au [schéma de données des lieux de médiation numérique](https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique), nous publions régulièrement des données compatibles sur [data.gouv, dans l'organisation _Cartographie Nationale des lieux de médiation numérique_](https://www.data.gouv.fr/fr/organizations/cartographie-nationale-des-lieux-de-mediation-numerique/). N'hésitez pas à nous contacter pour faire apparaître vos données dans cette liste.
+Pour utiliser une autre source, il faut préciser une url qui fournit les données conformes au [schéma de données des lieux de médiation numérique](https://lamednum.coop/schema-de-donnees-des-lieux-de-mediation-numerique), nous publions régulièrement des données compatibles sur [data.gouv, dans l'organisation _Cartographie Nationale des lieux de médiation numérique_](https://www.data.gouv.fr/fr/organizations/cartographie-nationale-des-lieux-de-mediation-numerique/). N'hésitez pas à nous contacter pour faire apparaître vos données dans cette liste.
 
-Exemple avec les données du hub Hinaura :
+Exemple avec les données du hub Hinaura récupérées depuis data.gouv :
 
 ```html
 <fr-mediation-numerique-conteneur>
@@ -409,12 +416,11 @@ Il est possible de changer certaines couleurs utilisées par la cartographie, po
       titre="Médiation numérique à Bessenay"
       logo="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg">
       <fr-mediation-numerique
-        source="https://api.conseiller-numerique.gouv.fr/permanences"
+        source="https://www.data.gouv.fr/fr/datasets/r/55eea24c-be8c-47f9-9c4a-77399d346fbd"
         latitude="45.77647396140311"
         longitude="4.55431157343317"
         zoom="12"></fr-mediation-numerique>
     </fr-mediation-numerique-conteneur>
-
     <script
       src="https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@5.23.0/mediation-numerique.js"
       type="module"></script>
