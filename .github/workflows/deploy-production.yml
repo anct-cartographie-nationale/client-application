@@ -13,35 +13,28 @@ jobs:
 
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Set mednum custom style
         run: cp -r projects/client-application/src/scss.mednum/* projects/client-application/src/scss
-
       - name: Build
         run: yarn build client-application
-
       - name: Lieux mediation numérique data from API
         run: curl https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique | gunzip >> ./dist/client-application/assets/data/lieux-inclusion-numerique.json
-
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build
           path: dist
@@ -51,10 +44,9 @@ jobs:
     needs: build
     steps:
       - name: Download build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build
-
       - name: Deploy
         uses: kersvers/s3-sync-with-cloudfront-invalidation@v1.0.0
         with:

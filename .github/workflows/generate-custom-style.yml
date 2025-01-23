@@ -19,21 +19,18 @@ jobs:
 
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Main theme color change
         run: |
           cd projects/client-application
@@ -46,16 +43,13 @@ jobs:
           defaultIconFontPath=$(grep font-path-icons src/scss/variables/_icons.scss)
           newIconFontPath='$font-path-icons: "https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale'@${{ github.event.inputs.version }}'/assets/fonts/";'
           sed -i "s|$defaultIconFontPath|$newIconFontPath|g" src/scss/variables/_icons.scss
-
       - name: Theme has been changed
         run: echo "La couleur du nouveau thème est ${{ github.event.inputs.primary-color }}"
-
       - name: Build
         run: |
           yarn build client-application --named-chunks --output-hashing none
-
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build
           path: dist/client-application/styles.css

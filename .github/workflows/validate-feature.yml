@@ -25,109 +25,89 @@ jobs:
   prettier:
     name: Prettier
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Prettier
         run: yarn prettier --check .
 
   eslint:
     name: ESLint
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Lint
         run: yarn lint client-application
 
   stylelint:
     name: Stylelint
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Lint
         run: yarn stylelint "projects/client-application/**/*.scss"
 
   commitlint:
     name: CommitLint
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: commitlint
         run: |
           cd projects/client-application
@@ -136,196 +116,160 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Test
         run: yarn test client-application
 
   build-client-application:
     name: Build Client Application
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Build
         run: yarn build client-application
-
       - name: Lieux mediation numérique data from API
         run: curl https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique | gunzip >> ./dist/client-application/assets/data/lieux-inclusion-numerique.json
-
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build@client-application
           path: dist
 
   build-mediation-numerique-web-component:
     name: Build Mediation Numerique Web Component
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Build
         run: yarn build mediation-numerique
-
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build@mediation-numerique
           path: dist
 
   build-cartographie-web-component:
     name: Build Cartographie Web Component
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Build
         run: yarn build cartographie
-
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build@cartographie
           path: dist
 
   build-orientation-web-component:
     name: Build Orientation Web Component
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Build
         run: yarn build orientation
-
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build@orientation
           path: dist
 
   build-coordinateurs-web-component:
     name: Build Coordinateurs Web Component
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout project workspace repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: anct-cartographie-nationale/client-base
-
       - name: Checkout client-application repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: projects/client-application
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.x'
+          node-version: 22
           cache: 'yarn'
-
       - name: Install dependencies
         run: yarn
-
       - name: Build
         run: yarn build coordinateurs
-
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build@coordinateurs
           path: dist
 
   create-feature-branch-workspace:
@@ -383,10 +327,11 @@ jobs:
       - deploy-feature-branch-environment
     steps:
       - name: Download build
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: build
-
+          pattern: build@*
+          merge-multiple: true
+          path: build
       - name: Publish
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
@@ -395,7 +340,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_S3_BUCKET: anct-carto-client-${{ needs.create-feature-branch-workspace.outputs.tf-workspace }}
-          SOURCE_DIR: 'client-application'
+          SOURCE_DIR: 'build/client-application'
 
       - name: See cartographie nationale client URL
         run: |
