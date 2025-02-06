@@ -19,7 +19,7 @@ export const BRAND_CONFIGURATION: BrandConfiguration = {
 export const BRAND_APPLICATION_CONFIGURATION: BrandConfiguration = {
   name: 'Aix-en-Provence',
   sousTitre: "des lieux d'inclusion numérique",
-  logo: './assets/img/logo/aix-en-provence.jpg',
+  logo: './assets/img/logo/aix-en-provence.png',
   logoAvecTexte: '',
   illustration: 'svg-paca.svg'
 };
