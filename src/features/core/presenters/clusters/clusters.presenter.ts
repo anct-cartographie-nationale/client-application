@@ -38,8 +38,10 @@ export class ClustersPresenter {
   public fromLieuxMediationNumerique([lieuxMediationNumerique, zoom, [topLeft, bottomRight]]: [
     LieuMediationNumeriquePresentation[],
     number,
-    [Localisation, Localisation]
+    [Localisation | null, Localisation | null]
   ]) {
+    if (topLeft == null || bottomRight == null) return [];
+
     this._clusters = this._superCluster
       .load(lieuxMediationNumerique.map(toLieuMediationNumeriqueToGeoJsonFeature))
       .getClusters([topLeft.longitude, bottomRight.latitude, bottomRight.longitude, topLeft.latitude], zoom);
