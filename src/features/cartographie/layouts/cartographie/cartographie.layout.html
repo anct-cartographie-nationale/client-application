@@ -226,7 +226,7 @@
         [center]="[localisation.longitude, localisation.latitude]"
         (zoomEvt)="zooming($event)"
         (zoomEnd)="onMapViewUpdated($event)"
-        (mapLoad)="$event.resize()"
+        (mapLoad)=" $event.fitBounds($event.getBounds())"
         (mapDragEnd)="onMapViewUpdatedDragging($event)">
         <mgl-control mglNavigation [showZoom]="true" [showCompass]="false" position="top-left"></mgl-control>
         <mgl-marker
