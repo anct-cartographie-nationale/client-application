@@ -296,10 +296,11 @@ const availableSourcesMap: Map<string, SourcePresentationCallback> = new Map<str
     })
   ],
   [
-    'Siilab',
+    'SIILAB',
     (_: string) => ({
       label: 'Siilab',
       link: 'http://carto.assembleurs.com/',
+      update_link: 'https://solen1.enquetes.social.gouv.fr/cgi-3/HE/SF?P=76z14z2z-1z-1z2747C6FAAF',
       logo: 'siilab'
     })
   ]
