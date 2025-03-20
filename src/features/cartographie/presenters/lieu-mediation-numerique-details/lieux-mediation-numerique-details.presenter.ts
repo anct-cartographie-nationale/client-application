@@ -189,6 +189,14 @@ const availableSourcesMap: Map<string, SourcePresentationCallback> = new Map<str
     })
   ],
   [
+    'Paris',
+    (_: string) => ({
+      label: 'Paris',
+      link: 'https://opendata.paris.fr/explore/dataset/reseau-parisien-dinclusion-numerique/information',
+      logo: 'paris'
+    })
+  ],
+  [
     'Haute-Vienne',
     (_: string) => ({
       label: 'Département de la Haute-Vienne',
