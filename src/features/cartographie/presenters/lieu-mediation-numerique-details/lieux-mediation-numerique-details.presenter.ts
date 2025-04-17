@@ -304,6 +304,16 @@ const availableSourcesMap: Map<string, SourcePresentationCallback> = new Map<str
     })
   ],
   [
+    'soliguide',
+    (_: string) => ({
+      label: 'Soliguide',
+      link: 'https://soliguide.fr',
+      detail: "L'information utile à ceux qui en ont besoin",
+      update_link: 'https://soliguide.fr/fr/connexion',
+      logo: 'soliguide'
+    })
+  ],
+  [
     'SIILAB',
     (_: string) => ({
       label: 'Siilab',
