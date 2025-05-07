@@ -154,7 +154,7 @@ const availableSourcesMap: Map<string, SourcePresentationCallback> = new Map<str
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora',
       origin: {
-        api: `https://api.data.inclusion.beta.gouv.fr/api/v0/structures/dora/${id}`,
+        api: `https://api.data.inclusion.beta.gouv.fr/api/v0/services/dora/${id}`,
         token:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYXJjLmdhdmFuaWVyQGJldGEuZ291di5mciIsImFkbWluIjpmYWxzZX0.vd5hs4vraX6kSc6mQz98nFdrJgDw-3B6Gk-8UzoWNO4'
       }
@@ -305,12 +305,17 @@ const availableSourcesMap: Map<string, SourcePresentationCallback> = new Map<str
   ],
   [
     'soliguide',
-    (_: string) => ({
+    (id: string) => ({
       label: 'Soliguide',
       link: 'https://soliguide.fr',
       detail: "L'information utile à ceux qui en ont besoin",
       update_link: 'https://soliguide.fr/fr/connexion',
-      logo: 'soliguide'
+      logo: 'soliguide',
+      origin: {
+        api: `https://api.data.inclusion.beta.gouv.fr/api/v0/services/soliguide/${id.split('-')[1]}`,
+        token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYXJjLmdhdmFuaWVyQGJldGEuZ291di5mciIsImFkbWluIjpmYWxzZX0.vd5hs4vraX6kSc6mQz98nFdrJgDw-3B6Gk-8UzoWNO4'
+      }
     })
   ],
   [
@@ -418,8 +423,8 @@ const getMergedSources = (id: string): SourcePresentation[] =>
   id
     .split('__')
     .map((id: string): SourcePresentation | undefined => {
-      const [source, originalId] = id.split('_');
-      return availableSourcesMap.get(source)?.(originalId);
+      const [source, sourceId] = id.split('_');
+      return availableSourcesMap.get(source)?.(sourceId);
     })
     .filter((source): source is SourcePresentation => source != undefined)
     .reduce(toSingleSource, []);
