@@ -154,7 +154,7 @@ const availableSourcesMap: Map<string, SourcePresentationCallback> = new Map<str
       update_link: 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F',
       logo: 'dora',
       origin: {
-        api: `https://api.data.inclusion.beta.gouv.fr/api/v0/services/dora/${id}`,
+        api: `https://api.data.inclusion.gouv.fr/api/v0/services/dora/${id}`,
         token:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYXJjLmdhdmFuaWVyQGJldGEuZ291di5mciIsImFkbWluIjpmYWxzZX0.vd5hs4vraX6kSc6mQz98nFdrJgDw-3B6Gk-8UzoWNO4'
       }
@@ -178,6 +178,34 @@ const availableSourcesMap: Map<string, SourcePresentationCallback> = new Map<str
       detail: "Formulaire Francil'In",
       update_link: 'https://form.typeform.com/to/qTKCmDOf?typeform-source=equipe752106.typeform.com',
       logo: 'francilin'
+    })
+  ],
+  [
+    'france-travail',
+    (id: string) => ({
+      label: 'France Travail',
+      link: 'https://data.inclusion.gouv.fr/acceder-aux-donnees/',
+      detail: 'Ces données sont fournies par France Travail via data·inclusion',
+      logo: 'france-travail',
+      origin: {
+        api: `https://api.data.inclusion.gouv.fr/api/v0/services/france-travail/${id.split('-').slice(2).join('-')}`,
+        token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYXJjLmdhdmFuaWVyQGJldGEuZ291di5mciIsImFkbWluIjpmYWxzZX0.vd5hs4vraX6kSc6mQz98nFdrJgDw-3B6Gk-8UzoWNO4'
+      }
+    })
+  ],
+  [
+    'fredo',
+    (id: string) => ({
+      label: 'Fredo',
+      link: 'https://data.inclusion.gouv.fr/acceder-aux-donnees/',
+      detail: 'Ces données sont fournies par Fredo via data·inclusion',
+      logo: 'fredo',
+      origin: {
+        api: `https://api.data.inclusion.gouv.fr/api/v0/services/fredo/${id.split('-').slice(1).join('-')}`,
+        token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYXJjLmdhdmFuaWVyQGJldGEuZ291di5mciIsImFkbWluIjpmYWxzZX0.vd5hs4vraX6kSc6mQz98nFdrJgDw-3B6Gk-8UzoWNO4'
+      }
     })
   ],
   [
@@ -312,7 +340,7 @@ const availableSourcesMap: Map<string, SourcePresentationCallback> = new Map<str
       update_link: 'https://soliguide.fr/fr/connexion',
       logo: 'soliguide',
       origin: {
-        api: `https://api.data.inclusion.beta.gouv.fr/api/v0/services/soliguide/${id.split('-')[1]}`,
+        api: `https://api.data.inclusion.gouv.fr/api/v0/services/soliguide/${id.split('-')[1]}`,
         token:
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtYXJjLmdhdmFuaWVyQGJldGEuZ291di5mciIsImFkbWluIjpmYWxzZX0.vd5hs4vraX6kSc6mQz98nFdrJgDw-3B6Gk-8UzoWNO4'
       }
