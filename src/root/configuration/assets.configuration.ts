@@ -9,7 +9,7 @@ export const ASSETS_TOKEN: InjectionToken<AssetsConfiguration> = new InjectionTo
 );
 
 export const ASSETS_CONFIGURATION: AssetsConfiguration = {
-  path: 'https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@5.24.0/assets'
+  path: 'https://cdn.jsdelivr.net/npm/@gouvfr-anct/cartographie-nationale@5.25.0/assets'
 };
 
 export const ASSETS_APPLICATION_CONFIGURATION: AssetsConfiguration = {

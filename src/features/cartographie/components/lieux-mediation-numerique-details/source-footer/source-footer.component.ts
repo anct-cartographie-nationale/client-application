@@ -15,7 +15,7 @@ export class SourceFooterComponent {
   public getUpdateLink(source: SourcePresentation | undefined): string | null {
     if (source?.update_link) return source.update_link;
     else if (!source?.update_link && source?.label !== 'France Services')
-      return 'https://dora.inclusion.beta.gouv.fr/auth/connexion?next=%2F';
+      return 'https://coop-numerique.anct.gouv.fr/coop/lieux-activite';
     else return null;
   }
 }

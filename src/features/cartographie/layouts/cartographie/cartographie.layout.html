@@ -133,7 +133,7 @@
       <div class="d-flex flex-column h-100 bg-white border-top">
         <div class="list-group list-group-flush">
           <a
-            href="https://labase.anct.gouv.fr/ressource/995"
+            href="https://lesbases.anct.gouv.fr/ressources/faq-de-la-cartographie-nationale"
             target="_blank"
             title="FAQ (nouvel onglet)"
             rel="noopener noreferrer"
@@ -141,7 +141,7 @@
             FAQ
           </a>
           <a
-            href="https://labase.anct.gouv.fr/ressource/974"
+            href="https://lesbases.anct.gouv.fr/ressources/reorienter-quelqu-un-vers-un-service-d-inclusion-numerique"
             target="_blank"
             title="Comment orienter ? (nouvel onglet)"
             rel="noopener noreferrer"
@@ -178,15 +178,15 @@
           </a>
           <a
             class="btn orientation-btn bg-white mb-3 p-3 rounded-0 d-flex d-flex align-items-center"
-            href="https://labase.anct.gouv.fr/base/356?tags=&page=0&tab=resources"
+            href="https://lesbases.anct.gouv.fr/bases/cartographie-nationale-de-l-inclusion-numerique"
             target="_blank"
-            title="La Cartographie nationale sur la Base (nouvel onglet)"
+            title="La Cartographie nationale sur les Bases (nouvel onglet)"
             rel="noopener noreferrer">
             <span class="ri-circled bg-primary text-light fw-normal me-3" aria-hidden="true">
               <span role="img" class="ri-external-link-line" aria-hidden="true"></span>
             </span>
             <span class="orientation-btn-label my-auto text-start lh-sm">
-              La Cartographie nationale sur la Base
+              La Cartographie nationale sur les Bases
               <span class="small text-muted d-block fst-italic">
                 Comment enregistrer vos données sur la cartographie ? Comment orienter un bénéficiaire ? Les réponses à vos
                 questions sont ici.
@@ -226,7 +226,7 @@
         [center]="[localisation.longitude, localisation.latitude]"
         (zoomEvt)="zooming($event)"
         (zoomEnd)="onMapViewUpdated($event)"
-        (mapLoad)="$event.resize()"
+        (mapLoad)=" $event.fitBounds($event.getBounds())"
         (mapDragEnd)="onMapViewUpdatedDragging($event)">
         <mgl-control mglNavigation [showZoom]="true" [showCompass]="false" position="top-left"></mgl-control>
         <mgl-marker
