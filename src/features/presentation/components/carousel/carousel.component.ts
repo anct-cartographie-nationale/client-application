@@ -45,7 +45,7 @@ export class CarouselComponent {
     },
     {
       titre: 'La mise à jour',
-      text: `En collaboration avec Dora, le service public numérique de recensement et mise à jour de l’offre d’insertion, 
+      text: `En collaboration avec La Coop de la médiation numérique,
       nous proposons à tous les acteurs de la médiation numérique de référencer et mettre à jour leur offre à un seul endroit tout en la rendant disponible partout,
       grâce à l'open data.`,
       imageUrl: '/assets/img/presentation/svg-actu-vertical.svg',
