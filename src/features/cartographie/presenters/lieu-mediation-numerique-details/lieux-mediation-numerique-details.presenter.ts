@@ -98,7 +98,7 @@ const typologieValue: Record<Typologie, string> = {
   PENSION: 'Pension de famille / résidence accueil',
   PI: 'Point info',
   PIJ_BIJ: 'Points et bureaux information jeunesse',
-  PIMMS: 'Point Information Médiation Multi Services',
+  PIMMS: 'Pimms Médiation',
   PJJ: 'Protection judiciaire de la jeunesse',
   PLIE: "Plans locaux pour l'insertion et l'emploi",
   PREF: 'Préfecture, Sous-Préfecture',
