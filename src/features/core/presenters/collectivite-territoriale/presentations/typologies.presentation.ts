@@ -281,7 +281,7 @@ export const DataInclusionTypologies: DataInclusionTypologiesSchema = {
     subtype: 'autre'
   },
   PIMMS: {
-    label: 'Point Information Médiation Multi Services (PIMMS)',
+    label: 'Pimms Médiation',
     type: 'association'
   },
   PJJ: {
