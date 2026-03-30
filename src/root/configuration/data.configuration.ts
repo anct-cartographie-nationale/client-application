@@ -18,5 +18,5 @@ export const DATA_TOKEN: InjectionToken<DataConfiguration> = new InjectionToken<
 
 export const DATA_CONFIGURATION: DataConfiguration = {
   lieuxDeMediationNumerique:
-    'https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique?adresse[eq][code_insee]=13001'
+    'https://d27gljvji6o5x3.cloudfront.net/api/v0/lieux-inclusion-numerique?adresse[eq][code_insee]=13001'
 };

@@ -157,7 +157,7 @@ jobs:
       - name: Build
         run: yarn build client-application
       - name: Lieux mediation numérique data from API
-        run: curl https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique | gunzip >> ./dist/client-application/assets/data/lieux-inclusion-numerique.json
+        run: curl https://d27gljvji6o5x3.cloudfront.net/api/v0/lieux-inclusion-numerique | gunzip >> ./dist/client-application/assets/data/lieux-inclusion-numerique.json
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
