@@ -17,5 +17,5 @@ export const DATA_COORDINATEURS_CONFIGURATION: DataCoordinateursConfiguration = 
 export const DATA_TOKEN: InjectionToken<DataConfiguration> = new InjectionToken<DataConfiguration>('data.configuration');
 
 export const DATA_CONFIGURATION: DataConfiguration = {
-  lieuxDeMediationNumerique: 'https://cartographie.societenumerique.gouv.fr/api/v0/lieux-inclusion-numerique?source[eq]=SIILAB'
+  lieuxDeMediationNumerique: 'https://d27gljvji6o5x3.cloudfront.net/api/v0/lieux-inclusion-numerique?source[eq]=SIILAB'
 };
